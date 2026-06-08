@@ -42,16 +42,16 @@ export default {
     } else {
       await import('~dist/style.css')
       await import('~dist/utilities.css')
-      componentModule = await import('~dist/oeos-components-es.js')
+      componentModule = await import('~dist/sybz-components-es.js')
     }
 
-    const { default: OeosComponents, createSvg } = componentModule
+    const { default: SybzComponents, createSvg } = componentModule
     const svgIconConfig = createSvg(
       './assets/svg', // 指定本地 SVG 文件夹路径
     )
 
     ctx.app.config.globalProperties.$echarts = echarts // 全局使用
-    // 将oeos-v3-components下的公共函数赋值到全局
+    // 将 sybz-components 下的公共函数赋值到全局
     Object.keys(utils).forEach((v) => {
       ctx.app.config.globalProperties[v] = utils[v]
     })
@@ -67,7 +67,7 @@ export default {
       locale, // 语言设置
     })
     // 全局注册基础组件
-    ctx.app.use(OeosComponents)
+    ctx.app.use(SybzComponents)
     ctx.app.use(VueTippy)
 
     ctx.app.component('Demo', VPDemo)

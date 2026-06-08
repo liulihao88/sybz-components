@@ -1,13 +1,13 @@
 <template>
   <div>
-    <o-date-range
+    <s-date-range
       v-model="dateRange"
       :disabled-date="disabledDate"
       @calendar-change="calendarChange"
       format="YYYY-MM-DD"
       value-format="YYYY-MM-DD"
       :shortcuts="shortcuts"
-    ></o-date-range>
+    ></s-date-range>
     {{ dateRange }}
   </div>
 </template>

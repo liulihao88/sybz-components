@@ -8,7 +8,7 @@ const a = ref(33)
 const isShow = ref(false)
 const confirmLoading = ref(false)
 async function cusConfirm() {
-  console.log(`***** 点我作甚  10行 docs/examples/ODialog/usually.vue  15:06:26`)
+  console.log(`***** 点我作甚  10行 docs/examples/SDialog/usually.vue  15:06:26`)
   confirmLoading.value = true
   proxy.$toast('正在保存', 'i');
   await sleep(2000)
@@ -28,7 +28,7 @@ function sleep(delay = 0, fn = () => {}) {
 
 <template>
   <el-button @click="btnClick" type="danger">打开dialog</el-button>
-  <o-dialog
+  <s-dialog
     ref="dialogRef"
     title="常用的dialog"
     @confirm="cusConfirm"
@@ -48,7 +48,7 @@ function sleep(delay = 0, fn = () => {}) {
     <div v-for="(v, i) in 40" :key="i">
       <div>超长文本</div>
     </div>
-  </o-dialog>
+  </s-dialog>
 </template>
 
 <style scoped lang="scss"></style>

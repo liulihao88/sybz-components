@@ -21,7 +21,7 @@
   </el-descriptions>
 
   <hr />
-  <o-descriptions :options="options" :column="1" label-width="300"></o-descriptions>
+  <s-descriptions :options="options" :column="1" label-width="300"></s-descriptions>
 </template>
 
 <script lang="ts" setup>

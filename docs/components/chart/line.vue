@@ -3,7 +3,7 @@
     <t-layout-page-item>
       <el-button @click="isShow = !isShow">{{ isShow ? '隐藏' : '显示' }}</el-button>
       <el-button @click="addData()">增加数据</el-button>
-      <o-chart
+      <s-chart
         v-show="isShow"
         :option="options"
         @click="click"

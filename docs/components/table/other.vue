@@ -99,18 +99,18 @@ const columns = computed(() => {
 
 <template>
   <div>
-    <o-flex gap="small" direction="column">
-      <o-radio v-model="otherParams.size" :options="['small', 'default', 'large']" type="simple" title="size"></o-radio>
-      <o-radio v-model="otherParams.showPage" :options="[true, false]" type="simple" title="showPage"></o-radio>
-      <o-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></o-radio>
-    </o-flex>
-    <o-table
+    <s-flex gap="small" direction="column">
+      <s-radio v-model="otherParams.size" :options="['small', 'default', 'large']" type="simple" title="size"></s-radio>
+      <s-radio v-model="otherParams.showPage" :options="[true, false]" type="simple" title="showPage"></s-radio>
+      <s-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></s-radio>
+    </s-flex>
+    <s-table
       :columns="columns"
       :data="data"
       v-bind="otherParams"
       :pageAttrs="{
         layout: 'prev, pager, next, jumper',
       }"
-    ></o-table>
+    ></s-table>
   </div>
 </template>

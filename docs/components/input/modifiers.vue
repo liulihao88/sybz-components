@@ -1,10 +1,10 @@
 <template>
-  <o-flex gap="small"> 
-    <o-input v-model.lazy="input" style="width: 240px" placeholder="lazy" />
-    <o-input v-model.number="input" style="width: 240px" placeholder="number" />
-    <o-input v-model.trim="input" style="width: 240px" placeholder="trim" />
+  <s-flex gap="small"> 
+    <s-input v-model.lazy="input" style="width: 240px" placeholder="lazy" />
+    <s-input v-model.number="input" style="width: 240px" placeholder="number" />
+    <s-input v-model.trim="input" style="width: 240px" placeholder="trim" />
     {{ input }}
-  </o-flex>
+  </s-flex>
 </template>
 
 <script lang="ts" setup>

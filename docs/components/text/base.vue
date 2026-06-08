@@ -52,12 +52,12 @@ console.log(`04 11`, 11);
     <el-space wrap>
       <ul class="content">
         <li>
-          <o-text>
+          <s-text>
             测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
-          </o-text>
-          <oText :lineClamp="2">
+          </s-text>
+          <sText :lineClamp="2">
             测试文本，这是一个稍微有点长的文本，lineClamp参数为2，即两行过长省略后，鼠标悬浮会有tooltip提示,鼠标悬浮会有tooltip提示,鼠标悬浮会有tooltip提示
-          </oText>
+          </sText>
         </li>
       </ul>
     </el-space>
@@ -73,13 +73,13 @@ console.log(`04 11`, 11);
     <el-space wrap>
       <ul class="content">
         <li>
-          <oText :tippyProps="{ content: customContent }">
+          <sText :tippyProps="{ content: customContent }">
             props写法 -
             测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
-          </oText>
+          </sText>
         </li>
         <li>
-          <oText>
+          <sText>
             <template #content>
               <div>
                 <b>这是插槽写法: </b>
@@ -88,7 +88,7 @@ console.log(`04 11`, 11);
             </template>
             插槽写法 -
             测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
-          </oText>
+          </sText>
         </li>
       </ul>
     </el-space>
@@ -98,14 +98,14 @@ console.log(`04 11`, 11);
     <el-space wrap>
       <ul class="content">
         <li>
-          <oText type="primary" size="large">
+          <sText type="primary" size="large">
             测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
-          </oText>
+          </sText>
         </li>
         <li>
-          <oText :lineClamp="4" type="info">
+          <sText :lineClamp="4" type="info">
             测试文本，这是一个非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长的文本，lineClamp参数为4，即四行过长省略后，鼠标悬浮会有tooltip提示
-          </oText>
+          </sText>
         </li>
       </ul>
     </el-space>
@@ -115,18 +115,18 @@ console.log(`04 11`, 11);
     <el-space wrap>
       <ul class="content">
         <li>
-          <oText
+          <sText
             :tippyProps="{ offset: [0, -20], theme: 'light', arrow: false }"
           >
             偏移白色无箭头 -
             测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
-          </oText>
+          </sText>
         </li>
         <li>
-          <oText :lineClamp="4" :tippyProps="{ followCursor: true }">
+          <sText :lineClamp="4" :tippyProps="{ followCursor: true }">
             鼠标跟随 -
             测试文本，这是一个非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长，非常非常长的文本，lineClamp参数为4，即四行过长省略后，鼠标悬浮会有tooltip提示
-          </oText>
+          </sText>
         </li>
       </ul>
     </el-space>
@@ -136,14 +136,14 @@ console.log(`04 11`, 11);
     <el-space wrap>
       <ul class="content">
         <li>
-          <oText tag="p" :lineClamp="2">
+          <sText tag="p" :lineClamp="2">
             This is a paragraph. Paragraph start
-            <oText :truncated="false">
-              【 This is oText
-              <oText tag="sup" size="small" :truncated="false">
+            <sText :truncated="false">
+              【 This is sText
+              <sText tag="sup" size="small" :truncated="false">
                 superscript 】
-              </oText>
-            </oText>
+              </sText>
+            </sText>
             <el-text>
               【 This is El-Text
               <el-text tag="sub" size="small"> subscript 】 </el-text>
@@ -152,7 +152,7 @@ console.log(`04 11`, 11);
             <el-text tag="del">【Deleted】</el-text>
             <el-text tag="mark">【Marked】</el-text>
             Paragraph end.
-          </oText>
+          </sText>
         </li>
       </ul>
     </el-space>

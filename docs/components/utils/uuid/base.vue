@@ -30,8 +30,8 @@ const options = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="uuid"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="uuid"></SFunctionSourceCode>
   <div>
-    <o-descriptions :options="options" title="uuid随机字符" :column="1"></o-descriptions>
+    <s-descriptions :options="options" title="uuid随机字符" :column="1"></s-descriptions>
   </div>
 </template>

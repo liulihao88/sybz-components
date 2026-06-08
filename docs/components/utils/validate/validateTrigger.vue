@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance, watch, computed, toRaw } from 'vue'
-// import { validateTrigger, validate, validForm } from '@oeos-components/utils'
+// import { validateTrigger, validate, validForm } from '@sybz-components/utils'
 import { validateTrigger, validate, validForm } from '@/utils/src/index'
 const formRef = ref(null)
 const form = ref({})
@@ -17,14 +17,14 @@ const submit = async () => {
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="validateTrigger"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="validateTrigger"></SFunctionSourceCode>
   <div>
     <el-form ref="formRef" :model="form" :rules="rules" label-width="auto">
       <el-form-item label="长度1-2, 只有提交的时候才校验" prop="number">
-        <o-input v-model="form.number" />
+        <s-input v-model="form.number" />
       </el-form-item>
       <el-form-item label="长度1-2, change和blur都校验, 使用validateTrigger" prop="number2">
-        <o-input v-model="form.number2" />
+        <s-input v-model="form.number2" />
       </el-form-item>
     </el-form>
 

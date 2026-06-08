@@ -38,7 +38,7 @@ itemWrapper/scroll
 
 | 插槽名 | 说明 |
 | :----: | ---- |
-| `default` | 需要包裹的 `o-item` 或任意块级内容 |
+| `default` | 需要包裹的 `s-item` 或任意块级内容 |
 
 ### 说明
 

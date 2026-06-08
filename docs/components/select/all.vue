@@ -17,7 +17,7 @@ function itemDisabled(item) {
 
 <template>
   <div>
-    <o-select
+    <s-select
       title="大部分常用属性"
       v-model="selectVal"
       :options="options"
@@ -25,7 +25,7 @@ function itemDisabled(item) {
       value="id"
       :itemDisabled="itemDisabled"
       :customLabel="(item) => item.name + '(' + item.id + ')'"
-    ></o-select>
+    ></s-select>
   </div>
 </template>
 

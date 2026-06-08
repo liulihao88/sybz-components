@@ -11,14 +11,14 @@ const parse$toast = (str) => {
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="formatTextToHtml"></OFunctionSourceCode>
-  <o-title title="1. 提示"></o-title>
-  <o-button type="primary" @click="parse$toast('Hello\nWorld')">基础</o-button>
-  <o-button type="primary" @click="parse$toast('Item1\tItem2')">包含制表符</o-button>
-  <o-button type="primary" @click="parse$toast('Error log:\n  Time: 2024-01-01\n  Message: Something went wrong')">
+  <SFunctionSourceCode functionName="formatTextToHtml"></SFunctionSourceCode>
+  <s-title title="1. 提示"></s-title>
+  <s-button type="primary" @click="parse$toast('Hello\nWorld')">基础</s-button>
+  <s-button type="primary" @click="parse$toast('Item1\tItem2')">包含制表符</s-button>
+  <s-button type="primary" @click="parse$toast('Error log:\n  Time: 2024-01-01\n  Message: Something went wrong')">
     实际应用场景
-  </o-button>
-  <o-button
+  </s-button>
+  <s-button
     type="primary"
     @click="
       parse$toast(
@@ -27,8 +27,8 @@ const parse$toast = (str) => {
     "
   >
     实际应用场景2
-  </o-button>
+  </s-button>
 
-  <o-title title="2. 直接在html中使用"></o-title>
+  <s-title title="2. 直接在html中使用"></s-title>
   <div v-html="formatTextToHtml('Error log:\n  Time: 2024-01-01\n  Message: Something went wrong')"></div>
 </template>

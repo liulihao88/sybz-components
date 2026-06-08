@@ -10,16 +10,16 @@ function confirm() {
 
 <template>
   <div>
-    <o-popconfirm title="自定义title" content="自定义content" @confirm="confirm" trigger="click" width="500">
+    <s-popconfirm title="自定义title" content="自定义content" @confirm="confirm" trigger="click" width="500">
       <el-button type="danger">自定义popconfirm</el-button>
-    </o-popconfirm>
+    </s-popconfirm>
 
     <br />
     <br />
 
-    <o-popconfirm title="自定义title" width="500" :reConfirm="reConfirm" @confirm="confirm">
+    <s-popconfirm title="自定义title" width="500" :reConfirm="reConfirm" @confirm="confirm">
       <el-button type="danger" :disabled="reConfirm">自定义popconfirm</el-button>
-    </o-popconfirm>
+    </s-popconfirm>
     <el-button type="primary" @click="reConfirm = !reConfirm">reConfirm切换</el-button>
   </div>
 </template>

@@ -1,4 +1,4 @@
-<script setup lang="ts" name="OBasicLayout">
+<script setup lang="ts" name="SBasicLayout">
 import { ref, computed, watch } from 'vue'
 const props = defineProps({
   modelValue: {
@@ -150,37 +150,37 @@ const handleIconClick = (event) => {
 </script>
 
 <template>
-  <div class="o-basic-layout" :style="boxMergedStyle" ref="boxRef">
+  <div class="s-basic-layout" :style="boxMergedStyle" ref="boxRef">
     <div
-      class="o-basic-layout__header"
+      class="s-basic-layout__header"
       v-if="$slots.header || props.title"
       :style="headerMergedStyle"
       ref="headerRef"
       @click="handleHeaderClick"
       :class="{ collapsible: isHeaderTrigger }"
     >
-      <div class="o-basic-layout__header-main">
+      <div class="s-basic-layout__header-main">
         <slot name="header">
-          <o-title :title="props.title" :style="{ ...headerStyle }"></o-title>
+          <s-title :title="props.title" :style="{ ...headerStyle }"></s-title>
         </slot>
       </div>
       <span v-if="collapsible" class="collapse-arrow" :class="{ collapsed: isCollapsed }" @click="handleIconClick">
         <slot name="icon">
-          <o-icon name="arrow-down" ></o-icon>
+          <s-icon name="arrow-down" ></s-icon>
         </slot>
       </span>
     </div>
-    <div class="o-basic-layout__body" :style="{ ...bodyStyle, ...scrollStyle, ...squareStyle }" v-show="!isCollapsed">
+    <div class="s-basic-layout__body" :style="{ ...bodyStyle, ...scrollStyle, ...squareStyle }" v-show="!isCollapsed">
       <slot></slot>
     </div>
-    <div class="o-basic-layout__footer" v-if="$slots.footer && !isCollapsed" :style="footerStyle">
+    <div class="s-basic-layout__footer" v-if="$slots.footer && !isCollapsed" :style="footerStyle">
       <slot name="footer"></slot>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.o-basic-layout {
+.s-basic-layout {
   background: var(--el-bg-color);
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -201,7 +201,7 @@ const handleIconClick = (event) => {
       user-select: none;
     }
 
-    .o-basic-layout__header-main {
+    .s-basic-layout__header-main {
       width: 100%;
       min-width: 0;
       flex: 1 1 auto;

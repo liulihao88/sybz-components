@@ -28,21 +28,21 @@ function parseSpace(space) {
 
 <template>
   <div>
-    <o-capacity-progress :total="row.totalSpace" :used="row.usedSpace" width="300"></o-capacity-progress>
+    <s-capacity-progress :total="row.totalSpace" :used="row.usedSpace" width="300"></s-capacity-progress>
 
     <hr />
 
-    <o-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></o-capacity-progress>
+    <s-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></s-capacity-progress>
 
     <hr />
-    <o-capacity-progress :total="row.totalSpace" :used="row.noUsed">
+    <s-capacity-progress :total="row.totalSpace" :used="row.noUsed">
       <span>{{ parseSpace(row.noUsed) }} / {{ parseSpace(row.totalSpace) }}</span>
-    </o-capacity-progress>
+    </s-capacity-progress>
 
     <br />
 
-    <o-capacity-progress :total="testRow.total" :used="testRow.used">
+    <s-capacity-progress :total="testRow.total" :used="testRow.used">
       <span>{{ parseSpace(testRow.used) }} / {{ parseSpace(testRow.total) }}</span>
-    </o-capacity-progress>
+    </s-capacity-progress>
   </div>
 </template>

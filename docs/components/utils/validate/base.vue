@@ -91,14 +91,14 @@ const fieldList = computed(() => {
 
 <template>
   <div>
-    <OFunctionSourceCode functionName="validate"></OFunctionSourceCode>
-    <o-title title="由于有特殊的相同字段的校验, 所以fieldList使用了compued, 正常情况下, 不需要computed"></o-title>
-    <o-form :fieldList="fieldList" :model="form" ref="oFormRef" :column="2" label-width="200">
+    <SFunctionSourceCode functionName="validate"></SFunctionSourceCode>
+    <s-title title="由于有特殊的相同字段的校验, 所以fieldList使用了compued, 正常情况下, 不需要computed"></s-title>
+    <s-form :fieldList="fieldList" :model="form" ref="sFormRef" :column="2" label-width="200">
       <tempalte v-for="(v, i) in fieldList" :key="i">
         <template #[`${v.prop}-label`]="{ item }">
           <div>{{ item }}??</div>
         </template>
       </tempalte>
-    </o-form>
+    </s-form>
   </div>
 </template>

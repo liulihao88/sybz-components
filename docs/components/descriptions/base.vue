@@ -73,5 +73,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <o-descriptions :options="DataSource.descData"></o-descriptions>
+  <s-descriptions :options="DataSource.descData"></s-descriptions>
 </template>

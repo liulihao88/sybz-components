@@ -1,6 +1,6 @@
 # CompTitle 组件标题前缀
 
-`o-comp-title` 是表单类组件左侧标题前缀，用来和 `o-input`、`o-select`、`o-input-number` 等输入控件拼接展示。单独使用时会保持和 Element Plus 输入框一致的高度。
+`s-comp-title` 是表单类组件左侧标题前缀，用来和 `s-input`、`s-select`、`s-input-number` 等输入控件拼接展示。单独使用时会保持和 Element Plus 输入框一致的高度。
 
 ## Hidden Title {.md-hidden}
 
@@ -27,6 +27,6 @@ compTitle/base
 
 ### 说明
 
-- `o-comp-title` 默认用于输入类组件的左侧标题区域。
+- `s-comp-title` 默认用于输入类组件的左侧标题区域。
 - 默认高度为 `var(--el-component-size, 32px)`，`small` 为 `24px`，`large` 为 `40px`。
 - 和输入框拼接时，通常需要把后面的输入框左侧圆角置为 `0`。

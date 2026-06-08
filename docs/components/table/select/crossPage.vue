@@ -59,10 +59,10 @@ const clearSelected = () => {
     <div class="multiple-demo__toolbar">
       <span class="multiple-demo__value">当前页: 第 {{ currentPage }} 页</span>
       <span class="multiple-demo__value">已选: {{ selectedText }}</span>
-      <o-button @click="clearSelected">清空</o-button>
+      <s-button @click="clearSelected">清空</s-button>
     </div>
 
-    <o-table
+    <s-table
       v-model="selectedRows"
       selection-type="multiple"
       :columns="columns"

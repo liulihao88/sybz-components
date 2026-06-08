@@ -57,6 +57,6 @@ let option = {
 </script>
 
 <template>
-  <o-title title="两组y轴"></o-title>
-  <o-chart :option="option" />
+  <s-title title="两组y轴"></s-title>
+  <s-chart :option="option" />
 </template>

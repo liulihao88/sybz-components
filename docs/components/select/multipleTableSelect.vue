@@ -35,7 +35,7 @@ const columns = [
     btns: [
       {
         content: '编辑',
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'edit',
           content: '编辑',
@@ -127,7 +127,7 @@ watch(
 <template>
   <div>
     {{ selectValue }} ??? {{ selectName }} === {{ selectRow }}
-    <o-select
+    <s-select
       v-model="selectName"
       :title="`多选的 => ${selectValue}`"
       width="100%"
@@ -139,15 +139,15 @@ watch(
       @clear="clear"
     >
       <template #empty>
-        <o-table
+        <s-table
           :columns="columns"
           :showIndex="false"
           :data="data"
           ref="tableRef"
           :showPage="false"
           @selection-change="handleCurrentChange"
-        ></o-table>
+        ></s-table>
       </template>
-    </o-select>
+    </s-select>
   </div>
 </template>

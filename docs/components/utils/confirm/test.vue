@@ -18,10 +18,10 @@ const cc = () => {
 
 <template>
   <div>
-    <o-dialog ref="dialogRef" title="t1" v-model="isShow">
-      <el-button type="primary" @click="proxy.confirm('oeos-confirm', {})">oeos-confirm</el-button>
+    <s-dialog ref="dialogRef" title="t1" v-model="isShow">
+      <el-button type="primary" @click="proxy.confirm('sybz-confirm', {})">sybz-confirm</el-button>
       <el-button type="primary" @click="cc">原生</el-button>
-    </o-dialog>
+    </s-dialog>
 
     <el-button type="primary" @click="isShow = true">测试89</el-button>
 

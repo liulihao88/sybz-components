@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { tableData } from './data'
-import { clone } from '@oeos-components/utils'
+import { clone } from '@sybz-components/utils'
 
 const indexMethod = (index: number) => {
   return index + 1 
@@ -23,7 +23,7 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <o-table
+  <s-table
     :data="clone(tableData, 1)"
     :columns="columns"
     :indexAttrs="{

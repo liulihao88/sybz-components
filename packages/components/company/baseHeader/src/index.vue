@@ -1,4 +1,4 @@
-<script setup lang="ts" name="OBaseHeader">
+<script setup lang="ts" name="SBaseHeader">
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 </script>

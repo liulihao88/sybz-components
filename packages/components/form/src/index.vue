@@ -1,9 +1,9 @@
-<script setup lang="ts" name="OForm">
+<script setup lang="ts" name="SForm">
 import { ref, watch } from 'vue'
 import RenderComp from './renderComp.vue'
-import { validForm, isEmpty, $toast } from '@oeos-components/utils'
-import OIcon from '@/components/icon/src/index.vue'
-import OTooltip from '@/components/tooltip/src/index.vue'
+import { validForm, isEmpty, $toast } from '@sybz-components/utils'
+import SIcon from '@/components/icon/src/index.vue'
+import STooltip from '@/components/tooltip/src/index.vue'
 
 defineOptions({
   inheritAttrs: false,
@@ -37,9 +37,9 @@ const getPlaceholder = (row: any) => {
   return row.placeholder ?? ''
 }
 
-const oFormRef = ref()
+const sFormRef = ref()
 async function validate(isResetFields = false, otherParams = {}) {
-  await validForm(oFormRef, otherParams)
+  await validForm(sFormRef, otherParams)
   if (isResetFields) {
     resetFields()
   }
@@ -48,11 +48,11 @@ const submit = () => {
   validate()
 }
 function resetFields() {
-  oFormRef.value.resetFields()
+  sFormRef.value.resetFields()
 }
 
 function clearValidate() {
-  oFormRef.value.clearValidate()
+  sFormRef.value.clearValidate()
 }
 function mergeRules(rules) {
   if (isEmpty(rules)) {
@@ -125,7 +125,7 @@ defineExpose({
 
 <template>
   <div>
-    <el-form ref="oFormRef" :model="model" v-bind="{ 'label-width': 'auto', ...$attrs }" class="o-form">
+    <el-form ref="sFormRef" :model="model" v-bind="{ 'label-width': 'auto', ...$attrs }" class="s-form">
       <template v-for="(v, i) in sFieldList" :key="i">
         <el-form-item
           :prop="v.prop"
@@ -141,9 +141,9 @@ defineExpose({
             </template>
             <template v-else>
               <slot :name="v.prop + '-label'" :item="v">
-                <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="o-form__label-image" v-bind="v.imgAttrs" />
-                <o-icon v-else-if="v.imgAttrs?.name" :name="v.imgAttrs?.name" class="o-form__label-icon" v-bind="v.imgAttrs" />
-                <o-tooltip :content="v.label" />
+                <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
+                <s-icon v-else-if="v.imgAttrs?.name" :name="v.imgAttrs?.name" class="s-form__label-icon" v-bind="v.imgAttrs" />
+                <s-tooltip :content="v.label" />
               </slot>
             </template>
           </template>
@@ -156,7 +156,7 @@ defineExpose({
           <template v-else>
             <component
               v-model="model[v.prop!]"
-              :is="v.comp || 'o-input'"
+              :is="v.comp || 's-input'"
               :placeholder="getPlaceholder(v)"
               :rules="v.rules"
               v-bind="{ clearable: true, filterable: true, width: '100%', ...v.attrs }"
@@ -167,27 +167,27 @@ defineExpose({
       </template>
       
     </el-form>
-    <o-flex justify="center" v-if="showFooter">
+    <s-flex justify="center" v-if="showFooter">
       <el-button type="primary" @click="submit" size="small">提交</el-button>
       <el-button type="" @click="resetFields" size="small">重置</el-button>
       <el-button type="danger" @click="clearValidate" size="small">清除校验</el-button>
       <el-button type="danger" @click="showFormValue" size="small">查看form的值</el-button>
       <el-button type="danger" @click="showFieldListValue" size="small">查看fieldList的值</el-button>
-    </o-flex>
+    </s-flex>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.o-form {
+.s-form {
   display: flex;
   flex-wrap: wrap;
 }
 
-.o-form__label-image {
+.s-form__label-image {
   height: 16px;
 }
 
-.o-form__label-icon {
+.s-form__label-icon {
   margin-right: 4px;
 }
 :deep(.el-form-item) {
@@ -202,9 +202,9 @@ defineExpose({
     .el-date-editor,
     .el-input-number,
     .el-textarea,
-    .o-input,
-    .o-select,
-    .o-date-range {
+    .s-input,
+    .s-select,
+    .s-date-range {
       width: 100%;
       height: 100%;
     }

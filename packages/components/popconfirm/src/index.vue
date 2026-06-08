@@ -4,7 +4,7 @@
  */
 
 defineOptions({
-  name: 'OPopconfirm',
+  name: 'SPopconfirm',
 })
 import { ref, onMounted } from 'vue'
 const isPopoverVisible = ref(false)
@@ -57,7 +57,7 @@ defineExpose({
 <template>
   <el-popover
     v-if="props.reConfirm"
-    class="o-popconfirm__box"
+    class="s-popconfirm__box"
     :title="props.title"
     :width="props.width"
     v-bind="$attrs"
@@ -65,9 +65,9 @@ defineExpose({
     v-model:visible="isPopoverVisible"
   >
     <slot name="content">
-      <div class="o-popconfirm__content">{{ props.content }}</div>
+      <div class="s-popconfirm__content">{{ props.content }}</div>
     </slot>
-    <div class="o-popconfirm__footer">
+    <div class="s-popconfirm__footer">
       <slot name="footer">
         <el-button size="small" type="info" @click="cancel">取消</el-button>
         <el-button size="small" type="primary" @click="confirm">确定</el-button>
@@ -77,21 +77,21 @@ defineExpose({
       <slot></slot>
     </template>
   </el-popover>
-  <span class="o-popconfirm__simple_box" v-else @click="confirm">
+  <span class="s-popconfirm__simple_box" v-else @click="confirm">
     <slot></slot>
   </span>
 </template>
 
 <style scoped lang="scss">
-.o-popconfirm__footer {
+.s-popconfirm__footer {
   text-align: right;
   margin: 0;
   margin-top: 16px;
 }
 
-.o-popconfirm__simple_box:has(.el-button) + :deep(.el-button),
-.el-button + .o-popconfirm__simple_box :deep(.el-button),
-.o-popconfirm__simple_box:has(.el-button) + .o-popconfirm__simple_box:has(.el-button) {
+.s-popconfirm__simple_box:has(.el-button) + :deep(.el-button),
+.el-button + .s-popconfirm__simple_box :deep(.el-button),
+.s-popconfirm__simple_box:has(.el-button) + .s-popconfirm__simple_box:has(.el-button) {
   margin-left: 12px !important;
 }
 </style>

@@ -9,9 +9,9 @@ const columns = [
     render: ({ row, scope, value, column, index }) => {
       return (
         <>
-          <oFlex align="center">
-            <oIcon name="delete"></oIcon> <span class="cl-blue">render1111</span>
-          </oFlex>
+          <sFlex align="center">
+            <sIcon name="delete"></sIcon> <span class="cl-blue">render1111</span>
+          </sFlex>
         </>
       )
     },
@@ -29,7 +29,7 @@ const columns = [
         render: ({ row, scope, value, column, action, index }) => {
           return (
             <>
-              <oIcon name="delete"></oIcon> <span class="cl-blue">render</span>
+              <sIcon name="delete"></sIcon> <span class="cl-blue">render</span>
             </>
           )
         },
@@ -41,7 +41,7 @@ const columns = [
         render: ({ row, scope, value, column, action, index }) => {
           return (
             <>
-              <oIcon name="plus"></oIcon> <span class="cl-blue">我是蓝色</span>
+              <sIcon name="plus"></sIcon> <span class="cl-blue">我是蓝色</span>
             </>
           )
         },
@@ -53,6 +53,6 @@ const columns = [
 
 <template>
   <div>
-    <o-table :columns="columns" :data="data" ref="tableRef"></o-table>
+    <s-table :columns="columns" :data="data" ref="tableRef"></s-table>
   </div>
 </template>

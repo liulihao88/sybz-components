@@ -1,7 +1,7 @@
 <template>
   {{ theme }}
-  <o-radio v-model="theme" :options="themeList" type="button" style="margin-bottom: 20px" />
-  <o-chart :option="options" :theme="theme" style="width: 100%; height: 500px" />
+  <s-radio v-model="theme" :options="themeList" type="button" style="margin-bottom: 20px" />
+  <s-chart :option="options" :theme="theme" style="width: 100%; height: 500px" />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'

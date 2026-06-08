@@ -24,13 +24,13 @@ const lists = [
 
 <template>
   <div>
-    <oItemWrapper :columns="3">
+    <sItemWrapper :columns="3">
       <div v-for="(v, i) in lists" :key="i">
         <div class="f-st-ct">
           <div class="mr">{{ v.label }} ({{ v.value }}) -></div>
-          <o-icon :name="v.value" color="var(--blue)"></o-icon>
+          <s-icon :name="v.value" color="var(--blue)"></s-icon>
         </div>
       </div>
-    </oItemWrapper>
+    </sItemWrapper>
   </div>
 </template>

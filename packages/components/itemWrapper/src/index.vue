@@ -1,15 +1,15 @@
 <template>
-  <div class="o-item-wrapper" :class="{ 'with-columns': props.columns }">
+  <div class="s-item-wrapper" :class="{ 'with-columns': props.columns }">
     <component :is="item" class="col" v-for="(item, index) in validSlots" :key="index" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useSlots, computed, type VNode } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 
 defineOptions({
-  name: 'OItemWrapper',
+  name: 'SItemWrapper',
 })
 
 const props = defineProps({
@@ -69,7 +69,7 @@ const slotRows = computed(() => {
 </script>
 
 <!-- <style lang="scss" scoped>
-.o-item-wrapper {
+.s-item-wrapper {
   display: flex;
   flex-direction: column;
   gap: v-bind('props.gap');
@@ -93,7 +93,7 @@ const slotRows = computed(() => {
 </style> -->
 
 <style lang="scss" scoped>
-.o-item-wrapper {
+.s-item-wrapper {
   /* 默认 flex 布局（无 columns） */
   display: flex;
   flex-wrap: nowrap;

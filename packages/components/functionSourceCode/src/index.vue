@@ -13,7 +13,7 @@
 import { ref, watch } from 'vue'
 
 defineOptions({
-  name: 'OFunctionSourceCode',
+  name: 'SFunctionSourceCode',
 })
 
 // 从父组件接收函数名

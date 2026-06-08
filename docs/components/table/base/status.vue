@@ -3,9 +3,9 @@ import { tableData } from './data'
 
 const tableRowClassName = ({ rowIndex }: { rowIndex: number }) => {
   if (rowIndex === 1 || rowIndex === 5) {
-    return 'o-warning-row'
+    return 's-warning-row'
   } else if (rowIndex === 3 || rowIndex === 7) {
-    return 'o-success-row'
+    return 's-success-row'
   }
   return ''
 }
@@ -27,15 +27,15 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <o-table :data="tableData" :columns="columns" :row-class-name="tableRowClassName" />
+  <s-table :data="tableData" :columns="columns" :row-class-name="tableRowClassName" />
 </template>
 
 <style scoped lang="scss">
-:deep(.o-warning-row) {
+:deep(.s-warning-row) {
   --el-table-tr-bg-color: var(--el-color-warning-light-9);
 }
 
-:deep(.o-success-row) {
+:deep(.s-success-row) {
   --el-table-tr-bg-color: var(--el-color-success-light-9);
 }
 </style>

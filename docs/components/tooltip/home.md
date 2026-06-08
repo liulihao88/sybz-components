@@ -1,6 +1,6 @@
 # Tooltip 文字提示组件
 
-`o-tooltip` 基于 Element Plus `el-tooltip` 封装，额外提供了“文本溢出时才显示提示”和“多行省略”能力，适合表格列、描述信息、按钮说明等场景。
+`s-tooltip` 基于 Element Plus `el-tooltip` 封装，额外提供了“文本溢出时才显示提示”和“多行省略”能力，适合表格列、描述信息、按钮说明等场景。
 
 [Element Plus Tooltip 文档](https://element-plus.org/zh-CN/component/tooltip.html)
 

@@ -9,7 +9,7 @@ const form = ref({
   hobby: '',
 })
 const originForm = proxy.clone(form.value)
-const oFormRef = ref(null)
+const sFormRef = ref(null)
 const rules = {
   name: [proxy.validate()],
   age: [proxy.validate()],
@@ -31,7 +31,7 @@ const fieldList = computed(() => {
     {
       prop: 'hobby',
       label: '爱好',
-      comp: 'o-select',
+      comp: 's-select',
       attrs: {
         options: [
           {
@@ -60,8 +60,8 @@ const open = (isEdit = false) => {
   isShow.value = true
 }
 const confirm = async () => {
-  await oFormRef.value.validate(true)
-  oFormRef.value.resetFields()
+  await sFormRef.value.validate(true)
+  sFormRef.value.resetFields()
   proxy.$toast('保存成功')
   isShow.value = false
 }
@@ -69,9 +69,9 @@ const confirm = async () => {
 
 <template>
   <div>
-    <o-dialog ref="dialogRef" title="弹框form表单" v-model="isShow" @confirm="confirm">
-      <o-form :fieldList="fieldList" :model="form" ref="oFormRef" :rules="rules"></o-form>
-    </o-dialog>
+    <s-dialog ref="dialogRef" title="弹框form表单" v-model="isShow" @confirm="confirm">
+      <s-form :fieldList="fieldList" :model="form" ref="sFormRef" :rules="rules"></s-form>
+    </s-dialog>
     <el-button type="primary" @click="open()">新建</el-button>
     <el-button type="primary" @click="open(true)">编辑</el-button>
   </div>

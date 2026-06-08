@@ -1,12 +1,12 @@
 <template>
-  <div class="o-title" :style="{ ...margin, height: processWidth(height, true) }" v-bind="$attrs">
-    <div class="o-title__top" :class="parseClass">
-      <div class="o-title__main" :style="{ marginLeft: props.inner ? '8px' : 0 }">
-        <span :class="($slots.icon || props.type === 'icon') && 'o-title__slot-icon-wrapper'">
+  <div class="s-title" :style="{ ...margin, height: processWidth(height, true) }" v-bind="$attrs">
+    <div class="s-title__top" :class="parseClass">
+      <div class="s-title__main" :style="{ marginLeft: props.inner ? '8px' : 0 }">
+        <span :class="($slots.icon || props.type === 'icon') && 's-title__slot-icon-wrapper'">
           <slot name="icon" class="icon_slot">
             <svg
               v-if="props.type === 'icon'"
-              class="o-title__default-icon"
+              class="s-title__default-icon"
               viewBox="0 0 1024 1024"
               aria-hidden="true"
               focusable="false"
@@ -33,20 +33,20 @@
         </span>
         <slot></slot>
       </div>
-      <div :class="$slots.right && 'o-title__slot-right-wrapper'">
+      <div :class="$slots.right && 's-title__slot-right-wrapper'">
         <slot name="right"></slot>
       </div>
     </div>
-    <div class="o-title__subTitle" v-if="subTitle" v-bind="subAttrs">
+    <div class="s-title__subTitle" v-if="subTitle" v-bind="subAttrs">
       {{ subTitle }}
     </div>
   </div>
 </template>
 
-<script setup lang="ts" name="OTitle">
+<script setup lang="ts" name="STitle">
 /**
-<o-title title="使用hooks1" t="100"></o-title>
-<o-title title="我说呢" sub-title="test/t2.vue"></o-title>
+<s-title title="使用hooks1" t="100"></s-title>
+<s-title title="我说呢" sub-title="test/t2.vue"></s-title>
 *
 */
 import { processWidth } from '@/utils/src/index.ts'
@@ -124,31 +124,31 @@ const margin = computed(() => {
 const parseClass = computed(() => {
   let type = props.type
   if (type === 'simple' || type === 'icon') {
-    return 'o-title__top-simple-left'
+    return 's-title__top-simple-left'
   }
   if (type === 'form') {
-    return 'o-title__form-left'
+    return 's-title__form-left'
   }
-  return 'o-title__top-left'
+  return 's-title__top-left'
 })
 
 </script>
 
 <style scoped lang="scss">
-.o-title {
+.s-title {
   position: relative;
   box-sizing: border-box;
-  .o-title__main {
+  .s-title__main {
     display: flex;
     align-items: center;
   }
-  .o-title__top {
+  .s-title__top {
     display: flex;
     align-items: center;
     color: var(--el-text-color-primary);
     font-size: 16px;
     justify-content: space-between;
-    .o-title__slot-icon-wrapper {
+    .s-title__slot-icon-wrapper {
       margin-right: 8px;
       width: 14px;
       height: 14px;
@@ -156,18 +156,18 @@ const parseClass = computed(() => {
       align-items: center;
       color: currentColor;
     }
-    .o-title__default-icon {
+    .s-title__default-icon {
       width: 14px;
       height: 14px;
       display: block;
     }
-    .o-title__slot-right-wrapper {
+    .s-title__slot-right-wrapper {
       text-align: right;
       display: flex;
     }
   }
 
-  .o-title__form-left {
+  .s-title__form-left {
     padding: 0 0 8px;
     margin: 0 0 16px;
     font-weight: 800;
@@ -175,7 +175,7 @@ const parseClass = computed(() => {
     border-bottom: 1px dashed var(--el-border-color-lighter);
   }
 
-  .o-title__top-simple-left {
+  .s-title__top-simple-left {
     width: 100%;
     align-items: center;
     position: relative;
@@ -188,7 +188,7 @@ const parseClass = computed(() => {
       white-space: nowrap;
     }
   }
-  .o-title__top-left {
+  .s-title__top-left {
     width: 100%;
     align-items: center;
     position: relative;
@@ -213,7 +213,7 @@ const parseClass = computed(() => {
       white-space: nowrap;
     }
   }
-  .o-title__subTitle {
+  .s-title__subTitle {
     font-size: 14px;
     font-weight: 400;
     color: var(--el-text-color-secondary);

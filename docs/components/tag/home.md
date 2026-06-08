@@ -1,6 +1,6 @@
 # Tag 标签组件
 
-`o-tag` 基于 Element Plus `el-tag` 封装，支持直接指定标签类型，也支持根据值自动映射标签文案和颜色。适合状态展示、枚举值翻译、表格状态列等场景。
+`s-tag` 基于 Element Plus `el-tag` 封装，支持直接指定标签类型，也支持根据值自动映射标签文案和颜色。适合状态展示、枚举值翻译、表格状态列等场景。
 
 [Element Plus Tag Documentation](https://element-plus.org/zh-CN/component/tag.html)
 
@@ -96,7 +96,7 @@ const options = [
 ```
 
 ```vue
-<o-tag
+<s-tag
   :value="row.status"
   :options="options"
   :config="{ label: 'name', value: 'value' }"
@@ -120,7 +120,7 @@ const options = [
 ```
 
 ```vue
-<o-tag :value="status" :options="options" />
+<s-tag :value="status" :options="options" />
 ```
 
 ### 颜色使用原则

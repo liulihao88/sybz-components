@@ -1,10 +1,10 @@
 <!-- src/components/QuotaFormItem.vue -->
 <template>
   <el-form-item label="配额" prop="quota" :rules="rules" ref="formItemRef" v-bind="$attrs">
-    <div class="o-quota-unit">
-      <div class="o-quota-unit__controls">
-        <el-input-number v-model="internalValue" style="min-width: 150px" class="o-quota-unit__input" :min="0" />
-        <o-radio v-model="unitValue" :options="QUOTA_UNIT" showType="button" class="o-quota-unit__radio" />
+    <div class="s-quota-unit">
+      <div class="s-quota-unit__controls">
+        <el-input-number v-model="internalValue" style="min-width: 150px" class="s-quota-unit__input" :min="0" />
+        <s-radio v-model="unitValue" :options="QUOTA_UNIT" showType="button" class="s-quota-unit__radio" />
       </div>
     </div>
   </el-form-item>
@@ -21,7 +21,7 @@ const QUOTA_UNIT = [
 import { ref, watch, computed } from 'vue'
 
 defineOptions({
-  name: 'OQuotaUnit',
+  name: 'SQuotaUnit',
 })
 
 // ================== 1. PROPS & EMITS ==================
@@ -142,23 +142,23 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-.o-quota-unit {
+.s-quota-unit {
   display: flex;
   align-items: center;
 }
 
-.o-quota-unit__controls {
+.s-quota-unit__controls {
   display: flex;
   align-items: center;
   width: 100%;
   margin-right: 16px;
 }
 
-.o-quota-unit__input {
+.s-quota-unit__input {
   margin-right: 8px;
 }
 
-.o-quota-unit__radio {
+.s-quota-unit__radio {
   width: 200px;
 }
 

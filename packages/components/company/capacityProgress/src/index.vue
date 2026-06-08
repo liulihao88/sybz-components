@@ -1,8 +1,8 @@
-<script setup lang="ts" name="OCapacityProgress">
+<script setup lang="ts" name="SCapacityProgress">
 /**
- <o-capacity-progress :total="row.totalSpace" :used="row.usedSpace">
+ <s-capacity-progress :total="row.totalSpace" :used="row.usedSpace">
     {{ proxy.formatBytes(row.usedSpace) }} / {{ proxy.formatBytes(row.totalSpace) }}
-  </o-capacity-progress>
+  </s-capacity-progress>
  */
 
 import { ref, computed, onMounted, onUnmounted } from 'vue'
@@ -151,15 +151,15 @@ const parseType = computed(() => {
 
 const setColorByType = (pType) => {
   if (pType === 'primary') {
-    return 'var(--o-capacity-progress-fill)'
+    return 'var(--s-capacity-progress-fill)'
   } else if (pType === 'info') {
     return 'var(--el-color-info)'
   } else if (pType === 'warning') {
     return 'var(--el-color-warning)'
   } else if (pType === 'danger') {
-    return 'var(--o-capacity-progress-overflow-fill)'
+    return 'var(--s-capacity-progress-overflow-fill)'
   } else {
-    return 'var(--o-capacity-progress-fill)'
+    return 'var(--s-capacity-progress-fill)'
   }
 }
 function formatColor(value) {
@@ -167,9 +167,9 @@ function formatColor(value) {
     if (props.customColor) {
       return setColorByType(parseType.value)
     }
-    return 'var(--o-capacity-progress-fill)'
+    return 'var(--s-capacity-progress-fill)'
   } else {
-    return 'var(--o-capacity-progress-overflow-fill)'
+    return 'var(--s-capacity-progress-overflow-fill)'
   }
 }
 
@@ -210,8 +210,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="o-capacity-progress" :style="{ ...handleWidthHeight(props.width, props.height) }">
-    <o-progress
+  <div class="s-capacity-progress" :style="{ ...handleWidthHeight(props.width, props.height) }">
+    <s-progress
       ref="progressBoxRef"
       class="progress-box"
       :class="{ 'prgress-less-zero': Number(used) < 0 }"
@@ -225,8 +225,8 @@ onUnmounted(() => {
     >
       <template #default="{ percentage }">
         <el-tooltip :content="handleTooltip" :disabled="showRight">
-          <div ref="percentageRef" class="o-capacity-progress__value-row" :style="{ ...adaptiveWidth() }">
-            <div class="percentage-value o-capacity-progress__percentage">{{ format() }}</div>
+          <div ref="percentageRef" class="s-capacity-progress__value-row" :style="{ ...adaptiveWidth() }">
+            <div class="percentage-value s-capacity-progress__percentage">{{ format() }}</div>
             <div class="">
               <slot>
                 <span v-if="showRight">{{ parseSpace(props.used) }}/{{ parseSpace(props.total) }}</span>
@@ -235,44 +235,44 @@ onUnmounted(() => {
           </div>
         </el-tooltip>
       </template>
-    </o-progress>
-    <o-icon
+    </s-progress>
+    <s-icon
       v-if="percentage > 100"
       name="warning"
       content="已用容量远超总容量, 请扩容 "
-      class="o-capacity-progress__warning"
+      class="s-capacity-progress__warning"
       v-bind="iconAttrs"
     />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.o-capacity-progress {
+.s-capacity-progress {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-.o-capacity-progress__value-row {
+.s-capacity-progress__value-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.o-capacity-progress__percentage {
+.s-capacity-progress__percentage {
   margin-right: 8px;
 }
 
-.o-capacity-progress__warning {
+.s-capacity-progress__warning {
   margin-left: 8px;
 }
 
 .progress-box :deep(.el-progress-bar__outer) {
   width: 100%;
-  background: var(--o-capacity-progress-track-bg);
+  background: var(--s-capacity-progress-track-bg);
 }
 .progress-box.prgress-less-zero :deep(.el-progress-bar__outer) {
   width: 100%;
-  background: var(--o-capacity-progress-track-bg-negative);
+  background: var(--s-capacity-progress-track-bg-negative);
 }
 </style>

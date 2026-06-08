@@ -42,7 +42,7 @@ button/other
 | :----------: | ------------------- | --------------------------------------- | ------ |
 |   content    | tooltip的提示文字   | string                                  | ''     |
 |     time     | 防抖时长            | number(毫秒)                            | 0      |
-| tooltipAttrs | o-tooltip组件的属性 | Object [去tooltip组件](../tooltip/home) | {}     |
+| tooltipAttrs | s-tooltip组件的属性 | Object [去tooltip组件](../tooltip/home) | {}     |
 
 ### 事件
 

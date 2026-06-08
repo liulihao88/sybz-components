@@ -167,9 +167,9 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <o-table :columns="columns" :data="data">
+    <s-table :columns="columns" :data="data">
       <template #status="{ value }">
-        <o-tag
+        <s-tag
           :primary="['Normal']"
           :info="['Unknown', 'PowerOff', 'Maintenance']"
           :warning="['Rebooting', 'Shuttingdown']"
@@ -179,8 +179,8 @@ onUnmounted(() => {
             label: 'name',
           }"
           :value="value"
-        ></o-tag>
+        ></s-tag>
       </template>
-    </o-table>
+    </s-table>
   </div>
 </template>

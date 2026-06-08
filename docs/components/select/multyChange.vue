@@ -21,7 +21,7 @@ nextTick(() => {
 watch(
   options,
   (val) => {
-    console.log(`38 21行 docs/examples/OSelect/multyChange.vue val`, val)
+    console.log(`38 21行 docs/examples/SSelect/multyChange.vue val`, val)
   },
   {
     deep: true,
@@ -33,10 +33,10 @@ watch(
 <template>
   <div>
     <div v-for="(v, i) in options" :key="i">
-      <o-select v-model="v.cc" :options="options" :ref="(el) => getSelectRef(el, i)"></o-select>
+      <s-select v-model="v.cc" :options="options" :ref="(el) => getSelectRef(el, i)"></s-select>
     </div>
 
-    <o-select v-model="setValue" :options="options"></o-select>
+    <s-select v-model="setValue" :options="options"></s-select>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="o-tabs-box">
+  <div class="s-tabs-box">
     <el-tabs v-bind="$attrs" v-model="tabsValue">
       <slot>
         <template v-for="tab in props.options" :key="tab[props.value]">
@@ -16,7 +16,7 @@
     </el-tabs>
   </div>
 </template>
-<script setup lang="ts" name="OTabs">
+<script setup lang="ts" name="STabs">
 import { computed } from 'vue'
 const props: any = defineProps({
   modelValue: {
@@ -65,7 +65,7 @@ const handleMouseEnter = (tabVal: string) => {
 }
 </script>
 <style lang="scss" scoped>
-.o-tabs-box {
+.s-tabs-box {
   :deep(.el-tabs__item) {
     font-size: 16px;
   }

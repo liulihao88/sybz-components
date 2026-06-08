@@ -11,11 +11,11 @@ const options = ref([
 
 <template>
   <div>
-    <o-select v-model="selectValue" :options="options" >
+    <s-select v-model="selectValue" :options="options" >
       <template #default="{ options, item }">
         <span>{{ item.label }}</span>
         <span class="cl-red">{{ item.value }}</span>
       </template>
-    </o-select>
+    </s-select>
   </div>
 </template>

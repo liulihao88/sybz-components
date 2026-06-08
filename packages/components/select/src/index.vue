@@ -1,6 +1,6 @@
 <template>
   <div
-    class="o-select"
+    class="s-select"
     :style="{ ...processWidth(mergedProps.width) }"
     :class="[
       sizeClass,
@@ -10,20 +10,20 @@
       },
     ]"
   >
-    <o-comp-title :title="mergedProps.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}" />
+    <s-comp-title :title="mergedProps.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}" />
     <el-tooltip
       v-bind="mergedTooltipAttrs"
       :content="selectTooltipContent"
       :disabled="!mergedProps.showTooltip || selectTooltipDisabled"
     >
-      <div class="o-select__tooltip-trigger" @mouseover="updateSelectTooltip">
+      <div class="s-select__tooltip-trigger" @mouseover="updateSelectTooltip">
         <el-select
           ref="selectRef"
           v-model="childSelectedValue"
-          class="o-select__select"
-          :class="isEmpty(sOptions, true) && emptyColor ? 'o-select__empty' : ''"
+          class="s-select__select"
+          :class="isEmpty(sOptions, true) && emptyColor ? 's-select__empty' : ''"
           :placeholder="handlePlaceholder()"
-          popper-class="o-select__multiple-checkbox"
+          popper-class="s-select__multiple-checkbox"
           :multiple="multiple"
           v-bind="{
             clearable: true,
@@ -39,12 +39,12 @@
         >
           <template v-if="mergedProps.showPrefix" #prefix>
             <slot name="prefix">
-              <span v-if="Array.isArray(childSelectedValue)" class="o-select__fraction">
-                <span class="o-select__fraction-text">{{ childSelectedValue.length }}</span>
-                <span class="o-select__fraction-line"></span>
-                <span class="o-select__fraction-text">{{ sOptions.length }}</span>
+              <span v-if="Array.isArray(childSelectedValue)" class="s-select__fraction">
+                <span class="s-select__fraction-text">{{ childSelectedValue.length }}</span>
+                <span class="s-select__fraction-line"></span>
+                <span class="s-select__fraction-text">{{ sOptions.length }}</span>
               </span>
-              <span v-else class="o-select__fraction-text o-select__fraction-text--absolute">{{ sOptions.length }}</span>
+              <span v-else class="s-select__fraction-text s-select__fraction-text--absolute">{{ sOptions.length }}</span>
             </slot>
           </template>
           <template v-if="$slots.label" #label="arg">
@@ -54,14 +54,14 @@
             <slot :name="name" v-bind="arg" :index="index" />
           </template>
 
-          <div v-if="multiple && mergedProps.showAll" class="o-select__bulk-actions">
+          <div v-if="multiple && mergedProps.showAll" class="s-select__bulk-actions">
             <el-checkbox
               v-model="selectChecked"
               :indeterminate="indeterminate"
-              class="o-select__all-select"
+              class="s-select__all-select"
               @change="selectAll"
             >
-              <div class="o-select__all-select-label">全选</div>
+              <div class="s-select__all-select-label">全选</div>
             </el-checkbox>
             <el-button type="primary" size="small" class="reverse-select" @click.stop="reverseSelect">反选</el-button>
           </div>
@@ -79,19 +79,19 @@
       </div>
     </el-tooltip>
 
-    <span v-if="showQuick && !parseDisabled && sOptions.length > 0" class="o-select__select-box">
-      <span class="o-select__select-box__inner">
-        <o-icon name="ArrowUp" :size="attrs.size === 'small' ? 10 : 14" @click="quickSelect(false)" />
-        <div class="o-select__divider" />
-        <o-icon name="ArrowDown" :size="attrs.size === 'small' ? 10 : 14" @click="quickSelect(true)" />
+    <span v-if="showQuick && !parseDisabled && sOptions.length > 0" class="s-select__select-box">
+      <span class="s-select__select-box__inner">
+        <s-icon name="ArrowUp" :size="attrs.size === 'small' ? 10 : 14" @click="quickSelect(false)" />
+        <div class="s-select__divider" />
+        <s-icon name="ArrowDown" :size="attrs.size === 'small' ? 10 : 14" @click="quickSelect(true)" />
       </span>
     </span>
   </div>
 </template>
 
-<script setup lang="ts" name="OSelect">
+<script setup lang="ts" name="SSelect">
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
-import { processWidth, isEmpty } from '@oeos-components/utils'
+import { processWidth, isEmpty } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 const { proxy } = getCurrentInstance()
 const attrs = useAttrs()
@@ -105,7 +105,7 @@ const noDefaultSlots = computed(() => {
 })
 
 const sizeClass = computed(() => {
-  return `o-select--${attrs.size || 'default'}`
+  return `s-select--${attrs.size || 'default'}`
 })
 
 const props = defineProps({
@@ -314,7 +314,7 @@ const reverseSelect = () => {
   changeMulty(noSelectedValue)
 }
 
-const mergedProps = useGlobalComponentConfig('oSelect', props)
+const mergedProps = useGlobalComponentConfig('sSelect', props)
 
 function handlePlaceholder() {
   let res = attrs.disabled ? mergedProps.value.disPlaceholder : attrs.placeholder || '请选择'
@@ -440,15 +440,15 @@ function _commonEmits(item, selectLabel, selectObj) {
 </script>
 
 <style lang="scss" scoped>
-.o-select {
-  --o-select-min-height: var(--el-component-size, 32px);
+.s-select {
+  --s-select-min-height: var(--el-component-size, 32px);
   display: inline-flex;
   width: 316px;
   height: 100%;
-  min-height: var(--o-select-min-height);
+  min-height: var(--s-select-min-height);
   vertical-align: bottom;
 
-  .o-select__fraction {
+  .s-select__fraction {
     display: inline-flex;
     min-width: 16px;
     flex-direction: column;
@@ -460,14 +460,14 @@ function _commonEmits(item, selectLabel, selectObj) {
     left: 1px;
   }
 
-  .o-select__fraction-text {
+  .s-select__fraction-text {
     display: block;
     line-height: 1;
     font-size: 12px;
     color: var(--el-disabled-text-color);
   }
 
-  .o-select__fraction-line {
+  .s-select__fraction-line {
     width: 100%;
     height: 1px;
     margin: 1px 0;
@@ -475,7 +475,7 @@ function _commonEmits(item, selectLabel, selectObj) {
     opacity: 0.6;
   }
 
-  .o-select__tooltip-trigger {
+  .s-select__tooltip-trigger {
     display: flex;
     flex: 1;
     height: 100%;
@@ -488,34 +488,34 @@ function _commonEmits(item, selectLabel, selectObj) {
   }
 
   :deep(.el-select__wrapper) {
-    min-height: max(100%, var(--o-select-min-height));
+    min-height: max(100%, var(--s-select-min-height));
   }
 
   :deep(.el-input__inner) {
     border-radius: 0px 2px 2px 0 !important;
   }
 
-  .o-select__empty {
+  .s-select__empty {
     :deep(.el-select__wrapper) {
       box-shadow: 0 0 0 1px var(--red) inset;
     }
   }
 }
 
-.o-select__fraction-text--absolute {
+.s-select__fraction-text--absolute {
   position: absolute;
   left: 1px;
 }
 
-.o-select__bulk-actions {
+.s-select__bulk-actions {
   position: relative;
 }
 
-.o-select__all-select-label {
+.s-select__all-select-label {
   margin-top: 8px;
 }
 
-.o-select__divider {
+.s-select__divider {
   width: 100%;
   height: 1px;
   background: var(--line);
@@ -534,7 +534,7 @@ function _commonEmits(item, selectLabel, selectObj) {
   }
 }
 
-.o-select__multiple-checkbox.is-multiple .el-select-dropdown__item {
+.s-select__multiple-checkbox.is-multiple .el-select-dropdown__item {
   &.selected::after {
     left: 21px;
     z-index: 10;
@@ -578,7 +578,7 @@ function _commonEmits(item, selectLabel, selectObj) {
     color: var(--el-color-white) !important;
   }
 }
-.o-select__all-select {
+.s-select__all-select {
   display: flex;
   padding: 0px 0px 10px 20px;
   align-items: flex-end;
@@ -586,7 +586,7 @@ function _commonEmits(item, selectLabel, selectObj) {
     background-color: var(--el-fill-color-light);
   }
 }
-.o-select__all-select:hover + .el-select-dropdown__item {
+.s-select__all-select:hover + .el-select-dropdown__item {
   background-color: unset;
 }
 .reverse-select {
@@ -594,7 +594,7 @@ function _commonEmits(item, selectLabel, selectObj) {
   right: 16px;
   top: 4px;
 }
-.o-select__select-box {
+.s-select__select-box {
   background: var(--el-fill-color-light);
   vertical-align: middle;
   position: relative;
@@ -602,7 +602,7 @@ function _commonEmits(item, selectLabel, selectObj) {
   border-left: none;
   white-space: nowrap;
   width: 14px;
-  min-height: max(100%, var(--o-select-min-height));
+  min-height: max(100%, var(--s-select-min-height));
   cursor: pointer;
   border-radius: 0px 2px 2px 0px;
   align-items: center;
@@ -610,7 +610,7 @@ function _commonEmits(item, selectLabel, selectObj) {
   align-items: center;
   justify-content: center;
   color: var(--el-color-info);
-  .o-select__select-box__inner {
+  .s-select__select-box__inner {
     display: flex;
     height: 100%;
     width: 100%;
@@ -621,17 +621,17 @@ function _commonEmits(item, selectLabel, selectObj) {
       color: var(--blue);
       background: var(--el-color-primary-light-9);
     }
-    .o-icon + .o-icon {
+    .s-icon + .s-icon {
       margin-left: 0;
     }
   }
 }
 
-.o-select--small {
-  --o-select-min-height: var(--el-component-size-small, 24px);
+.s-select--small {
+  --s-select-min-height: var(--el-component-size-small, 24px);
 }
 
-.o-select--large {
-  --o-select-min-height: var(--el-component-size-large, 40px);
+.s-select--large {
+  --s-select-min-height: var(--el-component-size-large, 40px);
 }
 </style>

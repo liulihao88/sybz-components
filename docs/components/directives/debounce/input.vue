@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-input type="primary" v-model="aa" v-debounce.input="input"></el-input>
-    <o-input type="primary" v-model="aa" v-debounce.input="input"></o-input>
+    <s-input type="primary" v-model="aa" v-debounce.input="input"></s-input>
   </div>
 </template>
 
@@ -15,6 +15,6 @@ function handleEvent(evt, ...rest) {
 }
 const aa = ref(2131)
 function input(el) {
-  proxy.log(`aa`, aa, '19行 docs/examples/ODirectives/input.vue')
+  proxy.log(`aa`, aa, '19行 docs/examples/SDirectives/input.vue')
 }
 </script>

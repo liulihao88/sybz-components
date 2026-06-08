@@ -3,8 +3,8 @@ import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 import * as icons from '@element-plus/icons-vue'
 function copyIcon(name) {
-  console.log(`1105 6行 docs/examples/OIcon/usually.vue name `, name)
-  let res = `<o-icon name="${proxy.toLine(name)}"></o-icon>`
+  console.log(`1105 6行 docs/examples/SIcon/usually.vue name `, name)
+  let res = `<s-icon name="${proxy.toLine(name)}"></s-icon>`
   proxy.copy(res, { duration: 500 })
 }
 </script>
@@ -13,7 +13,7 @@ function copyIcon(name) {
   <div class="icon-box">
     <template v-for="(v, i) in icons" :key="i">
       <div class="box-inner" @click="copyIcon(v.name)">
-        <o-icon :name="`${proxy.toLine(v.name)}`" class="item"></o-icon>
+        <s-icon :name="`${proxy.toLine(v.name)}`" class="item"></s-icon>
         <div>{{ v.name }}</div>
       </div>
     </template>

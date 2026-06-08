@@ -11,7 +11,7 @@ import workModule from '@/assets/images/overview/work-module.png'
 import spaceLimit from '@/assets/images/overview/space-limit.png'
 
 defineOptions({
-  name: 'OOverviewItem',
+  name: 'SOverviewItem',
 })
 
 const props = defineProps({
@@ -121,10 +121,10 @@ const compItemList = computed(() => {
 </script>
 
 <template>
-  <oBasicLayout class="o-overview-item">
-    <oItemWrapper class="o-overview-item__wrapper">
+  <sBasicLayout class="s-overview-item">
+    <sItemWrapper class="s-overview-item__wrapper">
       <template v-for="(v, i) in compItemList" :key="i">
-        <OItem
+        <SItem
           :label="v.label"
           :value="v.value"
           :style="{ background: v.style.background, fontSize: '12px', minWidth: '200px' }"
@@ -136,21 +136,21 @@ const compItemList = computed(() => {
         >
           <template #img>
             <div class="new-img-box">
-              <img :src="v.src" class="o-overview-item__image" :useResize="true" />
+              <img :src="v.src" class="s-overview-item__image" :useResize="true" />
             </div>
           </template>
-        </OItem>
+        </SItem>
       </template>
-    </oItemWrapper>
-  </oBasicLayout>
+    </sItemWrapper>
+  </sBasicLayout>
 </template>
 
 <style lang="scss" scoped>
-.o-overview-item {
+.s-overview-item {
   height: 100%;
 }
 
-.o-overview-item__wrapper {
+.s-overview-item__wrapper {
   width: 100%;
 }
 
@@ -168,7 +168,7 @@ const compItemList = computed(() => {
   }
 }
 
-.o-overview-item__image {
+.s-overview-item__image {
   position: relative;
 }
 </style>

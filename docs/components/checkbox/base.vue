@@ -11,7 +11,7 @@ const options = ref([
 
 <template>
   <div>
-    <o-checkbox v-model="checkboxValue" :options="options"></o-checkbox>
+    <s-checkbox v-model="checkboxValue" :options="options"></s-checkbox>
   </div>
 </template>
 

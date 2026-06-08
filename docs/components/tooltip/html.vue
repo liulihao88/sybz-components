@@ -20,11 +20,11 @@ const vnodeContent = h('div', {}, [
 
 <template>
   <div class="demo-box">
-    <o-tooltip width="220px" raw-content :content="rawHtml">HTML 字符串内容</o-tooltip>
+    <s-tooltip width="220px" raw-content :content="rawHtml">HTML 字符串内容</s-tooltip>
 
-    <o-tooltip :content="vnodeContent" trigger="click" placement="right">
+    <s-tooltip :content="vnodeContent" trigger="click" placement="right">
       <el-button type="primary">VNode 内容</el-button>
-    </o-tooltip>
+    </s-tooltip>
   </div>
 </template>
 

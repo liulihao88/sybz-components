@@ -78,11 +78,11 @@ const submitForm = async () => {
 <template>
   <div class="table-box">
     <el-form :model="form" ref="formRef" size="small">
-      <o-table :columns="columns" :data="form.data">
+      <s-table :columns="columns" :data="form.data">
         <template #name="{ scope, row }">
           <template v-if="row.isEdit">
             <el-form-item :prop="'data.' + scope.$index + '.name'" :rules="formRules.name" class="">
-              <o-input v-model="form.data[scope.$index].name" size="small" />
+              <s-input v-model="form.data[scope.$index].name" size="small" />
             </el-form-item>
           </template>
           <template v-else>
@@ -92,10 +92,10 @@ const submitForm = async () => {
 
         <template #age="{ scope, row }">
           <el-form-item :prop="'data.' + scope.$index + '.age'" :rules="formRules.age" class="">
-            <o-input v-model="form.data[scope.$index].age" size="small" />
+            <s-input v-model="form.data[scope.$index].age" size="small" />
           </el-form-item>
         </template>
-      </o-table>
+      </s-table>
     </el-form>
 
     <el-button type="primary" @click="submitForm()">Submit</el-button>

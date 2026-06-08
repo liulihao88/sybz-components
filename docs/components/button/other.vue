@@ -71,10 +71,10 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
       </div>
       <el-link
         class="mt-2"
-        href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/components/o-button.vue"
+        href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/components/s-button.vue"
         target="_blank"
       >
-        代码位置 src/views/components/o-button.vue
+        代码位置 src/views/components/s-button.vue
       </el-link>
     </template>
 
@@ -90,7 +90,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     </el-radio-group>
     <br />
     <el-space wrap>
-      <o-button
+      <s-button
         v-for="(button, index) in buttonList"
         :key="index"
         :type="button.type as any"
@@ -107,15 +107,15 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
         <template v-if="baseRadio !== 'circle'" #default>
           <p>{{ button.text }}</p>
         </template>
-      </o-button>
+      </s-button>
     </el-space>
     <el-divider />
 
     <div class="mb-4">加载状态按钮</div>
-    <o-button text bg type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
+    <s-button text bg type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
       {{ size === 'disabled' ? '停止加载' : '加载中' }}
-    </o-button>
-    <o-button
+    </s-button>
+    <s-button
       type="primary"
       plain
       :size="dynamicSize"
@@ -124,8 +124,8 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
       :loading="size !== 'disabled'"
     >
       {{ size === 'disabled' ? '停止加载' : '加载中' }}
-    </o-button>
-    <o-button type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
+    </s-button>
+    <s-button type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
       <template #loading>
         <div class="custom-loading">
           <svg class="circular" viewBox="-10, -10, 50, 50">
@@ -145,15 +145,15 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
         </div>
       </template>
       {{ size === 'disabled' ? '停止加载' : '加载中' }}
-    </o-button>
+    </s-button>
     <el-divider />
 
     <div class="mb-4">自定义元素标签。例如：按钮、div、链接</div>
-    <o-button :size="dynamicSize" :disabled="size === 'disabled'">button 标签</o-button>
-    <o-button tag="div" role="button" tabindex="0" :size="dynamicSize" :disabled="size === 'disabled'">
+    <s-button :size="dynamicSize" :disabled="size === 'disabled'">button 标签</s-button>
+    <s-button tag="div" role="button" tabindex="0" :size="dynamicSize" :disabled="size === 'disabled'">
       div 标签
-    </o-button>
-    <o-button
+    </s-button>
+    <s-button
       type="primary"
       tag="a"
       :href="size === 'disabled' ? 'javascript:void(0);' : 'https://element-plus.org/zh-CN/component/button.html#tag'"
@@ -163,17 +163,17 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
       :disabled="size === 'disabled'"
     >
       a 链接
-    </o-button>
+    </s-button>
     <el-divider />
 
-    <o-radio v-model="isDark" :options="[true, false]" type="simple" title="是否黑色"></o-radio>
+    <s-radio v-model="isDark" :options="[true, false]" type="simple" title="是否黑色"></s-radio>
     <div class="mb-4">自定义颜色</div>
     <el-space wrap>
-      <o-button color="#626aef" :dark="isDark">Default</o-button>
-      <o-button color="#626aef" :dark="isDark" plain>Plain</o-button>
+      <s-button color="#626aef" :dark="isDark">Default</s-button>
+      <s-button color="#626aef" :dark="isDark" plain>Plain</s-button>
 
-      <o-button color="#626aef" :dark="isDark" disabled>Disabled</o-button>
-      <o-button color="#626aef" :dark="isDark" disabled plain>Disabled Plain</o-button>
+      <s-button color="#626aef" :dark="isDark" disabled>Disabled</s-button>
+      <s-button color="#626aef" :dark="isDark" disabled plain>Disabled Plain</s-button>
     </el-space>
   </el-card>
 </template>
@@ -183,14 +183,14 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
   margin: 17px 0;
 }
 
-.o-button .custom-loading .circular {
+.s-button .custom-loading .circular {
   width: 18px;
   height: 18px;
   margin-right: 6px;
   animation: loading-rotate 2s linear infinite;
 }
 
-.o-button .custom-loading .circular .path {
+.s-button .custom-loading .circular .path {
   stroke: var(--el-button-text-color);
   stroke-width: 2;
   stroke-linecap: round;

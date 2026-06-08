@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
-import { $toast } from '@oeos-components/utils'
+import { $toast } from '@sybz-components/utils'
 const handleClick = () => {
   $toast('handleClick')
 }
@@ -11,30 +11,30 @@ const handleClick = () => {
   <div>
     <el-button :time="1000" @click="handleClick">
       <template #icon>
-        <o-icon name="delete"></o-icon>
+        <s-icon name="delete"></s-icon>
       </template>
       男人
     </el-button>
-    <o-button :time="1000" @click="handleClick" type="primary">
+    <s-button :time="1000" @click="handleClick" type="primary">
       <template #icon>
-        <o-icon name="delete"></o-icon>
+        <s-icon name="delete"></s-icon>
       </template>
-      男人(o-button)
-    </o-button>
+      男人(s-button)
+    </s-button>
 
     <!-- loading插槽 -->
     <el-button @click="handleClick" loading>
       <template #loading>
-        <o-icon name="refresh"></o-icon>
+        <s-icon name="refresh"></s-icon>
       </template>
       我是loading插槽
     </el-button>
 
-    <o-button @click="handleClick" loading type="primary">
+    <s-button @click="handleClick" loading type="primary">
       <template #loading>
-        <o-icon name="refresh"></o-icon>
+        <s-icon name="refresh"></s-icon>
       </template>
-      我是loading插槽(o-button)
-    </o-button>
+      我是loading插槽(s-button)
+    </s-button>
   </div>
 </template>

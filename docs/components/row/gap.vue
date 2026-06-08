@@ -10,11 +10,11 @@ const gap = computed(() => String(gapNumber.value))
     <div class="demo-title">当前 `gap`: "{{ gap }}"</div>
     <el-slider v-model="gapNumber" :min="0" :max="48" show-input />
 
-    <o-row :col="8" :gap="gap">
+    <s-row :col="8" :gap="gap">
       <div class="box">gap=&quot;{{ gap }}&quot;</div>
       <div class="box">数字字符串</div>
       <div class="box">自动按 px</div>
-    </o-row>
+    </s-row>
   </div>
 </template>
 

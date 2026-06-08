@@ -50,7 +50,7 @@ const childColumns: TableColumnList = [
     <el-switch v-model="parentBorder" />
     switch child border:
     <el-switch v-model="childBorder" />
-    <o-table :data="tableDataExpand" :columns="columns" :border="parentBorder">
+    <s-table :data="tableDataExpand" :columns="columns" :border="parentBorder">
       <template #expand="{ row }">
         <div class="m-4">
           <p class="mb-2">State: {{ row.state }}</p>
@@ -58,9 +58,9 @@ const childColumns: TableColumnList = [
           <p class="mb-2">Address: {{ row.address }}</p>
           <p class="mb-4">Zip: {{ row.zip }}</p>
           <h3>Family</h3>
-          <o-table :data="row.family" :columns="childColumns" :border="childBorder" />
+          <s-table :data="row.family" :columns="childColumns" :border="childBorder" />
         </div>
       </template>
-    </o-table>
+    </s-table>
   </div>
 </template>

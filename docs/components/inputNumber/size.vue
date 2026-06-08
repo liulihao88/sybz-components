@@ -10,11 +10,11 @@ const smallCount = ref(1)
   <div class="box">
     <div>
       1
-      <o-input-number v-model="smallCount" title="小尺寸" size="small" :min="0" />
+      <s-input-number v-model="smallCount" title="小尺寸" size="small" :min="0" />
       2
-      <o-input-number v-model="smallCount" title="小尺寸" :min="0" />
+      <s-input-number v-model="smallCount" title="小尺寸" :min="0" />
       3
-      <o-input-number v-model="smallCount" title="大尺寸" size="large" :min="0" />
+      <s-input-number v-model="smallCount" title="大尺寸" size="large" :min="0" />
     </div>
   </div>
 </template>

@@ -23,8 +23,8 @@ const options = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="formatDurationTime"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="formatDurationTime"></SFunctionSourceCode>
   <div>
-    <o-descriptions :options="options" title="时间转换" :column="1"></o-descriptions>
+    <s-descriptions :options="options" title="时间转换" :column="1"></s-descriptions>
   </div>
 </template>

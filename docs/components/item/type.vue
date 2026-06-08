@@ -1,21 +1,21 @@
 <template>
-  <OItemWrapper :columns="2">
-    <OItem
+  <SItemWrapper :columns="2">
+    <SItem
       label="这是默认类型"
       value="123456"
       src="https://img.yzcdn.cn/vant/logo.png"
       :imgStyle="{ height: '100px' }"
       height="300"
-    ></OItem>
-    <OItem
+    ></SItem>
+    <SItem
       label="这个类型是type='value'"
       type="value"
       value="123456"
       src="https://img.yzcdn.cn/vant/logo.png"
       :imgStyle="{ height: '100px' }"
       height="300"
-    ></OItem>
-    <OItem
+    ></SItem>
+    <SItem
       label="这个类型是type='value'且加属性"
       type="value"
       value="123456789233412"
@@ -27,8 +27,8 @@
         toFixed: true,
       }"
       height="300"
-    ></OItem>
-    <OItem
+    ></SItem>
+    <SItem
       label="这个类型是type='value'且加attrs加center属性"
       type="value"
       value="123456789233412"
@@ -41,8 +41,8 @@
         center: true
       }"
       height="300"
-    ></OItem>
-  </OItemWrapper>
+    ></SItem>
+  </SItemWrapper>
 </template>
 
 <style lang="scss" scoped></style>

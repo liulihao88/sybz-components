@@ -21,8 +21,8 @@ const options = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="getType"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="getType"></SFunctionSourceCode>
   <div>
-    <o-descriptions :options="options" title="getType获取类型" :column="1"></o-descriptions>
+    <s-descriptions :options="options" title="getType获取类型" :column="1"></s-descriptions>
   </div>
 </template>

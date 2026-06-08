@@ -1,5 +1,5 @@
 <template>
-  <div ref="wrapRef" v-bind="$attrs" class="o-click-outside-box">
+  <div ref="wrapRef" v-bind="$attrs" class="s-click-outside-box">
     <slot></slot>
   </div>
 </template>
@@ -10,7 +10,7 @@ import { ref, onMounted, onUnmounted, watch, type Ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 defineOptions({
-  name: 'OClickOutside',
+  name: 'SClickOutside',
 })
 
 const emit = defineEmits(['clickOutside', 'mounted'])
@@ -74,12 +74,12 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.o-click-outside-box {
+.s-click-outside-box {
   display: inline-block;
 }
-.o-click-outside-box:has(.el-button) + :deep(.el-button),
-.el-button + .o-click-outside-box :deep(.el-button),
-.o-click-outside-box:has(.el-button) + .o-click-outside-box:has(.el-button) {
+.s-click-outside-box:has(.el-button) + :deep(.el-button),
+.el-button + .s-click-outside-box :deep(.el-button),
+.s-click-outside-box:has(.el-button) + .s-click-outside-box:has(.el-button) {
   margin-left: 12px !important;
 }
 </style>

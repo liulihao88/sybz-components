@@ -1,10 +1,10 @@
 <template>
-  <o-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />
+  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />
 </template>
 
 <script setup lang="tsx">
 import { ref } from 'vue'
-import { validate } from '@oeos-components/utils'
+import { validate } from '@sybz-components/utils'
 import type { Ref } from 'vue'
 
 interface ColumnType {
@@ -67,7 +67,7 @@ const fieldList = [
   {
     label: '性别',
     prop: 'sex',
-    comp: 'o-select',
+    comp: 's-select',
     attrs: {
       options: [
         { label: '男人', value: 'man' },
@@ -79,7 +79,7 @@ const fieldList = [
   {
     label: '爱好(单独rules)',
     prop: 'hobby',
-    comp: 'o-checkbox',
+    comp: 's-checkbox',
     rules: [validate('请选择')],
     attrs: {
       showAll: false,
@@ -115,7 +115,7 @@ const fieldList = [
   {
     label: '状态',
     prop: 'status',
-    comp: 'o-switch',
+    comp: 's-switch',
     attrs: {
       'active-text': '启用',
       'inactive-text': '禁用',

@@ -8,6 +8,9 @@
     "paths": {
       "@/*": [
         "./packages/*"
+      ],
+      "@sybz-components/utils": [
+        "./packages/utils/src/index.ts"
       ]
     },
     "types": [

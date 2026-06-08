@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ref, getCurrentInstance, computed } from 'vue'
 const instance = getCurrentInstance()
-import { formatTime, sleep } from '@oeos-components/utils'
+import { formatTime, sleep } from '@sybz-components/utils'
 const data: any = ref({})
 const sizeValue = ref('default')
 const showAll = ref(false)
@@ -30,9 +30,9 @@ const options = computed(() => {
       label: '是否锁定',
       render: () => {
         if (data.value.isLock) {
-          return <o-icon name="lock"></o-icon>
+          return <s-icon name="lock"></s-icon>
         } else {
-          return <o-icon name="unlock"></o-icon>
+          return <s-icon name="unlock"></s-icon>
         }
       },
     },
@@ -74,24 +74,24 @@ init()
 
 <template>
   <div>
-    <o-flex direction="column">
-      <o-radio :options="sizeOptions" v-model="sizeValue"></o-radio>
-      <o-radio
+    <s-flex direction="column">
+      <s-radio :options="sizeOptions" v-model="sizeValue"></s-radio>
+      <s-radio
         :options="[
           { label: '有border', value: true },
           { label: '无border', value: false },
         ]"
         v-model="borderValue"
-      ></o-radio>
-      <o-radio
+      ></s-radio>
+      <s-radio
         :options="[
           { label: 'showAll为true', value: true },
           { label: 'showAll为false', value: false },
         ]"
         v-model="showAll"
-      ></o-radio>
-    </o-flex>
-    <o-descriptions
+      ></s-radio>
+    </s-flex>
+    <s-descriptions
       title="这是title"
       :options="options"
       class="w-100%"
@@ -101,7 +101,7 @@ init()
       :showAll="showAll"
       :border="borderValue"
       extra="这是extra"
-    ></o-descriptions>
+    ></s-descriptions>
   </div>
 </template>
 

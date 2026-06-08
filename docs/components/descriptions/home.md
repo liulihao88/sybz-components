@@ -47,7 +47,7 @@ descriptions/customStyle
 | `options` | 描述项配置列表 | `ItemOptions[]` | - |
 | `column` | 一行展示的描述项数量 | number | `3` |
 | `labelWidth` | label 宽度，传 `auto` 时会按最长 label 自动计算 | string / number | `auto` |
-| `showAll` | 是否完整展示文本；为 `false` 时通过 `o-tooltip` 省略展示 | boolean | `false` |
+| `showAll` | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean | `false` |
 
 ### ItemOptions
 
@@ -61,8 +61,8 @@ descriptions/customStyle
 | `render` | 自定义 value 渲染函数 | `(item) => VNode \| string` | - |
 | `filter` | 内容值格式化函数 | `(value) => any` | - |
 | `attrs` | 透传给 `el-descriptions-item` 的属性 | object | - |
-| `labelAttrs` | 透传给 label 内部 `o-tooltip` 的属性 | object | - |
-| `valueAttrs` | 透传给 value 内部 `o-tooltip` 的属性 | object | - |
+| `labelAttrs` | 透传给 label 内部 `s-tooltip` 的属性 | object | - |
+| `valueAttrs` | 透传给 value 内部 `s-tooltip` 的属性 | object | - |
 
 ### 插槽
 

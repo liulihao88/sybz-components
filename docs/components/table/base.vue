@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
-import { $toast } from '@oeos-components/utils'
+import { $toast } from '@sybz-components/utils'
 
 const data = ref([
   { name: '张三', address: '北京市朝阳区', status: 0 },
@@ -23,7 +23,7 @@ const columns = [
       {
         content: '编辑',
         handler: () => {},
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'edit',
           content: '编辑',
@@ -49,6 +49,6 @@ const toggleLoading = async () => {
 <template>
   <div>
     <el-button type="primary" @click="toggleLoading">请求loading</el-button>
-    <o-table :columns="columns" :data="data" :loading="loading"></o-table>
+    <s-table :columns="columns" :data="data" :loading="loading"></s-table>
   </div>
 </template>

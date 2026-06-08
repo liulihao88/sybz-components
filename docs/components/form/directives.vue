@@ -46,7 +46,7 @@ const fieldList = [
 watch(
   model,
   (val) => {
-    // console.log(`05 38行 docs/examples/OForm/directives.vue val`, val)
+    // console.log(`05 38行 docs/examples/SForm/directives.vue val`, val)
   },
   {
     deep: true,
@@ -64,10 +64,10 @@ async function testSubmit() {
 
 <template>
   <div>
-    <o-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></o-form>
+    <s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>
     <el-button type="primary" @click="testSubmit">测试提交</el-button>
 
-    <o-input v-model="cc" v-number="'true'" />
+    <s-input v-model="cc" v-number="'true'" />
   </div>
 </template>
 

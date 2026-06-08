@@ -1,4 +1,4 @@
-<script setup lang="ts" name="OUsedPie">
+<script setup lang="ts" name="SUsedPie">
 // import {defineAsyncComponent} from 'vue'
 import { ref, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
 // import VChart from 'vue-echarts'

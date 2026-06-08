@@ -1,10 +1,10 @@
-<script setup lang="ts" name="OCompTitle">
+<script setup lang="ts" name="SCompTitle">
 /**
  *
-  <o-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></o-comp-title>
+  <s-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
  */
 import { useAttrs, computed } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 const attrs = useAttrs()
 
 const props = defineProps({
@@ -30,14 +30,14 @@ const computedBoxStyle = computed(() => {
 })
 
 const sizeClass = computed(() => {
-  return attrs.size ? `el-input--${attrs.size}` : 'o-comp-title__base-size'
+  return attrs.size ? `el-input--${attrs.size}` : 's-comp-title__base-size'
 })
 
 </script>
 
 <template>
   <div
-    class="o-comp-title"
+    class="s-comp-title"
     :class="sizeClass"
     :style="{ ...computedBoxStyle }"
     v-bind="$attrs"
@@ -48,7 +48,7 @@ const sizeClass = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.o-comp-title {
+.s-comp-title {
   background: var(--el-fill-color-light);
   vertical-align: middle;
   position: relative;
@@ -66,11 +66,11 @@ const sizeClass = computed(() => {
   color: var(--el-color-info);
   font-size: 14px;
 }
-.o-comp-title + :deep(.el-input__wrapper) {
+.s-comp-title + :deep(.el-input__wrapper) {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
-.o-comp-title__base-size {
+.s-comp-title__base-size {
   font-size: 14px;
 }
 </style>

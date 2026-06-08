@@ -18,5 +18,5 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <o-table :data="tableData.concat(tableData).concat(tableData)" :columns="columns" height="360" />
+  <s-table :data="tableData.concat(tableData).concat(tableData)" :columns="columns" height="360" />
 </template>

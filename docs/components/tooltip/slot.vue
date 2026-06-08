@@ -1,19 +1,19 @@
 <template>
   <div class="demo-row">
-    <o-tooltip placement="right">
+    <s-tooltip placement="right">
       <el-button circle>
-        <o-icon name="plus"></o-icon>
+        <s-icon name="plus"></s-icon>
       </el-button>
       <template #content>
         <div>这是 `content` 插槽</div>
         <div class="cl-blue">可以放任意自定义节点</div>
       </template>
-    </o-tooltip>
+    </s-tooltip>
 
-    <o-tooltip placement="top">
+    <s-tooltip placement="top">
       <span class="custom-trigger">我是自定义触发区域</span>
       <template #content>默认插槽可以自定义 tooltip 的触发内容</template>
-    </o-tooltip>
+    </s-tooltip>
   </div>
 </template>
 

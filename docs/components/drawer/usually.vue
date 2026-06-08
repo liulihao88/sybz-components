@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
-import { sleep } from '@oeos-components/utils'
+import { sleep } from '@sybz-components/utils'
 
 const { proxy } = getCurrentInstance()
 const confirmLoading = ref(false)
@@ -19,7 +19,7 @@ async function cusConfirm() {
 
 <template>
   <div>
-    <o-drawer
+    <s-drawer
       ref="dialogRef"
       title="App"
       @confirm="cusConfirm"
@@ -111,7 +111,7 @@ async function cusConfirm() {
       <div>这是内容</div>
       <div>这是内容</div>
       <div>这是内容</div>
-    </o-drawer>
+    </s-drawer>
     <el-button @click="btnClick" type="danger">打开drawer</el-button>
   </div>
 </template>

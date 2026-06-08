@@ -1,5 +1,5 @@
 <template>
-  <o-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" />
+  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" />
 </template>
 
 <script setup lang="tsx">
@@ -15,27 +15,27 @@ const fieldList = [
   {
     label: '账号',
     prop: 'account',
-    comp: 'o-input',
+    comp: 's-input',
     attrs: {
       width: '200',
       onBlur: () => {
-        console.log(`***** onBlur 25行 docs/examples/OForm/event.vue`)
+        console.log(`***** onBlur 25行 docs/examples/SForm/event.vue`)
       },
       onInput: (val) => {
         console.log(`49 val`, val)
       },
       onFocus: () => {
-        console.log(`***** onFocus 28行 docs/examples/OForm/event.vue`)
+        console.log(`***** onFocus 28行 docs/examples/SForm/event.vue`)
       },
       onClear: () => {
-        console.log(`***** clear 35行 docs/examples/OForm/event.vue`)
+        console.log(`***** clear 35行 docs/examples/SForm/event.vue`)
       },
     },
   },
   {
     label: '性别',
     prop: 'sex',
-    comp: 'o-select',
+    comp: 's-select',
     attrs: {
       options: [
         { label: '男人', value: 'man' },
@@ -44,10 +44,10 @@ const fieldList = [
       ],
       width: '200',
       onChange: (...arr) => {
-        console.log(`1131 46行 docs/examples/OForm/event.vue arr `, arr)
+        console.log(`1131 46行 docs/examples/SForm/event.vue arr `, arr)
       },
       onChangeSelect: (...arr) => {
-        console.log(`1131 46行 docs/examples/OForm/event.vue arr `, arr)
+        console.log(`1131 46行 docs/examples/SForm/event.vue arr `, arr)
       },
     },
   },

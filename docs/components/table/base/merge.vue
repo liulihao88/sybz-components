@@ -107,8 +107,8 @@ const columns: TableColumnList = [
 
 <template>
   <div>
-    <o-table :data="tableData" :columns="columns" :span-method="arraySpanMethod" border />
+    <s-table :data="tableData" :columns="columns" :span-method="arraySpanMethod" border />
 
-    <o-table :data="tableData" :columns="columns" :span-method="objectSpanMethod" border />
+    <s-table :data="tableData" :columns="columns" :span-method="objectSpanMethod" border />
   </div>
 </template>

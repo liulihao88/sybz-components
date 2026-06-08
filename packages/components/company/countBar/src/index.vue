@@ -1,4 +1,4 @@
-<script setup lang="ts" name="OCountBar">
+<script setup lang="ts" name="SCountBar">
 /**
   "inCount": {
       "<1024B": 2,
@@ -244,19 +244,19 @@ onBeforeUnmount(() => {
 
 <template>
   <template v-if="isDataEmpty">
-    <o-empty class="o-count-bar__empty" />
+    <s-empty class="s-count-bar__empty" />
   </template>
   <template v-else>
-    <VChart class="o-count-bar__chart" :option="option" autoresize />
+    <VChart class="s-count-bar__chart" :option="option" autoresize />
   </template>
 </template>
 
 <style lang="scss" scoped>
-.o-count-bar__empty {
+.s-count-bar__empty {
   height: 100%;
 }
 
-.o-count-bar__chart {
+.s-count-bar__chart {
   height: 100%;
   min-height: 100px;
 }

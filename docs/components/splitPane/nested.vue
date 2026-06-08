@@ -16,22 +16,22 @@ const settingTB = reactive({
 
 <template>
   <div class="split-demo">
-    <o-split-pane :split-set="settingLR">
+    <s-split-pane :split-set="settingLR">
       <template #paneL>
         <div class="pane pane-a">A</div>
       </template>
 
       <template #paneR>
-        <o-split-pane :split-set="settingTB" class="nested-split">
+        <s-split-pane :split-set="settingTB" class="nested-split">
           <template #paneL>
             <div class="pane pane-b">B</div>
           </template>
           <template #paneR>
             <div class="pane pane-c">C</div>
           </template>
-        </o-split-pane>
+        </s-split-pane>
       </template>
-    </o-split-pane>
+    </s-split-pane>
   </div>
 </template>
 

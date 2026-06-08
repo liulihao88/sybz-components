@@ -1,8 +1,8 @@
-<script setup lang="ts" name="OChart">
+<script setup lang="ts" name="SChart">
 import { ref, getCurrentInstance, onMounted, watch, nextTick, markRaw, onBeforeUnmount, computed } from 'vue'
 const { proxy } = getCurrentInstance()
 import * as echarts from 'echarts'
-import { processWidth, debounce } from '@oeos-components/utils'
+import { processWidth, debounce } from '@sybz-components/utils'
 import { useEcharts } from './useEcharts.ts'
 const echartDivRef = ref<HTMLElement>(null)
 
@@ -129,8 +129,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="o-chart" :style="{ height: processWidth(height, true), width: processWidth(width, true) }">
-    <div ref="echartDivRef" :id="id" class="o-chart-container" v-show="!formatEmpty" />
+  <div class="s-chart" :style="{ height: processWidth(height, true), width: processWidth(width, true) }">
+    <div ref="echartDivRef" :id="id" class="s-chart-container" v-show="!formatEmpty" />
     <slot v-if="formatEmpty" name="empty">
       <el-empty v-bind="$attrs" :description="description" />
     </slot>
@@ -139,11 +139,11 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped lang="scss">
-.o-chart {
+.s-chart {
   position: relative;
 }
 
-.o-chart-container {
+.s-chart-container {
   height: 100%;
   width: 100%;
 }

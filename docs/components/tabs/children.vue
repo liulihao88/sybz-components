@@ -1,11 +1,11 @@
 <template>
-  <o-tabs v-model="activeName" class="demo-tabs" default-value="third" @tab-click="handleClick" :options="tabs">
+  <s-tabs v-model="activeName" class="demo-tabs" default-value="third" @tab-click="handleClick" :options="tabs">
     <el-tab-pane v-for="tab in tabs" :key="tab.name" :label="tab.label" :name="tab.value">
       default-value: third
       <br />
       active: {{ activeName }}
     </el-tab-pane>
-  </o-tabs>
+  </s-tabs>
 </template>
 
 <script lang="ts" setup>

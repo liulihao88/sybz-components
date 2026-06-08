@@ -1,4 +1,4 @@
-<script setup lang="ts" name="OChooseArea">
+<script setup lang="ts" name="SChooseArea">
 import { ref, getCurrentInstance } from 'vue'
 import address from './pca-code.json'
 import { processWidth } from '@/utils/src/base.ts'

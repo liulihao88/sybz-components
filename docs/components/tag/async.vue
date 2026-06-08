@@ -32,6 +32,6 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <o-tag :options="map2" width="100" height="100" :value="value"></o-tag>
+    <s-tag :options="map2" width="100" height="100" :value="value"></s-tag>
   </div>
 </template>

@@ -23,7 +23,7 @@ function parseSpace(space) {
 
 <template>
   <div>
-    <o-capacity-progress
+    <s-capacity-progress
       :total="row.totalSpace"
       :used="row.usedSpace"
       :info="['UNKNOWN']"
@@ -31,9 +31,9 @@ function parseSpace(space) {
       :primary="['SUFFICIENT']"
       value="OVERFLOW"
       :customColor="true"
-    ></o-capacity-progress>
+    ></s-capacity-progress>
     <br>
-    <o-capacity-progress
+    <s-capacity-progress
       :total="row.totalSpace"
       :used="row.usedSpace"
       :info="['UNKNOWN']"
@@ -41,9 +41,9 @@ function parseSpace(space) {
       :primary="['SUFFICIENT']"
       value="SUFFICIENT"
       :customColor="true"
-    ></o-capacity-progress>
+    ></s-capacity-progress>
     <br></br>
-    <o-capacity-progress
+    <s-capacity-progress
       :total="row.totalSpace"
       :used="row.usedSpace"
       :info="['UNKNOWN']"
@@ -51,9 +51,9 @@ function parseSpace(space) {
       :primary="['SUFFICIENT']"
       value="UNKNOWN"
       :customColor="true"
-    ></o-capacity-progress>
+    ></s-capacity-progress>
     <br></br>
-    <o-capacity-progress
+    <s-capacity-progress
       :total="row.totalSpace"
       :used="row.usedSpace"
       :info="['UNKNOWN']"
@@ -62,6 +62,6 @@ function parseSpace(space) {
       :primary="['SUFFICIENT']"
       value="BUG"
       :customColor="true"
-    ></o-capacity-progress>
+    ></s-capacity-progress>
   </div>
 </template>

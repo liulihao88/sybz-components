@@ -22,7 +22,7 @@ inputLabel/usually
 | `isComplex` | 是否按对象数组处理，开启后默认写入 `{ name }` 结构 | boolean | `false` |
 | `regexp` | 输入校验正则 | RegExp | - |
 | `message` | 校验失败提示文案 | string | `输入有误` |
-| `inputAttrs` | 透传给内部 `o-input` 的属性 | object | `{}` |
+| `inputAttrs` | 透传给内部 `s-input` 的属性 | object | `{}` |
 
 ### Exposes
 

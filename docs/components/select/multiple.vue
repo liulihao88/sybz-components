@@ -20,7 +20,7 @@ function change(...rest) {
 
 <template>
   <div>
-    <o-select
+    <s-select
       title="你好"
       v-model="optionsId"
       multiple
@@ -30,10 +30,10 @@ function change(...rest) {
       @changeSelect="changeSelect"
       @change="change"
       :options="stepList"
-    ></o-select>
+    ></s-select>
 
-    <o-title title="use collapse-tags"></o-title>
-    <o-select
+    <s-title title="use collapse-tags"></s-title>
+    <s-select
       v-model="optionsId"
       multiple
       label="name"
@@ -43,9 +43,9 @@ function change(...rest) {
       showPrefix
       collapse-tags
       :options="stepList"
-    ></o-select>
-    <o-title title="use collapse-tags-tooltip"></o-title>
-    <o-select
+    ></s-select>
+    <s-title title="use collapse-tags-tooltip"></s-title>
+    <s-select
       v-model="optionsId"
       multiple
       label="name"
@@ -55,10 +55,10 @@ function change(...rest) {
       collapse-tags
       collapse-tags-tooltip
       :options="stepList"
-    ></o-select>
+    ></s-select>
 
-    <o-title title="use max-collapse-tags"></o-title>
-    <o-select
+    <s-title title="use max-collapse-tags"></s-title>
+    <s-select
       v-model="optionsId"
       multiple
       label="name"
@@ -69,7 +69,7 @@ function change(...rest) {
       collapse-tags-tooltip
       :max-collapse-tags="3"
       :options="stepList"
-    ></o-select>
+    ></s-select>
   </div>
 </template>
 

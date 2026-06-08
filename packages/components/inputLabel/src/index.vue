@@ -1,7 +1,7 @@
-<script setup lang="ts" name="OInputLabel">
+<script setup lang="ts" name="SInputLabel">
 import { ref, watch } from 'vue'
-import OInput from '@/components/input'
-import OIcon from '@/components/icon'
+import SInput from '@/components/input'
+import SIcon from '@/components/icon'
 import { isEmpty, $toast } from '@/utils/src'
 
 const currentval = ref('')
@@ -124,14 +124,14 @@ defineExpose({
 </script>
 
 <template>
-  <div class="o-input-box">
-    <div class="o-input-box__content">
+  <div class="s-input-box">
+    <div class="s-input-box__content">
       <div v-for="(item, index) in labelarr" :key="index" :class="item.isDelete === 0 ? 'disbox' : 'spanbox'">
         <span>{{ item.name || item }}</span>
         <i class="spanclose" style="cursor: not-allowed" v-if="item.isDelete === 0"></i>
         <i v-else class="spanclose" @click="removeitem(index, item)"></i>
       </div>
-      <o-input
+      <s-input
         :placeholder="props.inputAttrs.placeholder || '输入后回车'"
         :width="props.inputAttrs.width || 120"
         v-model.trim="currentval"
@@ -142,12 +142,12 @@ defineExpose({
         v-bind="props.inputAttrs"
       />
     </div>
-    <o-icon name="circle-close" class="o-input-label__clear" v-if="labelarr.length > 0" @click="clearAll"></o-icon>
+    <s-icon name="circle-close" class="s-input-label__clear" v-if="labelarr.length > 0" @click="clearAll"></s-icon>
   </div>
 </template>
 
 <style scoped lang="scss">
-.o-input-box {
+.s-input-box {
   color: var(--blue);
   background-color: var(--el-bg-color);
   font-size: 12px;
@@ -161,17 +161,17 @@ defineExpose({
   width: 100% !important;
   margin-bottom: 0;
   &:hover {
-    .o-input-label__clear {
+    .s-input-label__clear {
       display: block;
     }
   }
 }
 
-.o-input-box__content {
+.s-input-box__content {
   border-radius: 6px;
   text-align: left;
   font-size: 0;
-  .o-input {
+  .s-input {
     width: unset;
     margin: 2px;
   }
@@ -237,11 +237,11 @@ defineExpose({
   -moz-osx-font-smoothing: grayscale;
 }
 
-:deep(.el-form-item__content .o-input-box) {
+:deep(.el-form-item__content .s-input-box) {
   width: 100% !important;
   max-width: 100% !important;
 }
-.o-input-label__clear {
+.s-input-label__clear {
   position: absolute;
   right: 4px;
   display: none;

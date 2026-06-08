@@ -1,6 +1,6 @@
 <template>
   <div>
-    <o-radio v-model="value" :options="options" />
+    <s-radio v-model="value" :options="options" />
   </div>
 </template>
 <script setup lang="ts">

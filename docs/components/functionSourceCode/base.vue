@@ -7,7 +7,7 @@ const options = ['uuid', 'isEmpty', 'formatBytes']
 
 <template>
   <div>
-    <o-radio v-model="functionName" :options="options" type="simple" class="mb" />
-    <o-function-source-code :function-name="functionName" />
+    <s-radio v-model="functionName" :options="options" type="simple" class="mb" />
+    <s-function-source-code :function-name="functionName" />
   </div>
 </template>

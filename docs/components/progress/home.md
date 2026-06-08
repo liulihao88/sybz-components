@@ -4,7 +4,7 @@
 
 ## Hidden Title {.md-hidden}
 
-<o-warning content="由于公司业务中值在不同百分比下, 会显示不同的颜色, 所以会对原有的<code>el-progress</code>样式颜色有影响, 如果想去掉影响, 可以设置`<code>customColor</code>属性为<code>false</code> "></o-warning>
+<s-warning content="由于公司业务中值在不同百分比下, 会显示不同的颜色, 所以会对原有的<code>el-progress</code>样式颜色有影响, 如果想去掉影响, 可以设置`<code>customColor</code>属性为<code>false</code> "></s-warning>
 
 ### 基础用法
 

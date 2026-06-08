@@ -1,25 +1,25 @@
 <template>
-  <o-flex gutter="small" direction="column">
+  <s-flex gutter="small" direction="column">
     <div>
-      <o-title title="自定义主题: effect"></o-title>
+      <s-title title="自定义主题: effect"></s-title>
       <div class="demo-row">
-        <o-tooltip content="默认暗色主题" placement="top">
+        <s-tooltip content="默认暗色主题" placement="top">
           <el-button>Dark</el-button>
-        </o-tooltip>
-        <o-tooltip content="浅色主题" placement="bottom" effect="light">
+        </s-tooltip>
+        <s-tooltip content="浅色主题" placement="bottom" effect="light">
           <el-button>Light</el-button>
-        </o-tooltip>
+        </s-tooltip>
 
-        <o-tooltip content="自定义主题" effect="customized">
+        <s-tooltip content="自定义主题" effect="customized">
           <el-button>Customized</el-button>
-        </o-tooltip>
+        </s-tooltip>
       </div>
     </div>
 
     <div>
-      <o-title title="禁用状态: disabled" sub-title="设置为 true 后，即使内容超出也不会显示 tooltip" />
+      <s-title title="禁用状态: disabled" sub-title="设置为 true 后，即使内容超出也不会显示 tooltip" />
       <div class="demo-row">
-        <o-tooltip
+        <s-tooltip
           :disabled="disabled"
           content="这是一段会根据 disabled 状态切换的提示文本，当前展示宽度较窄。"
           width="220px"
@@ -30,7 +30,7 @@
         </el-button>
       </div>
     </div>
-  </o-flex>
+  </s-flex>
 </template>
 
 <script lang="ts" setup>

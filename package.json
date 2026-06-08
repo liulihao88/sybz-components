@@ -1,17 +1,17 @@
 {
-  "name": "oeos-components",
+  "name": "sybz-components",
   "version": "0.4.14",
   "description": "Vue3 中基于Element-plus二次封装基础组件文档",
   "private": false,
   "type": "module",
-  "main": "dist/oeos-components-es.js",
-  "unpkg": "dist/oeos-components-umd.js",
-  "module": "dist/oeos-components-es.js",
+  "main": "dist/sybz-components-es.js",
+  "unpkg": "dist/sybz-components-umd.js",
+  "module": "dist/sybz-components-es.js",
   "style": "dist/style.css",
   "exports": {
     ".": {
-      "import": "./dist/oeos-components-es.js",
-      "default": "./dist/oeos-components-es.js"
+      "import": "./dist/sybz-components-es.js",
+      "default": "./dist/sybz-components-es.js"
     },
     "./style.css": "./dist/style.css",
     "./utilities.css": "./dist/utilities.css",
@@ -19,6 +19,9 @@
   },
   "files": [
     "dist"
+  ],
+  "workspaces": [
+    "packages/utils"
   ],
   "scripts": {
     "dev": "vitepress dev docs",
@@ -42,7 +45,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/vue-fontawesome": "^3.0.6",
     "@iconify/json": "^2.2.438",
-    "@oeos-components/utils": "^0.0.19",
+    "@sybz-components/utils": "workspace:*",
     "@rollup/plugin-terser": "^0.4.4",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
@@ -93,16 +96,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/liulihao88/oeos-components"
+    "url": "https://github.com/liulihao88/sybz-components"
   },
-  "homepage": "https://liulihao88.github.io/oeos-components/",
+  "homepage": "https://liulihao88.github.io/sybz-components/",
   "keywords": [
-    "oeos",
+    "sybz",
     "vue3",
     "element-plus",
     "components",
-    "cyrd",
-    "创云融达",
+    "sybz",
+    "思云博志",
     "llh"
   ],
   "peerDependencies": {

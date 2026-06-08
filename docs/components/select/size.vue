@@ -29,16 +29,16 @@ watch(
 
 <template>
   <div>
-    <o-radio
+    <s-radio
       v-model="changeSelectValue"
       class="mr8"
       :options="[
         { label: '全选', value: true },
         { label: '清空', value: false },
       ]"
-    ></o-radio>
-    <o-radio :options="['large', 'default', 'small']" v-model="size" type="simple"></o-radio>
-    <o-select
+    ></s-radio>
+    <s-radio :options="['large', 'default', 'small']" v-model="size" type="simple"></s-radio>
+    <s-select
       v-model="selectValue"
       :options="options"
       multiple

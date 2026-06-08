@@ -1,8 +1,8 @@
 <template>
   <el-row
     v-bind="$attrs"
-    class="o-row"
-    :class="{ 'o-row--custom-gutter': useCustomGutter }"
+    class="s-row"
+    :class="{ 's-row--custom-gutter': useCustomGutter }"
     :style="rowStyle"
     :gutter="nativeGutter"
     :justify="justify"
@@ -12,7 +12,7 @@
       <!-- 如果是 el-col 直接渲染 -->
       <component v-if="isElCol(vnode)" :is="vnode" />
       <!-- 否则包裹一层 el-col -->
-      <el-col v-else :span="getSpan(i)" v-bind="colAttrs" class="o-row__col">
+      <el-col v-else :span="getSpan(i)" v-bind="colAttrs" class="s-row__col">
         <component :is="vnode" />
       </el-col>
     </template>
@@ -21,10 +21,10 @@
 
 <script setup lang="ts">
 defineOptions({
-  name: 'ORow',
+  name: 'SRow',
 })
 import { computed, PropType, useSlots } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 
 const props = defineProps({
   col: {
@@ -105,7 +105,7 @@ const rowStyle = computed(() => {
   }
 
   return {
-    '--o-row-gutter': gutterValue.value,
+    '--s-row-gutter': gutterValue.value,
   }
 })
 
@@ -134,18 +134,18 @@ function getSpan(index: number) {
 </script>
 
 <style scoped lang="scss">
-.o-row__col {
+.s-row__col {
   height: 100%;
 }
 
-.o-row--custom-gutter {
-  margin-right: calc(var(--o-row-gutter) / -2);
-  margin-left: calc(var(--o-row-gutter) / -2);
+.s-row--custom-gutter {
+  margin-right: calc(var(--s-row-gutter) / -2);
+  margin-left: calc(var(--s-row-gutter) / -2);
 }
 
-.o-row--custom-gutter > :deep(.el-col) {
+.s-row--custom-gutter > :deep(.el-col) {
   box-sizing: border-box;
-  padding-right: calc(var(--o-row-gutter) / 2);
-  padding-left: calc(var(--o-row-gutter) / 2);
+  padding-right: calc(var(--s-row-gutter) / 2);
+  padding-left: calc(var(--s-row-gutter) / 2);
 }
 </style>

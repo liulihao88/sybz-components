@@ -1,10 +1,10 @@
 <script setup lang="ts">
 defineOptions({
-  name: 'OTag',
+  name: 'STag',
 })
 
 import { ref, computed } from 'vue'
-import { getType, isEmpty } from '@oeos-components/utils'
+import { getType, isEmpty } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 const props = defineProps({
   options: {

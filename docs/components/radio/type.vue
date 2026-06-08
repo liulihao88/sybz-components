@@ -1,8 +1,8 @@
 <template>
   <div>
-    <o-radio v-model="value" type="boolean" />
+    <s-radio v-model="value" type="boolean" />
     <br />
-    <o-radio v-model="value2" type="simple" :options="options" />
+    <s-radio v-model="value2" type="simple" :options="options" />
   </div>
 </template>
 <script setup lang="ts">

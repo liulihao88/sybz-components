@@ -1,5 +1,5 @@
 <template>
   <div>
-    <o-tag>好样的</o-tag>
+    <s-tag>好样的</s-tag>
   </div>
 </template>

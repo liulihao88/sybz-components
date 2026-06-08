@@ -1,6 +1,6 @@
 <template>
-  <o-flex gap="small" direction="column">
-    <o-input
+  <s-flex gap="small" direction="column">
+    <s-input
       title="密码框"
       v-model="input"
       style="width: 240px"
@@ -9,14 +9,14 @@
       show-password
     />
 
-    <o-flex gap="small">
-      <o-input v-model="input" size="large" title="size:large" />
-      <o-input v-model="input" size="default" title="size:default" />
-      <o-input v-model="input" size="small" title="size: small" />
-    </o-flex>
+    <s-flex gap="small">
+      <s-input v-model="input" size="large" title="size:large" />
+      <s-input v-model="input" size="default" title="size:default" />
+      <s-input v-model="input" size="small" title="size: small" />
+    </s-flex>
 
-    <o-title title="文本域">
-      <o-input
+    <s-title title="文本域">
+      <s-input
         title="文本域"
         v-model="textarea"
         style="width: 240px"
@@ -24,11 +24,11 @@
         type="textarea"
         placeholder="Please input"
       />
-    </o-title>
+    </s-title>
 
-    <o-input v-model="textarea1" style="width: 240px" autosize type="textarea" placeholder="Please input" />
+    <s-input v-model="textarea1" style="width: 240px" autosize type="textarea" placeholder="Please input" />
     <div style="margin: 20px 0" />
-    <o-input
+    <s-input
       v-model="textarea2"
       style="width: 240px"
       :autosize="{ minRows: 2, maxRows: 4 }"
@@ -36,7 +36,7 @@
       placeholder="Please input"
     />
 
-    <o-title title="输入长度限制" :sub-title='subTitle'></o-title>
+    <s-title title="输入长度限制" :sub-title='subTitle'></s-title>
 
     <el-input
       v-model="text"
@@ -75,7 +75,7 @@
       word-limit-position="outside"
       type="textarea"
     />
-  </o-flex>
+  </s-flex>
 </template>
 
 <script lang="ts" setup>

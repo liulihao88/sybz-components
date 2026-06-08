@@ -16,19 +16,19 @@ const confirm = (op, item) => {
 
 <template>
   <div>
-    <o-select v-model="selectValue" :options="options" width="100%">
+    <s-select v-model="selectValue" :options="options" width="100%">
       <template #header>自定义头部</template>
       <template #label="{ key, label, value }">{{ key }} ?? {{ label }} == {{ value }}</template>
       <!-- <template #label="arg">{{ arg }}</template> -->
       <template #default="{ options, item }">
         <div class="f-bt-ct w-100%">
           <span>{{ item.label }}</span>
-          <o-popconfirm @confirm="confirm(options, item)" trigger="click">
-            <o-icon name="delete" @click.stop></o-icon>
-          </o-popconfirm>
+          <s-popconfirm @confirm="confirm(options, item)" trigger="click">
+            <s-icon name="delete" @click.stop></s-icon>
+          </s-popconfirm>
         </div>
       </template>
       <template #footer>自定义底部</template>
-    </o-select>
+    </s-select>
   </div>
 </template>

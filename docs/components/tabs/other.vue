@@ -21,15 +21,15 @@ const stretch = ref(false)
 
 <template>
   <div>
-    <o-flex direction="column" gap="small">
-      <o-radio v-model="type" :options="['', 'card', 'border-card']" type="simple" title="类型"></o-radio>
-      <o-radio v-model="stretch" :options="[false, true]" type="simple" title="是否自动撑开"></o-radio>
-    </o-flex>
-    <o-tabs :options="navList" :type="type" :stretch="stretch">
+    <s-flex direction="column" gap="small">
+      <s-radio v-model="type" :options="['', 'card', 'border-card']" type="simple" title="类型"></s-radio>
+      <s-radio v-model="stretch" :options="[false, true]" type="simple" title="是否自动撑开"></s-radio>
+    </s-flex>
+    <s-tabs :options="navList" :type="type" :stretch="stretch">
       <template #sys>系统服务</template>
       <template #base>基础服务</template>
       <template #task>高级定时</template>
-    </o-tabs>
+    </s-tabs>
   </div>
 </template>
 

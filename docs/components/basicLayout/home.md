@@ -44,8 +44,8 @@ basicLayout/square
 | :----: | ---- | ---- | ------ |
 | `v-model` / `modelValue` | 折叠状态，`true` 表示收起 | boolean | `false` |
 | `size` | 内边距尺寸 | `small` / `default` / `large` | `default` |
-| `title` | 默认头部标题，传入后会使用 `o-title` 渲染 | string | `''` |
-| `boxStyle` | 传给默认 `o-title` 的样式 | object | `{}` |
+| `title` | 默认头部标题，传入后会使用 `s-title` 渲染 | string | `''` |
+| `boxStyle` | 传给默认 `s-title` 的样式 | object | `{}` |
 | `headerStyle` | 头部区域样式 | object | `{}` |
 | `bodyStyle` | 内容区域样式 | object | `{}` |
 | `footerStyle` | 底部区域样式 | object | `{}` |

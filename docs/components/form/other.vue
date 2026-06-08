@@ -1,11 +1,11 @@
 <template>
-  <o-flex gap="16" class="mb2">
-    <o-radio v-model="size" :options="['large', 'default', 'small']" type="simple" showType="button"></o-radio>
+  <s-flex gap="16" class="mb2">
+    <s-radio v-model="size" :options="['large', 'default', 'small']" type="simple" showType="button"></s-radio>
 
-    <o-radio v-model="labelPosition" :options="['left', 'right', 'top']" type="simple" showType="button"></o-radio>
-    <o-switch v-model="isDisabled" active-text="禁用" :inline-prompt="false"></o-switch>
-  </o-flex>
-  <o-form
+    <s-radio v-model="labelPosition" :options="['left', 'right', 'top']" type="simple" showType="button"></s-radio>
+    <s-switch v-model="isDisabled" active-text="禁用" :inline-prompt="false"></s-switch>
+  </s-flex>
+  <s-form
     ref="TFormDemo"
     :model="formData"
     :fieldList="fieldList"
@@ -61,7 +61,7 @@ const fieldList = [
   {
     label: '性别',
     prop: 'sex',
-    comp: 'o-select',
+    comp: 's-select',
     attrs: {
       options: [
         { label: '男人', value: 'man' },
@@ -73,7 +73,7 @@ const fieldList = [
   {
     label: '爱好',
     prop: 'hobby',
-    comp: 'o-checkbox',
+    comp: 's-checkbox',
     attrs: {
       showAll: false,
       options: [
@@ -108,7 +108,7 @@ const fieldList = [
   {
     label: '状态',
     prop: 'status',
-    comp: 'o-switch',
+    comp: 's-switch',
     attrs: {
       'active-text': '启用',
       'inactive-text': '禁用',

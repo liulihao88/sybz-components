@@ -1,18 +1,18 @@
 <template>
   <div
     ref="containerRef"
-    class="o-split-pane"
+    class="s-split-pane"
     :class="[`is-${mergedSplit}`, { 'is-dragging': active }]"
     :style="containerStyle"
   >
-    <div class="o-split-pane__pane o-split-pane__pane-left" :style="leftPaneStyle">
+    <div class="s-split-pane__pane s-split-pane__pane-left" :style="leftPaneStyle">
       <slot name="paneL">
         <slot name="left" />
       </slot>
     </div>
 
     <div
-      class="o-split-pane__resizer"
+      class="s-split-pane__resizer"
       role="separator"
       :aria-orientation="mergedSplit === 'vertical' ? 'vertical' : 'horizontal'"
       :aria-valuemin="mergedMinPercent"
@@ -22,23 +22,23 @@
       @pointerdown="handlePointerDown"
     />
 
-    <div class="o-split-pane__pane o-split-pane__pane-right" :style="rightPaneStyle">
+    <div class="s-split-pane__pane s-split-pane__pane-right" :style="rightPaneStyle">
       <slot name="paneR">
         <slot name="right" />
       </slot>
     </div>
 
-    <div v-show="active" class="o-split-pane__mask" />
+    <div v-show="active" class="s-split-pane__mask" />
   </div>
 </template>
 
-<script setup lang="ts" name="OSplitPane">
+<script setup lang="ts" name="SSplitPane">
 import { computed, onBeforeUnmount, ref, watch, type PropType } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 import type { SplitPaneDirection, SplitPaneSetting } from './types'
 
 defineOptions({
-  name: 'OSplitPane',
+  name: 'SSplitPane',
 })
 
 const props = defineProps({
@@ -103,7 +103,7 @@ const resizerSizeValue = computed(() => {
 const containerStyle = computed(() => {
   return {
     cursor: active.value ? (mergedSplit.value === 'vertical' ? 'col-resize' : 'row-resize') : undefined,
-    '--o-split-pane-resizer-size': resizerSizeValue.value,
+    '--s-split-pane-resizer-size': resizerSizeValue.value,
   }
 })
 
@@ -205,7 +205,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-.o-split-pane {
+.s-split-pane {
   position: relative;
   display: flex;
   width: 100%;
@@ -222,19 +222,19 @@ onBeforeUnmount(() => {
   }
 }
 
-.o-split-pane__pane {
+.s-split-pane__pane {
   position: relative;
   overflow: hidden;
   min-width: 0;
   min-height: 0;
 }
 
-.o-split-pane.is-vertical {
+.s-split-pane.is-vertical {
   flex-direction: row;
 
-  .o-split-pane__resizer {
-    flex: 0 0 var(--o-split-pane-resizer-size, 6px);
-    width: var(--o-split-pane-resizer-size, 6px);
+  .s-split-pane__resizer {
+    flex: 0 0 var(--s-split-pane-resizer-size, 6px);
+    width: var(--s-split-pane-resizer-size, 6px);
     height: 100%;
     cursor: col-resize;
 
@@ -246,13 +246,13 @@ onBeforeUnmount(() => {
   }
 }
 
-.o-split-pane.is-horizontal {
+.s-split-pane.is-horizontal {
   flex-direction: column;
 
-  .o-split-pane__resizer {
-    flex: 0 0 var(--o-split-pane-resizer-size, 6px);
+  .s-split-pane__resizer {
+    flex: 0 0 var(--s-split-pane-resizer-size, 6px);
     width: 100%;
-    height: var(--o-split-pane-resizer-size, 6px);
+    height: var(--s-split-pane-resizer-size, 6px);
     cursor: row-resize;
 
     &::before {
@@ -263,7 +263,7 @@ onBeforeUnmount(() => {
   }
 }
 
-.o-split-pane__resizer {
+.s-split-pane__resizer {
   position: relative;
   z-index: 2;
   flex-shrink: 0;
@@ -288,14 +288,14 @@ onBeforeUnmount(() => {
   }
 }
 
-.o-split-pane.is-dragging {
-  .o-split-pane__resizer {
+.s-split-pane.is-dragging {
+  .s-split-pane__resizer {
     color: var(--el-color-primary);
     background: var(--el-color-primary-light-8);
   }
 }
 
-.o-split-pane__mask {
+.s-split-pane__mask {
   position: absolute;
   inset: 0;
   z-index: 1;

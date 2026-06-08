@@ -1,17 +1,17 @@
 ---
 layout: home
 
-title: Oeos-components
+title: Sybz-components
 # titleTemplate: 选项卡描述
 editLink: true
 lastUpdated: true
 hero:
-  name: Oeos-components
+  name: Sybz-components
   text: vue3基础组件
   tagline: Vue3 中基于Element-plus二次封装基础组件文档
   image:
     src: /img/logo.svg
-    alt: Oeos-components
+    alt: Sybz-components
   actions:
     - theme: brand
       text: 安装指南

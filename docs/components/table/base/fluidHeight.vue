@@ -65,11 +65,11 @@ const onAddItem = () => {
 
 <template>
   <div>
-    <o-table :data="tableData" :columns="columns" maxHeight="500">
+    <s-table :data="tableData" :columns="columns" maxHeight="500">
       <template #operation="{ $index }">
         <el-button link type="primary" size="small" @click.prevent="deleteRow($index)">Remove</el-button>
       </template>
-    </o-table>
+    </s-table>
     <el-button class="w-full mt-4!" @click="onAddItem">Add Item</el-button>
   </div>
 </template>

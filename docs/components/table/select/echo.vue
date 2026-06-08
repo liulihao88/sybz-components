@@ -38,12 +38,12 @@ const setSelectedRows = (rows = []) => {
   <div>
     <div class="multiple-demo__toolbar">
       <span class="multiple-demo__value">当前回显值: {{ selectedText }} {{ selectedRows.length }}</span>
-      <o-button @click="setSelectedRows([data[0], data[2]])">回显前后两行</o-button>
-      <o-button @click="setSelectedRows([data[1]])">回显第二行</o-button>
-      <o-button @click="setSelectedRows()">清空</o-button>
+      <s-button @click="setSelectedRows([data[0], data[2]])">回显前后两行</s-button>
+      <s-button @click="setSelectedRows([data[1]])">回显第二行</s-button>
+      <s-button @click="setSelectedRows()">清空</s-button>
     </div>
 
-    <o-table
+    <s-table
       v-model="selectedRows"
       selection-type="multiple"
       :columns="columns"

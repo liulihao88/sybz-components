@@ -4,7 +4,7 @@ const { proxy } = getCurrentInstance()
 </script>
 
 <template>
-  <o-warning>
+  <s-warning>
     <template #title>我是插槽的title</template>
     <template #content>
       我是插槽的content
@@ -15,5 +15,5 @@ const { proxy } = getCurrentInstance()
         所以只能使用插槽)
       </el-button>
     </template>
-  </o-warning>
+  </s-warning>
 </template>

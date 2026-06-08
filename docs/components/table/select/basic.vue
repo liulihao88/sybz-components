@@ -34,7 +34,7 @@ const selectedText = computed(() => {
   <div>
     <div class="multiple-demo__value">当前选中: {{ selectedText }}</div>
     <div class="multiple-demo__value">当前选中行: {{ selectedRows }}</div>
-    <o-table
+    <s-table
       v-model="selectedRows"
       selection-type="multiple"
       :columns="columns"

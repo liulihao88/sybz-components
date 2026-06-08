@@ -30,7 +30,7 @@ const columns = [
         isShow: ({ scope }) => {
           return scope.$index === 1 ? true : false
         },
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'edit',
           content: '编辑',
@@ -39,7 +39,7 @@ const columns = [
       },
       {
         content: 'haha',
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'delete',
           content: '删除',
@@ -53,10 +53,10 @@ const columns = [
 
 <template>
   <div>
-    <o-table :columns="columns" :data="data" :showPage="false">
+    <s-table :columns="columns" :data="data" :showPage="false">
       <template #address="{ index, scope, index2 }">
         {{ scope.$index }} !!{{ index }} ?? {{ $index }} =={{ index2 }}
       </template>
-    </o-table>
+    </s-table>
   </div>
 </template>

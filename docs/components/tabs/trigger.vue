@@ -20,11 +20,11 @@ const navValue = ref('base')
 
 <template>
   <div>
-    <o-tabs :options="navList" trigger="hover" v-model="navValue">
+    <s-tabs :options="navList" trigger="hover" v-model="navValue">
       <template #sys>系统服务</template>
       <template #base>基础服务</template>
       <template #task>高级定时</template>
-    </o-tabs>
+    </s-tabs>
   </div>
 </template>
 

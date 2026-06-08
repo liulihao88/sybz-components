@@ -1,11 +1,11 @@
-<script setup lang="ts" name="ODrawer">
+<script setup lang="ts" name="SDrawer">
 /** @使用方式
-<o-drawer
+<s-drawer
   v-model="isShow"
   title="测试dialog"
   width="500"
   :closeOnClickModal="true"
-></o-drawer>
+></s-drawer>
 */
 import { ref, computed, useAttrs } from 'vue'
 const emits = defineEmits(['update:modelValue'])
@@ -118,7 +118,7 @@ function _handleClose() {
 </script>
 
 <template>
-  <div class="o-drawer">
+  <div class="s-drawer">
     <el-drawer
       :wrapper-closable="mergeAttrs.wrapperClosable"
       :destroy-on-close="mergeAttrs.wrapperClosable !== false"
@@ -146,7 +146,7 @@ function _handleClose() {
             id="kdDrawerConfirmBtn"
             :type="mergedConfirmAttrs.type || 'primary'"
             v-bind="mergedConfirmAttrs"
-            class="o-drawer__confirm"
+            class="s-drawer__confirm"
             @click="confirm"
           >
             {{ mergeAttrs.confirmText }}
@@ -166,7 +166,7 @@ function _handleClose() {
 </template>
 
 <style scoped lang="scss">
-.o-drawer {
+.s-drawer {
   :deep(.el-drawer__header) {
     margin-bottom: 0;
     color: var(--el-text-color-primary);
@@ -233,7 +233,7 @@ function _handleClose() {
   }
 }
 
-.o-drawer__confirm {
+.s-drawer__confirm {
   margin-right: 8px;
 }
 </style>

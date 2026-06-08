@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { clone } from "@oeos-components/utils";
+import { clone } from "@sybz-components/utils";
 
 const date = dayjs(new Date()).format("YYYY-MM-DD");
 

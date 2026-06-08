@@ -11,7 +11,7 @@ const options = ref([
 
 <template>
   <div>
-    <o-select v-model="selectVal" :options="options" title="哈哈"></o-select>
+    <s-select v-model="selectVal" :options="options" title="哈哈"></s-select>
   </div>
 </template>
 

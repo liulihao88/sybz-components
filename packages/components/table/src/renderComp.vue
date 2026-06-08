@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
-import type { OTableButton, OTableColumn, TableRender, TableRow, TableScope } from './types'
+import type { STableButton, STableColumn, TableRender, TableRow, TableScope } from './types'
 export default defineComponent({
   name: 'RenderComp',
   props: {
@@ -11,8 +11,8 @@ export default defineComponent({
       type: [Object, String, Number, Boolean, Array] as PropType<any>,
       default: undefined,
     },
-    column: Object as PropType<OTableColumn>,
-    action: Object as PropType<OTableButton>,
+    column: Object as PropType<STableColumn>,
+    action: Object as PropType<STableButton>,
     index: Number,
   },
   render(ctx) {

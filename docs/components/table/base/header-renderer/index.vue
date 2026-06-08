@@ -6,12 +6,12 @@ const { columns, filterTableData } = useColumns()
 </script>
 
 <template>
-  <o-table :data="filterTableData" :columns="columns">
+  <s-table :data="filterTableData" :columns="columns">
     <template #nameHeader>
       <span class="flex items-center">
         <IconifyIconOffline :icon="Calendar" />
         日期
       </span>
     </template>
-  </o-table>
+  </s-table>
 </template>

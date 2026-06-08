@@ -8,7 +8,7 @@ const hiddenDocsInProd = ['/components/test/home.md', '/components/chooseArea/ho
 
 export default defineConfig({
   // 站点级选项
-  base: '/oeos-components/',
+  base: '/sybz-components/',
   srcExclude: isProd ? ['components/test/**', 'components/chooseArea/**'] : [],
   head: [
     ['link', { rel: 'icon', type: 'image/x-icon', href: '/img/logo.svg' }],
@@ -24,8 +24,8 @@ export default defineConfig({
   lastUpdated: true,
   useWebFonts: false,
   cleanUrls: true,
-  title: 'Oeos-Components',
-  description: '创云融达',
+  title: 'Sybz-Components',
+  description: '思云博志',
   lang: 'zh-CN',
   themeConfig: {
     outline: 3,
@@ -37,7 +37,7 @@ export default defineConfig({
       text: '在 Github 上查看此页面',
     },
     footer: {
-      message: `创云融达前端组件库, <a target="_blank" style="color: var(--vp-c-brand)" href="${Github}">⭐欢迎访问</a>`,
+      message: `思云博志私有前端组件库, <a target="_blank" style="color: var(--vp-c-brand)" href="${Github}">⭐欢迎访问</a>`,
       copyright: ` 版权所有 © 2023-${new Date().getFullYear()}`,
     },
     nav: [

@@ -1,11 +1,11 @@
 <template>
-  <o-tooltip v-if="content" :content="content" v-bind="tooltipAttrs">
-    <el-button v-bind="{ loading: loading, ...$attrs }" @click="handleClick" class="o-button-content">
+  <s-tooltip v-if="content" :content="content" v-bind="tooltipAttrs">
+    <el-button v-bind="{ loading: loading, ...$attrs }" @click="handleClick" class="s-button-content">
       <template v-for="(arg, name, index) in $slots" v-slot:[name]>
         <slot :name="name" v-bind="arg" :index="index" />
       </template>
     </el-button>
-  </o-tooltip>
+  </s-tooltip>
   <el-button v-bind="{ loading: loading, ...$attrs }" @click="handleClick" v-else>
     <template v-for="(arg, name, index) in $slots" v-slot:[name]>
       <slot :name="name" v-bind="arg" :index="index" />
@@ -17,16 +17,16 @@
 import { ref, defineComponent } from 'vue'
 
 defineOptions({
-  name: 'OButton',
+  name: 'SButton',
 })
 
-interface OButtonSelfProps {
+interface SButtonSelfProps {
   time?: number
   content?: string
   tooltipAttrs?: Record<string, any>
 }
 
-const props = withDefaults(defineProps<OButtonSelfProps>(), {
+const props = withDefaults(defineProps<SButtonSelfProps>(), {
   time: 0,
   content: '',
   tooltipAttrs: () => ({}),

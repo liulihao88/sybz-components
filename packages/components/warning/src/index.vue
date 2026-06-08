@@ -1,7 +1,7 @@
-<script setup lang="ts" name="OWarning">
+<script setup lang="ts" name="SWarning">
 import { getCurrentInstance, computed, useAttrs } from 'vue'
-import OIcon from '@/components/icon/src/index.vue'
-import { processWidth } from '@oeos-components/utils'
+import SIcon from '@/components/icon/src/index.vue'
+import { processWidth } from '@sybz-components/utils'
 
 interface Props {
   content: string
@@ -58,44 +58,44 @@ const mergedStyle = computed(() => {
 
 function parseClass(): string {
   let type = props.type
-  return `o-warning__${type}`
+  return `s-warning__${type}`
 }
 </script>
 
 <template>
   <div
     :class="parseClass()"
-    class="o-warning-box"
+    class="s-warning-box"
     :style="{ ...processWidth(props.width), ...mergedStyle }"
     v-bind="attrs"
   >
-    <img v-if="type === 'warning' && props.icon" src="../notic.png" class="o-warning-box__img" />
-    <o-icon
+    <img v-if="type === 'warning' && props.icon" src="../notic.png" class="s-warning-box__img" />
+    <s-icon
       v-else-if="type === 'error' && props.icon"
       name="circle-close"
       :color="'var(--el-color-danger)'"
       v-bind="iconAttrs"
-      class="o-warning-box__icon"
+      class="s-warning-box__icon"
       size="16"
     />
-    <o-icon
+    <s-icon
       v-else-if="type !== 'warning' && props.icon"
       name="warning"
       :color="'var(--45)'"
       v-bind="iconAttrs"
-      class="o-warning-box__icon"
+      class="s-warning-box__icon"
       size="16"
     />
-    <div class="o-warning-box__container">
-      <div v-if="$slots.title || title" class="o-warning-box__title" :class="`o-warning-box__title--${type}`">
+    <div class="s-warning-box__container">
+      <div v-if="$slots.title || title" class="s-warning-box__title" :class="`s-warning-box__title--${type}`">
         <slot name="title">
           {{ title }}
         </slot>
       </div>
       <slot name="content">
         <span
-          class="o-warning-box__content"
-          :class="{ 'o-warning-box__content--muted': type === 'icon' }"
+          class="s-warning-box__content"
+          :class="{ 's-warning-box__content--muted': type === 'icon' }"
           v-bind="bindProps"
         />
       </slot>
@@ -104,53 +104,53 @@ function parseClass(): string {
 </template>
 
 <style lang="scss" scoped>
-.o-warning-box {
+.s-warning-box {
   display: flex;
   align-items: baseline;
   padding: 8px 8px;
   border: 1px solid var(--el-color-warning-light-5);
   border-radius: 4px;
 
-  .o-warning-box__title {
+  .s-warning-box__title {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 4px;
 
-    &.o-warning-box__title--info {
+    &.s-warning-box__title--info {
       color: var(--el-color-primary);
     }
 
-    &.o-warning-box__title--warning {
+    &.s-warning-box__title--warning {
       color: var(--el-color-warning);
     }
 
-    &.o-warning-box__title--error {
+    &.s-warning-box__title--error {
       color: var(--el-color-danger);
     }
 
-    &.o-warning-box__title--simple {
+    &.s-warning-box__title--simple {
       color: var(--45);
     }
   }
 
-  .o-warning-box__content {
+  .s-warning-box__content {
     font-size: 14px;
     font-weight: 400;
     color: var(--el-text-color-primary);
     overflow: auto;
   }
-  .o-warning-box__content--muted {
+  .s-warning-box__content--muted {
     color: var(--45);
     font-size: 14px;
   }
-  .o-warning-box__icon {
+  .s-warning-box__icon {
     position: relative;
     top: 3px;
     width: 16px;
     height: 16px;
     margin-right: 4px;
   }
-  .o-warning-box__img {
+  .s-warning-box__img {
     position: relative;
     top: 2px;
     width: 16px;
@@ -182,7 +182,7 @@ function parseClass(): string {
   }
 }
 
-.o-warning__info {
+.s-warning__info {
   border: 1px solid var(--line);
   background: var(--el-color-primary-light-9);
   border-left: 5px solid var(--el-color-primary);
@@ -191,14 +191,14 @@ function parseClass(): string {
     color: var(--el-color-primary-dark-2);
   }
 }
-.o-warning__simple {
-  .o-warning-box__content {
+.s-warning__simple {
+  .s-warning-box__content {
     color: var(--45);
   }
   border: unset;
   padding: 0;
 }
-.o-warning__warning {
+.s-warning__warning {
   background: var(--el-color-warning-light-9);
   border: 1px solid var(--el-color-warning-light-5);
   border-left: 5px solid var(--el-color-warning);
@@ -207,7 +207,7 @@ function parseClass(): string {
     color: var(--el-color-warning-dark-2);
   }
 }
-.o-warning__error {
+.s-warning__error {
   background: var(--el-color-danger-light-9);
   border: 1px solid var(--el-color-danger-light-5);
   border-left: 5px solid var(--el-color-danger);

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 import { ref, getCurrentInstance } from 'vue'
 
 defineOptions({
-  name: 'OSwitch',
+  name: 'SSwitch',
 })
 
 const props = defineProps({
@@ -44,7 +44,7 @@ const handleWidth = computed(() => {
 <template>
   <el-switch
     v-bind="{ 'inline-prompt': true, ...$attrs }"
-    class="o-custom-switch"
+    class="s-custom-switch"
     :loading="loading"
     :before-change="beforeChangeHandler"
     :style="{ '--switch-width': handleWidth }"
@@ -52,7 +52,7 @@ const handleWidth = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.o-custom-switch {
+.s-custom-switch {
   flex-direction: row-reverse; /* 反转子元素的顺序 */
   align-items: center;
   margin-right: 8px;

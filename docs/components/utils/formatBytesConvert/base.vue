@@ -25,8 +25,8 @@ const options = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="formatBytesConvert"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="formatBytesConvert"></SFunctionSourceCode>
   <div>
-    <o-descriptions :options="options" :column="1" label-width="500"></o-descriptions>
+    <s-descriptions :options="options" :column="1" label-width="500"></s-descriptions>
   </div>
 </template>

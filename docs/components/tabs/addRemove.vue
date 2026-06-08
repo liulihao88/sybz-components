@@ -4,7 +4,7 @@
       add tab
     </el-button>
   </div>
-  <o-tabs
+  <s-tabs
     v-model="editableTabsValue"
     type="card"
     class="demo-tabs"
@@ -19,7 +19,7 @@
     >
       {{ item.content }}
     </el-tab-pane>
-  </o-tabs>
+  </s-tabs>
 </template>
 
 <script lang="ts" setup>

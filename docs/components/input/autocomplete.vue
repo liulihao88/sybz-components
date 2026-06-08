@@ -18,7 +18,7 @@ options.value = [
 
 <template>
   <div>
-    <o-input v-model="cc" :options="options" width="300"></o-input>
-    <o-input v-model="cc" :options="options" width="300"></o-input>
+    <s-input v-model="cc" :options="options" width="300"></s-input>
+    <s-input v-model="cc" :options="options" width="300"></s-input>
   </div>
 </template>

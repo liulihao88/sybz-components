@@ -2,7 +2,7 @@
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 function tt() {
-  console.log('  </o-tooltip>')
+  console.log('  </s-tooltip>')
 }
 function isTest13() {
   console.log('isTest13')
@@ -32,25 +32,25 @@ const iconLists = ref([
 
 <template>
   <div>
-    <o-icon name="delete"></o-icon>
-    <o-icon name="warning" content="警告"></o-icon>
-    <o-icon name="refresh" content="刷新" @click="tt" color="var(--yellow)" size="50" placement="right"></o-icon>
-    <o-icon name="close" class="is-loading"></o-icon>
-    <o-icon name="refresh" content="刷新" class="cl-blue"></o-icon>
+    <s-icon name="delete"></s-icon>
+    <s-icon name="warning" content="警告"></s-icon>
+    <s-icon name="refresh" content="刷新" @click="tt" color="var(--yellow)" size="50" placement="right"></s-icon>
+    <s-icon name="close" class="is-loading"></s-icon>
+    <s-icon name="refresh" content="刷新" class="cl-blue"></s-icon>
 
     <hr>
 
     <div>
       <template v-for="(v, i) in iconLists" :key="i">
-        <o-icon :name="v" :content="v"></o-icon>
+        <s-icon :name="v" :content="v"></s-icon>
       </template>
     </div>
 
     <hr>
-    <o-title title="支持首字母大写, 驼峰, 中划线命名"></o-title>
-    <o-icon name="AddLocation"></o-icon>
-    <o-icon name="addLocation"></o-icon>
-    <o-icon name="add-location"></o-icon>
+    <s-title title="支持首字母大写, 驼峰, 中划线命名"></s-title>
+    <s-icon name="AddLocation"></s-icon>
+    <s-icon name="addLocation"></s-icon>
+    <s-icon name="add-location"></s-icon>
     <br />
   </div>
 </template>

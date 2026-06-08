@@ -19,11 +19,11 @@ const navList = [
 
 <template>
   <div>
-    <o-tabs :options="navList">
+    <s-tabs :options="navList">
       <template #sys>系统服务</template>
       <template #base>基础服务</template>
       <template #task>高级定时</template>
-    </o-tabs>
+    </s-tabs>
   </div>
 </template>
 

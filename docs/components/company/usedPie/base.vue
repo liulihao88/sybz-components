@@ -23,13 +23,13 @@ setTimeout(() => {
 
 <template>
   <div>
-    <OUsedPie :used="211" :total="222" style="height: 300px"></OUsedPie>
-    <OUsedPie :used="341" :total="222" style="height: 300px"></OUsedPie>
-    <OUsedPie :used="0" :total="0" style="height: 300px"></OUsedPie>
-    <OUsedPie :used="0" :total="34" style="height: 300px"></OUsedPie>
-    <OUsedPie v-bind="trueData" style="height: 300px"></OUsedPie>
-    <oBasicLayout title="桶容量信息统计" class="f-1 mt2 w-100% h-500">
-      <OUsedPie v-bind="trueData" />
-    </oBasicLayout>
+    <SUsedPie :used="211" :total="222" style="height: 300px"></SUsedPie>
+    <SUsedPie :used="341" :total="222" style="height: 300px"></SUsedPie>
+    <SUsedPie :used="0" :total="0" style="height: 300px"></SUsedPie>
+    <SUsedPie :used="0" :total="34" style="height: 300px"></SUsedPie>
+    <SUsedPie v-bind="trueData" style="height: 300px"></SUsedPie>
+    <sBasicLayout title="桶容量信息统计" class="f-1 mt2 w-100% h-500">
+      <SUsedPie v-bind="trueData" />
+    </sBasicLayout>
   </div>
 </template>

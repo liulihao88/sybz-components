@@ -1,4 +1,4 @@
-import { $toast } from "@oeos-components/utils";
+import { $toast } from "@sybz-components/utils";
 import { tableData } from "../data";
 import { ref, computed } from "vue";
 

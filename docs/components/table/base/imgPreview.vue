@@ -26,7 +26,7 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <o-table :data="tableDataImage" :columns="columns">
+  <s-table :data="tableDataImage" :columns="columns">
     <template #video>
       <video
         width="180"
@@ -52,5 +52,5 @@ const columns: TableColumnList = [
         class="w-[100px] h-[100px]"
       />
     </template>
-  </o-table>
+  </s-table>
 </template>

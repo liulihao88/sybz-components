@@ -91,7 +91,7 @@ form/directives
 | :---------: | --------------------- | -------------------- | --------- |
 |    label    | 左侧显示的label值     | string, slot, render | -         |
 |    prop     | 值对应的属性          | string               | -         |
-|    comp     | 要渲染的组件名称      | string               | 'o-input' |
+|    comp     | 要渲染的组件名称      | string               | 's-input' |
 |    attrs    | form绑定的属性        | object               | -         |
 |    rules    | 每一项对应的rules规则 | object               | -         |
 | labelRender | 对label的render渲染   | Function             | -         |

@@ -7,13 +7,13 @@ const isShow = ref(false)
 <template>
   <div>
     <el-button type="primary" @click="isShow = true">显示dialog</el-button>
-    <o-dialog title="基础dialog" v-model="isShow">
+    <s-dialog title="基础dialog" v-model="isShow">
       <template #header>
         这是header插槽, 默认icon还会保留
       </template>
       我是内容
 
       <template #footer>这是footer插槽</template>
-    </o-dialog>
+    </s-dialog>
   </div>
 </template>

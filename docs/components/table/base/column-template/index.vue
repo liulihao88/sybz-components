@@ -5,5 +5,5 @@ const { columns, tableData } = useColumns()
 </script>
 
 <template>
-  <o-table :data="tableData" :columns="columns" />
+  <s-table :data="tableData" :columns="columns" />
 </template>

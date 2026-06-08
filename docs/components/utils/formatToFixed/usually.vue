@@ -18,6 +18,6 @@ let arr = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="formatToFixed"></OFunctionSourceCode>
-  <o-descriptions :options="arr" title="formatToFixed" :column="1"></o-descriptions>
+  <SFunctionSourceCode functionName="formatToFixed"></SFunctionSourceCode>
+  <s-descriptions :options="arr" title="formatToFixed" :column="1"></s-descriptions>
 </template>

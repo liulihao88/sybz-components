@@ -1,7 +1,7 @@
-<script setup lang="ts" name="OIcon">
+<script setup lang="ts" name="SIcon">
 import { ref, computed } from 'vue'
 import { toLine } from '@/utils/src'
-import OSvg from '@/components/svg'
+import SSvg from '@/components/svg'
 const props = defineProps({
   name: {
     type: String,
@@ -43,8 +43,8 @@ const parseColor = computed(() => {
     :color="parseColor"
     props.disabled
     :size="props.size"
-    class="o-icon"
-    :class="props.disabled && 'o-icon__not-allowed'"
+    class="s-icon"
+    :class="props.disabled && 's-icon__not-allowed'"
     @click="handleClick"
   >
     <el-tooltip :disabled="!$attrs.content" v-bind="$attrs">
@@ -52,7 +52,7 @@ const parseColor = computed(() => {
         <slot v-if="$slots.default"></slot>
         <!-- 仅在默认插槽为空时渲染图标 -->
         <template v-else>
-          <o-svg v-if="type === 'svg'" v-bind="svgAttrs" :name="name"></o-svg>
+          <s-svg v-if="type === 'svg'" v-bind="svgAttrs" :name="name"></s-svg>
           <component :is="`el-icon-${toLine(props.name || '')}`" v-else></component>
         </template>
       </span>
@@ -61,13 +61,13 @@ const parseColor = computed(() => {
 </template>
 
 <style scoped lang="scss">
-.o-icon {
+.s-icon {
   // cursor: pointer;
 }
-.o-icon__not-allowed {
+.s-icon__not-allowed {
   cursor: not-allowed;
 }
-.o-icon + .o-icon {
+.s-icon + .s-icon {
   margin-left: 8px;
 }
 </style>

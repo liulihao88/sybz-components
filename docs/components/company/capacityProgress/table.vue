@@ -61,16 +61,16 @@ function parseSpace(space) {
 
 <template>
   <div>
-    <o-table :columns="columns" :data="data" ref="tableRef" :showPage="false">
+    <s-table :columns="columns" :data="data" ref="tableRef" :showPage="false">
       <template #cap="{ row }">
-        <o-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></o-capacity-progress>
+        <s-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></s-capacity-progress>
       </template>
       <template #cap2="{ row }">
-        <o-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></o-capacity-progress>
+        <s-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></s-capacity-progress>
       </template>
       <template #cap3="{ row }">
-        <o-capacity-progress :total="testRow.total" :used="testRow.used"></o-capacity-progress>
+        <s-capacity-progress :total="testRow.total" :used="testRow.used"></s-capacity-progress>
       </template>
-    </o-table>
+    </s-table>
   </div>
 </template>

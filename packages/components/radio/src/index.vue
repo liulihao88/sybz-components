@@ -1,11 +1,11 @@
 <template>
-  <div class="o-radio-box">
-    <o-comp-title
+  <div class="s-radio-box">
+    <s-comp-title
       :title="props.title"
       v-if="props.title"
       :boxStyle="$attrs.boxStyle ?? {}"
-      class="o-radio-box__title"
-    ></o-comp-title>
+      class="s-radio-box__title"
+    ></s-comp-title>
     <el-radio-group v-bind="$attrs">
       <slot>
         <component
@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="ORadio">
+<script setup lang="ts" name="SRadio">
 import { computed, ref, getCurrentInstance } from 'vue'
 import type { PropType } from 'vue'
 import type { RadioItem } from './radio'
@@ -93,12 +93,12 @@ const parseOptions = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-.o-radio-box {
+.s-radio-box {
   display: flex;
-  .o-radio-box__title {
+  .s-radio-box__title {
     margin-right: 8px;
   }
-  .o-comp-title {
+  .s-comp-title {
     border-right: 1px solid var(--el-border-color);
   }
 }

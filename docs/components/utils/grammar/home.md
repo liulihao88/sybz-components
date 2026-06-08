@@ -8,7 +8,7 @@
 
 ### 1. tip提示框
 
-<o-flex gap="16">
+<s-flex gap="16">
 
 ::: tip 提示
 andy加油.
@@ -30,7 +30,7 @@ This is a dangerous.
 This is a details block.
 :::
 
-</o-flex>
+</s-flex>
 
 ### 2. 通过`:::demo`使用示例.vue文件
 
@@ -84,15 +84,15 @@ button/base
 ::: code-group
 
 ```sh [pnpm]
-pnpm add oeos-components -S
+pnpm add sybz-components -S
 ```
 
 ```sh [yarn]
-yarn add oeos-components
+yarn add sybz-components
 ```
 
 ```sh [npm]
-npm install oeos-components -S
+npm install sybz-components -S
 ```
 
 ### 9. md中常用组件`el-tag`
@@ -114,7 +114,7 @@ markdownlint MD033 规则说明
 触发条件: 检测到任何 HTML/XML 风格的标签（包括 Vue 组件标签）
 
 2. 为什么会出现此警告
-   虽然 `<o-warning>` 是你的全局 Vue 组件，但在 markdown 解析器看来：
+   虽然 `<s-warning>` 是你的全局 Vue 组件，但在 markdown 解析器看来：
 
 Vue 组件标签仍属于 HTML 风格的标签语法
 markdownlint 规则默认不允许任何形式的内联 HTML
@@ -133,8 +133,8 @@ markdownlint 规则默认不允许任何形式的内联 HTML
   "no-inline-html": false
 }`
 
-### 12. 在markdown中使用o-tip
+### 12. 在markdown中使用s-tip
 
 | 属性名 | 说明      | 类型                                              | 默认值 |
 | :----: | --------- | ------------------------------------------------- | ------ |
-| title  | 顶部title | boolean <o-tip content="'true'\|'false'"></o-tip> | 提示   |
+| title  | 顶部title | boolean <s-tip content="'true'\|'false'"></s-tip> | 提示   |

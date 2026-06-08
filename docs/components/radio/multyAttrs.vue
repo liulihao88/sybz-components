@@ -1,6 +1,6 @@
 <template>
   <div>
-    <o-radio
+    <s-radio
       v-model="value"
       :options="options"
       value="id"

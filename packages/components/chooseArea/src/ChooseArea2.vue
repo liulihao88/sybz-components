@@ -1,15 +1,15 @@
 <template>
   <div>
-    <o-select
+    <s-select
       :options="address"
       v-model="province"
       placeholder="请选择省份"
       label="name"
       v-bind="$attrs"
       value="code"
-    ></o-select>
+    ></s-select>
 
-    <o-select
+    <s-select
       :options="cityList"
       :disabled="!province"
       v-model="city"
@@ -17,9 +17,9 @@
       label="name"
       v-bind="$attrs"
       value="code"
-    ></o-select>
+    ></s-select>
 
-    <o-select
+    <s-select
       v-model="area"
       :options="areaList"
       v-bind="$attrs"
@@ -27,7 +27,7 @@
       placeholder="请选择地区"
       label="name"
       value="code"
-    ></o-select>
+    ></s-select>
   </div>
 </template>
 

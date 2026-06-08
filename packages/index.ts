@@ -8,9 +8,9 @@ import VueTippy from 'vue-tippy'
 import registerDirectives from './directives/gDirectives.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { toLine } from './utils/src/index.ts'
-import type { OeosComponentsInstallOptions } from './types/index.ts'
+import type { SybzComponentsInstallOptions } from './types/index.ts'
 
-import OSvg from './components/svg/index.ts'
+import SSvg from './components/svg/index.ts'
 import { GLOBAL_COMPONENT_CONFIG_KEY } from './hooks/useGlobalComponentConfig'
 
 const componentsGlobal = import.meta.glob('./components/*/index.ts', { eager: true, import: 'default' }) // 引入全局基础组件
@@ -23,22 +23,22 @@ const allComponents = {
 
 // 1. 批量导出所有组件（作为命名导出）
 export const components = Object.entries(allComponents).reduce((acc, [key, component]) => {
-  const name = component.name || 'o' + component.__name
+  const name = component.name || 's' + component.__name
   acc[name] = component
   return acc
 }, {})
 
 // 按需导入
-export { OSvg }
+export { SSvg }
 
-const install = (app, options: OeosComponentsInstallOptions = {}) => {
+const install = (app, options: SybzComponentsInstallOptions = {}) => {
   if (options.globalComponentConfig) {
     app.provide(GLOBAL_COMPONENT_CONFIG_KEY, options.globalComponentConfig)
   }
 
   Object.keys(allComponents).forEach((key) => {
     let component = allComponents[key]
-    app.component(component.name || 'o' + component.__name, component)
+    app.component(component.name || 's' + component.__name, component)
   })
   registerDirectives(app)
 
@@ -57,7 +57,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 export function createSvg(iconDirs) {
   let res = {
     Svg: (props) => ({
-      component: OSvg,
+      component: SSvg,
       props: { ...props, iconDirs }, // 将 iconDirs 传递给 SvgIcon 组件
     }),
   }

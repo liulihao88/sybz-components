@@ -19,7 +19,7 @@ function isTest52() {
 <template>
   <div>
     <el-button type="primary" @click="isTest52">测试调用简单的select方法</el-button>
-    <o-select ref="simpleSelectRef" v-model="selectVal" :options="options" @change="selectChange"></o-select>
+    <s-select ref="simpleSelectRef" v-model="selectVal" :options="options" @change="selectChange"></s-select>
   </div>
 </template>
 

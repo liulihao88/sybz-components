@@ -107,16 +107,16 @@ const newData = {
 
 <template>
   <div>
-    <OCountBar :data="data" style="height: 300px"></OCountBar>
+    <SCountBar :data="data" style="height: 300px"></SCountBar>
     <hr />
 
-    <OCountBar :data="data2" style="height: 300px"></OCountBar>
+    <SCountBar :data="data2" style="height: 300px"></SCountBar>
     <hr />
-    <OCountBar :data="data3" style="height: 300px"></OCountBar>
-    <OCountBar
+    <SCountBar :data="data3" style="height: 300px"></SCountBar>
+    <SCountBar
       :data="newData"
       :options="{ count: 'magazineInCount', size: 'magazineInSize' }"
       style="height: 300px"
-    ></OCountBar>
+    ></SCountBar>
   </div>
 </template>

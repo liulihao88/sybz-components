@@ -32,7 +32,7 @@ const columns: TableColumnList = [
 <template>
   <div>
     <div class="single-demo__value">当前选中: {{ currentText }}</div>
-    <o-table
+    <s-table
       v-model="currentRow"
       :data="tableData"
       :columns="columns"

@@ -2,10 +2,10 @@
 import { computed } from 'vue'
 
 defineOptions({
-  name: 'OTest',
+  name: 'STest',
 })
 
-declare const __OEOS_COMPONENTS_BUILD_TIME__: string
+declare const __SYBZ_COMPONENTS_BUILD_TIME__: string
 
 const props = defineProps({
   label: {
@@ -19,19 +19,19 @@ const props = defineProps({
 })
 
 const displayText = computed(() => {
-  const text = `${props.label}: ${__OEOS_COMPONENTS_BUILD_TIME__}`
+  const text = `${props.label}: ${__SYBZ_COMPONENTS_BUILD_TIME__}`
   return props.prefix ? `${props.prefix}${text}` : text
 })
 </script>
 
 <template>
-  <div class="o-test">
+  <div class="s-test">
     {{ displayText }}
   </div>
 </template>
 
 <style scoped lang="scss">
-.o-test {
+.s-test {
   display: inline-flex;
   align-items: center;
   padding: 6px 12px;

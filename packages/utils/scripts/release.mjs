@@ -37,7 +37,7 @@ function run(command, args) {
 function main() {
   const pkg = readPackageJson()
   const nextVersion = bumpPatchVersion(pkg.version)
-  const commitMessage = `chore: release @oeos-components/utils v${nextVersion}`
+  const commitMessage = `chore: release @sybz-components/utils v${nextVersion}`
 
   if (dryRun) {
     console.log(`Current version: ${pkg.version}`)

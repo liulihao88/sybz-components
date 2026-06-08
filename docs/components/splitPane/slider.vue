@@ -12,14 +12,14 @@ const leftPercent = ref(35)
     </div>
 
     <div class="split-demo">
-      <o-split-pane v-model="leftPercent" :min-percent="10">
+      <s-split-pane v-model="leftPercent" :min-percent="10">
         <template #paneL>
           <div class="pane pane-a">左侧 {{ leftPercent }}%</div>
         </template>
         <template #paneR>
           <div class="pane pane-b">右侧 {{ 100 - leftPercent }}%</div>
         </template>
-      </o-split-pane>
+      </s-split-pane>
     </div>
   </div>
 </template>

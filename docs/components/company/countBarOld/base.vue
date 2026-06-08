@@ -17,9 +17,9 @@ const data2 = ref([
 
 <template>
   <div>
-    <OCountBarOld :data="data" style="height: 300px"></OCountBarOld>
+    <SCountBarOld :data="data" style="height: 300px"></SCountBarOld>
     <hr />
     <hr />
-    <OCountBarOld :data="data2" style="height: 300px"></OCountBarOld>
+    <SCountBarOld :data="data2" style="height: 300px"></SCountBarOld>
   </div>
 </template>

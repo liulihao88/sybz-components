@@ -1,5 +1,5 @@
 <template>
-  <div class="o-progress">
+  <div class="s-progress">
     <el-progress
       :percentage="percentageVal"
       v-bind="{ ...originAttrs, ...$attrs }"
@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="OProgress">
+<script lang="ts" setup name="SProgress">
 import { ref, watch } from 'vue'
 
 const props = defineProps({
@@ -78,7 +78,7 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-.o-progress {
+.s-progress {
   width: 100%;
 }
 </style>

@@ -7,19 +7,19 @@ const cc = ref(123)
 <template>
   <div>
     <div class="box">
-      <o-comp-title
+      <s-comp-title
         title="你好"
         :boxStyle="{ width: '160px', fontSize: '20px', color: 'var(--blue)' }"
-      ></o-comp-title>
+      ></s-comp-title>
       <el-input-number v-model="cc" />
     </div>
 
     <div class="mt box">
-      <o-comp-title
+      <s-comp-title
         title="你好"
         size="large"
-      ></o-comp-title>
-      <o-input v-model="cc" style="width: 100px" size="large" />
+      ></s-comp-title>
+      <s-input v-model="cc" style="width: 100px" size="large" />
     </div>
   </div>
 </template>

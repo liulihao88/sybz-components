@@ -1,17 +1,17 @@
-<script setup lang="ts" name="OTable">
+<script setup lang="ts" name="STable">
 import { ref, watch, computed, useAttrs, nextTick, toRaw, type PropType } from 'vue'
 import type { TableColumnCtx, TableInstance } from 'element-plus'
 import RenderComp from './renderComp.vue'
 import HeaderTooltip from './headerTooltip.vue'
-import OPopconfirm from '@/components/popconfirm/src/index.vue'
-import OIcon from '@/components/icon/src/index.vue'
-import { getType } from '@oeos-components/utils'
+import SPopconfirm from '@/components/popconfirm/src/index.vue'
+import SIcon from '@/components/icon/src/index.vue'
+import { getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type {
-  OTableButton,
-  OTableColumn,
-  OTableExpose,
-  OTableResolvedColumn,
+  STableButton,
+  STableColumn,
+  STableExpose,
+  STableResolvedColumn,
   TableCallbackContext,
   TableColumnList,
   TableFilter,
@@ -94,7 +94,7 @@ const props = defineProps({
     default: () => {},
   },
 })
-const mergedProps = useGlobalComponentConfig('oTable', props)
+const mergedProps = useGlobalComponentConfig('sTable', props)
 const tableRef = ref<TableInstance | null>(null)
 const tableTotal = computed(() => {
   return mergedProps.value.total ?? mergedProps.value.data.length
@@ -105,7 +105,7 @@ const emits = defineEmits<{
   'page-change': [payload: { pageNumber: number; pageSize: number }]
   'update:modelValue': [value: TableRow[] | TableRow | string | number | boolean | null | undefined]
 }>()
-const finalColumns = ref<OTableResolvedColumn[]>([])
+const finalColumns = ref<STableResolvedColumn[]>([])
 const syncingMultipleSelection = ref(false)
 const syncingSingleSelection = ref(false)
 
@@ -316,8 +316,8 @@ const createCallbackContext = ({
 }: {
   row?: TableRow
   scope?: TableScope
-  column?: OTableColumn
-  action?: OTableButton
+  column?: STableColumn
+  action?: STableButton
   index?: number
   event?: Event
   value?: any
@@ -370,7 +370,7 @@ const normalizeMaxBtns = (value: number | string | undefined) => {
   return Math.max(Math.floor(parsedValue), 1)
 }
 
-const normalizeColumnBtns = (btns: OTableButton[] = [], maxBtns = 4) => {
+const normalizeColumnBtns = (btns: STableButton[] = [], maxBtns = 4) => {
   const normalizedMaxBtns = normalizeMaxBtns(maxBtns)
   const normalizedBtns = btns.map((btn) => {
     return {
@@ -402,7 +402,7 @@ const normalizeColumnBtns = (btns: OTableButton[] = [], maxBtns = 4) => {
 }
 
 const updateTable = () => {
-  finalColumns.value = mergedProps.value.columns.map((item: OTableColumn) => {
+  finalColumns.value = mergedProps.value.columns.map((item: STableColumn) => {
     const maxBtns = normalizeMaxBtns(item.maxBtns ?? 4)
     const { btns, baseBtns, hideBtns } = normalizeColumnBtns(item.btns ?? [], maxBtns)
 
@@ -433,7 +433,7 @@ const updateTable = () => {
   })
 }
 // isShow 或者 content支持 函数或字符串两种写法。
-const operatorBtnFn = (cont: OTableButton['content'], context: TableCallbackContext = {}) => {
+const operatorBtnFn = (cont: STableButton['content'], context: TableCallbackContext = {}) => {
   if (typeof cont === 'function') {
     if (!context?.row) {
       return true
@@ -446,7 +446,7 @@ const operatorBtnFn = (cont: OTableButton['content'], context: TableCallbackCont
     return cont
   }
 }
-const parseDisabled = (disFn: OTableButton['disabled'], context: TableCallbackContext = {}) => {
+const parseDisabled = (disFn: STableButton['disabled'], context: TableCallbackContext = {}) => {
   if (typeof disFn === 'function') {
     if (!context?.row) {
       return false
@@ -460,7 +460,7 @@ const parseDisabled = (disFn: OTableButton['disabled'], context: TableCallbackCo
   }
 }
 const parseIsShow = (
-  isFn: OTableButton['isShow'] | OTableColumn['isShow'],
+  isFn: STableButton['isShow'] | STableColumn['isShow'],
   context: TableCallbackContext = {},
   legacyArgs: any[] = [],
 ) => {
@@ -490,14 +490,14 @@ const parseFilter = (filter: TableFilter | undefined, context: TableCallbackCont
   return filter(context.value)
 }
 
-const parseSlot = (val: Pick<OTableButton | OTableColumn, 'useSlot' | 'prop'>) => {
+const parseSlot = (val: Pick<STableButton | STableColumn, 'useSlot' | 'prop'>) => {
   if (val.useSlot === true) {
     return val.prop
   } else {
     return val.useSlot
   }
 }
-const parseReConfirm = (isFn: OTableButton['reConfirm'], row?: TableRow, scope?: TableScope) => {
+const parseReConfirm = (isFn: STableButton['reConfirm'], row?: TableRow, scope?: TableScope) => {
   if (typeof isFn === 'function') {
     const context = createCallbackContext({ row, scope })
     return invokeWithContext(isFn, context, [row, scope])
@@ -510,10 +510,10 @@ const parseReConfirm = (isFn: OTableButton['reConfirm'], row?: TableRow, scope?:
 }
 
 const handleCompClick = (
-  handlerMethod: OTableButton['handler'],
+  handlerMethod: STableButton['handler'],
   row: TableRow,
   scope: TableScope,
-  btnItem: OTableButton,
+  btnItem: STableButton,
   event: Event,
 ) => {
   if (handlerMethod) {
@@ -534,7 +534,7 @@ const indexMethod = (index: number) => {
   return (sPageNumber.value - 1) * sPageSize.value + index + 1
 }
 
-const handleEmptyText = (scope: TableScope, v: OTableResolvedColumn) => {
+const handleEmptyText = (scope: TableScope, v: STableResolvedColumn) => {
   // 判断'   '为空
   const trimIsEmpty = getType(scope.row[v.prop]) === 'string' && scope.row[v.prop].trim().length === 0
   if (scope.row[v.prop] === null || scope.row[v.prop] === undefined || scope.row[v.prop] === '' || trimIsEmpty) {
@@ -588,7 +588,7 @@ const getTextWidth = (text: string | number = '') => {
     document.body.appendChild(textMeasureEl)
   }
 
-  const buttonEl = document.querySelector('.o-table .hide-btns-button')
+  const buttonEl = document.querySelector('.s-table .hide-btns-button')
   if (buttonEl) {
     const style = window.getComputedStyle(buttonEl)
     textMeasureEl.style.font = style.font
@@ -604,13 +604,13 @@ const getTextWidth = (text: string | number = '') => {
   return Math.ceil(textMeasureEl.getBoundingClientRect().width)
 }
 
-const getLabelMinWidth = (column: OTableColumn) => {
+const getLabelMinWidth = (column: STableColumn) => {
   if (!column?.label) return undefined
   const sortableReserve = column.sortable ? HEADER_SORTABLE_RESERVE_WIDTH : 0
   return getTextWidth(column.label) + HEADER_MIN_WIDTH_PADDING + sortableReserve
 }
 
-const getBtnWidth = (btn: OTableButton) => {
+const getBtnWidth = (btn: STableButton) => {
   if (btn.width !== undefined) {
     return Number(btn.width)
   }
@@ -630,7 +630,7 @@ const getBtnWidth = (btn: OTableButton) => {
   return getTextWidth(btn.content || '')
 }
 
-const parseTableWidth = (btns: OTableButton[], hBtns: OTableButton[]) => {
+const parseTableWidth = (btns: STableButton[], hBtns: STableButton[]) => {
   const btnsWidth = btns.reduce((sum, btn) => sum + getBtnWidth(btn), 0)
   const gapWidth = Math.max(btns.length - 1, 0) * 12
   const moreWidth = hBtns.length > 0 ? 24 : 0
@@ -758,7 +758,7 @@ const tableAttrs = computed(() => {
   }
 })
 
-const getTableRef: OTableExpose['getTableRef'] = () => {
+const getTableRef: STableExpose['getTableRef'] = () => {
   return tableRef.value
 }
 
@@ -769,8 +769,8 @@ defineExpose({
 
 <template>
   <div
-    class="o-table"
-    :class="{ 'o-table--fluid-height': !!fluidHeight }"
+    class="s-table"
+    :class="{ 's-table--fluid-height': !!fluidHeight }"
     :style="wrapperStyle"
     v-loading="tableLoading"
   >
@@ -799,7 +799,7 @@ defineExpose({
           <HeaderTooltip :label="selectionHeaderLabel" />
         </template>
         <template #default="scope">
-          <div class="o-table__selection">
+          <div class="s-table__selection">
             <el-radio
               :model-value="isSingleRowSelected(scope.row)"
               :value="true"
@@ -898,7 +898,7 @@ defineExpose({
                       />
 
                       <template v-else-if="parseReConfirm(val.reConfirm, scope.row, scope)">
-                        <oPopconfirm
+                        <sPopconfirm
                           trigger="click"
                           :title="
                             getType(val.title) === 'function'
@@ -915,7 +915,7 @@ defineExpose({
                                 )
                               : val.title ?? '确定删除吗?'
                           "
-                          class="o-table__actions"
+                          class="s-table__actions"
                           @confirm="
                             invokeWithContext(
                               val.handler,
@@ -933,7 +933,7 @@ defineExpose({
                           <component
                             :is="val.comp"
                             v-if="val.comp"
-                            class="o-table__clickable"
+                            class="s-table__clickable"
                             v-bind="val.attrs"
                             :disabled="
                               parseDisabled(
@@ -979,12 +979,12 @@ defineExpose({
                               )
                             }}
                           </el-button>
-                        </oPopconfirm>
+                        </sPopconfirm>
                       </template>
                       <component
                         :is="val.comp"
                         v-else-if="val.comp"
-                        class="o-table__clickable"
+                        class="s-table__clickable"
                         v-bind="val.attrs"
                         :disabled="
                           parseDisabled(
@@ -1050,7 +1050,7 @@ defineExpose({
 
                   <template v-if="v.hideBtns.length > 0">
                     <el-dropdown class="" trigger="click">
-                      <o-icon name="more" @click.stop />
+                      <s-icon name="more" @click.stop />
                       <template #dropdown>
                         <el-dropdown-menu :hide-on-click="false">
                           <template v-for="(val, idx) in v.hideBtns" :key="idx">
@@ -1229,7 +1229,7 @@ defineExpose({
     <div class="page-wrap" v-if="mergedProps.showPage">
       <div class="page-left">
         <span>共</span>
-        <span class="o-table__total">{{ tableTotal }}</span>
+        <span class="s-table__total">{{ tableTotal }}</span>
         <span>项</span>
       </div>
       <div class="page-right">
@@ -1259,31 +1259,31 @@ defineExpose({
   cursor: pointer;
 }
 
-.o-table__selection {
+.s-table__selection {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.o-table__actions {
+.s-table__actions {
   display: flex;
   align-items: center;
 }
 
-.o-table__clickable {
+.s-table__clickable {
   cursor: pointer;
 }
 
-.o-table__total {
+.s-table__total {
   margin: 0 16px;
   font-weight: 900;
 }
 
-.o-table {
+.s-table {
   box-shadow: none !important;
 
-  &.o-table--fluid-height {
+  &.s-table--fluid-height {
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -1331,7 +1331,7 @@ defineExpose({
     box-shadow: none !important;
   }
 
-  &.o-table--fluid-height :deep(.el-table) {
+  &.s-table--fluid-height :deep(.el-table) {
     flex: 1;
     min-height: 0;
   }
@@ -1353,7 +1353,7 @@ defineExpose({
     gap: 8px;
     min-height: 23px;
     line-height: 23px;
-    .o-icon + .o-icon {
+    .s-icon + .s-icon {
       margin-left: 0;
     }
   }

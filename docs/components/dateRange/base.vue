@@ -12,15 +12,15 @@ const customPrefix = {
 
 <template>
   <div>
-    <o-date-range v-model="dateValue"></o-date-range>
-    <o-date-range
+    <s-date-range v-model="dateValue"></s-date-range>
+    <s-date-range
       v-model="dateValue"
       width="600"
       size="small"
       title="选择日期"
       class="m-t-8"
       :boxStyle="{ width: 100 }"
-    ></o-date-range>
+    ></s-date-range>
   </div>
 </template>
 

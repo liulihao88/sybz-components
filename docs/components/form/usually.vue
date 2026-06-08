@@ -64,7 +64,7 @@ const fieldList = [
   {
     label: '选择爱好',
     prop: 'hobby',
-    comp: 'o-select',
+    comp: 's-select',
     imgAttrs: {
       name: 'delete',
     },
@@ -88,7 +88,7 @@ const fieldList = [
   {
     label: '性别单选',
     prop: 'sex',
-    comp: 'o-radio',
+    comp: 's-radio',
     attrs: {
       options: [
         { label: '小月月', value: 'sex1' },
@@ -105,7 +105,7 @@ const fieldList = [
   {
     label: '描述',
     value: 'desc',
-    comp: 'o-input',
+    comp: 's-input',
     attrs: {
       type: 'textarea',
     },
@@ -122,12 +122,12 @@ async function isTest16() {
 
 <template>
   <div>
-    <o-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">
+    <s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">
       <template #name-label>这里我是特殊的name的label</template>
       <template #name>
-        <o-input v-model="model.name" placeholder="我是name" width="300" />
+        <s-input v-model="model.name" placeholder="我是name" width="300" />
       </template>
-    </o-form>
+    </s-form>
     <el-button type="primary" @click="isTest16">测试36</el-button>
   </div>
 </template>

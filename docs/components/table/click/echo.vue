@@ -38,12 +38,12 @@ const setSelectedRow = (row) => {
   <div>
     <div class="single-demo__toolbar">
       <span class="single-demo__value">当前回显值: {{ selectedText }}</span>
-      <o-button @click="setSelectedRow(data[0])">回显第一行</o-button>
-      <o-button @click="setSelectedRow(data[1])">回显第二行</o-button>
-      <o-button @click="setSelectedRow()">清空</o-button>
+      <s-button @click="setSelectedRow(data[0])">回显第一行</s-button>
+      <s-button @click="setSelectedRow(data[1])">回显第二行</s-button>
+      <s-button @click="setSelectedRow()">清空</s-button>
     </div>
 
-    <o-table
+    <s-table
       v-model="selectedRow"
       selection-type="single"
       :columns="columns"

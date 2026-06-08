@@ -1,12 +1,12 @@
 import Table from './src/index.vue'
 import { withInstall } from '@/components/utils/withInstall.ts'
 export type {
-  OTableButton,
-  OTableColumn,
-  OTableEmits,
-  OTableExpose,
-  OTableProps,
-  OTableResolvedColumn,
+  STableButton,
+  STableColumn,
+  STableEmits,
+  STableExpose,
+  STableProps,
+  STableResolvedColumn,
   TableCallbackContext,
   TableColumnList,
   TableFilter,
@@ -18,5 +18,5 @@ export type {
   TableSelectionType,
 } from './src/types.ts'
 
-const OTable = withInstall(Table)
-export default OTable
+const STable = withInstall(Table)
+export default STable

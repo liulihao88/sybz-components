@@ -4,7 +4,7 @@ const { proxy } = getCurrentInstance()
 
 // main.js
 provide('GLOBAL_COMPONENT_CONFIG', {
-  oSelect: {
+  sSelect: {
     showPrefix: true,
   },
 })
@@ -74,38 +74,38 @@ const handleCheckAll = (val) => {
 
 <template>
   <div>
-    <o-flex direction="column" gap="8">
-      <o-select v-model="selectVal" :options="options" label="name" value="id" title="value和label分别设置"></o-select>
-      <o-select
+    <s-flex direction="column" gap="8">
+      <s-select v-model="selectVal" :options="options" label="name" value="id" title="value和label分别设置"></s-select>
+      <s-select
         v-model="selectVal"
         :options="options"
         label="name"
         value="id"
         title="内容超宽时显示tooltip"
         width="220"
-      ></o-select>
-      <o-select
+      ></s-select>
+      <s-select
         title="有禁用状态"
         v-model="selectVal"
         :options="baseOptions"
         :itemDisabled="(item) => item.disabled"
-      ></o-select>
+      ></s-select>
   
-    </o-flex>
+    </s-flex>
 
-    <o-title title="禁用状态, 可清空" sub-title="disabled, clearable" t="10">
-      <o-select v-model="selectVal" :options="baseOptions" size="large" disabled clearable></o-select>
-    </o-title>
-    <o-title title="自定义下拉框菜单的头部和底部" sub-title="slot 中的header 和 footer" t="10">
-      <o-select v-model="selectVal" :options="baseOptions" size="large">
+    <s-title title="禁用状态, 可清空" sub-title="disabled, clearable" t="10">
+      <s-select v-model="selectVal" :options="baseOptions" size="large" disabled clearable></s-select>
+    </s-title>
+    <s-title title="自定义下拉框菜单的头部和底部" sub-title="slot 中的header 和 footer" t="10">
+      <s-select v-model="selectVal" :options="baseOptions" size="large">
         <template #header>我来组成头部</template>
         <template #default="{ options, item }">
           <span>{{ item.label }}</span>
           <span class="cl-red">--------{{ item.value }}</span>
         </template>
         <template #footer>我来组成底部</template>
-      </o-select>
-    </o-title>
+      </s-select>
+    </s-title>
 
     
   </div>

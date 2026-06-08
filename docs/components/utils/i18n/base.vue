@@ -22,7 +22,7 @@ const dateValue = ref([])
   <el-button type="primary" @click="changeLanguage">切换语言 => {{ locale.name }}</el-button>
   <el-config-provider :locale="locale">
     <el-time-picker v-model="value1" is-range />
-    <o-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></o-date-range>
+    <s-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></s-date-range>
   </el-config-provider>
 </template>
 

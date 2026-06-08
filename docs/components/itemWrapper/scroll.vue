@@ -1,23 +1,23 @@
 <template>
-  <oItemWrapper gap="20px" :minWidth="'200px'">
-    <OItem label="label" value="value" ></OItem>
-    <OItem label="label" value="value" ></OItem>
-    <OItem label="label" value="value" ></OItem>
-    <OItem label="label" value="value" ></OItem>
-    <OItem label="label" value="value" ></OItem>
-  </oItemWrapper>
+  <sItemWrapper gap="20px" :minWidth="'200px'">
+    <SItem label="label" value="value" ></SItem>
+    <SItem label="label" value="value" ></SItem>
+    <SItem label="label" value="value" ></SItem>
+    <SItem label="label" value="value" ></SItem>
+    <SItem label="label" value="value" ></SItem>
+  </sItemWrapper>
 
-  <o-title title="或者每个item单独设置">
+  <s-title title="或者每个item单独设置">
 
-  </o-title>
+  </s-title>
 
-  <oItemWrapper gap="20px" >
-    <OItem label="label" value="value" :style="{minWidth: '200px'}" ></OItem>
-    <OItem label="label" value="value" :style="{minWidth: '200px'}" ></OItem>
-    <OItem label="label" value="value" :style="{minWidth: '200px'}" ></OItem>
-    <OItem label="label" value="value" :style="{minWidth: '200px'}" ></OItem>
-    <OItem label="label" value="value" :style="{minWidth: '200px'}" ></OItem>
-  </oItemWrapper>
+  <sItemWrapper gap="20px" >
+    <SItem label="label" value="value" :style="{minWidth: '200px'}" ></SItem>
+    <SItem label="label" value="value" :style="{minWidth: '200px'}" ></SItem>
+    <SItem label="label" value="value" :style="{minWidth: '200px'}" ></SItem>
+    <SItem label="label" value="value" :style="{minWidth: '200px'}" ></SItem>
+    <SItem label="label" value="value" :style="{minWidth: '200px'}" ></SItem>
+  </sItemWrapper>
 </template>
 
 <style lang="scss" scoped></style>

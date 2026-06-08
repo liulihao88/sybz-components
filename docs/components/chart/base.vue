@@ -77,13 +77,13 @@ let option3 = {
   <div>
     <div class="f">
       <div class="f-1">
-        <o-chart :option="option" />
+        <s-chart :option="option" />
       </div>
       <div class="f-1">
-        <o-chart :option="option2" width="200" />
+        <s-chart :option="option2" width="200" />
       </div>
       <div class="f-1">
-        <o-chart :option="option3" height="500" />
+        <s-chart :option="option3" height="500" />
       </div>
     </div>
   </div>

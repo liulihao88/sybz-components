@@ -14,5 +14,5 @@ export function createAlgolia() {
   }
 }
 
-export const GitLab = 'https://39.104.162.143:3443/storage/oct-web-project-components-vue3/-/tree/develop'
-export const Github = 'https://github.com/liulihao88/oeos-components/tree/main'
+
+export const Github = 'https://github.com/liulihao88/sybz-components/tree/main'

@@ -1,15 +1,15 @@
 <template>
-  <oItemWrapper class="w-100%">
-    <OItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></OItem>
-    <OItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></OItem>
-    <OItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></OItem>
-  </oItemWrapper>
+  <sItemWrapper class="w-100%">
+    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
+    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
+    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
+  </sItemWrapper>
 
   <br />
 
-  <oItemWrapper class="w-100%">
+  <sItemWrapper class="w-100%">
     <el-button type="primary">测试98</el-button>
     <el-button type="primary">测试98</el-button>
     <el-button type="primary">测试98</el-button>
-  </oItemWrapper>
+  </sItemWrapper>
 </template>

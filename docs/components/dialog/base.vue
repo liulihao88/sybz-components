@@ -11,10 +11,10 @@ const confirm = () => {
 <template>
   <div>
     <el-button type="primary" @click="isShow = true">显示dialog</el-button>
-    <o-dialog title="基础dialog" v-model="isShow" @confirm="confirm">
+    <s-dialog title="基础dialog" v-model="isShow" @confirm="confirm">
       这是外部的dialog
-      <o-dialog ref="dialogRef" title="内部的" v-model="isShow2">这是内部的dialog</o-dialog>
-    </o-dialog>
+      <s-dialog ref="dialogRef" title="内部的" v-model="isShow2">这是内部的dialog</s-dialog>
+    </s-dialog>
   </div>
 </template>
 

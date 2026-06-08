@@ -1,5 +1,5 @@
 import Checkbox from './src/index.vue'
 import { withInstall } from '@/components/utils/withInstall.ts'
 
-const OCheckbox = withInstall(Checkbox)
-export default OCheckbox
+const SCheckbox = withInstall(Checkbox)
+export default SCheckbox

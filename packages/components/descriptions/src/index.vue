@@ -1,5 +1,5 @@
 <template>
-  <el-descriptions v-bind="{ border: true, ...$attrs }" :column="column" class="o-descriptions">
+  <el-descriptions v-bind="{ border: true, ...$attrs }" :column="column" class="s-descriptions">
     <slot>
       <el-descriptions-item v-for="(item, index) in options" :key="index" v-bind="item.attrs">
         <template #label>
@@ -16,7 +16,7 @@
             ></slot>
           </template>
           <template v-else-if="!props.showAll">
-            <o-tooltip :content="item.label" v-bind="item.labelAttrs"></o-tooltip>
+            <s-tooltip :content="item.label" v-bind="item.labelAttrs"></s-tooltip>
           </template>
           <template v-else>
             {{ item.label }}
@@ -33,12 +33,12 @@
           <template v-if="props.showAll">
             {{ parseValue(item) }}
           </template>
-          <o-tooltip
+          <s-tooltip
             v-else
-            class="o-descriptions__tooltip"
+            class="s-descriptions__tooltip"
             :content="parseContent(parseValue(item))"
             v-bind="item.valueAttrs"
-          ></o-tooltip>
+          ></s-tooltip>
         </template>
       </el-descriptions-item>
     </slot>
@@ -49,11 +49,11 @@
 import RenderComp from '@/components/common/renderComp.vue'
 import { computed, VNode, ref, useAttrs, onUnmounted } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
-import { processWidth } from '@oeos-components/utils'
-import OTooltip from '@/components/tooltip/src/index.vue'
+import { processWidth } from '@sybz-components/utils'
+import STooltip from '@/components/tooltip/src/index.vue'
 
 defineOptions({
-  name: 'ODescriptions',
+  name: 'SDescriptions',
 })
 
 const attrs = useAttrs()
@@ -182,11 +182,11 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-.o-descriptions__tooltip {
+.s-descriptions__tooltip {
   width: 100%;
 }
 
-.o-descriptions {
+.s-descriptions {
   :deep(.el-descriptions__body),
   :deep(.el-descriptions__table) {
     table-layout: fixed;

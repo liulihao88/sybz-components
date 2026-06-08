@@ -144,8 +144,8 @@ interface TryCatchResult<T> {
 
 type TryCatchTask<T> = Promise<T> | (() => T | Promise<T>)
 
-const DEFAULT_CONFIRM_BUTTON_CLASS = 'o-message-box__confirm-btn'
-const DEFAULT_CANCEL_BUTTON_CLASS = 'o-message-box__cancel-btn'
+const DEFAULT_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn'
+const DEFAULT_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn'
 
 function _getBrowserStorage(isSession = false): Storage | null {
   if (typeof window === 'undefined') {
@@ -230,7 +230,7 @@ export function $toast(
     if (message.closeAll) {
       ElMessage.closeAll()
     }
-    message.customClass = message.customClass === 'el' ? '' : 'o-antd-message'
+    message.customClass = message.customClass === 'el' ? '' : 's-antd-message'
     ElMessage(message)
     return
   }
@@ -240,7 +240,7 @@ export function $toast(
     if (type.closeAll) {
       ElMessage.closeAll()
     }
-    type.customClass = type.customClass === 'el' ? '' : 'o-antd-message'
+    type.customClass = type.customClass === 'el' ? '' : 's-antd-message'
     ElMessage({
       message,
       type: 'success',
@@ -256,7 +256,7 @@ export function $toast(
 
   const resolvedType = isShortType(type) ? typeMap[type] : type
 
-  otherParams.customClass = otherParams.customClass === 'el' ? '' : 'o-antd-message'
+  otherParams.customClass = otherParams.customClass === 'el' ? '' : 's-antd-message'
   ElMessage({
     message,
     type: resolvedType,
@@ -1239,7 +1239,7 @@ type DebouncedFunction<T extends Func> = ((...args: Parameters<T>) => Promise<Aw
  *   return keyword.trim()
  * }, 300)
  *
- * await search('oeos')
+ * await search('sybz')
  */
 export function debounce<T extends Func>(
   func: T,
@@ -1400,7 +1400,7 @@ export function getVariable(propertyName: string, fallback = ''): string {
   return res || fallback
 }
 
-declare const __OEOS_UTILS_BUILD_TIME__: string
+declare const __SYBZ_UTILS_BUILD_TIME__: string
 
 /**
  * 返回当前 utils 包的构建时间。
@@ -1411,5 +1411,5 @@ declare const __OEOS_UTILS_BUILD_TIME__: string
  * test()
  */
 export function test(): string {
-  return `build time: ${__OEOS_UTILS_BUILD_TIME__}`
+  return `build time: ${__SYBZ_UTILS_BUILD_TIME__}`
 }

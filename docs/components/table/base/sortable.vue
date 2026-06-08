@@ -20,5 +20,5 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <o-table :data="tableDataSortable" :columns="columns" :default-sort="{ prop: 'date', order: 'ascending' }" />
+  <s-table :data="tableDataSortable" :columns="columns" :default-sort="{ prop: 'date', order: 'ascending' }" />
 </template>

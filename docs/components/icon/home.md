@@ -36,8 +36,8 @@ icon/all
 | `color` | 图标颜色 | string | - |
 | `size` | 图标尺寸 | string / number | `16px` |
 | `disabled` | 是否禁用，禁用后不会触发点击 | boolean | `false` |
-| `type` | 图标类型，传 `svg` 时走 `o-svg` 渲染 | string | `''` |
-| `svgAttrs` | 透传给 `o-svg` 的属性 | object | `{}` |
+| `type` | 图标类型，传 `svg` 时走 `s-svg` 渲染 | string | `''` |
+| `svgAttrs` | 透传给 `s-svg` 的属性 | object | `{}` |
 
 ### 事件
 

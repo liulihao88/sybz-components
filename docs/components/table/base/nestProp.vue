@@ -75,9 +75,9 @@ const columns = [
 </script>
 
 <template>
-  <o-table :data="tableData" :columns="columns">
+  <s-table :data="tableData" :columns="columns">
     <template #content="{ row }">
       <span v-html="row.other[1].more.content" />
     </template>
-  </o-table>
+  </s-table>
 </template>

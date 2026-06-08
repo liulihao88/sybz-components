@@ -1,29 +1,29 @@
 <template>
-  <o-title title="direction 对齐方式"></o-title>
+  <s-title title="direction 对齐方式"></s-title>
   <el-radio-group v-model="direction">
     <el-radio value="row">row</el-radio>
     <el-radio value="column">column</el-radio>
     <el-radio value="row-reverse">row-reverse</el-radio>
     <el-radio value="column-reverse">column-reverse</el-radio>
   </el-radio-group>
-  <o-title title="justify 主轴上如何对齐"></o-title>
-  <o-radio
+  <s-title title="justify 主轴上如何对齐"></s-title>
+  <s-radio
     v-model="justify"
     :options="['start', 'end', 'center', 'space-between', 'space-around', 'space-evenly', 'normal']"
     type="simple"
-  ></o-radio>
-  <o-title title="align 交叉轴上如何对齐"></o-title>
-  <o-radio
+  ></s-radio>
+  <s-title title="align 交叉轴上如何对齐"></s-title>
+  <s-radio
     v-model="align"
     :options="['start', 'end', 'center', 'baseline', 'stretch', 'normal']"
     type="simple"
-  ></o-radio>
-  <o-title title="wrap 自动换行"></o-title>
-  <o-radio v-model="wrap" :options="['nowrap', 'wrap', 'wrap-reverse']" type="simple"></o-radio>
-  <o-title title="gap设置间距 ['small', 'default', 'large', processWidth的宽度]"></o-title>
-  <o-radio v-model="gapRadio" :options="['small', 'default', 'large', 'custom']" type="simple"></o-radio>
+  ></s-radio>
+  <s-title title="wrap 自动换行"></s-title>
+  <s-radio v-model="wrap" :options="['nowrap', 'wrap', 'wrap-reverse']" type="simple"></s-radio>
+  <s-title title="gap设置间距 ['small', 'default', 'large', processWidth的宽度]"></s-title>
+  <s-radio v-model="gapRadio" :options="['small', 'default', 'large', 'custom']" type="simple"></s-radio>
   <el-slider v-model="gapProgressValue" v-if="gapRadio === 'custom'"></el-slider>
-  <o-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-100%">
+  <s-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-100%">
     <div
       v-for="(item, index) in new Array(10)"
       :key="index"
@@ -33,18 +33,18 @@
         height: '30px',
       }"
     />
-  </o-flex>
+  </s-flex>
 
-  <o-title title="component 自定义根标签"></o-title>
-  <o-flex component="section" gap="default" class="demo-section">
+  <s-title title="component 自定义根标签"></s-title>
+  <s-flex component="section" gap="default" class="demo-section">
     <div class="demo-card">根节点是 section</div>
     <div class="demo-card">适合需要语义化标签的场景</div>
-  </o-flex>
+  </s-flex>
 
-  <o-title title="flex 控制组件自身伸缩"></o-title>
+  <s-title title="flex 控制组件自身伸缩"></s-title>
   <div class="parent-flex">
-    <o-flex flex="1" justify="center" align="center" class="grow-box">flex="1"</o-flex>
-    <o-flex flex="0 0 180px" justify="center" align="center" class="fixed-box">flex="0 0 180px"</o-flex>
+    <s-flex flex="1" justify="center" align="center" class="grow-box">flex="1"</s-flex>
+    <s-flex flex="0 0 180px" justify="center" align="center" class="fixed-box">flex="0 0 180px"</s-flex>
   </div>
 </template>
 <script setup lang="ts">

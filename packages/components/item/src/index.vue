@@ -1,4 +1,4 @@
-<script setup lang="ts" name="OItem">
+<script setup lang="ts" name="SItem">
 import { useSlots, computed } from 'vue'
 import { processWidth, formatThousands, formatToFixed, formatBytes } from '@/utils/src/index.ts'
 const props = defineProps({
@@ -75,22 +75,22 @@ const parseValue = computed(() => {
 
 <template>
   <div
-    class="o-item-box"
+    class="s-item-box"
     :style="{ ...{ height: processWidth(props.height, true) }, ...processWidth(props.width), ...boxStyle }"
     v-if="props.type === ''"
   >
-    <div class="o-item-box__img" :style="props.imgStyle">
+    <div class="s-item-box__img" :style="props.imgStyle">
       <slot name="img">
         <img :src="props.src" alt="" />
       </slot>
     </div>
-    <div class="o-item-box__right" :style="props.itemStyle">
-      <div class="o-item_box__label" :style="props.labelStyle">
+    <div class="s-item-box__right" :style="props.itemStyle">
+      <div class="s-item_box__label" :style="props.labelStyle">
         <slot name="label">
           {{ props.label }}
         </slot>
       </div>
-      <div class="o-item_box__value" :style="props.valueStyle">
+      <div class="s-item_box__value" :style="props.valueStyle">
         <slot name="value">
           {{ parseValue }}
         </slot>
@@ -98,23 +98,23 @@ const parseValue = computed(() => {
     </div>
   </div>
   <div
-    class="o-item-box__value"
+    class="s-item-box__value"
     :style="{ ...{ height: processWidth(props.height, true) }, ...processWidth(props.width), ...boxStyle }"
     v-else-if="props.type === 'value'"
   >
     <div class="o_item_box_value_item" :class="{ o_item_box_value_item_center: props.attrs?.center === true }">
-      <div class="o-item_box__value__value" :style="props.valueStyle">
+      <div class="s-item_box__value__value" :style="props.valueStyle">
         <slot name="value">
           {{ parseValue }}
         </slot>
       </div>
-      <div class="o-item_box__label__value" :style="props.labelStyle">
+      <div class="s-item_box__label__value" :style="props.labelStyle">
         <slot name="label">
           {{ props.label }}
         </slot>
       </div>
     </div>
-    <div class="o-item-box__img__value" :style="props.imgStyle">
+    <div class="s-item-box__img__value" :style="props.imgStyle">
       <slot name="img">
         <img :src="props.src" alt="" />
       </slot>
@@ -123,7 +123,7 @@ const parseValue = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.o-item-box {
+.s-item-box {
   background-color: var(--el-bg-color);
   padding: 16px;
   border-radius: 4px;
@@ -134,31 +134,31 @@ const parseValue = computed(() => {
   font-size: 18px;
   justify-content: v-bind('props.src || hasImgSlot ? "space-between" : "center"');
   // justify-content: center;
-  .o-item-box__img {
+  .s-item-box__img {
     height: 100%;
     margin-right: 8px;
     :deep(img) {
       height: 100%;
     }
   }
-  .o-item-box__right {
+  .s-item-box__right {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     justify-content: space-between;
-    .o-item_box__label {
+    .s-item_box__label {
       color: var(--45);
       font-size: 17px;
       font-weight: 600;
     }
-    .o-item_box__value {
+    .s-item_box__value {
       font-weight: 700;
     }
   }
 }
 
-.o-item-box__value {
+.s-item-box__value {
   background-color: var(--el-bg-color);
   padding: 16px;
   border-radius: 4px;
@@ -169,7 +169,7 @@ const parseValue = computed(() => {
   font-size: 18px;
   justify-content: v-bind('props.src || hasImgSlot ? "space-between" : "center"');
   // justify-content: center;
-  .o-item-box__img__value {
+  .s-item-box__img__value {
     height: 100%;
     margin-right: 8px;
     :deep(img) {
@@ -177,12 +177,12 @@ const parseValue = computed(() => {
     }
   }
   .o_item_box_value_item {
-    .o-item_box__label__value {
+    .s-item_box__label__value {
       color: var(--45);
       font-size: 14px;
       font-weight: 500;
     }
-    .o-item_box__value__value {
+    .s-item_box__value__value {
       font-weight: 700;
       font-size: 24px;
       margin-bottom: 8px;

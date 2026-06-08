@@ -88,12 +88,12 @@ const tableData = [
   <div>
     <el-button @click="resetDateFilter">reset date filter</el-button>
     <el-button @click="clearFilter">reset all filters</el-button>
-    <o-table ref="tableRef" row-key="date" :data="tableData" :columns="columns">
+    <s-table ref="tableRef" row-key="date" :data="tableData" :columns="columns">
       <template #tag="{ row }">
         <el-tag :type="row.tag === 'Home' ? null : 'success'" disable-transitions>
           {{ row.tag }}
         </el-tag>
       </template>
-    </o-table>
+    </s-table>
   </div>
 </template>

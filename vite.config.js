@@ -47,7 +47,7 @@ export default defineConfig({
     },
   },
   define: {
-    __OEOS_COMPONENTS_BUILD_TIME__: JSON.stringify(buildTime),
+    __SYBZ_COMPONENTS_BUILD_TIME__: JSON.stringify(buildTime),
   },
   plugins: [
     VueSetupExtend(),
@@ -98,6 +98,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'packages'),
+      '@sybz-components/utils': resolve(__dirname, 'packages/utils/src/index.ts'),
       '~dist': resolve(__dirname, 'dist'),
     },
   },

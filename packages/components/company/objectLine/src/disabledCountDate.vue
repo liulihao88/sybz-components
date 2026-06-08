@@ -1,5 +1,5 @@
 <template>
-  <div class="o-disabled-count-date">
+  <div class="s-disabled-count-date">
     <!-- <el-date-picker
       ref="datePickerRef"
       v-model="dateRange"
@@ -11,7 +11,7 @@
       :disabled-date="disabledDate"
       :shortcuts="shortcuts"
     /> -->
-    <o-date-range v-model="dateRange" value-format="x"></o-date-range>
+    <s-date-range v-model="dateRange" value-format="x"></s-date-range>
   </div>
 </template>
 
@@ -118,7 +118,7 @@ const disabledDate = (time) => {
 </script>
 
 <style scoped lang="scss">
-.o-disabled-count-date {
+.s-disabled-count-date {
   display: flex;
   align-items: center;
 }

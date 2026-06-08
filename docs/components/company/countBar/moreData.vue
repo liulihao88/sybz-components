@@ -78,7 +78,7 @@ objectDisk.value = {
 
 <template>
   <div>
-    <oCountBar
+    <sCountBar
       :data="objectDisk"
       style="min-height: 200px"
       :options="{ count: 'magazineInCount', size: 'magazineInSize' }"

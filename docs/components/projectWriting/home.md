@@ -4,7 +4,7 @@
 
 ### 说明
 
-- 该页面用于记录 `oeos-components` 仓库里常见且推荐复用的写法。
+- 该页面用于记录 `sybz-components` 仓库里常见且推荐复用的写法。
 - 新增组件、补文档、封装工具方法时，建议优先参考这里和现有同类目录。
 
 ### 1. 新增一个组件时，目录通常这样放
@@ -27,7 +27,7 @@ docs/components/foo/
 ### 2. 组件源码一般放在 `src/index.vue`
 
 ```vue
-<script setup lang="ts" name="OFoo">
+<script setup lang="ts" name="SFoo">
 import { computed, ref, useAttrs, useSlots, watch } from 'vue'
 
 const attrs = useAttrs()
@@ -96,8 +96,8 @@ const noDefaultSlots = computed(() => {
 import Foo from './src/index.vue'
 import { withInstall } from '@/components/utils/withInstall.ts'
 
-const OFoo = withInstall(Foo)
-export default OFoo
+const SFoo = withInstall(Foo)
+export default SFoo
 ```
 
 - 这样组件既能被全局注册，也能支持按需引入。
@@ -105,23 +105,23 @@ export default OFoo
 
 ### 6. 通过 `globalComponentConfig` 配置组件全局默认值
 
-`o-select` 和 `o-table` 当前都在用这个模式。
+`s-select` 和 `s-table` 当前都在用这个模式。
 
 ```ts
 // 组件内部统一走 hook
-const mergedProps = useGlobalComponentConfig('oSelect', props)
+const mergedProps = useGlobalComponentConfig('sSelect', props)
 ```
 
 ```ts
 // main.ts 中全局传入
 const app = createApp(App)
 
-app.use(OeosComponents, {
+app.use(SybzComponents, {
   globalComponentConfig: {
-    oSelect: {
+    sSelect: {
       showPrefix: true,
     },
-    oTable: {
+    sTable: {
       showIndex: false,
       showPage: false,
       pageSizes: [10, 30, 50, 100],
@@ -131,7 +131,7 @@ app.use(OeosComponents, {
 ```
 
 - 这种写法适合做“组件默认行为”的统一配置，比如 `showPrefix`、`showQuick` 一类开关。
-- 当前 `select` 会读取 `GLOBAL_COMPONENT_CONFIG.oSelect`，`table` 会读取 `GLOBAL_COMPONENT_CONFIG.oTable`，再生成 `mergedProps` 给内部逻辑使用。
+- 当前 `select` 会读取 `GLOBAL_COMPONENT_CONFIG.sSelect`，`table` 会读取 `GLOBAL_COMPONENT_CONFIG.sTable`，再生成 `mergedProps` 给内部逻辑使用。
 - 如果一个组件也要支持这种能力，通常做法是：组件内部直接调用 `useGlobalComponentConfig('组件key', props)`。
 - 如果只希望某个页面或某个模块下生效，也可以在父组件的 `setup` 里继续使用 `provide('GLOBAL_COMPONENT_CONFIG', ...)` 做局部覆盖。
 - 需要注意：当前组件里的合并顺序是 `...props, ...globalConfig?.xxx`，所以同名字段会以后面的全局配置为准；如果后续想改成“本地传参优先”，需要把顺序调成 `...globalConfig?.xxx, ...props`。

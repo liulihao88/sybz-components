@@ -5,10 +5,10 @@ const { proxy } = getCurrentInstance()
 
 <template>
   <div>
-    <div>docs/examples/OText/usually.vue</div>
-    <o-text style="width: 100px">
+    <div>docs/examples/SText/usually.vue</div>
+    <s-text style="width: 100px">
        测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
-    </o-text>
+    </s-text>
   </div>
 </template>
 

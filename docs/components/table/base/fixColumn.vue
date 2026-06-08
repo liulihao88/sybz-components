@@ -56,7 +56,7 @@ function handleClick(row) {
 </script>
 
 <template>
-  <o-table
+  <s-table
     :data="height ? tableDataMore.concat(tableDataMore).concat(tableDataMore) : tableDataMore"
     :columns="columns"
     :height="height"
@@ -65,5 +65,5 @@ function handleClick(row) {
       <el-button link type="primary" size="small" @click="handleClick(row)">Detail</el-button>
       <el-button link type="primary" size="small">Edit</el-button>
     </template>
-  </o-table>
+  </s-table>
 </template>

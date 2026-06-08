@@ -1,6 +1,6 @@
 # FunctionSourceCode 函数源码展示
 
-`o-function-source-code` 用于在文档中展示 `@oeos-components/utils` 中指定函数的源码，常用于工具函数文档页。
+`s-function-source-code` 用于在文档中展示 `@sybz-components/utils` 中指定函数的源码，常用于工具函数文档页。
 
 ## Hidden Title {.md-hidden}
 

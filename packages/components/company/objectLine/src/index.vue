@@ -1,13 +1,13 @@
-<script setup lang="ts" name="OObjectLine">
+<script setup lang="ts" name="SObjectLine">
 /** @使用方式
   时间最小区间是30分钟, 最大区间是2周
 */
 import { ref, getCurrentInstance, computed, watch, onMounted, onBeforeUnmount } from 'vue'
-import { formatThousands, isEmpty, formatTime, formatBytes, formatBytesConvert, getVariable } from '@oeos-components/utils'
+import { formatThousands, isEmpty, formatTime, formatBytes, formatBytesConvert, getVariable } from '@sybz-components/utils'
 import * as echarts from 'echarts'
 
 defineOptions({
-  name: 'OObjectLine',
+  name: 'SObjectLine',
 })
 
 const { proxy } = getCurrentInstance()
@@ -288,21 +288,21 @@ defineExpose({
 </script>
 
 <template>
-  <oBasicLayout class="o-object-line" :bodyStyle="{ padding: 0 }" v-bind="$attrs">
+  <sBasicLayout class="s-object-line" :bodyStyle="{ padding: 0 }" v-bind="$attrs">
     <template #header>
-      <o-title title="对象数量/大小历史">
+      <s-title title="对象数量/大小历史">
         <!-- <template #right>
           <DisabledCountDate v-model="dateRange" style="height: 24px" />
         </template> -->
-      </o-title>
+      </s-title>
     </template>
-    <o-chart v-if="!isEmpty(data)" :option="option" height="100%" ref="chartRef" />
-    <o-empty v-else class="o-object-line__empty" />
-  </oBasicLayout>
+    <s-chart v-if="!isEmpty(data)" :option="option" height="100%" ref="chartRef" />
+    <s-empty v-else class="s-object-line__empty" />
+  </sBasicLayout>
 </template>
 
 <style scoped lang="scss">
-.o-object-line__empty {
+.s-object-line__empty {
   height: 100%;
 }
 </style>

@@ -8,27 +8,27 @@ const count = ref(1)
 <template>
   <div class="demo-list">
     <div class="demo-row">
-      <o-comp-title title="默认" />
+      <s-comp-title title="默认" />
       <el-input v-model="value" placeholder="默认高度" />
     </div>
 
     <div class="demo-row">
-      <o-comp-title title="大尺寸" size="large" :box-style="{ width: 88 }" />
+      <s-comp-title title="大尺寸" size="large" :box-style="{ width: 88 }" />
       <el-input v-model="value" size="large" placeholder="large" />
     </div>
 
     <div class="demo-row">
-      <o-comp-title title="小尺寸" size="small" :box-style="{ width: 88, color: 'var(--el-color-primary)' }" />
+      <s-comp-title title="小尺寸" size="small" :box-style="{ width: 88, color: 'var(--el-color-primary)' }" />
       <el-input v-model="value" size="small" placeholder="small" />
     </div>
 
     <div class="demo-row">
-      <o-comp-title title="小尺寸" size="small" :box-style="{ width: 88, color: 'var(--el-color-primary)' }" />
+      <s-comp-title title="小尺寸" size="small" :box-style="{ width: 88, color: 'var(--el-color-primary)' }" />
       <el-select v-model="value" size="small" placeholder="small" />
     </div>
 
     <div class="demo-row">
-      <o-comp-title title="数量" />
+      <s-comp-title title="数量" />
       <el-input-number v-model="count" controls-position="right" />
     </div>
   </div>

@@ -81,7 +81,7 @@ const jumpUrl = (type: string) => {
   const sourceDir = getSourceDir()
 
   if (!sourceDir) {
-    ElMessage.warning('请先配置 VITE_SOURCE_DIR 环境变量，例如 VITE_SOURCE_DIR=/path/to/oeos-components')
+    ElMessage.warning('请先配置 VITE_SOURCE_DIR 环境变量，例如 VITE_SOURCE_DIR=/path/to/sybz-components')
     return
   }
 

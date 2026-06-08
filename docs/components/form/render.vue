@@ -1,10 +1,10 @@
 <template>
-  <o-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1"></o-form>
+  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1"></s-form>
 </template>
 
 <script setup lang="tsx">
 import { ref, reactive } from 'vue'
-import { validate } from '@oeos-components/utils'
+import { validate } from '@sybz-components/utils'
 
 const formData = ref({
   account: '123', // *用户账号
@@ -21,7 +21,7 @@ const fieldList = [
     },
     render: (item) => {
       return (
-        <o-flex>
+        <s-flex>
           <el-input
             placeholder="请输入render"
             modelValue={formData.value.account}
@@ -29,8 +29,8 @@ const fieldList = [
               formData.value.account = val
             }}
           />
-          <o-warning content="render渲染value" class="ml" size="small"></o-warning>
-        </o-flex>
+          <s-warning content="render渲染value" class="ml" size="small"></s-warning>
+        </s-flex>
       )
     },
   },
@@ -39,15 +39,15 @@ const fieldList = [
     label: '日期',
     prop: 'date',
     rules: [validate()],
-    comp: 'o-date-range',
+    comp: 's-date-range',
     labelRender: () => {
       return (
-        <o-flex align="center" gap="small">
+        <s-flex align="center" gap="small">
           日期组件
           <el-tooltip content="自定义label" placement="right">
-            <o-icon name="warning"></o-icon>
+            <s-icon name="warning"></s-icon>
           </el-tooltip>
-        </o-flex>
+        </s-flex>
       )
     },
   },

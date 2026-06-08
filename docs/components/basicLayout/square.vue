@@ -12,40 +12,40 @@ const tenantDetails = {
 
 <template>
   <div>
-    <oBasicLayout title="租户容量配额" class="w-300 h-500">
+    <sBasicLayout title="租户容量配额" class="w-300 h-500">
       <template #header></template>
-      <OQuotaPie
+      <SQuotaPie
         class="h-100%"
         type="quota"
         :used="tenantDetails.allocateQuota"
         :total="tenantDetails.tenantQuota"
         text="总使用量 / 总可用量"
-      ></OQuotaPie>
-    </oBasicLayout>
+      ></SQuotaPie>
+    </sBasicLayout>
     <br />
-    <oBasicLayout title="租户容量配额" class="w-300" :square="true">
+    <sBasicLayout title="租户容量配额" class="w-300" :square="true">
       <template #header></template>
-      <OQuotaPie
+      <SQuotaPie
         class="h-100%"
         type="quota"
         :used="tenantDetails.allocateQuota"
         :total="tenantDetails.tenantQuota"
         text="总使用量 / 总可用量"
-      ></OQuotaPie>
-    </oBasicLayout>
+      ></SQuotaPie>
+    </sBasicLayout>
 
     <br />
     <hr />
 
-    <oBasicLayout title="租户容量配额" class="h-360" :square="true">
+    <sBasicLayout title="租户容量配额" class="h-360" :square="true">
       <template #header></template>
-      <OQuotaPie
+      <SQuotaPie
         class="h-100%"
         type="quota"
         :used="tenantDetails.allocateQuota"
         :total="tenantDetails.tenantQuota"
         text="总使用量 / 总可用量"
-      ></OQuotaPie>
-    </oBasicLayout>
+      ></SQuotaPie>
+    </sBasicLayout>
   </div>
 </template>

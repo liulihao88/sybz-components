@@ -122,7 +122,7 @@ const handleMouseEnter = () => {
   >
     <span
       ref="textRef"
-      class="o-table__header-text"
+      class="s-table__header-text"
       :style="{ maxWidth: reserveWidth ? `calc(100% - ${reserveWidth}px)` : '100%' }"
       @mouseenter="handleMouseEnter"
     >
@@ -132,7 +132,7 @@ const handleMouseEnter = () => {
 </template>
 
 <style scoped lang="scss">
-.o-table__header-text {
+.s-table__header-text {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;

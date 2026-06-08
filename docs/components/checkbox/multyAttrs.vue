@@ -16,7 +16,7 @@ function change(checkValue) {
 
 <template>
   <div>
-    <o-checkbox
+    <s-checkbox
       @change="change"
       v-model="checkboxValue"
       :options="options"
@@ -26,7 +26,7 @@ function change(checkValue) {
       showType="button"
       value="id"
       :customDisabled="(item) => item.id === 'xrr'"
-    ></o-checkbox>
+    ></s-checkbox>
   </div>
 </template>
 

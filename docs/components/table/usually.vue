@@ -49,7 +49,7 @@ const columns = [
       {
         content: '编辑',
         handler: () => {},
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'edit',
           content: '编辑',
@@ -58,7 +58,7 @@ const columns = [
       },
       {
         handler: () => {},
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'view',
           content: '查看',
@@ -67,7 +67,7 @@ const columns = [
       },
       {
         handler: () => {},
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'delete',
           content: '删除',
@@ -122,7 +122,7 @@ init()
   <div>
     <el-button type="primary" @click="init">新增数据</el-button>
     {{ total }}
-    <o-table :columns="columns" :total="total" :data="data" ref="tableRef">
+    <s-table :columns="columns" :total="total" :data="data" ref="tableRef">
       <template #download="{ row }">
         <el-button
           type="text"
@@ -133,12 +133,12 @@ init()
           "
         >
           <template #icon>
-            <o-icon name="download" />
+            <s-icon name="download" />
           </template>
           下载
         </el-button>
       </template>
-    </o-table>
+    </s-table>
   </div>
 </template>
 

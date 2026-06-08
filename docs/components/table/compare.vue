@@ -134,8 +134,8 @@ const columns = [
 
 <template>
   <div class="compare-page">
-    <div class="section-title">o-table 效果</div>
-    <o-table :columns="columns" :data="data" :show-page="false" />
+    <div class="section-title">s-table 效果</div>
+    <s-table :columns="columns" :data="data" :show-page="false" />
 
     <div class="section-title">原生 el-table 效果</div>
     <el-table :data="data" border stripe table-layout="fixed">

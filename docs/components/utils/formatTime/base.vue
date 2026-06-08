@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import { formatTime } from '@/utils/src/index.ts'
-// import { formatTime } from '@oeos-components/utils'
+// import { formatTime } from '@sybz-components/utils'
 
 const options = [
   { label: 'formatTime()', value: formatTime() },
@@ -56,8 +56,8 @@ const options = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="formatTime"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="formatTime"></SFunctionSourceCode>
   <div>
-    <o-descriptions :options="options" title="时间转换" :column="1" showAll></o-descriptions>
+    <s-descriptions :options="options" title="时间转换" :column="1" showAll></s-descriptions>
   </div>
 </template>

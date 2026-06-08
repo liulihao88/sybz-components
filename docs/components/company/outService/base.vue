@@ -11,9 +11,9 @@ const details = {
 
 <template>
   <div>
-    <div>docs/examples/Company/OOutService/base.vue</div>
-    <OOutService :details="details" class="h-300 w-300"></OOutService>
+    <div>docs/examples/Company/SOutService/base.vue</div>
+    <SOutService :details="details" class="h-300 w-300"></SOutService>
     <br />
-    <OOutService :details="details" type="horizontal" class="w-100%"></OOutService>
+    <SOutService :details="details" type="horizontal" class="w-100%"></SOutService>
   </div>
 </template>

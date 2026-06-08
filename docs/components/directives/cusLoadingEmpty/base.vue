@@ -15,10 +15,10 @@ async function init() {
 
 <template>
   <div v-cus-loading:[cusLoadingText]="true" class="h-200">
-    <div>docs/examples/OTest/base.vue</div>
+    <div>docs/examples/STest/base.vue</div>
   </div>
   <div v-cus-empty:[emptyText]="true" class="h-200">
-    <div>docs/examples/OTest/base.vue</div>
+    <div>docs/examples/STest/base.vue</div>
   </div>
   <div v-cus-loading="isLoading" v-cus-empty="list.length === 0 && !isLoading" class="h-200"></div>
 </template>

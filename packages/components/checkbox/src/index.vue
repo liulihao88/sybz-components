@@ -1,16 +1,16 @@
-<script setup lang="ts" name="OCheckbox">
+<script setup lang="ts" name="SCheckbox">
 /** @使用方式
-<o-checkbox
+<s-checkbox
   v-model="formData.categoryIds"
   :options="tableData.data"
   value="id"
   :showAll="false"
   label="name"
   :customDisabled="judgeDisabled"
-></o-checkbox>
+></s-checkbox>
 */
 import { ref, watch, computed, useAttrs } from 'vue'
-import { isEmpty, processWidth } from '@oeos-components/utils'
+import { isEmpty, processWidth } from '@sybz-components/utils'
 const attrs = useAttrs()
 const props = defineProps({
   type: {
@@ -144,10 +144,10 @@ const hasGap = computed(() => !isEmpty(getGapValue.value, true))
 </script>
 
 <template>
-  <div class="o-checkbox" :class="{ 'o-gap-checkbox': hasGap }">
+  <div class="s-checkbox" :class="{ 's-gap-checkbox': hasGap }">
     <el-checkbox
       v-model="checkAll"
-      class="o-checkbox__all"
+      class="s-checkbox__all"
       :indeterminate="isIndeterminate"
       @change="checkAllChange"
       v-if="showAll"
@@ -159,7 +159,7 @@ const hasGap = computed(() => !isEmpty(getGapValue.value, true))
       v-model="props.modelValue"
       @change="groupChange"
       v-bind="filteredAttrs"
-      class="o-checkbox__wrapper"
+      class="s-checkbox__wrapper"
     >
       <slot>
         <component
@@ -170,7 +170,7 @@ const hasGap = computed(() => !isEmpty(getGapValue.value, true))
           :value="props.type === 'simple' ? item : item[props.value!]"
           :label="props.type === 'simple' ? item : item[props.label!]"
           :disabled="props.customDisabled(item)"
-          class="o-checkbox__item"
+          class="s-checkbox__item"
         >
           <slot :name="props.type === 'simple' ? item : item.slot" v-bind="props.type === 'simple' ? {} : item">
             {{ handleLabel(item, index) }}
@@ -182,10 +182,10 @@ const hasGap = computed(() => !isEmpty(getGapValue.value, true))
 </template>
 
 <style scoped lang="scss">
-.o-checkbox {
+.s-checkbox {
   display: flex;
   align-items: flex-start;
-  .o-checkbox__all {
+  .s-checkbox__all {
     font-weight: bold;
     margin-bottom: 0;
     white-space: nowrap;
@@ -193,21 +193,21 @@ const hasGap = computed(() => !isEmpty(getGapValue.value, true))
   }
 }
 
-.o-gap-checkbox {
-  .o-checkbox__all {
+.s-gap-checkbox {
+  .s-checkbox__all {
     font-weight: bold;
     margin-bottom: 0;
     white-space: nowrap;
     margin-right: v-bind('getGapValue') !important;
   }
 
-  .o-checkbox__wrapper {
+  .s-checkbox__wrapper {
     display: flex;
     flex-wrap: wrap;
     column-gap: v-bind('getGapValue'); // 只设置列间距
     row-gap: 8px; // 固定行间距或根据需要设置
 
-    .o-checkbox__item {
+    .s-checkbox__item {
       display: inline-flex;
       align-items: center;
     }

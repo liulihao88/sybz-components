@@ -19,17 +19,17 @@ const navList = [
 
 <template>
   <div>
-    <o-tabs :options="navList">
+    <s-tabs :options="navList">
       <template #sys-label>
-        <o-icon name="plus"></o-icon>
+        <s-icon name="plus"></s-icon>
         系统服务
       </template>
       <template #base-label>
-        <o-icon name="delete"></o-icon>
+        <s-icon name="delete"></s-icon>
         基础服务
       </template>
       <template #task-label>
-        <o-icon name="refresh"></o-icon>
+        <s-icon name="refresh"></s-icon>
         高级定时
       </template>
 
@@ -37,7 +37,7 @@ const navList = [
       <template #sys>我是服务啊</template>
       <template #base>基础服务</template>
       <template #task>高级定时</template>
-    </o-tabs>
+    </s-tabs>
   </div>
 </template>
 

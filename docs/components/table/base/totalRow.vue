@@ -127,6 +127,6 @@ const columns1: TableColumnList = [
 </script>
 
 <template>
-  <o-table :data="tableData" :columns="columns" border show-summary class="mb-6" />
-  <o-table :data="tableData" :columns="columns1" border :summary-method="getSummaries" show-summary />
+  <s-table :data="tableData" :columns="columns" border show-summary class="mb-6" />
+  <s-table :data="tableData" :columns="columns1" border :summary-method="getSummaries" show-summary />
 </template>

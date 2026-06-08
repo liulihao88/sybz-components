@@ -88,7 +88,7 @@ export const isDate = (val: unknown): val is Date => toTypeString(val) === '[obj
  * @returns 是否为 `RegExp`。
  *
  * @example
- * isRegExp(/oeos/i)
+ * isRegExp(/sybz/i)
  * // => true
  */
 export const isRegExp = (val: unknown): val is RegExp => toTypeString(val) === '[object RegExp]'
@@ -113,7 +113,7 @@ export const isFunction = (val: unknown): val is Function => typeof val === 'fun
  * @returns 是否为字符串。
  *
  * @example
- * isString('oeos')
+ * isString('sybz')
  * // => true
  */
 export const isString = (val: unknown): val is string => typeof val === 'string'
@@ -233,7 +233,7 @@ export const isEmptyObject = (val: unknown): val is Record<keyof any, any> =>
  * @returns 是否为合法 URL。
  *
  * @example
- * isUrl('https://oeos-components.com')
+ * isUrl('https://sybz-components.com')
  * // => true
  */
 export function isUrl(url: string): url is string {

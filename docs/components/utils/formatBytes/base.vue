@@ -31,8 +31,8 @@ const options = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="formatBytes"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="formatBytes"></SFunctionSourceCode>
   <div>
-    <o-descriptions :options="options" :column="1" :showAll="true"></o-descriptions>
+    <s-descriptions :options="options" :column="1" :showAll="true"></s-descriptions>
   </div>
 </template>

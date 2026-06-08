@@ -14,7 +14,7 @@ const customLabel = (item) => {
 
 <template>
   <div>
-    <o-select v-model="selectVal" :options="options" :customLabel="customLabel"></o-select>
+    <s-select v-model="selectVal" :options="options" :customLabel="customLabel"></s-select>
   </div>
 </template>
 

@@ -29,6 +29,6 @@ const columns: TableColumnList = [
       <el-radio-button label="auto" value="auto" />
     </el-radio-group>
 
-    <o-table :data="tableData" :columns="columns" :table-layout="tableLayout" />
+    <s-table :data="tableData" :columns="columns" :table-layout="tableLayout" />
   </div>
 </template>

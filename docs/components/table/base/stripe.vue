@@ -18,5 +18,5 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <o-table :data="tableData" :columns="columns" stripe />
+  <s-table :data="tableData" :columns="columns" stripe />
 </template>

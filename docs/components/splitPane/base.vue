@@ -17,7 +17,7 @@ function handleResize(val: number) {
   <div>
     <div class="split-toolbar">左侧宽度：{{ percent.toFixed(2) }}%</div>
     <div class="split-demo">
-      <o-split-pane :split-set="setting" @resize="handleResize">
+      <s-split-pane :split-set="setting" @resize="handleResize">
         <template #paneL>
           <div class="pane pane-a">
             <strong>Pane A</strong>
@@ -30,7 +30,7 @@ function handleResize(val: number) {
             <span>点击分割条可重置为 50%</span>
           </div>
         </template>
-      </o-split-pane>
+      </s-split-pane>
     </div>
   </div>
 </template>

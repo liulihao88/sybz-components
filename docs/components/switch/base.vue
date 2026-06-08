@@ -27,16 +27,16 @@ const beforeChange = async () => {
 
 <template>
   <div>
-    <o-switch v-model="cc"></o-switch>
+    <s-switch v-model="cc"></s-switch>
     {{ cc }}
     <br />
 
-    <o-switch v-model="cc" active-text="这是active的text" :inline-prompt="false"></o-switch>
+    <s-switch v-model="cc" active-text="这是active的text" :inline-prompt="false"></s-switch>
     <br />
-    <o-switch v-model="cc" active-text="是" inactive-text="否"></o-switch>
+    <s-switch v-model="cc" active-text="是" inactive-text="否"></s-switch>
     <br />
 
-    <o-switch
+    <s-switch
       v-model="cc2"
       active-text="测试更长的启用"
       inactive-text="停用"
@@ -46,8 +46,8 @@ const beforeChange = async () => {
     />
     {{ cc2 }}
 
-    <o-title title="异步方法, 自带loading; 大于等于0.5可切换, 否则不可切换"></o-title>
-    <o-switch v-model="dd" :before-change="beforeChange" inactive-text="异步" active-text="异步"></o-switch>
+    <s-title title="异步方法, 自带loading; 大于等于0.5可切换, 否则不可切换"></s-title>
+    <s-switch v-model="dd" :before-change="beforeChange" inactive-text="异步" active-text="异步"></s-switch>
     {{ randomValue }} => {{ dd }}
   </div>
 </template>

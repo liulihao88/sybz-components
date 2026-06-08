@@ -21,8 +21,8 @@ export interface TableScope<Row extends TableRow = TableRow> {
 
 export type TableCallbackContext<
   Row extends TableRow = TableRow,
-  Column = OTableColumn<Row>,
-  Action = OTableButton<Row>,
+  Column = STableColumn<Row>,
+  Action = STableButton<Row>,
 > = Partial<Row> & {
   row?: Row
   scope?: TableScope<Row>
@@ -50,7 +50,7 @@ export type TableFilter<Row extends TableRow = TableRow> =
   | TableContextHandler<any, Row>
   | ((value: any, row: Row, scope: TableScope<Row>) => any)
 
-export interface OTableButton<Row extends TableRow = TableRow> extends Record<string, any> {
+export interface STableButton<Row extends TableRow = TableRow> extends Record<string, any> {
   prop?: string
   content?: string | number | TableContextHandler<string | number, Row> | TableLegacyHandler<string | number>
   title?: string | number | TableContextHandler<string | number, Row> | TableLegacyHandler<string | number>
@@ -65,7 +65,7 @@ export interface OTableButton<Row extends TableRow = TableRow> extends Record<st
   width?: number | string
 }
 
-export interface OTableColumn<Row extends TableRow = TableRow> extends Record<string, any> {
+export interface STableColumn<Row extends TableRow = TableRow> extends Record<string, any> {
   label?: string | number
   prop?: string
   type?: string
@@ -80,19 +80,19 @@ export interface OTableColumn<Row extends TableRow = TableRow> extends Record<st
   handler?: TableContextHandler<any, Row> | TableLegacyHandler<any>
   isShow?: TableMaybeFn<boolean, Row>
   columnEmptyText?: string
-  btns?: OTableButton<Row>[]
+  btns?: STableButton<Row>[]
   maxBtns?: number
 }
 
-export interface OTableResolvedColumn<Row extends TableRow = TableRow> extends OTableColumn<Row> {
+export interface STableResolvedColumn<Row extends TableRow = TableRow> extends STableColumn<Row> {
   showOverflowTooltip?: boolean
-  btns: OTableButton<Row>[]
-  baseBtns: OTableButton<Row>[]
-  hideBtns: OTableButton<Row>[]
+  btns: STableButton<Row>[]
+  baseBtns: STableButton<Row>[]
+  hideBtns: STableButton<Row>[]
   maxBtns: number
 }
 
-export type TableColumnList<Row extends TableRow = TableRow> = OTableColumn<Row>[]
+export type TableColumnList<Row extends TableRow = TableRow> = STableColumn<Row>[]
 
 export type TableModelValue<Row extends TableRow = TableRow> =
   | Row[]
@@ -103,7 +103,7 @@ export type TableModelValue<Row extends TableRow = TableRow> =
   | null
   | undefined
 
-export interface OTableProps<Row extends TableRow = TableRow> {
+export interface STableProps<Row extends TableRow = TableRow> {
   data?: Row[]
   columns?: TableColumnList<Row>
   showPage?: boolean
@@ -122,12 +122,12 @@ export interface OTableProps<Row extends TableRow = TableRow> {
   selectionAttrs?: Record<string, any>
 }
 
-export type OTableEmits<Row extends TableRow = TableRow> = {
+export type STableEmits<Row extends TableRow = TableRow> = {
   'page-change': [payload: TablePageChangePayload]
   'update:modelValue': [value: TableModelValue<Row>]
 }
 
-export interface OTableExpose {
+export interface STableExpose {
   getTableRef: () => TableInstance | null
 }
 

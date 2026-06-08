@@ -5,15 +5,15 @@ const size = ref('default')
 
 <template>
   <div>
-    <o-radio v-model="size" :options="['large', 'default', 'small']" type="simple"></o-radio>
-    <OBasicLayout :size="size">
+    <s-radio v-model="size" :options="['large', 'default', 'small']" type="simple"></s-radio>
+    <SBasicLayout :size="size">
       无paddingLeft
       <template #header>
-        <o-title title="更改内部样式, 无paddingTop"></o-title>
+        <s-title title="更改内部样式, 无paddingTop"></s-title>
       </template>
       <template #footer>
         <el-button type="primary">无paddingBottom</el-button>
       </template>
-    </OBasicLayout>
+    </SBasicLayout>
   </div>
 </template>

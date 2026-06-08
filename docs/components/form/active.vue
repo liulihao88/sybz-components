@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance, computed } from 'vue'
-import { validateTrigger, validate, sleep } from '@oeos-components/utils'
-const oFormRef = ref()
+import { validateTrigger, validate, sleep } from '@sybz-components/utils'
+const sFormRef = ref()
 const form = ref({
   account: '',
   domains: [
@@ -43,20 +43,20 @@ const newAdd = () => {
 const deleteItem = async (i) => {
   form.value.domains.splice(i, 1)
   await sleep(0)
-  oFormRef.value.clearValidate()
+  sFormRef.value.clearValidate()
 }
 </script>
 
 <template>
   <div>
-    <o-form :fieldList="fieldList" :model="form" ref="oFormRef">
+    <s-form :fieldList="fieldList" :model="form" ref="sFormRef">
       <template v-for="(v, i) in form.domains" :key="v.key" #[`domains.${i}.value`]>
-        <o-flex align="center" gap="small">
-          <o-input v-model="form.domains[i].value" />
-          <o-icon name="delete" @click="deleteItem(i)"></o-icon>
-        </o-flex>
+        <s-flex align="center" gap="small">
+          <s-input v-model="form.domains[i].value" />
+          <s-icon name="delete" @click="deleteItem(i)"></s-icon>
+        </s-flex>
       </template>
-    </o-form>
+    </s-form>
     <el-button type="primary" @click="newAdd">新增 domain</el-button>
   </div>
 </template>

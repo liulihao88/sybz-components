@@ -10,7 +10,7 @@ const rules = {}
 const formRef = ref(null)
 const submit = async () => {
   await proxy.validForm(formRef.value)
-  console.log(`1128 10行 docs/examples/Company/OQuotaUnit/base.vue form.value `, form.value)
+  console.log(`1128 10行 docs/examples/Company/SQuotaUnit/base.vue form.value `, form.value)
 
   proxy.$toast('哈哈')
 }
@@ -41,7 +41,7 @@ const validateQuota = (rule, value, callback) => {
 <template>
   <div>
     <el-form :model="form" :rules="rules" ref="formRef">
-      <OQuotaUnit v-model="form.quota" v-model:unit="form.unit" :validator="validateQuota"></OQuotaUnit>
+      <SQuotaUnit v-model="form.quota" v-model:unit="form.unit" :validator="validateQuota"></SQuotaUnit>
       <div>==quota: {{ form.quota }} ==</div>
       <div>??unit: {{ form.unit }}??</div>
     </el-form>

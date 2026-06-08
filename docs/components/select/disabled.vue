@@ -23,11 +23,11 @@ const options2 = ref(['男人', '女人', '爱情'])
 
 <template>
   <div>
-    <o-select v-model="selectValue1" :options="options" :itemDisabled="itemDisabled" title="单选正常" />
-    <o-select v-model="selectValue2" :options="options2" :itemDisabled="itemDisabled2" type="simple" title="单选简单" />
-    <o-select v-model="selectValue3" :options="options" multiple :itemDisabled="itemDisabled" title="多选正常" />
+    <s-select v-model="selectValue1" :options="options" :itemDisabled="itemDisabled" title="单选正常" />
+    <s-select v-model="selectValue2" :options="options2" :itemDisabled="itemDisabled2" type="simple" title="单选简单" />
+    <s-select v-model="selectValue3" :options="options" multiple :itemDisabled="itemDisabled" title="多选正常" />
 
-    <o-select
+    <s-select
       v-model="selectValue4"
       :options="options2"
       multiple

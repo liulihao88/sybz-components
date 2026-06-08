@@ -1,5 +1,5 @@
 <template>
-  <div class="o-dialog">
+  <div class="s-dialog">
     <component
       :is="parseType"
       :custom-class="componentClass"
@@ -14,10 +14,10 @@
       @close="handleClose"
     >
       <template #header>
-        <div class="o-dialog__header">
-          <span v-if="!hideHeaderIcon" class="o-dialog__header-icon-box">
+        <div class="s-dialog__header">
+          <span v-if="!hideHeaderIcon" class="s-dialog__header-icon-box">
             <slot name="headerIcon">
-              <svg class="o-dialog__header-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+              <svg class="s-dialog__header-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
                 <path
                   fill="currentColor"
                   d="M192 160h384c35.36 0 64 28.64 64 64v96h192c35.36 0 64 28.64 64 64v448c0 35.36-28.64 64-64 64H448c-35.36 0-64-28.64-64-64v-96H192c-35.36 0-64-28.64-64-64V224c0-35.36 28.64-64 64-64zm0 64v448h192V384c0-35.36 28.64-64 64-64h128v-96H192zm256 160v448h384V384H448z"
@@ -29,7 +29,7 @@
               </svg>
             </slot>
           </span>
-          <span class="o-dialog__header-content">
+          <span class="s-dialog__header-content">
             <slot name="header">
               {{ title }}
             </slot>
@@ -65,7 +65,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="ODialog">
+<script setup lang="ts" name="SDialog">
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType } from '@/utils/src/index'
 const attrs = useAttrs()
@@ -147,7 +147,7 @@ const getThemeClass = computed(() => {
 })
 
 const componentClass = computed(() => {
-  return ['o-dialog__panel', getThemeClass.value].filter(Boolean).join(' ')
+  return ['s-dialog__panel', getThemeClass.value].filter(Boolean).join(' ')
 })
 
 const mergedConfirmAttrs = computed(() => {
@@ -165,7 +165,7 @@ const mergedCancelAttrs = computed(() => {
 })
 
 const drawerBodyClass = computed(() => {
-  return props.type === 'drawer' && props.fillSlot ? 'o-dialog__drawer-body--fill' : ''
+  return props.type === 'drawer' && props.fillSlot ? 's-dialog__drawer-body--fill' : ''
 })
 
 const fullscreenHeight = ref('calc(100vh - 124px)')
@@ -241,7 +241,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-.o-dialog {
+.s-dialog {
   :deep(.el-dialog__header),
   :deep(.el-drawer__header) {
     padding: 10px 16px;
@@ -273,7 +273,7 @@ onBeforeUnmount(() => {
       overflow-y: auto;
     }
   }
-  :deep(.o-dialog__drawer-body--fill) {
+  :deep(.s-dialog__drawer-body--fill) {
     display: flex;
     flex-direction: column;
     min-height: 0;
@@ -316,7 +316,7 @@ onBeforeUnmount(() => {
     width: 45px;
     height: 45px;
   }
-  .o-dialog__header {
+  .s-dialog__header {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -324,21 +324,21 @@ onBeforeUnmount(() => {
     color: var(--el-text-color-primary);
   }
 
-  .o-dialog__header-icon-box {
+  .s-dialog__header-icon-box {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
   }
 
-  .o-dialog__header-icon {
+  .s-dialog__header-icon {
     display: block;
     width: 16px;
     height: 16px;
     color: currentColor;
   }
 
-  .o-dialog__header-content {
+  .s-dialog__header-content {
     min-width: 0;
     flex: 1 1 auto;
   }

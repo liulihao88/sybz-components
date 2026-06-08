@@ -7,31 +7,31 @@
 ### 在vue3项目的main.js里引入
 
 ```js
-import 'oeos-components/style.css'
-import OeosComponets from 'oeos-components'
-app.use(OeosComponets)
+import 'sybz-components/style.css'
+import SybzComponents from 'sybz-components'
+app.use(SybzComponents)
 ```
 
 ### 在任何一个.vue文件下, 可直接引入组件
 
 ```js
-<o-button>这是o-button</o-button>
-<o-title title="这是o-title"></o-title>
+<s-button>这是s-button</s-button>
+<s-title title="这是s-title"></s-title>
 ```
 
-## 2. 在vue3项目中使用公共函数, 安装@oeos-components/utils
+## 2. 在vue3项目中使用公共函数, 安装@sybz-components/utils
 
 ```js
 // 如果想将所有函数挂载至全局使用
-import * as utils from '@oeos-components/utils'
-// 将oeos-components下的公共函数赋值到全局
+import * as utils from '@sybz-components/utils'
+// 将sybz-components下的公共函数赋值到全局
 Object.keys(utils).forEach((v) => {
   app.config.globalProperties[v] = utils[v]
 })
 然后通过`proxy.$toast('哈哈')`, 这种方式去使用函数
 
 // 如果想单独的引用某个函数
-import { $toast } from '@oeos-components/utils'
+import { $toast } from '@sybz-components/utils'
 $toast('嘿嘿')
 ```
 
@@ -45,4 +45,4 @@ v-number
 v-focus
 ```
 
-更多内容请查看[文档](https://liulihao88.github.io/oeos-components/)
+更多内容请查看[文档](https://liulihao88.github.io/sybz-components/)

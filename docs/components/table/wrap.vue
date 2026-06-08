@@ -85,7 +85,7 @@ const columns = [
     label: '操作',
     btns: [
       {
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'edit',
           content: '编辑'
@@ -98,11 +98,11 @@ const columns = [
 
 <template>
   <div>
-    <o-table :columns="columns" :preserve-expanded-content="preserveExpanded" :data="data" ref="tableRef">
+    <s-table :columns="columns" :preserve-expanded-content="preserveExpanded" :data="data" ref="tableRef">
       <el-table-column type="expand">
         <template #default="props">
           <div class="inner-table">
-            <o-table
+            <s-table
               :data="props.row.family"
               :columns="columns2"
               size="small"
@@ -116,11 +116,11 @@ const columns = [
               <el-table-column label="State" prop="state" />
               <el-table-column label="City" prop="city" />
               <el-table-column label="Address" prop="address" />
-            </o-table>
+            </s-table>
           </div>
         </template>
       </el-table-column>
-    </o-table>
+    </s-table>
   </div>
 </template>
 

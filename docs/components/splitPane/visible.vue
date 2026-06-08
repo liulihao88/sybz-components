@@ -34,11 +34,11 @@ watch(
 <template>
   <div>
     <div class="toolbar">
-      <o-checkbox v-model="visiblePanels" :options="panelOptions" :show-all="false" show-type="button" />
+      <s-checkbox v-model="visiblePanels" :options="panelOptions" :show-all="false" show-type="button" />
     </div>
 
     <div class="split-demo">
-      <o-split-pane
+      <s-split-pane
         v-model="splitPercent"
         :min-percent="0"
         :reset-on-click="visiblePanels.length === 2"
@@ -49,7 +49,7 @@ watch(
         <template #paneR>
           <div class="pane pane-b">转换结果</div>
         </template>
-      </o-split-pane>
+      </s-split-pane>
     </div>
   </div>
 </template>

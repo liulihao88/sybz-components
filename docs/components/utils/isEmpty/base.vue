@@ -66,11 +66,11 @@ const options = [
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="isEmpty"></OFunctionSourceCode>
-  <o-warning
+  <SFunctionSourceCode functionName="isEmpty"></SFunctionSourceCode>
+  <s-warning
     class="mb2"
     content="默认会把 undefined、null、空字符串、空数组、空对象、NaN、空 Set/Map、无效日期 视为空值；0、false、BigInt(0) 默认不再算空。<br>如果需要兼容旧语义，可以显式传第二个参数 false。"
   />
 
-  <o-descriptions :options="options" title="isEmpty判断是否为空" :column="1"></o-descriptions>
+  <s-descriptions :options="options" title="isEmpty判断是否为空" :column="1"></s-descriptions>
 </template>

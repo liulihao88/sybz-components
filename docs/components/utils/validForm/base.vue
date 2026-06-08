@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance, watch, computed } from 'vue'
-import { validate, validForm } from '@oeos-components/utils'
+import { validate, validForm } from '@sybz-components/utils'
 import type { FormInstance } from 'element-plus'
 const formRef = ref<FormInstance | null>(null)
 const form = ref({})
@@ -26,14 +26,14 @@ const submit4 = async () => {
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="validForm"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="validForm"></SFunctionSourceCode>
   <div>
     <el-form ref="formRef" :model="form" :rules="rules">
       <el-form-item label="基础用法" prop="name">
-        <o-input v-model="form.name" />
+        <s-input v-model="form.name" />
       </el-form-item>
       <el-form-item label="只能输入正整数" prop="number">
-        <o-input v-model="form.number" />
+        <s-input v-model="form.number" />
       </el-form-item>
     </el-form>
 

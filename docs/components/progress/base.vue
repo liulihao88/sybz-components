@@ -5,15 +5,15 @@ const { proxy } = getCurrentInstance()
 
 <template>
   <div>
-    <o-progress :percentage="80"></o-progress>
+    <s-progress :percentage="80"></s-progress>
     <br />
-    <o-progress :percentage="50" :indeterminate="true" color="blue" ></o-progress>
+    <s-progress :percentage="50" :indeterminate="true" color="blue" ></s-progress>
     <br />
-    <o-progress :percentage="50" :indeterminate="true"  :stroke-width="10" :show-text="false"></o-progress>
+    <s-progress :percentage="50" :indeterminate="true"  :stroke-width="10" :show-text="false"></s-progress>
     <br />
-    <o-progress type="circle" :percentage="25"></o-progress>
+    <s-progress type="circle" :percentage="25"></s-progress>
     <br />
-    <o-progress type="circle" :percentage="60" :stroke-width="10"></o-progress>
+    <s-progress type="circle" :percentage="60" :stroke-width="10"></s-progress>
   </div>
 </template>
 

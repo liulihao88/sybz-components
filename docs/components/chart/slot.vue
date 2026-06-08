@@ -1,5 +1,5 @@
 <template>
-  <o-chart :option="options">
+  <s-chart :option="options">
     <el-radio-group
       v-model="accessType"
       style="position: absolute; right: 10px; top: 0px;"
@@ -9,7 +9,7 @@
       <el-radio-button :value="0">访问人数</el-radio-button>
       <el-radio-button :value="1">访问人次</el-radio-button>
     </el-radio-group>
-  </o-chart>
+  </s-chart>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'

@@ -12,18 +12,18 @@ const disabledDate = (time) => {
 
 <template>
   <div>
-    <o-title title="年月日 时分秒"></o-title>
-    <o-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></o-date-range>
-    <o-title title="多属性"></o-title>
-    <o-date-range
+    <s-title title="年月日 时分秒"></s-title>
+    <s-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></s-date-range>
+    <s-title title="多属性"></s-title>
+    <s-date-range
       v-model="dateValue"
       title="选择日期"
       start-placeholder="开始"
       end-placeholder="结束"
       range-separator="///"
-    ></o-date-range>
-    <o-title title="支持到可以选择时间"></o-title>
-    <o-date-range
+    ></s-date-range>
+    <s-title title="支持到可以选择时间"></s-title>
+    <s-date-range
       v-model="dateValue"
       title="写入时间"
       class="mb2"
@@ -32,24 +32,24 @@ const disabledDate = (time) => {
       :boxStyle="{ width: 80 }"
       type="datetimerange"
     />
-    <o-title title="选择单个日期, 并且是时间戳"></o-title>
-    <o-date-range
+    <s-title title="选择单个日期, 并且是时间戳"></s-title>
+    <s-date-range
       v-model="dateSimple"
       title="完犊子"
       type="datetime"
       value-format="x"
-    ></o-date-range>
+    ></s-date-range>
     {{ dateSimple }}
 
     <br />
-    <o-title title="日期仅可以选择当前日期之前的"></o-title>
-    <o-date-range
+    <s-title title="日期仅可以选择当前日期之前的"></s-title>
+    <s-date-range
       v-model="beforeDateValue"
       type="datetime"
       value-format="x"
       placeholder="日期仅可以选择当前日期之前的"
       :disabled-date="disabledDate"
-    ></o-date-range>
+    ></s-date-range>
   </div>
 </template>
 

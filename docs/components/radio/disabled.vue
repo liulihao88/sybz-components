@@ -1,10 +1,10 @@
 <template>
   <div>
-    <o-title title="全部disabled"></o-title>
-    <o-radio v-model="value" :options="options" :disabled="true" />
+    <s-title title="全部disabled"></s-title>
+    <s-radio v-model="value" :options="options" :disabled="true" />
 
-    <o-title title="选项1,3disabled"></o-title>
-    <o-radio v-model="value" :options="options" :itemDisabled="itemDisabled" />
+    <s-title title="选项1,3disabled"></s-title>
+    <s-radio v-model="value" :options="options" :itemDisabled="itemDisabled" />
   </div>
 </template>
 <script setup lang="ts">

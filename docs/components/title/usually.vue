@@ -5,7 +5,7 @@ const { proxy } = getCurrentInstance()
 
 <template>
   <div>
-    <o-title title="左侧" tb="10" l="10">
+    <s-title title="左侧" tb="10" l="10">
       <span class="ml2">左侧的slot</span>
       <template #right>
         <el-button type="primary">右侧的button</el-button>
@@ -13,12 +13,12 @@ const { proxy } = getCurrentInstance()
         <el-button type="primary">右侧的button3</el-button>
         <el-button type="primary">右侧的button4</el-button>
       </template>
-    </o-title>
+    </s-title>
 
-    <o-title title="icon" type="simple">
+    <s-title title="icon" type="simple">
       <template #icon>
-        <o-icon name="plus"></o-icon>
+        <s-icon name="plus"></s-icon>
       </template>
-    </o-title>
+    </s-title>
   </div>
 </template>

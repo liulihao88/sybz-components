@@ -40,6 +40,6 @@ const columns = computed(() => {
 
 <template>
   <div>
-    <o-table :columns="columns" :data="data"></o-table>
+    <s-table :columns="columns" :data="data"></s-table>
   </div>
 </template>

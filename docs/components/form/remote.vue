@@ -52,7 +52,7 @@ const fieldList = [
   {
     label: '爱好',
     prop: 'hobby',
-    comp: 'o-select',
+    comp: 's-select',
     rules: [
       {
         required: true,
@@ -74,7 +74,7 @@ const fieldList = [
   {
     label: '性别单选',
     prop: 'sex',
-    comp: 'o-radio',
+    comp: 's-radio',
     default: 'sex2',
     attrs: {
       options: [
@@ -87,7 +87,7 @@ const fieldList = [
   {
     label: '描述',
     prop: 'desc',
-    comp: 'o-input',
+    comp: 's-input',
     attrs: {
       type: 'textarea',
     },
@@ -96,8 +96,8 @@ const fieldList = [
 
 const gFormRef = ref()
 async function testSubmit() {
-  proxy.log(`model`, model, '94行 docs/examples/OForm/remote.vue')
-  proxy.log(`model`, model, '94行 docs/examples/OForm/remote.vue')
+  proxy.log(`model`, model, '94行 docs/examples/SForm/remote.vue')
+  proxy.log(`model`, model, '94行 docs/examples/SForm/remote.vue')
   await gFormRef.value.validate()
   console.log(`***** 222  97行 test/t1.vue  15:52:04`)
   // proxy.log(`model`, model, '98行 test/t1.vue')
@@ -105,19 +105,19 @@ async function testSubmit() {
 // 以下两种方法都是可以的
 function clearForm() {
   // gFormRef.value.resetFields()
-  console.log(`gFormRef.value.$refs.oFormRef`, gFormRef.value.$refs.oFormRef)
-  gFormRef.value.$refs.oFormRef.resetFields()
+  console.log(`gFormRef.value.$refs.sFormRef`, gFormRef.value.$refs.sFormRef)
+  gFormRef.value.$refs.sFormRef.resetFields()
 }
 </script>
 
 <template>
   <div>
-    <o-form :model="model" :fieldList="fieldList" ref="gFormRef" label-width="100">
+    <s-form :model="model" :fieldList="fieldList" ref="gFormRef" label-width="100">
       <template #password-label>我是password啊</template>
       <template #name>
-        <o-input v-model="model.name" placeholder="我是slot的name" width="300" />
+        <s-input v-model="model.name" placeholder="我是slot的name" width="300" />
       </template>
-    </o-form>
+    </s-form>
     <el-button type="primary" @click="testSubmit">测试提交</el-button>
     <el-button type="primary" @click="clearForm">清空表单</el-button>
   </div>

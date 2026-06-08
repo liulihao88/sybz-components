@@ -33,19 +33,19 @@ const passwordType = computed(() => {
   <div>
     <el-form ref="formRef" :model="sameform" :rules="rules" label-width="auto" :validate-on-rule-change="false">
       <el-form-item label="旧密码" prop="oldPassword">
-        <o-input v-model="sameform.oldPassword" :type="passwordType" />
+        <s-input v-model="sameform.oldPassword" :type="passwordType" />
       </el-form-item>
       <el-form-item label="新密码" prop="newPwd">
-        <o-input v-model="sameform.newPwd" :type="passwordType" />
+        <s-input v-model="sameform.newPwd" :type="passwordType" />
       </el-form-item>
       <el-form-item label="确认新密码" prop="confirmNewPwd">
-        <o-input v-model="sameform.confirmNewPwd" type="password" />
+        <s-input v-model="sameform.confirmNewPwd" type="password" />
       </el-form-item>
     </el-form>
 
     <el-button type="primary" @click="confirm">提交</el-button>
     <el-button type="info" @click="formRef.clearValidate()">清空校验</el-button>
 
-    <o-warning type="icon" content="密码规则: 1-40位字符组合、特殊字符可选" />
+    <s-warning type="icon" content="密码规则: 1-40位字符组合、特殊字符可选" />
   </div>
 </template>

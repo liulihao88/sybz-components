@@ -8,7 +8,7 @@
 - `prefix`: 插槽前缀
 - `suffix`: 插槽后缀
 - `value-on-clear`: 输入框被清空时显示的值，支持 `number` / `null` / `min` / `max`。
-- `controls-position`: 控制按钮位置，`o-input-number` 默认值为 `right`。
+- `controls-position`: 控制按钮位置，`s-input-number` 默认值为 `right`。
 - `step-strictly`: 严格步进，设置为 `true` 后只能输入步进倍数。
 
 :::
@@ -55,5 +55,5 @@ inputNumber/usually
 ### 说明
 
 - 默认基于 `el-input-number` 二次封装，并透传绝大多数 `el-input-number` 属性。
-- 传入 `title` 后会在左侧渲染 `o-comp-title`，用于和其他表单组件保持一致。
+- 传入 `title` 后会在左侧渲染 `s-comp-title`，用于和其他表单组件保持一致。
 - 支持透传 `el-input-number` 的命名插槽。

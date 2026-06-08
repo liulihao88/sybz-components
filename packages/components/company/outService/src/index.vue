@@ -8,7 +8,7 @@ import group4 from '@/assets/images/overview/group4.png'
 import overviewService from '@/assets/images/overview/overview-service.png'
 
 defineOptions({
-  name: 'OOutService',
+  name: 'SOutService',
 })
 
 const props = defineProps({
@@ -49,26 +49,26 @@ const itemList = computed(() => {
 </script>
 
 <template>
-  <oBasicLayout class="o-out-service">
+  <sBasicLayout class="s-out-service">
     <template #header>
-      <o-title title="对外服务信息">
+      <s-title title="对外服务信息">
         <template #icon>
-          <img :src="overviewService" class="o-out-service__title-icon" />
+          <img :src="overviewService" class="s-out-service__title-icon" />
         </template>
-      </o-title>
+      </s-title>
     </template>
     <div class="top" v-if="type !== 'horizontal'">
       <div v-for="(v, i) in itemList" :key="i" class="item">
-        <img :src="v.img" class="o-out-service__item-icon" width="43" />
+        <img :src="v.img" class="s-out-service__item-icon" width="43" />
         <div class="item-right">
-          <div class="o-out-service__item-value">{{ v.value }}</div>
-          <div class="o-out-service__item-label">{{ v.label }}</div>
+          <div class="s-out-service__item-value">{{ v.value }}</div>
+          <div class="s-out-service__item-label">{{ v.label }}</div>
         </div>
       </div>
     </div>
-    <oItemWrapper v-else gap="16px" class="" :columns="2">
+    <sItemWrapper v-else gap="16px" class="" :columns="2">
       <template v-for="(v, i) in itemList" :key="i">
-        <o-item
+        <s-item
           :img="v.img"
           :label="v.label"
           :value="v.value"
@@ -78,10 +78,10 @@ const itemList = computed(() => {
           <template #img>
             <img :src="v.img" class="img-contain" width="43" style="min-width: 43px" />
           </template>
-        </o-item>
+        </s-item>
       </template>
-    </oItemWrapper>
-  </oBasicLayout>
+    </sItemWrapper>
+  </sBasicLayout>
 </template>
 
 <style lang="scss" scoped>
@@ -89,21 +89,21 @@ const itemList = computed(() => {
   margin-bottom: 16px;
 }
 
-.o-out-service {
+.s-out-service {
   height: 100%;
 }
 
-.o-out-service__title-icon,
-.o-out-service__item-icon {
+.s-out-service__title-icon,
+.s-out-service__item-icon {
   margin-right: 8px;
 }
 
-.o-out-service__item-value {
+.s-out-service__item-value {
   font-weight: 700;
   text-align: center;
 }
 
-.o-out-service__item-label {
+.s-out-service__item-label {
   color: var(--45);
   text-align: center;
 }

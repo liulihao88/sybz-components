@@ -24,5 +24,5 @@ let option = {
 </script>
 
 <template>
-  <o-chart :option="option" />
+  <s-chart :option="option" />
 </template>

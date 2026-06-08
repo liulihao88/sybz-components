@@ -18,38 +18,38 @@ const ulContent = `
 
 <template>
   <div>
-    <o-warning content="这是基础用法" title="我是title"></o-warning>
+    <s-warning content="这是基础用法" title="我是title"></s-warning>
     <br />
-    <o-warning
+    <s-warning
       content="<span class='vp-tag m-r-10'>1.2.0</span>这是基础用法-size为small <code>这是code包裹内容</code> <blue>这是blue包裹内容</blue>, <strong class='m-l-100'>这是strong包裹的内容</strong> 并且设置了left <a href='http://www.baidu.com'>设置根路径</a>   "
       size="small"
       class="m-l-10"
-    ></o-warning>
+    ></s-warning>
     <br />
-    <o-warning :content="ulContent" :dangerouslyUseHTMLString="true" :icon="false" :style="{ paddingLeft: '20px' }" />
+    <s-warning :content="ulContent" :dangerouslyUseHTMLString="true" :icon="false" :style="{ paddingLeft: '20px' }" />
     <br />
-    <o-flex>
-      <o-warning title="我是title" content="默认类型, <code>这是code包裹内容</code>" class="mr" />
-      <o-warning title="我是title" content="type=warning <code>这是code包裹内容</code>" type="warning" class="mr" />
-      <o-warning title="我是title" content="type=simple <code>这是code包裹内容</code>" type="simple" class="mr" />
-      <o-warning title="我是title" content="type=error <code>这是code包裹内容</code>" type="error" class="mr" />
-    </o-flex>
+    <s-flex>
+      <s-warning title="我是title" content="默认类型, <code>这是code包裹内容</code>" class="mr" />
+      <s-warning title="我是title" content="type=warning <code>这是code包裹内容</code>" type="warning" class="mr" />
+      <s-warning title="我是title" content="type=simple <code>这是code包裹内容</code>" type="simple" class="mr" />
+      <s-warning title="我是title" content="type=error <code>这是code包裹内容</code>" type="error" class="mr" />
+    </s-flex>
 
     <br />
-    <o-warning
+    <s-warning
       type="info"
       content="这是info的基础用法, 并更改图标"
       :iconAttrs="{
         name: 'delete',
       }"
-    ></o-warning>
+    ></s-warning>
     <br />
 
-    <o-warning content="这是更改样式" style="border-style: dotted; padding-left: 50px" left="10"></o-warning>
+    <s-warning content="这是更改样式" style="border-style: dotted; padding-left: 50px" left="10"></s-warning>
 
     <br />
-    <o-warning :content="htmlContent"></o-warning>
+    <s-warning :content="htmlContent"></s-warning>
     <br />
-    <o-warning content="不要icon按钮" title="我是title" :dangerouslyUseHTMLString="true" :icon="false"></o-warning>
+    <s-warning content="不要icon按钮" title="我是title" :dangerouslyUseHTMLString="true" :icon="false"></s-warning>
   </div>
 </template>

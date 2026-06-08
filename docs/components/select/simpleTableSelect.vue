@@ -28,7 +28,7 @@ const columns = [
     btns: [
       {
         content: '编辑',
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'edit',
           content: '编辑',
@@ -74,7 +74,7 @@ watch(
 
 <template>
   <div>
-    <o-select
+    <s-select
       v-model="selectName"
       :title="`单选的 => ${selectValue}`"
       width="100%"
@@ -83,15 +83,15 @@ watch(
       @clear="handleCurrentChange(null)"
     >
       <template #empty>
-        <o-table
+        <s-table
           :columns="columns"
           :data="data"
           ref="tableRef"
           :showPage="false"
           @current-change="handleCurrentChange"
           highlight-current-row
-        ></o-table>
+        ></s-table>
       </template>
-    </o-select>
+    </s-select>
   </div>
 </template>

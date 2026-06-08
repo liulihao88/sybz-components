@@ -1,15 +1,15 @@
 <template>
-  <component :is="component" :style="flexStyles" class="o-flex">
+  <component :is="component" :style="flexStyles" class="s-flex">
     <slot />
   </component>
 </template>
 
 <script setup lang="ts">
 import { computed, type Component, type PropType } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 
 defineOptions({
-  name: 'OFlex',
+  name: 'SFlex',
 })
 
 // --- Props 定义 ---
@@ -80,7 +80,7 @@ function parseGapValue() {
 </script>
 
 <style scoped lang="scss">
-.o-flex {
+.s-flex {
   display: flex;
   box-sizing: border-box;
   min-width: 0; /* Important for flex items to shrink properly */

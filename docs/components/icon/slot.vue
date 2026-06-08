@@ -3,7 +3,7 @@ import { ref, getCurrentInstance } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 const { proxy } = getCurrentInstance()
 function tt() {
-  console.log('  </o-tooltip>')
+  console.log('  </s-tooltip>')
 }
 function isTest13() {
   console.log('isTest13')
@@ -15,13 +15,13 @@ const plus = () => {
 
 <template>
   <div>
-    <o-icon>
+    <s-icon>
       <Plus></Plus>
-    </o-icon>
+    </s-icon>
 
-    <o-icon content="添加" @click="plus" class="cp">
+    <s-icon content="添加" @click="plus" class="cp">
       <Plus></Plus>
-    </o-icon>
+    </s-icon>
   </div>
 </template>
 

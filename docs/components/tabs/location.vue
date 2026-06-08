@@ -29,11 +29,11 @@ const navList = [
       <el-radio-button value="bottom">bottom</el-radio-button>
       <el-radio-button value="left">left</el-radio-button>
     </el-radio-group>
-    <o-tabs :options="navList" :tab-position="tabPosition">
+    <s-tabs :options="navList" :tab-position="tabPosition">
       <template #sys>我是服务啊</template>
       <template #base>基础服务</template>
       <template #task>高级定时</template>
-    </o-tabs>
+    </s-tabs>
   </div>
 </template>
 

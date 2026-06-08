@@ -1,7 +1,7 @@
-<script setup lang="ts" name="ODateRange">
+<script setup lang="ts" name="SDateRange">
 import { ref, useAttrs, getCurrentInstance, computed } from 'vue'
 import { processWidth } from '@/utils/src'
-import OCompTitle from '@/components/compTitle'
+import SCompTitle from '@/components/compTitle'
 const attrs = useAttrs()
 const props = defineProps({
   title: {
@@ -161,10 +161,10 @@ const handleWidth = () => {
 * @描述 日期dateRange选择框
 * @使用方法
 const dateValue = ref([])
-<o-date-range
+<s-date-range
   v-model="dateValue"
   format="YYYY-MM-DD HH:mm:ss"
-></o-date-range>
+></s-date-range>
 * @param
 */
 
@@ -193,14 +193,14 @@ const mergedAttrs = computed(() => {
 </script>
 
 <template>
-  <span class="o-date-range" :style="{ ...handleWidth() }">
-    <o-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></o-comp-title>
-    <el-date-picker :shortcuts="shortcuts" v-bind="mergedAttrs" class="o-date-range__picker"></el-date-picker>
+  <span class="s-date-range" :style="{ ...handleWidth() }">
+    <s-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
+    <el-date-picker :shortcuts="shortcuts" v-bind="mergedAttrs" class="s-date-range__picker"></el-date-picker>
   </span>
 </template>
 
 <style scoped lang="scss">
-.o-date-range {
+.s-date-range {
   display: inline-flex;
   vertical-align: middle;
   :deep(.el-date-editor) {

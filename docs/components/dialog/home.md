@@ -70,7 +70,7 @@ dialog/fillSlot
 |    cancelText     | 取消按钮文本                                                                            | string                                        | 取消   |
 |    confirmText    | 确认按钮文本                                                                            | string                                        | 确认   |
 |      footer       | 是否显示底部操作按钮                                                                    | object                                        | -      |
-|    showCancel     | 是否显示取消按钮                                                                        | boolean <o-tip content="true\|false"></o-tip> | true   |
+|    showCancel     | 是否显示取消按钮                                                                        | boolean <s-tip content="true\|false"></s-tip> | true   |
 |    showConfirm    | 是否显示确认按钮                                                                        | boolean                                       | true   |
 |   confirmAttrs    | 确认按钮的属性                                                                          | object                                        | {}     |
 |    cancleAttrs    | 取消按钮的属性                                                                          | object                                        | {}     |

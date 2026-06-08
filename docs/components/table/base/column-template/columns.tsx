@@ -1,4 +1,4 @@
-import { $toast } from "@oeos-components/utils";
+import { $toast } from "@sybz-components/utils";
 import { tableData } from "../data";
 
 // 如果您不习惯tsx写法，可以传slot，然后在template里写

@@ -27,6 +27,6 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <o-progress :percentage="percentage" :color="progressColor"></o-progress>
+    <s-progress :percentage="percentage" :color="progressColor"></s-progress>
   </div>
 </template>

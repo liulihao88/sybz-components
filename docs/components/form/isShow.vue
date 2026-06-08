@@ -1,20 +1,20 @@
 <template>
-  <o-flex gap="16" class="mb2">
-    <o-radio
+  <s-flex gap="16" class="mb2">
+    <s-radio
       v-model="isShow"
       :options="[
         { label: '显示密码', value: true },
         { label: '隐藏密码', value: false },
       ]"
       showType="button"
-    ></o-radio>
-  </o-flex>
-  <o-title title="性别有值的时候显示age"></o-title>
-  <o-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" />
+    ></s-radio>
+  </s-flex>
+  <s-title title="性别有值的时候显示age"></s-title>
+  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" />
 </template>
 
 <script setup lang="tsx">
-import { validateTrigger } from '@oeos-components/utils'
+import { validateTrigger } from '@sybz-components/utils'
 import { computed, ref } from 'vue'
 import type { Ref } from 'vue'
 
@@ -52,7 +52,7 @@ const fieldList = computed(() => {
     {
       label: '性别',
       prop: 'sex',
-      comp: 'o-select',
+      comp: 's-select',
       attrs: {
         options: [
           { label: '男人', value: 'man' },

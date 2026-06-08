@@ -30,7 +30,7 @@ export default defineBuildConfig({
       target: 'esnext',
       format: 'esm',
       define: {
-        __OEOS_UTILS_BUILD_TIME__: JSON.stringify(buildTime),
+        __SYBZ_UTILS_BUILD_TIME__: JSON.stringify(buildTime),
       },
     },
   },

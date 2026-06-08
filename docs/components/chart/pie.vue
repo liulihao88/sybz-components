@@ -1,5 +1,5 @@
 <template>
-  <o-chart :option="options" style="width: 100%; height: 500px" />
+  <s-chart :option="options" style="width: 100%; height: 500px" />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'

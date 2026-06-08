@@ -34,5 +34,5 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <o-table :data="tableDataMore" :columns="columns" alignWhole="center" />
+  <s-table :data="tableDataMore" :columns="columns" alignWhole="center" />
 </template>

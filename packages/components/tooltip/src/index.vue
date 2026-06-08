@@ -1,16 +1,16 @@
 <template>
-  <el-tooltip class="o-tooltip-box" :disabled="handleDisabled" :effect="effect" v-bind="tooltipAttrs">
+  <el-tooltip class="s-tooltip-box" :disabled="handleDisabled" :effect="effect" v-bind="tooltipAttrs">
     <span
       @click="contentClick"
       v-if="props.showSlot"
       ref="textRef"
-      class="o-tooltip-box__text"
-      :class="{ 'o-tooltip-box__text--multiline': isMultiLineClamp }"
+      class="s-tooltip-box__text"
+      :class="{ 's-tooltip-box__text--multiline': isMultiLineClamp }"
       :style="textStyle"
       @mouseover="onMouseOver"
       v-bind="$attrs"
     >
-      <span class="o-tooltip-box__content">
+      <span class="s-tooltip-box__content">
         <slot>
           {{ $attrs.content }}
         </slot>
@@ -26,9 +26,9 @@
   </el-tooltip>
 </template>
 
-<script setup lang="ts" name="OTooltip">
+<script setup lang="ts" name="STooltip">
 import { ref, useSlots, computed, useAttrs, h, resolveComponent } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 const slots = useSlots()
 const attrs = useAttrs()
 
@@ -130,7 +130,7 @@ function contentClick() {
 }
 </script>
 <style lang="scss" scoped>
-.o-tooltip-box__text {
+.s-tooltip-box__text {
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -138,13 +138,13 @@ function contentClick() {
   vertical-align: bottom;
 }
 
-.o-tooltip-box__text--multiline {
+.s-tooltip-box__text--multiline {
   text-overflow: initial;
 }
 
-.o-tooltip-box__text:has(.el-button) + :deep(.el-button),
-.el-button + .o-tooltip-box__text :deep(.el-button),
-.o-tooltip-box__text:has(.el-button) + .o-tooltip-box__text:has(.el-button) {
+.s-tooltip-box__text:has(.el-button) + :deep(.el-button),
+.el-button + .s-tooltip-box__text :deep(.el-button),
+.s-tooltip-box__text:has(.el-button) + .s-tooltip-box__text:has(.el-button) {
   margin-left: 12px !important;
 }
 </style>

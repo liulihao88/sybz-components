@@ -81,7 +81,7 @@ const showBigObject = () => {
     {
       label: '性别',
       prop: 'sex',
-      comp: 'o-select',
+      comp: 's-select',
       attrs: {
         options: [
           {
@@ -102,7 +102,7 @@ const showBigObject = () => {
     {
       label: '性别',
       prop: 'sex',
-      comp: 'o-select',
+      comp: 's-select',
       attrs: {
         options: [
           {
@@ -123,7 +123,7 @@ const showBigObject = () => {
     {
       label: '性别',
       prop: 'sex',
-      comp: 'o-select',
+      comp: 's-select',
       attrs: {
         options: [
           {
@@ -153,9 +153,9 @@ const showBigObject = () => {
 </script>
 
 <template>
-  <OFunctionSourceCode functionName="$toast"></OFunctionSourceCode>
+  <SFunctionSourceCode functionName="$toast"></SFunctionSourceCode>
   <div>
-    <o-flex wrap="wrap" gap="small">
+    <s-flex wrap="wrap" gap="small">
       <el-button type="primary" @click="base">基础</el-button>
       <el-button type="primary" @click="elBase">element-plus风格</el-button>
       <el-button type="primary" @click="duration5000">持续5秒</el-button>
@@ -203,6 +203,6 @@ const showBigObject = () => {
       </el-button>
       <el-button type="primary" @click="showObject">HTML 片段作为正文内容</el-button>
       <el-button type="primary" @click="showBigObject">显示大对象</el-button>
-    </o-flex>
+    </s-flex>
   </div>
 </template>

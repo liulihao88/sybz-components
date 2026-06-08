@@ -1,12 +1,12 @@
 <template>
-  <svg aria-hidden="true" v-bind="$attrs" class="o-svg-box" :style="parseStyle">
+  <svg aria-hidden="true" v-bind="$attrs" class="s-svg-box" :style="parseStyle">
     <use :href="symbolId" :fill="color" />
   </svg>
 </template>
 
-<script setup lang="ts" name="OSvg">
+<script setup lang="ts" name="SSvg">
 import { computed } from 'vue'
-import { processWidth } from '@oeos-components/utils'
+import { processWidth } from '@sybz-components/utils'
 const props = defineProps({
   prefix: {
     type: String,
@@ -38,7 +38,7 @@ const parseStyle = computed(() => {
 })
 </script>
 <style lang="scss" scoped>
-.o-svg-box {
+.s-svg-box {
   fill: currentColor;
   overflow: hidden;
 }

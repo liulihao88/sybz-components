@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ref, getCurrentInstance, reactive } from 'vue'
 const { proxy } = getCurrentInstance()
-import { validForm } from '@oeos-components/utils'
+import { validForm } from '@sybz-components/utils'
 const model = ref({
   account: '', // *用户账号
   password: null, // *用户密码
@@ -33,7 +33,7 @@ async function testSubmit() {
 
 <template>
   <div>
-    <o-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></o-form>
+    <s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>
     <el-button type="primary" @click="testSubmit">测试提交</el-button>
   </div>
 </template>

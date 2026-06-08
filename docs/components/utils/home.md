@@ -2,9 +2,9 @@
 
 ## Hidden Title {.md-hidden}
 
-本页收录 `@oeos-components/utils` 当前对外导出的全部工具方法，并为每个方法补一个最小示例，方便直接查用法。
+本页收录 `@sybz-components/utils` 当前对外导出的全部工具方法，并为每个方法补一个最小示例，方便直接查用法。
 
-以下示例默认已经从 `@oeos-components/utils` 引入对应方法；依赖 `window`、`document`、`localStorage`、`Element Plus` 或 `WebSocket` 的方法，需要在浏览器环境中使用。
+以下示例默认已经从 `@sybz-components/utils` 引入对应方法；依赖 `window`、`document`、`localStorage`、`Element Plus` 或 `WebSocket` 的方法，需要在浏览器环境中使用。
 
 ### 导出入口
 
@@ -78,7 +78,7 @@ await confirm('确定删除当前记录吗？', {
 复制文本到剪贴板，并默认弹出成功提示。
 
 ```ts
-copy('oeos-components')
+copy('sybz-components')
 copy('静默复制', { hideToast: true })
 ```
 
@@ -91,7 +91,7 @@ const search = debounce((keyword: string) => {
   console.log('search:', keyword)
 }, 300)
 
-search('oeos')
+search('sybz')
 ```
 
 ### diffDate
@@ -368,8 +368,8 @@ isPromise({ then: () => {} }) // false
 判断值是否为正则对象。
 
 ```ts
-isRegExp(/oeos/i) // true
-isRegExp('oeos') // false
+isRegExp(/sybz/i) // true
+isRegExp('sybz') // false
 ```
 
 ### isSet
@@ -386,7 +386,7 @@ isSet([1, 2, 3]) // false
 判断值是否为字符串。
 
 ```ts
-isString('oeos') // true
+isString('sybz') // true
 isString(123) // false
 ```
 
@@ -422,7 +422,7 @@ isSymbol('id') // false
 判断字符串是否为合法链接。
 
 ```ts
-isUrl('https://oeos-components.com') // true
+isUrl('https://sybz-components.com') // true
 isUrl('/local/path') // false
 ```
 

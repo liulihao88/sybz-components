@@ -4,7 +4,7 @@
 
 ::: tip 提示
 
-oeos-components 是基于 Vue3 + Element-plus 再次封装的基础组件, 适用于前端项目开发
+sybz-components 是基于 Vue3 + Element-plus 再次封装的基础组件, 适用于前端项目开发
 
 :::
 
@@ -12,20 +12,20 @@ oeos-components 是基于 Vue3 + Element-plus 再次封装的基础组件, 适�
 
 ## 使用包管理器 <el-tag  effect="dark">推荐</el-tag>
 
-**建议您使用包管理器 ([pnpm](https://pnpm.io/)<el-tag  effect="dark">推荐</el-tag> ， [yarn](https://classic.yarnpkg.com/lang/en/)，[npm](https://www.npmjs.com/)) 安装 oeos-components**。
+**建议您使用包管理器 ([pnpm](https://pnpm.io/)<el-tag  effect="dark">推荐</el-tag> ， [yarn](https://classic.yarnpkg.com/lang/en/)，[npm](https://www.npmjs.com/)) 安装 sybz-components**。
 
 ::: code-group
 
 ```sh [pnpm]
-pnpm add oeos-components -S
+pnpm add sybz-components -S
 ```
 
 ```sh [yarn]
-yarn add oeos-components
+yarn add sybz-components
 ```
 
 ```sh [npm]
-npm install oeos-components -S
+npm install sybz-components -S
 ```
 
 :::
@@ -36,42 +36,42 @@ npm install oeos-components -S
 
 ```js
 // main.ts
-import OeosComponents from 'oeos-components'
-import 'oeos-components/style.css'
+import SybzComponents from 'sybz-components'
+import 'sybz-components/style.css'
 const app = createApp(App)
-app.use(OeosComponents).mount('#app')
+app.use(SybzComponents).mount('#app')
 ```
 
 ### 安装函数库方法
 
-首先安装`@oeos-components/utils`
+首先安装`@sybz-components/utils`
 
 ::: code-group
 
 ```sh [pnpm]
-pnpm add @oeos-components/utils -S
+pnpm add @sybz-components/utils -S
 ```
 
 ```sh [yarn]
-yarn add @oeos-components/utils
+yarn add @sybz-components/utils
 ```
 
 ```sh [npm]
-npm install @oeos-components/utils -S
+npm install @sybz-components/utils -S
 ```
 
 :::
 
 ```js
-// 将oeos-components下的公共函数赋值到全局
-import * as utils from '@oeos-components/utils'
+// 将sybz-components下的公共函数赋值到全局
+import * as utils from '@sybz-components/utils'
 Object.keys(utils).forEach((v) => {
   app.config.globalProperties[v] = utils[v]
 })
 proxy.$toast('全局提示')
 
 // 按需引入
-import { $toast } from '@oeos-components/utils'
+import { $toast } from '@sybz-components/utils'
 $toast('我是成功提示')
 $toast('我是失败提示', 'e')
 ```
@@ -79,7 +79,7 @@ $toast('我是失败提示', 'e')
 ### 升级包
 
 ```javascript
-pnpm add oeos-components@latest && pnpm add @oeos-components/utils@latest
+pnpm add sybz-components@latest && pnpm add @sybz-components/utils@latest
 ```
 
 ### 自定义指令

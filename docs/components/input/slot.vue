@@ -12,17 +12,17 @@ const select = ref('')
 <template>
  <div class="box">
    <div>
-     <o-input v-model="input1" style="max-width: 600px" placeholder="Please input">
+     <s-input v-model="input1" style="max-width: 600px" placeholder="Please input">
        <template #prepend>Http://</template>
-     </o-input>
+     </s-input>
    </div>
    <div class="m-t-4">
-     <o-input v-model="input2" style="max-width: 600px" placeholder="Please input">
+     <s-input v-model="input2" style="max-width: 600px" placeholder="Please input">
        <template #append>.com</template>
-     </o-input>
+     </s-input>
    </div>
    <div class="m-t-4">
-     <o-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
+     <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
        <template #prepend>
          <el-select v-model="select" placeholder="Select" style="width: 215px">
            <el-option label="Restaurant" value="1" />
@@ -33,10 +33,10 @@ const select = ref('')
        <template #append>
          <el-button :icon="Search" />
        </template>
-     </o-input>
+     </s-input>
    </div>
    <div class="m-t-4">
-     <o-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
+     <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
        <template #prepend>
          <el-button :icon="Search" />
        </template>
@@ -47,7 +47,7 @@ const select = ref('')
            <el-option label="Tel" value="3" />
          </el-select>
        </template>
-     </o-input>
+     </s-input>
    </div>
  </div>
 

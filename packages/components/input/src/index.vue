@@ -1,7 +1,7 @@
 <template>
-  <div class="o-input" v-bind="subAttrs" :style="mergedStyle" :class="[$attrs.class, { 'has-content': content }]">
+  <div class="s-input" v-bind="subAttrs" :style="mergedStyle" :class="[$attrs.class, { 'has-content': content }]">
     <el-tooltip :content="'' + data" :disabled="inWidth || hideTooltip" v-bind="tooltipAttrs">
-      <div class="o-input__main">
+      <div class="s-input__main">
         <el-autocomplete
           v-if="props.options"
           v-model="data"
@@ -12,7 +12,7 @@
           v-bind="mergedAttrs"
         >
           <template v-if="$attrs.title" #prepend>
-            <div :style="{ ...computedBoxStyle }" class="o-input__title">
+            <div :style="{ ...computedBoxStyle }" class="s-input__title">
               {{ $attrs.title }}
             </div>
           </template>
@@ -32,7 +32,7 @@
           @mouseover.native="inputOnMouseOver($event)"
         >
           <template v-if="$attrs.title" #prepend>
-            <div :style="{ ...computedBoxStyle }" class="o-input__title">
+            <div :style="{ ...computedBoxStyle }" class="s-input__title">
               {{ $attrs.title }}
             </div>
           </template>
@@ -61,26 +61,26 @@
         </el-input>
       </div>
     </el-tooltip>
-    <o-icon
+    <s-icon
       v-if="content"
-      class="o-input__icon"
+      class="s-input__icon"
       v-bind="{ name: 'warning', color: 'var(--el-disabled-text-color)', size: '16px', ...props.iconAttrs }"
       :content="content"
     />
 
-    <o-icon
+    <s-icon
       v-if="$attrs.type === 'textarea' && data && !($attrs.disabled === true || $attrs.disabled === '')"
       name="circle-close"
-      class="o-input__clear"
+      class="s-input__clear"
       @click="clearTextareaValue"
     />
   </div>
 </template>
 
-<script setup lang="ts" name="OInput">
+<script setup lang="ts" name="SInput">
 import { ref, computed, useAttrs, watch } from 'vue'
 import { useVModel } from '@vueuse/core'
-import { processWidth, getType } from '@oeos-components/utils'
+import { processWidth, getType } from '@sybz-components/utils'
 const attrs = useAttrs()
 
 defineOptions({
@@ -279,17 +279,17 @@ const mergedStyle = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-.o-input {
+.s-input {
   position: relative;
   display: inline-block;
   width: 100%;
 
-  .o-input__main {
+  .s-input__main {
     width: 100%;
   }
 
   &.has-content {
-    .o-input__main {
+    .s-input__main {
       width: calc(100% - 32px);
     }
   }
@@ -312,24 +312,24 @@ const mergedStyle = computed(() => {
     padding: 0 4px;
   }
 
-  .o-input__icon {
+  .s-input__icon {
     position: absolute;
     top: 8px;
     right: 8px;
   }
 
   &:hover {
-    .o-input__clear {
+    .s-input__clear {
       display: block;
     }
   }
 
-  .o-input__title {
+  .s-input__title {
     text-align: center;
   }
 }
 
-.o-input__clear {
+.s-input__clear {
   position: absolute;
   right: 8px;
   bottom: calc(50% - 6px);

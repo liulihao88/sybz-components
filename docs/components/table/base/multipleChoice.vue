@@ -31,7 +31,7 @@ const columns: TableColumnList = [
 <template>
   <div>
     <div class="multiple-demo__value">当前选中: {{ selectedText }}</div>
-    <o-table
+    <s-table
       v-model="multipleSelection"
       :data="tableData"
       :columns="columns"

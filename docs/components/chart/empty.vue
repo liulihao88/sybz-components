@@ -1,13 +1,13 @@
 <template>
-  <o-flex :flex="1">
+  <s-flex :flex="1">
     <div class="f-1">
       <el-button @click="isEmptyBn = !isEmptyBn">切换状态</el-button>
-      <o-chart :option="options" :isEmpty="isEmptyBn" height="300" />
+      <s-chart :option="options" :isEmpty="isEmptyBn" height="300" />
     </div>
     <div class="f-1">
       <el-button @click="addData()">增加数据</el-button>
       <h3>Function类型</h3>
-      <o-chart
+      <s-chart
         :option="options"
         :isEmpty="isEmptyFn"
         image="/img/logo.svg"
@@ -17,13 +17,13 @@
     </div>
     <div class="f-1">
       <h3>空状态插槽</h3>
-      <o-chart :option="options" :isEmpty="isEmptyFn" height="300">
+      <s-chart :option="options" :isEmpty="isEmptyFn" height="300">
         <template #empty>
           <div style="text-align: center; margin-top: 100px; font-size: 32px">自定义空状态插槽</div>
         </template>
-      </o-chart>
+      </s-chart>
     </div>
-  </o-flex>
+  </s-flex>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'

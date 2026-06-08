@@ -58,7 +58,7 @@ const columns = [
     btns: [
       {
         content: '编辑',
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'edit',
           content: '编辑',
@@ -66,7 +66,7 @@ const columns = [
       },
       {
         content: '删除',
-        comp: 'o-icon',
+        comp: 's-icon',
         attrs: {
           name: 'delete',
           content: '删除',
@@ -79,20 +79,20 @@ const columns = [
 
 <template>
   <div>
-    <o-dialog title="基础dialog" v-model="isShow" fillSlot type="drawer">
-      <o-table :columns="columns" :data="data" ref="tableRef" height="100%"></o-table>
-    </o-dialog>
+    <s-dialog title="基础dialog" v-model="isShow" fillSlot type="drawer">
+      <s-table :columns="columns" :data="data" ref="tableRef" height="100%"></s-table>
+    </s-dialog>
     <el-button type="primary" @click="isShow = true">基础</el-button>
     <el-button type="primary" @click="isShow2 = true">复杂些的</el-button>
-    <o-dialog title="基础dialog" v-model="isShow2" fillSlot type="drawer">
-      <o-flex direction="column" class="h-100%">
+    <s-dialog title="基础dialog" v-model="isShow2" fillSlot type="drawer">
+      <s-flex direction="column" class="h-100%">
         <div class="mb2">这是上面的数据</div>
         <div class="mb2">这是上面的数据</div>
         <div class="mb2">这是上面的数据</div>
         <div class="mb2">这是上面的数据</div>
-        <o-table :columns="columns" :data="data" ref="tableRef" height="100%"></o-table>
-      </o-flex>
-    </o-dialog>
+        <s-table :columns="columns" :data="data" ref="tableRef" height="100%"></s-table>
+      </s-flex>
+    </s-dialog>
   </div>
 </template>
 

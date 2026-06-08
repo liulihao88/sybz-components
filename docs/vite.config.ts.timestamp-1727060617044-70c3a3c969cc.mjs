@@ -1,10 +1,10 @@
 // docs/vite.config.ts
-import { defineConfig } from "file:///Users/andy/cyrd/oeos-components/node_modules/.pnpm/vite@5.0.12_@types+node@20.11.16_sass@1.70.0_terser@5.31.1/node_modules/vite/dist/node/index.js";
-import vueJsx from "file:///Users/andy/cyrd/oeos-components/node_modules/.pnpm/@vitejs+plugin-vue-jsx@3.1.0_vite@5.0.12_@types+node@20.11.16_sass@1.70.0_terser@5.31.1__vue@3.4.15_typescript@5.3.3_/node_modules/@vitejs/plugin-vue-jsx/dist/index.mjs";
+import { defineConfig } from "file:///Users/andy/sybz/sybz-components/node_modules/.pnpm/vite@5.0.12_@types+node@20.11.16_sass@1.70.0_terser@5.31.1/node_modules/vite/dist/node/index.js";
+import vueJsx from "file:///Users/andy/sybz/sybz-components/node_modules/.pnpm/@vitejs+plugin-vue-jsx@3.1.0_vite@5.0.12_@types+node@20.11.16_sass@1.70.0_terser@5.31.1__vue@3.4.15_typescript@5.3.3_/node_modules/@vitejs/plugin-vue-jsx/dist/index.mjs";
 import { resolve } from "path";
 import { fileURLToPath, URL } from "node:url";
-import { codeInspectorPlugin } from "file:///Users/andy/cyrd/oeos-components/node_modules/.pnpm/code-inspector-plugin@0.10.1/node_modules/code-inspector-plugin/dist/index.mjs";
-import terser from "file:///Users/andy/cyrd/oeos-components/node_modules/.pnpm/@rollup+plugin-terser@0.4.4_rollup@4.9.6/node_modules/@rollup/plugin-terser/dist/es/index.js";
+import { codeInspectorPlugin } from "file:///Users/andy/sybz/sybz-components/node_modules/.pnpm/code-inspector-plugin@0.10.1/node_modules/code-inspector-plugin/dist/index.mjs";
+import terser from "file:///Users/andy/sybz/sybz-components/node_modules/.pnpm/@rollup+plugin-terser@0.4.4_rollup@4.9.6/node_modules/@rollup/plugin-terser/dist/es/index.js";
 
 // packages/utils/customVitePluginFilePath.js
 function customVitePluginFilePath() {
@@ -21,9 +21,9 @@ function customVitePluginFilePath() {
 }
 
 // docs/vite.config.ts
-import { createSvgIconsPlugin } from "file:///Users/andy/cyrd/oeos-components/node_modules/.pnpm/vite-plugin-svg-icons@2.0.1_vite@5.0.12_@types+node@20.11.16_sass@1.70.0_terser@5.31.1_/node_modules/vite-plugin-svg-icons/dist/index.mjs";
-var __vite_injected_original_dirname = "/Users/andy/cyrd/oeos-components/docs";
-var __vite_injected_original_import_meta_url = "file:///Users/andy/cyrd/oeos-components/docs/vite.config.ts";
+import { createSvgIconsPlugin } from "file:///Users/andy/sybz/sybz-components/node_modules/.pnpm/vite-plugin-svg-icons@2.0.1_vite@5.0.12_@types+node@20.11.16_sass@1.70.0_terser@5.31.1_/node_modules/vite-plugin-svg-icons/dist/index.mjs";
+var __vite_injected_original_dirname = "/Users/andy/sybz/sybz-components/docs";
+var __vite_injected_original_import_meta_url = "file:///Users/andy/sybz/sybz-components/docs/vite.config.ts";
 var vite_config_default = defineConfig({
   plugins: [
     vueJsx(),

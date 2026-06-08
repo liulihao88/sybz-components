@@ -1,14 +1,14 @@
-export interface OeosComponentsInstallOptions {
+export interface SybzComponentsInstallOptions {
   globalComponentConfig?: Record<string, Record<string, any>>
 }
 
 export type {
-  OTableButton,
-  OTableColumn,
-  OTableEmits,
-  OTableExpose,
-  OTableProps,
-  OTableResolvedColumn,
+  STableButton,
+  STableColumn,
+  STableEmits,
+  STableExpose,
+  STableProps,
+  STableResolvedColumn,
   TableCallbackContext,
   TableColumnList,
   TableFilter,

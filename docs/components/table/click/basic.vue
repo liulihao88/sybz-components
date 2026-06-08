@@ -33,7 +33,7 @@ const selectedText = computed(() => {
 <template>
   <div>
     <div class="single-demo__value">当前选中: {{ selectedText }}</div>
-    <o-table
+    <s-table
       v-model="selectedRow"
       selection-type="single"
       :columns="columns"

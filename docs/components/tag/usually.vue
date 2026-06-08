@@ -22,7 +22,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <o-tag
+    <s-tag
       :primary="[1, 2]"
       :value="value"
       :warning="[3, 4]"
@@ -30,14 +30,14 @@ onUnmounted(() => {
       :info="7"
       width="100"
       height="100"
-    ></o-tag>
-    <o-tag
+    ></s-tag>
+    <s-tag
       :primary="randomValue === 2"
       :danger="randomValue === 3"
       :info="randomValue === 4"
       :warning="randomValue === 5"
     >
       {{ randomValue }}
-    </o-tag>
+    </s-tag>
   </div>
 </template>

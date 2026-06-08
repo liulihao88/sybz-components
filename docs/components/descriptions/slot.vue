@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ref, getCurrentInstance, computed, h } from 'vue'
 const { proxy } = getCurrentInstance()
-import { formatTime } from '@oeos-components/utils'
+import { formatTime } from '@sybz-components/utils'
 type IData = {
   name: string
   age: number
@@ -46,10 +46,10 @@ init()
 
 <template>
   <div>
-    <div>docs/examples/ODescription/base.vue</div>
-    <o-descriptions :options="options" class="w-100%" :column="1" label-width="200px">
+    <div>docs/examples/SDescription/base.vue</div>
+    <s-descriptions :options="options" class="w-100%" :column="1" label-width="200px">
       <template #nameLabel="{ item, value, index, label }">这是自定义label</template>
       <template #nameValue="{ item, value, index, label }">这是自定义value</template>
-    </o-descriptions>
+    </s-descriptions>
   </div>
 </template>

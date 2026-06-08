@@ -9,11 +9,11 @@ const gutter = ref(16)
     <div class="demo-title">当前 `gutter`: {{ gutter }}</div>
     <el-slider v-model="gutter" :min="0" :max="48" show-input />
 
-    <o-row :col="8" :gutter="gutter">
+    <s-row :col="8" :gutter="gutter">
       <div class="box">1</div>
       <div class="box">2</div>
       <div class="box">3</div>
-    </o-row>
+    </s-row>
   </div>
 </template>
 

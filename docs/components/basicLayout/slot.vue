@@ -1,20 +1,20 @@
 <template>
   <div>
-    <OBasicLayout collapsible :boxStyle="{ border: 'none' }">
+    <SBasicLayout collapsible :boxStyle="{ border: 'none' }">
       <template #header>
-        <o-title title="更多">
+        <s-title title="更多">
           <template #right>
             <a href="#">header插槽</a>
           </template>
-        </o-title>
+        </s-title>
       </template>
       默认插槽
       <template #icon>
-        <o-icon name="plus" content="自定义折叠icon"></o-icon>
+        <s-icon name="plus" content="自定义折叠icon"></s-icon>
       </template>
       <template #footer>
         <el-button type="primary">footer插槽</el-button>
       </template>
-    </OBasicLayout>
+    </SBasicLayout>
   </div>
 </template>
