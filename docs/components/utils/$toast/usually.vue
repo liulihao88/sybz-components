@@ -168,6 +168,7 @@ const showBigObject = () => {
             icon: hot,
           })
         "
+        :icon="hot"
       >
         自定义图标
       </el-button>
