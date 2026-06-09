@@ -4,9 +4,10 @@
 
 ::: tip 提示
 
-sybz-components 是基于 Vue3 + Element-plus 再次封装的基础组件, 适用于前端项目开发
-
-:::
+1. sybz-components 是基于 Vue3 + Element-plus + 部分原生js组件 再次封装的基础组件, 适用于前端项目开发
+2. @sybz-components/utils是工作中常用的封装的函数库组件
+3. sybz-components全局注册了@element-plus/icons-vue的icon, 使用方式`el-icon-xxx`
+   :::
 
 ### 安装
 
@@ -32,14 +33,19 @@ npm install sybz-components -S
 
 ### 使用
 
-> #### 前提条件：使用项目必须全局注册 Element-plus组件库
+> #### 前提条件：使用项目必须注册 Element-plus组件库, 否则样式不生效
 
 ```js
 // main.ts
+import App from './App.vue'
+
+const app = createApp(App)
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import SybzComponents from 'sybz-components'
 import 'sybz-components/style.css'
-const app = createApp(App)
-app.use(SybzComponents).mount('#app')
+
+app.use(ElementPlus).use(SybzComponents).mount('#app')
 ```
 
 ### 安装函数库方法
