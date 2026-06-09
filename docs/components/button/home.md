@@ -10,6 +10,12 @@
 button/base
 :::
 
+### 图标按钮
+
+:::demo
+button/icon
+:::
+
 ### 提示文字
 
 :::demo

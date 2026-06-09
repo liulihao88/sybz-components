@@ -1,12 +1,12 @@
 <template>
   <s-tooltip v-if="content" :content="content" v-bind="tooltipAttrs">
-    <el-button v-bind="{ loading: loading, ...$attrs }" @click="handleClick" class="s-button-content">
+    <el-button v-bind="buttonAttrs" @click="handleClick" class="s-button-content">
       <template v-for="(arg, name, index) in $slots" v-slot:[name]>
         <slot :name="name" v-bind="arg" :index="index" />
       </template>
     </el-button>
   </s-tooltip>
-  <el-button v-bind="{ loading: loading, ...$attrs }" @click="handleClick" v-else>
+  <el-button v-bind="buttonAttrs" @click="handleClick" v-else>
     <template v-for="(arg, name, index) in $slots" v-slot:[name]>
       <slot :name="name" v-bind="arg" :index="index" />
     </template>
@@ -14,10 +14,12 @@
 </template>
 
 <script setup lang="tsx">
-import { ref, defineComponent } from 'vue'
+import { computed, ref, useAttrs } from 'vue'
+import { toLine } from '@sybz-components/utils'
 
 defineOptions({
   name: 'SButton',
+  inheritAttrs: false,
 })
 
 interface SButtonSelfProps {
@@ -32,12 +34,41 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   tooltipAttrs: () => ({}),
 })
 
+const attrs = useAttrs()
+
 // 抛出事件
 const emits = defineEmits(['click'])
 
 const lastClickTime = ref<number | null>(null)
 
 const loading = ref(false)
+
+const normalizeIcon = (icon: unknown) => {
+  if (typeof icon !== 'string' || !icon || icon.startsWith('el-icon-')) return icon
+  return `el-icon-${toLine(icon)}`
+}
+
+const buttonAttrs = computed(() => {
+  const normalizedAttrs = { ...attrs }
+
+  if ('icon' in normalizedAttrs) {
+    normalizedAttrs.icon = normalizeIcon(normalizedAttrs.icon)
+  }
+
+  if ('loadingIcon' in normalizedAttrs) {
+    normalizedAttrs.loadingIcon = normalizeIcon(normalizedAttrs.loadingIcon)
+  }
+
+  if ('loading-icon' in normalizedAttrs) {
+    normalizedAttrs['loading-icon'] = normalizeIcon(normalizedAttrs['loading-icon'])
+  }
+
+  return {
+    loading: loading.value,
+    ...normalizedAttrs,
+  }
+})
+
 const handleClick = () => {
   if (props.time === 0) {
     emits('click')
@@ -55,18 +86,6 @@ const handleClick = () => {
     }, props.time)
   }
 }
-
-const ButtonContent = defineComponent({
-  name: 'ButtonContent',
-  setup(_, { attrs, slots }) {
-    console.log(`18 attrs`, attrs)
-    return () => (
-      <el-button loading={loading.value} {...attrs} onClick={handleClick}>
-        {slots.default?.()}
-      </el-button>
-    )
-  },
-})
 </script>
 
 <style lang="scss" scoped>

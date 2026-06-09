@@ -9,7 +9,6 @@ import '/public/css/index.css'
 import './assets/styles/index.css'
 
 // 图标并进行全局注册
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import * as echarts from 'echarts' // 引入echarts
 
 import OTip from '../vitepress/components/oTip/index.vue'
@@ -55,10 +54,6 @@ export default {
     Object.keys(utils).forEach((v) => {
       ctx.app.config.globalProperties[v] = utils[v]
     })
-    // 注册所有图标
-    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-      ctx.app.component(key, component)
-    }
     ctx.app.component('OooSvg', svgIconConfig.Svg({}).component)
     ctx.app.component('OTip', OTip)
     ctx.app.component('ChangelogContent', ChangelogContent)

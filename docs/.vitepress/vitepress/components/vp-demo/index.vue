@@ -8,18 +8,18 @@
       <div class="op-btns">
         <ElTooltip content="跳转页面" :show-arrow="false" v-if="isDev">
           <ElIcon :size="16" class="op-btn" @click="jumpPath">
-            <promotion />
+            <el-icon-promotion />
             <!-- <o-icon name="promotion"></o-icon> -->
           </ElIcon>
         </ElTooltip>
         <ElTooltip content="复制代码" :show-arrow="false">
           <ElIcon :size="16" class="op-btn" @click="copyCode">
-            <CopyDocument />
+            <el-icon-copy-document />
           </ElIcon>
         </ElTooltip>
         <ElTooltip content="查看源代码" :show-arrow="false">
           <ElIcon :size="16" class="op-btn" @click="toggleSourceVisible()">
-            <View />
+            <el-icon-view />
           </ElIcon>
         </ElTooltip>
       </div>
