@@ -6,12 +6,8 @@
     "jsx": "preserve",
     "moduleResolution": "nodenext",
     "paths": {
-      "@/*": [
-        "./packages/*"
-      ],
-      "@sybz-components/utils": [
-        "./packages/utils/src/index.ts"
-      ]
+      "@/*": ["./packages/*"],
+      "@sybz-components/utils": ["./packages/utils/src/index.ts"]
     },
     "types": [
       // 用来指定需要包含的模块，并将其包含在全局范围内。
@@ -19,14 +15,6 @@
       "./packages/components.d.ts"
     ]
   },
-  "include": [
-    "packages/**/*.ts",
-    "packages/**/*.d.ts",
-    "packages/**/*.tsx",
-    "packages/**/*.vue"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["packages/**/*.ts", "packages/**/*.d.ts", "packages/**/*.tsx", "packages/**/*.vue"],
+  "exclude": ["node_modules", "dist"]
 }

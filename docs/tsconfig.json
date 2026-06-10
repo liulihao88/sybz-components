@@ -14,9 +14,7 @@
     "skipLibCheck": true,
     "jsx": "preserve",
     "paths": {
-      "@/*": [
-        "../packages/*"
-      ]
+      "@/*": ["../packages/*"]
     },
     "types": [
       // 用来指定需要包含的模块，并将其包含在全局范围内。
