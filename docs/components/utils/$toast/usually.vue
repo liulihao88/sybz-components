@@ -7,14 +7,12 @@ const { $toast, sleep } = utils
 const { proxy } = getCurrentInstance()
 const base = () => {
   $toast('基础成功')
-  $toast('基础成功', 's')
   $toast('基础警告', 'w')
   $toast('基础信息', 'i')
   $toast('基础错误', 'e')
 }
 const elBase = () => {
   $toast('基础成功', { customClass: 'el' })
-  $toast('基础成功', 's', { customClass: 'el' })
   $toast('基础警告', 'w', { customClass: 'el' })
   $toast('基础信息', 'i', { customClass: 'el' })
   $toast('基础错误', 'e', { customClass: 'el' })

@@ -5,6 +5,7 @@ import { createAlgolia, Github } from './utils/settings.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 const hiddenDocsInProd = ['/components/test/home.md', '/components/chooseArea/home.md']
+const sybzMark = (text: string) => `<span class="sybz-components-sidebar-star" aria-hidden="true">*</span>${text}`
 
 export default defineConfig({
   // 站点级选项
@@ -89,15 +90,15 @@ export default defineConfig({
               link: '/components/utils/home.md',
             },
             {
-              text: '$toast 消息提示',
+              text: sybzMark('$toast 消息提示'),
               link: '/components/utils/$toast/home.md',
             },
             {
-              text: 'clone 深克隆',
+              text: sybzMark('clone 深克隆'),
               link: '/components/utils/clone/home.md',
             },
             {
-              text: 'confirm 确认框',
+              text: sybzMark('confirm 确认框'),
               link: '/components/utils/confirm/home.md',
             },
             {
@@ -167,7 +168,7 @@ export default defineConfig({
               link: '/components/test/home.md',
             },
             {
-              text: 'button组件',
+              text: sybzMark('button组件'),
               link: '/components/button/home.md',
             },
             {
@@ -199,7 +200,7 @@ export default defineConfig({
               link: '/components/descriptions/home.md',
             },
             {
-              text: 'dialog组件',
+              text: sybzMark('dialog组件'),
               link: '/components/dialog/home.md',
             },
             {
@@ -247,7 +248,7 @@ export default defineConfig({
               link: '/components/icon/home.md',
             },
             {
-              text: 'input组件',
+              text: sybzMark('input组件'),
               link: '/components/input/home.md',
             },
             {
@@ -289,7 +290,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
-              text: 'flex布局组件',
+              text: sybzMark('flex布局组件'),
               link: '/components/flex/home.md',
             },
             {
@@ -297,7 +298,7 @@ export default defineConfig({
               link: '/components/splitPane/home.md',
             },
             {
-              text: 'basicLayout基础布局组件',
+              text: sybzMark('basicLayout基础布局组件'),
               link: '/components/basicLayout/home.md',
             },
             {
@@ -315,11 +316,11 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
-              text: 'form组件',
+              text: sybzMark('form组件'),
               link: '/components/form/home.md',
             },
             {
-              text: 'table组件',
+              text: sybzMark('table组件'),
               link: '/components/table/home.md',
             },
           ],
@@ -384,7 +385,7 @@ export default defineConfig({
               link: '/components/directives/throttle/home.md',
             },
             {
-              text: 'debounce防抖',
+              text: sybzMark('debounce防抖'),
               link: '/components/directives/debounce/home.md',
             },
             {
