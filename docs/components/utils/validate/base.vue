@@ -1,104 +1,37 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, computed } from 'vue'
-import { $toast, validate } from '@/utils/src/index'
-const { proxy } = getCurrentInstance()
-const form = ref({})
-const fieldList = computed(() => {
-  return [
-    {
-      label: 'validate()',
-      prop: 'name',
-      rules: [validate()],
-    },
-    {
-      label: 'validate("password")',
-      prop: 'password',
-      rules: [validate('password')],
-    },
-    {
-      label: 'validate("number")',
-      prop: 'number',
-      rules: [validate('number')],
-    },
-    {
-      label: 'validate("zeroPositive")',
-      prop: 'zeroPositive',
-      rules: [validate('zeroPositive')],
-    },
-    {
-      label: 'validate("integer")',
-      prop: 'integer',
-      rules: [validate('integer')],
-    },
-    {
-      label: 'validate("decimal")',
-      prop: 'decimal',
-      rules: [validate('decimal')],
-    },
-    {
-      label: 'validate("mobile")',
-      prop: 'mobile',
-      rules: [validate('mobile')],
-    },
-    {
-      label: 'validate("email")',
-      prop: 'email',
-      rules: [validate('email')],
-    },
-    {
-      label: 'validate("ip")',
-      prop: 'ip',
-      rules: [validate('ip')],
-    },
-    {
-      label: 'validate("port")',
-      prop: 'port',
-      rules: [validate('port')],
-    },
-    {
-      label: 'validate("between")',
-      prop: 'between',
-      rules: [validate('between')],
-    },
-    {
-      label: 'validate("between", {min: 1, max: 10})',
-      prop: 'between2',
-      rules: [validate('between', { min: 1, max: 10 })],
-    },
-    {
-      label: 'validate("length", {min:1, max:10})',
-      prop: 'length',
-      rules: [validate('length', { min: 1, max: 10 })],
-    },
-    {
-      label: 'validate("same") oldPwd',
-      prop: 'oldPwd',
-      rules: [validate('same', { value: form.value.newPwd })],
-    },
-    {
-      label: 'validate("same") newPwd',
-      prop: 'newPwd',
-      rules: [validate('same', { value: form.value.oldPwd })],
-    },
-    {
-      label: 'validate("custom")',
-      prop: 'custom',
-      rules: [validate('custom', { message: '最多保留2位小数', reg: /^\d+\.?\d{0,2}$/ })],
-    },
-  ]
+import { reactive, ref } from 'vue'
+import { $toast, validate, validForm } from '@/utils/src/index'
+
+const formRef = ref()
+const form = reactive({
+  name: '',
 })
+
+const rules = {
+  name: [validate()],
+}
+
+const submit = async () => {
+  // 1. 原生写法
+  // formRef.value?.validate((valid) => {
+  //   if (valid) {
+  //     $toast('校验通过')
+  //   }
+  // })
+  // 2. utils提供的validForm方法, 返回一个promise, 校验通过则resolve, 不通过则reject
+  await validForm(formRef.value)
+}
 </script>
 
 <template>
-  <div>
-    <SFunctionSourceCode functionName="validate"></SFunctionSourceCode>
-    <s-title title="由于有特殊的相同字段的校验, 所以fieldList使用了compued, 正常情况下, 不需要computed"></s-title>
-    <s-form :fieldList="fieldList" :model="form" ref="sFormRef" :column="2" label-width="200">
-      <tempalte v-for="(v, i) in fieldList" :key="i">
-        <template #[`${v.prop}-label`]="{ item }">
-          <div>{{ item }}??</div>
-        </template>
-      </tempalte>
-    </s-form>
-  </div>
+  <SFunctionSourceCode functionName="validate"></SFunctionSourceCode>
+  <el-form ref="formRef" :model="form" :rules="rules" label-width="80px" style="max-width: 360px">
+    <el-form-item label="姓名" prop="name">
+      <s-input v-model="form.name" placeholder="请输入姓名" />
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submit">提交</el-button>
+      <el-button @click="formRef?.resetFields()">重置</el-button>
+    </el-form-item>
+  </el-form>
 </template>

@@ -8,6 +8,12 @@
 utils/validate/base
 :::
 
+### 结合sForm组件
+
+:::demo
+utils/validate/sForm
+:::
+
 ### 高阶用法
 
 :::demo

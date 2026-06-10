@@ -1,21 +1,11 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const isShow = ref(false)
-const isShow2 = ref(false)
-const confirm = () => {
-  isShow2.value = true
-}
 </script>
 
 <template>
   <div>
     <el-button type="primary" @click="isShow = true">显示dialog</el-button>
-    <s-dialog title="基础dialog" v-model="isShow" @confirm="confirm">
-      这是外部的dialog
-      <s-dialog ref="dialogRef" title="内部的" v-model="isShow2">这是内部的dialog</s-dialog>
-    </s-dialog>
+    <s-dialog title="基础dialog" v-model="isShow">内容</s-dialog>
   </div>
 </template>
-
-<style scoped lang="scss"></style>
