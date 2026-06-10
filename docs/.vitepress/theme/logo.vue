@@ -37,7 +37,13 @@ import { ElMessage } from 'element-plus'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData, useRouter } from 'vitepress'
 import pkg from '../../../package.json'
-import { buildVscodeFileUrl, getComponentDocPath, getDocsBasePath, getSourceDir, joinLocalPath } from './utils/localFile'
+import {
+  buildVscodeFileUrl,
+  getComponentDocPath,
+  getDocsBasePath,
+  getSourceDir,
+  joinLocalPath,
+} from './utils/localFile'
 
 const { page } = useData()
 const router = useRouter()

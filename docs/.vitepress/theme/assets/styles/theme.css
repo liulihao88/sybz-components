@@ -4,9 +4,8 @@ html {
 
 body {
   overflow-y: auto;
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
-    'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial,
-    sans-serif !important;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1',
+    Arial, sans-serif !important;
   font-size: 14px;
   color: var(--vp-c-text-1);
 }
@@ -31,7 +30,7 @@ h2[tabindex='-1'] {
 .VPNavBarTitle :not(.visible-text),
 /* .VPNavBarTitle a , */
 .VPHero .container .clip {
-font-family: Comic Sans MS;
+  font-family: Comic Sans MS;
   background-image: linear-gradient(
     to right,
     #eea2a2 0%,
@@ -44,7 +43,6 @@ font-family: Comic Sans MS;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   color: transparent !important;
-  
 }
 
 /* home hero logo bg */
@@ -104,6 +102,7 @@ span {
   display: none;
 }
 
-th, td{
+th,
+td {
   min-width: 92px;
 }

@@ -31,20 +31,15 @@ export const mdPlugin = (md: MarkdownIt) => {
         const sourceFile = sourceFileToken.children?.[0].content ?? ''
         if (sourceFileToken.type === 'inline') {
           // 读取示列代码文件
-          source = fs.readFileSync(
-            path.resolve(docRoot, 'components', `${sourceFile}.vue`),
-            'utf-8',
-          )
+          source = fs.readFileSync(path.resolve(docRoot, 'components', `${sourceFile}.vue`), 'utf-8')
         }
         if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
         // opening tag
         return `<Demo
-                        source="${encodeURIComponent(highlight(source, 'vue'))}"
-                        path="${sourceFile}"
-                        raw-source="${encodeURIComponent(source)}"
-                        description="${encodeURIComponent(
-                          localMd.render(description),
-                        )}">`
+                    source="${encodeURIComponent(highlight(source, 'vue'))}"
+                    path="${sourceFile}"
+                    raw-source="${encodeURIComponent(source)}"
+                    description="${encodeURIComponent(localMd.render(description))}">`
       } else {
         // closing tag
         return '</Demo>\n'
