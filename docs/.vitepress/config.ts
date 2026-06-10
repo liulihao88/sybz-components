@@ -377,11 +377,15 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
-              text: 'copy复制',
+              text: sybzMark('copy复制'),
               link: '/components/directives/copy/home.md',
             },
             {
-              text: 'throttle节流',
+              text: sybzMark('focus自动聚焦'),
+              link: '/components/directives/focus/home.md',
+            },
+            {
+              text: sybzMark('throttle节流'),
               link: '/components/directives/throttle/home.md',
             },
             {

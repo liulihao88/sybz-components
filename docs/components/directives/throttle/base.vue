@@ -1,29 +1,51 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
-const baseIptValue = ref()
-const inputValue = ref()
-function baseThrottle() {
-  console.log('baseThrottle')
+import { ref } from 'vue'
+
+const defaultCount = ref(0)
+const delayCount = ref(0)
+const defaultTime = ref('-')
+const delayTime = ref('-')
+
+function getTime() {
+  return new Date().toLocaleTimeString()
 }
-function throttle3000() {
-  console.time('3000毫秒throttle')
-  console.log('throttle3000')
-  console.timeEnd('3000毫秒throttle')
+
+function handleDefaultClick() {
+  defaultCount.value += 1
+  defaultTime.value = getTime()
 }
-function inputChange() {
-  console.log(`inputValue.value`, inputValue.value)
+
+function handleDelayClick() {
+  delayCount.value += 1
+  delayTime.value = getTime()
 }
 </script>
 
 <template>
-  <div>
-    <!-- <el-input v-throttle v-model="baseIptValue" @input="inputChange" /> -->
-    <el-input v-throttle="inputChange" v-model="inputValue" />
-    <s-input v-model="inputValue" v-throttle="inputChange" />
-    <div class="mb-6 bg-white p-2" v-throttle="baseThrottle">默认1000毫秒</div>
-    <el-button v-throttle.3000="throttle3000">这是3000毫秒的</el-button>
+  <div class="throttle-demo">
+    <div class="throttle-demo__item">
+      <el-button type="primary" v-throttle="handleDefaultClick">默认 1000ms</el-button>
+      <span>执行 {{ defaultCount }} 次，最近 {{ defaultTime }}</span>
+    </div>
+
+    <div class="throttle-demo__item">
+      <el-button type="primary" v-throttle.3000="handleDelayClick">自定义 3000ms</el-button>
+      <span>执行 {{ delayCount }} 次，最近 {{ delayTime }}</span>
+    </div>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.throttle-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.throttle-demo__item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+</style>

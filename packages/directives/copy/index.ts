@@ -12,12 +12,10 @@ const copy: Directive = {
     const { value } = binding
     if (value) {
       el.copyValue = value
-      console.log(`36 binding`, binding)
       const arg = binding.arg ?? 'dblclick'
       // Register using addEventListener on mounted, and removeEventListener automatically on unmounted
       useEventListener(el, arg, () => {
         const success: boolean = copyText(el.copyValue, { hideToast: true })
-        console.log(`03 success`, success)
         success
           ? $toast(`<span class="text-[var(--blue)]">${el.copyValue}</span> 复制成功`, {
               dangerouslyUseHTMLString: true,

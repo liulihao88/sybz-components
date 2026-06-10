@@ -47,5 +47,6 @@ metadata:
 
 ### 自定义指令
 
+- `copy`
 - `focus`
 - `debounce`
