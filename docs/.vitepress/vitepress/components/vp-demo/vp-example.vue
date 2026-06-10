@@ -70,6 +70,8 @@ onBeforeMount(() => {
 }
 .example-component {
   min-height: 86px;
+  max-height: min(520px, calc(100vh - 180px));
+  overflow: auto;
   padding: 1.5rem;
   background-color: var(--el-bg-color-page);
   &--spin {

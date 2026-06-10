@@ -21,7 +21,6 @@ import VueTippy from 'vue-tippy'
 
 // 基于element-plus二次封装基础组件
 import '../../../packages/styles/index.scss'
-import '../../../packages/styles/utilities.scss'
 
 // import 'virtual:svg-icons-register'
 import 'virtual:svg-icons-register'
@@ -40,7 +39,6 @@ export default {
       componentModule = await import('@/index.ts')
     } else {
       await import('~dist/style.css')
-      await import('~dist/utilities.css')
       componentModule = await import('~dist/sybz-components-es.js')
     }
 
