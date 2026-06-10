@@ -68,7 +68,11 @@ export const formatDateToMinute = (date: ConfigType): string => formatDate(date,
  * diffDate('2026-04-24 12:00:00', '2026-04-24 11:30:00', 'minute')
  * // => 30
  */
-export function diffDate(date1: ConfigType, date2: ConfigType = dayjs(), format: DayUnit = 'second'): number | undefined {
+export function diffDate(
+  date1: ConfigType,
+  date2: ConfigType = dayjs(),
+  format: DayUnit = 'second',
+): number | undefined {
   if (!date1) return
   return dayjs(date1).diff(dayjs(date2), format)
 }

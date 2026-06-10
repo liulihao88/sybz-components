@@ -38,11 +38,7 @@ watch(
     </div>
 
     <div class="split-demo">
-      <s-split-pane
-        v-model="splitPercent"
-        :min-percent="0"
-        :reset-on-click="visiblePanels.length === 2"
-      >
+      <s-split-pane v-model="splitPercent" :min-percent="0" :reset-on-click="visiblePanels.length === 2">
         <template #paneL>
           <div class="pane pane-a">源文件视图</div>
         </template>

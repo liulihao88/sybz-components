@@ -8,56 +8,55 @@ const input3 = ref('')
 const select = ref('')
 </script>
 
-
 <template>
- <div class="box">
-   <div>
-     <s-input v-model="input1" style="max-width: 600px" placeholder="Please input">
-       <template #prepend>Http://</template>
-     </s-input>
-   </div>
-   <div class="mt-[4px]">
-     <s-input v-model="input2" style="max-width: 600px" placeholder="Please input">
-       <template #append>.com</template>
-     </s-input>
-   </div>
-   <div class="mt-[4px]">
-     <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
-       <template #prepend>
-         <el-select v-model="select" placeholder="Select" style="width: 215px">
-           <el-option label="Restaurant" value="1" />
-           <el-option label="Order No." value="2" />
-           <el-option label="Tel" value="3" />
-         </el-select>
-       </template>
-       <template #append>
-         <el-button :icon="Search" />
-       </template>
-     </s-input>
-   </div>
-   <div class="mt-[4px]">
-     <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
-       <template #prepend>
-         <el-button :icon="Search" />
-       </template>
-       <template #append>
-         <el-select v-model="select" placeholder="Select" style="width: 215px">
-           <el-option label="Restaurant" value="1" />
-           <el-option label="Order No." value="2" />
-           <el-option label="Tel" value="3" />
-         </el-select>
-       </template>
-     </s-input>
-   </div>
- </div>
-
+  <div class="box">
+    <div>
+      <s-input v-model="input1" style="max-width: 600px" placeholder="Please input">
+        <template #prepend>Http://</template>
+      </s-input>
+    </div>
+    <div class="mt-[4px]">
+      <s-input v-model="input2" style="max-width: 600px" placeholder="Please input">
+        <template #append>.com</template>
+      </s-input>
+    </div>
+    <div class="mt-[4px]">
+      <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
+        <template #prepend>
+          <el-select v-model="select" placeholder="Select" style="width: 215px">
+            <el-option label="Restaurant" value="1" />
+            <el-option label="Order No." value="2" />
+            <el-option label="Tel" value="3" />
+          </el-select>
+        </template>
+        <template #append>
+          <el-button :icon="Search" />
+        </template>
+      </s-input>
+    </div>
+    <div class="mt-[4px]">
+      <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
+        <template #prepend>
+          <el-button :icon="Search" />
+        </template>
+        <template #append>
+          <el-select v-model="select" placeholder="Select" style="width: 215px">
+            <el-option label="Restaurant" value="1" />
+            <el-option label="Order No." value="2" />
+            <el-option label="Tel" value="3" />
+          </el-select>
+        </template>
+      </s-input>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .input-with-select :deep(.el-input-group__prepend) {
   background-color: var(--el-fill-color-blank);
 }
-.box :deep(.el-input-group__prepend), .box :deep(.el-input-group__append){
+.box :deep(.el-input-group__prepend),
+.box :deep(.el-input-group__append) {
   padding: 0 20px !important;
 }
 </style>

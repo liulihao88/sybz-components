@@ -182,7 +182,6 @@ const options = ref({
   ],
 })
 
-
 const themeList = ref([
   { label: '默认', value: '' },
   { label: 'light', value: 'light' },

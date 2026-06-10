@@ -179,7 +179,7 @@ details.value = {
 
 <template>
   <div>
-    <SOverviewItem :details="details" ></SOverviewItem>
+    <SOverviewItem :details="details"></SOverviewItem>
     <SOverviewItem :details="details" style="width: 300%" type="system"></SOverviewItem>
   </div>
 </template>

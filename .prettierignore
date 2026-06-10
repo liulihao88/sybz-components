@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+coverage
+docs/.vitepress/cache
+docs/.vitepress/dist
+docs/.vitepress/.temp
+docs/vite.config.ts.timestamp-*.mjs
+*.log
+*.local
+*.lock
+pnpm-lock.yaml
+bun.lock
+dist.zip

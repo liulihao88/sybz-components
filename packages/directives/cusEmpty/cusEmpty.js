@@ -4,4 +4,3 @@ import createLoadingLikeDirective from '../createLoadingLikeDirective.js'
 let cusEmptyDirective = createLoadingLikeDirective(CusEmpty)
 
 export default cusEmptyDirective
-

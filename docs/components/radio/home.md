@@ -42,16 +42,16 @@ radio/slot
 
 ### 属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `title` | 左侧标题文案 | string | - |
-| `type` | 数据类型，支持 `''` / `simple` / `boolean` | string | `''` |
-| `showType` | 展示形式，支持 `radio` / `button` | string | `radio` |
-| `options` | 单选项列表 | array | `[]` |
-| `border` | 是否显示边框 | boolean | `false` |
-| `value` | 选项值字段名 | string / number / boolean | `value` |
-| `label` | 选项展示字段名 | string / number / boolean | `label` |
-| `itemDisabled` | 单项禁用判断函数 | function | `() => {}` |
+|     属性名     | 说明                                       | 类型                      | 默认值     |
+| :------------: | ------------------------------------------ | ------------------------- | ---------- |
+|    `title`     | 左侧标题文案                               | string                    | -          |
+|     `type`     | 数据类型，支持 `''` / `simple` / `boolean` | string                    | `''`       |
+|   `showType`   | 展示形式，支持 `radio` / `button`          | string                    | `radio`    |
+|   `options`    | 单选项列表                                 | array                     | `[]`       |
+|    `border`    | 是否显示边框                               | boolean                   | `false`    |
+|    `value`     | 选项值字段名                               | string / number / boolean | `value`    |
+|    `label`     | 选项展示字段名                             | string / number / boolean | `label`    |
+| `itemDisabled` | 单项禁用判断函数                           | function                  | `() => {}` |
 
 ### 说明
 

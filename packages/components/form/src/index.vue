@@ -20,7 +20,7 @@ export interface FormSelfProps {
 const props = withDefaults(defineProps<FormSelfProps>(), {
   showFooter: import.meta.env.DEV ? true : false,
   column: 1,
-  align: 'top'
+  align: 'top',
 })
 
 const sFieldList = ref(props.fieldList)
@@ -142,7 +142,12 @@ defineExpose({
             <template v-else>
               <slot :name="v.prop + '-label'" :item="v">
                 <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
-                <s-icon v-else-if="v.imgAttrs?.name" :name="v.imgAttrs?.name" class="s-form__label-icon" v-bind="v.imgAttrs" />
+                <s-icon
+                  v-else-if="v.imgAttrs?.name"
+                  :name="v.imgAttrs?.name"
+                  class="s-form__label-icon"
+                  v-bind="v.imgAttrs"
+                />
                 <s-tooltip :content="v.label" />
               </slot>
             </template>
@@ -165,7 +170,6 @@ defineExpose({
           </template>
         </el-form-item>
       </template>
-      
     </el-form>
     <s-flex justify="center" v-if="showFooter">
       <el-button type="primary" @click="submit" size="small">提交</el-button>

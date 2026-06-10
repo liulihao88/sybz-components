@@ -1,22 +1,9 @@
 <template>
   <div style="margin-bottom: 20px">
-    <el-button size="small" @click="addTab(editableTabsValue)">
-      add tab
-    </el-button>
+    <el-button size="small" @click="addTab(editableTabsValue)">add tab</el-button>
   </div>
-  <s-tabs
-    v-model="editableTabsValue"
-    type="card"
-    class="demo-tabs"
-    closable
-    @tab-remove="removeTab"
-  >
-    <el-tab-pane
-      v-for="item in editableTabs"
-      :key="item.name"
-      :label="item.title"
-      :name="item.name"
-    >
+  <s-tabs v-model="editableTabsValue" type="card" class="demo-tabs" closable @tab-remove="removeTab">
+    <el-tab-pane v-for="item in editableTabs" :key="item.name" :label="item.title" :name="item.name">
       {{ item.content }}
     </el-tab-pane>
   </s-tabs>

@@ -275,7 +275,8 @@ export const isSVGElement = (tag: unknown): tag is SVGElement =>
  *   },
  * })
  */
-export const isComponent = (val: unknown): boolean => isPlainObject(val) && (isFunction(val.render) || isFunction(val.setup))
+export const isComponent = (val: unknown): boolean =>
+  isPlainObject(val) && (isFunction(val.render) || isFunction(val.setup))
 
 /**
  * 判断当前运行环境是否为 iOS。

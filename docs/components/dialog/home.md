@@ -79,7 +79,7 @@ dialog/fillSlot
 |   enableConfirm   | 是否允许使用enter回车键执行confirm事件                                                  | boolean                                       | true   |
 | closeOnClickModal | 是否允许点击模态框关闭弹框                                                              | boolean                                       | true   |
 |      confirm      | 绑定确认按钮的方法, 与方法的区别是, 可以使用属性绑定异步事件而直接让确认按钮加载loading | Function                                      | -      |
-|      fillSlot     | 是否让默认slot内容区撑满dialog body高度, 并由slot内部自行处理滚动                       | boolean                                       | false  |
+|     fillSlot      | 是否让默认slot内容区撑满dialog body高度, 并由slot内部自行处理滚动                       | boolean                                       | false  |
 
 ### 方法
 
@@ -90,8 +90,8 @@ dialog/fillSlot
 
 ### Slots
 
-| 插槽名 | 说明                                                   |
-| :----: | ------------------------------------------------------ |
-| header | 对话框标题内容区；只替换标题文字区域，默认 icon 仍保留 |
-| headerIcon | 对话框标题左侧 icon 内容 |
-| footer | Dialog 按钮操作区的内容                                |
+|   插槽名   | 说明                                                   |
+| :--------: | ------------------------------------------------------ |
+|   header   | 对话框标题内容区；只替换标题文字区域，默认 icon 仍保留 |
+| headerIcon | 对话框标题左侧 icon 内容                               |
+|   footer   | Dialog 按钮操作区的内容                                |

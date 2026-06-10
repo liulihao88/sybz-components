@@ -33,7 +33,6 @@ const navList = [
         高级定时
       </template>
 
-      
       <template #sys>我是服务啊</template>
       <template #base>基础服务</template>
       <template #task>高级定时</template>

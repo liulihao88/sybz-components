@@ -30,7 +30,7 @@ const fieldList = [
     label: '密码',
     prop: 'password',
     comp: 'el-input',
-    placeholder: "请输入数字",
+    placeholder: '请输入数字',
     clearable: true,
     directives: {
       focus: true,

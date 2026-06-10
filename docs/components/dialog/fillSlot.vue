@@ -79,12 +79,12 @@ const columns = [
 
 <template>
   <div>
-    <s-dialog title="基础dialog" v-model="isShow" fillSlot >
+    <s-dialog title="基础dialog" v-model="isShow" fillSlot>
       <s-table :columns="columns" :data="data" ref="tableRef" height="100%"></s-table>
     </s-dialog>
     <el-button type="primary" @click="isShow = true">基础</el-button>
     <el-button type="primary" @click="isShow2 = true">复杂些的</el-button>
-    <s-dialog title="基础dialog" v-model="isShow2" fillSlot >
+    <s-dialog title="基础dialog" v-model="isShow2" fillSlot>
       <s-flex direction="column" class="h-full">
         <div class="mb-4">这是上面的数据</div>
         <div class="mb-4">这是上面的数据</div>

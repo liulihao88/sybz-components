@@ -11,7 +11,7 @@ const options = ref([
 
 <template>
   <div>
-    <s-select v-model="selectValue" :options="options" >
+    <s-select v-model="selectValue" :options="options">
       <template #default="{ options, item }">
         <span>{{ item.label }}</span>
         <span class="text-[var(--red)]">{{ item.value }}</span>

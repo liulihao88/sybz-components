@@ -3,7 +3,7 @@ import { tableData } from './data'
 import { clone } from '@sybz-components/utils'
 
 const indexMethod = (index: number) => {
-  return index + 1 
+  return index + 1
 }
 
 const columns: TableColumnList = [

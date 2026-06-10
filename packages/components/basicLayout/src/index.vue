@@ -166,7 +166,7 @@ const handleIconClick = (event) => {
       </div>
       <span v-if="collapsible" class="collapse-arrow" :class="{ collapsed: isCollapsed }" @click="handleIconClick">
         <slot name="icon">
-          <s-icon name="arrow-down" ></s-icon>
+          <s-icon name="arrow-down"></s-icon>
         </slot>
       </span>
     </div>

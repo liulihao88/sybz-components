@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
 defineOptions({
-  name: "PuoText"
-});
+  name: 'PuoText',
+})
 
-const customContent = ref("自定义tooltip内容");
+const customContent = ref('自定义tooltip内容')
 
 const changeTooltipContent = () => {
-  customContent.value =
-    "现在的时间是: "
-};
+  customContent.value = '现在的时间是: '
+}
 
-console.log(`04 11`, 11);
+console.log(`04 11`, 11)
 </script>
 
 <template>
@@ -52,9 +51,7 @@ console.log(`04 11`, 11);
     <el-space wrap>
       <ul class="content">
         <li>
-          <s-text>
-            测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
-          </s-text>
+          <s-text>测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示</s-text>
           <sText :lineClamp="2">
             测试文本，这是一个稍微有点长的文本，lineClamp参数为2，即两行过长省略后，鼠标悬浮会有tooltip提示,鼠标悬浮会有tooltip提示,鼠标悬浮会有tooltip提示
           </sText>
@@ -66,28 +63,24 @@ console.log(`04 11`, 11);
 
     <p class="mb-2">自定义 Tooltip 内容</p>
     <div class="mb-2">
-      <el-button @click="changeTooltipContent">
-        点击切换下方 Tooltip 内容
-      </el-button>
+      <el-button @click="changeTooltipContent">点击切换下方 Tooltip 内容</el-button>
     </div>
     <el-space wrap>
       <ul class="content">
         <li>
           <sText :tippyProps="{ content: customContent }">
-            props写法 -
-            测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
+            props写法 - 测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
           </sText>
         </li>
         <li>
           <sText>
             <template #content>
               <div>
-                <b>这是插槽写法: </b>
+                <b>这是插槽写法:</b>
                 <div>{{ customContent }}</div>
               </div>
             </template>
-            插槽写法 -
-            测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
+            插槽写法 - 测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
           </sText>
         </li>
       </ul>
@@ -115,11 +108,8 @@ console.log(`04 11`, 11);
     <el-space wrap>
       <ul class="content">
         <li>
-          <sText
-            :tippyProps="{ offset: [0, -20], theme: 'light', arrow: false }"
-          >
-            偏移白色无箭头 -
-            测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
+          <sText :tippyProps="{ offset: [0, -20], theme: 'light', arrow: false }">
+            偏移白色无箭头 - 测试文本，这是一个稍微有点长的文本，过长省略后，鼠标悬浮会有tooltip提示
           </sText>
         </li>
         <li>
@@ -140,13 +130,11 @@ console.log(`04 11`, 11);
             This is a paragraph. Paragraph start
             <sText :truncated="false">
               【 This is sText
-              <sText tag="sup" size="small" :truncated="false">
-                superscript 】
-              </sText>
+              <sText tag="sup" size="small" :truncated="false">superscript 】</sText>
             </sText>
             <el-text>
               【 This is El-Text
-              <el-text tag="sub" size="small"> subscript 】 </el-text>
+              <el-text tag="sub" size="small">subscript 】</el-text>
             </el-text>
             <el-text tag="ins">【Inserted】</el-text>
             <el-text tag="del">【Deleted】</el-text>

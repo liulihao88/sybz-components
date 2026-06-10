@@ -2,7 +2,7 @@
   <s-chart :option="options">
     <el-radio-group
       v-model="accessType"
-      style="position: absolute; right: 10px; top: 0px;"
+      style="position: absolute; right: 10px; top: 0px"
       size="small"
       @change="accessTypeChage"
     >

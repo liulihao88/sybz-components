@@ -1289,7 +1289,7 @@ defineExpose({
     min-height: 0;
   }
 
-.page-wrap {
+  .page-wrap {
     box-sizing: border-box;
     display: flex;
     align-items: center;

@@ -24,14 +24,14 @@ row/gap
 
 ### 属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `col` | 自动包裹为 `el-col` 时的栅格值，也可传数组按顺序指定 | number / number[] | `24` |
-| `gap` | 与 `gutter` 效果一致的间距属性，支持 `processWidth` 写法 | number / string | `''` |
-| `gutter` | 栅格间隔；未传 `gap` 时生效 | number / string | `0` |
-| `justify` | 主轴对齐方式 | `start` / `end` / `center` / `space-around` / `space-between` | `start` |
-| `align` | 交叉轴对齐方式 | `top` / `middle` / `bottom` | `top` |
-| `colAttrs` | 自动生成的 `el-col` 额外属性 | object | `{}` |
+|   属性名   | 说明                                                     | 类型                                                          | 默认值  |
+| :--------: | -------------------------------------------------------- | ------------------------------------------------------------- | ------- |
+|   `col`    | 自动包裹为 `el-col` 时的栅格值，也可传数组按顺序指定     | number / number[]                                             | `24`    |
+|   `gap`    | 与 `gutter` 效果一致的间距属性，支持 `processWidth` 写法 | number / string                                               | `''`    |
+|  `gutter`  | 栅格间隔；未传 `gap` 时生效                              | number / string                                               | `0`     |
+| `justify`  | 主轴对齐方式                                             | `start` / `end` / `center` / `space-around` / `space-between` | `start` |
+|  `align`   | 交叉轴对齐方式                                           | `top` / `middle` / `bottom`                                   | `top`   |
+| `colAttrs` | 自动生成的 `el-col` 额外属性                             | object                                                        | `{}`    |
 
 ### 说明
 

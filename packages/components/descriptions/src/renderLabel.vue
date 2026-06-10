@@ -3,11 +3,11 @@
 </template>
 <script lang="ts" setup>
 defineOptions({
-  name: "RenderLabel"
+  name: 'RenderLabel',
 })
 const props: any = defineProps({
   render: Function,
-  item: Object
+  item: Object,
 })
 const renderComponent = () => {
   return props.render(props?.item)

@@ -804,7 +804,11 @@ enum ValidateType {
   CUSTOM = 'custom',
 }
 
-export function validate(type: string = 'required', rules: ValidateInput = {}, pureValid = false): ValidateRuleResult | boolean {
+export function validate(
+  type: string = 'required',
+  rules: ValidateInput = {},
+  pureValid = false,
+): ValidateRuleResult | boolean {
   const rulesObject: ValidateRules = typeof rules === 'object' && rules !== null ? rules : {}
   let trigger = rulesObject.trigger || []
   // 使用枚举值组成的联合类型来确保类型安全
@@ -1186,14 +1190,8 @@ export function throttle<T extends Func>(fn: T, delay = 1000): (...args: Paramet
  *   return submitForm(form)
  * })
  */
-export function tryCatch<T>(
-  task: Promise<T>,
-  sendLoading?: Ref<boolean> | null,
-): Promise<TryCatchResult<T>>
-export function tryCatch<T>(
-  task: () => T | Promise<T>,
-  sendLoading?: Ref<boolean> | null,
-): Promise<TryCatchResult<T>>
+export function tryCatch<T>(task: Promise<T>, sendLoading?: Ref<boolean> | null): Promise<TryCatchResult<T>>
+export function tryCatch<T>(task: () => T | Promise<T>, sendLoading?: Ref<boolean> | null): Promise<TryCatchResult<T>>
 export async function tryCatch<T>(
   task: TryCatchTask<T>,
   sendLoading?: Ref<boolean> | null,

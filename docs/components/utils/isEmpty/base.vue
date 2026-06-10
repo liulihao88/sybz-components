@@ -11,7 +11,12 @@ const options = [
   { label: 'isEmpty(null)', value: isEmpty(null) },
   { label: "isEmpty('')", value: isEmpty('') },
   { label: "isEmpty(' ')", value: isEmpty(' ') },
-  { label: 'isEmpty(false)', value: isEmpty(false), labelAttrs: { class: 'text-[var(--blue)]' }, valueAttrs: { class: 'text-[var(--blue)]' } },
+  {
+    label: 'isEmpty(false)',
+    value: isEmpty(false),
+    labelAttrs: { class: 'text-[var(--blue)]' },
+    valueAttrs: { class: 'text-[var(--blue)]' },
+  },
   { label: "isEmpty(new Date('无效日期'))", value: isEmpty(new Date('无效日期')) },
   {
     label: 'isEmpty(new Date())',
@@ -19,7 +24,12 @@ const options = [
     labelAttrs: { class: 'text-[var(--blue)]' },
     valueAttrs: { class: 'text-[var(--blue)]' },
   },
-  { label: 'isEmpty(0)', value: isEmpty(0), labelAttrs: { class: 'text-[var(--blue)]' }, valueAttrs: { class: 'text-[var(--blue)]' } },
+  {
+    label: 'isEmpty(0)',
+    value: isEmpty(0),
+    labelAttrs: { class: 'text-[var(--blue)]' },
+    valueAttrs: { class: 'text-[var(--blue)]' },
+  },
   { label: 'isEmpty([])', value: isEmpty([]) },
   { label: 'isEmpty({})', value: isEmpty({}) },
   { label: 'isEmpty(NaN)', value: isEmpty(NaN) },

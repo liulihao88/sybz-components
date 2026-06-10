@@ -56,37 +56,37 @@ tooltip/visible
 
 ### 组件属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `width` | 默认文本触发区域最大宽度 | string | `100%` |
-| `lineClamp` | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1` |
-| `showSlot` | 是否渲染默认触发内容区域 | boolean | `true` |
-| `effect` | tooltip 主题，会透传给 `el-tooltip` | string | `dark` |
-| `tooltipAttrs` | 额外透传给 `el-tooltip` 的配置 | object | `{}` |
+|     属性名     | 说明                                       | 类型            | 默认值 |
+| :------------: | ------------------------------------------ | --------------- | ------ |
+|    `width`     | 默认文本触发区域最大宽度                   | string          | `100%` |
+|  `lineClamp`   | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`    |
+|   `showSlot`   | 是否渲染默认触发内容区域                   | boolean         | `true` |
+|    `effect`    | tooltip 主题，会透传给 `el-tooltip`        | string          | `dark` |
+| `tooltipAttrs` | 额外透传给 `el-tooltip` 的配置             | object          | `{}`   |
 
 ### 常用透传属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `content` | 提示内容；未传默认插槽时，也会作为默认展示文本 | string / VNode | - |
-| `placement` | tooltip 弹出位置 | string | Element Plus 默认值 |
-| `trigger` | 触发方式，支持单个值或数组 | string / string[] | Element Plus 默认值 |
-| `visible` | 受控显示状态 | boolean | - |
-| `disabled` | 是否禁用 tooltip | boolean | `false` |
-| `raw-content` | 是否将 `content` 按 HTML 字符串渲染 | boolean | `false` |
+|    属性名     | 说明                                           | 类型              | 默认值              |
+| :-----------: | ---------------------------------------------- | ----------------- | ------------------- |
+|   `content`   | 提示内容；未传默认插槽时，也会作为默认展示文本 | string / VNode    | -                   |
+|  `placement`  | tooltip 弹出位置                               | string            | Element Plus 默认值 |
+|   `trigger`   | 触发方式，支持单个值或数组                     | string / string[] | Element Plus 默认值 |
+|   `visible`   | 受控显示状态                                   | boolean           | -                   |
+|  `disabled`   | 是否禁用 tooltip                               | boolean           | `false`             |
+| `raw-content` | 是否将 `content` 按 HTML 字符串渲染            | boolean           | `false`             |
 
 ### 事件
 
-| 事件名 | 说明 |
-| :----: | ---- |
+| 事件名  | 说明                   |
+| :-----: | ---------------------- |
 | `click` | 点击触发内容区域时触发 |
 
 ### 插槽
 
-| 插槽名 | 说明 |
-| :----: | ---- |
+|  插槽名   | 说明                                       |
+| :-------: | ------------------------------------------ |
 | `default` | 自定义触发区域；常用于包裹按钮、图标等元素 |
-| `content` | 自定义 tooltip 内容 |
+| `content` | 自定义 tooltip 内容                        |
 
 ### 说明
 

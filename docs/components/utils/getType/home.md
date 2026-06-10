@@ -20,9 +20,9 @@ getType(value)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
-| `value` | `unknown` | 是 | - | 要判断类型的任意值。 |
+| 参数    | 类型      | 必填 | 默认值 | 说明                 |
+| ------- | --------- | ---- | ------ | -------------------- |
+| `value` | `unknown` | 是   | -      | 要判断类型的任意值。 |
 
 ### 返回值
 
@@ -30,18 +30,18 @@ getType(value)
 
 常见返回值：
 
-| 输入 | 返回值 |
-| --- | --- |
-| `123` | `'number'` |
-| `'text'` | `'string'` |
-| `null` | `'null'` |
-| `undefined` | `'undefined'` |
-| `[]` | `'array'` |
-| `{}` | `'object'` |
-| `new Date()` | `'date'` |
-| `/abc/` | `'regexp'` |
-| `new Map()` | `'map'` |
-| `new WeakMap()` | `'weakmap'` |
+| 输入            | 返回值        |
+| --------------- | ------------- |
+| `123`           | `'number'`    |
+| `'text'`        | `'string'`    |
+| `null`          | `'null'`      |
+| `undefined`     | `'undefined'` |
+| `[]`            | `'array'`     |
+| `{}`            | `'object'`    |
+| `new Date()`    | `'date'`      |
+| `/abc/`         | `'regexp'`    |
+| `new Map()`     | `'map'`       |
+| `new WeakMap()` | `'weakmap'`   |
 
 ### 常用场景
 

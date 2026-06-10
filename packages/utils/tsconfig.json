@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2015",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "removeComments": false,
     "module": "CommonJS",
     "declaration": true,
@@ -26,6 +23,8 @@
     "local/saveTsFunc.ts",
     "local/customVitePluginFilePath.ts",
     "local/is.ts",
-    "local/types.ts"
-, "withInstall.ts", "oldIndex.ts"  ]
+    "local/types.ts",
+    "withInstall.ts",
+    "oldIndex.ts"
+  ]
 }

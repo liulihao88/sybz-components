@@ -28,16 +28,16 @@ itemWrapper/scroll
 
 ### API
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `gap` | 子项之间的间距，内部会经过 `processWidth` 处理 | string / number | `16px` |
-| `columns` | 每行展示的列数；不传时保持横向 flex 布局 | number | `null` |
-| `minWidth` | 子项最小宽度，内部会经过 `processWidth` 处理 | string / number | `0` |
+|   属性名   | 说明                                           | 类型            | 默认值 |
+| :--------: | ---------------------------------------------- | --------------- | ------ |
+|   `gap`    | 子项之间的间距，内部会经过 `processWidth` 处理 | string / number | `16px` |
+| `columns`  | 每行展示的列数；不传时保持横向 flex 布局       | number          | `null` |
+| `minWidth` | 子项最小宽度，内部会经过 `processWidth` 处理   | string / number | `0`    |
 
 ### 插槽
 
-| 插槽名 | 说明 |
-| :----: | ---- |
+|  插槽名   | 说明                               |
+| :-------: | ---------------------------------- |
 | `default` | 需要包裹的 `s-item` 或任意块级内容 |
 
 ### 说明

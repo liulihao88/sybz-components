@@ -36,7 +36,7 @@
       placeholder="Please input"
     />
 
-    <s-title title="输入长度限制" :sub-title='subTitle'></s-title>
+    <s-title title="输入长度限制" :sub-title="subTitle"></s-title>
 
     <el-input
       v-model="text"
@@ -88,5 +88,6 @@ const input = ref('')
 
 const text = ref('')
 const textarea = ref('')
-const subTitle='使用 maxlength 和 minlength 属性, 来控制输入内容的最大字数和最小字数。 "字符数"使用JavaScript字符串长度来衡量。 为文本或文本输入类型设置 maxlength prop可以限制输入值的长度。 允许你通过设置 show-word-limit 到 true 来显示剩余字数。 从 2.11.5 版本开始，你可以将 word-limit-position 设置为 outside，以在输入框外显示字数统计。'
+const subTitle =
+  '使用 maxlength 和 minlength 属性, 来控制输入内容的最大字数和最小字数。 "字符数"使用JavaScript字符串长度来衡量。 为文本或文本输入类型设置 maxlength prop可以限制输入值的长度。 允许你通过设置 show-word-limit 到 true 来显示剩余字数。 从 2.11.5 版本开始，你可以将 word-limit-position 设置为 outside，以在输入框外显示字数统计。'
 </script>

@@ -4,7 +4,6 @@ const { proxy } = getCurrentInstance()
 const objectCount = ref([])
 const objectSize = ref([])
 
-
 setTimeout(() => {
   objectCount.value = [
     {

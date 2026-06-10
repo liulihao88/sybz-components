@@ -10,7 +10,7 @@ success.value
 </script>
 
 <template>
-  <div class="p-100 bg-[var(--blue)] ">
+  <div class="p-100 bg-[var(--blue)]">
     <div>docs/components/test/base.vue</div>
   </div>
 </template>

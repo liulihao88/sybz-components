@@ -7,9 +7,9 @@ const { proxy } = getCurrentInstance()
   <div>
     <s-progress :percentage="80"></s-progress>
     <br />
-    <s-progress :percentage="50" :indeterminate="true" color="blue" ></s-progress>
+    <s-progress :percentage="50" :indeterminate="true" color="blue"></s-progress>
     <br />
-    <s-progress :percentage="50" :indeterminate="true"  :stroke-width="10" :show-text="false"></s-progress>
+    <s-progress :percentage="50" :indeterminate="true" :stroke-width="10" :show-text="false"></s-progress>
     <br />
     <s-progress type="circle" :percentage="25"></s-progress>
     <br />

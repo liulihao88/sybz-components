@@ -20,30 +20,30 @@ flex/usually
 
 ### API
 
-| 属性名 | 说明 | 类型 | 可选值 | 默认值 |
-| :----: | ---- | ---- | ------ | ------ |
-| `direction` | 主轴方向，对应 `flex-direction` | string | `row` / `row-reverse` / `column` / `column-reverse` | `row` |
-| `wrap` | 是否换行，对应 `flex-wrap` | string | `nowrap` / `wrap` / `wrap-reverse` | `nowrap` |
-| `justify` | 主轴对齐方式，对应 `justify-content` | string | `start` / `end` / `center` / `space-between` / `space-around` / `space-evenly` / `normal` | `normal` |
-| `align` | 交叉轴对齐方式，对应 `align-items` | string | `start` / `end` / `center` / `baseline` / `stretch` / `normal` | `normal` |
-| `gap` | 子元素间距，对应 `gap` | string / number | `small` / `default` / `large` / 任意可被 `processWidth` 处理的宽度 | `0px` |
-| `flex` | 当前 `s-flex` 自身在父级 flex 容器中的伸缩规则，对应 CSS `flex` 简写 | string | 任意合法 CSS `flex` 值，如 `1`、`0 0 180px` | `''` |
-| `component` | 自定义根节点标签或组件 | string / Component | 原生标签名或 Vue 组件 | `div` |
+|   属性名    | 说明                                                                 | 类型               | 可选值                                                                                    | 默认值   |
+| :---------: | -------------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------- | -------- |
+| `direction` | 主轴方向，对应 `flex-direction`                                      | string             | `row` / `row-reverse` / `column` / `column-reverse`                                       | `row`    |
+|   `wrap`    | 是否换行，对应 `flex-wrap`                                           | string             | `nowrap` / `wrap` / `wrap-reverse`                                                        | `nowrap` |
+|  `justify`  | 主轴对齐方式，对应 `justify-content`                                 | string             | `start` / `end` / `center` / `space-between` / `space-around` / `space-evenly` / `normal` | `normal` |
+|   `align`   | 交叉轴对齐方式，对应 `align-items`                                   | string             | `start` / `end` / `center` / `baseline` / `stretch` / `normal`                            | `normal` |
+|    `gap`    | 子元素间距，对应 `gap`                                               | string / number    | `small` / `default` / `large` / 任意可被 `processWidth` 处理的宽度                        | `0px`    |
+|   `flex`    | 当前 `s-flex` 自身在父级 flex 容器中的伸缩规则，对应 CSS `flex` 简写 | string             | 任意合法 CSS `flex` 值，如 `1`、`0 0 180px`                                               | `''`     |
+| `component` | 自定义根节点标签或组件                                               | string / Component | 原生标签名或 Vue 组件                                                                     | `div`    |
 
 ### Gap 预设
 
-| 值 | 转换结果 |
-| :--: | -------- |
-| `small` | `8px` |
-| `default` | `16px` |
-| `large` | `24px` |
-| number | 交给 `processWidth` 处理，通常转成 `px` |
-| string | 交给 `processWidth` 处理，例如 `12px`、`1rem`、`50%` |
+|    值     | 转换结果                                             |
+| :-------: | ---------------------------------------------------- |
+|  `small`  | `8px`                                                |
+| `default` | `16px`                                               |
+|  `large`  | `24px`                                               |
+|  number   | 交给 `processWidth` 处理，通常转成 `px`              |
+|  string   | 交给 `processWidth` 处理，例如 `12px`、`1rem`、`50%` |
 
 ### 插槽
 
-| 插槽名 | 说明 |
-| :----: | ---- |
+|  插槽名   | 说明              |
+| :-------: | ----------------- |
 | `default` | flex 容器内部内容 |
 
 ### 说明

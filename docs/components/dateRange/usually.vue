@@ -33,12 +33,7 @@ const disabledDate = (time) => {
       type="datetimerange"
     />
     <s-title title="选择单个日期, 并且是时间戳"></s-title>
-    <s-date-range
-      v-model="dateSimple"
-      title="完犊子"
-      type="datetime"
-      value-format="x"
-    ></s-date-range>
+    <s-date-range v-model="dateSimple" title="完犊子" type="datetime" value-format="x"></s-date-range>
     {{ dateSimple }}
 
     <br />

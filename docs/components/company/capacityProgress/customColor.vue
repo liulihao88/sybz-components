@@ -32,7 +32,7 @@ function parseSpace(space) {
       value="OVERFLOW"
       :customColor="true"
     ></s-capacity-progress>
-    <br>
+    <br />
     <s-capacity-progress
       :total="row.totalSpace"
       :used="row.usedSpace"
@@ -42,7 +42,7 @@ function parseSpace(space) {
       value="SUFFICIENT"
       :customColor="true"
     ></s-capacity-progress>
-    <br></br>
+    <br />
     <s-capacity-progress
       :total="row.totalSpace"
       :used="row.usedSpace"
@@ -52,7 +52,7 @@ function parseSpace(space) {
       value="UNKNOWN"
       :customColor="true"
     ></s-capacity-progress>
-    <br></br>
+    <br />
     <s-capacity-progress
       :total="row.totalSpace"
       :used="row.usedSpace"

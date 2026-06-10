@@ -112,8 +112,8 @@ function clearAll() {
   emit('update:modelValue', [])
 }
 
-const blurInput = ()=>{
-  if(currentval.value){
+const blurInput = () => {
+  if (currentval.value) {
     addlabel()
   }
 }

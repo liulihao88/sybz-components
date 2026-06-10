@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-radio v-model="value" :options="options" value="id" label="name"  />
+    <s-radio v-model="value" :options="options" value="id" label="name" />
     <br />
     <s-radio v-model="value" :options="options" value="id" label="name" showType="button" size="small" />
   </div>

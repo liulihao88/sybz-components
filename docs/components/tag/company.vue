@@ -39,7 +39,7 @@ const nodeStatus = [
   },
 ]
 
-const data:any = ref([])
+const data: any = ref([])
 
 const firstTimer = window.setTimeout(() => {
   data.value = [

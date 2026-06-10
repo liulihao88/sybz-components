@@ -44,41 +44,41 @@ tag/async
 
 ### 属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `value` | 当前值；未传默认插槽时会作为标签内容或映射源 | string / number | - |
-| `type` | 直接指定标签类型 | `primary` / `success` / `info` / `warning` / `danger` | - |
-| `options` | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法 | array | `[]` |
-| `config` | 平铺数组模式下的字段映射配置 | `{ label?: string, value?: string }` | `{}` |
-| `primary` | 匹配为主色标签的规则 | boolean / string / number / array | - |
-| `info` | 匹配为信息标签的规则 | boolean / string / number / array | - |
-| `warning` | 匹配为警告标签的规则 | boolean / string / number / array | - |
-| `danger` | 匹配为危险标签的规则 | boolean / string / number / array | - |
-| `other` | 未命中任何规则时的兜底标签类型 | string | `primary` |
-| `width` | 标签宽度，会经过 `handleWidthHeight` 处理 | string / number | - |
-| `height` | 标签高度，会经过 `handleWidthHeight` 处理 | string / number | - |
+|  属性名   | 说明                                                        | 类型                                                  | 默认值    |
+| :-------: | ----------------------------------------------------------- | ----------------------------------------------------- | --------- |
+|  `value`  | 当前值；未传默认插槽时会作为标签内容或映射源                | string / number                                       | -         |
+|  `type`   | 直接指定标签类型                                            | `primary` / `success` / `info` / `warning` / `danger` | -         |
+| `options` | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法 | array                                                 | `[]`      |
+| `config`  | 平铺数组模式下的字段映射配置                                | `{ label?: string, value?: string }`                  | `{}`      |
+| `primary` | 匹配为主色标签的规则                                        | boolean / string / number / array                     | -         |
+|  `info`   | 匹配为信息标签的规则                                        | boolean / string / number / array                     | -         |
+| `warning` | 匹配为警告标签的规则                                        | boolean / string / number / array                     | -         |
+| `danger`  | 匹配为危险标签的规则                                        | boolean / string / number / array                     | -         |
+|  `other`  | 未命中任何规则时的兜底标签类型                              | string                                                | `primary` |
+|  `width`  | 标签宽度，会经过 `handleWidthHeight` 处理                   | string / number                                       | -         |
+| `height`  | 标签高度，会经过 `handleWidthHeight` 处理                   | string / number                                       | -         |
 
 ### 常用透传属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `effect` | 标签主题 | `dark` / `light` / `plain` | `light` |
-| `size` | 标签尺寸 | `large` / `default` / `small` | `default` |
-| `closable` | 是否显示关闭按钮 | boolean | `false` |
-| `round` | 是否使用圆角样式 | boolean | `false` |
-| `hit` | 是否有描边效果 | boolean | `false` |
+|   属性名   | 说明             | 类型                          | 默认值    |
+| :--------: | ---------------- | ----------------------------- | --------- |
+|  `effect`  | 标签主题         | `dark` / `light` / `plain`    | `light`   |
+|   `size`   | 标签尺寸         | `large` / `default` / `small` | `default` |
+| `closable` | 是否显示关闭按钮 | boolean                       | `false`   |
+|  `round`   | 是否使用圆角样式 | boolean                       | `false`   |
+|   `hit`    | 是否有描边效果   | boolean                       | `false`   |
 
 ### 事件
 
-| 事件名 | 说明 |
-| :----: | ---- |
-| `click` | 点击标签时触发，透传自 `el-tag` |
+| 事件名  | 说明                                   |
+| :-----: | -------------------------------------- |
+| `click` | 点击标签时触发，透传自 `el-tag`        |
 | `close` | 关闭标签时触发，需配合 `closable` 使用 |
 
 ### 插槽
 
-| 插槽名 | 说明 |
-| :----: | ---- |
+|  插槽名   | 说明                                                    |
+| :-------: | ------------------------------------------------------- |
 | `default` | 自定义标签内容；传入后会覆盖默认的 `value`/映射文案展示 |
 
 ### options 数据格式

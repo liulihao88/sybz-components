@@ -32,17 +32,10 @@ const computedBoxStyle = computed(() => {
 const sizeClass = computed(() => {
   return attrs.size ? `el-input--${attrs.size}` : 's-comp-title__base-size'
 })
-
 </script>
 
 <template>
-  <div
-    class="s-comp-title"
-    :class="sizeClass"
-    :style="{ ...computedBoxStyle }"
-    v-bind="$attrs"
-    v-if="props.title"
-  >
+  <div class="s-comp-title" :class="sizeClass" :style="{ ...computedBoxStyle }" v-bind="$attrs" v-if="props.title">
     {{ props.title }}
   </div>
 </template>

@@ -38,7 +38,7 @@ const iconLists = ref([
     <s-icon name="close" class="is-loading"></s-icon>
     <s-icon name="refresh" content="刷新" class="text-[var(--blue)]"></s-icon>
 
-    <hr>
+    <hr />
 
     <div>
       <template v-for="(v, i) in iconLists" :key="i">
@@ -46,7 +46,7 @@ const iconLists = ref([
       </template>
     </div>
 
-    <hr>
+    <hr />
     <s-title title="支持首字母大写, 驼峰, 中划线命名"></s-title>
     <s-icon name="AddLocation"></s-icon>
     <s-icon name="addLocation"></s-icon>

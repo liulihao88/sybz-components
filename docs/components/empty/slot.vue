@@ -17,7 +17,6 @@ const { proxy } = getCurrentInstance()
 </template>
 
 <style scoped lang="scss">
-
 .img-box {
   width: 40px;
 }

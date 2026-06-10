@@ -14,7 +14,6 @@ function throttle3000() {
 function inputChange() {
   console.log(`inputValue.value`, inputValue.value)
 }
-
 </script>
 
 <template>

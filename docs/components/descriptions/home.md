@@ -42,35 +42,35 @@ descriptions/customStyle
 
 ### API
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `options` | 描述项配置列表 | `ItemOptions[]` | - |
-| `column` | 一行展示的描述项数量 | number | `3` |
-| `labelWidth` | label 宽度，传 `auto` 时会按最长 label 自动计算 | string / number | `auto` |
-| `showAll` | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean | `false` |
+|    属性名    | 说明                                                     | 类型            | 默认值  |
+| :----------: | -------------------------------------------------------- | --------------- | ------- |
+|  `options`   | 描述项配置列表                                           | `ItemOptions[]` | -       |
+|   `column`   | 一行展示的描述项数量                                     | number          | `3`     |
+| `labelWidth` | label 宽度，传 `auto` 时会按最长 label 自动计算          | string / number | `auto`  |
+|  `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean         | `false` |
 
 ### ItemOptions
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `label` | 标签文本 | string | - |
-| `value` | 内容值 | any | - |
-| `labelSlot` | 自定义 label 插槽名 | string | - |
-| `valueSlot` | 自定义 value 插槽名 | string | - |
-| `labelRender` | 自定义 label 渲染函数 | `(item) => VNode \| string` | - |
-| `render` | 自定义 value 渲染函数 | `(item) => VNode \| string` | - |
-| `filter` | 内容值格式化函数 | `(value) => any` | - |
-| `attrs` | 透传给 `el-descriptions-item` 的属性 | object | - |
-| `labelAttrs` | 透传给 label 内部 `s-tooltip` 的属性 | object | - |
-| `valueAttrs` | 透传给 value 内部 `s-tooltip` 的属性 | object | - |
+|    属性名     | 说明                                 | 类型                        | 默认值 |
+| :-----------: | ------------------------------------ | --------------------------- | ------ |
+|    `label`    | 标签文本                             | string                      | -      |
+|    `value`    | 内容值                               | any                         | -      |
+|  `labelSlot`  | 自定义 label 插槽名                  | string                      | -      |
+|  `valueSlot`  | 自定义 value 插槽名                  | string                      | -      |
+| `labelRender` | 自定义 label 渲染函数                | `(item) => VNode \| string` | -      |
+|   `render`    | 自定义 value 渲染函数                | `(item) => VNode \| string` | -      |
+|   `filter`    | 内容值格式化函数                     | `(value) => any`            | -      |
+|    `attrs`    | 透传给 `el-descriptions-item` 的属性 | object                      | -      |
+| `labelAttrs`  | 透传给 label 内部 `s-tooltip` 的属性 | object                      | -      |
+| `valueAttrs`  | 透传给 value 内部 `s-tooltip` 的属性 | object                      | -      |
 
 ### 插槽
 
-| 插槽名 | 说明 | 插槽参数 |
-| :----: | ---- | -------- |
-| `default` | 自定义完整描述内容，会覆盖 `options` 渲染 | - |
-| `labelSlot` 对应名称 | 自定义某一项 label | `{ item, label, value, index }` |
-| `valueSlot` 对应名称 | 自定义某一项 value | `{ item, label, value, index }` |
+|        插槽名        | 说明                                      | 插槽参数                        |
+| :------------------: | ----------------------------------------- | ------------------------------- |
+|      `default`       | 自定义完整描述内容，会覆盖 `options` 渲染 | -                               |
+| `labelSlot` 对应名称 | 自定义某一项 label                        | `{ item, label, value, index }` |
+| `valueSlot` 对应名称 | 自定义某一项 value                        | `{ item, label, value, index }` |
 
 ### 透传属性
 

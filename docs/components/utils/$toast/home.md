@@ -33,18 +33,18 @@ $toast.warning(message, options)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
-| `message` | `string \| VNode \| () => VNode \| ToastOptions` | 是 | - | 提示内容。传对象时会被当成完整的 Element Plus `MessageOptions` 使用。 |
-| `type` | `'success' \| 'info' \| 'error' \| 'warning' \| 's' \| 'i' \| 'e' \| 'w' \| ToastOptions` | 否 | `'success'` | 提示类型。`s/i/e/w` 分别是 `success/info/error/warning` 的简写；传对象时表示第二参数直接作为配置项。 |
-| `otherParams` | `ToastOptions` | 否 | `{}` | 额外配置，会透传给 `ElMessage`。 |
+| 参数          | 类型                                                                                      | 必填 | 默认值      | 说明                                                                                                 |
+| ------------- | ----------------------------------------------------------------------------------------- | ---- | ----------- | ---------------------------------------------------------------------------------------------------- |
+| `message`     | `string \| VNode \| () => VNode \| ToastOptions`                                          | 是   | -           | 提示内容。传对象时会被当成完整的 Element Plus `MessageOptions` 使用。                                |
+| `type`        | `'success' \| 'info' \| 'error' \| 'warning' \| 's' \| 'i' \| 'e' \| 'w' \| ToastOptions` | 否   | `'success'` | 提示类型。`s/i/e/w` 分别是 `success/info/error/warning` 的简写；传对象时表示第二参数直接作为配置项。 |
+| `otherParams` | `ToastOptions`                                                                            | 否   | `{}`        | 额外配置，会透传给 `ElMessage`。                                                                     |
 
 `ToastOptions` 在 Element Plus `MessageOptions` 基础上额外支持：
 
-| 字段 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `closeAll` | `boolean` | `false` | 显示当前消息前是否先关闭页面上已有的全部消息。 |
-| `customClass` | `string` | `'s-antd-message'` | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生样式，不追加默认类名。 |
+| 字段          | 类型      | 默认值             | 说明                                                                     |
+| ------------- | --------- | ------------------ | ------------------------------------------------------------------------ |
+| `closeAll`    | `boolean` | `false`            | 显示当前消息前是否先关闭页面上已有的全部消息。                           |
+| `customClass` | `string`  | `'s-antd-message'` | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生样式，不追加默认类名。 |
 
 ### 返回值
 

@@ -90,7 +90,6 @@ const handleCheckAll = (val) => {
         :options="baseOptions"
         :itemDisabled="(item) => item.disabled"
       ></s-select>
-  
     </s-flex>
 
     <s-title title="禁用状态, 可清空" sub-title="disabled, clearable" t="10">
@@ -106,8 +105,6 @@ const handleCheckAll = (val) => {
         <template #footer>我来组成底部</template>
       </s-select>
     </s-title>
-
-    
   </div>
 </template>
 

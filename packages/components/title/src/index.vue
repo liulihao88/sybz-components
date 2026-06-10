@@ -131,7 +131,6 @@ const parseClass = computed(() => {
   }
   return 's-title__top-left'
 })
-
 </script>
 
 <style scoped lang="scss">

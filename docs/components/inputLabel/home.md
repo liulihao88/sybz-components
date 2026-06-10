@@ -16,18 +16,18 @@ inputLabel/usually
 
 ### 属性
 
-| 属性名 | 说明 | 类型 | 默认值 |
-| :----: | ---- | ---- | ------ |
-| `modelValue` | 标签数组值 | array | `[]` |
-| `isComplex` | 是否按对象数组处理，开启后默认写入 `{ name }` 结构 | boolean | `false` |
-| `regexp` | 输入校验正则 | RegExp | - |
-| `message` | 校验失败提示文案 | string | `输入有误` |
-| `inputAttrs` | 透传给内部 `s-input` 的属性 | object | `{}` |
+|    属性名    | 说明                                               | 类型    | 默认值     |
+| :----------: | -------------------------------------------------- | ------- | ---------- |
+| `modelValue` | 标签数组值                                         | array   | `[]`       |
+| `isComplex`  | 是否按对象数组处理，开启后默认写入 `{ name }` 结构 | boolean | `false`    |
+|   `regexp`   | 输入校验正则                                       | RegExp  | -          |
+|  `message`   | 校验失败提示文案                                   | string  | `输入有误` |
+| `inputAttrs` | 透传给内部 `s-input` 的属性                        | object  | `{}`       |
 
 ### Exposes
 
-| 名称 | 说明 | 类型 |
-| :--: | ---- | ---- |
+|    名称     | 说明             | 类型     |
+| :---------: | ---------------- | -------- |
 | `$getValue` | 获取当前标签数组 | function |
 
 ### 说明

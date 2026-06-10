@@ -21,7 +21,8 @@ const useComponent = () => {
 </script>
 
 <template>
-   注意: `confirm` 现在默认会显示取消/确认按钮并带默认 icon。这里的提示仍然是组件内容本身的 icon 渲染问题，如果需要将 `SWarning` 作为参数传入，建议使用原生的 `ElMessageBox.confirm`
+  注意: `confirm` 现在默认会显示取消/确认按钮并带默认 icon。这里的提示仍然是组件内容本身的 icon 渲染问题，如果需要将
+  `SWarning` 作为参数传入，建议使用原生的 `ElMessageBox.confirm`
   <el-button type="primary" @click="isShow = true">使用组件</el-button>
   <s-dialog ref="dialogRef" title="base" v-model="isShow">
     <div class="h-[500px]">

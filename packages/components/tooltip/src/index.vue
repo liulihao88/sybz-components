@@ -93,7 +93,7 @@ const dynamicComponent = computed(() => {
   const content = attrs.content
   if (isVNodeContent.value) {
     return {
-      render: () => content
+      render: () => content,
     }
   }
   return null

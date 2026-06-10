@@ -44,7 +44,9 @@
                 <span class="s-select__fraction-line"></span>
                 <span class="s-select__fraction-text">{{ sOptions.length }}</span>
               </span>
-              <span v-else class="s-select__fraction-text s-select__fraction-text--absolute">{{ sOptions.length }}</span>
+              <span v-else class="s-select__fraction-text s-select__fraction-text--absolute">
+                {{ sOptions.length }}
+              </span>
             </slot>
           </template>
           <template v-if="$slots.label" #label="arg">

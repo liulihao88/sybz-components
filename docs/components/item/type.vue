@@ -38,7 +38,7 @@
         formatBytes: true,
         formatThousands: true,
         toFixed: true,
-        center: true
+        center: true,
       }"
       height="300"
     ></SItem>

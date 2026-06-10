@@ -11,10 +11,7 @@ const vnodeContent = h('div', {}, [
   h('div', '1. 支持直接传入 VNode 作为 tooltip 内容'),
   h('div', '2. 适合结构化说明、规则列表等场景'),
   h('div', '3. 与 click、hover 等触发方式可以组合使用'),
-  h(
-    'div',
-    '4. 如果内容比较复杂，优先推荐使用 VNode 或 content 插槽，而不是一大段 HTML 字符串。',
-  ),
+  h('div', '4. 如果内容比较复杂，优先推荐使用 VNode 或 content 插槽，而不是一大段 HTML 字符串。'),
 ])
 </script>
 

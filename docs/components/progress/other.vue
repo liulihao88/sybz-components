@@ -12,7 +12,12 @@ const defaultColor = ref(true)
 <template>
   <el-card shadow="never">
     <template #header>
-      <s-radio v-model="defaultColor" :options="[true, false]" type="simple" title="不使用el-progress默认颜色"></s-radio>
+      <s-radio
+        v-model="defaultColor"
+        :options="[true, false]"
+        type="simple"
+        title="不使用el-progress默认颜色"
+      ></s-radio>
     </template>
 
     <div class="mb-4">直线进度条动画</div>

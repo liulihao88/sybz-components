@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="bg-white p-2" v-throttle="($event) => handleEvent($event, '其他传参')">
-      可以传参的
-    </div>
+    <div class="bg-white p-2" v-throttle="($event) => handleEvent($event, '其他传参')">可以传参的</div>
     <div v-throttle.click.scroll.1000="handleEvent" class="h-[300px] s-a cursor-pointer">
       <h1>这里, click和scroll事件, 都添加了500毫秒的节流</h1>
       <h1>

@@ -34,23 +34,23 @@ confirm(message, options, appContext)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
-| `message` | `string \| VNode \| () => VNode` | 是 | - | 确认框内容。可以传普通文本、HTML 字符串、VNode，或返回 VNode 的函数。 |
-| `options` | `ConfirmOptions` | 否 | `{}` | Element Plus `ElMessageBoxOptions` 配置，并额外支持 `appendTo`、`appContext`。 |
-| `appContext` | `AppContext \| null` | 否 | `null` | Vue 应用上下文。多应用或需要渲染组件内容时可手动传入。 |
+| 参数         | 类型                             | 必填 | 默认值 | 说明                                                                           |
+| ------------ | -------------------------------- | ---- | ------ | ------------------------------------------------------------------------------ |
+| `message`    | `string \| VNode \| () => VNode` | 是   | -      | 确认框内容。可以传普通文本、HTML 字符串、VNode，或返回 VNode 的函数。          |
+| `options`    | `ConfirmOptions`                 | 否   | `{}`   | Element Plus `ElMessageBoxOptions` 配置，并额外支持 `appendTo`、`appContext`。 |
+| `appContext` | `AppContext \| null`             | 否   | `null` | Vue 应用上下文。多应用或需要渲染组件内容时可手动传入。                         |
 
 `ConfirmOptions` 常用字段：
 
-| 字段 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `title` | `string` | `'提示'` | 确认框标题。 |
-| `showCancelButton` | `boolean` | `true` | 是否显示取消按钮。 |
-| `cancelButtonText` | `string` | `'取消'` | 取消按钮文案。 |
-| `confirmButtonText` | `string` | `'确定'` | 确认按钮文案。 |
-| `dangerouslyUseHTMLString` | `boolean` | `true` | 是否把字符串内容按 HTML 渲染。 |
-| `appendTo` | `string \| HTMLElement \| null` | 自动识别当前弹窗 | 指定 MessageBox 挂载节点。传普通字符串时会优先按 `id` 查询。 |
-| `appContext` | `AppContext \| null` | 自动解析 | 手动指定 Vue 应用上下文。优先级高于第三个参数。 |
+| 字段                       | 类型                            | 默认值           | 说明                                                         |
+| -------------------------- | ------------------------------- | ---------------- | ------------------------------------------------------------ |
+| `title`                    | `string`                        | `'提示'`         | 确认框标题。                                                 |
+| `showCancelButton`         | `boolean`                       | `true`           | 是否显示取消按钮。                                           |
+| `cancelButtonText`         | `string`                        | `'取消'`         | 取消按钮文案。                                               |
+| `confirmButtonText`        | `string`                        | `'确定'`         | 确认按钮文案。                                               |
+| `dangerouslyUseHTMLString` | `boolean`                       | `true`           | 是否把字符串内容按 HTML 渲染。                               |
+| `appendTo`                 | `string \| HTMLElement \| null` | 自动识别当前弹窗 | 指定 MessageBox 挂载节点。传普通字符串时会优先按 `id` 查询。 |
+| `appContext`               | `AppContext \| null`            | 自动解析         | 手动指定 Vue 应用上下文。优先级高于第三个参数。              |
 
 ### 返回值
 

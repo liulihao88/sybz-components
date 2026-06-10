@@ -21,18 +21,18 @@ await validForm(formRef, options)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| --- | --- | --- | --- | --- |
-| `formRef` | `FormInstance \| Ref<FormInstance>` | 是 | - | Element Plus 表单实例，或保存表单实例的 Vue `ref`。 |
-| `options` | `ValidFormOptions` | 否 | `{}` | 校验失败时的提示配置。 |
+| 参数      | 类型                                | 必填 | 默认值 | 说明                                                |
+| --------- | ----------------------------------- | ---- | ------ | --------------------------------------------------- |
+| `formRef` | `FormInstance \| Ref<FormInstance>` | 是   | -      | Element Plus 表单实例，或保存表单实例的 Vue `ref`。 |
+| `options` | `ValidFormOptions`                  | 否   | `{}`   | 校验失败时的提示配置。                              |
 
 `ValidFormOptions` 字段：
 
-| 字段 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| `message` | `string` | `'表单校验错误, 请检查'` | 校验失败时的提示文案。 |
-| `detail` | `boolean` | `false` | 是否在提示文案后拼接失败字段名。 |
-| `showMessage` | `boolean` | `true` | 是否通过 `$toast` 显示错误提示。 |
+| 字段          | 类型      | 默认值                   | 说明                             |
+| ------------- | --------- | ------------------------ | -------------------------------- |
+| `message`     | `string`  | `'表单校验错误, 请检查'` | 校验失败时的提示文案。           |
+| `detail`      | `boolean` | `false`                  | 是否在提示文案后拼接失败字段名。 |
+| `showMessage` | `boolean` | `true`                   | 是否通过 `$toast` 显示错误提示。 |
 
 ### 返回值
 

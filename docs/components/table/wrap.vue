@@ -88,8 +88,8 @@ const columns = [
         comp: 's-icon',
         attrs: {
           name: 'edit',
-          content: '编辑'
-        }
+          content: '编辑',
+        },
       },
     ],
   },

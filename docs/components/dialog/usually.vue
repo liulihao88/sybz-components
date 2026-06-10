@@ -10,7 +10,7 @@ const confirmLoading = ref(false)
 async function cusConfirm() {
   console.log(`***** 点我作甚  10行 docs/examples/SDialog/usually.vue  15:06:26`)
   confirmLoading.value = true
-  proxy.$toast('正在保存', 'i');
+  proxy.$toast('正在保存', 'i')
   await sleep(2000)
   proxy.$toast('保存成功', { duration: 3000 })
   confirmLoading.value = false

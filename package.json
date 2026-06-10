@@ -28,6 +28,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "lint:prettier": "prettier --write \"*.{js,ts,json,css,scss,vue,html,md,yml,yaml}\" \"{docs,packages,public,scripts,skills}/**/*.{js,ts,json,tsx,jsx,css,scss,vue,html,md,yml,yaml}\"",
     "release": "pnpm build && npm version patch && npm publish",
     "format": "prettier --write example/ packages/ docs/",
     "docsdev": "vitepress dev docs",

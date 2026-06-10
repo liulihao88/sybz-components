@@ -440,10 +440,7 @@ log('formData', formData)
 合并两个对象；同名字段都存在时，以第二个对象为准。
 
 ```ts
-merge(
-  { name: '', age: 18, city: 'beijing' },
-  { name: 'andy', age: 20, city: '' },
-)
+merge({ name: '', age: 18, city: 'beijing' }, { name: 'andy', age: 20, city: '' })
 ```
 
 ### objectToString

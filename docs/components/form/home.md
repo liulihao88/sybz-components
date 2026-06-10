@@ -18,7 +18,7 @@ form/rules
 
 ### 动态显隐 `isShow`
 
-:::demo 
+:::demo
 form/isShow
 :::
 
@@ -39,8 +39,6 @@ form/active
 :::demo
 form/column
 :::
-
-
 
 ### 插槽
 

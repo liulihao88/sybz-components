@@ -7,18 +7,12 @@ const cc = ref(123)
 <template>
   <div>
     <div class="box">
-      <s-comp-title
-        title="你好"
-        :boxStyle="{ width: '160px', fontSize: '20px', color: 'var(--blue)' }"
-      ></s-comp-title>
+      <s-comp-title title="你好" :boxStyle="{ width: '160px', fontSize: '20px', color: 'var(--blue)' }"></s-comp-title>
       <el-input-number v-model="cc" />
     </div>
 
     <div class="mt-2 box">
-      <s-comp-title
-        title="你好"
-        size="large"
-      ></s-comp-title>
+      <s-comp-title title="你好" size="large"></s-comp-title>
       <s-input v-model="cc" style="width: 100px" size="large" />
     </div>
   </div>
