@@ -7,7 +7,7 @@ const value = ref(1)
 <template>
   <div>
     <s-input-number v-model="value" :min="0" :max="10" />
-    <span class="m-l-12">当前值: {{ value }}</span>
+    <span class="ml-[12px]">当前值: {{ value }}</span>
   </div>
 </template>
 

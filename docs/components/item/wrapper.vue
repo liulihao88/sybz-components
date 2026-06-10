@@ -1,5 +1,5 @@
 <template>
-  <sItemWrapper class="w-100%">
+  <sItemWrapper class="w-full">
     <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
     <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
     <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
@@ -7,7 +7,7 @@
 
   <br />
 
-  <sItemWrapper class="w-100%">
+  <sItemWrapper class="w-full">
     <el-button type="primary">测试98</el-button>
     <el-button type="primary">测试98</el-button>
     <el-button type="primary">测试98</el-button>

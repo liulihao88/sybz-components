@@ -3,8 +3,8 @@ import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 const htmlContent = `
   <div>这是html</div> 
-  <span class="cl-blue">这是蓝色</span>  <br />
-  <span class="cl-yellow">这是黄色</span> 
+  <span class="text-[var(--blue)]">这是蓝色</span>  <br />
+  <span class="text-[var(--yellow)]">这是黄色</span>
 `
 
 const ulContent = `
@@ -21,18 +21,18 @@ const ulContent = `
     <s-warning content="这是基础用法" title="我是title"></s-warning>
     <br />
     <s-warning
-      content="<span class='vp-tag m-r-10'>1.2.0</span>这是基础用法-size为small <code>这是code包裹内容</code> <blue>这是blue包裹内容</blue>, <strong class='m-l-100'>这是strong包裹的内容</strong> 并且设置了left <a href='http://www.baidu.com'>设置根路径</a>   "
+      content="<span class='vp-tag mr-[10px]'>1.2.0</span>这是基础用法-size为small <code>这是code包裹内容</code> <blue>这是blue包裹内容</blue>, <strong class='ml-[100px]'>这是strong包裹的内容</strong> 并且设置了left <a href='http://www.baidu.com'>设置根路径</a>   "
       size="small"
-      class="m-l-10"
+      class="ml-[10px]"
     ></s-warning>
     <br />
     <s-warning :content="ulContent" :dangerouslyUseHTMLString="true" :icon="false" :style="{ paddingLeft: '20px' }" />
     <br />
     <s-flex>
-      <s-warning title="我是title" content="默认类型, <code>这是code包裹内容</code>" class="mr" />
-      <s-warning title="我是title" content="type=warning <code>这是code包裹内容</code>" type="warning" class="mr" />
-      <s-warning title="我是title" content="type=simple <code>这是code包裹内容</code>" type="simple" class="mr" />
-      <s-warning title="我是title" content="type=error <code>这是code包裹内容</code>" type="error" class="mr" />
+      <s-warning title="我是title" content="默认类型, <code>这是code包裹内容</code>" class="mr-2" />
+      <s-warning title="我是title" content="type=warning <code>这是code包裹内容</code>" type="warning" class="mr-2" />
+      <s-warning title="我是title" content="type=simple <code>这是code包裹内容</code>" type="simple" class="mr-2" />
+      <s-warning title="我是title" content="type=error <code>这是code包裹内容</code>" type="error" class="mr-2" />
     </s-flex>
 
     <br />

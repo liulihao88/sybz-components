@@ -75,14 +75,14 @@ let option3 = {
 
 <template>
   <div>
-    <div class="f">
-      <div class="f-1">
+    <div class="flex">
+      <div class="flex-1">
         <s-chart :option="option" />
       </div>
-      <div class="f-1">
+      <div class="flex-1">
         <s-chart :option="option2" width="200" />
       </div>
-      <div class="f-1">
+      <div class="flex-1">
         <s-chart :option="option3" height="500" />
       </div>
     </div>

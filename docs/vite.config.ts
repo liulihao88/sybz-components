@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
 import { fileURLToPath, URL } from 'node:url'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
@@ -12,7 +13,11 @@ import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
   envDir: fileURLToPath(new URL('..', import.meta.url)),
+  css: {
+    devSourcemap: false,
+  },
   plugins: [
+    tailwindcss(),
     VueSetupExtend(),
     svgLoader({
       defaultImport: 'url', // 将SVG作为URL导入

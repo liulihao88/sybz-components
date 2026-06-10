@@ -22,7 +22,7 @@ function inputChange() {
     <!-- <el-input v-throttle v-model="baseIptValue" @input="inputChange" /> -->
     <el-input v-throttle="inputChange" v-model="inputValue" />
     <s-input v-model="inputValue" v-throttle="inputChange" />
-    <div class="mb3 bg-white p" v-throttle="baseThrottle">默认1000毫秒</div>
+    <div class="mb-6 bg-white p-2" v-throttle="baseThrottle">默认1000毫秒</div>
     <el-button v-throttle.3000="throttle3000">这是3000毫秒的</el-button>
   </div>
 </template>

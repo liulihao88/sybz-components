@@ -19,8 +19,8 @@ function inputChange() {
 <template>
   <div>
     <el-input v-debounce="inputChange" v-model="inputValue" disabled />
-    <div class="mb3 p" v-debounce="baseDebounce">默认1000毫秒</div>
-    <button class="mb3 p d-b" v-debounce.200="debounce200">这是200毫秒的</button>
+    <div class="mb-6 p-2" v-debounce="baseDebounce">默认1000毫秒</div>
+    <button class="mb-6 p-2 block" v-debounce.200="debounce200">这是200毫秒的</button>
     <el-button v-debounce.3000="debounce3000">这是3000毫秒的</el-button>
   </div>
 </template>

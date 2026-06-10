@@ -24,10 +24,10 @@ const tenantDetailsExceed = {
 
 <template>
   <div>
-    <sBasicLayout title="租户容量配额" class="w-200" :square="true">
+    <sBasicLayout title="租户容量配额" class="w-[200px]" :square="true">
       <template #header></template>
       <SQuotaPie
-        class="h-100%"
+        class="h-full"
         type="quota"
         :used="tenantDetails.allocateQuota"
         :total="tenantDetails.tenantQuota"
@@ -36,21 +36,21 @@ const tenantDetailsExceed = {
     </sBasicLayout>
 
     <SQuotaPie
-      class="h-300"
+      class="h-[300px]"
       type="used"
       :used="tenantDetails.usedSpace"
       :total="tenantDetails.totalSpace"
       text="总分配配额 / 租户总配额"
     ></SQuotaPie>
     <SQuotaPie
-      class="h-200"
+      class="h-[200px]"
       type="used"
       :used="tenantDetailsExceed.usedSpace"
       :total="tenantDetailsExceed.totalSpace"
       text="总分配配额 / 租户总配额"
     ></SQuotaPie>
     <SQuotaPie
-      class="h-500"
+      class="h-[500px]"
       type="used"
       :used="tenantDetailsExceed.usedSpace"
       :total="tenantDetailsExceed.totalSpace"

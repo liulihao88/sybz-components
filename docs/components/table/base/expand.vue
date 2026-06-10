@@ -52,7 +52,7 @@ const childColumns: TableColumnList = [
     <el-switch v-model="childBorder" />
     <s-table :data="tableDataExpand" :columns="columns" :border="parentBorder">
       <template #expand="{ row }">
-        <div class="m-4">
+        <div class="m-[4px]">
           <p class="mb-2">State: {{ row.state }}</p>
           <p class="mb-2">City: {{ row.city }}</p>
           <p class="mb-2">Address: {{ row.address }}</p>

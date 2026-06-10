@@ -28,7 +28,7 @@ setTimeout(() => {
     <SUsedPie :used="0" :total="0" style="height: 300px"></SUsedPie>
     <SUsedPie :used="0" :total="34" style="height: 300px"></SUsedPie>
     <SUsedPie v-bind="trueData" style="height: 300px"></SUsedPie>
-    <sBasicLayout title="桶容量信息统计" class="f-1 mt2 w-100% h-500">
+    <sBasicLayout title="桶容量信息统计" class="flex-1 mt-4 w-full h-[500px]">
       <SUsedPie v-bind="trueData" />
     </sBasicLayout>
   </div>

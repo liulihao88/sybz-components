@@ -21,7 +21,7 @@ const confirm = (op, item) => {
       <template #label="{ key, label, value }">{{ key }} ?? {{ label }} == {{ value }}</template>
       <!-- <template #label="arg">{{ arg }}</template> -->
       <template #default="{ options, item }">
-        <div class="f-bt-ct w-100%">
+        <div class="flex justify-between items-center w-full">
           <span>{{ item.label }}</span>
           <s-popconfirm @confirm="confirm(options, item)" trigger="click">
             <s-icon name="delete" @click.stop></s-icon>

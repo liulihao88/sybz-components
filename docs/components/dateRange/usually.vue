@@ -26,7 +26,7 @@ const disabledDate = (time) => {
     <s-date-range
       v-model="dateValue"
       title="写入时间"
-      class="mb2"
+      class="mb-4"
       format="YYYY-MM-DD HH:mm:ss"
       width="500"
       :boxStyle="{ width: 80 }"

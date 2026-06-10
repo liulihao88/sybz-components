@@ -14,7 +14,7 @@ defineExpose({
 <template>
   <div class="cus-loading">
     <div class="cus-loading-content">
-      <img src="./loading.png" class="w-24 h-24" />
+      <img src="./loading.png" class="w-[24px] h-[24px]" />
       <p class="desc">{{ loadingText }}</p>
     </div>
   </div>

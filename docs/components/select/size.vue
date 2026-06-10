@@ -31,7 +31,7 @@ watch(
   <div>
     <s-radio
       v-model="changeSelectValue"
-      class="mr8"
+      class="mr-16"
       :options="[
         { label: '全选', value: true },
         { label: '清空', value: false },

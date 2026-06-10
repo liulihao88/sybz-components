@@ -16,12 +16,12 @@ const select = ref('')
        <template #prepend>Http://</template>
      </s-input>
    </div>
-   <div class="m-t-4">
+   <div class="mt-[4px]">
      <s-input v-model="input2" style="max-width: 600px" placeholder="Please input">
        <template #append>.com</template>
      </s-input>
    </div>
-   <div class="m-t-4">
+   <div class="mt-[4px]">
      <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
        <template #prepend>
          <el-select v-model="select" placeholder="Select" style="width: 215px">
@@ -35,7 +35,7 @@ const select = ref('')
        </template>
      </s-input>
    </div>
-   <div class="m-t-4">
+   <div class="mt-[4px]">
      <s-input v-model="input3" style="max-width: 600px" placeholder="Please input" class="input-with-select">
        <template #prepend>
          <el-button :icon="Search" />

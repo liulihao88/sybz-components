@@ -19,8 +19,8 @@ const copy: Directive = {
         const success: boolean = copyText(el.copyValue, { hideToast: true })
         console.log(`03 success`, success)
         success
-          ? $toast(`<span class="cl-blue">${el.copyValue}</span> 复制成功`, { dangerouslyUseHTMLString: true })
-          : $toast.error(`<span class="cl-blue">${el.copyValue}</span> 复制失败`, { dangerouslyUseHTMLString: true })
+          ? $toast(`<span class="text-[var(--blue)]">${el.copyValue}</span> 复制成功`, { dangerouslyUseHTMLString: true })
+          : $toast.error(`<span class="text-[var(--blue)]">${el.copyValue}</span> 复制失败`, { dangerouslyUseHTMLString: true })
       })
     } else {
       throw new Error('[Directive: copy]: need value! Like v-copy="modelValue"')

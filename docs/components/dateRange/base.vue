@@ -18,7 +18,7 @@ const customPrefix = {
       width="600"
       size="small"
       title="选择日期"
-      class="m-t-8"
+      class="mt-[8px]"
       :boxStyle="{ width: 100 }"
     ></s-date-range>
   </div>

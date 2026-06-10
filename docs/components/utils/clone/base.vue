@@ -42,9 +42,9 @@ const options = ref([
     <s-descriptions :options="options" :column="1" labelWidth="300" :showAll="true">
       <template #refValue="{ item }">
         <s-flex justify="end">
-          <div class="mr">clone(refValue)</div>
-          <div class="f-st-ct">
-            <s-tooltip content="const refValue = ref([11, 22, 33])" class="h-16">
+          <div class="mr-2">clone(refValue)</div>
+          <div class="flex justify-start items-center">
+            <s-tooltip content="const refValue = ref([11, 22, 33])" class="h-[16px]">
               <s-icon name="warning"></s-icon>
             </s-tooltip>
           </div>

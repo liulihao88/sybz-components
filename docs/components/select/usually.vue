@@ -101,7 +101,7 @@ const handleCheckAll = (val) => {
         <template #header>我来组成头部</template>
         <template #default="{ options, item }">
           <span>{{ item.label }}</span>
-          <span class="cl-red">--------{{ item.value }}</span>
+          <span class="text-[var(--red)]">--------{{ item.value }}</span>
         </template>
         <template #footer>我来组成底部</template>
       </s-select>

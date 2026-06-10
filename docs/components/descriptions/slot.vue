@@ -22,8 +22,8 @@ const options = computed(() => {
         return <div style="color: blue">这是labelRender</div>
       },
       render: (item) => {
-        // return h('div', { class: ['cl-red'] }, `这是render ${item.value}`)
-        return <div class="cl-red">这是render {item.value}</div>
+        // return h('div', { class: ['text-[var(--red)]'] }, `这是render ${item.value}`)
+        return <div class="text-[var(--red)]">这是render {item.value}</div>
       },
     },
     {
@@ -47,7 +47,7 @@ init()
 <template>
   <div>
     <div>docs/examples/SDescription/base.vue</div>
-    <s-descriptions :options="options" class="w-100%" :column="1" label-width="200px">
+    <s-descriptions :options="options" class="w-full" :column="1" label-width="200px">
       <template #nameLabel="{ item, value, index, label }">这是自定义label</template>
       <template #nameValue="{ item, value, index, label }">这是自定义value</template>
     </s-descriptions>

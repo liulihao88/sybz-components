@@ -52,23 +52,23 @@ const rules = {
 
 <template>
   <div class="">
-    <s-basic-layout class="h-100%">
+    <s-basic-layout class="h-full">
       <template #header>
         <s-title :title="metaTitle" />
       </template>
       <s-form ref="sFormRef" :fieldList="fieldList" :model="form" :rules="rules" class="custom-form-item" align="top">
         <template #quota>
           <SQuotaUnit v-model="form.quota" v-model:unit="form.quotaUnit" :validator="validateQuota" label="" />
-          <s-warning :content="`最高可配 <code>${totalQuota}</code>`" class="mt2" type="warning" width="700" />
+          <s-warning :content="`最高可配 <code>${totalQuota}</code>`" class="mt-4" type="warning" width="700" />
         </template>
         <!-- <el-form-item label="" prop="">
-          <div class="mt2">
+          <div class="mt-4">
             <s-warning :content="`最高可配 <code>${totalQuota}</code>`" class="" type="warning" width="700" />
           </div>
         </el-form-item> -->
         <template #quotaType>
           <s-radio v-model="form.quotaType" :options="QUOTA_OPTIONS" :clearable="false" />
-          <div class="mt2">
+          <div class="mt-4">
             <g-dif-warning type="quota" style="width: 700px" />
           </div>
         </template>
