@@ -26,7 +26,7 @@ export default defineConfig({
   useWebFonts: false,
   cleanUrls: true,
   title: 'Sybz-Components',
-  description: '思云博志',
+  description: '思云博智',
   lang: 'zh-CN',
   themeConfig: {
     outline: 3,
@@ -38,7 +38,7 @@ export default defineConfig({
       text: '在 Github 上查看此页面',
     },
     footer: {
-      message: `思云博志私有前端组件库, <a target="_blank" style="color: var(--vp-c-brand)" href="${Github}">⭐欢迎访问</a>`,
+      message: `思云博智私有前端组件库, <a target="_blank" style="color: var(--vp-c-brand)" href="${Github}">⭐欢迎访问</a>`,
       copyright: ` 版权所有 © 2023-${new Date().getFullYear()}`,
     },
     nav: [
