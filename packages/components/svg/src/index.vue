@@ -4,9 +4,13 @@
   </svg>
 </template>
 
-<script setup lang="ts" name="SSvg">
+<script setup lang="ts">
 import { computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+
+defineOptions({
+  name: 'SSvg',
+})
 const props = defineProps({
   prefix: {
     type: String,

@@ -27,10 +27,14 @@
   </div>
 </template>
 
-<script setup lang="ts" name="SRadio">
+<script setup lang="ts">
 import { computed, ref, getCurrentInstance } from 'vue'
 import type { PropType } from 'vue'
 import type { RadioItem } from './radio'
+
+defineOptions({
+  name: 'SRadio',
+})
 const props = defineProps({
   title: {
     type: String,

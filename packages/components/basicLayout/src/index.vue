@@ -1,5 +1,9 @@
-<script setup lang="ts" name="SBasicLayout">
+<script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+
+defineOptions({
+  name: 'SBasicLayout',
+})
 const props = defineProps({
   modelValue: {
     type: Boolean,

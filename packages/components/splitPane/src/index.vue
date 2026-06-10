@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="SSplitPane">
+<script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch, type PropType } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import type { SplitPaneDirection, SplitPaneSetting } from './types'

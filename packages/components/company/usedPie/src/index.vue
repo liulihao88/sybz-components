@@ -1,4 +1,4 @@
-<script setup lang="ts" name="SUsedPie">
+<script setup lang="ts">
 // import {defineAsyncComponent} from 'vue'
 import { ref, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
 // import VChart from 'vue-echarts'
@@ -7,6 +7,10 @@ import '@/utils/local/useEcharts'
 
 import { getVariable, clone, isEmpty, formatBytes, formatBytesConvert } from '@/utils/src'
 import { getPieColorByDataIndex } from '@/utils/local/packageUtils'
+
+defineOptions({
+  name: 'SUsedPie',
+})
 
 const props = defineProps({
   used: {

@@ -10,8 +10,12 @@
   </div>
 </template>
 
-<script lang="ts" setup name="SProgress">
+<script lang="ts" setup>
 import { ref, watch } from 'vue'
+
+defineOptions({
+  name: 'SProgress',
+})
 
 const props = defineProps({
   // 进度条百分比

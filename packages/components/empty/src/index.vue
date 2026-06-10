@@ -1,7 +1,11 @@
-<script setup lang="ts" name="SEmpty">
+<script setup lang="ts">
 import { ref, getCurrentInstance, withDefaults } from 'vue'
 import { processWidth } from '@/utils/src'
 import group_null from '@/assets/images/group_null.png'
+
+defineOptions({
+  name: 'SEmpty',
+})
 // const props = defineProps({
 //   description: {
 //     type: String,

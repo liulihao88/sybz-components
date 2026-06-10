@@ -27,8 +27,12 @@ docs/components/foo/
 ### 2. 组件源码一般放在 `src/index.vue`
 
 ```vue
-<script setup lang="ts" name="SFoo">
+<script setup lang="ts">
 import { computed, ref, useAttrs, useSlots, watch } from 'vue'
+
+defineOptions({
+  name: 'SFoo',
+})
 
 const attrs = useAttrs()
 const slots = useSlots()

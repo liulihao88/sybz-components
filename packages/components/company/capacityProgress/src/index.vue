@@ -1,4 +1,4 @@
-<script setup lang="ts" name="SCapacityProgress">
+<script setup lang="ts">
 /**
  <s-capacity-progress :total="row.totalSpace" :used="row.usedSpace">
     {{ proxy.formatBytes(row.usedSpace) }} / {{ proxy.formatBytes(row.totalSpace) }}
@@ -8,6 +8,10 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { sleep, formatBytes, getType } from '@/utils/src/index.ts'
 import { handleWidthHeight } from '@/components/utils/local.ts'
+
+defineOptions({
+  name: 'SCapacityProgress',
+})
 
 const progressBoxRef = ref(null)
 const percentageRef = ref(null)

@@ -1,4 +1,4 @@
-<script setup lang="ts" name="SDrawer">
+<script setup lang="ts">
 /** @使用方式
 <s-drawer
   v-model="isShow"
@@ -8,6 +8,10 @@
 ></s-drawer>
 */
 import { ref, computed, useAttrs } from 'vue'
+
+defineOptions({
+  name: 'SDrawer',
+})
 const emits = defineEmits(['update:modelValue'])
 const props = defineProps({
   confirmText: {

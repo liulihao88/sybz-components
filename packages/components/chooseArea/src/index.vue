@@ -1,7 +1,11 @@
-<script setup lang="ts" name="SChooseArea">
+<script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 import address from './pca-code.json'
 import { processWidth } from '@/utils/src/base.ts'
+
+defineOptions({
+  name: 'SChooseArea',
+})
 const props = defineProps({
   width: {
     type: [String, Number],

@@ -1,9 +1,13 @@
-<script setup lang="ts" name="SChart">
+<script setup lang="ts">
 import { ref, getCurrentInstance, onMounted, watch, nextTick, markRaw, onBeforeUnmount, computed } from 'vue'
 const { proxy } = getCurrentInstance()
 import * as echarts from 'echarts'
 import { processWidth, debounce } from '@sybz-components/utils'
 import { useEcharts } from './useEcharts.ts'
+
+defineOptions({
+  name: 'SChart',
+})
 const echartDivRef = ref<HTMLElement>(null)
 
 const emits = defineEmits()

@@ -77,13 +77,14 @@
   </div>
 </template>
 
-<script setup lang="ts" name="SInput">
+<script setup lang="ts">
 import { ref, computed, useAttrs, watch } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType } from '@sybz-components/utils'
 const attrs = useAttrs()
 
 defineOptions({
+  name: 'SInput',
   inheritAttrs: false,
 })
 

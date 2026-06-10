@@ -9,11 +9,12 @@
   </div>
 </template>
 
-<script setup lang="ts" name="SInputNumber">
+<script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 
 defineOptions({
+  name: 'SInputNumber',
   inheritAttrs: false,
 })
 

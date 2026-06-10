@@ -65,9 +65,13 @@
   </div>
 </template>
 
-<script setup lang="ts" name="SDialog">
+<script setup lang="ts">
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType } from '@/utils/src/index'
+
+defineOptions({
+  name: 'SDialog',
+})
 const attrs = useAttrs()
 const emits = defineEmits(['update:modelValue'])
 const props = defineProps({

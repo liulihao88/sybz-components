@@ -1,4 +1,4 @@
-<script setup lang="ts" name="SCheckbox">
+<script setup lang="ts">
 /** @使用方式
 <s-checkbox
   v-model="formData.categoryIds"
@@ -11,6 +11,10 @@
 */
 import { ref, watch, computed, useAttrs } from 'vue'
 import { isEmpty, processWidth } from '@sybz-components/utils'
+
+defineOptions({
+  name: 'SCheckbox',
+})
 const attrs = useAttrs()
 const props = defineProps({
   type: {

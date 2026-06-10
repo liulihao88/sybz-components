@@ -1,4 +1,4 @@
-<script setup lang="ts" name="SObjectLine">
+<script setup lang="ts">
 /** @使用方式
   时间最小区间是30分钟, 最大区间是2周
 */

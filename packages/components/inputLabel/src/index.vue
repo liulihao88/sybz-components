@@ -1,8 +1,12 @@
-<script setup lang="ts" name="SInputLabel">
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import SInput from '@/components/input'
 import SIcon from '@/components/icon'
 import { isEmpty, $toast } from '@/utils/src'
+
+defineOptions({
+  name: 'SInputLabel',
+})
 
 const currentval = ref('')
 const labelarr = ref([])

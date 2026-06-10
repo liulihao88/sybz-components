@@ -1,7 +1,11 @@
-<script setup lang="ts" name="SIcon">
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { toLine } from '@/utils/src'
 import SSvg from '@/components/svg'
+
+defineOptions({
+  name: 'SIcon',
+})
 const props = defineProps({
   name: {
     type: String,

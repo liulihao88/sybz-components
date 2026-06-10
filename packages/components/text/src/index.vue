@@ -1,6 +1,10 @@
-<script lang="ts" setup name="SText">
+<script lang="ts" setup>
 import { h, onMounted, ref, useSlots } from 'vue'
 import { type TippyOptions, useTippy } from 'vue-tippy'
+
+defineOptions({
+  name: 'SText',
+})
 
 const props = defineProps({
   // 行数

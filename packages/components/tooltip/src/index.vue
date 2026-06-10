@@ -26,9 +26,13 @@
   </el-tooltip>
 </template>
 
-<script setup lang="ts" name="STooltip">
+<script setup lang="ts">
 import { ref, useSlots, computed, useAttrs, h, resolveComponent } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+
+defineOptions({
+  name: 'STooltip',
+})
 const slots = useSlots()
 const attrs = useAttrs()
 

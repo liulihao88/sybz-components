@@ -16,8 +16,12 @@
     </el-tabs>
   </div>
 </template>
-<script setup lang="ts" name="STabs">
+<script setup lang="ts">
 import { computed } from 'vue'
+
+defineOptions({
+  name: 'STabs',
+})
 const props: any = defineProps({
   modelValue: {
     type: [String, Number, Boolean],

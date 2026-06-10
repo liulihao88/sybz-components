@@ -91,10 +91,14 @@
   </div>
 </template>
 
-<script setup lang="ts" name="SSelect">
+<script setup lang="ts">
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+
+defineOptions({
+  name: 'SSelect',
+})
 const { proxy } = getCurrentInstance()
 const attrs = useAttrs()
 const emits = defineEmits(['changeSelect', 'update:modelValue', 'change'])

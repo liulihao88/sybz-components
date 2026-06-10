@@ -1,7 +1,11 @@
-<script setup lang="ts" name="SWarning">
+<script setup lang="ts">
 import { getCurrentInstance, computed, useAttrs } from 'vue'
 import SIcon from '@/components/icon/src/index.vue'
 import { processWidth } from '@sybz-components/utils'
+
+defineOptions({
+  name: 'SWarning',
+})
 
 interface Props {
   content: string

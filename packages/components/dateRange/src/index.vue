@@ -1,7 +1,11 @@
-<script setup lang="ts" name="SDateRange">
+<script setup lang="ts">
 import { ref, useAttrs, getCurrentInstance, computed } from 'vue'
 import { processWidth } from '@/utils/src'
 import SCompTitle from '@/components/compTitle'
+
+defineOptions({
+  name: 'SDateRange',
+})
 const attrs = useAttrs()
 const props = defineProps({
   title: {

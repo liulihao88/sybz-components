@@ -29,6 +29,7 @@ metadata:
 - `button`
 - `dialog`
 - `input`
+- `tooltip`
 
 ### 原生组件
 

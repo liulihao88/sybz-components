@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="STitle">
+<script setup lang="ts">
 /**
 <s-title title="使用hooks1" t="100"></s-title>
 <s-title title="我说呢" sub-title="test/t2.vue"></s-title>
@@ -51,6 +51,10 @@
 */
 import { processWidth } from '@/utils/src/index.ts'
 import { computed } from 'vue'
+
+defineOptions({
+  name: 'STitle',
+})
 const props = defineProps({
   title: {
     type: String,

@@ -1,4 +1,4 @@
-<script setup lang="ts" name="SForm">
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import RenderComp from './renderComp.vue'
 import { validForm, isEmpty, $toast } from '@sybz-components/utils'
@@ -6,6 +6,7 @@ import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
 
 defineOptions({
+  name: 'SForm',
   inheritAttrs: false,
 })
 

@@ -1,10 +1,14 @@
-<script setup lang="ts" name="SCompTitle">
+<script setup lang="ts">
 /**
  *
   <s-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
  */
 import { useAttrs, computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+
+defineOptions({
+  name: 'SCompTitle',
+})
 const attrs = useAttrs()
 
 const props = defineProps({

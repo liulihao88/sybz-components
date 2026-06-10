@@ -1,4 +1,8 @@
-<script setup lang="ts" name="STable">
+<script setup lang="ts">
+defineOptions({
+  name: 'STable',
+})
+
 import { ref, watch, computed, useAttrs, nextTick, toRaw, type PropType } from 'vue'
 import type { TableColumnCtx, TableInstance } from 'element-plus'
 import RenderComp from './renderComp.vue'
@@ -7,6 +11,7 @@ import SPopconfirm from '@/components/popconfirm/src/index.vue'
 import SIcon from '@/components/icon/src/index.vue'
 import { getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+
 import type {
   STableButton,
   STableColumn,
