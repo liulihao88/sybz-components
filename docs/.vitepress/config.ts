@@ -276,7 +276,7 @@ export default defineConfig({
               link: '/components/title/home.md',
             },
             {
-              text: 'tooltip组件',
+              text: sybzMark('tooltip组件'),
               link: '/components/tooltip/home.md',
             },
             {

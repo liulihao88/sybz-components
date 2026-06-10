@@ -30,6 +30,12 @@ tooltip/lineClamp
 tooltip/trigger
 :::
 
+### 延迟触发
+
+:::demo `show-after`
+tooltip/delay
+:::
+
 ### 自定义主题和禁用状态
 
 :::demo
@@ -71,6 +77,7 @@ tooltip/visible
 |   `content`   | 提示内容；未传默认插槽时，也会作为默认展示文本 | string / VNode    | -                   |
 |  `placement`  | tooltip 弹出位置                               | string            | Element Plus 默认值 |
 |   `trigger`   | 触发方式，支持单个值或数组                     | string / string[] | Element Plus 默认值 |
+| `show-after`  | 延迟显示时间，单位毫秒                         | number            | `0`                 |
 |   `visible`   | 受控显示状态                                   | boolean           | -                   |
 |  `disabled`   | 是否禁用 tooltip                               | boolean           | `false`             |
 | `raw-content` | 是否将 `content` 按 HTML 字符串渲染            | boolean           | `false`             |
