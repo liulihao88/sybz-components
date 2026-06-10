@@ -78,6 +78,12 @@ export default defineConfig({
           fileName: 'utilities.css',
           source: result.css,
         })
+
+        this.emitFile({
+          type: 'asset',
+          fileName: 'utilities.scss',
+          source: readFileSync(utilitiesPath, 'utf-8'),
+        })
       },
     },
     vue({
