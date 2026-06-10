@@ -23,6 +23,11 @@ metadata:
 - `$toast`
 - `clone`
 - `confirm`
+- `getType`
+- `sleep`
+- `tryCatch`
+- `validate`
+- `validForm`
 
 ### Basic 基础组件
 

@@ -1,18 +1,20 @@
 # 自定义指令
 
-## 基础用法
+## v-throttle
+
+### 基础用法
 
 :::demo
 directives/throttle/base
 :::
 
-## 事件修饰符和传参
+### 事件修饰符和传参
 
 :::demo
 directives/throttle/method
 :::
 
-## 输入框中使用
+### 输入框中使用
 
 :::demo
 directives/throttle/input

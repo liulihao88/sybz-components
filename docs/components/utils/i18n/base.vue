@@ -19,10 +19,15 @@ const dateValue = ref([])
 </script>
 
 <template>
-  <el-button type="primary" @click="changeLanguage">切换语言 => {{ locale.name }}</el-button>
+  <div style="margin-bottom: 16px">
+    <el-button type="primary" @click="changeLanguage">切换语言 => {{ locale.name }}</el-button>
+  </div>
+
   <el-config-provider :locale="locale">
-    <el-time-picker v-model="value1" is-range />
-    <s-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></s-date-range>
+    <s-flex gap="8">
+      <el-time-picker v-model="value1" is-range />
+      <s-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></s-date-range>
+    </s-flex>
   </el-config-provider>
 </template>
 
