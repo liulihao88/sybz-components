@@ -97,7 +97,7 @@ const columns: TableColumnList = [
 
 <template>
   <div>
-    <s-table :data="tableData" :columns="columns" row-key="id" border default-expand-all class="mb-6" />
+    <s-table :data="tableData" :columns="columns" row-key="id" border default-expand-all class="m-b-24" />
     <s-table
       :data="tableData1"
       :columns="columns"

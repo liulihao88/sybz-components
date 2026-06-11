@@ -1,5 +1,5 @@
 <template>
-  <s-flex gap="16" class="mb-4">
+  <s-flex gap="16" class="m-b-16">
     <s-radio
       v-model="isShow"
       :options="[

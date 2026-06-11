@@ -14,13 +14,13 @@ async function init() {
 </script>
 
 <template>
-  <div v-cus-loading:[cusLoadingText]="true" class="h-[200px]">
+  <div v-cus-loading:[cusLoadingText]="true" class="h-200">
     <div>docs/examples/STest/base.vue</div>
   </div>
-  <div v-cus-empty:[emptyText]="true" class="h-[200px]">
+  <div v-cus-empty:[emptyText]="true" class="h-200">
     <div>docs/examples/STest/base.vue</div>
   </div>
-  <div v-cus-loading="isLoading" v-cus-empty="list.length === 0 && !isLoading" class="h-[200px]"></div>
+  <div v-cus-loading="isLoading" v-cus-empty="list.length === 0 && !isLoading" class="h-200"></div>
 </template>
 
 <style scoped lang="scss"></style>

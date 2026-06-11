@@ -47,10 +47,10 @@ const copy: Directive = {
         }
 
         success
-          ? $toast(`<span class="text-[var(--blue)]">${el.copyValue}</span> 复制成功`, {
+          ? $toast(`<span class="cl-blue">${el.copyValue}</span> 复制成功`, {
               dangerouslyUseHTMLString: true,
             })
-          : $toast.error(`<span class="text-[var(--blue)]">${el.copyValue}</span> 复制失败`, {
+          : $toast.error(`<span class="cl-blue">${el.copyValue}</span> 复制失败`, {
               dangerouslyUseHTMLString: true,
             })
       })

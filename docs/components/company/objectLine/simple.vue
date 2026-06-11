@@ -273,6 +273,6 @@ setTimeout(() => {
 
 <template>
   <div>
-    <SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-[400px]"></SObjectLine>
+    <SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400"></SObjectLine>
   </div>
 </template>

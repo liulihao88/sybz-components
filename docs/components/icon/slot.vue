@@ -19,7 +19,7 @@ const plus = () => {
       <Plus></Plus>
     </s-icon>
 
-    <s-icon content="添加" @click="plus" class="cursor-pointer">
+    <s-icon content="添加" @click="plus" class="cp">
       <Plus></Plus>
     </s-icon>
   </div>

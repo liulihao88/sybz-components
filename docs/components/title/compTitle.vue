@@ -11,7 +11,7 @@ const cc = ref(123)
       <el-input-number v-model="cc" />
     </div>
 
-    <div class="mt-2 box">
+    <div class="m-t-8 box">
       <s-comp-title title="你好" size="large"></s-comp-title>
       <s-input v-model="cc" style="width: 100px" size="large" />
     </div>

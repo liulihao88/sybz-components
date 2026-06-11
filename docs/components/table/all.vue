@@ -17,7 +17,7 @@ function tabClick({ index }) {
   <el-card shadow="never">
     <template #header>
       <div class="card-header">
-        <span class="font-medium">
+        <span class="fw-500">
           二次封装 Element Plus 的
           <el-link
             href="https://element-plus.org/zh-CN/component/table.html"

@@ -13,7 +13,7 @@ const useComponent = () => {
     message: h(SWarning, {
       dangerouslyUseHTMLString: true,
       content:
-        '对于光存储开启保持原始对象名称后，对象将作为独立文件在光存储介质直接存储。<br>注意：当桶内文件大小普遍较小 <span class="text-[var(--blue)]">（<100MB）</span> 或过大（>51GB）时不推荐打开此功能！您确定开启此功能吗?',
+        '对于光存储开启保持原始对象名称后，对象将作为独立文件在光存储介质直接存储。<br>注意：当桶内文件大小普遍较小 <span class="cl-blue">（<100MB）</span> 或过大（>51GB）时不推荐打开此功能！您确定开启此功能吗?',
     }),
     cancelButtonText: '取消',
   })
@@ -25,15 +25,15 @@ const useComponent = () => {
   `SWarning` 作为参数传入，建议使用原生的 `ElMessageBox.confirm`
   <el-button type="primary" @click="isShow = true">使用组件</el-button>
   <s-dialog ref="dialogRef" title="base" v-model="isShow">
-    <div class="h-[500px]">
+    <div class="h-500">
       我是顶层dialog
       <el-button type="primary" @click="isShow2 = true">打开二层的dialog, 并且有confirm确认框</el-button>
     </div>
     <s-dialog ref="dialogRef" title="dialog" v-model="isShow2">
-      <div class="h-[400px]">
+      <div class="h-400">
         <el-button type="primary" @click="useComponent">打开确认框</el-button>
       </div>
-      <div id="highSettingsForm" class="h-[100px]">在这个div下</div>
+      <div id="highSettingsForm" class="h-100">在这个div下</div>
     </s-dialog>
   </s-dialog>
 </template>

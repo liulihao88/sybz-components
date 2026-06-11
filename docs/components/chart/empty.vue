@@ -1,10 +1,10 @@
 <template>
   <s-flex :flex="1">
-    <div class="flex-1">
+    <div class="f-1">
       <el-button @click="isEmptyBn = !isEmptyBn">切换状态</el-button>
       <s-chart :option="options" :isEmpty="isEmptyBn" height="300" />
     </div>
-    <div class="flex-1">
+    <div class="f-1">
       <el-button @click="addData()">增加数据</el-button>
       <h3>Function类型</h3>
       <s-chart
@@ -15,7 +15,7 @@
         height="300"
       />
     </div>
-    <div class="flex-1">
+    <div class="f-1">
       <h3>空状态插槽</h3>
       <s-chart :option="options" :isEmpty="isEmptyFn" height="300">
         <template #empty>

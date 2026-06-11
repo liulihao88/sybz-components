@@ -85,11 +85,11 @@ const columns = [
     <el-button type="primary" @click="isShow = true">基础</el-button>
     <el-button type="primary" @click="isShow2 = true">复杂些的</el-button>
     <s-dialog title="基础dialog" v-model="isShow2" fillSlot type="drawer">
-      <s-flex direction="column" class="h-full">
-        <div class="mb-4">这是上面的数据</div>
-        <div class="mb-4">这是上面的数据</div>
-        <div class="mb-4">这是上面的数据</div>
-        <div class="mb-4">这是上面的数据</div>
+      <s-flex direction="column" class="h-block">
+        <div class="m-b-16">这是上面的数据</div>
+        <div class="m-b-16">这是上面的数据</div>
+        <div class="m-b-16">这是上面的数据</div>
+        <div class="m-b-16">这是上面的数据</div>
         <s-table :columns="columns" :data="data" ref="tableRef" height="100%"></s-table>
       </s-flex>
     </s-dialog>

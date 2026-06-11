@@ -6,7 +6,7 @@
       </el-button>
       <template #content>
         <div>这是 `content` 插槽</div>
-        <div class="text-[var(--blue)]">可以放任意自定义节点</div>
+        <div class="cl-blue">可以放任意自定义节点</div>
       </template>
     </s-tooltip>
 

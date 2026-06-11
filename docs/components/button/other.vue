@@ -70,7 +70,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
         </el-space>
       </div>
       <el-link
-        class="mt-2"
+        class="m-t-8"
         href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/components/s-button.vue"
         target="_blank"
       >
@@ -78,8 +78,8 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
       </el-link>
     </template>
 
-    <div class="mb-2">基础按钮</div>
-    <el-radio-group v-model="baseRadio" class="mb-3">
+    <div class="m-b-8">基础按钮</div>
+    <el-radio-group v-model="baseRadio" class="m-b-12">
       <el-radio label="default" value="default" />
       <el-radio label="plain" value="plain" />
       <el-radio label="round" value="round" />
@@ -111,7 +111,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     </el-space>
     <el-divider />
 
-    <div class="mb-4">加载状态按钮</div>
+    <div class="m-b-16">加载状态按钮</div>
     <s-button text bg type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
       {{ size === 'disabled' ? '停止加载' : '加载中' }}
     </s-button>
@@ -148,7 +148,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     </s-button>
     <el-divider />
 
-    <div class="mb-4">自定义元素标签。例如：按钮、div、链接</div>
+    <div class="m-b-16">自定义元素标签。例如：按钮、div、链接</div>
     <s-button :size="dynamicSize" :disabled="size === 'disabled'">button 标签</s-button>
     <s-button tag="div" role="button" tabindex="0" :size="dynamicSize" :disabled="size === 'disabled'">
       div 标签
@@ -167,7 +167,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     <el-divider />
 
     <s-radio v-model="isDark" :options="[true, false]" type="simple" title="是否黑色"></s-radio>
-    <div class="mb-4">自定义颜色</div>
+    <div class="m-b-16">自定义颜色</div>
     <el-space wrap>
       <s-button color="#626aef" :dark="isDark">Default</s-button>
       <s-button color="#626aef" :dark="isDark" plain>Plain</s-button>

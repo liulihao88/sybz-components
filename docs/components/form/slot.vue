@@ -1,7 +1,7 @@
 <template>
   <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" :rules="rules">
     <template #account-label>
-      <div class="text-[var(--blue)]">account-label</div>
+      <div class="cl-blue">account-label</div>
     </template>
     <template #account>
       <s-input v-model="formData.account" placeholder="这是account的slot写法" width="200" />

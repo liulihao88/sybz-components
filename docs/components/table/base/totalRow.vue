@@ -127,6 +127,6 @@ const columns1: TableColumnList = [
 </script>
 
 <template>
-  <s-table :data="tableData" :columns="columns" border show-summary class="mb-6" />
+  <s-table :data="tableData" :columns="columns" border show-summary class="m-b-24" />
   <s-table :data="tableData" :columns="columns1" border :summary-method="getSummaries" show-summary />
 </template>

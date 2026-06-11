@@ -70,7 +70,7 @@ await confirm('只提示确认按钮', {
   showCancelButton: false,
 })
 
-await confirm('第一行<br><span class="text-[var(--blue)]">重点内容</span>', {
+await confirm('第一行<br><span class="cl-blue">重点内容</span>', {
   dangerouslyUseHTMLString: true,
 })
 ```

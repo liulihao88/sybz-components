@@ -12,10 +12,10 @@ const tenantDetails = {
 
 <template>
   <div>
-    <sBasicLayout title="租户容量配额" class="w-[300px] h-[500px]">
+    <sBasicLayout title="租户容量配额" class="w-300 h-500">
       <template #header></template>
       <SQuotaPie
-        class="h-full"
+        class="h-block"
         type="quota"
         :used="tenantDetails.allocateQuota"
         :total="tenantDetails.tenantQuota"
@@ -23,10 +23,10 @@ const tenantDetails = {
       ></SQuotaPie>
     </sBasicLayout>
     <br />
-    <sBasicLayout title="租户容量配额" class="w-[300px]" :square="true">
+    <sBasicLayout title="租户容量配额" class="w-300" :square="true">
       <template #header></template>
       <SQuotaPie
-        class="h-full"
+        class="h-block"
         type="quota"
         :used="tenantDetails.allocateQuota"
         :total="tenantDetails.tenantQuota"
@@ -37,10 +37,10 @@ const tenantDetails = {
     <br />
     <hr />
 
-    <sBasicLayout title="租户容量配额" class="h-[360px]" :square="true">
+    <sBasicLayout title="租户容量配额" class="h-360" :square="true">
       <template #header></template>
       <SQuotaPie
-        class="h-full"
+        class="h-block"
         type="quota"
         :used="tenantDetails.allocateQuota"
         :total="tenantDetails.tenantQuota"

@@ -19,7 +19,7 @@ const mounted = (e) => {
 <template>
   <div>
     <sClickOutside @clickOutside="outer" @mounted="mounted">
-      <el-button @click="inner" class="w-[200px] h-[200px] bg-[var(--blue)]">你好啊</el-button>
+      <el-button @click="inner" class="w-200 h-200 bg-blue">你好啊</el-button>
     </sClickOutside>
   </div>
 </template>

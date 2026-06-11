@@ -2,7 +2,7 @@
 import { h } from 'vue'
 
 const rawHtml = `
-  <div class="text-[var(--blue)] font-semibold">支持 raw-content</div>
+  <div class="cl-blue fw-600">支持 raw-content</div>
   <div>可以直接传入 HTML 字符串。</div>
   <div>也可以通过 <code>&lt;br&gt;</code> 或块级标签进行换行。</div>
 `

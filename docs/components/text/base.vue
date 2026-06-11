@@ -18,7 +18,7 @@ console.log(`04 11`, 11)
   <el-card shadow="never">
     <template #header>
       <div class="card-header">
-        <span class="font-medium">
+        <span class="fw-500">
           文本省略，基于
           <el-link
             href="https://element-plus.org/zh-CN/component/text.html"
@@ -39,7 +39,7 @@ console.log(`04 11`, 11)
         </span>
       </div>
       <el-link
-        class="mt-2"
+        class="m-t-8"
         href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/components/text.vue"
         target="_blank"
       >
@@ -47,7 +47,7 @@ console.log(`04 11`, 11)
       </el-link>
     </template>
 
-    <p class="mb-2">基础用法11111</p>
+    <p class="m-b-8">基础用法11111</p>
     <el-space wrap>
       <ul class="content">
         <li>
@@ -61,8 +61,8 @@ console.log(`04 11`, 11)
 
     <el-divider />
 
-    <p class="mb-2">自定义 Tooltip 内容</p>
-    <div class="mb-2">
+    <p class="m-b-8">自定义 Tooltip 内容</p>
+    <div class="m-b-8">
       <el-button @click="changeTooltipContent">点击切换下方 Tooltip 内容</el-button>
     </div>
     <el-space wrap>
@@ -87,7 +87,7 @@ console.log(`04 11`, 11)
     </el-space>
 
     <el-divider />
-    <p class="mb-2">自定义 el-text 配置</p>
+    <p class="m-b-8">自定义 el-text 配置</p>
     <el-space wrap>
       <ul class="content">
         <li>
@@ -104,7 +104,7 @@ console.log(`04 11`, 11)
     </el-space>
 
     <el-divider />
-    <p class="mb-2">自定义 VueTippy 配置</p>
+    <p class="m-b-8">自定义 VueTippy 配置</p>
     <el-space wrap>
       <ul class="content">
         <li>
@@ -122,7 +122,7 @@ console.log(`04 11`, 11)
     </el-space>
 
     <el-divider />
-    <p class="mb-2">组件嵌套: 不需要省略的需设置 truncated 为 false</p>
+    <p class="m-b-8">组件嵌套: 不需要省略的需设置 truncated 为 false</p>
     <el-space wrap>
       <ul class="content">
         <li>

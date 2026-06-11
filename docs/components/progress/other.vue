@@ -20,18 +20,18 @@ const defaultColor = ref(true)
       ></s-radio>
     </template>
 
-    <div class="mb-4">直线进度条动画</div>
-    <div class="w-1/4">
-      <s-progress indeterminate :percentage="50" class="mb-4" :customColor="defaultColor" />
-      <s-progress indeterminate :percentage="100" :format="format" class="mb-4" :customColor="defaultColor" />
-      <s-progress indeterminate :customColor="defaultColor" :percentage="100" status="success" class="mb-4" />
-      <s-progress indeterminate :percentage="100" :customColor="defaultColor" status="warning" class="mb-4" />
-      <s-progress indeterminate :percentage="50" status="exception" :customColor="defaultColor" class="mb-4" />
+    <div class="m-b-16">直线进度条动画</div>
+    <div class="w-25%">
+      <s-progress indeterminate :percentage="50" class="m-b-16" :customColor="defaultColor" />
+      <s-progress indeterminate :percentage="100" :format="format" class="m-b-16" :customColor="defaultColor" />
+      <s-progress indeterminate :customColor="defaultColor" :percentage="100" status="success" class="m-b-16" />
+      <s-progress indeterminate :percentage="100" :customColor="defaultColor" status="warning" class="m-b-16" />
+      <s-progress indeterminate :percentage="50" status="exception" :customColor="defaultColor" class="m-b-16" />
     </div>
 
-    <div class="mb-4">进度条内显示百分比标识</div>
-    <div class="w-1/4">
-      <s-progress :text-inside="true" :stroke-width="26" :percentage="70" class="mb-4" :customColor="defaultColor" />
+    <div class="m-b-16">进度条内显示百分比标识</div>
+    <div class="w-25%">
+      <s-progress :text-inside="true" :stroke-width="26" :percentage="70" class="m-b-16" :customColor="defaultColor" />
       <s-progress
         :text-inside="true"
         :stroke-width="24"
@@ -41,14 +41,14 @@ const defaultColor = ref(true)
         striped
         striped-flow
         :duration="70"
-        class="mb-4"
+        class="m-b-16"
       />
       <s-progress
         :text-inside="true"
         :stroke-width="22"
         :percentage="80"
         status="warning"
-        class="mb-4"
+        class="m-b-16"
         :customColor="defaultColor"
       />
       <s-progress
@@ -59,12 +59,12 @@ const defaultColor = ref(true)
         status="exception"
         striped
         striped-flow
-        class="mb-4"
+        class="m-b-16"
       />
     </div>
 
-    <div class="mb-4">自定义内容</div>
-    <div class="w-1/4 demo-progress">
+    <div class="m-b-16">自定义内容</div>
+    <div class="w-25% demo-progress">
       <s-progress :percentage="50" :customColor="defaultColor">
         <el-button text>自定义内容</el-button>
       </s-progress>

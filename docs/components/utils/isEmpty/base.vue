@@ -14,21 +14,21 @@ const options = [
   {
     label: 'isEmpty(false)',
     value: isEmpty(false),
-    labelAttrs: { class: 'text-[var(--blue)]' },
-    valueAttrs: { class: 'text-[var(--blue)]' },
+    labelAttrs: { class: 'cl-blue' },
+    valueAttrs: { class: 'cl-blue' },
   },
   { label: "isEmpty(new Date('无效日期'))", value: isEmpty(new Date('无效日期')) },
   {
     label: 'isEmpty(new Date())',
     value: isEmpty(new Date()),
-    labelAttrs: { class: 'text-[var(--blue)]' },
-    valueAttrs: { class: 'text-[var(--blue)]' },
+    labelAttrs: { class: 'cl-blue' },
+    valueAttrs: { class: 'cl-blue' },
   },
   {
     label: 'isEmpty(0)',
     value: isEmpty(0),
-    labelAttrs: { class: 'text-[var(--blue)]' },
-    valueAttrs: { class: 'text-[var(--blue)]' },
+    labelAttrs: { class: 'cl-blue' },
+    valueAttrs: { class: 'cl-blue' },
   },
   { label: 'isEmpty([])', value: isEmpty([]) },
   { label: 'isEmpty({})', value: isEmpty({}) },
@@ -38,26 +38,26 @@ const options = [
   {
     label: 'isEmpty(BigInt(0))',
     value: isEmpty(BigInt(0)),
-    labelAttrs: { class: 'text-[var(--blue)]' },
-    valueAttrs: { class: 'text-[var(--blue)]' },
+    labelAttrs: { class: 'cl-blue' },
+    valueAttrs: { class: 'cl-blue' },
   },
   {
     label: 'isEmpty(/abc/)',
     value: isEmpty(/abc/),
-    labelAttrs: { class: 'text-[var(--blue)]' },
-    valueAttrs: { class: 'text-[var(--blue)]' },
+    labelAttrs: { class: 'cl-blue' },
+    valueAttrs: { class: 'cl-blue' },
   },
   {
     label: 'isEmpty(Promise.resolve(1))',
     value: isEmpty(Promise.resolve(1)),
-    labelAttrs: { class: 'text-[var(--blue)]' },
-    valueAttrs: { class: 'text-[var(--blue)]' },
+    labelAttrs: { class: 'cl-blue' },
+    valueAttrs: { class: 'cl-blue' },
   },
   {
     label: 'isEmpty({ [Symbol()]: 1 })',
     value: isEmpty(symbolObject),
-    labelAttrs: { class: 'text-[var(--blue)]' },
-    valueAttrs: { class: 'text-[var(--blue)]' },
+    labelAttrs: { class: 'cl-blue' },
+    valueAttrs: { class: 'cl-blue' },
   },
 
   {
@@ -78,7 +78,7 @@ const options = [
 <template>
   <SFunctionSourceCode functionName="isEmpty"></SFunctionSourceCode>
   <s-warning
-    class="mb-4"
+    class="m-b-16"
     content="默认会把 undefined、null、空字符串、空数组、空对象、NaN、空 Set/Map、无效日期 视为空值；0、false、BigInt(0) 默认不再算空。<br>如果需要兼容旧语义，可以显式传第二个参数 false。"
   />
 

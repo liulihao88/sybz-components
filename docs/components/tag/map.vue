@@ -31,9 +31,9 @@ const row = {
 <template>
   <div>
     <div v-for="(v, i) in map" :key="i">
-      <STag class="mr-[8px]" :type="v.type">{{ v.name }}</STag>
+      <STag class="m-r-8" :type="v.type">{{ v.name }}</STag>
     </div>
-    <STag class="mr-[8px]" :options="map2" :value="row.asyncValue" width="100"></STag>
-    <STag class="mr-[8px]" :options="map2" :value="row.InService" width="100"></STag>
+    <STag class="m-r-8" :options="map2" :value="row.asyncValue" width="100"></STag>
+    <STag class="m-r-8" :options="map2" :value="row.InService" width="100"></STag>
   </div>
 </template>

@@ -70,6 +70,6 @@ const onAddItem = () => {
         <el-button link type="primary" size="small" @click.prevent="deleteRow($index)">Remove</el-button>
       </template>
     </s-table>
-    <el-button class="w-full mt-4!" @click="onAddItem">Add Item</el-button>
+    <el-button class="w-block m-t-16" @click="onAddItem">Add Item</el-button>
   </div>
 </template>

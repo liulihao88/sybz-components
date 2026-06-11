@@ -14,6 +14,6 @@ const loadingText= '小样, 你脱了马甲我照样认识你'
 </script>
 
 <template>
-  <div v-cus-loading:[loadingText]="isLoading" class="h-[300px] ">我说呢</div>
+  <div v-cus-loading:[loadingText]="isLoading" class="h-300 ">我说呢</div>
 </template> 
 */

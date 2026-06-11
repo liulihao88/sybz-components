@@ -94,7 +94,7 @@ init()
     <s-descriptions
       title="这是title"
       :options="options"
-      class="w-full"
+      class="w-block"
       :column="1"
       label-width="300"
       :size="sizeValue"

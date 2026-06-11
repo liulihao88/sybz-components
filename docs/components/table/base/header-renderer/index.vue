@@ -8,7 +8,7 @@ const { columns, filterTableData } = useColumns()
 <template>
   <s-table :data="filterTableData" :columns="columns">
     <template #nameHeader>
-      <span class="flex items-center">
+      <span class="f ai-c">
         <IconifyIconOffline :icon="Calendar" />
         日期
       </span>

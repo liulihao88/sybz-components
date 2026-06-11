@@ -1,5 +1,5 @@
 <template>
-  <s-flex class="h-[100px]">
+  <s-flex class="h-100">
     <div
       v-for="(item, index) in new Array(4)"
       :key="index"

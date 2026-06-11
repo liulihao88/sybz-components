@@ -48,7 +48,7 @@
     />
     <el-input
       v-model="text"
-      class="ml-4"
+      class="m-l-16"
       style="width: 240px"
       maxlength="10"
       placeholder="Please input"
@@ -67,7 +67,7 @@
     />
     <el-input
       v-model="textarea"
-      class="ml-4"
+      class="m-l-16"
       maxlength="30"
       style="width: 240px"
       placeholder="Please input"

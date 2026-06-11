@@ -46,7 +46,7 @@ const props = withDefaults(
 )
 /** @使用方式
 <s-empty description="您没有消费订单" width="48"></s-empty>
-<s-empty class="w-full" src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" width="200" ></s-empty>
+<s-empty class="w-block" src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg" width="200" ></s-empty>
 */
 </script>
 

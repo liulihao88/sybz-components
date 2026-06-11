@@ -17,7 +17,7 @@ const fieldList = [
     prop: 'account',
     rules: [validate()],
     labelRender: () => {
-      return <div class="text-[var(--red)]">labelRender渲染label</div>
+      return <div class="cl-red">labelRender渲染label</div>
     },
     render: (item) => {
       return (
@@ -29,7 +29,7 @@ const fieldList = [
               formData.value.account = val
             }}
           />
-          <s-warning content="render渲染value" class="ml-2" size="small"></s-warning>
+          <s-warning content="render渲染value" class="m-l-8" size="small"></s-warning>
         </s-flex>
       )
     },
