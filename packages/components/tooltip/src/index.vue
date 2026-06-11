@@ -1,8 +1,8 @@
 <template>
-  <el-tooltip class="s-tooltip-box" :disabled="handleDisabled" :effect="effect" v-bind="tooltipAttrs">
+  <el-tooltip class="s-tooltip-box" :disabled="handleDisabled" :effect="mergedProps.effect" v-bind="mergedTooltipAttrs">
     <span
       @click="contentClick"
-      v-if="props.showSlot"
+      v-if="mergedProps.showSlot"
       ref="textRef"
       class="s-tooltip-box__text"
       :class="{ 's-tooltip-box__text--multiline': isMultiLineClamp }"
@@ -29,6 +29,7 @@
 <script setup lang="ts">
 import { ref, useSlots, computed, useAttrs, h, resolveComponent } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'STooltip',
@@ -57,9 +58,14 @@ const props = defineProps({
     default: () => ({}),
   },
 })
+const mergedProps = useGlobalComponentConfig('sTooltip', props)
+
+const mergedTooltipAttrs = computed(() => {
+  return mergedProps.value.tooltipAttrs ?? {}
+})
 
 const normalizedLineClamp = computed(() => {
-  const lineClamp = Number(props.lineClamp)
+  const lineClamp = Number(mergedProps.value.lineClamp)
   if (!Number.isFinite(lineClamp) || lineClamp <= 0) {
     return 1
   }
@@ -70,7 +76,7 @@ const isMultiLineClamp = computed(() => normalizedLineClamp.value > 1)
 
 const textStyle = computed(() => {
   const baseStyle = {
-    maxWidth: processWidth(props.width, true),
+    maxWidth: processWidth(mergedProps.value.width, true),
   }
 
   if (!isMultiLineClamp.value) {
@@ -118,7 +124,7 @@ const handleDisabled = computed(() => {
   return isDisabled.value
 })
 function onMouseOver() {
-  if (!props.showSlot) {
+  if (!mergedProps.value.showSlot) {
     return
   }
   // 内容超出，显示文字提示内容

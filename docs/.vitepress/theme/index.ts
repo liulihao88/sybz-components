@@ -62,7 +62,16 @@ export default {
       locale, // 语言设置
     })
     // 全局注册基础组件
-    ctx.app.use(SybzComponents)
+    ctx.app.use(SybzComponents, {
+      globalComponentConfig: {
+        sDialog: {
+          // theme: 'chenghua',
+        },
+        sTitle: {
+          showAfter: 1000,
+        },
+      },
+    })
     ctx.app.use(VueTippy)
 
     ctx.app.component('Demo', VPDemo)

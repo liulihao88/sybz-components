@@ -1,8 +1,7 @@
 <template>
-  <div class="s-dialog">
+  <div class="s-dialog" :class="componentClass">
     <component
       :is="parseType"
-      :custom-class="componentClass"
       v-bind="{
         width: '640px',
         bodyClass: drawerBodyClass,
@@ -15,7 +14,7 @@
     >
       <template #header>
         <div class="s-dialog__header">
-          <span v-if="!hideHeaderIcon" class="s-dialog__header-icon-box">
+          <span v-if="!mergedProps.hideHeaderIcon" class="s-dialog__header-icon-box">
             <slot name="headerIcon">
               <svg class="s-dialog__header-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
                 <path
@@ -31,7 +30,7 @@
           </span>
           <span class="s-dialog__header-content">
             <slot name="header">
-              {{ title }}
+              {{ mergedProps.title }}
             </slot>
           </span>
         </div>
@@ -39,25 +38,27 @@
       <div :class="slotBoxClass">
         <slot></slot>
       </div>
-      <template #footer v-if="showFooter">
+      <template #footer v-if="mergedShowFooter">
         <slot name="footer">
           <el-button
-            v-if="showCancel"
+            v-if="mergedProps.showCancel"
+            class="s-dialog__cancel-button"
             :type="mergedCancelAttrs.type || ''"
             v-bind="mergedCancelAttrs"
             @click="handleCancelClose"
           >
-            {{ cancelText }}
+            {{ mergedProps.cancelText }}
           </el-button>
           <el-button
-            v-if="showConfirm"
+            v-if="mergedProps.showConfirm"
+            class="s-dialog__confirm-button"
             :loading="confirmLoading"
             id="kdDialogConfirmBtn"
             :type="mergedConfirmAttrs.type || 'primary'"
             v-bind="mergedConfirmAttrs"
             @click="confirm"
           >
-            {{ confirmText }}
+            {{ mergedProps.confirmText }}
           </el-button>
         </slot>
       </template>
@@ -68,6 +69,7 @@
 <script setup lang="ts">
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType } from '@/utils/src/index'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SDialog',
@@ -86,7 +88,7 @@ const props = defineProps({
   },
   theme: {
     type: String,
-    default: '', // 弹框样式: 默认空, norm norm16 simple
+    default: '', // 弹框样式: 默认空, norm norm16 simple chenghua
   },
   cancel: {
     type: [Function, String],
@@ -103,7 +105,7 @@ const props = defineProps({
   // 是否显示底部操作按钮 :footer="null"
   showFooter: {
     type: Boolean,
-    default: true,
+    default: undefined,
   },
   showCancel: {
     type: Boolean,
@@ -138,13 +140,13 @@ const props = defineProps({
     default: false,
   },
 })
+const mergedProps = useGlobalComponentConfig('sDialog', props)
+
 const getThemeClass = computed(() => {
-  if (props.theme === 'norm') {
-    return 'kd-norm-dialog'
-  } else if (props.theme === 'norm16') {
-    return 'kd-norm16-dialog'
-  } else if (props.theme === 'simple') {
-    return 'kd-simple-dialog'
+  if (mergedProps.value.theme === 'norm') {
+    return 's-norm-dialog'
+  } else if (mergedProps.value.theme === 'chenghua') {
+    return 's-chenghua-dialog'
   } else {
     return ''
   }
@@ -154,22 +156,26 @@ const componentClass = computed(() => {
   return ['s-dialog__panel', getThemeClass.value].filter(Boolean).join(' ')
 })
 
+const mergedShowFooter = computed(() => {
+  return mergedProps.value.showFooter ?? mergedProps.value.theme !== 'chenghua'
+})
+
 const mergedConfirmAttrs = computed(() => {
   return {
-    icon: 'el-icon-check',
-    ...props.confirmAttrs,
+    icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-check',
+    ...mergedProps.value.confirmAttrs,
   }
 })
 
 const mergedCancelAttrs = computed(() => {
   return {
-    icon: 'el-icon-close',
-    ...props.cancelAttrs,
+    icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-close',
+    ...mergedProps.value.cancelAttrs,
   }
 })
 
 const drawerBodyClass = computed(() => {
-  return props.type === 'drawer' && props.fillSlot ? 's-dialog__drawer-body--fill' : ''
+  return mergedProps.value.type === 'drawer' && mergedProps.value.fillSlot ? 's-dialog__drawer-body--fill' : ''
 })
 
 const fullscreenHeight = ref('calc(100vh - 124px)')
@@ -177,13 +183,13 @@ const slotBoxClass = computed(() => {
   if (attrs.fullscreen === true || attrs.fullscreen === '') {
     return 'dialog_fullscreen'
   }
-  return props.fillSlot ? 'dialog_slot_box dialog_slot_box--fill' : 'dialog_slot_box'
+  return mergedProps.value.fillSlot ? 'dialog_slot_box dialog_slot_box--fill' : 'dialog_slot_box'
 })
 watch(
-  () => props.showFooter,
+  () => mergedShowFooter.value,
   (val) => {
     if (attrs.fullscreen === true || attrs.fullscreen === '') {
-      if (props.showFooter === false) {
+      if (val === false) {
         fullscreenHeight.value = 'calc(100vh - 74px)'
       } else {
         fullscreenHeight.value = 'calc(100vh - 124px)'
@@ -197,9 +203,9 @@ watch(
 
 const confirmLoading = ref(false)
 async function confirm() {
-  if (props.confirm && getType(props.confirm) === 'function') {
+  if (mergedProps.value.confirm && getType(mergedProps.value.confirm) === 'function') {
     confirmLoading.value = true
-    await props.confirm().finally(() => {
+    await mergedProps.value.confirm().finally(() => {
       confirmLoading.value = false
     })
   } else if (attrs.onConfirm) {
@@ -222,15 +228,20 @@ function handleClose() {
 
 // 只有当弹框的时候, 且按的是回车键, 才走confirm
 function onkeypress({ code }: KeyboardEvent) {
-  if (attrs.modelValue === true && code === 'Enter' && props.enableConfirm && props.confirmAttrs?.loading !== true) {
+  if (
+    attrs.modelValue === true &&
+    code === 'Enter' &&
+    mergedProps.value.enableConfirm &&
+    mergedProps.value.confirmAttrs?.loading !== true
+  ) {
     confirm()
   }
 }
 
 const parseType = computed(() => {
-  if (props.type === '') {
+  if (mergedProps.value.type === '') {
     return 'el-dialog'
-  } else if (props.type === 'drawer') {
+  } else if (mergedProps.value.type === 'drawer') {
     return 'el-drawer'
   }
 })
@@ -252,6 +263,7 @@ onBeforeUnmount(() => {
     border-bottom: 1px solid var(--line);
     font-weight: 700;
   }
+
   :deep(.el-drawer__header) {
     margin-bottom: 0;
   }
@@ -345,6 +357,21 @@ onBeforeUnmount(() => {
   .s-dialog__header-content {
     min-width: 0;
     flex: 1 1 auto;
+  }
+}
+
+.s-dialog.s-chenghua-dialog {
+  :deep(.el-dialog__header),
+  :deep(.el-drawer__header) {
+    padding: 10px 16px;
+    border-bottom: 0px solid var(--line);
+    font-weight: 700;
+  }
+  :deep(.el-dialog) {
+    border-radius: 16px;
+  }
+  :deep(.el-dialog__footer) {
+    border-top: 0px solid var(--line);
   }
 }
 </style>

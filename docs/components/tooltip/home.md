@@ -60,6 +60,25 @@ tooltip/slot
 tooltip/visible
 :::
 
+### 全局默认配置
+
+tooltip 支持和 table 一样通过 `globalComponentConfig` 配置全局默认值，组件 key 为 `sTooltip`。
+
+```js
+app.use(SybzComponents, {
+  globalComponentConfig: {
+    sTooltip: {
+      width: '240px',
+      lineClamp: 2,
+      effect: 'light',
+      tooltipAttrs: {
+        placement: 'top',
+      },
+    },
+  },
+})
+```
+
 ### 组件属性
 
 |     属性名     | 说明                                       | 类型            | 默认值 |

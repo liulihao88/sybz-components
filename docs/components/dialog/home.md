@@ -10,6 +10,14 @@
 dialog/base
 :::
 
+### 成化样式
+
+设置 `theme="chenghua"` 可以切换到成化样式。
+
+:::demo
+dialog/chenghua
+:::
+
 ### 通常用法
 
 :::demo
@@ -61,15 +69,33 @@ dialog/drawerFillSlot
 dialog/fillSlot
 :::
 
+### 全局默认配置
+
+dialog 支持和 table 一样通过 `globalComponentConfig` 配置全局默认值，组件 key 为 `sDialog`。
+
+```js
+app.use(SybzComponents, {
+  globalComponentConfig: {
+    sDialog: {
+      theme: 'chenghua',
+      showFooter: false,
+      hideHeaderIcon: true,
+    },
+  },
+})
+```
+
 ### 属性
 
 |      属性名       | 说明                                                                                    | 类型                                          | 默认值 |
 | :---------------: | --------------------------------------------------------------------------------------- | --------------------------------------------- | ------ |
 |       title       | 顶部title                                                                               | string                                        | 提示   |
+|       theme       | 弹框样式，可选 `chenghua`                                                               | string                                        | -      |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                    | boolean                                       | false  |
 |    cancelText     | 取消按钮文本                                                                            | string                                        | 取消   |
 |    confirmText    | 确认按钮文本                                                                            | string                                        | 确认   |
 |      footer       | 是否显示底部操作按钮                                                                    | object                                        | -      |
+|    showFooter     | 是否显示底部操作按钮；`theme="chenghua"` 未传时默认不显示                               | boolean                                       | true   |
 |    showCancel     | 是否显示取消按钮                                                                        | boolean <s-tip content="true\|false"></s-tip> | true   |
 |    showConfirm    | 是否显示确认按钮                                                                        | boolean                                       | true   |
 |   confirmAttrs    | 确认按钮的属性                                                                          | object                                        | {}     |
