@@ -4,6 +4,10 @@
 
 ## Hidden Title {.md-hidden}
 
+## 属性事件插槽简介
+
+<ApiIntro />
+
 ### 基础用法
 
 :::demo 这是chart的最基础用法

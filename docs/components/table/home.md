@@ -4,6 +4,10 @@
 
 ## Hidden Title {.md-hidden}
 
+## 属性事件插槽简介
+
+<ApiIntro />
+
 ### all
 
 :::demo

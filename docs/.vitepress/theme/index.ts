@@ -13,6 +13,7 @@ import * as echarts from 'echarts' // 引入echarts
 
 import OTip from '../vitepress/components/oTip/index.vue'
 import ChangelogContent from './components/ChangelogContent.vue'
+import ApiIntro from '../../shared/ApiIntro.vue'
 
 import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
@@ -57,6 +58,7 @@ export default {
     ctx.app.component('OooSvg', svgIconConfig.Svg({}).component)
     ctx.app.component('OTip', OTip)
     ctx.app.component('ChangelogContent', ChangelogContent)
+    ctx.app.component('ApiIntro', ApiIntro)
     // 注册ElementPlus
     ctx.app.use(ElementPlus, {
       locale, // 语言设置
@@ -67,7 +69,6 @@ export default {
         sDialog: {
           // theme: 'chenghua',
         },
-      
       },
     })
     ctx.app.use(VueTippy)

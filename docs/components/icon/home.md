@@ -2,6 +2,10 @@
 
 ## Hidden Title {.md-hidden}
 
+## 属性事件插槽简介
+
+<ApiIntro />
+
 [Element Plus Icon Documentation](https://element-plus.org/zh-CN/component/icon.html)
 
 ### 基础用法

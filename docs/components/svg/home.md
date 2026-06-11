@@ -4,6 +4,10 @@
 
 ## Hidden Title {.md-hidden}
 
+## 属性事件插槽简介
+
+<ApiIntro />
+
 <s-warning content="注意: 如果svg本身不支持改变颜色, 那么设置<code>color</code>也是不起作用的 . 如果希望svg能够改变颜色, 那需要将svg的代码中的<code>fill</code>改为<code>currentColor</code>" type="warning"></s-warning>
 
 svg图片存放地址: docs/.vitepress/theme/assets/svg
