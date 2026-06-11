@@ -1,5 +1,4 @@
 import './styles/index.scss'
-import './styles/tailwind.css'
 
 // 全局注册vue-tippy
 import 'tippy.js/dist/tippy.css'

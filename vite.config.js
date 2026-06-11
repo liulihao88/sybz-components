@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
 import vue from '@vitejs/plugin-vue'
-import tailwindcss from '@tailwindcss/vite'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
 import pkg from './package.json'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -51,7 +50,6 @@ export default defineConfig({
     __SYBZ_COMPONENTS_BUILD_TIME__: JSON.stringify(buildTime),
   },
   plugins: [
-    tailwindcss(),
     VueSetupExtend(),
     {
       ...terser({

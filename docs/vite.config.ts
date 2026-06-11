@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
 import { fileURLToPath, URL } from 'node:url'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
@@ -17,7 +16,6 @@ export default defineConfig({
     devSourcemap: false,
   },
   plugins: [
-    tailwindcss(),
     VueSetupExtend(),
     svgLoader({
       defaultImport: 'url', // 将SVG作为URL导入
