@@ -12,10 +12,16 @@
 tooltip/base
 :::
 
-### 主题与点击事件
+### 通常用法
 
 :::demo
 tooltip/usually
+:::
+
+### 主题与点击事件
+
+:::demo
+tooltip/theme
 :::
 
 ### 最大行数
@@ -63,6 +69,7 @@ tooltip/visible
 ### 全局默认配置
 
 tooltip 支持和 table 一样通过 `globalComponentConfig` 配置全局默认值，组件 key 为 `sTooltip`。
+除 `width`、`lineClamp`、`showSlot`、`effect` 这些封装属性外，Element Plus Tooltip 的属性可直接写在 `sTooltip` 下。
 
 ```js
 app.use(SybzComponents, {
@@ -71,9 +78,8 @@ app.use(SybzComponents, {
       width: '240px',
       lineClamp: 2,
       effect: 'light',
-      tooltipAttrs: {
-        placement: 'top',
-      },
+      placement: 'top',
+      showAfter: 1000,
     },
   },
 })
@@ -81,13 +87,12 @@ app.use(SybzComponents, {
 
 ### 组件属性
 
-|     属性名     | 说明                                       | 类型            | 默认值 |
-| :------------: | ------------------------------------------ | --------------- | ------ |
-|    `width`     | 默认文本触发区域最大宽度                   | string          | `100%` |
-|  `lineClamp`   | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`    |
-|   `showSlot`   | 是否渲染默认触发内容区域                   | boolean         | `true` |
-|    `effect`    | tooltip 主题，会透传给 `el-tooltip`        | string          | `dark` |
-| `tooltipAttrs` | 额外透传给 `el-tooltip` 的配置             | object          | `{}`   |
+|   属性名    | 说明                                       | 类型            | 默认值 |
+| :---------: | ------------------------------------------ | --------------- | ------ |
+|   `width`   | 默认文本触发区域最大宽度                   | string          | `100%` |
+| `lineClamp` | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`    |
+| `showSlot`  | 是否渲染默认触发内容区域                   | boolean         | `true` |
+|  `effect`   | tooltip 主题，会透传给 `el-tooltip`        | string          | `dark` |
 
 ### 常用透传属性
 

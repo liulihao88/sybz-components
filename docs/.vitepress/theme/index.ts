@@ -67,9 +67,7 @@ export default {
         sDialog: {
           // theme: 'chenghua',
         },
-        sTitle: {
-          showAfter: 1000,
-        },
+      
       },
     })
     ctx.app.use(VueTippy)

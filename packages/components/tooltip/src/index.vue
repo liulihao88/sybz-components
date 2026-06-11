@@ -53,15 +53,17 @@ const props = defineProps({
   effect: {
     default: 'dark',
   },
-  tooltipAttrs: {
-    type: Object,
-    default: () => ({}),
-  },
 })
 const mergedProps = useGlobalComponentConfig('sTooltip', props)
+const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect']
 
 const mergedTooltipAttrs = computed(() => {
-  return mergedProps.value.tooltipAttrs ?? {}
+  return Object.keys(mergedProps.value).reduce((attrs, key) => {
+    if (!ownPropKeys.includes(key)) {
+      attrs[key] = mergedProps.value[key]
+    }
+    return attrs
+  }, {})
 })
 
 const normalizedLineClamp = computed(() => {
