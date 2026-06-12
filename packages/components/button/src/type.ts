@@ -7,5 +7,7 @@ export interface SButtonSelfProps {
   placement?: string
   tipProps?: Record<string, any>
   isDebounce?: boolean
+  theme?: '' | 'chenghua'
+  width?: string | number
 }
 export type SButtonProps = SButtonSelfProps

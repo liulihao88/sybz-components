@@ -14,6 +14,26 @@
 button/base
 :::
 
+### 成华主题
+
+:::demo
+button/chenghua
+:::
+
+### 全局默认配置
+
+button 支持通过 `globalComponentConfig` 配置全局默认值，组件 key 为 `sButton`。
+
+```js
+app.use(SybzComponents, {
+  globalComponentConfig: {
+    sButton: {
+      theme: 'chenghua',
+    },
+  },
+})
+```
+
 ### 图标按钮
 
 :::demo
@@ -53,6 +73,8 @@ button/other
 |   content    | tooltip的提示文字   | string                                  | ''     |
 |     time     | 防抖时长            | number(毫秒)                            | 0      |
 | tooltipAttrs | s-tooltip组件的属性 | Object [去tooltip组件](../tooltip/home) | {}     |
+|    theme     | 主题样式            | `'chenghua'`                            | ''     |
+|    width     | 按钮宽度，支持 `processWidth` 写法 | string / number                         | ''     |
 
 ### 事件
 

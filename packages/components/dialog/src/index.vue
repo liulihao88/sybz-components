@@ -16,7 +16,7 @@
         <div class="s-dialog__header">
           <span v-if="!mergedProps.hideHeaderIcon" class="s-dialog__header-icon-box">
             <slot name="headerIcon">
-              <svg class="s-dialog__header-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+              <svg class="s-dialog__header-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false" v-if="props.theme !== 'chenghua'">
                 <path
                   fill="currentColor"
                   d="M192 160h384c35.36 0 64 28.64 64 64v96h192c35.36 0 64 28.64 64 64v448c0 35.36-28.64 64-64 64H448c-35.36 0-64-28.64-64-64v-96H192c-35.36 0-64-28.64-64-64V224c0-35.36 28.64-64 64-64zm0 64v448h192V384c0-35.36 28.64-64 64-64h128v-96H192zm256 160v448h384V384H448z"
