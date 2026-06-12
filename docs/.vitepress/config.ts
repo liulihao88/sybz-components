@@ -168,6 +168,10 @@ export default defineConfig({
               link: '/components/test/home.md',
             },
             {
+              text: 'buildTime构建时间',
+              link: '/components/buildTime/home.md',
+            },
+            {
               text: sybzMark('button组件'),
               link: '/components/button/home.md',
             },

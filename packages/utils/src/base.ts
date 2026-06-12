@@ -1313,11 +1313,11 @@ export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, a
     cancelButtonText: '取消',
     confirmButtonText: '确定',
     dangerouslyUseHTMLString: true,
-    ...options,
     appendTo: resolvedAppendTo,
     appContext: resolvedAppContext,
     confirmButtonClass: _mergeClassNames(DEFAULT_CONFIRM_BUTTON_CLASS, options?.confirmButtonClass),
     cancelButtonClass: _mergeClassNames(DEFAULT_CANCEL_BUTTON_CLASS, options?.cancelButtonClass),
+    ...options,
   }
 
   return ElMessageBox.confirm(resolvedMessage, mergeOptions)
@@ -1398,7 +1398,25 @@ export function getVariable(propertyName: string, fallback = ''): string {
   return res || fallback
 }
 
-declare const __SYBZ_UTILS_BUILD_TIME__: string
+declare const __SYBZ_UTILS_BUILD_TIME__: string | undefined
+
+const DEFAULT_BUILD_TIME_FALLBACK = '未注入'
+
+/**
+ * 返回当前 @sybz-components/utils 包的构建时间。
+ *
+ * @returns 构建时间字符串。
+ *
+ * @example
+ * getUtilsBuildTime()
+ */
+export function getUtilsBuildTime(fallback = DEFAULT_BUILD_TIME_FALLBACK): string {
+  if (typeof __SYBZ_UTILS_BUILD_TIME__ === 'string' && __SYBZ_UTILS_BUILD_TIME__) {
+    return __SYBZ_UTILS_BUILD_TIME__
+  }
+
+  return fallback
+}
 
 /**
  * 返回当前 utils 包的构建时间。
@@ -1409,5 +1427,5 @@ declare const __SYBZ_UTILS_BUILD_TIME__: string
  * test()
  */
 export function test(): string {
-  return `build time: ${__SYBZ_UTILS_BUILD_TIME__}`
+  return `build time: ${getUtilsBuildTime()}`
 }

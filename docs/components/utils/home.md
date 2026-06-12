@@ -499,12 +499,12 @@ await sleep(500)
 await sleep(1000, () => console.log('1 秒后执行'))
 ```
 
-### test
+### getUtilsBuildTime
 
 返回当前 utils 构建时间。
 
 ```ts
-test()
+getUtilsBuildTime()
 ```
 
 ### throttle

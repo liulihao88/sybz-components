@@ -20,6 +20,12 @@ const formatBuildTime = (date) => {
 }
 
 const buildTime = formatBuildTime(new Date())
+const externalPackages = ['vue', 'echarts', 'vue-echarts', '@sybz-components/utils']
+const isExternalPackage = (id) =>
+  externalPackages.includes(id) ||
+  /^echarts(\/|$)/.test(id) ||
+  /^vue-echarts(\/|$)/.test(id) ||
+  /^@sybz-components\/utils(\/|$)/.test(id)
 
 export default defineConfig({
   build: {
@@ -30,12 +36,12 @@ export default defineConfig({
       fileName: (format) => `${pkg.name}-${format}.js`,
     },
     rollupOptions: {
-      external: (id) =>
-        ['vue', 'echarts', 'vue-echarts'].includes(id) || /^echarts(\/|$)/.test(id) || /^vue-echarts(\/|$)/.test(id),
+      external: isExternalPackage,
       output: {
         // UMD模式下位那些外部化的依赖提供一个全局的变量
         globals: {
           vue: 'Vue',
+          '@sybz-components/utils': 'SybzComponentsUtils',
           echarts: 'echarts',
           'echarts/core': 'echarts',
           'echarts/charts': 'echarts',

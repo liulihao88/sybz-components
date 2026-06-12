@@ -3,7 +3,7 @@ import { ref, getCurrentInstance, h } from 'vue'
 const { proxy } = getCurrentInstance()
 import { confirm } from '@/utils/src/index'
 const base = () => {
-  confirm('确定删除吗?')
+  confirm('确定要执行此操作吗？', { confirmButtonClass: '', cancelButtonClass: '' })
 }
 
 const useHtml = () => {
