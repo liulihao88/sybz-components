@@ -2,12 +2,12 @@
 import { confirm } from '@/utils/src/index'
 
 const deleteConfirm = () => {
-  confirm('确定删除文件 <span> <code>成华AI服务申请表.xlsx</code></span> 吗？<br />删除后无法恢复。', {
+  confirm('确定删除文件 <code>成华AI服务申请表.xlsx</code> 吗？<br />删除后无法恢复。', {
     title: '删除确认',
     theme: 'chenghua',
     confirmButtonText: '确认删除',
     cancelButtonText: '再想想',
-    confirmButtonClass: 's-confirm-danger-button',
+    confirmButtonClass: 's-confirm-danger-button', // s-confirm-danger-button
   })
 }
 
@@ -53,17 +53,5 @@ const customText = () => {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-}
-</style>
-
-<style lang="scss">
-
-.s-confirm-danger-button {
-  --el-button-bg-color: var(--el-color-danger);
-  --el-button-border-color: var(--el-color-danger);
-  --el-button-hover-bg-color: var(--el-color-danger-light-3);
-  --el-button-hover-border-color: var(--el-color-danger-light-3);
-  --el-button-active-bg-color: var(--el-color-danger-dark-2);
-  --el-button-active-border-color: var(--el-color-danger-dark-2);
 }
 </style>

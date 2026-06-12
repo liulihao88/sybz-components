@@ -97,6 +97,23 @@
     font-size: 14px;
     line-height: 1.6;
     color: #000000;
+
+    code {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 8px;
+      border: 1px solid rgba(22, 93, 255, 0.16);
+      border-radius: 4px;
+      margin: 0 4px;
+      background: rgba(22, 93, 255, 0.08);
+      color: var(--ch-message-box-primary);
+      font-family: 'Roboto Mono', 'PingFang SC', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1;
+      vertical-align: middle;
+    }
   }
 
   .el-message-box__btns {
@@ -130,6 +147,15 @@
     --el-button-active-bg-color: var(--ch-message-box-primary-active);
     --el-button-active-border-color: var(--ch-message-box-primary-active);
     --el-button-active-text-color: #ffffff;
+  }
+
+  .s-message-box__confirm-btn--chenghua.s-confirm-danger-button {
+    --el-button-bg-color: var(--el-color-danger);
+    --el-button-border-color: var(--el-color-danger);
+    --el-button-hover-bg-color: var(--el-color-danger-light-3);
+    --el-button-hover-border-color: var(--el-color-danger-light-3);
+    --el-button-active-bg-color: var(--el-color-danger-dark-2);
+    --el-button-active-border-color: var(--el-color-danger-dark-2);
   }
 
   .s-message-box__cancel-btn--chenghua {
