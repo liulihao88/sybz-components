@@ -58,6 +58,7 @@ const normalizeIcon = (icon: unknown) => {
 
 const buttonAttrs = computed(() => {
   const normalizedAttrs = { ...attrs }
+  const buttonHeight = processWidth(mergedProps.value.height, true)
 
   if ('icon' in normalizedAttrs) {
     normalizedAttrs.icon = normalizeIcon(normalizedAttrs.icon)
@@ -77,7 +78,8 @@ const buttonAttrs = computed(() => {
     style: [
       {
         ...processWidth(mergedProps.value.width),
-        height: processWidth(mergedProps.value.height, true),
+        height: buttonHeight,
+        minHeight: buttonHeight,
       },
       normalizedAttrs.style,
     ],

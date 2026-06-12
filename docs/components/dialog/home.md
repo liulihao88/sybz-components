@@ -16,7 +16,7 @@ dialog/base
 
 ### 成华样式
 
-设置 `theme="chenghua"` 可以切换到成华样式。
+设置 `theme="chenghua"` 可以切换到成华样式。成华主题默认展示底部按钮，和普通 dialog 行为一致。
 
 :::demo
 dialog/chenghua
@@ -82,7 +82,6 @@ app.use(SybzComponents, {
   globalComponentConfig: {
     sDialog: {
       theme: 'chenghua',
-      showFooter: false,
       hideHeaderIcon: true,
     },
   },
@@ -99,7 +98,7 @@ app.use(SybzComponents, {
 |    cancelText     | 取消按钮文本                                                                            | string                                        | 取消   |
 |    confirmText    | 确认按钮文本                                                                            | string                                        | 确认   |
 |      footer       | 是否显示底部操作按钮                                                                    | object                                        | -      |
-|    showFooter     | 是否显示底部操作按钮；`theme="chenghua"` 未传时默认不显示                               | boolean                                       | true   |
+|    showFooter     | 是否显示底部操作按钮                                                                    | boolean                                       | true   |
 |    showCancel     | 是否显示取消按钮                                                                        | boolean <s-tip content="true\|false"></s-tip> | true   |
 |    showConfirm    | 是否显示确认按钮                                                                        | boolean                                       | true   |
 |   confirmAttrs    | 确认按钮的属性                                                                          | object                                        | {}     |

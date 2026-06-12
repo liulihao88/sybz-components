@@ -16,7 +16,13 @@
         <div class="s-dialog__header">
           <span v-if="!mergedProps.hideHeaderIcon" class="s-dialog__header-icon-box">
             <slot name="headerIcon">
-              <svg class="s-dialog__header-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false" v-if="props.theme !== 'chenghua'">
+              <svg
+                class="s-dialog__header-icon"
+                viewBox="0 0 1024 1024"
+                aria-hidden="true"
+                focusable="false"
+                v-if="mergedProps.theme !== 'chenghua'"
+              >
                 <path
                   fill="currentColor"
                   d="M192 160h384c35.36 0 64 28.64 64 64v96h192c35.36 0 64 28.64 64 64v448c0 35.36-28.64 64-64 64H448c-35.36 0-64-28.64-64-64v-96H192c-35.36 0-64-28.64-64-64V224c0-35.36 28.64-64 64-64zm0 64v448h192V384c0-35.36 28.64-64 64-64h128v-96H192zm256 160v448h384V384H448z"
@@ -40,26 +46,28 @@
       </div>
       <template #footer v-if="mergedShowFooter">
         <slot name="footer">
-          <el-button
+          <SButton
             v-if="mergedProps.showCancel"
             class="s-dialog__cancel-button"
             :type="mergedCancelAttrs.type || ''"
             v-bind="mergedCancelAttrs"
+            :theme="dialogButtonTheme"
             @click="handleCancelClose"
           >
             {{ mergedProps.cancelText }}
-          </el-button>
-          <el-button
+          </SButton>
+          <SButton
             v-if="mergedProps.showConfirm"
             class="s-dialog__confirm-button"
             :loading="confirmLoading"
             id="kdDialogConfirmBtn"
             :type="mergedConfirmAttrs.type || 'primary'"
             v-bind="mergedConfirmAttrs"
+            :theme="dialogButtonTheme"
             @click="confirm"
           >
             {{ mergedProps.confirmText }}
-          </el-button>
+          </SButton>
         </slot>
       </template>
     </component>
@@ -70,6 +78,7 @@
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType } from '@/utils/src/index'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import SButton from '@/components/button/src/index.vue'
 
 defineOptions({
   name: 'SDialog',
@@ -157,12 +166,17 @@ const componentClass = computed(() => {
 })
 
 const mergedShowFooter = computed(() => {
-  return mergedProps.value.showFooter ?? mergedProps.value.theme !== 'chenghua'
+  return mergedProps.value.showFooter ?? true
+})
+
+const dialogButtonTheme = computed(() => {
+  return mergedProps.value.theme === 'chenghua' ? 'chenghua' : ''
 })
 
 const mergedConfirmAttrs = computed(() => {
   return {
     icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-check',
+    ...(mergedProps.value.theme === 'chenghua' ? { height: 36 } : {}),
     ...mergedProps.value.confirmAttrs,
   }
 })
@@ -170,6 +184,7 @@ const mergedConfirmAttrs = computed(() => {
 const mergedCancelAttrs = computed(() => {
   return {
     icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-close',
+    ...(mergedProps.value.theme === 'chenghua' ? { height: 36 } : {}),
     ...mergedProps.value.cancelAttrs,
   }
 })
@@ -366,6 +381,12 @@ onBeforeUnmount(() => {
     padding: 10px 16px;
     border-bottom: 0px solid var(--line);
     font-weight: 700;
+  }
+  :deep(.s-dialog__header-content) {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--el-text-color-primary);
   }
   :deep(.el-dialog) {
     border-radius: 16px;
