@@ -2,16 +2,13 @@
 import { confirm } from '@/utils/src/index'
 
 const deleteConfirm = () => {
-  confirm(
-    '确定删除文件 <span class="s-confirm-file-name">成华AI服务申请表.xlsx</span> 吗？<br />删除后无法恢复。',
-    {
-      title: '删除确认',
-      theme: 'chenghua',
-      confirmButtonText: '确认删除',
-      cancelButtonText: '再想想',
-      confirmButtonClass: 's-confirm-danger-button',
-    },
-  )
+  confirm('确定删除文件 <span> <code>成华AI服务申请表.xlsx</code></span> 吗？<br />删除后无法恢复。', {
+    title: '删除确认',
+    theme: 'chenghua',
+    confirmButtonText: '确认删除',
+    cancelButtonText: '再想想',
+    confirmButtonClass: 's-confirm-danger-button',
+  })
 }
 
 const noCancel = () => {
@@ -60,17 +57,6 @@ const customText = () => {
 </style>
 
 <style lang="scss">
-.s-confirm-file-name {
-  display: inline-flex;
-  align-items: center;
-  min-height: 24px;
-  padding: 0 8px;
-  border-radius: 4px;
-  margin: 0 4px;
-  background: rgba(22, 93, 255, 0.08);
-  color: #165dff;
-  font-weight: 600;
-}
 
 .s-confirm-danger-button {
   --el-button-bg-color: var(--el-color-danger);

@@ -1,5 +1,14 @@
 <template>
   <div class="chenghua-button-demo">
+    <div class="chenghua-button-demo__entry">
+      <s-button theme="chenghua" variant="gradient" icon="set-up" width="288" height="52">
+        审核规则管理
+      </s-button>
+      <s-button theme="chenghua" variant="outline" icon="plus" width="178" height="48">
+        新建审核规则
+      </s-button>
+    </div>
+
     <div class="chenghua-button-demo__row">
       <s-button theme="chenghua" type="primary">主要按钮</s-button>
       <s-button theme="chenghua" type="primary" icon="plus">新增服务</s-button>
@@ -45,6 +54,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  align-items: center;
+}
+
+.chenghua-button-demo__entry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
   align-items: center;
 }
 

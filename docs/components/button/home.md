@@ -74,6 +74,7 @@ button/other
 |     time     | 防抖时长            | number(毫秒)                            | 0      |
 | tooltipAttrs | s-tooltip组件的属性 | Object [去tooltip组件](../tooltip/home) | {}     |
 |    theme     | 主题样式            | `'chenghua'`                            | ''     |
+|   variant    | 成华主题样式变体    | `'' \| 'outline' \| 'gradient'`         | ''     |
 |    width     | 按钮宽度，支持 `processWidth` 写法 | string / number                         | ''     |
 |    height    | 按钮高度，支持 `processWidth` 写法 | string / number                         | ''     |
 

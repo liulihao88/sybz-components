@@ -8,6 +8,7 @@ export interface SButtonSelfProps {
   tipProps?: Record<string, any>
   isDebounce?: boolean
   theme?: '' | 'chenghua'
+  variant?: '' | 'outline' | 'gradient'
   width?: string | number
   height?: string | number
 }

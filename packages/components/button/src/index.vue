@@ -28,6 +28,7 @@ interface SButtonSelfProps {
   content?: string
   tooltipAttrs?: Record<string, any>
   theme?: '' | 'chenghua'
+  variant?: '' | 'outline' | 'gradient'
   width?: string | number
   height?: string | number
 }
@@ -37,6 +38,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   content: '',
   tooltipAttrs: () => ({}),
   theme: '',
+  variant: '',
   width: '',
   height: '',
 })
@@ -88,6 +90,8 @@ const buttonAttrs = computed(() => {
 
 const buttonClass = computed(() => ({
   's-button--chenghua': mergedProps.value.theme === 'chenghua',
+  's-button--chenghua-outline': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'outline',
+  's-button--chenghua-gradient': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'gradient',
 }))
 
 const handleClick = () => {
@@ -114,6 +118,8 @@ const handleClick = () => {
   --ch-button-primary: #165dff;
   --ch-button-primary-hover: #1e6efc;
   --ch-button-primary-active: #0f4fd6;
+  --ch-button-accent-start: #1e6efc;
+  --ch-button-accent-end: #00c5e7;
   --ch-button-text-secondary: #979797;
   --el-button-font-weight: 500;
   --el-button-border-radius: 8px;
@@ -219,6 +225,66 @@ const handleClick = () => {
   :deep(.el-icon + span),
   :deep(span + .el-icon) {
     margin-left: 8px;
+  }
+
+  &.s-button--chenghua-outline {
+    --el-button-bg-color: #ffffff;
+    --el-button-border-color: var(--ch-button-primary);
+    --el-button-text-color: var(--ch-button-primary);
+    --el-button-hover-bg-color: rgba(22, 93, 255, 0.06);
+    --el-button-hover-border-color: var(--ch-button-primary-hover);
+    --el-button-hover-text-color: var(--ch-button-primary-hover);
+    --el-button-active-bg-color: rgba(22, 93, 255, 0.1);
+    --el-button-active-border-color: var(--ch-button-primary-active);
+    --el-button-active-text-color: var(--ch-button-primary-active);
+    --el-button-disabled-bg-color: #ffffff;
+    --el-button-disabled-border-color: rgba(151, 151, 151, 0.35);
+    --el-button-disabled-text-color: var(--ch-button-text-secondary);
+  }
+
+  &.s-button--chenghua-gradient {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: transparent;
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: transparent;
+    --el-button-hover-border-color: transparent;
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: transparent;
+    --el-button-active-border-color: transparent;
+    --el-button-active-text-color: #ffffff;
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: transparent;
+    --el-button-disabled-text-color: rgba(255, 255, 255, 0.8);
+
+    border-color: transparent;
+    background: linear-gradient(90deg, var(--ch-button-accent-start) 0%, var(--ch-button-accent-end) 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(22, 93, 255, 0.18);
+
+    &:hover,
+    &:focus {
+      border-color: transparent;
+      background: linear-gradient(90deg, #165dff 0%, #00b8df 100%);
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(22, 93, 255, 0.22);
+    }
+
+    &:active {
+      border-color: transparent;
+      background: linear-gradient(90deg, #0f4fd6 0%, #00a4c9 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 14px rgba(22, 93, 255, 0.18);
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus,
+    &.is-disabled:active {
+      border-color: transparent;
+      background: linear-gradient(90deg, rgba(30, 110, 252, 0.45) 0%, rgba(0, 197, 231, 0.45) 100%);
+      color: rgba(255, 255, 255, 0.8);
+      box-shadow: none;
+    }
   }
 }
 </style>
