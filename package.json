@@ -27,7 +27,7 @@
     "dev": "vitepress dev docs",
     "build": "vite build",
     "docsbuild": "vitepress build docs",
-    "buildAll": "pnpm run -C packages/utils build --stub && pnpm build",
+    "buildAll": "pnpm build && pnpm run -C packages/utils build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore \"*.{js,cjs,mjs,ts,cts,mts,json,jsonc,css,scss,vue,html,md,yml,yaml}\" \".vscode/**/*.{json,jsonc}\" \"{docs,packages,public,scripts,skills}/**/*.{js,cjs,mjs,ts,cts,mts,json,jsonc,tsx,jsx,css,scss,vue,html,md,yml,yaml}\"",
@@ -38,7 +38,10 @@
     "release-deploy": "pnpm release && npm run deploy",
     "update-document": "pnpm build && npm run deploy",
     "deploy-no-build": "sh -x deploy.sh -k",
-    "utils:release": "pnpm run -C packages/utils release"
+    "utils:release": "pnpm run -C packages/utils release",
+    "link:bun": "bun link && bun link --cwd packages/utils",
+    "link:pnpm": "pnpm link -g && pnpm -C packages/utils link -g",
+    "unlink:bun": "bun unlink && bun unlink --cwd packages/utils"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
