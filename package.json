@@ -27,7 +27,7 @@
     "dev": "vitepress dev docs",
     "build": "vite build",
     "docsbuild": "vitepress build docs",
-    "buildAll": "pnpm run -C packages/utils build && pnpm build",
+    "buildAll": "pnpm run -C packages/utils build --stub && pnpm build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore \"*.{js,cjs,mjs,ts,cts,mts,json,jsonc,css,scss,vue,html,md,yml,yaml}\" \".vscode/**/*.{json,jsonc}\" \"{docs,packages,public,scripts,skills}/**/*.{js,cjs,mjs,ts,cts,mts,json,jsonc,tsx,jsx,css,scss,vue,html,md,yml,yaml}\"",
