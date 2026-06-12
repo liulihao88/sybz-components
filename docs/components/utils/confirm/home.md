@@ -45,6 +45,7 @@ confirm(message, options, appContext)
 | 字段                       | 类型                            | 默认值           | 说明                                                         |
 | -------------------------- | ------------------------------- | ---------------- | ------------------------------------------------------------ |
 | `title`                    | `string`                        | `'提示'`         | 确认框标题。                                                 |
+| `theme`                    | `'' \| 'chenghua'`              | `''`             | 确认框主题，设置为 `'chenghua'` 时使用成华样式。             |
 | `showCancelButton`         | `boolean`                       | `true`           | 是否显示取消按钮。                                           |
 | `cancelButtonText`         | `string`                        | `'取消'`         | 取消按钮文案。                                               |
 | `confirmButtonText`        | `string`                        | `'确定'`         | 确认按钮文案。                                               |
@@ -68,6 +69,13 @@ await confirm('确认提交？', {
 
 await confirm('只提示确认按钮', {
   showCancelButton: false,
+})
+
+await confirm('确定提交当前服务申请吗？', {
+  title: '成华 AI 服务申请',
+  theme: 'chenghua',
+  confirmButtonText: '立即提交',
+  cancelButtonText: '再想想',
 })
 
 await confirm('第一行<br><span class="cl-blue">重点内容</span>', {

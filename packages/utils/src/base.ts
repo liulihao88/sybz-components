@@ -122,6 +122,10 @@ type ConfirmAppendTarget = string | HTMLElement | null
 
 interface ConfirmOptions extends ElMessageBoxOptions {
   /**
+   * 确认框主题。
+   */
+  theme?: '' | 'chenghua'
+  /**
    * 追加到的挂载节点。支持 css 选择器、DOM 节点或 `null`。
    */
   appendTo?: ConfirmAppendTarget
@@ -146,6 +150,9 @@ type TryCatchTask<T> = Promise<T> | (() => T | Promise<T>)
 
 const DEFAULT_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn'
 const DEFAULT_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn'
+const CHENGHUA_CONFIRM_BOX_CLASS = 's-message-box--chenghua'
+const CHENGHUA_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn--chenghua'
+const CHENGHUA_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--chenghua'
 
 function _getBrowserStorage(isSession = false): Storage | null {
   if (typeof window === 'undefined') {
@@ -1302,9 +1309,19 @@ export function debounce<T extends Func>(
  * })
  */
 export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, appContext: AppContext | null = null) {
+  const {
+    theme,
+    customClass,
+    confirmButtonClass,
+    cancelButtonClass,
+    appendTo,
+    appContext: optionAppContext,
+    ...messageBoxOptions
+  } = options
   const resolvedMessage = typeof message === 'function' ? message() : message
-  const resolvedAppendTo = _resolveAppendTarget(options?.appendTo)
-  const resolvedAppContext = _resolveAppContext(options?.appContext || appContext)
+  const resolvedAppendTo = _resolveAppendTarget(appendTo)
+  const resolvedAppContext = _resolveAppContext(optionAppContext || appContext)
+  const isChenghuaTheme = theme === 'chenghua'
 
   const mergeOptions = {
     title: '提示',
@@ -1313,11 +1330,20 @@ export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, a
     cancelButtonText: '取消',
     confirmButtonText: '确定',
     dangerouslyUseHTMLString: true,
+    ...messageBoxOptions,
     appendTo: resolvedAppendTo,
     appContext: resolvedAppContext,
-    confirmButtonClass: _mergeClassNames(DEFAULT_CONFIRM_BUTTON_CLASS, options?.confirmButtonClass),
-    cancelButtonClass: _mergeClassNames(DEFAULT_CANCEL_BUTTON_CLASS, options?.cancelButtonClass),
-    ...options,
+    customClass: _mergeClassNames(isChenghuaTheme && CHENGHUA_CONFIRM_BOX_CLASS, customClass),
+    confirmButtonClass: _mergeClassNames(
+      DEFAULT_CONFIRM_BUTTON_CLASS,
+      isChenghuaTheme && CHENGHUA_CONFIRM_BUTTON_CLASS,
+      confirmButtonClass,
+    ),
+    cancelButtonClass: _mergeClassNames(
+      DEFAULT_CANCEL_BUTTON_CLASS,
+      isChenghuaTheme && CHENGHUA_CANCEL_BUTTON_CLASS,
+      cancelButtonClass,
+    ),
   }
 
   return ElMessageBox.confirm(resolvedMessage, mergeOptions)
