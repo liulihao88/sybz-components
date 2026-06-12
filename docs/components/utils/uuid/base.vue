@@ -30,7 +30,6 @@ const options = [
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="uuid"></SFunctionSourceCode>
   <div>
     <s-descriptions :options="options" title="uuid随机字符" :column="1"></s-descriptions>
   </div>

@@ -37,7 +37,6 @@ const options = ref([
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="clone"></SFunctionSourceCode>
   <div>
     <s-descriptions :options="options" :column="1" labelWidth="300" :showAll="true">
       <template #refValue="{ item }">

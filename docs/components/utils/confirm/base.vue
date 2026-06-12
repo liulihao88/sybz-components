@@ -15,7 +15,6 @@ const useHtml = () => {
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="confirm"></SFunctionSourceCode>
   <div>
     <el-button type="primary" @click="base">基础用法</el-button>
     <el-button type="primary" @click="useHtml">使用html</el-button>

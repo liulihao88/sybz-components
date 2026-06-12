@@ -35,7 +35,6 @@ const run = async (shouldThrow = false) => {
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="tryCatch"></SFunctionSourceCode>
   <div style="display: flex; gap: 12px; flex-wrap: wrap">
     <el-button type="primary" :loading="loading" @click="run()">异步测试</el-button>
     <el-button :loading="loading" @click="run(true)">同步报错</el-button>

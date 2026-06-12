@@ -56,7 +56,6 @@ const options = [
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="formatTime"></SFunctionSourceCode>
   <div>
     <s-descriptions :options="options" title="时间转换" :column="1" showAll></s-descriptions>
   </div>

@@ -17,7 +17,6 @@ const submit = async () => {
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="validateTrigger"></SFunctionSourceCode>
   <div>
     <el-form ref="formRef" :model="form" :rules="rules" label-width="auto">
       <el-form-item label="长度1-2, 只有提交的时候才校验" prop="number">

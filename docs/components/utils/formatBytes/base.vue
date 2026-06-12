@@ -31,7 +31,6 @@ const options = [
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="formatBytes"></SFunctionSourceCode>
   <div>
     <s-descriptions :options="options" :column="1" :showAll="true"></s-descriptions>
   </div>

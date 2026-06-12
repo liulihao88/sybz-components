@@ -24,7 +24,6 @@ const submit = async () => {
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="validate"></SFunctionSourceCode>
   <el-form ref="formRef" :model="form" :rules="rules" label-width="80px" style="max-width: 360px">
     <el-form-item label="姓名" prop="name">
       <s-input v-model="form.name" placeholder="请输入姓名" />

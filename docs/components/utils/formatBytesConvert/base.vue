@@ -25,7 +25,6 @@ const options = [
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="formatBytesConvert"></SFunctionSourceCode>
   <div>
     <s-descriptions :options="options" :column="1" label-width="500"></s-descriptions>
   </div>

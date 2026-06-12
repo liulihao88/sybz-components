@@ -151,7 +151,6 @@ const showBigObject = () => {
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="$toast"></SFunctionSourceCode>
   <div>
     <s-flex wrap="wrap" gap="small">
       <el-button type="primary" @click="base">基础</el-button>

@@ -76,7 +76,6 @@ const options = [
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="isEmpty"></SFunctionSourceCode>
   <s-warning
     class="m-b-16"
     content="默认会把 undefined、null、空字符串、空数组、空对象、NaN、空 Set/Map、无效日期 视为空值；0、false、BigInt(0) 默认不再算空。<br>如果需要兼容旧语义，可以显式传第二个参数 false。"

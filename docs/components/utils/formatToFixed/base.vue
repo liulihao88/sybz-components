@@ -14,6 +14,5 @@ let arr = [
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="formatToFixed"></SFunctionSourceCode>
   <s-descriptions :options="arr" title="formatToFixed" :column="1"></s-descriptions>
 </template>

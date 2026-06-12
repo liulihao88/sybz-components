@@ -13,7 +13,6 @@ const sleepHandler = async () => {
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="sleep"></SFunctionSourceCode>
   <div>
     <el-button type="primary" @click="sleepHandler" :loading="loading">2秒后显示</el-button>
   </div>

@@ -11,7 +11,6 @@ const parse$toast = (str) => {
 </script>
 
 <template>
-  <SFunctionSourceCode functionName="formatTextToHtml"></SFunctionSourceCode>
   <s-title title="1. 提示"></s-title>
   <s-button type="primary" @click="parse$toast('Hello\nWorld')">基础</s-button>
   <s-button type="primary" @click="parse$toast('Item1\tItem2')">包含制表符</s-button>
