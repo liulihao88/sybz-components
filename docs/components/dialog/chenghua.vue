@@ -11,10 +11,13 @@ const visible = reactive({
 
 <template>
   <div class="chenghua-dialog-demo">
-    <el-button type="primary" @click="visible.base = true">默认底部按钮</el-button>
-    <el-button type="primary" @click="visible.noFooter = true">隐藏底部按钮</el-button>
-    <el-button type="primary" @click="visible.buttons = true">自定义按钮</el-button>
-    <el-button type="primary" @click="visible.header = true">自定义标题</el-button>
+    <s-button theme="chenghua" @click="visible.base = true">默认底部按钮</s-button>
+    <s-button theme="chenghua" @click="visible.noFooter = true" type="primary">隐藏底部按钮</s-button>
+    <s-button theme="chenghua" @click="visible.buttons = true" type="danger">自定义按钮</s-button>
+    <s-button theme="chenghua" @click="visible.header = true">自定义标题</s-button>
+    <s-button theme="chenghua" size="small">小</s-button>
+    <s-button theme="chenghua">默认</s-button>
+    <s-button theme="chenghua" size="large">大</s-button>
 
     <s-dialog title="默认成华弹框" theme="chenghua" width="512px" v-model="visible.base">
       成华主题默认展示底部按钮，和普通 dialog 行为保持一致。
@@ -30,7 +33,7 @@ const visible = reactive({
       width="512px"
       cancel-text="暂不处理"
       confirm-text="立即提交"
-      :cancel-attrs="{ width: 96 }"
+      :cancel-attrs="{ width: 96, height: 40 }"
       :confirm-attrs="{ width: 112, height: 40 }"
       v-model="visible.buttons"
     >
@@ -38,9 +41,7 @@ const visible = reactive({
     </s-dialog>
 
     <s-dialog theme="chenghua" width="512px" v-model="visible.header">
-      <template #header>
-        成华 AI 服务申请
-      </template>
+      <template #header>成华 AI 服务申请</template>
       自定义 header 插槽时，标题区域仍会沿用成华主题字号。
     </s-dialog>
   </div>

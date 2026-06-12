@@ -118,11 +118,8 @@ const handleClick = () => {
   --el-button-font-weight: 500;
   --el-button-border-radius: 8px;
 
-  min-height: 36px;
-  padding: 0 16px;
   border-radius: 8px;
   font-family: 'PingFang SC', sans-serif;
-  font-size: 14px;
   line-height: 1;
   transition:
     background-color 0.2s ease,
@@ -130,7 +127,9 @@ const handleClick = () => {
     color 0.2s ease,
     box-shadow 0.2s ease;
 
-  &:not(.el-button--primary):not(.is-link):not(.is-text) {
+  &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+      .el-button--info
+    ):not(.is-link):not(.is-text) {
     --el-button-bg-color: #ffffff;
     --el-button-border-color: rgba(22, 93, 255, 0.45);
     --el-button-text-color: var(--ch-button-primary);
@@ -146,22 +145,62 @@ const handleClick = () => {
   }
 
   &.el-button--primary {
-    --el-button-bg-color: var(--ch-button-primary);
-    --el-button-border-color: var(--ch-button-primary);
-    --el-button-text-color: #ffffff;
-    --el-button-hover-bg-color: var(--ch-button-primary-hover);
-    --el-button-hover-border-color: var(--ch-button-primary-hover);
-    --el-button-hover-text-color: #ffffff;
-    --el-button-active-bg-color: var(--ch-button-primary-active);
-    --el-button-active-border-color: var(--ch-button-primary-active);
-    --el-button-active-text-color: #ffffff;
-    --el-button-disabled-bg-color: rgba(22, 93, 255, 0.45);
-    --el-button-disabled-border-color: rgba(22, 93, 255, 0.12);
-    --el-button-disabled-text-color: #ffffff;
+    --ch-button-type-color: var(--ch-button-primary);
+    --ch-button-type-hover: var(--ch-button-primary-hover);
+    --ch-button-type-active: var(--ch-button-primary-active);
+    --ch-button-type-disabled: rgba(22, 93, 255, 0.45);
+    --ch-button-type-disabled-border: rgba(22, 93, 255, 0.12);
+  }
 
-    min-height: 44px;
-    padding: 0 20px;
-    font-size: 16px;
+  &.el-button--success {
+    --ch-button-type-color: var(--el-color-success);
+    --ch-button-type-hover: var(--el-color-success-light-3);
+    --ch-button-type-active: var(--el-color-success-dark-2);
+    --ch-button-type-disabled: var(--el-color-success-light-5);
+    --ch-button-type-disabled-border: var(--el-color-success-light-7);
+  }
+
+  &.el-button--warning {
+    --ch-button-type-color: var(--el-color-warning);
+    --ch-button-type-hover: var(--el-color-warning-light-3);
+    --ch-button-type-active: var(--el-color-warning-dark-2);
+    --ch-button-type-disabled: var(--el-color-warning-light-5);
+    --ch-button-type-disabled-border: var(--el-color-warning-light-7);
+  }
+
+  &.el-button--danger {
+    --ch-button-type-color: var(--el-color-danger);
+    --ch-button-type-hover: var(--el-color-danger-light-3);
+    --ch-button-type-active: var(--el-color-danger-dark-2);
+    --ch-button-type-disabled: var(--el-color-danger-light-5);
+    --ch-button-type-disabled-border: var(--el-color-danger-light-7);
+  }
+
+  &.el-button--info {
+    --ch-button-type-color: var(--el-color-info);
+    --ch-button-type-hover: var(--el-color-info-light-3);
+    --ch-button-type-active: var(--el-color-info-dark-2);
+    --ch-button-type-disabled: var(--el-color-info-light-5);
+    --ch-button-type-disabled-border: var(--el-color-info-light-7);
+  }
+
+  &.el-button--primary,
+  &.el-button--success,
+  &.el-button--warning,
+  &.el-button--danger,
+  &.el-button--info {
+    --el-button-bg-color: var(--ch-button-type-color);
+    --el-button-border-color: var(--ch-button-type-color);
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: var(--ch-button-type-hover);
+    --el-button-hover-border-color: var(--ch-button-type-hover);
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: var(--ch-button-type-active);
+    --el-button-active-border-color: var(--ch-button-type-active);
+    --el-button-active-text-color: #ffffff;
+    --el-button-disabled-bg-color: var(--ch-button-type-disabled);
+    --el-button-disabled-border-color: var(--ch-button-type-disabled-border);
+    --el-button-disabled-text-color: #ffffff;
   }
 
   &.is-link,

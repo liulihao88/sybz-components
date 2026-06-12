@@ -1,9 +1,16 @@
 <template>
   <div class="chenghua-button-demo">
     <div class="chenghua-button-demo__row">
-      <s-button theme="chenghua" type="primary" width="400">主要按钮</s-button>
+      <s-button theme="chenghua" type="primary">主要按钮</s-button>
       <s-button theme="chenghua" type="primary" icon="plus">新增服务</s-button>
       <s-button theme="chenghua" type="primary" disabled>禁用按钮</s-button>
+    </div>
+
+    <div class="chenghua-button-demo__row">
+      <s-button theme="chenghua" type="success">Success</s-button>
+      <s-button theme="chenghua" type="warning">Warning</s-button>
+      <s-button theme="chenghua" type="danger">Danger</s-button>
+      <s-button theme="chenghua" type="info">Info</s-button>
     </div>
 
     <div class="chenghua-button-demo__row">

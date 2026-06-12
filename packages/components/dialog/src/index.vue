@@ -176,7 +176,6 @@ const dialogButtonTheme = computed(() => {
 const mergedConfirmAttrs = computed(() => {
   return {
     icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-check',
-    ...(mergedProps.value.theme === 'chenghua' ? { height: 36 } : {}),
     ...mergedProps.value.confirmAttrs,
   }
 })
@@ -184,7 +183,6 @@ const mergedConfirmAttrs = computed(() => {
 const mergedCancelAttrs = computed(() => {
   return {
     icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-close',
-    ...(mergedProps.value.theme === 'chenghua' ? { height: 36 } : {}),
     ...mergedProps.value.cancelAttrs,
   }
 })
