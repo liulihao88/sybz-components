@@ -59,3 +59,7 @@ getType(new RegExp('abc'))
 ### 注意事项
 
 `getType` 只返回类型名称，不做类型收窄。如果在 TypeScript 中需要类型保护，可以结合 `packages/utils/src/is.ts` 中的 `isArray`、`isMap`、`isFunction` 等方法。
+
+
+:::utils-source getType
+:::

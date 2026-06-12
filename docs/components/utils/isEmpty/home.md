@@ -63,3 +63,7 @@ isEmpty(ref([]))
 ### 注意事项
 
 对象判断只针对普通对象，避免把 `RegExp`、`Error`、`Promise` 等实例误判为空。如果你需要旧版“假值都算空”的语义，明确传 `strict=false`。
+
+
+:::utils-source isEmpty
+:::

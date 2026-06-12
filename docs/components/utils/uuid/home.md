@@ -85,3 +85,7 @@ uuid(
 ### 注意事项
 
 `uuid` 使用 `Math.random()`，适合业务展示和 mock 数据，不适合作为密码学安全随机数。`number` 模式不会生成包含 `0` 的数字。
+
+
+:::utils-source uuid
+:::

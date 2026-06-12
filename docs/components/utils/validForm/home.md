@@ -61,3 +61,7 @@ await validForm(formRef, {
 ### 注意事项
 
 `formRef` 必须能取到带 `validate(callback)` 方法的表单实例。`showMessage=false` 只是不弹提示，Promise 仍会 reject，调用处仍需要处理失败分支。
+
+
+:::utils-source validForm
+:::

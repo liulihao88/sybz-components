@@ -75,3 +75,7 @@ diffDateFromCurrent(3600)
 ### 注意事项
 
 这些函数依赖 `dayjs` 的解析能力。`diffDate(date1, date2)` 内部计算的是 `dayjs(date1).diff(dayjs(date2), unit)`，所以结果正负取决于两个时间的先后顺序。
+
+
+:::utils-source formatDate formatDateToDay formatDateToMinute diffDate diffDateFromCurrent
+:::

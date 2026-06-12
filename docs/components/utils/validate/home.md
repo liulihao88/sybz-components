@@ -114,3 +114,7 @@ validate('custom', { value: '22.1', reg: /^\d+\.?\d{0,2}$/ }, true)
 ### 注意事项
 
 `same` 依赖传入时的 `rules.value`，如果对比值来自响应式表单，通常需要用 `computed` 重新生成规则，确保拿到最新值。`pureValid=true` 更适合简单正则判断，不会返回 Element Plus 规则对象。
+
+
+:::utils-source validate validateTrigger
+:::

@@ -78,3 +78,7 @@ await confirm('第一行<br><span class="cl-blue">重点内容</span>', {
 ### 注意事项
 
 `confirm` 依赖 Element Plus 的 `ElMessageBox`，需要在浏览器端使用。默认开启 `dangerouslyUseHTMLString`，传入来自用户输入的 HTML 前要先做好可信处理，避免注入风险。嵌套 `s-dialog` 或 `el-dialog` 中使用时，如果默认挂载位置不符合预期，可以显式传 `appendTo`。
+
+
+:::utils-source confirm
+:::

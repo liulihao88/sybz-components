@@ -1,11 +1,44 @@
 import { defineConfig } from 'vitepress'
 import { fileURLToPath, URL } from 'node:url'
+import type { ModuleNode, Plugin, ViteDevServer } from 'vite'
 import { mdPlugin } from './config/plugins.ts'
 import { createAlgolia, Github } from './utils/settings.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 const hiddenDocsInProd = ['/components/test/home.md', '/components/chooseArea/home.md']
 const sybzMark = (text: string) => `<span class="sybz-components-sidebar-star" aria-hidden="true">*</span>${text}`
+const rootDir = fileURLToPath(new URL('../..', import.meta.url))
+const utilsSourceDir = fileURLToPath(new URL('../../packages/utils/src/', import.meta.url))
+const utilsDocsDir = fileURLToPath(new URL('../components/utils/', import.meta.url))
+
+const reloadUtilsSourceDocs = (server: ViteDevServer, file: string) => {
+  if (!file.startsWith(utilsSourceDir) || !file.endsWith('.ts')) return
+
+  const fileToModulesMap = (
+    server.moduleGraph as unknown as {
+      fileToModulesMap?: Map<string, Set<ModuleNode>>
+    }
+  ).fileToModulesMap
+
+  fileToModulesMap?.forEach((modules, moduleFile) => {
+    if (!moduleFile.startsWith(utilsDocsDir) || !moduleFile.endsWith('.md')) return
+
+    modules.forEach((module) => server.moduleGraph.invalidateModule(module))
+  })
+
+  server.ws.send({ type: 'full-reload' })
+}
+
+const utilsSourceDocsHmrPlugin = (): Plugin => ({
+  name: 'vitepress-utils-source-docs-hmr',
+  apply: 'serve',
+  configureServer(server) {
+    server.watcher.add(utilsSourceDir)
+    server.watcher.on('add', (file) => reloadUtilsSourceDocs(server, file))
+    server.watcher.on('change', (file) => reloadUtilsSourceDocs(server, file))
+    server.watcher.on('unlink', (file) => reloadUtilsSourceDocs(server, file))
+  },
+})
 
 export default defineConfig({
   // 站点级选项
@@ -406,9 +439,10 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [utilsSourceDocsHmrPlugin()],
     server: {
       fs: {
-        allow: [fileURLToPath(new URL('../..', import.meta.url))],
+        allow: [rootDir],
       },
     },
   },

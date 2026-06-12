@@ -56,3 +56,7 @@ formatBytesConvert(1040000, { thounsands: true })
 ### 注意事项
 
 支持的单位包括 `B`、`Byte`、`KB`、`MB`、`GB`、`TB`、`PB`、`EB`、`ZB`、`YB`，单位大小写不敏感。`thounsands` 是当前 API 的实际字段名，使用时不要写成 `thousands`。
+
+
+:::utils-source formatBytesConvert
+:::

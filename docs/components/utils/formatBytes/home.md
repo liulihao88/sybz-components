@@ -56,3 +56,7 @@ formatBytes(1040000, { prefix: '$', suffix: '/s', thousands: true })
 ### 注意事项
 
 单位按 `1024` 进制递增，支持 `B` 到 `YB`。当输入值小于或等于 `1` 时会直接按 `B` 展示。
+
+
+:::utils-source formatBytes
+:::
