@@ -29,6 +29,7 @@ interface SButtonSelfProps {
   tooltipAttrs?: Record<string, any>
   theme?: '' | 'chenghua'
   width?: string | number
+  height?: string | number
 }
 
 const props = withDefaults(defineProps<SButtonSelfProps>(), {
@@ -37,6 +38,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   tooltipAttrs: () => ({}),
   theme: '',
   width: '',
+  height: '',
 })
 
 const attrs = useAttrs()
@@ -72,7 +74,13 @@ const buttonAttrs = computed(() => {
   return {
     loading: loading.value,
     ...normalizedAttrs,
-    style: [processWidth(mergedProps.value.width), normalizedAttrs.style],
+    style: [
+      {
+        ...processWidth(mergedProps.value.width),
+        height: processWidth(mergedProps.value.height, true),
+      },
+      normalizedAttrs.style,
+    ],
   }
 })
 

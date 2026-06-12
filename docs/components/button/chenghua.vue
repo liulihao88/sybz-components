@@ -18,13 +18,11 @@
       <s-button theme="chenghua" text disabled>禁用文字</s-button>
     </div>
 
-    <div>
-      <s-button theme="chenghua" type="primary" width="100%">整行按钮</s-button>
-    </div>
-    <div>
-      <s-button size="small">small</s-button>
-      <s-button>默认</s-button>
-      <s-button size="large">large</s-button>
+    <div class="chenghua-button-demo__size">
+      <s-button theme="chenghua" type="primary" width="100%">width="100%"</s-button>
+      <s-button theme="chenghua" width="180">width="180"</s-button>
+      <s-button theme="chenghua" height="60">height="60"</s-button>
+      <s-button theme="chenghua" type="primary" width="180" height="30">width + height</s-button>
     </div>
   </div>
 </template>
@@ -41,6 +39,13 @@
   flex-wrap: wrap;
   gap: 12px;
   align-items: center;
+}
+
+.chenghua-button-demo__size {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 420px;
 }
 
 .chenghua-button-demo__row--wide {

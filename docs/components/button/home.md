@@ -75,6 +75,7 @@ button/other
 | tooltipAttrs | s-tooltip组件的属性 | Object [去tooltip组件](../tooltip/home) | {}     |
 |    theme     | 主题样式            | `'chenghua'`                            | ''     |
 |    width     | 按钮宽度，支持 `processWidth` 写法 | string / number                         | ''     |
+|    height    | 按钮高度，支持 `processWidth` 写法 | string / number                         | ''     |
 
 ### 事件
 

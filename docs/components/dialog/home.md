@@ -14,9 +14,9 @@
 dialog/base
 :::
 
-### 成化样式
+### 成华样式
 
-设置 `theme="chenghua"` 可以切换到成化样式。
+设置 `theme="chenghua"` 可以切换到成华样式。
 
 :::demo
 dialog/chenghua

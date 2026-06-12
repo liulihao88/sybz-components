@@ -9,5 +9,6 @@ export interface SButtonSelfProps {
   isDebounce?: boolean
   theme?: '' | 'chenghua'
   width?: string | number
+  height?: string | number
 }
 export type SButtonProps = SButtonSelfProps
