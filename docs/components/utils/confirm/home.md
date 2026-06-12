@@ -8,6 +8,12 @@
 utils/confirm/base
 :::
 
+### 成华主题
+
+:::demo
+utils/confirm/chenghua
+:::
+
 ### 在弹框中使用
 
 :::demo
@@ -71,11 +77,28 @@ await confirm('只提示确认按钮', {
   showCancelButton: false,
 })
 
-await confirm('确定提交当前服务申请吗？', {
-  title: '成华 AI 服务申请',
+await confirm('当前内容存在未保存修改，建议返回检查后再离开。', {
+  title: '离开提醒',
   theme: 'chenghua',
-  confirmButtonText: '立即提交',
-  cancelButtonText: '再想想',
+  showConfirmButton: false,
+  cancelButtonText: '返回检查',
+})
+
+await confirm(
+  '确定删除文件 <span class="s-confirm-file-name">成华AI服务申请表.xlsx</span> 吗？<br />删除后无法恢复。',
+  {
+    title: '删除确认',
+    theme: 'chenghua',
+    confirmButtonText: '确认删除',
+    cancelButtonText: '再想想',
+  },
+)
+
+await confirm('当前申请已提交，请等待平台审核。', {
+  title: '提交成功',
+  theme: 'chenghua',
+  showCancelButton: false,
+  confirmButtonText: '知道了',
 })
 
 await confirm('第一行<br><span class="cl-blue">重点内容</span>', {
