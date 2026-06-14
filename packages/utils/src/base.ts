@@ -118,17 +118,12 @@ interface CopyOptions extends ToastOptions {
 
 type WidthInput = string | number | Ref<string | number>
 type ConfirmMessage = string | VNode | (() => VNode)
-type ConfirmAppendTarget = string | HTMLElement | null
 
 interface ConfirmOptions extends ElMessageBoxOptions {
   /**
    * 确认框主题。
    */
   theme?: '' | 'chenghua'
-  /**
-   * 追加到的挂载节点。支持 css 选择器、DOM 节点或 `null`。
-   */
-  appendTo?: ConfirmAppendTarget
   /**
    * 手动传入 appContext，处理多应用或嵌套弹窗场景。
    */
