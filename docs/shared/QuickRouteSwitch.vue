@@ -101,6 +101,10 @@ const filteredGroups = computed(() => {
 
 const flatFilteredItems = computed(() => filteredGroups.value.flatMap((group) => group.items))
 const totalRouteCount = computed(() => flatRouteItems.value.length)
+const selectedRouteIndex = computed(() => {
+  const item = flatFilteredItems.value[activeIndex.value]
+  return item ? getRouteIndex(item) : 0
+})
 
 const currentPath = computed(() => route.path.replace(/\/$/, ''))
 
@@ -111,6 +115,28 @@ const isCurrent = (item: RouteItem) =>
 const getRouteIndex = (item: RouteItem) =>
   flatRouteItems.value.findIndex((routeItem) => routeItem.normalizedLink === item.normalizedLink) + 1
 
+const waitForFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+
+const scrollActiveSidebarItem = async () => {
+  await nextTick()
+  await waitForFrame()
+  await waitForFrame()
+
+  const sidebar = document.querySelector<HTMLElement>('.VPSidebar')
+  const activeItem = sidebar?.querySelector<HTMLElement>('.VPSidebarItem.is-active')
+  if (!sidebar || !activeItem) return
+
+  const sidebarRect = sidebar.getBoundingClientRect()
+  const activeRect = activeItem.getBoundingClientRect()
+  const activeOffsetTop = activeRect.top - sidebarRect.top + sidebar.scrollTop
+  const targetTop = activeOffsetTop - sidebar.clientHeight / 2 + activeItem.clientHeight / 2
+
+  sidebar.scrollTo({
+    top: Math.max(0, targetTop),
+    behavior: 'smooth',
+  })
+}
+
 const openDialog = () => {
   keyword.value = ''
   visible.value = true
@@ -120,9 +146,10 @@ const closeDialog = () => {
   visible.value = false
 }
 
-const goTo = (item: RouteItem) => {
+const goTo = async (item: RouteItem) => {
   closeDialog()
-  router.go(item.routeLink)
+  await router.go(item.routeLink)
+  scrollActiveSidebarItem()
 }
 
 const chooseActive = () => {
@@ -162,7 +189,7 @@ watch(keyword, () => {
             <header class="quick-route-switch__header">
               <div>
                 <h2>快速跳转</h2>
-                <p>{{ flatFilteredItems.length }} / {{ totalRouteCount }} 个页面</p>
+                <p>{{ selectedRouteIndex }} / {{ totalRouteCount }} 个页面</p>
               </div>
               <button class="quick-route-switch__icon-button" type="button" title="关闭" @click="closeDialog">
                 <el-icon><Close /></el-icon>
