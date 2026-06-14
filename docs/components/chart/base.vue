@@ -38,10 +38,10 @@ let option2 = {
 
 let option3 = {
   title: {
-    text: 'Basic Radar Chart',
+    text: '雷达图',
   },
   legend: {
-    data: ['Allocated Budget', 'Actual Spending'],
+    data: ['雷达1', '雷达2'],
   },
   radar: {
     // shape: 'circle',
@@ -61,11 +61,11 @@ let option3 = {
       data: [
         {
           value: [4200, 3000, 20000, 35000, 50000, 18000],
-          name: 'Allocated Budget',
+          name: '雷达1',
         },
         {
           value: [5000, 14000, 28000, 26000, 42000, 21000],
-          name: 'Actual Spending',
+          name: '雷达2',
         },
       ],
     },
