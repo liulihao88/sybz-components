@@ -46,7 +46,7 @@ export default defineConfig({
   srcExclude: isProd ? ['components/test/**', 'components/chooseArea/**'] : [],
   head: [
     ['link', { rel: 'icon', type: 'image/x-icon', href: '/img/logo.svg' }],
-    ['meta', { name: 'algolia-site-verification', content: '615410A52214B092' }],
+    ['meta', { name: 'algolia-site-verification', content: '8E57640BD511CC36' }],
     ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
     [
       'meta',
