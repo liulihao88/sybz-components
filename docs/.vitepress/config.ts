@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { fileURLToPath, URL } from 'node:url'
 import type { ModuleNode, Plugin, ViteDevServer } from 'vite'
 import { mdPlugin } from './config/plugins.ts'
-import { createAlgolia, Github } from './utils/settings.ts'
+import { Github } from './utils/settings.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 const hiddenDocsInProd = ['/components/test/home.md', '/components/chooseArea/home.md']
@@ -63,7 +63,32 @@ export default defineConfig({
   lang: 'zh-CN',
   themeConfig: {
     outline: 3,
-    algolia: createAlgolia(),
+    search: {
+      provider: 'local',
+      options: {
+        translations: {
+          button: {
+            buttonText: '搜索文档',
+            buttonAriaLabel: '搜索文档',
+          },
+          modal: {
+            displayDetails: '显示详细列表',
+            resetButtonTitle: '清空搜索',
+            backButtonTitle: '关闭搜索',
+            noResultsText: '没有搜索结果',
+            footer: {
+              selectText: '选择',
+              selectKeyAriaLabel: '回车',
+              navigateText: '切换',
+              navigateUpKeyAriaLabel: '上箭头',
+              navigateDownKeyAriaLabel: '下箭头',
+              closeText: '关闭',
+              closeKeyAriaLabel: 'Esc',
+            },
+          },
+        },
+      },
+    },
     lastUpdatedText: '最近更新时间',
     docFooter: { prev: '上一篇', next: '下一篇' },
     editLink: {
