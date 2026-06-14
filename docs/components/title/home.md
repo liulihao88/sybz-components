@@ -12,6 +12,12 @@
 title/base
 :::
 
+### 成华主题
+
+:::demo
+title/chenghua
+:::
+
 ### 通常用法
 
 :::demo
@@ -41,6 +47,7 @@ title/compTitle
 |    `tb`    | 同时设置上下边距                              | string / number | -       |
 |  `height`  | 组件高度                                      | string / number | `''`    |
 |   `type`   | 标题样式类型，支持 `icon` / `simple` / `form` | string          | `icon`  |
+|  `theme`   | 主题样式，支持 `chenghua`                     | string          | `''`    |
 
 ### 插槽
 

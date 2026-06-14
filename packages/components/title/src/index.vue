@@ -1,11 +1,21 @@
 <template>
-  <div class="s-title" :style="{ ...margin, height: processWidth(height, true) }" v-bind="$attrs">
+  <div
+    class="s-title"
+    :class="titleClass"
+    :style="{ ...margin, height: processWidth(mergedProps.height, true) }"
+    v-bind="$attrs"
+  >
     <div class="s-title__top" :class="parseClass">
-      <div class="s-title__main" :style="{ marginLeft: props.inner ? '8px' : 0 }">
-        <span :class="($slots.icon || props.type === 'icon') && 's-title__slot-icon-wrapper'">
+      <div class="s-title__main" :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }">
+        <span :class="($slots.icon || mergedProps.type === 'icon') && 's-title__slot-icon-wrapper'">
           <slot name="icon" class="icon_slot">
+            <span
+              v-if="mergedProps.theme === 'chenghua' && mergedProps.type === 'icon'"
+              class="s-title__chenghua-icon"
+              aria-hidden="true"
+            ></span>
             <svg
-              v-if="props.type === 'icon'"
+              v-else-if="mergedProps.type === 'icon'"
               class="s-title__default-icon"
               viewBox="0 0 1024 1024"
               aria-hidden="true"
@@ -28,7 +38,7 @@
         </span>
         <span class="title-text">
           <slot name="title">
-            {{ title }}
+            {{ mergedProps.title }}
           </slot>
         </span>
         <slot></slot>
@@ -37,8 +47,8 @@
         <slot name="right"></slot>
       </div>
     </div>
-    <div class="s-title__subTitle" v-if="subTitle" v-bind="subAttrs">
-      {{ subTitle }}
+    <div class="s-title__subTitle" v-if="mergedProps.subTitle" v-bind="mergedProps.subAttrs">
+      {{ mergedProps.subTitle }}
     </div>
   </div>
 </template>
@@ -51,6 +61,7 @@
 */
 import { processWidth } from '@/utils/src/index.ts'
 import { computed } from 'vue'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'STitle',
@@ -100,10 +111,15 @@ const props = defineProps({
     type: String, // simple, icon, form
     default: 'icon',
   },
+  theme: {
+    type: String, // chenghua
+    default: '',
+  },
 })
+const mergedProps = useGlobalComponentConfig('sTitle', props)
 
 const margin = computed(() => {
-  const { t, b, l, tb } = props
+  const { t, b, l, tb } = mergedProps.value
   if (!t && !b && !l && !tb) {
     return {}
   } else {
@@ -126,7 +142,7 @@ const margin = computed(() => {
 })
 
 const parseClass = computed(() => {
-  let type = props.type
+  let type = mergedProps.value.type
   if (type === 'simple' || type === 'icon') {
     return 's-title__top-simple-left'
   }
@@ -135,6 +151,10 @@ const parseClass = computed(() => {
   }
   return 's-title__top-left'
 })
+
+const titleClass = computed(() => ({
+  's-title--chenghua': mergedProps.value.theme === 'chenghua',
+}))
 </script>
 
 <style scoped lang="scss">
@@ -221,6 +241,137 @@ const parseClass = computed(() => {
     font-weight: 400;
     color: var(--el-text-color-secondary);
     letter-spacing: 0;
+  }
+
+  &.s-title--chenghua {
+    --ch-title-primary: #165dff;
+    --ch-title-primary-hover: #1e6efc;
+    --ch-title-accent: #00c5e7;
+    --ch-title-text: var(--el-text-color-primary);
+    --ch-title-secondary: var(--el-text-color-secondary);
+
+    font-family: 'PingFang SC', sans-serif;
+
+    .s-title__top {
+      position: relative;
+      min-height: 34px;
+      padding-bottom: 8px;
+      color: var(--ch-title-text);
+      font-size: 18px;
+      line-height: 1.4;
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(22, 93, 255, 0.28) 0%,
+          rgba(0, 197, 231, 0.14) 38%,
+          rgba(0, 197, 231, 0) 78%
+        );
+        content: '';
+      }
+    }
+
+    .s-title__main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .s-title__slot-icon-wrapper {
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+      color: var(--ch-title-primary);
+    }
+
+    .s-title__chenghua-icon {
+      position: relative;
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--ch-title-primary) 0%, var(--ch-title-accent) 100%);
+      box-shadow: 0 6px 14px rgba(22, 93, 255, 0.18);
+
+      &::before {
+        position: absolute;
+        inset: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.62);
+        border-radius: 2px;
+        content: '';
+      }
+
+      &::after {
+        position: absolute;
+        right: -2px;
+        bottom: 2px;
+        width: 6px;
+        height: 6px;
+        border: 2px solid var(--el-bg-color);
+        border-radius: 3px;
+        background: var(--ch-title-accent);
+        content: '';
+      }
+    }
+
+    .s-title__top-simple-left,
+    .s-title__top-left,
+    .s-title__form-left {
+      width: 100%;
+
+      .title-text {
+        display: inline-block;
+        max-width: 100%;
+        margin-right: 10px;
+        overflow: hidden;
+        color: var(--ch-title-text);
+        font-weight: 600;
+        letter-spacing: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .s-title__top-left {
+      padding-left: 14px;
+
+      &::before {
+        top: 50%;
+        bottom: auto;
+        left: 0;
+        width: 4px;
+        height: 18px;
+        border-radius: 4px;
+        background: linear-gradient(180deg, var(--ch-title-primary) 0%, var(--ch-title-accent) 100%);
+        transform: translateY(calc(-50% - 4px));
+      }
+    }
+
+    .s-title__form-left {
+      padding: 0 0 10px;
+      margin: 0 0 16px;
+      border-bottom: 0;
+    }
+
+    .s-title__slot-right-wrapper {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
+    .s-title__subTitle {
+      margin-top: 4px;
+      color: var(--ch-title-secondary);
+      font-size: 13px;
+      line-height: 1.5;
+    }
   }
 }
 </style>
