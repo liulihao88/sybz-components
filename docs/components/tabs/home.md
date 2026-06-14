@@ -14,6 +14,18 @@
 tabs/base
 :::
 
+### 尺寸
+
+:::demo
+tabs/size
+:::
+
+### 胶囊主题
+
+:::demo
+tabs/capsule
+:::
+
 ### 通常用法
 
 :::demo
@@ -70,6 +82,8 @@ tabs/location
 |   `value`    | 标签值字段名                         | string                    | `value` |
 |  `subAttrs`  | 透传给 `el-tab-pane` 的属性          | object                    | `{}`    |
 |  `trigger`   | 切换触发方式，支持 `click` / `hover` | string                    | `click` |
+|   `theme`    | 主题样式，支持 `capsule`             | string                    | `''`    |
+|    `size`    | 尺寸，支持 `small` / `default` / `large` | string                 | `default` |
 
 ### 事件
 
