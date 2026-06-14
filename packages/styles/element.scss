@@ -149,15 +149,6 @@
     --el-button-active-text-color: #ffffff;
   }
 
-  .s-message-box__confirm-btn--chenghua.s-confirm-danger-button {
-    --el-button-bg-color: var(--el-color-danger);
-    --el-button-border-color: var(--el-color-danger);
-    --el-button-hover-bg-color: var(--el-color-danger-light-3);
-    --el-button-hover-border-color: var(--el-color-danger-light-3);
-    --el-button-active-bg-color: var(--el-color-danger-dark-2);
-    --el-button-active-border-color: var(--el-color-danger-dark-2);
-  }
-
   .s-message-box__cancel-btn--chenghua {
     --el-button-bg-color: #ffffff;
     --el-button-border-color: rgba(22, 93, 255, 0.45);
@@ -171,5 +162,57 @@
     --el-button-disabled-bg-color: #ffffff;
     --el-button-disabled-border-color: rgba(151, 151, 151, 0.35);
     --el-button-disabled-text-color: var(--ch-message-box-secondary-text);
+  }
+
+  .s-message-box__confirm-btn--chenghua.s-confirm-danger-button,
+  .s-message-box__cancel-btn--chenghua.s-confirm-danger-button {
+    --el-button-bg-color: var(--el-color-danger);
+    --el-button-border-color: var(--el-color-danger);
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: var(--el-color-danger-light-3);
+    --el-button-hover-border-color: var(--el-color-danger-light-3);
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: var(--el-color-danger-dark-2);
+    --el-button-active-border-color: var(--el-color-danger-dark-2);
+    --el-button-active-text-color: #ffffff;
+  }
+
+  .s-message-box__confirm-btn--chenghua.s-confirm-success-button,
+  .s-message-box__cancel-btn--chenghua.s-confirm-success-button {
+    --el-button-bg-color: var(--el-color-success);
+    --el-button-border-color: var(--el-color-success);
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: var(--el-color-success-light-3);
+    --el-button-hover-border-color: var(--el-color-success-light-3);
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: var(--el-color-success-dark-2);
+    --el-button-active-border-color: var(--el-color-success-dark-2);
+    --el-button-active-text-color: #ffffff;
+  }
+
+  .s-message-box__confirm-btn--chenghua.s-confirm-warning-button,
+  .s-message-box__cancel-btn--chenghua.s-confirm-warning-button {
+    --el-button-bg-color: var(--el-color-warning);
+    --el-button-border-color: var(--el-color-warning);
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: var(--el-color-warning-light-3);
+    --el-button-hover-border-color: var(--el-color-warning-light-3);
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: var(--el-color-warning-dark-2);
+    --el-button-active-border-color: var(--el-color-warning-dark-2);
+    --el-button-active-text-color: #ffffff;
+  }
+
+  .s-message-box__confirm-btn--chenghua.s-confirm-info-button,
+  .s-message-box__cancel-btn--chenghua.s-confirm-info-button {
+    --el-button-bg-color: var(--el-color-info);
+    --el-button-border-color: var(--el-color-info);
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: var(--el-color-info-light-3);
+    --el-button-hover-border-color: var(--el-color-info-light-3);
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: var(--el-color-info-dark-2);
+    --el-button-active-border-color: var(--el-color-info-dark-2);
+    --el-button-active-text-color: #ffffff;
   }
 }

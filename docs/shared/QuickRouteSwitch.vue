@@ -81,6 +81,8 @@ const routeGroups = computed<RouteGroup[]>(() => {
     .filter((group: RouteGroup) => group.text && group.items.length)
 })
 
+const flatRouteItems = computed(() => routeGroups.value.flatMap((group) => group.items))
+
 const filteredGroups = computed(() => {
   const query = keyword.value.trim().toLowerCase()
   const groups = routeGroups.value
@@ -98,13 +100,16 @@ const filteredGroups = computed(() => {
 })
 
 const flatFilteredItems = computed(() => filteredGroups.value.flatMap((group) => group.items))
-const totalRouteCount = computed(() => routeGroups.value.reduce((total, group) => total + group.items.length, 0))
+const totalRouteCount = computed(() => flatRouteItems.value.length)
 
 const currentPath = computed(() => route.path.replace(/\/$/, ''))
 
 const isCurrent = (item: RouteItem) =>
   item.normalizedLink.replace(/\/$/, '') === currentPath.value ||
   item.routeLink.replace(/\/$/, '') === currentPath.value
+
+const getRouteIndex = (item: RouteItem) =>
+  flatRouteItems.value.findIndex((routeItem) => routeItem.normalizedLink === item.normalizedLink) + 1
 
 const openDialog = () => {
   keyword.value = ''
@@ -183,22 +188,42 @@ watch(keyword, () => {
                 <section v-for="group in filteredGroups" :key="group.text" class="quick-route-switch__group">
                   <h3>{{ group.text }}</h3>
                   <div class="quick-route-switch__grid">
-                    <button
+                    <el-tooltip
                       v-for="item in group.items"
                       :key="item.normalizedLink"
-                      type="button"
-                      class="quick-route-switch__item"
-                      :class="{
-                        current: isCurrent(item),
-                        active: flatFilteredItems[activeIndex]?.normalizedLink === item.normalizedLink,
-                      }"
-                      @click="goTo(item)"
+                      effect="dark"
+                      placement="top"
+                      :show-after="500"
+                      :hide-after="0"
+                      popper-class="quick-route-switch-tooltip"
                     >
-                      <span class="quick-route-switch__item-title">
-                        <el-icon v-if="isCurrent(item)"><LocationFilled /></el-icon>
-                        {{ item.text }}
-                      </span>
-                    </button>
+                      <template #content>
+                        <div class="quick-route-switch__tooltip">
+                          <strong>{{ item.text }}</strong>
+                          <span>序号：{{ getRouteIndex(item) }} / {{ totalRouteCount }}</span>
+                          <span>分类：{{ group.text }}</span>
+                          <span>原始地址：{{ item.link }}</span>
+                          <span>路由地址：{{ item.normalizedLink }}</span>
+                          <span>跳转地址：{{ item.routeLink }}</span>
+                          <span>当前路径：{{ currentPath || '/' }}</span>
+                          <span>状态：{{ isCurrent(item) ? '当前页面' : '可跳转' }}</span>
+                        </div>
+                      </template>
+                      <button
+                        type="button"
+                        class="quick-route-switch__item"
+                        :class="{
+                          current: isCurrent(item),
+                          active: flatFilteredItems[activeIndex]?.normalizedLink === item.normalizedLink,
+                        }"
+                        @click="goTo(item)"
+                      >
+                        <span class="quick-route-switch__item-title">
+                          <el-icon v-if="isCurrent(item)"><LocationFilled /></el-icon>
+                          {{ item.text }}
+                        </span>
+                      </button>
+                    </el-tooltip>
                   </div>
                 </section>
               </template>
@@ -438,6 +463,34 @@ watch(keyword, () => {
 .quick-route-switch__item-title .el-icon {
   flex: 0 0 auto;
   color: var(--vp-c-brand-1);
+}
+
+.quick-route-switch__tooltip {
+  display: grid;
+  gap: 4px;
+  min-width: 280px;
+  max-width: min(560px, 72vw);
+  color: #f9fafb;
+  font-size: 12px;
+  line-height: 1.45;
+  word-break: break-all;
+}
+
+.quick-route-switch__tooltip strong {
+  margin-bottom: 2px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.quick-route-switch__tooltip span {
+  color: #d1d5db;
+}
+
+:global(.quick-route-switch-tooltip) {
+  max-width: min(600px, 76vw);
 }
 
 .quick-route-switch__empty {

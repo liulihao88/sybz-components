@@ -7,7 +7,7 @@ const deleteConfirm = () => {
     theme: 'chenghua',
     confirmButtonText: '确认删除',
     cancelButtonText: '再想想',
-    confirmButtonClass: 's-confirm-danger-button', // s-confirm-danger-button
+    confirmButtonClass: 's-confirm-danger-button',
   })
 }
 
@@ -37,6 +37,41 @@ const customText = () => {
     cancelButtonText: '再想想',
   })
 }
+
+const noClose = () => {
+  confirm('该操作需要通过底部按钮明确选择，右上角关闭按钮已隐藏。', {
+    title: '隐藏关闭按钮',
+    theme: 'chenghua',
+    showClose: false,
+    closeOnClickModal: false,
+    closeOnPressEscape: false,
+    confirmButtonText: '继续处理',
+    cancelButtonText: '暂不处理',
+  })
+}
+
+const differentColorButtons = () => {
+  confirm('请选择当前审批结果，同意和驳回使用不同的按钮颜色。', {
+    title: '审批处理',
+    theme: 'chenghua',
+    confirmButtonText: '同意',
+    cancelButtonText: '驳回',
+    confirmButtonClass: 's-confirm-success-button',
+    cancelButtonClass: 's-confirm-warning-button',
+  })
+}
+
+const warningConfirm = () => {
+  confirm('当前任务执行后会影响线上配置，建议确认关联服务状态后继续。', {
+    title: '高风险变更',
+    theme: 'chenghua',
+    showClose: false,
+    confirmButtonText: '继续变更',
+    cancelButtonText: '取消变更',
+    confirmButtonClass: 's-confirm-warning-button',
+    cancelButtonClass: 's-confirm-info-button',
+  })
+}
 </script>
 
 <template>
@@ -45,6 +80,9 @@ const customText = () => {
     <s-button theme="chenghua" type="primary" @click="noCancel">无取消按钮</s-button>
     <s-button theme="chenghua" @click="noConfirm">无确定按钮</s-button>
     <s-button theme="chenghua" type="success" @click="customText">自定义文案</s-button>
+    <s-button theme="chenghua" type="primary" @click="noClose">不显示 X 按钮</s-button>
+    <s-button theme="chenghua" type="success" @click="differentColorButtons">不同颜色按钮</s-button>
+    <s-button theme="chenghua" type="warning" @click="warningConfirm">警告确认</s-button>
   </div>
 </template>
 
