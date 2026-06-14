@@ -3,34 +3,34 @@ export function createAlgolia() {
     appId: 'OWC5FF7N30',
     apiKey: '610e973b9963174fcbc3409dfca4bacb',
     indexName: 'liulihao88_github_io_owc5ff7n30_pages',
-    // searchParameters: {
-    //   attributesToRetrieve: [
-    //     'hierarchy.lvl0',
-    //     'hierarchy.lvl1',
-    //     'hierarchy.lvl2',
-    //     'hierarchy.lvl3',
-    //     'hierarchy.lvl4',
-    //     'hierarchy.lvl5',
-    //     'hierarchy.lvl6',
-    //     'content',
-    //     'type',
-    //     'url',
-    //     'title',
-    //     'headers',
-    //     'description',
-    //   ],
-    //   attributesToSnippet: [
-    //     'hierarchy.lvl1:10',
-    //     'hierarchy.lvl2:10',
-    //     'hierarchy.lvl3:10',
-    //     'hierarchy.lvl4:10',
-    //     'hierarchy.lvl5:10',
-    //     'hierarchy.lvl6:10',
-    //     'content:10',
-    //     'title:10',
-    //     'description:10',
-    //   ],
-    // },
+    searchParameters: {
+      attributesToRetrieve: [
+        'hierarchy.lvl0',
+        'hierarchy.lvl1',
+        'hierarchy.lvl2',
+        'hierarchy.lvl3',
+        'hierarchy.lvl4',
+        'hierarchy.lvl5',
+        'hierarchy.lvl6',
+        'content',
+        'type',
+        'url',
+        'title',
+        'headers',
+        'description',
+      ],
+      attributesToSnippet: [
+        'hierarchy.lvl1:10',
+        'hierarchy.lvl2:10',
+        'hierarchy.lvl3:10',
+        'hierarchy.lvl4:10',
+        'hierarchy.lvl5:10',
+        'hierarchy.lvl6:10',
+        'content:10',
+        'title:10',
+        'description:10',
+      ],
+    },
     transformSearchClient(searchClient) {
       const removeLangFacetFilters = (facetFilters) => {
         if (!facetFilters) return undefined
@@ -57,6 +57,7 @@ export function createAlgolia() {
       })
 
       const mapAlgoliaHitToDocSearchHit = (item) => {
+        const isDocSearchHit = Boolean(item.type && item.hierarchy)
         const title = item.hierarchy?.lvl1 || item.title || 'Sybz Components'
         const content = item.content || item.description || title
         const hierarchy = {
@@ -71,8 +72,8 @@ export function createAlgolia() {
 
         return {
           ...item,
-          type: item.type || 'content',
-          content,
+          type: item.type || 'lvl1',
+          content: isDocSearchHit ? content : undefined,
           hierarchy,
           _highlightResult: {
             ...item._highlightResult,
@@ -84,7 +85,7 @@ export function createAlgolia() {
           },
           _snippetResult: {
             ...item._snippetResult,
-            content: item._snippetResult?.content || item._highlightResult?.content || snippetResult(content),
+            content: isDocSearchHit ? item._snippetResult?.content || item._highlightResult?.content || snippetResult(content) : undefined,
             hierarchy: {
               ...item._snippetResult?.hierarchy,
               lvl0: item._snippetResult?.hierarchy?.lvl0 || snippetResult(hierarchy.lvl0),
