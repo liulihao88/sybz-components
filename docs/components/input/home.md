@@ -26,6 +26,12 @@ input/chenghua
 input/size
 :::
 
+### maxlength 最大长度
+
+:::demo
+input/maxlength
+:::
+
 ### other
 
 :::demo
