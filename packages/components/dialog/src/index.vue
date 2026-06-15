@@ -373,24 +373,4 @@ onBeforeUnmount(() => {
   }
 }
 
-.s-dialog.s-chenghua-dialog {
-  :deep(.el-dialog__header),
-  :deep(.el-drawer__header) {
-    padding: 10px 16px;
-    border-bottom: 0px solid var(--line);
-    font-weight: 700;
-  }
-  :deep(.s-dialog__header-content) {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--el-text-color-primary);
-  }
-  :deep(.el-dialog) {
-    border-radius: 16px;
-  }
-  :deep(.el-dialog__footer) {
-    border-top: 0px solid var(--line);
-  }
-}
 </style>
