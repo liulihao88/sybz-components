@@ -67,7 +67,6 @@ export default {
     })
     // 全局注册基础组件
     ctx.app.use(SybzComponents, {
-      // theme: 'chenghua',
       dangerouslyUseHTMLString: true,
       title: {
         theme: 'chenghua',

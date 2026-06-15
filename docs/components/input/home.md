@@ -85,6 +85,9 @@ input/autocomplete
 |           `boxStyle`            | 标题前缀区域样式                                      | object           | `{}`    |
 |             `width`             | 输入框宽度                                            | string / number  | `100%`  |
 |            `height`             | 输入框高度                                            | string / number  | `''`    |
+|           `maxlength`           | 最大输入长度，超出后截断输入并触发 `$toast` 提示      | string / number  | `10`    |
+|      `hideMaxLengthError`       | 是否隐藏超出最大长度时的 `$toast` 提示                | boolean          | `false` |
+|      `maxLengthErrorText`       | 自定义超出最大长度时的 `$toast` 提示文案              | string           | `''`    |
 |             `size`              | 输入框尺寸                                            | string           | `''`    |
 |            `theme`              | 输入框主题                                            | string           | `''`    |
 |         `showWordLimit`         | 是否显示字数统计                                      | boolean / string | `''`    |

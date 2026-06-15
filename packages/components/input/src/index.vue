@@ -4,11 +4,12 @@
       <div class="s-input__main">
         <el-autocomplete
           v-if="mergedProps.options"
-          v-model="data"
+          :model-value="data"
           :fetch-suggestions="querySearch"
           :placeholder="handlePlaceholder()"
           :clearable="$attrs.clearable !== false"
           @mouseover.native="inputOnMouseOver($event)"
+          @update:model-value="handleInputUpdate"
           v-bind="mergedAttrs"
         >
           <template v-if="$attrs.title" #prepend>
@@ -20,16 +21,16 @@
 
         <el-input
           v-else
-          v-model="data"
+          :model-value="data"
           :placeholder="handlePlaceholder()"
           class="kd-ipt"
           :showPassword="showPassword"
           :class="{ 'kd-textarea': $attrs.type === 'textarea' }"
-          :maxlength="handleMaxLength"
           v-bind="mergedAttrs"
           :show-word-limit="handleShowWordLimit()"
           @focus="focusHandler($event)"
           @mouseover.native="inputOnMouseOver($event)"
+          @update:model-value="handleInputUpdate"
         >
           <template v-if="$attrs.title" #prepend>
             <div :style="{ ...computedBoxStyle }" class="s-input__title">
@@ -81,7 +82,7 @@
 <script setup lang="ts">
 import { ref, computed, useAttrs, watch } from 'vue'
 import { useVModel } from '@vueuse/core'
-import { processWidth, getType } from '@sybz-components/utils'
+import { processWidth, getType, $toast } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 const attrs = useAttrs()
 
@@ -104,6 +105,17 @@ const props = defineProps({
   },
   height: {
     type: [String, Number],
+    default: '',
+  },
+  maxlength: {
+    type: [String, Number],
+  },
+  hideMaxLengthError: {
+    type: Boolean,
+    default: false,
+  },
+  maxLengthErrorText: {
+    type: String,
     default: '',
   },
   size: {
@@ -167,6 +179,7 @@ const props = defineProps({
 const mergedProps = useGlobalComponentConfig('input', props)
 const restaurants = ref([])
 const inWidth = ref(true)
+const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
 
 const inputClass = computed(() => [
@@ -177,13 +190,39 @@ const inputClass = computed(() => [
   },
 ])
 
-const handleMaxLength = computed(() => {
-  if (attrs.type === 'textarea') {
-    return attrs.maxlength || 1000
-  } else {
-    return attrs.maxlength || ''
-  }
+const normalizedMaxLength = computed(() => {
+  const maxLength = Number(mergedProps.value.maxlength ?? mergedProps.value.maxLength)
+  return Number.isFinite(maxLength) && maxLength > 0 ? maxLength : 0
 })
+
+const maxLengthErrorMessage = computed(
+  () => mergedProps.value.maxLengthErrorText || `输入长度不能超过${normalizedMaxLength.value}`,
+)
+
+const resolveMaxLengthValue = (value: unknown) => {
+  if (value === null || value === undefined || !normalizedMaxLength.value) return value
+
+  const text = String(value)
+
+  if (text.length <= normalizedMaxLength.value) return value
+
+  const nextValue = text.slice(0, normalizedMaxLength.value)
+
+  if (!mergedProps.value.hideMaxLengthError) {
+    const now = Date.now()
+
+    if (now - lastMaxLengthToastTime.value > 800) {
+      $toast.error(maxLengthErrorMessage.value)
+      lastMaxLengthToastTime.value = now
+    }
+  }
+
+  return nextValue
+}
+
+const handleInputUpdate = (value: unknown) => {
+  data.value = resolveMaxLengthValue(value)
+}
 
 watch(
   () => mergedProps.value.options,
@@ -298,7 +337,7 @@ const mergedAttrs = computed(() => {
   const merged = {
     ...baseAttrs,
     ...Object.entries(attrs).reduce((obj, [key, value]) => {
-      if (key !== 'class' && key !== 'style') {
+      if (key !== 'class' && key !== 'style' && key !== 'maxlength' && key !== 'max-length') {
         obj[key] = value
       }
       return obj
