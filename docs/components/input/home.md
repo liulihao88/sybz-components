@@ -72,6 +72,7 @@ input/autocomplete
 |          `modelValue`           | 绑定值                                                | any              | -       |
 |           `boxStyle`            | 标题前缀区域样式                                      | object           | `{}`    |
 |             `width`             | 输入框宽度                                            | string / number  | `100%`  |
+|            `height`             | 输入框高度                                            | string / number  | `''`    |
 |         `showWordLimit`         | 是否显示字数统计                                      | boolean / string | `''`    |
 |             `block`             | 是否按块级宽度展示                                    | boolean          | `false` |
 |        `disPlaceholder`         | 禁用态下显示的占位文案                                | string           | `''`    |

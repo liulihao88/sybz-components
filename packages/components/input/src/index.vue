@@ -102,6 +102,10 @@ const props = defineProps({
     type: [String, Number],
     default: '100%',
   },
+  height: {
+    type: [String, Number],
+    default: '',
+  },
   showWordLimit: {
     type: [Boolean, String],
     default: '',
@@ -226,14 +230,21 @@ function inputOnMouseOver(event) {
   }
 }
 
-const handleWidth = () => {
-  if (!props.width) {
-    return {}
+const handleSize = () => {
+  const sizeStyle: Record<string, any> = {}
+
+  if (mergedProps.value.width) {
+    sizeStyle.width = processWidth(mergedProps.value.width, true)
   }
-  let inputWidth = processWidth(props.width, true)
-  return {
-    width: inputWidth,
+
+  if (mergedProps.value.height) {
+    const inputHeight = processWidth(mergedProps.value.height, true)
+    sizeStyle.height = inputHeight
+    sizeStyle['--s-input-height'] = inputHeight
+    sizeStyle['--el-input-height'] = inputHeight
   }
+
+  return sizeStyle
 }
 const clearTextareaValue = () => {
   data.value = ''
@@ -278,9 +289,9 @@ const mergedAttrs = computed(() => {
 
 const mergedStyle = computed(() => {
   // ensure both parts are objects before spreading to avoid TS spread errors
-  const w = handleWidth()
+  const size = handleSize()
   return {
-    ...(typeof w === 'object' && w ? w : {}),
+    ...(typeof size === 'object' && size ? size : {}),
     ...(typeof attrs.style === 'object' && attrs.style ? attrs.style : {}),
   }
 })
@@ -294,6 +305,21 @@ const mergedStyle = computed(() => {
 
   .s-input__main {
     width: 100%;
+    height: 100%;
+  }
+
+  :deep(.el-autocomplete),
+  :deep(.el-input),
+  :deep(.el-textarea) {
+    height: 100%;
+  }
+
+  :deep(.el-input__wrapper) {
+    min-height: var(--s-input-height, var(--el-input-height));
+  }
+
+  :deep(.el-textarea__inner) {
+    min-height: var(--s-input-height, auto);
   }
 
   &.has-content {

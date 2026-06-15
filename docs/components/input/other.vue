@@ -15,6 +15,13 @@
       <s-input v-model="input" size="small" title="size: small" />
     </s-flex>
 
+    <div class="input-demo-meta">
+      <span>属性: height</span>
+      <span>可选值: string | number</span>
+      <span>默认值: ''</span>
+    </div>
+    <s-input v-model="input" width="240" height="48" title="height: 48" placeholder="height: 48" />
+
     <s-title title="文本域">
       <s-input
         title="文本域"
@@ -91,3 +98,14 @@ const textarea = ref('')
 const subTitle =
   '使用 maxlength 和 minlength 属性, 来控制输入内容的最大字数和最小字数。 "字符数"使用JavaScript字符串长度来衡量。 为文本或文本输入类型设置 maxlength prop可以限制输入值的长度。 允许你通过设置 show-word-limit 到 true 来显示剩余字数。 从 2.11.5 版本开始，你可以将 word-limit-position 设置为 outside，以在输入框外显示字数统计。'
 </script>
+
+<style scoped lang="scss">
+.input-demo-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+</style>
