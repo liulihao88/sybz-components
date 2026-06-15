@@ -14,6 +14,12 @@
 select/base
 :::
 
+### 成华主题
+
+:::demo
+select/chenghua
+:::
+
 ### 通常用法
 
 :::demo
@@ -100,6 +106,7 @@ select/multipleTableSelect
 |          `showPrefix`           | 是否显示前缀数量信息                                   | boolean                 | `false`    |
 |           `showQuick`           | 是否显示上下快速切换按钮                               | boolean                 | `true`     |
 |             `size`              | 选择器尺寸，支持 `small` / `default` / `large`         | string                  | `''`       |
+|            `theme`              | 选择器主题，支持 `chenghua`                            | string                  | `''`       |
 |            `title`              | 左侧标题文案                                           | string                  | `''`       |
 |           `connect`             | 多字段 label 拼接符                                    | string                  | `/`        |
 |          `customLabel`          | 自定义 label 生成函数                                  | function / string       | `''`       |

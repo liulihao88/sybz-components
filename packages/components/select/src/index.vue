@@ -4,6 +4,7 @@
     :style="{ ...processWidth(mergedProps.width) }"
     :class="[
       sizeClass,
+      themeClass,
       {
         'has-title': mergedProps.title,
         'has-quick': mergedProps.showQuick && !parseDisabled && sOptions.length > 0,
@@ -23,14 +24,14 @@
           class="s-select__select"
           :class="isEmpty(sOptions, true) && emptyColor ? 's-select__empty' : ''"
           :placeholder="handlePlaceholder()"
-          popper-class="s-select__multiple-checkbox"
+          :popper-class="selectPopperClass"
           :multiple="multiple"
           v-bind="{
             clearable: true,
             filterable: true,
             size: mergedProps.size || undefined,
             ...Object.entries($attrs).reduce((obj, [key, value]) => {
-              if (key !== 'class' && key !== 'style') {
+              if (!['class', 'style', 'popper-class', 'popperClass'].includes(key)) {
                 obj[key] = value
               }
               return obj
@@ -151,6 +152,11 @@ const props = defineProps({
   size: {
     type: String,
     default: '',
+  },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
   },
   title: {
     type: String,
@@ -332,6 +338,23 @@ const reverseSelect = () => {
 const mergedSize = computed(() => mergedProps.value.size || 'default')
 const sizeClass = computed(() => {
   return `s-select--${mergedSize.value}`
+})
+const themeClass = computed(() => {
+  return mergedProps.value.theme === 'chenghua' ? 's-select--chenghua' : ''
+})
+const inheritedPopperClass = computed(() => {
+  return [attrs['popper-class'], attrs.popperClass]
+    .filter((item) => typeof item === 'string' && item.trim())
+    .join(' ')
+})
+const selectPopperClass = computed(() => {
+  return [
+    's-select__multiple-checkbox',
+    inheritedPopperClass.value,
+    mergedProps.value.theme === 'chenghua' ? 's-select__popper--chenghua' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 })
 
 function handlePlaceholder() {
