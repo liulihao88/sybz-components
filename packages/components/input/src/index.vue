@@ -1,9 +1,9 @@
 <template>
-  <div class="s-input" v-bind="subAttrs" :style="mergedStyle" :class="[$attrs.class, { 'has-content': content }]">
-    <el-tooltip :content="'' + data" :disabled="inWidth || hideTooltip" v-bind="tooltipAttrs">
+  <div class="s-input" v-bind="mergedProps.subAttrs" :style="mergedStyle" :class="inputClass">
+    <el-tooltip :content="'' + data" :disabled="inWidth || mergedProps.hideTooltip" v-bind="mergedProps.tooltipAttrs">
       <div class="s-input__main">
         <el-autocomplete
-          v-if="props.options"
+          v-if="mergedProps.options"
           v-model="data"
           :fetch-suggestions="querySearch"
           :placeholder="handlePlaceholder()"
@@ -62,10 +62,10 @@
       </div>
     </el-tooltip>
     <s-icon
-      v-if="content"
+      v-if="mergedProps.content"
       class="s-input__icon"
-      v-bind="{ name: 'warning', color: 'var(--el-disabled-text-color)', size: '16px', ...props.iconAttrs }"
-      :content="content"
+      v-bind="{ name: 'warning', color: 'var(--el-disabled-text-color)', size: '16px', ...mergedProps.iconAttrs }"
+      :content="mergedProps.content"
       :dangerouslyUseHTMLString="mergedProps.dangerouslyUseHTMLString"
     />
 
@@ -105,6 +105,16 @@ const props = defineProps({
   height: {
     type: [String, Number],
     default: '',
+  },
+  size: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'small', 'default', 'large'].includes(value),
+  },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
   },
   showWordLimit: {
     type: [Boolean, String],
@@ -159,6 +169,14 @@ const restaurants = ref([])
 const inWidth = ref(true)
 const data = useVModel(props)
 
+const inputClass = computed(() => [
+  attrs.class,
+  {
+    'has-content': mergedProps.value.content,
+    's-input--chenghua': mergedProps.value.theme === 'chenghua',
+  },
+])
+
 const handleMaxLength = computed(() => {
   if (attrs.type === 'textarea') {
     return attrs.maxlength || 1000
@@ -168,7 +186,7 @@ const handleMaxLength = computed(() => {
 })
 
 watch(
-  () => props.options,
+  () => mergedProps.value.options,
   (val) => {
     if (!val) {
       return
@@ -190,25 +208,26 @@ watch(
 )
 
 const computedBoxStyle = computed(() => {
-  if (props.boxStyle?.width) {
-    let minusWidth = parseInt(props.boxStyle.width) - 8 + 'px'
+  if (mergedProps.value.boxStyle?.width) {
+    let minusWidth = parseInt(mergedProps.value.boxStyle.width) - 8 + 'px'
     return {
-      ...props.boxStyle,
+      ...mergedProps.value.boxStyle,
       width: processWidth(minusWidth, true),
     }
   } else {
-    return props.boxStyle
+    return mergedProps.value.boxStyle
   }
 })
 
 function handlePlaceholder() {
-  let res = attrs.disabled === '' || !!attrs.disabled === true ? props.disPlaceholder : attrs.placeholder || '请输入'
+  let res =
+    attrs.disabled === '' || !!attrs.disabled === true ? mergedProps.value.disPlaceholder : attrs.placeholder || '请输入'
   return res
 }
 // 是否显示showWordLimit属性
 function handleShowWordLimit() {
-  if (typeof props.showWordLimit === 'boolean') {
-    return props.showWordLimit
+  if (typeof mergedProps.value.showWordLimit === 'boolean') {
+    return mergedProps.value.showWordLimit
   }
   if (attrs.type === 'textarea') {
     return true
@@ -274,6 +293,7 @@ const mergedAttrs = computed(() => {
     resize: 'none',
     rows: 2,
     clearable: true,
+    size: mergedProps.value.size || undefined,
   }
   const merged = {
     ...baseAttrs,

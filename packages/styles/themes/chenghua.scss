@@ -516,6 +516,84 @@
   font-weight: 600;
 }
 
+.s-input.s-input--chenghua.s-input--chenghua {
+  --s-input-ch-primary: #165dff;
+  --s-input-ch-primary-hover: #1e6efc;
+  --s-input-ch-primary-soft: rgba(22, 93, 255, 0.08);
+  --s-input-ch-border: rgba(22, 93, 255, 0.2);
+  --s-input-ch-border-hover: rgba(22, 93, 255, 0.42);
+  --s-input-ch-text: #1d2b4f;
+  --s-input-ch-muted: #6f7a95;
+  --s-input-ch-bg: #ffffff;
+
+  font-family: 'PingFang SC', sans-serif;
+
+  .el-input,
+  .el-textarea,
+  .el-autocomplete {
+    --el-input-border-color: var(--s-input-ch-border);
+    --el-input-hover-border-color: var(--s-input-ch-border-hover);
+    --el-input-focus-border-color: var(--s-input-ch-primary);
+    --el-input-text-color: var(--s-input-ch-text);
+    --el-input-placeholder-color: var(--s-input-ch-muted);
+    --el-input-bg-color: var(--s-input-ch-bg);
+  }
+
+  .el-input__wrapper,
+  .el-textarea__inner {
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 0 0 1px var(--s-input-ch-border) inset;
+    transition:
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .el-input__wrapper:hover,
+  .el-textarea__inner:hover {
+    box-shadow: 0 0 0 1px var(--s-input-ch-border-hover) inset;
+  }
+
+  .el-input__wrapper.is-focus,
+  .el-textarea__inner:focus {
+    box-shadow:
+      0 0 0 1px var(--s-input-ch-primary) inset,
+      0 8px 18px rgba(22, 93, 255, 0.08);
+  }
+
+  .el-input-group__prepend,
+  .el-input-group__append {
+    border-color: transparent;
+    background: #edf4ff;
+    color: var(--s-input-ch-text);
+    box-shadow: 0 0 0 1px var(--s-input-ch-border) inset;
+    font-weight: 500;
+  }
+
+  .s-input__title {
+    color: var(--s-input-ch-text);
+    font-weight: 500;
+  }
+
+  .el-input__prefix,
+  .el-input__suffix,
+  .el-input__count,
+  .el-textarea .el-input__count {
+    color: var(--s-input-ch-muted);
+  }
+
+  .el-input__clear,
+  .el-input__password {
+    color: var(--s-input-ch-primary);
+  }
+
+  .el-input.is-disabled .el-input__wrapper,
+  .el-textarea.is-disabled .el-textarea__inner {
+    background: #f6f8fb;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08) inset;
+  }
+}
+
 .s-table.s-table--chenghua.s-table--chenghua {
   --s-table-ch-primary: #165dff;
   --s-table-ch-primary-soft: rgba(22, 93, 255, 0.1);

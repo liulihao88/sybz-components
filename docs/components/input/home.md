@@ -14,6 +14,18 @@
 input/base
 :::
 
+### 成华主题
+
+:::demo
+input/chenghua
+:::
+
+### size 尺寸
+
+:::demo
+input/size
+:::
+
 ### other
 
 :::demo
@@ -73,6 +85,8 @@ input/autocomplete
 |           `boxStyle`            | 标题前缀区域样式                                      | object           | `{}`    |
 |             `width`             | 输入框宽度                                            | string / number  | `100%`  |
 |            `height`             | 输入框高度                                            | string / number  | `''`    |
+|             `size`              | 输入框尺寸                                            | string           | `''`    |
+|            `theme`              | 输入框主题                                            | string           | `''`    |
 |         `showWordLimit`         | 是否显示字数统计                                      | boolean / string | `''`    |
 |             `block`             | 是否按块级宽度展示                                    | boolean          | `false` |
 |        `disPlaceholder`         | 禁用态下显示的占位文案                                | string           | `''`    |

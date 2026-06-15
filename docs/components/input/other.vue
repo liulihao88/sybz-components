@@ -9,12 +9,6 @@
       show-password
     />
 
-    <s-flex gap="small">
-      <s-input v-model="input" size="large" title="size:large" />
-      <s-input v-model="input" size="default" title="size:default" />
-      <s-input v-model="input" size="small" title="size: small" />
-    </s-flex>
-
     <div class="input-demo-meta">
       <span>属性: height</span>
       <span>可选值: string | number</span>
