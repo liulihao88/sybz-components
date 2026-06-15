@@ -37,6 +37,7 @@ function sleep(delay = 0, fn = () => {}) {
     :confirmAttrs="{
       loading: confirmLoading,
     }"
+    confirmText="保存"
     v-model="isShow"
     @cancel="proxy.$toast('哈哈')"
     cancelText="高级配置"
