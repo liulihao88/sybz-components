@@ -83,7 +83,7 @@
       </div>
     </el-tooltip>
 
-    <span v-if="showQuick && !parseDisabled && sOptions.length > 0" class="s-select__select-box">
+    <span v-if="mergedProps.showQuick && !parseDisabled && sOptions.length > 0" class="s-select__select-box">
       <span class="s-select__select-box__inner">
         <s-icon name="ArrowUp" :size="mergedSize === 'small' ? 10 : 14" @click="quickSelect(false)" />
         <div class="s-select__divider" />

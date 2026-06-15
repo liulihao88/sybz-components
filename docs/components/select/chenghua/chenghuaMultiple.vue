@@ -22,7 +22,15 @@ const options = [
       <span>默认值: false</span>
     </div>
 
-    <s-select v-model="multipleValue" width="100%" theme="chenghua" multiple title="多选服务" :options="options" />
+    <s-select
+      v-model="multipleValue"
+      width="100%"
+      theme="chenghua"
+      multiple
+      title="多选服务"
+      :options="options"
+      
+    />
   </div>
 </template>
 
