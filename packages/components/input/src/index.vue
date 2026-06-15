@@ -66,6 +66,7 @@
       class="s-input__icon"
       v-bind="{ name: 'warning', color: 'var(--el-disabled-text-color)', size: '16px', ...props.iconAttrs }"
       :content="content"
+      :dangerouslyUseHTMLString="mergedProps.dangerouslyUseHTMLString"
     />
 
     <s-icon
@@ -81,6 +82,7 @@
 import { ref, computed, useAttrs, watch } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType } from '@sybz-components/utils'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 const attrs = useAttrs()
 
 defineOptions({
@@ -143,7 +145,12 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  dangerouslyUseHTMLString: {
+    type: Boolean,
+    default: false,
+  },
 })
+const mergedProps = useGlobalComponentConfig('input', props)
 const restaurants = ref([])
 const inWidth = ref(true)
 const data = useVModel(props)

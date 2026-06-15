@@ -64,6 +64,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  dangerouslyUseHTMLString: {
+    type: Boolean,
+    default: true,
+  },
   theme: {
     type: String,
     default: '',
@@ -85,31 +89,6 @@ const normalizeClassValue = (value: unknown) => {
 
   return value ? String(value) : ''
 }
-
-const escapeHtml = (content: string) => {
-  return content
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
-
-const contentHtml = computed(() => {
-  const content = mergedProps.value.content || ''
-  const codeTagReg = /<code>([\s\S]*?)<\/code>/gi
-  let result = ''
-  let lastIndex = 0
-  let match: RegExpExecArray | null
-
-  while ((match = codeTagReg.exec(content))) {
-    result += escapeHtml(content.slice(lastIndex, match.index))
-    result += `<code>${escapeHtml(match[1])}</code>`
-    lastIndex = match.index + match[0].length
-  }
-
-  return result + escapeHtml(content.slice(lastIndex))
-})
 
 const popperClass = computed(() => {
   const attrPopperClass = normalizeClassValue(attrs['popper-class'] || attrs.popperClass)
@@ -148,7 +127,14 @@ defineExpose({
     v-model:visible="isPopoverVisible"
   >
     <slot name="content">
-      <div v-if="contentHtml" class="s-popconfirm__content" v-html="contentHtml"></div>
+      <template v-if="mergedProps.content">
+        <div
+          v-if="mergedProps.dangerouslyUseHTMLString"
+          class="s-popconfirm__content"
+          v-html="mergedProps.content"
+        ></div>
+        <div v-else class="s-popconfirm__content">{{ mergedProps.content }}</div>
+      </template>
     </slot>
     <div class="s-popconfirm__footer">
       <slot name="footer">

@@ -3,13 +3,17 @@ export type SybzComponentInstallConfig = Record<string, any>
 export interface SybzComponentsInstallOptions {
   theme?: string
   size?: string
+  dangerouslyUseHTMLString?: boolean
   button?: SybzComponentInstallConfig
   dialog?: SybzComponentInstallConfig
+  icon?: SybzComponentInstallConfig
+  input?: SybzComponentInstallConfig
   popconfirm?: SybzComponentInstallConfig
   select?: SybzComponentInstallConfig
   table?: SybzComponentInstallConfig
   title?: SybzComponentInstallConfig
   tooltip?: SybzComponentInstallConfig
+  warning?: SybzComponentInstallConfig
   [key: string]: any
 }
 

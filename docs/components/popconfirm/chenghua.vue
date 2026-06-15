@@ -17,13 +17,17 @@ function confirm() {
       <span>属性: content</span>
       <span>支持: 文本 | &lt;code&gt;...&lt;/code&gt;</span>
       <span>默认值: ''</span>
+      <span>属性: dangerouslyUseHTMLString</span>
+      <span>可选值: true | false</span>
+      <span>默认值: true</span>
     </div>
 
     <div class="popconfirm-chenghua-demo__actions">
       <s-popconfirm
         theme="chenghua"
-        title="删除服务"
+        title="确认删除任务"
         content="确定删除<code>智慧档案检索</code>吗?"
+        :dangerouslyUseHTMLString="true"
         width="260"
         trigger="click"
         @confirm="confirm"
@@ -35,6 +39,7 @@ function confirm() {
         theme="chenghua"
         title="发布确认"
         content="将发布到<code>生产环境</code>, 请确认配置无误。"
+        :dangerouslyUseHTMLString="true"
         width="280"
         trigger="click"
         @confirm="confirm"

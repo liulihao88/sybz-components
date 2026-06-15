@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { getCurrentInstance, computed, useAttrs } from 'vue'
+import { computed, useAttrs } from 'vue'
 import SIcon from '@/components/icon/src/index.vue'
 import { processWidth } from '@sybz-components/utils'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SWarning',
@@ -33,35 +34,38 @@ const props = withDefaults(defineProps<Props>(), {
   iconAttrs: () => ({}),
   left: false,
 })
+const mergedProps = useGlobalComponentConfig('warning', props)
 
 const attrs = useAttrs()
 
 const bindProps = computed(() => {
-  return props.dangerouslyUseHTMLString ? { innerHTML: props.content } : { textContent: props.content }
+  return mergedProps.value.dangerouslyUseHTMLString
+    ? { innerHTML: mergedProps.value.content }
+    : { textContent: mergedProps.value.content }
 })
 
 const mergedStyle = computed(() => {
   let obj: Record<string, any> = {}
-  if (props.size === 'small') {
+  if (mergedProps.value.size === 'small') {
     obj.paddingTop = 0
     obj.paddingBottom = 0
   }
-  if (props.dotted) {
+  if (mergedProps.value.dotted) {
     obj['border-style'] = 'dotted'
   }
-  if (props.left) {
-    if (typeof props.left === 'boolean') {
+  if (mergedProps.value.left) {
+    if (typeof mergedProps.value.left === 'boolean') {
       obj.marginLeft = '8px'
     } else {
-      obj.marginLeft = processWidth(props.left, true)
+      obj.marginLeft = processWidth(mergedProps.value.left, true)
     }
   }
-  let res = { ...obj, ...props.customStyle }
+  let res = { ...obj, ...mergedProps.value.customStyle }
   return res
 })
 
 function parseClass(): string {
-  let type = props.type
+  let type = mergedProps.value.type
   return `s-warning__${type}`
 }
 </script>
@@ -70,36 +74,40 @@ function parseClass(): string {
   <div
     :class="parseClass()"
     class="s-warning-box"
-    :style="{ ...processWidth(props.width), ...mergedStyle }"
+    :style="{ ...processWidth(mergedProps.width), ...mergedStyle }"
     v-bind="attrs"
   >
-    <img v-if="type === 'warning' && props.icon" src="../notic.png" class="s-warning-box__img" />
+    <img v-if="mergedProps.type === 'warning' && mergedProps.icon" src="../notic.png" class="s-warning-box__img" />
     <s-icon
-      v-else-if="type === 'error' && props.icon"
+      v-else-if="mergedProps.type === 'error' && mergedProps.icon"
       name="circle-close"
       :color="'var(--el-color-danger)'"
-      v-bind="iconAttrs"
+      v-bind="mergedProps.iconAttrs"
       class="s-warning-box__icon"
       size="16"
     />
     <s-icon
-      v-else-if="type !== 'warning' && props.icon"
+      v-else-if="mergedProps.type !== 'warning' && mergedProps.icon"
       name="warning"
       :color="'var(--45)'"
-      v-bind="iconAttrs"
+      v-bind="mergedProps.iconAttrs"
       class="s-warning-box__icon"
       size="16"
     />
     <div class="s-warning-box__container">
-      <div v-if="$slots.title || title" class="s-warning-box__title" :class="`s-warning-box__title--${type}`">
+      <div
+        v-if="$slots.title || mergedProps.title"
+        class="s-warning-box__title"
+        :class="`s-warning-box__title--${mergedProps.type}`"
+      >
         <slot name="title">
-          {{ title }}
+          {{ mergedProps.title }}
         </slot>
       </div>
       <slot name="content">
         <span
           class="s-warning-box__content"
-          :class="{ 's-warning-box__content--muted': type === 'icon' }"
+          :class="{ 's-warning-box__content--muted': mergedProps.type === 'icon' }"
           v-bind="bindProps"
         />
       </slot>

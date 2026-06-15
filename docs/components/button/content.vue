@@ -16,7 +16,8 @@ const isTest39 = () => {
     <el-button type="primary" @click="isTest39" size="small">测试33</el-button>
     <el-button type="primary" @click="isTest39" size="small">测试33</el-button>
     <s-button
-      content="我是提示文字, tooltip的属性都在tooltipAttrs下"
+      content="我是提示文字, tooltip的属性都在tooltipAttrs下, <code>dangerouslyUseHTMLString</code> 可以控制是否解析"
+      :dangerouslyUseHTMLString="true"
       :tooltipAttrs="{ placement: 'right' }"
       icon="plus"
       @click="handleClick"

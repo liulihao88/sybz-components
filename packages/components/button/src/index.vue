@@ -1,5 +1,10 @@
 <template>
-  <s-tooltip v-if="mergedProps.content" :content="mergedProps.content" v-bind="mergedProps.tooltipAttrs">
+  <s-tooltip
+    v-if="mergedProps.content"
+    :content="mergedProps.content"
+    :dangerouslyUseHTMLString="mergedProps.dangerouslyUseHTMLString"
+    v-bind="mergedProps.tooltipAttrs"
+  >
     <el-button v-bind="buttonAttrs" :class="['s-button-content', buttonClass]" @click="handleClick">
       <template v-for="(arg, name, index) in $slots" v-slot:[name]>
         <slot :name="name" v-bind="arg" :index="index" />
@@ -27,6 +32,7 @@ interface SButtonSelfProps {
   time?: number
   content?: string
   tooltipAttrs?: Record<string, any>
+  dangerouslyUseHTMLString?: boolean
   theme?: '' | 'chenghua'
   variant?: '' | 'outline' | 'gradient'
   size?: '' | 'small' | 'default' | 'large'
@@ -38,6 +44,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   time: 0,
   content: '',
   tooltipAttrs: () => ({}),
+  dangerouslyUseHTMLString: false,
   theme: '',
   variant: '',
   size: '',

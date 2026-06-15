@@ -204,7 +204,12 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  dangerouslyUseHTMLString: {
+    type: Boolean,
+    default: false,
+  },
 })
+const mergedProps = useGlobalComponentConfig('select', props)
 
 const sOptions = ref(props.options)
 
@@ -232,7 +237,11 @@ const mergedTooltipAttrs = computed(() => {
   return {
     placement: 'top',
     effect: 'dark',
-    ...props.tooltipAttrs,
+    ...mergedProps.value.tooltipAttrs,
+    rawContent:
+      mergedProps.value.dangerouslyUseHTMLString ||
+      mergedProps.value.tooltipAttrs.rawContent ||
+      mergedProps.value.tooltipAttrs['raw-content'],
   }
 })
 
@@ -320,7 +329,6 @@ const reverseSelect = () => {
   changeMulty(noSelectedValue)
 }
 
-const mergedProps = useGlobalComponentConfig('select', props)
 const mergedSize = computed(() => mergedProps.value.size || 'default')
 const sizeClass = computed(() => {
   return `s-select--${mergedSize.value}`

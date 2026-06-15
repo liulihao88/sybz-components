@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, useAttrs } from 'vue'
 import { toLine } from '@/utils/src'
 import SSvg from '@/components/svg'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SIcon',
@@ -30,15 +31,31 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  dangerouslyUseHTMLString: {
+    type: Boolean,
+    default: false,
+  },
 })
+const mergedProps = useGlobalComponentConfig('icon', props)
+const attrs = useAttrs()
 const emits = defineEmits(['click'])
 function handleClick($event) {
-  if (props.disabled) return
+  if (mergedProps.value.disabled) return
   emits('click', $event)
 }
 const parseColor = computed(() => {
-  if (props.disabled) return 'var(--el-disabled-text-color)'
-  return props.color
+  if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
+  return mergedProps.value.color
+})
+
+const tooltipAttrs = computed(() => {
+  const restAttrs = { ...attrs }
+  delete restAttrs.dangerouslyUseHTMLString
+
+  return {
+    ...restAttrs,
+    rawContent: mergedProps.value.dangerouslyUseHTMLString || restAttrs.rawContent || restAttrs['raw-content'],
+  }
 })
 </script>
 
@@ -46,18 +63,18 @@ const parseColor = computed(() => {
   <el-icon
     :color="parseColor"
     props.disabled
-    :size="props.size"
+    :size="mergedProps.size"
     class="s-icon"
-    :class="props.disabled && 's-icon__not-allowed'"
+    :class="mergedProps.disabled && 's-icon__not-allowed'"
     @click="handleClick"
   >
-    <el-tooltip :disabled="!$attrs.content" v-bind="$attrs">
+    <el-tooltip :disabled="!tooltipAttrs.content" v-bind="tooltipAttrs">
       <span ref="contentRef">
         <slot v-if="$slots.default"></slot>
         <!-- 仅在默认插槽为空时渲染图标 -->
         <template v-else>
-          <s-svg v-if="type === 'svg'" v-bind="svgAttrs" :name="name"></s-svg>
-          <component :is="`el-icon-${toLine(props.name || '')}`" v-else></component>
+          <s-svg v-if="mergedProps.type === 'svg'" v-bind="mergedProps.svgAttrs" :name="mergedProps.name"></s-svg>
+          <component :is="`el-icon-${toLine(mergedProps.name || '')}`" v-else></component>
         </template>
       </span>
     </el-tooltip>

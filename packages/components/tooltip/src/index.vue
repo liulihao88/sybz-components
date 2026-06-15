@@ -8,7 +8,7 @@
       :class="{ 's-tooltip-box__text--multiline': isMultiLineClamp }"
       :style="textStyle"
       @mouseover="onMouseOver"
-      v-bind="$attrs"
+      v-bind="triggerAttrs"
     >
       <span class="s-tooltip-box__content">
         <slot>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useSlots, computed, useAttrs, h, resolveComponent } from 'vue'
+import { computed, ref, useAttrs, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -53,17 +53,55 @@ const props = defineProps({
   effect: {
     default: 'dark',
   },
+  dangerouslyUseHTMLString: {
+    type: Boolean,
+    default: false,
+  },
 })
 const mergedProps = useGlobalComponentConfig('tooltip', props)
-const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect']
+const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect', 'dangerouslyUseHTMLString']
 
 const mergedTooltipAttrs = computed(() => {
-  return Object.keys(mergedProps.value).reduce((attrs, key) => {
+  const tooltipAttrs = Object.keys(mergedProps.value).reduce<Record<string, any>>((attrs, key) => {
     if (!ownPropKeys.includes(key)) {
       attrs[key] = mergedProps.value[key]
     }
     return attrs
   }, {})
+  const rawContent =
+    mergedProps.value.dangerouslyUseHTMLString ||
+    attrs.rawContent ||
+    attrs['raw-content'] ||
+    tooltipAttrs.rawContent ||
+    tooltipAttrs['raw-content']
+
+  return {
+    ...tooltipAttrs,
+    rawContent,
+  }
+})
+
+const triggerAttrs = computed(() => {
+  const triggerAttrs = { ...attrs }
+  const tooltipOnlyAttrs = [
+    'content',
+    'rawContent',
+    'raw-content',
+    'placement',
+    'trigger',
+    'showAfter',
+    'show-after',
+    'hideAfter',
+    'hide-after',
+    'visible',
+    'disabled',
+  ]
+
+  tooltipOnlyAttrs.forEach((key) => {
+    delete triggerAttrs[key]
+  })
+
+  return triggerAttrs
 })
 
 const normalizedLineClamp = computed(() => {
