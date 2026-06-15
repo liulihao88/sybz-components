@@ -25,8 +25,8 @@ function isTest65() {
     <br />
 
     <br />
-    <s-popconfirm @confirm="confirm" content="我是删除content" :reConfirm="false">
-      <el-button type="primary" @click="isTest65">测试66</el-button>
+    <s-popconfirm @confirm="confirm" content="确定删除<code>123</code>吗?">
+      <el-button type="primary">测试66</el-button>
     </s-popconfirm>
 
     <br />

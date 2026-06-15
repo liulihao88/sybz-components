@@ -94,18 +94,17 @@
 
 <script setup lang="ts">
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
-import { processWidth, isEmpty } from '@sybz-components/utils'
+import { processWidth, isEmpty, clone } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SSelect',
 })
-const { proxy } = getCurrentInstance()
 const attrs = useAttrs()
 const emits = defineEmits(['changeSelect', 'update:modelValue', 'change'])
 const slots = useSlots()
 const noDefaultSlots = computed(() => {
-  const copySlots = proxy.clone(slots)
+  const copySlots = clone(slots)
   delete copySlots.default
   delete copySlots.label
   return copySlots
