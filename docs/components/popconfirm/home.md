@@ -14,6 +14,12 @@
 popconfirm/base
 :::
 
+### 成华主题
+
+:::demo
+popconfirm/chenghua
+:::
+
 ### 通常用法
 
 :::demo
@@ -32,8 +38,9 @@ popconfirm/slot
 | :---------: | -------------------------------------- | --------------- | ------------- |
 |   `title`   | 标题文案                               | string          | `确定删除吗?` |
 |   `width`   | 弹层宽度                               | string / number | `200`         |
-|  `content`  | 正文内容                               | string          | -             |
+|  `content`  | 正文内容，支持 `<code>...</code>` 写法 | string          | `''`          |
 | `reConfirm` | 是否启用二次确认，关闭后点击即直接确认 | boolean         | `true`        |
+|   `theme`   | 主题                                   | `'' / chenghua` | `''`          |
 
 ### 事件
 

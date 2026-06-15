@@ -5,6 +5,7 @@ export interface SybzComponentsInstallOptions {
   size?: string
   button?: SybzComponentInstallConfig
   dialog?: SybzComponentInstallConfig
+  popconfirm?: SybzComponentInstallConfig
   select?: SybzComponentInstallConfig
   table?: SybzComponentInstallConfig
   title?: SybzComponentInstallConfig

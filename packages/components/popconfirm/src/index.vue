@@ -6,16 +6,31 @@
 defineOptions({
   name: 'SPopconfirm',
 })
-import { ref, onMounted } from 'vue'
+import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import SButton from '@/components/button/src/index.vue'
+
+const attrs = useAttrs()
 const isPopoverVisible = ref(false)
+let showTimer: number | undefined
+
 const handleShow = () => {
-  onMounted(() => {
+  window.clearTimeout(showTimer)
+  showTimer = window.setTimeout(() => {
+    document.removeEventListener('click', closePopoverOnClickOutside)
     document.addEventListener('click', closePopoverOnClickOutside)
-  })
+  }, 0)
 }
 
-const closePopoverOnClickOutside = (event) => {
-  if (!document.querySelector('.el-popover').contains(event.target)) {
+const removeClickOutsideListener = () => {
+  window.clearTimeout(showTimer)
+  document.removeEventListener('click', closePopoverOnClickOutside)
+}
+
+const closePopoverOnClickOutside = (event: MouseEvent) => {
+  const popover = document.querySelector('.el-popover')
+
+  if (!popover || !popover.contains(event.target as Node)) {
     close()
   }
 }
@@ -26,6 +41,7 @@ function confirm() {
 }
 function close() {
   isPopoverVisible.value = false
+  removeClickOutsideListener()
 }
 function cancel() {
   close()
@@ -42,11 +58,77 @@ const props = defineProps({
   },
   content: {
     type: String,
+    default: '',
   },
   reConfirm: {
     type: Boolean,
     default: true,
   },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
+  },
+})
+
+const mergedProps = useGlobalComponentConfig('popconfirm', props)
+
+const normalizeClassValue = (value: unknown) => {
+  if (Array.isArray(value)) return value.filter(Boolean).join(' ')
+
+  if (value && typeof value === 'object') {
+    return Object.entries(value)
+      .filter(([, active]) => active)
+      .map(([className]) => className)
+      .join(' ')
+  }
+
+  return value ? String(value) : ''
+}
+
+const escapeHtml = (content: string) => {
+  return content
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+const contentHtml = computed(() => {
+  const content = mergedProps.value.content || ''
+  const codeTagReg = /<code>([\s\S]*?)<\/code>/gi
+  let result = ''
+  let lastIndex = 0
+  let match: RegExpExecArray | null
+
+  while ((match = codeTagReg.exec(content))) {
+    result += escapeHtml(content.slice(lastIndex, match.index))
+    result += `<code>${escapeHtml(match[1])}</code>`
+    lastIndex = match.index + match[0].length
+  }
+
+  return result + escapeHtml(content.slice(lastIndex))
+})
+
+const popperClass = computed(() => {
+  const attrPopperClass = normalizeClassValue(attrs['popper-class'] || attrs.popperClass)
+
+  return [
+    's-popconfirm__popper',
+    mergedProps.value.theme === 'chenghua' ? 's-popconfirm__popper--chenghua' : '',
+    attrPopperClass,
+  ]
+    .filter(Boolean)
+    .join(' ')
+})
+
+const popconfirmButtonTheme = computed(() => {
+  return mergedProps.value.theme === 'chenghua' ? 'chenghua' : ''
+})
+
+onBeforeUnmount(() => {
+  removeClickOutsideListener()
 })
 
 defineExpose({
@@ -56,42 +138,105 @@ defineExpose({
 
 <template>
   <el-popover
-    v-if="props.reConfirm"
+    v-if="mergedProps.reConfirm"
     class="s-popconfirm__box"
-    :title="props.title"
-    :width="props.width"
+    :title="mergedProps.title"
+    :width="mergedProps.width"
     v-bind="$attrs"
+    :popper-class="popperClass"
     @show="handleShow"
     v-model:visible="isPopoverVisible"
   >
     <slot name="content">
-      <div class="s-popconfirm__content">{{ props.content }}</div>
+      <div v-if="contentHtml" class="s-popconfirm__content" v-html="contentHtml"></div>
     </slot>
     <div class="s-popconfirm__footer">
       <slot name="footer">
-        <el-button size="small" type="info" @click="cancel">取消</el-button>
-        <el-button size="small" type="primary" @click="confirm">确定</el-button>
+        <SButton size="small" type="info" :theme="popconfirmButtonTheme" @click="cancel">取消</SButton>
+        <SButton size="small" type="primary" :theme="popconfirmButtonTheme" @click="confirm">确定</SButton>
       </slot>
     </div>
     <template v-slot:reference>
       <slot></slot>
     </template>
   </el-popover>
-  <span class="s-popconfirm__simple_box" v-else @click="confirm">
+  <span
+    class="s-popconfirm__simple_box"
+    :class="{ 's-popconfirm__simple_box--chenghua': mergedProps.theme === 'chenghua' }"
+    v-else
+    @click="confirm"
+  >
     <slot></slot>
   </span>
 </template>
 
 <style scoped lang="scss">
 .s-popconfirm__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
   text-align: right;
   margin: 0;
   margin-top: 16px;
+}
+
+.s-popconfirm__content {
+  color: var(--el-text-color-regular);
+  line-height: 1.6;
 }
 
 .s-popconfirm__simple_box:has(.el-button) + :deep(.el-button),
 .el-button + .s-popconfirm__simple_box :deep(.el-button),
 .s-popconfirm__simple_box:has(.el-button) + .s-popconfirm__simple_box:has(.el-button) {
   margin-left: 12px !important;
+}
+
+.s-popconfirm__simple_box--chenghua {
+  font-family: 'PingFang SC', sans-serif;
+}
+
+:global(.s-popconfirm__popper .s-popconfirm__content code) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 18px;
+  padding: 0 5px;
+  margin: 0 2px;
+  border-radius: 4px;
+  background: var(--el-fill-color-light);
+  color: var(--el-color-primary);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 12px;
+  line-height: 18px;
+  vertical-align: baseline;
+}
+
+:global(.s-popconfirm__popper--chenghua) {
+  --s-popconfirm-ch-primary: #165dff;
+  --s-popconfirm-ch-text: #1d2b4f;
+
+  padding: 14px !important;
+  border: 1px solid rgba(22, 93, 255, 0.16) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 12px 32px rgba(22, 93, 255, 0.14) !important;
+  font-family: 'PingFang SC', sans-serif;
+}
+
+:global(.s-popconfirm__popper--chenghua .el-popover__title) {
+  margin-bottom: 8px;
+  color: var(--s-popconfirm-ch-text);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+:global(.s-popconfirm__popper--chenghua .s-popconfirm__content) {
+  color: #33415f;
+  font-size: 13px;
+}
+
+:global(.s-popconfirm__popper--chenghua .s-popconfirm__content code) {
+  background: rgba(22, 93, 255, 0.08);
+  color: var(--s-popconfirm-ch-primary);
+  font-weight: 600;
 }
 </style>
