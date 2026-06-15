@@ -16,8 +16,10 @@ button/base
 
 ### 成华主题
 
+#### chenghua主题示例
+
 :::demo
-button/chenghua
+button/chenghua/base
 :::
 
 ### 全局默认配置

@@ -14,8 +14,10 @@ title/base
 
 ### 成华主题
 
+#### chenghua主题示例
+
 :::demo
-title/chenghua
+title/chenghua/base
 :::
 
 ### 通常用法

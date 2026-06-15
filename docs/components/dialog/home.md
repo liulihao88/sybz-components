@@ -18,8 +18,10 @@ dialog/base
 
 设置 `theme="chenghua"` 可以切换到成华样式。成华主题默认展示底部按钮，和普通 dialog 行为一致。
 
+#### chenghua主题示例
+
 :::demo
-dialog/chenghua
+dialog/chenghua/base
 :::
 
 ### 通常用法

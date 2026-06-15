@@ -16,8 +16,10 @@ input/base
 
 ### 成华主题
 
+#### chenghua主题示例
+
 :::demo
-input/chenghua
+input/chenghua/base
 :::
 
 ### size 尺寸

@@ -10,8 +10,10 @@ utils/confirm/base
 
 ### 成华主题
 
+#### chenghua主题示例
+
 :::demo
-utils/confirm/chenghua
+utils/confirm/chenghua/base
 :::
 
 ### 在弹框中使用

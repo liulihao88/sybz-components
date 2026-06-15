@@ -22,8 +22,10 @@ table/base
 
 ### 成华主题
 
+#### chenghua主题示例
+
 :::demo
-table/chenghua
+table/chenghua/base
 :::
 
 ### other

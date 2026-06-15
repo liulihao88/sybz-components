@@ -16,8 +16,22 @@ select/base
 
 ### 成华主题
 
+#### chenghua基础用法
+
 :::demo
-select/chenghua
+select/chenghua/chenghuaBase
+:::
+
+#### chenghua尺寸
+
+:::demo
+select/chenghua/chenghuaSize
+:::
+
+#### chenghua多选
+
+:::demo
+select/chenghua/chenghuaMultiple
 :::
 
 ### 通常用法

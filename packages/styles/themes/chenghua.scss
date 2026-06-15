@@ -663,6 +663,30 @@
     color: var(--s-select-ch-primary);
   }
 
+  .el-select__selection .el-tag {
+    --el-tag-bg-color: var(--el-color-primary-light-9);
+    --el-tag-border-color: var(--el-color-primary-light-5);
+    --el-tag-hover-color: var(--el-color-primary-light-8);
+    --el-tag-text-color: var(--el-color-primary);
+
+    border-color: var(--el-color-primary-light-5);
+    background-color: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
+  }
+
+  .el-select__selection .el-tag__content {
+    color: var(--el-color-primary);
+  }
+
+  .el-select__selection .el-tag__close {
+    color: var(--el-color-primary);
+  }
+
+  .el-select__selection .el-tag__close:hover {
+    background-color: var(--el-color-primary);
+    color: #ffffff;
+  }
+
   .s-comp-title {
     color: var(--s-select-ch-text);
     font-weight: 500;

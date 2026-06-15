@@ -16,8 +16,10 @@ popconfirm/base
 
 ### 成华主题
 
+#### chenghua主题示例
+
 :::demo
-popconfirm/chenghua
+popconfirm/chenghua/base
 :::
 
 ### 通常用法

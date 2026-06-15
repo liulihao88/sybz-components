@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const value = ref('archive')
-const multipleValue = ref(['archive', 'ai'])
+const smallValue = ref('archive')
+const defaultValue = ref('storage')
+const largeValue = ref('ai')
 
 const options = [
   { label: '智慧档案检索', value: 'archive' },
@@ -24,9 +25,9 @@ const options = [
     </div>
 
     <s-flex gap="small" direction="column">
-      <s-select v-model="value" width="320" theme="chenghua" title="服务名称" :options="options" />
-      <s-select v-model="value" width="320" theme="chenghua" size="large" :options="options" />
-      <s-select v-model="multipleValue" width="320" theme="chenghua" multiple title="多选服务" :options="options" />
+      <s-select v-model="smallValue" width="320" theme="chenghua" size="small" :options="options" />
+      <s-select v-model="defaultValue" width="320" theme="chenghua" size="default" :options="options" />
+      <s-select v-model="largeValue" width="320" theme="chenghua" size="large" :options="options" />
     </s-flex>
   </div>
 </template>
