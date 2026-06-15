@@ -54,6 +54,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
+  },
   pageSize: {
     type: Number,
     default: 30,
@@ -131,6 +136,26 @@ const normalizedSelectionAttrs = computed<Record<string, any>>(() => {
 const selectionHeaderLabel = computed(() => normalizedSelectionAttrs.value.label || '')
 const customHeaderCellStyle = computed<Record<string, any>>(() => {
   return (attrs['custom-header-cell-style'] as unknown as Record<string, any>) ?? {}
+})
+const tableHeaderCellStyle = computed<Record<string, any>>(() => {
+  const baseStyle =
+    mergedProps.value.theme === 'chenghua'
+      ? {
+          background: 'var(--s-table-ch-header-bg)',
+          color: '#1d2b4f',
+          fontWeight: 600,
+          textAlign: 'center',
+        }
+      : {
+          background: 'var(--el-fill-color-light)',
+          color: 'var(--el-text-color-primary)',
+          textAlign: 'center',
+        }
+
+  return {
+    ...baseStyle,
+    ...customHeaderCellStyle.value,
+  }
 })
 const indexColumnAttrs = computed<Record<string, any>>(() => {
   return (mergedProps.value.indexAttrs as unknown as Record<string, any>) ?? {}
@@ -738,6 +763,11 @@ const wrapperStyle = computed(() => {
   }
 })
 
+const tableClass = computed(() => ({
+  's-table--fluid-height': !!fluidHeight.value,
+  's-table--chenghua': mergedProps.value.theme === 'chenghua',
+}))
+
 const tableAttrs = computed(() => {
   const nextAttrs = {
     ...attrs,
@@ -781,21 +811,11 @@ defineExpose({
 </script>
 
 <template>
-  <div
-    class="s-table"
-    :class="{ 's-table--fluid-height': !!fluidHeight }"
-    :style="wrapperStyle"
-    v-loading="tableLoading"
-  >
+  <div class="s-table" :class="tableClass" :style="wrapperStyle" v-loading="tableLoading">
     <el-table
       ref="tableRef"
       :data="mergedProps.data"
-      :header-cell-style="{
-        background: 'var(--el-fill-color-light)',
-        color: 'var(--el-text-color-primary)',
-        textAlign: 'center',
-        ...customHeaderCellStyle,
-      }"
+      :header-cell-style="tableHeaderCellStyle"
       :empty-text="compEmptyText"
       v-bind="{
         stripe: true,
@@ -1409,6 +1429,288 @@ defineExpose({
   }
   :deep(.el-button) {
     margin-left: 0 !important;
+  }
+
+  &.s-table--chenghua {
+    --s-table-ch-primary: #165dff;
+    --s-table-ch-primary-soft: rgba(22, 93, 255, 0.1);
+    --s-table-ch-border: transparent;
+    --s-table-ch-divider: rgba(15, 23, 42, 0.08);
+    --s-table-ch-row: #ffffff;
+    --s-table-ch-row-alt: #fbfdff;
+    --s-table-ch-row-hover: #f3f8ff;
+    --s-table-ch-header-bg: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+    --s-table-ch-text: #1d2b4f;
+    --s-table-ch-muted: #6f7a95;
+
+    border-radius: 8px;
+    background: var(--s-table-ch-header-bg) !important;
+    color: var(--s-table-ch-text);
+
+    :deep(.el-table) {
+      --el-table-border-color: var(--s-table-ch-divider);
+      --el-table-border: 1px solid var(--s-table-ch-divider);
+      --el-table-header-text-color: var(--s-table-ch-text);
+      --el-table-text-color: var(--s-table-ch-text);
+      --el-table-row-hover-bg-color: var(--s-table-ch-row-hover);
+      --el-table-current-row-bg-color: #edf5ff;
+
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      border-color: transparent;
+      box-shadow: 0 8px 24px rgba(22, 93, 255, 0.08) !important;
+      overflow: hidden;
+      background: var(--s-table-ch-header-bg) !important;
+    }
+
+    :deep(.el-table__inner-wrapper) {
+      overflow: hidden;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      background: var(--s-table-ch-header-bg) !important;
+    }
+
+    :deep(.el-table__header-wrapper),
+    :deep(.el-table__fixed-header-wrapper),
+    :deep(.el-table__fixed-right .el-table__fixed-header-wrapper),
+    :deep(.el-table__header),
+    :deep(.el-table__header thead),
+    :deep(.el-table__header tr) {
+      background: var(--s-table-ch-header-bg) !important;
+    }
+
+    :deep(.el-table__header),
+    :deep(.el-table__body),
+    :deep(.el-table__footer) {
+      margin: 0 !important;
+      border-spacing: 0 !important;
+      border-collapse: separate !important;
+    }
+
+    :deep(.el-table tr) {
+      border-top: 0 !important;
+    }
+
+    :deep(.el-table__body-wrapper),
+    :deep(.el-table__fixed-body-wrapper),
+    :deep(.el-table__fixed-right .el-table__fixed-body-wrapper),
+    :deep(.el-table__body),
+    :deep(.el-table__body tbody) {
+      background: var(--s-table-ch-row);
+    }
+
+    :deep(.el-table__inner-wrapper::before),
+    :deep(.el-table--border::before),
+    :deep(.el-table--border::after),
+    :deep(.el-table--border .el-table__inner-wrapper::after),
+    :deep(.el-table__border-left-patch),
+    :deep(.el-table__border-right-patch),
+    :deep(.el-table__border-bottom-patch) {
+      background-color: transparent !important;
+    }
+
+    :deep(.el-table th.el-table__cell) {
+      height: 44px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--s-table-ch-divider) !important;
+      background: var(--s-table-ch-header-bg) !important;
+      background-clip: padding-box;
+      letter-spacing: 0;
+    }
+
+    :deep(.el-table__header tr:first-child th.el-table__cell:first-child) {
+      border-top-left-radius: 8px;
+    }
+
+    :deep(.el-table__header tr:first-child th.el-table__cell:last-child),
+    :deep(.el-table__header tr:first-child th.el-table__cell.gutter) {
+      border-top-right-radius: 8px;
+    }
+
+    :deep(.el-table__fixed-header-wrapper .el-table__header tr:first-child th.el-table__cell:first-child),
+    :deep(.el-table__fixed-left .el-table__header tr:first-child th.el-table__cell:first-child) {
+      border-top-left-radius: 8px;
+    }
+
+    :deep(.el-table__fixed-right .el-table__header tr:first-child th.el-table__cell:last-child) {
+      border-top-right-radius: 8px;
+    }
+
+    :deep(.el-table th.el-table__cell),
+    :deep(.el-table td.el-table__cell) {
+      border-top: 0 !important;
+      border-left: 0 !important;
+      border-right: 1px solid var(--s-table-ch-divider) !important;
+    }
+
+    :deep(.el-table th.el-table__cell:last-child),
+    :deep(.el-table td.el-table__cell:last-child),
+    :deep(.el-table th.el-table__cell.gutter),
+    :deep(.el-table td.el-table__cell.gutter) {
+      border-right: 0 !important;
+    }
+
+    :deep(.el-table th.el-table__cell.is-sortable:hover) {
+      background: linear-gradient(180deg, #f2f7ff 0%, #e7f1ff 100%) !important;
+    }
+
+    :deep(.el-table tr:not(:last-child) td.el-table__cell),
+    :deep(.el-table td.el-table__cell) {
+      border-bottom: 1px solid var(--s-table-ch-divider) !important;
+    }
+
+    :deep(.el-table__body tr.el-table__row),
+    :deep(.el-table__body tr.el-table__row > td.el-table__cell) {
+      --el-table-tr-bg-color: var(--s-table-ch-row);
+
+      background: var(--s-table-ch-row) !important;
+      transition: background-color 0.18s ease;
+    }
+
+    :deep(.el-table__body tr.el-table__row) {
+      background: var(--s-table-ch-row) !important;
+    }
+
+    :deep(.el-table__body tr.el-table__row > td.el-table__cell .cell) {
+      background-color: transparent;
+      transition: background-color 0.18s ease;
+    }
+
+    :deep(.el-table--striped .el-table__body tr.el-table__row--striped) {
+      background: var(--s-table-ch-row-alt) !important;
+    }
+
+    :deep(.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell) {
+      --el-table-tr-bg-color: var(--s-table-ch-row-alt);
+
+      background: var(--s-table-ch-row-alt) !important;
+    }
+
+    :deep(.el-table__body tr.el-table__row.current-row),
+    :deep(.el-table__body tr.el-table__row.current-row > td.el-table__cell),
+    :deep(.el-table__body tr.el-table__row:hover),
+    :deep(.el-table__body tr:hover > td.el-table__cell),
+    :deep(.el-table__body tr.hover-row),
+    :deep(.el-table__body tr.hover-row > td.el-table__cell),
+    :deep(.el-table__body tr.hover-row.current-row > td.el-table__cell) {
+      --el-table-tr-bg-color: var(--s-table-ch-row-hover);
+
+      background: var(--s-table-ch-row-hover) !important;
+    }
+
+    :deep(.el-table__body tr.el-table__row.current-row > td.el-table__cell .cell),
+    :deep(.el-table__body tr:hover > td.el-table__cell .cell),
+    :deep(.el-table__body tr.hover-row > td.el-table__cell .cell),
+    :deep(.el-table__body tr.hover-row.current-row > td.el-table__cell .cell) {
+      background: transparent !important;
+    }
+
+    :deep(.el-table__body tr:hover > td.el-table__cell .cell > :not([class*='el-'])),
+    :deep(.el-table__body tr.hover-row > td.el-table__cell .cell > :not([class*='el-'])),
+    :deep(.el-table__body tr:hover > td.el-table__cell .cell > :not([class*='el-']) > :not([class*='el-'])),
+    :deep(.el-table__body tr.hover-row > td.el-table__cell .cell > :not([class*='el-']) > :not([class*='el-'])) {
+      background-color: transparent !important;
+    }
+
+    :deep(.el-table-fixed-column--right),
+    :deep(.el-table-fixed-column--left) {
+      background: inherit;
+    }
+
+    :deep(.el-table-fixed-column--right.is-last-column::before),
+    :deep(.el-table-fixed-column--right.is-first-column::before),
+    :deep(.el-table-fixed-column--left.is-last-column::before),
+    :deep(.el-table-fixed-column--left.is-first-column::before) {
+      box-shadow: none;
+    }
+
+    :deep(.el-table-fixed-column--left.is-last-column) {
+      border-right: 1px solid var(--s-table-ch-divider) !important;
+    }
+
+    :deep(.el-table-fixed-column--right.is-first-column),
+    :deep(.el-table-fixed-column--right.is-last-column) {
+      border-left: 1px solid var(--s-table-ch-divider) !important;
+    }
+
+    .hide-btns-button:not(.is-disabled) {
+      color: var(--s-table-ch-primary);
+    }
+
+    :deep(.el-button.is-link:not(.is-disabled)) {
+      color: var(--s-table-ch-primary);
+      font-weight: 500;
+    }
+
+    :deep(.el-button.is-link:not(.is-disabled):hover) {
+      color: #0f4fd6;
+    }
+
+    :deep(.el-checkbox__input.is-checked .el-checkbox__inner),
+    :deep(.el-checkbox__input.is-indeterminate .el-checkbox__inner),
+    :deep(.el-radio__input.is-checked .el-radio__inner) {
+      border-color: var(--s-table-ch-primary);
+      background-color: var(--s-table-ch-primary);
+    }
+
+    :deep(.el-radio__input.is-checked + .el-radio__label) {
+      color: var(--s-table-ch-primary);
+    }
+
+    .page-wrap {
+      border-color: transparent;
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      color: var(--s-table-ch-muted);
+      box-shadow: 0 6px 18px rgba(22, 93, 255, 0.04);
+    }
+
+    .page-wrap .page-left {
+      color: var(--s-table-ch-muted);
+    }
+
+    .s-table__total {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 24px;
+      margin: 0 8px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: var(--s-table-ch-primary-soft);
+      color: var(--s-table-ch-primary);
+      font-weight: 700;
+    }
+
+    :deep(.el-pagination.is-background .btn-prev),
+    :deep(.el-pagination.is-background .btn-next),
+    :deep(.el-pagination.is-background .el-pager li) {
+      border: 1px solid transparent;
+      background: #edf4ff;
+      color: #33415f;
+    }
+
+    :deep(.el-pagination.is-background .btn-prev:hover),
+    :deep(.el-pagination.is-background .btn-next:hover),
+    :deep(.el-pagination.is-background .el-pager li:hover) {
+      border-color: transparent;
+      color: var(--s-table-ch-primary);
+    }
+
+    :deep(.el-pagination.is-background .el-pager li.is-active) {
+      border-color: transparent;
+      background: var(--s-table-ch-primary);
+      color: #ffffff;
+      box-shadow: 0 6px 14px rgba(22, 93, 255, 0.22);
+    }
+
+    :deep(.el-pagination .el-input__wrapper),
+    :deep(.el-pagination .el-select__wrapper) {
+      border-radius: 6px;
+      box-shadow: none;
+    }
   }
 }
 </style>
