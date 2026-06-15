@@ -11,7 +11,7 @@ import { toLine } from './utils/src/index.ts'
 import type { SybzComponentsInstallOptions } from './types/index.ts'
 
 import SSvg from './components/svg/index.ts'
-import { GLOBAL_COMPONENT_CONFIG_KEY } from './hooks/useGlobalComponentConfig'
+import { GLOBAL_COMPONENT_COMMON_PROPS_KEY, GLOBAL_COMPONENT_CONFIG_KEY } from './hooks/useGlobalComponentConfig'
 
 const componentsGlobal = import.meta.glob('./components/*/index.ts', { eager: true, import: 'default' }) // 引入全局基础组件
 const componentsCompany = import.meta.glob('./components/company/*/index.ts', { eager: true, import: 'default' }) // 引入业务组件
@@ -31,9 +31,55 @@ export const components = Object.entries(allComponents).reduce((acc, [key, compo
 // 按需导入
 export { SSvg }
 
+const isConfigRecord = (value: unknown): value is Record<string, any> => {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+}
+
+const lowerFirst = (value: string) => value.charAt(0).toLowerCase() + value.slice(1)
+
+const getComponentOptionKey = (component: any) => {
+  const name = component.name || `s${component.__name || ''}`
+
+  if (!name) return ''
+
+  if (/^S[A-Z]/.test(name)) {
+    return lowerFirst(name.slice(1))
+  }
+
+  return lowerFirst(name)
+}
+
+const componentConfigKeys = new Set(Object.values(allComponents).map(getComponentOptionKey).filter(Boolean))
+
+const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}) => {
+  if (!isConfigRecord(options)) return {}
+
+  const commonProps: Record<string, any> = {}
+  const resolvedConfig: Record<string, Record<string, any>> = {}
+
+  Object.entries(options).forEach(([key, value]) => {
+    if (componentConfigKeys.has(key)) {
+      if (isConfigRecord(value)) {
+        resolvedConfig[key] = value
+      }
+      return
+    }
+
+    commonProps[key] = value
+  })
+
+  if (Object.keys(commonProps).length) {
+    resolvedConfig[GLOBAL_COMPONENT_COMMON_PROPS_KEY] = commonProps
+  }
+
+  return resolvedConfig
+}
+
 const install = (app, options: SybzComponentsInstallOptions = {}) => {
-  if (options.globalComponentConfig) {
-    app.provide(GLOBAL_COMPONENT_CONFIG_KEY, options.globalComponentConfig)
+  const componentDefaults = resolveGlobalComponentConfig(options)
+
+  if (Object.keys(componentDefaults).length) {
+    app.provide(GLOBAL_COMPONENT_CONFIG_KEY, componentDefaults)
   }
 
   Object.keys(allComponents).forEach((key) => {

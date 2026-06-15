@@ -116,7 +116,7 @@ const props = defineProps({
     default: '',
   },
 })
-const mergedProps = useGlobalComponentConfig('sTitle', props)
+const mergedProps = useGlobalComponentConfig('title', props)
 
 const margin = computed(() => {
   const { t, b, l, tb } = mergedProps.value

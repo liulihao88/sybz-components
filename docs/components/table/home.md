@@ -112,6 +112,7 @@ table/compare
 |     `columns`     | 列配置                                     | array   | `[]`           |
 |    `showPage`     | 是否显示分页                               | boolean | `true`         |
 |    `showIndex`    | 是否显示序号列                             | boolean | `true`         |
+|      `size`       | 表格和分页尺寸，支持 `small` / `default` / `large` | string  | `''`           |
 |    `pageSize`     | 每页条数                                   | number  | `30`           |
 |   `pageNumber`    | 当前页码                                   | number  | `1`            |
 |    `pageSizes`    | 分页器可选每页条数                         | array   | `[10, 30, 50]` |

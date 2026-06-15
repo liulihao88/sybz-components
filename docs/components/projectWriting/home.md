@@ -107,13 +107,13 @@ export default SFoo
 - 这样组件既能被全局注册，也能支持按需引入。
 - 基础组件目录里通常都会有一个 `index.ts` 专门做这件事。
 
-### 6. 通过 `globalComponentConfig` 配置组件全局默认值
+### 6. 配置组件全局默认值
 
-`s-select` 和 `s-table` 当前都在用这个模式。
+组件全局默认值直接写在 `app.use` 的第二个参数里，风格和 Element Plus 保持一致。
 
 ```ts
 // 组件内部统一走 hook
-const mergedProps = useGlobalComponentConfig('sSelect', props)
+const mergedProps = useGlobalComponentConfig('select', props)
 ```
 
 ```ts
@@ -121,24 +121,25 @@ const mergedProps = useGlobalComponentConfig('sSelect', props)
 const app = createApp(App)
 
 app.use(SybzComponents, {
-  globalComponentConfig: {
-    sSelect: {
-      showPrefix: true,
-    },
-    sTable: {
-      showIndex: false,
-      showPage: false,
-      pageSizes: [10, 30, 50, 100],
-    },
+  theme: 'chenghua',
+  size: 'small',
+  select: {
+    showPrefix: true,
+  },
+  table: {
+    showIndex: false,
+    showPage: false,
+    pageSizes: [10, 30, 50, 100],
   },
 })
 ```
 
 - 这种写法适合做“组件默认行为”的统一配置，比如 `showPrefix`、`showQuick` 一类开关。
-- 当前 `select` 会读取 `GLOBAL_COMPONENT_CONFIG.sSelect`，`table` 会读取 `GLOBAL_COMPONENT_CONFIG.sTable`，再生成 `mergedProps` 给内部逻辑使用。
+- `theme`、`size` 这类和组件平级的字段会作为公共默认值，分发给声明了同名 prop 且接入了 `useGlobalComponentConfig` 的组件。
+- `select`、`table` 这类组件名字段只对对应组件生效，可用于覆盖公共默认值或补充组件自己的默认行为。
 - 如果一个组件也要支持这种能力，通常做法是：组件内部直接调用 `useGlobalComponentConfig('组件key', props)`。
-- 如果只希望某个页面或某个模块下生效，也可以在父组件的 `setup` 里继续使用 `provide('GLOBAL_COMPONENT_CONFIG', ...)` 做局部覆盖。
-- 需要注意：当前组件里的合并顺序是 `...props, ...globalConfig?.xxx`，所以同名字段会以后面的全局配置为准；如果后续想改成“本地传参优先”，需要把顺序调成 `...globalConfig?.xxx, ...props`。
+- 如果只希望某个页面或某个模块下生效，也可以在父组件的 `setup` 里继续使用 `provide('GLOBAL_COMPONENT_CONFIG', { select: { ... } })` 做局部覆盖。
+- 同名字段遵循“全局配置作为默认值，本地显式传入的 prop 优先”的规则。
 
 ### 7. 文档页通常拆成 `home.md + 多个 demo.vue`
 

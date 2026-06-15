@@ -75,18 +75,22 @@ dialog/fillSlot
 
 ### 全局默认配置
 
-dialog 支持和 table 一样通过 `globalComponentConfig` 配置全局默认值，组件 key 为 `sDialog`。
+dialog 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
 
 ```js
 app.use(SybzComponents, {
-  globalComponentConfig: {
-    sDialog: {
-      theme: 'chenghua',
-      hideHeaderIcon: true,
-    },
+  theme: 'chenghua',
+  dialog: {
+    hideHeaderIcon: true,
   },
 })
 ```
+
+| 配置项                  | 可选值             | 默认值 | 说明                         |
+| ----------------------- | ------------------ | ------ | ---------------------------- |
+| `theme`                 | `'' \| 'chenghua'` | `''`   | 公共主题，dialog 会作为默认主题 |
+| `dialog.theme`          | `'' \| 'chenghua'` | `''`   | dialog 单独主题，优先级高于公共配置 |
+| `dialog.hideHeaderIcon` | `boolean`          | `false` | 是否隐藏顶部默认 icon        |
 
 ### 属性
 

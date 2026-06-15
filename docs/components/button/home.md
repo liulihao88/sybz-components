@@ -22,17 +22,21 @@ button/chenghua
 
 ### 全局默认配置
 
-button 支持通过 `globalComponentConfig` 配置全局默认值，组件 key 为 `sButton`。
+button 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
 
 ```js
 app.use(SybzComponents, {
-  globalComponentConfig: {
-    sButton: {
-      theme: 'chenghua',
-    },
-  },
+  theme: 'chenghua',
+  size: 'small',
+  button: {},
 })
 ```
+
+| 配置项   | 可选值                                   | 默认值 | 说明                                      |
+| -------- | ---------------------------------------- | ------ | ----------------------------------------- |
+| `theme`  | `'' \| 'chenghua'`                       | `''`   | 公共主题，声明同名 prop 的组件会读取      |
+| `size`   | `'' \| 'small' \| 'default' \| 'large'` | `''`   | 公共尺寸，button 会作为默认尺寸           |
+| `button` | object                                   | `{}`   | button 单独默认配置，优先级高于公共配置   |
 
 ### 图标按钮
 
@@ -75,6 +79,7 @@ button/other
 | tooltipAttrs | s-tooltip组件的属性 | Object [去tooltip组件](../tooltip/home) | {}     |
 |    theme     | 主题样式            | `'chenghua'`                            | ''     |
 |   variant    | 成华主题样式变体    | `'' \| 'outline' \| 'gradient'`         | ''     |
+|     size     | 按钮尺寸            | `'' \| 'small' \| 'default' \| 'large'` | ''     |
 |    width     | 按钮宽度，支持 `processWidth` 写法 | string / number                         | ''     |
 |    height    | 按钮高度，支持 `processWidth` 写法 | string / number                         | ''     |
 

@@ -67,13 +67,9 @@ export default {
     })
     // 全局注册基础组件
     ctx.app.use(SybzComponents, {
-      globalComponentConfig: {
-        sDialog: {
-          // theme: 'chenghua',
-        },
-        sButton: {
-          // theme: 'chenghua',
-        },
+      // theme: 'chenghua',
+      title: {
+        theme: 'chenghua',
       },
     })
     ctx.app.use(VueTippy)

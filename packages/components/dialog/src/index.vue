@@ -149,7 +149,7 @@ const props = defineProps({
     default: false,
   },
 })
-const mergedProps = useGlobalComponentConfig('sDialog', props)
+const mergedProps = useGlobalComponentConfig('dialog', props)
 
 const getThemeClass = computed(() => {
   if (mergedProps.value.theme === 'norm') {

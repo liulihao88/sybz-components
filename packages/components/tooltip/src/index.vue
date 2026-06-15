@@ -54,7 +54,7 @@ const props = defineProps({
     default: 'dark',
   },
 })
-const mergedProps = useGlobalComponentConfig('sTooltip', props)
+const mergedProps = useGlobalComponentConfig('tooltip', props)
 const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect']
 
 const mergedTooltipAttrs = computed(() => {

@@ -10,7 +10,7 @@
       },
     ]"
   >
-    <s-comp-title :title="mergedProps.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}" />
+    <s-comp-title :title="mergedProps.title" :size="mergedProps.size || undefined" :boxStyle="$attrs.boxStyle ?? {}" />
     <el-tooltip
       v-bind="mergedTooltipAttrs"
       :content="selectTooltipContent"
@@ -28,6 +28,7 @@
           v-bind="{
             clearable: true,
             filterable: true,
+            size: mergedProps.size || undefined,
             ...Object.entries($attrs).reduce((obj, [key, value]) => {
               if (key !== 'class' && key !== 'style') {
                 obj[key] = value
@@ -83,9 +84,9 @@
 
     <span v-if="showQuick && !parseDisabled && sOptions.length > 0" class="s-select__select-box">
       <span class="s-select__select-box__inner">
-        <s-icon name="ArrowUp" :size="attrs.size === 'small' ? 10 : 14" @click="quickSelect(false)" />
+        <s-icon name="ArrowUp" :size="mergedSize === 'small' ? 10 : 14" @click="quickSelect(false)" />
         <div class="s-select__divider" />
-        <s-icon name="ArrowDown" :size="attrs.size === 'small' ? 10 : 14" @click="quickSelect(true)" />
+        <s-icon name="ArrowDown" :size="mergedSize === 'small' ? 10 : 14" @click="quickSelect(true)" />
       </span>
     </span>
   </div>
@@ -108,10 +109,6 @@ const noDefaultSlots = computed(() => {
   delete copySlots.default
   delete copySlots.label
   return copySlots
-})
-
-const sizeClass = computed(() => {
-  return `s-select--${attrs.size || 'default'}`
 })
 
 const props = defineProps({
@@ -151,6 +148,10 @@ const props = defineProps({
   showQuick: {
     type: Boolean,
     default: true,
+  },
+  size: {
+    type: String,
+    default: '',
   },
   title: {
     type: String,
@@ -320,7 +321,11 @@ const reverseSelect = () => {
   changeMulty(noSelectedValue)
 }
 
-const mergedProps = useGlobalComponentConfig('sSelect', props)
+const mergedProps = useGlobalComponentConfig('select', props)
+const mergedSize = computed(() => mergedProps.value.size || 'default')
+const sizeClass = computed(() => {
+  return `s-select--${mergedSize.value}`
+})
 
 function handlePlaceholder() {
   let res = attrs.disabled ? mergedProps.value.disPlaceholder : attrs.placeholder || '请选择'

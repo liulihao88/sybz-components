@@ -72,22 +72,28 @@ tooltip/visible
 
 ### 全局默认配置
 
-tooltip 支持和 table 一样通过 `globalComponentConfig` 配置全局默认值，组件 key 为 `sTooltip`。
-除 `width`、`lineClamp`、`showSlot`、`effect` 这些封装属性外，Element Plus Tooltip 的属性可直接写在 `sTooltip` 下。
+tooltip 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
+除 `width`、`lineClamp`、`showSlot`、`effect` 这些封装属性外，Element Plus Tooltip 的属性可直接写在 `tooltip` 下。
 
 ```js
 app.use(SybzComponents, {
-  globalComponentConfig: {
-    sTooltip: {
-      width: '240px',
-      lineClamp: 2,
-      effect: 'light',
-      placement: 'top',
-      showAfter: 1000,
-    },
+  tooltip: {
+    width: '240px',
+    lineClamp: 2,
+    effect: 'light',
+    placement: 'top',
+    showAfter: 1000,
   },
 })
 ```
+
+| 配置项              | 可选值               | 默认值              | 说明                               |
+| ------------------- | -------------------- | ------------------- | ---------------------------------- |
+| `tooltip.width`     | string               | `100%`              | 默认文本触发区域最大宽度           |
+| `tooltip.lineClamp` | string / number      | `1`                 | 默认文本区域最大展示行数           |
+| `tooltip.effect`    | string               | `dark`              | tooltip 主题                       |
+| `tooltip.placement` | string               | Element Plus 默认值 | tooltip 弹出位置                   |
+| `tooltip.showAfter` | number               | `0`                 | 延迟显示时间，单位毫秒             |
 
 ### 组件属性
 

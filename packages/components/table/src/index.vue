@@ -50,6 +50,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  size: {
+    type: String,
+    default: '',
+  },
   pageSize: {
     type: Number,
     default: 30,
@@ -99,7 +103,7 @@ const props = defineProps({
     default: () => {},
   },
 })
-const mergedProps = useGlobalComponentConfig('sTable', props)
+const mergedProps = useGlobalComponentConfig('table', props)
 const tableRef = ref<TableInstance | null>(null)
 const tableTotal = computed(() => {
   return mergedProps.value.total ?? mergedProps.value.data.length
@@ -739,6 +743,10 @@ const tableAttrs = computed(() => {
     ...attrs,
   } as Record<string, any>
 
+  if (mergedProps.value.size) {
+    nextAttrs.size = mergedProps.value.size
+  }
+
   delete nextAttrs.onSelectionChange
   delete nextAttrs.onCurrentChange
   delete nextAttrs.onRowClick
@@ -817,7 +825,7 @@ defineExpose({
       <el-table-column
         v-if="isSingleSelection && mergedProps.showIndex"
         type="index"
-        :width="tableTotal >= 10000 || $attrs.size === 'large' ? 70 : 60"
+        :width="tableTotal >= 10000 || mergedProps.size === 'large' ? 70 : 60"
         align="center"
         :index="indexMethod"
         :fixed="true"
@@ -832,7 +840,7 @@ defineExpose({
       <el-table-column
         v-if="!isSingleSelection && mergedProps.showIndex"
         type="index"
-        :width="tableTotal >= 10000 || $attrs.size === 'large' ? 70 : 60"
+        :width="tableTotal >= 10000 || mergedProps.size === 'large' ? 70 : 60"
         align="center"
         :index="indexMethod"
         :fixed="true"
@@ -1247,7 +1255,7 @@ defineExpose({
             :page-sizes="mergedProps.pageSizes"
             layout="prev, pager, next, jumper, sizes"
             :total="tableTotal"
-            :size="$attrs.size"
+            :size="mergedProps.size || undefined"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             v-bind="paginationAttrs"

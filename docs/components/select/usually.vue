@@ -4,7 +4,7 @@ const { proxy } = getCurrentInstance()
 
 // main.js
 provide('GLOBAL_COMPONENT_CONFIG', {
-  sSelect: {
+  select: {
     showPrefix: true,
   },
 })

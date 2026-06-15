@@ -29,6 +29,7 @@ interface SButtonSelfProps {
   tooltipAttrs?: Record<string, any>
   theme?: '' | 'chenghua'
   variant?: '' | 'outline' | 'gradient'
+  size?: '' | 'small' | 'default' | 'large'
   width?: string | number
   height?: string | number
 }
@@ -39,12 +40,13 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   tooltipAttrs: () => ({}),
   theme: '',
   variant: '',
+  size: '',
   width: '',
   height: '',
 })
 
 const attrs = useAttrs()
-const mergedProps = useGlobalComponentConfig('sButton', props)
+const mergedProps = useGlobalComponentConfig('button', props)
 
 // 抛出事件
 const emits = defineEmits(['click'])
@@ -76,6 +78,7 @@ const buttonAttrs = computed(() => {
 
   return {
     loading: loading.value,
+    size: mergedProps.value.size || undefined,
     ...normalizedAttrs,
     style: [
       {

@@ -1,5 +1,15 @@
+export type SybzComponentInstallConfig = Record<string, any>
+
 export interface SybzComponentsInstallOptions {
-  globalComponentConfig?: Record<string, Record<string, any>>
+  theme?: string
+  size?: string
+  button?: SybzComponentInstallConfig
+  dialog?: SybzComponentInstallConfig
+  select?: SybzComponentInstallConfig
+  table?: SybzComponentInstallConfig
+  title?: SybzComponentInstallConfig
+  tooltip?: SybzComponentInstallConfig
+  [key: string]: any
 }
 
 export type {
