@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: '',
   type: 'info',
   width: '100%',
-  dangerouslyUseHTMLString: true,
+  dangerouslyUseHTMLString: false,
   icon: true,
   size: 'default',
   dotted: false,

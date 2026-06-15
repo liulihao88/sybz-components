@@ -66,7 +66,7 @@ const props = defineProps({
   },
   dangerouslyUseHTMLString: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   theme: {
     type: String,

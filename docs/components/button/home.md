@@ -23,12 +23,13 @@ button/chenghua
 ### 全局默认配置
 
 button 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
+文档站已全局设置 `dangerouslyUseHTMLString: true`，所以示例里的 `<code>` 默认会被解析；组件源码默认值仍是 `false`。
 
 ```js
 app.use(SybzComponents, {
   theme: 'chenghua',
   size: 'small',
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHTMLString: true,
   button: {},
 })
 ```
