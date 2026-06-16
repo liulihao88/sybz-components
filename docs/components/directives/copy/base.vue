@@ -10,12 +10,18 @@ const silentText = ref('静默复制的文本')
   <div>
     <div class="m-b-8">
       文本复制指令（双击输入框内容即可复制）
+
       <el-input v-model="searchSix" v-copy="searchSix" class="w-200" />
       <!-- <el-input v-model="searchSix" /> -->
     </div>
     <div>
       文本复制指令（自定义触发事件，单击复制）
-      <span v-copy:click="text" class="cp cl-blue">{{ text }}</span>
+      <s-flex v-copy:click="text" class="cp cl-blue" align="center">
+        <span>
+          {{ text }}
+        </span>
+        <s-icon name="copy-document"></s-icon>
+      </s-flex>
     </div>
     <div class="m-t-8">
       文本复制指令（不显示 toast）
