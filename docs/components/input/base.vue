@@ -1,9 +1,9 @@
 <template>
-  <s-input v-model="input" style="width: 240px" placeholder="Please input" />
+  <s-input v-model="name" />
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const input = ref('')
+const name = ref('')
 </script>

@@ -15,6 +15,7 @@ import OTip from '../vitepress/components/oTip/index.vue'
 import ChangelogContent from './components/ChangelogContent.vue'
 import ApiIntro from '../../shared/ApiIntro.vue'
 import ComponentQuickSidebar from '../../shared/ComponentQuickSidebar.vue'
+import ScrollPositionRestore from '../../shared/ScrollPositionRestore.vue'
 
 import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
@@ -33,7 +34,7 @@ export default {
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-title-before': () => h(Logo),
-      'layout-bottom': () => h(ComponentQuickSidebar),
+      'layout-bottom': () => [h(ComponentQuickSidebar), h(ScrollPositionRestore)],
     })
   },
   async enhanceApp(ctx) {
