@@ -72,7 +72,7 @@ export default {
         theme: 'chenghua',
       },
       select: {
-        showQuick:false
+        
       }
     })
     ctx.app.use(VueTippy)
