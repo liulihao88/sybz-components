@@ -10,6 +10,7 @@ export interface SybzComponentsInstallOptions {
   input?: SybzComponentInstallConfig
   popconfirm?: SybzComponentInstallConfig
   select?: SybzComponentInstallConfig
+  tag?: SybzComponentInstallConfig
   table?: SybzComponentInstallConfig
   title?: SybzComponentInstallConfig
   tooltip?: SybzComponentInstallConfig

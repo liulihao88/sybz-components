@@ -16,6 +16,20 @@
 tag/base
 :::
 
+### 成华主题
+
+#### chenghua基础用法
+
+:::demo
+tag/chenghua/chenghuaBase
+:::
+
+#### chenghua映射状态
+
+:::demo
+tag/chenghua/chenghuaMap
+:::
+
 ### 值匹配着色
 
 :::demo
@@ -52,6 +66,8 @@ tag/async
 | :-------: | ----------------------------------------------------------- | ----------------------------------------------------- | --------- |
 |  `value`  | 当前值；未传默认插槽时会作为标签内容或映射源                | string / number                                       | -         |
 |  `type`   | 直接指定标签类型                                            | `primary` / `success` / `info` / `warning` / `danger` | -         |
+|  `theme`  | 标签主题，支持 `chenghua`                                   | `''` / `chenghua`                                     | `''`      |
+|  `size`   | 标签尺寸                                                    | `''` / `large` / `default` / `small`                  | `''`      |
 | `options` | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法 | array                                                 | `[]`      |
 | `config`  | 平铺数组模式下的字段映射配置                                | `{ label?: string, value?: string }`                  | `{}`      |
 | `primary` | 匹配为主色标签的规则                                        | boolean / string / number / array                     | -         |
