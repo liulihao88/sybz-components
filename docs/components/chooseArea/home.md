@@ -12,11 +12,18 @@
 chooseArea/base
 :::
 
+### 高度
+
+:::demo
+chooseArea/height
+:::
+
 ### 属性
 
 | 属性名  | 说明       | 类型            | 默认值 |
 | :-----: | ---------- | --------------- | ------ |
 | `width` | 选择器宽度 | string / number | `''`   |
+| `height` | 选择器高度 | string / number | `''`   |
 
 ### 说明
 

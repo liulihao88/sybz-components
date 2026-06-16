@@ -1,5 +1,5 @@
 <template>
-  <div class="s-input-number" v-bind="props.subAttrs" :style="[widthStyle, attrs.style]" :class="attrs.class">
+  <div class="s-input-number" v-bind="props.subAttrs" :style="[inputNumberStyle, attrs.style]" :class="attrs.class">
     <s-comp-title v-if="props.title" :title="props.title" :size="attrs.size" :boxStyle="props.boxStyle" />
     <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
       <template v-for="(_, name) in $slots" #[name]="slotProps">
@@ -33,6 +33,10 @@ const props = defineProps({
     type: [String, Number],
     default: '',
   },
+  height: {
+    type: [String, Number],
+    default: '',
+  },
   subAttrs: {
     type: Object,
     default: () => {
@@ -54,14 +58,21 @@ const mergedAttrs = computed(() => {
   }, baseAttrs)
 })
 
-const widthStyle = computed(() => {
-  if (!props.width) {
-    return {}
+const inputNumberStyle = computed(() => {
+  const style: Record<string, any> = {}
+
+  if (props.width) {
+    style.width = processWidth(props.width, true)
   }
 
-  return {
-    width: processWidth(props.width, true),
+  if (props.height) {
+    const inputNumberHeight = processWidth(props.height, true)
+    style.height = inputNumberHeight
+    style['--s-input-number-height'] = inputNumberHeight
+    style['--el-input-height'] = inputNumberHeight
   }
+
+  return style
 })
 </script>
 
@@ -74,6 +85,13 @@ const widthStyle = computed(() => {
   .s-input-number__inner {
     flex: 1 1 auto;
     min-width: 0;
+    height: 100%;
+  }
+
+  :deep(.el-input-number .el-input),
+  :deep(.el-input-number .el-input__wrapper) {
+    height: 100%;
+    min-height: var(--s-input-number-height, var(--el-input-height, 32px));
   }
 
   .s-comp-title + :deep(.el-input-number .el-input__wrapper),

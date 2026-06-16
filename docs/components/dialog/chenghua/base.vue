@@ -15,9 +15,7 @@ const visible = reactive({
     <s-button theme="chenghua" @click="visible.noFooter = true" type="primary">隐藏底部按钮</s-button>
     <s-button theme="chenghua" @click="visible.buttons = true" type="danger">自定义按钮</s-button>
     <s-button theme="chenghua" @click="visible.header = true">自定义标题</s-button>
-    <s-button theme="chenghua" size="small">小</s-button>
-    <s-button theme="chenghua">默认</s-button>
-    <s-button theme="chenghua" size="large">大</s-button>
+
 
     <s-dialog title="默认成华弹框" theme="chenghua" width="512px" v-model="visible.base">
       成华主题默认展示底部按钮，和普通 dialog 行为保持一致。

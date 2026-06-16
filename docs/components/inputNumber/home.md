@@ -25,6 +25,12 @@
 inputNumber/base
 :::
 
+### 高度
+
+:::demo
+inputNumber/height
+:::
+
 ### 尺寸
 
 :::demo
@@ -45,6 +51,7 @@ inputNumber/usually
 |   `title`    | 左侧标题前缀文案 | string          | `''`   |
 |  `boxStyle`  | 标题前缀区域样式 | object          | `{}`   |
 |   `width`    | 组件总宽度       | string / number | `''`   |
+|   `height`   | 组件总高度       | string / number | `''`   |
 |  `subAttrs`  | 外层容器额外属性 | object          | `{}`   |
 
 ### 插槽

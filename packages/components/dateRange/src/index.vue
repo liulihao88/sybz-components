@@ -16,6 +16,10 @@ const props = defineProps({
     type: [String, Number],
     default: '300px',
   },
+  height: {
+    type: [String, Number],
+    default: '',
+  },
 })
 
 const oneDay = 3600 * 1000 * 24
@@ -152,15 +156,22 @@ const shortcuts = computed(() => {
     ]
   }
 })
-const handleWidth = () => {
-  if (!props.width) {
-    return {}
+const dateRangeStyle = computed(() => {
+  const style: Record<string, any> = {}
+
+  if (props.width) {
+    style.width = processWidth(props.width, true)
   }
-  let parseWidth = processWidth(props.width, true)
-  return {
-    width: parseWidth,
+
+  if (props.height) {
+    const dateRangeHeight = processWidth(props.height, true)
+    style.height = dateRangeHeight
+    style['--s-date-range-height'] = dateRangeHeight
+    style['--el-input-height'] = dateRangeHeight
   }
-}
+
+  return style
+})
 /**
 * @描述 日期dateRange选择框
 * @使用方法
@@ -197,7 +208,7 @@ const mergedAttrs = computed(() => {
 </script>
 
 <template>
-  <span class="s-date-range" :style="{ ...handleWidth() }">
+  <span class="s-date-range" :style="dateRangeStyle">
     <s-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
     <el-date-picker :shortcuts="shortcuts" v-bind="mergedAttrs" class="s-date-range__picker"></el-date-picker>
   </span>
@@ -206,9 +217,13 @@ const mergedAttrs = computed(() => {
 <style scoped lang="scss">
 .s-date-range {
   display: inline-flex;
+  align-items: stretch;
   vertical-align: middle;
+
   :deep(.el-date-editor) {
     flex: 1;
+    height: 100%;
+    min-height: var(--s-date-range-height, var(--el-input-height, 32px));
   }
 }
 </style>

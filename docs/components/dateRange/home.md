@@ -14,6 +14,12 @@
 dateRange/base
 :::
 
+### 高度
+
+:::demo
+dateRange/height
+:::
+
 ### 通常用法
 
 :::demo `继承el-date-picker所有属性`
@@ -32,6 +38,7 @@ dateRange/range
 | :-----: | ------------ | --------------- | ------- |
 | `title` | 左侧标题文案 | string          | `''`    |
 | `width` | 组件整体宽度 | string / number | `300px` |
+| `height` | 组件整体高度 | string / number | `''`    |
 
 ### 默认行为
 

@@ -1,12 +1,12 @@
 <template>
   <div class="chenghua-button-demo">
     <div class="chenghua-button-demo__entry">
-      <s-button theme="chenghua" variant="gradient" icon="set-up" width="288" height="52">
-        审核规则管理
-      </s-button>
-      <s-button theme="chenghua" variant="outline" icon="plus" width="178" height="48">
-        新建审核规则
-      </s-button>
+      <s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>
+      <s-button theme="chenghua" variant="outline" icon="plus" width="178" size="large">新建审核规则</s-button>
+
+      <s-button theme="chenghua" size="small">小</s-button>
+      <s-button theme="chenghua">默认</s-button>
+      <s-button theme="chenghua" size="large">大</s-button>
     </div>
 
     <div class="chenghua-button-demo__row">

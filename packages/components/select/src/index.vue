@@ -1,7 +1,7 @@
 <template>
   <div
     class="s-select"
-    :style="{ ...processWidth(mergedProps.width) }"
+    :style="selectStyle"
     :class="[
       sizeClass,
       themeClass,
@@ -177,6 +177,10 @@ const props = defineProps({
     type: [String, Number],
     default: '',
   },
+  height: {
+    type: [String, Number],
+    default: '',
+  },
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性
   disPlaceholder: {
     type: String,
@@ -338,6 +342,21 @@ const reverseSelect = () => {
 const mergedSize = computed(() => mergedProps.value.size || 'default')
 const sizeClass = computed(() => {
   return `s-select--${mergedSize.value}`
+})
+const selectStyle = computed(() => {
+  const style: Record<string, any> = {
+    ...processWidth(mergedProps.value.width),
+  }
+
+  if (mergedProps.value.height) {
+    const selectHeight = processWidth(mergedProps.value.height, true)
+    style.height = selectHeight
+    style.minHeight = selectHeight
+    style['--s-select-min-height'] = selectHeight
+    style['--el-input-height'] = selectHeight
+  }
+
+  return style
 })
 const themeClass = computed(() => {
   return mergedProps.value.theme === 'chenghua' ? 's-select--chenghua' : ''

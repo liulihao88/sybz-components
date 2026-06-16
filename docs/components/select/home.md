@@ -40,6 +40,12 @@ select/chenghua/chenghuaMultiple
 select/usually
 :::
 
+### 高度
+
+:::demo
+select/height
+:::
+
 ### 尺寸
 
 :::demo
@@ -125,6 +131,7 @@ select/multipleTableSelect
 |           `connect`             | 多字段 label 拼接符                                    | string                  | `/`        |
 |          `customLabel`          | 自定义 label 生成函数                                  | function / string       | `''`       |
 |             `width`             | 组件宽度                                               | string / number         | `''`       |
+|            `height`             | 组件高度                                               | string / number         | `''`       |
 |        `disPlaceholder`         | 禁用态占位文案                                         | string                  | `''`       |
 |         `itemDisabled`          | 单项禁用判断函数                                       | function                | `() => {}` |
 |             `url`               | 远程请求地址或方法                                     | string / function       | `''`       |

@@ -69,7 +69,7 @@ export default {
     ctx.app.use(SybzComponents, {
       dangerouslyUseHTMLString: true,
       title: {
-        theme: 'chenghua',
+        // theme: 'chenghua',
       },
       select: {
         
