@@ -25,6 +25,9 @@ type QuickGroup = {
 const { theme, site } = useData()
 const route = useRoute()
 const router = useRouter()
+const SIDEBAR_WIDTH = 148
+const COLLAPSED_WIDTH = 30
+const MIN_VISIBLE_HEIGHT = 28
 const DEFAULT_POSITION = {
   left: 8,
   top: 78,
@@ -34,10 +37,12 @@ const position = ref({ ...DEFAULT_POSITION })
 const dragging = ref(false)
 const expanded = ref(true)
 const keyword = ref('')
-const detailItem = ref<QuickItem | null>(null)
 let dragOffsetX = 0
 let dragOffsetY = 0
-let detailTimer: number | undefined
+let dragStartX = 0
+let dragStartY = 0
+let dragMoved = false
+let suppressNextClick = false
 
 const cleanText = (text = '') =>
   text
@@ -126,19 +131,29 @@ const filteredGroups = computed(() => {
     }))
     .filter((group) => group.items.length)
 })
+const flatItems = computed(() => groups.value.flatMap((group) => group.items))
 const shouldShow = computed(() => route.path.includes('/components/'))
 const currentPath = computed(() => route.path.replace(/\/$/, ''))
+const sidebarStyle = computed(() => ({
+  left: `${position.value.left}px`,
+  top: `${position.value.top}px`,
+  '--component-quick-sidebar-top': `${position.value.top}px`,
+}))
 
 const isCurrent = (item: QuickItem) =>
   item.normalizedLink.replace(/\/$/, '') === currentPath.value ||
   item.routeLink.replace(/\/$/, '') === currentPath.value
 
+const getItemIndex = (item: QuickItem) =>
+  flatItems.value.findIndex((routeItem) => routeItem.normalizedLink === item.normalizedLink) + 1
+
 const clampPosition = (left: number, top: number) => {
   if (typeof window === 'undefined') return { left, top }
+  const sidebarWidth = expanded.value ? SIDEBAR_WIDTH : COLLAPSED_WIDTH
 
   return {
-    left: Math.min(Math.max(0, left), Math.max(0, window.innerWidth - 180)),
-    top: Math.min(Math.max(48, top), Math.max(48, window.innerHeight - 120)),
+    left: Math.min(Math.max(0, left), Math.max(0, window.innerWidth - sidebarWidth)),
+    top: Math.min(Math.max(0, top), Math.max(0, window.innerHeight - MIN_VISIBLE_HEIGHT)),
   }
 }
 
@@ -183,57 +198,81 @@ const scrollSidebarToItem = async (item: QuickItem) => {
   })
 }
 
-const hideDetail = () => {
-  if (detailTimer !== undefined) {
-    window.clearTimeout(detailTimer)
-    detailTimer = undefined
+const goTo = async (item: QuickItem) => {
+  if (suppressNextClick) {
+    suppressNextClick = false
+    return
   }
 
-  detailItem.value = null
-}
-
-const showDetailLater = (item: QuickItem) => {
-  hideDetail()
-  detailTimer = window.setTimeout(() => {
-    detailItem.value = item
-  }, 3000)
-}
-
-const goTo = async (item: QuickItem) => {
-  hideDetail()
   await router.go(item.routeLink)
   scrollSidebarToItem(item)
 }
 
 const toggleExpanded = () => {
+  if (suppressNextClick) {
+    suppressNextClick = false
+    return
+  }
+
   expanded.value = !expanded.value
-  hideDetail()
+  position.value = clampPosition(position.value.left, position.value.top)
+  savePosition()
 }
 
 const handleDragMove = (event: PointerEvent) => {
   if (!dragging.value) return
+
+  if (Math.abs(event.clientX - dragStartX) > 3 || Math.abs(event.clientY - dragStartY) > 3) {
+    dragMoved = true
+  }
+
   const nextPosition = clampPosition(event.clientX - dragOffsetX, event.clientY - dragOffsetY)
   position.value = nextPosition
 }
 
 const handleDragEnd = () => {
   if (!dragging.value) return
+  const shouldSuppressClick = dragMoved
+
   dragging.value = false
   savePosition()
   window.removeEventListener('pointermove', handleDragMove)
   window.removeEventListener('pointerup', handleDragEnd)
   window.removeEventListener('pointercancel', handleDragEnd)
+
+  if (shouldSuppressClick) {
+    suppressNextClick = true
+    window.setTimeout(() => {
+      suppressNextClick = false
+    }, 100)
+  }
 }
 
 const handleDragStart = (event: PointerEvent) => {
   if (event.button !== 0) return
 
   dragging.value = true
+  dragStartX = event.clientX
+  dragStartY = event.clientY
+  dragMoved = false
   dragOffsetX = event.clientX - position.value.left
   dragOffsetY = event.clientY - position.value.top
   window.addEventListener('pointermove', handleDragMove)
   window.addEventListener('pointerup', handleDragEnd)
   window.addEventListener('pointercancel', handleDragEnd)
+}
+
+const handlePanelDragStart = (event: PointerEvent) => {
+  const target = event.target as HTMLElement | null
+  if (
+    target?.closest(
+      'input, textarea, select, [contenteditable="true"], .component-quick-sidebar__collapse, .s-tooltip-box__text',
+    )
+  ) {
+    return
+  }
+
+  handleDragStart(event)
 }
 
 onMounted(() => {
@@ -251,7 +290,6 @@ onMounted(() => {
 
 onUnmounted(() => {
   handleDragEnd()
-  hideDetail()
 })
 </script>
 
@@ -260,7 +298,7 @@ onUnmounted(() => {
     v-if="shouldShow"
     class="component-quick-sidebar"
     :class="{ dragging, collapsed: !expanded }"
-    :style="{ left: `${position.left}px`, top: `${position.top}px` }"
+    :style="sidebarStyle"
     aria-label="组件快速跳转"
   >
     <button
@@ -268,11 +306,12 @@ onUnmounted(() => {
       class="component-quick-sidebar__collapsed-button"
       type="button"
       title="展开快捷导航"
+      @pointerdown="handleDragStart"
       @click="toggleExpanded"
     >
       开
     </button>
-    <div v-else class="component-quick-sidebar__body">
+    <div v-else class="component-quick-sidebar__body" @pointerdown="handlePanelDragStart">
       <div class="component-quick-sidebar__top">
         <input
           v-model="keyword"
@@ -285,7 +324,7 @@ onUnmounted(() => {
           class="component-quick-sidebar__handle"
           type="button"
           title="拖动快捷导航"
-          @pointerdown.prevent="handleDragStart"
+          @pointerdown.prevent.stop="handleDragStart"
         >
           拖
         </button>
@@ -293,38 +332,55 @@ onUnmounted(() => {
           class="component-quick-sidebar__collapse"
           type="button"
           title="收起快捷导航"
+          @pointerdown.stop
           @click="toggleExpanded"
         >
           收
         </button>
       </div>
-      <section v-for="group in filteredGroups" :key="group.text" class="component-quick-sidebar__group">
-        <div class="component-quick-sidebar__title">
-          {{ group.text }}
-        </div>
-        <div class="component-quick-sidebar__grid">
-          <button
-            v-for="item in group.items"
-            :key="item.normalizedLink"
-            type="button"
-            class="component-quick-sidebar__item"
-            :class="{ current: isCurrent(item) }"
-            @mouseenter="showDetailLater(item)"
-            @mouseleave="hideDetail"
-            @focus="showDetailLater(item)"
-            @blur="hideDetail"
-            @click="goTo(item)"
-          >
-            {{ item.shortText || item.text }}
-          </button>
-        </div>
-      </section>
-      <div v-if="!filteredGroups.length" class="component-quick-sidebar__empty">无匹配</div>
-    </div>
-    <div v-if="expanded && detailItem" class="component-quick-sidebar__detail" @mouseenter="hideDetail">
-      <strong>{{ detailItem.text }}</strong>
-      <span>分类: {{ detailItem.groupText }}</span>
-      <span>路径: {{ detailItem.normalizedLink }}</span>
+      <div class="component-quick-sidebar__content">
+        <section v-for="group in filteredGroups" :key="group.text" class="component-quick-sidebar__group">
+          <div class="component-quick-sidebar__title">
+            {{ group.text }}
+          </div>
+          <div class="component-quick-sidebar__grid">
+            <s-tooltip
+              v-for="item in group.items"
+              :key="item.normalizedLink"
+              :show-after="2000"
+              :hide-after="400"
+              placement="bottom-start"
+              effect="light"
+              :enterable="true"
+              :offset="4"
+              popper-class="component-quick-sidebar-popper"
+            >
+              <button
+                type="button"
+                class="component-quick-sidebar__item"
+                :class="{ current: isCurrent(item) }"
+                @click="goTo(item)"
+              >
+                {{ item.shortText || item.text }}
+              </button>
+              <template #content>
+                <div class="component-quick-sidebar__detail" @pointerdown.stop @click.stop>
+                  <strong>{{ item.text }}</strong>
+                  <span>序号: {{ getItemIndex(item) }} / {{ flatItems.length }}</span>
+                  <span>分类: {{ item.groupText }}</span>
+                  <span v-if="item.shortText !== item.text">简写: {{ item.shortText }}</span>
+                  <span>原始地址: {{ item.link }}</span>
+                  <span>路由地址: {{ item.normalizedLink }}</span>
+                  <span>跳转地址: {{ item.routeLink }}</span>
+                  <span>当前路径: {{ currentPath || '/' }}</span>
+                  <span>状态: {{ isCurrent(item) ? '当前页面' : '可跳转' }}</span>
+                </div>
+              </template>
+            </s-tooltip>
+          </div>
+        </section>
+        <div v-if="!filteredGroups.length" class="component-quick-sidebar__empty">无匹配</div>
+      </div>
     </div>
   </aside>
 </template>
@@ -336,6 +392,7 @@ onUnmounted(() => {
   display: none;
   width: 148px;
   pointer-events: none;
+  touch-action: none;
 }
 
 .component-quick-sidebar.collapsed {
@@ -362,25 +419,33 @@ onUnmounted(() => {
 }
 
 .component-quick-sidebar__body {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--component-quick-sidebar-top) - 8px);
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
-  padding: 6px 5px;
+  padding: 5px 4px;
   background: var(--vp-c-bg);
   background: color-mix(in srgb, var(--vp-c-bg) 92%, transparent);
   box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
   pointer-events: auto;
   user-select: none;
+  cursor: grab;
+  overflow: hidden;
 }
 
 .component-quick-sidebar.dragging .component-quick-sidebar__body {
   box-shadow: 0 12px 32px rgb(0 0 0 / 14%);
+  cursor: grabbing;
 }
 
 .component-quick-sidebar__top {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 24px 24px;
   gap: 4px;
-  margin-bottom: 5px;
+  flex: 0 0 auto;
+  margin-bottom: 4px;
+  cursor: default;
 }
 
 .component-quick-sidebar__search {
@@ -395,6 +460,7 @@ onUnmounted(() => {
   font-weight: 700;
   line-height: 20px;
   outline: none;
+  cursor: text;
 }
 
 .component-quick-sidebar__search:focus {
@@ -413,6 +479,7 @@ onUnmounted(() => {
   font-size: 10px;
   font-weight: 800;
   line-height: 20px;
+  touch-action: none;
 }
 
 .component-quick-sidebar.dragging .component-quick-sidebar__handle {
@@ -430,6 +497,7 @@ onUnmounted(() => {
   font-size: 10px;
   font-weight: 800;
   line-height: 20px;
+  cursor: pointer;
 }
 
 .component-quick-sidebar__collapse:hover {
@@ -437,14 +505,31 @@ onUnmounted(() => {
   background: var(--vp-c-brand-soft);
 }
 
+.component-quick-sidebar__content {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
+
+.component-quick-sidebar__content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.component-quick-sidebar__content::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--vp-c-divider);
+}
+
 .component-quick-sidebar__group + .component-quick-sidebar__group {
-  margin-top: 5px;
-  padding-top: 4px;
+  margin-top: 3px;
+  padding-top: 3px;
   border-top: 1px solid var(--vp-c-divider);
 }
 
 .component-quick-sidebar__title {
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   color: var(--vp-c-text-1);
   font-size: 10px;
   font-weight: 900;
@@ -457,16 +542,24 @@ onUnmounted(() => {
 .component-quick-sidebar__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px;
+  gap: 1px 2px;
+}
+
+.component-quick-sidebar__grid :deep(.s-tooltip-box__text) {
+  display: block;
+  width: 100%;
+  max-width: none !important;
+  overflow: visible;
+  white-space: normal;
 }
 
 .component-quick-sidebar__item {
   display: block;
   width: 100%;
-  min-height: 18px;
+  min-height: 16px;
   border: 0;
   border-radius: 3px;
-  padding: 1px 3px;
+  padding: 0 3px;
   color: var(--vp-c-text-2);
   background: transparent;
   font-size: 9px;
@@ -476,6 +569,7 @@ onUnmounted(() => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .component-quick-sidebar__item:hover {
@@ -496,20 +590,42 @@ onUnmounted(() => {
   text-align: center;
 }
 
+:global(.component-quick-sidebar-popper) {
+  max-width: min(340px, calc(100vw - 24px));
+  padding: 0;
+  pointer-events: auto;
+  user-select: text;
+}
+
+:global(.component-quick-sidebar-popper *) {
+  user-select: text;
+}
+
 .component-quick-sidebar__detail {
-  position: absolute;
-  top: 0;
-  left: calc(100% + 8px);
   display: grid;
-  gap: 3px;
-  width: 210px;
+  gap: 4px;
+  min-width: 0;
+  max-width: min(320px, calc(100vw - 32px));
+  max-height: min(320px, calc(100vh - 24px));
+  overflow: auto;
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
   padding: 8px;
   color: var(--vp-c-text-2);
   background: var(--vp-c-bg);
   box-shadow: 0 10px 30px rgb(0 0 0 / 14%);
-  pointer-events: none;
+  user-select: text;
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
+
+.component-quick-sidebar__detail::-webkit-scrollbar {
+  width: 5px;
+}
+
+.component-quick-sidebar__detail::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--vp-c-divider);
 }
 
 .component-quick-sidebar__detail strong {
