@@ -1,9 +1,11 @@
 <template>
   <div v-if="items.length" ref="rootRef" class="api-intro">
     <s-tooltip v-for="item in items" :key="item.key" placement="bottom" effect="light">
-      <code class="api-intro__tag">
+      <code class="api-intro__tag" v-copy="item.displayName">
         <span class="api-intro__kind">{{ item.kind }}</span>
-        {{ item.displayName }}
+        <span>
+          {{ item.displayName }}
+        </span>
       </code>
       <template #content>
         <div class="api-intro__card">

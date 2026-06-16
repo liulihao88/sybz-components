@@ -85,9 +85,9 @@
 
     <span v-if="mergedProps.showQuick && !parseDisabled && sOptions.length > 0" class="s-select__select-box">
       <span class="s-select__select-box__inner">
-        <s-icon name="ArrowUp" :size="mergedSize === 'small' ? 10 : 14" @click="quickSelect(false)" />
+        <s-icon name="ArrowUp" :size="quickIconSize" @click="quickSelect(false)" />
         <div class="s-select__divider" />
-        <s-icon name="ArrowDown" :size="mergedSize === 'small' ? 10 : 14" @click="quickSelect(true)" />
+        <s-icon name="ArrowDown" :size="quickIconSize" @click="quickSelect(true)" />
       </span>
     </span>
   </div>
@@ -343,9 +343,21 @@ const mergedSize = computed(() => mergedProps.value.size || 'default')
 const sizeClass = computed(() => {
   return `s-select--${mergedSize.value}`
 })
+const quickIconBaseSize = computed(() => (mergedSize.value === 'small' ? 10 : 14))
+const quickIconSize = computed(() => 'var(--s-select-quick-icon-size)')
+const getCompactIconSize = (height: string) => {
+  const heightNumber = Number.parseFloat(height)
+
+  if (!Number.isNaN(heightNumber) && height.endsWith('px')) {
+    return `${Math.max(4, Math.min(quickIconBaseSize.value, (heightNumber - 2) / 2))}px`
+  }
+
+  return `clamp(4px, calc((${height} - 2px) / 2), ${quickIconBaseSize.value}px)`
+}
 const selectStyle = computed(() => {
   const style: Record<string, any> = {
     ...processWidth(mergedProps.value.width),
+    '--s-select-quick-icon-size': `${quickIconBaseSize.value}px`,
   }
 
   if (mergedProps.value.height) {
@@ -354,6 +366,8 @@ const selectStyle = computed(() => {
     style.minHeight = selectHeight
     style['--s-select-min-height'] = selectHeight
     style['--el-input-height'] = selectHeight
+    style['--s-select-title-font-size'] = `clamp(8px, calc(${selectHeight} - 8px), 14px)`
+    style['--s-select-quick-icon-size'] = getCompactIconSize(selectHeight)
   }
 
   return style
@@ -502,6 +516,8 @@ function _commonEmits(item, selectLabel, selectObj) {
 <style lang="scss" scoped>
 .s-select {
   --s-select-min-height: var(--el-component-size, 32px);
+  --s-select-title-font-size: 14px;
+  --s-select-quick-icon-size: 14px;
   display: inline-flex;
   width: 316px;
   height: 100%;
@@ -548,7 +564,31 @@ function _commonEmits(item, selectLabel, selectObj) {
   }
 
   :deep(.el-select__wrapper) {
-    min-height: max(100%, var(--s-select-min-height));
+    height: 100%;
+    min-height: var(--s-select-min-height);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  :deep(.el-select__selection),
+  :deep(.el-select__selected-item) {
+    min-height: 0;
+  }
+
+  :deep(.el-select__placeholder) {
+    line-height: 1;
+  }
+
+  :deep(.el-select__suffix) {
+    height: 100%;
+    align-items: center;
+  }
+
+  :deep(.s-comp-title) {
+    height: var(--s-select-min-height) !important;
+    min-height: var(--s-select-min-height) !important;
+    font-size: var(--s-select-title-font-size) !important;
+    line-height: 1 !important;
   }
 
   :deep(.el-input__inner) {
@@ -578,6 +618,7 @@ function _commonEmits(item, selectLabel, selectObj) {
 .s-select__divider {
   width: 100%;
   height: 1px;
+  flex: 0 0 1px;
   background: var(--line);
 }
 .has-title {
@@ -662,7 +703,10 @@ function _commonEmits(item, selectLabel, selectObj) {
   border-left: none;
   white-space: nowrap;
   width: 14px;
-  min-height: max(100%, var(--s-select-min-height));
+  height: 100%;
+  min-height: var(--s-select-min-height);
+  box-sizing: border-box;
+  overflow: hidden;
   cursor: pointer;
   border-radius: 0px 2px 2px 0px;
   align-items: center;
@@ -676,8 +720,20 @@ function _commonEmits(item, selectLabel, selectObj) {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    :hover {
+    justify-content: stretch;
+    overflow: hidden;
+
+    > .s-icon {
+      width: 100%;
+      flex: 1 1 0;
+      min-height: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--s-select-quick-icon-size) !important;
+    }
+
+    > .s-icon:hover {
       color: var(--blue);
       background: var(--el-color-primary-light-9);
     }

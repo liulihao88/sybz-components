@@ -24,6 +24,7 @@ const options = [
       <s-select v-model="value" title="服务名称" width="200" height="40" :options="options" />
       <s-select v-model="quickValue" title="快速切换1" width="200" size="small" :options="options" showQuick />
       <s-select v-model="quickValue" title="快速切换2" width="200" height="32" :options="options" showQuick />
+      <s-select v-model="quickValue" title="快速切换2" width="200" height="20" :options="options" showQuick />
     </div>
   </div>
 </template>
