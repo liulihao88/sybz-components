@@ -37,6 +37,7 @@
   --s-ch-primary-border-hover: rgba(var(--s-ch-primary-rgb), 0.42);
   --s-ch-primary-shadow: rgba(var(--s-ch-primary-rgb), 0.18);
   --s-ch-primary-shadow-weak: rgba(var(--s-ch-primary-rgb), 0.08);
+  --s-ch-comp-title-padding-x: 14px;
   --s-ch-header-bg: linear-gradient(180deg, var(--s-ch-bg-soft) 0%, #eef5ff 100%);
   --s-ch-control-bg: linear-gradient(180deg, var(--s-ch-bg) 0%, var(--s-ch-bg-soft) 100%);
 }
@@ -723,6 +724,8 @@
   box-shadow: none;
   font-family: var(--s-ch-font-family);
   font-weight: 600;
+  padding-left: var(--s-ch-comp-title-padding-x);
+  padding-right: var(--s-ch-comp-title-padding-x);
 }
 
 .s-input.s-input--chenghua.s-input--chenghua {
