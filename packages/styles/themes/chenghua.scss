@@ -166,6 +166,7 @@
   &.s-button--chenghua-gradient {
     --el-button-bg-color: transparent;
     --el-button-border-color: transparent;
+    --el-button-outline-color: transparent;
     --el-button-text-color: #ffffff;
     --el-button-hover-bg-color: transparent;
     --el-button-hover-border-color: transparent;
@@ -177,31 +178,36 @@
     --el-button-disabled-border-color: transparent;
     --el-button-disabled-text-color: rgba(255, 255, 255, 0.8);
 
-    border-color: transparent;
+    border: 0;
+    outline: none;
     background: linear-gradient(90deg, var(--s-ch-primary-hover) 0%, var(--s-ch-accent) 100%);
     color: #ffffff;
-    box-shadow: 0 8px 18px rgba(var(--s-ch-primary-rgb), 0.18);
+    box-shadow: none;
 
     &:hover,
-    &:focus {
-      border-color: transparent;
+    &:focus,
+    &:focus-visible {
+      border: 0;
+      outline: none;
       background: linear-gradient(90deg, var(--s-ch-primary) 0%, var(--s-ch-accent-hover) 100%);
       color: #ffffff;
-      box-shadow: 0 10px 22px rgba(var(--s-ch-primary-rgb), 0.22);
+      box-shadow: none;
     }
 
     &:active {
-      border-color: transparent;
+      border: 0;
+      outline: none;
       background: linear-gradient(90deg, var(--s-ch-primary-active) 0%, var(--s-ch-accent-active) 100%);
       color: #ffffff;
-      box-shadow: 0 6px 14px rgba(var(--s-ch-primary-rgb), 0.18);
+      box-shadow: none;
     }
 
     &.is-disabled,
     &.is-disabled:hover,
     &.is-disabled:focus,
     &.is-disabled:active {
-      border-color: transparent;
+      border: 0;
+      outline: none;
       background: linear-gradient(90deg, rgba(var(--s-ch-primary-hover-rgb), 0.45) 0%, rgba(var(--s-ch-accent-rgb), 0.45) 100%);
       color: rgba(255, 255, 255, 0.8);
       box-shadow: none;
