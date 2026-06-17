@@ -14,12 +14,19 @@
 compTitle/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua" 时启用成华主题样式`
+compTitle/chenghua/base
+:::
+
 ### API
 
 |   属性名   | 说明                                                    | 类型   | 默认值 |
 | :--------: | ------------------------------------------------------- | ------ | ------ |
 |  `title`   | 标题文案；为空时不渲染组件                              | string | `''`   |
 | `boxStyle` | 标题容器样式，支持 `width` 并会经过 `processWidth` 处理 | object | `{}`   |
+|  `theme`   | 主题样式                                                | `''` / `chenghua` | `''` |
 
 ### 透传属性
 

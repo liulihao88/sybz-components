@@ -713,6 +713,18 @@
   font-weight: 600;
 }
 
+.s-comp-title.s-comp-title--chenghua.s-comp-title--chenghua {
+  border-color: var(--s-ch-primary-border);
+  border-right: 0;
+  border-top-left-radius: var(--s-ch-radius);
+  border-bottom-left-radius: var(--s-ch-radius);
+  background: var(--s-ch-fill);
+  color: var(--s-ch-text);
+  box-shadow: 0 0 0 1px var(--s-ch-primary-border) inset;
+  font-family: var(--s-ch-font-family);
+  font-weight: 600;
+}
+
 .s-input.s-input--chenghua.s-input--chenghua {
   font-family: var(--s-ch-font-family);
 

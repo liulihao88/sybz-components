@@ -5,6 +5,7 @@
  */
 import { useAttrs, computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SCompTitle',
@@ -20,27 +21,39 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
+  },
 })
+const mergedProps = useGlobalComponentConfig('compTitle', props)
 
 const computedBoxStyle = computed(() => {
-  if (props.boxStyle?.width) {
+  if (mergedProps.value.boxStyle?.width) {
     return {
-      ...props.boxStyle,
-      width: processWidth(props.boxStyle?.width, true),
+      ...mergedProps.value.boxStyle,
+      width: processWidth(mergedProps.value.boxStyle?.width, true),
     }
   } else {
-    return props.boxStyle
+    return mergedProps.value.boxStyle
   }
 })
 
 const sizeClass = computed(() => {
   return attrs.size ? `el-input--${attrs.size}` : 's-comp-title__base-size'
 })
+const compTitleClass = computed(() => [
+  sizeClass.value,
+  {
+    's-comp-title--chenghua': mergedProps.value.theme === 'chenghua',
+  },
+])
 </script>
 
 <template>
-  <div class="s-comp-title" :class="sizeClass" :style="{ ...computedBoxStyle }" v-bind="$attrs" v-if="props.title">
-    {{ props.title }}
+  <div class="s-comp-title" :class="compTitleClass" :style="{ ...computedBoxStyle }" v-bind="$attrs" v-if="mergedProps.title">
+    {{ mergedProps.title }}
   </div>
 </template>
 
