@@ -846,8 +846,9 @@
     border-bottom-left-radius: 0;
   }
 
-  .el-input-number:not(.is-controls-right):not(.is-without-controls) .el-input__wrapper {
-    border-radius: 0;
+  .el-input-number:not(.is-controls-right):not(.is-without-controls) .el-input {
+    border-top-right-radius: var(--s-ch-radius);
+    border-bottom-right-radius: var(--s-ch-radius);
   }
 
   .el-input-number:not(.is-controls-right):not(.is-without-controls) .el-input-number__decrease {
