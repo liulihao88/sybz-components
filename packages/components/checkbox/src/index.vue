@@ -11,6 +11,7 @@
 */
 import { ref, watch, computed, useAttrs } from 'vue'
 import { isEmpty, processWidth } from '@sybz-components/utils'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SCheckbox',
@@ -65,7 +66,13 @@ const props = defineProps({
     type: [Number, String],
     default: '',
   },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
+  },
 })
+const mergedProps = useGlobalComponentConfig('checkbox', props)
 const checkAll = ref(false)
 const isIndeterminate = ref(false)
 const allCheckList = ref([])
@@ -145,16 +152,21 @@ const filteredAttrs = computed(() => {
 
 const getGapValue = computed(() => processWidth(props.gap, true))
 const hasGap = computed(() => !isEmpty(getGapValue.value, true))
+const checkboxClass = computed(() => ({
+  's-gap-checkbox': hasGap.value,
+  's-checkbox--chenghua': mergedProps.value.theme === 'chenghua',
+  's-checkbox--button': mergedProps.value.showType === 'button',
+}))
 </script>
 
 <template>
-  <div class="s-checkbox" :class="{ 's-gap-checkbox': hasGap }">
+  <div class="s-checkbox" :class="checkboxClass">
     <el-checkbox
       v-model="checkAll"
       class="s-checkbox__all"
       :indeterminate="isIndeterminate"
       @change="checkAllChange"
-      v-if="showAll"
+      v-if="mergedProps.showAll"
       v-bind="$attrs"
     >
       全选

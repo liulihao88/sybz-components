@@ -14,6 +14,12 @@
 checkbox/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua" 时启用成华主题样式`
+checkbox/chenghua/base
+:::
+
 ### 通常用法
 
 :::demo
@@ -52,6 +58,7 @@ checkbox/customGap
 | customDisabled | 自定义的disabled                                   | function           | {}     |
 |  customLabel   | 自定义显示的label                                  | function/string/'' | {}     |
 |      gap       | 多个复选框之间的水平间距，支持 `processWidth` 写法 | number/string      | -      |
+|     theme      | 主题样式                                           | `''` / `chenghua`  | `''`   |
 
 ### 方法
 
