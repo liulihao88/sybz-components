@@ -20,34 +20,15 @@ const options = [
       <span>默认值: ''</span>
     </div>
 
-    <div class="demo-list">
+    <s-flex gap="8">
       <s-select v-model="value" title="服务名称" width="200" height="40" :options="options" />
-      <s-select v-model="quickValue" title="快速切换1" width="200" size="small" :options="options" showQuick />
-      <s-select v-model="quickValue" title="快速切换2" width="200" height="32" :options="options" showQuick />
-      <s-select v-model="quickValue" title="快速切换2" width="200" height="20" :options="options" showQuick />
-    </div>
+      <s-select v-model="quickValue" title="快速切换1" width="200" size="small" :options="options" />
+      <s-select v-model="quickValue" title="快速切换2" width="200" height="32" :options="options" />
+      <s-select v-model="quickValue" title="快速切换2" width="200" height="20" :options="options" />
+    </s-flex>
   </div>
 </template>
 
 <style scoped lang="scss">
-.select-height-demo {
-  display: grid;
-  gap: 16px;
-}
 
-.demo-meta {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.demo-list {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  align-items: center;
-}
 </style>

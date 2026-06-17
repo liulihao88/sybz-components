@@ -37,17 +37,26 @@ const options = [
         <el-input v-model="value" placeholder="请输入服务名称" />
       </div>
 
-      <div class="comp-title-chenghua-demo__row">
-        <s-comp-title title="业务类型" theme="chenghua" size="small" :box-style="{ width: 96 }" />
-        <el-select v-model="selectValue" size="small" placeholder="请选择业务类型">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-        </el-select>
-      </div>
+      <s-select
+        v-model="selectValue"
+        theme="chenghua"
+        size="small"
+        title="业务类型"
+        width="360"
+        :box-style="{ width: 96 }"
+        :options="options"
+        placeholder="请选择业务类型"
+      />
 
-      <div class="comp-title-chenghua-demo__row">
-        <s-comp-title title="容量配额" theme="chenghua" size="large" :box-style="{ width: 96 }" />
-        <el-input-number v-model="count" size="large" controls-position="right" :min="0" />
-      </div>
+      <s-input-number
+        v-model="count"
+        theme="chenghua"
+        title="容量配额"
+        size="large"
+        width="360"
+        :box-style="{ width: 96 }"
+        :min="0"
+      />
     </div>
   </div>
 </template>
@@ -81,16 +90,12 @@ const options = [
   min-width: 0;
 }
 
-.comp-title-chenghua-demo__row :deep(.el-input),
-.comp-title-chenghua-demo__row :deep(.el-select),
-.comp-title-chenghua-demo__row :deep(.el-input-number) {
+.comp-title-chenghua-demo__row :deep(.el-input) {
   flex: 1;
   min-width: 0;
 }
 
-.comp-title-chenghua-demo__row :deep(.el-input__wrapper),
-.comp-title-chenghua-demo__row :deep(.el-select__wrapper),
-.comp-title-chenghua-demo__row :deep(.el-input-number .el-input__wrapper) {
+.comp-title-chenghua-demo__row :deep(.el-input__wrapper) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }

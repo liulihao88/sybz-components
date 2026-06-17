@@ -236,7 +236,12 @@ const mergedAttrs = computed(() => {
 
 <template>
   <span class="s-date-range" :class="dateRangeClass" :style="dateRangeStyle">
-    <s-comp-title :title="mergedProps.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
+    <s-comp-title
+      :title="mergedProps.title"
+      :size="attrs.size"
+      :boxStyle="$attrs.boxStyle ?? {}"
+      :theme="mergedProps.theme"
+    ></s-comp-title>
     <el-date-picker :shortcuts="shortcuts" v-bind="mergedAttrs" class="s-date-range__picker"></el-date-picker>
   </span>
 </template>

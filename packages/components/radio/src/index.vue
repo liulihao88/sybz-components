@@ -4,6 +4,7 @@
       :title="props.title"
       v-if="props.title"
       :boxStyle="$attrs.boxStyle ?? {}"
+      :theme="props.theme"
       class="s-radio-box__title"
     ></s-comp-title>
     <el-radio-group v-bind="$attrs">
@@ -38,6 +39,11 @@ defineOptions({
 const props = defineProps({
   title: {
     type: String,
+  },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
   },
   type: {
     type: String,

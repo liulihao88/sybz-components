@@ -84,27 +84,21 @@ const handleCheckAll = (val) => {
         title="内容超宽时显示tooltip"
         width="220"
       ></s-select>
-      <s-select
-        title="有禁用状态"
-        v-model="selectVal"
-        :options="baseOptions"
-        :itemDisabled="(item) => item.disabled"
-      ></s-select>
     </s-flex>
+    <s-select title="有禁用状态" v-model="selectVal" :options="baseOptions"></s-select>
+    <s-select v-model="selectVal" title="快速切换2" width="200"  :options="baseOptions" />
 
-    <s-title title="禁用状态, 可清空" sub-title="disabled, clearable" t="10">
-      <s-select v-model="selectVal" :options="baseOptions" size="large" disabled clearable></s-select>
-    </s-title>
-    <s-title title="自定义下拉框菜单的头部和底部" sub-title="slot 中的header 和 footer" t="10">
-      <s-select v-model="selectVal" :options="baseOptions" size="large">
-        <template #header>我来组成头部</template>
-        <template #default="{ options, item }">
-          <span>{{ item.label }}</span>
-          <span class="cl-red">--------{{ item.value }}</span>
-        </template>
-        <template #footer>我来组成底部</template>
-      </s-select>
-    </s-title>
+    <s-title title="禁用状态, 可清空" sub-title="disabled, clearable" t="10"></s-title>
+    <s-title title="自定义下拉框菜单的头部和底部" sub-title="slot 中的header 和 footer" t="10"></s-title>
+    <s-select v-model="selectVal" :options="baseOptions" size="large" disabled clearable showQuick></s-select>
+    <s-select v-model="selectVal" :options="baseOptions" size="large">
+      <template #header>我来组成头部</template>
+      <template #default="{ options, item }">
+        <span>{{ item.label }}</span>
+        <span class="cl-red">--------{{ item.value }}</span>
+      </template>
+      <template #footer>我来组成底部</template>
+    </s-select>
   </div>
 </template>
 

@@ -8,10 +8,17 @@
       {
         'has-title': mergedProps.title,
         'has-quick': mergedProps.showQuick && !parseDisabled && sOptions.length > 0,
+        'is-multiple': multiple,
+        'has-custom-height': mergedProps.height,
       },
     ]"
   >
-    <s-comp-title :title="mergedProps.title" :size="mergedProps.size || undefined" :boxStyle="$attrs.boxStyle ?? {}" />
+    <s-comp-title
+      :title="mergedProps.title"
+      :size="mergedProps.size || undefined"
+      :boxStyle="$attrs.boxStyle ?? {}"
+      :theme="mergedProps.theme"
+    />
     <el-tooltip
       v-bind="mergedTooltipAttrs"
       :content="selectTooltipContent"
@@ -522,6 +529,7 @@ function _commonEmits(item, selectLabel, selectObj) {
   width: 316px;
   height: 100%;
   min-height: var(--s-select-min-height);
+  align-items: stretch;
   vertical-align: bottom;
 
   .s-select__fraction {
@@ -598,6 +606,26 @@ function _commonEmits(item, selectLabel, selectObj) {
   .s-select__empty {
     :deep(.el-select__wrapper) {
       box-shadow: 0 0 0 1px var(--red) inset;
+    }
+  }
+
+  &.is-multiple:not(.has-custom-height) {
+    height: auto;
+
+    .s-select__tooltip-trigger,
+    :deep(.el-select),
+    :deep(.el-select__wrapper) {
+      height: auto;
+    }
+
+    :deep(.el-select__wrapper) {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+
+    :deep(.s-comp-title) {
+      height: auto !important;
+      align-self: stretch;
     }
   }
 }
@@ -703,8 +731,8 @@ function _commonEmits(item, selectLabel, selectObj) {
   border-left: none;
   white-space: nowrap;
   width: 14px;
-  height: 100%;
   min-height: var(--s-select-min-height);
+  align-self: stretch;
   box-sizing: border-box;
   overflow: hidden;
   cursor: pointer;
@@ -717,6 +745,7 @@ function _commonEmits(item, selectLabel, selectObj) {
   .s-select__select-box__inner {
     display: flex;
     height: 100%;
+    min-height: 100%;
     width: 100%;
     flex-direction: column;
     align-items: center;
