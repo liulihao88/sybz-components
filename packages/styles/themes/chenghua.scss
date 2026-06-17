@@ -440,6 +440,90 @@
   .el-dialog__footer {
     border-top: 0px solid var(--line);
   }
+
+  .s-dialog__drawer--chenghua {
+    border-left: 1px solid rgba(var(--s-ch-primary-rgb), 0.12);
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    background: var(--s-ch-bg);
+    box-shadow: -18px 0 48px rgba(15, 23, 42, 0.18);
+
+    .el-drawer__header {
+      display: flex;
+      align-items: center;
+      min-height: 60px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--s-ch-divider);
+      margin: 0;
+      background: linear-gradient(180deg, #ffffff 0%, var(--s-ch-bg-soft) 100%);
+    }
+
+    .s-dialog__header {
+      min-width: 0;
+      gap: 8px;
+    }
+
+    .s-dialog__header-content {
+      overflow: hidden;
+      color: var(--s-ch-text);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.35;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .el-drawer__close-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 1;
+      box-sizing: border-box;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--s-ch-radius-small);
+      color: var(--s-ch-text-muted);
+
+      .el-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      &:hover,
+      &:focus {
+        background: var(--s-ch-primary-soft);
+        color: var(--s-ch-primary);
+      }
+    }
+
+    .el-drawer__body {
+      padding: 20px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      color: var(--s-ch-text-regular);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .dialog_slot_box {
+      min-height: 0;
+    }
+
+    .el-drawer__footer {
+      min-height: 60px;
+      padding: 12px 20px;
+      border-top: 1px solid var(--s-ch-divider);
+      background: rgba(248, 251, 255, 0.92);
+      backdrop-filter: blur(10px);
+    }
+
+    .s-dialog__confirm-button,
+    .s-dialog__cancel-button {
+      min-width: 88px;
+    }
+  }
 }
 
 .s-message-box--chenghua.s-message-box--chenghua {

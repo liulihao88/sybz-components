@@ -3,12 +3,13 @@
     <component
       :is="parseType"
       v-bind="{
-        width: '640px',
+        ...defaultPanelAttrs,
         bodyClass: drawerBodyClass,
         closeOnClickModal: true,
         destroyOnClose: true,
         draggable: true,
         ...$attrs,
+        class: panelClass,
       }"
       @close="handleClose"
     >
@@ -165,6 +166,27 @@ const componentClass = computed(() => {
   return ['s-dialog__panel', getThemeClass.value].filter(Boolean).join(' ')
 })
 
+const isDrawer = computed(() => mergedProps.value.type === 'drawer')
+
+const defaultPanelAttrs = computed(() => {
+  return isDrawer.value
+    ? {
+        size: 'min(480px, calc(100vw - 32px))',
+      }
+    : {
+        width: '640px',
+      }
+})
+
+const panelClass = computed(() => {
+  return [
+    attrs.class,
+    isDrawer.value ? 's-dialog__drawer' : '',
+    isDrawer.value && mergedProps.value.theme === 'chenghua' ? 's-dialog__drawer--chenghua' : '',
+  ]
+    .filter(Boolean)
+})
+
 const mergedShowFooter = computed(() => {
   return mergedProps.value.showFooter ?? true
 })
@@ -279,6 +301,56 @@ onBeforeUnmount(() => {
 
   :deep(.el-drawer__header) {
     margin-bottom: 0;
+  }
+  :deep(.s-dialog__drawer) {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: -16px 0 42px rgb(15 23 42 / 16%);
+  }
+  :deep(.s-dialog__drawer .el-drawer__header) {
+    flex: 0 0 auto;
+    min-height: 56px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  :deep(.s-dialog__drawer .el-drawer__body) {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  :deep(.s-dialog__drawer .el-drawer__footer) {
+    flex: 0 0 auto;
+    min-height: 56px;
+    padding: 10px 20px;
+    border-top: 1px solid var(--line);
+    background: var(--el-fill-color-extra-light);
+  }
+  :deep(.s-dialog__drawer .el-drawer__close-btn) {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    box-sizing: border-box;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: var(--el-text-color-secondary);
+  }
+  :deep(.s-dialog__drawer .el-drawer__close-btn .el-icon) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  :deep(.s-dialog__drawer .el-drawer__close-btn:hover) {
+    color: var(--el-color-primary);
+    background: var(--el-color-primary-light-9);
   }
   :deep(.el-dialog) {
     padding: 0 !important;
