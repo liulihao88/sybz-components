@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SBasicLayout',
@@ -54,7 +55,13 @@ const props = defineProps({
     default: 'header',
     validator: (value) => ['icon', 'header'].includes(value),
   },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
+  },
 })
+const mergedProps = useGlobalComponentConfig('basicLayout', props)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -64,8 +71,8 @@ const isCollapsed = ref(false)
 
 const boxMergedStyle = computed(() => {
   return {
-    ...props.boxStyle,
-    ...(props.square
+    ...mergedProps.value.boxStyle,
+    ...(mergedProps.value.square
       ? {
           display: 'inline-flex',
         }
@@ -75,7 +82,7 @@ const boxMergedStyle = computed(() => {
 
 const headerMergedStyle = computed(() => {
   let noBorderStyle = {}
-  if (!props.border) {
+  if (!mergedProps.value.border) {
     noBorderStyle = {
       borderBottom: 'none',
       paddingBottom: 0,
@@ -83,16 +90,16 @@ const headerMergedStyle = computed(() => {
   }
   return {
     ...noBorderStyle,
-    ...props.headerStyle,
+    ...mergedProps.value.headerStyle,
   }
 })
 
 const isHeaderTrigger = computed(() => {
-  return props.collapsible && props.collapseTrigger === 'header'
+  return mergedProps.value.collapsible && mergedProps.value.collapseTrigger === 'header'
 })
 
 const scrollStyle = computed(() => {
-  if (props.scroll) {
+  if (mergedProps.value.scroll) {
     return {
       flex: 1,
       overflow: 'auto',
@@ -101,7 +108,7 @@ const scrollStyle = computed(() => {
   return {}
 })
 const squareStyle = computed(() => {
-  if (props.square && boxRef.value) {
+  if (mergedProps.value.square && boxRef.value) {
     const boxWidth = boxRef.value.offsetWidth
     const boxHeight = (boxRef.value.offsetHeight ?? 0) - (headerRef.value?.offsetHeight ?? 0)
     const max = Math.max(boxWidth, boxHeight)
@@ -117,9 +124,15 @@ const squareStyle = computed(() => {
 })
 
 const compPadding = computed(() => {
-  const { size } = props
+  const { size } = mergedProps.value
   return size === 'default' ? '16px' : size === 'large' ? '24px' : '8px'
 })
+
+const layoutClass = computed(() => ({
+  's-basic-layout--chenghua': mergedProps.value.theme === 'chenghua',
+  'is-collapsed': isCollapsed.value,
+  'is-collapsible': mergedProps.value.collapsible,
+}))
 
 watch(
   () => props.modelValue,
@@ -132,7 +145,7 @@ watch(
 )
 
 const toggleCollapse = () => {
-  if (!props.collapsible) {
+  if (!mergedProps.value.collapsible) {
     return
   }
 
@@ -154,10 +167,10 @@ const handleIconClick = (event) => {
 </script>
 
 <template>
-  <div class="s-basic-layout" :style="boxMergedStyle" ref="boxRef">
+  <div class="s-basic-layout" :class="layoutClass" :style="boxMergedStyle" ref="boxRef">
     <div
       class="s-basic-layout__header"
-      v-if="$slots.header || props.title"
+      v-if="$slots.header || mergedProps.title"
       :style="headerMergedStyle"
       ref="headerRef"
       @click="handleHeaderClick"
@@ -165,19 +178,32 @@ const handleIconClick = (event) => {
     >
       <div class="s-basic-layout__header-main">
         <slot name="header">
-          <s-title :title="props.title" :style="{ ...headerStyle }"></s-title>
+          <s-title
+            :title="mergedProps.title"
+            :theme="mergedProps.theme"
+            :style="{ ...mergedProps.headerStyle }"
+          ></s-title>
         </slot>
       </div>
-      <span v-if="collapsible" class="collapse-arrow" :class="{ collapsed: isCollapsed }" @click="handleIconClick">
+      <span
+        v-if="mergedProps.collapsible"
+        class="collapse-arrow"
+        :class="{ collapsed: isCollapsed }"
+        @click="handleIconClick"
+      >
         <slot name="icon">
           <s-icon name="arrow-down"></s-icon>
         </slot>
       </span>
     </div>
-    <div class="s-basic-layout__body" :style="{ ...bodyStyle, ...scrollStyle, ...squareStyle }" v-show="!isCollapsed">
+    <div
+      class="s-basic-layout__body"
+      :style="{ ...mergedProps.bodyStyle, ...scrollStyle, ...squareStyle }"
+      v-show="!isCollapsed"
+    >
       <slot></slot>
     </div>
-    <div class="s-basic-layout__footer" v-if="$slots.footer && !isCollapsed" :style="footerStyle">
+    <div class="s-basic-layout__footer" v-if="$slots.footer && !isCollapsed" :style="mergedProps.footerStyle">
       <slot name="footer"></slot>
     </div>
   </div>

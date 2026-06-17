@@ -12,6 +12,12 @@
 basicLayout/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua"` 时启用成华主题布局样式
+basicLayout/chenghua/base
+:::
+
 ### 展开和收缩
 
 :::demo
@@ -58,6 +64,7 @@ basicLayout/square
 |         `square`         | 内容区按宽高最大值渲染为正方形            | boolean                       | `false`   |
 |      `collapsible`       | 是否允许点击头部展开/收起                 | boolean                       | `false`   |
 |    `collapseTrigger`     | 折叠触发区域                              | `icon` / `header`             | `header`  |
+|         `theme`          | 主题样式                                  | `''` / `chenghua`             | `''`      |
 
 ### 事件
 
