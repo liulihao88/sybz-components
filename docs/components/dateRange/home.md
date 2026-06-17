@@ -14,6 +14,12 @@
 dateRange/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua" 时启用成华主题样式`
+dateRange/chenghua/base
+:::
+
 ### 高度
 
 :::demo
@@ -39,6 +45,7 @@ dateRange/range
 | `title` | 左侧标题文案 | string          | `''`    |
 | `width` | 组件整体宽度 | string / number | `300px` |
 | `height` | 组件整体高度 | string / number | `''`    |
+| `theme` | 主题样式 | `''` / `chenghua` | `''` |
 
 ### 默认行为
 

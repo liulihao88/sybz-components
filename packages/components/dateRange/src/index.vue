@@ -2,6 +2,7 @@
 import { ref, useAttrs, getCurrentInstance, computed } from 'vue'
 import { processWidth } from '@/utils/src'
 import SCompTitle from '@/components/compTitle'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SDateRange',
@@ -20,7 +21,13 @@ const props = defineProps({
     type: [String, Number],
     default: '',
   },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
+  },
 })
+const mergedProps = useGlobalComponentConfig('dateRange', props)
 
 const oneDay = 3600 * 1000 * 24
 const shortcuts = computed(() => {
@@ -159,18 +166,35 @@ const shortcuts = computed(() => {
 const dateRangeStyle = computed(() => {
   const style: Record<string, any> = {}
 
-  if (props.width) {
-    style.width = processWidth(props.width, true)
+  if (mergedProps.value.width) {
+    style.width = processWidth(mergedProps.value.width, true)
   }
 
-  if (props.height) {
-    const dateRangeHeight = processWidth(props.height, true)
+  if (mergedProps.value.height) {
+    const dateRangeHeight = processWidth(mergedProps.value.height, true)
     style.height = dateRangeHeight
     style['--s-date-range-height'] = dateRangeHeight
     style['--el-input-height'] = dateRangeHeight
   }
 
   return style
+})
+const dateRangeClass = computed(() => ({
+  's-date-range--chenghua': mergedProps.value.theme === 'chenghua',
+  'has-title': !!mergedProps.value.title,
+}))
+const inheritedPopperClass = computed(() => {
+  return [attrs['popper-class'], attrs.popperClass]
+    .filter((item) => typeof item === 'string' && item.trim())
+    .join(' ')
+})
+const dateRangePopperClass = computed(() => {
+  return [
+    inheritedPopperClass.value,
+    mergedProps.value.theme === 'chenghua' ? 's-date-range__popper--chenghua' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 })
 /**
 * @描述 日期dateRange选择框
@@ -184,7 +208,7 @@ const dateValue = ref([])
 */
 
 const mergedAttrs = computed(() => {
-  let baseAttrs = {
+  const baseAttrs: Record<string, any> = {
     'value-format': 'YYYY-MM-DD HH:mm:ss',
     format: attrs.type !== 'datetime' ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss',
     type: 'daterange',
@@ -195,12 +219,15 @@ const mergedAttrs = computed(() => {
   }
   const merged = {
     ...baseAttrs,
-    ...Object.entries(attrs).reduce((obj, [key, value]) => {
-      if (key !== 'class' && key !== 'style') {
+    ...Object.entries(attrs).reduce<Record<string, any>>((obj, [key, value]) => {
+      if (!['class', 'style', 'popper-class', 'popperClass'].includes(key)) {
         obj[key] = value
       }
       return obj
     }, {}),
+  }
+  if (dateRangePopperClass.value) {
+    merged['popper-class'] = dateRangePopperClass.value
   }
   console.log(`66 merged`, merged)
   return merged
@@ -208,8 +235,8 @@ const mergedAttrs = computed(() => {
 </script>
 
 <template>
-  <span class="s-date-range" :style="dateRangeStyle">
-    <s-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
+  <span class="s-date-range" :class="dateRangeClass" :style="dateRangeStyle">
+    <s-comp-title :title="mergedProps.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
     <el-date-picker :shortcuts="shortcuts" v-bind="mergedAttrs" class="s-date-range__picker"></el-date-picker>
   </span>
 </template>

@@ -13,7 +13,7 @@ const disabledDate = (time) => {
 <template>
   <div>
     <s-title title="年月日 时分秒"></s-title>
-    <s-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></s-date-range>
+    <s-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange" ></s-date-range>
     <s-title title="多属性"></s-title>
     <s-date-range
       v-model="dateValue"
