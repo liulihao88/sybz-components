@@ -16,7 +16,7 @@ dialog/base
 
 ### 抽屉式用法
 
-设置 `type="drawer"` 时，`s-dialog` 会按抽屉方式展示。`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`。
+设置 `type="drawer"` 时，`s-dialog` 会按抽屉方式展示。`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`。设置 `width` 可以控制抽屉宽度，`width` 支持 `string` 和 `number`，默认值是 `''`。
 
 :::demo
 dialog/drawer
@@ -42,7 +42,7 @@ dialog/chenghua/base
 
 #### chenghua 抽屉式用法
 
-设置 `theme="chenghua"` 和 `type="drawer"` 时，`s-dialog` 会按成华主题的抽屉式弹层展示。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`。
+设置 `theme="chenghua"` 和 `type="drawer"` 时，`s-dialog` 会按成华主题的抽屉式弹层展示。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
 
 :::demo
 dialog/chenghua/drawer
@@ -106,6 +106,7 @@ app.use(SybzComponents, {
 |      属性名       | 说明                                                                                    | 类型                                          | 默认值 |
 | :---------------: | --------------------------------------------------------------------------------------- | --------------------------------------------- | ------ |
 |       title       | 顶部title                                                                               | string                                        | 提示   |
+|       width       | 弹框宽度；当 `type="drawer"` 时用于控制抽屉宽度                                       | string / number                               | ''     |
 |       theme       | 弹框样式，可选 `chenghua`                                                               | string                                        | -      |
 |       type        | 弹框类型，可选 `drawer`                                                                 | string                                        | ''     |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                    | boolean                                       | false  |

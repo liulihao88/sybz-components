@@ -77,7 +77,7 @@
 
 <script setup lang="ts">
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
-import { getType } from '@/utils/src/index'
+import { getType, processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
 
@@ -95,6 +95,10 @@ const props = defineProps({
   title: {
     type: String,
     default: '提示',
+  },
+  width: {
+    type: [String, Number],
+    default: '',
   },
   theme: {
     type: String,
@@ -167,14 +171,15 @@ const componentClass = computed(() => {
 })
 
 const isDrawer = computed(() => mergedProps.value.type === 'drawer')
+const panelWidth = computed(() => processWidth(mergedProps.value.width, true))
 
 const defaultPanelAttrs = computed(() => {
   return isDrawer.value
     ? {
-        size: 'min(480px, calc(100vw - 32px))',
+        size: panelWidth.value || 'min(480px, calc(100vw - 32px))',
       }
     : {
-        width: '640px',
+        width: panelWidth.value || '640px',
       }
 })
 

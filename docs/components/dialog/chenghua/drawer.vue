@@ -6,6 +6,7 @@ const visible = ref(false)
 const configs = [
   { label: 'theme', value: 'chenghua', defaultValue: "''" },
   { label: 'type', value: 'drawer', defaultValue: "''" },
+  { label: 'width', value: 'string / number', defaultValue: "''" },
   { label: 'showFooter', value: 'true / false', defaultValue: 'true' },
 ]
 </script>
@@ -18,14 +19,14 @@ const configs = [
       title="成华抽屉式 dialog"
       theme="chenghua"
       type="drawer"
-      size="480px"
+      width="1000"
       confirm-text="保存"
       cancel-text="关闭"
     >
       <div class="chenghua-drawer-demo__content">
         <section class="chenghua-drawer-demo__section">
           <h4>抽屉式弹层</h4>
-          <p>同时设置 theme="chenghua" 和 type="drawer" 后，会使用成华主题的右侧抽屉面板。</p>
+          <p>同时设置 theme="chenghua" 和 type="drawer" 后，会使用成华主题的右侧抽屉面板；设置 width 可以控制抽屉宽度。</p>
         </section>
 
         <section class="chenghua-drawer-demo__section">
