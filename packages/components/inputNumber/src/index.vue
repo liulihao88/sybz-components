@@ -1,6 +1,12 @@
 <template>
   <div class="s-input-number" v-bind="mergedProps.subAttrs" :style="[inputNumberStyle, attrs.style]" :class="inputNumberClass">
-    <s-comp-title v-if="mergedProps.title" :title="mergedProps.title" :size="attrs.size" :boxStyle="mergedProps.boxStyle" />
+    <s-comp-title
+      v-if="mergedProps.title"
+      :title="mergedProps.title"
+      :size="attrs.size"
+      :boxStyle="mergedProps.boxStyle"
+      :theme="mergedProps.theme"
+    />
     <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
       <template v-for="(_, name) in $slots" #[name]="slotProps">
         <slot :name="name" v-bind="slotProps || {}" />
