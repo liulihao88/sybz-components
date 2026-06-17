@@ -14,6 +14,22 @@
 dialog/base
 :::
 
+### 抽屉式用法
+
+设置 `type="drawer"` 时，`s-dialog` 会按抽屉方式展示。`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`。
+
+:::demo
+dialog/drawer
+:::
+
+#### drawer 配合 fillSlot
+
+`fillSlot` 的可选值是 `true` 和 `false`，默认值是 `false`。
+
+:::demo
+dialog/drawerFillSlot
+:::
+
 ### 成华样式
 
 设置 `theme="chenghua"` 可以切换到成华样式。成华主题默认展示底部按钮，和普通 dialog 行为一致。
@@ -22,6 +38,14 @@ dialog/base
 
 :::demo
 dialog/chenghua/base
+:::
+
+#### chenghua 抽屉式用法
+
+设置 `theme="chenghua"` 和 `type="drawer"` 时，`s-dialog` 会按成华主题的抽屉式弹层展示。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`。
+
+:::demo
+dialog/chenghua/drawer
 :::
 
 ### 通常用法
@@ -57,18 +81,6 @@ dialog组件如果把@confirm换成:confirm, 那么子组件会优先处理属�
 dialog/confirmLoading
 :::
 
----
-
-### dialog组件生成的drawer
-
-:::demo
-dialog/drawer
-:::
-
-:::demo drawer 配合 fillSlot
-dialog/drawerFillSlot
-:::
-
 ### 内部高度占满100%: fillSlot
 
 :::demo
@@ -95,6 +107,7 @@ app.use(SybzComponents, {
 | :---------------: | --------------------------------------------------------------------------------------- | --------------------------------------------- | ------ |
 |       title       | 顶部title                                                                               | string                                        | 提示   |
 |       theme       | 弹框样式，可选 `chenghua`                                                               | string                                        | -      |
+|       type        | 弹框类型，可选 `drawer`                                                                 | string                                        | ''     |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                    | boolean                                       | false  |
 |    cancelText     | 取消按钮文本                                                                            | string                                        | 取消   |
 |    confirmText    | 确认按钮文本                                                                            | string                                        | 确认   |

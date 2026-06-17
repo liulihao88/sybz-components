@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
+
 const isShow = ref(false)
 </script>
 
 <template>
   <div>
-    <s-dialog ref="dialogRef" title="我是dialog组件生成的drawer" type="drawer" v-model="isShow"></s-dialog>
-
-    <el-button type="primary" @click="isShow = true">打开dialog组件生成的drawer</el-button>
+    <el-button type="primary" @click="isShow = true">打开 drawer</el-button>
+    <s-dialog v-model="isShow" title="抽屉式 dialog" type="drawer">
+      <p>设置 type="drawer" 后，s-dialog 会使用抽屉方式从页面侧边打开。</p>
+      <p>type 可选值：''、drawer；默认值：''。</p>
+    </s-dialog>
   </div>
 </template>
