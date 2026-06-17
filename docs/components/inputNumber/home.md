@@ -25,6 +25,12 @@
 inputNumber/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua" 时启用成华主题样式`
+inputNumber/chenghua/base
+:::
+
 ### 高度
 
 :::demo
@@ -52,6 +58,8 @@ inputNumber/usually
 |  `boxStyle`  | 标题前缀区域样式 | object          | `{}`   |
 |   `width`    | 组件总宽度       | string / number | `''`   |
 |   `height`   | 组件总高度       | string / number | `''`   |
+|   `theme`    | 主题样式         | `''` / `chenghua` | `''` |
+| `controls-position` | 控制按钮位置 | `''` / `right` | `right` |
 |  `subAttrs`  | 外层容器额外属性 | object          | `{}`   |
 
 ### 插槽

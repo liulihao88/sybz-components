@@ -1,6 +1,6 @@
 <template>
-  <div class="s-input-number" v-bind="props.subAttrs" :style="[inputNumberStyle, attrs.style]" :class="attrs.class">
-    <s-comp-title v-if="props.title" :title="props.title" :size="attrs.size" :boxStyle="props.boxStyle" />
+  <div class="s-input-number" v-bind="mergedProps.subAttrs" :style="[inputNumberStyle, attrs.style]" :class="inputNumberClass">
+    <s-comp-title v-if="mergedProps.title" :title="mergedProps.title" :size="attrs.size" :boxStyle="mergedProps.boxStyle" />
     <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
       <template v-for="(_, name) in $slots" #[name]="slotProps">
         <slot :name="name" v-bind="slotProps || {}" />
@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SInputNumber',
@@ -37,6 +38,11 @@ const props = defineProps({
     type: [String, Number],
     default: '',
   },
+  theme: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'chenghua'].includes(value),
+  },
   subAttrs: {
     type: Object,
     default: () => {
@@ -44,6 +50,15 @@ const props = defineProps({
     },
   },
 })
+const mergedProps = useGlobalComponentConfig('inputNumber', props)
+
+const inputNumberClass = computed(() => [
+  attrs.class,
+  {
+    's-input-number--chenghua': mergedProps.value.theme === 'chenghua',
+    'has-title': !!mergedProps.value.title,
+  },
+])
 
 const mergedAttrs = computed(() => {
   const baseAttrs = {
@@ -61,14 +76,15 @@ const mergedAttrs = computed(() => {
 const inputNumberStyle = computed(() => {
   const style: Record<string, any> = {}
 
-  if (props.width) {
-    style.width = processWidth(props.width, true)
+  if (mergedProps.value.width) {
+    style.width = processWidth(mergedProps.value.width, true)
   }
 
-  if (props.height) {
-    const inputNumberHeight = processWidth(props.height, true)
+  if (mergedProps.value.height) {
+    const inputNumberHeight = processWidth(mergedProps.value.height, true)
     style.height = inputNumberHeight
     style['--s-input-number-height'] = inputNumberHeight
+    style['--s-input-number-controls-height'] = `calc((${inputNumberHeight} - 2px) / 2)`
     style['--el-input-height'] = inputNumberHeight
   }
 
@@ -92,6 +108,12 @@ const inputNumberStyle = computed(() => {
   :deep(.el-input-number .el-input__wrapper) {
     height: 100%;
     min-height: var(--s-input-number-height, var(--el-input-height, 32px));
+  }
+
+  :deep(.el-input-number.is-controls-right .el-input-number__decrease),
+  :deep(.el-input-number.is-controls-right .el-input-number__increase) {
+    height: var(--s-input-number-controls-height, var(--el-input-number-controls-height));
+    line-height: var(--s-input-number-controls-height, var(--el-input-number-controls-height));
   }
 
   .s-comp-title + :deep(.el-input-number .el-input__wrapper),

@@ -1,6 +1,6 @@
 <template>
   <div v-if="items.length" ref="rootRef" class="api-intro">
-    <s-tooltip v-for="item in items" :key="item.key" placement="bottom" effect="light">
+    <s-tooltip v-for="item in items" :key="item.key" placement="bottom" effect="light" showAfter="100">
       <code class="api-intro__tag" v-copy:click="item.displayName">
         <span class="api-intro__kind">{{ item.kind }}</span>
         <span>
