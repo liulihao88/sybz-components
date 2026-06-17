@@ -88,11 +88,6 @@ app.use(SybzComponents, {
 })
 ```
 
-| 配置项                  | 可选值             | 默认值 | 说明                         |
-| ----------------------- | ------------------ | ------ | ---------------------------- |
-| `theme`                 | `'' \| 'chenghua'` | `''`   | 公共主题，dialog 会作为默认主题 |
-| `dialog.theme`          | `'' \| 'chenghua'` | `''`   | dialog 单独主题，优先级高于公共配置 |
-| `dialog.hideHeaderIcon` | `boolean`          | `false` | 是否隐藏顶部默认 icon        |
 
 ### 属性
 
