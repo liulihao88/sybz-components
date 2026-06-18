@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { getStorage, setStorage } from '@sybz-components/utils'
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useData, useRoute, useRouter } from 'vitepress'
 
@@ -45,23 +46,17 @@ let dragStartY = 0
 let dragMoved = false
 let suppressNextClick = false
 
-type BrowserStorageName = 'localStorage' | 'sessionStorage'
-
-const getStorageItem = (storageName: BrowserStorageName, key: string) => {
-  if (typeof window === 'undefined') return null
-
+const safeGetStorage = <T = any,>(storageName: string, isSession = false) => {
   try {
-    return window[storageName].getItem(key)
+    return getStorage<T>(storageName, isSession)
   } catch {
     return null
   }
 }
 
-const setStorageItem = (storageName: BrowserStorageName, key: string, value: string) => {
-  if (typeof window === 'undefined') return
-
+const safeSetStorage = (storageName: string, value: unknown, isSession = false) => {
   try {
-    window[storageName].setItem(key, value)
+    setStorage(storageName, value, isSession)
   } catch {
     // Storage can be blocked by browser privacy settings; UI state should still update.
   }
@@ -188,11 +183,11 @@ const clampPosition = (left: number, top: number, isExpanded = expanded.value) =
 }
 
 const savePosition = () => {
-  setStorageItem('localStorage', STORAGE_KEY, JSON.stringify(position.value))
+  safeSetStorage(STORAGE_KEY, position.value)
 }
 
 const saveExpandedState = () => {
-  setStorageItem('sessionStorage', EXPANDED_STORAGE_KEY, expanded.value ? 'expanded' : 'collapsed')
+  safeSetStorage(EXPANDED_STORAGE_KEY, expanded.value ? 'expanded' : 'collapsed', true)
 }
 
 const syncPosition = () => {
@@ -323,21 +318,17 @@ const handlePanelDragStart = (event: PointerEvent) => {
 }
 
 onMounted(() => {
-  const rawExpanded = getStorageItem('sessionStorage', EXPANDED_STORAGE_KEY)
-  const rawPosition = getStorageItem('localStorage', STORAGE_KEY)
+  const rawExpanded = safeGetStorage<string>(EXPANDED_STORAGE_KEY, true)
+  const rawPosition = safeGetStorage<Partial<typeof DEFAULT_POSITION>>(STORAGE_KEY)
 
   if (rawExpanded === 'expanded' || rawExpanded === 'collapsed') {
     expanded.value = rawExpanded === 'expanded'
   }
 
-  if (rawPosition) {
-    try {
-      const parsedPosition = JSON.parse(rawPosition)
-      if (typeof parsedPosition.left === 'number' && typeof parsedPosition.top === 'number') {
-        position.value = clampPosition(parsedPosition.left, parsedPosition.top)
-      }
-    } catch {
-      position.value = { ...DEFAULT_POSITION }
+  if (rawPosition && typeof rawPosition === 'object') {
+    const parsedPosition = rawPosition as Partial<typeof DEFAULT_POSITION>
+    if (typeof parsedPosition.left === 'number' && typeof parsedPosition.top === 'number') {
+      position.value = clampPosition(parsedPosition.left, parsedPosition.top)
     }
   }
 
