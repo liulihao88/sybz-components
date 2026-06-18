@@ -217,6 +217,17 @@ const scrollSidebarToItem = async (item: QuickItem) => {
   })
 }
 
+const setExpandedState = (nextExpanded: boolean) => {
+  if (expanded.value === nextExpanded) return
+
+  const currentRight = position.value.left + getSidebarWidth(expanded.value)
+
+  expanded.value = nextExpanded
+  position.value = clampPosition(currentRight - getSidebarWidth(nextExpanded), position.value.top, nextExpanded)
+  savePosition()
+  saveExpandedState()
+}
+
 const goTo = async (item: QuickItem) => {
   if (suppressNextClick) {
     suppressNextClick = false
@@ -233,13 +244,12 @@ const toggleExpanded = () => {
     return
   }
 
-  const nextExpanded = !expanded.value
-  const currentRight = position.value.left + getSidebarWidth(expanded.value)
+  setExpandedState(!expanded.value)
+}
 
-  expanded.value = nextExpanded
-  position.value = clampPosition(currentRight - getSidebarWidth(nextExpanded), position.value.top, nextExpanded)
-  savePosition()
-  saveExpandedState()
+const collapseSidebar = () => {
+  suppressNextClick = false
+  setExpandedState(false)
 }
 
 const handleDragMove = (event: PointerEvent) => {
@@ -289,7 +299,7 @@ const handlePanelDragStart = (event: PointerEvent) => {
   const target = event.target as HTMLElement | null
   if (
     target?.closest(
-      'input, textarea, select, [contenteditable="true"], .component-quick-sidebar__collapse, .s-tooltip-box__text',
+      'button, input, textarea, select, [contenteditable="true"], .s-tooltip-box__text',
     )
   ) {
     return
@@ -333,6 +343,8 @@ onUnmounted(() => {
     :class="{ dragging, 'is-expanded': expanded, 'is-collapsed': !expanded }"
     :style="sidebarStyle"
     aria-label="组件快速跳转"
+    :aria-expanded="expanded"
+    :data-state="expanded ? 'expanded' : 'collapsed'"
   >
     <button
       v-if="!expanded"
@@ -340,8 +352,8 @@ onUnmounted(() => {
       class="component-quick-sidebar__collapsed-button"
       type="button"
       title="展开快捷导航"
-      @pointerdown="handleDragStart"
-      @click="toggleExpanded"
+      @pointerdown.stop="handleDragStart"
+      @click.stop="toggleExpanded"
     >
       开
     </button>
@@ -367,7 +379,7 @@ onUnmounted(() => {
           type="button"
           title="收起快捷导航"
           @pointerdown.stop
-          @click="toggleExpanded"
+          @click.stop="collapseSidebar"
         >
           收
         </button>
