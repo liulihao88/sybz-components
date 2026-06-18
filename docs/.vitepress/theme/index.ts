@@ -72,9 +72,10 @@ export default {
       title: {
         // theme: 'chenghua',
       },
-      select: {
-        
-      }
+      tooltip: {
+        // showAfter: 1500,
+      },
+      select: {},
     })
     ctx.app.use(VueTippy)
 
