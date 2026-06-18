@@ -1,0 +1,89 @@
+.s-input.s-input--chenghua.s-input--chenghua {
+  font-family: var(--s-ch-font-family);
+
+  .el-input,
+  .el-textarea,
+  .el-autocomplete {
+    --el-input-border-color: var(--s-ch-primary-border);
+    --el-input-hover-border-color: var(--s-ch-primary-border-hover);
+    --el-input-focus-border-color: var(--s-ch-primary);
+    --el-input-text-color: var(--s-ch-text);
+    --el-input-placeholder-color: var(--s-ch-text-muted);
+    --el-input-bg-color: var(--s-ch-bg);
+  }
+
+  .el-input__wrapper,
+  .el-textarea__inner {
+    border-radius: var(--s-ch-radius);
+    background: var(--s-ch-control-bg);
+    box-shadow: 0 0 0 1px var(--s-ch-primary-border) inset;
+    transition:
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .el-input-group--prepend .el-input-group__prepend {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .el-input-group--prepend .el-input__wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .el-input-group--append .el-input-group__append {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .el-input-group--append .el-input__wrapper {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .el-input__wrapper:hover,
+  .el-textarea__inner:hover {
+    box-shadow: 0 0 0 1px var(--s-ch-primary-border-hover) inset;
+  }
+
+  .el-input__wrapper.is-focus,
+  .el-textarea__inner:focus {
+    box-shadow:
+      0 0 0 1px var(--s-ch-primary) inset,
+      0 8px 18px rgba(var(--s-ch-primary-rgb), 0.08);
+  }
+
+  .el-input-group__prepend,
+  .el-input-group__append {
+    border-color: transparent;
+    background: var(--s-ch-fill);
+    color: var(--s-ch-text);
+    box-shadow: 0 0 0 1px var(--s-ch-primary-border) inset;
+    font-weight: 500;
+  }
+
+  .s-input__title {
+    color: var(--s-ch-text);
+    font-weight: 500;
+  }
+
+  .el-input__prefix,
+  .el-input__suffix,
+  .el-input__count,
+  .el-textarea .el-input__count {
+    color: var(--s-ch-text-muted);
+  }
+
+  .el-input__clear,
+  .el-input__password {
+    color: var(--s-ch-primary);
+  }
+
+  .el-input.is-disabled .el-input__wrapper,
+  .el-textarea.is-disabled .el-textarea__inner {
+    background: var(--s-ch-disabled-bg);
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08) inset;
+  }
+}
+

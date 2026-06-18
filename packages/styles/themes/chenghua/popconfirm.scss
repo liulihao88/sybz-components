@@ -1,0 +1,31 @@
+.s-popconfirm__simple_box--chenghua.s-popconfirm__simple_box--chenghua {
+  font-family: var(--s-ch-font-family);
+}
+
+.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua {
+  padding: 14px !important;
+  border: 1px solid rgba(var(--s-ch-primary-rgb), 0.16) !important;
+  border-radius: var(--s-ch-radius) !important;
+  box-shadow: 0 12px 32px rgba(var(--s-ch-primary-rgb), 0.14) !important;
+  font-family: var(--s-ch-font-family);
+}
+
+.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .el-popover__title {
+  margin-bottom: 8px;
+  color: var(--s-ch-text);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .s-popconfirm__content {
+  color: var(--s-ch-text-regular);
+  font-size: 13px;
+}
+
+.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .s-popconfirm__content code {
+  background: rgba(var(--s-ch-primary-rgb), 0.08);
+  color: var(--s-ch-primary);
+  font-weight: 600;
+}
+

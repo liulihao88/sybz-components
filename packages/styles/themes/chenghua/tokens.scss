@@ -1,0 +1,44 @@
+:root {
+  --s-ch-primary: #165dff;
+  --s-ch-primary-hover: #1e6efc;
+  --s-ch-primary-active: #0f4fd6;
+  --s-ch-primary-rgb: 22, 93, 255;
+  --s-ch-primary-hover-rgb: 30, 110, 252;
+  --s-ch-accent: #00c5e7;
+  --s-ch-accent-hover: #00b8df;
+  --s-ch-accent-active: #00a4c9;
+  --s-ch-accent-rgb: 0, 197, 231;
+  --s-ch-text: #1d2b4f;
+  --s-ch-text-regular: #33415f;
+  --s-ch-text-muted: #6f7a95;
+  --s-ch-text-secondary: #979797;
+  --s-ch-success: #00a870;
+  --s-ch-success-rgb: 0, 168, 112;
+  --s-ch-warning: #ff7d00;
+  --s-ch-warning-rgb: 255, 125, 0;
+  --s-ch-danger: #f53f3f;
+  --s-ch-danger-rgb: 245, 63, 63;
+  --s-ch-info: #6f7a95;
+  --s-ch-info-rgb: 111, 122, 149;
+  --s-ch-bg: #ffffff;
+  --s-ch-bg-soft: #f8fbff;
+  --s-ch-fill: #edf4ff;
+  --s-ch-row-alt: #fbfdff;
+  --s-ch-row-hover: #f3f8ff;
+  --s-ch-disabled-bg: #f6f8fb;
+  --s-ch-divider: rgba(15, 23, 42, 0.08);
+  --s-ch-radius: 8px;
+  --s-ch-radius-small: 6px;
+  --s-ch-radius-large: 16px;
+  --s-ch-font-family: 'PingFang SC', sans-serif;
+  --s-ch-primary-soft: rgba(var(--s-ch-primary-rgb), 0.08);
+  --s-ch-primary-soft-2: rgba(var(--s-ch-primary-rgb), 0.1);
+  --s-ch-primary-border: rgba(var(--s-ch-primary-rgb), 0.2);
+  --s-ch-primary-border-hover: rgba(var(--s-ch-primary-rgb), 0.42);
+  --s-ch-primary-shadow: rgba(var(--s-ch-primary-rgb), 0.18);
+  --s-ch-primary-shadow-weak: rgba(var(--s-ch-primary-rgb), 0.08);
+  --s-ch-comp-title-padding-x: 14px;
+  --s-ch-header-bg: linear-gradient(180deg, var(--s-ch-bg-soft) 0%, #eef5ff 100%);
+  --s-ch-control-bg: linear-gradient(180deg, var(--s-ch-bg) 0%, var(--s-ch-bg-soft) 100%);
+}
+
