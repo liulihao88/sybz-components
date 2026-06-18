@@ -72,6 +72,9 @@ export default {
       title: {
         // theme: 'chenghua',
       },
+      inputNumber:{
+        // size: 'small'
+      },
       tooltip: {
         // showAfter: 1500,
       },

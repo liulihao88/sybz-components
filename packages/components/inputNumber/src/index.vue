@@ -3,7 +3,7 @@
     <s-comp-title
       v-if="mergedProps.title"
       :title="mergedProps.title"
-      :size="attrs.size"
+      :size="mergedProps.size"
       :boxStyle="mergedProps.boxStyle"
       :theme="mergedProps.theme"
     />
@@ -49,6 +49,11 @@ const props = defineProps({
     default: '',
     validator: (value: string) => ['', 'chenghua'].includes(value),
   },
+  size: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['', 'large', 'default', 'small'].includes(value),
+  },
   subAttrs: {
     type: Object,
     default: () => {
@@ -69,6 +74,7 @@ const inputNumberClass = computed(() => [
 const mergedAttrs = computed(() => {
   const baseAttrs = {
     'controls-position': 'right',
+    size: mergedProps.value.size || undefined,
   }
 
   return Object.entries(attrs).reduce((obj, [key, value]) => {

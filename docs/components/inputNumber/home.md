@@ -59,6 +59,7 @@ inputNumber/usually
 |   `width`    | 组件总宽度       | string / number | `''`   |
 |   `height`   | 组件总高度       | string / number | `''`   |
 |   `theme`    | 主题样式         | `''` / `chenghua` | `''` |
+|    `size`    | 输入框尺寸       | `''` / `large` / `default` / `small` | `''` |
 | `controls-position` | 控制按钮位置 | `''` / `right` | `right` |
 |  `subAttrs`  | 外层容器额外属性 | object          | `{}`   |
 
