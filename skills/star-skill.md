@@ -38,11 +38,13 @@ metadata:
 - `compTitle`
 - `dateRange`
 - `dialog`
+- `empty`
 - `input`
 - `inputNumber`
 - `popconfirm`
 - `radio`
 - `select`
+- `switch`
 - `tag`
 - `title`
 - `tooltip`

@@ -246,7 +246,7 @@ export default defineConfig({
               link: '/components/drawer/home.md',
             },
             {
-              text: 'empty组件',
+              text: sybzMark('empty组件'),
               link: '/components/empty/home.md',
             },
             {
@@ -274,7 +274,7 @@ export default defineConfig({
               link: '/components/select/home.md',
             },
             {
-              text: 'switch组件',
+              text: sybzMark('switch组件'),
               link: '/components/switch/home.md',
             },
             {

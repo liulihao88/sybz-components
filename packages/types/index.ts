@@ -6,11 +6,13 @@ export interface SybzComponentsInstallOptions {
   dangerouslyUseHTMLString?: boolean
   button?: SybzComponentInstallConfig
   dialog?: SybzComponentInstallConfig
+  empty?: SybzComponentInstallConfig
   icon?: SybzComponentInstallConfig
   input?: SybzComponentInstallConfig
   popconfirm?: SybzComponentInstallConfig
   radio?: SybzComponentInstallConfig
   select?: SybzComponentInstallConfig
+  switch?: SybzComponentInstallConfig
   tag?: SybzComponentInstallConfig
   table?: SybzComponentInstallConfig
   title?: SybzComponentInstallConfig

@@ -14,6 +14,12 @@
 empty/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`description` 的类型是 `string`，默认值是 `暂无数据`；`width` 支持 `string` 和 `number`，默认值是 `60`。
+empty/chenghua/base
+:::
+
 ### 通常用法
 
 :::demo
@@ -31,6 +37,7 @@ empty/slot
 |    属性名     | 说明                 | 类型            | 默认值       |
 | :-----------: | -------------------- | --------------- | ------------ |
 | `description` | 空状态描述文案       | string          | `暂无数据`   |
+|    `theme`    | 主题样式，支持 `''` / `chenghua` | string          | `''`         |
 |    `width`    | 图片宽度             | string / number | `60`         |
 |   `height`    | 图片高度             | string / number | -            |
 |  `imgAttrs`   | 图片额外样式或属性   | object          | `{}`         |
