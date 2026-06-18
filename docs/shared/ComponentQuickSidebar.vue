@@ -35,9 +35,12 @@ const DEFAULT_POSITION = {
 }
 const STORAGE_KEY = 'sybz-component-quick-sidebar-position'
 const EXPANDED_STORAGE_KEY = 'sybz-component-quick-sidebar-expanded'
+const MIN_VIEWPORT_WIDTH = 1
+const MIN_VIEWPORT_HEIGHT = 1
 const position = ref({ ...DEFAULT_POSITION })
 const dragging = ref(false)
 const expanded = ref(true)
+const mounted = ref(false)
 const keyword = ref('')
 let dragOffsetX = 0
 let dragOffsetY = 0
@@ -59,6 +62,28 @@ const safeSetStorage = (storageName: string, value: unknown, isSession = false) 
     setStorage(storageName, value, isSession)
   } catch {
     // Storage can be blocked by browser privacy settings; UI state should still update.
+  }
+}
+
+const normalizePosition = (rawPosition: unknown) => {
+  const parsedPosition =
+    typeof rawPosition === 'string'
+      ? (() => {
+          try {
+            return JSON.parse(rawPosition)
+          } catch {
+            return null
+          }
+        })()
+      : rawPosition
+
+  if (!parsedPosition || typeof parsedPosition !== 'object') return { ...DEFAULT_POSITION }
+
+  const { left, top } = parsedPosition as Partial<typeof DEFAULT_POSITION>
+
+  return {
+    left: typeof left === 'number' && Number.isFinite(left) ? left : DEFAULT_POSITION.left,
+    top: typeof top === 'number' && Number.isFinite(top) ? top : DEFAULT_POSITION.top,
   }
 }
 
@@ -150,7 +175,7 @@ const filteredGroups = computed(() => {
     .filter((group) => group.items.length)
 })
 const flatItems = computed(() => groups.value.flatMap((group) => group.items))
-const shouldShow = computed(() => route.path.includes('/components/'))
+const shouldShow = computed(() => mounted.value && route.path.includes('/components/'))
 const currentPath = computed(() => route.path.replace(/\/$/, ''))
 const getSidebarWidth = (isExpanded = expanded.value) => (isExpanded ? SIDEBAR_WIDTH : COLLAPSED_WIDTH)
 const currentSidebarWidth = computed(() => getSidebarWidth(expanded.value))
@@ -172,13 +197,15 @@ const getItemIndex = (item: QuickItem) =>
 
 const clampPosition = (left: number, top: number, isExpanded = expanded.value) => {
   if (typeof window === 'undefined') return { left, top }
+  const viewportWidth = Math.max(MIN_VIEWPORT_WIDTH, window.innerWidth || 0)
+  const viewportHeight = Math.max(MIN_VIEWPORT_HEIGHT, window.innerHeight || 0)
   const sidebarWidth = getSidebarWidth(isExpanded)
   const safeLeft = Number.isFinite(left) ? left : DEFAULT_POSITION.left
   const safeTop = Number.isFinite(top) ? top : DEFAULT_POSITION.top
 
   return {
-    left: Math.min(Math.max(0, safeLeft), Math.max(0, window.innerWidth - sidebarWidth)),
-    top: Math.min(Math.max(0, safeTop), Math.max(0, window.innerHeight - MIN_VISIBLE_HEIGHT)),
+    left: Math.min(Math.max(0, safeLeft), Math.max(0, viewportWidth - sidebarWidth)),
+    top: Math.min(Math.max(0, safeTop), Math.max(0, viewportHeight - MIN_VISIBLE_HEIGHT)),
   }
 }
 
@@ -319,23 +346,22 @@ const handlePanelDragStart = (event: PointerEvent) => {
 
 onMounted(() => {
   const rawExpanded = safeGetStorage<string>(EXPANDED_STORAGE_KEY, true)
-  const rawPosition = safeGetStorage<Partial<typeof DEFAULT_POSITION>>(STORAGE_KEY)
+  const rawPosition = safeGetStorage<Partial<typeof DEFAULT_POSITION> | string>(STORAGE_KEY)
 
   if (rawExpanded === 'expanded' || rawExpanded === 'collapsed') {
     expanded.value = rawExpanded === 'expanded'
   }
 
-  if (rawPosition && typeof rawPosition === 'object') {
-    const parsedPosition = rawPosition as Partial<typeof DEFAULT_POSITION>
-    if (typeof parsedPosition.left === 'number' && typeof parsedPosition.top === 'number') {
-      position.value = clampPosition(parsedPosition.left, parsedPosition.top)
-    }
-  }
+  const nextPosition = normalizePosition(rawPosition)
+  position.value = clampPosition(nextPosition.left, nextPosition.top, expanded.value)
+  savePosition()
 
   window.addEventListener('resize', syncPosition)
+  mounted.value = true
 })
 
 onUnmounted(() => {
+  mounted.value = false
   handleDragEnd()
   window.removeEventListener('resize', syncPosition)
 })
