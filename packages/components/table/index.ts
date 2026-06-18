@@ -5,6 +5,7 @@ export type {
   STableColumn,
   STableEmits,
   STableExpose,
+  STablePageAttrs,
   STableProps,
   STableResolvedColumn,
   TableCallbackContext,

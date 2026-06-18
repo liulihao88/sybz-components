@@ -135,6 +135,35 @@ table/compare
 |   `asyncUpdate`   | 是否由外部异步控制分页状态                 | boolean | `false`        |
 |    `pageAttrs`    | 分页组件透传配置                           | object  | `{}`           |
 
+### pageAttrs 内部属性
+
+`pageAttrs` 会透传给内部 `el-pagination`。`s-table` 默认会先设置 `current-page`、`page-size`、`page-sizes`、`layout`、`total`、`size` 等分页属性，再合并 `pageAttrs`；所以 `pageAttrs` 中同名属性会覆盖默认值。分页事件仍统一由 `s-table` 处理并触发 `page-change`。
+
+|       字段名       | 说明                                                                 | 类型               | 默认值                                  |
+| :----------------: | -------------------------------------------------------------------- | ------------------ | --------------------------------------- |
+|    `pageSize`      | 每页条数；覆盖内部根据 `pageSize` prop 维护的值                      | number             | `pageSize` prop，默认 `30`              |
+| `defaultPageSize`  | 非受控模式下的默认每页条数                                           | number             | -                                       |
+|      `total`       | 总条数；覆盖内部根据 `total` / `data.length` 计算的值                | number             | `total ?? data.length`                  |
+|    `pageCount`     | 总页数；设置后 `el-pagination` 可不依赖 `total`                      | number             | -                                       |
+|    `pagerCount`    | 页码按钮数量，需要大于 `4` 小于 `22` 的奇数                          | number             | `7`                                     |
+|   `currentPage`    | 当前页码；覆盖内部根据 `pageNumber` prop 维护的值                    | number             | `pageNumber` prop，默认 `1`             |
+| `defaultCurrentPage` | 非受控模式下的默认当前页码                                         | number             | -                                       |
+|      `layout`      | 分页布局，可包含 `prev`、`pager`、`next`、`jumper`、`sizes`、`total`、`->` | string             | `prev, pager, next, jumper, sizes`      |
+|    `pageSizes`     | 每页条数选项；覆盖 `pageSizes` prop                                  | number[]           | `pageSizes` prop，默认 `[10, 30, 50]`   |
+|   `popperClass`    | 每页条数下拉框的 class                                               | string             | `''`                                    |
+|   `popperStyle`    | 每页条数下拉框样式                                                   | string / object    | -                                       |
+|     `prevText`     | 替代上一页图标的文字                                                 | string             | `''`                                    |
+|     `prevIcon`     | 上一页图标                                                           | string / Component | Element Plus 默认图标                   |
+|     `nextText`     | 替代下一页图标的文字                                                 | string             | `''`                                    |
+|     `nextIcon`     | 下一页图标                                                           | string / Component | Element Plus 默认图标                   |
+|    `teleported`    | 下拉框是否挂载到 body                                                | boolean            | `true`                                  |
+|       `small`      | 是否使用小尺寸，Element Plus 已推荐改用 `size`                       | boolean            | `false`                                 |
+|       `size`       | 分页尺寸，支持 `small` / `default` / `large`                         | string             | `size` prop 或 Element Plus 全局尺寸    |
+|    `background`    | 是否为分页按钮添加背景色                                             | boolean            | `true`                                  |
+|    `disabled`      | 是否禁用分页                                                         | boolean            | `false`                                 |
+| `hideOnSinglePage` | 只有一页时是否隐藏分页                                               | boolean            | `false`                                 |
+|   `appendSizeTo`   | 每页条数下拉框挂载目标                                               | string             | -                                       |
+
 ### 事件
 
 |       事件名        | 说明                      | 回调参数                        |
@@ -142,24 +171,70 @@ table/compare
 |    `page-change`    | 页码或每页条数变化时触发  | `({ pageNumber, pageSize })`    |
 | `update:modelValue` | 内置单选/多选值变化时触发 | `(selectedRow \| selectedRows)` |
 
-### columns 常用字段
+### columns 内部属性
 
-|      字段名       | 说明                                               | 类型               |
-| :---------------: | -------------------------------------------------- | ------------------ |
-|      `label`      | 列标题                                             | string             |
-|      `prop`       | 对应字段名                                         | string             |
-|      `type`       | 特殊列类型，如 `selection` / `expand`              | string             |
-|      `width`      | 列宽                                               | string / number    |
-|      `fixed`      | 固定列                                             | string / boolean   |
-|      `align`      | 对齐方式                                           | string             |
-|     `useSlot`     | 使用插槽渲染，传 `true` 时默认插槽名为 `prop`      | boolean / string   |
-|     `render`      | 自定义渲染函数                                     | function           |
-|     `filter`      | 自定义文本处理                                     | function           |
-|     `handler`     | 单元格点击事件                                     | function           |
-|     `isShow`      | 控制列是否显示，支持布尔值或函数                   | boolean / function |
-| `columnEmptyText` | 当前列的空值占位文案，会覆盖全局 `columnEmptyText` | string             |
-|      `btns`       | 操作栏按钮配置，存在时该列作为操作列渲染           | array              |
-|     `maxBtns`     | 操作栏最多显示的总数量，包含“更多”入口，默认 `4`   | number             |
+`columns` 每一项都会生成一个 `el-table-column`。`s-table` 会额外处理 `useSlot`、`render`、`filter`、`handler`、`isShow`、`columnEmptyText`、`btns`、`maxBtns` 等字段；其它 `el-table-column` 属性会继续透传。
+
+|      字段名       | 说明                                                                 | 类型               | 默认值 |
+| :---------------: | -------------------------------------------------------------------- | ------------------ | ------ |
+|      `label`      | 列标题                                                               | string / number    | -      |
+|      `prop`       | 对应字段名，也是 `useSlot: true` 时的默认插槽名                      | string             | -      |
+|    `property`     | `prop` 的别名，透传给 `el-table-column`                              | string             | -      |
+|      `type`       | 特殊列类型，支持 `selection` / `index` / `expand` 等 Element Plus 类型 | string             | -      |
+|    `className`    | 当前列单元格 class                                                   | string             | -      |
+|  `labelClassName` | 当前列表头 class                                                     | string             | -      |
+|      `width`      | 列宽                                                                 | string / number    | -      |
+|    `minWidth`     | 最小列宽；未设置 `width` 时，`s-table` 会根据标题自动补一个最小宽度  | string / number    | -      |
+|      `fixed`      | 固定列，`true` 表示固定在左侧，也可传 `left` / `right`               | string / boolean   | -      |
+|      `align`      | 单元格对齐方式，支持 `left` / `center` / `right`                     | string             | -      |
+|   `headerAlign`   | 表头对齐方式，未设置时跟随 `align`                                   | string             | -      |
+|    `sortable`     | 是否可排序；远程排序传 `custom`                                      | boolean / string   | `false` |
+|   `sortMethod`    | 自定义排序方法，`sortable` 为 `true` 时生效                          | function           | -      |
+|     `sortBy`      | 指定排序字段或排序取值函数                                           | string / string[] / function | - |
+|   `sortOrders`    | 点击表头时排序顺序                                                   | array              | `['ascending', 'descending', null]` |
+|    `resizable`    | 是否可拖拽调整列宽，表格 `border` 为 `true` 时生效                   | boolean            | `true` |
+|    `columnKey`    | 列 key，使用筛选事件时用于标识列                                     | string             | -      |
+|  `renderHeader`   | Element Plus 表头渲染函数                                            | function           | -      |
+| `showOverflowTooltip` | 内容溢出时是否显示 tooltip                                      | boolean / object   | `true` |
+| `tooltipFormatter` | 溢出 tooltip 内容格式化函数                                         | function           | -      |
+|    `formatter`    | Element Plus 单元格格式化函数                                        | function           | -      |
+|    `selectable`   | `type="selection"` 时判断某行是否可选                                | function           | -      |
+| `reserveSelection` | `type="selection"` 时是否保留选中状态，需要配合 `row-key`           | boolean            | `false` |
+|   `filterMethod`  | Element Plus 筛选方法                                                | function           | -      |
+|  `filteredValue`  | 已选中的筛选值                                                       | array              | -      |
+|     `filters`     | 筛选选项，每项通常包含 `text` 和 `value`                             | array              | -      |
+| `filterPlacement` | 筛选下拉框位置                                                       | string             | -      |
+| `filterMultiple`  | 筛选是否支持多选                                                     | boolean            | `true` |
+| `filterClassName` | 筛选下拉框 class                                                     | string             | -      |
+|      `index`      | `type="index"` 时自定义序号                                          | number / function  | -      |
+|     `useSlot`     | 使用插槽渲染；传 `true` 时插槽名为 `prop`，传字符串时插槽名为该字符串 | boolean / string   | `false` |
+|     `render`      | `s-table` 自定义渲染函数，接收对象参数                               | function           | -      |
+|     `filter`      | `s-table` 自定义文本处理函数                                         | function           | -      |
+|     `handler`     | 单元格点击事件；存在时单元格内容会带点击样式                         | function           | -      |
+|     `isShow`      | 控制列是否显示，支持布尔值或函数                                     | boolean / function | `true` |
+| `columnEmptyText` | 当前列的空值占位文案，会覆盖全局 `columnEmptyText`                   | string             | -      |
+|      `btns`       | 操作栏按钮配置，存在且不为空时该列作为操作列渲染                     | array              | `[]`   |
+|     `maxBtns`     | 操作栏最多显示的总数量，包含“更多”入口                               | number / string    | `4`    |
+
+### columns.btns 内部属性
+
+`btns` 用于配置操作栏按钮。按钮数量超过 `maxBtns` 时，会展示 `maxBtns - 1` 个按钮，其余按钮放入“更多”下拉中。
+
+|   字段名    | 说明                                                                 | 类型               | 默认值 |
+| :---------: | -------------------------------------------------------------------- | ------------------ | ------ |
+|   `prop`    | 操作按钮关联字段，回调参数中的 `value` 会读取 `row[prop]`            | string             | -      |
+|  `content`  | 按钮文案，支持函数                                                   | string / number / function | - |
+|   `title`   | `reConfirm` 开启时的确认提示文案，支持函数                           | string / number / function | `确定删除吗?` |
+|  `handler`  | 点击按钮或确认后执行的方法                                           | function           | -      |
+|  `isShow`   | 控制按钮是否显示，支持布尔值或函数                                   | boolean / function | `true` |
+| `disabled`  | 控制按钮是否禁用，支持布尔值或函数                                   | boolean / function | `false` |
+| `reConfirm` | 是否点击后先弹出二次确认，支持布尔值或函数                           | boolean / function | `false` |
+|  `render`   | 自定义按钮渲染函数，接收对象参数                                     | function           | -      |
+|  `useSlot`  | 使用插槽渲染；传 `true` 时插槽名为 `prop`，传字符串时插槽名为该字符串 | boolean / string   | `false` |
+|   `comp`    | 自定义按钮组件，传组件名或组件对象                                   | string / Component | -      |
+|   `attrs`   | 使用 `comp` 时透传给自定义组件的属性                                 | object             | -      |
+|   `width`   | 操作栏宽度计算时使用的按钮宽度                                       | number / string    | -      |
+| 其它字段    | 未在上表列出的字段会继续透传给内部 `el-button`                       | any                | -      |
 
 ### render 参数
 

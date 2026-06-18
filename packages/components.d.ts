@@ -1,6 +1,7 @@
 import type {
   STableButton as STableButtonType,
   STableColumn as STableColumnType,
+  STablePageAttrs as STablePageAttrsType,
   STableProps as STablePropsType,
   TableCallbackContext as TableCallbackContextType,
   TableColumnList as TableColumnListType,
@@ -16,6 +17,7 @@ declare global {
   type TableCallbackContext = TableCallbackContextType
   type TableModelValue = TableModelValueType
   type TablePageChangePayload = TablePageChangePayloadType
+  type STablePageAttrs = STablePageAttrsType
   type TableSelectionType = TableSelectionTypeType
   type STableProps = STablePropsType
 }

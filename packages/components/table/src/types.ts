@@ -1,4 +1,4 @@
-import type { TableColumnCtx, TableInstance } from 'element-plus'
+import type { PaginationPropsPublic, TableColumnCtx, TableInstance } from 'element-plus'
 import type { Component, VNodeChild } from 'vue'
 
 export type TableRow = Record<string, any>
@@ -50,6 +50,10 @@ export type TableFilter<Row extends TableRow = TableRow> =
   | TableContextHandler<any, Row>
   | ((value: any, row: Row, scope: TableScope<Row>) => any)
 
+export interface STablePageAttrs extends Partial<PaginationPropsPublic> {
+  [key: string]: any
+}
+
 export interface STableButton<Row extends TableRow = TableRow> extends Record<string, any> {
   prop?: string
   content?: string | number | TableContextHandler<string | number, Row> | TableLegacyHandler<string | number>
@@ -68,12 +72,34 @@ export interface STableButton<Row extends TableRow = TableRow> extends Record<st
 export interface STableColumn<Row extends TableRow = TableRow> extends Record<string, any> {
   label?: string | number
   prop?: string
+  property?: string
   type?: string
+  className?: string
+  labelClassName?: string
   width?: number | string
   minWidth?: number | string
   fixed?: string | boolean
   align?: string
+  headerAlign?: string
   sortable?: string | boolean
+  sortMethod?: TableColumnCtx<Row>['sortMethod']
+  sortBy?: TableColumnCtx<Row>['sortBy']
+  sortOrders?: TableColumnCtx<Row>['sortOrders']
+  resizable?: boolean
+  columnKey?: string
+  renderHeader?: TableColumnCtx<Row>['renderHeader']
+  showOverflowTooltip?: TableColumnCtx<Row>['showOverflowTooltip']
+  tooltipFormatter?: TableColumnCtx<Row>['tooltipFormatter']
+  formatter?: TableColumnCtx<Row>['formatter']
+  selectable?: TableColumnCtx<Row>['selectable']
+  reserveSelection?: boolean
+  filterMethod?: TableColumnCtx<Row>['filterMethod']
+  filteredValue?: TableColumnCtx<Row>['filteredValue']
+  filters?: TableColumnCtx<Row>['filters']
+  filterPlacement?: string
+  filterMultiple?: boolean
+  filterClassName?: string
+  index?: TableColumnCtx<Row>['index']
   useSlot?: boolean | string
   render?: TableRender<Row>
   filter?: TableFilter<Row>
@@ -81,7 +107,7 @@ export interface STableColumn<Row extends TableRow = TableRow> extends Record<st
   isShow?: TableMaybeFn<boolean, Row>
   columnEmptyText?: string
   btns?: STableButton<Row>[]
-  maxBtns?: number
+  maxBtns?: number | string
 }
 
 export interface STableResolvedColumn<Row extends TableRow = TableRow> extends STableColumn<Row> {
@@ -116,7 +142,7 @@ export interface STableProps<Row extends TableRow = TableRow> {
   loading?: boolean
   indexAttrs?: Record<string, any>
   asyncUpdate?: boolean
-  pageAttrs?: Record<string, any>
+  pageAttrs?: STablePageAttrs
   modelValue?: TableModelValue<Row>
   selectionType?: TableSelectionType
   selectionAttrs?: Record<string, any>
