@@ -7,7 +7,7 @@ const cc = ref(123)
 <template>
   <div>
     <el-input v-model="cc" v-copy="cc"></el-input>
-    123333
+    12333344
     <div></div>
   </div>
 </template>
