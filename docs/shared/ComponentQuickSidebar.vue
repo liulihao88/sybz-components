@@ -33,6 +33,7 @@ const DEFAULT_POSITION = {
   top: 78,
 }
 const STORAGE_KEY = 'sybz-component-quick-sidebar-position'
+const EXPANDED_STORAGE_KEY = 'sybz-component-quick-sidebar-expanded'
 const position = ref({ ...DEFAULT_POSITION })
 const dragging = ref(false)
 const expanded = ref(true)
@@ -134,9 +135,14 @@ const filteredGroups = computed(() => {
 const flatItems = computed(() => groups.value.flatMap((group) => group.items))
 const shouldShow = computed(() => route.path.includes('/components/'))
 const currentPath = computed(() => route.path.replace(/\/$/, ''))
+const getSidebarWidth = (isExpanded = expanded.value) => (isExpanded ? SIDEBAR_WIDTH : COLLAPSED_WIDTH)
+const currentSidebarWidth = computed(() => getSidebarWidth(expanded.value))
 const sidebarStyle = computed(() => ({
   left: `${position.value.left}px`,
   top: `${position.value.top}px`,
+  width: `${currentSidebarWidth.value}px`,
+  minWidth: `${currentSidebarWidth.value}px`,
+  maxWidth: `${currentSidebarWidth.value}px`,
   '--component-quick-sidebar-top': `${position.value.top}px`,
 }))
 
@@ -147,13 +153,15 @@ const isCurrent = (item: QuickItem) =>
 const getItemIndex = (item: QuickItem) =>
   flatItems.value.findIndex((routeItem) => routeItem.normalizedLink === item.normalizedLink) + 1
 
-const clampPosition = (left: number, top: number) => {
+const clampPosition = (left: number, top: number, isExpanded = expanded.value) => {
   if (typeof window === 'undefined') return { left, top }
-  const sidebarWidth = expanded.value ? SIDEBAR_WIDTH : COLLAPSED_WIDTH
+  const sidebarWidth = getSidebarWidth(isExpanded)
+  const safeLeft = Number.isFinite(left) ? left : DEFAULT_POSITION.left
+  const safeTop = Number.isFinite(top) ? top : DEFAULT_POSITION.top
 
   return {
-    left: Math.min(Math.max(0, left), Math.max(0, window.innerWidth - sidebarWidth)),
-    top: Math.min(Math.max(0, top), Math.max(0, window.innerHeight - MIN_VISIBLE_HEIGHT)),
+    left: Math.min(Math.max(0, safeLeft), Math.max(0, window.innerWidth - sidebarWidth)),
+    top: Math.min(Math.max(0, safeTop), Math.max(0, window.innerHeight - MIN_VISIBLE_HEIGHT)),
   }
 }
 
@@ -161,6 +169,17 @@ const savePosition = () => {
   if (typeof window === 'undefined') return
 
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(position.value))
+}
+
+const saveExpandedState = () => {
+  if (typeof window === 'undefined') return
+
+  window.sessionStorage.setItem(EXPANDED_STORAGE_KEY, expanded.value ? 'expanded' : 'collapsed')
+}
+
+const syncPosition = () => {
+  position.value = clampPosition(position.value.left, position.value.top)
+  savePosition()
 }
 
 const getRoutePath = (item: QuickItem) => {
@@ -214,9 +233,13 @@ const toggleExpanded = () => {
     return
   }
 
-  expanded.value = !expanded.value
-  position.value = clampPosition(position.value.left, position.value.top)
+  const nextExpanded = !expanded.value
+  const currentRight = position.value.left + getSidebarWidth(expanded.value)
+
+  expanded.value = nextExpanded
+  position.value = clampPosition(currentRight - getSidebarWidth(nextExpanded), position.value.top, nextExpanded)
   savePosition()
+  saveExpandedState()
 }
 
 const handleDragMove = (event: PointerEvent) => {
@@ -276,20 +299,30 @@ const handlePanelDragStart = (event: PointerEvent) => {
 }
 
 onMounted(() => {
+  const rawExpanded = window.sessionStorage.getItem(EXPANDED_STORAGE_KEY)
   const rawPosition = window.localStorage.getItem(STORAGE_KEY)
-  if (!rawPosition) return
 
-  try {
-    const parsedPosition = JSON.parse(rawPosition)
-    if (typeof parsedPosition.left !== 'number' || typeof parsedPosition.top !== 'number') return
-    position.value = clampPosition(parsedPosition.left, parsedPosition.top)
-  } catch {
-    position.value = { ...DEFAULT_POSITION }
+  if (rawExpanded === 'expanded' || rawExpanded === 'collapsed') {
+    expanded.value = rawExpanded === 'expanded'
   }
+
+  if (rawPosition) {
+    try {
+      const parsedPosition = JSON.parse(rawPosition)
+      if (typeof parsedPosition.left === 'number' && typeof parsedPosition.top === 'number') {
+        position.value = clampPosition(parsedPosition.left, parsedPosition.top)
+      }
+    } catch {
+      position.value = { ...DEFAULT_POSITION }
+    }
+  }
+
+  window.addEventListener('resize', syncPosition)
 })
 
 onUnmounted(() => {
   handleDragEnd()
+  window.removeEventListener('resize', syncPosition)
 })
 </script>
 
@@ -297,12 +330,13 @@ onUnmounted(() => {
   <aside
     v-if="shouldShow"
     class="component-quick-sidebar"
-    :class="{ dragging, collapsed: !expanded }"
+    :class="{ dragging, 'is-expanded': expanded, 'is-collapsed': !expanded }"
     :style="sidebarStyle"
     aria-label="组件快速跳转"
   >
     <button
       v-if="!expanded"
+      key="collapsed"
       class="component-quick-sidebar__collapsed-button"
       type="button"
       title="展开快捷导航"
@@ -311,7 +345,7 @@ onUnmounted(() => {
     >
       开
     </button>
-    <div v-else class="component-quick-sidebar__body" @pointerdown="handlePanelDragStart">
+    <div v-else key="expanded" class="component-quick-sidebar__body" @pointerdown="handlePanelDragStart">
       <div class="component-quick-sidebar__top">
         <input
           v-model="keyword"
@@ -391,36 +425,85 @@ onUnmounted(() => {
   z-index: 43;
   display: none;
   width: 148px;
+  box-sizing: border-box;
   pointer-events: none;
   touch-action: none;
 }
 
-.component-quick-sidebar.collapsed {
+.component-quick-sidebar *,
+.component-quick-sidebar *::before,
+.component-quick-sidebar *::after {
+  box-sizing: border-box;
+}
+
+.component-quick-sidebar.is-collapsed {
   width: 30px;
+  height: 28px;
+  overflow: hidden;
+}
+
+.component-quick-sidebar.is-collapsed .component-quick-sidebar__body {
+  display: none;
 }
 
 .component-quick-sidebar__collapsed-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 30px;
   height: 28px;
-  border: 1px solid var(--vp-c-divider);
+  border: 1px solid color-mix(in srgb, #fff 42%, var(--vp-c-brand-1));
   border-radius: 6px;
-  color: var(--vp-c-text-2);
-  background: var(--vp-c-bg);
-  box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background: var(--vp-c-brand-1);
+  box-shadow:
+    0 8px 24px rgb(0 0 0 / 18%),
+    0 0 0 3px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+  appearance: none;
   font-size: 11px;
   font-weight: 900;
   line-height: 1;
+  text-align: center;
   pointer-events: auto;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .component-quick-sidebar__collapsed-button:hover {
-  color: var(--vp-c-brand-1);
-  background: var(--vp-c-brand-soft);
+  border-color: #fff;
+  color: #fff;
+  background: var(--vp-c-brand-2);
+  box-shadow:
+    0 10px 28px rgb(0 0 0 / 22%),
+    0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 24%, transparent);
+  transform: translateY(-1px);
+}
+
+:global(html.dark) .component-quick-sidebar__collapsed-button {
+  border-color: color-mix(in srgb, #fff 72%, var(--vp-c-brand-1));
+  box-shadow:
+    0 10px 30px rgb(0 0 0 / 46%),
+    0 0 0 3px color-mix(in srgb, var(--vp-c-brand-1) 42%, transparent),
+    0 0 18px color-mix(in srgb, var(--vp-c-brand-1) 52%, transparent);
+}
+
+:global(html.dark) .component-quick-sidebar__collapsed-button:hover {
+  box-shadow:
+    0 12px 34px rgb(0 0 0 / 52%),
+    0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 52%, transparent),
+    0 0 24px color-mix(in srgb, var(--vp-c-brand-1) 64%, transparent);
 }
 
 .component-quick-sidebar__body {
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-height: calc(100vh - var(--component-quick-sidebar-top) - 8px);
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
