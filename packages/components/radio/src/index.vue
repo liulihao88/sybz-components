@@ -1,10 +1,10 @@
 <template>
-  <div class="s-radio-box">
+  <div class="s-radio-box" :class="radioClass">
     <s-comp-title
-      :title="props.title"
-      v-if="props.title"
+      :title="mergedProps.title"
+      v-if="mergedProps.title"
       :boxStyle="$attrs.boxStyle ?? {}"
-      :theme="props.theme"
+      :theme="mergedProps.theme"
       class="s-radio-box__title"
     ></s-comp-title>
     <el-radio-group v-bind="$attrs">
@@ -14,13 +14,13 @@
           v-bind="item"
           :is="radioType"
           :key="index"
-          :label="item[props.label!]"
-          :value="item[props.value!]"
-          :border="border"
-          :disabled="itemDisabled(item, index, parseOptions)"
+          :label="item[mergedProps.label!]"
+          :value="item[mergedProps.value!]"
+          :border="mergedProps.border"
+          :disabled="mergedProps.itemDisabled(item, index, parseOptions)"
         >
           <slot :name="item.slot" v-bind="item">
-            {{ item[props.label!] }}
+            {{ item[mergedProps.label!] }}
           </slot>
         </component>
       </slot>
@@ -29,9 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, getCurrentInstance } from 'vue'
+import { computed, useAttrs } from 'vue'
 import type { PropType } from 'vue'
 import type { RadioItem } from './radio'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SRadio',
@@ -76,29 +77,38 @@ const props = defineProps({
     default: () => {},
   },
 })
+const mergedProps = useGlobalComponentConfig('radio', props)
+const attrs = useAttrs()
 const radioType = computed(() => {
   const obj = {
     radio: 'el-radio',
     button: 'el-radio-button',
   }
-  return obj[props.showType] ?? 'el-radio'
+  return obj[mergedProps.value.showType] ?? 'el-radio'
 })
 const parseOptions = computed(() => {
-  if (props.type === 'boolean') {
+  if (mergedProps.value.type === 'boolean') {
     return [
       { label: true, value: true },
       { label: false, value: false },
     ]
   }
-  if (props.type === 'simple' && props.options.length > 0) {
-    return props.options.map((v) => {
+  if (mergedProps.value.type === 'simple' && mergedProps.value.options.length > 0) {
+    return mergedProps.value.options.map((v) => {
       return {
         label: v,
         value: v,
       }
     })
   }
-  return props.options
+  return mergedProps.value.options
+})
+const radioClass = computed(() => {
+  return {
+    's-radio-box--chenghua': mergedProps.value.theme === 'chenghua',
+    's-radio-box--button': mergedProps.value.showType === 'button',
+    's-radio-box--border': Boolean(attrs.border ?? mergedProps.value.border),
+  }
 })
 </script>
 

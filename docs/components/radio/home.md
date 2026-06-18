@@ -14,6 +14,12 @@
 radio/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`showType` 的可选值是 `radio` 和 `button`，默认值是 `radio`；`border` 的可选值是 `true` 和 `false`，默认值是 `false`。
+radio/chenghua/base
+:::
+
 ### disabled
 
 :::demo 基于 Element-plus 的 `el-radio` 二次封装的**单选组件**，继承原组件的所有属性
@@ -50,6 +56,7 @@ radio/slot
 | :------------: | ------------------------------------------ | ------------------------- | ---------- |
 |    `title`     | 左侧标题文案                               | string                    | -          |
 |     `type`     | 数据类型，支持 `''` / `simple` / `boolean` | string                    | `''`       |
+|    `theme`     | 主题样式，支持 `''` / `chenghua`           | string                    | `''`       |
 |   `showType`   | 展示形式，支持 `radio` / `button`          | string                    | `radio`    |
 |   `options`    | 单选项列表                                 | array                     | `[]`       |
 |    `border`    | 是否显示边框                               | boolean                   | `false`    |

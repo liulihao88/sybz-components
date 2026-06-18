@@ -41,10 +41,12 @@ metadata:
 - `input`
 - `inputNumber`
 - `popconfirm`
+- `radio`
 - `select`
 - `tag`
 - `title`
 - `tooltip`
+- `warning`
 
 ### 原生组件
 

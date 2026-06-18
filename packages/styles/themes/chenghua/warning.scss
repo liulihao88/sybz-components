@@ -1,0 +1,78 @@
+.s-warning-box.s-warning-box--chenghua.s-warning-box--chenghua.s-warning-box--chenghua {
+  --s-warning-ch-color: var(--s-ch-primary);
+  --s-warning-ch-color-rgb: var(--s-ch-primary-rgb);
+  --s-warning-ch-soft: rgba(var(--s-warning-ch-color-rgb), 0.08);
+  --s-warning-ch-border: rgba(var(--s-warning-ch-color-rgb), 0.24);
+  --s-warning-ch-border-strong: rgba(var(--s-warning-ch-color-rgb), 0.66);
+
+  align-items: flex-start;
+  min-height: 40px;
+  border-color: var(--s-warning-ch-border);
+  border-left-color: var(--s-warning-ch-color);
+  border-radius: var(--s-ch-radius);
+  background: linear-gradient(180deg, rgba(var(--s-warning-ch-color-rgb), 0.08) 0%, rgba(var(--s-warning-ch-color-rgb), 0.04) 100%);
+  color: var(--s-ch-text);
+  font-family: var(--s-ch-font-family);
+  box-shadow: 0 6px 18px rgba(var(--s-warning-ch-color-rgb), 0.06);
+
+  .s-warning-box__title,
+  .s-warning-box__title--info,
+  .s-warning-box__title--warning,
+  .s-warning-box__title--error,
+  .s-warning-box__title--simple {
+    color: var(--s-warning-ch-color);
+    font-weight: 600;
+  }
+
+  .s-warning-box__content,
+  .s-warning-box__content--muted {
+    color: var(--s-ch-text-regular);
+    line-height: 1.6;
+  }
+
+  .s-warning-box__icon,
+  .s-warning-box__img {
+    margin-right: 8px;
+  }
+
+  .s-warning-box__icon {
+    color: var(--s-warning-ch-color);
+  }
+
+  code,
+  blue {
+    background-color: var(--s-warning-ch-soft);
+    color: var(--s-warning-ch-color);
+  }
+}
+
+.s-warning-box.s-warning-box--chenghua.s-warning-box--chenghua.s-warning__info {
+  --s-warning-ch-color: var(--s-ch-primary);
+  --s-warning-ch-color-rgb: var(--s-ch-primary-rgb);
+}
+
+.s-warning-box.s-warning-box--chenghua.s-warning-box--chenghua.s-warning__warning {
+  --s-warning-ch-color: var(--s-ch-warning);
+  --s-warning-ch-color-rgb: var(--s-ch-warning-rgb);
+}
+
+.s-warning-box.s-warning-box--chenghua.s-warning-box--chenghua.s-warning__error {
+  --s-warning-ch-color: var(--s-ch-danger);
+  --s-warning-ch-color-rgb: var(--s-ch-danger-rgb);
+}
+
+.s-warning-box.s-warning-box--chenghua.s-warning-box--chenghua.s-warning__simple {
+  --s-warning-ch-color: var(--s-ch-info);
+  --s-warning-ch-color-rgb: var(--s-ch-info-rgb);
+
+  min-height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  .s-warning-box__content,
+  .s-warning-box__content--muted {
+    color: var(--s-ch-text-muted);
+  }
+}

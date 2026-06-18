@@ -9,6 +9,7 @@ export interface SybzComponentsInstallOptions {
   icon?: SybzComponentInstallConfig
   input?: SybzComponentInstallConfig
   popconfirm?: SybzComponentInstallConfig
+  radio?: SybzComponentInstallConfig
   select?: SybzComponentInstallConfig
   tag?: SybzComponentInstallConfig
   table?: SybzComponentInstallConfig

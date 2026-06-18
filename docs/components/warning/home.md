@@ -12,6 +12,12 @@
 warning/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`type` 的可选值是 `info`、`simple`、`warning`、`error`，默认值是 `info`；`size` 的可选值是 `small` 和 `default`，默认值是 `default`。
+warning/chenghua/base
+:::
+
 ### 插槽
 
 :::demo 插槽
@@ -23,6 +29,7 @@ warning/slot
 |          属性名          | 说明                                       | 类型                      | 默认值    |
 | :----------------------: | ------------------------------------------ | ------------------------- | --------- |
 |          title           | 标题内容                                   | string                    | `''`      |
+|          theme           | 主题样式，支持 `''` / `chenghua`           | string                    | `''`      |
 |           type           | 提示类型，支持 `info/simple/warning/error` | string                    | `info`    |
 |         content          | 显示的正文内容                             | string                    | -         |
 |          width           | 宽度                                       | string / number           | `100%`    |

@@ -11,6 +11,7 @@ defineOptions({
 interface Props {
   content: string
   title?: string
+  theme?: '' | 'chenghua'
   type?: 'info' | 'simple' | 'warning' | 'error'
   width?: string | number
   dangerouslyUseHTMLString?: boolean
@@ -24,6 +25,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   title: '',
+  theme: '',
   type: 'info',
   width: '100%',
   dangerouslyUseHTMLString: false,
@@ -64,9 +66,18 @@ const mergedStyle = computed(() => {
   return res
 })
 
+const infoIconColor = computed(() => {
+  return mergedProps.value.theme === 'chenghua' ? 'var(--s-ch-primary)' : 'var(--45)'
+})
+
+const errorIconColor = computed(() => {
+  return mergedProps.value.theme === 'chenghua' ? 'var(--s-ch-danger)' : 'var(--el-color-danger)'
+})
+
 function parseClass(): string {
   let type = mergedProps.value.type
-  return `s-warning__${type}`
+  const themeClass = mergedProps.value.theme === 'chenghua' ? ' s-warning-box--chenghua' : ''
+  return `s-warning__${type}${themeClass}`
 }
 </script>
 
@@ -81,7 +92,7 @@ function parseClass(): string {
     <s-icon
       v-else-if="mergedProps.type === 'error' && mergedProps.icon"
       name="circle-close"
-      :color="'var(--el-color-danger)'"
+      :color="errorIconColor"
       v-bind="mergedProps.iconAttrs"
       class="s-warning-box__icon"
       size="16"
@@ -89,7 +100,7 @@ function parseClass(): string {
     <s-icon
       v-else-if="mergedProps.type !== 'warning' && mergedProps.icon"
       name="warning"
-      :color="'var(--45)'"
+      :color="infoIconColor"
       v-bind="mergedProps.iconAttrs"
       class="s-warning-box__icon"
       size="16"

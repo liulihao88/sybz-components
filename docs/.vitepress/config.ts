@@ -262,7 +262,7 @@ export default defineConfig({
               link: '/components/progress/home.md',
             },
             {
-              text: 'radio组件',
+              text: sybzMark('radio组件'),
               link: '/components/radio/home.md',
             },
             {
@@ -318,7 +318,7 @@ export default defineConfig({
               link: '/components/tooltip/home.md',
             },
             {
-              text: 'warning组件',
+              text: sybzMark('warning组件'),
               link: '/components/warning/home.md',
             },
           ].filter((item) => !isProd || !hiddenDocsInProd.includes(item.link)),
