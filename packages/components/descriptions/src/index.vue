@@ -1,7 +1,7 @@
 <template>
-  <el-descriptions v-bind="{ border: true, ...$attrs }" :column="column" class="s-descriptions">
+  <el-descriptions v-bind="{ border: true, ...$attrs }" :column="column" class="s-descriptions" :class="descriptionsClass">
     <slot>
-      <el-descriptions-item v-for="(item, index) in options" :key="index" v-bind="item.attrs">
+      <el-descriptions-item v-for="(item, index) in mergedProps.options ?? []" :key="index" v-bind="item.attrs">
         <template #label>
           <template v-if="item.labelRender">
             <render-comp :render="item.labelRender" :item="item" />
@@ -15,7 +15,7 @@
               :index="index"
             ></slot>
           </template>
-          <template v-else-if="!props.showAll">
+          <template v-else-if="!mergedProps.showAll">
             <s-tooltip :content="item.label" v-bind="item.labelAttrs"></s-tooltip>
           </template>
           <template v-else>
@@ -30,7 +30,7 @@
           <slot :name="item.valueSlot" :item="item" :label="item.label" :value="parseValue(item)" :index="index"></slot>
         </template>
         <template v-else>
-          <template v-if="props.showAll">
+          <template v-if="mergedProps.showAll">
             {{ parseValue(item) }}
           </template>
           <s-tooltip
@@ -51,6 +51,7 @@ import { computed, VNode, ref, useAttrs, onUnmounted } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import STooltip from '@/components/tooltip/src/index.vue'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SDescriptions',
@@ -60,6 +61,7 @@ const attrs = useAttrs()
 
 type DescriptionsProps = {
   options: ItemOptions[]
+  theme: '' | 'chenghua'
   column: number
   labelWidth: any
   showAll: boolean
@@ -79,10 +81,12 @@ type ItemOptions = {
 }
 
 const props = withDefaults(defineProps<DescriptionsProps>(), {
+  theme: '',
   column: 3,
   labelWidth: 'auto',
   showAll: false,
 })
+const mergedProps = useGlobalComponentConfig('descriptions', props)
 
 // const props = defineProps({
 //   options: {
@@ -141,9 +145,9 @@ const LABEL_EXTRA_WIDTH = 24
 
 const labelWidth2 = computed(() => {
   // 如果设置了 labelWidth 为 "auto" 或者空值，则计算最大宽度
-  if (props.labelWidth === 'auto' || !props.labelWidth) {
+  if (mergedProps.value.labelWidth === 'auto' || !mergedProps.value.labelWidth) {
     let maxWidth = 0
-    ;(props.options ?? []).forEach((v) => {
+    ;(mergedProps.value.options ?? []).forEach((v) => {
       const labelWidth = getLabelWidth(v.label)
       if (labelWidth > maxWidth) {
         maxWidth = labelWidth
@@ -153,12 +157,12 @@ const labelWidth2 = computed(() => {
     return maxWidth + LABEL_EXTRA_WIDTH + 'px'
   }
 
-  if (props.labelWidth && props.labelWidth !== 'auto') {
-    return processWidth(props.labelWidth, true)
+  if (mergedProps.value.labelWidth && mergedProps.value.labelWidth !== 'auto') {
+    return processWidth(mergedProps.value.labelWidth, true)
   }
 })
 
-const column = computed(() => props.column)
+const column = computed(() => mergedProps.value.column)
 
 const parseContent = (value: any) => {
   if (typeof value === 'function') {
@@ -171,6 +175,10 @@ const parseContent = (value: any) => {
 const getTextAlign = computed(() => {
   return attrs.direction === 'vertical' ? 'left' : 'right'
 })
+
+const descriptionsClass = computed(() => ({
+  's-descriptions--chenghua': mergedProps.value.theme === 'chenghua',
+}))
 
 // 在组件卸载时清理测量元素
 

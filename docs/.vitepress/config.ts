@@ -234,7 +234,7 @@ export default defineConfig({
               link: '/components/dateRange/home.md',
             },
             {
-              text: 'descriptions组件',
+              text: sybzMark('descriptions组件'),
               link: '/components/descriptions/home.md',
             },
             {

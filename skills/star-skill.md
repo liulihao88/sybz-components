@@ -37,6 +37,7 @@ metadata:
 - `checkbox`
 - `compTitle`
 - `dateRange`
+- `descriptions`
 - `dialog`
 - `empty`
 - `input`

@@ -5,6 +5,7 @@ export interface SybzComponentsInstallOptions {
   size?: string
   dangerouslyUseHTMLString?: boolean
   button?: SybzComponentInstallConfig
+  descriptions?: SybzComponentInstallConfig
   dialog?: SybzComponentInstallConfig
   empty?: SybzComponentInstallConfig
   icon?: SybzComponentInstallConfig

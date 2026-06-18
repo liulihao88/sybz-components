@@ -14,6 +14,12 @@
 descriptions/base
 :::
 
+### 成华主题
+
+:::demo `theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`column` 的类型是 `number`，默认值是 `3`；`labelWidth` 支持 `string` 和 `number`，默认值是 `auto`；`showAll` 的可选值是 `true` 和 `false`，默认值是 `false`。
+descriptions/chenghua/base
+:::
+
 ### 通常用法
 
 :::demo
@@ -49,6 +55,7 @@ descriptions/customStyle
 |    属性名    | 说明                                                     | 类型            | 默认值  |
 | :----------: | -------------------------------------------------------- | --------------- | ------- |
 |  `options`   | 描述项配置列表                                           | `ItemOptions[]` | -       |
+|   `theme`    | 主题样式，支持 `''` / `chenghua`                         | string          | `''`    |
 |   `column`   | 一行展示的描述项数量                                     | number          | `3`     |
 | `labelWidth` | label 宽度，传 `auto` 时会按最长 label 自动计算          | string / number | `auto`  |
 |  `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean         | `false` |

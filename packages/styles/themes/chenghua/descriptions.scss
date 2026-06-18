@@ -1,0 +1,75 @@
+.s-descriptions.s-descriptions--chenghua.s-descriptions--chenghua {
+  --el-descriptions-table-border: 1px solid var(--s-ch-divider);
+  --el-descriptions-item-bordered-label-background: var(--s-ch-bg-soft);
+
+  color: var(--s-ch-text);
+  font-family: var(--s-ch-font-family);
+
+  .el-descriptions__header {
+    margin-bottom: 12px;
+  }
+
+  .el-descriptions__title {
+    color: var(--s-ch-text);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .el-descriptions__extra {
+    color: var(--s-ch-text-muted);
+    font-size: 14px;
+  }
+
+  .el-descriptions__body {
+    overflow: hidden;
+    border-radius: var(--s-ch-radius);
+    background: var(--s-ch-bg);
+    box-shadow: 0 8px 24px rgba(var(--s-ch-primary-rgb), 0.06);
+  }
+
+  .el-descriptions__table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .el-descriptions__cell {
+    border-color: var(--s-ch-divider) !important;
+    color: var(--s-ch-text-regular);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .el-descriptions__label {
+    background: var(--s-ch-bg-soft) !important;
+    color: var(--s-ch-text);
+    font-weight: 600;
+  }
+
+  .el-descriptions__content {
+    background: var(--s-ch-bg);
+    color: var(--s-ch-text-regular);
+    font-weight: 400;
+  }
+
+  .el-descriptions__table:not(.is-bordered) .el-descriptions__label {
+    background: transparent !important;
+    color: var(--s-ch-text-muted);
+  }
+
+  .el-descriptions__table:not(.is-bordered) .el-descriptions__content {
+    color: var(--s-ch-text);
+  }
+
+  .el-descriptions__table.is-bordered .el-descriptions__cell {
+    padding: 12px 14px;
+  }
+
+  .el-descriptions__table.is-bordered .el-descriptions__label {
+    box-shadow: inset 3px 0 0 rgba(var(--s-ch-primary-rgb), 0.22);
+  }
+
+  .s-descriptions__tooltip {
+    color: var(--s-ch-text-regular);
+  }
+}
