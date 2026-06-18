@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import { readFileSync } from 'fs'
+import { readFileSync, readdirSync } from 'fs'
 import vue from '@vitejs/plugin-vue'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
 import pkg from './package.json'
@@ -87,6 +87,27 @@ export default defineConfig({
           type: 'asset',
           fileName: 'utilities.scss',
           source: readFileSync(utilitiesPath, 'utf-8'),
+        })
+      },
+    },
+    {
+      name: 'emit-types-entry',
+      apply: 'build',
+      generateBundle() {
+        const typesDir = resolve(__dirname, './packages/types')
+        const declarationEntries = [
+          ['index.d.ts', './packages/index.d.ts'],
+          ...readdirSync(typesDir)
+            .filter((fileName) => fileName.endsWith('.d.ts'))
+            .map((fileName) => [`types/${fileName}`, `./packages/types/${fileName}`]),
+        ]
+
+        declarationEntries.forEach(([fileName, sourcePath]) => {
+          this.emitFile({
+            type: 'asset',
+            fileName,
+            source: readFileSync(resolve(__dirname, sourcePath), 'utf-8'),
+          })
         })
       },
     },

@@ -1,14 +1,12 @@
-import type { PaginationPropsPublic, TableColumnCtx, TableInstance } from 'element-plus'
 import type { Component, VNodeChild } from 'vue'
+import type { PaginationPropsPublic, TableColumnCtx, TableInstance } from 'element-plus'
 
 export type TableRow = Record<string, any>
 
 export type TableSelectionType = '' | 'single' | 'multiple'
 
 export interface TablePageChangePayload {
-  /** 当前页码 */
   pageNumber: number
-  /** 每页条数 */
   pageSize: number
 }
 

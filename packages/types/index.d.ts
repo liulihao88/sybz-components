@@ -22,4 +22,4 @@ export interface SybzComponentsInstallOptions {
   [key: string]: any
 }
 
-export type * from './table.ts'
+export type * from './table'

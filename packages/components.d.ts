@@ -3,18 +3,24 @@ import type {
   STableColumn as STableColumnType,
   STablePageAttrs as STablePageAttrsType,
   STableProps as STablePropsType,
+  TableCellContext as TableCellContextType,
   TableCallbackContext as TableCallbackContextType,
   TableColumnList as TableColumnListType,
+  TableFilterContext as TableFilterContextType,
+  TableFilter as TableFilterType,
   TableModelValue as TableModelValueType,
   TablePageChangePayload as TablePageChangePayloadType,
   TableSelectionType as TableSelectionTypeType,
-} from './types/index.ts'
+} from './types/table.ts'
 
 declare global {
   type TableBtnItem = STableButtonType
   type TableColumnItem = STableColumnType
   type TableColumnList = TableColumnListType
+  type TableCellContext = TableCellContextType
   type TableCallbackContext = TableCallbackContextType
+  type TableFilter = TableFilterType
+  type TableFilterContext = TableFilterContextType
   type TableModelValue = TableModelValueType
   type TablePageChangePayload = TablePageChangePayloadType
   type STablePageAttrs = STablePageAttrsType

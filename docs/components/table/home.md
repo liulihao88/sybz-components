@@ -175,6 +175,22 @@ table/compare
 
 `columns` 每一项都会生成一个 `el-table-column`。`s-table` 会额外处理 `useSlot`、`render`、`filter`、`handler`、`isShow`、`columnEmptyText`、`btns`、`maxBtns` 等字段；其它 `el-table-column` 属性会继续透传。
 
+TypeScript 项目中建议从 `sybz-components/types/table` 引入列配置类型，并给 `computed` 或列数组显式标注行数据类型，这样 `filter: ({ row }) => ...`、`render: ({ row }) => ...` 里的 `row` 才能被推导：
+
+```ts
+import type { TableColumnList } from 'sybz-components/types/table'
+
+type TemplateRow = {
+  rank: number
+  templateName: string
+}
+
+const templateTableColumns = computed<TableColumnList<TemplateRow>>(() => [
+  { prop: 'rank', label: '序号', width: 64, align: 'center', useSlot: 'rank' },
+  { prop: 'templateName', label: '热门文案模版', minWidth: 420, filter: ({ row }) => getTemplateName(row) },
+])
+```
+
 |      字段名       | 说明                                                                 | 类型               | 默认值 |
 | :---------------: | -------------------------------------------------------------------- | ------------------ | ------ |
 |      `label`      | 列标题                                                               | string / number    | -      |

@@ -7,11 +7,19 @@
   "main": "dist/sybz-components-es.js",
   "unpkg": "dist/sybz-components-umd.js",
   "module": "dist/sybz-components-es.js",
+  "types": "dist/index.d.ts",
   "style": "dist/style.css",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/sybz-components-es.js",
       "default": "./dist/sybz-components-es.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts"
+    },
+    "./types/*": {
+      "types": "./dist/types/*.d.ts"
     },
     "./style.css": "./dist/style.css",
     "./utilities.css": "./dist/utilities.css",
