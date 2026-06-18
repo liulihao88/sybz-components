@@ -164,7 +164,7 @@ export default defineConfig({
               link: '/components/utils/formatToFixed/home.md',
             },
             {
-              text: 'getType 类型判断',
+              text: sybzMark('getType 类型判断'),
               link: '/components/utils/getType/home.md',
             },
             {
@@ -172,11 +172,11 @@ export default defineConfig({
               link: '/components/utils/isEmpty/home.md',
             },
             {
-              text: 'sleep 延迟函数',
+              text: sybzMark('sleep 延迟函数'),
               link: '/components/utils/sleep/home.md',
             },
             {
-              text: 'tryCatch Promise 封装',
+              text: sybzMark('tryCatch Promise 封装'),
               link: '/components/utils/tryCatch/home.md',
             },
             {
@@ -184,11 +184,11 @@ export default defineConfig({
               link: '/components/utils/uuid/home.md',
             },
             {
-              text: 'validate 表单校验',
+              text: sybzMark('validate 表单校验'),
               link: '/components/utils/validate/home.md',
             },
             {
-              text: 'validForm 表单校验封装',
+              text: sybzMark('validForm 表单校验封装'),
               link: '/components/utils/validForm/home.md',
             },
           ],
@@ -210,7 +210,7 @@ export default defineConfig({
               link: '/components/button/home.md',
             },
             {
-              text: 'checkbox组件',
+              text: sybzMark('checkbox组件'),
               link: '/components/checkbox/home.md',
             },
             {
@@ -226,11 +226,11 @@ export default defineConfig({
               link: '/components/clickOutside/home.md',
             },
             {
-              text: 'compTitle标题前缀',
+              text: sybzMark('compTitle标题前缀'),
               link: '/components/compTitle/home.md',
             },
             {
-              text: 'dateRange组件',
+              text: sybzMark('dateRange组件'),
               link: '/components/dateRange/home.md',
             },
             {
@@ -254,7 +254,7 @@ export default defineConfig({
               link: '/components/functionSourceCode/home.md',
             },
             {
-              text: 'popconfirm组件',
+              text: sybzMark('popconfirm组件'),
               link: '/components/popconfirm/home.md',
             },
             {
@@ -270,7 +270,7 @@ export default defineConfig({
               link: '/components/row/home.md',
             },
             {
-              text: 'select组件',
+              text: sybzMark('select组件'),
               link: '/components/select/home.md',
             },
             {
@@ -290,7 +290,7 @@ export default defineConfig({
               link: '/components/input/home.md',
             },
             {
-              text: 'inputNumber组件',
+              text: sybzMark('inputNumber组件'),
               link: '/components/inputNumber/home.md',
             },
             {
@@ -302,7 +302,7 @@ export default defineConfig({
               link: '/components/tabs/home.md',
             },
             {
-              text: 'tag组件',
+              text: sybzMark('tag组件'),
               link: '/components/tag/home.md',
             },
             {
@@ -310,7 +310,7 @@ export default defineConfig({
               link: '/components/text/home.md',
             },
             {
-              text: 'title组件',
+              text: sybzMark('title组件'),
               link: '/components/title/home.md',
             },
             {

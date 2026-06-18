@@ -18,6 +18,8 @@ metadata:
 
 ## 标记范围
 
+标记范围需要和 `docs/.vitepress/config.ts` 中使用 `sybzMark(...)` 的侧边栏条目保持一致。凡是组件已经支持并展示 `theme="chenghua"` 成华主题，都需要在侧边栏加星号。
+
 ### 函数方法
 
 - `$toast`
@@ -32,14 +34,22 @@ metadata:
 ### Basic 基础组件
 
 - `button`
+- `checkbox`
+- `compTitle`
+- `dateRange`
 - `dialog`
 - `input`
+- `inputNumber`
+- `popconfirm`
+- `select`
+- `tag`
+- `title`
 - `tooltip`
 
 ### 原生组件
 
-- `flex`
 - `basicLayout`
+- `flex`
 
 ### Complex 复杂组件
 
@@ -54,4 +64,5 @@ metadata:
 
 - `copy`
 - `focus`
+- `throttle`
 - `debounce`
