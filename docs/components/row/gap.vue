@@ -2,40 +2,51 @@
 import { computed, ref } from 'vue'
 
 const gapNumber = ref(24)
-const gap = computed(() => String(gapNumber.value))
+const gap = computed(() => `${gapNumber.value}px`)
 </script>
 
 <template>
-  <div class="demo-box">
-    <div class="demo-title">当前 `gap`: "{{ gap }}"</div>
+  <div class="row-gap-demo">
+    <div class="row-gap-demo__meta">
+      <span>属性: gap</span>
+      <span>可选值: number | string</span>
+      <span>默认值: ''</span>
+      <span>当前值: {{ gap }}</span>
+    </div>
+
     <el-slider v-model="gapNumber" :min="0" :max="48" show-input />
 
     <s-row :col="8" :gap="gap">
-      <div class="box">gap=&quot;{{ gap }}&quot;</div>
-      <div class="box">数字字符串</div>
-      <div class="box">自动按 px</div>
+      <div class="row-gap-demo__block">gap</div>
+      <div class="row-gap-demo__block">支持 px</div>
+      <div class="row-gap-demo__block">优先于 gutter</div>
     </s-row>
   </div>
 </template>
 
 <style scoped lang="scss">
-.demo-box {
+.row-gap-demo {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
-.demo-title {
-  color: var(--45);
-}
-
-.box {
-  height: 72px;
+.row-gap-demo__meta {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.row-gap-demo__block {
+  display: flex;
+  min-height: 64px;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  background: #eee;
-  color: #666;
+  background: var(--el-color-primary-light-9);
+  color: var(--el-color-primary);
 }
 </style>

@@ -44,6 +44,7 @@ metadata:
 - `inputNumber`
 - `popconfirm`
 - `radio`
+- `row`
 - `select`
 - `switch`
 - `tag`

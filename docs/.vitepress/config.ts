@@ -266,7 +266,7 @@ export default defineConfig({
               link: '/components/radio/home.md',
             },
             {
-              text: 'row布局组件',
+              text: sybzMark('row布局组件'),
               link: '/components/row/home.md',
             },
             {
