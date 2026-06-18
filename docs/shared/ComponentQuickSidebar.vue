@@ -45,6 +45,28 @@ let dragStartY = 0
 let dragMoved = false
 let suppressNextClick = false
 
+type BrowserStorageName = 'localStorage' | 'sessionStorage'
+
+const getStorageItem = (storageName: BrowserStorageName, key: string) => {
+  if (typeof window === 'undefined') return null
+
+  try {
+    return window[storageName].getItem(key)
+  } catch {
+    return null
+  }
+}
+
+const setStorageItem = (storageName: BrowserStorageName, key: string, value: string) => {
+  if (typeof window === 'undefined') return
+
+  try {
+    window[storageName].setItem(key, value)
+  } catch {
+    // Storage can be blocked by browser privacy settings; UI state should still update.
+  }
+}
+
 const cleanText = (text = '') =>
   text
     .replace(/<[^>]+>/g, '')
@@ -166,15 +188,11 @@ const clampPosition = (left: number, top: number, isExpanded = expanded.value) =
 }
 
 const savePosition = () => {
-  if (typeof window === 'undefined') return
-
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(position.value))
+  setStorageItem('localStorage', STORAGE_KEY, JSON.stringify(position.value))
 }
 
 const saveExpandedState = () => {
-  if (typeof window === 'undefined') return
-
-  window.sessionStorage.setItem(EXPANDED_STORAGE_KEY, expanded.value ? 'expanded' : 'collapsed')
+  setStorageItem('sessionStorage', EXPANDED_STORAGE_KEY, expanded.value ? 'expanded' : 'collapsed')
 }
 
 const syncPosition = () => {
@@ -239,11 +257,7 @@ const goTo = async (item: QuickItem) => {
 }
 
 const toggleExpanded = () => {
-  if (suppressNextClick) {
-    suppressNextClick = false
-    return
-  }
-
+  suppressNextClick = false
   setExpandedState(!expanded.value)
 }
 
@@ -309,8 +323,8 @@ const handlePanelDragStart = (event: PointerEvent) => {
 }
 
 onMounted(() => {
-  const rawExpanded = window.sessionStorage.getItem(EXPANDED_STORAGE_KEY)
-  const rawPosition = window.localStorage.getItem(STORAGE_KEY)
+  const rawExpanded = getStorageItem('sessionStorage', EXPANDED_STORAGE_KEY)
+  const rawPosition = getStorageItem('localStorage', STORAGE_KEY)
 
   if (rawExpanded === 'expanded' || rawExpanded === 'collapsed') {
     expanded.value = rawExpanded === 'expanded'
@@ -352,7 +366,7 @@ onUnmounted(() => {
       class="component-quick-sidebar__collapsed-button"
       type="button"
       title="展开快捷导航"
-      @pointerdown.stop="handleDragStart"
+      @pointerdown.stop
       @click.stop="toggleExpanded"
     >
       开
@@ -448,14 +462,18 @@ onUnmounted(() => {
   box-sizing: border-box;
 }
 
-.component-quick-sidebar.is-collapsed {
+.component-quick-sidebar.is-collapsed,
+.component-quick-sidebar[data-state='collapsed'],
+.component-quick-sidebar[aria-expanded='false'] {
   width: 30px;
   height: 28px;
   overflow: hidden;
 }
 
-.component-quick-sidebar.is-collapsed .component-quick-sidebar__body {
-  display: none;
+.component-quick-sidebar.is-collapsed .component-quick-sidebar__body,
+.component-quick-sidebar[data-state='collapsed'] .component-quick-sidebar__body,
+.component-quick-sidebar[aria-expanded='false'] .component-quick-sidebar__body {
+  display: none !important;
 }
 
 .component-quick-sidebar__collapsed-button {
