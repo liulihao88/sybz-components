@@ -151,7 +151,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'packages'),
-      '@sybz-components/utils': resolve(__dirname, 'packages/utils/src/index.ts'),
       '~dist': resolve(__dirname, 'dist'),
     },
   },
