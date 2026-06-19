@@ -265,7 +265,10 @@ pnpm dev
 | `pnpm dev` | 启动 VitePress 文档开发服务 |
 | `pnpm build` | 构建组件库 |
 | `pnpm docsbuild` | 构建文档站点 |
-| `pnpm lint` | 执行 ESLint |
+| `pnpm lint` | 执行 ESLint 并自动修复 |
+| `pnpm lint:check` | 执行 ESLint 检查，不修改文件 |
+| `pnpm typecheck` | 检查组件库 TS 入口、类型和公共 API |
+| `pnpm typecheck:sfc` | 检查全部 Vue SFC，适合逐步治理存量类型问题 |
 | `pnpm format` | 执行 Prettier 格式化 |
 
 ## 目录结构

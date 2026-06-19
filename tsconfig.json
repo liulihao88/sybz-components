@@ -1,15 +1,24 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "noEmit": true,
     "jsx": "preserve",
-    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": false,
     "paths": {
       "@/*": ["./packages/*"],
       "@sybz-components/utils": ["./packages/utils/src/index.ts"]
     },
     "types": [
+      "vite/client",
       // 用来指定需要包含的模块，并将其包含在全局范围内。
       "element-plus/global",
       "./packages/components.d.ts"

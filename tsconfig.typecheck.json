@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "packages/env.d.ts",
+    "packages/index.ts",
+    "packages/index.d.ts",
+    "packages/components.d.ts",
+    "packages/components/*/src/types.ts",
+    "packages/components/*/src/type.ts",
+    "packages/components/*/src/*.d.ts",
+    "packages/hooks/**/*.ts",
+    "packages/types/**/*.ts",
+    "packages/types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist", "docs"]
+}

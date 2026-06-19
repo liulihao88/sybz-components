@@ -1,5 +1,6 @@
 import './styles/index.scss'
 
+import type { App, Component } from 'vue'
 // 全局注册vue-tippy
 import 'tippy.js/dist/tippy.css'
 import 'tippy.js/themes/light.css'
@@ -7,14 +8,24 @@ import VueTippy from 'vue-tippy'
 
 import registerDirectives from './directives/gDirectives.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { toLine } from './utils/src/index.ts'
 import type { SybzComponentsInstallOptions } from './types/index.ts'
 
 import SSvg from './components/svg/index.ts'
 import { GLOBAL_COMPONENT_COMMON_PROPS_KEY, GLOBAL_COMPONENT_CONFIG_KEY } from './hooks/useGlobalComponentConfig'
 
-const componentsGlobal = import.meta.glob('./components/*/index.ts', { eager: true, import: 'default' }) // 引入全局基础组件
-const componentsCompany = import.meta.glob('./components/company/*/index.ts', { eager: true, import: 'default' }) // 引入业务组件
+type InstallableComponent = Component & {
+  name?: string
+  __name?: string
+}
+
+const componentsGlobal = import.meta.glob<InstallableComponent>('./components/*/index.ts', {
+  eager: true,
+  import: 'default',
+}) // 引入全局基础组件
+const componentsCompany = import.meta.glob<InstallableComponent>('./components/company/*/index.ts', {
+  eager: true,
+  import: 'default',
+}) // 引入业务组件
 
 const allComponents = {
   ...componentsGlobal,
@@ -34,6 +45,11 @@ export { SSvg }
 const isConfigRecord = (value: unknown): value is Record<string, any> => {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
+
+const toLine = (text: string, connect = '-') =>
+  text
+    .replace(/([A-Z])/g, (match, _letter, offset) => (offset === 0 ? match.toLowerCase() : `${connect}${match.toLowerCase()}`))
+    .toLowerCase()
 
 const lowerFirst = (value: string) => value.charAt(0).toLowerCase() + value.slice(1)
 
@@ -75,7 +91,7 @@ const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}
   return resolvedConfig
 }
 
-const install = (app, options: SybzComponentsInstallOptions = {}) => {
+const install = (app: App, options: SybzComponentsInstallOptions = {}) => {
   const componentDefaults = resolveGlobalComponentConfig(options)
 
   if (Object.keys(componentDefaults).length) {
@@ -83,7 +99,7 @@ const install = (app, options: SybzComponentsInstallOptions = {}) => {
   }
 
   Object.keys(allComponents).forEach((key) => {
-    let component = allComponents[key]
+    const component = allComponents[key]
     app.component(component.name || 's' + component.__name, component)
   })
   registerDirectives(app)
@@ -101,7 +117,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export function createSvg(iconDirs) {
-  let res = {
+  const res = {
     Svg: (props) => ({
       component: SSvg,
       props: { ...props, iconDirs }, // 将 iconDirs 传递给 SvgIcon 组件
