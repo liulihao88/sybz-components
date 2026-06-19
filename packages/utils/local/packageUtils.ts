@@ -1,4 +1,4 @@
-import { getVariable } from '../src/index.ts'
+import { getVariable } from '@sybz-components/utils'
 export function getPieColorByDataIndex(params: any, usedPercent: string) {
   if (params.dataIndex === 0) {
     if (parseInt(usedPercent) > 100) {

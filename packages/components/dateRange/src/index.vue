@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, useAttrs, getCurrentInstance, computed } from 'vue'
-import { processWidth } from '@/utils/src'
+import { processWidth } from '@sybz-components/utils'
 import SCompTitle from '@/components/compTitle'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 

@@ -8,6 +8,10 @@ importers:
 
   .:
     dependencies:
+      '@sybz-components/utils':
+        specifier: ^0.0.8
+        version: 0.0.8(typescript@5.3.3)
+    devDependencies:
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.4.15(typescript@5.3.3))
@@ -26,18 +30,24 @@ importers:
       '@rollup/plugin-terser':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.9.6)
-      '@sybz-components/utils':
-        specifier: ^0.0.7
-        version: 0.0.7(typescript@5.3.3)
+      '@rushstack/eslint-patch':
+        specifier: ^1.3.3
+        version: 1.7.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.40.0
         version: 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.56.0)(typescript@5.3.3))(eslint@8.56.0)(typescript@5.3.3)
       '@typescript-eslint/parser':
         specifier: ^5.40.0
         version: 5.62.0(eslint@8.56.0)(typescript@5.3.3)
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.3
+        version: 5.0.3(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))(vue@3.4.15(typescript@5.3.3))
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.1.0
         version: 3.1.0(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))(vue@3.4.15(typescript@5.3.3))
+      '@vue/eslint-config-prettier':
+        specifier: ^8.0.0
+        version: 8.0.0(eslint@8.56.0)(prettier@3.2.5)
       '@vue/shared':
         specifier: ^3.4.27
         version: 3.4.27
@@ -50,18 +60,30 @@ importers:
       chalk:
         specifier: ^5.3.0
         version: 5.3.0
+      code-inspector-plugin:
+        specifier: ^0.10.1
+        version: 0.10.1
       consola:
         specifier: ^3.2.3
         version: 3.2.3
       dayjs:
         specifier: ^1.11.19
         version: 1.11.19
+      echarts:
+        specifier: ^5.5.1
+        version: 5.6.0
       element-plus:
         specifier: ^2.11.5
         version: 2.13.0(vue@3.4.15(typescript@5.3.3))
       escape-html:
         specifier: ^1.0.3
         version: 1.0.3
+      eslint:
+        specifier: ^8.49.0
+        version: 8.56.0
+      eslint-plugin-vue:
+        specifier: ^9.17.0
+        version: 9.21.1(eslint@8.56.0)
       fast-glob:
         specifier: ^3.3.3
         version: 3.3.3
@@ -80,6 +102,9 @@ importers:
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.3.3)(vue@3.4.15(typescript@5.3.3))
+      prettier:
+        specifier: ^3.0.3
+        version: 3.2.5
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
@@ -89,6 +114,9 @@ importers:
       sass:
         specifier: ^1.70.0
         version: 1.70.0
+      terser:
+        specifier: ^5.31.1
+        version: 5.31.1
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
@@ -101,6 +129,12 @@ importers:
       unplugin-icons:
         specifier: ^23.0.1
         version: 23.0.1(@vue/compiler-sfc@3.4.21)
+      vite:
+        specifier: ^5.2.11
+        version: 5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
+      vite-plugin-md:
+        specifier: ^0.21.5
+        version: 0.21.5(@vitejs/plugin-vue@5.0.3(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))(vue@3.4.15(typescript@5.3.3)))(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
       vite-plugin-svg-icons:
         specifier: ^2.0.1
         version: 2.0.1(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
@@ -113,6 +147,12 @@ importers:
       vitepress:
         specifier: 1.0.0-rc.1
         version: 1.0.0-rc.1(@algolia/client-search@4.22.1)(@types/node@20.11.16)(async-validator@4.2.5)(lightningcss@1.32.0)(sass@1.70.0)(search-insights@2.13.0)(terser@5.31.1)(typescript@5.3.3)
+      vue:
+        specifier: ^3.4.15
+        version: 3.4.15(typescript@5.3.3)
+      vue-echarts:
+        specifier: ^7.0.3
+        version: 7.0.3(@vue/runtime-core@3.5.18)(echarts@5.6.0)(vue@3.4.15(typescript@5.3.3))
       vue-router:
         specifier: ^4.2.5
         version: 4.2.5(vue@3.4.15(typescript@5.3.3))
@@ -122,46 +162,6 @@ importers:
       vue-tsc:
         specifier: ^3.1.5
         version: 3.1.5(typescript@5.3.3)
-    devDependencies:
-      '@rushstack/eslint-patch':
-        specifier: ^1.3.3
-        version: 1.7.2
-      '@vitejs/plugin-vue':
-        specifier: ^5.0.3
-        version: 5.0.3(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))(vue@3.4.15(typescript@5.3.3))
-      '@vue/eslint-config-prettier':
-        specifier: ^8.0.0
-        version: 8.0.0(eslint@8.56.0)(prettier@3.2.5)
-      code-inspector-plugin:
-        specifier: ^0.10.1
-        version: 0.10.1
-      echarts:
-        specifier: ^5.5.0
-        version: 5.5.0
-      eslint:
-        specifier: ^8.49.0
-        version: 8.56.0
-      eslint-plugin-vue:
-        specifier: ^9.17.0
-        version: 9.21.1(eslint@8.56.0)
-      prettier:
-        specifier: ^3.0.3
-        version: 3.2.5
-      terser:
-        specifier: ^5.31.1
-        version: 5.31.1
-      vite:
-        specifier: ^5.2.11
-        version: 5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
-      vite-plugin-md:
-        specifier: ^0.21.5
-        version: 0.21.5(@vitejs/plugin-vue@5.0.3(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))(vue@3.4.15(typescript@5.3.3)))(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
-      vue:
-        specifier: ^3.4.15
-        version: 3.4.15(typescript@5.3.3)
-      vue-echarts:
-        specifier: ^7.0.3
-        version: 7.0.3(@vue/runtime-core@3.5.18)(echarts@5.5.0)(vue@3.4.15(typescript@5.3.3))
 
   packages/utils:
     dependencies:
@@ -1373,8 +1373,8 @@ packages:
   '@sxzz/popperjs-es@2.11.7':
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
 
-  '@sybz-components/utils@0.0.7':
-    resolution: {integrity: sha512-a3KOONi+XUs+1VKXSjmniL99vT+aRCa0XpvgeyhjmYDhheG86NyinLVwoQb5A3rRqdYLQ0GjCcIb/OF8zEcUAA==}
+  '@sybz-components/utils@0.0.8':
+    resolution: {integrity: sha512-0TWj265+zlCA4QzvXwBr1yub9PCHYcrAZWXsZpIH0Q9WbzZjvU7O58fw3w7vlcabZcbVpuaGzjruSGn9QEIjAg==}
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -2233,8 +2233,8 @@ packages:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
 
-  echarts@5.5.0:
-    resolution: {integrity: sha512-rNYnNCzqDAPCr4m/fqyUFv7fD9qIsd50S6GDFgO1DxZhncCsNsG7IfUlAlvZe5oSEQxtsjnHiUuppzccry93Xw==}
+  echarts@5.6.0:
+    resolution: {integrity: sha512-oTbVTsXfKuEhxftHqL5xprgLoc0k7uScAwtryCgWF6hPYFLRwOUHiFmHGCBKP5NPFNkDVopOieyUqYGH8Fa3kA==}
 
   electron-to-chromium@1.4.690:
     resolution: {integrity: sha512-+2OAGjUx68xElQhydpcbqH50hE8Vs2K6TkAeLhICYfndb67CVH0UsZaijmRUE3rHlIxU1u0jxwhgVe6fK3YANA==}
@@ -4411,8 +4411,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zrender@5.5.0:
-    resolution: {integrity: sha512-O3MilSi/9mwoovx77m6ROZM7sXShR/O/JIanvzTwjN3FORfLSr81PsUGd7jlaYOeds9d8tw82oP44+3YucVo+w==}
+  zrender@5.6.1:
+    resolution: {integrity: sha512-OFXkDJKcrlx5su2XbzJvj/34Q3m6PvyCZkVPHGYpcCJ52ek4U/ymZyfuV1nKE23AyBJ51E/6Yr0mhZ7xGTO4ag==}
 
 snapshots:
 
@@ -5319,7 +5319,7 @@ snapshots:
 
   '@sxzz/popperjs-es@2.11.7': {}
 
-  '@sybz-components/utils@0.0.7(typescript@5.3.3)':
+  '@sybz-components/utils@0.0.8(typescript@5.3.3)':
     dependencies:
       '@vue/reactivity': 3.5.26
       '@vue/shared': 3.5.26
@@ -6425,10 +6425,10 @@ snapshots:
       es-errors: 1.3.0
       gopd: 1.2.0
 
-  echarts@5.5.0:
+  echarts@5.6.0:
     dependencies:
       tslib: 2.3.0
-      zrender: 5.5.0
+      zrender: 5.6.1
 
   electron-to-chromium@1.4.690: {}
 
@@ -8800,9 +8800,9 @@ snapshots:
     dependencies:
       vue: 3.4.15(typescript@5.3.3)
 
-  vue-echarts@7.0.3(@vue/runtime-core@3.5.18)(echarts@5.5.0)(vue@3.4.15(typescript@5.3.3)):
+  vue-echarts@7.0.3(@vue/runtime-core@3.5.18)(echarts@5.6.0)(vue@3.4.15(typescript@5.3.3)):
     dependencies:
-      echarts: 5.5.0
+      echarts: 5.6.0
       vue: 3.4.15(typescript@5.3.3)
       vue-demi: 0.13.11(vue@3.4.15(typescript@5.3.3))
     optionalDependencies:
@@ -8902,6 +8902,6 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zrender@5.5.0:
+  zrender@5.6.1:
     dependencies:
       tslib: 2.3.0

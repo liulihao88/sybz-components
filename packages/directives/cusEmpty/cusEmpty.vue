@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
-import { processWidth } from '@/utils/src'
+import { processWidth } from '@sybz-components/utils'
 import group_null from '@/assets/images/group_null.png'
 const loadingText = ref('暂无数据')
 const setLoadingText = (val) => {

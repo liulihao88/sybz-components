@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import SInput from '@/components/input'
 import SIcon from '@/components/icon'
-import { isEmpty, $toast } from '@/utils/src'
+import { isEmpty, $toast } from '@sybz-components/utils'
 
 defineOptions({
   name: 'SInputLabel',

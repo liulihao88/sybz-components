@@ -6,7 +6,7 @@
  */
 
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { sleep, formatBytes, getType } from '@/utils/src/index.ts'
+import { sleep, formatBytes, getType } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 
 defineOptions({

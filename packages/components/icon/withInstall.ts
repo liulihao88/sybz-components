@@ -1,6 +1,6 @@
 import { App, Plugin } from 'vue'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import { toLine } from '@/utils/src/index.ts'
+import { toLine } from '@sybz-components/utils'
 
 type SFCWithInstall<T> = T & Plugin
 

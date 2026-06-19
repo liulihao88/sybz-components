@@ -1,12 +1,12 @@
 import { ElMessage } from 'element-plus'
-import { clone, isEmpty, throttle, debounce, $toast } from '@/utils/src/index.ts'
+import { clone, isEmpty, throttle, debounce, $toast } from '@sybz-components/utils'
 import CusLoading from './cusLoading/cusLoading.js'
 import CusEmpty from './cusEmpty/cusEmpty.js'
 import Copy from './copy/index.ts'
 /**
  * 复制文本
  * <span v-copy="'生当作人杰'">咋回事</span>
- * import { $toast } from '/@/utils/src/index.ts'
+ * import { $toast } from '@sybz-components/utils'
  */
 
 export default function (app) {

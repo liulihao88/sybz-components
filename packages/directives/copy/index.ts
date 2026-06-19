@@ -1,5 +1,5 @@
 import { useEventListener } from '@vueuse/core'
-import { copy as copyText, $toast } from '@/utils/src/index.ts'
+import { copy as copyText, $toast } from '@sybz-components/utils'
 import type { Directive, DirectiveBinding } from 'vue'
 
 type CopyValue =

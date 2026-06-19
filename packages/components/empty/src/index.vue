@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, withDefaults } from 'vue'
-import { processWidth } from '@/utils/src'
+import { processWidth } from '@sybz-components/utils'
 import group_null from '@/assets/images/group_null.png'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import address from './pca-code.json'
-import { processWidth } from '@/utils/src/base.ts'
+import { processWidth } from '@sybz-components/utils'
 
 defineOptions({
   name: 'SChooseArea',

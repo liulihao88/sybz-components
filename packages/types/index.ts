@@ -1,6 +1,9 @@
 export type SybzComponentInstallConfig = Record<string, any>
 
 export interface SybzComponentsInstallOptions {
+  registerDirectives?: boolean
+  registerElementPlusIcons?: boolean
+  useTippy?: boolean
   theme?: string
   size?: string
   dangerouslyUseHTMLString?: boolean

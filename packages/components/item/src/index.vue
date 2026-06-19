@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSlots, computed } from 'vue'
-import { processWidth, formatThousands, formatToFixed, formatBytes } from '@/utils/src/index.ts'
+import { processWidth, formatThousands, formatToFixed, formatBytes } from '@sybz-components/utils'
 
 defineOptions({
   name: 'SItem',

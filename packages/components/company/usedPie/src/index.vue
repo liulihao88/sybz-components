@@ -5,7 +5,7 @@ import { ref, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vu
 const VChart = defineAsyncComponent(() => import('vue-echarts')) // 因为直接引入vue-echarts, 使用vitepress打包回报错, 在使用 VitePress 打包时，如果引入的 vue-echarts 中包含对 document 的引用，可能会导致 document is not defined 的错误。这是因为 VitePress 使用了服务器端渲染（SSR），而 document 是浏览器环境中的对象，在服务器端环境中不存在。以下是几种可能的解决
 import '@/utils/local/useEcharts'
 
-import { getVariable, clone, isEmpty, formatBytes, formatBytesConvert } from '@/utils/src'
+import { getVariable, clone, isEmpty, formatBytes, formatBytesConvert } from '@sybz-components/utils'
 import { getPieColorByDataIndex } from '@/utils/local/packageUtils'
 
 defineOptions({

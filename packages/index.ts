@@ -67,6 +67,10 @@ const getComponentOptionKey = (component: any) => {
 
 const componentConfigKeys = new Set(Object.values(allComponents).map(getComponentOptionKey).filter(Boolean))
 
+const installOptionKeys = new Set(['registerDirectives', 'registerElementPlusIcons', 'useTippy'])
+
+const shouldInstallOption = (value: boolean | undefined) => value !== false
+
 const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}) => {
   if (!isConfigRecord(options)) return {}
 
@@ -74,6 +78,10 @@ const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}
   const resolvedConfig: Record<string, Record<string, any>> = {}
 
   Object.entries(options).forEach(([key, value]) => {
+    if (installOptionKeys.has(key)) {
+      return
+    }
+
     if (componentConfigKeys.has(key)) {
       if (isConfigRecord(value)) {
         resolvedConfig[key] = value
@@ -102,12 +110,20 @@ const install = (app: App, options: SybzComponentsInstallOptions = {}) => {
     const component = allComponents[key]
     app.component(component.name || 's' + component.__name, component)
   })
-  registerDirectives(app)
 
-  for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(`el-icon-${toLine(key)}`, component)
+  if (shouldInstallOption(options.registerDirectives)) {
+    registerDirectives(app)
   }
-  app.use(VueTippy)
+
+  if (shouldInstallOption(options.registerElementPlusIcons)) {
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+      app.component(`el-icon-${toLine(key)}`, component)
+    }
+  }
+
+  if (shouldInstallOption(options.useTippy)) {
+    app.use(VueTippy)
+  }
 }
 
 // @ts-ignore

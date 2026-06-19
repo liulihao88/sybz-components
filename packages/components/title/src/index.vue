@@ -59,7 +59,7 @@
 <s-title title="我说呢" sub-title="test/t2.vue"></s-title>
 *
 */
-import { processWidth } from '@/utils/src/index.ts'
+import { processWidth } from '@sybz-components/utils'
 import { computed } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
