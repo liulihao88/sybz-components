@@ -268,9 +268,17 @@ const setExpandedState = (nextExpanded: boolean) => {
   saveExpandedState()
 }
 
-const goTo = async (item: QuickItem) => {
+const consumeSuppressNextClick = () => {
   if (suppressNextClick) {
     suppressNextClick = false
+    return true
+  }
+
+  return false
+}
+
+const goTo = async (item: QuickItem) => {
+  if (consumeSuppressNextClick()) {
     return
   }
 
@@ -279,7 +287,10 @@ const goTo = async (item: QuickItem) => {
 }
 
 const toggleExpanded = () => {
-  suppressNextClick = false
+  if (consumeSuppressNextClick()) {
+    return
+  }
+
   setExpandedState(!expanded.value)
 }
 
@@ -382,8 +393,8 @@ onUnmounted(() => {
       key="collapsed"
       class="component-quick-sidebar__collapsed-button"
       type="button"
-      title="展开快捷导航"
-      @pointerdown.stop
+      title="点击展开，拖动移动"
+      @pointerdown.stop="handleDragStart"
       @click.stop="toggleExpanded"
     >
       开
@@ -514,7 +525,7 @@ onUnmounted(() => {
   line-height: 1;
   text-align: center;
   pointer-events: auto;
-  cursor: pointer;
+  cursor: grab;
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
@@ -530,6 +541,10 @@ onUnmounted(() => {
     0 10px 28px rgb(0 0 0 / 22%),
     0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 24%, transparent);
   transform: translateY(-1px);
+}
+
+.component-quick-sidebar.dragging .component-quick-sidebar__collapsed-button {
+  cursor: grabbing;
 }
 
 :global(html.dark) .component-quick-sidebar__collapsed-button {
