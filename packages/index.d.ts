@@ -1,15 +1,17 @@
 import type { App } from 'vue'
+import type { InstallableComponent } from './types/components/_shared'
 import type { SybzComponentsInstallOptions } from './types/index'
 
 export type * from './types/index'
+export type * from './components'
 
 export interface SybzComponentsPlugin {
   install: (app: App, options?: SybzComponentsInstallOptions) => void
   [key: string]: any
 }
 
-export declare const components: Record<string, any>
-export declare const SSvg: any
+export declare const components: Record<string, InstallableComponent>
+export declare const SSvg: (typeof import('./types/components/svg'))['default']
 export declare function createSvg(iconDirs: string[]): Record<string, any>
 
 declare const plugin: SybzComponentsPlugin

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import { readFileSync, readdirSync } from 'fs'
+import { readFileSync } from 'fs'
+import fg from 'fast-glob'
 import vue from '@vitejs/plugin-vue'
 import { codeInspectorPlugin } from 'code-inspector-plugin'
 import pkg from './package.json'
@@ -114,12 +115,13 @@ export default defineConfig({
       name: 'emit-types-entry',
       apply: 'build',
       generateBundle() {
-        const typesDir = resolve(__dirname, './packages/types')
         const declarationEntries = [
           ['index.d.ts', './packages/index.d.ts'],
-          ...readdirSync(typesDir)
-            .filter((fileName) => fileName.endsWith('.d.ts'))
-            .map((fileName) => [`types/${fileName}`, `./packages/types/${fileName}`]),
+          ['components.d.ts', './packages/components.d.ts'],
+          ...fg.sync('packages/types/**/*.d.ts', { cwd: __dirname, onlyFiles: true }).map((sourcePath) => [
+            sourcePath.replace(/^packages\//, ''),
+            `./${sourcePath}`,
+          ]),
         ]
 
         declarationEntries.forEach(([fileName, sourcePath]) => {

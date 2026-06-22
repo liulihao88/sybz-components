@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "vite build",
+    "build": "pnpm types:generate && vite build",
     "docsbuild": "vitepress build docs",
     "buildAll": "pnpm build && pnpm run -C packages/utils build",
     "preview": "vite preview",
@@ -47,6 +47,7 @@
     "lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore \"*.{js,cjs,mjs,ts,cts,mts,json,jsonc,css,scss,vue,html,md,yml,yaml}\" \".vscode/**/*.{json,jsonc}\" \"{docs,packages,public,scripts,skills}/**/*.{js,cjs,mjs,ts,cts,mts,json,jsonc,tsx,jsx,css,scss,vue,html,md,yml,yaml}\"",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "typecheck:sfc": "vue-tsc --noEmit -p tsconfig.json",
+    "types:generate": "node ./scripts/generate-component-types.mjs",
     "release": "pnpm build && npm version patch && npm publish",
     "format": "pnpm lint:prettier",
     "docsserve": "vitepress serve docs",

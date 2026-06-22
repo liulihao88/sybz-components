@@ -26,3 +26,4 @@ export interface SybzComponentsInstallOptions {
 }
 
 export type * from './table'
+export type * from './component-props'
