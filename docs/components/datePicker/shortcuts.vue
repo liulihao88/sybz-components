@@ -36,14 +36,17 @@ const shortcuts = [
       <span>属性: shortcuts</span>
       <span>可选值: array | false</span>
       <span>默认值: 内置快捷项</span>
+      <span>日期范围默认值: 今天、昨天、最近7天、最近30天、最近90天、最近1年、本周、上周、本月、上月、本季度、上季度、今年、去年</span>
+      <span>月份范围默认值: 本月、上月、最近3个月、最近6个月、最近12个月、今年、去年</span>
+      <span>年份范围默认值: 今年、去年、最近3年、最近5年、最近10年</span>
       <span>属性: type</span>
-      <span>可选值: date | daterange</span>
+      <span>可选值: date | daterange | datetimerange | monthrange | yearrange</span>
       <span>默认值: date</span>
     </div>
 
     <div class="demo-list">
       <s-date-picker v-model="dateValue" :shortcuts="shortcuts" placeholder="自定义快捷项"></s-date-picker>
-      <s-date-picker v-model="rangeValue" type="daterange" width="520" start-placeholder="内置快捷项"></s-date-picker>
+      <s-date-picker v-model="rangeValue" type="datetimerange" width="520" start-placeholder="内置快捷项"></s-date-picker>
       <s-date-picker v-model="noShortcutsValue" :shortcuts="false" placeholder="关闭快捷项"></s-date-picker>
     </div>
 

@@ -35,113 +35,187 @@ const props = defineProps({
 })
 const mergedProps = useGlobalComponentConfig('datePicker', props)
 
-const oneDay = 3600 * 1000 * 24
 const pickerType = computed(() => String(attrs.type || 'date'))
 const isRangeType = computed(() => ['daterange', 'datetimerange', 'monthrange', 'yearrange'].includes(pickerType.value))
 
-const getDayStartTime = (date = new Date()) => new Date(date.toLocaleDateString()).getTime()
+const startOfDay = (date = new Date()) => new Date(date.getFullYear(), date.getMonth(), date.getDate())
+const endOfDay = (date = new Date()) => new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999)
+const getDayRange = (date = new Date()) => [startOfDay(date), endOfDay(date)]
+const addDays = (date: Date, amount: number) => {
+  const result = new Date(date)
+  result.setDate(result.getDate() + amount)
+  return result
+}
+const addMonths = (date: Date, amount: number) => new Date(date.getFullYear(), date.getMonth() + amount, date.getDate())
+const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate()
+const addYears = (date: Date, amount: number) => {
+  const year = date.getFullYear() + amount
+  const month = date.getMonth()
+  const day = Math.min(date.getDate(), getDaysInMonth(year, month))
 
-const defaultRangeShortcuts = [
+  return new Date(year, month, day)
+}
+const startOfWeek = (date = new Date()) => {
+  const day = date.getDay() || 7
+  return addDays(startOfDay(date), 1 - day)
+}
+const endOfWeek = (date = new Date()) => endOfDay(addDays(startOfWeek(date), 6))
+const getWeekRange = (date = new Date()) => [startOfWeek(date), endOfWeek(date)]
+const startOfMonth = (date = new Date()) => new Date(date.getFullYear(), date.getMonth(), 1)
+const endOfMonth = (date = new Date()) => new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999)
+const getMonthRange = (date = new Date()) => [startOfMonth(date), endOfMonth(date)]
+const startOfQuarter = (date = new Date()) => new Date(date.getFullYear(), Math.floor(date.getMonth() / 3) * 3, 1)
+const endOfQuarter = (date = new Date()) => {
+  const quarterStartMonth = Math.floor(date.getMonth() / 3) * 3
+  return new Date(date.getFullYear(), quarterStartMonth + 3, 0, 23, 59, 59, 999)
+}
+const getQuarterRange = (date = new Date()) => [startOfQuarter(date), endOfQuarter(date)]
+const startOfYear = (date = new Date()) => new Date(date.getFullYear(), 0, 1)
+const endOfYear = (date = new Date()) => new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999)
+const getYearRange = (date = new Date()) => [startOfYear(date), endOfYear(date)]
+const rangeToToday = (startDate: Date) => [startDate, endOfDay()]
+const rangeToCurrentMonth = (startDate: Date) => [startDate, endOfMonth()]
+const recentDays = (amount: number) => {
+  const today = new Date()
+  return [startOfDay(addDays(today, 1 - amount)), endOfDay(today)]
+}
+const recentMonths = (amount: number) => {
+  const currentMonth = startOfMonth()
+  return [startOfMonth(addMonths(currentMonth, 1 - amount)), endOfMonth(currentMonth)]
+}
+const recentYears = (amount: number) => {
+  const currentYear = startOfYear()
+  return [startOfYear(addYears(currentYear, 1 - amount)), endOfYear(currentYear)]
+}
+const recentCalendarYears = (amount: number) => {
+  const today = new Date()
+  return [startOfDay(addYears(today, -amount)), endOfDay(today)]
+}
+
+const defaultDateRangeShortcuts = [
   {
     text: '今天',
-    value: () => {
-      const startTimestamp = getDayStartTime()
-      return [new Date(startTimestamp), new Date(startTimestamp + oneDay - 1)]
-    },
+    value: () => getDayRange(),
   },
   {
     text: '昨天',
-    value: () => {
-      const todayStart = getDayStartTime()
-      return [new Date(todayStart - oneDay), new Date(todayStart - 1)]
-    },
+    value: () => getDayRange(addDays(new Date(), -1)),
   },
   {
     text: '最近7天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - oneDay * (7 - 1))
-      return [start, end]
-    },
-  },
-  {
-    text: '本周',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      const day = start.getDay() || 7
-      start.setTime(start.getTime() - oneDay * (day - 1))
-      return [start, end]
-    },
-  },
-  {
-    text: '上周',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      const day = start.getDay() || 7
-      start.setTime(start.getTime() - oneDay * (day - 1 + 7))
-      end.setTime(end.getTime() - oneDay * day)
-      return [start, end]
-    },
-  },
-  {
-    text: '本月',
-    value: () => {
-      const end = new Date()
-      const start = new Date(getDayStartTime())
-      start.setDate(1)
-      return [start, end]
-    },
-  },
-  {
-    text: '上月',
-    value: () => {
-      const start = new Date()
-      const end = new Date(start)
-      end.setMonth(start.getMonth())
-      start.setMonth(start.getMonth() - 1)
-      end.setDate(0)
-      start.setDate(1)
-      return [start, end]
-    },
+    value: () => recentDays(7),
   },
   {
     text: '最近30天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - oneDay * 30)
-      return [start, end]
-    },
+    value: () => recentDays(30),
   },
   {
     text: '最近90天',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - oneDay * 90)
-      return [start, end]
-    },
+    value: () => recentDays(90),
   },
   {
     text: '最近1年',
-    value: () => {
-      const end = new Date()
-      const start = new Date()
-      start.setTime(start.getTime() - oneDay * 365)
-      return [start, end]
-    },
+    value: () => recentCalendarYears(1),
   },
   {
-    text: '一月以前30天',
-    value: () => {
-      const todayStart = getDayStartTime()
-      return [new Date(todayStart - oneDay * 60), new Date(todayStart - oneDay * 30)]
-    },
+    text: '本周',
+    value: () => rangeToToday(startOfWeek()),
+  },
+  {
+    text: '上周',
+    value: () => getWeekRange(addDays(new Date(), -7)),
+  },
+  {
+    text: '本月',
+    value: () => rangeToToday(startOfMonth()),
+  },
+  {
+    text: '上月',
+    value: () => getMonthRange(addMonths(startOfMonth(), -1)),
+  },
+  {
+    text: '本季度',
+    value: () => rangeToToday(startOfQuarter()),
+  },
+  {
+    text: '上季度',
+    value: () => getQuarterRange(addMonths(startOfQuarter(), -3)),
+  },
+  {
+    text: '今年',
+    value: () => rangeToToday(startOfYear()),
+  },
+  {
+    text: '去年',
+    value: () => getYearRange(addYears(startOfYear(), -1)),
   },
 ]
+
+const defaultMonthRangeShortcuts = [
+  {
+    text: '本月',
+    value: () => getMonthRange(),
+  },
+  {
+    text: '上月',
+    value: () => getMonthRange(addMonths(startOfMonth(), -1)),
+  },
+  {
+    text: '最近3个月',
+    value: () => recentMonths(3),
+  },
+  {
+    text: '最近6个月',
+    value: () => recentMonths(6),
+  },
+  {
+    text: '最近12个月',
+    value: () => recentMonths(12),
+  },
+  {
+    text: '今年',
+    value: () => rangeToCurrentMonth(startOfYear()),
+  },
+  {
+    text: '去年',
+    value: () => getYearRange(addYears(startOfYear(), -1)),
+  },
+]
+
+const defaultYearRangeShortcuts = [
+  {
+    text: '今年',
+    value: () => getYearRange(),
+  },
+  {
+    text: '去年',
+    value: () => getYearRange(addYears(startOfYear(), -1)),
+  },
+  {
+    text: '最近3年',
+    value: () => recentYears(3),
+  },
+  {
+    text: '最近5年',
+    value: () => recentYears(5),
+  },
+  {
+    text: '最近10年',
+    value: () => recentYears(10),
+  },
+]
+
+const defaultRangeShortcuts = computed(() => {
+  if (pickerType.value === 'monthrange') {
+    return defaultMonthRangeShortcuts
+  }
+
+  if (pickerType.value === 'yearrange') {
+    return defaultYearRangeShortcuts
+  }
+
+  return defaultDateRangeShortcuts
+})
 
 const defaultSingleShortcuts = [
   {
@@ -150,19 +224,11 @@ const defaultSingleShortcuts = [
   },
   {
     text: '昨天',
-    value: () => {
-      const date = new Date()
-      date.setTime(date.getTime() - oneDay)
-      return date
-    },
+    value: () => addDays(new Date(), -1),
   },
   {
     text: '一周前',
-    value: () => {
-      const date = new Date()
-      date.setTime(date.getTime() - oneDay * 7)
-      return date
-    },
+    value: () => addDays(new Date(), -7),
   },
 ]
 
@@ -175,7 +241,7 @@ const shortcuts = computed(() => {
     return undefined
   }
 
-  return isRangeType.value ? defaultRangeShortcuts : defaultSingleShortcuts
+  return isRangeType.value ? defaultRangeShortcuts.value : defaultSingleShortcuts
 })
 
 const datePickerStyle = computed(() => {

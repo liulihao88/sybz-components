@@ -108,4 +108,8 @@ datePicker/limitRange
 - `datetime` / `datetimerange` 默认 `format` 和 `value-format` 为 `YYYY-MM-DD HH:mm:ss`。
 - `year` / `years` / `yearrange` 默认 `format` 和 `value-format` 为 `YYYY`。
 - `month` / `months` / `monthrange` 默认 `format` 和 `value-format` 为 `YYYY-MM`。
+- 范围快捷项会按自然日边界计算，日期时间范围开始为 `00:00:00.000`，结束为 `23:59:59.999`。
+- `daterange` / `datetimerange` 内置快捷项：今天、昨天、最近7天、最近30天、最近90天、最近1年、本周、上周、本月、上月、本季度、上季度、今年、去年。
+- `monthrange` 内置快捷项：本月、上月、最近3个月、最近6个月、最近12个月、今年、去年。
+- `yearrange` 内置快捷项：今年、去年、最近3年、最近5年、最近10年。
 - 组件继承 `el-date-picker` 的属性、事件、插槽，并额外支持 `title`、`width`、`height`、`theme`。
