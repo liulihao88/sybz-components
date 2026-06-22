@@ -56,6 +56,12 @@ datePicker/shortcuts
 datePicker/format
 :::
 
+### 时间戳
+
+:::demo `value-format="x" 返回毫秒时间戳，value-format="X" 返回秒级时间戳`
+datePicker/timestamp
+:::
+
 ### 默认面板日期和默认时间
 
 :::demo `支持 default-value 和 default-time`
