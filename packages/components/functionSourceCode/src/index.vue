@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+import * as utilsModule from '@sybz-components/utils'
 import { ref, watch } from 'vue'
 
 defineOptions({
@@ -25,17 +26,7 @@ const props = defineProps({
 })
 
 const sourceCode = ref<string>('')
-type UtilsModule = Record<string, unknown>
-
-let utilsModulePromise: Promise<UtilsModule> | null = null
-
-const loadUtilsModule = () => {
-  if (!utilsModulePromise) {
-    utilsModulePromise = import('@sybz-components/utils') as Promise<UtilsModule>
-  }
-
-  return utilsModulePromise
-}
+const utilsRecord = utilsModule as Record<string, unknown>
 
 const stringifyExport = (value: unknown, functionName: string): string | null => {
   if (typeof value === 'function') {
@@ -49,10 +40,9 @@ const stringifyExport = (value: unknown, functionName: string): string | null =>
   return null
 }
 
-const loadUtils = async (functionName: string) => {
+const loadUtils = (functionName: string) => {
   try {
-    const utilsModule = await loadUtilsModule()
-    const code = stringifyExport(utilsModule[functionName], functionName)
+    const code = stringifyExport(utilsRecord[functionName], functionName)
 
     if (functionName !== props.functionName) {
       return

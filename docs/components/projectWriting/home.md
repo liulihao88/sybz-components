@@ -9,7 +9,7 @@
 
 ### 1. 新增一个组件时，目录通常这样放
 
-```text
+```txt
 packages/components/foo/
 ├─ index.ts
 └─ src/index.vue
@@ -157,7 +157,7 @@ foo/base
 
 ### 8. 工具方法通常按“实现文件 + 统一导出 + 对应文档”组织
 
-```text
+```txt
 packages/utils/src/base.ts
 packages/utils/src/index.ts
 docs/components/utils/isEmpty/home.md
