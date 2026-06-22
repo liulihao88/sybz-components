@@ -11,6 +11,7 @@ const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', '
 const TYPED_COMPONENT_PROPS = new Map([
   ['SBuildTime', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBuildTimeProps' }],
   ['SButton', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SButtonProps' }],
+  ['SDatePicker', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDatePickerProps' }],
   ['SDescriptions', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDescriptionsProps' }],
   ['SDialog', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDialogProps' }],
   ['SEmpty', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SEmptyProps' }],

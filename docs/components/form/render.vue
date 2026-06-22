@@ -39,7 +39,7 @@ const fieldList = [
     label: '日期',
     prop: 'date',
     rules: [validate()],
-    comp: 's-date-range',
+    comp: 's-date-picker',
     labelRender: () => {
       return (
         <s-flex align="center" gap="small">

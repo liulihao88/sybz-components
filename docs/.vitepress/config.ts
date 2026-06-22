@@ -230,8 +230,8 @@ export default defineConfig({
               link: '/components/compTitle/home.md',
             },
             {
-              text: sybzMark('dateRange组件'),
-              link: '/components/dateRange/home.md',
+              text: sybzMark('datePicker组件'),
+              link: '/components/datePicker/home.md',
             },
             {
               text: sybzMark('descriptions组件'),

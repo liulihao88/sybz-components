@@ -6,7 +6,7 @@ const dateValue = ref('')
 </script>
 
 <template>
-  <div class="date-range-height-demo">
+  <div class="date-picker-height-demo">
     <div class="demo-meta">
       <span>属性: height</span>
       <span>可选值: string | number</span>
@@ -14,20 +14,21 @@ const dateValue = ref('')
     </div>
 
     <div class="demo-list">
-      <s-date-range
+      <s-date-picker
         v-model="rangeValue"
         title="时间范围"
+        type="daterange"
         width="520"
         height="40"
         :boxStyle="{ width: 84 }"
-      ></s-date-range>
-      <s-date-range v-model="dateValue" title="日期" type="date" width="280" height="48"></s-date-range>
+      ></s-date-picker>
+      <s-date-picker v-model="dateValue" title="日期" type="date" width="280" height="48"></s-date-picker>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.date-range-height-demo {
+.date-picker-height-demo {
   display: grid;
   gap: 16px;
 }

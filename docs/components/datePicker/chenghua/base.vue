@@ -6,14 +6,17 @@ const dateValue = ref('')
 </script>
 
 <template>
-  <div class="date-range-chenghua-demo">
-    <div class="date-range-chenghua-demo__meta">
+  <div class="date-picker-chenghua-demo">
+    <div class="date-picker-chenghua-demo__meta">
       <span>属性: theme</span>
       <span>可选值: '' | 'chenghua'</span>
       <span>默认值: ''</span>
       <span>属性: type</span>
-      <span>可选值: date | datetime | daterange | datetimerange | monthrange | yearrange</span>
-      <span>默认值: daterange</span>
+      <span>
+        可选值: year | years | month | months | date | dates | week | datetime | daterange | datetimerange | monthrange
+        | yearrange
+      </span>
+      <span>默认值: date</span>
       <span>属性: width</span>
       <span>可选值: string | number</span>
       <span>默认值: 300px</span>
@@ -22,16 +25,17 @@ const dateValue = ref('')
       <span>默认值: ''</span>
     </div>
 
-    <div class="date-range-chenghua-demo__list">
-      <s-date-range
+    <div class="date-picker-chenghua-demo__list">
+      <s-date-picker
         v-model="rangeValue"
         theme="chenghua"
+        type="daterange"
         title="审核周期"
         width="520"
         height="40"
         :boxStyle="{ width: 84 }"
-      ></s-date-range>
-      <s-date-range
+      ></s-date-picker>
+      <s-date-picker
         v-model="dateValue"
         theme="chenghua"
         title="发布日期"
@@ -40,19 +44,19 @@ const dateValue = ref('')
         height="40"
         placeholder="选择发布日期"
         :boxStyle="{ width: 84 }"
-      ></s-date-range>
+      ></s-date-picker>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.date-range-chenghua-demo {
+.date-picker-chenghua-demo {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.date-range-chenghua-demo__meta {
+.date-picker-chenghua-demo__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
@@ -61,7 +65,7 @@ const dateValue = ref('')
   line-height: 1.5;
 }
 
-.date-range-chenghua-demo__list {
+.date-picker-chenghua-demo__list {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;

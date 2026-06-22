@@ -26,7 +26,7 @@ const dateValue = ref([])
   <el-config-provider :locale="locale">
     <s-flex gap="8">
       <el-time-picker v-model="value1" is-range />
-      <s-date-range v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></s-date-range>
+      <s-date-picker v-model="dateValue" width="600" format="YYYY-MM-DD HH:mm:ss" type="datetimerange"></s-date-picker>
     </s-flex>
   </el-config-provider>
 </template>

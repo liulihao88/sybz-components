@@ -1,4 +1,4 @@
-.s-date-range.s-date-range--chenghua.s-date-range--chenghua {
+.s-date-picker.s-date-picker--chenghua.s-date-picker--chenghua {
   font-family: var(--s-ch-font-family);
 
   .s-comp-title {
@@ -62,7 +62,7 @@
   }
 }
 
-.s-date-range__popper--chenghua.s-date-range__popper--chenghua {
+.s-date-picker__popper--chenghua.s-date-picker__popper--chenghua {
   border: 1px solid rgba(var(--s-ch-primary-rgb), 0.14);
   border-radius: var(--s-ch-radius);
   box-shadow: 0 12px 32px rgba(var(--s-ch-primary-rgb), 0.14);
@@ -177,4 +177,3 @@
     --el-button-active-border-color: var(--s-ch-primary-active);
   }
 }
-

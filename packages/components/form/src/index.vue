@@ -209,7 +209,7 @@ defineExpose({
     .el-textarea,
     .s-input,
     .s-select,
-    .s-date-range {
+    .s-date-picker {
       width: 100%;
       height: 100%;
     }

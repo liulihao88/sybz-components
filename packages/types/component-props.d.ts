@@ -1,4 +1,5 @@
 import type { VNode } from 'vue'
+import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'
 
 export type SybzComponentTheme = '' | 'chenghua'
 export type SybzComponentSize = '' | 'small' | 'default' | 'large'
@@ -21,6 +22,15 @@ export interface SButtonProps {
   size?: SybzComponentSize
   width?: string | number
   height?: string | number
+}
+
+export interface SDatePickerProps extends Omit<Partial<DatePickerPropsPublic>, 'shortcuts'> {
+  title?: string
+  width?: string | number
+  height?: string | number
+  theme?: SybzComponentTheme
+  shortcuts?: DatePickerPropsPublic['shortcuts'] | false
+  boxStyle?: SybzRecord
 }
 
 export interface SDescriptionsItemOption {

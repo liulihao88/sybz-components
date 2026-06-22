@@ -36,7 +36,7 @@ metadata:
 - `button`
 - `checkbox`
 - `compTitle`
-- `dateRange`
+- `datePicker`
 - `descriptions`
 - `dialog`
 - `empty`

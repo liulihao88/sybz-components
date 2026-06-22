@@ -44,7 +44,7 @@ declare module 'vue' {
     SCompTitle: (typeof import('./types/components/compTitle'))['default']
     SCountBar: (typeof import('./types/components/company/countBar'))['default']
     SCountBarOld: (typeof import('./types/components/company/countBarOld'))['default']
-    SDateRange: (typeof import('./types/components/dateRange'))['default']
+    SDatePicker: (typeof import('./types/components/datePicker'))['default']
     SDescriptions: (typeof import('./types/components/descriptions'))['default']
     SDialog: (typeof import('./types/components/dialog'))['default']
     SDrawer: (typeof import('./types/components/drawer'))['default']
@@ -131,9 +131,9 @@ export type SCountBarOldComponent = (typeof import('./types/components/company/c
 export type SCountBarOldInstance = ComponentInstance<SCountBarOldComponent>
 export type SCountBarOldPublicProps = SCountBarOldInstance['$props']
 
-export type SDateRangeComponent = (typeof import('./types/components/dateRange'))['default']
-export type SDateRangeInstance = ComponentInstance<SDateRangeComponent>
-export type SDateRangePublicProps = SDateRangeInstance['$props']
+export type SDatePickerComponent = (typeof import('./types/components/datePicker'))['default']
+export type SDatePickerInstance = ComponentInstance<SDatePickerComponent>
+export type SDatePickerPublicProps = SDatePickerInstance['$props']
 
 export type SDescriptionsComponent = (typeof import('./types/components/descriptions'))['default']
 export type SDescriptionsInstance = ComponentInstance<SDescriptionsComponent>

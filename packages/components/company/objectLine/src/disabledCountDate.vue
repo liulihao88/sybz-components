@@ -11,7 +11,7 @@
       :disabled-date="disabledDate"
       :shortcuts="shortcuts"
     /> -->
-    <s-date-range v-model="dateRange" value-format="x"></s-date-range>
+    <s-date-picker v-model="dateRange" type="daterange" value-format="x"></s-date-picker>
   </div>
 </template>
 
