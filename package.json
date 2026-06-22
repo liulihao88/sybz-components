@@ -8,6 +8,7 @@
   "unpkg": "dist/sybz-components-umd.js",
   "module": "dist/sybz-components-es.js",
   "packageManager": "pnpm@10.12.1",
+  
   "types": "dist/index.d.ts",
   "style": "dist/style.css",
   "exports": {
@@ -41,6 +42,7 @@
     "dev": "vitepress dev docs",
     "build": "pnpm types:generate && vite build",
     "docsbuild": "vitepress build docs",
+    "preinstall": "npx only-allow pnpm",
     "buildAll": "pnpm build && pnpm run -C packages/utils build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx,.cjs,.mjs --fix --ignore-path .gitignore",
