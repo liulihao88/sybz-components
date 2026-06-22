@@ -7,6 +7,7 @@
   "main": "dist/sybz-components-es.js",
   "unpkg": "dist/sybz-components-umd.js",
   "module": "dist/sybz-components-es.js",
+  "packageManager": "pnpm@10.12.1",
   "types": "dist/index.d.ts",
   "style": "dist/style.css",
   "exports": {
