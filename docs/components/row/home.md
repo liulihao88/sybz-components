@@ -12,19 +12,19 @@
 
 ### 基础用法
 
-:::demo `col` 用来控制自动生成的 `el-col` 宽度。`col` 的可选值是 `number` 和 `number[]`，默认值是 `24`；`colAttrs` 的可选值是 `object`，默认值是 `{}`。
+:::demo 基础写法：`<s-row :col="6" :gutter="16">...</s-row>`。属性说明：`col` 示例值：`6`，类型：number / number[]，默认值：`24`；`gutter` 示例值：`16`，类型：number / string，默认值：`0`；`col-attrs` 示例值：`{ xs: 12, sm: 8, md: 6 }`，类型：object，默认值：`{}`。本示例展示基础渲染和最小配置。`col` 用来控制自动生成的 `el-col` 宽度。`col` 的可选值是 `number` 和 `number[]`，默认值是 `24`；`colAttrs` 的可选值是 `object`，默认值是 `{}`。
 row/base
 :::
 
 ### gutter 间距
 
-:::demo `gutter` 控制列间距。`gutter` 的可选值是 `number` 和 `string`，默认值是 `0`。
+:::demo 基础写法：`<s-row :col="8" :gutter="gutter">...</s-row>`。属性说明：`col` 示例值：`8`，类型：number / number[]，默认值：`24`；`gutter` 示例值：`gutter`，类型：number / string，默认值：`0`。本示例展示gutter 间距配置。`gutter` 控制列间距。`gutter` 的可选值是 `number` 和 `string`，默认值是 `0`。
 row/gutter
 :::
 
 ### gap 间距
 
-:::demo `gap` 是 `s-row` 提供的间距别名，会优先于 `gutter` 生效。`gap` 的可选值是 `number` 和 `string`，默认值是 `''`。
+:::demo 基础写法：`<s-row :col="8" :gap="gap">...</s-row>`。属性说明：`col` 示例值：`8`，类型：number / number[]，默认值：`24`；`gap` 示例值：`gap`，类型：number / string，默认值：`''`。本示例展示gap 间距配置。`gap` 是 `s-row` 提供的间距别名，会优先于 `gutter` 生效。`gap` 的可选值是 `number` 和 `string`，默认值是 `''`。
 row/gap
 :::
 

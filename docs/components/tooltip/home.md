@@ -12,61 +12,61 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-tooltip width="100" content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" placement="right">...</s-tooltip>`。属性说明：`width` 示例值：`100`，类型：string，默认值：`100%`；`content` 示例值：`这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会...`，类型：string / VNode，默认值：未设置；`placement` 示例值：`right`，类型：string，默认值：Element Plus 默认值。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 tooltip/base
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-tooltip width="220px" placement="right" show-arrow content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" />`。属性说明：`width` 示例值：`220px`，类型：string，默认值：`100%`；`placement` 示例值：`right`，类型：string，默认值：Element Plus 默认值；`show-arrow` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`content` 示例值：`这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会...`，类型：string / VNode，默认值：未设置；`showAfter` 示例值：`1000`，类型：number，默认值：`0`。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 tooltip/usually
 :::
 
 ### 主题与点击事件
 
-:::demo
+:::demo 基础写法：`<s-tooltip content="默认 dark 主题，文本超出宽度时会显示完整内容。" width="200px" placement="bottom" />`。属性说明：`content` 示例值：`默认 dark 主题，文本超出宽度时会显示完整内容。`，类型：string / VNode，默认值：未设置；`width` 示例值：`200px`，类型：string，默认值：`100%`；`placement` 示例值：`bottom`，类型：string，默认值：Element Plus 默认值；`effect` 示例值：`light`，类型：string，默认值：`dark`。本示例展示主题切换，可以直接复制基础写法后按业务替换数据。
 tooltip/theme
 :::
 
 ### 最大行数
 
-:::demo `line-clamp`
+:::demo 基础写法：`<s-tooltip :content="longText" width="220px" :line-clamp="2" placement="top" />`。属性说明：`content` 示例值：`longText`，类型：string / VNode，默认值：未设置；`width` 示例值：`220px`，类型：string，默认值：`100%`；`line-clamp` 示例值：`2`，类型：string / number，默认值：`1`；`placement` 示例值：`top`，类型：string，默认值：Element Plus 默认值；`effect` 示例值：`light`，类型：string，默认值：`dark`。本示例展示最大行数配置。line-clamp。
 tooltip/lineClamp
 :::
 
 ### 触发方式
 
-:::demo `'hover' | 'click' | 'focus' | 'contextmenu'`，也支持数组形式
+:::demo 基础写法：`<s-tooltip content="默认使用 hover 触发" trigger="hover">...</s-tooltip>`。属性说明：`content` 示例值：`默认使用 hover 触发`，类型：string / VNode，默认值：未设置；`trigger` 示例值：`hover`，类型：string / string[]，默认值：Element Plus 默认值。本示例展示触发方式配置。`'hover' | 'click' | 'focus' | 'contextmenu'`，也支持数组形式。
 tooltip/trigger
 :::
 
 ### 延迟触发
 
-:::demo `show-after`
+:::demo 基础写法：`<s-tooltip content="鼠标移入 1 秒后显示 tooltip" :show-after="1000">...</s-tooltip>`。属性说明：`content` 示例值：`鼠标移入 1 秒后显示 tooltip`，类型：string / VNode，默认值：未设置；`show-after` 示例值：`1000`，类型：number，默认值：`0`。本示例展示延迟触发配置。show-after。
 tooltip/delay
 :::
 
 ### 自定义主题和禁用状态
 
-:::demo
+:::demo 基础写法：`<s-tooltip content="默认暗色主题" placement="top">...</s-tooltip>`。属性说明：`content` 示例值：`默认暗色主题`，类型：string / VNode，默认值：未设置；`placement` 示例值：`top`，类型：string，默认值：Element Plus 默认值；`effect` 示例值：`light`，类型：string，默认值：`dark`；`disabled` 示例值：`disabled`，类型：boolean，默认值：`false`；`width` 示例值：`220px`，类型：string，默认值：`100%`。本示例展示禁用状态，可以直接复制基础写法后按业务替换数据。
 tooltip/other
 :::
 
 ### 显示 HTML / VNode 内容
 
-:::demo `dangerouslyUseHTMLString`
+:::demo 基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。属性说明：`width` 示例值：`220px`，类型：string，默认值：`100%`；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`content` 示例值：`rawHtml`，类型：string / VNode，默认值：未设置；`trigger` 示例值：`click`，类型：string / string[]，默认值：Element Plus 默认值；`placement` 示例值：`right`，类型：string，默认值：Element Plus 默认值。本示例展示显示 HTML / VNode 内容配置。dangerouslyUseHTMLString。
 tooltip/html
 :::
 
 ### 自定义插槽
 
-:::demo `default|content`
+:::demo 基础写法：`<s-tooltip placement="right">...</s-tooltip>`。属性说明：`placement` 示例值：`right`，类型：string，默认值：Element Plus 默认值。本示例展示插槽内容定制。default|content。
 tooltip/slot
 :::
 
 ### 受控模式
 
-:::demo `visible`
+:::demo 基础写法：`<s-tooltip :visible="visible" content="当前 tooltip 由外部 visible 状态完全控制" placement="top">...</s-tooltip>`。属性说明：`visible` 示例值：`visible`，类型：boolean，默认值：未设置；`content` 示例值：`当前 tooltip 由外部 visible 状态完全控制`，类型：string / VNode，默认值：未设置；`placement` 示例值：`top`，类型：string，默认值：Element Plus 默认值。本示例展示受控模式配置。visible。
 tooltip/visible
 :::
 

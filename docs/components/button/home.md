@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-button icon="plus" type="primary">我是按钮</s-button>`。属性说明：`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`content` 示例值：`我是提示文字`，类型：string，默认值：`''`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 button/base
 :::
 
@@ -18,13 +18,13 @@ button/base
 
 #### chenghua主题示例
 
-:::demo
+:::demo 基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。属性说明：`theme` 示例值：`chenghua`，类型：`'' \| 'chenghua'`，默认值：`''`；`variant` 示例值：`gradient`，类型：`'' \| 'outline' \| 'gradient'`，默认值：`''`；`icon` 示例值：`set-up`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`width` 示例值：`288`，类型：string / number，默认值：`''`；`size` 示例值：`large`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 button/chenghua/base
 :::
 
 ### Hover 动效（hoverAnimation 默认值：false）
 
-:::demo `hoverAnimation` 控制按钮鼠标移入时是否上移并轻微放大，可选值是 `true` 和 `false`，默认值是 `false`。
+:::demo 基础写法：`<s-button hover-animation type="primary">移入动效</s-button>`。属性说明：`hover-animation` 示例值：`true`，类型：boolean，默认值：`false`；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示鼠标移入上移并轻微放大的动效。`hoverAnimation` 控制按钮鼠标移入时是否上移并轻微放大，可选值是 `true` 和 `false`，默认值是 `false`。
 button/hoverAnimation
 :::
 
@@ -51,31 +51,31 @@ app.use(SybzComponents, {
 
 ### 图标按钮
 
-:::demo
+:::demo 基础写法：`<s-button :icon="Plus" type="primary">导入 Plus</s-button>`。属性说明：`icon` 示例值：`Plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`size` 示例值：`large`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`plain` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示图标按钮配置，可以直接复制基础写法后按业务替换数据。
 button/icon
 :::
 
 ### 提示文字
 
-:::demo
+:::demo 基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性说明：`content` 示例值：`我是提示文字`，类型：string，默认值：`''`；`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`tooltipAttrs` 示例值：`{ placement: 'right' }`，类型：Object [去tooltip组件](../tooltip/home)，默认值：`{}`；`text` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示提示内容配置，可以直接复制基础写法后按业务替换数据。
 button/content
 :::
 
 ### 防抖
 
-:::demo
+:::demo 基础写法：`<s-button :time="timeValue" @click="handleClick" icon="plus">1秒防抖</s-button>`。属性说明：`time` 示例值：`timeValue`，类型：number(毫秒)，默认值：`0`；`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`loading` 示例值：`false`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示点击频率控制，可以直接复制基础写法后按业务替换数据。
 button/throttle
 :::
 
 ### slots
 
-:::demo
+:::demo 基础写法：`<el-button :time="1000" @click="handleClick">...</el-button>`。属性说明：`time` 示例值：`1000`，类型：number(毫秒)，默认值：`0`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
 button/slots
 :::
 
 ### other
 
-:::demo
+:::demo 基础写法：`<el-card shadow="never">...</el-card>`。属性说明：`shadow` 示例值：`never`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`wrap` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`40`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`v-tippy` 示例值：`{ content: '点击查看详细文档', }`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`href` 示例值：`https://element-plus.org/zh-CN/co...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`target` 示例值：`_blank`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`v-model` 示例值：`size`，类型由绑定值决定，默认值由绑定变量初始值决定；`value` 示例值：`large`，类型：string / number，默认值：未设置。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
 button/other
 :::
 

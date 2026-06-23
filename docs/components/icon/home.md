@@ -10,25 +10,25 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-icon name="delete">...</s-icon>`。属性说明：`name` 示例值：`delete`，类型：string，默认值：未设置；`content` 示例值：`警告`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`color` 示例值：`var(--yellow)`，类型：string，默认值：未设置；`size` 示例值：`50`，类型：string / number，默认值：`16px`；`placement` 示例值：`right`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 icon/base
 :::
 
 ### 插槽
 
-:::demo
+:::demo 基础写法：`<s-icon>...</s-icon>`。属性说明：`content` 示例值：`添加`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
 icon/slot
 :::
 
 ### 常用图标查找
 
-:::demo
+:::demo 基础写法：`<s-icon :name="v.value" color="var(--blue)">...</s-icon>`。属性说明：`name` 示例值：`v.value`，类型：string，默认值：未设置；`color` 示例值：`var(--blue)`，类型：string，默认值：未设置。本示例展示图标按钮配置，可以直接复制基础写法后按业务替换数据。
 icon/usually
 :::
 
 ### 所有图标
 
-:::demo
+:::demo 基础写法：`<s-icon :name="`${proxy.toLine(v.name)}`" class="item">...</s-icon>`。属性说明：`name` 示例值：``${proxy.toLine(v.name)}``，类型：string，默认值：未设置。本示例展示图标按钮配置，可以直接复制基础写法后按业务替换数据。
 icon/all
 :::
 

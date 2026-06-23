@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-function-source-code :function-name="functionName" />`。属性说明：`function-name` 示例值：`functionName`，类型：string，默认值：`uuid`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 functionSourceCode/base
 :::
 

@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
-    <p text="sm" v-html="decodedDescription" />
+    <div class="demo-description" text="sm" v-html="descriptionWithCopy" @click="handleDescriptionClick" />
     <div class="example">
       <Example :path="path" />
       <ElDivider class="m-0" />
@@ -75,6 +75,12 @@ const toggleSourceVisible = (isOpen?: boolean) => {
 }
 
 const decodedDescription = computed(() => decodeURIComponent(props.description!))
+const descriptionWithCopy = computed(() => {
+  return decodedDescription.value.replace(
+    /((?:基础写法|基础用法)：\s*<code>[\s\S]*?<\/code>)/,
+    '$1<button class="demo-description__copy" type="button" data-demo-basic-copy>复制</button>',
+  )
+})
 
 const copyCode = async () => {
   if (!isSupported) {
@@ -86,6 +92,35 @@ const copyCode = async () => {
   } catch (e: any) {
     ElMessage.error(e.message)
   }
+}
+
+const copyBasicUsage = async (code: string) => {
+  if (!isSupported) {
+    ElMessage.error('复制失败')
+  }
+  try {
+    await copy(code)
+    ElMessage.success('已复制基础写法')
+  } catch (e: any) {
+    ElMessage.error(e.message)
+  }
+}
+
+const handleDescriptionClick = (event: MouseEvent) => {
+  const target = event.target as HTMLElement
+  const button = target.closest<HTMLButtonElement>('[data-demo-basic-copy]')
+  if (!button) return
+
+  const code = button.previousElementSibling?.tagName.toLowerCase() === 'code'
+    ? button.previousElementSibling.textContent
+    : ''
+
+  if (!code) {
+    ElMessage.warning('未找到可复制的基础写法')
+    return
+  }
+
+  copyBasicUsage(code)
 }
 
 const jumpPath = async () => {
@@ -101,6 +136,41 @@ const jumpPath = async () => {
 }
 </script>
 <style lang="scss" scoped>
+.demo-description {
+  margin: 1em 0;
+  line-height: 1.7;
+
+  :deep(p) {
+    margin: 0;
+  }
+
+  :deep(.demo-description__copy) {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 8px;
+    margin-left: 8px;
+    border: 1px solid var(--el-border-color);
+    border-radius: 4px;
+    background: var(--el-fill-color-blank);
+    color: var(--el-text-color-regular);
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 20px;
+    vertical-align: 1px;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+
+    &:hover {
+      border-color: var(--el-color-primary);
+      background: var(--el-color-primary-light-9);
+      color: var(--el-color-primary);
+    }
+  }
+}
+
 .example {
   border: 1px solid var(--border-color);
   border-radius: var(--el-border-radius-base);

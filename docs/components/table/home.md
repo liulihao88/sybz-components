@@ -10,13 +10,13 @@
 
 ### all
 
-:::demo
+:::demo 基础写法：`<el-card shadow="never">...</el-card>`。属性说明：`shadow` 示例值：`never`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`href` 示例值：`https://element-plus.org/zh-CN/co...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`target` 示例值：`_blank`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示all配置，可以直接复制基础写法后按业务替换数据。
 table/all
 :::
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data" :loading="loading">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`loading` 示例值：`loading`，类型：boolean，默认值：`false`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 table/base
 :::
 
@@ -24,91 +24,91 @@ table/base
 
 #### chenghua主题示例
 
-:::demo
+:::demo 基础写法：`<s-table theme="chenghua" size="small" :columns="columns" :data="data" :total="36" />`。属性说明：`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`size` 示例值：`small`，类型：string，默认值：`size` prop 或 Element Plus 全局尺寸；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`total` 示例值：`36`，类型：number，默认值：`total ?? data.length`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 table/chenghua/base
 :::
 
 ### other
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data" v-bind="otherParams" :pageAttrs="{ layout: 'prev, pager, next, jumper', }">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`v-bind` 示例值：`otherParams`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`pageAttrs` 示例值：`{ layout: 'prev, pager, next, jum...`，类型：object，默认值：`{}`。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
 table/other
 :::
 
 ### 单选
 
-:::demo 基础单选，点击当前行进行选中
+:::demo 基础写法：`<s-table v-model="selectedRow" selection-type="single" :columns="columns" :data="data" :showPage="false" highlight-current-row />`。属性说明：`v-model` 示例值：`selectedRow`，类型由绑定值决定，默认值由绑定变量初始值决定；`selection-type` 示例值：`single`，类型：string，默认值：`''`；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`showPage` 示例值：`false`，类型：boolean，默认值：`true`；`highlight-current-row` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示单选交互。基础单选，点击当前行进行选中。
 table/click/basic
 :::
 
-:::demo 通过 `v-model + row-key` 回显单选值
+:::demo 基础写法：`<s-table v-model="selectedRow" selection-type="single" :columns="columns" :data="data" :showPage="false" row-key="id" highlight-current-row />`。属性说明：`v-model` 示例值：`selectedRow`，类型由绑定值决定，默认值由绑定变量初始值决定；`selection-type` 示例值：`single`，类型：string，默认值：`''`；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`showPage` 示例值：`false`，类型：boolean，默认值：`true`；`row-key` 示例值：`id`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`highlight-current-row` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示单选交互。通过 `v-model + row-key` 回显单选值。
 table/click/echo
 :::
 
 ### 多选
 
-:::demo 基础多选
+:::demo 基础写法：`<s-table v-model="selectedRows" selection-type="multiple" :columns="columns" :data="data" :showPage="false" />`。属性说明：`v-model` 示例值：`selectedRows`，类型由绑定值决定，默认值由绑定变量初始值决定；`selection-type` 示例值：`multiple`，类型：string，默认值：`''`；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`showPage` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示多选交互。基础多选。
 table/select/basic
 :::
 
-:::demo 通过 `v-model + row-key` 回显多选值
+:::demo 基础写法：`<s-table v-model="selectedRows" selection-type="multiple" :columns="columns" :data="data" :showIndex="false" :showPage="false" row-key="id" />`。属性说明：`v-model` 示例值：`selectedRows`，类型由绑定值决定，默认值由绑定变量初始值决定；`selection-type` 示例值：`multiple`，类型：string，默认值：`''`；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`showIndex` 示例值：`false`，类型：boolean，默认值：`true`；`showPage` 示例值：`false`，类型：boolean，默认值：`true`；`row-key` 示例值：`id`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示多选交互。通过 `v-model + row-key` 回显多选值。
 table/select/echo
 :::
 
-:::demo 跨页多选需要传 `row-key`, 默认就是支持跨页多选的
+:::demo 基础写法：`<s-table v-model="selectedRows" selection-type="multiple" :columns="columns" :data="displayData" :total="fullData.length" :pageSize="pageSize" :pageSizes="[2, 10, 30, 50]" :pageNumber="currentPage" :showIndex="false" row-key="id" @page-change="handlePageChange" />`。属性说明：`v-model` 示例值：`selectedRows`，类型由绑定值决定，默认值由绑定变量初始值决定；`selection-type` 示例值：`multiple`，类型：string，默认值：`''`；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`displayData`，类型：array，默认值：`[]`；`total` 示例值：`fullData.length`，类型：number，默认值：`total ?? data.length`；`pageSize` 示例值：`pageSize`，类型：number，默认值：`pageSize` prop，默认 `30`；`pageSizes` 示例值：`[2, 10, 30, 50]`，类型：number[]，默认值：`pageSizes` prop，默认 `[10, 30, 50]`；`pageNumber` 示例值：`currentPage`，类型：number，默认值：`1`。本示例展示多选交互。跨页多选需要传 `row-key`, 默认就是支持跨页多选的。
 table/select/crossPage
 :::
 
 ### 多级表头
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data" :showIndex="false" :showPage="false">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`showIndex` 示例值：`false`，类型：boolean，默认值：`true`；`showPage` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示多级表头配置，可以直接复制基础写法后按业务替换数据。
 table/groupHeader
 :::
 
 ### 隐藏按钮或列 isShow
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data" :showPage="false">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`showPage` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示隐藏按钮或列 isShow配置，可以直接复制基础写法后按业务替换数据。
 table/isShow
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :total="total" :data="data" ref="tableRef">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`total` 示例值：`total`，类型：number，默认值：`total ?? data.length`；`data` 示例值：`data`，类型：array，默认值：`[]`。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 table/usually
 :::
 
 ### 编辑
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="form.data">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`form.data`，类型：array，默认值：`[]`。本示例展示编辑配置，可以直接复制基础写法后按业务替换数据。
 table/edit
 :::
 
 ### reConfirm再确认
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`。本示例展示reConfirm再确认配置，可以直接复制基础写法后按业务替换数据。
 table/reConfirm
 :::
 
 ### 表格里嵌套表格
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :preserve-expanded-content="preserveExpanded" :data="data" ref="tableRef">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`preserve-expanded-content` 示例值：`preserveExpanded`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`data` 示例值：`data`，类型：array，默认值：`[]`；`size` 示例值：`small`，类型：string，默认值：`size` prop 或 Element Plus 全局尺寸；`showIndex` 示例值：`false`，类型：boolean，默认值：`true`；`showPage` 示例值：`false`，类型：boolean，默认值：`true`；`custom-header-cell-style` 示例值：`{ height: 'unset', }`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示表格场景，可以直接复制基础写法后按业务替换数据。
 table/wrap
 :::
 
 ### render生成html
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data" ref="tableRef">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`。本示例展示render生成html配置，可以直接复制基础写法后按业务替换数据。
 table/render
 :::
 
 ### 改变操作按钮的属性
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data" ref="tableRef">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`。本示例展示改变操作按钮的属性配置，可以直接复制基础写法后按业务替换数据。
 table/operator
 :::
 
 ### 对比
 
-:::demo
+:::demo 基础写法：`<s-table :columns="columns" :data="data" :show-page="false" />`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`show-page` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示对比配置，可以直接复制基础写法后按业务替换数据。
 table/compare
 :::
 

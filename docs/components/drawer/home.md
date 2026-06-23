@@ -14,13 +14,13 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-drawer title="baseDrawer" v-model="isShowAbandon">...</s-drawer>`。属性说明：`title` 示例值：`baseDrawer`，类型：string，默认值：`""`；`v-model` 示例值：`isShowAbandon`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 drawer/base
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-drawer ref="dialogRef" title="App" @confirm="cusConfirm" :confirmAttrs="{ loading: confirmLoading, }" v-model="isShow">...</s-drawer>`。属性说明：`title` 示例值：`App`，类型：string，默认值：`""`；`confirmAttrs` 示例值：`{ loading: confirmLoading, }`，类型：object，默认值：`{}`；`v-model` 示例值：`isShow`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 drawer/usually
 :::
 

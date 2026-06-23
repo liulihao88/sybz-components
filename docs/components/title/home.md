@@ -8,7 +8,7 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-title title="你好">...</s-title>`。属性说明：`title` 示例值：`你好`，类型：string，默认值：`''`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`type` 示例值：`simple`，类型：string，默认值：`icon`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 title/base
 :::
 
@@ -16,19 +16,19 @@ title/base
 
 #### chenghua主题示例
 
-:::demo
+:::demo 基础写法：`<s-title title="成华 AI 服务申请" theme="chenghua" sub-title="审批中 12 个，待处理 4 个">...</s-title>`。属性说明：`title` 示例值：`成华 AI 服务申请`，类型：string，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`sub-title` 示例值：`审批中 12 个，待处理 4 个`，类型：string，默认值：`''`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 title/chenghua/base
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-title title="左侧" tb="10" l="10">...</s-title>`。属性说明：`title` 示例值：`左侧`，类型：string，默认值：`''`；`tb` 示例值：`10`，类型：string / number，默认值：未设置；`l` 示例值：`10`，类型：string / number，默认值：`''`。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 title/usually
 :::
 
 ### compTitle组件的使用
 
-:::demo
+:::demo 基础写法：`<s-comp-title title="你好" :boxStyle="{ width: '160px', fontSize: '20px', color: 'var(--blue)' }">...</s-comp-title>`。属性说明：`title` 示例值：`你好`，类型：string，默认值：`''`；`boxStyle` 示例值：`{ width: '160px', fontSize: '20px...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`large`，类型：string，默认值：`''`。本示例展示compTitle组件的使用配置，可以直接复制基础写法后按业务替换数据。
 title/compTitle
 :::
 

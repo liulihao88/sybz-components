@@ -8,13 +8,13 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<el-card shadow="never">...</el-card>`。属性说明：`shadow` 示例值：`never`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`href` 示例值：`https://element-plus.org/zh-CN/co...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`target` 示例值：`_blank`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 text/base
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-text style="width: 100px">...</s-text>`。属性说明：该示例不需要额外属性，未传属性时使用组件默认值。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 text/usually
 :::
 

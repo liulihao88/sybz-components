@@ -10,43 +10,43 @@
 
 ### 基础用法
 
-:::demo 基于 Element-plus 的 `el-radio` 二次封装的**单选组件**，继承原组件的所有属性
+:::demo 基础写法：`<s-radio v-model="value" :options="options" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示基础渲染和最小配置。基于 Element-plus 的 `el-radio` 二次封装的**单选组件**，继承原组件的所有属性。
 radio/base
 :::
 
 ### 成华主题
 
-:::demo `theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`showType` 的可选值是 `radio` 和 `button`，默认值是 `radio`；`border` 的可选值是 `true` 和 `false`，默认值是 `false`。
+:::demo 基础写法：`<s-radio v-model="service" title="服务类型" theme="chenghua" :options="serviceOptions" />`。属性说明：`v-model` 示例值：`service`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`服务类型`，类型：string，默认值：未设置；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`options` 示例值：`serviceOptions`，类型：array，默认值：`[]`；`border` 示例值：`true`，类型：boolean，默认值：`false`；`show-type` 示例值：`button`，类型：string，默认值：`radio`。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`showType` 的可选值是 `radio` 和 `button`，默认值是 `radio`；`border` 的可选值是 `true` 和 `false`，默认值是 `false`。
 radio/chenghua/base
 :::
 
 ### disabled
 
-:::demo 基于 Element-plus 的 `el-radio` 二次封装的**单选组件**，继承原组件的所有属性
+:::demo 基础写法：`<s-radio v-model="value" :options="options" :disabled="true" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`options`，类型：array，默认值：`[]`；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`itemDisabled` 示例值：`itemDisabled`，类型：function，默认值：`() => {}`。本示例展示禁用状态。基于 Element-plus 的 `el-radio` 二次封装的**单选组件**，继承原组件的所有属性。
 radio/disabled
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-radio v-model="value" :options="options" value="id" label="name" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`options`，类型：array，默认值：`[]`；`value` 示例值：`id`，类型：string / number / boolean，默认值：`value`；`label` 示例值：`name`，类型：string / number / boolean，默认值：`label`；`showType` 示例值：`button`，类型：string，默认值：`radio`；`size` 示例值：`small`，类型：string，可选值：`large` / `default` / `small`，默认值：继承全局尺寸或 `default`。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 radio/usually
 :::
 
 ### 使用type
 
-:::demo 这里更改了type属性, 可以有很多种自定义options的变换, 属于自定义的扩展
+:::demo 基础写法：`<s-radio v-model="value" type="boolean" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`boolean`，类型：string，默认值：`''`；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示使用type配置。这里更改了type属性, 可以有很多种自定义options的变换, 属于自定义的扩展。
 radio/type
 :::
 
 ### 多个属性的用法
 
-:::demo
+:::demo 基础写法：`<s-radio v-model="value" :options="options" value="id" label="name" showType="button" size="small" @change="change" :subAttrs="{ disabled: 'isDis' }" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`options`，类型：array，默认值：`[]`；`value` 示例值：`id`，类型：string / number / boolean，默认值：`value`；`label` 示例值：`name`，类型：string / number / boolean，默认值：`label`；`showType` 示例值：`button`，类型：string，默认值：`radio`；`size` 示例值：`small`，类型：string，可选值：`large` / `default` / `small`，默认值：继承全局尺寸或 `default`；`subAttrs` 示例值：`{ disabled: 'isDis' }`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示多个属性的用法配置，可以直接复制基础写法后按业务替换数据。
 radio/multyAttrs
 :::
 
 ### Slots
 
-:::demo
+:::demo 基础写法：`<s-radio v-model="value" :options="options" size="large" @change="change">...</s-radio>`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`options`，类型：array，默认值：`[]`；`size` 示例值：`large`，类型：string，可选值：`large` / `default` / `small`，默认值：继承全局尺寸或 `default`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
 radio/slot
 :::
 

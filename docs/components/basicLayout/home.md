@@ -8,43 +8,43 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<sBasicLayout title="基础用法">...</sBasicLayout>`。属性说明：`title` 示例值：`基础用法`，类型：string，默认值：`''`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 basicLayout/base
 :::
 
 ### 成华主题
 
-:::demo `theme="chenghua"` 时启用成华主题布局样式
+:::demo 基础写法：`<s-basic-layout v-model="collapsed" theme="chenghua" title="审核规则管理">...</s-basic-layout>`。属性说明：`v-model` 示例值：`collapsed`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`；`title` 示例值：`审核规则管理`，类型：string，默认值：`''`。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题布局样式。
 basicLayout/chenghua/base
 :::
 
 ### 展开和收缩
 
-:::demo
+:::demo 基础写法：`<SBasicLayout :collapsible="true">...</SBasicLayout>`。属性说明：`collapsible` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示展开和收缩配置，可以直接复制基础写法后按业务替换数据。
 basicLayout/callapse
 :::
 
 ### other
 
-:::demo
+:::demo 基础写法：`<SBasicLayout :size="size">...</SBasicLayout>`。属性说明：`size` 示例值：`size`，类型：`small` / `default` / `large`，默认值：`default`。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
 basicLayout/other
 :::
 
 ### 自适应高度
 
-:::demo
+:::demo 基础写法：`<SBasicLayout title="不自适应body的高度" class="m-t-16 h-block" :scroll="false">...</SBasicLayout>`。属性说明：`title` 示例值：`不自适应body的高度`，类型：string，默认值：`''`；`scroll` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示高度配置，可以直接复制基础写法后按业务替换数据。
 basicLayout/customLayout
 :::
 
 ### slot插槽
 
-:::demo
+:::demo 基础写法：`<SBasicLayout collapsible :boxStyle="{ border: 'none' }">...</SBasicLayout>`。属性说明：`collapsible` 示例值：`true`，类型：boolean，默认值：`false`；`boxStyle` 示例值：`{ border: 'none' }`，类型：object，默认值：`{}`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
 basicLayout/slot
 :::
 
 ### body正方形
 
-:::demo
+:::demo 基础写法：`<sBasicLayout title="租户容量配额" class="w-300 h-500">...</sBasicLayout>`。属性说明：`title` 示例值：`租户容量配额`，类型：string，默认值：`''`。本示例展示body正方形配置，可以直接复制基础写法后按业务替换数据。
 basicLayout/square
 :::
 

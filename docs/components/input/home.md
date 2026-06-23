@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-input v-model="name" />`。属性说明：`v-model` 示例值：`name`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 input/base
 :::
 
@@ -18,38 +18,38 @@ input/base
 
 #### chenghua主题示例
 
-:::demo
+:::demo 基础写法：`<s-input v-model="input" width="320" theme="chenghua" size="large" placeholder="请输入服务名称" />`。属性说明：`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`100%`；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`size` 示例值：`large`，类型：string，默认值：`''`；`placeholder` 示例值：`请输入服务名称`，类型：string，默认值：`""`；`title` 示例值：`负责人`，类型：string，默认值：`""`；`maxlength` 示例值：`10`，类型：string / number，默认值：`10`；`type` 示例值：`textarea`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 input/chenghua/base
 :::
 
 ### size 尺寸
 
-:::demo
+:::demo 基础写法：`<s-input v-model="input" width="220" size="large" placeholder="large" />`。属性说明：`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`220`，类型：string / number，默认值：`100%`；`size` 示例值：`large`，类型：string，默认值：`''`；`placeholder` 示例值：`large`，类型：string，默认值：`""`。本示例展示尺寸配置，可以直接复制基础写法后按业务替换数据。
 input/size
 :::
 
 ### maxlength 最大长度
 
-:::demo
+:::demo 基础写法：`<s-input v-model="customValue" width="320" title="自定义 maxlength 和 toast 文案" :maxlength="6" max-length-error-text="最多只能输入 6 个字符" />`。属性说明：`v-model` 示例值：`customValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`100%`；`title` 示例值：`自定义 maxlength 和 toast 文案`，类型：string，默认值：`""`；`maxlength` 示例值：`6`，类型：string / number，默认值：`10`；`max-length-error-text` 示例值：`最多只能输入 6 个字符`，类型：string，默认值：`''`；`hide-max-length-error` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示maxlength 最大长度配置，可以直接复制基础写法后按业务替换数据。
 input/maxlength
 :::
 
 ### other
 
-:::demo
+:::demo 基础写法：`<s-input title="密码框" v-model="input" style="width: 240px" type="password" placeholder="Please input password" show-password />`。属性说明：`title` 示例值：`密码框`，类型：string，默认值：`""`；`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`password`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`placeholder` 示例值：`Please input password`，类型：string，默认值：`""`；`show-password` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`width` 示例值：`240`，类型：string / number，默认值：`100%`；`height` 示例值：`48`，类型：string / number，默认值：`''`；`rows` 示例值：`2`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
 input/other
 :::
 
 ### Modifiers
 
 <el-tag>注意</el-tag> : s-input默认设置`trim`为true, 去掉首尾空格. 如果不想要这个设置, 请设置`trim`为false
-:::demo
+:::demo 基础写法：`<s-input v-model.lazy="input" style="width: 240px" placeholder="lazy" />`。属性说明：`v-model.lazy` 示例值：`input`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`placeholder` 示例值：`lazy`，类型：string，默认值：`""`；`v-model.number` 示例值：`input`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`v-model.trim` 示例值：`input`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示Modifiers配置，可以直接复制基础写法后按业务替换数据。
 input/modifiers
 :::
 
 ### 禁用状态
 
-:::demo
+:::demo 基础写法：`<s-input v-model="input" style="width: 240px" disabled placeholder="Please input" />`。属性说明：`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`placeholder` 示例值：`Please input`，类型：string，默认值：`""`。本示例展示禁用状态，可以直接复制基础写法后按业务替换数据。
 input/disabled
 :::
 
@@ -57,31 +57,31 @@ input/disabled
 
 使用`clearable`属性即可得到一个可一键清空的输入框, `s-input`默认clearable是`true`的.
 
-:::demo
+:::demo 基础写法：`<el-input v-model="input" style="width: 240px" placeholder="Please input" :clearable="false" />`。属性说明：`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`placeholder` 示例值：`Please input`，类型：string，默认值：`""`；`clearable` 示例值：`false`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示一键清空配置，可以直接复制基础写法后按业务替换数据。
 input/clearable
 :::
 
 ### 格式化
 
-:::demo
+:::demo 基础写法：`<el-input v-model="input" style="width: 240px" placeholder="Please input" :formatter="(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')" :parser="(value) => value.replace(/\$\s?|(,*)/g, '')" />`。属性说明：`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`placeholder` 示例值：`Please input`，类型：string，默认值：`""`；`formatter` 示例值：`(value) => `$ ${value}`.replace(/...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`parser` 示例值：`(value) => value.replace(/\$\s?|(...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示格式化配置，可以直接复制基础写法后按业务替换数据。
 input/formatter
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-input content="这里主要是为了让其鼠标移入显示文本" v-model="iptValue">...</s-input>`。属性说明：`content` 示例值：`这里主要是为了让其鼠标移入显示文本`，类型：string，默认值：`''`；`v-model` 示例值：`iptValue`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 input/usually
 :::
 
 ### 复合型输入框
 
-:::demo
+:::demo 基础写法：`<s-input v-model="input1" style="max-width: 600px" placeholder="Please input">...</s-input>`。属性说明：`v-model` 示例值：`input1`，类型由绑定值决定，默认值由绑定变量初始值决定；`placeholder` 示例值：`Please input`，类型：string，默认值：`""`。本示例展示复合型输入框配置，可以直接复制基础写法后按业务替换数据。
 input/slot
 :::
 
 ### 封装el-autocomplete的用法
 
-:::demo
+:::demo 基础写法：`<s-input v-model="cc" :options="options" width="300">...</s-input>`。属性说明：`v-model` 示例值：`cc`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`options`，类型：array，默认值：未设置；`width` 示例值：`300`，类型：string / number，默认值：`100%`。本示例展示封装el-autocomplete的用法配置，可以直接复制基础写法后按业务替换数据。
 input/autocomplete
 :::
 

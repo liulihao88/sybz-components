@@ -10,43 +10,43 @@
 
 ### 基础用法
 
-:::demo
+:::demo 基础写法：`<s-descriptions :options="DataSource.descData">...</s-descriptions>`。属性说明：`options` 示例值：`DataSource.descData`，类型：`ItemOptions[]`，默认值：未设置。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 descriptions/base
 :::
 
 ### 成华主题
 
-:::demo `theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`column` 的类型是 `number`，默认值是 `3`；`labelWidth` 支持 `string` 和 `number`，默认值是 `auto`；`showAll` 的可选值是 `true` 和 `false`，默认值是 `false`。
+:::demo 基础写法：`<s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" label-width="110" show-all />`。属性说明：`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`title` 示例值：`服务基础信息`，类型：string，默认值：`""`；`extra` 示例值：`更新时间 10:24`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`3`，类型：number，默认值：`3`；`label-width` 示例值：`110`，类型：string / number，默认值：`auto`；`show-all` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`column` 的类型是 `number`，默认值是 `3`；`labelWidth` 支持 `string` 和 `number`，默认值是 `auto`；`showAll` 的可选值是 `true` 和 `false`，默认值是 `false`。
 descriptions/chenghua/base
 :::
 
 ### 通常用法
 
-:::demo
+:::demo 基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra">...</s-descriptions>`。属性说明：`title` 示例值：`这是title`，类型：string，默认值：`""`；`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`1`，类型：number，默认值：`3`；`label-width` 示例值：`300`，类型：string / number，默认值：`auto`；`size` 示例值：`sizeValue`，类型：string，可选值：`large` / `default` / `small`，默认值：继承全局尺寸或 `default`；`showAll` 示例值：`showAll`，类型：boolean，默认值：`false`；`border` 示例值：`borderValue`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`extra` 示例值：`这是extra`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
 descriptions/usually
 :::
 
 ### 每行展示多少项
 
-:::demo
+:::demo 基础写法：`<s-descriptions :options="DataSource.descData" :column="radioValue">...</s-descriptions>`。属性说明：`options` 示例值：`DataSource.descData`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`radioValue`，类型：number，默认值：`3`。本示例展示每行展示多少项配置，可以直接复制基础写法后按业务替换数据。
 descriptions/column
 :::
 
 ### 垂直列表
 
-:::demo
+:::demo 基础写法：`<s-descriptions title="Vertical list with border" direction="vertical" :column="4" :size="size" border>...</s-descriptions>`。属性说明：`title` 示例值：`Vertical list with border`，类型：string，默认值：`""`；`direction` 示例值：`vertical`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`4`，类型：number，默认值：`3`；`size` 示例值：`size`，类型：string，可选值：`large` / `default` / `small`，默认值：继承全局尺寸或 `default`；`border` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示垂直列表配置，可以直接复制基础写法后按业务替换数据。
 descriptions/vertical
 :::
 
 ### slot插槽
 
-:::demo
+:::demo 基础写法：`<s-descriptions :options="options" class="w-block" :column="1" label-width="200px">...</s-descriptions>`。属性说明：`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`1`，类型：number，默认值：`3`；`label-width` 示例值：`200px`，类型：string / number，默认值：`auto`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
 descriptions/slot
 :::
 
 ### 自定义样式
 
-:::demo
+:::demo 基础写法：`<s-descriptions :options="options" :column="1" label-width="300">...</s-descriptions>`。属性说明：`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`1`，类型：number，默认值：`3`；`label-width` 示例值：`300`，类型：string / number，默认值：`auto`。本示例展示自定义配置，可以直接复制基础写法后按业务替换数据。
 descriptions/customStyle
 :::
 
