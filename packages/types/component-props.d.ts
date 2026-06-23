@@ -22,6 +22,7 @@ export interface SButtonProps {
   size?: SybzComponentSize
   width?: string | number
   height?: string | number
+  hoverAnimation?: boolean
 }
 
 export interface SDatePickerProps extends Omit<Partial<DatePickerPropsPublic>, 'shortcuts'> {

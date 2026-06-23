@@ -1,3 +1,18 @@
+.s-button--hover-animation.s-button--hover-animation {
+  transform-origin: center;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.28s ease;
+  will-change: transform;
+
+  &:not(.is-disabled):not(.is-loading):hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+}
+
 .s-button--chenghua.s-button--chenghua {
   --el-button-font-weight: 500;
   --el-button-border-radius: var(--s-ch-radius);
@@ -9,7 +24,8 @@
     background-color 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    transform 0.28s ease;
 
   &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
       .el-button--info
@@ -171,4 +187,3 @@
     }
   }
 }
-

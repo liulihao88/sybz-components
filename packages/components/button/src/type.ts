@@ -11,5 +11,6 @@ export interface SButtonSelfProps {
   variant?: '' | 'outline' | 'gradient'
   width?: string | number
   height?: string | number
+  hoverAnimation?: boolean
 }
 export type SButtonProps = SButtonSelfProps

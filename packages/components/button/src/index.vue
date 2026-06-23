@@ -38,6 +38,7 @@ interface SButtonSelfProps {
   size?: '' | 'small' | 'default' | 'large'
   width?: string | number
   height?: string | number
+  hoverAnimation?: boolean
 }
 
 const props = withDefaults(defineProps<SButtonSelfProps>(), {
@@ -50,6 +51,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   size: '',
   width: '',
   height: '',
+  hoverAnimation: false,
 })
 
 const attrs = useAttrs()
@@ -99,6 +101,7 @@ const buttonAttrs = computed(() => {
 })
 
 const buttonClass = computed(() => ({
+  's-button--hover-animation': mergedProps.value.hoverAnimation,
   's-button--chenghua': mergedProps.value.theme === 'chenghua',
   's-button--chenghua-outline': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'outline',
   's-button--chenghua-gradient': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'gradient',

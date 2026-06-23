@@ -22,6 +22,12 @@ button/base
 button/chenghua/base
 :::
 
+### Hover 动效（hoverAnimation 默认值：false）
+
+:::demo `hoverAnimation` 控制按钮鼠标移入时是否上移并轻微放大，可选值是 `true` 和 `false`，默认值是 `false`。
+button/hoverAnimation
+:::
+
 ### 全局默认配置
 
 button 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
@@ -88,6 +94,7 @@ button/other
 |             `size`              | 按钮尺寸                            | `'' \| 'small' \| 'default' \| 'large'` | `''`    |
 |            `width`              | 按钮宽度，支持 `processWidth` 写法  | string / number                         | `''`    |
 |            `height`             | 按钮高度，支持 `processWidth` 写法  | string / number                         | `''`    |
+|       `hoverAnimation`          | 鼠标移入时上移并轻微放大的动效      | boolean                                 | `false` |
 
 ### 事件
 
