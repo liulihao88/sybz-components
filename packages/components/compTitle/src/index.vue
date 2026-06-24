@@ -1,8 +1,4 @@
 <script setup lang="ts">
-/**
- *
-  <s-comp-title :title="props.title" :size="attrs.size" :boxStyle="$attrs.boxStyle ?? {}"></s-comp-title>
- */
 import { useAttrs, computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'

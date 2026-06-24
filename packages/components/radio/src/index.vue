@@ -1,10 +1,8 @@
 <template>
   <div class="s-radio-box" :class="radioClass">
     <s-comp-title
-      :title="mergedProps.title"
       v-if="mergedProps.title"
-      :boxStyle="$attrs.boxStyle ?? {}"
-      :theme="mergedProps.theme"
+      v-bind="compTitleProps"
       class="s-radio-box__title"
     ></s-comp-title>
     <el-radio-group v-bind="$attrs">
@@ -40,6 +38,9 @@ defineOptions({
 const props = defineProps({
   title: {
     type: String,
+  },
+  boxStyle: {
+    type: Object,
   },
   theme: {
     type: String,
@@ -79,6 +80,18 @@ const props = defineProps({
 })
 const mergedProps = useGlobalComponentConfig('radio', props)
 const attrs = useAttrs()
+const compTitleProps = computed(() => {
+  const titleProps: Record<string, any> = {
+    title: mergedProps.value.title,
+    theme: mergedProps.value.theme,
+  }
+
+  if (mergedProps.value.boxStyle !== undefined) {
+    titleProps.boxStyle = mergedProps.value.boxStyle
+  }
+
+  return titleProps
+})
 const radioType = computed(() => {
   const obj = {
     radio: 'el-radio',

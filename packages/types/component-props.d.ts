@@ -105,6 +105,7 @@ export interface SRadioItem {
 
 export interface SRadioProps {
   title?: string
+  boxStyle?: SybzRecord
   theme?: SybzComponentTheme
   type?: '' | 'boolean' | 'simple'
   showType?: 'radio' | 'button'
@@ -128,6 +129,7 @@ export interface SSelectProps {
   size?: SybzComponentSize
   theme?: SybzComponentTheme
   title?: string
+  boxStyle?: SybzRecord
   connect?: string
   customLabel?: string | ((item: any) => any)
   width?: string | number

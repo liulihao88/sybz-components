@@ -14,10 +14,7 @@
     ]"
   >
     <s-comp-title
-      :title="mergedProps.title"
-      :size="mergedProps.size || undefined"
-      :boxStyle="$attrs.boxStyle ?? {}"
-      :theme="mergedProps.theme"
+      v-bind="compTitleProps"
     />
     <el-tooltip
       v-bind="mergedTooltipAttrs"
@@ -169,6 +166,9 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  boxStyle: {
+    type: Object,
+  },
 
   // 如果label显示多个参数的连接符
   connect: {
@@ -227,6 +227,19 @@ const props = defineProps({
   },
 })
 const mergedProps = useGlobalComponentConfig('select', props)
+const compTitleProps = computed(() => {
+  const titleProps: Record<string, any> = {
+    title: mergedProps.value.title,
+    size: mergedProps.value.size || undefined,
+    theme: mergedProps.value.theme,
+  }
+
+  if (mergedProps.value.boxStyle !== undefined) {
+    titleProps.boxStyle = mergedProps.value.boxStyle
+  }
+
+  return titleProps
+})
 
 const sOptions = ref(props.options)
 
