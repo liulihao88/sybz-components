@@ -41,6 +41,7 @@ export const components = Object.entries(allComponents).reduce((acc, [key, compo
 
 // 按需导入
 export { SSvg }
+export * from './hooks'
 
 const isConfigRecord = (value: unknown): value is Record<string, any> => {
   return value !== null && typeof value === 'object' && !Array.isArray(value)

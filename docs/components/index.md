@@ -98,6 +98,22 @@ v-number
 v-focus
 ```
 
+### Hooks
+
+Hooks 是基于 Vue 组合式 API 的公共状态和生命周期封装，已经从 `sybz-components` 主包导出。
+
+```ts
+import { useLoading, usePagination } from 'sybz-components'
+```
+
+只想单独表达使用 hooks 时，也可以从 hooks 子路径引入：
+
+```ts
+import { useLoading, usePagination } from 'sybz-components/hooks'
+```
+
+完整示例见 [Hooks 总览](/components/hooks/home.md)。
+
 ### docs文档结构目录
 
 ```

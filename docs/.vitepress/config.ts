@@ -436,6 +436,52 @@ export default defineConfig({
             },
           ],
         },
+        {
+          text: 'Hooks',
+          collapsed: false,
+          items: [
+            {
+              text: 'Hooks 总览',
+              link: '/components/hooks/home.md',
+            },
+            {
+              text: 'useBoolean 布尔状态',
+              link: '/components/hooks/useBoolean/home.md',
+            },
+            {
+              text: 'useLoading 加载状态',
+              link: '/components/hooks/useLoading/home.md',
+            },
+            {
+              text: 'usePagination 分页状态',
+              link: '/components/hooks/usePagination/home.md',
+            },
+            {
+              text: 'useDebounceFn 防抖函数',
+              link: '/components/hooks/useDebounceFn/home.md',
+            },
+            {
+              text: 'useThrottleFn 节流函数',
+              link: '/components/hooks/useThrottleFn/home.md',
+            },
+            {
+              text: 'useElementSize 元素尺寸',
+              link: '/components/hooks/useElementSize/home.md',
+            },
+            {
+              text: 'useEventListener 事件监听',
+              link: '/components/hooks/useEventListener/home.md',
+            },
+            {
+              text: 'useClickOutside 外部点击',
+              link: '/components/hooks/useClickOutside/home.md',
+            },
+            {
+              text: 'useZIndex 层级管理',
+              link: '/components/hooks/useZIndex/home.md',
+            },
+          ],
+        },
       ],
     },
   },

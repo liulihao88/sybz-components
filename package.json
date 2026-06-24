@@ -23,6 +23,11 @@
     "./types/*": {
       "types": "./dist/types/*.d.ts"
     },
+    "./hooks": {
+      "types": "./dist/types/hooks/index.d.ts",
+      "import": "./dist/sybz-components-es.js",
+      "default": "./dist/sybz-components-es.js"
+    },
     "./style.css": "./dist/style.css",
     "./utilities.css": "./dist/utilities.css",
     "./utilities.scss": "./dist/utilities.scss"

@@ -4,6 +4,7 @@ import type { SybzComponentsInstallOptions } from './types/index'
 
 export type * from './types/index'
 export type * from './components'
+export * from './types/hooks'
 
 export interface SybzComponentsPlugin {
   install: (app: App, options?: SybzComponentsInstallOptions) => void
