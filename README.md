@@ -214,7 +214,7 @@ app.use(SybzComponents, {
 | 分类 | 组件 |
 | --- | --- |
 | 基础组件 | `SButton`、`SInput`、`SInputNumber`、`SSelect`、`SCheckbox`、`SRadio`、`SSwitch` |
-| 数据展示 | `STable`、`STag`、`SText`、`STooltip`、`SDescriptions`、`SEmpty` |
+| 数据展示 | `STable`、`STag`、`STooltip`、`SDescriptions`、`SEmpty` |
 | 反馈组件 | `SDialog`、`SDrawer`、`SPopconfirm`、`SWarning`、`SProgress` |
 | 布局组件 | `SBasicLayout`、`SRow`、`SFlex`、`SItem`、`SItemWrapper`、`SSplitPane` |
 | 业务组件 | `SChart`、`SDatePicker`、`SBuildTime`、`SCompTitle` |

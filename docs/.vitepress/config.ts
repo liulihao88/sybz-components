@@ -201,10 +201,10 @@ export default defineConfig({
               text: '测试组件',
               link: '/components/test/home.md',
             },
-            {
-              text: 'buildTime构建时间',
-              link: '/components/buildTime/home.md',
-            },
+            // {
+            //   text: 'buildTime构建时间',
+            //   link: '/components/buildTime/home.md',
+            // },
             {
               text: sybzMark('button组件'),
               link: '/components/button/home.md',
@@ -245,10 +245,10 @@ export default defineConfig({
               text: sybzMark('empty组件'),
               link: '/components/empty/home.md',
             },
-            {
-              text: 'functionSourceCode源码展示',
-              link: '/components/functionSourceCode/home.md',
-            },
+            // {
+            //   text: 'functionSourceCode源码展示',
+            //   link: '/components/functionSourceCode/home.md',
+            // },
             {
               text: sybzMark('popconfirm组件'),
               link: '/components/popconfirm/home.md',
@@ -300,10 +300,6 @@ export default defineConfig({
             {
               text: sybzMark('tag组件'),
               link: '/components/tag/home.md',
-            },
-            {
-              text: 'text组件',
-              link: '/components/text/home.md',
             },
             {
               text: sybzMark('title组件'),

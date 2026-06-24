@@ -72,7 +72,6 @@ declare module 'vue' {
     STabs: (typeof import('./types/components/tabs'))['default']
     STag: (typeof import('./types/components/tag'))['default']
     STest: (typeof import('./types/components/test'))['default']
-    SText: (typeof import('./types/components/text'))['default']
     STitle: (typeof import('./types/components/title'))['default']
     STooltip: (typeof import('./types/components/tooltip'))['default']
     SWarning: (typeof import('./types/components/warning'))['default']
@@ -238,10 +237,6 @@ export type STagPublicProps = STagInstance['$props']
 export type STestComponent = (typeof import('./types/components/test'))['default']
 export type STestInstance = ComponentInstance<STestComponent>
 export type STestPublicProps = STestInstance['$props']
-
-export type STextComponent = (typeof import('./types/components/text'))['default']
-export type STextInstance = ComponentInstance<STextComponent>
-export type STextPublicProps = STextInstance['$props']
 
 export type STitleComponent = (typeof import('./types/components/title'))['default']
 export type STitleInstance = ComponentInstance<STitleComponent>
