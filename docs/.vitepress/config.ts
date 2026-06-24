@@ -387,10 +387,6 @@ export default defineConfig({
               text: 'quotaPie容量圆环组件',
               link: '/components/company/quotaPie/home.md',
             },
-            {
-              text: 'quotaUnit容量单位组件',
-              link: '/components/company/quotaUnit/home.md',
-            },
           ],
         },
 

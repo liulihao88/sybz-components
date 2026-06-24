@@ -62,7 +62,6 @@ declare module 'vue' {
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
     SProgress: (typeof import('./types/components/progress'))['default']
     SQuotaPie: (typeof import('./types/components/company/quotaPie'))['default']
-    SQuotaUnit: (typeof import('./types/components/company/quotaUnit'))['default']
     SRadio: (typeof import('./types/components/radio'))['default']
     SRow: (typeof import('./types/components/row'))['default']
     SSelect: (typeof import('./types/components/select'))['default']
@@ -199,10 +198,6 @@ export type SProgressPublicProps = SProgressInstance['$props']
 export type SQuotaPieComponent = (typeof import('./types/components/company/quotaPie'))['default']
 export type SQuotaPieInstance = ComponentInstance<SQuotaPieComponent>
 export type SQuotaPiePublicProps = SQuotaPieInstance['$props']
-
-export type SQuotaUnitComponent = (typeof import('./types/components/company/quotaUnit'))['default']
-export type SQuotaUnitInstance = ComponentInstance<SQuotaUnitComponent>
-export type SQuotaUnitPublicProps = SQuotaUnitInstance['$props']
 
 export type SRadioComponent = (typeof import('./types/components/radio'))['default']
 export type SRadioInstance = ComponentInstance<SRadioComponent>
