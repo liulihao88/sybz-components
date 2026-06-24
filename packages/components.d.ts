@@ -59,7 +59,6 @@ declare module 'vue' {
     SItem: (typeof import('./types/components/item'))['default']
     SItemWrapper: (typeof import('./types/components/itemWrapper'))['default']
     SObjectLine: (typeof import('./types/components/company/objectLine'))['default']
-    SOutService: (typeof import('./types/components/company/outService'))['default']
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
     SProgress: (typeof import('./types/components/progress'))['default']
     SQuotaPie: (typeof import('./types/components/company/quotaPie'))['default']
@@ -77,7 +76,6 @@ declare module 'vue' {
     SText: (typeof import('./types/components/text'))['default']
     STitle: (typeof import('./types/components/title'))['default']
     STooltip: (typeof import('./types/components/tooltip'))['default']
-    SUsedPie: (typeof import('./types/components/company/usedPie'))['default']
     SWarning: (typeof import('./types/components/warning'))['default']
   }
 }
@@ -190,11 +188,6 @@ export type SObjectLineComponent = (typeof import('./types/components/company/ob
 export type SObjectLineInstance = ComponentInstance<SObjectLineComponent>
 export type SObjectLinePublicProps = SObjectLineInstance['$props']
 
-export type SOutServiceComponent = (typeof import('./types/components/company/outService'))['default']
-export type SOutServiceInstance = ComponentInstance<SOutServiceComponent>
-export type SOutServicePublicProps = SOutServiceInstance['$props']
-
-
 export type SPopconfirmComponent = (typeof import('./types/components/popconfirm'))['default']
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>
 export type SPopconfirmPublicProps = SPopconfirmInstance['$props']
@@ -262,10 +255,6 @@ export type STitlePublicProps = STitleInstance['$props']
 export type STooltipComponent = (typeof import('./types/components/tooltip'))['default']
 export type STooltipInstance = ComponentInstance<STooltipComponent>
 export type STooltipPublicProps = STooltipInstance['$props']
-
-export type SUsedPieComponent = (typeof import('./types/components/company/usedPie'))['default']
-export type SUsedPieInstance = ComponentInstance<SUsedPieComponent>
-export type SUsedPiePublicProps = SUsedPieInstance['$props']
 
 export type SWarningComponent = (typeof import('./types/components/warning'))['default']
 export type SWarningInstance = ComponentInstance<SWarningComponent>

@@ -384,14 +384,6 @@ export default defineConfig({
               link: '/components/company/objectLine/home.md',
             },
             {
-              text: 'outService对外服务信息',
-              link: '/components/company/outService/home.md',
-            },
-            {
-              text: 'usedPie使用量圆环组件',
-              link: '/components/company/usedPie/home.md',
-            },
-            {
               text: 'quotaPie容量圆环组件',
               link: '/components/company/quotaPie/home.md',
             },

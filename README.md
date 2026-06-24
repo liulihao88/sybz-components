@@ -51,7 +51,7 @@ yarn add sybz-components element-plus @element-plus/icons-vue @vueuse/core vue-t
 bun add sybz-components element-plus @element-plus/icons-vue @vueuse/core vue-tippy tippy.js echarts
 ```
 
-如果使用 `quotaPie`、`usedPie`、`countBar` 等基于 `vue-echarts` 的业务图表组件，再安装：
+如果使用 `quotaPie`、`countBar` 等基于 `vue-echarts` 的业务图表组件，再安装：
 
 ```sh
 pnpm add vue-echarts
