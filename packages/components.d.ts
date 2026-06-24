@@ -60,7 +60,6 @@ declare module 'vue' {
     SItemWrapper: (typeof import('./types/components/itemWrapper'))['default']
     SObjectLine: (typeof import('./types/components/company/objectLine'))['default']
     SOutService: (typeof import('./types/components/company/outService'))['default']
-    SOverviewItem: (typeof import('./types/components/company/overviewItem'))['default']
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
     SProgress: (typeof import('./types/components/progress'))['default']
     SQuotaPie: (typeof import('./types/components/company/quotaPie'))['default']
@@ -195,9 +194,6 @@ export type SOutServiceComponent = (typeof import('./types/components/company/ou
 export type SOutServiceInstance = ComponentInstance<SOutServiceComponent>
 export type SOutServicePublicProps = SOutServiceInstance['$props']
 
-export type SOverviewItemComponent = (typeof import('./types/components/company/overviewItem'))['default']
-export type SOverviewItemInstance = ComponentInstance<SOverviewItemComponent>
-export type SOverviewItemPublicProps = SOverviewItemInstance['$props']
 
 export type SPopconfirmComponent = (typeof import('./types/components/popconfirm'))['default']
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>

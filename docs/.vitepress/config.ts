@@ -214,10 +214,6 @@ export default defineConfig({
               link: '/components/checkbox/home.md',
             },
             {
-              text: 'chooseArea组件',
-              link: '/components/chooseArea/home.md',
-            },
-            {
               text: 'chart图表组件',
               link: '/components/chart/home.md',
             },
@@ -390,10 +386,6 @@ export default defineConfig({
             {
               text: 'outService对外服务信息',
               link: '/components/company/outService/home.md',
-            },
-            {
-              text: 'overviewItem顶部列表',
-              link: '/components/company/overviewItem/home.md',
             },
             {
               text: 'usedPie使用量圆环组件',

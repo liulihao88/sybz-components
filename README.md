@@ -217,7 +217,7 @@ app.use(SybzComponents, {
 | 数据展示 | `STable`、`STag`、`SText`、`STooltip`、`SDescriptions`、`SEmpty` |
 | 反馈组件 | `SDialog`、`SDrawer`、`SPopconfirm`、`SWarning`、`SProgress` |
 | 布局组件 | `SBasicLayout`、`SRow`、`SFlex`、`SItem`、`SItemWrapper`、`SSplitPane` |
-| 业务组件 | `SChart`、`SDatePicker`、`SChooseArea`、`SBuildTime`、`SCompTitle` |
+| 业务组件 | `SChart`、`SDatePicker`、`SBuildTime`、`SCompTitle` |
 | 图标与源码 | `SIcon`、`SSvg`、`SFunctionSourceCode` |
 
 完整示例请访问 [组件文档](https://liulihao88.github.io/sybz-components/components/)。
