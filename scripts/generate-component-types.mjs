@@ -25,7 +25,19 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
   ['SDatePicker', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDatePickerProps' }],
   ['SDescriptions', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDescriptionsProps' }],
-  ['SDialog', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDialogProps' }],
+  [
+    'SDialog',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SDialogProps',
+      exportedComponentTypeName: 'SDialogComponent',
+      tagName: 's-dialog',
+      description: 's-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。',
+      publicPropsTypeName: 'SDialogPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'dialog',
+    },
+  ],
   ['SEmpty', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SEmptyProps' }],
   ['SForm', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFormProps' }],
   ['SRadio', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SRadioProps' }],
@@ -234,6 +246,69 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     )
     wrapperLines.push("    $emit: ElButtonInstance['$emit']")
     wrapperLines.push("    $slots: ElButtonInstance['$slots']")
+    wrapperLines.push('  }')
+    wrapperLines.push('}')
+    wrapperLines.push('')
+    wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)
+    wrapperLines.push(`export default ${componentName}`)
+    wrapperLines.push('')
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'dialog') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElDialog } from 'element-plus'",
+      "import type { ElDrawer } from 'element-plus'",
+      `import type { ${typedComponent.typeName}, SDialogTheme, SDialogType, SybzRecord } from '${normalizedPropsImportPath}'`,
+      '',
+      'type ElDialogInstance = InstanceType<typeof ElDialog>',
+      'type ElDrawerInstance = InstanceType<typeof ElDrawer>',
+      '',
+    ]
+
+    if (typedComponent.description) {
+      wrapperLines.push('/**')
+      wrapperLines.push(` * ${typedComponent.description}`)
+      wrapperLines.push(' *')
+      wrapperLines.push(
+        ' * 支持 Element Plus Dialog 的公开属性，并补充 Drawer 相关属性与 title、theme、confirmAttrs、cancelAttrs、fillSlot 等扩展属性。',
+      )
+      wrapperLines.push(' */')
+    }
+
+    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName} &`)
+    wrapperLines.push(`  Omit<ElDialogInstance['$props'], keyof ${typedComponent.typeName}> &`)
+    wrapperLines.push(`  Omit<ElDrawerInstance['$props'], keyof ${typedComponent.typeName} | keyof ElDialogInstance['$props']>`)
+    wrapperLines.push('')
+    wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = typeof ElDialog & {`)
+    wrapperLines.push('  new (): {')
+    wrapperLines.push('    $props: {')
+    wrapperLines.push("      type?: SDialogType")
+    wrapperLines.push('      title?: string')
+    wrapperLines.push('      width?: string | number')
+    wrapperLines.push("      theme?: SDialogTheme")
+    wrapperLines.push("      cancel?: string | ((...args: any[]) => any)")
+    wrapperLines.push('      cancelText?: string')
+    wrapperLines.push('      confirmText?: string')
+    wrapperLines.push('      showFooter?: boolean')
+    wrapperLines.push('      showCancel?: boolean')
+    wrapperLines.push('      showConfirm?: boolean')
+    wrapperLines.push('      confirmAttrs?: SybzRecord')
+    wrapperLines.push('      cancelAttrs?: SybzRecord')
+    wrapperLines.push('      enableConfirm?: boolean')
+    wrapperLines.push('      confirm?: (...args: any[]) => any')
+    wrapperLines.push('      fillSlot?: boolean')
+    wrapperLines.push('      hideHeaderIcon?: boolean')
+    wrapperLines.push(
+      "    } & Omit<ElDialogInstance['$props'], 'type' | 'title' | 'width'> & Omit<ElDrawerInstance['$props'], 'type' | 'title' | 'width' | keyof ElDialogInstance['$props']>",
+    )
+    wrapperLines.push("    $emit: ElDialogInstance['$emit']")
+    wrapperLines.push("    $slots: ElDialogInstance['$slots']")
     wrapperLines.push('  }')
     wrapperLines.push('}')
     wrapperLines.push('')

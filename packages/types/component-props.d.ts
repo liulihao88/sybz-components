@@ -1,5 +1,7 @@
 import type { VNode } from 'vue'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
+import type { DialogPropsPublic } from 'element-plus/es/components/dialog'
+import type { DrawerPropsPublic } from 'element-plus/es/components/drawer'
 import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'
 
 export type SybzComponentTheme = '' | 'chenghua'
@@ -76,7 +78,7 @@ export type SDialogType = '' | 'drawer'
 export type SDialogTheme = '' | 'norm' | 'chenghua'
 export type SDialogHandler = string | ((...args: any[]) => any)
 
-export interface SDialogProps {
+export interface SDialogSelfProps {
   type?: SDialogType
   title?: string
   width?: string | number
@@ -94,6 +96,12 @@ export interface SDialogProps {
   fillSlot?: boolean
   hideHeaderIcon?: boolean
 }
+
+export type SDialogPanelProps = Partial<
+  Omit<DialogPropsPublic & DrawerPropsPublic, keyof SDialogSelfProps>
+>
+
+export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 
 export interface SEmptyProps {
   description?: string

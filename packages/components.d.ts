@@ -49,7 +49,10 @@ declare module 'vue' {
     SCountBarOld: (typeof import('./types/components/company/countBarOld'))['default']
     SDatePicker: (typeof import('./types/components/datePicker'))['default']
     SDescriptions: (typeof import('./types/components/descriptions'))['default']
+    /** s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。 */
     SDialog: (typeof import('./types/components/dialog'))['default']
+    /** s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。 */
+    's-dialog': (typeof import('./types/components/dialog'))['default']
     SDrawer: (typeof import('./types/components/drawer'))['default']
     SEmpty: (typeof import('./types/components/empty'))['default']
     SFlex: (typeof import('./types/components/flex'))['default']
@@ -141,9 +144,9 @@ export type SDescriptionsComponent = (typeof import('./types/components/descript
 export type SDescriptionsInstance = ComponentInstance<SDescriptionsComponent>
 export type SDescriptionsPublicProps = SDescriptionsInstance['$props']
 
-export type SDialogComponent = (typeof import('./types/components/dialog'))['default']
+export type SDialogComponent = import('./types/components/dialog').SDialogComponent
 export type SDialogInstance = ComponentInstance<SDialogComponent>
-export type SDialogPublicProps = SDialogInstance['$props']
+export type SDialogPublicProps = import('./types/components/dialog').SDialogPublicProps
 
 export type SDrawerComponent = (typeof import('./types/components/drawer'))['default']
 export type SDrawerInstance = ComponentInstance<SDrawerComponent>
