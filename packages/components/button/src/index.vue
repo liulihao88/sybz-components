@@ -57,8 +57,9 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
 const attrs = useAttrs()
 const mergedProps = useGlobalComponentConfig('button', props)
 
-// 抛出事件
-const emits = defineEmits(['click'])
+const emits = defineEmits<{
+  click: [evt: MouseEvent]
+}>()
 
 const lastClickTime = ref<number | null>(null)
 
@@ -107,16 +108,16 @@ const buttonClass = computed(() => ({
   's-button--chenghua-gradient': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'gradient',
 }))
 
-const handleClick = () => {
+const handleClick = (evt: MouseEvent) => {
   if (mergedProps.value.time === 0) {
-    emits('click')
+    emits('click', evt)
     return
   }
 
   const now = Date.now()
   if (lastClickTime.value === null || now - lastClickTime.value >= mergedProps.value.time) {
     loading.value = true
-    emits('click')
+    emits('click', evt)
     lastClickTime.value = now
 
     setTimeout(() => {
