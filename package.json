@@ -100,7 +100,7 @@
     "markdown-it-container": "^3.0.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.7",
-    "prettier": "^3.0.3",
+    "prettier": "3.8.4",
     "prismjs": "^1.29.0",
     "rollup": "^4.9.6",
     "sass": "^1.70.0",

@@ -946,7 +946,7 @@ defineExpose({
                                   }),
                                   [scope.row, scope, val],
                                 )
-                              : val.title ?? '确定删除吗?'
+                              : (val.title ?? '确定删除吗?')
                           "
                           class="s-table__actions"
                           @confirm="
@@ -1395,9 +1395,9 @@ defineExpose({
   }
 
   :deep(
-      .el-table__body-wrapper .el-table-column--selection > .cell,
-      .el-table__header-wrapper .el-table-column--selection > .cell
-    ) {
+    .el-table__body-wrapper .el-table-column--selection > .cell,
+    .el-table__header-wrapper .el-table-column--selection > .cell
+  ) {
     justify-content: center;
     min-width: unset;
   }

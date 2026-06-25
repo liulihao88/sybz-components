@@ -1,7 +1,7 @@
 @import './tokens.scss';
 @each $cl, $clVar in blue var(--blue), blue2 var(--blue2), 85 var(--85), 65 var(--65), 45 var(--45), black var(--black),
-  white var(--white), red var(--red), red2 var(--red2), yellow var(--yellow), yellow2 var(--yellow2), green var(--green),
-  green2 var(--green2), gray var(--gray), gray2 var(--gray2), line var(--line)
+  white var(--white), red var(--red), red2 var(--red2), yellow var(--yellow), yellow2 var(--yellow2),
+  green var(--green), green2 var(--green2), gray var(--gray), gray2 var(--gray2), line var(--line)
 {
   .cl-#{'' + $cl} {
     color: $clVar;
