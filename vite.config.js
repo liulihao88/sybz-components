@@ -118,10 +118,9 @@ export default defineConfig({
         const declarationEntries = [
           ['index.d.ts', './packages/index.d.ts'],
           ['components.d.ts', './packages/components.d.ts'],
-          ...fg.sync('packages/types/**/*.d.ts', { cwd: __dirname, onlyFiles: true }).map((sourcePath) => [
-            sourcePath.replace(/^packages\//, ''),
-            `./${sourcePath}`,
-          ]),
+          ...fg
+            .sync('packages/types/**/*.d.ts', { cwd: __dirname, onlyFiles: true })
+            .map((sourcePath) => [sourcePath.replace(/^packages\//, ''), `./${sourcePath}`]),
         ]
 
         declarationEntries.forEach(([fileName, sourcePath]) => {

@@ -3,8 +3,7 @@ import type { SSelectProps } from '../component-props'
 
 type ElSelectInstance = InstanceType<typeof ElSelect>
 
-export type SSelectPublicProps = SSelectProps &
-  Omit<ElSelectInstance['$props'], keyof SSelectProps>
+export type SSelectPublicProps = SSelectProps & Omit<ElSelectInstance['$props'], keyof SSelectProps>
 
 export type SSelectComponent = typeof ElSelect & {
   new (): {

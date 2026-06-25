@@ -1,5 +1,10 @@
 <template>
-  <div class="s-input-number" v-bind="mergedProps.subAttrs" :style="[inputNumberStyle, attrs.style]" :class="inputNumberClass">
+  <div
+    class="s-input-number"
+    v-bind="mergedProps.subAttrs"
+    :style="[inputNumberStyle, attrs.style]"
+    :class="inputNumberClass"
+  >
     <s-comp-title
       v-if="mergedProps.title"
       :title="mergedProps.title"

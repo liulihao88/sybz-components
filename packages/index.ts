@@ -49,7 +49,9 @@ const isConfigRecord = (value: unknown): value is Record<string, any> => {
 
 const toLine = (text: string, connect = '-') =>
   text
-    .replace(/([A-Z])/g, (match, _letter, offset) => (offset === 0 ? match.toLowerCase() : `${connect}${match.toLowerCase()}`))
+    .replace(/([A-Z])/g, (match, _letter, offset) =>
+      offset === 0 ? match.toLowerCase() : `${connect}${match.toLowerCase()}`,
+    )
     .toLowerCase()
 
 const lowerFirst = (value: string) => value.charAt(0).toLowerCase() + value.slice(1)

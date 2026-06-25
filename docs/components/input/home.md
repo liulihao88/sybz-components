@@ -87,27 +87,27 @@ input/autocomplete
 
 ### 属性
 
-|             属性名              | 说明                                                  | 类型             | 默认值  |
-| :-----------------------------: | ----------------------------------------------------- | ---------------- | ------- |
-|          `modelValue`           | 绑定值                                                | any              | -       |
-|           `boxStyle`            | 标题前缀区域样式                                      | object           | `{}`    |
-|             `width`             | 输入框宽度                                            | string / number  | `100%`  |
-|            `height`             | 输入框高度                                            | string / number  | `''`    |
-|           `maxlength`           | 最大输入长度，超出后截断输入并触发 `$toast` 提示      | string / number  | `10`    |
-|      `hideMaxLengthError`       | 是否隐藏超出最大长度时的 `$toast` 提示                | boolean          | `false` |
-|      `maxLengthErrorText`       | 自定义超出最大长度时的 `$toast` 提示文案              | string           | `''`    |
-|             `size`              | 输入框尺寸                                            | string           | `''`    |
-|            `theme`              | 输入框主题                                            | string           | `''`    |
-|         `showWordLimit`         | 是否显示字数统计                                      | boolean / string | `''`    |
-|             `block`             | 是否按块级宽度展示                                    | boolean          | `false` |
-|        `disPlaceholder`         | 禁用态下显示的占位文案                                | string           | `''`    |
-|           `subAttrs`            | 外层容器额外属性                                      | object           | `{}`    |
-|         `tooltipAttrs`          | tooltip 额外属性                                      | object           | `{}`    |
-|           `iconAttrs`           | 右侧提示图标属性                                      | object           | `{}`    |
-|          `hideTooltip`          | 是否关闭溢出提示                                      | boolean          | `false` |
-|            `options`            | 自动补全候选项，存在时渲染为 `el-autocomplete`        | array            | -       |
-|            `content`            | 右侧说明提示文案                                      | string           | `''`    |
-| `dangerouslyUseHTMLString`      | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染     | boolean          | `false` |
+|           属性名           | 说明                                              | 类型             | 默认值  |
+| :------------------------: | ------------------------------------------------- | ---------------- | ------- |
+|        `modelValue`        | 绑定值                                            | any              | -       |
+|         `boxStyle`         | 标题前缀区域样式                                  | object           | `{}`    |
+|          `width`           | 输入框宽度                                        | string / number  | `100%`  |
+|          `height`          | 输入框高度                                        | string / number  | `''`    |
+|        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示  | string / number  | `10`    |
+|    `hideMaxLengthError`    | 是否隐藏超出最大长度时的 `$toast` 提示            | boolean          | `false` |
+|    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案          | string           | `''`    |
+|           `size`           | 输入框尺寸                                        | string           | `''`    |
+|          `theme`           | 输入框主题                                        | string           | `''`    |
+|      `showWordLimit`       | 是否显示字数统计                                  | boolean / string | `''`    |
+|          `block`           | 是否按块级宽度展示                                | boolean          | `false` |
+|      `disPlaceholder`      | 禁用态下显示的占位文案                            | string           | `''`    |
+|         `subAttrs`         | 外层容器额外属性                                  | object           | `{}`    |
+|       `tooltipAttrs`       | tooltip 额外属性                                  | object           | `{}`    |
+|        `iconAttrs`         | 右侧提示图标属性                                  | object           | `{}`    |
+|       `hideTooltip`        | 是否关闭溢出提示                                  | boolean          | `false` |
+|         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`    | array            | -       |
+|         `content`          | 右侧说明提示文案                                  | string           | `''`    |
+| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染 | boolean          | `false` |
 
 ### 说明
 

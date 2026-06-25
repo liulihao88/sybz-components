@@ -47,6 +47,5 @@ formatDurationTime(999999999, '{d}天{h}时{i}分{s}秒')
 
 入参单位是毫秒，不是秒。模板中不写 `{d}` 时不会按天拆分，较长时间会继续累计到小时里。
 
-
 :::utils-source formatDurationTime
 :::

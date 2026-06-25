@@ -20,11 +20,11 @@ useEventListener(target, event, handler)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| ---- | ---- | ---- | ------ | ---- |
-| `target` | `EventTarget \| Ref<EventTarget \| null>` | 是 | - | 事件目标。 |
-| `event` | `string` | 是 | - | 事件名称。 |
-| `handler` | `(event: Event) => any` | 是 | - | 事件处理函数。 |
+| 参数      | 类型                                      | 必填 | 默认值 | 说明           |
+| --------- | ----------------------------------------- | ---- | ------ | -------------- |
+| `target`  | `EventTarget \| Ref<EventTarget \| null>` | 是   | -      | 事件目标。     |
+| `event`   | `string`                                  | 是   | -      | 事件名称。     |
+| `handler` | `(event: Event) => any`                   | 是   | -      | 事件处理函数。 |
 
 ### 注意事项
 

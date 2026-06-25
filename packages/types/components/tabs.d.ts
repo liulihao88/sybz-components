@@ -3,8 +3,7 @@ import type { STabsProps } from '../component-props'
 
 type ElTabsInstance = InstanceType<typeof ElTabs>
 
-export type STabsPublicProps = STabsProps &
-  Omit<ElTabsInstance['$props'], keyof STabsProps>
+export type STabsPublicProps = STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>
 
 export type STabsComponent = typeof ElTabs & {
   new (): {

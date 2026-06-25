@@ -176,13 +176,13 @@ app.use(SybzComponents, {
 
 常用全局配置：
 
-| 配置项 | 说明 | 示例 |
-| --- | --- | --- |
-| `theme` | 组件主题 | `'chenghua'` |
-| `size` | 组件尺寸 | `'default'` |
-| `button` | Button 默认属性 | `{ type: 'primary' }` |
-| `table` | Table 默认属性 | `{ stripe: true }` |
-| `dialog` | Dialog 默认属性 | `{ width: '520px' }` |
+| 配置项    | 说明             | 示例                  |
+| --------- | ---------------- | --------------------- |
+| `theme`   | 组件主题         | `'chenghua'`          |
+| `size`    | 组件尺寸         | `'default'`           |
+| `button`  | Button 默认属性  | `{ type: 'primary' }` |
+| `table`   | Table 默认属性   | `{ stripe: true }`    |
+| `dialog`  | Dialog 默认属性  | `{ width: '520px' }`  |
 | `tooltip` | Tooltip 默认属性 | `{ effect: 'light' }` |
 
 更多配置请查看 [类型定义](./packages/types/index.ts)。
@@ -199,11 +199,11 @@ app.use(SybzComponents, {
 })
 ```
 
-| 配置项 | 说明 | 默认值 |
-| --- | --- | --- |
-| `registerDirectives` | 是否注册 `v-copy`、`v-focus`、`v-throttle` 等内置指令 | `true` |
+| 配置项                     | 说明                                                  | 默认值 |
+| -------------------------- | ----------------------------------------------------- | ------ |
+| `registerDirectives`       | 是否注册 `v-copy`、`v-focus`、`v-throttle` 等内置指令 | `true` |
 | `registerElementPlusIcons` | 是否全局注册 `el-icon-*` 格式的 Element Plus 图标别名 | `true` |
-| `useTippy` | 是否执行 `app.use(VueTippy)` | `true` |
+| `useTippy`                 | 是否执行 `app.use(VueTippy)`                          | `true` |
 
 ## Peer 依赖说明
 
@@ -211,14 +211,14 @@ app.use(SybzComponents, {
 
 ## 常用组件
 
-| 分类 | 组件 |
-| --- | --- |
-| 基础组件 | `SButton`、`SInput`、`SInputNumber`、`SSelect`、`SCheckbox`、`SRadio`、`SSwitch` |
-| 数据展示 | `STable`、`STag`、`STooltip`、`SDescriptions`、`SEmpty` |
-| 反馈组件 | `SDialog`、`SDrawer`、`SPopconfirm`、`SWarning`、`SProgress` |
-| 布局组件 | `SBasicLayout`、`SRow`、`SFlex`、`SItem`、`SItemWrapper`、`SSplitPane` |
-| 业务组件 | `SChart`、`SDatePicker`、`SBuildTime`、`SCompTitle` |
-| 图标与源码 | `SIcon`、`SSvg`、`SFunctionSourceCode` |
+| 分类       | 组件                                                                             |
+| ---------- | -------------------------------------------------------------------------------- |
+| 基础组件   | `SButton`、`SInput`、`SInputNumber`、`SSelect`、`SCheckbox`、`SRadio`、`SSwitch` |
+| 数据展示   | `STable`、`STag`、`STooltip`、`SDescriptions`、`SEmpty`                          |
+| 反馈组件   | `SDialog`、`SDrawer`、`SPopconfirm`、`SWarning`、`SProgress`                     |
+| 布局组件   | `SBasicLayout`、`SRow`、`SFlex`、`SItem`、`SItemWrapper`、`SSplitPane`           |
+| 业务组件   | `SChart`、`SDatePicker`、`SBuildTime`、`SCompTitle`                              |
+| 图标与源码 | `SIcon`、`SSvg`、`SFunctionSourceCode`                                           |
 
 完整示例请访问 [组件文档](https://liulihao88.github.io/sybz-components/components/)。
 
@@ -261,15 +261,15 @@ proxy.$toast('操作成功')
 
 注册 `SybzComponents` 后，内置指令可直接使用：
 
-| 指令 | 说明 | 示例 |
-| --- | --- | --- |
-| `v-copy` | 复制文本，默认双击触发 | `<span v-copy="'hello'">双击复制</span>` |
-| `v-focus` | 自动聚焦输入框 | `<s-input v-focus />` |
-| `v-number` | 限制输入为数字 | `<input v-number min="1" max="99" />` |
-| `v-throttle` | 节流事件 | `<button v-throttle.500="submit">提交</button>` |
-| `v-debounce` | 防抖事件 | `<input v-debounce.input.300="search" />` |
-| `v-cus-loading` | 自定义 loading 状态 | 查看文档示例 |
-| `v-cus-empty` | 自定义 empty 状态 | 查看文档示例 |
+| 指令            | 说明                   | 示例                                            |
+| --------------- | ---------------------- | ----------------------------------------------- |
+| `v-copy`        | 复制文本，默认双击触发 | `<span v-copy="'hello'">双击复制</span>`        |
+| `v-focus`       | 自动聚焦输入框         | `<s-input v-focus />`                           |
+| `v-number`      | 限制输入为数字         | `<input v-number min="1" max="99" />`           |
+| `v-throttle`    | 节流事件               | `<button v-throttle.500="submit">提交</button>` |
+| `v-debounce`    | 防抖事件               | `<input v-debounce.input.300="search" />`       |
+| `v-cus-loading` | 自定义 loading 状态    | 查看文档示例                                    |
+| `v-cus-empty`   | 自定义 empty 状态      | 查看文档示例                                    |
 
 ## 类型支持
 
@@ -300,16 +300,16 @@ pnpm dev
 
 常用命令：
 
-| 命令 | 说明 |
-| --- | --- |
-| `pnpm dev` | 启动 VitePress 文档开发服务 |
-| `pnpm build` | 构建组件库 |
-| `pnpm docsbuild` | 构建文档站点 |
-| `pnpm lint` | 执行 ESLint 并自动修复 |
-| `pnpm lint:check` | 执行 ESLint 检查，不修改文件 |
-| `pnpm typecheck` | 检查组件库 TS 入口、类型和公共 API |
+| 命令                 | 说明                                       |
+| -------------------- | ------------------------------------------ |
+| `pnpm dev`           | 启动 VitePress 文档开发服务                |
+| `pnpm build`         | 构建组件库                                 |
+| `pnpm docsbuild`     | 构建文档站点                               |
+| `pnpm lint`          | 执行 ESLint 并自动修复                     |
+| `pnpm lint:check`    | 执行 ESLint 检查，不修改文件               |
+| `pnpm typecheck`     | 检查组件库 TS 入口、类型和公共 API         |
 | `pnpm typecheck:sfc` | 检查全部 Vue SFC，适合逐步治理存量类型问题 |
-| `pnpm format` | 执行 Prettier 格式化 |
+| `pnpm format`        | 执行 Prettier 格式化                       |
 
 ## 目录结构
 

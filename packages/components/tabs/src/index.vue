@@ -253,9 +253,7 @@ onBeforeUnmount(() => {
     padding: 0;
     border: 1px solid var(--s-tabs-capsule-border-color);
     border-radius: 999px;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.28)),
-      var(--s-tabs-capsule-bg);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.28)), var(--s-tabs-capsule-bg);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.78),
       0 8px 24px rgba(17, 24, 39, 0.08);

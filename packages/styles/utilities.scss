@@ -441,10 +441,12 @@ $align: (
   font-weight: 900;
 }
 
-.h-block, .h-full {
+.h-block,
+.h-full {
   height: 100%;
 }
-.w-block, .w-full {
+.w-block,
+.w-full {
   width: 100%;
 }
 .animate {

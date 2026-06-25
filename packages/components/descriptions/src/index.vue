@@ -1,5 +1,10 @@
 <template>
-  <el-descriptions v-bind="{ border: true, ...$attrs }" :column="column" class="s-descriptions" :class="descriptionsClass">
+  <el-descriptions
+    v-bind="{ border: true, ...$attrs }"
+    :column="column"
+    class="s-descriptions"
+    :class="descriptionsClass"
+  >
     <slot>
       <el-descriptions-item v-for="(item, index) in mergedProps.options ?? []" :key="index" v-bind="item.attrs">
         <template #label>

@@ -3,8 +3,7 @@ import type { SRadioProps } from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
-export type SRadioPublicProps = SRadioProps &
-  Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>
+export type SRadioPublicProps = SRadioProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>
 
 export type SRadioComponent = typeof ElRadioGroup & {
   new (): {

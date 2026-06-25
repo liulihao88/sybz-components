@@ -8,8 +8,7 @@ type ElButtonInstance = InstanceType<typeof ElButton>
  *
  * 支持 Element Plus Button 的公开属性，并扩展 content、tooltipAttrs、theme、variant、width、height、hoverAnimation 等属性。
  */
-export type SButtonPublicProps = SButtonProps &
-  Omit<ElButtonInstance['$props'], keyof SButtonProps>
+export type SButtonPublicProps = SButtonProps & Omit<ElButtonInstance['$props'], keyof SButtonProps>
 
 export type SButtonComponent = typeof ElButton & {
   new (): {
@@ -34,7 +33,19 @@ export type SButtonComponent = typeof ElButton & {
       height?: string | number
       /** 是否开启 hover 动效 */
       hoverAnimation?: boolean
-    } & Omit<ElButtonInstance['$props'], 'time' | 'content' | 'tooltipAttrs' | 'dangerouslyUseHTMLString' | 'theme' | 'variant' | 'size' | 'width' | 'height' | 'hoverAnimation'>
+    } & Omit<
+      ElButtonInstance['$props'],
+      | 'time'
+      | 'content'
+      | 'tooltipAttrs'
+      | 'dangerouslyUseHTMLString'
+      | 'theme'
+      | 'variant'
+      | 'size'
+      | 'width'
+      | 'height'
+      | 'hoverAnimation'
+    >
     $emit: ElButtonInstance['$emit']
     $slots: ElButtonInstance['$slots']
   }

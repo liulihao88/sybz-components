@@ -36,14 +36,14 @@ popconfirm/slot
 
 ### 属性
 
-|             属性名              | 说明                                                  | 类型            | 默认值        |
-| :-----------------------------: | ----------------------------------------------------- | --------------- | ------------- |
-|             `title`             | 标题文案                                              | string          | `确定删除吗?` |
-|             `width`             | 弹层宽度                                              | string / number | `200`         |
-|            `content`            | 正文内容，可配合 `dangerouslyUseHTMLString` 解析 HTML | string          | `''`          |
-|           `reConfirm`           | 是否启用二次确认，关闭后点击即直接确认                | boolean         | `true`        |
-| `dangerouslyUseHTMLString`      | 是否将 `content` 按 HTML 字符串渲染                   | boolean         | `false`       |
-|             `theme`             | 主题                                                  | `'' / chenghua` | `''`          |
+|           属性名           | 说明                                                  | 类型            | 默认值        |
+| :------------------------: | ----------------------------------------------------- | --------------- | ------------- |
+|          `title`           | 标题文案                                              | string          | `确定删除吗?` |
+|          `width`           | 弹层宽度                                              | string / number | `200`         |
+|         `content`          | 正文内容，可配合 `dangerouslyUseHTMLString` 解析 HTML | string          | `''`          |
+|        `reConfirm`         | 是否启用二次确认，关闭后点击即直接确认                | boolean         | `true`        |
+| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染                   | boolean         | `false`       |
+|          `theme`           | 主题                                                  | `'' / chenghua` | `''`          |
 
 ### 事件
 

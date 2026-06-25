@@ -102,45 +102,45 @@ select/disabled
 
 ### table单选
 
-:::demo 基础写法：`<s-select v-model="selectName" :title="`单选的 => ${selectValue}`" width="100%" ref="selectRef" value-key="value" @clear="handleCurrentChange(null)">...</s-select>`。属性说明：`v-model` 示例值：`selectName`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：``单选的 => ${selectValue}``，类型：string，默认值：`''`；`width` 示例值：`100%`，类型：string / number，默认值：`''`；`value-key` 示例值：`value`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示单选交互，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-select v-model="selectName" :title="`单选的 => ${selectValue}`" width="100%" ref="selectRef" value-key="value" @clear="handleCurrentChange(null)">...</s-select>`。属性说明：`v-model` 示例值：`selectName`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`单选的 => ${selectValue}`，类型：string，默认值：`''`；`width` 示例值：`100%`，类型：string / number，默认值：`''`；`value-key` 示例值：`value`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示单选交互，可以直接复制基础写法后按业务替换数据。
 select/simpleTableSelect
 :::
 
 ### table多选
 
-:::demo 基础写法：`<s-select v-model="selectName" :title="`多选的 => ${selectValue}`" width="100%" ref="selectRef" multiple @change="change" :collapse-tags="true" :collapse-tags-tooltip="true" @clear="clear">...</s-select>`。属性说明：`v-model` 示例值：`selectName`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：``多选的 => ${selectValue}``，类型：string，默认值：`''`；`width` 示例值：`100%`，类型：string / number，默认值：`''`；`multiple` 示例值：`true`，类型：boolean，默认值：`false`；`collapse-tags` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`collapse-tags-tooltip` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示多选交互，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-select v-model="selectName" :title="`多选的 => ${selectValue}`" width="100%" ref="selectRef" multiple @change="change" :collapse-tags="true" :collapse-tags-tooltip="true" @clear="clear">...</s-select>`。属性说明：`v-model` 示例值：`selectName`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`多选的 => ${selectValue}`，类型：string，默认值：`''`；`width` 示例值：`100%`，类型：string / number，默认值：`''`；`multiple` 示例值：`true`，类型：boolean，默认值：`false`；`collapse-tags` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`collapse-tags-tooltip` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示多选交互，可以直接复制基础写法后按业务替换数据。
 select/multipleTableSelect
 :::
 
 ### 属性
 
-|             属性名              | 说明                                                   | 类型                    | 默认值     |
-| :-----------------------------: | ------------------------------------------------------ | ----------------------- | ---------- |
-|          `modelValue`           | 当前值                                                 | array / string / number | -          |
-|             `value`             | 选项值字段名                                           | string                  | `value`    |
-|             `label`             | 选项显示字段名，支持字符串或多字段数组                 | string / array          | `label`    |
-|            `options`            | 选项数据                                               | array                   | `[]`       |
-|             `type`              | 数据类型，传 `simple` 时按基础类型数组处理             | string                  | `''`       |
-|           `multiple`            | 是否多选                                               | boolean                 | `false`    |
-|            `showAll`            | 多选时是否显示全选/反选                                | boolean                 | `true`     |
-|          `showPrefix`           | 是否显示前缀数量信息                                   | boolean                 | `false`    |
-|           `showQuick`           | 是否显示上下快速切换按钮                               | boolean                 | `true`     |
-|             `size`              | 选择器尺寸，支持 `small` / `default` / `large`         | string                  | `''`       |
-|            `theme`              | 选择器主题，支持 `chenghua`                            | string                  | `''`       |
-|            `title`              | 左侧标题文案                                           | string                  | `''`       |
-|           `connect`             | 多字段 label 拼接符                                    | string                  | `/`        |
-|          `customLabel`          | 自定义 label 生成函数                                  | function / string       | `''`       |
-|             `width`             | 组件宽度                                               | string / number         | `''`       |
-|            `height`             | 组件高度                                               | string / number         | `''`       |
-|        `disPlaceholder`         | 禁用态占位文案                                         | string                  | `''`       |
-|         `itemDisabled`          | 单项禁用判断函数                                       | function                | `() => {}` |
-|             `url`               | 远程请求地址或方法                                     | string / function       | `''`       |
-|          `urlParams`            | 远程请求参数                                           | object                  | `{}`       |
-|       `optionsExpression`       | 远程结果取值表达式                                     | string                  | `''`       |
-|          `emptyColor`           | 选项为空时是否高亮边框                                 | boolean                 | `false`    |
-|          `showTooltip`          | 选中项文本溢出时是否显示 tooltip                       | boolean                 | `true`     |
-|         `tooltipAttrs`          | 选中项溢出 tooltip 额外属性                            | object                  | `{}`       |
-| `dangerouslyUseHTMLString`      | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染      | boolean                 | `false`    |
+|           属性名           | 说明                                              | 类型                    | 默认值     |
+| :------------------------: | ------------------------------------------------- | ----------------------- | ---------- |
+|        `modelValue`        | 当前值                                            | array / string / number | -          |
+|          `value`           | 选项值字段名                                      | string                  | `value`    |
+|          `label`           | 选项显示字段名，支持字符串或多字段数组            | string / array          | `label`    |
+|         `options`          | 选项数据                                          | array                   | `[]`       |
+|           `type`           | 数据类型，传 `simple` 时按基础类型数组处理        | string                  | `''`       |
+|         `multiple`         | 是否多选                                          | boolean                 | `false`    |
+|         `showAll`          | 多选时是否显示全选/反选                           | boolean                 | `true`     |
+|        `showPrefix`        | 是否显示前缀数量信息                              | boolean                 | `false`    |
+|        `showQuick`         | 是否显示上下快速切换按钮                          | boolean                 | `true`     |
+|           `size`           | 选择器尺寸，支持 `small` / `default` / `large`    | string                  | `''`       |
+|          `theme`           | 选择器主题，支持 `chenghua`                       | string                  | `''`       |
+|          `title`           | 左侧标题文案                                      | string                  | `''`       |
+|         `connect`          | 多字段 label 拼接符                               | string                  | `/`        |
+|       `customLabel`        | 自定义 label 生成函数                             | function / string       | `''`       |
+|          `width`           | 组件宽度                                          | string / number         | `''`       |
+|          `height`          | 组件高度                                          | string / number         | `''`       |
+|      `disPlaceholder`      | 禁用态占位文案                                    | string                  | `''`       |
+|       `itemDisabled`       | 单项禁用判断函数                                  | function                | `() => {}` |
+|           `url`            | 远程请求地址或方法                                | string / function       | `''`       |
+|        `urlParams`         | 远程请求参数                                      | object                  | `{}`       |
+|    `optionsExpression`     | 远程结果取值表达式                                | string                  | `''`       |
+|        `emptyColor`        | 选项为空时是否高亮边框                            | boolean                 | `false`    |
+|       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                  | boolean                 | `true`     |
+|       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                       | object                  | `{}`       |
+| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染 | boolean                 | `false`    |
 
 ### 事件
 

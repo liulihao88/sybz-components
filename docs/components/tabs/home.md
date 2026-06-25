@@ -74,16 +74,16 @@ tabs/location
 
 ### 属性
 
-|    属性名    | 说明                                 | 类型                      | 默认值  |
-| :----------: | ------------------------------------ | ------------------------- | ------- |
-| `modelValue` | 当前激活 tab                         | string / number / boolean | -       |
-|  `options`   | 标签页配置                           | array                     | `[]`    |
-|   `label`    | 标签标题字段名                       | string                    | `label` |
-|   `value`    | 标签值字段名                         | string                    | `value` |
-|  `subAttrs`  | 透传给 `el-tab-pane` 的属性          | object                    | `{}`    |
-|  `trigger`   | 切换触发方式，支持 `click` / `hover` | string                    | `click` |
-|   `theme`    | 主题样式，支持 `capsule`             | string                    | `''`    |
-|    `size`    | 尺寸，支持 `small` / `default` / `large` | string                 | `default` |
+|    属性名    | 说明                                     | 类型                      | 默认值    |
+| :----------: | ---------------------------------------- | ------------------------- | --------- |
+| `modelValue` | 当前激活 tab                             | string / number / boolean | -         |
+|  `options`   | 标签页配置                               | array                     | `[]`      |
+|   `label`    | 标签标题字段名                           | string                    | `label`   |
+|   `value`    | 标签值字段名                             | string                    | `value`   |
+|  `subAttrs`  | 透传给 `el-tab-pane` 的属性              | object                    | `{}`      |
+|  `trigger`   | 切换触发方式，支持 `click` / `hover`     | string                    | `click`   |
+|   `theme`    | 主题样式，支持 `capsule`                 | string                    | `''`      |
+|    `size`    | 尺寸，支持 `small` / `default` / `large` | string                    | `default` |
 
 ### 事件
 

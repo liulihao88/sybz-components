@@ -48,6 +48,5 @@ loading.value = false
 
 `sleep` 不会取消定时器，也不会捕获 `callback` 内部异常。若回调里可能抛错，建议在回调内部自行处理。
 
-
 :::utils-source sleep
 :::

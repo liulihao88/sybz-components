@@ -51,17 +51,17 @@ inputNumber/usually
 
 ### 属性
 
-|    属性名    | 说明             | 类型            | 默认值 |
-| :----------: | ---------------- | --------------- | ------ |
-| `modelValue` | 绑定值           | any             | -      |
-|   `title`    | 左侧标题前缀文案 | string          | `''`   |
-|  `boxStyle`  | 标题前缀区域样式 | object          | `{}`   |
-|   `width`    | 组件总宽度       | string / number | `''`   |
-|   `height`   | 组件总高度       | string / number | `''`   |
-|   `theme`    | 主题样式         | `''` / `chenghua` | `''` |
-|    `size`    | 输入框尺寸       | `''` / `large` / `default` / `small` | `''` |
-| `controls-position` | 控制按钮位置 | `''` / `right` | `right` |
-|  `subAttrs`  | 外层容器额外属性 | object          | `{}`   |
+|       属性名        | 说明             | 类型                                 | 默认值  |
+| :-----------------: | ---------------- | ------------------------------------ | ------- |
+|    `modelValue`     | 绑定值           | any                                  | -       |
+|       `title`       | 左侧标题前缀文案 | string                               | `''`    |
+|     `boxStyle`      | 标题前缀区域样式 | object                               | `{}`    |
+|       `width`       | 组件总宽度       | string / number                      | `''`    |
+|      `height`       | 组件总高度       | string / number                      | `''`    |
+|       `theme`       | 主题样式         | `''` / `chenghua`                    | `''`    |
+|       `size`        | 输入框尺寸       | `''` / `large` / `default` / `small` | `''`    |
+| `controls-position` | 控制按钮位置     | `''` / `right`                       | `right` |
+|     `subAttrs`      | 外层容器额外属性 | object                               | `{}`    |
 
 ### 插槽
 

@@ -260,7 +260,9 @@ const computedBoxStyle = computed(() => {
 
 function handlePlaceholder() {
   let res =
-    attrs.disabled === '' || !!attrs.disabled === true ? mergedProps.value.disPlaceholder : attrs.placeholder || '请输入'
+    attrs.disabled === '' || !!attrs.disabled === true
+      ? mergedProps.value.disPlaceholder
+      : attrs.placeholder || '请输入'
   return res
 }
 // 是否显示showWordLimit属性

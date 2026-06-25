@@ -13,7 +13,7 @@ const isShow = ref(false)
 
     <el-button type="primary" size="small">测试02</el-button>
     <s-button theme="chenghua" size="small" type="primary"></s-button>
-    <s-table></s-table>
+    <!-- <s-table></s-table> -->
     <s-empty description="暂无数据" width="48" height="48"></s-empty>
 
     <el-dialog title="33"></el-dialog>
@@ -26,11 +26,23 @@ const isShow = ref(false)
       :show-confirm="false"
     ></s-dialog>
 
-    <s-tag theme="chenghua"></s-tag>
+    <s-tag theme="chenghua">我不服</s-tag>
 
-    <s-flex justify="space-between2"></s-flex>
+    <s-flex justify="space-between2的撒"></s-flex>
 
-    <s-date-picker ></s-date-picker>
+    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
+    <hr />
+    <SItem label="label" value="value"></SItem>
+    <s-title title="插槽用法" tb="8"></s-title>
+    <s-item class="abc">
+      <template #img>
+        <img src="https://img.yzcdn.cn/vant/logo.png" />
+      </template>
+      <template #label>label</template>
+      <template #value>value</template>
+    </s-item>
+
+    <s-date-picker></s-date-picker>
 
     <s-input v-model="cc" height="30" size="large" :clearable="false" theme="chenghua"></s-input>
 

@@ -20,14 +20,14 @@ const { currentZIndex, nextZIndex, initialZIndex } = useZIndex(initialValue)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| ---- | ---- | ---- | ------ | ---- |
-| `initialValue` | `number` | 否 | `2000` | 起始层级。 |
+| 参数           | 类型     | 必填 | 默认值 | 说明       |
+| -------------- | -------- | ---- | ------ | ---------- |
+| `initialValue` | `number` | 否   | `2000` | 起始层级。 |
 
 ### 返回值
 
-| 名称 | 类型 | 说明 |
-| ---- | ---- | ---- |
-| `currentZIndex` | `ComputedRef<number>` | 当前层级。 |
-| `nextZIndex` | `() => number` | 生成并返回下一个层级。 |
-| `initialZIndex` | `Ref<number>` | 起始层级。 |
+| 名称            | 类型                  | 说明                   |
+| --------------- | --------------------- | ---------------------- |
+| `currentZIndex` | `ComputedRef<number>` | 当前层级。             |
+| `nextZIndex`    | `() => number`        | 生成并返回下一个层级。 |
+| `initialZIndex` | `Ref<number>`         | 起始层级。             |

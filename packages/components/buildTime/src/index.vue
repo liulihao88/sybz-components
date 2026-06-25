@@ -116,8 +116,7 @@ const buildTimes = computed(() => [
 .s-build-time__value {
   min-width: 0;
   color: var(--el-text-color-primary);
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   overflow-wrap: anywhere;
 }
 

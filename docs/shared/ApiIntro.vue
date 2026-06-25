@@ -298,7 +298,10 @@ onMounted(async () => {
 
 .api-intro__detail-item {
   display: grid;
-  grid-template-columns: minmax(92px, max-content) minmax(80px, max-content) minmax(80px, max-content) minmax(180px, 1fr);
+  grid-template-columns: minmax(92px, max-content) minmax(80px, max-content) minmax(80px, max-content) minmax(
+      180px,
+      1fr
+    );
   gap: 4px 10px;
   align-items: baseline;
   padding: 6px 8px;

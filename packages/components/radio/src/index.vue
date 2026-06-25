@@ -1,10 +1,6 @@
 <template>
   <div class="s-radio-box" :class="radioClass">
-    <s-comp-title
-      v-if="mergedProps.title"
-      v-bind="compTitleProps"
-      class="s-radio-box__title"
-    ></s-comp-title>
+    <s-comp-title v-if="mergedProps.title" v-bind="compTitleProps" class="s-radio-box__title"></s-comp-title>
     <el-radio-group v-bind="$attrs">
       <slot>
         <component

@@ -26,7 +26,9 @@ const configs = [
       <div class="chenghua-drawer-demo__content">
         <section class="chenghua-drawer-demo__section">
           <h4>抽屉式弹层</h4>
-          <p>同时设置 theme="chenghua" 和 type="drawer" 后，会使用成华主题的右侧抽屉面板；设置 width 可以控制抽屉宽度。</p>
+          <p>
+            同时设置 theme="chenghua" 和 type="drawer" 后，会使用成华主题的右侧抽屉面板；设置 width 可以控制抽屉宽度。
+          </p>
         </section>
 
         <section class="chenghua-drawer-demo__section">

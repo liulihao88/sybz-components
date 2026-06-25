@@ -100,13 +100,12 @@ app.use(SybzComponents, {
 })
 ```
 
-
 ### 属性
 
 |      属性名       | 说明                                                                                    | 类型                                          | 默认值 |
 | :---------------: | --------------------------------------------------------------------------------------- | --------------------------------------------- | ------ |
 |       title       | 顶部title                                                                               | string                                        | 提示   |
-|       width       | 弹框宽度；当 `type="drawer"` 时用于控制抽屉宽度                                       | string / number                               | ''     |
+|       width       | 弹框宽度；当 `type="drawer"` 时用于控制抽屉宽度                                         | string / number                               | ''     |
 |       theme       | 弹框样式，可选 `chenghua`                                                               | string                                        | -      |
 |       type        | 弹框类型，可选 `drawer`                                                                 | string                                        | ''     |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                    | boolean                                       | false  |

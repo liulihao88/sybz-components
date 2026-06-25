@@ -68,6 +68,5 @@ formatToFixed(222222, { digit: 2, thousands: true })
 
 `unit: false` 只会移除输入值里原本携带的单位，不会影响 `suffix`。如果需要展示百分号，使用 `suffix: '%'`。
 
-
 :::utils-source formatToFixed
 :::

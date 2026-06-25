@@ -34,15 +34,15 @@ icon/all
 
 ### 属性
 
-|             属性名              | 说明                                 | 类型            | 默认值  |
-| :-----------------------------: | ------------------------------------ | --------------- | ------- |
-|             `name`              | 图标名称                             | string          | -       |
-|            `color`              | 图标颜色                             | string          | -       |
-|             `size`              | 图标尺寸                             | string / number | `16px`  |
-|           `disabled`            | 是否禁用，禁用后不会触发点击         | boolean         | `false` |
-|             `type`              | 图标类型，传 `svg` 时走 `s-svg` 渲染 | string          | `''`    |
-|           `svgAttrs`            | 透传给 `s-svg` 的属性                | object          | `{}`    |
-| `dangerouslyUseHTMLString`      | 是否将 tooltip 的 `content` 按 HTML 字符串渲染 | boolean         | `false` |
+|           属性名           | 说明                                           | 类型            | 默认值  |
+| :------------------------: | ---------------------------------------------- | --------------- | ------- |
+|           `name`           | 图标名称                                       | string          | -       |
+|          `color`           | 图标颜色                                       | string          | -       |
+|           `size`           | 图标尺寸                                       | string / number | `16px`  |
+|         `disabled`         | 是否禁用，禁用后不会触发点击                   | boolean         | `false` |
+|           `type`           | 图标类型，传 `svg` 时走 `s-svg` 渲染           | string          | `''`    |
+|         `svgAttrs`         | 透传给 `s-svg` 的属性                          | object          | `{}`    |
+| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染 | boolean         | `false` |
 
 ### 事件
 

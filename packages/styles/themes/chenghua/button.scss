@@ -181,7 +181,11 @@
     &.is-disabled:active {
       border: 0;
       outline: none;
-      background: linear-gradient(90deg, rgba(var(--s-ch-primary-hover-rgb), 0.45) 0%, rgba(var(--s-ch-accent-rgb), 0.45) 100%);
+      background: linear-gradient(
+        90deg,
+        rgba(var(--s-ch-primary-hover-rgb), 0.45) 0%,
+        rgba(var(--s-ch-accent-rgb), 0.45) 100%
+      );
       color: rgba(255, 255, 255, 0.8);
       box-shadow: none;
     }

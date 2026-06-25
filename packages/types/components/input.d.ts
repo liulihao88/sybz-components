@@ -3,8 +3,7 @@ import type { SInputProps, SybzComponentTheme, SybzComponentSize, SybzRecord } f
 
 type ElInputInstance = InstanceType<typeof ElInput>
 
-export type SInputPublicProps = SInputProps &
-  Omit<ElInputInstance['$props'], keyof SInputProps>
+export type SInputPublicProps = SInputProps & Omit<ElInputInstance['$props'], keyof SInputProps>
 
 export type SInputComponent = typeof ElInput & {
   new (): {

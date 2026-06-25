@@ -3,8 +3,7 @@ import type { SChooseAreaProps } from '../component-props'
 
 type ElCascaderInstance = InstanceType<typeof ElCascader>
 
-export type SChooseAreaPublicProps = SChooseAreaProps &
-  Omit<ElCascaderInstance['$props'], keyof SChooseAreaProps>
+export type SChooseAreaPublicProps = SChooseAreaProps & Omit<ElCascaderInstance['$props'], keyof SChooseAreaProps>
 
 export type SChooseAreaComponent = typeof ElCascader & {
   new (): {

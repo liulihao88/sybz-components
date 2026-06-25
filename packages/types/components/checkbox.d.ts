@@ -3,8 +3,7 @@ import type { SCheckboxProps } from '../component-props'
 
 type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 
-export type SCheckboxPublicProps = SCheckboxProps &
-  Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxProps>
+export type SCheckboxPublicProps = SCheckboxProps & Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxProps>
 
 export type SCheckboxComponent = typeof ElCheckboxGroup & {
   new (): {

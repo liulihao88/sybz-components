@@ -3,8 +3,7 @@ import type { SPopconfirmProps } from '../component-props'
 
 type ElPopoverInstance = InstanceType<typeof ElPopover>
 
-export type SPopconfirmPublicProps = SPopconfirmProps &
-  Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>
+export type SPopconfirmPublicProps = SPopconfirmProps & Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>
 
 export type SPopconfirmComponent = typeof ElPopover & {
   new (): {

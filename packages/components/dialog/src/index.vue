@@ -188,8 +188,7 @@ const panelClass = computed(() => {
     attrs.class,
     isDrawer.value ? 's-dialog__drawer' : '',
     isDrawer.value && mergedProps.value.theme === 'chenghua' ? 's-dialog__drawer--chenghua' : '',
-  ]
-    .filter(Boolean)
+  ].filter(Boolean)
 })
 
 const mergedShowFooter = computed(() => {
@@ -449,5 +448,4 @@ onBeforeUnmount(() => {
     flex: 1 1 auto;
   }
 }
-
 </style>

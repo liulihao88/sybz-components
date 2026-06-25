@@ -22,10 +22,7 @@ export type DebouncedFunction<T extends (...args: any[]) => any> = ((
   flush: () => ReturnType<T> | undefined
 }
 
-export declare function useDebounceFn<T extends (...args: any[]) => any>(
-  fn: T,
-  wait?: number,
-): DebouncedFunction<T>
+export declare function useDebounceFn<T extends (...args: any[]) => any>(fn: T, wait?: number): DebouncedFunction<T>
 
 export interface UseElementSizeOptions {
   initialWidth?: number

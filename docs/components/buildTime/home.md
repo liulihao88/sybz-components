@@ -22,12 +22,12 @@ buildTime/inline
 
 ### 属性
 
-|       属性名       | 说明                         | 类型    | 默认值                   |
-| :----------------: | ---------------------------- | ------- | ------------------------ |
-|  `componentsLabel` | 组件库构建时间的标签         | string  | `sybz-components`        |
-|    `utilsLabel`    | utils 构建时间的标签         | string  | `@sybz-components/utils` |
-|    `emptyText`     | 未注入构建时间时的展示文案   | string  | `未注入`                 |
-|      `inline`      | 是否横向展示                 | boolean | `false`                  |
+|      属性名       | 说明                       | 类型    | 默认值                   |
+| :---------------: | -------------------------- | ------- | ------------------------ |
+| `componentsLabel` | 组件库构建时间的标签       | string  | `sybz-components`        |
+|   `utilsLabel`    | utils 构建时间的标签       | string  | `@sybz-components/utils` |
+|    `emptyText`    | 未注入构建时间时的展示文案 | string  | `未注入`                 |
+|     `inline`      | 是否横向展示               | boolean | `false`                  |
 
 ### 说明
 

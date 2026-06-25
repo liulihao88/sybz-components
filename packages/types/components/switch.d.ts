@@ -3,8 +3,7 @@ import type { SSwitchProps } from '../component-props'
 
 type ElSwitchInstance = InstanceType<typeof ElSwitch>
 
-export type SSwitchPublicProps = SSwitchProps &
-  Omit<ElSwitchInstance['$props'], keyof SSwitchProps>
+export type SSwitchPublicProps = SSwitchProps & Omit<ElSwitchInstance['$props'], keyof SSwitchProps>
 
 export type SSwitchComponent = typeof ElSwitch & {
   new (): {

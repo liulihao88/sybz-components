@@ -3,8 +3,7 @@ import type { SRowProps } from '../component-props'
 
 type ElRowInstance = InstanceType<typeof ElRow>
 
-export type SRowPublicProps = SRowProps &
-  Omit<ElRowInstance['$props'], keyof SRowProps>
+export type SRowPublicProps = SRowProps & Omit<ElRowInstance['$props'], keyof SRowProps>
 
 export type SRowComponent = typeof ElRow & {
   new (): {

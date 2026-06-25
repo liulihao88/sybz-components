@@ -3,8 +3,7 @@ import type { STagProps } from '../component-props'
 
 type ElTagInstance = InstanceType<typeof ElTag>
 
-export type STagPublicProps = STagProps &
-  Omit<ElTagInstance['$props'], keyof STagProps>
+export type STagPublicProps = STagProps & Omit<ElTagInstance['$props'], keyof STagProps>
 
 export type STagComponent = typeof ElTag & {
   new (): {

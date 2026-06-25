@@ -12,10 +12,12 @@ type BaseInstallableComponent<Props = Record<string, any>, Emits extends EmitsOp
 > &
   Plugin
 
-export type InstallableComponent<Props = Record<string, any>, Emits extends EmitsOptions = {}> =
-  BaseInstallableComponent<Props, Emits> & {
-    new (): {
-      $props: Props
-      $emit: Emits extends Record<string, any> ? any : any
-    }
+export type InstallableComponent<
+  Props = Record<string, any>,
+  Emits extends EmitsOptions = {},
+> = BaseInstallableComponent<Props, Emits> & {
+  new (): {
+    $props: Props
+    $emit: Emits extends Record<string, any> ? any : any
   }
+}

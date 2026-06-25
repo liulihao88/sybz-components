@@ -344,11 +344,7 @@ const handleDragStart = (event: PointerEvent) => {
 
 const handlePanelDragStart = (event: PointerEvent) => {
   const target = event.target as HTMLElement | null
-  if (
-    target?.closest(
-      'button, input, textarea, select, [contenteditable="true"], .s-tooltip-box__text',
-    )
-  ) {
+  if (target?.closest('button, input, textarea, select, [contenteditable="true"], .s-tooltip-box__text')) {
     return
   }
 
@@ -791,5 +787,4 @@ onUnmounted(() => {
     display: block;
   }
 }
-
 </style>

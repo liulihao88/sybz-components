@@ -1,5 +1,5 @@
 import { ElCascader } from 'element-plus'
-import type { VNode } from 'vue'
+import type { Component, VNode } from 'vue'
 import type { InputPropsPublic } from 'element-plus/es/components/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
@@ -117,9 +117,7 @@ export interface SDialogSelfProps {
   hideHeaderIcon?: boolean
 }
 
-export type SDialogPanelProps = Partial<
-  Omit<DialogPropsPublic & DrawerPropsPublic, keyof SDialogSelfProps>
->
+export type SDialogPanelProps = Partial<Omit<DialogPropsPublic & DrawerPropsPublic, keyof SDialogSelfProps>>
 
 export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 
@@ -175,8 +173,7 @@ export interface SCheckboxSelfProps {
   theme?: SybzComponentTheme
 }
 
-export type SCheckboxProps = SCheckboxSelfProps &
-  Partial<Omit<CheckboxGroupPropsPublic, keyof SCheckboxSelfProps>>
+export type SCheckboxProps = SCheckboxSelfProps & Partial<Omit<CheckboxGroupPropsPublic, keyof SCheckboxSelfProps>>
 
 export interface SChooseAreaSelfProps {
   width?: string | number
@@ -220,6 +217,21 @@ export interface SChartProps {
   theme?: string
   isEmpty?: boolean | ((options: SybzRecord) => boolean)
   description?: string
+}
+
+export type SFlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
+export type SFlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
+export type SFlexJustify = 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'normal'
+export type SFlexAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal'
+
+export interface SFlexProps {
+  direction?: SFlexDirection
+  wrap?: SFlexWrap
+  justify?: SFlexJustify
+  align?: SFlexAlign
+  flex?: string
+  gap?: SybzComponentSize | string | number
+  component?: string | Component
 }
 
 export interface SEmptySelfProps {
@@ -305,8 +317,7 @@ export interface SRadioSelfProps {
   itemDisabled?: (...args: any[]) => any
 }
 
-export type SRadioProps = SRadioSelfProps &
-  Partial<Omit<RadioGroupPropsPublic, keyof SRadioSelfProps>>
+export type SRadioProps = SRadioSelfProps & Partial<Omit<RadioGroupPropsPublic, keyof SRadioSelfProps>>
 
 export interface SSelectSelfProps {
   modelValue?: any[] | string | number
@@ -453,8 +464,7 @@ export interface STooltipSelfProps {
   dangerouslyUseHTMLString?: boolean
 }
 
-export type STooltipProps = STooltipSelfProps &
-  Partial<Omit<ElTooltipPropsPublic, keyof STooltipSelfProps>>
+export type STooltipProps = STooltipSelfProps & Partial<Omit<ElTooltipPropsPublic, keyof STooltipSelfProps>>
 
 export interface SDrawerSelfProps {
   confirmText?: string

@@ -3,8 +3,7 @@ import type { SInputNumberProps } from '../component-props'
 
 type ElInputNumberInstance = InstanceType<typeof ElInputNumber>
 
-export type SInputNumberPublicProps = SInputNumberProps &
-  Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>
+export type SInputNumberPublicProps = SInputNumberProps & Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>
 
 export type SInputNumberComponent = typeof ElInputNumber & {
   new (): {

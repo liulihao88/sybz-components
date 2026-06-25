@@ -21,11 +21,7 @@ const collapsed = ref(false)
       <span>默认值: 'header'</span>
     </div>
 
-    <s-basic-layout
-      v-model="collapsed"
-      theme="chenghua"
-      title="审核规则管理"
-    >
+    <s-basic-layout v-model="collapsed" theme="chenghua">
       <div class="basic-layout-chenghua-demo__content">
         <div class="basic-layout-chenghua-demo__row">
           <span>规则范围</span>

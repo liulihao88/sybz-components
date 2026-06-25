@@ -19,7 +19,12 @@ const handleInput = (value: string) => {
 
 <template>
   <s-flex direction="column" gap="12" align="flex-start">
-    <el-input :model-value="keyword" placeholder="连续输入，500ms 后只查询最后一次" style="width: 320px" @input="handleInput" />
+    <el-input
+      :model-value="keyword"
+      placeholder="连续输入，500ms 后只查询最后一次"
+      style="width: 320px"
+      @input="handleInput"
+    />
     <s-flex gap="8" wrap>
       <el-button @click="search.flush">立即执行</el-button>
       <el-button @click="search.cancel">取消</el-button>

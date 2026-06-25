@@ -20,16 +20,16 @@ const { state, set, setTrue, setFalse, toggle } = useBoolean(initialValue)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| ---- | ---- | ---- | ------ | ---- |
-| `initialValue` | `boolean` | 否 | `false` | 初始布尔值。 |
+| 参数           | 类型      | 必填 | 默认值  | 说明         |
+| -------------- | --------- | ---- | ------- | ------------ |
+| `initialValue` | `boolean` | 否   | `false` | 初始布尔值。 |
 
 ### 返回值
 
-| 名称 | 类型 | 说明 |
-| ---- | ---- | ---- |
-| `state` | `Ref<boolean>` | 当前布尔状态。 |
-| `set` | `(value: boolean) => void` | 设置指定布尔值。 |
-| `setTrue` | `() => void` | 设置为 `true`。 |
-| `setFalse` | `() => void` | 设置为 `false`。 |
-| `toggle` | `() => void` | 在 `true` / `false` 间切换。 |
+| 名称       | 类型                       | 说明                         |
+| ---------- | -------------------------- | ---------------------------- |
+| `state`    | `Ref<boolean>`             | 当前布尔状态。               |
+| `set`      | `(value: boolean) => void` | 设置指定布尔值。             |
+| `setTrue`  | `() => void`               | 设置为 `true`。              |
+| `setFalse` | `() => void`               | 设置为 `false`。             |
+| `toggle`   | `() => void`               | 在 `true` / `false` 间切换。 |

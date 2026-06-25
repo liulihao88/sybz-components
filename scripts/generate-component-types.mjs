@@ -10,7 +10,10 @@ const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', '
 
 const TYPED_COMPONENT_PROPS = new Map([
   ['SBuildTime', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBuildTimeProps' }],
-  ['SBasicLayout', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBasicLayoutProps' }],
+  [
+    'SBasicLayout',
+    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBasicLayoutProps' },
+  ],
   [
     'SButton',
     {
@@ -47,7 +50,10 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'cascader',
     },
   ],
-  ['SClickOutside', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SClickOutsideProps' }],
+  [
+    'SClickOutside',
+    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SClickOutsideProps' },
+  ],
   ['SCompTitle', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SCompTitleProps' }],
   [
     'SDatePicker',
@@ -118,7 +124,10 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'form',
     },
   ],
-  ['SFunctionSourceCode', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFunctionSourceCodeProps' }],
+  [
+    'SFunctionSourceCode',
+    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFunctionSourceCodeProps' },
+  ],
   ['SIcon', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SIconProps' }],
   [
     'SInput',
@@ -131,7 +140,10 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'input',
     },
   ],
-  ['SInputLabel', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SInputLabelProps' }],
+  [
+    'SInputLabel',
+    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SInputLabelProps' },
+  ],
   [
     'SInputNumber',
     {
@@ -144,7 +156,10 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   ['SItem', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemProps' }],
-  ['SItemWrapper', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemWrapperProps' }],
+  [
+    'SItemWrapper',
+    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemWrapperProps' },
+  ],
   [
     'SPopconfirm',
     {
@@ -255,9 +270,7 @@ const TYPED_COMPONENT_PROPS = new Map([
 const toPosixPath = (value) => value.replaceAll('\\', '/')
 
 const toPascalCase = (value) =>
-  value
-    .replace(/(^|[-_/])([a-zA-Z0-9])/g, (_match, _prefix, char) => char.toUpperCase())
-    .replace(/[^a-zA-Z0-9]/g, '')
+  value.replace(/(^|[-_/])([a-zA-Z0-9])/g, (_match, _prefix, char) => char.toUpperCase()).replace(/[^a-zA-Z0-9]/g, '')
 
 const toKebabCase = (value) =>
   value
@@ -353,7 +366,7 @@ if (tableAliases.length) {
   lines.push('')
 }
 
-lines.push('declare module \'vue\' {')
+lines.push("declare module 'vue' {")
 lines.push('  export interface GlobalComponents {')
 componentEntries.forEach(({ componentName, tagName, wrapperPath }) => {
   const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
@@ -495,16 +508,18 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
 
     wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName} &`)
     wrapperLines.push(`  Omit<ElDialogInstance['$props'], keyof ${typedComponent.typeName}> &`)
-    wrapperLines.push(`  Omit<ElDrawerInstance['$props'], keyof ${typedComponent.typeName} | keyof ElDialogInstance['$props']>`)
+    wrapperLines.push(
+      `  Omit<ElDrawerInstance['$props'], keyof ${typedComponent.typeName} | keyof ElDialogInstance['$props']>`,
+    )
     wrapperLines.push('')
     wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = typeof ElDialog & {`)
     wrapperLines.push('  new (): {')
     wrapperLines.push('    $props: {')
-    wrapperLines.push("      type?: SDialogType")
+    wrapperLines.push('      type?: SDialogType')
     wrapperLines.push('      title?: string')
     wrapperLines.push('      width?: string | number')
-    wrapperLines.push("      theme?: SDialogTheme")
-    wrapperLines.push("      cancel?: string | ((...args: any[]) => any)")
+    wrapperLines.push('      theme?: SDialogTheme')
+    wrapperLines.push('      cancel?: string | ((...args: any[]) => any)')
     wrapperLines.push('      cancelText?: string')
     wrapperLines.push('      confirmText?: string')
     wrapperLines.push('      showFooter?: boolean')
@@ -538,7 +553,9 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
     const wrapperLines = [
       "import { ElInput } from 'element-plus'",
-      "import type { SInputProps, SybzComponentTheme, SybzComponentSize, SybzRecord } from '" + normalizedPropsImportPath + "'",
+      "import type { SInputProps, SybzComponentTheme, SybzComponentSize, SybzRecord } from '" +
+        normalizedPropsImportPath +
+        "'",
       '',
       'type ElInputInstance = InstanceType<typeof ElInput>',
       '',
@@ -557,7 +574,7 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
       '      maxLengthErrorText?: string',
       '      size?: SybzComponentSize',
       '      theme?: SybzComponentTheme',
-      "      showWordLimit?: boolean | string",
+      '      showWordLimit?: boolean | string',
       '      block?: boolean',
       '      disPlaceholder?: string',
       '      subAttrs?: SybzRecord',
@@ -1093,8 +1110,12 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     return
   }
 
-  const sharedImportPath = toPosixPath(relative(wrapperDir, resolve(componentTypeDir, '_shared.d.ts')).replace(/\.d\.ts$/, ''))
-  const wrapperLines = [`import type { InstallableComponent } from '${sharedImportPath.startsWith('.') ? sharedImportPath : `./${sharedImportPath}`}'`]
+  const sharedImportPath = toPosixPath(
+    relative(wrapperDir, resolve(componentTypeDir, '_shared.d.ts')).replace(/\.d\.ts$/, ''),
+  )
+  const wrapperLines = [
+    `import type { InstallableComponent } from '${sharedImportPath.startsWith('.') ? sharedImportPath : `./${sharedImportPath}`}'`,
+  ]
 
   if (typedComponent) {
     const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
@@ -1201,7 +1222,9 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
         wrapperLines.push('> &')
         wrapperLines.push('  Plugin')
       } else {
-        wrapperLines.push(`export interface ${typedComponent.exportedComponentTypeName} extends InstallableComponent<${componentTypeParams}> {}`)
+        wrapperLines.push(
+          `export interface ${typedComponent.exportedComponentTypeName} extends InstallableComponent<${componentTypeParams}> {}`,
+        )
       }
       wrapperLines.push('')
       wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)

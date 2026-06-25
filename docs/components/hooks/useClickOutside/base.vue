@@ -13,9 +13,7 @@ useClickOutside(panelRef, () => {
 <template>
   <div class="hooks-click-outside-demo">
     <el-button type="primary" @click.stop="open">打开面板</el-button>
-    <div v-if="visible" ref="panelRef" class="hooks-click-outside-demo__panel">
-      点击这个面板外部会关闭
-    </div>
+    <div v-if="visible" ref="panelRef" class="hooks-click-outside-demo__panel">点击这个面板外部会关闭</div>
   </div>
 </template>
 

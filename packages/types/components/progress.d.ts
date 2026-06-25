@@ -3,8 +3,7 @@ import type { SProgressProps } from '../component-props'
 
 type ElProgressInstance = InstanceType<typeof ElProgress>
 
-export type SProgressPublicProps = SProgressProps &
-  Omit<ElProgressInstance['$props'], keyof SProgressProps>
+export type SProgressPublicProps = SProgressProps & Omit<ElProgressInstance['$props'], keyof SProgressProps>
 
 export type SProgressComponent = typeof ElProgress & {
   new (): {

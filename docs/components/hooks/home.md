@@ -32,10 +32,10 @@ import { useLoading, usePagination } from 'sybz-components/hooks'
 
 ### 放在哪里更合适
 
-| 类型 | 推荐位置 | 说明 |
-| ---- | -------- | ---- |
-| 依赖 `ref`、`computed`、生命周期、DOM 响应式监听的组合式函数 | `sybz-components/hooks` | 和 Vue 强绑定，属于组件库能力 |
-| 纯函数、格式化、校验、数据转换 | `@sybz-components/utils` | 不依赖 Vue，更适合作为独立工具包 |
-| 只服务组件内部的封装 | `packages/hooks` 内部使用 | 可以导出，也可以不暴露给业务 |
+| 类型                                                         | 推荐位置                  | 说明                             |
+| ------------------------------------------------------------ | ------------------------- | -------------------------------- |
+| 依赖 `ref`、`computed`、生命周期、DOM 响应式监听的组合式函数 | `sybz-components/hooks`   | 和 Vue 强绑定，属于组件库能力    |
+| 纯函数、格式化、校验、数据转换                               | `@sybz-components/utils`  | 不依赖 Vue，更适合作为独立工具包 |
+| 只服务组件内部的封装                                         | `packages/hooks` 内部使用 | 可以导出，也可以不暴露给业务     |
 
 `useGlobalComponentConfig` 是组件库内部用于合并全局组件配置的 hook，业务项目通常不需要直接使用。

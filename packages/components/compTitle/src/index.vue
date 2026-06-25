@@ -48,7 +48,13 @@ const compTitleClass = computed(() => [
 </script>
 
 <template>
-  <div class="s-comp-title" :class="compTitleClass" :style="{ ...computedBoxStyle }" v-bind="$attrs" v-if="mergedProps.title">
+  <div
+    class="s-comp-title"
+    :class="compTitleClass"
+    :style="{ ...computedBoxStyle }"
+    v-bind="$attrs"
+    v-if="mergedProps.title"
+  >
     {{ mergedProps.title }}
   </div>
 </template>

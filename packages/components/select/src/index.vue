@@ -13,9 +13,7 @@
       },
     ]"
   >
-    <s-comp-title
-      v-bind="compTitleProps"
-    />
+    <s-comp-title v-bind="compTitleProps" />
     <el-tooltip
       v-bind="mergedTooltipAttrs"
       :content="selectTooltipContent"
@@ -396,9 +394,7 @@ const themeClass = computed(() => {
   return mergedProps.value.theme === 'chenghua' ? 's-select--chenghua' : ''
 })
 const inheritedPopperClass = computed(() => {
-  return [attrs['popper-class'], attrs.popperClass]
-    .filter((item) => typeof item === 'string' && item.trim())
-    .join(' ')
+  return [attrs['popper-class'], attrs.popperClass].filter((item) => typeof item === 'string' && item.trim()).join(' ')
 })
 const selectPopperClass = computed(() => {
   return [

@@ -33,7 +33,8 @@ export type SDialogComponent = typeof ElDialog & {
       confirm?: (...args: any[]) => any
       fillSlot?: boolean
       hideHeaderIcon?: boolean
-    } & Omit<ElDialogInstance['$props'], 'type' | 'title' | 'width'> & Omit<ElDrawerInstance['$props'], 'type' | 'title' | 'width' | keyof ElDialogInstance['$props']>
+    } & Omit<ElDialogInstance['$props'], 'type' | 'title' | 'width'> &
+      Omit<ElDrawerInstance['$props'], 'type' | 'title' | 'width' | keyof ElDialogInstance['$props']>
     $emit: ElDialogInstance['$emit']
     $slots: ElDialogInstance['$slots']
   }

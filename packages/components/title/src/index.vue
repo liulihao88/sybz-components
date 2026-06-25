@@ -242,6 +242,5 @@ const titleClass = computed(() => ({
     color: var(--el-text-color-secondary);
     letter-spacing: 0;
   }
-
 }
 </style>

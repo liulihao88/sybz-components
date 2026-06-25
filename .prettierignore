@@ -1,10 +1,7 @@
 node_modules
-dist
+dist/
 dist-ssr
 coverage
-docs/.vitepress/cache
-docs/.vitepress/dist
-docs/.vitepress/.temp
 docs/vite.config.ts.timestamp-*.mjs
 *.log
 *.local
@@ -12,3 +9,9 @@ docs/vite.config.ts.timestamp-*.mjs
 pnpm-lock.yaml
 bun.lock
 dist.zip
+pnpm-lock.yaml
+
+# cache
+.cache/
+.temp/
+.tmp/

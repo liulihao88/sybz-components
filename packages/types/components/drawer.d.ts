@@ -3,8 +3,7 @@ import type { SDrawerProps } from '../component-props'
 
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
 
-export type SDrawerPublicProps = SDrawerProps &
-  Omit<ElDrawerInstance['$props'], keyof SDrawerProps>
+export type SDrawerPublicProps = SDrawerProps & Omit<ElDrawerInstance['$props'], keyof SDrawerProps>
 
 export type SDrawerComponent = typeof ElDrawer & {
   new (): {

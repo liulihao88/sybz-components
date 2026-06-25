@@ -53,6 +53,5 @@ const result = await tryCatch(Promise.resolve({ id: 1 }))
 
 优先传 `() => task()`，这样函数执行阶段的同步错误也能被捕获。如果第二个参数不是 `ref`，函数不会直接修改它，并会在控制台提示无法修改非 `ref` 的 loading。
 
-
 :::utils-source tryCatch
 :::

@@ -94,47 +94,47 @@ datePicker/limitRange
 
 ### 属性
 
-|        属性名        | 说明                                                         | 类型                         | 可选值                     | 默认值             |
-| :------------------: | ------------------------------------------------------------ | ---------------------------- | -------------------------- | ------------------ |
-|     `modelValue`     | 绑定值，支持 `v-model`                                       | string / number / Date / array | -                        | `''`               |
-|        `type`        | 选择器类型                                                   | string                       | `year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange` | `date`             |
-|       `title`        | 左侧标题文案                                                 | string                       | -                          | `''`               |
-|       `width`        | 组件整体宽度                                                 | string / number              | -                          | `300px`            |
-|       `height`       | 组件整体高度                                                 | string / number              | -                          | `''`               |
-|      `boxStyle`      | 标题区域样式                                                 | object                       | -                          | `{}`               |
-|       `theme`        | 主题样式                                                     | string                       | `''` / `chenghua`          | `''`               |
-|       `format`       | 显示在输入框中的格式                                         | string                       | -                          | 按 `type` 自动设置 |
-|    `value-format`    | 绑定值的格式，支持传 `x` 返回毫秒时间戳，传 `X` 返回秒时间戳 | string                       | -                          | 按 `type` 自动设置 |
-|    `placeholder`     | 非范围选择时的占位文案                                       | string                       | -                          | `请选择日期`       |
-| `start-placeholder`  | 范围选择开始占位文案                                         | string                       | -                          | `开始日期`         |
-|  `end-placeholder`   | 范围选择结束占位文案                                         | string                       | -                          | `结束日期`         |
-|  `range-separator`   | 范围选择分隔符                                               | string                       | -                          | `-`                |
-|     `shortcuts`      | 快捷选项，传 `false` 关闭内置快捷项                          | array / false                | -                          | 内置快捷项         |
-|   `default-value`    | 面板打开时默认显示的日期                                     | Date / Date[]                | -                          | -                  |
-|    `default-time`    | 范围选择时默认补全的时间                                     | Date / Date[]                | -                          | -                  |
-|   `disabled-date`    | 禁用日期判断函数                                             | function                     | `(date: Date) => boolean`  | -                  |
-|        `size`        | 输入框尺寸                                                   | string                       | `large` / `default` / `small` | -               |
-|     `clearable`      | 是否显示清除按钮                                             | boolean                      | `true` / `false`           | `true`             |
-|      `readonly`      | 是否只读                                                     | boolean                      | `true` / `false`           | `false`            |
-|      `disabled`      | 是否禁用                                                     | boolean                      | `true` / `false`           | `false`            |
-|      `editable`      | 文本框是否可输入                                             | boolean                      | `true` / `false`           | `true`             |
-|   `unlink-panels`    | 范围选择时是否取消两个日期面板之间的联动                     | boolean                      | `true` / `false`           | `false`            |
-|  `show-week-number`  | 是否显示周数                                                 | boolean                      | `true` / `false`           | `false`            |
-|    `prefix-icon`     | 自定义前缀图标                                               | string / Component           | -                          | `''`               |
-|     `clear-icon`     | 自定义清除图标                                               | string / Component           | -                          | -                  |
-|    `popper-class`    | 下拉面板类名                                                 | string                       | -                          | -                  |
-|    `popper-style`    | 下拉面板样式                                                 | string / object / array      | -                          | -                  |
+|       属性名        | 说明                                                         | 类型                           | 可选值                                                                                                                                      | 默认值             |
+| :-----------------: | ------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+|    `modelValue`     | 绑定值，支持 `v-model`                                       | string / number / Date / array | -                                                                                                                                           | `''`               |
+|       `type`        | 选择器类型                                                   | string                         | `year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange` | `date`             |
+|       `title`       | 左侧标题文案                                                 | string                         | -                                                                                                                                           | `''`               |
+|       `width`       | 组件整体宽度                                                 | string / number                | -                                                                                                                                           | `300px`            |
+|      `height`       | 组件整体高度                                                 | string / number                | -                                                                                                                                           | `''`               |
+|     `boxStyle`      | 标题区域样式                                                 | object                         | -                                                                                                                                           | `{}`               |
+|       `theme`       | 主题样式                                                     | string                         | `''` / `chenghua`                                                                                                                           | `''`               |
+|      `format`       | 显示在输入框中的格式                                         | string                         | -                                                                                                                                           | 按 `type` 自动设置 |
+|   `value-format`    | 绑定值的格式，支持传 `x` 返回毫秒时间戳，传 `X` 返回秒时间戳 | string                         | -                                                                                                                                           | 按 `type` 自动设置 |
+|    `placeholder`    | 非范围选择时的占位文案                                       | string                         | -                                                                                                                                           | `请选择日期`       |
+| `start-placeholder` | 范围选择开始占位文案                                         | string                         | -                                                                                                                                           | `开始日期`         |
+|  `end-placeholder`  | 范围选择结束占位文案                                         | string                         | -                                                                                                                                           | `结束日期`         |
+|  `range-separator`  | 范围选择分隔符                                               | string                         | -                                                                                                                                           | `-`                |
+|     `shortcuts`     | 快捷选项，传 `false` 关闭内置快捷项                          | array / false                  | -                                                                                                                                           | 内置快捷项         |
+|   `default-value`   | 面板打开时默认显示的日期                                     | Date / Date[]                  | -                                                                                                                                           | -                  |
+|   `default-time`    | 范围选择时默认补全的时间                                     | Date / Date[]                  | -                                                                                                                                           | -                  |
+|   `disabled-date`   | 禁用日期判断函数                                             | function                       | `(date: Date) => boolean`                                                                                                                   | -                  |
+|       `size`        | 输入框尺寸                                                   | string                         | `large` / `default` / `small`                                                                                                               | -                  |
+|     `clearable`     | 是否显示清除按钮                                             | boolean                        | `true` / `false`                                                                                                                            | `true`             |
+|     `readonly`      | 是否只读                                                     | boolean                        | `true` / `false`                                                                                                                            | `false`            |
+|     `disabled`      | 是否禁用                                                     | boolean                        | `true` / `false`                                                                                                                            | `false`            |
+|     `editable`      | 文本框是否可输入                                             | boolean                        | `true` / `false`                                                                                                                            | `true`             |
+|   `unlink-panels`   | 范围选择时是否取消两个日期面板之间的联动                     | boolean                        | `true` / `false`                                                                                                                            | `false`            |
+| `show-week-number`  | 是否显示周数                                                 | boolean                        | `true` / `false`                                                                                                                            | `false`            |
+|    `prefix-icon`    | 自定义前缀图标                                               | string / Component             | -                                                                                                                                           | `''`               |
+|    `clear-icon`     | 自定义清除图标                                               | string / Component             | -                                                                                                                                           | -                  |
+|   `popper-class`    | 下拉面板类名                                                 | string                         | -                                                                                                                                           | -                  |
+|   `popper-style`    | 下拉面板样式                                                 | string / object / array        | -                                                                                                                                           | -                  |
 
 ### 事件
 
-|       事件名        | 说明                         | 回调参数 |
-| :-----------------: | ---------------------------- | -------- |
-| `update:modelValue` | 绑定值变化时触发             | `value`  |
-|      `change`       | 用户确认选中值时触发         | `value`  |
-|       `focus`       | 输入框聚焦时触发             | `event`  |
-|       `blur`        | 输入框失焦时触发             | `event`  |
-| `calendar-change`   | 范围选择时，日历选中项变化触发 | `value`  |
-|  `visible-change`   | 下拉面板显示或隐藏时触发     | `visible` |
+|       事件名        | 说明                           | 回调参数  |
+| :-----------------: | ------------------------------ | --------- |
+| `update:modelValue` | 绑定值变化时触发               | `value`   |
+|      `change`       | 用户确认选中值时触发           | `value`   |
+|       `focus`       | 输入框聚焦时触发               | `event`   |
+|       `blur`        | 输入框失焦时触发               | `event`   |
+|  `calendar-change`  | 范围选择时，日历选中项变化触发 | `value`   |
+|  `visible-change`   | 下拉面板显示或隐藏时触发       | `visible` |
 
 ### 方法
 
@@ -142,15 +142,15 @@ datePicker/limitRange
 | :-----------: | ---------------- | ---- |
 |    `focus`    | 聚焦输入框       | -    |
 |    `blur`     | 使输入框失焦     | -    |
-|  `handleOpen` | 打开日期选择面板 | -    |
+| `handleOpen`  | 打开日期选择面板 | -    |
 | `handleClose` | 关闭日期选择面板 | -    |
 
 ### 插槽
 
-|      插槽名       | 说明                   | 参数 |
-| :---------------: | ---------------------- | ---- |
+|      插槽名       | 说明                   | 参数   |
+| :---------------: | ---------------------- | ------ |
 |     `default`     | 自定义日期单元格内容   | `cell` |
-| `range-separator` | 自定义范围选择分隔内容 | -    |
+| `range-separator` | 自定义范围选择分隔内容 | -      |
 
 ### 默认行为
 

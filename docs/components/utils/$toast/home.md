@@ -64,6 +64,5 @@ $toast.error('接口请求失败', { showClose: true })
 
 `$toast` 依赖 Element Plus 的 `ElMessage`，需要在浏览器端且项目已正确引入 Element Plus 样式。需要渲染 HTML 字符串时，可通过配置项传 `dangerouslyUseHTMLString: true`。
 
-
 :::utils-source $toast
 :::

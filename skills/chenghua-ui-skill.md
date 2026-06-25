@@ -118,7 +118,7 @@ Web 端：
   --ch-space-sm: 16px;
   --ch-space-md: 24px;
   --ch-space-lg: 32px;
-  --ch-font-ui: "PingFang SC", sans-serif;
-  --ch-font-number: "Roboto Mono", monospace;
+  --ch-font-ui: 'PingFang SC', sans-serif;
+  --ch-font-number: 'Roboto Mono', monospace;
 }
 ```

@@ -87,24 +87,24 @@ app.use(SybzComponents, {
 })
 ```
 
-| 配置项                                 | 可选值               | 默认值              | 说明                                |
-| -------------------------------------- | -------------------- | ------------------- | ----------------------------------- |
-| `tooltip.width`                        | string               | `100%`              | 默认文本触发区域最大宽度            |
-| `tooltip.lineClamp`                    | string / number      | `1`                 | 默认文本区域最大展示行数            |
-| `tooltip.effect`                       | string               | `dark`              | tooltip 主题                        |
-| `tooltip.placement`                    | string               | Element Plus 默认值 | tooltip 弹出位置                    |
-| `tooltip.showAfter`                    | number               | `0`                 | 延迟显示时间，单位毫秒              |
-| `tooltip.dangerouslyUseHTMLString`     | boolean              | `false`             | 是否将 `content` 按 HTML 字符串渲染 |
+| 配置项                             | 可选值          | 默认值              | 说明                                |
+| ---------------------------------- | --------------- | ------------------- | ----------------------------------- |
+| `tooltip.width`                    | string          | `100%`              | 默认文本触发区域最大宽度            |
+| `tooltip.lineClamp`                | string / number | `1`                 | 默认文本区域最大展示行数            |
+| `tooltip.effect`                   | string          | `dark`              | tooltip 主题                        |
+| `tooltip.placement`                | string          | Element Plus 默认值 | tooltip 弹出位置                    |
+| `tooltip.showAfter`                | number          | `0`                 | 延迟显示时间，单位毫秒              |
+| `tooltip.dangerouslyUseHTMLString` | boolean         | `false`             | 是否将 `content` 按 HTML 字符串渲染 |
 
 ### 组件属性
 
-|             属性名              | 说明                                       | 类型            | 默认值  |
-| :-----------------------------: | ------------------------------------------ | --------------- | ------- |
-|             `width`             | 默认文本触发区域最大宽度                   | string          | `100%`  |
-|           `lineClamp`           | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`     |
-|           `showSlot`            | 是否渲染默认触发内容区域                   | boolean         | `true`  |
-|            `effect`             | tooltip 主题，会透传给 `el-tooltip`        | string          | `dark`  |
-| `dangerouslyUseHTMLString`      | 是否将 `content` 按 HTML 字符串渲染        | boolean         | `false` |
+|           属性名           | 说明                                       | 类型            | 默认值  |
+| :------------------------: | ------------------------------------------ | --------------- | ------- |
+|          `width`           | 默认文本触发区域最大宽度                   | string          | `100%`  |
+|        `lineClamp`         | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`     |
+|         `showSlot`         | 是否渲染默认触发内容区域                   | boolean         | `true`  |
+|          `effect`          | tooltip 主题，会透传给 `el-tooltip`        | string          | `dark`  |
+| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染        | boolean         | `false` |
 
 ### 常用透传属性
 

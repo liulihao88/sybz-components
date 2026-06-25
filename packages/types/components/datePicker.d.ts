@@ -3,8 +3,7 @@ import type { SDatePickerProps } from '../component-props'
 
 type ElDatePickerInstance = InstanceType<typeof ElDatePicker>
 
-export type SDatePickerPublicProps = SDatePickerProps &
-  Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>
+export type SDatePickerPublicProps = SDatePickerProps & Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>
 
 export type SDatePickerComponent = typeof ElDatePicker & {
   new (): {

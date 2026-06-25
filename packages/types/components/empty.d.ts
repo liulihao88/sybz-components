@@ -3,8 +3,7 @@ import type { SEmptyProps } from '../component-props'
 
 type ElEmptyInstance = InstanceType<typeof ElEmpty>
 
-export type SEmptyPublicProps = SEmptyProps &
-  Omit<ElEmptyInstance['$props'], keyof SEmptyProps>
+export type SEmptyPublicProps = SEmptyProps & Omit<ElEmptyInstance['$props'], keyof SEmptyProps>
 
 export type SEmptyComponent = typeof ElEmpty & {
   new (): {

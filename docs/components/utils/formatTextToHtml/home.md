@@ -49,6 +49,5 @@ formatTextToHtml('Name\tValue')
 
 返回值通常配合 `v-html` 或 Element Plus 消息的 `dangerouslyUseHTMLString` 使用。这个函数只转换换行和制表符，不会过滤用户输入的 HTML；渲染不可信内容前需要自行做安全处理。
 
-
 :::utils-source formatTextToHtml
 :::

@@ -3,8 +3,7 @@ import type { SFormProps } from '../component-props'
 
 type ElFormInstance = InstanceType<typeof ElForm>
 
-export type SFormPublicProps = SFormProps &
-  Omit<ElFormInstance['$props'], keyof SFormProps>
+export type SFormPublicProps = SFormProps & Omit<ElFormInstance['$props'], keyof SFormProps>
 
 export type SFormComponent = typeof ElForm & {
   new (): {

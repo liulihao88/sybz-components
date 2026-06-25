@@ -8,7 +8,6 @@
   "unpkg": "dist/sybz-components-umd.js",
   "module": "dist/sybz-components-es.js",
   "packageManager": "pnpm@10.12.1",
-  
   "types": "dist/index.d.ts",
   "style": "dist/style.css",
   "exports": {
@@ -52,12 +51,11 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.ts,.tsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "lint:check": "eslint . --ext .vue,.js,.jsx,.ts,.tsx,.cjs,.mjs --ignore-path .gitignore",
-    "lint:prettier": "prettier --write --ignore-unknown --ignore-path .prettierignore \"*.{js,cjs,mjs,ts,cts,mts,json,jsonc,css,scss,vue,html,md,yml,yaml}\" \".vscode/**/*.{json,jsonc}\" \"{docs,packages,public,scripts,skills}/**/*.{js,cjs,mjs,ts,cts,mts,json,jsonc,tsx,jsx,css,scss,vue,html,md,yml,yaml}\"",
+    "lint:prettier": "prettier --write .",
     "typecheck": "tsc --noEmit -p tsconfig.typecheck.json",
     "typecheck:sfc": "vue-tsc --noEmit -p tsconfig.json",
     "types:generate": "node ./scripts/generate-component-types.mjs",
     "release": "pnpm build && npm version patch && npm publish",
-    "format": "pnpm lint:prettier",
     "docsserve": "vitepress serve docs",
     "deploy": "sh -x deploy.sh",
     "release-deploy": "pnpm release && npm run deploy",

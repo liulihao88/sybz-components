@@ -31,7 +31,10 @@ const getComponentConfig = <T extends Record<string, any>>(
   }
 }
 
-const getExplicitProps = <T extends Record<string, any>>(rawProps: Record<string, any> | null | undefined, props: T) => {
+const getExplicitProps = <T extends Record<string, any>>(
+  rawProps: Record<string, any> | null | undefined,
+  props: T,
+) => {
   if (!rawProps) return {}
 
   return Object.keys(props).reduce<Record<string, any>>((explicitProps, key) => {

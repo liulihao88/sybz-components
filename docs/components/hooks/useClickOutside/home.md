@@ -21,7 +21,7 @@ useClickOutside(panelRef, callback)
 
 ### 参数说明
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-| ---- | ---- | ---- | ------ | ---- |
-| `elementRef` | `Ref<HTMLElement \| undefined>` | 是 | - | 要判断内外部的元素。 |
-| `callback` | `(event: MouseEvent) => void` | 是 | - | 点击外部时执行。 |
+| 参数         | 类型                            | 必填 | 默认值 | 说明                 |
+| ------------ | ------------------------------- | ---- | ------ | -------------------- |
+| `elementRef` | `Ref<HTMLElement \| undefined>` | 是   | -      | 要判断内外部的元素。 |
+| `callback`   | `(event: MouseEvent) => void`   | 是   | -      | 点击外部时执行。     |
