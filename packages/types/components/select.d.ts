@@ -1,5 +1,18 @@
-import type { InstallableComponent } from './_shared'
+import { ElSelect } from 'element-plus'
 import type { SSelectProps } from '../component-props'
 
-declare const SSelect: InstallableComponent<SSelectProps>
+type ElSelectInstance = InstanceType<typeof ElSelect>
+
+export type SSelectPublicProps = SSelectProps &
+  Omit<ElSelectInstance['$props'], keyof SSelectProps>
+
+export type SSelectComponent = typeof ElSelect & {
+  new (): {
+    $props: SSelectProps & Omit<ElSelectInstance['$props'], keyof SSelectProps>
+    $emit: ElSelectInstance['$emit']
+    $slots: ElSelectInstance['$slots']
+  }
+}
+
+declare const SSelect: SSelectComponent
 export default SSelect

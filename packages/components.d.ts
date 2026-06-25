@@ -172,9 +172,9 @@ export type SIconComponent = (typeof import('./types/components/icon'))['default
 export type SIconInstance = ComponentInstance<SIconComponent>
 export type SIconPublicProps = SIconInstance['$props']
 
-export type SInputComponent = (typeof import('./types/components/input'))['default']
+export type SInputComponent = import('./types/components/input').SInputComponent
 export type SInputInstance = ComponentInstance<SInputComponent>
-export type SInputPublicProps = SInputInstance['$props']
+export type SInputPublicProps = import('./types/components/input').SInputPublicProps
 
 export type SInputLabelComponent = (typeof import('./types/components/inputLabel'))['default']
 export type SInputLabelInstance = ComponentInstance<SInputLabelComponent>
@@ -224,9 +224,9 @@ export type SRowComponent = (typeof import('./types/components/row'))['default']
 export type SRowInstance = ComponentInstance<SRowComponent>
 export type SRowPublicProps = SRowInstance['$props']
 
-export type SSelectComponent = (typeof import('./types/components/select'))['default']
+export type SSelectComponent = import('./types/components/select').SSelectComponent
 export type SSelectInstance = ComponentInstance<SSelectComponent>
-export type SSelectPublicProps = SSelectInstance['$props']
+export type SSelectPublicProps = import('./types/components/select').SSelectPublicProps
 
 export type SSplitPaneComponent = (typeof import('./types/components/splitPane'))['default']
 export type SSplitPaneInstance = ComponentInstance<SSplitPaneComponent>
@@ -264,9 +264,9 @@ export type STitleComponent = (typeof import('./types/components/title'))['defau
 export type STitleInstance = ComponentInstance<STitleComponent>
 export type STitlePublicProps = STitleInstance['$props']
 
-export type STooltipComponent = (typeof import('./types/components/tooltip'))['default']
+export type STooltipComponent = import('./types/components/tooltip').STooltipComponent
 export type STooltipInstance = ComponentInstance<STooltipComponent>
-export type STooltipPublicProps = STooltipInstance['$props']
+export type STooltipPublicProps = import('./types/components/tooltip').STooltipPublicProps
 
 export type SUsedPieComponent = (typeof import('./types/components/company/usedPie'))['default']
 export type SUsedPieInstance = ComponentInstance<SUsedPieComponent>

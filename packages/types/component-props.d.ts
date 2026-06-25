@@ -1,8 +1,23 @@
 import type { VNode } from 'vue'
+import type { InputPropsPublic } from 'element-plus/es/components/input'
+import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
+import type { CascaderProps } from 'element-plus/es/components/cascader'
+import type { CheckboxGroupPropsPublic } from 'element-plus/es/components/checkbox'
+import type { SwitchPropsPublic } from 'element-plus/es/components/switch'
 import type { DialogPropsPublic } from 'element-plus/es/components/dialog'
 import type { DrawerPropsPublic } from 'element-plus/es/components/drawer'
 import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'
+import type { DescriptionPropsPublic } from 'element-plus/es/components/descriptions/src/description'
+import type { SelectPropsPublic } from 'element-plus/es/components/select'
+import type { ElTooltipPropsPublic } from 'element-plus/es/components/tooltip'
+import type { EmptyPropsPublic } from 'element-plus/es/components/empty'
+import type { PopoverPropsPublic } from 'element-plus/es/components/popover'
+import type { ProgressPropsPublic } from 'element-plus/es/components/progress'
+import type { RadioGroupPropsPublic } from 'element-plus/es/components/radio'
+import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
+import type { TagPropsPublic } from 'element-plus/es/components/tag'
+import type { RowPropsPublic } from 'element-plus/es/components/row'
 
 export type SybzComponentTheme = '' | 'chenghua'
 export type SybzComponentSize = '' | 'small' | 'default' | 'large'
@@ -44,7 +59,7 @@ export type SButtonEmits = {
   click: (evt: MouseEvent) => boolean
 }
 
-export interface SDatePickerProps extends Omit<Partial<DatePickerPropsPublic>, 'shortcuts'> {
+export interface SDatePickerSelfProps {
   title?: string
   width?: string | number
   height?: string | number
@@ -52,6 +67,9 @@ export interface SDatePickerProps extends Omit<Partial<DatePickerPropsPublic>, '
   shortcuts?: DatePickerPropsPublic['shortcuts'] | false
   boxStyle?: SybzRecord
 }
+
+export type SDatePickerProps = SDatePickerSelfProps &
+  Omit<Partial<DatePickerPropsPublic>, keyof SDatePickerSelfProps | 'shortcuts'>
 
 export interface SDescriptionsItemOption {
   label: string
@@ -103,7 +121,106 @@ export type SDialogPanelProps = Partial<
 
 export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 
-export interface SEmptyProps {
+export interface SInputSelfProps {
+  modelValue: any
+  boxStyle?: SybzRecord
+  width?: string | number
+  height?: string | number
+  maxlength?: string | number
+  hideMaxLengthError?: boolean
+  maxLengthErrorText?: string
+  size?: SybzComponentSize
+  theme?: SybzComponentTheme
+  showWordLimit?: boolean | string
+  block?: boolean
+  disPlaceholder?: string
+  subAttrs?: SybzRecord
+  tooltipAttrs?: SybzRecord
+  iconAttrs?: SybzRecord
+  hideTooltip?: boolean
+  options?: any[]
+  content?: string
+  dangerouslyUseHTMLString?: boolean
+}
+
+export type SInputProps = SInputSelfProps & Partial<Omit<InputPropsPublic, keyof SInputSelfProps>>
+
+export interface SInputNumberSelfProps {
+  title?: string
+  boxStyle?: SybzRecord
+  width?: string | number
+  height?: string | number
+  theme?: SybzComponentTheme
+  size?: SybzComponentSize
+  subAttrs?: SybzRecord
+}
+
+export type SInputNumberProps = SInputNumberSelfProps &
+  Partial<Omit<InputNumberPropsPublic, keyof SInputNumberSelfProps>>
+
+export interface SCheckboxSelfProps {
+  type?: '' | 'simple'
+  options?: any[]
+  showType?: 'check' | 'button'
+  modelValue?: any[]
+  label?: string
+  value?: string
+  showAll?: boolean
+  attrs?: SybzRecord
+  customDisabled?: (...args: any[]) => any
+  customLabel?: string | ((item: any, index: number) => any)
+  gap?: string | number
+  theme?: SybzComponentTheme
+}
+
+export type SCheckboxProps = SCheckboxSelfProps &
+  Partial<Omit<CheckboxGroupPropsPublic, keyof SCheckboxSelfProps>>
+
+export interface SChooseAreaSelfProps {
+  width?: string | number
+  height?: string | number
+}
+
+export type SChooseAreaProps = SChooseAreaSelfProps &
+  Partial<Omit<CascaderProps, keyof SChooseAreaSelfProps | 'width' | 'height'>>
+
+export interface SClickOutsideProps {
+  options?: SybzRecord
+}
+
+export interface SCompTitleProps {
+  title?: string
+  boxStyle?: SybzRecord
+  theme?: SybzComponentTheme
+}
+
+export interface SBasicLayoutProps {
+  modelValue?: boolean
+  size?: SybzComponentSize
+  title?: string
+  boxStyle?: SybzRecord
+  headerStyle?: SybzRecord
+  bodyStyle?: SybzRecord
+  footerStyle?: SybzRecord
+  border?: boolean
+  scroll?: boolean
+  square?: boolean
+  collapsible?: boolean
+  collapseTrigger?: 'icon' | 'header'
+  theme?: SybzComponentTheme
+}
+
+export interface SChartProps {
+  width?: string
+  height?: string
+  id?: string
+  option: SybzRecord
+  theme?: string
+  isEmpty?: boolean | ((options: SybzRecord) => boolean)
+  description?: string
+}
+
+export interface SEmptySelfProps {
   description?: string
   theme?: SybzComponentTheme
   width?: string | number
@@ -112,12 +229,57 @@ export interface SEmptyProps {
   src?: string
 }
 
+export type SEmptyProps = SEmptySelfProps & Partial<Omit<EmptyPropsPublic, keyof SEmptySelfProps>>
+
 export interface SFormProps {
   fieldList: SybzRecord
   model: SybzRecord
   showFooter?: boolean
   column?: 1 | 2 | 3 | 4 | 5 | 6
   align?: 'center' | 'top' | 'flex-end'
+}
+
+export interface SFunctionSourceCodeProps {
+  functionName?: string
+}
+
+export interface SIconProps {
+  name: string
+  color?: string
+  size?: string | number
+  disabled?: boolean
+  type?: string
+  svgAttrs?: SybzRecord
+  dangerouslyUseHTMLString?: boolean
+}
+
+export interface SItemProps {
+  src?: string
+  label: string | number
+  value: string | number
+  width?: string | number
+  height?: string | number
+  labelStyle?: SybzRecord
+  valueStyle?: SybzRecord
+  itemStyle?: SybzRecord
+  imgStyle?: SybzRecord
+  boxStyle?: SybzRecord
+  type?: '' | 'value'
+  attrs?: SybzRecord
+}
+
+export interface SItemWrapperProps {
+  gap?: string | number
+  columns?: number | null
+  minWidth?: string | number
+}
+
+export interface SInputLabelProps {
+  modelValue?: any[]
+  isComplex?: boolean
+  regexp?: RegExp
+  message?: string
+  inputAttrs?: SybzRecord
 }
 
 export interface SRadioItem {
@@ -128,7 +290,7 @@ export interface SRadioItem {
   [key: string]: any
 }
 
-export interface SRadioProps {
+export interface SRadioSelfProps {
   title?: string
   boxStyle?: SybzRecord
   theme?: SybzComponentTheme
@@ -141,7 +303,10 @@ export interface SRadioProps {
   itemDisabled?: (...args: any[]) => any
 }
 
-export interface SSelectProps {
+export type SRadioProps = SRadioSelfProps &
+  Partial<Omit<RadioGroupPropsPublic, keyof SRadioSelfProps>>
+
+export interface SSelectSelfProps {
   modelValue?: any[] | string | number
   value?: string
   label?: string | string[]
@@ -170,6 +335,37 @@ export interface SSelectProps {
   dangerouslyUseHTMLString?: boolean
 }
 
+export type SSelectProps = SSelectSelfProps & Partial<Omit<SelectPropsPublic, keyof SSelectSelfProps>>
+
+export interface SSwitchSelfProps {
+  theme?: SybzComponentTheme
+  beforeChange?: (...args: any[]) => any
+  width?: string | number
+}
+
+export type SSwitchProps = SSwitchSelfProps & Partial<Omit<SwitchPropsPublic, keyof SSwitchSelfProps>>
+
+export interface SProgressSelfProps {
+  percentage: number
+  animationTime?: number
+  isAnimation?: boolean
+  customColor?: boolean
+}
+
+export type SProgressProps = SProgressSelfProps & Partial<Omit<ProgressPropsPublic, keyof SProgressSelfProps>>
+
+export interface SPopoverConfirmSelfProps {
+  title?: string
+  width?: string | number
+  content?: string
+  reConfirm?: boolean
+  dangerouslyUseHTMLString?: boolean
+  theme?: SybzComponentTheme
+}
+
+export type SPopconfirmProps = SPopoverConfirmSelfProps &
+  Partial<Omit<PopoverPropsPublic, keyof SPopoverConfirmSelfProps>>
+
 export type SplitPaneDirection = 'vertical' | 'horizontal'
 
 export interface SplitPaneSetting {
@@ -188,6 +384,50 @@ export interface SSplitPaneProps {
   modelValue?: number
 }
 
+export interface SSvgProps {
+  prefix?: string
+  name: string
+  color?: string
+  customStyle?: SybzRecord
+  size?: string | number
+}
+
+export interface STabsSelfProps {
+  modelValue: string | number | boolean
+  options?: any[]
+  label?: string
+  value?: string
+  subAttrs?: SybzRecord
+  trigger?: 'click' | 'hover'
+  theme?: string
+  size?: 'small' | 'default' | 'large'
+}
+
+export type STabsProps = STabsSelfProps & Partial<Omit<TabsPropsPublic, keyof STabsSelfProps>>
+
+export interface STagSelfProps {
+  options?: any[]
+  value?: string | number
+  width?: string | number
+  height?: string | number
+  primary?: string | number | boolean | any[]
+  warning?: string | number | boolean | any[]
+  danger?: string | number | boolean | any[]
+  info?: string | number | boolean | any[]
+  other?: string
+  type?: string
+  theme?: SybzComponentTheme
+  size?: SybzComponentSize
+  config?: SybzRecord
+}
+
+export type STagProps = STagSelfProps & Partial<Omit<TagPropsPublic, keyof STagSelfProps>>
+
+export interface STestProps {
+  label?: string
+  prefix?: string
+}
+
 export interface STitleProps {
   title?: string
   size?: string
@@ -203,13 +443,55 @@ export interface STitleProps {
   theme?: SybzComponentTheme
 }
 
-export interface STooltipProps {
+export interface STooltipSelfProps {
   width?: string
   lineClamp?: string | number
   showSlot?: boolean
   effect?: string
   dangerouslyUseHTMLString?: boolean
 }
+
+export type STooltipProps = STooltipSelfProps &
+  Partial<Omit<ElTooltipPropsPublic, keyof STooltipSelfProps>>
+
+export interface SDrawerSelfProps {
+  confirmText?: string
+  cancelText?: string
+  showFooter?: boolean
+  showConfirm?: boolean
+  showCancel?: boolean
+  wrapperClosable?: boolean
+  confirmAttrs?: SybzRecord
+  cancelAttrs?: SybzRecord
+  detailAttrs?: SybzRecord
+  type?: '' | 'detail'
+}
+
+export type SDrawerProps = SDrawerSelfProps & Partial<Omit<DrawerPropsPublic, keyof SDrawerSelfProps>>
+
+export interface SDescriptionsOwnProps {
+  options: SDescriptionsItemOption[]
+  theme?: SybzComponentTheme
+  column?: number
+  labelWidth?: string | number
+  showAll?: boolean
+}
+
+export type SDescriptionsProps = SDescriptionsOwnProps &
+  Partial<Omit<DescriptionPropsPublic, keyof SDescriptionsOwnProps>>
+
+export interface SRowSelfProps {
+  col?: number | number[]
+  gap?: string | number
+  gutter?: string | number
+  justify?: RowPropsPublic['justify']
+  align?: RowPropsPublic['align']
+  colAttrs?: SybzRecord
+}
+
+export type SRowProps = SRowSelfProps & Partial<Omit<RowPropsPublic, keyof SRowSelfProps>>
+
+export type SChooseAreaPanelProps = Partial<Omit<CascaderProps, 'width' | 'height'>>
 
 export type SWarningType = 'info' | 'simple' | 'warning' | 'error'
 export type SWarningSize = 'small' | 'default'
