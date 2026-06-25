@@ -1,5 +1,18 @@
-import type { InstallableComponent } from './_shared'
+import { ElRow } from 'element-plus'
 import type { SRowProps } from '../component-props'
 
-declare const SRow: InstallableComponent<SRowProps>
+type ElRowInstance = InstanceType<typeof ElRow>
+
+export type SRowPublicProps = SRowProps &
+  Omit<ElRowInstance['$props'], keyof SRowProps>
+
+export type SRowComponent = typeof ElRow & {
+  new (): {
+    $props: SRowProps & Omit<ElRowInstance['$props'], keyof SRowProps>
+    $emit: ElRowInstance['$emit']
+    $slots: ElRowInstance['$slots']
+  }
+}
+
+declare const SRow: SRowComponent
 export default SRow

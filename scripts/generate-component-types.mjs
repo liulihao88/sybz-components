@@ -25,12 +25,52 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   ['SChart', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SChartProps' }],
-  ['SCheckbox', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SCheckboxProps' }],
-  ['SChooseArea', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SChooseAreaProps' }],
+  [
+    'SCheckbox',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SCheckboxProps',
+      exportedComponentTypeName: 'SCheckboxComponent',
+      publicPropsTypeName: 'SCheckboxPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'checkbox',
+    },
+  ],
+  [
+    'SChooseArea',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SChooseAreaProps',
+      exportedComponentTypeName: 'SChooseAreaComponent',
+      publicPropsTypeName: 'SChooseAreaPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'cascader',
+    },
+  ],
   ['SClickOutside', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SClickOutsideProps' }],
   ['SCompTitle', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SCompTitleProps' }],
-  ['SDatePicker', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDatePickerProps' }],
-  ['SDescriptions', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDescriptionsProps' }],
+  [
+    'SDatePicker',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SDatePickerProps',
+      exportedComponentTypeName: 'SDatePickerComponent',
+      publicPropsTypeName: 'SDatePickerPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'datePicker',
+    },
+  ],
+  [
+    'SDescriptions',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SDescriptionsProps',
+      exportedComponentTypeName: 'SDescriptionsComponent',
+      publicPropsTypeName: 'SDescriptionsPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'descriptions',
+    },
+  ],
   [
     'SDialog',
     {
@@ -44,10 +84,40 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'dialog',
     },
   ],
-  ['SDrawer', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SDrawerProps' }],
-  ['SEmpty', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SEmptyProps' }],
+  [
+    'SDrawer',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SDrawerProps',
+      exportedComponentTypeName: 'SDrawerComponent',
+      publicPropsTypeName: 'SDrawerPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'drawer',
+    },
+  ],
+  [
+    'SEmpty',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SEmptyProps',
+      exportedComponentTypeName: 'SEmptyComponent',
+      publicPropsTypeName: 'SEmptyPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'empty',
+    },
+  ],
   ['SFlex', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFlexProps' }],
-  ['SForm', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFormProps' }],
+  [
+    'SForm',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SFormProps',
+      exportedComponentTypeName: 'SFormComponent',
+      publicPropsTypeName: 'SFormPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'form',
+    },
+  ],
   ['SFunctionSourceCode', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFunctionSourceCodeProps' }],
   ['SIcon', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SIconProps' }],
   [
@@ -62,13 +132,63 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   ['SInputLabel', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SInputLabelProps' }],
-  ['SInputNumber', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SInputNumberProps' }],
+  [
+    'SInputNumber',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SInputNumberProps',
+      exportedComponentTypeName: 'SInputNumberComponent',
+      publicPropsTypeName: 'SInputNumberPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'inputNumber',
+    },
+  ],
   ['SItem', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemProps' }],
   ['SItemWrapper', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemWrapperProps' }],
-  ['SPopconfirm', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SPopconfirmProps' }],
-  ['SProgress', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SProgressProps' }],
-  ['SRadio', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SRadioProps' }],
-  ['SRow', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SRowProps' }],
+  [
+    'SPopconfirm',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SPopconfirmProps',
+      exportedComponentTypeName: 'SPopconfirmComponent',
+      publicPropsTypeName: 'SPopconfirmPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'popover',
+    },
+  ],
+  [
+    'SProgress',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SProgressProps',
+      exportedComponentTypeName: 'SProgressComponent',
+      publicPropsTypeName: 'SProgressPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'progress',
+    },
+  ],
+  [
+    'SRadio',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SRadioProps',
+      exportedComponentTypeName: 'SRadioComponent',
+      publicPropsTypeName: 'SRadioPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'radio',
+    },
+  ],
+  [
+    'SRow',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SRowProps',
+      exportedComponentTypeName: 'SRowComponent',
+      publicPropsTypeName: 'SRowPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'row',
+    },
+  ],
   [
     'SSelect',
     {
@@ -82,10 +202,40 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
   ['SSplitPane', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SSplitPaneProps' }],
   ['SSvg', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SSvgProps' }],
-  ['SSwitch', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SSwitchProps' }],
+  [
+    'SSwitch',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SSwitchProps',
+      exportedComponentTypeName: 'SSwitchComponent',
+      publicPropsTypeName: 'SSwitchPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'switch',
+    },
+  ],
   ['STable', { importPath: resolve(rootDir, 'packages/types/table.d.ts'), typeName: 'STableProps' }],
-  ['STabs', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STabsProps' }],
-  ['STag', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STagProps' }],
+  [
+    'STabs',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'STabsProps',
+      exportedComponentTypeName: 'STabsComponent',
+      publicPropsTypeName: 'STabsPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'tabs',
+    },
+  ],
+  [
+    'STag',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'STagProps',
+      exportedComponentTypeName: 'STagComponent',
+      publicPropsTypeName: 'STagPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'tag',
+    },
+  ],
   ['STest', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STestProps' }],
   ['STitle', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STitleProps' }],
   [
@@ -108,6 +258,13 @@ const toPascalCase = (value) =>
   value
     .replace(/(^|[-_/])([a-zA-Z0-9])/g, (_match, _prefix, char) => char.toUpperCase())
     .replace(/[^a-zA-Z0-9]/g, '')
+
+const toKebabCase = (value) =>
+  value
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/[_/]+/g, '-')
+    .replace(/-+/g, '-')
+    .toLowerCase()
 
 const collectComponentEntries = () => {
   const groups = [
@@ -141,6 +298,7 @@ const componentEntries = collectComponentEntries()
     const componentName = `S${toPascalCase(dirName)}`
     return {
       componentName,
+      tagName: `s-${toKebabCase(dirName)}`,
       wrapperPath,
       wrapperFilePath,
       instanceTypeName: `${componentName}Instance`,
@@ -197,7 +355,7 @@ if (tableAliases.length) {
 
 lines.push('declare module \'vue\' {')
 lines.push('  export interface GlobalComponents {')
-componentEntries.forEach(({ componentName, wrapperPath }) => {
+componentEntries.forEach(({ componentName, tagName, wrapperPath }) => {
   const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
   const componentType = typedComponent?.exportedComponentTypeName
     ? `import('${wrapperPath}').${typedComponent.exportedComponentTypeName}`
@@ -211,11 +369,12 @@ componentEntries.forEach(({ componentName, wrapperPath }) => {
   }
   lines.push(`    ${componentName}: ${globalComponentType}`)
 
-  if (typedComponent?.tagName) {
-    if (typedComponent.description) {
+  const templateTagName = typedComponent?.tagName || tagName
+  if (templateTagName) {
+    if (typedComponent?.description) {
       lines.push(`    /** ${typedComponent.description} */`)
     }
-    lines.push(`    '${typedComponent.tagName}': ${globalComponentType}`)
+    lines.push(`    '${templateTagName}': ${globalComponentType}`)
   }
 })
 lines.push('  }')
@@ -471,6 +630,456 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
       `    $props: STooltipProps & Omit<ElTooltipInstance['$props'], keyof STooltipProps>`,
       "    $emit: ElTooltipInstance['$emit']",
       "    $slots: ElTooltipInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'checkbox') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElCheckboxGroup } from 'element-plus'",
+      "import type { SCheckboxProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SCheckboxProps &`,
+      `  Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElCheckboxGroup & {`,
+      '  new (): {',
+      `    $props: SCheckboxProps & Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxProps>`,
+      "    $emit: ElCheckboxGroupInstance['$emit']",
+      "    $slots: ElCheckboxGroupInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'radio') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElRadioGroup } from 'element-plus'",
+      "import type { SRadioProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SRadioProps &`,
+      `  Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElRadioGroup & {`,
+      '  new (): {',
+      `    $props: SRadioProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>`,
+      "    $emit: ElRadioGroupInstance['$emit']",
+      "    $slots: ElRadioGroupInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'empty') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElEmpty } from 'element-plus'",
+      "import type { SEmptyProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElEmptyInstance = InstanceType<typeof ElEmpty>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SEmptyProps &`,
+      `  Omit<ElEmptyInstance['$props'], keyof SEmptyProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElEmpty & {`,
+      '  new (): {',
+      `    $props: SEmptyProps & Omit<ElEmptyInstance['$props'], keyof SEmptyProps>`,
+      "    $emit: ElEmptyInstance['$emit']",
+      "    $slots: ElEmptyInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'tabs') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElTabs } from 'element-plus'",
+      "import type { STabsProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElTabsInstance = InstanceType<typeof ElTabs>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = STabsProps &`,
+      `  Omit<ElTabsInstance['$props'], keyof STabsProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElTabs & {`,
+      '  new (): {',
+      `    $props: STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>`,
+      "    $emit: ElTabsInstance['$emit']",
+      "    $slots: ElTabsInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'tag') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElTag } from 'element-plus'",
+      "import type { STagProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElTagInstance = InstanceType<typeof ElTag>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = STagProps &`,
+      `  Omit<ElTagInstance['$props'], keyof STagProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElTag & {`,
+      '  new (): {',
+      `    $props: STagProps & Omit<ElTagInstance['$props'], keyof STagProps>`,
+      "    $emit: ElTagInstance['$emit']",
+      "    $slots: ElTagInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'row') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElRow } from 'element-plus'",
+      "import type { SRowProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElRowInstance = InstanceType<typeof ElRow>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SRowProps &`,
+      `  Omit<ElRowInstance['$props'], keyof SRowProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElRow & {`,
+      '  new (): {',
+      `    $props: SRowProps & Omit<ElRowInstance['$props'], keyof SRowProps>`,
+      "    $emit: ElRowInstance['$emit']",
+      "    $slots: ElRowInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'switch') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElSwitch } from 'element-plus'",
+      "import type { SSwitchProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElSwitchInstance = InstanceType<typeof ElSwitch>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SSwitchProps &`,
+      `  Omit<ElSwitchInstance['$props'], keyof SSwitchProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElSwitch & {`,
+      '  new (): {',
+      `    $props: SSwitchProps & Omit<ElSwitchInstance['$props'], keyof SSwitchProps>`,
+      "    $emit: ElSwitchInstance['$emit']",
+      "    $slots: ElSwitchInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'inputNumber') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElInputNumber } from 'element-plus'",
+      "import type { SInputNumberProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElInputNumberInstance = InstanceType<typeof ElInputNumber>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SInputNumberProps &`,
+      `  Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElInputNumber & {`,
+      '  new (): {',
+      `    $props: SInputNumberProps & Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>`,
+      "    $emit: ElInputNumberInstance['$emit']",
+      "    $slots: ElInputNumberInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'popover') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElPopover } from 'element-plus'",
+      "import type { SPopconfirmProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElPopoverInstance = InstanceType<typeof ElPopover>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SPopconfirmProps &`,
+      `  Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElPopover & {`,
+      '  new (): {',
+      `    $props: SPopconfirmProps & Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>`,
+      "    $emit: ElPopoverInstance['$emit']",
+      "    $slots: ElPopoverInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'datePicker') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElDatePicker } from 'element-plus'",
+      "import type { SDatePickerProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElDatePickerInstance = InstanceType<typeof ElDatePicker>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SDatePickerProps &`,
+      `  Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElDatePicker & {`,
+      '  new (): {',
+      `    $props: SDatePickerProps & Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>`,
+      "    $emit: ElDatePickerInstance['$emit']",
+      "    $slots: ElDatePickerInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'cascader') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElCascader } from 'element-plus'",
+      "import type { SChooseAreaProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElCascaderInstance = InstanceType<typeof ElCascader>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SChooseAreaProps &`,
+      `  Omit<ElCascaderInstance['$props'], keyof SChooseAreaProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElCascader & {`,
+      '  new (): {',
+      `    $props: SChooseAreaProps & Omit<ElCascaderInstance['$props'], keyof SChooseAreaProps>`,
+      "    $emit: ElCascaderInstance['$emit']",
+      "    $slots: ElCascaderInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'drawer') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElDrawer } from 'element-plus'",
+      "import type { SDrawerProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElDrawerInstance = InstanceType<typeof ElDrawer>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SDrawerProps &`,
+      `  Omit<ElDrawerInstance['$props'], keyof SDrawerProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElDrawer & {`,
+      '  new (): {',
+      `    $props: SDrawerProps & Omit<ElDrawerInstance['$props'], keyof SDrawerProps>`,
+      "    $emit: ElDrawerInstance['$emit']",
+      "    $slots: ElDrawerInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'descriptions') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElDescriptions } from 'element-plus'",
+      "import type { SDescriptionsProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SDescriptionsProps &`,
+      `  Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElDescriptions & {`,
+      '  new (): {',
+      `    $props: SDescriptionsProps & Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsProps>`,
+      "    $emit: ElDescriptionsInstance['$emit']",
+      "    $slots: ElDescriptionsInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'progress') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElProgress } from 'element-plus'",
+      "import type { SProgressProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElProgressInstance = InstanceType<typeof ElProgress>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SProgressProps &`,
+      `  Omit<ElProgressInstance['$props'], keyof SProgressProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElProgress & {`,
+      '  new (): {',
+      `    $props: SProgressProps & Omit<ElProgressInstance['$props'], keyof SProgressProps>`,
+      "    $emit: ElProgressInstance['$emit']",
+      "    $slots: ElProgressInstance['$slots']",
+      '  }',
+      '}',
+      '',
+      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
+      `export default ${componentName}`,
+      '',
+    ]
+
+    mkdirSync(wrapperDir, { recursive: true })
+    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
+    return
+  }
+
+  if (typedComponent?.explicitComponentType === 'form') {
+    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const wrapperLines = [
+      "import { ElForm } from 'element-plus'",
+      "import type { SFormProps } from '" + normalizedPropsImportPath + "'",
+      '',
+      'type ElFormInstance = InstanceType<typeof ElForm>',
+      '',
+      `export type ${typedComponent.publicPropsTypeName} = SFormProps &`,
+      `  Omit<ElFormInstance['$props'], keyof SFormProps>`,
+      '',
+      `export type ${typedComponent.exportedComponentTypeName} = typeof ElForm & {`,
+      '  new (): {',
+      `    $props: SFormProps & Omit<ElFormInstance['$props'], keyof SFormProps>`,
+      "    $emit: ElFormInstance['$emit']",
+      "    $slots: ElFormInstance['$slots']",
       '  }',
       '}',
       '',

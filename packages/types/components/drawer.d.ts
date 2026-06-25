@@ -1,5 +1,18 @@
-import type { InstallableComponent } from './_shared'
+import { ElDrawer } from 'element-plus'
 import type { SDrawerProps } from '../component-props'
 
-declare const SDrawer: InstallableComponent<SDrawerProps>
+type ElDrawerInstance = InstanceType<typeof ElDrawer>
+
+export type SDrawerPublicProps = SDrawerProps &
+  Omit<ElDrawerInstance['$props'], keyof SDrawerProps>
+
+export type SDrawerComponent = typeof ElDrawer & {
+  new (): {
+    $props: SDrawerProps & Omit<ElDrawerInstance['$props'], keyof SDrawerProps>
+    $emit: ElDrawerInstance['$emit']
+    $slots: ElDrawerInstance['$slots']
+  }
+}
+
+declare const SDrawer: SDrawerComponent
 export default SDrawer

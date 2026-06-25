@@ -1,8 +1,8 @@
+import { ElCascader } from 'element-plus'
 import type { VNode } from 'vue'
 import type { InputPropsPublic } from 'element-plus/es/components/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
-import type { CascaderProps } from 'element-plus/es/components/cascader'
 import type { CheckboxGroupPropsPublic } from 'element-plus/es/components/checkbox'
 import type { SwitchPropsPublic } from 'element-plus/es/components/switch'
 import type { DialogPropsPublic } from 'element-plus/es/components/dialog'
@@ -71,6 +71,8 @@ export interface SDatePickerSelfProps {
 export type SDatePickerProps = SDatePickerSelfProps &
   Omit<Partial<DatePickerPropsPublic>, keyof SDatePickerSelfProps | 'shortcuts'>
 
+type ElCascaderInstance = InstanceType<typeof ElCascader>
+
 export interface SDescriptionsItemOption {
   label: string
   value: any
@@ -84,7 +86,7 @@ export interface SDescriptionsItemOption {
   valueAttrs?: SybzRecord
 }
 
-export interface SDescriptionsProps {
+export interface SDescriptionsOwnProps {
   options: SDescriptionsItemOption[]
   theme?: SybzComponentTheme
   column?: number
@@ -182,7 +184,7 @@ export interface SChooseAreaSelfProps {
 }
 
 export type SChooseAreaProps = SChooseAreaSelfProps &
-  Partial<Omit<CascaderProps, keyof SChooseAreaSelfProps | 'width' | 'height'>>
+  Partial<Omit<ElCascaderInstance['$props'], keyof SChooseAreaSelfProps | 'width' | 'height'>>
 
 export interface SClickOutsideProps {
   options?: SybzRecord
@@ -399,7 +401,7 @@ export interface STabsSelfProps {
   value?: string
   subAttrs?: SybzRecord
   trigger?: 'click' | 'hover'
-  theme?: string
+  theme?: '' | 'capsule'
   size?: 'small' | 'default' | 'large'
 }
 
@@ -415,7 +417,7 @@ export interface STagSelfProps {
   danger?: string | number | boolean | any[]
   info?: string | number | boolean | any[]
   other?: string
-  type?: string
+  type?: TagPropsPublic['type']
   theme?: SybzComponentTheme
   size?: SybzComponentSize
   config?: SybzRecord
@@ -469,14 +471,6 @@ export interface SDrawerSelfProps {
 
 export type SDrawerProps = SDrawerSelfProps & Partial<Omit<DrawerPropsPublic, keyof SDrawerSelfProps>>
 
-export interface SDescriptionsOwnProps {
-  options: SDescriptionsItemOption[]
-  theme?: SybzComponentTheme
-  column?: number
-  labelWidth?: string | number
-  showAll?: boolean
-}
-
 export type SDescriptionsProps = SDescriptionsOwnProps &
   Partial<Omit<DescriptionPropsPublic, keyof SDescriptionsOwnProps>>
 
@@ -491,7 +485,7 @@ export interface SRowSelfProps {
 
 export type SRowProps = SRowSelfProps & Partial<Omit<RowPropsPublic, keyof SRowSelfProps>>
 
-export type SChooseAreaPanelProps = Partial<Omit<CascaderProps, 'width' | 'height'>>
+export type SChooseAreaPanelProps = Partial<Omit<ElCascaderInstance['$props'], 'width' | 'height'>>
 
 export type SWarningType = 'info' | 'simple' | 'warning' | 'error'
 export type SWarningSize = 'small' | 'default'

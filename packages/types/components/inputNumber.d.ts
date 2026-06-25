@@ -1,5 +1,18 @@
-import type { InstallableComponent } from './_shared'
+import { ElInputNumber } from 'element-plus'
 import type { SInputNumberProps } from '../component-props'
 
-declare const SInputNumber: InstallableComponent<SInputNumberProps>
+type ElInputNumberInstance = InstanceType<typeof ElInputNumber>
+
+export type SInputNumberPublicProps = SInputNumberProps &
+  Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>
+
+export type SInputNumberComponent = typeof ElInputNumber & {
+  new (): {
+    $props: SInputNumberProps & Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>
+    $emit: ElInputNumberInstance['$emit']
+    $slots: ElInputNumberInstance['$slots']
+  }
+}
+
+declare const SInputNumber: SInputNumberComponent
 export default SInputNumber

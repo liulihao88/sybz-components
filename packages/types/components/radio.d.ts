@@ -1,5 +1,18 @@
-import type { InstallableComponent } from './_shared'
+import { ElRadioGroup } from 'element-plus'
 import type { SRadioProps } from '../component-props'
 
-declare const SRadio: InstallableComponent<SRadioProps>
+type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
+
+export type SRadioPublicProps = SRadioProps &
+  Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>
+
+export type SRadioComponent = typeof ElRadioGroup & {
+  new (): {
+    $props: SRadioProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>
+    $emit: ElRadioGroupInstance['$emit']
+    $slots: ElRadioGroupInstance['$slots']
+  }
+}
+
+declare const SRadio: SRadioComponent
 export default SRadio

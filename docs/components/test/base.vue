@@ -26,7 +26,9 @@ const isShow = ref(false)
       :show-confirm="false"
     ></s-dialog>
 
-    <s-tag theme="chenghua2"></s-tag>
+    <s-tag theme="chenghua"></s-tag>
+
+    <s-flex justify="space-between2"></s-flex>
 
     <s-date-picker ></s-date-picker>
 
