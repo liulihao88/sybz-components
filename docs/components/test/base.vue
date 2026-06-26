@@ -15,7 +15,7 @@ const c = ref(false)
     <el-button type="primary" size="small">测试02</el-button>
     <s-button theme="chenghua" size="small" type="primary" class="cc" v-if="c"></s-button>
     <!-- <s-table></s-table> -->
-    <s-empty description="暂无数据" width="48" height="48"> </s-empty>
+    <s-empty description="暂无数据" width="48" height="48"> 你还好嘛 </s-empty>
 
     <el-dialog title="33"> </el-dialog>
     <s-dialog
