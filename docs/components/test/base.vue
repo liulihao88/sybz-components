@@ -10,7 +10,11 @@ console.log(`7行 docs/components/test/base.vue 1 `, 1)
 
 <template>
   <div>
-    <el-input v-model="cc" v-copy="cc"></el-input>
+    <el-input v-model="cc" v-copy="cc">
+
+
+      
+    </el-input>
     1233334455
     <div></div>
 
