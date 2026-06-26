@@ -22,7 +22,7 @@ const c = ref()
       v-model="isShow"
       title2="12321"
       theme="chenghua"
-      type="drawer"
+      type="drawer2"
       confirmText=""
       :show-confirm="false"
     ></s-dialog>
