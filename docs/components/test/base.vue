@@ -19,9 +19,7 @@ console.log(`7行 docs/components/test/base.vue 1 `, 1)
     <!-- <s-table></s-table> -->
     <s-empty description="暂无数据" width="48" height="48"></s-empty>
 
-    <el-dialog title="33">
-      
-    </el-dialog>
+    <el-dialog title="33"> </el-dialog>
     <s-dialog
       v-model="isShow"
       title2="12321"
@@ -31,19 +29,11 @@ console.log(`7行 docs/components/test/base.vue 1 `, 1)
       :show-confirm="false"
     ></s-dialog>
 
-    <s-tag theme="chenghua">
-      
-      我不服
-    
-    
-    </s-tag>
+    <s-tag theme="chenghua"> 我不服 </s-tag>
 
     <s-flex justify="space-between2的撒"></s-flex>
 
-    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">
-
-      
-    </SItem>
+    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"> </SItem>
     <hr />
     <SItem label="label" value="value"></SItem>
     <s-title title="插槽用法" tb="8"></s-title>
