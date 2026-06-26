@@ -17,15 +17,15 @@ function change(checkValue) {
 <template>
   <div>
     <s-checkbox
-      @change="change"
       v-model="checkboxValue"
       :options="options"
       label="name"
-      :showAll="false"
+      :show-all="false"
       size="small"
-      showType="button"
+      show-type="button"
       value="id"
-      :customDisabled="(item) => item.id === 'xrr'"
+      :custom-disabled="(item) => item.id === 'xrr'"
+      @change="change"
     ></s-checkbox>
   </div>
 </template>

@@ -18,7 +18,7 @@ const cc = () => {
 
 <template>
   <div>
-    <s-dialog ref="dialogRef" title="t1" v-model="isShow">
+    <s-dialog ref="dialogRef" v-model="isShow" title="t1">
       <el-button type="primary" @click="proxy.confirm('sybz-confirm', {})">sybz-confirm</el-button>
       <el-button type="primary" @click="cc">原生</el-button>
     </s-dialog>

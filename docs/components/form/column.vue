@@ -6,7 +6,7 @@
     <el-radio-button :value="4">一行展示4项</el-radio-button>
     <el-radio-button :value="5">一行展示5项</el-radio-button>
   </el-radio-group>
-  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" />
+  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :column="column" />
 </template>
 
 <script setup lang="tsx">

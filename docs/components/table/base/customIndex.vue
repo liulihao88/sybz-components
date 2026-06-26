@@ -26,7 +26,7 @@ const columns: TableColumnList = [
   <s-table
     :data="clone(tableData, 1)"
     :columns="columns"
-    :indexAttrs="{
+    :index-attrs="{
       index: indexMethod,
     }"
   />

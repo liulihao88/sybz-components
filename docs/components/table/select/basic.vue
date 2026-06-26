@@ -34,7 +34,7 @@ const selectedText = computed(() => {
   <div>
     <div class="multiple-demo__value">当前选中: {{ selectedText }}</div>
     <div class="multiple-demo__value">当前选中行: {{ selectedRows }}</div>
-    <s-table v-model="selectedRows" selection-type="multiple" :columns="columns" :data="data" :showPage="false" />
+    <s-table v-model="selectedRows" selection-type="multiple" :columns="columns" :data="data" :show-page="false" />
   </div>
 </template>
 

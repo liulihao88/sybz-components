@@ -48,8 +48,8 @@ const setSelectedRows = (rows = []) => {
       selection-type="multiple"
       :columns="columns"
       :data="data"
-      :showIndex="false"
-      :showPage="false"
+      :show-index="false"
+      :show-page="false"
       row-key="id"
     />
   </div>

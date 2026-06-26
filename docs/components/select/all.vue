@@ -18,13 +18,13 @@ function itemDisabled(item) {
 <template>
   <div>
     <s-select
-      title="大部分常用属性"
       v-model="selectVal"
+      title="大部分常用属性"
       :options="options"
       label="name"
       value="id"
-      :itemDisabled="itemDisabled"
-      :customLabel="(item) => item.name + '(' + item.id + ')'"
+      :item-disabled="itemDisabled"
+      :custom-label="(item) => item.name + '(' + item.id + ')'"
     ></s-select>
   </div>
 </template>

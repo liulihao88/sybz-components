@@ -21,12 +21,12 @@ async function cusConfirm() {
   <div>
     <s-drawer
       ref="dialogRef"
+      v-model="isShow"
       title="App"
-      @confirm="cusConfirm"
-      :confirmAttrs="{
+      :confirm-attrs="{
         loading: confirmLoading,
       }"
-      v-model="isShow"
+      @confirm="cusConfirm"
     >
       <div>这是内容</div>
       <div>这是内容</div>
@@ -112,7 +112,7 @@ async function cusConfirm() {
       <div>这是内容</div>
       <div>这是内容</div>
     </s-drawer>
-    <el-button @click="btnClick" type="danger">打开drawer</el-button>
+    <el-button type="danger" @click="btnClick">打开drawer</el-button>
   </div>
 </template>
 

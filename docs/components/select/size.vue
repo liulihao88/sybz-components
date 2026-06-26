@@ -37,13 +37,13 @@ watch(
         { label: '清空', value: false },
       ]"
     ></s-radio>
-    <s-radio :options="['large', 'default', 'small']" v-model="size" type="simple"></s-radio>
+    <s-radio v-model="size" :options="['large', 'default', 'small']" type="simple"></s-radio>
     <s-select
       v-model="selectValue"
       :options="options"
       multiple
       :size="size"
-      :showQuick="true"
+      :show-quick="true"
       :title="`选择尺寸=>${size}`"
     />
   </div>

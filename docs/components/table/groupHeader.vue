@@ -34,7 +34,7 @@ const formatAmount = (amount) => `¥${amount}`
 
 <template>
   <div class="group-header-demo">
-    <s-table :columns="columns" :data="data" :showIndex="false" :showPage="false">
+    <s-table :columns="columns" :data="data" :show-index="false" :show-page="false">
       <el-table-column prop="index" label="序号" width="70" align="center" />
 
       <el-table-column label="文件一" align="center">

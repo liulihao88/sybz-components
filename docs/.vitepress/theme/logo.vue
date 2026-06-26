@@ -1,30 +1,30 @@
 <template>
   <div class="">({{ pkgVersion }})</div>
-  <el-button type="primary" size="small" @click.stop.prevent="toggleSourceVisible" class="prod-toogle" v-if="!isHome">
+  <el-button v-if="!isHome" type="primary" size="small" class="prod-toogle" @click.stop.prevent="toggleSourceVisible">
     <div class="visible-text">
       {{ sourceVisible === true ? '代码折叠' : '代码显示' }}
     </div>
   </el-button>
 
-  <div class="code-toggle" v-if="isDev && !isHome">
-    <el-button type="primary" size="small" @click.stop.prevent="jumpUrl('md')" class="dev-md-copy">
+  <div v-if="isDev && !isHome" class="code-toggle">
+    <el-button type="primary" size="small" class="dev-md-copy" @click.stop.prevent="jumpUrl('md')">
       <div class="visible-text">跳转home.md(仅本地)</div>
     </el-button>
     <el-button
+      v-if="showPackagesButton"
       type="primary"
       size="small"
-      @click.stop.prevent="jumpUrl('packages')"
       class="dev-package-copy"
-      v-if="showPackagesButton"
+      @click.stop.prevent="jumpUrl('packages')"
     >
       <div class="visible-text">跳转packages(仅本地)</div>
     </el-button>
     <el-button
+      v-if="isDev"
       type="primary"
       size="small"
-      @click.stop.prevent="jumpUrl('test/home')"
       class="dev-package-copy"
-      v-if="isDev"
+      @click.stop.prevent="jumpUrl('test/home')"
     >
       <div class="visible-text">跳转测试页</div>
     </el-button>

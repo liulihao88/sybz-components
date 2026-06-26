@@ -21,15 +21,15 @@ function change(...rest) {
 <template>
   <div>
     <s-select
-      title="你好"
       v-model="optionsId"
+      title="你好"
       multiple
       label="name"
       value="id"
-      showPrefix
-      @changeSelect="changeSelect"
-      @change="change"
+      show-prefix
       :options="stepList"
+      @change-select="changeSelect"
+      @change="change"
     ></s-select>
 
     <s-title title="use collapse-tags"></s-title>
@@ -38,11 +38,11 @@ function change(...rest) {
       multiple
       label="name"
       value="id"
-      @changeSelect="changeSelect"
-      @change="change"
-      showPrefix
+      show-prefix
       collapse-tags
       :options="stepList"
+      @change-select="changeSelect"
+      @change="change"
     ></s-select>
     <s-title title="use collapse-tags-tooltip"></s-title>
     <s-select
@@ -50,11 +50,11 @@ function change(...rest) {
       multiple
       label="name"
       value="id"
-      @changeSelect="changeSelect"
-      @change="change"
       collapse-tags
       collapse-tags-tooltip
       :options="stepList"
+      @change-select="changeSelect"
+      @change="change"
     ></s-select>
 
     <s-title title="use max-collapse-tags"></s-title>
@@ -63,12 +63,12 @@ function change(...rest) {
       multiple
       label="name"
       value="id"
-      @changeSelect="changeSelect"
-      @change="change"
       collapse-tags
       collapse-tags-tooltip
       :max-collapse-tags="3"
       :options="stepList"
+      @change-select="changeSelect"
+      @change="change"
     ></s-select>
   </div>
 </template>

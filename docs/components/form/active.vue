@@ -49,7 +49,7 @@ const deleteItem = async (i) => {
 
 <template>
   <div>
-    <s-form :fieldList="fieldList" :model="form" ref="sFormRef">
+    <s-form ref="sFormRef" :field-list="fieldList" :model="form">
       <template v-for="(v, i) in form.domains" :key="v.key" #[`domains.${i}.value`]>
         <s-flex align="center" gap="small">
           <s-input v-model="form.domains[i].value" />

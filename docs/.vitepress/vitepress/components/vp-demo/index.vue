@@ -1,12 +1,12 @@
 <template>
   <ClientOnly>
     <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
-    <div class="demo-description" text="sm" v-html="descriptionWithCopy" @click="handleDescriptionClick" />
+    <div class="demo-description" text="sm" @click="handleDescriptionClick" v-html="descriptionWithCopy" />
     <div class="example">
       <Example :path="path" />
       <ElDivider class="m-0" />
       <div class="op-btns">
-        <ElTooltip content="跳转页面" :show-arrow="false" v-if="isDev">
+        <ElTooltip v-if="isDev" content="跳转页面" :show-arrow="false">
           <ElIcon :size="16" class="op-btn" @click="jumpPath">
             <el-icon-promotion />
             <!-- <o-icon name="promotion"></o-icon> -->

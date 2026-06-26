@@ -75,20 +75,20 @@ init()
 <template>
   <div>
     <s-flex direction="column">
-      <s-radio :options="sizeOptions" v-model="sizeValue"></s-radio>
+      <s-radio v-model="sizeValue" :options="sizeOptions"></s-radio>
       <s-radio
+        v-model="borderValue"
         :options="[
           { label: '有border', value: true },
           { label: '无border', value: false },
         ]"
-        v-model="borderValue"
       ></s-radio>
       <s-radio
+        v-model="showAll"
         :options="[
           { label: 'showAll为true', value: true },
           { label: 'showAll为false', value: false },
         ]"
-        v-model="showAll"
       ></s-radio>
     </s-flex>
     <s-descriptions
@@ -98,7 +98,7 @@ init()
       :column="1"
       label-width="300"
       :size="sizeValue"
-      :showAll="showAll"
+      :show-all="showAll"
       :border="borderValue"
       extra="这是extra"
     ></s-descriptions>

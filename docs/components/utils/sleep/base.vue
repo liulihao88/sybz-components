@@ -14,6 +14,6 @@ const sleepHandler = async () => {
 
 <template>
   <div>
-    <el-button type="primary" @click="sleepHandler" :loading="loading">2秒后显示</el-button>
+    <el-button type="primary" :loading="loading" @click="sleepHandler">2秒后显示</el-button>
   </div>
 </template>

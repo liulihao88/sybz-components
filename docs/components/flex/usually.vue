@@ -22,7 +22,7 @@
   <s-radio v-model="wrap" :options="['nowrap', 'wrap', 'wrap-reverse']" type="simple"></s-radio>
   <s-title title="gap设置间距 ['small', 'default', 'large', processWidth的宽度]"></s-title>
   <s-radio v-model="gapRadio" :options="['small', 'default', 'large', 'custom']" type="simple"></s-radio>
-  <el-slider v-model="gapProgressValue" v-if="gapRadio === 'custom'"></el-slider>
+  <el-slider v-if="gapRadio === 'custom'" v-model="gapProgressValue"></el-slider>
   <s-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-block">
     <div
       v-for="(item, index) in new Array(10)"

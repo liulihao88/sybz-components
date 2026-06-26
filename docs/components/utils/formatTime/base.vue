@@ -57,6 +57,6 @@ const options = [
 
 <template>
   <div>
-    <s-descriptions :options="options" title="时间转换" :column="1" showAll></s-descriptions>
+    <s-descriptions :options="options" title="时间转换" :column="1" show-all></s-descriptions>
   </div>
 </template>

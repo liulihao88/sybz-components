@@ -5,10 +5,10 @@
       :options="options"
       value="id"
       label="name"
-      showType="button"
+      show-type="button"
       size="small"
+      :sub-attrs="{ disabled: 'isDis' }"
       @change="change"
-      :subAttrs="{ disabled: 'isDis' }"
     />
   </div>
 </template>

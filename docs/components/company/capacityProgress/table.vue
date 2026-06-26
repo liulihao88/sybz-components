@@ -61,7 +61,7 @@ function parseSpace(space) {
 
 <template>
   <div>
-    <s-table :columns="columns" :data="data" ref="tableRef" :showPage="false">
+    <s-table ref="tableRef" :columns="columns" :data="data" :show-page="false">
       <template #cap="{ row }">
         <s-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></s-capacity-progress>
       </template>

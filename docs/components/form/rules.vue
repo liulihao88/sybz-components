@@ -1,5 +1,5 @@
 <template>
-  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />
+  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :column="column" :rules="rules" />
 </template>
 
 <script setup lang="tsx">

@@ -6,11 +6,11 @@
         { label: '显示密码', value: true },
         { label: '隐藏密码', value: false },
       ]"
-      showType="button"
+      show-type="button"
     ></s-radio>
   </s-flex>
   <s-title title="性别有值的时候显示age"></s-title>
-  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" />
+  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :size="size" :label-position="labelPosition" />
 </template>
 
 <script setup lang="tsx">

@@ -53,7 +53,7 @@ const columns = [
 
 <template>
   <div>
-    <s-table :columns="columns" :data="data" :showPage="false">
+    <s-table :columns="columns" :data="data" :show-page="false">
       <template #address="{ index, scope, index2 }">
         {{ scope.$index }} !!{{ index }} ?? {{ $index }} =={{ index2 }}
       </template>

@@ -37,7 +37,7 @@ const columns: TableColumnList = [
       :data="tableData"
       :columns="columns"
       selection-type="single"
-      :showPage="false"
+      :show-page="false"
       row-key="name"
     />
     <div style="margin-top: 20px">

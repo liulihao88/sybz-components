@@ -112,7 +112,7 @@ function clearForm() {
 
 <template>
   <div>
-    <s-form :model="model" :fieldList="fieldList" ref="gFormRef" label-width="100">
+    <s-form ref="gFormRef" :model="model" :field-list="fieldList" label-width="100">
       <template #password-label>我是password啊</template>
       <template #name>
         <s-input v-model="model.name" placeholder="我是slot的name" width="300" />

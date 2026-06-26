@@ -122,7 +122,7 @@ init()
   <div>
     <el-button type="primary" @click="init">新增数据</el-button>
     {{ total }}
-    <s-table :columns="columns" :total="total" :data="data" ref="tableRef">
+    <s-table ref="tableRef" :columns="columns" :total="total" :data="data">
       <template #download="{ row }">
         <el-button
           type="text"

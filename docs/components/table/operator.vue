@@ -53,6 +53,6 @@ const columns = [
 
 <template>
   <div>
-    <s-table :columns="columns" :data="data" ref="tableRef"></s-table>
+    <s-table ref="tableRef" :columns="columns" :data="data"></s-table>
   </div>
 </template>

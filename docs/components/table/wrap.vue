@@ -98,7 +98,7 @@ const columns = [
 
 <template>
   <div>
-    <s-table :columns="columns" :preserve-expanded-content="preserveExpanded" :data="data" ref="tableRef">
+    <s-table ref="tableRef" :columns="columns" :preserve-expanded-content="preserveExpanded" :data="data">
       <el-table-column type="expand">
         <template #default="props">
           <div class="inner-table">
@@ -106,8 +106,8 @@ const columns = [
               :data="props.row.family"
               :columns="columns2"
               size="small"
-              :showIndex="false"
-              :showPage="false"
+              :show-index="false"
+              :show-page="false"
               :custom-header-cell-style="{
                 height: 'unset',
               }"

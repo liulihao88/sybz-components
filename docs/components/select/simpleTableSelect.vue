@@ -75,21 +75,21 @@ watch(
 <template>
   <div>
     <s-select
+      ref="selectRef"
       v-model="selectName"
       :title="`单选的 => ${selectValue}`"
       width="100%"
-      ref="selectRef"
       value-key="value"
       @clear="handleCurrentChange(null)"
     >
       <template #empty>
         <s-table
+          ref="tableRef"
           :columns="columns"
           :data="data"
-          ref="tableRef"
-          :showPage="false"
-          @current-change="handleCurrentChange"
+          :show-page="false"
           highlight-current-row
+          @current-change="handleCurrentChange"
         ></s-table>
       </template>
     </s-select>

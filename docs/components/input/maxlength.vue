@@ -20,7 +20,7 @@
         :maxlength="6"
         max-length-error-text="最多只能输入 6 个字符"
       />
-      <s-input title="隐藏 toast 提示" v-model="hiddenToastValue" width="320" :maxlength="8" hide-max-length-error />
+      <s-input v-model="hiddenToastValue" title="隐藏 toast 提示" width="320" :maxlength="8" hide-max-length-error />
     </s-flex>
   </div>
 </template>

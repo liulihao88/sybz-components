@@ -32,11 +32,11 @@ function handleClickOrScroll(event: Event) {
 
 <template>
   <div class="throttle-demo">
-    <el-button type="primary" v-throttle="($event) => handleWithParams($event, '保存')">传参调用</el-button>
+    <el-button v-throttle="($event) => handleWithParams($event, '保存')" type="primary">传参调用</el-button>
 
-    <div class="throttle-demo__box" v-throttle.mouseenter.1500="handleMouseenter">mouseenter 事件 1500ms</div>
+    <div v-throttle.mouseenter.1500="handleMouseenter" class="throttle-demo__box">mouseenter 事件 1500ms</div>
 
-    <div class="throttle-demo__scroll" v-throttle.click.scroll.1000="handleClickOrScroll">
+    <div v-throttle.click.scroll.1000="handleClickOrScroll" class="throttle-demo__scroll">
       <div class="throttle-demo__scroll-content">
         <p v-for="item in 8" :key="item">点击或滚动区域 {{ item }}</p>
       </div>

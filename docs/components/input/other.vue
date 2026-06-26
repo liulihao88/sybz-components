@@ -1,8 +1,8 @@
 <template>
   <s-flex gap="small" direction="column">
     <s-input
-      title="密码框"
       v-model="input"
+      title="密码框"
       style="width: 240px"
       type="password"
       placeholder="Please input password"
@@ -18,8 +18,8 @@
 
     <s-title title="文本域">
       <s-input
-        title="文本域"
         v-model="textarea"
+        title="文本域"
         style="width: 240px"
         :rows="2"
         type="textarea"

@@ -82,7 +82,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <s-radio v-model="radioValue" :options="options" showType="button" class="m-b-8"></s-radio>
+    <s-radio v-model="radioValue" :options="options" show-type="button" class="m-b-8"></s-radio>
 
     <s-descriptions :options="DataSource.descData" :column="radioValue"></s-descriptions>
   </div>

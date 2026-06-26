@@ -33,7 +33,7 @@ const dateValue = ref('')
         title="审核周期"
         width="520"
         height="40"
-        :boxStyle="{ width: 84 }"
+        :box-style="{ width: 84 }"
       ></s-date-picker>
       <s-date-picker
         v-model="dateValue"
@@ -43,7 +43,7 @@ const dateValue = ref('')
         width="320"
         height="40"
         placeholder="选择发布日期"
-        :boxStyle="{ width: 84 }"
+        :box-style="{ width: 84 }"
       ></s-date-picker>
     </div>
   </div>

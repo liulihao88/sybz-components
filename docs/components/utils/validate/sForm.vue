@@ -92,7 +92,7 @@ const fieldList = computed(() => {
 <template>
   <div>
     <s-title title="由于有特殊的相同字段的校验, 所以fieldList使用了compued, 正常情况下, 不需要computed"></s-title>
-    <s-form :fieldList="fieldList" :model="form" ref="sFormRef" :column="2" label-width="200">
+    <s-form ref="sFormRef" :field-list="fieldList" :model="form" :column="2" label-width="200">
       <tempalte v-for="(v, i) in fieldList" :key="i">
         <template #[`${v.prop}-label`]="{ item }">
           <div>{{ item }}??</div>

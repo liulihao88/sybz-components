@@ -38,7 +38,7 @@ const options = ref([
 
 <template>
   <div>
-    <s-descriptions :options="options" :column="1" labelWidth="300" :showAll="true">
+    <s-descriptions :options="options" :column="1" label-width="300" :show-all="true">
       <template #refValue="{ item }">
         <s-flex justify="end">
           <div class="m-r-8">clone(refValue)</div>

@@ -108,7 +108,7 @@ const columns = computed(() => {
       :columns="columns"
       :data="data"
       v-bind="otherParams"
-      :pageAttrs="{
+      :page-attrs="{
         layout: 'prev, pager, next, jumper',
       }"
     ></s-table>

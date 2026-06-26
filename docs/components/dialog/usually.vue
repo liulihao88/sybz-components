@@ -27,24 +27,24 @@ function sleep(delay = 0, fn = () => {}) {
 </script>
 
 <template>
-  <el-button @click="btnClick" type="danger">打开dialog</el-button>
+  <el-button type="danger" @click="btnClick">打开dialog</el-button>
   <s-dialog
     ref="dialogRef"
+    v-model="isShow"
     title="常用的dialog"
-    @confirm="cusConfirm"
     width="100%"
-    :closeOnClickModal="false"
-    :confirmAttrs="{
+    :close-on-click-modal="false"
+    :confirm-attrs="{
       loading: confirmLoading,
     }"
-    confirmText="保存"
-    v-model="isShow"
-    @cancel="proxy.$toast('哈哈')"
-    cancelText="高级配置"
-    :cancelAttrs="{
+    confirm-text="保存"
+    cancel-text="高级配置"
+    :cancel-attrs="{
       type: 'primary',
       icon: 'el-icon-edit',
     }"
+    @confirm="cusConfirm"
+    @cancel="proxy.$toast('哈哈')"
   >
     <div v-for="(v, i) in 40" :key="i">
       <div>超长文本</div>

@@ -24,12 +24,12 @@ function handleDelayClick() {
 <template>
   <div class="throttle-demo">
     <div class="throttle-demo__item">
-      <el-button type="primary" v-throttle="handleDefaultClick">默认 1000ms</el-button>
+      <el-button v-throttle="handleDefaultClick" type="primary">默认 1000ms</el-button>
       <span>执行 {{ defaultCount }} 次，最近 {{ defaultTime }}</span>
     </div>
 
     <div class="throttle-demo__item">
-      <el-button type="primary" v-throttle.3000="handleDelayClick">自定义 3000ms</el-button>
+      <el-button v-throttle.3000="handleDelayClick" type="primary">自定义 3000ms</el-button>
       <span>执行 {{ delayCount }} 次，最近 {{ delayTime }}</span>
     </div>
   </div>

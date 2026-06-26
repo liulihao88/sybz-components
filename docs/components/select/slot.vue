@@ -23,7 +23,7 @@ const confirm = (op, item) => {
       <template #default="{ options, item }">
         <div class="f-bt w-block">
           <span>{{ item.label }}</span>
-          <s-popconfirm @confirm="confirm(options, item)" trigger="click">
+          <s-popconfirm trigger="click" @confirm="confirm(options, item)">
             <s-icon name="delete" @click.stop></s-icon>
           </s-popconfirm>
         </div>

@@ -48,7 +48,7 @@ const setSelectedRow = (row) => {
       selection-type="single"
       :columns="columns"
       :data="data"
-      :showPage="false"
+      :show-page="false"
       row-key="id"
       highlight-current-row
     />

@@ -1,25 +1,25 @@
 <template>
   <Transition :name="transitionName" @after-leave="destroyComponent" @enter="updateHeight">
     <div
-      class="vk-message"
       v-show="visible"
+      ref="messageRef"
+      class="vk-message"
       :class="{
         [`vk-message--${type}`]: type,
         'is-close': showClose,
       }"
       role="alert"
-      ref="messageRef"
       :style="cssStyle"
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
     >
       <div class="vk-message__content">
         <slot>
-          <RenderVnode :vNode="message" v-if="message" />
+          <RenderVnode v-if="message" :v-node="message" />
         </slot>
       </div>
-      <div class="vk-message__close" v-if="showClose">
-        <Icon @click.stop="visible = false" icon="xmark" />
+      <div v-if="showClose" class="vk-message__close">
+        <Icon icon="xmark" @click.stop="visible = false" />
       </div>
     </div>
   </Transition>

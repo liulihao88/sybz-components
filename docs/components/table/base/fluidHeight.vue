@@ -65,7 +65,7 @@ const onAddItem = () => {
 
 <template>
   <div>
-    <s-table :data="tableData" :columns="columns" maxHeight="500">
+    <s-table :data="tableData" :columns="columns" max-height="500">
       <template #operation="{ $index }">
         <el-button link type="primary" size="small" @click.prevent="deleteRow($index)">Remove</el-button>
       </template>

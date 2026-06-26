@@ -4,7 +4,7 @@
       label="这是默认类型"
       value="123456"
       src="https://img.yzcdn.cn/vant/logo.png"
-      :imgStyle="{ height: '100px' }"
+      :img-style="{ height: '100px' }"
       height="300"
     ></SItem>
     <SItem
@@ -12,7 +12,7 @@
       type="value"
       value="123456"
       src="https://img.yzcdn.cn/vant/logo.png"
-      :imgStyle="{ height: '100px' }"
+      :img-style="{ height: '100px' }"
       height="300"
     ></SItem>
     <SItem
@@ -20,7 +20,7 @@
       type="value"
       value="123456789233412"
       src="https://img.yzcdn.cn/vant/logo.png"
-      :imgStyle="{ height: '100px' }"
+      :img-style="{ height: '100px' }"
       :attrs="{
         formatBytes: true,
         formatThousands: true,
@@ -33,7 +33,7 @@
       type="value"
       value="123456789233412"
       src="https://img.yzcdn.cn/vant/logo.png"
-      :imgStyle="{ height: '100px' }"
+      :img-style="{ height: '100px' }"
       :attrs="{
         formatBytes: true,
         formatThousands: true,

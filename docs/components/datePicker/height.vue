@@ -20,7 +20,7 @@ const dateValue = ref('')
         type="daterange"
         width="520"
         height="40"
-        :boxStyle="{ width: 84 }"
+        :box-style="{ width: 84 }"
       ></s-date-picker>
       <s-date-picker v-model="dateValue" title="日期" type="date" width="280" height="48"></s-date-picker>
     </div>

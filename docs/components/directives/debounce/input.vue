@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-input type="primary" v-model="aa" v-debounce.input="input"></el-input>
-    <s-input type="primary" v-model="aa" v-debounce.input="input"></s-input>
+    <el-input v-model="aa" v-debounce.input="input" type="primary"></el-input>
+    <s-input v-model="aa" v-debounce.input="input" type="primary"></s-input>
   </div>
 </template>
 

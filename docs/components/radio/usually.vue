@@ -2,7 +2,7 @@
   <div>
     <s-radio v-model="value" :options="options" value="id" label="name" />
     <br />
-    <s-radio v-model="value" :options="options" value="id" label="name" showType="button" size="small" />
+    <s-radio v-model="value" :options="options" value="id" label="name" show-type="button" size="small" />
   </div>
 </template>
 <script setup lang="ts">

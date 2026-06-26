@@ -4,7 +4,7 @@
     <s-radio v-model="value" :options="options" :disabled="true" />
 
     <s-title title="选项1,3disabled"></s-title>
-    <s-radio v-model="value" :options="options" :itemDisabled="itemDisabled" />
+    <s-radio v-model="value" :options="options" :item-disabled="itemDisabled" />
   </div>
 </template>
 <script setup lang="ts">

@@ -13,19 +13,19 @@
       v-model="value"
       :options="options"
       size="large"
-      :customLabel="(item) => `${item.label}--${item.value}`"
+      :custom-label="(item) => `${item.label}--${item.value}`"
     ></s-checkbox>
   </div>
   <div>
     <h4>默认插槽(由于默认插槽, 是取的label作为值, 所以无法跟全选联通, 必须将全选隐藏)</h4>
-    <s-checkbox v-model="value2" size="small" :showAll="false">
+    <s-checkbox v-model="value2" size="small" :show-all="false">
       <el-checkbox label="上海" value="上海" />
       <el-checkbox label="北京" value="北京" />
       <el-checkbox label="广州" value="广州" />
       <el-checkbox label="深圳" value="深圳" />
     </s-checkbox>
     <br />
-    <s-checkbox v-model="value2" size="large" :showAll="false">
+    <s-checkbox v-model="value2" size="large" :show-all="false">
       <el-checkbox-button label="上海" value="上海" />
       <el-checkbox-button label="北京" value="北京" />
       <el-checkbox-button label="广州" value="广州" />

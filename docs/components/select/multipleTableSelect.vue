@@ -128,23 +128,23 @@ watch(
   <div>
     {{ selectValue }} ??? {{ selectName }} === {{ selectRow }}
     <s-select
+      ref="selectRef"
       v-model="selectName"
       :title="`多选的 => ${selectValue}`"
       width="100%"
-      ref="selectRef"
       multiple
-      @change="change"
       :collapse-tags="true"
       :collapse-tags-tooltip="true"
+      @change="change"
       @clear="clear"
     >
       <template #empty>
         <s-table
-          :columns="columns"
-          :showIndex="false"
-          :data="data"
           ref="tableRef"
-          :showPage="false"
+          :columns="columns"
+          :show-index="false"
+          :data="data"
+          :show-page="false"
           @selection-change="handleCurrentChange"
         ></s-table>
       </template>

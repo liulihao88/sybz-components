@@ -33,7 +33,7 @@ watch(
 <template>
   <div>
     <div v-for="(v, i) in options" :key="i">
-      <s-select v-model="v.cc" :options="options" :ref="(el) => getSelectRef(el, i)"></s-select>
+      <s-select :ref="(el) => getSelectRef(el, i)" v-model="v.cc" :options="options"></s-select>
     </div>
 
     <s-select v-model="setValue" :options="options"></s-select>

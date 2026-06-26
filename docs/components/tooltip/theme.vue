@@ -14,8 +14,8 @@ function handleClick() {
       content="light 主题也支持默认的溢出检测，点击文字还能触发 click 事件。"
       width="200px"
       placement="bottom"
-      @click="handleClick"
       effect="light"
+      @click="handleClick"
     />
   </div>
 </template>

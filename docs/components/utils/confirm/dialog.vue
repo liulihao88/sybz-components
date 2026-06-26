@@ -24,12 +24,12 @@ const useComponent = () => {
   注意: `confirm` 现在默认会显示取消/确认按钮并带默认 icon。这里的提示仍然是组件内容本身的 icon 渲染问题，如果需要将
   `SWarning` 作为参数传入，建议使用原生的 `ElMessageBox.confirm`
   <el-button type="primary" @click="isShow = true">使用组件</el-button>
-  <s-dialog ref="dialogRef" title="base" v-model="isShow">
+  <s-dialog ref="dialogRef" v-model="isShow" title="base">
     <div class="h-500">
       我是顶层dialog
       <el-button type="primary" @click="isShow2 = true">打开二层的dialog, 并且有confirm确认框</el-button>
     </div>
-    <s-dialog ref="dialogRef" title="dialog" v-model="isShow2">
+    <s-dialog ref="dialogRef" v-model="isShow2" title="dialog">
       <div class="h-400">
         <el-button type="primary" @click="useComponent">打开确认框</el-button>
       </div>

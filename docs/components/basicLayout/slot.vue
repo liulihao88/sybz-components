@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SBasicLayout collapsible :boxStyle="{ border: 'none' }">
+    <SBasicLayout collapsible :box-style="{ border: 'none' }">
       <template #header>
         <s-title title="更多">
           <template #right>

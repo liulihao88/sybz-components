@@ -64,7 +64,7 @@ async function testSubmit() {
 
 <template>
   <div>
-    <s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>
+    <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules"></s-form>
     <el-button type="primary" @click="testSubmit">测试提交</el-button>
 
     <s-input v-model="cc" v-number="'true'" />

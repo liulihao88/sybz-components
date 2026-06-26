@@ -1,5 +1,5 @@
 <template>
-  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" :rules="rules">
+  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :column="1" :rules="rules">
     <template #account-label>
       <div class="cl-blue">account-label</div>
     </template>

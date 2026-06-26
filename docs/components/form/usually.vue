@@ -122,7 +122,7 @@ async function isTest16() {
 
 <template>
   <div>
-    <s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">
+    <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules">
       <template #name-label>这里我是特殊的name的label</template>
       <template #name>
         <s-input v-model="model.name" placeholder="我是name" width="300" />

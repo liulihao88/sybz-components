@@ -28,7 +28,7 @@ const dateSimple = ref('')
         start-placeholder="开始"
         end-placeholder="结束"
         range-separator="///"
-        :boxStyle="{ width: 84 }"
+        :box-style="{ width: 84 }"
       ></s-date-picker>
       <s-date-picker
         v-model="dateSimple"
@@ -36,7 +36,7 @@ const dateSimple = ref('')
         type="datetime"
         value-format="x"
         width="360"
-        :boxStyle="{ width: 84 }"
+        :box-style="{ width: 84 }"
       ></s-date-picker>
     </div>
 

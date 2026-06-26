@@ -1,5 +1,5 @@
 <template>
-  <sItemWrapper gap="20px" :minWidth="'200px'">
+  <sItemWrapper gap="20px" :min-width="'200px'">
     <SItem label="label" value="value"></SItem>
     <SItem label="label" value="value"></SItem>
     <SItem label="label" value="value"></SItem>

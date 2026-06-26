@@ -7,7 +7,7 @@ const isShow = ref(false)
 <template>
   <div>
     <el-button type="primary" @click="isShow = true">显示dialog</el-button>
-    <s-dialog title="基础dialog" v-model="isShow">
+    <s-dialog v-model="isShow" title="基础dialog">
       <template #header>这是header插槽, 默认icon还会保留</template>
       我是内容
 

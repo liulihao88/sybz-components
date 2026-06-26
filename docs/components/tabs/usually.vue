@@ -24,7 +24,7 @@ function tabChange(value) {
 <template>
   <div>
     <h6>去掉底部的border, 去掉选中项的下划线</h6>
-    <s-tabs :options="navList" v-model="navName" @tabChange="tabChange"></s-tabs>
+    <s-tabs v-model="navName" :options="navList" @tab-change="tabChange"></s-tabs>
     <div v-if="navName === 'sys'">系统服务</div>
     <div v-if="navName === 'base'">基础服务</div>
     <div v-if="navName === 'task'">高级定时</div>

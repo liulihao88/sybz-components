@@ -14,7 +14,7 @@ const { proxy } = getCurrentInstance()
       </template>
     </s-title>
     <s-title title="form表单的类型" type="form"></s-title>
-    <s-title title="我是插是插槽title我是插槽title我是插槽title" subTitle="我不服啊" type="simple">
+    <s-title title="我是插是插槽title我是插槽title我是插槽title" sub-title="我不服啊" type="simple">
       我是默认的s
       <template #icon>
         <s-icon name="delete"></s-icon>

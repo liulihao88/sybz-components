@@ -5,12 +5,12 @@ const { proxy } = getCurrentInstance()
 
 <template>
   <div>
-    <s-svg name="icon_file-cloud-line" :customStyle="{ width: '100px', height: '100px', color: 'red' }"></s-svg>
+    <s-svg name="icon_file-cloud-line" :custom-style="{ width: '100px', height: '100px', color: 'red' }"></s-svg>
 
-    <s-svg name="403" :customStyle="{ width: '100px', height: '100px', color: 'red' }"></s-svg>
-    <s-svg name="hot" :customStyle="{ width: '100px', height: '100px', color: 'blue' }"></s-svg>
-    <s-svg name="back" :customStyle="{ width: '100px', height: '100px', color: 'blue' }"></s-svg>
-    <s-svg name="service" :customStyle="{ width: '100px', height: '100px', color: 'blue' }"></s-svg>
-    <s-svg name="dialog3" :customStyle="{ width: '100px', height: '100px', color: 'red' }"></s-svg>
+    <s-svg name="403" :custom-style="{ width: '100px', height: '100px', color: 'red' }"></s-svg>
+    <s-svg name="hot" :custom-style="{ width: '100px', height: '100px', color: 'blue' }"></s-svg>
+    <s-svg name="back" :custom-style="{ width: '100px', height: '100px', color: 'blue' }"></s-svg>
+    <s-svg name="service" :custom-style="{ width: '100px', height: '100px', color: 'blue' }"></s-svg>
+    <s-svg name="dialog3" :custom-style="{ width: '100px', height: '100px', color: 'red' }"></s-svg>
   </div>
 </template>

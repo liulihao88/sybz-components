@@ -30,7 +30,7 @@ function parseSpace(space) {
       :warning="['OVERFLOW', 'CRITICAL', 'SHORT', 'OVERHALF']"
       :primary="['SUFFICIENT']"
       value="OVERFLOW"
-      :customColor="true"
+      :custom-color="true"
     ></s-capacity-progress>
     <br />
     <s-capacity-progress
@@ -40,7 +40,7 @@ function parseSpace(space) {
       :warning="['OVERFLOW', 'CRITICAL', 'SHORT', 'OVERHALF']"
       :primary="['SUFFICIENT']"
       value="SUFFICIENT"
-      :customColor="true"
+      :custom-color="true"
     ></s-capacity-progress>
     <br />
     <s-capacity-progress
@@ -50,7 +50,7 @@ function parseSpace(space) {
       :warning="['OVERFLOW', 'CRITICAL', 'SHORT', 'OVERHALF']"
       :primary="['SUFFICIENT']"
       value="UNKNOWN"
-      :customColor="true"
+      :custom-color="true"
     ></s-capacity-progress>
     <br />
     <s-capacity-progress
@@ -61,7 +61,7 @@ function parseSpace(space) {
       :danger="['BUG']"
       :primary="['SUFFICIENT']"
       value="BUG"
-      :customColor="true"
+      :custom-color="true"
     ></s-capacity-progress>
   </div>
 </template>

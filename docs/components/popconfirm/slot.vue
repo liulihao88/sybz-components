@@ -13,7 +13,7 @@ function cusConfirm() {
 
 <template>
   <div>
-    <s-popconfirm trigger="click" @confirm="confirm" title="" ref="popoverRef">
+    <s-popconfirm ref="popoverRef" trigger="click" title="" @confirm="confirm">
       <template #content>我是slot的content</template>
       <template #footer>
         <el-button size="small" type="primary" @click="cusConfirm">我是slot的footer</el-button>

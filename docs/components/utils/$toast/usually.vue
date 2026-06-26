@@ -160,12 +160,12 @@ const showBigObject = () => {
       <el-button type="primary" @click="$toast('可关闭', { showClose: true })">可关闭</el-button>
       <el-button type="primary" @click="$toast('分组消息合并', { grouping: true })">分组消息合并</el-button>
       <el-button
+        :icon="hot"
         @click="
           $toast('自定义消息图标', {
             icon: hot,
           })
         "
-        :icon="hot"
       >
         自定义图标
       </el-button>

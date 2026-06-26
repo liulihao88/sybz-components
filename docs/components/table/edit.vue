@@ -77,7 +77,7 @@ const submitForm = async () => {
 
 <template>
   <div class="table-box">
-    <el-form :model="form" ref="formRef" size="small">
+    <el-form ref="formRef" :model="form" size="small">
       <s-table :columns="columns" :data="form.data">
         <template #name="{ scope, row }">
           <template v-if="row.isEdit">

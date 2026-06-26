@@ -10,7 +10,7 @@ areaValue.value = ['13', '1305', '130506']
 
 <template>
   <div class="box">
-    <s-choose-area @change="result" v-model="areaValue" width="300"></s-choose-area>
+    <s-choose-area v-model="areaValue" width="300" @change="result"></s-choose-area>
   </div>
 </template>
 

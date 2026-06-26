@@ -15,7 +15,7 @@ const handleClick = () => {
       </template>
       男人
     </el-button>
-    <s-button :time="1000" @click="handleClick" type="primary">
+    <s-button :time="1000" type="primary" @click="handleClick">
       <template #icon>
         <s-icon name="delete"></s-icon>
       </template>
@@ -23,14 +23,14 @@ const handleClick = () => {
     </s-button>
 
     <!-- loading插槽 -->
-    <el-button @click="handleClick" loading>
+    <el-button loading @click="handleClick">
       <template #loading>
         <s-icon name="refresh"></s-icon>
       </template>
       我是loading插槽
     </el-button>
 
-    <s-button @click="handleClick" loading type="primary">
+    <s-button loading type="primary" @click="handleClick">
       <template #loading>
         <s-icon name="refresh"></s-icon>
       </template>

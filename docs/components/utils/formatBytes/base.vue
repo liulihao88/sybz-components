@@ -32,6 +32,6 @@ const options = [
 
 <template>
   <div>
-    <s-descriptions :options="options" :column="1" :showAll="true"></s-descriptions>
+    <s-descriptions :options="options" :column="1" :show-all="true"></s-descriptions>
   </div>
 </template>

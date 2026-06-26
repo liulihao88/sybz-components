@@ -13,7 +13,7 @@ async function replayFocus() {
 
 <template>
   <div class="focus-demo">
-    <el-input v-if="visible" v-focus v-model="inputValue" class="focus-demo__input" placeholder="挂载后自动聚焦" />
+    <el-input v-if="visible" v-model="inputValue" v-focus class="focus-demo__input" placeholder="挂载后自动聚焦" />
     <el-button type="primary" @click="replayFocus">重新触发聚焦</el-button>
   </div>
 </template>

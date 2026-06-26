@@ -21,7 +21,7 @@ const isShow = ref(false)
       title2="12321"
       theme="chenghua"
       type="drawer"
-      confirmText=""
+      confirm-text=""
       :show-confirm="false"
     ></s-dialog>
 
