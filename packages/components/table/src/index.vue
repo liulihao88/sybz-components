@@ -1388,10 +1388,12 @@ defineExpose({
     gap: 8px;
     min-height: 23px;
     line-height: 23px;
+
     .s-icon + .s-icon {
       margin-left: 0;
     }
   }
+
   :deep(.el-table-fixed-column--right .cell.el-tooltip:has(> :only-child)) {
     justify-content: center;
   }
@@ -1429,6 +1431,7 @@ defineExpose({
   :deep(.el-table-fixed-column--right.is-first-column:before) {
     box-shadow: 1px 0 0 0 var(--el-border-color-extra-light);
   }
+
   :deep(.el-button) {
     margin-left: 0 !important;
   }
