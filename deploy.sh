@@ -1,30 +1,44 @@
-# /bin/bash
+#!/usr/bin/env bash
 
 # 确保脚本抛出遇到的错误
-set -e
+set -euo pipefail
 
-# 打包生成静态文件
-pnpm docsbuild
+skip_build=false
+commit_message="更新"
 
-# 进入待发布的 dist/ 目录
-cd docs/.vitepress/dist
+for arg in "$@"; do
+    case "$arg" in
+        -k|--skip-build)
+            skip_build=true
+            ;;
+        *)
+            commit_message="$arg"
+            ;;
+    esac
+done
 
-# 检查是否提供了提交消息
-if [ -z "$1" ]; then
-    # 如果没有提供提交消息，则使用默认消息
-    commit_message="更新"
-else
-    # 使用提供的提交消息
-    commit_message="$1"
+if [ "$skip_build" = false ]; then
+    # 打包生成静态文件
+    pnpm docsbuild
+elif [ ! -f "docs/.vitepress/dist/index.html" ]; then
+    echo "docs/.vitepress/dist/index.html 不存在，无法跳过 docsbuild"
+    exit 1
 fi
 
 # 提交打包静态网站到 github-pages 分支
-git init
+cd docs/.vitepress/dist
+touch .nojekyll
+git init -b main
+git checkout -B main
 git add .
-git commit -m "deploy"
+if ! git diff --cached --quiet; then
+    git commit -m "deploy"
+else
+    echo "文档产物没有变化，继续推送当前 dist HEAD"
+fi
 
 # 部署到 https://<username>.github.io/<repo>
-git push -f https://github.com/liulihao88/sybz-components.git main:github-pages
+git push -f https://github.com/liulihao88/sybz-components.git HEAD:github-pages
 
 # 提交所有代码到github
 cd ../../../
