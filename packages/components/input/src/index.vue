@@ -8,12 +8,13 @@
           :fetch-suggestions="querySearch"
           :placeholder="handlePlaceholder()"
           :clearable="$attrs.clearable !== false"
-          @mouseover.native="inputOnMouseOver($event)"
-          @update:model-value="handleInputUpdate"
           v-bind="mergedAttrs"
+          @mouseover="inputOnMouseOver($event)"
+          @update:model-value="handleInputUpdate"
         >
-          <template v-if="$attrs.title" #prepend>
-            <div :style="{ ...computedBoxStyle }" class="s-input__title">
+          <template v-if="$attrs.title || $slots.prepend" #prepend>
+            <slot v-if="$slots.prepend" name="prepend" />
+            <div v-else :style="{ ...computedBoxStyle }" class="s-input__title">
               {{ $attrs.title }}
             </div>
           </template>
@@ -24,16 +25,17 @@
           :model-value="data"
           :placeholder="handlePlaceholder()"
           class="kd-ipt"
-          :showPassword="showPassword"
+          :show-password="showPassword"
           :class="{ 'kd-textarea': $attrs.type === 'textarea' }"
           v-bind="mergedAttrs"
           :show-word-limit="handleShowWordLimit()"
           @focus="focusHandler($event)"
-          @mouseover.native="inputOnMouseOver($event)"
+          @mouseover="inputOnMouseOver($event)"
           @update:model-value="handleInputUpdate"
         >
-          <template v-if="$attrs.title" #prepend>
-            <div :style="{ ...computedBoxStyle }" class="s-input__title">
+          <template v-if="$attrs.title || $slots.prepend" #prepend>
+            <slot v-if="$slots.prepend" name="prepend" />
+            <div v-else :style="{ ...computedBoxStyle }" class="s-input__title">
               {{ $attrs.title }}
             </div>
           </template>
@@ -41,23 +43,18 @@
           <slot />
 
           <!-- 前缀插槽 -->
-          <template v-if="$slots.prefix" v-slot:prefix>
+          <template v-if="$slots.prefix" #prefix>
             <slot name="prefix" />
           </template>
 
           <!-- 后缀插槽 -->
-          <template v-if="$slots.suffix" v-slot:suffix>
+          <template v-if="$slots.suffix" #suffix>
             <slot name="suffix" />
           </template>
 
           <!-- 后置插槽 -->
-          <template v-if="$slots.append" v-slot:append>
+          <template v-if="$slots.append" #append>
             <slot name="append" />
-          </template>
-
-          <!-- 前置插槽 -->
-          <template v-if="$slots.prepend" v-slot:prepend>
-            <slot name="prepend" />
           </template>
         </el-input>
       </div>
@@ -67,7 +64,7 @@
       class="s-input__icon"
       v-bind="{ name: 'warning', color: 'var(--el-disabled-text-color)', size: '16px', ...mergedProps.iconAttrs }"
       :content="mergedProps.content"
-      :dangerouslyUseHTMLString="mergedProps.dangerouslyUseHTMLString"
+      :dangerously-use-h-t-m-l-string="mergedProps.dangerouslyUseHTMLString"
     />
 
     <s-icon
@@ -83,6 +80,8 @@
 import { ref, computed, useAttrs, watch } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
+import { inputProps } from 'element-plus/es/components/input'
+import type { InputPropsPublic } from 'element-plus/es/components/input'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 const attrs = useAttrs()
 
@@ -91,8 +90,19 @@ defineOptions({
   inheritAttrs: false,
 })
 
+type InputSize = NonNullable<InputPropsPublic['size']>
+
+const normalizeInputSize = (size: unknown): InputSize | undefined => {
+  if (!inputProps.size.validator?.(size)) {
+    return undefined
+  }
+
+  return size ? (size as InputSize) : undefined
+}
+
 const props = defineProps({
   modelValue: {
+    type: null,
     required: true,
   },
   boxStyle: {
@@ -109,6 +119,7 @@ const props = defineProps({
   },
   maxlength: {
     type: [String, Number],
+    default: undefined,
   },
   hideMaxLengthError: {
     type: Boolean,
@@ -166,6 +177,7 @@ const props = defineProps({
   // 适用于el-autocomplete
   options: {
     type: Array,
+    default: undefined,
   },
   content: {
     type: String,
@@ -258,12 +270,12 @@ const computedBoxStyle = computed(() => {
   }
 })
 
-function handlePlaceholder() {
-  let res =
-    attrs.disabled === '' || !!attrs.disabled === true
-      ? mergedProps.value.disPlaceholder
-      : attrs.placeholder || '请输入'
-  return res
+function handlePlaceholder(): string {
+  if (attrs.disabled === '' || attrs.disabled === true) {
+    return mergedProps.value.disPlaceholder
+  }
+
+  return typeof attrs.placeholder === 'string' ? attrs.placeholder : '请输入'
 }
 // 是否显示showWordLimit属性
 function handleShowWordLimit() {
@@ -330,20 +342,23 @@ const createFilter = (queryString: string) => {
 }
 
 const mergedAttrs = computed(() => {
-  let baseAttrs = {
+  const baseAttrs: Record<string, any> & { size?: InputSize } = {
     resize: 'none',
     rows: 2,
     clearable: true,
-    size: mergedProps.value.size || undefined,
+    size: normalizeInputSize(mergedProps.value.size),
   }
   const merged = {
     ...baseAttrs,
-    ...Object.entries(attrs).reduce((obj, [key, value]) => {
-      if (key !== 'class' && key !== 'style' && key !== 'maxlength' && key !== 'max-length') {
-        obj[key] = value
-      }
-      return obj
-    }, {}),
+    ...Object.entries(attrs).reduce(
+      (obj, [key, value]) => {
+        if (key !== 'class' && key !== 'style' && key !== 'maxlength' && key !== 'max-length' && key !== 'size') {
+          obj[key] = value
+        }
+        return obj
+      },
+      {} as Record<string, any>,
+    ),
   }
   return merged
 })
