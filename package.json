@@ -69,8 +69,13 @@
     "unlink:bun": "bun unlink && bun unlink --cwd packages/utils"
   },
   "lint-staged": {
-    "*": "prettier --check --ignore-unknown",
-    "*.{js,jsx,ts,tsx,cjs,mjs,vue}": "eslint --max-warnings=0"
+    "**/*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix --max-warnings=0"
+    ],
+    "**/*.{css,scss,json,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@sybz-components/utils": "^0.0.8",
