@@ -1,10 +1,22 @@
 import { mkdirSync, readdirSync, writeFileSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
+import prettier from 'prettier'
 
 const rootDir = process.cwd()
 const componentsDir = resolve(rootDir, 'packages/components')
 const outputPath = resolve(rootDir, 'packages/components.d.ts')
 const componentTypeDir = resolve(rootDir, 'packages/types/components')
+const declarationPrettierOptions = (await prettier.resolveConfig(outputPath)) ?? {}
+
+const formatDeclaration = (content) =>
+  prettier.format(content.endsWith('\n') ? content : `${content}\n`, {
+    ...declarationPrettierOptions,
+    parser: 'typescript',
+  })
+
+const writeDeclarationFile = async (filePath, content) => {
+  writeFileSync(filePath, await formatDeclaration(content))
+}
 
 const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', 'utils'])
 
@@ -413,9 +425,9 @@ componentEntries.forEach(({ componentName, wrapperPath, instanceTypeName, public
 lines.push('export {}')
 lines.push('')
 
-writeFileSync(outputPath, `${lines.join('\n')}`)
+await writeDeclarationFile(outputPath, lines.join('\n'))
 
-componentEntries.forEach(({ componentName, wrapperFilePath }) => {
+for (const { componentName, wrapperFilePath } of componentEntries) {
   const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
   const wrapperDir = dirname(wrapperFilePath)
 
@@ -479,8 +491,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     wrapperLines.push('')
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'dialog') {
@@ -544,8 +556,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     wrapperLines.push('')
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'input') {
@@ -596,8 +608,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'select') {
@@ -626,8 +638,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'tooltip') {
@@ -656,8 +668,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'checkbox') {
@@ -686,8 +698,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'radio') {
@@ -716,8 +728,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'empty') {
@@ -746,8 +758,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'tabs') {
@@ -776,8 +788,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'tag') {
@@ -806,8 +818,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'row') {
@@ -836,8 +848,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'switch') {
@@ -866,8 +878,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'inputNumber') {
@@ -896,8 +908,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'popover') {
@@ -926,8 +938,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'datePicker') {
@@ -956,8 +968,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'cascader') {
@@ -986,8 +998,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'drawer') {
@@ -1016,8 +1028,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'descriptions') {
@@ -1046,8 +1058,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'progress') {
@@ -1076,8 +1088,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   if (typedComponent?.explicitComponentType === 'form') {
@@ -1106,8 +1118,8 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
     ]
 
     mkdirSync(wrapperDir, { recursive: true })
-    writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-    return
+    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+    continue
   }
 
   const sharedImportPath = toPosixPath(
@@ -1240,5 +1252,5 @@ componentEntries.forEach(({ componentName, wrapperFilePath }) => {
   wrapperLines.push('')
 
   mkdirSync(wrapperDir, { recursive: true })
-  writeFileSync(wrapperFilePath, wrapperLines.join('\n'))
-})
+  await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+}
