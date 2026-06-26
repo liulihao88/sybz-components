@@ -18,11 +18,11 @@
           <span v-if="!mergedProps.hideHeaderIcon" class="s-dialog__header-icon-box">
             <slot name="headerIcon">
               <svg
+                v-if="mergedProps.theme !== 'chenghua'"
                 class="s-dialog__header-icon"
                 viewBox="0 0 1024 1024"
                 aria-hidden="true"
                 focusable="false"
-                v-if="mergedProps.theme !== 'chenghua'"
               >
                 <path
                   fill="currentColor"
@@ -45,13 +45,13 @@
       <div :class="slotBoxClass">
         <slot></slot>
       </div>
-      <template #footer v-if="mergedShowFooter">
+      <template v-if="mergedShowFooter" #footer>
         <slot name="footer">
           <SButton
             v-if="mergedProps.showCancel"
             class="s-dialog__cancel-button"
-            :type="mergedCancelAttrs.type || ''"
-            v-bind="mergedCancelAttrs"
+            v-bind="cancelButtonAttrs"
+            :type="cancelButtonType"
             :theme="dialogButtonTheme"
             @click="handleCancelClose"
           >
@@ -59,13 +59,13 @@
           </SButton>
           <SButton
             v-if="mergedProps.showConfirm"
+            id="kdDialogConfirmBtn"
             class="s-dialog__confirm-button"
             :loading="confirmLoading"
-            id="kdDialogConfirmBtn"
-            :type="mergedConfirmAttrs.type || 'primary'"
-            v-bind="mergedConfirmAttrs"
+            v-bind="confirmButtonAttrs"
+            :type="confirmButtonType"
             :theme="dialogButtonTheme"
-            @click="confirm"
+            @click="confirmHandler"
           >
             {{ mergedProps.confirmText }}
           </SButton>
@@ -143,7 +143,8 @@ const props = defineProps({
     default: true,
   },
   confirm: {
-    type: Function,
+    type: [Function, undefined],
+    default: undefined,
   },
   fillSlot: {
     type: Boolean,
@@ -213,6 +214,22 @@ const mergedCancelAttrs = computed(() => {
   }
 })
 
+const getButtonType = (type: unknown, defaultType = '') => {
+  return typeof type === 'string' && type ? type : defaultType
+}
+
+const cancelButtonAttrs = computed(() => {
+  const { type: _type, ...buttonAttrs } = mergedCancelAttrs.value
+  return buttonAttrs
+})
+const cancelButtonType = computed(() => getButtonType(mergedCancelAttrs.value.type))
+
+const confirmButtonAttrs = computed(() => {
+  const { type: _type, ...buttonAttrs } = mergedConfirmAttrs.value
+  return buttonAttrs
+})
+const confirmButtonType = computed(() => getButtonType(mergedConfirmAttrs.value.type, 'primary'))
+
 const drawerBodyClass = computed(() => {
   return mergedProps.value.type === 'drawer' && mergedProps.value.fillSlot ? 's-dialog__drawer-body--fill' : ''
 })
@@ -241,20 +258,20 @@ watch(
 )
 
 const confirmLoading = ref(false)
-async function confirm() {
+async function confirmHandler() {
   if (mergedProps.value.confirm && getType(mergedProps.value.confirm) === 'function') {
     confirmLoading.value = true
     await mergedProps.value.confirm().finally(() => {
       confirmLoading.value = false
     })
-  } else if (attrs.onConfirm) {
+  } else if (typeof attrs.onConfirm === 'function') {
     attrs.onConfirm()
   } else {
     handleClose()
   }
 }
 function handleCancelClose() {
-  if (attrs.onCancel) {
+  if (typeof attrs.onCancel === 'function') {
     attrs.onCancel()
   } else {
     emits('update:modelValue', false)
@@ -277,13 +294,13 @@ function onkeypress({ code }: KeyboardEvent) {
   }
 }
 
-const parseType = computed(() => {
+const parseType = () => {
   if (mergedProps.value.type === '') {
     return 'el-dialog'
   } else if (mergedProps.value.type === 'drawer') {
     return 'el-drawer'
   }
-})
+}
 
 onMounted(() => {
   document.addEventListener('keypress', onkeypress)
