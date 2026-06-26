@@ -10,7 +10,7 @@ const c = ref(false)
     <el-input v-model="cc" v-copy="cc"> </el-input>
     1233334455
 
-    <div>321321</div>
+    <div>32132331</div>
 
     <el-button type="primary" size="small">测试02</el-button>
     <s-button theme="chenghua" size="small" type="primary" class="cc" v-if="c"></s-button>
