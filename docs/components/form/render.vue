@@ -1,5 +1,5 @@
 <template>
-  <s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1"></s-form>
+  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :column="1"></s-form>
 </template>
 
 <script setup lang="tsx">
@@ -7,7 +7,7 @@ import { ref, reactive } from 'vue'
 import { validate } from '@sybz-components/utils'
 
 const formData = ref({
-  account: '123', // *用户账号
+  account: '1234', // *用户账号
   date: [],
 })
 
