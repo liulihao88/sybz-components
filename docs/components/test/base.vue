@@ -3,6 +3,9 @@ import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 const cc = ref(123)
 const isShow = ref(false)
+const c = ref()
+
+console.log(`7行 docs/components/test/base.vue 1 `, 1)
 </script>
 
 <template>
@@ -16,7 +19,9 @@ const isShow = ref(false)
     <!-- <s-table></s-table> -->
     <s-empty description="暂无数据" width="48" height="48"></s-empty>
 
-    <el-dialog title="33"></el-dialog>
+    <el-dialog title="33">
+      
+    </el-dialog>
     <s-dialog
       v-model="isShow"
       title2="12321"
@@ -26,11 +31,19 @@ const isShow = ref(false)
       :show-confirm="false"
     ></s-dialog>
 
-    <s-tag theme="chenghua">我不服</s-tag>
+    <s-tag theme="chenghua">
+      
+      我不服
+    
+    
+    </s-tag>
 
     <s-flex justify="space-between2的撒"></s-flex>
 
-    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
+    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">
+
+      
+    </SItem>
     <hr />
     <SItem label="label" value="value"></SItem>
     <s-title title="插槽用法" tb="8"></s-title>
