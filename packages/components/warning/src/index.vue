@@ -14,7 +14,7 @@ interface Props {
   theme?: '' | 'chenghua'
   type?: 'info' | 'simple' | 'warning' | 'error'
   width?: string | number
-  dangerouslyUseHTMLString?: boolean
+  dangerouslyUseHtmlString?: boolean
   icon?: boolean
   size?: 'small' | 'default'
   dotted?: boolean
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   theme: '',
   type: 'info',
   width: '100%',
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHtmlString: false,
   icon: true,
   size: 'default',
   dotted: false,
@@ -41,7 +41,7 @@ const mergedProps = useGlobalComponentConfig('warning', props)
 const attrs = useAttrs()
 
 const bindProps = computed(() => {
-  return mergedProps.value.dangerouslyUseHTMLString
+  return mergedProps.value.dangerouslyUseHtmlString
     ? { innerHTML: mergedProps.value.content }
     : { textContent: mergedProps.value.content }
 })

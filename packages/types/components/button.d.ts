@@ -20,7 +20,7 @@ export type SButtonComponent = typeof ElButton & {
       /** 透传给 s-tooltip 的属性 */
       tooltipAttrs?: SybzRecord
       /** 是否允许 tooltip 内容作为 HTML 片段渲染 */
-      dangerouslyUseHTMLString?: boolean
+      dangerouslyUseHtmlString?: boolean
       /** 组件主题 */
       theme?: SybzComponentTheme
       /** chenghua 主题下的按钮变体 */
@@ -38,7 +38,7 @@ export type SButtonComponent = typeof ElButton & {
       | 'time'
       | 'content'
       | 'tooltipAttrs'
-      | 'dangerouslyUseHTMLString'
+      | 'dangerouslyUseHtmlString'
       | 'theme'
       | 'variant'
       | 'size'

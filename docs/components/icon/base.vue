@@ -34,8 +34,8 @@ const iconLists = ref([
   <div>
     <s-icon name="delete"></s-icon>
     <s-icon name="warning" content="警告"></s-icon>
-    <s-icon name="info-filled" content="支持 <code>HTML</code> 提示" :dangerouslyUseHTMLString="true"></s-icon>
-    <s-icon name="refresh" content="刷新" @click="tt" color="var(--yellow)" size="50" placement="right"></s-icon>
+    <s-icon name="info-filled" content="支持 <code>HTML</code> 提示" :dangerously-use-html-string="true"></s-icon>
+    <s-icon name="refresh" content="刷新" color="var(--yellow)" size="50" placement="right" @click="tt"></s-icon>
     <s-icon name="close" class="is-loading"></s-icon>
     <s-icon name="refresh" content="刷新" class="cl-blue"></s-icon>
 

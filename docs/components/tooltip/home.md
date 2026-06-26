@@ -54,7 +54,7 @@ tooltip/other
 
 ### 显示 HTML / VNode 内容
 
-:::demo 基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。属性说明：`width` 示例值：`220px`，类型：string，默认值：`100%`；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`content` 示例值：`rawHtml`，类型：string / VNode，默认值：未设置；`trigger` 示例值：`click`，类型：string / string[]，默认值：Element Plus 默认值；`placement` 示例值：`right`，类型：string，默认值：Element Plus 默认值。本示例展示显示 HTML / VNode 内容配置。dangerouslyUseHTMLString。
+:::demo 基础写法：`<s-tooltip width="220px" :dangerously-use-html-string="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。属性说明：`width` 示例值：`220px`，类型：string，默认值：`100%`；`dangerouslyUseHtmlString` 示例值：`true`，类型：boolean，默认值：`false`；`content` 示例值：`rawHtml`，类型：string / VNode，默认值：未设置；`trigger` 示例值：`click`，类型：string / string[]，默认值：Element Plus 默认值；`placement` 示例值：`right`，类型：string，默认值：Element Plus 默认值。本示例展示显示 HTML / VNode 内容配置。dangerouslyUseHtmlString。
 tooltip/html
 :::
 
@@ -94,7 +94,7 @@ app.use(SybzComponents, {
 | `tooltip.effect`                   | string          | `dark`              | tooltip 主题                        |
 | `tooltip.placement`                | string          | Element Plus 默认值 | tooltip 弹出位置                    |
 | `tooltip.showAfter`                | number          | `0`                 | 延迟显示时间，单位毫秒              |
-| `tooltip.dangerouslyUseHTMLString` | boolean         | `false`             | 是否将 `content` 按 HTML 字符串渲染 |
+| `tooltip.dangerouslyUseHtmlString` | boolean         | `false`             | 是否将 `content` 按 HTML 字符串渲染 |
 
 ### 组件属性
 
@@ -104,7 +104,7 @@ app.use(SybzComponents, {
 |        `lineClamp`         | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`     |
 |         `showSlot`         | 是否渲染默认触发内容区域                   | boolean         | `true`  |
 |          `effect`          | tooltip 主题，会透传给 `el-tooltip`        | string          | `dark`  |
-| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染        | boolean         | `false` |
+| `dangerouslyUseHtmlString` | 是否将 `content` 按 HTML 字符串渲染        | boolean         | `false` |
 
 ### 常用透传属性
 

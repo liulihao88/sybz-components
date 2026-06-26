@@ -8,7 +8,7 @@ export interface SButtonSelfProps {
   /** 透传给 s-tooltip 的属性 */
   tooltipAttrs?: Record<string, any>
   /** 是否允许 tooltip 内容作为 HTML 片段渲染 */
-  dangerouslyUseHTMLString?: boolean
+  dangerouslyUseHtmlString?: boolean
   /** 组件主题 */
   theme?: '' | 'chenghua'
   /** chenghua 主题下的按钮变体 */

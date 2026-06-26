@@ -107,7 +107,7 @@ input/autocomplete
 |       `hideTooltip`        | 是否关闭溢出提示                                  | boolean          | `false` |
 |         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`    | array            | -       |
 |         `content`          | 右侧说明提示文案                                  | string           | `''`    |
-| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染 | boolean          | `false` |
+| `dangerouslyUseHtmlString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染 | boolean          | `false` |
 
 ### 说明
 

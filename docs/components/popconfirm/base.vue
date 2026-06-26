@@ -25,7 +25,7 @@ function isTest65() {
     <br />
 
     <br />
-    <s-popconfirm content="确定删除 123 吗?" @confirm="confirm">
+    <s-popconfirm content="确定删除<code>123</code>吗?" :dangerously-use-html-string="true" @confirm="confirm">
       <el-button type="primary">测试66</el-button>
     </s-popconfirm>
 

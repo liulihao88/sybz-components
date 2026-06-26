@@ -2,7 +2,7 @@
 import { h } from 'vue'
 
 const rawHtml = `
-  <div class="cl-blue fw-600">支持 dangerouslyUseHTMLString</div>
+  <div class="cl-blue fw-600">支持 dangerouslyUseHtmlString</div>
   <div>可以直接传入 HTML 字符串。</div>
   <div>也可以通过 <code>&lt;br&gt;</code> 或块级标签进行换行。</div>
 `
@@ -17,7 +17,7 @@ const vnodeContent = h('div', {}, [
 
 <template>
   <div class="demo-box">
-    <s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>
+    <s-tooltip width="220px" :dangerously-use-html-string="true" :content="rawHtml">HTML 字符串内容</s-tooltip>
 
     <s-tooltip :content="vnodeContent" trigger="click" placement="right">
       <el-button type="primary">VNode 内容</el-button>

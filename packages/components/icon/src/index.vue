@@ -14,7 +14,7 @@ interface IconProps {
   disabled?: boolean
   type?: string
   svgAttrs?: Record<string, any>
-  dangerouslyUseHTMLString?: boolean
+  dangerouslyUseHtmlString?: boolean
 }
 
 const props = withDefaults(defineProps<IconProps>(), {
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   disabled: false,
   type: '', // svg
   svgAttrs: () => ({}),
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('icon', props)
 const attrs = useAttrs()
@@ -39,11 +39,11 @@ const parseColor = computed(() => {
 
 const tooltipAttrs = computed(() => {
   const restAttrs = { ...attrs }
-  delete restAttrs.dangerouslyUseHTMLString
+  delete restAttrs.dangerouslyUseHtmlString
 
   return {
     ...restAttrs,
-    rawContent: mergedProps.value.dangerouslyUseHTMLString || restAttrs.rawContent || restAttrs['raw-content'],
+    rawContent: mergedProps.value.dangerouslyUseHtmlString || restAttrs.rawContent || restAttrs['raw-content'],
   }
 })
 </script>

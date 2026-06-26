@@ -31,13 +31,13 @@ button/hoverAnimation
 ### 全局默认配置
 
 button 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
-文档站已全局设置 `dangerouslyUseHTMLString: true`，所以示例里的 `<code>` 默认会被解析；组件源码默认值仍是 `false`。
+文档站已全局设置 `dangerouslyUseHtmlString: true`，所以示例里的 `<code>` 默认会被解析；组件源码默认值仍是 `false`。
 
 ```js
 app.use(SybzComponents, {
   theme: 'chenghua',
   size: 'small',
-  dangerouslyUseHTMLString: true,
+  dangerouslyUseHtmlString: true,
   button: {},
 })
 ```
@@ -46,7 +46,7 @@ app.use(SybzComponents, {
 | -------------------------- | --------------------------------------- | ------- | ------------------------------------------- |
 | `theme`                    | `'' \| 'chenghua'`                      | `''`    | 公共主题，声明同名 prop 的组件会读取        |
 | `size`                     | `'' \| 'small' \| 'default' \| 'large'` | `''`    | 公共尺寸，button 会作为默认尺寸             |
-| `dangerouslyUseHTMLString` | `true \| false`                         | `false` | 是否将 content 类提示内容按 HTML 字符串渲染 |
+| `dangerouslyUseHtmlString` | `true \| false`                         | `false` | 是否将 content 类提示内容按 HTML 字符串渲染 |
 | `button`                   | object                                  | `{}`    | button 单独默认配置，优先级高于公共配置     |
 
 ### 图标按钮
@@ -57,7 +57,7 @@ button/icon
 
 ### 提示文字
 
-:::demo 基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性说明：`content` 示例值：`我是提示文字`，类型：string，默认值：`''`；`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`tooltipAttrs` 示例值：`{ placement: 'right' }`，类型：Object [去tooltip组件](../tooltip/home)，默认值：`{}`；`text` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示提示内容配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性说明：`content` 示例值：`我是提示文字`，类型：string，默认值：`''`；`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`dangerouslyUseHtmlString` 示例值：`true`，类型：boolean，默认值：`false`；`tooltipAttrs` 示例值：`{ placement: 'right' }`，类型：Object [去tooltip组件](../tooltip/home)，默认值：`{}`；`text` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示提示内容配置，可以直接复制基础写法后按业务替换数据。
 button/content
 :::
 
@@ -88,7 +88,7 @@ button/other
 |         `content`          | tooltip 的提示文字                  | string                                  | `''`    |
 |           `time`           | 防抖时长                            | number(毫秒)                            | `0`     |
 |       `tooltipAttrs`       | s-tooltip 组件的属性                | Object [去tooltip组件](../tooltip/home) | `{}`    |
-| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                 | `false` |
+| `dangerouslyUseHtmlString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                 | `false` |
 |          `theme`           | 主题样式                            | `'' \| 'chenghua'`                      | `''`    |
 |         `variant`          | 成华主题样式变体                    | `'' \| 'outline' \| 'gradient'`         | `''`    |
 |           `size`           | 按钮尺寸                            | `'' \| 'small' \| 'default' \| 'large'` | `''`    |

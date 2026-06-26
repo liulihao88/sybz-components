@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-icon name="delete">...</s-icon>`。属性说明：`name` 示例值：`delete`，类型：string，默认值：未设置；`content` 示例值：`警告`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`color` 示例值：`var(--yellow)`，类型：string，默认值：未设置；`size` 示例值：`50`，类型：string / number，默认值：`16px`；`placement` 示例值：`right`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-icon name="delete">...</s-icon>`。属性说明：`name` 示例值：`delete`，类型：string，默认值：未设置；`content` 示例值：`警告`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`dangerouslyUseHtmlString` 示例值：`true`，类型：boolean，默认值：`false`；`color` 示例值：`var(--yellow)`，类型：string，默认值：未设置；`size` 示例值：`50`，类型：string / number，默认值：`16px`；`placement` 示例值：`right`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 icon/base
 :::
 
@@ -42,7 +42,7 @@ icon/all
 |         `disabled`         | 是否禁用，禁用后不会触发点击                   | boolean         | `false` |
 |           `type`           | 图标类型，传 `svg` 时走 `s-svg` 渲染           | string          | `''`    |
 |         `svgAttrs`         | 透传给 `s-svg` 的属性                          | object          | `{}`    |
-| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染 | boolean         | `false` |
+| `dangerouslyUseHtmlString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染 | boolean         | `false` |
 
 ### 事件
 

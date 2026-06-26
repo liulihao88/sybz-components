@@ -23,6 +23,10 @@ export type SybzComponentTheme = '' | 'chenghua'
 export type SybzComponentSize = '' | 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 
+export interface SHtmlStringProps {
+  dangerouslyUseHtmlString?: boolean
+}
+
 export interface SBuildTimeProps {
   componentsLabel?: string
   utilsLabel?: string
@@ -30,15 +34,13 @@ export interface SBuildTimeProps {
   inline?: boolean
 }
 
-export interface SButtonSelfProps {
+export interface SButtonSelfProps extends SHtmlStringProps {
   /** 点击后进入 loading 状态的毫秒数，0 表示不启用点击节流 loading */
   time?: number
   /** 按钮提示内容，设置后会用 s-tooltip 包裹按钮 */
   content?: string
   /** 透传给 s-tooltip 的属性 */
   tooltipAttrs?: SybzRecord
-  /** 是否允许 tooltip 内容作为 HTML 片段渲染 */
-  dangerouslyUseHTMLString?: boolean
   /** 组件主题 */
   theme?: SybzComponentTheme
   /** chenghua 主题下的按钮变体 */
@@ -121,7 +123,7 @@ export type SDialogPanelProps = Partial<Omit<DialogPropsPublic & DrawerPropsPubl
 
 export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 
-export interface SInputSelfProps {
+export interface SInputSelfProps extends SHtmlStringProps {
   modelValue: any
   boxStyle?: SybzRecord
   width?: string | number
@@ -140,7 +142,6 @@ export interface SInputSelfProps {
   hideTooltip?: boolean
   options?: any[]
   content?: string
-  dangerouslyUseHTMLString?: boolean
 }
 
 export type SInputProps = SInputSelfProps & Partial<Omit<InputPropsPublic, keyof SInputSelfProps>>
@@ -257,14 +258,13 @@ export interface SFunctionSourceCodeProps {
   functionName?: string
 }
 
-export interface SIconProps {
+export interface SIconProps extends SHtmlStringProps {
   name: string
   color?: string
   size?: string | number
   disabled?: boolean
   type?: string
   svgAttrs?: SybzRecord
-  dangerouslyUseHTMLString?: boolean
 }
 
 export interface SItemProps {
@@ -319,7 +319,7 @@ export interface SRadioSelfProps {
 
 export type SRadioProps = SRadioSelfProps & Partial<Omit<RadioGroupPropsPublic, keyof SRadioSelfProps>>
 
-export interface SSelectSelfProps {
+export interface SSelectSelfProps extends SHtmlStringProps {
   modelValue?: any[] | string | number
   value?: string
   label?: string | string[]
@@ -345,7 +345,6 @@ export interface SSelectSelfProps {
   emptyColor?: boolean
   showTooltip?: boolean
   tooltipAttrs?: SybzRecord
-  dangerouslyUseHTMLString?: boolean
 }
 
 export type SSelectProps = SSelectSelfProps & Partial<Omit<SelectPropsPublic, keyof SSelectSelfProps>>
@@ -367,7 +366,7 @@ export interface SProgressSelfProps {
 
 export type SProgressProps = SProgressSelfProps & Partial<Omit<ProgressPropsPublic, keyof SProgressSelfProps>>
 
-export interface SPopoverConfirmSelfProps {
+export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   title?: string
   width?: string | number
   content?: string
@@ -455,12 +454,11 @@ export interface STitleProps {
   theme?: SybzComponentTheme
 }
 
-export interface STooltipSelfProps {
+export interface STooltipSelfProps extends SHtmlStringProps {
   width?: string
   lineClamp?: string | number
   showSlot?: boolean
   effect?: string
-  dangerouslyUseHTMLString?: boolean
 }
 
 export type STooltipProps = STooltipSelfProps & Partial<Omit<ElTooltipPropsPublic, keyof STooltipSelfProps>>
@@ -499,13 +497,12 @@ export type SChooseAreaPanelProps = Partial<Omit<ElCascaderInstance['$props'], '
 export type SWarningType = 'info' | 'simple' | 'warning' | 'error'
 export type SWarningSize = 'small' | 'default'
 
-export interface SWarningProps {
+export interface SWarningProps extends SHtmlStringProps {
   content: string
   title?: string
   theme?: SybzComponentTheme
   type?: SWarningType
   width?: string | number
-  dangerouslyUseHTMLString?: boolean
   icon?: boolean
   size?: SWarningSize
   dotted?: boolean

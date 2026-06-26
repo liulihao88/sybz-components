@@ -26,7 +26,7 @@ export type SInputComponent = typeof ElInput & {
       hideTooltip?: boolean
       options?: any[]
       content?: string
-      dangerouslyUseHTMLString?: boolean
+      dangerouslyUseHtmlString?: boolean
     } & Omit<ElInputInstance['$props'], keyof SInputProps>
     $emit: ElInputInstance['$emit']
     $slots: ElInputInstance['$slots']

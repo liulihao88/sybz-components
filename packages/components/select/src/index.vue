@@ -139,7 +139,7 @@ interface SelectProps {
   emptyColor?: boolean
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
-  dangerouslyUseHTMLString?: boolean
+  dangerouslyUseHtmlString?: boolean
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -174,7 +174,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   emptyColor: false,
   showTooltip: true,
   tooltipAttrs: () => ({}),
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
 const compTitleProps = computed(() => {
@@ -219,7 +219,7 @@ const mergedTooltipAttrs = computed(() => {
     effect: 'dark',
     ...mergedProps.value.tooltipAttrs,
     rawContent:
-      mergedProps.value.dangerouslyUseHTMLString ||
+      mergedProps.value.dangerouslyUseHtmlString ||
       mergedProps.value.tooltipAttrs.rawContent ||
       mergedProps.value.tooltipAttrs['raw-content'],
   }

@@ -15,24 +15,35 @@ function confirm() {
       <span>可选值: '' | chenghua</span>
       <span>默认值: ''</span>
       <span>属性: content</span>
-      <span>支持: 文本</span>
+      <span>支持: 文本 | 安全白名单 HTML</span>
       <span>默认值: ''</span>
-      <span>插槽: content</span>
-      <span>用途: 自定义正文内容</span>
+      <span>属性: dangerouslyUseHtmlString</span>
+      <span>可选值: true | false</span>
+      <span>默认值: false</span>
     </div>
 
     <div class="popconfirm-chenghua-demo__actions">
-      <s-popconfirm theme="chenghua" title="确认删除任务" width="260" trigger="click" @confirm="confirm">
-        <template #content>
-          <div class="s-popconfirm__content">确定删除<code>智慧档案检索</code>吗?</div>
-        </template>
+      <s-popconfirm
+        theme="chenghua"
+        title="确认删除任务"
+        content="确定删除<code>智慧档案检索</code>吗?"
+        :dangerously-use-html-string="true"
+        width="260"
+        trigger="click"
+        @confirm="confirm"
+      >
         <s-button theme="chenghua" type="danger">删除服务</s-button>
       </s-popconfirm>
 
-      <s-popconfirm theme="chenghua" title="发布确认" width="280" trigger="click" @confirm="confirm">
-        <template #content>
-          <div class="s-popconfirm__content">将发布到<code>生产环境</code>, 请确认配置无误。</div>
-        </template>
+      <s-popconfirm
+        theme="chenghua"
+        title="发布确认"
+        content="将发布到<code>生产环境</code>, 请确认配置无误。"
+        :dangerously-use-html-string="true"
+        width="280"
+        trigger="click"
+        @confirm="confirm"
+      >
         <s-button theme="chenghua" type="primary">发布配置</s-button>
       </s-popconfirm>
     </div>

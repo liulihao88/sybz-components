@@ -64,7 +64,7 @@
       class="s-input__icon"
       v-bind="{ name: 'warning', color: 'var(--el-disabled-text-color)', size: '16px', ...mergedProps.iconAttrs }"
       :content="mergedProps.content"
-      :dangerously-use-h-t-m-l-string="mergedProps.dangerouslyUseHTMLString"
+      :dangerously-use-html-string="mergedProps.dangerouslyUseHtmlString"
     />
 
     <s-icon
@@ -119,7 +119,7 @@ interface SInputProps {
   hideTooltip?: boolean
   options?: any[]
   content?: string
-  dangerouslyUseHTMLString?: boolean
+  dangerouslyUseHtmlString?: boolean
 }
 
 const props = withDefaults(defineProps<SInputProps>(), {
@@ -142,7 +142,7 @@ const props = withDefaults(defineProps<SInputProps>(), {
   // 适用于el-autocomplete
   options: undefined,
   content: '',
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('input', props)
 const restaurants = ref([])

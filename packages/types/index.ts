@@ -6,7 +6,7 @@ export interface SybzComponentsInstallOptions {
   useTippy?: boolean
   theme?: string
   size?: string
-  dangerouslyUseHTMLString?: boolean
+  dangerouslyUseHtmlString?: boolean
   button?: SybzComponentInstallConfig
   datePicker?: SybzComponentInstallConfig
   descriptions?: SybzComponentInstallConfig
