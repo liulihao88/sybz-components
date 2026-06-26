@@ -53,7 +53,6 @@ const validSlots = computed(() => {
 
   return normalizeNodes(slots.default?.() || [])
 })
-
 </script>
 
 <!-- <style lang="scss" scoped>
