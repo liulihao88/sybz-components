@@ -6,10 +6,10 @@ docs/vite.config.ts.timestamp-*.mjs
 *.log
 *.local
 *.lock
-pnpm-lock.yaml
 bun.lock
 dist.zip
 pnpm-lock.yaml
+docs/.vitepress/cache/**
 
 # cache
 .cache/

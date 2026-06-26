@@ -69,11 +69,11 @@
     "unlink:bun": "bun unlink && bun unlink --cwd packages/utils"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,vue}": [
+    "**/*.{js,jsx,ts,tsx,vue,mjs,cjs}": [
       "prettier --write",
       "eslint --fix --max-warnings=0"
     ],
-    "**/*.{css,scss,json,md}": [
+    "**/*.{css,scss,json,md,yaml.yml,html}": [
       "prettier --write"
     ]
   },
