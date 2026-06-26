@@ -12,11 +12,6 @@ import { docRoot, projRoot } from './global.ts'
 const localMd = MarkdownIt()
 const utilsSrcDir = resolve(projRoot, 'packages/utils/src')
 
-interface SourceInfo {
-  file: string
-  code: string
-}
-
 const isExported = (node: ts.Node) => node.modifiers?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword)
 
 const getDeclarationNames = (node: ts.Node) => {

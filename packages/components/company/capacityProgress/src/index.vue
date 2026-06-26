@@ -97,14 +97,6 @@ const percentage = computed(() => {
   return percentRes
 })
 
-const parseContent = computed(() => {
-  if (props.options.length > 0 && props.value) {
-    return optionsGetName.value
-  } else {
-    return props.content
-  }
-})
-
 const optionsGetName = ref()
 const changeGetName = (foundItem) => {
   optionsGetName.value = foundItem[props.value]

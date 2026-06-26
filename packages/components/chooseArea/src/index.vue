@@ -16,7 +16,6 @@ const props = defineProps({
     default: '',
   },
 })
-function handleCascaderChange(value) {}
 const optionsProps = {
   label: 'name',
   value: 'code',
@@ -44,7 +43,6 @@ const chooseAreaStyle = computed(() => {
     <el-cascader
       :options="address"
       :style="chooseAreaStyle"
-      @change="handleCascaderChange"
       placeholder="请选择省市区"
       :props="optionsProps"
       v-bind="$attrs"

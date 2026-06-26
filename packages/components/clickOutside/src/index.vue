@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 // https://vueuse.org/core/onClickOutside/
-import { ref, onMounted, onUnmounted, watch, type Ref } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 defineOptions({
@@ -43,7 +43,6 @@ const setupClickOutside = (currentOptions: object) => {
     () => {
       // 现在我们可以安全地访问 ref 和 options
       // 将事件对象和配置一起发出，信息更全
-      console.log(`25 currentOptions`, currentOptions)
       emit('clickOutside', { ...currentOptions })
     },
     currentOptions,

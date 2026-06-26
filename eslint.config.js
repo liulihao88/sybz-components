@@ -23,8 +23,8 @@ export default [
     ],
   },
   js.configs.recommended,
-  ...tsPlugin.configs['flat/recommended'],
-  ...vue.configs['flat/recommended'],
+  tsPlugin.configs['flat/base'],
+  ...vue.configs['flat/base'],
   {
     files: ['**/*.{js,jsx,ts,tsx,cjs,mjs,vue}'],
     languageOptions: {
@@ -37,8 +37,35 @@ export default [
       },
     },
     rules: {
-      'no-console': 'off',
+      'no-console': 'error',
       'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+  {
+    files: ['**/*.{ts,tsx,vue}'],
+    rules: {
+      'no-undef': 'off',
+      'no-redeclare': 'off',
+    },
+  },
+  {
+    files: ['**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+  {
+    files: ['docs/components/**/*.{vue,ts,tsx,js,jsx}', 'docs/shared/**/*.{ts,tsx,js,jsx}', 'packages/utils/scripts/**/*.mjs'],
+    rules: {
+      'no-console': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
     },
   },
@@ -50,6 +77,9 @@ export default [
         parser: tsParser,
         ecmaVersion: 'latest',
         sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
         extraFileExtensions: ['.vue'],
       },
     },

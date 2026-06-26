@@ -156,7 +156,7 @@ function _getBrowserStorage(isSession = false): Storage | null {
 
   try {
     return isSession ? window.sessionStorage : window.localStorage
-  } catch (error) {
+  } catch {
     return null
   }
 }
@@ -171,7 +171,9 @@ function _parseStorageValue<T = any>(value: string | null): T | string | number 
     if (typeof parsed !== 'number') {
       return parsed
     }
-  } catch (error) {}
+  } catch {
+    // Keep the original string when it is not valid JSON.
+  }
 
   return value
 }
@@ -989,7 +991,7 @@ export const copy = (text: string, toastParams: CopyOptions = {}): boolean => {
   document.body.removeChild(textarea)
   if (!toastParams.hideToast) {
     // 确保我们传递给$toast的是一个有效的ToastOptions对象
-    const { hideToast, ...toastOptions } = toastParams
+    const { hideToast: _hideToast, ...toastOptions } = toastParams
     $toast(text + '复制成功', toastOptions)
     return true
   }
@@ -1016,12 +1018,12 @@ export function log(variableStr: string, variable: unknown, otherInfo = ''): voi
       const lineNumber = matchResult[2]
       fileInfo = `vscode://file${JSON.parse(otherInfo)}:${lineNumber}`
     }
-  } catch (error) {
+  } catch {
     fileInfo = otherInfo
   }
 
   if (isRef(variable)) {
-    let unrefVariable = unref(variable)
+    const unrefVariable = unref(variable)
     _log(toRaw(unrefVariable))
   } else {
     _log(variable)
@@ -1082,7 +1084,7 @@ export function random(min = 0, max = 10): number {
  */
 export function toLine(text: string, connect = '-'): string {
   let translateText = text
-    .replace(/([A-Z])/g, (match, p1, offset, origin) => {
+    .replace(/([A-Z])/g, (match, _letter, offset) => {
       if (offset === 0) {
         return `${match.toLocaleLowerCase()}`
       } else {
@@ -1202,7 +1204,7 @@ export async function tryCatch<T>(
     if (isRef(sendLoading)) {
       sendLoading.value = value
     } else if (sendLoading !== undefined && sendLoading !== null) {
-      console.warn('Cannot modify non-ref sendLoading directly!')
+      consola.warn('Cannot modify non-ref sendLoading directly!')
     }
   }
 
@@ -1367,7 +1369,7 @@ function _resolveAppendTarget(appendTo?: ConfirmAppendTarget) {
           : `#${rawSelector}`
 
       return document.querySelector(selector) || appendTo
-    } catch (error) {
+    } catch {
       return appendTo
     }
   }

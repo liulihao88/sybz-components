@@ -128,7 +128,7 @@ const checkType = computed(() => {
   }
   return obj[props.showType] ?? 'el-checkbox'
 })
-function groupChange(item, idx) {
+function groupChange(item) {
   emitValue(item)
 }
 
@@ -146,7 +146,7 @@ function handleLabel(item, index) {
   }
 }
 const filteredAttrs = computed(() => {
-  const { label, ...rest } = attrs
+  const { label: _label, ...rest } = attrs
   return rest
 })
 

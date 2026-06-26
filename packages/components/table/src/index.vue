@@ -21,7 +21,6 @@ import type {
   TableColumnList,
   TableFilter,
   TableModelValue,
-  TablePageChangePayload,
   TableRow,
   TableSelectionType,
   TableScope,

@@ -2,7 +2,7 @@
 /** @使用方式
   时间最小区间是30分钟, 最大区间是2周
 */
-import { ref, getCurrentInstance, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import {
   formatThousands,
   isEmpty,
@@ -11,13 +11,11 @@ import {
   formatBytesConvert,
   getVariable,
 } from '@sybz-components/utils'
-import * as echarts from 'echarts'
 
 defineOptions({
   name: 'SObjectLine',
 })
 
-const { proxy } = getCurrentInstance()
 const chartRef = ref(null)
 const themeVersion = ref(0)
 let themeObserver: MutationObserver | null = null
@@ -32,8 +30,6 @@ const props = defineProps({
     default: () => [],
   },
 })
-
-const emits = defineEmits(['dateChange'])
 
 const getObjectLineColors = () => {
   return {
@@ -127,7 +123,7 @@ const option = computed(() => {
       textStyle: {
         color: themeColors.tooltipText,
       },
-      formatter: (params, ...arr) => {
+      formatter: (params) => {
         let time = data.value[0].timeValue[params[0].dataIndex].time * 1000
         let parseTime = formatTime(time, '{y}-{m}-{d} {h}:{m}')
         let res = ` ${parseTime} <br> `

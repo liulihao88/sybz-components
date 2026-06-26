@@ -208,7 +208,7 @@ export class WS {
         try {
           const res = JSON.parse(data.data)
           callback(res)
-        } catch (err) {
+        } catch {
           callback(data)
         }
       }

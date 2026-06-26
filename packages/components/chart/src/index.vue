@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, onMounted, watch, nextTick, markRaw, onBeforeUnmount, computed } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, watch, markRaw, onBeforeUnmount, computed } from 'vue'
 import * as echarts from 'echarts'
-import { processWidth, debounce } from '@sybz-components/utils'
+import { debounce } from '@sybz-components/utils'
 import { useEcharts } from './useEcharts.ts'
 
 defineOptions({
@@ -48,18 +47,6 @@ const props = withDefaults(
   },
 )
 
-// 设置图表函数
-const setOption = debounce(
-  async (data) => {
-    if (!chart.value) return
-    chart.value.setOption(data, true, true)
-    await nextTick()
-    resizeChart()
-  },
-  300,
-  true,
-)
-
 const initChart = () => {
   chart.value = markRaw(echarts.init(echartDivRef.value, props.theme))
   // setOption(props.option)
@@ -81,7 +68,7 @@ const resizeChart = debounce(
 
 watch(
   [() => props.width, () => props.height],
-  (val) => {
+  () => {
     resizeChart()
   },
   {

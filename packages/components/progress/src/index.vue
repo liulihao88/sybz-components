@@ -70,7 +70,7 @@ const customColorMethod = (percentage: number) => {
 }
 watch(
   () => props.percentage,
-  (val) => {
+  () => {
     if (props.isAnimation) {
       animation()
     }

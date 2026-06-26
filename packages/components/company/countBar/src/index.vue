@@ -23,11 +23,11 @@
       ">5GB": 0
   },
  */
-import { ref, getCurrentInstance, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
 // import VChart from 'vue-echarts'
 const VChart = defineAsyncComponent(() => import('vue-echarts')) // // 因为直接引入vue-echarts, 使用vitepress打包回报错, 在使用 VitePress 打包时，如果引入的 vue-echarts 中包含对 document 的引用，可能会导致 document is not defined 的错误。这是因为 VitePress 使用了服务器端渲染（SSR），而 document 是浏览器环境中的对象，在服务器端环境中不存在。以下是几种可能的解决
 import '@/utils/local/useEcharts'
-import { clone, formatBytes, formatBytesConvert, getVariable, isEmpty, formatThousands } from '@sybz-components/utils'
+import { clone, formatBytes, getVariable, isEmpty, formatThousands } from '@sybz-components/utils'
 
 defineOptions({
   name: 'SCountBar',
@@ -161,32 +161,6 @@ let initOption = {
   ],
 }
 
-function roundUpToNearestKB(bytes) {
-  const regex = /^(\d+(\.\d+)?)\s*([a-zA-Z]+)?$/
-  const match = bytes.match(regex)
-  const number = parseFloat(match[1])
-  const unit = match[3] ? match[3].toUpperCase() : null
-
-  // 向上取整到最近的1000字节的倍数
-  const roundedSizeInBytes = Math.ceil(number / 1000) * 1000
-
-  // 转换回KB
-
-  return roundedSizeInBytes + unit
-}
-
-function formatNumberWithChineseAbbreviation(num) {
-  if (num >= 1e12) {
-    return formatThousands(num / 1e12) + '兆'
-  } else if (num >= 1e8) {
-    return formatThousands(num / 1e8) + '亿'
-  } else if (num >= 1e4) {
-    return formatThousands(num / 1e4) + '万'
-  } else {
-    return formatThousands(num)
-  }
-}
-
 watch(
   () => props.data,
   (val) => {
@@ -206,7 +180,7 @@ watch(
       }
     })
 
-    let filterEmptyData = parseData.filter((v) => {
+    let filterEmptyData = parseData.filter(() => {
       // return v.value
       return true
     })

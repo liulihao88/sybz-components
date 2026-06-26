@@ -135,7 +135,7 @@ const textStyle = computed(() => {
 // 检查 content 是否为 VNode
 const isVNodeContent = computed(() => {
   const content = attrs.content
-  return content && typeof content === 'object' && content.hasOwnProperty('type')
+  return content && typeof content === 'object' && Object.prototype.hasOwnProperty.call(content, 'type')
 })
 
 // 创建一个动态组件来渲染 VNode

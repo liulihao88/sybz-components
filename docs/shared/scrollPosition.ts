@@ -45,7 +45,9 @@ const readScrollSnapshot = (key = getStorageKey()) => {
 const saveScrollSnapshot = (key = getStorageKey()) => {
   try {
     window.sessionStorage.setItem(key, JSON.stringify(getScrollSnapshot()))
-  } catch {}
+  } catch {
+    // sessionStorage can be unavailable in private mode or blocked environments.
+  }
 }
 
 const restoreScrollSnapshot = (key = getStorageKey()) => {

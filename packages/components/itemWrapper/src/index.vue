@@ -54,18 +54,6 @@ const validSlots = computed(() => {
   return normalizeNodes(slots.default?.() || [])
 })
 
-// 根据columns分组插槽内容
-const slotRows = computed(() => {
-  if (!props.columns) {
-    return [validSlots.value]
-  }
-
-  const result = []
-  for (let i = 0; i < validSlots.value.length; i += props.columns) {
-    result.push(validSlots.value.slice(i, i + props.columns))
-  }
-  return result
-})
 </script>
 
 <!-- <style lang="scss" scoped>

@@ -31,7 +31,7 @@ const beforeChangeHandler = async () => {
     loading.value = true
     await mergedProps.value.beforeChange() // 等待 Promise 完成
     return true // 允许切换
-  } catch (err) {
+  } catch {
     return false // 阻止切换
   } finally {
     loading.value = false // 无论成功失败，都关闭 loading

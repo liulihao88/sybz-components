@@ -64,14 +64,12 @@ watch(
   },
 )
 
-function removeitem(index, item) {
+function removeitem(index) {
   labelarr.value.splice(index, 1)
   emit('update:modelValue', labelarr.value)
 }
 // input回车加入labelarr中
 function addlabel() {
-  console.log(`props.regexp`, props.regexp)
-  console.log(`currentval.value`, currentval.value)
   if (props.regexp) {
     if (!props.regexp.test(currentval.value)) {
       return $toast(props.message, 'e')

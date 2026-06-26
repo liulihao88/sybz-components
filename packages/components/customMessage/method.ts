@@ -30,8 +30,6 @@ export const createMessage = (props: CreateMessageProps) => {
     onDestory: destory,
   }
   const vnode = h(MessageConstructor, newProps)
-  console.log(`vnode`, vnode)
-  console.log(`container`, container)
   render(vnode, container)
 
   //非空断言操作符
@@ -44,7 +42,6 @@ export const createMessage = (props: CreateMessageProps) => {
     props: newProps,
     destory: manualDestroy,
   }
-  console.log(`instance`, instance)
   instances.push(instance)
   return instance
 }
@@ -54,7 +51,6 @@ export const getLastInstance = () => {
 }
 export const getLastBottomOffset = (id: string) => {
   const idx = instances.findIndex((instance) => instance.id === id)
-  console.log('idx', id, idx, instances.length)
   if (idx <= 0) {
     return 0
   } else {

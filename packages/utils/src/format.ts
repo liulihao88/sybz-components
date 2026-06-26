@@ -1,5 +1,6 @@
 import { getType } from './base'
 import { isNumber, isStringNumber } from './is'
+import { consola } from 'consola'
 
 /**
  * `formatBytes` 的配置项。
@@ -197,14 +198,14 @@ export function formatBytesConvert(
 
   const match = bytes.match(bytesRegex)
   if (!match) {
-    console.warn("Invalid bytes format. Please provide a valid bytes string, like '100GB'.")
+    consola.warn("Invalid bytes format. Please provide a valid bytes string, like '100GB'.")
     return
   }
 
   const size = parseFloat(match[1])
   const unit = match[2].toUpperCase() as keyof typeof units
   if (!Object.prototype.hasOwnProperty.call(units, unit)) {
-    console.warn(
+    consola.warn(
       "Invalid bytes unit. Please provide a valid unit, like 'B', 'BYTE', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', or 'YB'.",
     )
     return

@@ -1,5 +1,4 @@
-import { ElMessage } from 'element-plus'
-import { clone, isEmpty, throttle, debounce, $toast } from '@sybz-components/utils'
+import { isEmpty, throttle, debounce } from '@sybz-components/utils'
 import CusLoading from './cusLoading/cusLoading.js'
 import CusEmpty from './cusEmpty/cusEmpty.js'
 import Copy from './copy/index.ts'
@@ -49,12 +48,8 @@ export default function (app) {
     mounted(el) {
       const inputEl = el.nodeName === 'INPUT' ? el : el.querySelector('input')
       if (!inputEl) {
-        console.error('v-number directive requires an input element')
-        return
+        throw new TypeError('v-number directive requires an input element')
       }
-
-      // 设置初始值
-      inputEl.value = inputEl.value
 
       // 监听 input 事件
       inputEl.addEventListener('input', handleInput)
@@ -62,8 +57,7 @@ export default function (app) {
     updated(el) {
       const inputEl = el.nodeName === 'INPUT' ? el : el.querySelector('input')
       if (!inputEl) {
-        console.error('v-number directive requires an input element')
-        return
+        throw new TypeError('v-number directive requires an input element')
       }
 
       // 获取 min 和 max 的值
@@ -122,8 +116,7 @@ export default function (app) {
   app.directive('throttle', {
     mounted(el, binding) {
       if (typeof binding.value !== 'function') {
-        console.error('Directive value must be a function')
-        return
+        throw new TypeError('Directive value must be a function')
       }
       let delay = 1000
       for (let key in binding.modifiers) {
@@ -154,7 +147,7 @@ export default function (app) {
         el.addEventListener(key, throttledFn)
       }
     },
-    unmounted(el, binding) {
+    unmounted(el) {
       if (!el._ThrottleDirective) {
         return
       }
@@ -174,9 +167,7 @@ export default function (app) {
   app.directive('debounce', {
     mounted(el, binding) {
       if (typeof binding.value !== 'function') {
-        console.error('Directive value must be a function')
-
-        return
+        throw new TypeError('Directive value must be a function')
       }
       let delay = 1000
       for (let key in binding.modifiers) {
@@ -207,7 +198,7 @@ export default function (app) {
         el.addEventListener(key, debouncedFn)
       }
     },
-    unmounted(el, binding) {
+    unmounted(el) {
       if (!el._DebounceDirective) {
         return
       }

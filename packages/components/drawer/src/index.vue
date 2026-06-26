@@ -7,7 +7,7 @@
   :closeOnClickModal="true"
 ></s-drawer>
 */
-import { ref, computed, useAttrs } from 'vue'
+import { computed, useAttrs } from 'vue'
 
 defineOptions({
   name: 'SDrawer',

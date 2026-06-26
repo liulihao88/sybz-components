@@ -2,7 +2,7 @@
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 const data = ref([
-  { name: '<1023', value: 12345, value2: 9999999999999999999994513 },
+  { name: '<1023', value: 12345, value2: Number.MAX_SAFE_INTEGER },
   { name: '<2M', value: 3, value2: 444444 },
 ])
 

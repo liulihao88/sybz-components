@@ -49,7 +49,7 @@ const props = withDefaults(
 )
 const mergedProps = useGlobalComponentConfig('empty', props)
 const emptyBindProps = computed(() => {
-  const { theme, ...rest } = mergedProps.value
+  const { theme: _theme, ...rest } = mergedProps.value
   return rest
 })
 const emptyClass = computed(() => ({

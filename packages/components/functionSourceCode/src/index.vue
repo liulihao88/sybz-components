@@ -50,7 +50,6 @@ const loadUtils = (functionName: string) => {
 
     sourceCode.value = code || `// 未能找到函数 "${functionName}" 的源码`
   } catch (error) {
-    console.error(`加载函数源码失败: ${functionName}`, error)
     if (functionName === props.functionName) {
       sourceCode.value = `// 加载函数源码时出错: ${error}`
     }

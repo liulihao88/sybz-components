@@ -7,7 +7,6 @@ export default defineComponent({
     item: Object,
   },
   render(ctx) {
-    console.log(`47 ctx`, ctx)
     return ctx.render(ctx?.item)
   },
 })

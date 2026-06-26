@@ -23,11 +23,11 @@
       ">5GB": 0
   },
  */
-import { ref, getCurrentInstance, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
 // import VChart from 'vue-echarts'
 const VChart = defineAsyncComponent(() => import('vue-echarts')) // // 因为直接引入vue-echarts, 使用vitepress打包回报错, 在使用 VitePress 打包时，如果引入的 vue-echarts 中包含对 document 的引用，可能会导致 document is not defined 的错误。这是因为 VitePress 使用了服务器端渲染（SSR），而 document 是浏览器环境中的对象，在服务器端环境中不存在。以下是几种可能的解决
 import '@/utils/local/useEcharts'
-import { clone, formatBytes, formatBytesConvert, formatThousands, getVariable } from '@sybz-components/utils'
+import { clone, formatBytes, formatThousands, getVariable } from '@sybz-components/utils'
 
 defineOptions({
   name: 'SCountBarOld',
@@ -164,37 +164,6 @@ let initOption = {
     },
   ],
 }
-function formatter(params) {
-  let res = `${params.name} \n <span style="color: var(--blue)">${params.value}</span>`
-  let { value, name } = params.data
-  return `${name}: ${value}\n 占比: (${params.percent}%)`
-}
-
-// 计算y轴的最大值
-function _parseYAxisMax(yData) {
-  let getMax = Math.max(...yData)
-  let toBytes = formatBytes(getMax)
-  console.log(`57 toBytes`, toBytes)
-  let toUpperBytes = roundUpToNearestKB(toBytes)
-  let max = formatBytesConvert(toUpperBytes)
-  console.log(`48 max`, max)
-  initOption.yAxis[1].max = max
-}
-
-function roundUpToNearestKB(bytes) {
-  const regex = /^(\d+(\.\d+)?)\s*([a-zA-Z]+)?$/
-  const match = bytes.match(regex)
-  const number = parseFloat(match[1])
-  const unit = match[3] ? match[3].toUpperCase() : null
-
-  // 向上取整到最近的1000字节的倍数
-  const roundedSizeInBytes = Math.ceil(number / 1000) * 1000
-
-  // 转换回KB
-
-  return roundedSizeInBytes + unit
-}
-
 function formatNumberWithChineseAbbreviation(num) {
   if (num >= 1e12) {
     return formatThousands(num / 1e12) + '兆'

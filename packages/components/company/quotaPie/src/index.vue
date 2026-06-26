@@ -32,7 +32,6 @@ const containerSize = ref({ width: 0, height: 0 })
 const isEmpty = ref(false)
 const options = ref()
 
-const seriesData = ref([])
 const usedNum = ref(0)
 const totalNum = ref(0)
 const usedPercent = ref('0%')

@@ -33,7 +33,7 @@ const allComponents = {
 }
 
 // 1. 批量导出所有组件（作为命名导出）
-export const components = Object.entries(allComponents).reduce((acc, [key, component]) => {
+export const components = Object.values(allComponents).reduce((acc, component) => {
   const name = component.name || 's' + component.__name
   acc[name] = component
   return acc
