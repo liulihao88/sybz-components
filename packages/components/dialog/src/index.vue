@@ -47,7 +47,7 @@
       </div>
       <template v-if="mergedShowFooter" #footer>
         <slot name="footer">
-          <SButton
+          <s-button
             v-if="mergedProps.showCancel"
             class="s-dialog__cancel-button"
             v-bind="cancelButtonAttrs"
@@ -56,8 +56,8 @@
             @click="handleCancelClose"
           >
             {{ mergedProps.cancelText }}
-          </SButton>
-          <SButton
+          </s-button>
+          <s-button
             v-if="mergedProps.showConfirm"
             id="kdDialogConfirmBtn"
             class="s-dialog__confirm-button"
@@ -68,7 +68,7 @@
             @click="confirmHandler"
           >
             {{ mergedProps.confirmText }}
-          </SButton>
+          </s-button>
         </slot>
       </template>
     </component>
@@ -77,6 +77,7 @@
 
 <script setup lang="ts">
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
+import type { PropType } from 'vue'
 import { getType, processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
@@ -84,6 +85,9 @@ import SButton from '@/components/button/src/index.vue'
 defineOptions({
   name: 'SDialog',
 })
+
+type DialogButtonAttrs = Partial<InstanceType<typeof SButton>['$props']> & Record<string, any>
+
 const attrs = useAttrs()
 const emits = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -130,11 +134,11 @@ const props = defineProps({
     default: true,
   },
   confirmAttrs: {
-    type: Object,
+    type: Object as PropType<DialogButtonAttrs>,
     default: () => ({}),
   },
   cancelAttrs: {
-    type: Object,
+    type: Object as PropType<DialogButtonAttrs>,
     default: () => ({}),
   },
   enableConfirm: {
@@ -200,14 +204,14 @@ const dialogButtonTheme = computed(() => {
   return mergedProps.value.theme === 'chenghua' ? 'chenghua' : ''
 })
 
-const mergedConfirmAttrs = computed(() => {
+const mergedConfirmAttrs = computed<DialogButtonAttrs>(() => {
   return {
     icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-check',
     ...mergedProps.value.confirmAttrs,
   }
 })
 
-const mergedCancelAttrs = computed(() => {
+const mergedCancelAttrs = computed<DialogButtonAttrs>(() => {
   return {
     icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-close',
     ...mergedProps.value.cancelAttrs,
@@ -229,6 +233,7 @@ const confirmButtonAttrs = computed(() => {
   return buttonAttrs
 })
 const confirmButtonType = computed(() => getButtonType(mergedConfirmAttrs.value.type, 'primary'))
+const confirmButtonLoading = computed(() => mergedConfirmAttrs.value.loading === true)
 
 const drawerBodyClass = computed(() => {
   return mergedProps.value.type === 'drawer' && mergedProps.value.fillSlot ? 's-dialog__drawer-body--fill' : ''
@@ -284,12 +289,7 @@ function handleClose() {
 
 // 只有当弹框的时候, 且按的是回车键, 才走confirm
 function onkeypress({ code }: KeyboardEvent) {
-  if (
-    attrs.modelValue === true &&
-    code === 'Enter' &&
-    mergedProps.value.enableConfirm &&
-    mergedProps.value.confirmAttrs?.loading !== true
-  ) {
+  if (attrs.modelValue === true && code === 'Enter' && mergedProps.value.enableConfirm && !confirmButtonLoading.value) {
     confirm()
   }
 }
