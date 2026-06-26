@@ -2,7 +2,7 @@
 import { ref, getCurrentInstance } from 'vue'
 const cc = ref(123)
 const isShow = ref(false)
-const c = ref()
+const c = ref(false)
 </script>
 
 <template>
@@ -10,10 +10,10 @@ const c = ref()
     <el-input v-model="cc" v-copy="cc"> </el-input>
     1233334455
 
-    <div></div>
+    <div>321321</div>
 
     <el-button type="primary" size="small">测试02</el-button>
-    <s-button theme="chenghua" size="small" type="primary"></s-button>
+    <s-button theme="chenghua" size="small" type="primary" class="cc" v-if="c"></s-button>
     <!-- <s-table></s-table> -->
     <s-empty description="暂无数据" width="48" height="48"> </s-empty>
 
@@ -22,9 +22,11 @@ const c = ref()
       v-model="isShow"
       title2="12321"
       theme="chenghua"
-      type="drawer2"
+      type="drawer"
       confirmText=""
       :show-confirm="false"
+      class="cc"
+      v-if="c"
     ></s-dialog>
 
     <s-tag theme="chenghua"> 我不服 </s-tag>
