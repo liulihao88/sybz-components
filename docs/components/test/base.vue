@@ -1,22 +1,13 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
 const cc = ref(123)
 const isShow = ref(false)
 const c = ref()
-
-console.log(`7行 docs/components/test/base.vue 1 `, 1)
-
-
 </script>
 
 <template>
   <div>
-    <el-input v-model="cc" v-copy="cc">
-
-
-      
-    </el-input>
+    <el-input v-model="cc" v-copy="cc"> </el-input>
     1233334455
     <div></div>
 
@@ -43,13 +34,13 @@ console.log(`7行 docs/components/test/base.vue 1 `, 1)
     <hr />
     <SItem label="label" value="value"></SItem>
     <s-title title="插槽用法" tb="8"></s-title>
-    <s-item class="abc">
+    <!-- <s-item class="abc">
       <template #img>
         <img src="https://img.yzcdn.cn/vant/logo.png" />
       </template>
       <template #label>label</template>
       <template #value>value</template>
-    </s-item>
+    </s-item> -->
 
     <s-date-picker></s-date-picker>
 
