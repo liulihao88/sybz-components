@@ -3,63 +3,84 @@ defineOptions({
   name: 'STag',
 })
 
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { getType, isEmpty } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
-const props = defineProps({
-  options: {
-    type: Array,
-    default: () => [],
-  },
-  value: {
-    type: [String, Number],
-  },
-  width: {
-    type: [String, Number],
-  },
-  height: {
-    type: [String, Number],
-  },
-  primary: {
-    type: [String, Number, Boolean, Array],
-  },
-  warning: {
-    type: [String, Number, Boolean, Array],
-  },
-  danger: {
-    type: [String, Number, Boolean, Array],
-  },
-  info: {
-    type: [String, Number, Boolean, Array],
-  },
+type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
+type TagTheme = '' | 'chenghua'
+type TagSize = '' | 'small' | 'default' | 'large'
+type TagRule = string | number | boolean | any[]
 
-  other: {
-    type: String,
-    default: 'primary',
-  },
-  type: {
-    type: String,
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
-  size: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'small', 'default', 'large'].includes(value),
-  },
-  config: {
-    type: Object,
-    default: () => ({}),
-  },
+interface TagProps {
+  options?: Record<string, any>[]
+  value?: string | number
+  width?: string | number
+  height?: string | number
+  primary?: TagRule
+  warning?: TagRule
+  danger?: TagRule
+  info?: TagRule
+  other?: TagType
+  type?: TagType
+  theme?: TagTheme
+  size?: TagSize
+  config?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<TagProps>(), {
+  options: () => [],
+  value: '',
+  width: '',
+  height: '',
+  primary: false,
+  warning: false,
+  danger: false,
+  info: false,
+  other: 'primary',
+  type: '',
+  theme: '',
+  size: '',
+  config: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('tag', props)
 
 const hasValue = computed(() => !isEmpty(mergedProps.value.value, true))
 const hasOptions = computed(() => mergedProps.value.options.length > 0)
+
+const optionMatch = computed(() => {
+  const { options, config, value } = mergedProps.value
+
+  if (!hasOptions.value || !hasValue.value) {
+    return null
+  }
+
+  if (!isEmpty(config)) {
+    const foundItem = options.find((obj) => value === obj[config.value || 'value'])
+    return foundItem
+      ? {
+          label: foundItem[config.label || 'label'],
+        }
+      : null
+  }
+
+  for (const item of options) {
+    for (const [type, items] of Object.entries(item)) {
+      if (!Array.isArray(items)) continue
+      const foundItem = items.find((obj) => Object.prototype.hasOwnProperty.call(obj, value))
+      if (foundItem) {
+        return {
+          type,
+          label: foundItem[value],
+        }
+      }
+    }
+  }
+
+  return null
+})
+
+const optionsGetName = computed(() => optionMatch.value?.label)
 
 const parseContent = computed(() => {
   if (hasOptions.value && hasValue.value && !isEmpty(optionsGetName.value, true)) {
@@ -68,12 +89,6 @@ const parseContent = computed(() => {
     return mergedProps.value.value
   }
 })
-
-const optionsGetName = ref()
-
-const changeGetName = (foundItem, key = mergedProps.value.value) => {
-  optionsGetName.value = foundItem?.[key]
-}
 
 const getMatchType = (types, type) => {
   const normalizedTypes = Array.isArray(types) ? types : [types]
@@ -89,14 +104,11 @@ const getMatchType = (types, type) => {
 }
 
 const parseType = computed(() => {
-  const { primary, warning, info, danger, other, type, options, config, value } = mergedProps.value
-  optionsGetName.value = undefined
+  const { primary, warning, info, danger, other, type, config } = mergedProps.value
 
   if (hasOptions.value && hasValue.value) {
     if (!isEmpty(config)) {
-      const foundItem = options.find((obj) => value === obj[config.value || 'value'])
-      if (foundItem) {
-        optionsGetName.value = foundItem[config.label || 'label']
+      if (optionMatch.value) {
         return (
           getMatchType(primary, 'primary') ||
           getMatchType(info, 'info') ||
@@ -107,17 +119,7 @@ const parseType = computed(() => {
       }
       return other
     } else {
-      for (const item of options) {
-        for (const [type, items] of Object.entries(item)) {
-          if (!Array.isArray(items)) continue
-          const foundItem = items.find((obj) => Object.prototype.hasOwnProperty.call(obj, value))
-          if (foundItem) {
-            changeGetName(foundItem, value)
-            return type
-          }
-        }
-      }
-      return other
+      return optionMatch.value?.type || other
     }
   }
 
