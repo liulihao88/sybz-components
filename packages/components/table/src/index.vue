@@ -12,6 +12,8 @@ import SIcon from '@/components/icon/src/index.vue'
 import { getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
+console.log(`111`, 111)
+
 import type {
   STableButton,
   STableColumn,
@@ -1271,7 +1273,7 @@ defineExpose({
             class="tab_pagination"
             background
             :current-page="sPageNumber"
-            :page-size="sPageSize"
+            :pageSize="sPageSize"
             :page-sizes="mergedProps.pageSizes"
             layout="prev, pager, next, jumper, sizes"
             :total="tableTotal"

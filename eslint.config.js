@@ -65,8 +65,8 @@ export default [
   {
     files: ['docs/components/**/*.{vue,ts,tsx,js,jsx}', 'docs/shared/**/*.{ts,tsx,js,jsx}', 'packages/utils/scripts/**/*.mjs'],
     rules: {
-      'no-console': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
+      // 'no-console': 'off',
+      // '@typescript-eslint/no-unused-vars': 'off',
     },
   },
   {
