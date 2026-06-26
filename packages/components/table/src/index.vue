@@ -1273,7 +1273,7 @@ defineExpose({
             class="tab_pagination"
             background
             :current-page="sPageNumber"
-            :pageSize="sPageSize"
+            :page-size="sPageSize"
             :page-sizes="mergedProps.pageSizes"
             layout="prev, pager, next, jumper, sizes"
             :total="tableTotal"

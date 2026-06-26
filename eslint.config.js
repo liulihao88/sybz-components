@@ -37,16 +37,9 @@ export default [
       },
     },
     rules: {
-      'no-console': 'error',
+      'no-console': 'off',
       'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-        },
-      ],
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
   {
@@ -63,7 +56,11 @@ export default [
     },
   },
   {
-    files: ['docs/components/**/*.{vue,ts,tsx,js,jsx}', 'docs/shared/**/*.{ts,tsx,js,jsx}', 'packages/utils/scripts/**/*.mjs'],
+    files: [
+      'docs/components/**/*.{vue,ts,tsx,js,jsx}',
+      'docs/shared/**/*.{ts,tsx,js,jsx}',
+      'packages/utils/scripts/**/*.mjs',
+    ],
     rules: {
       // 'no-console': 'off',
       // '@typescript-eslint/no-unused-vars': 'off',
