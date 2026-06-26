@@ -1,7 +1,7 @@
 <template>
   <el-descriptions
     v-bind="{ border: true, ...$attrs }"
-    :column="column"
+    :column="descriptionColumn"
     class="s-descriptions"
     :class="descriptionsClass"
   >
@@ -66,10 +66,10 @@ const attrs = useAttrs()
 
 type DescriptionsProps = {
   options: ItemOptions[]
-  theme: '' | 'chenghua'
-  column: number
-  labelWidth: any
-  showAll: boolean
+  theme?: '' | 'chenghua'
+  column?: number
+  labelWidth?: any
+  showAll?: boolean
 }
 
 type ItemOptions = {
@@ -92,25 +92,6 @@ const props = withDefaults(defineProps<DescriptionsProps>(), {
   showAll: false,
 })
 const mergedProps = useGlobalComponentConfig('descriptions', props)
-
-// const props = defineProps({
-//   options: {
-//     type: Array as () => Options[],
-//     required: true,
-//   },
-//   column: {
-//     type: Number,
-//     default: 3,
-//   },
-//   labelWidth: {
-//     type: String,
-//     default: 'auto',
-//   },
-//   showAll: {
-//     type: Boolean,
-//     default: false,
-//   },
-// })
 
 const parseValue = (item: ItemOptions) => {
   if (item.filter) {
@@ -165,9 +146,11 @@ const labelWidth2 = computed(() => {
   if (mergedProps.value.labelWidth && mergedProps.value.labelWidth !== 'auto') {
     return processWidth(mergedProps.value.labelWidth, true)
   }
+
+  return 'auto'
 })
 
-const column = computed(() => mergedProps.value.column)
+const descriptionColumn = computed(() => mergedProps.value.column)
 
 const parseContent = (value: any) => {
   if (typeof value === 'function') {
@@ -225,7 +208,7 @@ onUnmounted(() => {
   }
 
   :deep(.el-descriptions__content) {
-    width: calc((100% - v-bind(labelWidth2) * v-bind(column)) / v-bind(column));
+    width: calc((100% - v-bind(labelWidth2) * v-bind(descriptionColumn)) / v-bind(descriptionColumn));
     min-width: 100px;
   }
 

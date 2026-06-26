@@ -1,14 +1,14 @@
 <template>
   <el-tooltip class="s-tooltip-box" :disabled="handleDisabled" :effect="mergedProps.effect" v-bind="mergedTooltipAttrs">
     <span
-      @click="contentClick"
       v-if="mergedProps.showSlot"
       ref="textRef"
       class="s-tooltip-box__text"
       :class="{ 's-tooltip-box__text--multiline': isMultiLineClamp }"
       :style="textStyle"
-      @mouseover="onMouseOver"
       v-bind="triggerAttrs"
+      @click="contentClick"
+      @mouseover="onMouseOver"
     >
       <span class="s-tooltip-box__content">
         <slot>
@@ -16,11 +16,11 @@
         </slot>
       </span>
     </span>
-    <template v-if="$slots.content" v-slot:content>
+    <template v-if="$slots.content" #content>
       <slot name="content"></slot>
     </template>
     <!-- 添加对 VNode 类型 content 的支持 -->
-    <template v-else-if="isVNodeContent" v-slot:content>
+    <template v-else-if="isVNodeContent" #content>
       <component :is="dynamicComponent" />
     </template>
   </el-tooltip>
@@ -37,26 +37,20 @@ defineOptions({
 const slots = useSlots()
 const attrs = useAttrs()
 
-const props = defineProps({
-  width: {
-    type: String,
-    default: '100%',
-  },
-  lineClamp: {
-    type: [String, Number],
-    default: 1,
-  },
-  showSlot: {
-    type: Boolean,
-    default: true,
-  },
-  effect: {
-    default: 'dark',
-  },
-  dangerouslyUseHTMLString: {
-    type: Boolean,
-    default: false,
-  },
+interface TooltipProps {
+  width?: string
+  lineClamp?: string | number
+  showSlot?: boolean
+  effect?: string
+  dangerouslyUseHTMLString?: boolean
+}
+
+const props = withDefaults(defineProps<TooltipProps>(), {
+  width: '100%',
+  lineClamp: 1,
+  showSlot: true,
+  effect: 'dark',
+  dangerouslyUseHTMLString: false,
 })
 const mergedProps = useGlobalComponentConfig('tooltip', props)
 const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect', 'dangerouslyUseHTMLString']

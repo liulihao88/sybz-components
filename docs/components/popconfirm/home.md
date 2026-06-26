@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-popconfirm @confirm="confirm">...</s-popconfirm>`。属性说明：`content` 示例值：`确定删除<code>123</code>吗?`，类型：string，默认值：`''`；`reConfirm` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-popconfirm @confirm="confirm">...</s-popconfirm>`。属性说明：`content` 示例值：`确定删除 123 吗?`，类型：string，默认值：`''`；`reConfirm` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 popconfirm/base
 :::
 
@@ -18,7 +18,7 @@ popconfirm/base
 
 #### chenghua主题示例
 
-:::demo 基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<code>智慧档案检索</code>吗?" :dangerouslyUseHTMLString="true" width="260" trigger="click" @confirm="confirm">...</s-popconfirm>`。属性说明：`theme` 示例值：`chenghua`，类型：`'' / chenghua`，默认值：`''`；`title` 示例值：`确认删除任务`，类型：string，默认值：`确定删除吗?`；`content` 示例值：`确定删除<code>智慧档案检索</code>吗?`，类型：string，默认值：`''`；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`width` 示例值：`260`，类型：string / number，默认值：`200`；`trigger` 示例值：`click`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" width="260" trigger="click" @confirm="confirm"><template #content>确定删除<code>智慧档案检索</code>吗?</template>...</s-popconfirm>`。属性说明：`theme` 示例值：`chenghua`，类型：`'' / chenghua`，默认值：`''`；`title` 示例值：`确认删除任务`，类型：string，默认值：`确定删除吗?`；`content` 示例值：`确定删除任务吗?`，类型：string，默认值：`''`；`content` 插槽示例值：`确定删除<code>智慧档案检索</code>吗?`，默认值：未设置；`width` 示例值：`260`，类型：string / number，默认值：`200`；`trigger` 示例值：`click`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 popconfirm/chenghua/base
 :::
 
@@ -36,14 +36,13 @@ popconfirm/slot
 
 ### 属性
 
-|           属性名           | 说明                                                  | 类型            | 默认值        |
-| :------------------------: | ----------------------------------------------------- | --------------- | ------------- |
-|          `title`           | 标题文案                                              | string          | `确定删除吗?` |
-|          `width`           | 弹层宽度                                              | string / number | `200`         |
-|         `content`          | 正文内容，可配合 `dangerouslyUseHTMLString` 解析 HTML | string          | `''`          |
-|        `reConfirm`         | 是否启用二次确认，关闭后点击即直接确认                | boolean         | `true`        |
-| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染                   | boolean         | `false`       |
-|          `theme`           | 主题                                                  | `'' / chenghua` | `''`          |
+|   属性名    | 说明                                   | 类型            | 默认值        |
+| :---------: | -------------------------------------- | --------------- | ------------- |
+|   `title`   | 标题文案                               | string          | `确定删除吗?` |
+|   `width`   | 弹层宽度                               | string / number | `200`         |
+|  `content`  | 正文文本，始终按纯文本渲染             | string          | `''`          |
+| `reConfirm` | 是否启用二次确认，关闭后点击即直接确认 | boolean         | `true`        |
+|   `theme`   | 主题                                   | `'' / chenghua` | `''`          |
 
 ### 事件
 
@@ -54,11 +53,11 @@ popconfirm/slot
 
 ### 插槽
 
-|  插槽名   | 说明             |
-| :-------: | ---------------- |
-| `default` | 触发器内容       |
-| `content` | 自定义正文内容   |
-| `footer`  | 自定义底部操作区 |
+|  插槽名   | 说明                                     |
+| :-------: | ---------------------------------------- |
+| `default` | 触发器内容                               |
+| `content` | 自定义正文内容，富文本内容请使用这个插槽 |
+| `footer`  | 自定义底部操作区                         |
 
 ### Exposes
 

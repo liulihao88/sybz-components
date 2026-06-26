@@ -16,60 +16,37 @@ defineOptions({
 const progressBoxRef = ref(null)
 const percentageRef = ref(null)
 const showRight = ref(true)
-const props = defineProps({
-  total: {
-    type: [String, Number],
-    required: true,
-  },
-  used: {
-    type: [String, Number],
-    required: true,
-  },
-  iconAttrs: {
-    // 超出容量的显示icon
-    type: Object,
-    default: () => {},
-  },
-  width: {
-    type: [String, Number],
-  },
-  height: {
-    type: [String, Number],
-  },
-  options: {
-    type: Array,
-    default: () => [],
-  },
-  warning: {
-    type: [String, Number, Array],
-  },
-  primary: {
-    type: [String, Number, Array],
-  },
-  danger: {
-    type: [String, Number, Array],
-  },
-  info: {
-    type: [String, Number, Array],
-  },
-  value: {
-    type: [String, Number],
-  },
-  content: {
-    type: [String, Number],
-    required: true,
-  },
-  other: {
-    type: String,
-    default: 'primary',
-  },
-  type: {
-    type: String,
-  },
-  customColor: {
-    type: Boolean,
-    default: false,
-  },
+interface CapacityProgressProps {
+  total: string | number
+  used: string | number
+  iconAttrs?: Record<string, any>
+  width?: string | number
+  height?: string | number
+  options?: Record<string, any[]>[]
+  warning?: string | number | any[]
+  primary?: string | number | any[]
+  danger?: string | number | any[]
+  info?: string | number | any[]
+  value?: string | number
+  content: string | number
+  other?: string
+  type?: string
+  customColor?: boolean
+}
+
+const props = withDefaults(defineProps<CapacityProgressProps>(), {
+  iconAttrs: () => ({}),
+  width: undefined,
+  height: undefined,
+  options: () => [],
+  warning: undefined,
+  primary: undefined,
+  danger: undefined,
+  info: undefined,
+  value: undefined,
+  other: 'primary',
+  type: undefined,
+  customColor: false,
 })
 function format() {
   if (percentage.value < 0) {
@@ -219,7 +196,7 @@ onUnmounted(() => {
       :color="formatColor"
       v-bind="$attrs"
     >
-      <template #default="{ percentage }">
+      <template #default>
         <el-tooltip :content="handleTooltip" :disabled="showRight">
           <div ref="percentageRef" class="s-capacity-progress__value-row" :style="{ ...adaptiveWidth() }">
             <div class="percentage-value s-capacity-progress__percentage">{{ format() }}</div>

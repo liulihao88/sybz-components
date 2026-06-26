@@ -10,7 +10,7 @@
   >
     <template v-for="(vnode, i) in getDefaultSlot()" :key="vnode.key ?? i">
       <!-- 如果是 el-col 直接渲染 -->
-      <component v-if="isElCol(vnode)" :is="vnode" />
+      <component :is="vnode" v-if="isElCol(vnode)" />
       <!-- 否则包裹一层 el-col -->
       <el-col v-else :span="getSpan(i)" v-bind="colAttrs" class="s-row__col">
         <component :is="vnode" />
@@ -23,34 +23,25 @@
 defineOptions({
   name: 'SRow',
 })
-import { computed, PropType, useSlots } from 'vue'
+import { computed, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 
-const props = defineProps({
-  col: {
-    type: [Number, Array] as PropType<number | number[]>,
-    default: 24,
-  },
-  gap: {
-    type: [Number, String],
-    default: '',
-  },
-  gutter: {
-    type: [Number, String],
-    default: 0,
-  },
-  justify: {
-    type: String as PropType<'start' | 'end' | 'center' | 'space-around' | 'space-between'>,
-    default: 'start',
-  },
-  align: {
-    type: String as PropType<'top' | 'middle' | 'bottom'>,
-    default: 'top',
-  },
-  colAttrs: {
-    type: Object,
-    default: () => ({}),
-  },
+interface RowProps {
+  col?: number | number[]
+  gap?: number | string
+  gutter?: number | string
+  justify?: 'start' | 'end' | 'center' | 'space-around' | 'space-between'
+  align?: 'top' | 'middle' | 'bottom'
+  colAttrs?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<RowProps>(), {
+  col: 24,
+  gap: '',
+  gutter: 0,
+  justify: 'start',
+  align: 'top',
+  colAttrs: () => ({}),
 })
 
 const slots = useSlots()

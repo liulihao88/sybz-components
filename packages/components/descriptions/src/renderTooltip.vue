@@ -5,9 +5,13 @@
 defineOptions({
   name: 'RenderTooltip',
 })
-const props: any = defineProps({
-  render: Function,
-  item: Object,
+interface RenderTooltipProps {
+  render: (...args: any[]) => any
+  item?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<RenderTooltipProps>(), {
+  item: undefined,
 })
 const renderComponent = () => {
   return props.render(props?.item)

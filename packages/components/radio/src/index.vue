@@ -4,9 +4,9 @@
     <el-radio-group v-bind="$attrs">
       <slot>
         <component
-          v-for="(item, index) in parseOptions"
           v-bind="item"
           :is="radioType"
+          v-for="(item, index) in parseOptions"
           :key="index"
           :label="item[mergedProps.label!]"
           :value="item[mergedProps.value!]"
@@ -24,55 +24,36 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import type { PropType } from 'vue'
 import type { RadioItem } from './radio'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SRadio',
 })
-const props = defineProps({
-  title: {
-    type: String,
-  },
-  boxStyle: {
-    type: Object,
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
-  type: {
-    type: String,
-    validator: (value: string) => ['boolean', 'simple', ''].includes(value),
-    default: '',
-  },
-  showType: {
-    type: String as PropType<'radio' | 'button'>,
-    validator: (value: string) => ['radio', 'button'].includes(value),
-    default: 'radio',
-  },
-  options: {
-    type: Array as PropType<RadioItem[]>,
-    default: () => [],
-  },
-  border: {
-    type: Boolean,
-    default: false,
-  },
-  value: {
-    type: [String, Number, Boolean],
-    default: 'value',
-  },
-  label: {
-    type: [String, Number, Boolean],
-    default: 'label',
-  },
-  itemDisabled: {
-    type: Function,
-    default: () => {},
-  },
+interface RadioProps {
+  title?: string
+  boxStyle?: Record<string, any>
+  theme?: '' | 'chenghua'
+  type?: 'boolean' | 'simple' | ''
+  showType?: 'radio' | 'button'
+  options?: RadioItem[]
+  border?: boolean
+  value?: any
+  label?: any
+  itemDisabled?: (...args: any[]) => any
+}
+
+const props = withDefaults(defineProps<RadioProps>(), {
+  title: undefined,
+  boxStyle: undefined,
+  theme: '',
+  type: '',
+  showType: 'radio',
+  options: () => [],
+  border: false,
+  value: 'value',
+  label: 'label',
+  itemDisabled: () => {},
 })
 const mergedProps = useGlobalComponentConfig('radio', props)
 const attrs = useAttrs()

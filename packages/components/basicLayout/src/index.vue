@@ -5,61 +5,36 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 defineOptions({
   name: 'SBasicLayout',
 })
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
-  size: {
-    type: String,
-    default: 'default', // small large
-  },
-  title: {
-    type: String,
-    default: '',
-  },
-  boxStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  headerStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  bodyStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  footerStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  border: {
-    type: Boolean,
-    default: true,
-  },
-  scroll: {
-    type: Boolean,
-    default: true,
-  },
-  square: {
-    type: Boolean,
-    default: false,
-  },
-  collapsible: {
-    type: Boolean,
-    default: false,
-  },
-  collapseTrigger: {
-    type: String,
-    default: 'header',
-    validator: (value) => ['icon', 'header'].includes(value),
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
+interface BasicLayoutProps {
+  modelValue?: boolean
+  size?: 'default' | 'small' | 'large' | string
+  title?: string
+  boxStyle?: Record<string, any>
+  headerStyle?: Record<string, any>
+  bodyStyle?: Record<string, any>
+  footerStyle?: Record<string, any>
+  border?: boolean
+  scroll?: boolean
+  square?: boolean
+  collapsible?: boolean
+  collapseTrigger?: 'icon' | 'header'
+  theme?: '' | 'chenghua'
+}
+
+const props = withDefaults(defineProps<BasicLayoutProps>(), {
+  modelValue: false,
+  size: 'default', // small large
+  title: '',
+  boxStyle: () => ({}),
+  headerStyle: () => ({}),
+  bodyStyle: () => ({}),
+  footerStyle: () => ({}),
+  border: true,
+  scroll: true,
+  square: false,
+  collapsible: false,
+  collapseTrigger: 'header',
+  theme: '',
 })
 const mergedProps = useGlobalComponentConfig('basicLayout', props)
 
@@ -167,14 +142,14 @@ const handleIconClick = (event) => {
 </script>
 
 <template>
-  <div class="s-basic-layout" :class="layoutClass" :style="boxMergedStyle" ref="boxRef">
+  <div ref="boxRef" class="s-basic-layout" :class="layoutClass" :style="boxMergedStyle">
     <div
-      class="s-basic-layout__header"
       v-if="$slots.header || mergedProps.title"
-      :style="headerMergedStyle"
       ref="headerRef"
-      @click="handleHeaderClick"
+      class="s-basic-layout__header"
+      :style="headerMergedStyle"
       :class="{ collapsible: isHeaderTrigger }"
+      @click="handleHeaderClick"
     >
       <div class="s-basic-layout__header-main">
         <slot name="header">
@@ -197,13 +172,13 @@ const handleIconClick = (event) => {
       </span>
     </div>
     <div
+      v-show="!isCollapsed"
       class="s-basic-layout__body"
       :style="{ ...mergedProps.bodyStyle, ...scrollStyle, ...squareStyle }"
-      v-show="!isCollapsed"
     >
       <slot></slot>
     </div>
-    <div class="s-basic-layout__footer" v-if="$slots.footer && !isCollapsed" :style="mergedProps.footerStyle">
+    <div v-if="$slots.footer && !isCollapsed" class="s-basic-layout__footer" :style="mergedProps.footerStyle">
       <slot name="footer"></slot>
     </div>
   </div>

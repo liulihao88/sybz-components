@@ -15,35 +15,24 @@ function confirm() {
       <span>可选值: '' | chenghua</span>
       <span>默认值: ''</span>
       <span>属性: content</span>
-      <span>支持: 文本 | &lt;code&gt;...&lt;/code&gt;</span>
+      <span>支持: 文本</span>
       <span>默认值: ''</span>
-      <span>属性: dangerouslyUseHTMLString</span>
-      <span>可选值: true | false</span>
-      <span>默认值: true</span>
+      <span>插槽: content</span>
+      <span>用途: 自定义正文内容</span>
     </div>
 
     <div class="popconfirm-chenghua-demo__actions">
-      <s-popconfirm
-        theme="chenghua"
-        title="确认删除任务"
-        content="确定删除<code>智慧档案检索</code>吗?"
-        :dangerouslyUseHTMLString="true"
-        width="260"
-        trigger="click"
-        @confirm="confirm"
-      >
+      <s-popconfirm theme="chenghua" title="确认删除任务" width="260" trigger="click" @confirm="confirm">
+        <template #content>
+          <div class="s-popconfirm__content">确定删除<code>智慧档案检索</code>吗?</div>
+        </template>
         <s-button theme="chenghua" type="danger">删除服务</s-button>
       </s-popconfirm>
 
-      <s-popconfirm
-        theme="chenghua"
-        title="发布确认"
-        content="将发布到<code>生产环境</code>, 请确认配置无误。"
-        :dangerouslyUseHTMLString="true"
-        width="280"
-        trigger="click"
-        @confirm="confirm"
-      >
+      <s-popconfirm theme="chenghua" title="发布确认" width="280" trigger="click" @confirm="confirm">
+        <template #content>
+          <div class="s-popconfirm__content">将发布到<code>生产环境</code>, 请确认配置无误。</div>
+        </template>
         <s-button theme="chenghua" type="primary">发布配置</s-button>
       </s-popconfirm>
     </div>

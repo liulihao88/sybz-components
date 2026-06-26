@@ -13,53 +13,32 @@ defineOptions({
   name: 'SDrawer',
 })
 const emits = defineEmits(['update:modelValue'])
-const props = defineProps({
-  confirmText: {
-    type: String,
-    default: '提交',
-  },
-  cancelText: {
-    type: String,
-    default: '取消',
-  },
-  showFooter: {
-    type: Boolean,
-    default: true,
-  },
-  showConfirm: {
-    type: Boolean,
-    default: true,
-  },
-  showCancel: {
-    type: Boolean,
-    default: true,
-  },
-  wrapperClosable: {
-    type: Boolean,
-    default: true,
-  },
-  confirmAttrs: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
-  cancelAttrs: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
+interface DrawerProps {
+  confirmText?: string
+  cancelText?: string
+  showFooter?: boolean
+  showConfirm?: boolean
+  showCancel?: boolean
+  wrapperClosable?: boolean
+  confirmAttrs?: Record<string, any>
+  cancelAttrs?: Record<string, any>
+  detailAttrs?: Record<string, any>
+  type?: 'detail' | ''
+}
+
+const props = withDefaults(defineProps<DrawerProps>(), {
+  confirmText: '提交',
+  cancelText: '取消',
+  showFooter: true,
+  showConfirm: true,
+  showCancel: true,
+  wrapperClosable: true,
+  confirmAttrs: () => ({}),
+  cancelAttrs: () => ({}),
   // 自定义详情属性
-  detailAttrs: {
-    type: Object,
-    default: () => {},
-  },
+  detailAttrs: () => ({}),
   // 可选值: detail, ''
-  type: {
-    type: String,
-    default: '',
-  },
+  type: '',
 })
 
 const attrs = useAttrs()
@@ -102,14 +81,14 @@ const mergedCancelAttrs = computed(() => {
 })
 
 function confirm() {
-  if (attrs.onConfirm) {
+  if (typeof attrs.onConfirm === 'function') {
     attrs.onConfirm()
   } else {
     _handleClose()
   }
 }
 function handleClose() {
-  if (attrs.onCancel) {
+  if (typeof attrs.onCancel === 'function') {
     attrs.onCancel()
   } else {
     _handleClose()

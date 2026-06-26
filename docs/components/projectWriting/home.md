@@ -38,14 +38,14 @@ const attrs = useAttrs()
 const slots = useSlots()
 const emits = defineEmits(['change', 'update:modelValue'])
 
-const props = defineProps({
-  modelValue: {
-    type: [String, Number, Array],
-  },
-  width: {
-    type: [String, Number],
-    default: '',
-  },
+interface FooProps {
+  modelValue?: string | number | any[]
+  width?: string | number
+}
+
+const props = withDefaults(defineProps<FooProps>(), {
+  modelValue: undefined,
+  width: '',
 })
 </script>
 ```

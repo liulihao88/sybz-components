@@ -1,8 +1,8 @@
 <template>
   <div>
     <s-select
-      :options="address"
       v-model="province"
+      :options="address"
       placeholder="请选择省份"
       label="name"
       v-bind="$attrs"
@@ -10,9 +10,9 @@
     ></s-select>
 
     <s-select
+      v-model="city"
       :options="cityList"
       :disabled="!province"
-      v-model="city"
       placeholder="请选择城市"
       label="name"
       v-bind="$attrs"
@@ -35,11 +35,12 @@
 import { ref, watch } from 'vue'
 import address from './pca-code.json'
 
-const props = defineProps({
-  modelValue: {
-    type: Array,
-    default: () => [],
-  },
+interface ChooseArea2Props {
+  modelValue?: any[]
+}
+
+const props = withDefaults(defineProps<ChooseArea2Props>(), {
+  modelValue: () => [],
 })
 
 // 省市区里面的对象

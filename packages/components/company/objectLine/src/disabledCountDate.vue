@@ -18,13 +18,12 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-const props = defineProps({
-  modelValue: {
-    type: [Number, String, Array],
-    default: () => {
-      return [new Date().getTime() - 86400 * 1000 * 365, new Date().getTime()]
-    },
-  },
+interface DisabledCountDateProps {
+  modelValue?: number | string | any[]
+}
+
+const props = withDefaults(defineProps<DisabledCountDateProps>(), {
+  modelValue: () => [new Date().getTime() - 86400 * 1000 * 365, new Date().getTime()],
 })
 const dateRange = ref(props.modelValue)
 const emits = defineEmits(['update:modelValue'])

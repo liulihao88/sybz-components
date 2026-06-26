@@ -30,42 +30,25 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 defineOptions({
   name: 'STabs',
 })
-const props: any = defineProps({
-  modelValue: {
-    type: [String, Number, Boolean],
-    required: true,
-  },
-  options: {
-    type: Array,
-    default: () => {
-      return []
-    },
-  },
-  label: {
-    type: String,
-    default: 'label',
-  },
-  value: {
-    type: String,
-    default: 'value',
-  },
-  subAttrs: {
-    type: Object,
-    default: () => {},
-  },
-  trigger: {
-    type: String,
-    default: 'click', // 默认为点击触发，可选值为 'click' 或 'hover'
-  },
-  theme: {
-    type: String,
-    default: '',
-  },
-  size: {
-    type: String,
-    default: 'default',
-    validator: (value: string) => ['small', 'default', 'large'].includes(value),
-  },
+interface TabsProps {
+  modelValue: string | number | boolean
+  options?: Record<string, any>[]
+  label?: string
+  value?: string
+  subAttrs?: Record<string, any>
+  trigger?: 'click' | 'hover'
+  theme?: string
+  size?: 'small' | 'default' | 'large'
+}
+
+const props = withDefaults(defineProps<TabsProps>(), {
+  options: () => [],
+  label: 'label',
+  value: 'value',
+  subAttrs: () => ({}),
+  trigger: 'click', // 默认为点击触发，可选值为 'click' 或 'hover'
+  theme: '',
+  size: 'default',
 })
 const emits = defineEmits(['update:modelValue'])
 const tabsBoxRef = ref<HTMLElement>()

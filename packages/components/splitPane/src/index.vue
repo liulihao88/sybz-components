@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch, type PropType } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import type { SplitPaneDirection, SplitPaneSetting } from './types'
 
@@ -41,35 +41,24 @@ defineOptions({
   name: 'SSplitPane',
 })
 
-const props = defineProps({
-  splitSet: {
-    type: Object as PropType<SplitPaneSetting>,
-    default: () => ({}),
-  },
-  split: {
-    type: String as PropType<SplitPaneDirection>,
-    default: 'vertical',
-  },
-  minPercent: {
-    type: Number,
-    default: 0,
-  },
-  defaultPercent: {
-    type: Number,
-    default: 50,
-  },
-  resizerSize: {
-    type: [String, Number],
-    default: 6,
-  },
-  resetOnClick: {
-    type: Boolean,
-    default: true,
-  },
-  modelValue: {
-    type: Number,
-    default: undefined,
-  },
+interface SplitPaneProps {
+  splitSet?: SplitPaneSetting
+  split?: SplitPaneDirection
+  minPercent?: number
+  defaultPercent?: number
+  resizerSize?: string | number
+  resetOnClick?: boolean
+  modelValue?: number
+}
+
+const props = withDefaults(defineProps<SplitPaneProps>(), {
+  splitSet: () => ({}),
+  split: 'vertical',
+  minPercent: 0,
+  defaultPercent: 50,
+  resizerSize: 6,
+  resetOnClick: true,
+  modelValue: undefined,
 })
 
 const emits = defineEmits(['resize', 'update:modelValue'])

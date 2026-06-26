@@ -5,57 +5,33 @@ import { processWidth, formatThousands, formatToFixed, formatBytes } from '@sybz
 defineOptions({
   name: 'SItem',
 })
-const props = defineProps({
-  src: {
-    type: String,
-    default: '',
-    // default: 'https://img.yzcdn.cn/vant/logo.png',
-  },
-  label: {
-    type: [String, Number],
-    required: true,
-  },
-  value: {
-    type: [String, Number],
-    required: true,
-  },
-  width: {
-    type: [String, Number],
-    default: '',
-  },
-  height: {
-    type: [String, Number],
-    default: '',
-  },
-  labelStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  valueStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  itemStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  imgStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  boxStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  type: {
-    type: String, // 'value',
-    default: '', // 不传时为 ''
-    validator: (value) => ['', 'value'].includes(value),
-  },
-  attrs: {
-    type: Object,
-    default: () => {},
-  },
+interface ItemProps {
+  src?: string
+  label: string | number
+  value: string | number
+  width?: string | number
+  height?: string | number
+  labelStyle?: Record<string, any>
+  valueStyle?: Record<string, any>
+  itemStyle?: Record<string, any>
+  imgStyle?: Record<string, any>
+  boxStyle?: Record<string, any>
+  type?: '' | 'value'
+  attrs?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<ItemProps>(), {
+  src: '',
+  // default: 'https://img.yzcdn.cn/vant/logo.png',
+  width: '',
+  height: '',
+  labelStyle: () => ({}),
+  valueStyle: () => ({}),
+  itemStyle: () => ({}),
+  imgStyle: () => ({}),
+  boxStyle: () => ({}),
+  type: '', // 不传时为 ''
+  attrs: () => ({}),
 })
 const slots = useSlots()
 const hasImgSlot = !!slots.img // 判断是否使用了 img 插槽
@@ -79,9 +55,9 @@ const parseValue = computed(() => {
 
 <template>
   <div
+    v-if="props.type === ''"
     class="s-item-box"
     :style="{ ...{ height: processWidth(props.height, true) }, ...processWidth(props.width), ...boxStyle }"
-    v-if="props.type === ''"
   >
     <div class="s-item-box__img" :style="props.imgStyle">
       <slot name="img">
@@ -102,9 +78,9 @@ const parseValue = computed(() => {
     </div>
   </div>
   <div
+    v-else-if="props.type === 'value'"
     class="s-item-box__value"
     :style="{ ...{ height: processWidth(props.height, true) }, ...processWidth(props.width), ...boxStyle }"
-    v-else-if="props.type === 'value'"
   >
     <div class="o_item_box_value_item" :class="{ o_item_box_value_item_center: props.attrs?.center === true }">
       <div class="s-item_box__value__value" :style="props.valueStyle">

@@ -47,32 +47,20 @@ function cancel() {
   close()
   emits('cancel')
 }
-const props = defineProps({
-  title: {
-    type: String,
-    default: '确定删除吗?',
-  },
-  width: {
-    type: [String, Number],
-    default: 200,
-  },
-  content: {
-    type: String,
-    default: '',
-  },
-  reConfirm: {
-    type: Boolean,
-    default: true,
-  },
-  dangerouslyUseHTMLString: {
-    type: Boolean,
-    default: false,
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
+interface PopconfirmProps {
+  title?: string
+  width?: string | number
+  content?: string
+  reConfirm?: boolean
+  theme?: '' | 'chenghua'
+}
+
+const props = withDefaults(defineProps<PopconfirmProps>(), {
+  title: '确定删除吗?',
+  width: 200,
+  content: '',
+  reConfirm: true,
+  theme: '',
 })
 
 const mergedProps = useGlobalComponentConfig('popconfirm', props)
@@ -118,22 +106,17 @@ defineExpose({
 <template>
   <el-popover
     v-if="mergedProps.reConfirm"
+    v-bind="$attrs"
+    v-model:visible="isPopoverVisible"
     class="s-popconfirm__box"
     :title="mergedProps.title"
     :width="mergedProps.width"
-    v-bind="$attrs"
     :popper-class="popperClass"
     @show="handleShow"
-    v-model:visible="isPopoverVisible"
   >
     <slot name="content">
       <template v-if="mergedProps.content">
-        <div
-          v-if="mergedProps.dangerouslyUseHTMLString"
-          class="s-popconfirm__content"
-          v-html="mergedProps.content"
-        ></div>
-        <div v-else class="s-popconfirm__content">{{ mergedProps.content }}</div>
+        <div class="s-popconfirm__content" v-text="mergedProps.content"></div>
       </template>
     </slot>
     <div class="s-popconfirm__footer">
@@ -142,14 +125,14 @@ defineExpose({
         <SButton size="small" type="primary" :theme="popconfirmButtonTheme" @click="confirm">确定</SButton>
       </slot>
     </div>
-    <template v-slot:reference>
+    <template #reference>
       <slot></slot>
     </template>
   </el-popover>
   <span
+    v-else
     class="s-popconfirm__simple_box"
     :class="{ 's-popconfirm__simple_box--chenghua': mergedProps.theme === 'chenghua' }"
-    v-else
     @click="confirm"
   >
     <slot></slot>

@@ -1,6 +1,6 @@
 <template>
   <div class="s-item-wrapper" :class="{ 'with-columns': props.columns }">
-    <component :is="item" class="col" v-for="(item, index) in validSlots" :key="index" />
+    <component :is="item" v-for="(item, index) in validSlots" :key="index" class="col" />
   </div>
 </template>
 
@@ -12,19 +12,16 @@ defineOptions({
   name: 'SItemWrapper',
 })
 
-const props = defineProps({
-  gap: {
-    type: [String, Number],
-    default: '16px',
-  },
-  columns: {
-    type: Number,
-    default: null, // null 表示不分组，保持原样
-  },
-  minWidth: {
-    type: [String, Number],
-    default: 0,
-  },
+interface ItemWrapperProps {
+  gap?: string | number
+  columns?: number | null
+  minWidth?: string | number
+}
+
+const props = withDefaults(defineProps<ItemWrapperProps>(), {
+  gap: '16px',
+  columns: null, // null 表示不分组，保持原样
+  minWidth: 0,
 })
 
 const gapValue = computed(() => processWidth(props.gap, true))

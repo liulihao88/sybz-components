@@ -56,7 +56,7 @@
           <template v-if="$slots.label" #label="arg">
             <slot name="label" v-bind="arg" />
           </template>
-          <template v-for="(arg, name, index) in noDefaultSlots" v-slot:[name]>
+          <template v-for="(arg, name, index) in noDefaultSlots" #[name]>
             <slot :name="name" v-bind="arg" :index="index" />
           </template>
 
@@ -113,116 +113,68 @@ const noDefaultSlots = computed(() => {
   return copySlots
 })
 
-const props = defineProps({
-  modelValue: {
-    type: [Array, String, Number],
-  },
-  value: {
-    type: String,
-    default: 'value',
-  },
-  label: {
-    type: [String, Array],
-    default: 'label',
-  },
-  options: {
-    type: Array,
-    default: () => [],
-  },
+interface SelectProps {
+  modelValue?: any[] | string | number
+  value?: string
+  label?: string | string[]
+  options?: any[]
+  type?: string
+  multiple?: boolean
+  showAll?: boolean
+  showPrefix?: boolean
+  showQuick?: boolean
+  size?: string
+  theme?: '' | 'chenghua'
+  title?: string
+  boxStyle?: Record<string, any>
+  connect?: string
+  customLabel?: ((...args: any[]) => any) | string
+  width?: string | number
+  height?: string | number
+  disPlaceholder?: string
+  itemDisabled?: (...args: any[]) => any
+  url?: string | ((...args: any[]) => any)
+  urlParams?: Record<string, any>
+  optionsExpression?: string
+  emptyColor?: boolean
+  showTooltip?: boolean
+  tooltipAttrs?: Record<string, any>
+  dangerouslyUseHTMLString?: boolean
+}
+
+const props = withDefaults(defineProps<SelectProps>(), {
+  modelValue: undefined,
+  value: 'value',
+  label: 'label',
+  options: () => [],
   // 是简单的options 还是复杂options。默认复杂
-  type: {
-    type: String,
-    default: '', // 简单选项'simple',
-  },
+  type: '', // 简单选项'simple',
   // 是否多选
-  multiple: {
-    type: Boolean,
-    default: false,
-  },
-  showAll: {
-    type: Boolean,
-    default: true,
-  },
-  showPrefix: {
-    type: Boolean,
-    default: false,
-  },
-  showQuick: {
-    type: Boolean,
-    default: true,
-  },
-  size: {
-    type: String,
-    default: '',
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
-  title: {
-    type: String,
-    default: '',
-  },
-  boxStyle: {
-    type: Object,
-  },
+  multiple: false,
+  showAll: true,
+  showPrefix: false,
+  showQuick: true,
+  size: '',
+  theme: '',
+  title: '',
+  boxStyle: undefined,
 
   // 如果label显示多个参数的连接符
-  connect: {
-    type: String,
-    default: '/',
-  },
+  connect: '/',
   // 自定义label显示多个参数的函数
-  customLabel: {
-    type: [Function, String],
-    default: '',
-  },
-  width: {
-    type: [String, Number],
-    default: '',
-  },
-  height: {
-    type: [String, Number],
-    default: '',
-  },
+  customLabel: '',
+  width: '',
+  height: '',
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性
-  disPlaceholder: {
-    type: String,
-    default: '',
-  },
-  itemDisabled: {
-    type: Function,
-    default: () => {},
-  },
-  url: {
-    type: [String, Function],
-    default: '',
-  },
-  urlParams: {
-    type: Object,
-    default: () => {},
-  },
-  optionsExpression: {
-    type: String,
-    default: '',
-  },
-  emptyColor: {
-    type: Boolean,
-    default: false,
-  },
-  showTooltip: {
-    type: Boolean,
-    default: true,
-  },
-  tooltipAttrs: {
-    type: Object,
-    default: () => ({}),
-  },
-  dangerouslyUseHTMLString: {
-    type: Boolean,
-    default: false,
-  },
+  disPlaceholder: '',
+  itemDisabled: () => {},
+  url: '',
+  urlParams: () => ({}),
+  optionsExpression: '',
+  emptyColor: false,
+  showTooltip: true,
+  tooltipAttrs: () => ({}),
+  dangerouslyUseHTMLString: false,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
 const compTitleProps = computed(() => {

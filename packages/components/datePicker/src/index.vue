@@ -10,28 +10,20 @@ defineOptions({
 })
 const attrs = useAttrs()
 const datePickerRef = ref()
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  width: {
-    type: [String, Number],
-    default: '300px',
-  },
-  height: {
-    type: [String, Number],
-    default: '',
-  },
-  boxStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
+interface DatePickerProps {
+  title?: string
+  width?: string | number
+  height?: string | number
+  boxStyle?: Record<string, any>
+  theme?: '' | 'chenghua'
+}
+
+const props = withDefaults(defineProps<DatePickerProps>(), {
+  title: '',
+  width: '300px',
+  height: '',
+  boxStyle: () => ({}),
+  theme: '',
 })
 const mergedProps = useGlobalComponentConfig('datePicker', props)
 
@@ -355,7 +347,7 @@ defineExpose({
     <s-comp-title
       :title="mergedProps.title"
       :size="attrs.size"
-      :boxStyle="mergedProps.boxStyle"
+      :box-style="mergedProps.boxStyle"
       :theme="mergedProps.theme"
     ></s-comp-title>
     <el-date-picker ref="datePickerRef" v-bind="mergedAttrs" class="s-date-picker__picker">

@@ -372,7 +372,6 @@ export interface SPopoverConfirmSelfProps {
   width?: string | number
   content?: string
   reConfirm?: boolean
-  dangerouslyUseHTMLString?: boolean
   theme?: SybzComponentTheme
 }
 

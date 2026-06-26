@@ -6,15 +6,14 @@ import { processWidth } from '@sybz-components/utils'
 defineOptions({
   name: 'SChooseArea',
 })
-const props = defineProps({
-  width: {
-    type: [String, Number],
-    default: '',
-  },
-  height: {
-    type: [String, Number],
-    default: '',
-  },
+interface ChooseAreaProps {
+  width?: string | number
+  height?: string | number
+}
+
+const props = withDefaults(defineProps<ChooseAreaProps>(), {
+  width: '',
+  height: '',
 })
 const optionsProps = {
   label: 'name',

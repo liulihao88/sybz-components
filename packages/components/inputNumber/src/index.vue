@@ -9,7 +9,7 @@
       v-if="mergedProps.title"
       :title="mergedProps.title"
       :size="mergedProps.size"
-      :boxStyle="mergedProps.boxStyle"
+      :box-style="mergedProps.boxStyle"
       :theme="mergedProps.theme"
     />
     <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
@@ -32,39 +32,24 @@ defineOptions({
 
 const attrs = useAttrs()
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  boxStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  width: {
-    type: [String, Number],
-    default: '',
-  },
-  height: {
-    type: [String, Number],
-    default: '',
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
-  size: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'large', 'default', 'small'].includes(value),
-  },
-  subAttrs: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
+interface InputNumberProps {
+  title?: string
+  boxStyle?: Record<string, any>
+  width?: string | number
+  height?: string | number
+  theme?: '' | 'chenghua'
+  size?: '' | 'large' | 'default' | 'small'
+  subAttrs?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<InputNumberProps>(), {
+  title: '',
+  boxStyle: () => ({}),
+  width: '',
+  height: '',
+  theme: '',
+  size: '',
+  subAttrs: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('inputNumber', props)
 

@@ -9,22 +9,7 @@ defineOptions({
 })
 const echartDivRef = ref<HTMLElement>(null)
 
-const emits = defineEmits()
-
-// const props = defineProps({
-//   height: {
-//     type: [String, Number],
-//     default: '400px',
-//   },
-//   width: {
-//     type: [String, Number],
-//     default: '100%',
-//   },
-//   option: {
-//     type: Object,
-//     default: () => {},
-//   },
-// })
+const emits = defineEmits(['chart'])
 
 const chart = ref()
 
@@ -35,13 +20,14 @@ const props = withDefaults(
     id?: string
     option: Record<string, any>
     theme?: string
-    isEmpty: boolean | ((options: Record<string, any>) => boolean)
-    description: string
+    isEmpty?: boolean | ((options: Record<string, any>) => boolean)
+    description?: string
   }>(),
   {
     height: '400px',
     isEmpty: false,
     width: '100%',
+    theme: undefined,
     description: '暂无数据',
     id: () => Math.random().toString(36).substring(2, 8),
   },
@@ -121,7 +107,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="s-chart" :style="{ height: processWidth(height, true), width: processWidth(width, true) }">
-    <div ref="echartDivRef" :id="id" class="s-chart-container" v-show="!formatEmpty" />
+    <div v-show="!formatEmpty" :id="id" ref="echartDivRef" class="s-chart-container" />
     <slot v-if="formatEmpty" name="empty">
       <el-empty v-bind="$attrs" :description="description" />
     </slot>

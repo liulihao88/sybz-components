@@ -11,32 +11,21 @@ defineOptions({
 const currentval = ref('')
 const labelarr = ref([])
 
-const props = defineProps({
-  modelValue: {
-    type: Array,
-    default() {
-      return []
-    },
-  },
+interface InputLabelProps {
+  modelValue?: any[]
+  isComplex?: boolean
+  regexp?: any
+  message?: string
+  inputAttrs?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<InputLabelProps>(), {
+  modelValue: () => [],
   // 简单的就直接传基本数据类型, 复杂的需要传引用数据类型, 默认是简单数据
-  isComplex: {
-    type: Boolean,
-    default: false,
-  },
-  regexp: {
-    tupe: RegExp,
-    default: '',
-  },
-  message: {
-    tupe: String,
-    default: '输入有误',
-  },
-  inputAttrs: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
+  isComplex: false,
+  regexp: '',
+  message: '输入有误',
+  inputAttrs: () => ({}),
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -130,21 +119,21 @@ defineExpose({
     <div class="s-input-box__content">
       <div v-for="(item, index) in labelarr" :key="index" :class="item.isDelete === 0 ? 'disbox' : 'spanbox'">
         <span>{{ item.name || item }}</span>
-        <i class="spanclose" style="cursor: not-allowed" v-if="item.isDelete === 0"></i>
+        <i v-if="item.isDelete === 0" class="spanclose" style="cursor: not-allowed"></i>
         <i v-else class="spanclose" @click="removeitem(index, item)"></i>
       </div>
       <s-input
+        v-model.trim="currentval"
         :placeholder="props.inputAttrs.placeholder || '输入后回车'"
         :width="props.inputAttrs.width || 120"
-        v-model.trim="currentval"
-        @keyup.enter.stop="addlabel"
-        @blur="blurInput"
         clearable
         type="text"
         v-bind="props.inputAttrs"
+        @keyup.enter.stop="addlabel"
+        @blur="blurInput"
       />
     </div>
-    <s-icon name="circle-close" class="s-input-label__clear" v-if="labelarr.length > 0" @click="clearAll"></s-icon>
+    <s-icon v-if="labelarr.length > 0" name="circle-close" class="s-input-label__clear" @click="clearAll"></s-icon>
   </div>
 </template>
 

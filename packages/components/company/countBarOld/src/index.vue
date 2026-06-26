@@ -32,11 +32,12 @@ import { clone, formatBytes, formatThousands, getVariable } from '@sybz-componen
 defineOptions({
   name: 'SCountBarOld',
 })
-const props = defineProps({
-  data: {
-    type: Array,
-    default: () => [], // [{name: '<1024kb', value: 22}]
-  },
+interface CountBarOldProps {
+  data?: any[]
+}
+
+const props = withDefaults(defineProps<CountBarOldProps>(), {
+  data: () => [], // [{name: '<1024kb', value: 22}]
 })
 const option = ref()
 const isEmpty = ref(false)

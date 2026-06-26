@@ -5,50 +5,32 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type Component, type PropType } from 'vue'
+import { computed, type Component } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 
 defineOptions({
   name: 'SFlex',
 })
 
+interface FlexProps {
+  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
+  wrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
+  justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'normal'
+  align?: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal'
+  flex?: string
+  gap?: string | number
+  component?: string | Component
+}
+
 // --- Props 定义 ---
-const props = defineProps({
-  // vertical: flex 主轴的方向是否垂直，使用 flex-direction: column
-  direction: {
-    type: String,
-    default: 'row', // column row-reverse column-reverse
-  },
-  // wrap: 设置元素单行显示还是多行显示
-  wrap: {
-    type: String as () => 'nowrap' | 'wrap' | 'wrap-reverse',
-    default: 'nowrap',
-  },
-  // justify: 设置元素在主轴方向上的对齐方式
-  justify: {
-    type: String as () => 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'normal',
-    default: 'normal',
-  },
-  // align: 设置元素在交叉轴方向上的对齐方式
-  align: {
-    type: String as () => 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal',
-    default: 'normal',
-  },
-  // flex: flex CSS 简写属性
-  flex: {
-    type: String,
-    default: '',
-  },
-  // gap: 设置网格之间的间隙
-  gap: {
-    type: [String, Number],
-    default: '0px', // small default large
-  },
-  // component: 自定义元素类型
-  component: {
-    type: [String, Object] as PropType<string | Component>,
-    default: 'div',
-  },
+const props = withDefaults(defineProps<FlexProps>(), {
+  direction: 'row', // column row-reverse column-reverse
+  wrap: 'nowrap',
+  justify: 'normal',
+  align: 'normal',
+  flex: '',
+  gap: '0px', // small default large
+  component: 'div',
 })
 
 // --- 计算 Style ---

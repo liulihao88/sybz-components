@@ -7,19 +7,16 @@ defineOptions({
   name: 'SSwitch',
 })
 
-const props = defineProps({
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
-  beforeChange: {
-    type: Function,
-  },
-  width: {
-    type: [String, Number],
-    default: '',
-  },
+interface SwitchProps {
+  theme?: '' | 'chenghua'
+  beforeChange?: (...args: any[]) => any
+  width?: string | number
+}
+
+const props = withDefaults(defineProps<SwitchProps>(), {
+  theme: '',
+  beforeChange: undefined,
+  width: '',
 })
 const mergedProps = useGlobalComponentConfig('switch', props)
 

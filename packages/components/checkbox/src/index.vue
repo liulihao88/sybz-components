@@ -16,61 +16,36 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 defineOptions({
   name: 'SCheckbox',
 })
-const attrs = useAttrs()
-const props = defineProps({
-  type: {
-    type: String,
-    default: '',
-  },
-  options: {
-    type: Object,
-    default: () => {
-      return []
-    },
-  },
-  showType: {
-    type: String,
-    validator: (value: string) => ['check', 'button'].includes(value),
-    default: 'check', // button
-  },
-  modelValue: {
-    type: Array,
-    defalut: () => [],
-  },
-  label: {
-    type: String,
-    default: 'label',
-  },
-  value: {
-    type: String,
-    default: 'value',
-  },
-  showAll: {
-    type: Boolean,
-    default: true,
-  },
-  attrs: {
-    type: Object,
-    default: () => {},
-  },
-  customDisabled: {
-    type: Function,
-    default: () => {},
-  },
+const rootAttrs = useAttrs()
+interface CheckboxProps {
+  type?: string
+  options?: any[]
+  showType?: 'check' | 'button'
+  modelValue?: any[]
+  label?: string
+  value?: string
+  showAll?: boolean
+  attrs?: Record<string, any>
+  customDisabled?: (...args: any[]) => any
+  customLabel?: ((...args: any[]) => any) | string
+  gap?: number | string
+  theme?: '' | 'chenghua'
+}
+
+const props = withDefaults(defineProps<CheckboxProps>(), {
+  type: '',
+  options: () => [],
+  showType: 'check', // button
+  modelValue: () => [],
+  label: 'label',
+  value: 'value',
+  showAll: true,
+  attrs: () => ({}),
+  customDisabled: () => {},
   // 自定义label显示多个参数的函数
-  customLabel: {
-    type: [Function, String],
-    default: '',
-  },
-  gap: {
-    type: [Number, String],
-    default: '',
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
+  customLabel: '',
+  gap: '',
+  theme: '',
 })
 const mergedProps = useGlobalComponentConfig('checkbox', props)
 const checkAll = ref(false)
@@ -128,10 +103,6 @@ const checkType = computed(() => {
   }
   return obj[props.showType] ?? 'el-checkbox'
 })
-function groupChange(item) {
-  emitValue(item)
-}
-
 function emitValue(item) {
   allCheckList.value = item
   emits('update:modelValue', allCheckList.value)
@@ -146,8 +117,16 @@ function handleLabel(item, index) {
   }
 }
 const filteredAttrs = computed(() => {
-  const { label: _label, ...rest } = attrs
+  const { label: _label, ...rest } = rootAttrs
   return rest
+})
+const checkboxModel = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emitValue(value)
+  },
 })
 
 const getGapValue = computed(() => processWidth(props.gap, true))
@@ -162,25 +141,20 @@ const checkboxClass = computed(() => ({
 <template>
   <div class="s-checkbox" :class="checkboxClass">
     <el-checkbox
+      v-if="mergedProps.showAll"
       v-model="checkAll"
       class="s-checkbox__all"
       :indeterminate="isIndeterminate"
-      @change="checkAllChange"
-      v-if="mergedProps.showAll"
       v-bind="$attrs"
+      @change="checkAllChange"
     >
       全选
     </el-checkbox>
-    <el-checkbox-group
-      v-model="props.modelValue"
-      @change="groupChange"
-      v-bind="filteredAttrs"
-      class="s-checkbox__wrapper"
-    >
+    <el-checkbox-group v-model="checkboxModel" v-bind="filteredAttrs" class="s-checkbox__wrapper">
       <slot>
         <component
           :is="checkType"
-          v-bind="attrs"
+          v-bind="rootAttrs"
           v-for="(item, index) in props.options"
           :key="index"
           :value="props.type === 'simple' ? item : item[props.value!]"

@@ -11,26 +11,19 @@ import { processWidth } from '@sybz-components/utils'
 defineOptions({
   name: 'SSvg',
 })
-const props = defineProps({
-  prefix: {
-    type: String,
-    default: 'icon',
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-  },
-  customStyle: {
-    type: Object,
-    default: () => {},
-  },
-  size: {
-    type: [String, Number],
-    default: '16px',
-  },
+interface SvgProps {
+  prefix?: string
+  name: string
+  color?: string
+  customStyle?: Record<string, any>
+  size?: string | number
+}
+
+const props = withDefaults(defineProps<SvgProps>(), {
+  prefix: 'icon',
+  color: undefined,
+  customStyle: () => ({}),
+  size: '16px',
 })
 const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 const parseStyle = computed(() => {

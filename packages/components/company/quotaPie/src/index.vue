@@ -7,24 +7,16 @@ import { formatBytes, formatBytesConvert, clone, getVariable } from '@sybz-compo
 defineOptions({
   name: 'SQuotaPie',
 })
-const props = defineProps({
-  used: {
-    type: [String, Number],
-    required: true,
-  },
-  total: {
-    type: [String, Number],
-    required: true,
-  },
-  type: {
-    type: String, // used, quota
-    default: 'used',
-  },
-  text: {
-    type: String,
-    required: true,
-    default: '总使用量 / 总可用量',
-  },
+interface QuotaPieProps {
+  used: string | number
+  total: string | number
+  type?: string
+  text?: string
+}
+
+const props = withDefaults(defineProps<QuotaPieProps>(), {
+  type: 'used',
+  text: '总使用量 / 总可用量',
 })
 // 添加容器尺寸的响应式引用
 const containerRef = ref(null)
@@ -34,12 +26,11 @@ const options = ref()
 
 const usedNum = ref(0)
 const totalNum = ref(0)
-const usedPercent = ref('0%')
 let resizeObserver: ResizeObserver | null = null
 let themeObserver: MutationObserver | null = null
 
+const usedPercent = computed(() => `${((usedNum.value / totalNum.value) * 100).toFixed(2)}%`)
 const getValue = computed(() => {
-  usedPercent.value = ((usedNum.value / totalNum.value) * 100).toFixed(2) + '%'
   let num = `${formatBytes(formatBytesConvert(props.used))} / ${formatBytes(formatBytesConvert(props.total))}`
   return `${usedPercent.value}\n\n${num}\n\n${props.text}`
 })
@@ -134,7 +125,7 @@ let initOptions = {
     left: 'center',
     top: 'center',
     style: {
-      text: getValue, // 自定义文本内容
+      text: '', // 自定义文本内容
       textAlign: 'center',
       fill: '',
       fontSize: 14,
@@ -227,7 +218,7 @@ onBeforeUnmount(() => {
     <s-empty class="s-quota-pie__empty" />
   </template>
   <template v-else>
-    <div class="vChart-box" ref="containerRef">
+    <div ref="containerRef" class="vChart-box">
       <v-chart class="s-quota-pie__chart" :option="options" autoresize />
     </div>
   </template>

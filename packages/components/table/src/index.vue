@@ -3,7 +3,7 @@ defineOptions({
   name: 'STable',
 })
 
-import { ref, watch, computed, useAttrs, nextTick, toRaw, type PropType } from 'vue'
+import { ref, watch, computed, useAttrs, nextTick, toRaw } from 'vue'
 import type { TableColumnCtx, TableInstance } from 'element-plus'
 import RenderComp from './renderComp.vue'
 import HeaderTooltip from './headerTooltip.vue'
@@ -34,81 +34,46 @@ const HEADER_MIN_WIDTH_PADDING = 32
 const HEADER_SORTABLE_RESERVE_WIDTH = 28
 const hasOwn = (target, key) => Object.prototype.hasOwnProperty.call(target, key)
 
-const props = defineProps({
-  data: {
-    type: Array as PropType<TableRow[]>,
-    default: () => [],
-  },
-  columns: {
-    type: Array as PropType<TableColumnList>,
-    default: () => [],
-  },
-  showPage: {
-    type: Boolean,
-    default: true,
-  },
-  showIndex: {
-    type: Boolean,
-    default: true,
-  },
-  size: {
-    type: String,
-    default: '',
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
-  pageSize: {
-    type: Number,
-    default: 30,
-  },
-  pageNumber: {
-    type: Number,
-    default: 1,
-  },
-  pageSizes: {
-    type: Array as PropType<number[]>,
-    default: () => {
-      return [10, 30, 50]
-    },
-  },
-  total: {
-    type: Number,
-    default: 0,
-  },
-  columnEmptyText: {
-    type: String,
-    default: '-',
-  },
-  loading: {
-    type: Boolean,
-  },
-  indexAttrs: {
-    type: Object as PropType<Record<string, any>>,
-    default: () => {},
-  },
-  asyncUpdate: {
-    type: Boolean,
-    default: false,
-  },
-  pageAttrs: {
-    type: Object as PropType<Record<string, any>>,
-    default: () => {},
-  },
-  modelValue: {
-    type: [Array, Object, String, Number, Boolean] as PropType<TableModelValue>,
-    default: undefined,
-  },
-  selectionType: {
-    type: String as PropType<TableSelectionType>,
-    default: '',
-  },
-  selectionAttrs: {
-    type: Object as PropType<Record<string, any>>,
-    default: () => {},
-  },
+interface TableProps {
+  data?: TableRow[]
+  columns?: TableColumnList
+  showPage?: boolean
+  showIndex?: boolean
+  size?: string
+  theme?: '' | 'chenghua'
+  pageSize?: number
+  pageNumber?: number
+  pageSizes?: number[]
+  total?: number
+  columnEmptyText?: string
+  loading?: boolean
+  indexAttrs?: Record<string, any>
+  asyncUpdate?: boolean
+  pageAttrs?: Record<string, any>
+  modelValue?: TableModelValue
+  selectionType?: TableSelectionType
+  selectionAttrs?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<TableProps>(), {
+  data: () => [],
+  columns: () => [],
+  showPage: true,
+  showIndex: true,
+  size: '',
+  theme: '',
+  pageSize: 30,
+  pageNumber: 1,
+  pageSizes: () => [10, 30, 50],
+  total: 0,
+  columnEmptyText: '-',
+  loading: undefined,
+  indexAttrs: () => ({}),
+  asyncUpdate: false,
+  pageAttrs: () => ({}),
+  modelValue: undefined,
+  selectionType: '',
+  selectionAttrs: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('table', props)
 const tableRef = ref<TableInstance | null>(null)

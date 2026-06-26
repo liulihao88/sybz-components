@@ -15,11 +15,12 @@ defineOptions({
 
 const emit = defineEmits(['clickOutside', 'mounted'])
 
-const props = defineProps({
-  options: {
-    type: Object,
-    default: () => ({}),
-  },
+interface ClickOutsideProps {
+  options?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<ClickOutsideProps>(), {
+  options: () => ({}),
 })
 
 const wrapRef = ref(null)

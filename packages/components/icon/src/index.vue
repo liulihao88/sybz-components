@@ -7,34 +7,23 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 defineOptions({
   name: 'SIcon',
 })
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-  },
-  size: {
-    type: [String, Number],
-    default: '16px', // 1em, 10px 10, 100%,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  type: {
-    type: String,
-    default: '', // svg
-  },
-  svgAttrs: {
-    type: Object,
-    default: () => ({}),
-  },
-  dangerouslyUseHTMLString: {
-    type: Boolean,
-    default: false,
-  },
+interface IconProps {
+  name: string
+  color?: string
+  size?: string | number
+  disabled?: boolean
+  type?: string
+  svgAttrs?: Record<string, any>
+  dangerouslyUseHTMLString?: boolean
+}
+
+const props = withDefaults(defineProps<IconProps>(), {
+  color: undefined,
+  size: '16px', // 1em, 10px 10, 100%,
+  disabled: false,
+  type: '', // svg
+  svgAttrs: () => ({}),
+  dangerouslyUseHTMLString: false,
 })
 const mergedProps = useGlobalComponentConfig('icon', props)
 const attrs = useAttrs()

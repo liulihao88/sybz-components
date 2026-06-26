@@ -32,21 +32,22 @@ import { clone, formatBytes, getVariable, isEmpty, formatThousands } from '@sybz
 defineOptions({
   name: 'SCountBar',
 })
-const props = defineProps({
-  data: {
-    type: Array,
-    default: () => [], // [{name: '<1024kb', value: 22}]
-  },
-  options: {
-    type: Object,
-    default: () => {
-      return {
-        count: 'inCount',
-        size: 'inSize',
-        format: '',
-      }
-    },
-  },
+interface CountBarProps {
+  data?: any[]
+  options?: {
+    count: string
+    size: string
+    format: string
+  }
+}
+
+const props = withDefaults(defineProps<CountBarProps>(), {
+  data: () => [], // [{name: '<1024kb', value: 22}]
+  options: () => ({
+    count: 'inCount',
+    size: 'inSize',
+    format: '',
+  }),
 })
 const option = ref()
 const isDataEmpty = ref(false)

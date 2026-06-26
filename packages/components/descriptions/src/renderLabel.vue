@@ -5,9 +5,13 @@
 defineOptions({
   name: 'RenderLabel',
 })
-const props: any = defineProps({
-  render: Function,
-  item: Object,
+interface RenderLabelProps {
+  render: (...args: any[]) => any
+  item?: Record<string, any>
+}
+
+const props = withDefaults(defineProps<RenderLabelProps>(), {
+  item: undefined,
 })
 const renderComponent = () => {
   return props.render(props?.item)

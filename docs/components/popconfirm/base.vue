@@ -25,14 +25,14 @@ function isTest65() {
     <br />
 
     <br />
-    <s-popconfirm @confirm="confirm" content="确定删除<code>123</code>吗?">
+    <s-popconfirm content="确定删除 123 吗?" @confirm="confirm">
       <el-button type="primary">测试66</el-button>
     </s-popconfirm>
 
     <br />
     <br />
 
-    <s-popconfirm @confirm="confirm" :reConfirm="false">
+    <s-popconfirm :re-confirm="false" @confirm="confirm">
       <el-button type="primary" @click="isTest65">
         有些情况(比如本地开发), 不希望弹出弹框浪费时间, 可以设置:reConfirm="false"
       </el-button>

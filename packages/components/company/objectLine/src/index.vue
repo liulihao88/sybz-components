@@ -20,15 +20,14 @@ const chartRef = ref(null)
 const themeVersion = ref(0)
 let themeObserver: MutationObserver | null = null
 
-const props = defineProps({
-  objectCount: {
-    type: Array,
-    default: () => [],
-  },
-  objectSize: {
-    type: Array,
-    default: () => [],
-  },
+interface ObjectLineProps {
+  objectCount?: any[]
+  objectSize?: any[]
+}
+
+const props = withDefaults(defineProps<ObjectLineProps>(), {
+  objectCount: () => [],
+  objectSize: () => [],
 })
 
 const getObjectLineColors = () => {
@@ -291,7 +290,7 @@ defineExpose({
 </script>
 
 <template>
-  <sBasicLayout class="s-object-line" :bodyStyle="{ padding: 0 }" v-bind="$attrs">
+  <sBasicLayout class="s-object-line" :body-style="{ padding: 0 }" v-bind="$attrs">
     <template #header>
       <s-title title="对象数量/大小历史">
         <!-- <template #right>
@@ -299,7 +298,7 @@ defineExpose({
         </template> -->
       </s-title>
     </template>
-    <s-chart v-if="!isEmpty(data)" :option="option" height="100%" ref="chartRef" />
+    <s-chart v-if="!isEmpty(data)" ref="chartRef" :option="option" height="100%" />
     <s-empty v-else class="s-object-line__empty" />
   </sBasicLayout>
 </template>

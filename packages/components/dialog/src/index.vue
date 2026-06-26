@@ -77,7 +77,6 @@
 
 <script setup lang="ts">
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
-import type { PropType } from 'vue'
 import { getType, processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
@@ -87,77 +86,47 @@ defineOptions({
 })
 
 type DialogButtonAttrs = Partial<InstanceType<typeof SButton>['$props']> & Record<string, any>
+type DialogAction = ((...args: any[]) => any) | string
 
 const attrs = useAttrs()
 const emits = defineEmits(['update:modelValue'])
-const props = defineProps({
-  type: {
-    type: String, // drawer
-    // default: 'drawer',
-    default: '',
-  },
-  title: {
-    type: String,
-    default: '提示',
-  },
-  width: {
-    type: [String, Number],
-    default: '',
-  },
-  theme: {
-    type: String,
-    default: '', // 弹框样式: 默认空, norm norm16 simple chenghua
-  },
-  cancel: {
-    type: [Function, String],
-    default: '', //
-  },
-  cancelText: {
-    type: String,
-    default: '取消',
-  },
-  confirmText: {
-    type: String,
-    default: '确认',
-  },
+interface DialogProps {
+  type?: '' | 'drawer'
+  title?: string
+  width?: string | number
+  theme?: '' | 'norm' | 'norm16' | 'simple' | 'chenghua' | string
+  cancel?: DialogAction
+  cancelText?: string
+  confirmText?: string
+  showFooter?: boolean
+  showCancel?: boolean
+  showConfirm?: boolean
+  confirmAttrs?: DialogButtonAttrs
+  cancelAttrs?: DialogButtonAttrs
+  enableConfirm?: boolean
+  confirm?: (...args: any[]) => any
+  fillSlot?: boolean
+  hideHeaderIcon?: boolean
+}
+
+const props = withDefaults(defineProps<DialogProps>(), {
+  type: '',
+  title: '提示',
+  width: '',
+  theme: '', // 弹框样式: 默认空, norm norm16 simple chenghua
+  cancel: '',
+  cancelText: '取消',
+  confirmText: '确认',
   // 是否显示底部操作按钮 :footer="null"
-  showFooter: {
-    type: Boolean,
-    default: undefined,
-  },
-  showCancel: {
-    type: Boolean,
-    default: true,
-  },
-  showConfirm: {
-    type: Boolean,
-    default: true,
-  },
-  confirmAttrs: {
-    type: Object as PropType<DialogButtonAttrs>,
-    default: () => ({}),
-  },
-  cancelAttrs: {
-    type: Object as PropType<DialogButtonAttrs>,
-    default: () => ({}),
-  },
-  enableConfirm: {
-    // 是否允许使用enter键, 点击确定按钮
-    type: Boolean,
-    default: true,
-  },
-  confirm: {
-    type: [Function, undefined],
-    default: undefined,
-  },
-  fillSlot: {
-    type: Boolean,
-    default: false,
-  },
-  hideHeaderIcon: {
-    type: Boolean,
-    default: false,
-  },
+  showFooter: undefined,
+  showCancel: true,
+  showConfirm: true,
+  confirmAttrs: () => ({}),
+  cancelAttrs: () => ({}),
+  enableConfirm: true,
+  confirm: undefined,
+  fillSlot: false,
+  hideHeaderIcon: false,
 })
 const mergedProps = useGlobalComponentConfig('dialog', props)
 
@@ -290,7 +259,7 @@ function handleClose() {
 // 只有当弹框的时候, 且按的是回车键, 才走confirm
 function onkeypress({ code }: KeyboardEvent) {
   if (attrs.modelValue === true && code === 'Enter' && mergedProps.value.enableConfirm && !confirmButtonLoading.value) {
-    confirm()
+    confirmHandler()
   }
 }
 

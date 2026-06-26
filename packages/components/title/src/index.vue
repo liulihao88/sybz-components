@@ -47,7 +47,7 @@
         <slot name="right"></slot>
       </div>
     </div>
-    <div class="s-title__subTitle" v-if="mergedProps.subTitle" v-bind="mergedProps.subAttrs">
+    <div v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
       {{ mergedProps.subTitle }}
     </div>
   </div>
@@ -66,55 +66,35 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 defineOptions({
   name: 'STitle',
 })
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  size: {
-    type: String,
-    default: '', // 默认margin 16px 0
-  },
+interface TitleProps {
+  title?: string
+  size?: string
+  subTitle?: string
+  subAttrs?: Record<string, any>
+  inner?: boolean
+  t?: string | number
+  b?: string | number
+  l?: string | number
+  tb?: string | number
+  height?: string | number
+  type?: 'simple' | 'icon' | 'form' | string
+  theme?: '' | 'chenghua'
+}
+
+const props = withDefaults(defineProps<TitleProps>(), {
+  title: '',
+  size: '', // 默认margin 16px 0
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
-  subTitle: {
-    type: String,
-    default: '',
-  },
-  subAttrs: {
-    type: Object,
-    default: () => ({}),
-  },
-  inner: {
-    type: Boolean,
-    default: false,
-  },
-  t: {
-    type: [String, Number],
-    default: '',
-  },
-  b: {
-    type: [String, Number],
-    default: '',
-  },
-  l: {
-    type: [String, Number],
-    default: '',
-  },
-  tb: {
-    type: [String, Number],
-  },
-  height: {
-    type: [String, Number],
-    default: '',
-  },
-  type: {
-    type: String, // simple, icon, form
-    default: 'icon',
-  },
-  theme: {
-    type: String, // chenghua
-    default: '',
-  },
+  subTitle: '',
+  subAttrs: () => ({}),
+  inner: false,
+  t: '',
+  b: '',
+  l: '',
+  tb: undefined,
+  height: '',
+  type: 'icon',
+  theme: '',
 })
 const mergedProps = useGlobalComponentConfig('title', props)
 

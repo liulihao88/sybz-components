@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref, nextTick, onMounted, onBeforeUnmount, watch } from 'vue'
 
-const props = defineProps({
-  label: {
-    type: [String, Number],
-    default: '',
-  },
+interface HeaderTooltipProps {
+  label?: string | number
+}
+
+const props = withDefaults(defineProps<HeaderTooltipProps>(), {
+  label: '',
 })
 
 const textRef = ref<HTMLElement | null>(null)

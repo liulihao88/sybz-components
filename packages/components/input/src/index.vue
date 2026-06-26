@@ -100,93 +100,49 @@ const normalizeInputSize = (size: unknown): InputSize | undefined => {
   return size ? (size as InputSize) : undefined
 }
 
-const props = defineProps({
-  modelValue: {
-    type: null,
-    required: true,
-  },
-  boxStyle: {
-    type: Object,
-    default: () => {},
-  },
-  width: {
-    type: [String, Number],
-    default: '100%',
-  },
-  height: {
-    type: [String, Number],
-    default: '',
-  },
-  maxlength: {
-    type: [String, Number],
-    default: undefined,
-  },
-  hideMaxLengthError: {
-    type: Boolean,
-    default: false,
-  },
-  maxLengthErrorText: {
-    type: String,
-    default: '',
-  },
-  size: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'small', 'default', 'large'].includes(value),
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
-  showWordLimit: {
-    type: [Boolean, String],
-    default: '',
-  },
-  block: {
-    type: Boolean,
-    default: false,
-  },
+interface SInputProps {
+  modelValue: any
+  boxStyle?: Record<string, any>
+  width?: string | number
+  height?: string | number
+  maxlength?: string | number
+  hideMaxLengthError?: boolean
+  maxLengthErrorText?: string
+  size?: InputSize | ''
+  theme?: '' | 'chenghua'
+  showWordLimit?: boolean | string
+  block?: boolean
+  disPlaceholder?: string
+  subAttrs?: Record<string, any>
+  tooltipAttrs?: Record<string, any>
+  iconAttrs?: Record<string, any>
+  hideTooltip?: boolean
+  options?: any[]
+  content?: string
+  dangerouslyUseHTMLString?: boolean
+}
+
+const props = withDefaults(defineProps<SInputProps>(), {
+  boxStyle: () => ({}),
+  width: '100%',
+  height: '',
+  maxlength: undefined,
+  hideMaxLengthError: false,
+  maxLengthErrorText: '',
+  size: '',
+  theme: '',
+  showWordLimit: '',
+  block: false,
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性
-  disPlaceholder: {
-    type: String,
-    default: '',
-  },
-  subAttrs: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
-  tooltipAttrs: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
-  iconAttrs: {
-    type: Object,
-    default: () => {
-      return {}
-    },
-  },
-  hideTooltip: {
-    type: Boolean,
-    default: false,
-  },
+  disPlaceholder: '',
+  subAttrs: () => ({}),
+  tooltipAttrs: () => ({}),
+  iconAttrs: () => ({}),
+  hideTooltip: false,
   // 适用于el-autocomplete
-  options: {
-    type: Array,
-    default: undefined,
-  },
-  content: {
-    type: String,
-    default: '',
-  },
-  dangerouslyUseHTMLString: {
-    type: Boolean,
-    default: false,
-  },
+  options: undefined,
+  content: '',
+  dangerouslyUseHTMLString: false,
 })
 const mergedProps = useGlobalComponentConfig('input', props)
 const restaurants = ref([])

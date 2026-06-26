@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, withDefaults } from 'vue'
+import { computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import group_null from '@/assets/images/group_null.png'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -7,30 +7,6 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 defineOptions({
   name: 'SEmpty',
 })
-// const props = defineProps({
-//   description: {
-//     type: String,
-//     default: '暂无数据',
-//   },
-//   width: {
-//     type: [String, Number],
-//     default: 60,
-//   },
-//   height: {
-//     type: [String, Number],
-//   },
-//   imgAttrs: {
-//     type: Object,
-//     default: () => {},
-//   },
-//   src: {
-//     type: String,
-//     default: () => {
-//       return group_null
-//     },
-//   },
-// })
-
 const props = withDefaults(
   defineProps<{
     description?: string
@@ -44,6 +20,8 @@ const props = withDefaults(
     description: '暂无数据',
     theme: '',
     width: 60,
+    height: undefined,
+    imgAttrs: () => ({}),
     src: group_null,
   },
 )

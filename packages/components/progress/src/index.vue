@@ -17,26 +17,17 @@ defineOptions({
   name: 'SProgress',
 })
 
-const props = defineProps({
-  // 进度条百分比
-  percentage: {
-    type: Number,
-    required: true,
-  },
-  // 动画时间
-  animationTime: {
-    type: Number,
-    default: 500,
-  },
-  // 是否开启动画
-  isAnimation: {
-    type: Boolean,
-    default: true,
-  },
-  customColor: {
-    type: Boolean,
-    default: true, // 是否开启自定义颜色, 不开启则使用el-progress默认颜色
-  },
+interface ProgressProps {
+  percentage: number
+  animationTime?: number
+  isAnimation?: boolean
+  customColor?: boolean
+}
+
+const props = withDefaults(defineProps<ProgressProps>(), {
+  animationTime: 500,
+  isAnimation: true,
+  customColor: true, // 是否开启自定义颜色, 不开启则使用el-progress默认颜色
 })
 
 const originAttrs = {

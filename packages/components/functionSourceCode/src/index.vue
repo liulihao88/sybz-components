@@ -18,11 +18,12 @@ defineOptions({
 })
 
 // 从父组件接收函数名
-const props = defineProps({
-  functionName: {
-    type: String,
-    default: 'uuid',
-  },
+interface FunctionSourceCodeProps {
+  functionName?: string
+}
+
+const props = withDefaults(defineProps<FunctionSourceCodeProps>(), {
+  functionName: 'uuid',
 })
 
 const sourceCode = ref<string>('')

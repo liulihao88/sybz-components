@@ -8,20 +8,16 @@ defineOptions({
 })
 const attrs = useAttrs()
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  boxStyle: {
-    type: Object,
-    default: () => ({}),
-  },
-  theme: {
-    type: String,
-    default: '',
-    validator: (value: string) => ['', 'chenghua'].includes(value),
-  },
+interface CompTitleProps {
+  title?: string
+  boxStyle?: Record<string, any>
+  theme?: '' | 'chenghua'
+}
+
+const props = withDefaults(defineProps<CompTitleProps>(), {
+  title: '',
+  boxStyle: () => ({}),
+  theme: '',
 })
 const mergedProps = useGlobalComponentConfig('compTitle', props)
 
@@ -49,11 +45,11 @@ const compTitleClass = computed(() => [
 
 <template>
   <div
+    v-if="mergedProps.title"
     class="s-comp-title"
     :class="compTitleClass"
     :style="{ ...computedBoxStyle }"
     v-bind="$attrs"
-    v-if="mergedProps.title"
   >
     {{ mergedProps.title }}
   </div>
