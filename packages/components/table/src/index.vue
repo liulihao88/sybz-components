@@ -75,6 +75,7 @@ const props = defineProps({
   },
   total: {
     type: Number,
+    default: 0,
   },
   columnEmptyText: {
     type: String,
@@ -811,7 +812,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-table" :class="tableClass" :style="wrapperStyle" v-loading="tableLoading">
+  <div v-loading="tableLoading" class="s-table" :class="tableClass" :style="wrapperStyle">
     <el-table
       ref="tableRef"
       :data="mergedProps.data"
@@ -1259,7 +1260,7 @@ defineExpose({
       </template>
     </el-table>
 
-    <div class="page-wrap" v-if="mergedProps.showPage">
+    <div v-if="mergedProps.showPage" class="page-wrap">
       <div class="page-left">
         <span>共</span>
         <span class="s-table__total">{{ tableTotal }}</span>
@@ -1276,9 +1277,9 @@ defineExpose({
             layout="prev, pager, next, jumper, sizes"
             :total="tableTotal"
             :size="mergedProps.size || undefined"
+            v-bind="paginationAttrs"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            v-bind="paginationAttrs"
           />
         </div>
       </div>
