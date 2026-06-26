@@ -24,7 +24,7 @@ export default [
   },
   js.configs.recommended,
   tsPlugin.configs['flat/base'],
-  ...vue.configs['flat/base'],
+  ...vue.configs['flat/recommended'],
   {
     files: ['**/*.{js,jsx,ts,tsx,cjs,mjs,vue}'],
     languageOptions: {
