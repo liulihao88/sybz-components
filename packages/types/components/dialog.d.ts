@@ -19,6 +19,7 @@ export type SDialogComponent = typeof ElDialog & {
     $props: {
       type?: SDialogType
       title?: string
+      subTitle?: string
       width?: string | number
       theme?: SDialogTheme
       cancel?: string | ((...args: any[]) => any)

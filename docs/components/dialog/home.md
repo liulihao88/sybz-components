@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-dialog title="基础dialog" v-model="isShow">内容</s-dialog>`。属性说明：`title` 示例值：`基础dialog`，类型：string，默认值：`""`；`v-model` 示例值：`isShow`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-dialog title="基础dialog" sub-title="这是一段颜色稍淡的二级标题" v-model="isShow">内容</s-dialog>`。属性说明：`title` 示例值：`基础dialog`，类型：string，默认值：`提示`；`subTitle` 示例值：`这是一段颜色稍淡的二级标题`，类型：string，默认值：`""`；`v-model` 示例值：`isShow`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 dialog/base
 :::
 
@@ -105,6 +105,7 @@ app.use(SybzComponents, {
 |      属性名       | 说明                                                                                    | 类型                                          | 默认值 |
 | :---------------: | --------------------------------------------------------------------------------------- | --------------------------------------------- | ------ |
 |       title       | 顶部title                                                                               | string                                        | 提示   |
+|     subTitle      | 顶部二级标题，显示在 title 下方，颜色稍淡                                               | string                                        | ''     |
 |       width       | 弹框宽度；当 `type="drawer"` 时用于控制抽屉宽度                                         | string / number                               | ''     |
 |       theme       | 弹框样式，可选 `chenghua`                                                               | string                                        | -      |
 |       type        | 弹框类型，可选 `drawer`                                                                 | string                                        | ''     |

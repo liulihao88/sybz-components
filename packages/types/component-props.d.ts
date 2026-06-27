@@ -103,6 +103,7 @@ export type SDialogHandler = string | ((...args: any[]) => any)
 export interface SDialogSelfProps {
   type?: SDialogType
   title?: string
+  subTitle?: string
   width?: string | number
   theme?: SDialogTheme
   cancel?: SDialogHandler

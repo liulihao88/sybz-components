@@ -6,6 +6,11 @@ const isShow = ref(false)
 <template>
   <div>
     <el-button type="primary" @click="isShow = true">显示dialog</el-button>
-    <s-dialog v-model="isShow" title="基础dialog">内容</s-dialog>
+    <s-dialog
+      v-model="isShow"
+      title="基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础基础"
+    >
+      内容
+    </s-dialog>
   </div>
 </template>

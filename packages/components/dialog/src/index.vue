@@ -38,7 +38,12 @@
           </span>
           <span class="s-dialog__header-content">
             <slot name="header">
-              {{ mergedProps.title }}
+              <span class="s-dialog__header-title">
+                {{ mergedProps.title }}
+              </span>
+              <span v-if="mergedProps.subTitle" class="s-dialog__header-sub-title">
+                {{ mergedProps.subTitle }}
+              </span>
             </slot>
           </span>
         </div>
@@ -95,6 +100,7 @@ interface DialogProps {
   modelValue?: boolean
   type?: '' | 'drawer'
   title?: string
+  subTitle?: string
   width?: string | number
   theme?: '' | 'norm' | 'norm16' | 'simple' | 'chenghua' | string
   cancel?: DialogAction
@@ -115,6 +121,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
   type: '',
   title: '提示',
+  subTitle: '',
   width: '',
   theme: '', // 弹框样式: 默认空, norm norm16 simple chenghua
   cancel: '',
@@ -291,6 +298,10 @@ onBeforeUnmount(() => {
     font-weight: 700;
   }
 
+  :deep(.el-dialog__header) {
+    padding-right: 40px;
+  }
+
   :deep(.el-drawer__header) {
     margin-bottom: 0;
   }
@@ -411,7 +422,7 @@ onBeforeUnmount(() => {
   }
   .s-dialog__header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     font-size: 16px;
     color: var(--el-text-color-primary);
@@ -422,6 +433,7 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
+    height: 22px;
   }
 
   .s-dialog__header-icon {
@@ -434,6 +446,22 @@ onBeforeUnmount(() => {
   .s-dialog__header-content {
     min-width: 0;
     flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .s-dialog__header-title {
+    line-height: 22px;
+  }
+
+  .s-dialog__header-sub-title {
+    color: var(--el-text-color-secondary);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
   }
 }
 </style>
