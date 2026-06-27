@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SafeHtml from '@/components/utils/SafeHtml.vue'
+
 const tableData = [
   {
     userInfo: { name: 'Test1', age: 22 },
@@ -77,7 +79,7 @@ const columns = [
 <template>
   <s-table :data="tableData" :columns="columns">
     <template #content="{ row }">
-      <span v-html="row.other[1].more.content" />
+      <SafeHtml :html="row.other[1].more.content" />
     </template>
   </s-table>
 </template>

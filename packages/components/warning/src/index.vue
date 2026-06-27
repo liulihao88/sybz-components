@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import SIcon from '@/components/icon/src/index.vue'
+import SafeHtml from '@/components/utils/SafeHtml.vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -39,12 +40,6 @@ const props = withDefaults(defineProps<Props>(), {
 const mergedProps = useGlobalComponentConfig('warning', props)
 
 const attrs = useAttrs()
-
-const bindProps = computed(() => {
-  return mergedProps.value.dangerouslyUseHtmlString
-    ? { innerHTML: mergedProps.value.content }
-    : { textContent: mergedProps.value.content }
-})
 
 const mergedStyle = computed(() => {
   let obj: Record<string, any> = {}
@@ -116,10 +111,17 @@ function parseClass(): string {
         </slot>
       </div>
       <slot name="content">
-        <span
+        <SafeHtml
+          v-if="mergedProps.dangerouslyUseHtmlString"
           class="s-warning-box__content"
           :class="{ 's-warning-box__content--muted': mergedProps.type === 'icon' }"
-          v-bind="bindProps"
+          :html="mergedProps.content"
+        />
+        <span
+          v-else
+          class="s-warning-box__content"
+          :class="{ 's-warning-box__content--muted': mergedProps.type === 'icon' }"
+          v-text="mergedProps.content"
         />
       </slot>
     </div>

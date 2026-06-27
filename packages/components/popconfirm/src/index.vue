@@ -9,6 +9,7 @@ defineOptions({
 import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
+import SafeHtml from '@/components/utils/SafeHtml.vue'
 
 const attrs = useAttrs()
 const isPopoverVisible = ref(false)
@@ -97,60 +98,6 @@ const popconfirmButtonTheme = computed(() => {
 })
 
 const safeContent = computed(() => String(mergedProps.value.content ?? ''))
-const ALLOWED_CONTENT_TAGS = new Set([
-  'b',
-  'strong',
-  'i',
-  'em',
-  'u',
-  's',
-  'br',
-  'span',
-  'code',
-  'pre',
-  'p',
-  'ul',
-  'ol',
-  'li',
-])
-
-const sanitizeContentHtml = (content: string) => {
-  if (typeof DOMParser === 'undefined' || typeof document === 'undefined') {
-    return ''
-  }
-
-  const parsedDocument = new DOMParser().parseFromString(content, 'text/html')
-  const cleanNode = (node: Node) => {
-    Array.from(node.childNodes).forEach((child) => {
-      if (child.nodeType === Node.COMMENT_NODE) {
-        child.remove()
-        return
-      }
-
-      if (child.nodeType !== Node.ELEMENT_NODE) {
-        return
-      }
-
-      const element = child as HTMLElement
-      const tagName = element.tagName.toLowerCase()
-
-      if (!ALLOWED_CONTENT_TAGS.has(tagName)) {
-        element.replaceWith(document.createTextNode(element.textContent ?? ''))
-        return
-      }
-
-      Array.from(element.attributes).forEach((attr) => {
-        element.removeAttribute(attr.name)
-      })
-      cleanNode(element)
-    })
-  }
-
-  cleanNode(parsedDocument.body)
-  return parsedDocument.body.innerHTML
-}
-
-const sanitizedContent = computed(() => sanitizeContentHtml(safeContent.value))
 
 onBeforeUnmount(() => {
   removeClickOutsideListener()
@@ -174,9 +121,12 @@ defineExpose({
   >
     <slot name="content">
       <template v-if="mergedProps.content">
-        <!-- eslint-disable vue/no-v-html -->
-        <div v-if="mergedProps.dangerouslyUseHtmlString" class="s-popconfirm__content" v-html="sanitizedContent"></div>
-        <!-- eslint-enable vue/no-v-html -->
+        <SafeHtml
+          v-if="mergedProps.dangerouslyUseHtmlString"
+          tag="div"
+          class="s-popconfirm__content"
+          :html="safeContent"
+        />
         <div v-else class="s-popconfirm__content" v-text="safeContent"></div>
       </template>
     </slot>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
+import SafeHtml from '@/components/utils/SafeHtml.vue'
 const { proxy } = getCurrentInstance()
 import { formatTextToHtml, $toast } from '@/utils/src/index'
 const parse$toast = (str) => {
@@ -29,5 +30,5 @@ const parse$toast = (str) => {
   </s-button>
 
   <s-title title="2. 直接在html中使用"></s-title>
-  <div v-html="formatTextToHtml('Error log:\n  Time: 2024-01-01\n  Message: Something went wrong')"></div>
+  <SafeHtml tag="div" :html="formatTextToHtml('Error log:\n  Time: 2024-01-01\n  Message: Something went wrong')" />
 </template>
