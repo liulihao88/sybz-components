@@ -436,7 +436,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
     const wrapperLines = [
       "import { ElButton } from 'element-plus'",
-      `import type { ${typedComponent.typeName}, SybzComponentTheme, SybzRecord } from '${normalizedPropsImportPath}'`,
+      `import type { ${typedComponent.typeName} } from '${normalizedPropsImportPath}'`,
       '',
       'type ElButtonInstance = InstanceType<typeof ElButton>',
       '',
@@ -446,9 +446,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       wrapperLines.push('/**')
       wrapperLines.push(` * ${typedComponent.description}`)
       wrapperLines.push(' *')
-      wrapperLines.push(
-        ' * 支持 Element Plus Button 的公开属性，并扩展 content、tooltipAttrs、theme、variant、width、height、hoverAnimation 等属性。',
-      )
+      wrapperLines.push(' * 支持 Element Plus Button 的公开属性，并扩展 sybz 自身属性。')
       wrapperLines.push(' */')
     }
 
@@ -457,29 +455,8 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     wrapperLines.push('')
     wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = typeof ElButton & {`)
     wrapperLines.push('  new (): {')
-    wrapperLines.push('    $props: {')
-    wrapperLines.push('      /** 点击后进入 loading 状态的毫秒数，0 表示不启用点击节流 loading */')
-    wrapperLines.push('      time?: number')
-    wrapperLines.push('      /** 按钮提示内容，设置后会用 s-tooltip 包裹按钮 */')
-    wrapperLines.push('      content?: string')
-    wrapperLines.push('      /** 透传给 s-tooltip 的属性 */')
-    wrapperLines.push('      tooltipAttrs?: SybzRecord')
-    wrapperLines.push('      /** 是否允许 tooltip 内容作为 HTML 片段渲染 */')
-    wrapperLines.push('      dangerouslyUseHtmlString?: boolean')
-    wrapperLines.push('      /** 组件主题 */')
-    wrapperLines.push('      theme?: SybzComponentTheme')
-    wrapperLines.push('      /** chenghua 主题下的按钮变体 */')
-    wrapperLines.push("      variant?: '' | 'outline' | 'gradient'")
-    wrapperLines.push('      /** 按钮尺寸 */')
-    wrapperLines.push("      size?: '' | 'small' | 'default' | 'large'")
-    wrapperLines.push('      /** 按钮宽度，数字会按工具方法补单位 */')
-    wrapperLines.push('      width?: string | number')
-    wrapperLines.push('      /** 按钮高度，数字会按工具方法补单位 */')
-    wrapperLines.push('      height?: string | number')
-    wrapperLines.push('      /** 是否开启 hover 动效 */')
-    wrapperLines.push('      hoverAnimation?: boolean')
     wrapperLines.push(
-      "    } & Omit<ElButtonInstance['$props'], 'time' | 'content' | 'tooltipAttrs' | 'dangerouslyUseHtmlString' | 'theme' | 'variant' | 'size' | 'width' | 'height' | 'hoverAnimation'>",
+      `    $props: ${typedComponent.typeName} & Omit<ElButtonInstance['$props'], keyof ${typedComponent.typeName}>`,
     )
     wrapperLines.push("    $emit: ElButtonInstance['$emit']")
     wrapperLines.push("    $slots: ElButtonInstance['$slots']")
@@ -501,7 +478,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     const wrapperLines = [
       "import { ElDialog } from 'element-plus'",
       "import type { ElDrawer } from 'element-plus'",
-      `import type { ${typedComponent.typeName}, SDialogTheme, SDialogType, SybzRecord } from '${normalizedPropsImportPath}'`,
+      `import type { ${typedComponent.typeName} } from '${normalizedPropsImportPath}'`,
       '',
       'type ElDialogInstance = InstanceType<typeof ElDialog>',
       'type ElDrawerInstance = InstanceType<typeof ElDrawer>',
@@ -512,9 +489,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       wrapperLines.push('/**')
       wrapperLines.push(` * ${typedComponent.description}`)
       wrapperLines.push(' *')
-      wrapperLines.push(
-        ' * 支持 Element Plus Dialog 的公开属性，并补充 Drawer 相关属性与 title、theme、confirmAttrs、cancelAttrs、fillSlot 等扩展属性。',
-      )
+      wrapperLines.push(' * 支持 Element Plus Dialog/Drawer 的公开属性，并扩展 sybz 自身属性。')
       wrapperLines.push(' */')
     }
 
@@ -526,26 +501,8 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     wrapperLines.push('')
     wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = typeof ElDialog & {`)
     wrapperLines.push('  new (): {')
-    wrapperLines.push('    $props: {')
-    wrapperLines.push('      type?: SDialogType')
-    wrapperLines.push('      title?: string')
-    wrapperLines.push('      subTitle?: string')
-    wrapperLines.push('      width?: string | number')
-    wrapperLines.push('      theme?: SDialogTheme')
-    wrapperLines.push('      cancel?: string | ((...args: any[]) => any)')
-    wrapperLines.push('      cancelText?: string')
-    wrapperLines.push('      confirmText?: string')
-    wrapperLines.push('      showFooter?: boolean')
-    wrapperLines.push('      showCancel?: boolean')
-    wrapperLines.push('      showConfirm?: boolean')
-    wrapperLines.push('      confirmAttrs?: SybzRecord')
-    wrapperLines.push('      cancelAttrs?: SybzRecord')
-    wrapperLines.push('      enableConfirm?: boolean')
-    wrapperLines.push('      confirm?: (...args: any[]) => any')
-    wrapperLines.push('      fillSlot?: boolean')
-    wrapperLines.push('      hideHeaderIcon?: boolean')
     wrapperLines.push(
-      "    } & Omit<ElDialogInstance['$props'], 'type' | 'title' | 'subTitle' | 'width'> & Omit<ElDrawerInstance['$props'], 'type' | 'title' | 'subTitle' | 'width' | keyof ElDialogInstance['$props']>",
+      `    $props: ${typedComponent.typeName} & Omit<ElDialogInstance['$props'], keyof ${typedComponent.typeName}> & Omit<ElDrawerInstance['$props'], keyof ${typedComponent.typeName} | keyof ElDialogInstance['$props']>`,
     )
     wrapperLines.push("    $emit: ElDialogInstance['$emit']")
     wrapperLines.push("    $slots: ElDialogInstance['$slots']")
@@ -566,38 +523,16 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
     const wrapperLines = [
       "import { ElInput } from 'element-plus'",
-      "import type { SInputProps, SybzComponentTheme, SybzComponentSize, SybzRecord } from '" +
-        normalizedPropsImportPath +
-        "'",
+      `import type { ${typedComponent.typeName} } from '${normalizedPropsImportPath}'`,
       '',
       'type ElInputInstance = InstanceType<typeof ElInput>',
       '',
-      `export type ${typedComponent.publicPropsTypeName} = SInputProps &`,
-      `  Omit<ElInputInstance['$props'], keyof SInputProps>`,
+      `export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName} &`,
+      `  Omit<ElInputInstance['$props'], keyof ${typedComponent.typeName}>`,
       '',
       `export type ${typedComponent.exportedComponentTypeName} = typeof ElInput & {`,
       '  new (): {',
-      '    $props: {',
-      '      modelValue: any',
-      '      boxStyle?: SybzRecord',
-      '      width?: string | number',
-      '      height?: string | number',
-      '      maxlength?: string | number',
-      '      hideMaxLengthError?: boolean',
-      '      maxLengthErrorText?: string',
-      '      size?: SybzComponentSize',
-      '      theme?: SybzComponentTheme',
-      '      showWordLimit?: boolean | string',
-      '      block?: boolean',
-      '      disPlaceholder?: string',
-      '      subAttrs?: SybzRecord',
-      '      tooltipAttrs?: SybzRecord',
-      '      iconAttrs?: SybzRecord',
-      '      hideTooltip?: boolean',
-      '      options?: any[]',
-      '      content?: string',
-      '      dangerouslyUseHtmlString?: boolean',
-      "    } & Omit<ElInputInstance['$props'], keyof SInputProps>",
+      `    $props: ${typedComponent.typeName} & Omit<ElInputInstance['$props'], keyof ${typedComponent.typeName}>`,
       "    $emit: ElInputInstance['$emit']",
       "    $slots: ElInputInstance['$slots']",
       '  }',
@@ -1133,21 +1068,9 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
   if (typedComponent) {
     const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
     const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const importedTypeNames = [
-      typedComponent.typeName,
-      typedComponent.emitsTypeName,
-      typedComponent.explicitComponentType === 'button' ? 'SybzComponentTheme' : undefined,
-      typedComponent.explicitComponentType === 'button' ? 'SybzRecord' : undefined,
-    ]
-      .filter(Boolean)
-      .join(', ')
+    const importedTypeNames = [typedComponent.typeName, typedComponent.emitsTypeName].filter(Boolean).join(', ')
     if (typedComponent.publicPropsTypeName) {
       wrapperLines.unshift("import type { AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'")
-    }
-    if (typedComponent.explicitComponentType === 'button') {
-      wrapperLines[0] =
-        "import type { AllowedComponentProps, ComponentCustomProps, ComponentOptionsMixin, DefineComponent, Plugin, PropType, VNodeProps } from 'vue'"
-      wrapperLines.unshift("import type { buttonProps } from 'element-plus/es/components/button'")
     }
     wrapperLines.push(`import type { ${importedTypeNames} } from '${normalizedPropsImportPath}'`)
     wrapperLines.push('')
@@ -1169,76 +1092,14 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       wrapperLines.push('/**')
       wrapperLines.push(` * ${typedComponent.description}`)
       wrapperLines.push(' *')
-      wrapperLines.push(
-        ' * 支持 Element Plus Button 的公开属性，并扩展 content、tooltipAttrs、theme、variant、width、height、hoverAnimation 等属性。',
-      )
+      wrapperLines.push(' * 支持组件公开属性，并扩展 sybz 自身属性。')
       wrapperLines.push(' */')
     }
 
     if (typedComponent.exportedComponentTypeName) {
-      if (typedComponent.explicitComponentType === 'button') {
-        wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = DefineComponent<`)
-        wrapperLines.push('  {')
-        wrapperLines.push('    /** 点击后进入 loading 状态的毫秒数，0 表示不启用点击节流 loading */')
-        wrapperLines.push('    readonly time: {')
-        wrapperLines.push('      readonly type: PropType<number>')
-        wrapperLines.push('      readonly default: 0')
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** 按钮提示内容，设置后会用 s-tooltip 包裹按钮 */')
-        wrapperLines.push('    readonly content: {')
-        wrapperLines.push('      readonly type: PropType<string>')
-        wrapperLines.push("      readonly default: ''")
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** 透传给 s-tooltip 的属性 */')
-        wrapperLines.push('    readonly tooltipAttrs: {')
-        wrapperLines.push('      readonly type: PropType<SybzRecord>')
-        wrapperLines.push('      readonly default: () => SybzRecord')
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** 是否允许 tooltip 内容作为 HTML 片段渲染 */')
-        wrapperLines.push('    readonly dangerouslyUseHtmlString: {')
-        wrapperLines.push('      readonly type: PropType<boolean>')
-        wrapperLines.push('      readonly default: false')
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** 组件主题 */')
-        wrapperLines.push('    readonly theme: {')
-        wrapperLines.push('      readonly type: PropType<SybzComponentTheme>')
-        wrapperLines.push("      readonly default: ''")
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** chenghua 主题下的按钮变体 */')
-        wrapperLines.push('    readonly variant: {')
-        wrapperLines.push("      readonly type: PropType<'' | 'outline' | 'gradient'>")
-        wrapperLines.push("      readonly default: ''")
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** 按钮宽度，数字会按工具方法补单位 */')
-        wrapperLines.push('    readonly width: {')
-        wrapperLines.push('      readonly type: PropType<string | number>')
-        wrapperLines.push("      readonly default: ''")
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** 按钮高度，数字会按工具方法补单位 */')
-        wrapperLines.push('    readonly height: {')
-        wrapperLines.push('      readonly type: PropType<string | number>')
-        wrapperLines.push("      readonly default: ''")
-        wrapperLines.push('    }')
-        wrapperLines.push('    /** 是否开启 hover 动效 */')
-        wrapperLines.push('    readonly hoverAnimation: {')
-        wrapperLines.push('      readonly type: PropType<boolean>')
-        wrapperLines.push('      readonly default: false')
-        wrapperLines.push('    }')
-        wrapperLines.push('  } & typeof buttonProps,')
-        wrapperLines.push('  {},')
-        wrapperLines.push('  any,')
-        wrapperLines.push('  {},')
-        wrapperLines.push('  {},')
-        wrapperLines.push('  ComponentOptionsMixin,')
-        wrapperLines.push('  ComponentOptionsMixin,')
-        wrapperLines.push(`  ${typedComponent.emitsTypeName || '{}'}`)
-        wrapperLines.push('> &')
-        wrapperLines.push('  Plugin')
-      } else {
-        wrapperLines.push(
-          `export interface ${typedComponent.exportedComponentTypeName} extends InstallableComponent<${componentTypeParams}> {}`,
-        )
-      }
+      wrapperLines.push(
+        `export interface ${typedComponent.exportedComponentTypeName} extends InstallableComponent<${componentTypeParams}> {}`,
+      )
       wrapperLines.push('')
       wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)
     } else {
