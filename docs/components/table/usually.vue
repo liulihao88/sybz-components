@@ -33,7 +33,7 @@ const columns = [
   {
     label: '结束时间',
     prop: 'endTime',
-    filter: proxy.formatTime,
+    filter: 'formatTime',
   },
   {
     label: '状态',

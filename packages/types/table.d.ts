@@ -53,13 +53,9 @@ export type TableMaybeFn<TResult = any, Row extends TableRow = TableRow> =
 
 export type TableRender<Row extends TableRow = TableRow> = (context: TableCellContext<Row>) => VNodeChild
 
-export type TableFilterContext<Row extends TableRow = TableRow> = TableCellContext<Row>
+export type TableFilterContext<Row extends TableRow = TableRow> = TableCallbackContext<Row>
 
-export type TableFilter<Row extends TableRow = TableRow> = (
-  context: TableFilterContext<Row>,
-  row: Row,
-  scope: TableScope<Row>,
-) => any
+export type TableFilter<Row extends TableRow = TableRow> = string | ((context: TableFilterContext<Row>) => any)
 
 export interface STablePageAttrs extends Partial<PaginationPropsPublic> {
   [key: string]: any

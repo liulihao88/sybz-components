@@ -225,7 +225,7 @@ const templateTableColumns = computed<TableColumnList<TemplateRow>>(() => [
 |        `index`        | `type="index"` 时自定义序号                                            | number / function            | -                                   |
 |       `useSlot`       | 使用插槽渲染；传 `true` 时插槽名为 `prop`，传字符串时插槽名为该字符串  | boolean / string             | `false`                             |
 |       `render`        | `s-table` 自定义渲染函数，接收对象参数                                 | function                     | -                                   |
-|       `filter`        | `s-table` 自定义文本处理函数                                           | function                     | -                                   |
+|       `filter`        | `s-table` 自定义文本处理，支持方法名字符串或对象参数函数               | string / function            | -                                   |
 |       `handler`       | 单元格点击事件；存在时单元格内容会带点击样式                           | function                     | -                                   |
 |       `isShow`        | 控制列是否显示，支持布尔值或函数                                       | boolean / function           | `true`                              |
 |   `columnEmptyText`   | 当前列的空值占位文案，会覆盖全局 `columnEmptyText`                     | string                       | -                                   |
@@ -271,6 +271,8 @@ render({ row, scope, value, column, action, index })
 
 ### 回调参数
 
+`filter` 支持字符串或函数。传字符串时，会优先读取当前组件实例上的同名方法并用当前单元格 `value` 调用；没有同名方法时读取当前行的同名字段。传函数时只接收一个对象参数，和 `disabled` 用法保持一致。
+
 `filter`、`handler`、`isShow`、`disabled`、`reConfirm`，以及按钮的 `content` / `title` 函数，推荐统一使用对象参数：
 
 ```ts
@@ -279,7 +281,7 @@ const callback = ({ row, scope, value, column, action, index, event }) => {}
 
 - `value` 是当前列或当前按钮 `prop` 对应的值。
 - `event` 仅点击相关回调下存在。
-- 仍兼容旧的位置参数写法，但更推荐对象写法，和 `render` 保持一致。
+- `filter` 不再使用旧的位置参数写法；函数形式固定为一个对象参数，和 `render` 保持一致。
 
 ### 说明
 

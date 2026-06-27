@@ -3,7 +3,7 @@ defineOptions({
   name: 'STable',
 })
 
-import { ref, watch, computed, useAttrs, nextTick, toRaw } from 'vue'
+import { ref, watch, computed, useAttrs, nextTick, toRaw, getCurrentInstance } from 'vue'
 import type { TableColumnCtx, TableInstance } from 'element-plus'
 import RenderComp from './renderComp.vue'
 import HeaderTooltip from './headerTooltip.vue'
@@ -21,7 +21,6 @@ import type {
   STableResolvedColumn,
   TableCallbackContext,
   TableColumnList,
-  TableFilter,
   TableModelValue,
   TableRow,
   TableSelectionType,
@@ -29,6 +28,7 @@ import type {
 } from './types'
 
 const attrs = useAttrs()
+const instance = getCurrentInstance()
 const PAGE_WRAP_HEIGHT = 50
 const HEADER_MIN_WIDTH_PADDING = 32
 const HEADER_SORTABLE_RESERVE_WIDTH = 28
@@ -351,16 +351,6 @@ const invokeWithContext = (fn: any, context: TableCallbackContext, legacyArgs: a
   return fn(context)
 }
 
-const isDestructuredObjectCallback = (fn: Function) => {
-  const source = Function.prototype.toString.call(fn).replace(/\s+/g, ' ')
-
-  return (
-    /^\s*(async\s+)?function\b[^(]*\(\s*\{/.test(source) ||
-    /^\s*(async\s+)?\(\s*\{/.test(source) ||
-    /^\s*(async\s+)?\{\s*[^}]*\}\s*=>/.test(source)
-  )
-}
-
 const normalizeMaxBtns = (value: number | string | undefined) => {
   const parsedValue = Number(value)
 
@@ -475,20 +465,34 @@ const parseIsShow = (
   }
 }
 
-const parseFilter = (filter: TableFilter | undefined, context: TableCallbackContext = {}) => {
-  if (typeof filter !== 'function') {
+const getFilterValueByName = (filter: string, context: TableCallbackContext = {}) => {
+  const globalValue = instance?.proxy?.[filter]
+
+  if (typeof globalValue === 'function') {
+    return globalValue(context.value)
+  }
+
+  if (globalValue !== undefined) {
+    return globalValue
+  }
+
+  return context.row?.[filter]
+}
+
+const parseFilter = (filter: STableColumn['filter'], context: TableCallbackContext = {}) => {
+  if (filter === undefined) {
     return context.value
   }
 
-  if (filter.length > 1) {
-    return filter(context.value, context.row, context.scope)
+  if (typeof filter === 'string') {
+    return getFilterValueByName(filter, context)
   }
 
-  if (isDestructuredObjectCallback(filter)) {
+  if (typeof filter === 'function') {
     return filter(context)
   }
 
-  return filter(context.value)
+  return context.value
 }
 
 const parseSlot = (val: Pick<STableButton | STableColumn, 'useSlot' | 'prop'>) => {
