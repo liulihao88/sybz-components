@@ -1,9 +1,10 @@
 <template>
   <div class="s-dialog" :class="componentClass">
     <component
-      :is="parseType"
+      :is="panelComponent"
       v-bind="{
         ...defaultPanelAttrs,
+        modelValue: mergedProps.modelValue,
         bodyClass: drawerBodyClass,
         closeOnClickModal: true,
         destroyOnClose: true,
@@ -91,6 +92,7 @@ type DialogAction = ((...args: any[]) => any) | string
 const attrs = useAttrs()
 const emits = defineEmits(['update:modelValue'])
 interface DialogProps {
+  modelValue?: boolean
   type?: '' | 'drawer'
   title?: string
   width?: string | number
@@ -110,6 +112,7 @@ interface DialogProps {
 }
 
 const props = withDefaults(defineProps<DialogProps>(), {
+  modelValue: false,
   type: '',
   title: '提示',
   width: '',
@@ -258,18 +261,17 @@ function handleClose() {
 
 // 只有当弹框的时候, 且按的是回车键, 才走confirm
 function onkeypress({ code }: KeyboardEvent) {
-  if (attrs.modelValue === true && code === 'Enter' && mergedProps.value.enableConfirm && !confirmButtonLoading.value) {
+  if (
+    mergedProps.value.modelValue === true &&
+    code === 'Enter' &&
+    mergedProps.value.enableConfirm &&
+    !confirmButtonLoading.value
+  ) {
     confirmHandler()
   }
 }
 
-const parseType = () => {
-  if (mergedProps.value.type === '') {
-    return 'el-dialog'
-  } else if (mergedProps.value.type === 'drawer') {
-    return 'el-drawer'
-  }
-}
+const panelComponent = computed(() => (isDrawer.value ? 'el-drawer' : 'el-dialog'))
 
 onMounted(() => {
   document.addEventListener('keypress', onkeypress)
