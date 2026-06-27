@@ -6,12 +6,13 @@ defineOptions({
   name: 'RenderComp',
 })
 interface RenderCompProps {
-  render: (...args: any[]) => any
+  render?: (...args: any[]) => any
   item?: Record<string, any>
 }
 
 const props = withDefaults(defineProps<RenderCompProps>(), {
-  item: undefined,
+  render: () => null,
+  item: () => ({}),
 })
 const renderComponent = () => {
   return props.render(props?.item)

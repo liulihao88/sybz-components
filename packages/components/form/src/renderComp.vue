@@ -1,18 +1,19 @@
 <script lang="ts">
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, type PropType } from 'vue'
 export default defineComponent({
   name: 'RenderComp',
   props: {
-    render: Function,
-    item: Object,
+    render: {
+      type: Function as PropType<(...args: any[]) => any>,
+      default: () => null,
+    },
+    item: {
+      type: Object as PropType<Record<string, any>>,
+      default: () => ({}),
+    },
   },
   render(ctx) {
-    // 如果 render 函数存在，调用它并传递 item 参数
-    if (ctx.render) {
-      return ctx.render(ctx?.item)
-    }
-    // 返回空节点
-    return h('div')
+    return ctx.render(ctx?.item) ?? h('div')
   },
 })
 </script>
