@@ -29,6 +29,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+docs/vite.config.ts.timestamp-*.mjs
 docs/.vitepress/cache
 dist.zip
 .vitepress
