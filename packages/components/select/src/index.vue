@@ -18,8 +18,11 @@
       v-bind="mergedTooltipAttrs"
       :content="selectTooltipContent"
       :disabled="!mergedProps.showTooltip || selectTooltipDisabled"
+      :visible="selectTooltipVisible"
+      :persistent="false"
+      transition="s-select-tooltip-no-transition"
     >
-      <div class="s-select__tooltip-trigger" @mouseover="updateSelectTooltip">
+      <div class="s-select__tooltip-trigger" @mouseleave="hideSelectTooltip" @mouseover="updateSelectTooltip">
         <el-select
           ref="selectRef"
           v-model="childSelectedValue"
@@ -39,6 +42,7 @@
               return obj
             }, {}),
           }"
+          @clear="hideSelectTooltip"
           @change="changeHandler"
         >
           <template v-if="mergedProps.showPrefix" #prefix>
@@ -213,6 +217,7 @@ const disOptions = computed(() => {
 const selectRef = ref(null)
 const selectTooltipContent = ref('')
 const selectTooltipDisabled = ref(true)
+const selectTooltipVisible = ref(false)
 const mergedTooltipAttrs = computed(() => {
   return {
     placement: 'top',
@@ -224,6 +229,11 @@ const mergedTooltipAttrs = computed(() => {
       mergedProps.value.tooltipAttrs['raw-content'],
   }
 })
+
+const hideSelectTooltip = () => {
+  selectTooltipVisible.value = false
+  selectTooltipDisabled.value = true
+}
 
 // vue3 v-model简写
 const childSelectedValue = computed({
@@ -376,17 +386,23 @@ const getTooltipTarget = () => {
 
 const updateSelectTooltip = async () => {
   if (!mergedProps.value.showTooltip) {
-    selectTooltipDisabled.value = true
-    selectTooltipContent.value = ''
+    hideSelectTooltip()
     return
   }
 
   await nextTick()
   const target = getTooltipTarget() as HTMLElement | null
   const content = target?.textContent?.replace(/\s+/g, ' ').trim() || ''
+  const canShow = !!target && !!content && target.scrollWidth > target.clientWidth
+
+  if (!canShow) {
+    hideSelectTooltip()
+    return
+  }
 
   selectTooltipContent.value = content
-  selectTooltipDisabled.value = !target || !content || target.scrollWidth <= target.clientWidth
+  selectTooltipDisabled.value = false
+  selectTooltipVisible.value = true
 }
 // 将label作为多个值连接起来。 比如 admin/管理员, 这是两个属性拼接出来的
 function handleLabel(item) {
@@ -455,6 +471,7 @@ function changeMulty(item) {
 }
 // 有些场景， 下拉框不仅需要获取value, 还需要获取选择的对象或者label, el-select原生没有这个属性， 所以changeHandler就做了下处理， 返回的数组包含3个属性， 第一个value, 第二个选中对象， 第三个选中的label。
 function changeHandler(item) {
+  hideSelectTooltip()
   // 如果val是数组, 证明是多选
   if (Array.isArray(item)) {
     changeMulty(item)
