@@ -465,7 +465,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     wrapperLines.push('      /** 透传给 s-tooltip 的属性 */')
     wrapperLines.push('      tooltipAttrs?: SybzRecord')
     wrapperLines.push('      /** 是否允许 tooltip 内容作为 HTML 片段渲染 */')
-    wrapperLines.push('      dangerouslyUseHTMLString?: boolean')
+    wrapperLines.push('      dangerouslyUseHtmlString?: boolean')
     wrapperLines.push('      /** 组件主题 */')
     wrapperLines.push('      theme?: SybzComponentTheme')
     wrapperLines.push('      /** chenghua 主题下的按钮变体 */')
@@ -479,7 +479,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     wrapperLines.push('      /** 是否开启 hover 动效 */')
     wrapperLines.push('      hoverAnimation?: boolean')
     wrapperLines.push(
-      "    } & Omit<ElButtonInstance['$props'], 'time' | 'content' | 'tooltipAttrs' | 'dangerouslyUseHTMLString' | 'theme' | 'variant' | 'size' | 'width' | 'height' | 'hoverAnimation'>",
+      "    } & Omit<ElButtonInstance['$props'], 'time' | 'content' | 'tooltipAttrs' | 'dangerouslyUseHtmlString' | 'theme' | 'variant' | 'size' | 'width' | 'height' | 'hoverAnimation'>",
     )
     wrapperLines.push("    $emit: ElButtonInstance['$emit']")
     wrapperLines.push("    $slots: ElButtonInstance['$slots']")
@@ -529,6 +529,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     wrapperLines.push('    $props: {')
     wrapperLines.push('      type?: SDialogType')
     wrapperLines.push('      title?: string')
+    wrapperLines.push('      subTitle?: string')
     wrapperLines.push('      width?: string | number')
     wrapperLines.push('      theme?: SDialogTheme')
     wrapperLines.push('      cancel?: string | ((...args: any[]) => any)')
@@ -544,7 +545,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     wrapperLines.push('      fillSlot?: boolean')
     wrapperLines.push('      hideHeaderIcon?: boolean')
     wrapperLines.push(
-      "    } & Omit<ElDialogInstance['$props'], 'type' | 'title' | 'width'> & Omit<ElDrawerInstance['$props'], 'type' | 'title' | 'width' | keyof ElDialogInstance['$props']>",
+      "    } & Omit<ElDialogInstance['$props'], 'type' | 'title' | 'subTitle' | 'width'> & Omit<ElDrawerInstance['$props'], 'type' | 'title' | 'subTitle' | 'width' | keyof ElDialogInstance['$props']>",
     )
     wrapperLines.push("    $emit: ElDialogInstance['$emit']")
     wrapperLines.push("    $slots: ElDialogInstance['$slots']")
@@ -595,7 +596,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '      hideTooltip?: boolean',
       '      options?: any[]',
       '      content?: string',
-      '      dangerouslyUseHTMLString?: boolean',
+      '      dangerouslyUseHtmlString?: boolean',
       "    } & Omit<ElInputInstance['$props'], keyof SInputProps>",
       "    $emit: ElInputInstance['$emit']",
       "    $slots: ElInputInstance['$slots']",
@@ -1194,7 +1195,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
         wrapperLines.push('      readonly default: () => SybzRecord')
         wrapperLines.push('    }')
         wrapperLines.push('    /** 是否允许 tooltip 内容作为 HTML 片段渲染 */')
-        wrapperLines.push('    readonly dangerouslyUseHTMLString: {')
+        wrapperLines.push('    readonly dangerouslyUseHtmlString: {')
         wrapperLines.push('      readonly type: PropType<boolean>')
         wrapperLines.push('      readonly default: false')
         wrapperLines.push('    }')

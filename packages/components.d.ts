@@ -90,16 +90,12 @@ declare module 'vue' {
     's-item-wrapper': (typeof import('./types/components/itemWrapper'))['default']
     SObjectLine: (typeof import('./types/components/company/objectLine'))['default']
     's-object-line': (typeof import('./types/components/company/objectLine'))['default']
-    SOutService: (typeof import('./types/components/company/outService'))['default']
-    's-out-service': (typeof import('./types/components/company/outService'))['default']
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
     's-popconfirm': (typeof import('./types/components/popconfirm'))['default']
     SProgress: (typeof import('./types/components/progress'))['default']
     's-progress': (typeof import('./types/components/progress'))['default']
     SQuotaPie: (typeof import('./types/components/company/quotaPie'))['default']
     's-quota-pie': (typeof import('./types/components/company/quotaPie'))['default']
-    SQuotaUnit: (typeof import('./types/components/company/quotaUnit'))['default']
-    's-quota-unit': (typeof import('./types/components/company/quotaUnit'))['default']
     SRadio: (typeof import('./types/components/radio'))['default']
     's-radio': (typeof import('./types/components/radio'))['default']
     SRow: (typeof import('./types/components/row'))['default']
@@ -120,14 +116,10 @@ declare module 'vue' {
     's-tag': (typeof import('./types/components/tag'))['default']
     STest: (typeof import('./types/components/test'))['default']
     's-test': (typeof import('./types/components/test'))['default']
-    SText: (typeof import('./types/components/text'))['default']
-    's-text': (typeof import('./types/components/text'))['default']
     STitle: (typeof import('./types/components/title'))['default']
     's-title': (typeof import('./types/components/title'))['default']
     STooltip: (typeof import('./types/components/tooltip'))['default']
     's-tooltip': (typeof import('./types/components/tooltip'))['default']
-    SUsedPie: (typeof import('./types/components/company/usedPie'))['default']
-    's-used-pie': (typeof import('./types/components/company/usedPie'))['default']
     SWarning: (typeof import('./types/components/warning'))['default']
     's-warning': (typeof import('./types/components/warning'))['default']
   }
@@ -241,10 +233,6 @@ export type SObjectLineComponent = (typeof import('./types/components/company/ob
 export type SObjectLineInstance = ComponentInstance<SObjectLineComponent>
 export type SObjectLinePublicProps = SObjectLineInstance['$props']
 
-export type SOutServiceComponent = (typeof import('./types/components/company/outService'))['default']
-export type SOutServiceInstance = ComponentInstance<SOutServiceComponent>
-export type SOutServicePublicProps = SOutServiceInstance['$props']
-
 export type SPopconfirmComponent = import('./types/components/popconfirm').SPopconfirmComponent
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>
 export type SPopconfirmPublicProps = import('./types/components/popconfirm').SPopconfirmPublicProps
@@ -256,10 +244,6 @@ export type SProgressPublicProps = import('./types/components/progress').SProgre
 export type SQuotaPieComponent = (typeof import('./types/components/company/quotaPie'))['default']
 export type SQuotaPieInstance = ComponentInstance<SQuotaPieComponent>
 export type SQuotaPiePublicProps = SQuotaPieInstance['$props']
-
-export type SQuotaUnitComponent = (typeof import('./types/components/company/quotaUnit'))['default']
-export type SQuotaUnitInstance = ComponentInstance<SQuotaUnitComponent>
-export type SQuotaUnitPublicProps = SQuotaUnitInstance['$props']
 
 export type SRadioComponent = import('./types/components/radio').SRadioComponent
 export type SRadioInstance = ComponentInstance<SRadioComponent>
@@ -301,10 +285,6 @@ export type STestComponent = (typeof import('./types/components/test'))['default
 export type STestInstance = ComponentInstance<STestComponent>
 export type STestPublicProps = STestInstance['$props']
 
-export type STextComponent = (typeof import('./types/components/text'))['default']
-export type STextInstance = ComponentInstance<STextComponent>
-export type STextPublicProps = STextInstance['$props']
-
 export type STitleComponent = (typeof import('./types/components/title'))['default']
 export type STitleInstance = ComponentInstance<STitleComponent>
 export type STitlePublicProps = STitleInstance['$props']
@@ -312,10 +292,6 @@ export type STitlePublicProps = STitleInstance['$props']
 export type STooltipComponent = import('./types/components/tooltip').STooltipComponent
 export type STooltipInstance = ComponentInstance<STooltipComponent>
 export type STooltipPublicProps = import('./types/components/tooltip').STooltipPublicProps
-
-export type SUsedPieComponent = (typeof import('./types/components/company/usedPie'))['default']
-export type SUsedPieInstance = ComponentInstance<SUsedPieComponent>
-export type SUsedPiePublicProps = SUsedPieInstance['$props']
 
 export type SWarningComponent = (typeof import('./types/components/warning'))['default']
 export type SWarningInstance = ComponentInstance<SWarningComponent>
