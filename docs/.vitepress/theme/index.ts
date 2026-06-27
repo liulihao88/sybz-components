@@ -15,6 +15,7 @@ import OTip from '../vitepress/components/oTip/index.vue'
 import ChangelogContent from './components/ChangelogContent.vue'
 import ApiIntro from '../../shared/ApiIntro.vue'
 import ComponentQuickSidebar from '../../shared/ComponentQuickSidebar.vue'
+import DocBasicUsage from '../../shared/DocBasicUsage.vue'
 import ScrollPositionRestore from '../../shared/ScrollPositionRestore.vue'
 
 import { VPDemo } from '../vitepress'
@@ -62,6 +63,7 @@ export default {
     ctx.app.component('OTip', OTip)
     ctx.app.component('ChangelogContent', ChangelogContent)
     ctx.app.component('ApiIntro', ApiIntro)
+    ctx.app.component('DocBasicUsage', DocBasicUsage)
     // 注册ElementPlus
     ctx.app.use(ElementPlus, {
       locale, // 语言设置

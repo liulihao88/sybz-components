@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-button>按钮</s-button>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

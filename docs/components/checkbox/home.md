@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<doc-basic-usage code='<s-checkbox v-model="checkboxValue" :options="options" />' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />
