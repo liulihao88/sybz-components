@@ -80,8 +80,8 @@
 import { ref, computed, useAttrs, watch } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
-import { inputProps } from 'element-plus/es/components/input'
-import type { InputPropsPublic } from 'element-plus/es/components/input'
+import { inputProps } from 'element-plus/es/components/input/src/input'
+import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 const attrs = useAttrs()
 

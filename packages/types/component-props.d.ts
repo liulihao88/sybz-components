@@ -1,6 +1,6 @@
 import { ElCascader } from 'element-plus'
 import type { Component, VNode } from 'vue'
-import type { InputPropsPublic } from 'element-plus/es/components/input'
+import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
 import type { CheckboxGroupPropsPublic } from 'element-plus/es/components/checkbox'
