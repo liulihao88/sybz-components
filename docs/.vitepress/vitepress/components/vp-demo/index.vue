@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
-    <div class="demo-description" text="sm" @click="handleDescriptionClick" v-html="descriptionWithCopy" />
+    <SafeHtml class="demo-description" text="sm" :html="descriptionWithCopy" @click="handleDescriptionClick" />
     <div class="example">
       <Example :path="path" />
       <ElDivider class="m-0" />
@@ -43,6 +43,7 @@ import { computed, onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useClipboard } from '@vueuse/core'
 import { getStorage } from '@/utils/src/index.ts'
+import SafeHtml from '@/components/utils/SafeHtml.vue'
 
 import Example from './vp-example.vue'
 import SourceCode from './vp-source-code.vue'

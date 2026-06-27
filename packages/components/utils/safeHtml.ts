@@ -3,9 +3,17 @@ const ALLOWED_HTML_TAGS = new Set([
   'b',
   'blue',
   'br',
+  'button',
   'code',
   'div',
   'em',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'hr',
   'i',
   'img',
   'li',
@@ -21,8 +29,11 @@ const ALLOWED_HTML_TAGS = new Set([
 
 const ALLOWED_GLOBAL_ATTRIBUTES = new Set(['class', 'title'])
 const ALLOWED_ATTRIBUTES_BY_TAG: Record<string, Set<string>> = {
+  button: new Set(['type']),
+  code: new Set(['v-pre']),
   a: new Set(['href', 'target', 'rel']),
   img: new Set(['src', 'alt', 'width', 'height']),
+  pre: new Set(['v-pre']),
 }
 
 const escapeHtml = (content: string) => {
@@ -49,7 +60,11 @@ const isSafeUrl = (value: string) => {
 }
 
 const isAllowedAttribute = (tagName: string, attributeName: string) => {
-  return ALLOWED_GLOBAL_ATTRIBUTES.has(attributeName) || ALLOWED_ATTRIBUTES_BY_TAG[tagName]?.has(attributeName)
+  return (
+    attributeName.startsWith('data-') ||
+    ALLOWED_GLOBAL_ATTRIBUTES.has(attributeName) ||
+    ALLOWED_ATTRIBUTES_BY_TAG[tagName]?.has(attributeName)
+  )
 }
 
 export const sanitizeHtml = (content: string) => {

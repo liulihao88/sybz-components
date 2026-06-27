@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import SafeHtml from '@/components/utils/SafeHtml.vue'
 
 const props = defineProps({
   source: {
@@ -15,7 +16,7 @@ const decoded = computed(() => {
 
 <template>
   <div class="example-source-wrapper">
-    <div class="example-source language-vue" v-html="decoded" />
+    <SafeHtml tag="div" class="example-source language-vue" :html="decoded" />
   </div>
 </template>
 
