@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='formatBytes(1024)' />
+
 ### 基础用法
 
 :::demo

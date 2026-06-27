@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-select v-model="selectVal" :options="options" title="哈哈"></s-select>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

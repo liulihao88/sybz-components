@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='const { currentZIndex, nextZIndex } = useZIndex(2000)' />
+
 ### 基础用法
 
 :::demo 基础用法：`const { currentZIndex, nextZIndex } = useZIndex(2000)`。属性说明：`initialValue` 示例值：`2000`，类型：number，默认值：`2000`；返回值 `currentZIndex` 是当前层级，`nextZIndex` 会生成下一个层级。本示例展示多个浮层依次提升层级。

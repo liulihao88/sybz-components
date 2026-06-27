@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='await sleep(1000)' />
+
 ### 基础用法
 
 :::demo

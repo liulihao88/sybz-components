@@ -2,6 +2,8 @@
 
 ## v-debounce防抖
 
+<DocBasicUsage code='<el-button v-debounce="handleClick">按钮</el-button>' />
+
 ### 基础用法
 
 :::demo

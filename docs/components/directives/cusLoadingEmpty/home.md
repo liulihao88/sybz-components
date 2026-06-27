@@ -2,6 +2,8 @@
 
 ## v-cusLoading / v-cusEmpty
 
+<DocBasicUsage code='<div v-cus-loading="isLoading" v-cus-empty="list.length === 0 && !isLoading"></div>' />
+
 :::demo
 directives/cusLoadingEmpty/base
 :::

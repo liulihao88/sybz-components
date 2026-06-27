@@ -2,6 +2,8 @@
 
 ## v-copy
 
+<DocBasicUsage code='<span v-copy:click="text">{{ text }}</span>' />
+
 ### 基础用法
 
 :::demo

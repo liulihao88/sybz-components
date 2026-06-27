@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<sBasicLayout title="基础用法"></sBasicLayout>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

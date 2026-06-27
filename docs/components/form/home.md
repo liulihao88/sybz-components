@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

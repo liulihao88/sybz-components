@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

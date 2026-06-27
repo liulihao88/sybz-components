@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-choose-area @change="result" v-model="areaValue" width="300"></s-choose-area>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

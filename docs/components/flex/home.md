@@ -6,6 +6,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-flex class="h-100"></s-flex>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

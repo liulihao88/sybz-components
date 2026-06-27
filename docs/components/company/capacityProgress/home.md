@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-capacity-progress :total="row.totalSpace" :used="row.usedSpace" width="300"></s-capacity-progress>' />
+
 ### 基础用法
 
 :::demo 基础写法：`<s-capacity-progress :total="row.totalSpace" :used="row.usedSpace" width="300">...</s-capacity-progress>`。属性说明：`total` 示例值：`row.totalSpace`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`used` 示例值：`row.usedSpace`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`width` 示例值：`300`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。

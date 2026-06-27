@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<sItemWrapper></sItemWrapper>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-tabs :options="navList"></s-tabs>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

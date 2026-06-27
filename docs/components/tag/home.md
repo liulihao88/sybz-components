@@ -6,6 +6,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<STag class="m-r-8" type="primary">默认</STag>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

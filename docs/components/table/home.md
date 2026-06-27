@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-table :columns="columns" :data="data" :loading="loading"></s-table>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-descriptions :options="descOptions"></s-descriptions>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

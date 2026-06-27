@@ -6,6 +6,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-tooltip width="100" content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" placement="right"></s-tooltip>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

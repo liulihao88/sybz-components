@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-switch v-model="cc"></s-switch>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

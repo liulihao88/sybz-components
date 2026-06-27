@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<el-config-provider :locale="locale"></el-config-provider>' />
+
 ### 基础用法
 
 :::demo

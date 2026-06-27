@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-date-picker v-model="dateValue"></s-date-picker>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

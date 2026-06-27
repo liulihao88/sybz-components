@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-icon name="delete"></s-icon>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

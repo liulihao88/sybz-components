@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-title title="你好"></s-title>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

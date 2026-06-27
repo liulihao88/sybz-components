@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-warning content="这是基础用法" title="我是title"></s-warning>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

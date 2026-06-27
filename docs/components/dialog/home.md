@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-dialog v-model="isShow">内容</s-dialog>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

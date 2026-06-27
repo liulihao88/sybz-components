@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-progress :percentage="80"></s-progress>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='formatTextToHtml(text)' />
+
 ### 基础用法
 
 :::demo

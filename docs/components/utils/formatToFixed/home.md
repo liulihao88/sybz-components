@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='formatToFixed(22)' />
+
 ### 基础用法
 
 :::demo

@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code="await confirm('确定删除当前记录吗？')" />
+
 ### 基础用法
 
 :::demo

@@ -6,6 +6,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-row :col="6" :gutter="16"></s-row>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

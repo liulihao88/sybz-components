@@ -2,6 +2,8 @@
 
 ## v-focus 自动聚焦
 
+<DocBasicUsage code='<el-input v-focus />' />
+
 ### 基础用法
 
 :::demo

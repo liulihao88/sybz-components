@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-popconfirm @confirm="confirm"></s-popconfirm>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

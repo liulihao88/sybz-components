@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='clone(data)' />
+
 ### 基础用法
 
 :::demo

@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code="$toast('保存成功')" />
+
 ### 基础用法
 
 :::demo

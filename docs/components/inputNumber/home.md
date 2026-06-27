@@ -15,6 +15,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-input-number v-model="value" :min="0" :max="10" />' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

@@ -2,6 +2,8 @@
 
 ## v-throttle
 
+<DocBasicUsage code='<el-button v-throttle="handleClick">按钮</el-button>' />
+
 ### 基础用法
 
 :::demo

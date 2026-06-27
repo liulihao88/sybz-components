@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='await validForm(formRef)' />
+
 ### 基础用法
 
 :::demo

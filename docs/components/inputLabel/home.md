@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-input-label v-model="arr"></s-input-label>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='formatDurationTime(1162821)' />
+
 ### 基础用法
 
 :::demo

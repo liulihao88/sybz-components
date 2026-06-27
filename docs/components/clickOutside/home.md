@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<sClickOutside @clickOutside="outer" @mounted="mounted"></sClickOutside>' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

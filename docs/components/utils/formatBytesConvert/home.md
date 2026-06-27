@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code="formatBytesConvert('1GB')" />
+
 ### 基础用法
 
 :::demo

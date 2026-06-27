@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='await tryCatch(() => task())' />
+
 ### 基础用法
 
 :::demo

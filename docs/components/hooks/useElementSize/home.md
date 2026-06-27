@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='const { width, height } = useElementSize(targetRef)' />
+
 ### 基础用法
 
 :::demo 基础用法：`const { width, height } = useElementSize(targetRef)`。属性说明：`target` 示例值：`targetRef`，类型：HTMLElement / SVGElement / Ref，默认值：必传；`initialWidth` 示例值：`0`，类型：number，默认值：`0`；`initialHeight` 示例值：`0`，类型：number，默认值：`0`；`box` 示例值：`content-box`，类型：ResizeObserverBoxOptions，默认值：浏览器默认。返回值 `width` 和 `height` 会随元素尺寸变化更新。本示例展示拖动改变元素宽度后实时读取尺寸。

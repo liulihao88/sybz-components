@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-build-time />' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

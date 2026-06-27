@@ -4,6 +4,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='<s-function-source-code :function-name="functionName" />' />
+
 ## 属性事件插槽简介
 
 <ApiIntro />

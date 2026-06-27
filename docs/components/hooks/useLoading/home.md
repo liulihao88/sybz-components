@@ -2,6 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
+<DocBasicUsage code='const { loading, withLoading } = useLoading(false)' />
+
 ### 基础用法
 
 :::demo 基础用法：`const { loading, withLoading } = useLoading(false)`。属性说明：`initialValue` 示例值：`false`，类型：boolean，默认值：`false`；返回值 `loading` 是加载 Ref，`withLoading` 会在异步任务开始时自动开启 loading，结束或报错时自动关闭。本示例展示按钮异步提交，可以直接复制基础写法后替换请求函数。

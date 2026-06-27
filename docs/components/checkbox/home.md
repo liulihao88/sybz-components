@@ -4,7 +4,7 @@
 
 ## Hidden Title {.md-hidden}
 
-<doc-basic-usage code='<s-checkbox v-model="checkboxValue" :options="options" />' />
+<DocBasicUsage code='<s-checkbox v-model="checkboxValue" :options="options"></s-checkbox>' />
 
 ## 属性事件插槽简介
 
