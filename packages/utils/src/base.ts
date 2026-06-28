@@ -895,18 +895,18 @@ export function validate(
     )
   }
   if (type === ValidateType.BETWEEN) {
-    let min = rulesObject.min
-    let max = rulesObject.max
+    let minValue = rulesObject.min ?? ''
+    let maxValue = rulesObject.max ?? ''
     const validateBetween = (rule: any, value: any, callback: (error?: Error) => void) => {
       let validFlag = /^-?[0-9]+$/.test(value)
       if (!validFlag) {
         callback(new Error('请输入数字'))
       }
-      if (value < min && min !== undefined) {
-        callback(new Error(`数字不能小于${min}`))
+      if (!isEmpty(minValue) && value < minValue) {
+        callback(new Error(`数字不能小于${minValue}`))
       }
-      if (value > max && max !== undefined) {
-        callback(new Error(`数字不能大于${max}`))
+      if (!isEmpty(maxValue) && value > maxValue && maxValue !== undefined) {
+        callback(new Error(`数字不能大于${maxValue}`))
       }
       callback()
     }
@@ -972,6 +972,7 @@ export function validate(
       trigger: trigger,
     }
   }
+  return {}
 }
 
 /**
