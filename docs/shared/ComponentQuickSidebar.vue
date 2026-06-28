@@ -42,6 +42,7 @@ const dragging = ref(false)
 const expanded = ref(true)
 const mounted = ref(false)
 const keyword = ref('')
+const sidebarRef = ref<HTMLElement | null>(null)
 let dragOffsetX = 0
 let dragOffsetY = 0
 let dragStartX = 0
@@ -284,6 +285,16 @@ const goTo = async (item: QuickItem) => {
 
   await router.go(item.routeLink)
   scrollSidebarToItem(item)
+  await nextTick()
+
+  const escapedLink =
+    typeof window.CSS?.escape === 'function'
+      ? window.CSS.escape(item.normalizedLink)
+      : item.normalizedLink.replace(/"/g, '\\"')
+  const currentItemButton = sidebarRef.value?.querySelector<HTMLElement>(
+    `.component-quick-sidebar__item[data-link="${escapedLink}"]`,
+  )
+  currentItemButton?.focus()
 }
 
 const toggleExpanded = () => {
@@ -297,6 +308,52 @@ const toggleExpanded = () => {
 const collapseSidebar = () => {
   suppressNextClick = false
   setExpandedState(false)
+}
+
+const getFocusableElements = () => {
+  const sidebarEl = sidebarRef.value
+  if (!sidebarEl || !expanded.value) return []
+
+  return Array.from(
+    sidebarEl.querySelectorAll<HTMLElement>(
+      'input:not([disabled]), button:not([disabled]):not([tabindex="-1"]), [href], [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((element) => element.offsetParent !== null)
+}
+
+const handleSidebarTab = (event: KeyboardEvent) => {
+  if (!shouldShow.value || !expanded.value || event.key !== 'Tab') return
+
+  const focusableElements = getFocusableElements()
+  if (!focusableElements.length) {
+    event.preventDefault()
+    return
+  }
+
+  const firstElement = focusableElements[0]
+  const lastElement = focusableElements[focusableElements.length - 1]
+  const activeElement = document.activeElement as HTMLElement | null
+
+  if (!activeElement || !sidebarRef.value?.contains(activeElement)) {
+    event.preventDefault()
+    firstElement.focus()
+    return
+  }
+
+  if (event.shiftKey && activeElement === firstElement) {
+    event.preventDefault()
+    lastElement.focus()
+    return
+  }
+
+  if (!event.shiftKey && activeElement === lastElement) {
+    event.preventDefault()
+    firstElement.focus()
+  }
+}
+
+const handleWindowKeydown = (event: KeyboardEvent) => {
+  handleSidebarTab(event)
 }
 
 const handleDragMove = (event: PointerEvent) => {
@@ -364,6 +421,7 @@ onMounted(() => {
   savePosition()
 
   window.addEventListener('resize', syncPosition)
+  window.addEventListener('keydown', handleWindowKeydown, true)
   mounted.value = true
 })
 
@@ -371,12 +429,14 @@ onUnmounted(() => {
   mounted.value = false
   handleDragEnd()
   window.removeEventListener('resize', syncPosition)
+  window.removeEventListener('keydown', handleWindowKeydown, true)
 })
 </script>
 
 <template>
   <aside
     v-if="shouldShow"
+    ref="sidebarRef"
     class="component-quick-sidebar"
     :class="{ dragging, 'is-expanded': expanded, 'is-collapsed': !expanded }"
     :style="sidebarStyle"
@@ -445,6 +505,7 @@ onUnmounted(() => {
                 type="button"
                 class="component-quick-sidebar__item"
                 :class="{ current: isCurrent(item) }"
+                :data-link="item.normalizedLink"
                 @click="goTo(item)"
                 @keydown.enter.prevent.stop="goTo(item)"
                 @keydown.space.prevent.stop="goTo(item)"
