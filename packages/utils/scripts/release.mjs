@@ -1,9 +1,12 @@
 import { execFileSync } from 'node:child_process'
 import { readFileSync, writeFileSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const cwd = process.cwd()
-const packageJsonPath = resolve(cwd, 'package.json')
+const scriptDir = dirname(fileURLToPath(import.meta.url))
+const packageDir = resolve(scriptDir, '..')
+const rootDir = resolve(packageDir, '../..')
+const packageJsonPath = resolve(packageDir, 'package.json')
 const dryRun = process.argv.includes('--dry-run')
 
 function readPackageJson() {
@@ -25,8 +28,9 @@ function bumpPatchVersion(version) {
   return versionParts.join('.')
 }
 
-function run(command, args) {
+function run(command, args, options = {}) {
   const commandText = [command, ...args].join(' ')
+  const cwd = options.cwd ?? packageDir
   console.log(`\n> ${commandText}`)
   execFileSync(command, args, {
     cwd,
@@ -43,13 +47,16 @@ function main() {
     console.log(`Current version: ${pkg.version}`)
     console.log(`Next version: ${nextVersion}`)
     console.log('Planned steps:')
-    console.log('1. Update package.json version')
-    console.log('2. Build dist with unbuild')
-    console.log('3. git add -A .')
-    console.log(`4. git commit -m "${commitMessage}"`)
-    console.log('5. npm publish')
+    console.log('1. Run utils tests')
+    console.log('2. Update package.json version')
+    console.log('3. Build dist with unbuild')
+    console.log('4. git add -A .')
+    console.log(`5. git commit -m "${commitMessage}"`)
+    console.log('6. npm publish')
     return
   }
+
+  run('pnpm', ['test:utils'], { cwd: rootDir })
 
   pkg.version = nextVersion
   writePackageJson(pkg)
