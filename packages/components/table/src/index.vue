@@ -34,6 +34,26 @@ const HEADER_MIN_WIDTH_PADDING = 32
 const HEADER_SORTABLE_RESERVE_WIDTH = 28
 const hasOwn = (target, key) => Object.prototype.hasOwnProperty.call(target, key)
 
+type ElementTableColumn = TableColumnCtx<TableRow> & {
+  id?: string
+  realWidth?: number | null
+  width?: number | string
+  minWidth?: number | string
+  type?: string
+  fixed?: string | boolean
+  isColumnGroup?: boolean
+}
+
+type ElementTableLayout = {
+  bodyWidth?: { value: number | null }
+  getFlattenColumns?: () => ElementTableColumn[]
+}
+
+type ElementTableInstance = TableInstance & {
+  $el?: HTMLElement
+  layout?: ElementTableLayout
+}
+
 interface TableProps {
   data?: TableRow[]
   columns?: TableColumnList
@@ -635,15 +655,102 @@ const getBtnWidth = (btn: STableButton) => {
   return getTextWidth(btn.content || '')
 }
 
-const parseTableWidth = (btns: STableButton[], hBtns: STableButton[]) => {
+const getNumericWidth = (value: number | string | undefined) => {
+  if (value === undefined || value === '') return 0
+
+  const width = typeof value === 'number' ? value : Number.parseFloat(value)
+  return Number.isFinite(width) ? width : 0
+}
+
+const getActionColumnWidth = (btns: STableButton[], hBtns: STableButton[]) => {
   const btnsWidth = btns.reduce((sum, btn) => sum + getBtnWidth(btn), 0)
   const gapWidth = Math.max(btns.length - 1, 0) * 12
   const moreWidth = hBtns.length > 0 ? 24 : 0
   const paddingWidth = 40
   const minWidth = 60
 
-  return `${Math.max(btnsWidth + gapWidth + moreWidth + paddingWidth, minWidth)}px`
+  return Math.max(btnsWidth + gapWidth + moreWidth + paddingWidth, minWidth)
 }
+
+const getActionColumnAttrs = (column: STableResolvedColumn) => {
+  const actionWidth = getActionColumnWidth(column.baseBtns, column.hideBtns)
+  const normalizedMinWidth = Math.max(getNumericWidth(column.minWidth), actionWidth)
+  const nextAttrs: Record<string, any> = {
+    fixed: 'right',
+    ...column,
+    minWidth: normalizedMinWidth,
+  }
+
+  if (nextAttrs.width === undefined) {
+    nextAttrs.width = normalizedMinWidth
+  }
+
+  return nextAttrs
+}
+
+const getColumnRenderWidth = (column: ElementTableColumn) => {
+  return getNumericWidth(column.realWidth ?? column.width ?? column.minWidth)
+}
+
+const isFlexibleDataColumn = (column: ElementTableColumn) => {
+  if (column.fixed || column.isColumnGroup) return false
+
+  return !['selection', 'index', 'expand'].includes(column.type || '')
+}
+
+const fillTableRemainingWidth = (resizedColumn?: TableColumnCtx<TableRow>) => {
+  const table = tableRef.value as ElementTableInstance | null
+  const columns = table?.layout?.getFlattenColumns?.() ?? []
+  if (!table?.$el || columns.length === 0) return
+
+  const tableWidth = table.$el.clientWidth
+  if (!tableWidth) return
+
+  const bodyWidth = columns.reduce((sum, column) => sum + getColumnRenderWidth(column), 0)
+  const remainingWidth = tableWidth - bodyWidth
+  if (remainingWidth <= 1) return
+
+  const flexibleColumns = columns.filter(isFlexibleDataColumn)
+  const targetColumn =
+    [...flexibleColumns].reverse().find((column) => column !== resizedColumn) ??
+    flexibleColumns[flexibleColumns.length - 1]
+  if (!targetColumn) return
+
+  const targetWidth = getColumnRenderWidth(targetColumn) + remainingWidth
+  targetColumn.width = targetWidth
+  targetColumn.realWidth = targetWidth
+
+  if (table.layout?.bodyWidth) {
+    table.layout.bodyWidth.value = tableWidth
+  }
+
+  table.doLayout()
+}
+
+const refreshTableLayout = (resizedColumn?: TableColumnCtx<TableRow>) => {
+  nextTick(() => {
+    tableRef.value?.doLayout()
+
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(() => {
+        fillTableRemainingWidth(resizedColumn)
+      })
+    } else {
+      fillTableRemainingWidth(resizedColumn)
+    }
+  })
+}
+
+const handleHeaderDragend = (
+  newWidth: number,
+  oldWidth: number,
+  column: TableColumnCtx<TableRow>,
+  event: MouseEvent,
+) => {
+  invokeAttrsListener('onHeaderDragend', newWidth, oldWidth, column, event)
+  refreshTableLayout(column)
+}
+
 watch(
   () => mergedProps.value.columns,
   () => {
@@ -751,6 +858,7 @@ const tableAttrs = computed(() => {
   delete nextAttrs.onSelectionChange
   delete nextAttrs.onCurrentChange
   delete nextAttrs.onRowClick
+  delete nextAttrs.onHeaderDragend
 
   if (
     isSingleSelection.value &&
@@ -796,6 +904,7 @@ defineExpose({
       @selection-change="handleTableSelectionChange"
       @current-change="handleTableCurrentChange"
       @row-click="handleTableRowClick"
+      @header-dragend="handleHeaderDragend"
     >
       <el-table-column v-if="isMultipleSelection" v-bind="multipleSelectionColumnAttrs" />
       <el-table-column v-else-if="isSingleSelection" v-bind="singleSelectionColumnAttrs">
@@ -848,10 +957,7 @@ defineExpose({
               <HeaderTooltip :label="v.label" />
             </template>
           </el-table-column>
-          <el-table-column
-            v-else-if="v.btns && v.btns.length > 0"
-            v-bind="{ ...{ fixed: 'right', width: parseTableWidth(v.baseBtns, v.hideBtns) }, ...v }"
-          >
+          <el-table-column v-else-if="v.btns && v.btns.length > 0" v-bind="getActionColumnAttrs(v)">
             <template #header>
               <HeaderTooltip :label="v.label" />
             </template>
@@ -1333,6 +1439,12 @@ defineExpose({
 
   :deep(.el-table) {
     box-shadow: none !important;
+  }
+
+  :deep(.el-table__header),
+  :deep(.el-table__body),
+  :deep(.el-table__footer) {
+    min-width: 100%;
   }
 
   &.s-table--fluid-height :deep(.el-table) {
