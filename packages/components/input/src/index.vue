@@ -1,7 +1,14 @@
 <template>
   <div class="s-input" v-bind="mergedProps.subAttrs" :style="mergedStyle" :class="inputClass">
-    <el-tooltip :content="'' + data" :disabled="inWidth || mergedProps.hideTooltip" v-bind="mergedProps.tooltipAttrs">
-      <div class="s-input__main">
+    <el-tooltip
+      :content="inputTooltipContent"
+      :disabled="inputTooltipDisabled"
+      :visible="inputTooltipVisible"
+      :persistent="false"
+      transition="s-input-tooltip-no-transition"
+      v-bind="mergedProps.tooltipAttrs"
+    >
+      <div class="s-input__main" @mouseleave="hideInputTooltip">
         <el-autocomplete
           v-if="mergedProps.options"
           :model-value="data"
@@ -9,6 +16,7 @@
           :placeholder="handlePlaceholder()"
           :clearable="$attrs.clearable !== false"
           v-bind="mergedAttrs"
+          @clear="hideInputTooltip"
           @mouseover="inputOnMouseOver($event)"
           @update:model-value="handleInputUpdate"
         >
@@ -29,6 +37,7 @@
           :class="{ 'kd-textarea': $attrs.type === 'textarea' }"
           v-bind="mergedAttrs"
           :show-word-limit="handleShowWordLimit()"
+          @clear="hideInputTooltip"
           @focus="focusHandler($event)"
           @mouseover="inputOnMouseOver($event)"
           @update:model-value="handleInputUpdate"
@@ -77,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, useAttrs, watch } from 'vue'
+import { ref, computed, useAttrs, watch, nextTick } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
 import { inputProps } from 'element-plus/es/components/input/src/input'
@@ -146,7 +155,9 @@ const props = withDefaults(defineProps<SInputProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('input', props)
 const restaurants = ref([])
-const inWidth = ref(true)
+const inputTooltipContent = ref('')
+const inputTooltipDisabled = ref(true)
+const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
 
@@ -189,7 +200,12 @@ const resolveMaxLengthValue = (value: unknown) => {
 }
 
 const handleInputUpdate = (value: unknown) => {
-  data.value = resolveMaxLengthValue(value)
+  const nextValue = resolveMaxLengthValue(value)
+  data.value = nextValue
+
+  if (nextValue === '' || nextValue === null || nextValue === undefined) {
+    hideInputTooltip()
+  }
 }
 
 watch(
@@ -249,13 +265,37 @@ function focusHandler(evt) {
     evt.target.select()
   }
 }
-function inputOnMouseOver(event) {
-  const target = event.target
-  if (target.offsetWidth + 4 < target.scrollWidth) {
-    inWidth.value = false
-  } else {
-    inWidth.value = true
+const hideInputTooltip = () => {
+  inputTooltipVisible.value = false
+  inputTooltipDisabled.value = true
+  inputTooltipContent.value = ''
+}
+
+const getInputTooltipTarget = (target: HTMLElement | null) => {
+  return (target?.closest('.el-input, .el-autocomplete, .el-textarea')?.querySelector('input, textarea') ||
+    target) as HTMLElement | null
+}
+
+async function inputOnMouseOver(event) {
+  if (mergedProps.value.hideTooltip) {
+    hideInputTooltip()
+    return
   }
+
+  await nextTick()
+
+  const target = getInputTooltipTarget(event.target as HTMLElement | null)
+  const content = target?.textContent?.replace(/\s+/g, ' ').trim() || String(data.value ?? '')
+  const canShow = !!target && !!content && target.offsetWidth + 4 < target.scrollWidth
+
+  if (!canShow) {
+    hideInputTooltip()
+    return
+  }
+
+  inputTooltipContent.value = content
+  inputTooltipDisabled.value = false
+  inputTooltipVisible.value = true
 }
 
 const handleSize = () => {
@@ -275,6 +315,7 @@ const handleSize = () => {
   return sizeStyle
 }
 const clearTextareaValue = () => {
+  hideInputTooltip()
   data.value = ''
 }
 
