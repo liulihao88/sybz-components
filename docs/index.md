@@ -17,6 +17,9 @@ hero:
       text: 安装指南
       link: /components/
     - theme: brand
+      text: 组件库用法
+      link: /components/usageGuide/home
+    - theme: brand
       text: 组件预览
       link: /components/button/home
 features:

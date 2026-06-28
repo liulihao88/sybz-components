@@ -98,6 +98,10 @@ export default defineConfig({
               link: '/components/',
             },
             {
+              text: '组件库使用指南',
+              link: '/components/usageGuide/home.md',
+            },
+            {
               text: 'vitepress常用语法',
               link: '/components/utils/grammar/home.md',
             },

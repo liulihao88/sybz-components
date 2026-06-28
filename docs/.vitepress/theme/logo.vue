@@ -1,12 +1,19 @@
 <template>
-  <div class="">({{ pkgVersion }})</div>
-  <el-button v-if="!isHome" type="primary" size="small" class="prod-toogle" @click.stop.prevent="toggleSourceVisible">
+  <div class="" tabindex="-1">({{ pkgVersion }})</div>
+  <el-button
+    v-if="!isHome"
+    type="primary"
+    size="small"
+    class="prod-toogle"
+    tabindex="-1"
+    @click.stop.prevent="toggleSourceVisible"
+  >
     <div class="visible-text">
       {{ sourceVisible === true ? '代码折叠' : '代码显示' }}
     </div>
   </el-button>
 
-  <div v-if="isDev && !isHome" class="code-toggle">
+  <div v-if="isDev && !isHome" class="code-toggle" tabindex="-1">
     <el-button type="primary" size="small" class="dev-md-copy" @click.stop.prevent="jumpUrl('md')">
       <div class="visible-text">跳转home.md(仅本地)</div>
     </el-button>
