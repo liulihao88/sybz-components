@@ -1017,7 +1017,7 @@ export const copy = (text: string, toastParams: CopyOptions = {}): boolean => {
  * log('formData', formData)
  */
 export function log(variableStr: string, variable: unknown, otherInfo = ''): void {
-  const stack = new Error().stack.split('\n')[2].trim() // 获取调用堆栈的第二行
+  const stack = new Error().stack?.split('\n')[2]?.trim() ?? '' // 获取调用堆栈的第二行
   const matchResult = stack.match(/\((.*):(\d+):(\d+)\)/)
   let fileInfo = ''
   try {
@@ -1035,7 +1035,7 @@ export function log(variableStr: string, variable: unknown, otherInfo = ''): voi
   } else {
     _log(variable)
   }
-  function _log(consoleData) {
+  function _log(consoleData: unknown) {
     if (getType(consoleData) === 'object' || getType(consoleData) === 'array') {
       consola.log(
         `%c${variableStr} `,
@@ -1047,7 +1047,7 @@ export function log(variableStr: string, variable: unknown, otherInfo = ''): voi
       consola.log(`%c${variableStr} `, 'background:#fff; color: blue;font-size: 0.8em', consoleData, `${fileInfo}`)
     }
   }
-  function getType(type) {
+  function getType(type: unknown): string {
     if (typeof type === 'object') {
       const objType = Object.prototype.toString.call(type).slice(8, -1).toLowerCase()
       return objType
