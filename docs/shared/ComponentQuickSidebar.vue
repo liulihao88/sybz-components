@@ -407,6 +407,7 @@ onUnmounted(() => {
         <button
           class="component-quick-sidebar__handle"
           type="button"
+          tabindex="-1"
           title="拖动快捷导航"
           @pointerdown.prevent.stop="handleDragStart"
         >
@@ -415,6 +416,7 @@ onUnmounted(() => {
         <button
           class="component-quick-sidebar__collapse"
           type="button"
+          tabindex="-1"
           title="收起快捷导航"
           @pointerdown.stop
           @click.stop="collapseSidebar"
@@ -444,6 +446,8 @@ onUnmounted(() => {
                 class="component-quick-sidebar__item"
                 :class="{ current: isCurrent(item) }"
                 @click="goTo(item)"
+                @keydown.enter.prevent.stop="goTo(item)"
+                @keydown.space.prevent.stop="goTo(item)"
               >
                 {{ item.shortText || item.text }}
               </button>
