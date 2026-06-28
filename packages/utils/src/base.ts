@@ -118,6 +118,12 @@ interface CopyOptions extends ToastOptions {
 
 type WidthInput = string | number | Ref<string | number>
 type ConfirmMessage = string | VNode | (() => VNode)
+type ConfirmAppendTarget = NonNullable<ElMessageBoxOptions['appendTo']>
+type AppRootElement = Element & {
+  _vue_app?: {
+    _context?: AppContext | null
+  }
+}
 
 interface ConfirmOptions extends ElMessageBoxOptions {
   /**
@@ -368,8 +374,8 @@ export function clearStorage(str: ClearStorageInput = ''): void {
     sessionStorageRef?.clear()
     localStorageRef?.clear()
   }
-  if (!isEmpty(str) && getType(str) !== 'object') {
-    let strArr = Array.isArray(str) ? str : [str]
+  if (typeof str === 'string' || Array.isArray(str)) {
+    const strArr = Array.isArray(str) ? str : [str]
     for (let i = 0; i < strArr.length; i++) {
       sessionStorageRef?.removeItem(strArr[i])
       localStorageRef?.removeItem(strArr[i])
@@ -377,16 +383,18 @@ export function clearStorage(str: ClearStorageInput = ''): void {
   }
   if (_isObjectWithExclude(str)) {
     if (!isEmpty(str.exclude) && getType(str) === 'object') {
-      let sessionStorageObj = {}
-      let localStorageObj = {}
+      const sessionStorageObj: StorageMap = {}
+      const localStorageObj: StorageMap = {}
       for (const key in str.exclude) {
         if (Object.prototype.hasOwnProperty.call(str.exclude, key)) {
           const name = str.exclude[key]
-          if (getStorage(name)) {
-            localStorageObj[name] = getStorage(name)
+          const localValue = getStorage(name)
+          const sessionValue = getStorage(name, true)
+          if (localValue !== null) {
+            localStorageObj[name] = localValue
           }
-          if (getStorage(name, true)) {
-            sessionStorageObj[name] = getStorage(name, true)
+          if (sessionValue !== null) {
+            sessionStorageObj[name] = sessionValue
           }
         }
       }
@@ -403,7 +411,7 @@ export function clearStorage(str: ClearStorageInput = ''): void {
 }
 // 自定义类型守卫函数
 function _isObjectWithExclude(obj: ClearStorageInput): obj is ClearStorageExcludeOptions {
-  return typeof obj === 'object' && obj !== null && 'exclude' in obj && typeof obj.exclude === 'object'
+  return typeof obj === 'object' && obj !== null && 'exclude' in obj && Array.isArray(obj.exclude)
 }
 
 /**
@@ -530,7 +538,7 @@ export function isEmpty(data: any, strict = true): boolean {
  * )
  */
 export function merge<T extends StorageMap, U extends StorageMap>(obj1: T, obj2: U): T & U {
-  let merged = { ...obj1, ...obj2 }
+  const merged: StorageMap = { ...obj1, ...obj2 }
   for (let key in merged) {
     if (!isEmpty(obj1[key]) && !isEmpty(obj2[key])) {
       merged[key] = obj2[key]
@@ -559,17 +567,15 @@ export function merge<T extends StorageMap, U extends StorageMap>(obj1: T, obj2:
  */
 export function clone<T>(data: T[], times?: number): T[]
 export function clone<T>(data: T, times?: number): T
-export function clone<T>(data: T, times = 1): T {
-  if (isRef(data)) {
-    data = unref(data)
-  }
+export function clone<T>(data: T | T[], times = 1): T | T[] {
+  const rawData = isRef(data) ? unref(data) : data
   // Check if the data is not an array
-  if (getType(data) !== 'array') {
+  if (!Array.isArray(rawData)) {
     // If not an array, return a deep clone of the data
-    return cloneDeep(data)
+    return cloneDeep(rawData) as T
   }
-  const clonedData = cloneDeep(data)
-  const result: typeof clonedData = []
+  const clonedData = cloneDeep(rawData) as T[]
+  const result: T[] = []
   for (let i = 0; i < times; i++) {
     result.push(...clonedData)
   }
@@ -1368,7 +1374,7 @@ function _resolveAppendTarget(appendTo?: ConfirmAppendTarget) {
           ? rawSelector
           : `#${rawSelector}`
 
-      return document.querySelector(selector) || appendTo
+      return document.querySelector<HTMLElement>(selector) || appendTo
     } catch {
       return appendTo
     }
@@ -1396,11 +1402,16 @@ function _resolveAppContext(appContext: AppContext | null | undefined) {
     return appContext
   }
 
+  const installWithContext = ElMessageBox.install as unknown as { context?: AppContext | null } | undefined
+  const messageBoxWithContext = ElMessageBox as typeof ElMessageBox & { _context?: AppContext | null }
+  const elementPlusContext = installWithContext?.context || messageBoxWithContext._context || null
+
   if (typeof document === 'undefined') {
-    return ElMessageBox.install?.context || ElMessageBox._context
+    return elementPlusContext
   }
 
-  return ElMessageBox.install?.context || ElMessageBox._context || document.querySelector('#app')?._vue_app?._context
+  const appRoot = document.querySelector('#app') as AppRootElement | null
+  return elementPlusContext || appRoot?._vue_app?._context || null
 }
 
 /**
