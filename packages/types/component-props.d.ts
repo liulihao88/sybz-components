@@ -1,4 +1,3 @@
-import { ElCascader } from 'element-plus'
 import type { Component, VNode } from 'vue'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
@@ -72,8 +71,6 @@ export interface SDatePickerSelfProps {
 
 export type SDatePickerProps = SDatePickerSelfProps &
   Omit<Partial<DatePickerPropsPublic>, keyof SDatePickerSelfProps | 'shortcuts'>
-
-type ElCascaderInstance = InstanceType<typeof ElCascader>
 
 export interface SDescriptionsItemOption {
   label: string
@@ -176,14 +173,6 @@ export interface SCheckboxSelfProps {
 }
 
 export type SCheckboxProps = SCheckboxSelfProps & Partial<Omit<CheckboxGroupPropsPublic, keyof SCheckboxSelfProps>>
-
-export interface SChooseAreaSelfProps {
-  width?: string | number
-  height?: string | number
-}
-
-export type SChooseAreaProps = SChooseAreaSelfProps &
-  Partial<Omit<ElCascaderInstance['$props'], keyof SChooseAreaSelfProps | 'width' | 'height'>>
 
 export interface SClickOutsideProps {
   options?: SybzRecord
@@ -492,8 +481,6 @@ export interface SRowSelfProps {
 }
 
 export type SRowProps = SRowSelfProps & Partial<Omit<RowPropsPublic, keyof SRowSelfProps>>
-
-export type SChooseAreaPanelProps = Partial<Omit<ElCascaderInstance['$props'], 'width' | 'height'>>
 
 export type SWarningType = 'info' | 'simple' | 'warning' | 'error'
 export type SWarningSize = 'small' | 'default'

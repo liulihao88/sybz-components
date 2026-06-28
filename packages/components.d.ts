@@ -48,8 +48,6 @@ declare module 'vue' {
     's-chart': (typeof import('./types/components/chart'))['default']
     SCheckbox: (typeof import('./types/components/checkbox'))['default']
     's-checkbox': (typeof import('./types/components/checkbox'))['default']
-    SChooseArea: (typeof import('./types/components/chooseArea'))['default']
-    's-choose-area': (typeof import('./types/components/chooseArea'))['default']
     SClickOutside: (typeof import('./types/components/clickOutside'))['default']
     's-click-outside': (typeof import('./types/components/clickOutside'))['default']
     SCompTitle: (typeof import('./types/components/compTitle'))['default']
@@ -152,10 +150,6 @@ export type SChartPublicProps = SChartInstance['$props']
 export type SCheckboxComponent = import('./types/components/checkbox').SCheckboxComponent
 export type SCheckboxInstance = ComponentInstance<SCheckboxComponent>
 export type SCheckboxPublicProps = import('./types/components/checkbox').SCheckboxPublicProps
-
-export type SChooseAreaComponent = import('./types/components/chooseArea').SChooseAreaComponent
-export type SChooseAreaInstance = ComponentInstance<SChooseAreaComponent>
-export type SChooseAreaPublicProps = import('./types/components/chooseArea').SChooseAreaPublicProps
 
 export type SClickOutsideComponent = (typeof import('./types/components/clickOutside'))['default']
 export type SClickOutsideInstance = ComponentInstance<SClickOutsideComponent>

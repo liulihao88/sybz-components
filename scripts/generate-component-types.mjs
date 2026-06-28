@@ -52,17 +52,6 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
-    'SChooseArea',
-    {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
-      typeName: 'SChooseAreaProps',
-      exportedComponentTypeName: 'SChooseAreaComponent',
-      publicPropsTypeName: 'SChooseAreaPublicProps',
-      useDefaultExportForGlobal: true,
-      explicitComponentType: 'cascader',
-    },
-  ],
-  [
     'SClickOutside',
     { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SClickOutsideProps' },
   ],
@@ -895,36 +884,6 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       `    $props: SDatePickerProps & Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>`,
       "    $emit: ElDatePickerInstance['$emit']",
       "    $slots: ElDatePickerInstance['$slots']",
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'cascader') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElCascader } from 'element-plus'",
-      "import type { SChooseAreaProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElCascaderInstance = InstanceType<typeof ElCascader>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SChooseAreaProps &`,
-      `  Omit<ElCascaderInstance['$props'], keyof SChooseAreaProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElCascader & {`,
-      '  new (): {',
-      `    $props: SChooseAreaProps & Omit<ElCascaderInstance['$props'], keyof SChooseAreaProps>`,
-      "    $emit: ElCascaderInstance['$emit']",
-      "    $slots: ElCascaderInstance['$slots']",
       '  }',
       '}',
       '',
