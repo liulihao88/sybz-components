@@ -264,7 +264,14 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   ['STest', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STestProps' }],
-  ['STitle', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STitleProps' }],
+  [
+    'STitle',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'STitleProps',
+      slots: ['default', 'title', 'icon', 'extra'],
+    },
+  ],
   [
     'STooltip',
     {
