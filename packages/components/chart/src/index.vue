@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, watch, markRaw, onBeforeUnmount, computed } from 'vue'
+import { ref, shallowRef, watch, markRaw, onBeforeUnmount, computed } from 'vue'
 import * as echarts from 'echarts'
-import { debounce } from '@sybz-components/utils'
+import { debounce, processWidth } from '@sybz-components/utils'
 import { useEcharts } from './useEcharts.ts'
 
 defineOptions({
   name: 'SChart',
 })
-const echartDivRef = ref<HTMLElement>(null)
+const echartDivRef = shallowRef<HTMLElement | null>(null)
 
 const emits = defineEmits(['chart'])
 
@@ -34,6 +34,8 @@ const props = withDefaults(
 )
 
 const initChart = () => {
+  if (!echartDivRef.value) return
+
   chart.value = markRaw(echarts.init(echartDivRef.value, props.theme))
   // setOption(props.option)
   // 返回chart实例
@@ -79,7 +81,7 @@ watch(
 watch(
   () => props.theme,
   async () => {
-    chart.value.dispose()
+    chart.value?.dispose()
     initChart()
   },
 )
@@ -100,7 +102,7 @@ onBeforeUnmount(() => {
   // 取消监听
   // window.removeEventListener('resize', resizeChart)
   // 销毁echarts实例
-  chart.value.dispose()
+  chart.value?.dispose()
   chart.value = null
 })
 </script>

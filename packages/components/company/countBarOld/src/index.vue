@@ -123,7 +123,7 @@ let initOption = {
       axisLabel: {
         color: '',
         formatter: (value) => {
-          let res = formatBytes(value, { toFixed: 2 })
+          let res = formatBytes(value, { digit: 2 })
           return res
         },
       },

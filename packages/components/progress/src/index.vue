@@ -1,17 +1,14 @@
 <template>
   <div class="s-progress">
-    <el-progress
-      :percentage="percentageVal"
-      v-bind="{ ...originAttrs, ...$attrs }"
-      :color="$attrs.color || customColorMethod(percentageVal)"
-    >
+    <el-progress :percentage="percentageVal" v-bind="{ ...originAttrs, ...$attrs }" :color="progressColor">
       <slot :percentage="percentageVal"></slot>
     </el-progress>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
+import type { ProgressProps as ElProgressProps } from 'element-plus'
 
 defineOptions({
   name: 'SProgress',
@@ -33,6 +30,7 @@ const props = withDefaults(defineProps<ProgressProps>(), {
 const originAttrs = {
   'stroke-width': 16,
 }
+const attrs = useAttrs()
 
 const percentageVal = ref<number>(0)
 const animation = () => {
@@ -59,6 +57,9 @@ const customColorMethod = (percentage: number) => {
     return ''
   }
 }
+const progressColor = computed<ElProgressProps['color']>(() => {
+  return (attrs.color as ElProgressProps['color']) || customColorMethod(percentageVal.value)
+})
 watch(
   () => props.percentage,
   () => {

@@ -28,20 +28,10 @@
           v-model="childSelectedValue"
           class="s-select__select"
           :class="isEmpty(sOptions, true) && emptyColor ? 's-select__empty' : ''"
-          :placeholder="handlePlaceholder()"
+          :placeholder="selectPlaceholder"
           :popper-class="selectPopperClass"
           :multiple="multiple"
-          v-bind="{
-            clearable: true,
-            filterable: true,
-            size: mergedProps.size || undefined,
-            ...Object.entries($attrs).reduce((obj, [key, value]) => {
-              if (!['class', 'style', 'popper-class', 'popperClass'].includes(key)) {
-                obj[key] = value
-              }
-              return obj
-            }, {}),
-          }"
+          v-bind="selectAttrs"
           @clear="hideSelectTooltip"
           @change="changeHandler"
         >
@@ -78,9 +68,9 @@
 
           <el-option
             v-for="(item, index) in sOptions"
-            :key="type === 'simple' ? item : item[mergedProps.value]"
-            :label="type === 'simple' ? item : handleLabel(item)"
-            :value="type === 'simple' ? item : item[mergedProps.value]"
+            :key="getOptionKey(item, index)"
+            :label="getOptionLabel(item)"
+            :value="getOptionValue(item)"
             :disabled="itemDisabled(item, index, sOptions)"
           >
             <slot :options="sOptions" :item="item" />
@@ -101,7 +91,7 @@
 
 <script setup lang="ts">
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
-import { processWidth, isEmpty, clone } from '@sybz-components/utils'
+import { processWidth, isEmpty } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
@@ -110,8 +100,8 @@ defineOptions({
 const attrs = useAttrs()
 const emits = defineEmits(['changeSelect', 'update:modelValue', 'change'])
 const slots = useSlots()
-const noDefaultSlots = computed(() => {
-  const copySlots = clone(slots)
+const noDefaultSlots = computed<Record<string, any>>(() => {
+  const copySlots = { ...slots } as Record<string, any>
   delete copySlots.default
   delete copySlots.label
   return copySlots
@@ -195,7 +185,10 @@ const compTitleProps = computed(() => {
   return titleProps
 })
 
-const sOptions = ref(props.options)
+type SelectOption = Record<string, any> | string | number | boolean
+type SelectModelValue = any[] | string | number | undefined
+
+const sOptions = ref<SelectOption[]>(props.options)
 
 watch(
   () => props.options,
@@ -214,7 +207,7 @@ const disOptions = computed(() => {
   })
 })
 
-const selectRef = ref(null)
+const selectRef = ref<{ $el?: HTMLElement; $emit?: (...args: any[]) => void } | null>(null)
 const selectTooltipContent = ref('')
 const selectTooltipDisabled = ref(true)
 const selectTooltipVisible = ref(false)
@@ -223,10 +216,27 @@ const mergedTooltipAttrs = computed(() => {
     placement: 'top',
     effect: 'dark',
     ...mergedProps.value.tooltipAttrs,
-    rawContent:
+    rawContent: Boolean(
       mergedProps.value.dangerouslyUseHtmlString ||
       mergedProps.value.tooltipAttrs.rawContent ||
       mergedProps.value.tooltipAttrs['raw-content'],
+    ),
+  }
+})
+
+const selectAttrs = computed<Record<string, any>>(() => {
+  const nextAttrs = Object.entries(attrs).reduce<Record<string, any>>((obj, [key, value]) => {
+    if (!['class', 'style', 'popper-class', 'popperClass'].includes(key)) {
+      obj[key] = value
+    }
+    return obj
+  }, {})
+
+  return {
+    clearable: true,
+    filterable: true,
+    size: mergedProps.value.size || undefined,
+    ...nextAttrs,
   }
 })
 
@@ -236,7 +246,7 @@ const hideSelectTooltip = () => {
 }
 
 // vue3 v-model简写
-const childSelectedValue = computed({
+const childSelectedValue = computed<SelectModelValue>({
   get() {
     // 如果是多选, 且props.modelValue是空, 那么返回空数组.
     if (isEmpty(props.modelValue, true) && props.multiple) {
@@ -248,8 +258,35 @@ const childSelectedValue = computed({
     emits('update:modelValue', val)
   },
 })
-const handleDifValue = (item) => {
-  return props.type === 'simple' ? item : item[props.value]
+const isRecordOption = (item: SelectOption): item is Record<string, any> => {
+  return item !== null && typeof item === 'object' && !Array.isArray(item)
+}
+
+const getModelValueArray = () => {
+  return Array.isArray(props.modelValue) ? props.modelValue : []
+}
+
+const getOptionProp = (item: SelectOption, prop: string | undefined) => {
+  if (!prop || !isRecordOption(item)) {
+    return undefined
+  }
+  return item[prop]
+}
+
+const handleDifValue = (item: SelectOption) => {
+  return props.type === 'simple' ? item : getOptionProp(item, props.value)
+}
+
+const getOptionValue = (item: SelectOption) => handleDifValue(item)
+
+const getOptionLabel = (item: SelectOption): string | number => {
+  const label = props.type === 'simple' ? item : handleLabel(item)
+  return typeof label === 'number' || typeof label === 'string' ? label : String(label ?? '')
+}
+
+const getOptionKey = (item: SelectOption, index: number) => {
+  const value = getOptionValue(item)
+  return typeof value === 'number' || typeof value === 'string' ? value : index
 }
 
 const parseDisabled = computed(() => {
@@ -278,23 +315,21 @@ const parseDisabled = computed(() => {
 const indeterminate = computed({
   get() {
     const _deval = props.modelValue
-    if (!_deval) {
-      return false
-    }
-    return _deval?.length !== disOptions.value.length && _deval?.length !== 0
+    if (!Array.isArray(_deval)) return false
+    return _deval.length !== disOptions.value.length && _deval.length !== 0
   },
   set(val) {
-    return val?.length !== disOptions.value.length && val?.length !== 0
+    return Boolean(val)
   },
 })
 // 设置全选
 const selectChecked = computed({
   get() {
     const _deval = props.modelValue
-    return _deval?.length === disOptions.value.length
+    return Array.isArray(_deval) && _deval.length === disOptions.value.length
   },
   set(val) {
-    return val?.length === disOptions.value.length
+    return Boolean(val)
   },
 })
 // 点击全选
@@ -313,7 +348,7 @@ const selectAll = (val: any) => {
 const reverseSelect = () => {
   const noSelectedValue = disOptions.value
     .filter((v) => {
-      return !props.modelValue.includes(handleDifValue(v))
+      return !getModelValueArray().includes(handleDifValue(v))
     })
     .map((v) => handleDifValue(v))
   changeMulty(noSelectedValue)
@@ -368,10 +403,10 @@ const selectPopperClass = computed(() => {
     .join(' ')
 })
 
-function handlePlaceholder() {
+const selectPlaceholder = computed(() => {
   let res = attrs.disabled ? mergedProps.value.disPlaceholder : attrs.placeholder || '请选择'
-  return res
-}
+  return typeof res === 'string' ? res : String(res ?? '')
+})
 
 const getTooltipTarget = () => {
   if (props.multiple) {
@@ -405,7 +440,7 @@ const updateSelectTooltip = async () => {
   selectTooltipVisible.value = true
 }
 // 将label作为多个值连接起来。 比如 admin/管理员, 这是两个属性拼接出来的
-function handleLabel(item) {
+function handleLabel(item: SelectOption) {
   // 如果customLabel是函数就执行customLabel的函数去处理label显示
   if (typeof props.customLabel === 'function') {
     return props.customLabel(item)
@@ -414,28 +449,28 @@ function handleLabel(item) {
     if (Array.isArray(props.label)) {
       let str = ''
       props.label.forEach((v) => {
-        str += item[v] + props.connect
+        str += getOptionProp(item, v) + props.connect
       })
       let res = str.slice(0, -1)
       return res
     } else {
       // 直接显示label
-      return item[props.label]
+      return getOptionProp(item, props.label)
     }
   }
 }
 
-const quickSelect = (isPlus) => {
+const quickSelect = (isPlus: boolean) => {
   if (disOptions.value.length === 0 || attrs.disabled === '' || !!attrs.disabled === true) {
     return
   }
   let nextIdx = 0
-  if (isEmpty(props.modelValue, true) || (props.multiple === true && props.modelValue.length > 1)) {
+  if (isEmpty(props.modelValue, true) || (props.multiple === true && getModelValueArray().length > 1)) {
     nextIdx = 0
   } else {
     let nowIdx = disOptions.value.findIndex((v) => {
       if (props.multiple === true) {
-        return handleDifValue(v) === props.modelValue[0]
+        return handleDifValue(v) === getModelValueArray()[0]
       } else {
         return handleDifValue(v) === props.modelValue
       }
@@ -448,20 +483,20 @@ const quickSelect = (isPlus) => {
       nextIdx = disOptions.value.length - 1
     }
   }
-  let getValue = props.type === 'simple' ? disOptions.value[nextIdx] : disOptions.value[nextIdx][props.value]
+  let getValue = handleDifValue(disOptions.value[nextIdx])
   if (props.multiple === true) {
-    selectRef.value.$emit('change', [getValue])
+    selectRef.value?.$emit?.('change', [getValue])
   } else {
-    selectRef.value.$emit('change', getValue)
+    selectRef.value?.$emit?.('change', getValue)
   }
 }
 
 // 处理多选的返回情况
-function changeMulty(item) {
+function changeMulty(item: any[]) {
   let selectLabel = []
   const selectObj = sOptions.value.filter((v) => {
-    if (item.includes(v[props.value])) {
-      selectLabel.push(v[props.label])
+    if (item.includes(handleDifValue(v))) {
+      selectLabel.push(Array.isArray(props.label) ? handleLabel(v) : getOptionProp(v, props.label))
       return true
     } else {
       return false
@@ -470,7 +505,7 @@ function changeMulty(item) {
   _commonEmits(item, selectLabel, selectObj)
 }
 // 有些场景， 下拉框不仅需要获取value, 还需要获取选择的对象或者label, el-select原生没有这个属性， 所以changeHandler就做了下处理， 返回的数组包含3个属性， 第一个value, 第二个选中对象， 第三个选中的label。
-function changeHandler(item) {
+function changeHandler(item: any) {
   hideSelectTooltip()
   // 如果val是数组, 证明是多选
   if (Array.isArray(item)) {
@@ -485,10 +520,10 @@ function changeHandler(item) {
     if (props.type === 'simple') {
       return v === item
     } else {
-      return v[props.value] === item
+      return getOptionProp(v, props.value) === item
     }
   })[0]
-  let selectLabel = selectObj[props.label]
+  let selectLabel = Array.isArray(props.label) ? handleLabel(selectObj) : getOptionProp(selectObj, props.label)
   _commonEmits(item, selectLabel, selectObj)
 }
 function _commonEmits(item, selectLabel, selectObj) {

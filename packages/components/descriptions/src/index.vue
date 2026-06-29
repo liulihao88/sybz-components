@@ -172,7 +172,7 @@ const descriptionsClass = computed(() => ({
 
 onUnmounted(() => {
   if (measureElement.value) {
-    document.body.removeChild(measureElement.value)
+    measureElement.value.remove()
   }
 })
 </script>

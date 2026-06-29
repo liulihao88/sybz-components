@@ -8,6 +8,7 @@
 ></s-drawer>
 */
 import { computed, useAttrs } from 'vue'
+import type { ButtonProps } from 'element-plus'
 
 defineOptions({
   name: 'SDrawer',
@@ -20,8 +21,8 @@ interface DrawerProps {
   showConfirm?: boolean
   showCancel?: boolean
   wrapperClosable?: boolean
-  confirmAttrs?: Record<string, any>
-  cancelAttrs?: Record<string, any>
+  confirmAttrs?: Partial<ButtonProps> & Record<string, any>
+  cancelAttrs?: Partial<ButtonProps> & Record<string, any>
   detailAttrs?: Record<string, any>
   type?: 'detail' | ''
 }
@@ -42,10 +43,16 @@ const props = withDefaults(defineProps<DrawerProps>(), {
 })
 
 const attrs = useAttrs()
-const mergeAttrs = computed(() => {
+const mergeAttrs = computed<{
+  size: string | number
+  confirmText: string
+  showCancel: boolean
+  wrapperClosable: boolean
+  destroyOnClose: boolean
+}>(() => {
   // 如果type不是detail, 走默认的逻辑
   let changeAttrs = {
-    size: attrs.size || 640,
+    size: (attrs.size as string | number | undefined) || 640,
     confirmText: props.confirmText,
     showCancel: props.showCancel,
     wrapperClosable: props.wrapperClosable,
@@ -66,14 +73,14 @@ const mergeAttrs = computed(() => {
   return changeAttrs
 })
 
-const mergedConfirmAttrs = computed(() => {
+const mergedConfirmAttrs = computed<Partial<ButtonProps> & Record<string, any>>(() => {
   return {
     icon: props.type === 'detail' ? 'el-icon-close' : 'el-icon-check',
     ...props.confirmAttrs,
   }
 })
 
-const mergedCancelAttrs = computed(() => {
+const mergedCancelAttrs = computed<Partial<ButtonProps> & Record<string, any>>(() => {
   return {
     icon: 'el-icon-close',
     ...props.cancelAttrs,

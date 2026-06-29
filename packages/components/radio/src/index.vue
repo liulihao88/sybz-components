@@ -13,7 +13,7 @@
           :border="mergedProps.border"
           :disabled="mergedProps.itemDisabled(item, index, parseOptions)"
         >
-          <slot :name="item.slot" v-bind="item">
+          <slot :name="'slot' in item ? item.slot : undefined" v-bind="item">
             {{ item[mergedProps.label!] }}
           </slot>
         </component>

@@ -14,14 +14,23 @@ export interface CopyEl extends HTMLElement {
   copyHideToast: boolean
 }
 
-function getCopyOptions(binding: DirectiveBinding<CopyValue>) {
+type CopyOptions = {
+  value: string
+  hideToast: boolean
+}
+
+function getCopyOptions(binding: DirectiveBinding<CopyValue>): CopyOptions {
   const bindingValue = binding.value
-  const isObjectValue = typeof bindingValue === 'object' && bindingValue !== null
-  const copyValue = isObjectValue ? bindingValue.value : bindingValue
+  if (typeof bindingValue === 'object' && bindingValue !== null) {
+    return {
+      value: bindingValue.value,
+      hideToast: Boolean(binding.modifiers.hideToast || bindingValue.hideToast),
+    }
+  }
 
   return {
-    value: copyValue,
-    hideToast: Boolean(binding.modifiers.hideToast || (isObjectValue && bindingValue.hideToast)),
+    value: typeof bindingValue === 'string' ? bindingValue : '',
+    hideToast: Boolean(binding.modifiers.hideToast),
   }
 }
 

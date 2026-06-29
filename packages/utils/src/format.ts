@@ -172,9 +172,10 @@ export function formatBytesConvert(
 
   const regex = /^\d{1,3}(,\d{3})*(\.\d+)?[a-zA-Z ]*$/
   if (typeof oBytes === 'string' && regex.test(oBytes)) {
-    bytes = oBytes.replace(/,/g, '')
-    if (isStringNumber(bytes) || isNumber(bytes) || getType(bytes) !== 'string') {
-      return parseDigitThounsands(bytes)
+    const normalizedBytes = oBytes.replace(/,/g, '')
+    bytes = normalizedBytes
+    if (isStringNumber(normalizedBytes) || isNumber(normalizedBytes) || getType(normalizedBytes) !== 'string') {
+      return parseDigitThounsands(normalizedBytes)
     }
   }
 
@@ -479,7 +480,6 @@ export function formatTextToHtml(str: unknown): unknown {
     return str
   }
 
-  str = str.replace(/\n/g, '<br>')
-  str = str.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
-  return str
+  const withBreaks = str.replace(/\n/g, '<br>')
+  return withBreaks.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;')
 }

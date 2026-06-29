@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
+import { random } from '@sybz-components/utils'
 const selectVal = ref()
 const simpleSelectRef = ref(null)
 const options = ref([
@@ -12,13 +13,14 @@ function selectChange(val) {
   console.log(`33 val`, val)
 }
 function isTest52() {
-  simpleSelectRef.value?.$refs?.selectRef?.$emit('change', options.value[2].value)
+  let randomNum = random(0, options.value.length - 1)
+  simpleSelectRef.value?.$refs?.selectRef?.$emit('change', options.value[randomNum].value)
 }
 </script>
 
 <template>
   <div>
-    <el-button type="primary" @click="isTest52">测试调用简单的select方法</el-button>
+    <el-button type="primary" class="mr2" @click="isTest52">测试调用简单的select方法</el-button>
     <s-select ref="simpleSelectRef" v-model="selectVal" :options="options" @change="selectChange"></s-select>
   </div>
 </template>

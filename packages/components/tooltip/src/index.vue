@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import { computed, ref, useAttrs, useSlots } from 'vue'
+import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -71,7 +72,7 @@ const mergedTooltipAttrs = computed(() => {
 
   return {
     ...tooltipAttrs,
-    rawContent,
+    rawContent: Boolean(rawContent),
   }
 })
 
@@ -108,8 +109,8 @@ const normalizedLineClamp = computed(() => {
 
 const isMultiLineClamp = computed(() => normalizedLineClamp.value > 1)
 
-const textStyle = computed(() => {
-  const baseStyle = {
+const textStyle = computed<CSSProperties>(() => {
+  const baseStyle: CSSProperties = {
     maxWidth: processWidth(mergedProps.value.width, true),
   }
 
@@ -121,7 +122,7 @@ const textStyle = computed(() => {
     ...baseStyle,
     display: '-webkit-box',
     whiteSpace: 'normal',
-    WebkitBoxOrient: 'vertical',
+    WebkitBoxOrient: 'vertical' as const,
     WebkitLineClamp: String(normalizedLineClamp.value),
   }
 })
@@ -145,9 +146,9 @@ const dynamicComponent = computed(() => {
 
 const textRef = ref<HTMLElement>()
 const isDisabled = ref(false)
-const handleDisabled = computed(() => {
+const handleDisabled = computed<boolean>(() => {
   if (attrs.disabled) {
-    return attrs.disabled
+    return Boolean(attrs.disabled)
   }
   if (!attrs.content && !slots.content) {
     return true

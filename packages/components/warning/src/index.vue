@@ -13,7 +13,7 @@ interface Props {
   content: string
   title?: string
   theme?: '' | 'chenghua'
-  type?: 'info' | 'simple' | 'warning' | 'error'
+  type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
   width?: string | number
   dangerouslyUseHtmlString?: boolean
   icon?: boolean

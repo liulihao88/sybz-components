@@ -33,6 +33,9 @@ const PAGE_WRAP_HEIGHT = 50
 const HEADER_MIN_WIDTH_PADDING = 32
 const HEADER_SORTABLE_RESERVE_WIDTH = 28
 const hasOwn = (target, key) => Object.prototype.hasOwnProperty.call(target, key)
+const isTableRow = (value: unknown): value is TableRow => {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+}
 
 type ElementTableColumn = TableColumnCtx<TableRow> & {
   id?: string
@@ -264,8 +267,7 @@ const syncSingleSelection = async () => {
   if (!tableRef.value?.setCurrentRow) return
 
   const currentRows = Array.isArray(mergedProps.value.data) ? mergedProps.value.data : []
-  const targetRow =
-    mergedProps.value.modelValue && !Array.isArray(mergedProps.value.modelValue) ? mergedProps.value.modelValue : null
+  const targetRow = isTableRow(mergedProps.value.modelValue) ? mergedProps.value.modelValue : null
   const matchedRow = currentRows.find((row) => isSameRow(row, targetRow)) ?? null
 
   syncingSingleSelection.value = true
@@ -322,7 +324,7 @@ const handleSingleSelectionChange = (row: TableRow) => {
 }
 
 const isSingleRowSelected = (row: TableRow) => {
-  if (!mergedProps.value.modelValue || Array.isArray(mergedProps.value.modelValue)) return false
+  if (!isTableRow(mergedProps.value.modelValue)) return false
   return isSameRow(row, mergedProps.value.modelValue)
 }
 
@@ -685,6 +687,18 @@ const getActionColumnAttrs = (column: STableResolvedColumn) => {
     nextAttrs.width = normalizedMinWidth
   }
 
+  return getTableColumnAttrs(nextAttrs as STableResolvedColumn)
+}
+
+const getTableColumnAttrs = (column: STableColumn | STableResolvedColumn) => {
+  const nextAttrs: Record<string, any> = {
+    ...column,
+  }
+
+  if (nextAttrs.label !== undefined) {
+    nextAttrs.label = String(nextAttrs.label)
+  }
+
   return nextAttrs
 }
 
@@ -810,10 +824,10 @@ const parseEmptyText = computed(() => {
 })
 const compEmptyText = computed(() => {
   if (hasOwn(attrs, 'empty-text')) {
-    return attrs['empty-text']
+    return String(attrs['empty-text'] ?? '')
   }
   if (hasOwn(attrs, 'emptyText')) {
-    return attrs['emptyText']
+    return String(attrs['emptyText'] ?? '')
   }
   return parseEmptyText.value
 })
@@ -878,6 +892,11 @@ const tableAttrs = computed(() => {
     ...nextAttrs,
     height: mergedProps.value.showPage ? `calc(100% - ${PAGE_WRAP_HEIGHT}px)` : '100%',
   }
+})
+
+const paginationSize = computed(() => {
+  const size = mergedProps.value.size
+  return size === 'small' || size === 'default' || size === 'large' ? size : undefined
 })
 
 const getTableRef: STableExpose['getTableRef'] = () => {
@@ -952,7 +971,7 @@ defineExpose({
       </el-table-column>
       <template v-for="(v, i) in finalColumns" :key="i">
         <template v-if="parseIsShow(v.isShow, createCallbackContext({ column: v, index: i }), [v, i])">
-          <el-table-column v-if="v.type" :key="v.type" v-bind="{ align: 'center', ...v }">
+          <el-table-column v-if="v.type" :key="v.type" v-bind="{ align: 'center', ...getTableColumnAttrs(v) }">
             <template #header>
               <HeaderTooltip :label="v.label" />
             </template>
@@ -1272,7 +1291,7 @@ defineExpose({
             </template>
           </el-table-column>
 
-          <el-table-column v-else v-bind="{ ...v }">
+          <el-table-column v-else v-bind="getTableColumnAttrs(v)">
             <template #header>
               <HeaderTooltip :label="v.label" />
             </template>
@@ -1352,7 +1371,7 @@ defineExpose({
             :page-sizes="mergedProps.pageSizes"
             layout="prev, pager, next, jumper, sizes"
             :total="tableTotal"
-            :size="mergedProps.size || undefined"
+            :size="paginationSize"
             v-bind="paginationAttrs"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"

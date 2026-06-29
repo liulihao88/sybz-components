@@ -30,7 +30,7 @@ const emits = defineEmits(['update:modelValue'])
 watch(
   () => dateRange.value,
   (val) => {
-    if (!val || val.length < 2) return
+    if (!Array.isArray(val) || val.length < 2) return
     // if (duration < minDuration) {
     //   isValid.value = false
     //   datePickerRef.value.handleOpen()

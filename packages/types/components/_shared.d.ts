@@ -15,9 +15,11 @@ type BaseInstallableComponent<Props = Record<string, any>, Emits extends EmitsOp
 export type InstallableComponent<
   Props = Record<string, any>,
   Emits extends EmitsOptions = {},
+  Slots extends Record<string, (...args: any[]) => any> = {},
 > = BaseInstallableComponent<Props, Emits> & {
   new (): {
     $props: Props
     $emit: Emits extends Record<string, any> ? any : any
+    $slots: Slots
   }
 }

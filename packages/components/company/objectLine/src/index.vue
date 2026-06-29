@@ -74,12 +74,16 @@ function formatNumberWithChineseAbbreviation(num) {
  * @returns {number} - 四舍五入后的值
  */
 function ceilToNearest(value) {
-  if (value <= 10) {
-    return Math.ceil(value) // ≤10：四舍五入到个位（1.2 → 2）
-  } else if (value <= 100) {
-    return Math.ceil(value / 10) * 10 // ≤100：四舍五入到十位（96.34 → 100）
+  const numericValue = Number(value)
+  if (!Number.isFinite(numericValue)) {
+    return 0
+  }
+  if (numericValue <= 10) {
+    return Math.ceil(numericValue) // ≤10：四舍五入到个位（1.2 → 2）
+  } else if (numericValue <= 100) {
+    return Math.ceil(numericValue / 10) * 10 // ≤100：四舍五入到十位（96.34 → 100）
   } else {
-    return Math.ceil(value / 100) * 100 // >100：四舍五入到百位（1234 → 1300）
+    return Math.ceil(numericValue / 100) * 100 // >100：四舍五入到百位（1234 → 1300）
   }
 }
 
@@ -88,10 +92,10 @@ const interval = ref(0)
 const calcMax = (value) => {
   // value.max 是自动计算出的最大值
   let res = formatBytes(value.max)
-  let [num, unit] = res.split(' ')
+  let [num, unit] = String(res).split(' ')
   let ceilToNearestNum = ceilToNearest(num)
   let maxValue = ceilToNearestNum + ' ' + unit
-  let cc = formatBytesConvert(maxValue)
+  let cc = Number(formatBytesConvert(maxValue)) || 0
   interval.value = cc / 5
   return cc
 }
@@ -290,7 +294,7 @@ defineExpose({
 </script>
 
 <template>
-  <sBasicLayout class="s-object-line" :body-style="{ padding: 0 }" v-bind="$attrs">
+  <s-basic-layout class="s-object-line" :body-style="{ padding: 0 }" v-bind="$attrs">
     <template #header>
       <s-title title="对象数量/大小历史">
         <!-- <template #right>
@@ -300,7 +304,7 @@ defineExpose({
     </template>
     <s-chart v-if="!isEmpty(data)" ref="chartRef" :option="option" height="100%" />
     <s-empty v-else class="s-object-line__empty" />
-  </sBasicLayout>
+  </s-basic-layout>
 </template>
 
 <style scoped lang="scss">

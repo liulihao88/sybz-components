@@ -2,7 +2,7 @@
   <div
     class="s-input-number"
     v-bind="mergedProps.subAttrs"
-    :style="[inputNumberStyle, attrs.style]"
+    :style="[inputNumberStyle, attrs.style as any]"
     :class="inputNumberClass"
   >
     <s-comp-title

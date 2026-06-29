@@ -120,7 +120,7 @@ defineExpose({
       <div v-for="(item, index) in labelarr" :key="index" :class="item.isDelete === 0 ? 'disbox' : 'spanbox'">
         <span>{{ item.name || item }}</span>
         <i v-if="item.isDelete === 0" class="spanclose" style="cursor: not-allowed"></i>
-        <i v-else class="spanclose" @click="removeitem(index, item)"></i>
+        <i v-else class="spanclose" @click="removeitem(index)"></i>
       </div>
       <s-input
         v-model.trim="currentval"

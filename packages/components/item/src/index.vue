@@ -33,6 +33,11 @@ const props = withDefaults(defineProps<ItemProps>(), {
   type: '', // 不传时为 ''
   attrs: () => ({}),
 })
+defineSlots<{
+  img?: () => any
+  label?: () => any
+  value?: () => any
+}>()
 const slots = useSlots()
 const hasImgSlot = !!slots.img // 判断是否使用了 img 插槽
 

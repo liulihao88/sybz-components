@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
+import type { ElTooltipProps } from 'element-plus'
 import { toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -37,13 +38,13 @@ const parseColor = computed(() => {
   return mergedProps.value.color
 })
 
-const tooltipAttrs = computed(() => {
+const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() => {
   const restAttrs = { ...attrs }
   delete restAttrs.dangerouslyUseHtmlString
 
   return {
     ...restAttrs,
-    rawContent: mergedProps.value.dangerouslyUseHtmlString || restAttrs.rawContent || restAttrs['raw-content'],
+    rawContent: Boolean(mergedProps.value.dangerouslyUseHtmlString || restAttrs.rawContent || restAttrs['raw-content']),
   }
 })
 </script>

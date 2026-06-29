@@ -100,6 +100,7 @@ let initOption = {
   ],
   yAxis: {
     type: 'category',
+    data: [],
     axisTick: {
       show: false, // 隐藏刻度线
     },

@@ -34,6 +34,10 @@ const getValue = computed(() => {
   let num = `${formatBytes(formatBytesConvert(props.used))} / ${formatBytes(formatBytesConvert(props.total))}`
   return `${usedPercent.value}\n\n${num}\n\n${props.text}`
 })
+const toFiniteNumber = (value: unknown) => {
+  const numberValue = Number(value)
+  return Number.isFinite(numberValue) ? numberValue : 0
+}
 
 const syncQuotaPieTheme = () => {
   initOptions.title.textStyle.color = getVariable('--blue')
@@ -139,8 +143,8 @@ watch(
   ([usedNew, totalNew]) => {
     if (usedNew || totalNew) {
       isEmpty.value = false
-      usedNum.value = formatBytesConvert(usedNew)
-      totalNum.value = formatBytesConvert(totalNew)
+      usedNum.value = toFiniteNumber(formatBytesConvert(usedNew))
+      totalNum.value = toFiniteNumber(formatBytesConvert(totalNew))
       updateChartOptions()
     } else {
       isEmpty.value = true
@@ -153,7 +157,7 @@ watch(
 )
 
 // 根据容器尺寸调整字体大小的函数
-const adjustFontSize = (width, height) => {
+const adjustFontSize = (width: number, height: number) => {
   let baseSize = Math.min(width, height) / 20
 
   const minFontSize = 10
@@ -163,7 +167,7 @@ const adjustFontSize = (width, height) => {
   } else if (baseSize > maxFontSize) {
     baseSize = maxFontSize
   }
-  initOptions.graphic.style.fontSize = baseSize + 'px' // 中央文本大小
+  initOptions.graphic.style.fontSize = baseSize // 中央文本大小
 
   initOptions.series[0].label.textStyle = {
     fontSize: baseSize / 30,

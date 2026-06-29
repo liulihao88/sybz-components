@@ -36,6 +36,12 @@ const props = withDefaults(defineProps<BasicLayoutProps>(), {
   collapseTrigger: 'header',
   theme: '',
 })
+defineSlots<{
+  default?: () => any
+  header?: () => any
+  footer?: () => any
+  icon?: () => any
+}>()
 const mergedProps = useGlobalComponentConfig('basicLayout', props)
 
 const emit = defineEmits(['update:modelValue'])
