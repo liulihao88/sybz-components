@@ -5,9 +5,9 @@ type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 
 export type SCheckboxPublicProps = SCheckboxProps & Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxProps>
 
-export type SCheckboxComponent = typeof ElCheckboxGroup & {
+export type SCheckboxComponent = {
   new (): {
-    $props: SCheckboxProps & Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxProps>
+    $props: SCheckboxPublicProps
     $emit: ElCheckboxGroupInstance['$emit']
     $slots: ElCheckboxGroupInstance['$slots']
   }
