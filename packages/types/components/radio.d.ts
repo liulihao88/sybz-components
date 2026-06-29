@@ -9,7 +9,7 @@ export type SRadioComponent = {
   new (): {
     $props: SRadioPublicProps
     $emit: ElRadioGroupInstance['$emit']
-    $slots: ElRadioGroupInstance['$slots']
+    $slots: ElRadioGroupInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

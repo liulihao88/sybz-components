@@ -9,7 +9,7 @@ export type SFormComponent = typeof ElForm & {
   new (): {
     $props: SFormProps & Omit<ElFormInstance['$props'], keyof SFormProps>
     $emit: ElFormInstance['$emit']
-    $slots: ElFormInstance['$slots']
+    $slots: ElFormInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

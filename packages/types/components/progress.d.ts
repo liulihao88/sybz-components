@@ -9,7 +9,9 @@ export type SProgressComponent = typeof ElProgress & {
   new (): {
     $props: SProgressProps & Omit<ElProgressInstance['$props'], keyof SProgressProps>
     $emit: ElProgressInstance['$emit']
-    $slots: ElProgressInstance['$slots']
+    $slots: ElProgressInstance['$slots'] & {
+      default?: () => any
+    }
   }
 }
 

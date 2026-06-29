@@ -9,7 +9,7 @@ export type SSelectComponent = typeof ElSelect & {
   new (): {
     $props: SSelectProps & Omit<ElSelectInstance['$props'], keyof SSelectProps>
     $emit: ElSelectInstance['$emit']
-    $slots: ElSelectInstance['$slots']
+    $slots: ElSelectInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

@@ -9,7 +9,7 @@ export type SDatePickerComponent = typeof ElDatePicker & {
   new (): {
     $props: SDatePickerProps & Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>
     $emit: ElDatePickerInstance['$emit']
-    $slots: ElDatePickerInstance['$slots']
+    $slots: ElDatePickerInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

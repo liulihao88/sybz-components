@@ -9,7 +9,9 @@ export type STagComponent = typeof ElTag & {
   new (): {
     $props: STagProps & Omit<ElTagInstance['$props'], keyof STagProps>
     $emit: ElTagInstance['$emit']
-    $slots: ElTagInstance['$slots']
+    $slots: ElTagInstance['$slots'] & {
+      default?: () => any
+    }
   }
 }
 

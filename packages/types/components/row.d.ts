@@ -9,7 +9,9 @@ export type SRowComponent = typeof ElRow & {
   new (): {
     $props: SRowProps & Omit<ElRowInstance['$props'], keyof SRowProps>
     $emit: ElRowInstance['$emit']
-    $slots: ElRowInstance['$slots']
+    $slots: ElRowInstance['$slots'] & {
+      default?: () => any
+    }
   }
 }
 

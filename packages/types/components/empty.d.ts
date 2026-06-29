@@ -9,7 +9,11 @@ export type SEmptyComponent = typeof ElEmpty & {
   new (): {
     $props: SEmptyProps & Omit<ElEmptyInstance['$props'], keyof SEmptyProps>
     $emit: ElEmptyInstance['$emit']
-    $slots: ElEmptyInstance['$slots']
+    $slots: ElEmptyInstance['$slots'] & {
+      default?: () => any
+      image?: () => any
+      description?: () => any
+    }
   }
 }
 

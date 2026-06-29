@@ -20,7 +20,12 @@ export type SDialogComponent = typeof ElDialog & {
       Omit<ElDialogInstance['$props'], keyof SDialogProps> &
       Omit<ElDrawerInstance['$props'], keyof SDialogProps | keyof ElDialogInstance['$props']>
     $emit: ElDialogInstance['$emit']
-    $slots: ElDialogInstance['$slots']
+    $slots: ElDialogInstance['$slots'] & {
+      default?: () => any
+      header?: () => any
+      headerIcon?: () => any
+      footer?: () => any
+    }
   }
 }
 

@@ -9,7 +9,7 @@ export type SInputNumberComponent = typeof ElInputNumber & {
   new (): {
     $props: SInputNumberProps & Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>
     $emit: ElInputNumberInstance['$emit']
-    $slots: ElInputNumberInstance['$slots']
+    $slots: ElInputNumberInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

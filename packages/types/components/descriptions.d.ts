@@ -10,7 +10,7 @@ export type SDescriptionsComponent = typeof ElDescriptions & {
   new (): {
     $props: SDescriptionsProps & Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsProps>
     $emit: ElDescriptionsInstance['$emit']
-    $slots: ElDescriptionsInstance['$slots']
+    $slots: ElDescriptionsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

@@ -9,7 +9,7 @@ export type SCheckboxComponent = {
   new (): {
     $props: SCheckboxPublicProps
     $emit: ElCheckboxGroupInstance['$emit']
-    $slots: ElCheckboxGroupInstance['$slots']
+    $slots: ElCheckboxGroupInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

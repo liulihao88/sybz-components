@@ -21,6 +21,13 @@ const writeDeclarationFile = async (filePath, content) => {
 const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', 'utils'])
 
 const TYPED_COMPONENT_PROPS = new Map([
+  [
+    'SBaseHeader',
+    {
+      typeName: 'Record<string, any>',
+      slots: ['default', 'extra'],
+    },
+  ],
   ['SBuildTime', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBuildTimeProps' }],
   [
     'SBasicLayout',
@@ -41,9 +48,24 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SButtonPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'button',
+      allowAnySlots: true,
     },
   ],
-  ['SChart', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SChartProps' }],
+  [
+    'SCapacityProgress',
+    {
+      typeName: 'Record<string, any>',
+      slots: ['default'],
+    },
+  ],
+  [
+    'SChart',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SChartProps',
+      slots: ['default', 'empty'],
+    },
+  ],
   [
     'SCheckbox',
     {
@@ -53,11 +75,16 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SCheckboxPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'checkbox',
+      allowAnySlots: true,
     },
   ],
   [
     'SClickOutside',
-    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SClickOutsideProps' },
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SClickOutsideProps',
+      slots: ['default'],
+    },
   ],
   ['SCompTitle', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SCompTitleProps' }],
   [
@@ -69,6 +96,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SDatePickerPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'datePicker',
+      allowAnySlots: true,
     },
   ],
   [
@@ -80,6 +108,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SDescriptionsPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'descriptions',
+      allowAnySlots: true,
     },
   ],
   [
@@ -93,6 +122,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SDialogPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'dialog',
+      slots: ['default', 'header', 'headerIcon', 'footer'],
     },
   ],
   [
@@ -104,6 +134,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SDrawerPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'drawer',
+      slots: ['default', 'header', 'footer'],
     },
   ],
   [
@@ -115,9 +146,17 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SEmptyPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'empty',
+      slots: ['default', 'image', 'description'],
     },
   ],
-  ['SFlex', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFlexProps' }],
+  [
+    'SFlex',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SFlexProps',
+      slots: ['default'],
+    },
+  ],
   [
     'SForm',
     {
@@ -127,13 +166,21 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SFormPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'form',
+      allowAnySlots: true,
     },
   ],
   [
     'SFunctionSourceCode',
     { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFunctionSourceCodeProps' },
   ],
-  ['SIcon', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SIconProps' }],
+  [
+    'SIcon',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SIconProps',
+      slots: ['default'],
+    },
+  ],
   [
     'SInput',
     {
@@ -143,6 +190,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SInputPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'input',
+      slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
     },
   ],
   [
@@ -158,6 +206,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SInputNumberPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'inputNumber',
+      allowAnySlots: true,
     },
   ],
   [
@@ -170,7 +219,11 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
   [
     'SItemWrapper',
-    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemWrapperProps' },
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SItemWrapperProps',
+      slots: ['default'],
+    },
   ],
   [
     'SPopconfirm',
@@ -181,6 +234,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SPopconfirmPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'popover',
+      slots: ['default', 'content', 'footer'],
     },
   ],
   [
@@ -192,6 +246,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SProgressPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'progress',
+      slots: ['default'],
     },
   ],
   [
@@ -203,6 +258,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SRadioPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'radio',
+      allowAnySlots: true,
     },
   ],
   [
@@ -214,6 +270,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SRowPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'row',
+      slots: ['default'],
     },
   ],
   [
@@ -225,9 +282,17 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SSelectPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'select',
+      allowAnySlots: true,
     },
   ],
-  ['SSplitPane', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SSplitPaneProps' }],
+  [
+    'SSplitPane',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SSplitPaneProps',
+      slots: ['paneL', 'left', 'paneR', 'extra'],
+    },
+  ],
   ['SSvg', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SSvgProps' }],
   [
     'SSwitch',
@@ -240,7 +305,14 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'switch',
     },
   ],
-  ['STable', { importPath: resolve(rootDir, 'packages/types/table.d.ts'), typeName: 'STableProps' }],
+  [
+    'STable',
+    {
+      importPath: resolve(rootDir, 'packages/types/table.d.ts'),
+      typeName: 'STableProps',
+      allowAnySlots: true,
+    },
+  ],
   [
     'STabs',
     {
@@ -250,6 +322,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'STabsPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tabs',
+      allowAnySlots: true,
     },
   ],
   [
@@ -261,6 +334,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'STagPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tag',
+      slots: ['default'],
     },
   ],
   ['STest', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STestProps' }],
@@ -281,9 +355,17 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'STooltipPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tooltip',
+      slots: ['default', 'content'],
     },
   ],
-  ['SWarning', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SWarningProps' }],
+  [
+    'SWarning',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SWarningProps',
+      slots: ['title', 'content'],
+    },
+  ],
 ])
 
 const toPosixPath = (value) => value.replaceAll('\\', '/')
@@ -299,24 +381,38 @@ const toKebabCase = (value) =>
     .toLowerCase()
 
 const formatSlotsType = (slots = []) => {
+  if (slots === 'any') return 'Record<string, (...args: any[]) => any>'
   if (!slots.length) return ''
 
   return ['{', ...slots.map((slot) => `    ${slot}?: () => any`), '  }'].join('\n')
 }
 
+const getSlotsType = (typedComponent) => {
+  if (typedComponent?.allowAnySlots) {
+    return 'Record<string, (...args: any[]) => any>'
+  }
+
+  return formatSlotsType(typedComponent?.slots)
+}
+
 const getInstallableComponentTypeParams = (typedComponent) => {
   const params = [typedComponent.typeName]
 
-  if (typedComponent.emitsTypeName || typedComponent.slots?.length) {
+  const slotsType = getSlotsType(typedComponent)
+  if (typedComponent.emitsTypeName || slotsType) {
     params.push(typedComponent.emitsTypeName || '{}')
   }
 
-  const slotsType = formatSlotsType(typedComponent.slots)
   if (slotsType) {
     params.push(slotsType)
   }
 
   return params.join(',\n  ')
+}
+
+const getWrapperSlotsType = (baseSlotsType, typedComponent) => {
+  const ownSlotsType = getSlotsType(typedComponent)
+  return ownSlotsType ? `${baseSlotsType} & ${ownSlotsType}` : baseSlotsType
 }
 
 const collectComponentEntries = () => {
@@ -487,7 +583,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       `    $props: ${typedComponent.typeName} & Omit<ElButtonInstance['$props'], keyof ${typedComponent.typeName}>`,
     )
     wrapperLines.push("    $emit: ElButtonInstance['$emit']")
-    wrapperLines.push("    $slots: ElButtonInstance['$slots']")
+    wrapperLines.push(`    $slots: ${getWrapperSlotsType("ElButtonInstance['$slots']", typedComponent)}`)
     wrapperLines.push('  }')
     wrapperLines.push('}')
     wrapperLines.push('')
@@ -533,7 +629,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       `    $props: ${typedComponent.typeName} & Omit<ElDialogInstance['$props'], keyof ${typedComponent.typeName}> & Omit<ElDrawerInstance['$props'], keyof ${typedComponent.typeName} | keyof ElDialogInstance['$props']>`,
     )
     wrapperLines.push("    $emit: ElDialogInstance['$emit']")
-    wrapperLines.push("    $slots: ElDialogInstance['$slots']")
+    wrapperLines.push(`    $slots: ${getWrapperSlotsType("ElDialogInstance['$slots']", typedComponent)}`)
     wrapperLines.push('  }')
     wrapperLines.push('}')
     wrapperLines.push('')
@@ -562,7 +658,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: ${typedComponent.typeName} & Omit<ElInputInstance['$props'], keyof ${typedComponent.typeName}>`,
       "    $emit: ElInputInstance['$emit']",
-      "    $slots: ElInputInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElInputInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -592,7 +688,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: ${typedComponent.typeName} & Omit<ElSelectInstance['$props'], keyof ${typedComponent.typeName}>`,
       "    $emit: ElSelectInstance['$emit']",
-      "    $slots: ElSelectInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElSelectInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -622,7 +718,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: STooltipProps & Omit<ElTooltipInstance['$props'], keyof STooltipProps>`,
       "    $emit: ElTooltipInstance['$emit']",
-      "    $slots: ElTooltipInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElTooltipInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -652,7 +748,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: ${typedComponent.publicPropsTypeName}`,
       "    $emit: ElCheckboxGroupInstance['$emit']",
-      "    $slots: ElCheckboxGroupInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElCheckboxGroupInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -682,7 +778,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: ${typedComponent.publicPropsTypeName}`,
       "    $emit: ElRadioGroupInstance['$emit']",
-      "    $slots: ElRadioGroupInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElRadioGroupInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -712,7 +808,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SEmptyProps & Omit<ElEmptyInstance['$props'], keyof SEmptyProps>`,
       "    $emit: ElEmptyInstance['$emit']",
-      "    $slots: ElEmptyInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElEmptyInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -742,7 +838,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>`,
       "    $emit: ElTabsInstance['$emit']",
-      "    $slots: ElTabsInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElTabsInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -772,7 +868,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: STagProps & Omit<ElTagInstance['$props'], keyof STagProps>`,
       "    $emit: ElTagInstance['$emit']",
-      "    $slots: ElTagInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElTagInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -802,7 +898,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SRowProps & Omit<ElRowInstance['$props'], keyof SRowProps>`,
       "    $emit: ElRowInstance['$emit']",
-      "    $slots: ElRowInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElRowInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -832,7 +928,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SSwitchProps & Omit<ElSwitchInstance['$props'], keyof SSwitchProps>`,
       "    $emit: ElSwitchInstance['$emit']",
-      "    $slots: ElSwitchInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElSwitchInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -862,7 +958,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SInputNumberProps & Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>`,
       "    $emit: ElInputNumberInstance['$emit']",
-      "    $slots: ElInputNumberInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElInputNumberInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -892,7 +988,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SPopconfirmProps & Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>`,
       "    $emit: ElPopoverInstance['$emit']",
-      "    $slots: ElPopoverInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElPopoverInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -922,7 +1018,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SDatePickerProps & Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>`,
       "    $emit: ElDatePickerInstance['$emit']",
-      "    $slots: ElDatePickerInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElDatePickerInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -952,7 +1048,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SDrawerProps & Omit<ElDrawerInstance['$props'], keyof SDrawerProps>`,
       "    $emit: ElDrawerInstance['$emit']",
-      "    $slots: ElDrawerInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElDrawerInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -982,7 +1078,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SDescriptionsProps & Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsProps>`,
       "    $emit: ElDescriptionsInstance['$emit']",
-      "    $slots: ElDescriptionsInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElDescriptionsInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -1012,7 +1108,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SProgressProps & Omit<ElProgressInstance['$props'], keyof SProgressProps>`,
       "    $emit: ElProgressInstance['$emit']",
-      "    $slots: ElProgressInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElProgressInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -1042,7 +1138,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       '  new (): {',
       `    $props: SFormProps & Omit<ElFormInstance['$props'], keyof SFormProps>`,
       "    $emit: ElFormInstance['$emit']",
-      "    $slots: ElFormInstance['$slots']",
+      `    $slots: ${getWrapperSlotsType("ElFormInstance['$slots']", typedComponent)}`,
       '  }',
       '}',
       '',
@@ -1064,13 +1160,15 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
   ]
 
   if (typedComponent) {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
     const importedTypeNames = [typedComponent.typeName, typedComponent.emitsTypeName].filter(Boolean).join(', ')
     if (typedComponent.publicPropsTypeName) {
       wrapperLines.unshift("import type { AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'")
     }
-    wrapperLines.push(`import type { ${importedTypeNames} } from '${normalizedPropsImportPath}'`)
+    if (typedComponent.importPath) {
+      const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
+      const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+      wrapperLines.push(`import type { ${importedTypeNames} } from '${normalizedPropsImportPath}'`)
+    }
     wrapperLines.push('')
     const componentTypeParams = getInstallableComponentTypeParams(typedComponent)
 

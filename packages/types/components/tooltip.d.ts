@@ -9,7 +9,10 @@ export type STooltipComponent = typeof ElTooltip & {
   new (): {
     $props: STooltipProps & Omit<ElTooltipInstance['$props'], keyof STooltipProps>
     $emit: ElTooltipInstance['$emit']
-    $slots: ElTooltipInstance['$slots']
+    $slots: ElTooltipInstance['$slots'] & {
+      default?: () => any
+      content?: () => any
+    }
   }
 }
 

@@ -9,7 +9,11 @@ export type SPopconfirmComponent = typeof ElPopover & {
   new (): {
     $props: SPopconfirmProps & Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>
     $emit: ElPopoverInstance['$emit']
-    $slots: ElPopoverInstance['$slots']
+    $slots: ElPopoverInstance['$slots'] & {
+      default?: () => any
+      content?: () => any
+      footer?: () => any
+    }
   }
 }
 

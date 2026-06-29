@@ -14,7 +14,7 @@ export type SButtonComponent = typeof ElButton & {
   new (): {
     $props: SButtonProps & Omit<ElButtonInstance['$props'], keyof SButtonProps>
     $emit: ElButtonInstance['$emit']
-    $slots: ElButtonInstance['$slots']
+    $slots: ElButtonInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

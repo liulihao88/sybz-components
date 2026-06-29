@@ -9,7 +9,7 @@ export type STabsComponent = typeof ElTabs & {
   new (): {
     $props: STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>
     $emit: ElTabsInstance['$emit']
-    $slots: ElTabsInstance['$slots']
+    $slots: ElTabsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

@@ -9,7 +9,13 @@ export type SInputComponent = typeof ElInput & {
   new (): {
     $props: SInputProps & Omit<ElInputInstance['$props'], keyof SInputProps>
     $emit: ElInputInstance['$emit']
-    $slots: ElInputInstance['$slots']
+    $slots: ElInputInstance['$slots'] & {
+      default?: () => any
+      prepend?: () => any
+      prefix?: () => any
+      suffix?: () => any
+      append?: () => any
+    }
   }
 }
 
