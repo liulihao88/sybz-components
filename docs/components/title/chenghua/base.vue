@@ -1,14 +1,14 @@
 <template>
   <div class="chenghua-title-demo">
     <s-title title="成华 AI 服务申请" theme="chenghua" sub-title="审批中 12 个，待处理 4 个">
-      <template #right>
+      <template #extra>
         <s-button theme="chenghua" type="primary" size="small">新建申请</s-button>
         <s-button theme="chenghua" size="small">查看全部</s-button>
       </template>
     </s-title>
 
     <s-title title="资源使用趋势" theme="chenghua" type="" sub-title="近 7 天容量与对象数变化">
-      <template #right>
+      <template #extra>
         <s-button theme="chenghua" variant="outline" size="small">导出数据</s-button>
       </template>
     </s-title>

@@ -43,8 +43,8 @@
         </span>
         <slot></slot>
       </div>
-      <div :class="$slots.right && 's-title__slot-right-wrapper'">
-        <slot name="right"></slot>
+      <div :class="$slots.extra && 's-title__slot-extra-wrapper'">
+        <slot name="extra"></slot>
       </div>
     </div>
     <div v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
@@ -164,7 +164,7 @@ const titleClass = computed(() => ({
       height: 14px;
       display: block;
     }
-    .s-title__slot-right-wrapper {
+    .s-title__slot-extra-wrapper {
       text-align: right;
       display: flex;
     }

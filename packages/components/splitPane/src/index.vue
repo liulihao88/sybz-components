@@ -24,7 +24,7 @@
 
     <div class="s-split-pane__pane s-split-pane__pane-right" :style="rightPaneStyle">
       <slot name="paneR">
-        <slot name="right" />
+        <slot name="extra" />
       </slot>
     </div>
 

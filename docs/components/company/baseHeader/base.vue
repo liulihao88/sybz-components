@@ -10,7 +10,7 @@ const value = ref()
       <div>
         <s-input v-model="value" title="我是左侧的input"></s-input>
       </div>
-      <template #right>
+      <template #extra>
         <el-button>我是右侧的slot</el-button>
         <el-button>这是右侧button</el-button>
       </template>

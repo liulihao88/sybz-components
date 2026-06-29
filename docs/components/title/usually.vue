@@ -7,7 +7,7 @@ const { proxy } = getCurrentInstance()
   <div>
     <s-title title="左侧" tb="10" l="10">
       <span class="m-l-16">左侧的slot</span>
-      <template #right>
+      <template #extra>
         <el-button type="primary">右侧的button</el-button>
         <el-button type="primary">右侧的button2</el-button>
         <el-button type="primary">右侧的button3</el-button>

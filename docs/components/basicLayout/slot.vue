@@ -3,7 +3,7 @@
     <SBasicLayout collapsible :box-style="{ border: 'none' }">
       <template #header>
         <s-title title="更多">
-          <template #right>
+          <template #extra>
             <a href="#">header插槽</a>
           </template>
         </s-title>

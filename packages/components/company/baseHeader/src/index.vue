@@ -10,7 +10,7 @@ defineOptions({
       <slot />
     </div>
     <div class="base-header-box__right">
-      <slot name="right" />
+      <slot name="extra" />
     </div>
   </div>
 </template>

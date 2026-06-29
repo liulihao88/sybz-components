@@ -297,7 +297,7 @@ defineExpose({
   <s-basic-layout class="s-object-line" :body-style="{ padding: 0 }" v-bind="$attrs">
     <template #header>
       <s-title title="对象数量/大小历史">
-        <!-- <template #right>
+        <!-- <template #extra>
           <DisabledCountDate v-model="dateRange" style="height: 24px" />
         </template> -->
       </s-title>
