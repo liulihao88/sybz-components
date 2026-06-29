@@ -294,13 +294,15 @@ export interface SRadioItem {
   [key: string]: any
 }
 
+export type SRadioOption = SRadioItem | string | number | boolean
+
 export interface SRadioSelfProps {
   title?: string
   boxStyle?: SybzRecord
   theme?: SybzComponentTheme
   type?: '' | 'boolean' | 'simple'
   showType?: 'radio' | 'button'
-  options?: SRadioItem[]
+  options?: SRadioOption[]
   border?: boolean
   value?: string | number | boolean
   label?: string | number | boolean

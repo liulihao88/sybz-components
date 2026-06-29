@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 const value = ref(3)
-const options = ref([
+const options: any = ref([
   { name: 'O1', id: 1, isDis: false },
   { name: 'O2', id: 2, isDis: true },
   { name: 'O3', id: 3, isDis: false },

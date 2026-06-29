@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import type { RadioItem } from './radio'
+import type { RadioItem, RadioOption, RadioOptionValue } from './radio'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
@@ -36,7 +36,7 @@ interface RadioProps {
   theme?: '' | 'chenghua'
   type?: 'boolean' | 'simple' | ''
   showType?: 'radio' | 'button'
-  options?: RadioItem[]
+  options?: RadioOption[]
   border?: boolean
   value?: any
   label?: any
@@ -76,6 +76,19 @@ const radioType = computed(() => {
   }
   return obj[mergedProps.value.showType] ?? 'el-radio'
 })
+const isBaseOption = (option: RadioOption): option is RadioOptionValue => {
+  return ['string', 'number', 'boolean'].includes(typeof option)
+}
+const normalizeOption = (option: RadioOption): RadioItem => {
+  if (isBaseOption(option)) {
+    return {
+      label: option,
+      value: option,
+    }
+  }
+
+  return option
+}
 const parseOptions = computed(() => {
   if (mergedProps.value.type === 'boolean') {
     return [
@@ -83,15 +96,7 @@ const parseOptions = computed(() => {
       { label: false, value: false },
     ]
   }
-  if (mergedProps.value.type === 'simple' && mergedProps.value.options.length > 0) {
-    return mergedProps.value.options.map((v) => {
-      return {
-        label: v,
-        value: v,
-      }
-    })
-  }
-  return mergedProps.value.options
+  return mergedProps.value.options.map(normalizeOption)
 })
 const radioClass = computed(() => {
   return {

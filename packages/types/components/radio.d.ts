@@ -5,9 +5,9 @@ type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
 export type SRadioPublicProps = SRadioProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>
 
-export type SRadioComponent = typeof ElRadioGroup & {
+export type SRadioComponent = {
   new (): {
-    $props: SRadioProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>
+    $props: SRadioPublicProps
     $emit: ElRadioGroupInstance['$emit']
     $slots: ElRadioGroupInstance['$slots']
   }
