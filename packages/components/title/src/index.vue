@@ -43,8 +43,10 @@
         </span>
         <slot></slot>
       </div>
-      <div :class="$slots.extra && 's-title__slot-extra-wrapper'">
-        <slot name="extra"></slot>
+      <div :class="($slots.extra || $slots.right) && 's-title__slot-extra-wrapper'">
+        <slot name="extra">
+          <slot name="right"></slot>
+        </slot>
       </div>
     </div>
     <div v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
@@ -66,6 +68,13 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 defineOptions({
   name: 'STitle',
 })
+defineSlots<{
+  default?: () => any
+  title?: () => any
+  icon?: () => any
+  extra?: () => any
+  right?: () => any
+}>()
 interface TitleProps {
   title?: string
   size?: string

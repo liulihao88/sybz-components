@@ -27,13 +27,13 @@ const isShow = ref(false)
 
     <s-tag theme="chenghua">我不服</s-tag>
 
-    <s-flex justify="space-between2的撒"></s-flex>
+    <s-flex justify="space-between"></s-flex>
 
     <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>
     <hr />
     <SItem label="label" value="value"></SItem>
     <s-title title="插槽用法" tb="8"></s-title>
-    <s-item class="abc">
+    <s-item class="abc" label="label" value="value">
       <template #img>
         <img src="https://img.yzcdn.cn/vant/logo.png" />
       </template>

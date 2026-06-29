@@ -343,7 +343,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
       typeName: 'STitleProps',
-      slots: ['default', 'title', 'icon', 'extra'],
+      slots: ['default', 'title', 'icon', 'extra', 'right'],
     },
   ],
   [

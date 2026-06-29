@@ -1,33 +1,12 @@
-import type { ComponentOptionsMixin, DefineComponent, EmitsOptions, Plugin, SlotsType } from 'vue'
-
-type BaseInstallableComponent<
-  Props = Record<string, any>,
-  Emits extends EmitsOptions = {},
-  Slots extends Record<string, any> = {},
-> = DefineComponent<
-  Props,
-  {},
-  any,
-  {},
-  {},
-  ComponentOptionsMixin,
-  ComponentOptionsMixin,
-  Emits,
-  string,
-  {},
-  any,
-  Props,
-  {},
-  SlotsType<Slots>
-> &
-  Plugin
+import type { App, EmitsOptions } from 'vue'
 
 export type InstallableComponent<
   Props = Record<string, any>,
   Emits extends EmitsOptions = {},
   Slots extends Record<string, any> = {},
-> = BaseInstallableComponent<Props, Emits, Slots> & {
-  new (): {
+> = {
+  install?: (app: App) => any
+  new (...args: any[]): {
     $props: Props
     $emit: Emits extends Record<string, any> ? any : any
     $slots: Slots

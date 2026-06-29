@@ -9,6 +9,7 @@ declare const STitle: InstallableComponent<
     title?: () => any
     icon?: () => any
     extra?: () => any
+    right?: () => any
   }
 >
 export default STitle
