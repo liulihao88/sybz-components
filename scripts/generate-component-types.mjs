@@ -24,7 +24,11 @@ const TYPED_COMPONENT_PROPS = new Map([
   ['SBuildTime', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBuildTimeProps' }],
   [
     'SBasicLayout',
-    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBasicLayoutProps' },
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SBasicLayoutProps',
+      slots: ['default', 'header', 'footer', 'icon'],
+    },
   ],
   [
     'SButton',
@@ -156,7 +160,14 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'inputNumber',
     },
   ],
-  ['SItem', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemProps' }],
+  [
+    'SItem',
+    {
+      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      typeName: 'SItemProps',
+      slots: ['img', 'label', 'value'],
+    },
+  ],
   [
     'SItemWrapper',
     { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SItemWrapperProps' },
@@ -279,6 +290,27 @@ const toKebabCase = (value) =>
     .replace(/[_/]+/g, '-')
     .replace(/-+/g, '-')
     .toLowerCase()
+
+const formatSlotsType = (slots = []) => {
+  if (!slots.length) return ''
+
+  return ['{', ...slots.map((slot) => `    ${slot}?: () => any`), '  }'].join('\n')
+}
+
+const getInstallableComponentTypeParams = (typedComponent) => {
+  const params = [typedComponent.typeName]
+
+  if (typedComponent.emitsTypeName || typedComponent.slots?.length) {
+    params.push(typedComponent.emitsTypeName || '{}')
+  }
+
+  const slotsType = formatSlotsType(typedComponent.slots)
+  if (slotsType) {
+    params.push(slotsType)
+  }
+
+  return params.join(',\n  ')
+}
 
 const collectComponentEntries = () => {
   const groups = [
@@ -1033,7 +1065,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     }
     wrapperLines.push(`import type { ${importedTypeNames} } from '${normalizedPropsImportPath}'`)
     wrapperLines.push('')
-    const componentTypeParams = [typedComponent.typeName, typedComponent.emitsTypeName].filter(Boolean).join(', ')
+    const componentTypeParams = getInstallableComponentTypeParams(typedComponent)
 
     if (typedComponent.publicPropsTypeName) {
       wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName} &`)
