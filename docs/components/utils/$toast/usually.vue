@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, h } from 'vue'
+import { ref, h } from 'vue'
 import * as utils from '@/utils/src/index'
 import hot from '../../../.vitepress/theme/assets/svg/hot.svg?component'
 import { ElMessage } from 'element-plus'
 const { $toast, sleep } = utils
-const { proxy } = getCurrentInstance()
 const base = () => {
   $toast('基础成功')
   $toast('基础警告', 'w')

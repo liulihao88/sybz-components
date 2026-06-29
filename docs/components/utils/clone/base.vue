@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 import { clone } from '@sybz-components/utils'
 
 const refValue = ref([11, 22, 33])

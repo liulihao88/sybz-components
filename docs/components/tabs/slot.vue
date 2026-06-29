@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const navList = [
   {
     label: '系统服务参数设置',

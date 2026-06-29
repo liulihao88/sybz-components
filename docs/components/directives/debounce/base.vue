@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const inputValue = ref()
 function baseDebounce() {
   console.log('baseDebounce')

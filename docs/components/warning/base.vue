@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const htmlContent = `
   <div>这是html</div> 
   <span class="cl-blue">这是蓝色</span>  <br />

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const searchSix = ref('copy')
 const text = ref('可复制的文本')
 const silentText = ref('静默复制的文本')

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, watch, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { validate, validForm } from '@sybz-components/utils'
 import type { FormInstance } from 'element-plus'
 const formRef = ref<FormInstance | null>(null)

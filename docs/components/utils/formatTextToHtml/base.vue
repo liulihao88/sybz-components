@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
-const { proxy } = getCurrentInstance()
 import { formatTextToHtml, $toast } from '@/utils/src/index'
 const parse$toast = (str) => {
   $toast(formatTextToHtml(str), {

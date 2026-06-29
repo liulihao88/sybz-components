@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const selectValue = ref('z3')
 const options = ref([
   { label: '张三', value: 'z3', disabled: true },

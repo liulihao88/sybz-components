@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 import { sleep } from '@sybz-components/utils'
 
-const { proxy } = getCurrentInstance()
 const confirmLoading = ref(false)
 function btnClick() {
   isShow.value = true

@@ -1,6 +1,5 @@
 <script setup lang="tsx">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const data = ref([{ name: 'andy' }])
 const columns = [
   {

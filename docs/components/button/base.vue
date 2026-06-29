@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 import { $toast } from '@sybz-components/utils'
 </script>
 

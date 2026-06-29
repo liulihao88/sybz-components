@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, computed } from 'vue'
+import { ref, computed } from 'vue'
 
 const data = ref([
   { name: '张三', address: '北京市朝阳区', status: 0 },

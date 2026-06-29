@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { validate, validateTrigger, validForm, $toast } from '@/utils/src/index'
 const sameform = ref({})
 const formRef = ref(null)

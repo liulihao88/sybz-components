@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, nextTick, watch } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, nextTick, watch } from 'vue'
 const options = ref([
   { label: '张三', cc: 'a', value: 'z3' },
   { label: '李四', cc: 'b', value: 'l4' },

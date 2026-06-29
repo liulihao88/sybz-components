@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const stepList = [
   { id: '1', name: '开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11' },
   { id: '2', name: 'POSUI2' },

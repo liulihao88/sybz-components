@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, h } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, h } from 'vue'
 import { confirm } from '@/utils/src/index'
 const base = () => {
   confirm('确定要执行此操作吗？', { confirmButtonClass: '', cancelButtonClass: '' })

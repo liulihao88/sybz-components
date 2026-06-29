@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 import { random } from '@sybz-components/utils'
 const selectVal = ref()
-const simpleSelectRef = ref(null)
+const simpleSelectRef = ref<any>(null)
 const options = ref([
   { label: '张三', value: 'z3' },
   { label: '李四', value: 'l4' },

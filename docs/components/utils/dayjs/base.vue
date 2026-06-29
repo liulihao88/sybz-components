@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 import { formatDateToDay, formatDateToMinute, formatDate, diffDate, diffDateFromCurrent } from '@/utils/src/index.ts'
 </script>
 

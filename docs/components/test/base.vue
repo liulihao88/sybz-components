@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 const cc = ref(123)
 const isShow = ref(false)
 const c = ref(false)

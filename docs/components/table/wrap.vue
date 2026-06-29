@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 const childBorder = ref(false)
 const columns2 = [
   { label: '名字2', prop: 'name' },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, watch, computed, toRaw } from 'vue'
+import { ref, watch, computed, toRaw } from 'vue'
 // import { validateTrigger, validate, validForm } from '@sybz-components/utils'
 import { validateTrigger, validate, validForm } from '@/utils/src/index'
 const formRef = ref(null)

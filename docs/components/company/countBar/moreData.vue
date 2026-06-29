@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, computed } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, computed } from 'vue'
 const objectDisk = ref({})
 objectDisk.value = {
   magazineList: [

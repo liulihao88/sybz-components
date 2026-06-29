@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 import { formatToFixed, $toast } from '@/utils/src/index.ts'
 let arr = [
   { label: 'formatToFixed(22, { digit: 4 })', value: formatToFixed(22, { digit: 4 }) },

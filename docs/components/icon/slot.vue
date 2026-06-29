@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
-const { proxy } = getCurrentInstance()
 function tt() {
   console.log('  </s-tooltip>')
 }

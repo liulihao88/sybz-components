@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, onMounted, reactive } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, onMounted, reactive } from 'vue'
 const options = ref([
   { label: '一行展示', value: 1 },
   { label: '一行展示2项', value: 2 },

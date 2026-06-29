@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, watch, provide } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, watch, provide } from 'vue'
 
 // main.js
 provide('GLOBAL_COMPONENT_CONFIG', {

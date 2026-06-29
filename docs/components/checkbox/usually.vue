@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 const checkboxValue = ref(['xxx'])
 const options = ref([
   { name: '小月月11111111', id: 'xyy' },

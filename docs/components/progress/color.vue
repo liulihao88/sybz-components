@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, onUnmounted } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, onUnmounted } from 'vue'
 function progressColor(value) {
   if (value < 20) {
     return 'red'

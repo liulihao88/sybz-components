@@ -42,7 +42,7 @@ export default loadingDirective
 /**
  *  @使用方式
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 const isLoading = ref(true)
 const loadingText= '小样, 你脱了马甲我照样认识你'
 </script>

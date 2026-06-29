@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref } from 'vue'
 import { $toast } from '@sybz-components/utils'
 const inner = () => {
   console.log(`1192 6行 docs/examples/SClickOutside/base.vue 111 `, 111)

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { $toast, validate } from '@/utils/src/index'
-const { proxy } = getCurrentInstance()
 const form = ref({})
 const fieldList = computed(() => {
   return [

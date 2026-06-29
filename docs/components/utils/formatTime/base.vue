@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance } from 'vue'
+import { ref } from 'vue'
 import { formatTime } from '@/utils/src/index.ts'
 // import { formatTime } from '@sybz-components/utils'
 

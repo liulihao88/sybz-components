@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, computed } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, computed } from 'vue'
 // const data = ref([
 //   { name: '<1023', value: 12345, value2: 9999999999999999999994513 },
 //   { name: '<2M', value: 3, value2: 444444 },
