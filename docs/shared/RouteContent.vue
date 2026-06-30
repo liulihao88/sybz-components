@@ -8,7 +8,7 @@ defineOptions({
 })
 
 const route = useRoute()
-const contentKey = computed(() => route.data.relativePath || route.path)
+const contentKey = computed(() => `${route.path}::${route.data.relativePath || ''}`)
 </script>
 
 <template>
