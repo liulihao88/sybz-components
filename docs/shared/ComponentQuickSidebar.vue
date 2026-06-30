@@ -9,6 +9,8 @@ type SidebarItem = {
   items?: SidebarItem[]
 }
 
+type SidebarConfig = SidebarItem[] | Record<string, SidebarItem[]>
+
 type QuickItem = {
   text: string
   shortText: string
@@ -115,6 +117,25 @@ const withBase = (link: string) => {
   return `${base}${normalizedLink}`
 }
 
+const getComponentSidebar = (sidebar: SidebarConfig | undefined) => {
+  if (Array.isArray(sidebar)) return sidebar
+  if (!sidebar) return []
+
+  const base = site.value.base.replace(/\/$/, '')
+  const candidateKeys = ['/components/', '/components', `${base}/components/`, `${base}/components`]
+
+  for (const key of candidateKeys) {
+    if (Array.isArray(sidebar[key])) return sidebar[key]
+  }
+
+  const matchedKey = Object.keys(sidebar).find((key) => {
+    const keyWithoutBase = base && key.startsWith(base) ? key.slice(base.length) || '/' : key
+    return keyWithoutBase.replace(/\/$/, '') === '/components'
+  })
+
+  return matchedKey ? sidebar[matchedKey] : []
+}
+
 const getShortText = (text: string) =>
   text
     .replace(/utils 方法总览（A-Z）/g, 'utils')
@@ -151,8 +172,7 @@ const flattenItems = (items: SidebarItem[] = [], groupText = ''): QuickItem[] =>
   })
 
 const groups = computed<QuickGroup[]>(() => {
-  const sidebar = theme.value.sidebar
-  const componentSidebar = Array.isArray(sidebar) ? sidebar : sidebar?.['/components'] || []
+  const componentSidebar = getComponentSidebar(theme.value.sidebar as SidebarConfig | undefined)
 
   return componentSidebar
     .map((group: SidebarItem) => {
