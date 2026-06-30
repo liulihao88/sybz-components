@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
-import { validate, validForm } from '@sybz-components/utils'
+import { validate, validateForm } from '@sybz-components/utils'
 import type { FormInstance } from 'element-plus'
 const formRef = ref<FormInstance | null>(null)
 const form = ref({})
@@ -12,16 +12,16 @@ const rules = computed(() => {
   }
 })
 const submit = async () => {
-  await validForm(formRef)
+  await validateForm(formRef)
 }
 const submit2 = async () => {
-  await validForm(formRef, { message: '我是自定义错误消息' })
+  await validateForm(formRef, { message: '我是自定义错误消息' })
 }
 const submit3 = async () => {
-  await validForm(formRef, { showMessage: false })
+  await validateForm(formRef, { showMessage: false })
 }
 const submit4 = async () => {
-  await validForm(formRef, { detail: true })
+  await validateForm(formRef, { detail: true })
 }
 </script>
 

@@ -8,7 +8,7 @@ const isLoading = ref(false)
 init()
 async function init() {
   isLoading.value = true
-  await proxy.sleep(3000)
+  await proxy.delay(3000)
   isLoading.value = false
 }
 </script>

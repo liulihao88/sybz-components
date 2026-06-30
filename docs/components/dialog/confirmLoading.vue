@@ -6,13 +6,13 @@ const isShow = ref(false)
 const closeType = ref()
 const confirm = async () => {
   if (closeType.value === 'noClose') {
-    await proxy.sleep(300)
+    await proxy.delay(300)
     $toast('点击了确认但不关闭')
     return
   }
-  await proxy.sleep(300)
+  await proxy.delay(300)
   proxy.$toast(1)
-  await proxy.sleep(300)
+  await proxy.delay(300)
   proxy.$toast(2)
   isShow.value = false
 }

@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ref, getCurrentInstance, computed } from 'vue'
 const instance = getCurrentInstance()
-import { formatTime, sleep } from '@sybz-components/utils'
+import { formatTime, delay } from '@sybz-components/utils'
 const data: any = ref({})
 const sizeValue = ref('default')
 const showAll = ref(false)
@@ -61,7 +61,7 @@ const sizeOptions = [
 const borderValue = ref(true)
 
 const init = async () => {
-  await sleep(1000)
+  await delay(1000)
   data.value = {
     name: 'andy',
     time: 1638720415900,

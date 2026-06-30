@@ -51,8 +51,8 @@ const open = (isEdit = false) => {
   console.log(`02 isEdit`, isEdit)
   if (isEdit) {
     form.value = {
-      name: proxy.uuid('name'),
-      age: proxy.uuid('number'),
+      name: proxy.mockValue('name'),
+      age: proxy.mockValue('number'),
     }
   } else {
     form.value = originForm

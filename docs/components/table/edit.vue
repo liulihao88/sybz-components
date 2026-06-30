@@ -13,7 +13,7 @@ const header = [
 ]
 const edit = async ({ row, scope }) => {
   if (row.isEdit) {
-    await proxy.sleep(1000)
+    await proxy.delay(1000)
     proxy.$toast('保存成功')
     return (form.value.data[scope.$index].isEdit = false)
   }
@@ -70,7 +70,7 @@ const form = ref({
 })
 const formRef = ref(null)
 const submitForm = async () => {
-  await proxy.validForm(formRef, { detail: false })
+  await proxy.validateForm(formRef, { detail: false })
   proxy.$toast('编辑成功')
 }
 </script>

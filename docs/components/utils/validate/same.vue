@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { validate, validateTrigger, validForm, $toast } from '@/utils/src/index'
+import { validate, validateTrigger, validateForm, $toast } from '@/utils/src/index'
 const sameform = ref({})
 const formRef = ref(null)
 
@@ -13,7 +13,7 @@ const rules = computed(() => {
 })
 
 const confirm = async () => {
-  await validForm(formRef)
+  await validateForm(formRef)
   $toast('校验')
 }
 

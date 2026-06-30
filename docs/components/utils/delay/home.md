@@ -1,24 +1,24 @@
-# sleep延迟函数
+# delay延迟函数
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='await sleep(1000)' />
+<DocBasicUsage code='await delay(1000)' />
 
 ### 基础用法
 
 :::demo
-utils/sleep/base
+utils/delay/base
 :::
 
 ### 说明
 
-`sleep` 用于创建一个延迟结束的 `Promise`，适合在异步流程中等待一段时间，或在延迟结束后执行一个回调函数。
+`delay` 用于创建一个延迟结束的 `Promise`，适合在异步流程中等待一段时间，或在延迟结束后执行一个回调函数。
 
 ### 调用形式
 
 ```ts
-await sleep(delay)
-await sleep(delay, callback)
+await delay(delay)
+await delay(delay, callback)
 ```
 
 ### 参数说明
@@ -35,20 +35,20 @@ await sleep(delay, callback)
 ### 常用场景
 
 ```ts
-await sleep(1000)
+await delay(1000)
 
-await sleep(300, () => {
+await delay(300, () => {
   console.log('延迟结束')
 })
 
 loading.value = true
-await sleep(500)
+await delay(500)
 loading.value = false
 ```
 
 ### 注意事项
 
-`sleep` 不会取消定时器，也不会捕获 `callback` 内部异常。若回调里可能抛错，建议在回调内部自行处理。
+`delay` 不会取消定时器，也不会捕获 `callback` 内部异常。若回调里可能抛错，建议在回调内部自行处理。
 
-:::utils-source sleep
+:::utils-source delay
 :::

@@ -11,11 +11,11 @@ import {
   processWidth,
   random,
   setStorage,
-  sleep,
+  delay,
   throttle,
   toLine,
   tryCatch,
-  uuid,
+  mockValue,
   validate,
 } from '../base'
 
@@ -83,13 +83,13 @@ describe('base utils', () => {
     expect(clone([1, { id: 2 }], 2)).toEqual([1, { id: 2 }, 1, { id: 2 }])
   })
 
-  it('generates deterministic uuid values for option arrays and number-like modes', () => {
-    expect(uuid([{ label: 'A', value: 'a' }], 4, { optionsIndex: 0 })).toBe('a')
+  it('generates deterministic mockValue values for option arrays and number-like modes', () => {
+    expect(mockValue([{ label: 'A', value: 'a' }], 4, { optionsIndex: 0 })).toBe('a')
 
     vi.spyOn(Math, 'random').mockReturnValue(0)
-    expect(uuid('number', 3)).toBe(111)
-    expect(uuid('ip')).toBe('10.0.11.1')
-    expect(uuid('port')).toBe(1)
+    expect(mockValue('number', 3)).toBe(111)
+    expect(mockValue('ip')).toBe('10.0.11.1')
+    expect(mockValue('port')).toBe(1)
   })
 
   it('returns lower-case raw types and converts names to separator case', () => {
@@ -123,10 +123,10 @@ describe('base utils', () => {
     })
   })
 
-  it('sleeps and invokes optional callback', async () => {
+  it('delays and invokes optional callback', async () => {
     vi.useFakeTimers()
     const fn = vi.fn()
-    const promise = sleep(100, fn)
+    const promise = delay(100, fn)
 
     await vi.advanceTimersByTimeAsync(100)
     await expect(promise).resolves.toBeUndefined()

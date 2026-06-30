@@ -20,7 +20,7 @@ const rules = computed(() => {
 })
 
 const confirm = async () => {
-  await proxy.validForm(formRef)
+  await proxy.validateForm(formRef)
   proxy.$toast('校验')
 }
 

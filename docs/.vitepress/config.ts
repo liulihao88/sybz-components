@@ -181,8 +181,8 @@ export default defineConfig({
               link: '/components/utils/isEmpty/home.md',
             },
             {
-              text: sybzMark('sleep 延迟函数'),
-              link: '/components/utils/sleep/home.md',
+              text: sybzMark('deply 延迟函数'),
+              link: '/components/utils/deplay/home.md',
             },
             {
               text: sybzMark('tryCatch Promise 封装'),

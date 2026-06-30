@@ -34,7 +34,7 @@ const options = computed(() => {
 })
 
 const init = async () => {
-  await proxy.sleep(1000)
+  await proxy.delay(1000)
   data.value = {
     name: 'andy',
     age: 18,

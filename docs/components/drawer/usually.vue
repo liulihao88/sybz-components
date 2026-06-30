@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { sleep } from '@sybz-components/utils'
+import { delay } from '@sybz-components/utils'
 
 const confirmLoading = ref(false)
 function btnClick() {
@@ -10,7 +10,7 @@ const a = ref(33)
 const isShow = ref(false)
 async function cusConfirm() {
   confirmLoading.value = true
-  await sleep(2000)
+  await delay(2000)
   confirmLoading.value = false
   isShow.value = false
 }

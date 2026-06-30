@@ -22,7 +22,7 @@ type ValidateRuleResult = {
   max?: number
 }
 type ValidatePrimitiveValue = string | number | boolean | null | undefined
-type UuidOptionItem<T = any> = { label: string; value: T }
+type MockValueOptionItem<T = any> = { label: string; value: T }
 
 interface ToastOptions extends Partial<MessageOptions> {
   /**
@@ -40,7 +40,7 @@ interface ClearStorageExcludeOptions {
 
 type ClearStorageInput = string | string[] | ClearStorageExcludeOptions
 
-interface ValidFormOptions {
+interface ValidateFormOptions {
   /**
    * 校验失败时的提示文案。
    */
@@ -59,7 +59,7 @@ interface FormValidateTarget {
   validate: (callback: (valid: boolean, status: StorageMap) => void) => void
 }
 
-interface UuidOptions {
+interface MockValueOptions {
   /**
    * `email` 模式下的邮箱后缀，默认 `@qq.com`。
    */
@@ -422,14 +422,14 @@ function _isObjectWithExclude(obj: ClearStorageInput): obj is ClearStorageExclud
  * @returns 校验通过时返回表单状态对象，失败时 reject 对应状态对象。
  *
  * @example
- * await validForm(formRef)
+ * await validateForm(formRef)
  *
  * @example
- * await validForm(formRef, { message: '请检查表单信息', detail: true })
+ * await validateForm(formRef, { message: '请检查表单信息', detail: true })
  */
-export function validForm(
+export function validateForm(
   ref: MaybeRef<FormValidateTarget>,
-  { message = '表单校验错误, 请检查', detail = false, showMessage = true }: ValidFormOptions = {},
+  { message = '表单校验错误, 请检查', detail = false, showMessage = true }: ValidateFormOptions = {},
 ): Promise<StorageMap> {
   return new Promise((resolve, reject) => {
     unref(ref).validate((valid, status) => {
@@ -591,20 +591,20 @@ export function clone<T>(data: T | T[], times = 1): T | T[] {
  * @returns 生成结果。
  *
  * @example
- * uuid()
+ * mockValue()
  * // => 'aB3d'
  *
  * @example
- * uuid('phone')
+ * mockValue('phone')
  * // => '13603312460'
  *
  * @example
- * uuid('time', 0, { startStr: 'andy', timeStr: '{h}:{i}:{s}' })
+ * mockValue('time', 0, { startStr: 'andy', timeStr: '{h}:{i}:{s}' })
  */
-export function uuid(
-  type: string | Array<UuidOptionItem> = '',
+export function mockValue(
+  type: string | Array<MockValueOptionItem> = '',
   length = 4,
-  options: UuidOptions = {},
+  options: MockValueOptions = {},
 ): string | number | any {
   const { emailStr = '@qq.com', timeStr = '{y}-{m}-{d} {h}:{i}:{s}', startStr = '', optionsIndex = null } = options
 
@@ -659,13 +659,13 @@ export function uuid(
 
   // 生成邮箱
   if (type === 'email') {
-    result = uuid(startStr, length) + emailStr
+    result = mockValue(startStr, length) + emailStr
     return result
   }
 
   // 生成时间
   if (type === 'time') {
-    return uuid(startStr, length, options) + ' ' + formatTime(new Date(), timeStr)
+    return mockValue(startStr, length, options) + ' ' + formatTime(new Date(), timeStr)
   }
 
   // 生成数字
@@ -723,7 +723,7 @@ export function getType(type: unknown): string {
 
 /**
  * 一个辅助函数，用于在代码中创建一个暂停（延迟）。
- * 它返回一个 Promise，你可以在 `await` 后使用它来实现类似 "sleep" 的效果。
+ * 它返回一个 Promise，你可以在 `await` 后使用它来实现类似 "delay" 的效果。
  *
  * @param delay - 等待的毫秒数。默认值为 0，表示不延迟。
  * @param fn - (可选) 一个在延迟结束后立即执行的函数。
@@ -733,12 +733,12 @@ export function getType(type: unknown): string {
  * @example
  * // 基本用法：延迟 2 秒后打印消息
  * console.log('开始');
- * await sleep(2000);
+ * await delay(2000);
  * console.log('2秒后执行');
  *
  * @example
  * // 带回调函数的用法：延迟 1 秒后执行清理工作
- * sleep(1000, () => {
+ * delay(1000, () => {
  *   console.log('执行清理操作...');
  *   // 清理代码...
  * });
@@ -747,10 +747,10 @@ export function getType(type: unknown): string {
  * // 在循环中使用：每次迭代后延迟 500 毫秒
  * for (let i = 0; i < 5; i++) {
  *   console.log(`当前值: ${i}`);
- *   await sleep(500);
+ *   await delay(500);
  * }
  */
-export function sleep(delay: number = 0, fn?: () => void) {
+export function delay(delay: number = 0, fn?: () => void) {
   return new Promise<void>((resolve) =>
     setTimeout(() => {
       fn?.()

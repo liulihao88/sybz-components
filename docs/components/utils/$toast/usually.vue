@@ -3,7 +3,7 @@ import { ref, h } from 'vue'
 import * as utils from '@/utils/src/index'
 import hot from '../../../.vitepress/theme/assets/svg/hot.svg?component'
 import { ElMessage } from 'element-plus'
-const { $toast, sleep } = utils
+const { $toast, delay } = utils
 const base = () => {
   $toast('基础成功')
   $toast('基础警告', 'w')
@@ -34,7 +34,7 @@ const closeOther = async () => {
     })
   }
   $toast('1秒后其他的都关闭')
-  await sleep(1000)
+  await delay(1000)
   $toast('天下之大唯我独尊', { closeAll: true })
 }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import RenderComp from './renderComp.vue'
-import { validForm, isEmpty, $toast } from '@sybz-components/utils'
+import { validateForm, isEmpty, $toast } from '@sybz-components/utils'
 import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
 
@@ -84,7 +84,7 @@ const getPlaceholder = (row: FormFieldItem) => {
 
 const sFormRef = ref<FormValidateTarget>()
 async function validate(isResetFields = false, otherParams: Record<string, unknown> = {}) {
-  await validForm(sFormRef.value, otherParams)
+  await validateForm(sFormRef.value, otherParams)
   if (isResetFields) {
     resetFields()
   }

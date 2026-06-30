@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, computed, toRaw } from 'vue'
-// import { validateTrigger, validate, validForm } from '@sybz-components/utils'
-import { validateTrigger, validate, validForm } from '@/utils/src/index'
+// import { validateTrigger, validate, validateForm } from '@sybz-components/utils'
+import { validateTrigger, validate, validateForm } from '@/utils/src/index'
 const formRef = ref(null)
 const form = ref({})
 
@@ -12,7 +12,7 @@ const rules = computed(() => {
   }
 })
 const submit = async () => {
-  await validForm(formRef)
+  await validateForm(formRef)
 }
 </script>
 

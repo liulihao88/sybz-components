@@ -38,7 +38,7 @@ npm install sybz-components element-plus @element-plus/icons-vue @vueuse/core
 
 :::
 
-如果你还需要使用公共函数库，例如 `$toast`、`clone`、`validForm`，再安装 utils：
+如果你还需要使用公共函数库，例如 `$toast`、`clone`、`validateForm`，再安装 utils：
 
 ::: code-group
 
@@ -205,13 +205,13 @@ const data = [
 工具函数从 `@sybz-components/utils` 引入。
 
 ```ts
-import { $toast, clone, sleep } from '@sybz-components/utils'
+import { $toast, clone, delay } from '@sybz-components/utils'
 
 $toast('保存成功')
 
 const newData = clone(oldData)
 
-await sleep(500)
+await delay(500)
 ```
 
 也可以把常用方法挂到全局，不过新项目更推荐在需要的文件里按需引入，这样来源更清楚。

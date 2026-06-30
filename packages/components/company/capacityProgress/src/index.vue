@@ -6,7 +6,7 @@
  */
 
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { sleep, formatBytes, getType } from '@sybz-components/utils'
+import { delay, formatBytes, getType } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 
 defineOptions({
@@ -147,7 +147,7 @@ function formatColor(value) {
 }
 
 const adaptiveWidth = async () => {
-  await sleep()
+  await delay()
   if (!progressBoxRef.value?.$el?.offsetWidth) {
     showRight.value = true
   }

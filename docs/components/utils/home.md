@@ -24,10 +24,10 @@
 - [formatToFixed](/components/utils/formatToFixed/home.md)
 - [getType](/components/utils/getType/home.md)
 - [isEmpty](/components/utils/isEmpty/home.md)
-- [sleep](/components/utils/sleep/home.md)
+- [delay](/components/utils/delay/home.md)
 - [tryCatch](/components/utils/tryCatch/home.md)
-- [uuid](/components/utils/uuid/home.md)
-- [validForm](/components/utils/validForm/home.md)
+- [mockValue](/components/utils/mockValue/home.md)
+- [validateForm](/components/utils/validateForm/home.md)
 - [validate](/components/utils/validate/home.md)
 
 ## 函数方法（A-Z）
@@ -490,13 +490,13 @@ setStorage('userInfo', { id: 1, name: 'andy' })
 setStorage('formDraft', { keyword: '机房', page: 2 }, true)
 ```
 
-### sleep
+### delay
 
 创建一个可 `await` 的延迟。
 
 ```ts
-await sleep(500)
-await sleep(1000, () => console.log('1 秒后执行'))
+await delay(500)
+await delay(1000, () => console.log('1 秒后执行'))
 ```
 
 ### getUtilsBuildTime
@@ -559,14 +559,14 @@ if (!error) {
 }
 ```
 
-### uuid
+### mockValue
 
 生成随机字符串，也支持手机号、邮箱、时间串、数字等特殊模式。
 
 ```ts
-uuid() // 普通随机串
-uuid('phone') // 随机手机号
-uuid('number', 6) // 6 位数字
+mockValue() // 普通随机串
+mockValue('phone') // 随机手机号
+mockValue('number', 6) // 6 位数字
 ```
 
 ### validate
@@ -588,13 +588,13 @@ const nameRule = validateTrigger('required', {
 })
 ```
 
-### validForm
+### validateForm
 
 对 `el-form` 的 `validate` 做 Promise 封装，便于直接 `await`。
 
 ```ts
-await validForm(formRef)
-await validForm(formRef, {
+await validateForm(formRef)
+await validateForm(formRef, {
   message: '请先完善表单信息',
   detail: true,
 })

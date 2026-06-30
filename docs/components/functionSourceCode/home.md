@@ -12,15 +12,15 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-function-source-code :function-name="functionName" />`。属性说明：`function-name` 示例值：`functionName`，类型：string，默认值：`uuid`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-function-source-code :function-name="functionName" />`。属性说明：`function-name` 示例值：`functionName`，类型：string，默认值：`mockValue`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 functionSourceCode/base
 :::
 
 ### API
 
-|     属性名     | 说明                       | 类型   | 默认值 |
-| :------------: | -------------------------- | ------ | ------ |
-| `functionName` | 需要展示源码的工具函数名称 | string | `uuid` |
+|     属性名     | 说明                       | 类型   | 默认值      |
+| :------------: | -------------------------- | ------ | ----------- |
+| `functionName` | 需要展示源码的工具函数名称 | string | `mockValue` |
 
 ### 说明
 

@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ref, getCurrentInstance, reactive } from 'vue'
 const { proxy } = getCurrentInstance()
-import { validForm } from '@sybz-components/utils'
+import { validateForm } from '@sybz-components/utils'
 const model = ref({
   account: '', // *用户账号
   password: null, // *用户密码

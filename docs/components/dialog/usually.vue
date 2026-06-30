@@ -11,12 +11,12 @@ async function cusConfirm() {
   console.log(`***** 点我作甚  10行 docs/examples/SDialog/usually.vue  15:06:26`)
   confirmLoading.value = true
   proxy.$toast('正在保存', 'i')
-  await sleep(2000)
+  await delay(2000)
   proxy.$toast('保存成功', { duration: 3000 })
   confirmLoading.value = false
   isShow.value = false
 }
-function sleep(delay = 0, fn = () => {}) {
+function delay(delay = 0, fn = () => {}) {
   return new Promise((resolve) =>
     setTimeout(() => {
       fn && fn()

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const functionName = ref('uuid')
-const options = ['uuid', 'isEmpty', 'formatBytes']
+const functionName = ref('mockValue')
+const options = ['mockValue', 'isEmpty', 'formatBytes']
 </script>
 
 <template>

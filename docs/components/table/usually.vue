@@ -109,7 +109,7 @@ const num = ref(1)
 const total = ref(0)
 
 async function init() {
-  await proxy.sleep(300)
+  await proxy.delay(300)
   num.value++
   data.value = proxy.clone(orgData, num.value)
   console.log(`data.value`, data.value)

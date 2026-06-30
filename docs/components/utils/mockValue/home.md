@@ -1,27 +1,27 @@
-# uuid生成随机字符串
+# mockValue生成随机字符串
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='uuid()' />
+<DocBasicUsage code='mockValue()' />
 
 ### 基础用法
 
 :::demo
-utils/uuid/base
+utils/mockValue/base
 :::
 
 ### 说明
 
-`uuid` 用于生成随机字符串，也内置了手机号、邮箱、时间、数字、IP、端口和选项数组取值等模式。它常用于 mock 数据、临时标识、表单默认值和演示数据。
+`mockValue` 用于生成随机字符串，也内置了手机号、邮箱、时间、数字、IP、端口和选项数组取值等模式。它常用于 mock 数据、临时标识、表单默认值和演示数据。
 
 ### 调用形式
 
 ```ts
-uuid()
-uuid(type)
-uuid(type, length)
-uuid(type, length, options)
-uuid(optionsArray, length, options)
+mockValue()
+mockValue(type)
+mockValue(type, length)
+mockValue(type, length, options)
+mockValue(optionsArray, length, options)
 ```
 
 ### 参数说明
@@ -30,7 +30,7 @@ uuid(optionsArray, length, options)
 | --------- | ------------------------------------------------ | ---- | ------ | ---------------------------------------------------------------------------- |
 | `type`    | `string \| Array<{ label: string; value: any }>` | 否   | `''`   | 生成模式。不传时生成普通随机字符串；传数组时随机返回某一项或该项的 `value`。 |
 | `length`  | `number`                                         | 否   | `4`    | 普通随机字符串或 `number` 模式的长度。                                       |
-| `options` | `UuidOptions`                                    | 否   | `{}`   | 不同模式下的额外配置。                                                       |
+| `options` | `MockValueOptions`                               | 否   | `{}`   | 不同模式下的额外配置。                                                       |
 
 内置 `type`：
 
@@ -45,7 +45,7 @@ uuid(optionsArray, length, options)
 | `'port'`   | `number` | 生成 `1-65535` 范围内的端口号。                                         |
 | `Array`    | `any`    | 从数组中随机取一项；如果数组项有 `value` 字段，返回 `value`。           |
 
-`UuidOptions` 字段：
+`MockValueOptions` 字段：
 
 | 字段           | 类型             | 默认值                      | 说明                                                       |
 | -------------- | ---------------- | --------------------------- | ---------------------------------------------------------- |
@@ -61,19 +61,19 @@ uuid(optionsArray, length, options)
 ### 常用场景
 
 ```ts
-uuid()
+mockValue()
 // 'aB3d'
 
-uuid('number', 6)
+mockValue('number', 6)
 // 483921
 
-uuid('email', 6, { emailStr: '@example.com' })
+mockValue('email', 6, { emailStr: '@example.com' })
 // 'xY3kP2@example.com'
 
-uuid('time', 4, { startStr: 'task-', timeStr: '{h}:{i}:{s}' })
+mockValue('time', 4, { startStr: 'task-', timeStr: '{h}:{i}:{s}' })
 // 'task-aB3d 09:30:12'
 
-uuid(
+mockValue(
   [
     { label: '启用', value: 1 },
     { label: '禁用', value: 0 },
@@ -86,7 +86,7 @@ uuid(
 
 ### 注意事项
 
-`uuid` 使用 `Math.random()`，适合业务展示和 mock 数据，不适合作为密码学安全随机数。`number` 模式不会生成包含 `0` 的数字。
+`mockValue` 使用 `Math.random()`，适合业务展示和 mock 数据，不适合作为密码学安全随机数。`number` 模式不会生成包含 `0` 的数字。
 
-:::utils-source uuid
+:::utils-source mockValue
 :::

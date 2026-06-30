@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { validateTrigger, validate, sleep } from '@sybz-components/utils'
+import { validateTrigger, validate, delay } from '@sybz-components/utils'
 const sFormRef = ref()
 const form = ref({
   account: '',
@@ -42,7 +42,7 @@ const newAdd = () => {
 }
 const deleteItem = async (i) => {
   form.value.domains.splice(i, 1)
-  await sleep(0)
+  await delay(0)
   sFormRef.value.clearValidate()
 }
 </script>

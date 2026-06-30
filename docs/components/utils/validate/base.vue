@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { $toast, validate, validForm } from '@/utils/src/index'
+import { $toast, validate, validateForm } from '@/utils/src/index'
 
 const formRef = ref()
 const form = reactive({
@@ -18,8 +18,8 @@ const submit = async () => {
   //     $toast('校验通过')
   //   }
   // })
-  // 2. utils提供的validForm方法, 返回一个promise, 校验通过则resolve, 不通过则reject
-  await validForm(formRef.value)
+  // 2. utils提供的validateForm方法, 返回一个promise, 校验通过则resolve, 不通过则reject
+  await validateForm(formRef.value)
 }
 </script>
 

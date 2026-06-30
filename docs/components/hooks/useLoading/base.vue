@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useLoading } from '@/index.ts'
-import { sleep, $toast } from '@sybz-components/utils'
+import { delay, $toast } from '@sybz-components/utils'
 
 const count = ref(0)
 const { loading, withLoading } = useLoading(false)
 
 const submit = () => {
   withLoading(async () => {
-    await sleep(1000)
+    await delay(1000)
     count.value += 1
     $toast('提交完成')
   })

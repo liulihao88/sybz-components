@@ -23,7 +23,7 @@ interface FunctionSourceCodeProps {
 }
 
 const props = withDefaults(defineProps<FunctionSourceCodeProps>(), {
-  functionName: 'uuid',
+  functionName: 'mockValue',
 })
 
 const sourceCode = ref<string>('')
