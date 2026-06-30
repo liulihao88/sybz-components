@@ -120,7 +120,7 @@ interface SelectProps {
   size?: string
   theme?: '' | 'chenghua'
   title?: string
-  boxStyle?: Record<string, any>
+  compTitleStyle?: Record<string, any>
   connect?: string
   customLabel?: ((...args: any[]) => any) | string
   width?: string | number
@@ -152,7 +152,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: '',
   theme: '',
   title: '',
-  boxStyle: undefined,
+  compTitleStyle: undefined,
 
   // 如果label显示多个参数的连接符
   connect: '/',
@@ -180,8 +180,8 @@ const compTitleProps = computed(() => {
     theme: mergedProps.value.theme,
   }
 
-  if (mergedProps.value.boxStyle !== undefined) {
-    titleProps.boxStyle = mergedProps.value.boxStyle
+  if (mergedProps.value.compTitleStyle !== undefined) {
+    titleProps.compTitleStyle = mergedProps.value.compTitleStyle
   }
 
   return titleProps

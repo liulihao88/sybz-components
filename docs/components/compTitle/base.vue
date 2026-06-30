@@ -13,17 +13,17 @@ const count = ref(1)
     </div>
 
     <div class="demo-row">
-      <s-comp-title title="大尺寸" size="large" :box-style="{ width: 88 }" />
+      <s-comp-title title="大尺寸" size="large" :comp-title-style="{ width: 88 }" />
       <el-input v-model="value" size="large" placeholder="large" />
     </div>
 
     <div class="demo-row">
-      <s-comp-title title="小尺寸" size="small" :box-style="{ width: 88, color: 'var(--el-color-primary)' }" />
+      <s-comp-title title="小尺寸" size="small" :comp-title-style="{ width: 88, color: 'var(--el-color-primary)' }" />
       <el-input v-model="value" size="small" placeholder="small" />
     </div>
 
     <div class="demo-row">
-      <s-comp-title title="小尺寸" size="small" :box-style="{ width: 88, color: 'var(--el-color-primary)' }" />
+      <s-comp-title title="小尺寸" size="small" :comp-title-style="{ width: 88, color: 'var(--el-color-primary)' }" />
       <el-select v-model="value" size="small" placeholder="small" />
     </div>
 

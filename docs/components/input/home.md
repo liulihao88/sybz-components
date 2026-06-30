@@ -92,7 +92,7 @@ input/autocomplete
 |           属性名           | 说明                                              | 类型             | 默认值  |
 | :------------------------: | ------------------------------------------------- | ---------------- | ------- |
 |        `modelValue`        | 绑定值                                            | any              | -       |
-|         `boxStyle`         | 标题前缀区域样式                                  | object           | `{}`    |
+|      `compTitleStyle`      | 标题前缀组件样式                                  | object           | `{}`    |
 |          `width`           | 输入框宽度                                        | string / number  | `100%`  |
 |          `height`          | 输入框高度                                        | string / number  | `''`    |
 |        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示  | string / number  | `10`    |

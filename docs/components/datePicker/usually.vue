@@ -11,7 +11,7 @@ const dateSimple = ref('')
       <span>属性: title</span>
       <span>可选值: string</span>
       <span>默认值: ''</span>
-      <span>属性: boxStyle</span>
+      <span>属性: compTitleStyle</span>
       <span>可选值: object</span>
       <span>默认值: {}</span>
       <span>属性: start-placeholder / end-placeholder</span>
@@ -28,7 +28,7 @@ const dateSimple = ref('')
         start-placeholder="开始"
         end-placeholder="结束"
         range-separator="///"
-        :box-style="{ width: 84 }"
+        :comp-title-style="{ width: 84 }"
       ></s-date-picker>
       <s-date-picker
         v-model="dateSimple"
@@ -36,7 +36,7 @@ const dateSimple = ref('')
         type="datetime"
         value-format="x"
         width="360"
-        :box-style="{ width: 84 }"
+        :comp-title-style="{ width: 84 }"
       ></s-date-picker>
     </div>
 

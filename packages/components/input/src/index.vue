@@ -111,7 +111,7 @@ const normalizeInputSize = (size: unknown): InputSize | undefined => {
 
 interface SInputProps {
   modelValue: any
-  boxStyle?: Record<string, any>
+  compTitleStyle?: Record<string, any>
   width?: string | number
   height?: string | number
   maxlength?: string | number
@@ -133,7 +133,7 @@ interface SInputProps {
 }
 
 const props = withDefaults(defineProps<SInputProps>(), {
-  boxStyle: () => ({}),
+  compTitleStyle: undefined,
   width: '100%',
   height: '',
   maxlength: undefined,
@@ -236,14 +236,16 @@ watch(
 )
 
 const computedBoxStyle = computed(() => {
-  if (mergedProps.value.boxStyle?.width) {
-    let minusWidth = parseInt(mergedProps.value.boxStyle.width) - 8 + 'px'
+  const compTitleStyle = mergedProps.value.compTitleStyle ?? {}
+
+  if (compTitleStyle.width) {
+    let minusWidth = parseInt(compTitleStyle.width) - 8 + 'px'
     return {
-      ...mergedProps.value.boxStyle,
+      ...compTitleStyle,
       width: processWidth(minusWidth, true),
     }
   } else {
-    return mergedProps.value.boxStyle
+    return compTitleStyle
   }
 })
 

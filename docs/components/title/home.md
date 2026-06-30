@@ -30,7 +30,7 @@ title/usually
 
 ### compTitle组件的使用
 
-:::demo 基础写法：`<s-comp-title title="你好" :boxStyle="{ width: '160px', fontSize: '20px', color: 'var(--blue)' }">...</s-comp-title>`。属性说明：`title` 示例值：`你好`，类型：string，默认值：`''`；`boxStyle` 示例值：`{ width: '160px', fontSize: '20px...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`large`，类型：string，默认值：`''`。本示例展示compTitle组件的使用配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-comp-title title="你好" :compTitleStyle="{ width: '160px', fontSize: '20px', color: 'var(--blue)' }">...</s-comp-title>`。属性说明：`title` 示例值：`你好`，类型：string，默认值：`''`；`compTitleStyle` 示例值：`{ width: '160px', fontSize: '20px...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`large`，类型：string，默认值：`''`。本示例展示compTitle组件的使用配置，可以直接复制基础写法后按业务替换数据。
 title/compTitle
 :::
 

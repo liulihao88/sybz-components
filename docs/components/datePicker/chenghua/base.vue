@@ -23,6 +23,9 @@ const dateValue = ref('')
       <span>属性: height</span>
       <span>可选值: string | number</span>
       <span>默认值: ''</span>
+      <span>属性: compTitleStyle</span>
+      <span>可选值: object</span>
+      <span>默认值: {}</span>
     </div>
 
     <div class="date-picker-chenghua-demo__list">
@@ -33,7 +36,6 @@ const dateValue = ref('')
         title="审核周期"
         width="520"
         height="40"
-        :box-style="{ width: 84 }"
       ></s-date-picker>
       <s-date-picker
         v-model="dateValue"
@@ -43,7 +45,6 @@ const dateValue = ref('')
         width="320"
         height="40"
         placeholder="选择发布日期"
-        :box-style="{ width: 84 }"
       ></s-date-picker>
     </div>
   </div>

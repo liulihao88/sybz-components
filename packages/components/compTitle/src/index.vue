@@ -10,25 +10,27 @@ const attrs = useAttrs()
 
 interface CompTitleProps {
   title?: string
-  boxStyle?: Record<string, any>
+  compTitleStyle?: Record<string, any>
   theme?: '' | 'chenghua'
 }
 
 const props = withDefaults(defineProps<CompTitleProps>(), {
   title: '',
-  boxStyle: () => ({}),
+  compTitleStyle: undefined,
   theme: '',
 })
 const mergedProps = useGlobalComponentConfig('compTitle', props)
 
+const resolvedCompTitleStyle = computed(() => mergedProps.value.compTitleStyle ?? {})
+
 const computedBoxStyle = computed(() => {
-  if (mergedProps.value.boxStyle?.width) {
+  if (resolvedCompTitleStyle.value.width) {
     return {
-      ...mergedProps.value.boxStyle,
-      width: processWidth(mergedProps.value.boxStyle?.width, true),
+      ...resolvedCompTitleStyle.value,
+      width: processWidth(resolvedCompTitleStyle.value.width, true),
     }
   } else {
-    return mergedProps.value.boxStyle
+    return resolvedCompTitleStyle.value
   }
 })
 

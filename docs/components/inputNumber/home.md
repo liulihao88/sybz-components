@@ -57,7 +57,7 @@ inputNumber/usually
 | :-----------------: | ---------------- | ------------------------------------ | ------- |
 |    `modelValue`     | 绑定值           | any                                  | -       |
 |       `title`       | 左侧标题前缀文案 | string                               | `''`    |
-|     `boxStyle`      | 标题前缀区域样式 | object                               | `{}`    |
+|  `compTitleStyle`   | 标题前缀组件样式 | object                               | `{}`    |
 |       `width`       | 组件总宽度       | string / number                      | `''`    |
 |      `height`       | 组件总高度       | string / number                      | `''`    |
 |       `theme`       | 主题样式         | `''` / `chenghua`                    | `''`    |

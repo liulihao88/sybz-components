@@ -18,7 +18,7 @@ datePicker/base
 
 ### 成华主题
 
-:::demo 基础写法：`<s-date-picker v-model="rangeValue" theme="chenghua" type="daterange" title="审核周期" width="520" height="40" :boxStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：string，可选值：`''` / `chenghua`，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`title` 示例值：`审核周期`，类型：string，默认值：`''`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`boxStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`；`placeholder` 示例值：`选择发布日期`，类型：string，默认值：`请选择日期`。本示例展示成华主题样式。theme="chenghua" 时启用成华主题样式。
+:::demo 基础写法：`<s-date-picker v-model="rangeValue" theme="chenghua" type="daterange" title="审核周期" width="520" height="40" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：string，可选值：`''` / `chenghua`，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`title` 示例值：`审核周期`，类型：string，默认值：`''`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`compTitleStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`；`placeholder` 示例值：`选择发布日期`，类型：string，默认值：`请选择日期`。本示例展示成华主题样式。theme="chenghua" 时启用成华主题样式。
 datePicker/chenghua/base
 :::
 
@@ -72,13 +72,13 @@ datePicker/defaultValue
 
 ### 高度
 
-:::demo 基础写法：`<s-date-picker v-model="rangeValue" title="时间范围" type="daterange" width="520" height="40" :boxStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`时间范围`，类型：string，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`boxStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`。本示例展示高度配置。height 默认值为 ''。
+:::demo 基础写法：`<s-date-picker v-model="rangeValue" title="时间范围" type="daterange" width="520" height="40" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`时间范围`，类型：string，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`compTitleStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`。本示例展示高度配置。height 默认值为 ''。
 datePicker/height
 :::
 
 ### 标题和组合属性
 
-:::demo 基础写法：`<s-date-picker v-model="rangeValue" title="选择日期" type="daterange" width="560" start-placeholder="开始" end-placeholder="结束" range-separator="///" :boxStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`选择日期`，类型：string，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`560`，类型：string / number，默认值：`300px`；`start-placeholder` 示例值：`开始`，类型：string，默认值：`开始日期`；`end-placeholder` 示例值：`结束`，类型：string，默认值：`结束日期`；`range-separator` 示例值：`///`，类型：string，默认值：`-`；`boxStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`。本示例展示标题和组合属性配置。title 默认值为 ''，boxStyle 默认值为 {}。
+:::demo 基础写法：`<s-date-picker v-model="rangeValue" title="选择日期" type="daterange" width="560" start-placeholder="开始" end-placeholder="结束" range-separator="///" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`选择日期`，类型：string，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`560`，类型：string / number，默认值：`300px`；`start-placeholder` 示例值：`开始`，类型：string，默认值：`开始日期`；`end-placeholder` 示例值：`结束`，类型：string，默认值：`结束日期`；`range-separator` 示例值：`///`，类型：string，默认值：`-`；`compTitleStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`。本示例展示标题和组合属性配置。title 默认值为 ''，compTitleStyle 默认值为 {}。
 datePicker/usually
 :::
 
@@ -103,7 +103,7 @@ datePicker/limitRange
 |       `title`       | 左侧标题文案                                                 | string                         | -                                                                                                                                           | `''`               |
 |       `width`       | 组件整体宽度                                                 | string / number                | -                                                                                                                                           | `300px`            |
 |      `height`       | 组件整体高度                                                 | string / number                | -                                                                                                                                           | `''`               |
-|     `boxStyle`      | 标题区域样式                                                 | object                         | -                                                                                                                                           | `{}`               |
+|  `compTitleStyle`   | 左侧标题组件样式                                             | object                         | -                                                                                                                                           | `{}`               |
 |       `theme`       | 主题样式                                                     | string                         | `''` / `chenghua`                                                                                                                           | `''`               |
 |      `format`       | 显示在输入框中的格式                                         | string                         | -                                                                                                                                           | 按 `type` 自动设置 |
 |   `value-format`    | 绑定值的格式，支持传 `x` 返回毫秒时间戳，传 `X` 返回秒时间戳 | string                         | -                                                                                                                                           | 按 `type` 自动设置 |

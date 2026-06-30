@@ -26,28 +26,19 @@ const disabledValue = ref(8)
       <span>默认值: 'right'</span>
     </div>
 
-    <div class="input-number-chenghua-demo__list">
+    <s-item-wrapper flex="1" wrap="wrap">
       <s-input-number v-model="count" theme="chenghua" title="审核数量" width="240" height="40" :min="0" />
       <s-input-number
         v-model="quota"
         theme="chenghua"
         title="容量配额"
-        width="260"
         height="40"
         :min="0"
         :step="2"
         controls-position=""
       />
-      <s-input-number
-        v-model="disabledValue"
-        theme="chenghua"
-        title="禁用项"
-        width="220"
-        height="40"
-        :min="0"
-        disabled
-      />
-    </div>
+      <s-input-number v-model="disabledValue" theme="chenghua" title="禁用项" height="40" :min="0" disabled />
+    </s-item-wrapper>
   </div>
 </template>
 

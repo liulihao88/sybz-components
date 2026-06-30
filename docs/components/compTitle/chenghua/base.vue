@@ -21,7 +21,7 @@ const options = [
       <span>属性: title</span>
       <span>可选值: string</span>
       <span>默认值: ''</span>
-      <span>属性: boxStyle</span>
+      <span>属性: compTitleStyle</span>
       <span>可选值: object</span>
       <span>默认值: {}</span>
       <span>透传属性: size</span>
@@ -30,10 +30,10 @@ const options = [
     </div>
 
     <div class="comp-title-chenghua-demo__list">
-      <s-comp-title title="审核周期" theme="chenghua" :box-style="{ width: 96 }" />
+      <s-comp-title title="审核周期" theme="chenghua" :comp-title-style="{ width: 96 }" />
 
       <div class="comp-title-chenghua-demo__row">
-        <s-comp-title title="服务名称" theme="chenghua" :box-style="{ width: 96 }" />
+        <s-comp-title title="服务名称" theme="chenghua" :comp-title-style="{ width: 96 }" />
         <el-input v-model="value" placeholder="请输入服务名称" />
       </div>
 
@@ -43,7 +43,7 @@ const options = [
         size="small"
         title="业务类型"
         width="360"
-        :box-style="{ width: 96 }"
+        :comp-title-style="{ width: 96 }"
         :options="options"
         placeholder="请选择业务类型"
       />
@@ -54,7 +54,7 @@ const options = [
         title="容量配额"
         size="large"
         width="360"
-        :box-style="{ width: 96 }"
+        :comp-title-style="{ width: 96 }"
         :min="0"
       />
     </div>

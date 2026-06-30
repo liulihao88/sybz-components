@@ -5,13 +5,7 @@
     :style="[inputNumberStyle, attrs.style as any]"
     :class="inputNumberClass"
   >
-    <s-comp-title
-      v-if="mergedProps.title"
-      :title="mergedProps.title"
-      :size="mergedProps.size"
-      :box-style="mergedProps.boxStyle"
-      :theme="mergedProps.theme"
-    />
+    <s-comp-title v-if="mergedProps.title" v-bind="compTitleProps" />
     <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
       <template v-for="(_, name) in $slots" #[name]="slotProps">
         <slot :name="name" v-bind="slotProps || {}" />
@@ -34,7 +28,7 @@ const attrs = useAttrs()
 
 interface InputNumberProps {
   title?: string
-  boxStyle?: Record<string, any>
+  compTitleStyle?: Record<string, any>
   width?: string | number
   height?: string | number
   theme?: '' | 'chenghua'
@@ -44,7 +38,7 @@ interface InputNumberProps {
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
   title: '',
-  boxStyle: () => ({}),
+  compTitleStyle: undefined,
   width: '',
   height: '',
   theme: '',
@@ -52,6 +46,20 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   subAttrs: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('inputNumber', props)
+
+const compTitleProps = computed(() => {
+  const titleProps: Record<string, any> = {
+    title: mergedProps.value.title,
+    size: mergedProps.value.size,
+    theme: mergedProps.value.theme,
+  }
+
+  if (mergedProps.value.compTitleStyle !== undefined) {
+    titleProps.compTitleStyle = mergedProps.value.compTitleStyle
+  }
+
+  return titleProps
+})
 
 const inputNumberClass = computed(() => [
   attrs.class,

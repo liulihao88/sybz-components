@@ -33,7 +33,7 @@ defineOptions({
 })
 interface RadioProps {
   title?: string
-  boxStyle?: Record<string, any>
+  compTitleStyle?: Record<string, any>
   theme?: '' | 'chenghua'
   size?: '' | 'large' | 'default' | 'small'
   type?: 'boolean' | 'simple' | ''
@@ -47,7 +47,7 @@ interface RadioProps {
 
 const props = withDefaults(defineProps<RadioProps>(), {
   title: undefined,
-  boxStyle: undefined,
+  compTitleStyle: undefined,
   theme: '',
   size: '',
   type: '',
@@ -67,8 +67,8 @@ const compTitleProps = computed(() => {
     size: mergedProps.value.size,
   }
 
-  if (mergedProps.value.boxStyle !== undefined) {
-    titleProps.boxStyle = mergedProps.value.boxStyle
+  if (mergedProps.value.compTitleStyle !== undefined) {
+    titleProps.compTitleStyle = mergedProps.value.compTitleStyle
   }
 
   return titleProps

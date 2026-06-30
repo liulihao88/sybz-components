@@ -72,12 +72,10 @@ export default {
     ctx.app.use(SybzComponents, {
       dangerouslyUseHTMLString: true,
       size: 'large',
-      compTitle: {
-        boxStyle: {
-          padding: '0 116px',
-        },
+      compTitleStyle: {
+        padding: '0 16px',
       },
-      
+
       title: {
         // theme: 'chenghua',
       },

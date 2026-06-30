@@ -14,7 +14,7 @@ interface DatePickerProps {
   title?: string
   width?: string | number
   height?: string | number
-  boxStyle?: Record<string, any>
+  compTitleStyle?: Record<string, any>
   theme?: '' | 'chenghua'
   size?: '' | 'large' | 'default' | 'small'
 }
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   title: '',
   width: '300px',
   height: '',
-  boxStyle: () => ({}),
+  compTitleStyle: undefined,
   theme: '',
   size: '',
 })
@@ -260,6 +260,19 @@ const datePickerClass = computed(() => ({
 }))
 const rootClass = computed<any>(() => [datePickerClass.value, attrs.class])
 const rootStyle = computed<any>(() => [datePickerStyle.value, attrs.style])
+const compTitleProps = computed(() => {
+  const titleProps: Record<string, any> = {
+    title: mergedProps.value.title,
+    size: mergedProps.value.size,
+    theme: mergedProps.value.theme,
+  }
+
+  if (mergedProps.value.compTitleStyle !== undefined) {
+    titleProps.compTitleStyle = mergedProps.value.compTitleStyle
+  }
+
+  return titleProps
+})
 const inheritedPopperClass = computed(() => {
   return [attrs['popper-class'], attrs.popperClass].filter((item) => typeof item === 'string' && item.trim()).join(' ')
 })
@@ -319,7 +332,18 @@ const mergedAttrs = computed(() => {
   const merged = {
     ...baseAttrs,
     ...Object.entries(attrs).reduce<Record<string, any>>((obj, [key, value]) => {
-      if (!['boxStyle', 'class', 'style', 'popper-class', 'popperClass', 'shortcuts', 'size'].includes(key)) {
+      if (
+        ![
+          'compTitleStyle',
+          'comp-title-style',
+          'class',
+          'style',
+          'popper-class',
+          'popperClass',
+          'shortcuts',
+          'size',
+        ].includes(key)
+      ) {
         obj[key] = value
       }
       return obj
@@ -347,12 +371,7 @@ defineExpose({
 
 <template>
   <span class="s-date-picker" :class="rootClass" :style="rootStyle">
-    <s-comp-title
-      :title="mergedProps.title"
-      :size="mergedProps.size"
-      :box-style="mergedProps.boxStyle"
-      :theme="mergedProps.theme"
-    ></s-comp-title>
+    <s-comp-title v-bind="compTitleProps"></s-comp-title>
     <el-date-picker ref="datePickerRef" v-bind="mergedAttrs" class="s-date-picker__picker">
       <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
         <slot :name="slotName" v-bind="slotProps"></slot>

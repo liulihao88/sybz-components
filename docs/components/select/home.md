@@ -130,6 +130,7 @@ select/multipleTableSelect
 |           `size`           | 选择器尺寸，支持 `small` / `default` / `large`    | string                  | `''`       |
 |          `theme`           | 选择器主题，支持 `chenghua`                       | string                  | `''`       |
 |          `title`           | 左侧标题文案                                      | string                  | `''`       |
+|      `compTitleStyle`      | 左侧标题组件样式                                  | object                  | `{}`       |
 |         `connect`          | 多字段 label 拼接符                               | string                  | `/`        |
 |       `customLabel`        | 自定义 label 生成函数                             | function / string       | `''`       |
 |          `width`           | 组件宽度                                          | string / number         | `''`       |

@@ -69,7 +69,7 @@ export interface SDatePickerSelfProps {
   height?: string | number
   theme?: SybzComponentTheme
   shortcuts?: DatePickerPropsPublic['shortcuts'] | false
-  boxStyle?: SybzRecord
+  compTitleStyle?: SybzRecord
 }
 
 export type SDatePickerProps = SDatePickerSelfProps &
@@ -126,7 +126,7 @@ export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 
 export interface SInputSelfProps extends SHtmlStringProps {
   modelValue: any
-  boxStyle?: SybzRecord
+  compTitleStyle?: SybzRecord
   width?: string | number
   height?: string | number
   maxlength?: string | number
@@ -149,7 +149,7 @@ export type SInputProps = SInputSelfProps & Partial<Omit<InputPropsPublic, keyof
 
 export interface SInputNumberSelfProps {
   title?: string
-  boxStyle?: SybzRecord
+  compTitleStyle?: SybzRecord
   width?: string | number
   height?: string | number
   theme?: SybzComponentTheme
@@ -183,7 +183,7 @@ export interface SClickOutsideProps {
 
 export interface SCompTitleProps {
   title?: string
-  boxStyle?: SybzRecord
+  compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme
 }
 
@@ -301,7 +301,7 @@ export type SRadioOption = SRadioItem | string | number | boolean
 
 export interface SRadioSelfProps {
   title?: string
-  boxStyle?: SybzRecord
+  compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme
   type?: '' | 'boolean' | 'simple'
   showType?: 'radio' | 'button'
@@ -327,7 +327,7 @@ export interface SSelectSelfProps extends SHtmlStringProps {
   size?: SybzComponentSize
   theme?: SybzComponentTheme
   title?: string
-  boxStyle?: SybzRecord
+  compTitleStyle?: SybzRecord
   connect?: string
   customLabel?: string | ((item: any) => any)
   width?: string | number
