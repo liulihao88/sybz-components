@@ -16,6 +16,7 @@ interface DatePickerProps {
   height?: string | number
   boxStyle?: Record<string, any>
   theme?: '' | 'chenghua'
+  size?: '' | 'large' | 'default' | 'small'
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   height: '',
   boxStyle: () => ({}),
   theme: '',
+  size: '',
 })
 const mergedProps = useGlobalComponentConfig('datePicker', props)
 
@@ -312,11 +314,12 @@ const mergedAttrs = computed(() => {
     'start-placeholder': '开始日期',
     'end-placeholder': '结束日期',
     'range-separator': '-',
+    size: mergedProps.value.size || undefined,
   }
   const merged = {
     ...baseAttrs,
     ...Object.entries(attrs).reduce<Record<string, any>>((obj, [key, value]) => {
-      if (!['boxStyle', 'class', 'style', 'popper-class', 'popperClass', 'shortcuts'].includes(key)) {
+      if (!['boxStyle', 'class', 'style', 'popper-class', 'popperClass', 'shortcuts', 'size'].includes(key)) {
         obj[key] = value
       }
       return obj
@@ -346,7 +349,7 @@ defineExpose({
   <span class="s-date-picker" :class="rootClass" :style="rootStyle">
     <s-comp-title
       :title="mergedProps.title"
-      :size="attrs.size"
+      :size="mergedProps.size"
       :box-style="mergedProps.boxStyle"
       :theme="mergedProps.theme"
     ></s-comp-title>
