@@ -13,6 +13,7 @@ const STORAGE_PREFIX = 'sybz-components-docs-scroll:'
 const MAX_AGE = 1000 * 60 * 60 * 12
 const LISTENER_FLAG = '__sybzDocsScrollPositionListenerInstalled__'
 const ROUTER_FLAG = '__sybzDocsScrollPositionRouterInstalled__'
+let restoreVersion = 0
 
 const canUseDOM = () => {
   if (typeof window === 'undefined') return false
@@ -61,8 +62,11 @@ const saveScrollSnapshot = (key = getStorageKey()) => {
 const restoreScrollSnapshot = (key = getStorageKey()) => {
   const snapshot = readScrollSnapshot(key)
   if (!snapshot) return
+  const currentRestoreVersion = ++restoreVersion
 
   const scrollToSnapshot = () => {
+    if (currentRestoreVersion !== restoreVersion) return
+
     window.scrollTo({
       left: snapshot.left,
       top: snapshot.top,
@@ -74,6 +78,10 @@ const restoreScrollSnapshot = (key = getStorageKey()) => {
   window.requestAnimationFrame(scrollToSnapshot)
   window.requestAnimationFrame(() => window.requestAnimationFrame(scrollToSnapshot))
   ;[80, 240, 600, 1000].forEach((delay) => window.setTimeout(scrollToSnapshot, delay))
+}
+
+const cancelRestoreScrollSnapshot = () => {
+  restoreVersion += 1
 }
 
 export const installScrollPositionRestore = (router?: RouterLike) => {
@@ -117,7 +125,9 @@ export const installScrollPositionRestore = (router?: RouterLike) => {
 
   if (router && !runtimeWindow[ROUTER_FLAG]) {
     runtimeWindow[ROUTER_FLAG] = true
+
     router.onBeforeRouteChange = (...args: any[]) => {
+      cancelRestoreScrollSnapshot()
       saveScrollSnapshot()
       return beforeRouteChange?.(...args)
     }
