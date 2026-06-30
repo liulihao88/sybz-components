@@ -10,7 +10,7 @@ import { ref } from 'vue'
       <code>哈哈哈</code>
       <blue>哈哈哈</blue>
       <el-button type="primary" icon="el-icon-plus" size="small">
-        添加: (注意: dangerouslyUseHtmlString 方式渲染 HTML 内容，这种方式只能渲染原生 HTML 标签，无法渲染 Vue 组件;
+        添加: (注意: dangerouslyUseHTMLString 方式渲染 HTML 内容，这种方式只能渲染原生 HTML 标签，无法渲染 Vue 组件;
         所以只能使用插槽)
       </el-button>
     </template>

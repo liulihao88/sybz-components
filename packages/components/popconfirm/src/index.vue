@@ -53,6 +53,7 @@ interface PopconfirmProps {
   width?: string | number
   content?: string
   reConfirm?: boolean
+  dangerouslyUseHTMLString?: boolean
   dangerouslyUseHtmlString?: boolean
   theme?: '' | 'chenghua'
 }
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   width: 200,
   content: '',
   reConfirm: true,
+  dangerouslyUseHTMLString: false,
   dangerouslyUseHtmlString: false,
   theme: '',
 })
@@ -98,6 +100,9 @@ const popconfirmButtonTheme = computed(() => {
 })
 
 const safeContent = computed(() => String(mergedProps.value.content ?? ''))
+const htmlStringEnabled = computed(() =>
+  Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
+)
 
 onBeforeUnmount(() => {
   removeClickOutsideListener()
@@ -121,12 +126,7 @@ defineExpose({
   >
     <slot name="content">
       <template v-if="mergedProps.content">
-        <SafeHtml
-          v-if="mergedProps.dangerouslyUseHtmlString"
-          tag="div"
-          class="s-popconfirm__content"
-          :html="safeContent"
-        />
+        <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__content" :html="safeContent" />
         <div v-else class="s-popconfirm__content" v-text="safeContent"></div>
       </template>
     </slot>
@@ -176,10 +176,11 @@ defineExpose({
   align-items: center;
   min-height: 18px;
   padding: 0 5px;
+  border: 1px solid var(--s-code-border-color);
   margin: 0 2px;
   border-radius: 4px;
-  background: var(--el-fill-color-light);
-  color: var(--el-color-primary);
+  background: var(--s-code-bg-color);
+  color: var(--s-code-color);
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 12px;
   line-height: 18px;

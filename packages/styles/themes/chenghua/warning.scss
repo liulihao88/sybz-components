@@ -4,6 +4,21 @@
   --s-warning-ch-soft: rgba(var(--s-warning-ch-color-rgb), 0.08);
   --s-warning-ch-border: rgba(var(--s-warning-ch-color-rgb), 0.24);
   --s-warning-ch-border-strong: rgba(var(--s-warning-ch-color-rgb), 0.66);
+  --s-code-primary-color: var(--s-warning-ch-color);
+  --s-code-primary-bg-color: var(--s-warning-ch-soft);
+  --s-code-primary-border-color: var(--s-warning-ch-border);
+  --s-code-success-color: var(--s-ch-success);
+  --s-code-success-bg-color: rgba(var(--s-ch-success-rgb), 0.08);
+  --s-code-success-border-color: rgba(var(--s-ch-success-rgb), 0.18);
+  --s-code-warning-color: var(--s-ch-warning);
+  --s-code-warning-bg-color: rgba(var(--s-ch-warning-rgb), 0.08);
+  --s-code-warning-border-color: rgba(var(--s-ch-warning-rgb), 0.2);
+  --s-code-danger-color: var(--s-ch-danger);
+  --s-code-danger-bg-color: rgba(var(--s-ch-danger-rgb), 0.08);
+  --s-code-danger-border-color: rgba(var(--s-ch-danger-rgb), 0.18);
+  --s-code-info-color: var(--s-ch-info);
+  --s-code-info-bg-color: rgba(var(--s-ch-info-rgb), 0.08);
+  --s-code-info-border-color: rgba(var(--s-ch-info-rgb), 0.18);
 
   align-items: flex-start;
   min-height: 40px;
@@ -43,7 +58,6 @@
     color: var(--s-warning-ch-color);
   }
 
-  code,
   blue {
     background-color: var(--s-warning-ch-soft);
     color: var(--s-warning-ch-color);

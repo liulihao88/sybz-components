@@ -142,7 +142,7 @@ select/multipleTableSelect
 |        `emptyColor`        | 选项为空时是否高亮边框                            | boolean                 | `false`    |
 |       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                  | boolean                 | `true`     |
 |       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                       | object                  | `{}`       |
-| `dangerouslyUseHtmlString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染 | boolean                 | `false`    |
+| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染 | boolean                 | `false`    |
 
 ### 事件
 

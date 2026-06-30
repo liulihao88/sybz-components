@@ -133,6 +133,7 @@ interface SelectProps {
   emptyColor?: boolean
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
+  dangerouslyUseHTMLString?: boolean
   dangerouslyUseHtmlString?: boolean
 }
 
@@ -168,6 +169,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   emptyColor: false,
   showTooltip: true,
   tooltipAttrs: () => ({}),
+  dangerouslyUseHTMLString: false,
   dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
@@ -212,15 +214,24 @@ const selectTooltipContent = ref('')
 const selectTooltipDisabled = ref(true)
 const selectTooltipVisible = ref(false)
 const mergedTooltipAttrs = computed(() => {
+  const {
+    dangerouslyUseHTMLString,
+    dangerouslyUseHtmlString,
+    rawContent,
+    'raw-content': rawContentKebab,
+    ...tooltipAttrs
+  } = mergedProps.value.tooltipAttrs ?? {}
+  const htmlStringEnabled =
+    mergedProps.value.dangerouslyUseHTMLString ??
+    mergedProps.value.dangerouslyUseHtmlString ??
+    dangerouslyUseHTMLString ??
+    dangerouslyUseHtmlString
+
   return {
     placement: 'top',
     effect: 'dark',
-    ...mergedProps.value.tooltipAttrs,
-    rawContent: Boolean(
-      mergedProps.value.dangerouslyUseHtmlString ||
-      mergedProps.value.tooltipAttrs.rawContent ||
-      mergedProps.value.tooltipAttrs['raw-content'],
-    ),
+    ...tooltipAttrs,
+    rawContent: Boolean(htmlStringEnabled || rawContent || rawContentKebab),
   }
 })
 

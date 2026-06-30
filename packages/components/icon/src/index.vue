@@ -15,6 +15,7 @@ interface IconProps {
   disabled?: boolean
   type?: string
   svgAttrs?: Record<string, any>
+  dangerouslyUseHTMLString?: boolean
   dangerouslyUseHtmlString?: boolean
 }
 
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   disabled: false,
   type: '', // svg
   svgAttrs: () => ({}),
+  dangerouslyUseHTMLString: false,
   dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('icon', props)
@@ -40,11 +42,13 @@ const parseColor = computed(() => {
 
 const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() => {
   const restAttrs = { ...attrs }
+  delete restAttrs.dangerouslyUseHTMLString
   delete restAttrs.dangerouslyUseHtmlString
+  const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString
 
   return {
     ...restAttrs,
-    rawContent: Boolean(mergedProps.value.dangerouslyUseHtmlString || restAttrs.rawContent || restAttrs['raw-content']),
+    rawContent: Boolean(htmlStringEnabled || restAttrs.rawContent || restAttrs['raw-content']),
   }
 })
 </script>

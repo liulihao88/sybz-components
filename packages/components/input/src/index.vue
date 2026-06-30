@@ -73,7 +73,7 @@
       class="s-input__icon"
       v-bind="{ name: 'warning', color: 'var(--el-disabled-text-color)', size: '16px', ...mergedProps.iconAttrs }"
       :content="mergedProps.content"
-      :dangerously-use-html-string="mergedProps.dangerouslyUseHtmlString"
+      :dangerously-use-html-string="htmlStringEnabled"
     />
 
     <s-icon
@@ -128,6 +128,7 @@ interface SInputProps {
   hideTooltip?: boolean
   options?: any[]
   content?: string
+  dangerouslyUseHTMLString?: boolean
   dangerouslyUseHtmlString?: boolean
 }
 
@@ -151,6 +152,7 @@ const props = withDefaults(defineProps<SInputProps>(), {
   // 适用于el-autocomplete
   options: undefined,
   content: '',
+  dangerouslyUseHTMLString: false,
   dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('input', props)
@@ -160,6 +162,9 @@ const inputTooltipDisabled = ref(true)
 const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
+const htmlStringEnabled = computed(() =>
+  Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
+)
 
 const inputClass = computed(() => [
   attrs.class,

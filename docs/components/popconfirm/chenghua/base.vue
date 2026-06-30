@@ -17,7 +17,7 @@ function confirm() {
       <span>属性: content</span>
       <span>支持: 文本 | 安全白名单 HTML</span>
       <span>默认值: ''</span>
-      <span>属性: dangerouslyUseHtmlString</span>
+      <span>属性: dangerouslyUseHTMLString</span>
       <span>可选值: true | false</span>
       <span>默认值: false</span>
     </div>

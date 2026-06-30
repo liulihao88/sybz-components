@@ -3,6 +3,22 @@
 }
 
 .s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua {
+  --s-code-primary-color: var(--s-ch-primary);
+  --s-code-primary-bg-color: rgba(var(--s-ch-primary-rgb), 0.08);
+  --s-code-primary-border-color: rgba(var(--s-ch-primary-rgb), 0.16);
+  --s-code-success-color: var(--s-ch-success);
+  --s-code-success-bg-color: rgba(var(--s-ch-success-rgb), 0.08);
+  --s-code-success-border-color: rgba(var(--s-ch-success-rgb), 0.18);
+  --s-code-warning-color: var(--s-ch-warning);
+  --s-code-warning-bg-color: rgba(var(--s-ch-warning-rgb), 0.08);
+  --s-code-warning-border-color: rgba(var(--s-ch-warning-rgb), 0.2);
+  --s-code-danger-color: var(--s-ch-danger);
+  --s-code-danger-bg-color: rgba(var(--s-ch-danger-rgb), 0.08);
+  --s-code-danger-border-color: rgba(var(--s-ch-danger-rgb), 0.18);
+  --s-code-info-color: var(--s-ch-info);
+  --s-code-info-bg-color: rgba(var(--s-ch-info-rgb), 0.08);
+  --s-code-info-border-color: rgba(var(--s-ch-info-rgb), 0.18);
+
   padding: 14px !important;
   border: 1px solid rgba(var(--s-ch-primary-rgb), 0.16) !important;
   border-radius: var(--s-ch-radius) !important;
@@ -24,7 +40,5 @@
 }
 
 .s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .s-popconfirm__content code {
-  background: rgba(var(--s-ch-primary-rgb), 0.08);
-  color: var(--s-ch-primary);
   font-weight: 600;
 }

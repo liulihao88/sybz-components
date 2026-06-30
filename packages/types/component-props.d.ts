@@ -23,6 +23,9 @@ export type SybzComponentSize = '' | 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 
 export interface SHtmlStringProps {
+  /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
+  dangerouslyUseHTMLString?: boolean
+  /** 是否按 HTML 字符串渲染，兼容旧写法 */
   dangerouslyUseHtmlString?: boolean
 }
 

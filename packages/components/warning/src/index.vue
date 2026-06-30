@@ -15,6 +15,7 @@ interface Props {
   theme?: '' | 'chenghua'
   type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
   width?: string | number
+  dangerouslyUseHTMLString?: boolean
   dangerouslyUseHtmlString?: boolean
   icon?: boolean
   size?: 'small' | 'default'
@@ -29,6 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   theme: '',
   type: 'info',
   width: '100%',
+  dangerouslyUseHTMLString: false,
   dangerouslyUseHtmlString: false,
   icon: true,
   size: 'default',
@@ -40,6 +42,9 @@ const props = withDefaults(defineProps<Props>(), {
 const mergedProps = useGlobalComponentConfig('warning', props)
 
 const attrs = useAttrs()
+const htmlStringEnabled = computed(() =>
+  Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
+)
 
 const mergedStyle = computed(() => {
   let obj: Record<string, any> = {}
@@ -112,7 +117,7 @@ function parseClass(): string {
       </div>
       <slot name="content">
         <SafeHtml
-          v-if="mergedProps.dangerouslyUseHtmlString"
+          v-if="htmlStringEnabled"
           class="s-warning-box__content"
           :class="{ 's-warning-box__content--muted': mergedProps.type === 'icon' }"
           :html="mergedProps.content"

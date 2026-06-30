@@ -1,54 +1,36 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { confirm } from '@sybz-components/utils'
 const cc = ref(123)
 const isShow = ref(false)
 const c = ref(false)
+
+confirm(
+  '确定删除文件 <code>成华AI服务申请表.xlsx</code> 吗？<br />删除后无法恢复。 <code type="danger">错误</code> <code type="warning">警告</code><code type="info">消息</code>',
+  {
+    title: '删除确认',
+    theme: 'chenghua',
+    confirmButtonText: '确认删除',
+    cancelButtonText: '再想想',
+    confirmButtonClass: 's-confirm-danger-button',
+  },
+)
+
+const deleteConfirm = () => {
+  confirm('确定删除文件 <code>成华AI服务申请表.xlsx</code> 吗？<br />删除后无法恢复。', {
+    title: '删除确认',
+    theme: 'chenghua',
+    confirmButtonText: '确认删除',
+    cancelButtonText: '再想想',
+    confirmButtonClass: 's-confirm-danger-button',
+  })
+}
 </script>
 
 <template>
   <div>
-    <el-input v-model="cc" v-copy="cc"> </el-input>
-    1233334455
-
-    <div>321323dsadsa31</div>
-
-    <el-button type="primary" size="small">测试02</el-button>
-    <s-button v-if="c" theme="chenghua" size="small" type="primary" class="cc"></s-button>
-    <!-- <s-table></s-table> -->
-    <s-empty description="暂无数据" width="48" height="48"> 你还好嘛 </s-empty>
-
-    <el-dialog title="33"> </el-dialog>
-    <s-dialog
-      v-if="c"
-      v-model="isShow"
-      title2="12321"
-      theme="chenghua"
-      type="drawer"
-      confirm-text=""
-      :show-confirm="false"
-      class="cc"
-    ></s-dialog>
-
-    <s-tag theme="chenghua"> 我不服 </s-tag>
-
-    <s-flex justify="space-between2的撒"></s-flex>
-
-    <SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"> </SItem>
-    <hr />
-    <SItem label="label" value="value"></SItem>
-    <s-title title="插槽用法" tb="8"></s-title>
-    <!-- <s-item class="abc">
-      <template #img>
-        <img src="https://img.yzcdn.cn/vant/logo.png" />
-      </template>
-      <template #label>label</template>
-      <template #value>value</template>
-    </s-item> -->
-
-    <s-date-picker></s-date-picker>
-
-    <s-input v-model="cc" height="30" size="large" :clearable="false" theme="chenghua"></s-input>
-
-    <!-- <s-select multiple label="1" ></s-select> -->
+    <!-- <s-dialog v-model="isShow"></s-dialog> -->
+    <s-warning content="你好啊 "></s-warning>
+    <s-button @click="deleteConfirm"></s-button>
   </div>
 </template>
