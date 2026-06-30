@@ -2,9 +2,9 @@
 
 ## Hidden Title {.md-hidden}
 
-**说明**
+> 注意：前端项目默认使用 `Prettier` 代码格式化规则，强烈建议将 `Prettier` 设置为编辑器默认格式化工具。
 
-公司前端项目统一使用 `Prettier + ESLint + lint-staged + Husky + EditorConfig` 管理代码风格和提交质量。
+公司前端项目(`chenghua_agent/sybz-components`)统一使用 `Prettier + ESLint + lint-staged + Husky + EditorConfig` 管理代码风格和提交质量。
 
 - `Prettier` 负责格式化代码，统一引号、分号、换行、每行长度等风格。
 - `ESLint` 负责检查 JavaScript、TypeScript、Vue 代码里的潜在问题。
@@ -281,8 +281,9 @@ git commit
 
 ### 9. 团队约定
 
+- 规则可能会根据实际情况做调整, 不同项目调整后尽量同步更新, 保持一致.
 - 不建议在业务代码里随意关闭 ESLint 规则
-- 新增项目时，优先复制公司模板里的配置，不要每个项目单独发明一套风格。
+- 新增项目时，优先复制公司模板里的配置，尽量不要每个项目单独发明一套风格。
 - 如果某条 ESLint 规则影响开发效率，优先团队讨论后统一修改配置。
 - CI 中建议至少执行 `pnpm lint:check` 和 `pnpm lint:prettier:check`，避免跳过本地 hook 后直接合入。
 - 自动格式化产生的大范围 diff 建议单独提交，避免和业务逻辑混在一个 commit 里。
