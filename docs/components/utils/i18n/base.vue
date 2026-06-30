@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
 import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import en from 'element-plus/es/locale/lang/en'
@@ -14,7 +13,7 @@ const changeLanguage = () => {
     locale.value = zhCn
   }
 }
-const value1 = ref([])
+const timeValue = ref([])
 const dateValue = ref([])
 </script>
 
@@ -25,13 +24,14 @@ const dateValue = ref([])
 
   <el-config-provider :locale="locale">
     <s-flex gap="8">
-      <el-time-picker v-model="value1" is-range />
+      <el-time-picker v-model="timeValue" is-range :teleported="false" />
       <s-date-picker
         v-model="dateValue"
         width="600"
         format="YYYY-MM-DD HH:mm:ss"
         type="datetimerange"
         :shortcuts="false"
+        :teleported="false"
       ></s-date-picker>
     </s-flex>
   </el-config-provider>

@@ -44,7 +44,7 @@ const utilsSourceDocsHmrPlugin = (): Plugin => ({
 export default defineConfig({
   // 站点级选项
   base: siteBase,
-  srcExclude: isProd ? ['components/test/**', 'components/chooseArea/**'] : [],
+  srcExclude: isProd ? ['components/test/**'] : [],
   head: [
     ['link', { rel: 'icon', type: 'image/x-icon', href: `${siteBase}img/logo.svg` }],
     ['meta', { name: 'algolia-site-verification', content: '8E57640BD511CC36' }],
@@ -74,7 +74,7 @@ export default defineConfig({
     },
     footer: {
       message: `思云博智私有前端组件库, <a target="_blank" style="color: var(--vp-c-brand)" href="${Github}">⭐欢迎访问</a>`,
-      copyright: ` 版权所有 © 2023-${new Date().getFullYear()}`,
+      copyright: ` 版权所有 © 2023-2030`,
     },
     nav: [
       {
@@ -89,7 +89,7 @@ export default defineConfig({
     ],
     // 主题级选项
     sidebar: {
-      '/components': [
+      '/components/': [
         {
           text: '说明文档',
           collapsed: false,

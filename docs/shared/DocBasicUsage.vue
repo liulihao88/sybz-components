@@ -29,7 +29,7 @@ const handleCopy = () => {
   <div class="doc-basic-usage">
     <span class="doc-basic-usage__label">{{ label }}：</span>
     <code class="doc-basic-usage__code">{{ code }}</code>
-    <el-tooltip :content="tooltip" :show-arrow="false">
+    <el-tooltip :content="tooltip" :show-arrow="false" :teleported="false">
       <el-icon
         class="doc-basic-usage__copy"
         role="button"

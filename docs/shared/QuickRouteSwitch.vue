@@ -235,6 +235,7 @@ watch(keyword, () => {
                       placement="top"
                       :show-after="500"
                       :hide-after="0"
+                      :teleported="false"
                       popper-class="quick-route-switch-tooltip"
                     >
                       <template #content>

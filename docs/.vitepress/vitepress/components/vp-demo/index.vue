@@ -6,18 +6,18 @@
       <Example :path="path" />
       <ElDivider class="m-0" />
       <div class="op-btns">
-        <ElTooltip v-if="isDev" content="跳转页面" :show-arrow="false">
+        <ElTooltip v-if="isDev" content="跳转页面" :show-arrow="false" :teleported="false">
           <ElIcon :size="16" class="op-btn" @click="jumpPath">
             <el-icon-promotion />
             <!-- <o-icon name="promotion"></o-icon> -->
           </ElIcon>
         </ElTooltip>
-        <ElTooltip content="复制代码" :show-arrow="false">
+        <ElTooltip content="复制代码" :show-arrow="false" :teleported="false">
           <ElIcon :size="16" class="op-btn" @click="copyCode">
             <el-icon-copy-document />
           </ElIcon>
         </ElTooltip>
-        <ElTooltip content="查看源代码" :show-arrow="false">
+        <ElTooltip content="查看源代码" :show-arrow="false" :teleported="false">
           <ElIcon :size="16" class="op-btn" @click="toggleSourceVisible()">
             <el-icon-view />
           </ElIcon>
@@ -42,7 +42,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useClipboard } from '@vueuse/core'
-import { getStorage } from '@/utils/src/index.ts'
+import { getStorage } from '@sybz-components/utils'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
 
 import Example from './vp-example.vue'
