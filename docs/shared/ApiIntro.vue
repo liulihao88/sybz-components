@@ -114,6 +114,22 @@ const isApiTable = (heading: string, headers: string[]) => {
   return headingMatched || headerMatched
 }
 
+const shouldIgnoreHeading = (heading: string) => {
+  return /(全局默认配置|全局配置)/.test(heading)
+}
+
+const getSourcePriority = (heading: string, kind: string) => {
+  if (!heading) return 0
+  if (shouldIgnoreHeading(heading)) return -100
+  if (kind === '属性' && /^属性$/.test(heading)) return 100
+  if (kind === '事件' && /^事件$/.test(heading)) return 100
+  if (kind === '插槽' && /^插槽$/.test(heading)) return 100
+  if (kind === '方法' && /^方法$/.test(heading)) return 100
+  if (kind === '透传' && /透传/.test(heading)) return 90
+  if (/API/i.test(heading)) return 80
+  return 10
+}
+
 const getDetailHeading = (heading: string) => {
   const match = heading.match(/^(.+?)\s*内部属性$/)
   if (!match) return null
@@ -156,9 +172,8 @@ const parseTableRows = (table: HTMLTableElement, headers: string[], kind: string
 const collectItems = () => {
   const pageRoot = rootRef.value?.closest('.vp-doc') || document.querySelector('.vp-doc') || document
   const tables = Array.from(pageRoot.querySelectorAll('table')) as HTMLTableElement[]
-  const seen = new Set<string>()
   const detailMap = new Map<string, ApiIntroDetail[]>()
-  const collected: ApiIntroItem[] = []
+  const collectedMap = new Map<string, ApiIntroItem>()
 
   tables.forEach((table) => {
     if (table.closest('.el-table')) return
@@ -168,6 +183,7 @@ const collectItems = () => {
 
     const heading = findHeading(table)
     if (!isApiTable(heading, headers)) return
+    if (shouldIgnoreHeading(heading)) return
 
     const kind = getKind(heading, headers[0] || '')
     const detailHeading = getDetailHeading(heading)
@@ -198,12 +214,9 @@ const collectItems = () => {
       if (!name || /^[-—]+$/.test(name)) return
 
       const displayName = formatDisplayName(name, kind)
-      const key = `${kind}:${displayName}:${heading}`
-      if (seen.has(key)) return
-      seen.add(key)
-
-      collected.push({
-        key,
+      const uniqueKey = `${kind}:${displayName}`
+      const nextItem: ApiIntroItem = {
+        key: `${uniqueKey}:${heading}`,
         kind,
         name,
         displayName,
@@ -214,9 +227,16 @@ const collectItems = () => {
         values: valuesIndex >= 0 ? cells[valuesIndex] || '' : '',
         params: paramsIndex >= 0 ? cells[paramsIndex] || '' : '',
         details: [],
-      })
+      }
+      const prevItem = collectedMap.get(uniqueKey)
+
+      if (!prevItem || getSourcePriority(heading, kind) >= getSourcePriority(prevItem.source, prevItem.kind)) {
+        collectedMap.set(uniqueKey, nextItem)
+      }
     })
   })
+
+  const collected = Array.from(collectedMap.values())
 
   collected.forEach((item) => {
     item.details = detailMap.get(item.displayName) || []
