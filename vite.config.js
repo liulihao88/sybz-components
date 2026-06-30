@@ -81,7 +81,7 @@ export default defineConfig({
     {
       ...terser({
         compress: {
-          drop_console: true, // 移除所有console语句
+          drop_console: false, // 保留 console，方便线上排查偶发问题
         },
         format: {
           comments: /^@preserve|@keep/i, // 保留带有@preserve或@keep的注释

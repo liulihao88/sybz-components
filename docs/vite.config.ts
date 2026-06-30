@@ -35,7 +35,7 @@ export default defineConfig({
     }),
     terser({
       compress: {
-        drop_console: true, // 删除console
+        drop_console: false, // 保留 console，方便线上排查偶发路由问题
       },
     }),
     customVitePluginFilePath(),
