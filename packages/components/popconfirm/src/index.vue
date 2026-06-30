@@ -63,8 +63,8 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   width: 200,
   content: '',
   reConfirm: true,
-  dangerouslyUseHTMLString: false,
-  dangerouslyUseHtmlString: false,
+  dangerouslyUseHTMLString: undefined,
+  dangerouslyUseHtmlString: true,
   theme: '',
 })
 
@@ -99,7 +99,9 @@ const popconfirmButtonTheme = computed(() => {
   return mergedProps.value.theme === 'chenghua' ? 'chenghua' : ''
 })
 
+const safeTitle = computed(() => String(mergedProps.value.title ?? ''))
 const safeContent = computed(() => String(mergedProps.value.content ?? ''))
+const hasTitle = computed(() => !!safeTitle.value)
 const htmlStringEnabled = computed(() =>
   Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
 )
@@ -119,11 +121,16 @@ defineExpose({
     v-bind="$attrs"
     v-model:visible="isPopoverVisible"
     class="s-popconfirm__box"
-    :title="mergedProps.title"
     :width="mergedProps.width"
     :popper-class="popperClass"
     @show="handleShow"
   >
+    <slot name="title">
+      <template v-if="hasTitle">
+        <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__title" :html="safeTitle" />
+        <div v-else class="s-popconfirm__title" v-text="safeTitle"></div>
+      </template>
+    </slot>
     <slot name="content">
       <template v-if="mergedProps.content">
         <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__content" :html="safeContent" />
@@ -151,6 +158,14 @@ defineExpose({
 </template>
 
 <style scoped lang="scss">
+.s-popconfirm__title {
+  margin: 0 0 8px;
+  color: var(--el-text-color-primary);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
 .s-popconfirm__footer {
   display: flex;
   justify-content: flex-end;
@@ -171,7 +186,8 @@ defineExpose({
   margin-left: 12px !important;
 }
 
-:global(.s-popconfirm__popper .s-popconfirm__content code) {
+:global(.s-popconfirm__popper .s-popconfirm__content code),
+:global(.s-popconfirm__popper .s-popconfirm__title code) {
   display: inline-flex;
   align-items: center;
   min-height: 18px;

@@ -26,7 +26,7 @@
   font-family: var(--s-ch-font-family);
 }
 
-.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .el-popover__title {
+.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .s-popconfirm__title {
   margin-bottom: 8px;
   color: var(--s-ch-text);
   font-size: 14px;
@@ -39,6 +39,7 @@
   font-size: 13px;
 }
 
-.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .s-popconfirm__content code {
+.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .s-popconfirm__content code,
+.s-popconfirm__popper--chenghua.s-popconfirm__popper--chenghua .s-popconfirm__title code {
   font-weight: 600;
 }

@@ -238,21 +238,22 @@ const templateTableColumns = computed<TableColumnList<TemplateRow>>(() => [
 
 `btns` 用于配置操作栏按钮。按钮数量超过 `maxBtns` 时，会展示 `maxBtns - 1` 个按钮，其余按钮放入“更多”下拉中。
 
-|   字段名    | 说明                                                                  | 类型                       | 默认值        |
-| :---------: | --------------------------------------------------------------------- | -------------------------- | ------------- |
-|   `prop`    | 操作按钮关联字段，回调参数中的 `value` 会读取 `row[prop]`             | string                     | -             |
-|  `content`  | 按钮文案，支持函数                                                    | string / number / function | -             |
-|   `title`   | `reConfirm` 开启时的确认提示文案，支持函数                            | string / number / function | `确定删除吗?` |
-|  `handler`  | 点击按钮或确认后执行的方法                                            | function                   | -             |
-|  `isShow`   | 控制按钮是否显示，支持布尔值或函数                                    | boolean / function         | `true`        |
-| `disabled`  | 控制按钮是否禁用，支持布尔值或函数                                    | boolean / function         | `false`       |
-| `reConfirm` | 是否点击后先弹出二次确认，支持布尔值或函数                            | boolean / function         | `false`       |
-|  `render`   | 自定义按钮渲染函数，接收对象参数                                      | function                   | -             |
-|  `useSlot`  | 使用插槽渲染；传 `true` 时插槽名为 `prop`，传字符串时插槽名为该字符串 | boolean / string           | `false`       |
-|   `comp`    | 自定义按钮组件，传组件名或组件对象                                    | string / Component         | -             |
-|   `attrs`   | 使用 `comp` 时透传给自定义组件的属性                                  | object                     | -             |
-|   `width`   | 操作栏宽度计算时使用的按钮宽度                                        | number / string            | -             |
-|  其它字段   | 未在上表列出的字段会继续透传给内部 `el-button`                        | any                        | -             |
+|           字段名           | 说明                                                                  | 类型                       | 默认值        |
+| :------------------------: | --------------------------------------------------------------------- | -------------------------- | ------------- |
+|           `prop`           | 操作按钮关联字段，回调参数中的 `value` 会读取 `row[prop]`             | string                     | -             |
+|         `content`          | 按钮文案，支持函数                                                    | string / number / function | -             |
+|          `title`           | `reConfirm` 开启时的确认提示文案，支持函数                            | string / number / function | `确定删除吗?` |
+| `dangerouslyUseHTMLString` | 是否把确认提示里的字符串按 HTML 渲染，可用于解析 `<code>`             | boolean                    | `true`        |
+|         `handler`          | 点击按钮或确认后执行的方法                                            | function                   | -             |
+|          `isShow`          | 控制按钮是否显示，支持布尔值或函数                                    | boolean / function         | `true`        |
+|         `disabled`         | 控制按钮是否禁用，支持布尔值或函数                                    | boolean / function         | `false`       |
+|        `reConfirm`         | 是否点击后先弹出二次确认，支持布尔值或函数                            | boolean / function         | `false`       |
+|          `render`          | 自定义按钮渲染函数，接收对象参数                                      | function                   | -             |
+|         `useSlot`          | 使用插槽渲染；传 `true` 时插槽名为 `prop`，传字符串时插槽名为该字符串 | boolean / string           | `false`       |
+|           `comp`           | 自定义按钮组件，传组件名或组件对象                                    | string / Component         | -             |
+|          `attrs`           | 使用 `comp` 时透传给自定义组件的属性                                  | object                     | -             |
+|          `width`           | 操作栏宽度计算时使用的按钮宽度                                        | number / string            | -             |
+|          其它字段          | 未在上表列出的字段会继续透传给内部 `el-button`                        | any                        | -             |
 
 ### render 参数
 

@@ -67,6 +67,8 @@ export interface STableButton<Row extends TableRow = TableRow> extends Record<st
   prop?: string
   content?: string | number | TableContextHandler<string | number, Row> | TableLegacyHandler<string | number>
   title?: string | number | TableContextHandler<string | number, Row> | TableLegacyHandler<string | number>
+  dangerouslyUseHTMLString?: boolean
+  dangerouslyUseHtmlString?: boolean
   handler?: TableContextHandler<any, Row> | TableLegacyHandler<any>
   isShow?: TableMaybeFn<boolean, Row>
   disabled?: TableMaybeFn<boolean, Row>

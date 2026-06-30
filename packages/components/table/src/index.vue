@@ -1044,6 +1044,9 @@ defineExpose({
                                 )
                               : (val.title ?? '确定删除吗?')
                           "
+                          :dangerously-use-html-string="
+                            val.dangerouslyUseHTMLString ?? val.dangerouslyUseHtmlString ?? true
+                          "
                           class="s-table__actions"
                           @confirm="
                             invokeWithContext(

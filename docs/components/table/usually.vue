@@ -66,13 +66,14 @@ const columns = [
         disabled: ({ row }) => row.status === 'Loading',
       },
       {
+        title: ({ row }) => `删除后将无法恢复，确定删除<code>${row.name}</code>吗？`,
+        reConfirm: true,
         handler: () => {},
         comp: 's-icon',
         attrs: {
           name: 'delete',
           content: '删除',
         },
-        disabled: ({ row }) => row.status === 'Loading',
       },
       {
         prop: 'download',
