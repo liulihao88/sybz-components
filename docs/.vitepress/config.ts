@@ -181,24 +181,24 @@ export default defineConfig({
               link: '/components/utils/isEmpty/home.md',
             },
             {
-              text: sybzMark('deply 延迟函数'),
-              link: '/components/utils/deplay/home.md',
+              text: sybzMark('delay 延迟函数'),
+              link: '/components/utils/delay/home.md',
             },
             {
               text: sybzMark('tryCatch Promise 封装'),
               link: '/components/utils/tryCatch/home.md',
             },
             {
-              text: 'uuid 随机字符串',
-              link: '/components/utils/uuid/home.md',
+              text: 'mockValue 随机字符串',
+              link: '/components/utils/mockValue/home.md',
             },
             {
               text: sybzMark('validate 表单校验'),
               link: '/components/utils/validate/home.md',
             },
             {
-              text: sybzMark('validForm 表单校验封装'),
-              link: '/components/utils/validForm/home.md',
+              text: sybzMark('validateForm 表单校验封装'),
+              link: '/components/utils/validateForm/home.md',
             },
           ],
         },

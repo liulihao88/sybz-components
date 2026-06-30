@@ -81,7 +81,7 @@
     ]
   },
   "dependencies": {
-    "@sybz-components/utils": "^0.0.8",
+    "@sybz-components/utils": "^0.0.9",
     "eslint-config-prettier": "9.1.2"
   },
   "devDependencies": {
