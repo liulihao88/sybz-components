@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getStorage, setStorage } from '@/utils/src/index.ts'
+import { getStorage, setStorage } from '@sybz-components/utils'
 import { ElMessage } from 'element-plus'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData, useRouter } from 'vitepress'
@@ -100,6 +100,7 @@ const jumpUrl = (type: string) => {
 
   let compStr = getComponentDocPath(pathname)
   let targetPath = ''
+  console.log(`53 type`, type)
   if (type === 'md') {
     targetPath = joinLocalPath(sourceDir, 'docs/components', compStr, 'home.md')
     if (compStr === '') {
@@ -107,12 +108,14 @@ const jumpUrl = (type: string) => {
     }
   } else if (type === 'packages') {
     targetPath = joinLocalPath(sourceDir, 'packages/components', compStr, 'src/index.vue')
+    console.log(`45 compStr`, compStr)
     if (compStr.startsWith('utils')) {
       targetPath = joinLocalPath(sourceDir, 'packages/utils/src/index.ts')
     }
     if (compStr.startsWith('directives')) {
       targetPath = joinLocalPath(sourceDir, 'packages/directives/gDirectives.js')
     }
+    console.log(`58 targetPath`, targetPath)
   } else if (type === 'test/home') {
     router.go(`${getDocsBasePath()}/components/test/home`) // 使用 VitePress 路由进行跳转
     targetPath = joinLocalPath(sourceDir, 'docs/components/test/base.vue')
