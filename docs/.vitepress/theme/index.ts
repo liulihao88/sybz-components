@@ -63,7 +63,6 @@ export default {
     ctx.app.component('OooSvg', svgIconConfig.Svg({}).component)
     ctx.app.component('OTip', OTip)
     ctx.app.component('ChangelogContent', ChangelogContent)
-    ctx.app.component('Content', RouteContent)
     ctx.app.component('ApiIntro', ApiIntro)
     ctx.app.component('DocBasicUsage', DocBasicUsage)
     // 注册ElementPlus
@@ -93,5 +92,6 @@ export default {
 
     ctx.app.component('Demo', VPDemo)
     DefaultTheme.enhanceApp(ctx)
+    ctx.app.component('Content', RouteContent)
   },
 }

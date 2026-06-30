@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Content as VitePressContent, useRoute } from 'vitepress'
+import { computed } from 'vue'
 
 defineOptions({
   name: 'RouteContent',
@@ -7,8 +8,9 @@ defineOptions({
 })
 
 const route = useRoute()
+const contentKey = computed(() => route.data.relativePath || route.path)
 </script>
 
 <template>
-  <VitePressContent :key="route.path" v-bind="$attrs" />
+  <VitePressContent :key="contentKey" v-bind="$attrs" />
 </template>
