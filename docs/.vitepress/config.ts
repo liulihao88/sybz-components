@@ -111,6 +111,10 @@ export default defineConfig({
               link: '/components/projectWriting/home.md',
             },
             {
+              text: '前端代码统一规范',
+              link: '/components/codeStandard/home.md',
+            },
+            {
               text: '国际化',
               link: '/components/utils/i18n/home.md',
             },
