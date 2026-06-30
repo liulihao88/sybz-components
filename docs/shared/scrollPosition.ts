@@ -14,7 +14,15 @@ const MAX_AGE = 1000 * 60 * 60 * 12
 const LISTENER_FLAG = '__sybzDocsScrollPositionListenerInstalled__'
 const ROUTER_FLAG = '__sybzDocsScrollPositionRouterInstalled__'
 
-const canUseDOM = () => typeof window !== 'undefined' && typeof window.sessionStorage !== 'undefined'
+const canUseDOM = () => {
+  if (typeof window === 'undefined') return false
+
+  try {
+    return typeof window.sessionStorage !== 'undefined'
+  } catch {
+    return false
+  }
+}
 
 const getStorageKey = () => `${STORAGE_PREFIX}${window.location.pathname}${window.location.search}`
 
@@ -114,10 +122,6 @@ export const installScrollPositionRestore = (router?: RouterLike) => {
       return beforeRouteChange?.(...args)
     }
 
-    router.onAfterRouteChanged = (...args: any[]) => {
-      const result = afterRouteChanged?.(...args)
-      restoreScrollSnapshot()
-      return result
-    }
+    router.onAfterRouteChanged = (...args: any[]) => afterRouteChanged?.(...args)
   }
 }

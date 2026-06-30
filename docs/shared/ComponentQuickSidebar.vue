@@ -200,6 +200,14 @@ const isCurrent = (item: QuickItem) =>
 const getItemIndex = (item: QuickItem) =>
   flatItems.value.findIndex((routeItem) => routeItem.normalizedLink === item.normalizedLink) + 1
 
+const getPathname = (href: string) => {
+  try {
+    return new URL(href, window.location.origin).pathname.replace(/\/$/, '')
+  } catch {
+    return ''
+  }
+}
+
 const clampPosition = (left: number, top: number, isExpanded = expanded.value) => {
   if (typeof window === 'undefined') return { left, top }
   const viewportWidth = Math.max(MIN_VIEWPORT_WIDTH, window.innerWidth || 0)
@@ -227,11 +235,13 @@ const syncPosition = () => {
   savePosition()
 }
 
-const getRoutePath = (item: QuickItem) => {
+const getRoutePath = (item: QuickItem) => getPathname(item.routeLink) || item.normalizedLink.replace(/\/$/, '')
+
+const navigateTo = async (href: string) => {
   try {
-    return new URL(item.routeLink, window.location.origin).pathname.replace(/\/$/, '')
+    await router.go(href)
   } catch {
-    return item.normalizedLink.replace(/\/$/, '')
+    window.location.assign(href)
   }
 }
 
@@ -246,7 +256,7 @@ const scrollSidebarToItem = async (item: QuickItem) => {
   const targetPath = getRoutePath(item)
   const links = Array.from(sidebar.querySelectorAll<HTMLAnchorElement>('a[href]'))
   const target = links.find((link) => {
-    const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/$/, '')
+    const linkPath = getPathname(link.href)
     return linkPath === targetPath
   })
 
@@ -287,18 +297,22 @@ const goTo = async (item: QuickItem) => {
     return
   }
 
-  await router.go(item.routeLink)
-  scrollSidebarToItem(item)
+  await navigateTo(item.routeLink)
+  scrollSidebarToItem(item).catch(() => undefined)
   await nextTick()
 
-  const escapedLink =
-    typeof window.CSS?.escape === 'function'
-      ? window.CSS.escape(item.normalizedLink)
-      : item.normalizedLink.replace(/"/g, '\\"')
-  const currentItemButton = sidebarRef.value?.querySelector<HTMLElement>(
-    `.component-quick-sidebar__item[data-link="${escapedLink}"]`,
-  )
-  currentItemButton?.focus()
+  try {
+    const escapedLink =
+      typeof window.CSS?.escape === 'function'
+        ? window.CSS.escape(item.normalizedLink)
+        : item.normalizedLink.replace(/"/g, '\\"')
+    const currentItemButton = sidebarRef.value?.querySelector<HTMLElement>(
+      `.component-quick-sidebar__item[data-link="${escapedLink}"]`,
+    )
+    currentItemButton?.focus()
+  } catch {
+    // Focus recovery is optional after navigation.
+  }
 }
 
 const toggleExpanded = () => {

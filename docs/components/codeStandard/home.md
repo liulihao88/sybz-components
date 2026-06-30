@@ -17,11 +17,7 @@
 
 Vue3 + TypeScript 项目推荐安装下面这些依赖。
 
-```sh
-pnpm add -D prettier eslint @eslint/js eslint-plugin-vue vue-eslint-parser @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier globals husky lint-staged
-```
-
-推荐版本如下，项目里可以根据实际包管理策略锁定版本。
+推荐版本如下，项目里可以根据实际包管理策略锁定版本。(为了保证前端插件的一致性, 版本是锁死的)
 
 ```json
 {

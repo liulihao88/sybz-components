@@ -122,6 +122,14 @@ const getRouteIndex = (item: RouteItem) =>
 
 const waitForFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
 
+const navigateTo = async (href: string) => {
+  try {
+    await router.go(href)
+  } catch {
+    window.location.assign(href)
+  }
+}
+
 const scrollActiveSidebarItem = async () => {
   await nextTick()
   await waitForFrame()
@@ -153,8 +161,8 @@ const closeDialog = () => {
 
 const goTo = async (item: RouteItem) => {
   closeDialog()
-  await router.go(item.routeLink)
-  scrollActiveSidebarItem()
+  await navigateTo(item.routeLink)
+  scrollActiveSidebarItem().catch(() => undefined)
 }
 
 const chooseActive = () => {
