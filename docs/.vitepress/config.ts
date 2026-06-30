@@ -5,6 +5,7 @@ import { mdPlugin } from './config/plugins.ts'
 import { createAlgolia, Github } from './utils/settings.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
+const siteBase = '/sybz-components/'
 const hiddenDocsInProd = ['/components/test/home.md', '/components/chooseArea/home.md']
 const sybzMark = (text: string) => `<span class="sybz-components-sidebar-star" aria-hidden="true">*</span>${text}`
 const rootDir = fileURLToPath(new URL('../..', import.meta.url))
@@ -42,10 +43,10 @@ const utilsSourceDocsHmrPlugin = (): Plugin => ({
 
 export default defineConfig({
   // 站点级选项
-  base: '/sybz-components/',
+  base: siteBase,
   srcExclude: isProd ? ['components/test/**', 'components/chooseArea/**'] : [],
   head: [
-    ['link', { rel: 'icon', type: 'image/x-icon', href: '/img/logo.svg' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: `${siteBase}img/logo.svg` }],
     ['meta', { name: 'algolia-site-verification', content: '8E57640BD511CC36' }],
     ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
     [
@@ -58,7 +59,7 @@ export default defineConfig({
   ],
   lastUpdated: true,
   useWebFonts: false,
-  cleanUrls: true,
+  cleanUrls: false,
   title: 'Sybz-Components',
   description: '思云博智',
   lang: 'zh-CN',

@@ -37,10 +37,15 @@ const cleanText = (text = '') =>
 
 const normalizeLink = (link: string) => {
   const [path, hash = ''] = link.split('#')
-  const normalizedPath = path
+  let normalizedPath = path
     .replace(/\/index\.md$/, '/')
     .replace(/\.md$/, '')
     .replace(/\/home$/, '/home')
+
+  if (!site.value.cleanUrls && !normalizedPath.endsWith('/') && !normalizedPath.endsWith('.html')) {
+    normalizedPath += '.html'
+  }
+
   return hash ? `${normalizedPath}#${hash}` : normalizedPath
 }
 
