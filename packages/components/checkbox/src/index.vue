@@ -30,6 +30,7 @@ interface CheckboxProps {
   customLabel?: ((...args: any[]) => any) | string
   gap?: number | string
   theme?: '' | 'chenghua'
+  size?: '' | 'large' | 'default' | 'small'
 }
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
@@ -46,6 +47,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   customLabel: '',
   gap: '',
   theme: '',
+  size: '',
 })
 const mergedProps = useGlobalComponentConfig('checkbox', props)
 const checkAll = ref(false)
@@ -144,19 +146,25 @@ const checkboxClass = computed(() => ({
       v-if="mergedProps.showAll"
       v-model="checkAll"
       class="s-checkbox__all"
+      :size="mergedProps.size || undefined"
       :indeterminate="isIndeterminate"
       v-bind="$attrs"
       @change="checkAllChange"
     >
       全选
     </el-checkbox>
-    <el-checkbox-group v-model="checkboxModel" v-bind="filteredAttrs" class="s-checkbox__wrapper">
+    <el-checkbox-group
+      v-model="checkboxModel"
+      v-bind="{ ...filteredAttrs, size: mergedProps.size || undefined }"
+      class="s-checkbox__wrapper"
+    >
       <slot>
         <component
           :is="checkType"
           v-bind="rootAttrs"
           v-for="(item, index) in props.options"
           :key="index"
+          :size="mergedProps.size || undefined"
           :value="props.type === 'simple' ? item : item[props.value!]"
           :label="props.type === 'simple' ? item : item[props.label!]"
           :disabled="props.customDisabled(item)"

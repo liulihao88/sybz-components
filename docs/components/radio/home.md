@@ -62,6 +62,7 @@ radio/slot
 |   `showType`   | 展示形式，支持 `radio` / `button`          | string                                        | `radio`    |
 |   `options`    | 单选项列表，支持对象数组或基础值数组       | RadioItem[] / string[] / number[] / boolean[] | `[]`       |
 |    `border`    | 是否显示边框                               | boolean                                       | `false`    |
+|     `size`     | 单选尺寸，支持顶层传入和全局默认配置       | `''` / `large` / `default` / `small`          | `''`       |
 |    `value`     | 选项值字段名                               | string / number / boolean                     | `value`    |
 |    `label`     | 选项展示字段名                             | string / number / boolean                     | `label`    |
 | `itemDisabled` | 单项禁用判断函数                           | function                                      | `() => {}` |

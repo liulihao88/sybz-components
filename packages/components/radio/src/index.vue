@@ -1,13 +1,14 @@
 <template>
   <div class="s-radio-box" :class="radioClass">
     <s-comp-title v-if="mergedProps.title" v-bind="compTitleProps" class="s-radio-box__title"></s-comp-title>
-    <el-radio-group v-bind="$attrs">
+    <el-radio-group v-bind="groupAttrs">
       <slot>
         <component
           v-bind="item"
           :is="radioType"
           v-for="(item, index) in parseOptions"
           :key="index"
+          :size="mergedProps.size || undefined"
           :label="item[mergedProps.label!]"
           :value="item[mergedProps.value!]"
           :border="mergedProps.border"
@@ -34,6 +35,7 @@ interface RadioProps {
   title?: string
   boxStyle?: Record<string, any>
   theme?: '' | 'chenghua'
+  size?: '' | 'large' | 'default' | 'small'
   type?: 'boolean' | 'simple' | ''
   showType?: 'radio' | 'button'
   options?: RadioOption[]
@@ -47,6 +49,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
   title: undefined,
   boxStyle: undefined,
   theme: '',
+  size: '',
   type: '',
   showType: 'radio',
   options: () => [],
@@ -61,6 +64,7 @@ const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
     title: mergedProps.value.title,
     theme: mergedProps.value.theme,
+    size: mergedProps.value.size,
   }
 
   if (mergedProps.value.boxStyle !== undefined) {
@@ -69,6 +73,10 @@ const compTitleProps = computed(() => {
 
   return titleProps
 })
+const groupAttrs = computed(() => ({
+  ...attrs,
+  size: mergedProps.value.size || undefined,
+}))
 const radioType = computed(() => {
   const obj = {
     radio: 'el-radio',
