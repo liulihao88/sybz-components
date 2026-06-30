@@ -27,6 +27,7 @@ const visible = reactive({
     <s-dialog
       v-model="visible.buttons"
       title="自定义按钮"
+      sub-title="sub-title"
       theme="chenghua"
       width="512px"
       cancel-text="暂不处理"

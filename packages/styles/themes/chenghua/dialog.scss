@@ -1,20 +1,63 @@
 .s-dialog.s-chenghua-dialog.s-chenghua-dialog {
-  .el-dialog__header,
-  .el-drawer__header {
-    padding: 10px 16px;
-    border-bottom: 0px solid var(--line);
+  .el-dialog {
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 20px 56px rgba(15, 23, 42, 0.18);
+  }
+
+  .el-dialog__header {
+    padding: 14px 56px 14px 16px;
+    border-bottom: 0;
+    background: linear-gradient(90deg, var(--s-ch-primary) 0%, var(--s-ch-primary-hover) 100%);
     font-weight: 700;
+  }
+
+  .s-dialog__header {
+    align-items: center;
+    min-height: 28px;
+  }
+
+  .s-dialog__header-icon-box:empty {
+    display: none;
   }
 
   .s-dialog__header-content {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.4;
-    color: var(--el-text-color-primary);
+    color: #ffffff;
   }
 
-  .el-dialog {
-    border-radius: var(--s-ch-radius-large);
+  .s-dialog__header-sub-title {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .el-dialog__headerbtn {
+    top: 8px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--s-ch-radius);
+
+    .el-dialog__close {
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 22px;
+    }
+
+    &:hover,
+    &:focus {
+      background: rgba(255, 255, 255, 0.14);
+
+      .el-dialog__close {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .el-drawer__header {
+    padding: 10px 16px;
+    border-bottom: 0px solid var(--line);
+    font-weight: 700;
   }
 
   .el-dialog__footer {
