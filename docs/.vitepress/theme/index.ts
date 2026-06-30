@@ -71,10 +71,15 @@ export default {
     // 全局注册基础组件
     ctx.app.use(SybzComponents, {
       dangerouslyUseHTMLString: true,
+      compTitle: {
+        boxStyle: {
+          padding: '0 116px',
+        },
+      },
       title: {
         // theme: 'chenghua',
       },
-      inputNumber:{
+      inputNumber: {
         // size: 'small'
       },
       tooltip: {

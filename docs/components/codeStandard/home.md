@@ -2,7 +2,7 @@
 
 ## Hidden Title {.md-hidden}
 
-### 说明
+**说明**
 
 公司前端项目统一使用 `Prettier + ESLint + lint-staged + Husky + EditorConfig` 管理代码风格和提交质量。
 
@@ -13,7 +13,7 @@
 - `lint-staged` 只处理本次提交改动过的文件，避免每次提交都扫描整个项目。
 - `Husky` 负责在 `git commit` 前自动执行 `lint-staged`。
 
-## 1. 安装依赖
+### 1. 安装依赖
 
 Vue3 + TypeScript 项目推荐安装下面这些依赖。
 
@@ -39,7 +39,7 @@ pnpm add -D prettier eslint @eslint/js eslint-plugin-vue vue-eslint-parser @type
 }
 ```
 
-## 2. Prettier 配置
+### 2. Prettier 配置
 
 在项目根目录新增 `.prettierrc.js`。
 
@@ -61,7 +61,7 @@ export default {
 - `printWidth: 120`：每行最大宽度 120。
 - `endOfLine: 'lf'`：统一使用 LF 换行，避免 Windows/macOS 换行差异。
 
-## 3. EditorConfig 配置
+### 3. EditorConfig 配置
 
 在项目根目录新增 `.editorconfig`。
 
@@ -87,9 +87,17 @@ trim_trailing_whitespace = false
 - 所有文件统一保留文件末尾换行。
 - Markdown 保留行尾空格，避免影响手动换行语法。
 
-## 4. ESLint 配置
+### 4. ESLint 配置
 
-ESLint 9 推荐使用 flat config。公司项目统一在根目录使用 `eslint.config.js`。
+ESLint 9 推荐使用 flat config。本节默认展示 `chenghua_agent` 当前实际使用的配置，因为它更接近公司业务前端项目的落地方式。
+
+这套配置的特点是：
+
+- 结构简单，接入成本低，适合页面型业务项目快速统一规范。
+- 以 `js.configs.recommended`、`tsPlugin.configs['flat/base']`、`vue.configs['flat/base']` 为主，默认不过度增加规则负担。
+- 只保留必要的基础校验，避免一开始就让业务开发被大量 ESLint 报错打断。
+
+示例配置如下：
 
 ```js
 import js from '@eslint/js'
@@ -118,7 +126,7 @@ export default [
   },
   js.configs.recommended,
   tsPlugin.configs['flat/base'],
-  ...vue.configs['flat/recommended'],
+  ...vue.configs['flat/base'],
   {
     files: ['**/*.{js,jsx,ts,tsx,cjs,mjs,vue}'],
     languageOptions: {
@@ -131,12 +139,7 @@ export default [
       },
     },
     rules: {
-      'no-console': 'off',
       'no-unused-vars': 'off',
-      'vue/no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
-      'vue/multi-word-component-names': 'off',
-      'vue/no-template-shadow': 'off',
     },
   },
   {
@@ -165,15 +168,35 @@ export default [
 ]
 ```
 
-说明：
+配置说明：
 
 - `js.configs.recommended` 提供 JavaScript 基础规则。
 - `tsPlugin.configs['flat/base']` 提供 TypeScript 基础解析能力。
-- `vue.configs['flat/recommended']` 提供 Vue 推荐规则。
+- `vue.configs['flat/base']` 提供 Vue 的基础解析和最小可用配置，更适合业务项目先落地。
 - `prettier` 必须放在最后，用来关闭和 Prettier 冲突的规则。
-- `no-unused-vars` 默认关闭，避免 Vue 模板、类型声明、演示代码里产生过多噪音；业务项目可以按团队要求再收紧。
+- `no-unused-vars` 默认关闭，避免页面联调、临时变量、草稿代码阶段产生过多噪音。
 
-## 5. package.json 脚本
+#### 4.1 chenghua_agent、sybz-components、flat/recommended 的区别
+
+可以把这三套方案理解成不同的使用场景：
+
+- `chenghua_agent`：当前业务项目实际配置，基于 `vue.configs['flat/base']`，规则最轻，适合先把规范接起来。
+- `sybz-components`：在 `flat/recommended` 基础上，主动关闭了一些高频干扰规则，比如未使用变量、多单词组件名、模板变量遮蔽，更适合作为公司前端业务项目的统一配置。
+- 纯 `flat/recommended`：规则更完整、更严格，适合基础组件库、公共工具库、SDK、底层能力库。
+
+主要差异：
+
+- `chenghua_agent` 偏“先落地”，目标是先统一工程规范，不给业务开发增加太多阻力。
+- `sybz-components` 偏“平衡型”，既保留较多推荐规则，又主动关掉最影响协作效率的几条规则。
+- `flat/recommended` 偏“严格型”，更强调代码约束和一致性，适合复用层代码质量控制。
+
+如果只给一个建议：
+
+- 普通业务前端项目：可以先参考 `chenghua_agent`。
+- 公司通用业务项目模板：更推荐参考 `sybz-components`。
+- 基础组件库或公共库：优先使用 `flat/recommended`，再按需要做局部放宽。
+
+### 5. package.json 脚本
 
 在 `package.json` 中统一保留下面几个脚本。
 
@@ -201,7 +224,7 @@ pnpm lint:prettier:check
 - 提交前或 CI 中建议使用 `pnpm lint:check` 做只检查不修改。
 - 大范围统一格式时使用 `pnpm lint:prettier`。
 
-## 6. lint-staged 配置
+### 6. lint-staged 配置
 
 在 `package.json` 中新增 `lint-staged`。
 
@@ -220,7 +243,7 @@ pnpm lint:prettier:check
 - 样式、JSON、Markdown、YAML、HTML 只执行 Prettier。
 - `--max-warnings=0` 表示 ESLint warning 也会阻止提交，避免问题长期堆积。
 
-## 7. Husky 配置
+### 7. Husky 配置
 
 初始化 Husky。
 
@@ -245,7 +268,7 @@ git commit
 
 只要检查失败，本次 commit 就会被中断，需要修复后重新提交。
 
-## 8. 推荐执行流程
+### 8. 推荐执行流程
 
 新项目接入时，按下面顺序处理。
 
@@ -256,7 +279,7 @@ git commit
 5. 首次接入时执行 `pnpm lint:prettier` 和 `pnpm lint`，统一存量代码风格。
 6. 后续每次提交由 Husky 自动检查 staged 文件。
 
-## 9. 团队约定
+### 9. 团队约定
 
 - 不建议在业务代码里随意关闭 ESLint 规则
 - 新增项目时，优先复制公司模板里的配置，不要每个项目单独发明一套风格。
