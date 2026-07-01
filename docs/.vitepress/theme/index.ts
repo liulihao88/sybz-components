@@ -61,6 +61,7 @@ export default {
       ctx.app.config.globalProperties[v] = utils[v]
     })
     ctx.app.component('OooSvg', svgIconConfig.Svg({}).component)
+    console.log(`66 OTip`, OTip);
     ctx.app.component('OTip', OTip)
     ctx.app.component('ChangelogContent', ChangelogContent)
     ctx.app.component('ApiIntro', ApiIntro)

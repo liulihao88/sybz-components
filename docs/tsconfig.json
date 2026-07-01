@@ -17,9 +17,11 @@
       "@/*": ["../packages/*"]
     },
     "types": [
+      "vite/client",
       // 用来指定需要包含的模块，并将其包含在全局范围内。
       "element-plus/global",
       "../packages/components.d.ts"
     ]
-  }
+  },
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.d.ts", ".vitepress/**/*.vue", "shared/**/*.ts", "shared/**/*.vue"]
 }
