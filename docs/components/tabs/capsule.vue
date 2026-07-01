@@ -25,51 +25,7 @@ const navList = [
 
 <template>
   <div class="tabs-capsule-demo">
-    <s-tabs v-model="smallActiveTab" :options="navList" theme="capsule" size="small">
-      <template #web-label>
-        <el-icon><Monitor /></el-icon>
-        <span>网页应用</span>
-      </template>
-
-      <template #mini-label>
-        <el-icon><Grid /></el-icon>
-        <span>小程序</span>
-        <em>NEW</em>
-      </template>
-
-      <template #skill-label>
-        <el-icon><SetUp /></el-icon>
-        <span>技能创建</span>
-      </template>
-
-      <template #web>网页应用内容</template>
-      <template #mini>小程序内容</template>
-      <template #skill>技能创建内容</template>
-    </s-tabs>
-
-    <s-tabs v-model="defaultActiveTab" :options="navList" theme="capsule">
-      <template #web-label>
-        <el-icon><Monitor /></el-icon>
-        <span>网页应用</span>
-      </template>
-
-      <template #mini-label>
-        <el-icon><Grid /></el-icon>
-        <span>小程序</span>
-        <em>NEW</em>
-      </template>
-
-      <template #skill-label>
-        <el-icon><SetUp /></el-icon>
-        <span>技能创建</span>
-      </template>
-
-      <template #web>网页应用内容</template>
-      <template #mini>小程序内容</template>
-      <template #skill>技能创建内容</template>
-    </s-tabs>
-
-    <s-tabs v-model="largeActiveTab" :options="navList" theme="capsule" size="large">
+    <s-tabs v-model="defaultActiveTab" :options="navList" type="capsule">
       <template #web-label>
         <el-icon><Monitor /></el-icon>
         <span>网页应用</span>

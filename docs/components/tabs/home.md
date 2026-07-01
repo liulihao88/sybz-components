@@ -22,9 +22,9 @@ tabs/base
 tabs/size
 :::
 
-### 胶囊主题
+### 胶囊类型
 
-:::demo 基础写法：`<s-tabs v-model="smallActiveTab" :options="navList" theme="capsule" size="small">...</s-tabs>`。属性说明：`v-model` 示例值：`smallActiveTab`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`navList`，类型：array，默认值：`[]`；`theme` 示例值：`capsule`，类型：string，默认值：`''`；`size` 示例值：`small`，类型：string，默认值：`default`。本示例展示主题切换，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-tabs v-model="smallActiveTab" :options="navList" type="capsule" size="small">...</s-tabs>`。属性说明：`v-model` 示例值：`smallActiveTab`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`navList`，类型：array，默认值：`[]`；`type` 示例值：`capsule`，类型：string，可选值：`capsule` / Element Plus 原生 `type` 值，默认值：按内部组件或 Element Plus 对应属性；`size` 示例值：`small`，类型：string，默认值：`default`。本示例展示胶囊类型切换，可以直接复制基础写法后按业务替换数据。
 tabs/capsule
 :::
 
@@ -76,16 +76,16 @@ tabs/location
 
 ### 属性
 
-|    属性名    | 说明                                     | 类型                      | 默认值    |
-| :----------: | ---------------------------------------- | ------------------------- | --------- |
-| `modelValue` | 当前激活 tab                             | string / number / boolean | -         |
-|  `options`   | 标签页配置                               | array                     | `[]`      |
-|   `label`    | 标签标题字段名                           | string                    | `label`   |
-|   `value`    | 标签值字段名                             | string                    | `value`   |
-|  `subAttrs`  | 透传给 `el-tab-pane` 的属性              | object                    | `{}`      |
-|  `trigger`   | 切换触发方式，支持 `click` / `hover`     | string                    | `click`   |
-|   `theme`    | 主题样式，支持 `capsule`                 | string                    | `''`      |
-|    `size`    | 尺寸，支持 `small` / `default` / `large` | string                    | `default` |
+|    属性名    | 说明                                                                        | 类型                      | 默认值                             |
+| :----------: | --------------------------------------------------------------------------- | ------------------------- | ---------------------------------- |
+| `modelValue` | 当前激活 tab                                                                | string / number / boolean | -                                  |
+|  `options`   | 标签页配置                                                                  | array                     | `[]`                               |
+|   `label`    | 标签标题字段名                                                              | string                    | `label`                            |
+|   `value`    | 标签值字段名                                                                | string                    | `value`                            |
+|  `subAttrs`  | 透传给 `el-tab-pane` 的属性                                                 | object                    | `{}`                               |
+|  `trigger`   | 切换触发方式，支持 `click` / `hover`                                        | string                    | `click`                            |
+|    `type`    | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                    | 按内部组件或 Element Plus 对应属性 |
+|    `size`    | 尺寸，支持 `small` / `default` / `large`                                    | string                    | `default`                          |
 
 ### 事件
 
