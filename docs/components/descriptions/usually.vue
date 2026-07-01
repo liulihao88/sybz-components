@@ -8,8 +8,8 @@ const showAll = ref(false)
 const options = computed(() => {
   return [
     {
-      label: '名11字',
-      value: data.value.name,
+      key: '名11字',
+      id: data.value.name,
       attrs: {
         'label-align': 'left',
         align: 'center',
@@ -18,17 +18,17 @@ const options = computed(() => {
       },
     },
     {
-      label: '时间',
-      value: data.value.time,
+      key: '时间',
+      id: data.value.time,
     },
     {
-      label: 'filter的时间',
-      value: data.value.time,
+      key: 'filter的时间',
+      id: data.value.time,
       filter: (val) => formatTime(val),
     },
     {
-      label: '是否锁定',
-      render: () => {
+      key: '是否锁定',
+      id: () => {
         if (data.value.isLock) {
           return <s-icon name="lock"></s-icon>
         } else {
@@ -37,26 +37,13 @@ const options = computed(() => {
       },
     },
     {
-      label: '超出文本超出文本超出文本超出文本超出文本',
-      value: data.value.more,
+      key: '超出文本超出文本超出文本超出文本超出文本',
+      id: data.value.more,
     },
   ]
 })
 
-const sizeOptions = [
-  {
-    label: 'large',
-    value: 'large',
-  },
-  {
-    label: 'default',
-    value: 'default',
-  },
-  {
-    label: 'small',
-    value: 'small',
-  },
-]
+const sizeOptions = ['large', 'default', 'small']
 
 const borderValue = ref(true)
 
@@ -75,28 +62,21 @@ init()
 <template>
   <div>
     <s-flex direction="column">
-      <s-radio v-model="sizeValue" :options="sizeOptions"></s-radio>
-      <s-radio
-        v-model="borderValue"
-        :options="[
-          { label: '有border', value: true },
-          { label: '无border', value: false },
-        ]"
-      ></s-radio>
+      <s-radio v-model="sizeValue" :options="sizeOptions" type="simple"></s-radio>
       <s-radio
         v-model="showAll"
         :options="[
-          { label: 'showAll为true', value: true },
-          { label: 'showAll为false', value: false },
+          { key: 'showAll为true', value: true },
+          { key: 'showAll为false', value: false },
         ]"
       ></s-radio>
     </s-flex>
     <s-descriptions
       title="这是title"
       :options="options"
-      class="w-block"
       :column="1"
-      label-width="300"
+      label="key"
+      value="id"
       :size="sizeValue"
       :show-all="showAll"
       :border="borderValue"

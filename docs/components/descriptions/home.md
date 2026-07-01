@@ -4,7 +4,7 @@
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='<s-descriptions :options="descOptions"></s-descriptions>' />
+<DocBasicUsage code='<s-descriptions :options="options" value="value2" label="key"></s-descriptions>' />
 
 ## 属性事件插槽简介
 
@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-descriptions :options="DataSource.descData">...</s-descriptions>`。属性说明：`options` 示例值：`DataSource.descData`，类型：`ItemOptions[]`，默认值：未设置。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-descriptions :options="options" value="value2" label="key">...</s-descriptions>`。属性说明：`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`value` 示例值：`value2`，类型：string，默认值：`value`；`label` 示例值：`key`，类型：string，默认值：`label`。本示例展示基础渲染和最小配置，可以通过 `label` 和 `value` 快捷指定描述项里用于展示的字段名。
 descriptions/base
 :::
 
@@ -61,6 +61,8 @@ descriptions/customStyle
 |   `column`   | 一行展示的描述项数量                                     | number          | `3`     |
 | `labelWidth` | label 宽度，传 `auto` 时会按最长 label 自动计算          | string / number | `auto`  |
 |  `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean         | `false` |
+|   `label`    | options 中作为标签文本的字段名                           | string          | `label` |
+|   `value`    | options 中作为内容值的字段名                             | string          | `value` |
 
 ### ItemOptions
 

@@ -76,8 +76,9 @@ export type SDatePickerProps = SDatePickerSelfProps &
   Omit<Partial<DatePickerPropsPublic>, keyof SDatePickerSelfProps | 'shortcuts'>
 
 export interface SDescriptionsItemOption {
-  label: string
-  value: any
+  [key: string]: any
+  label?: string
+  value?: any
   labelSlot?: string
   valueSlot?: string
   labelRender?: (item: SDescriptionsItemOption) => VNode | string
@@ -94,6 +95,8 @@ export interface SDescriptionsOwnProps {
   column?: number
   labelWidth?: string | number
   showAll?: boolean
+  label?: string
+  value?: string
 }
 
 export type SDialogType = '' | 'drawer'

@@ -9,30 +9,36 @@
       <el-descriptions-item v-for="(item, index) in mergedProps.options ?? []" :key="index" v-bind="item.attrs">
         <template #label>
           <template v-if="item.labelRender">
-            <render-comp :render="item.labelRender" :item="item" />
+            <render-comp :render="item.labelRender" :item="getRenderItem(item)" />
           </template>
           <template v-else-if="item.labelSlot">
             <slot
               :name="item.labelSlot"
               :item="item"
-              :label="item.label"
+              :label="parseLabel(item)"
               :value="parseValue(item)"
               :index="index"
             ></slot>
           </template>
           <template v-else-if="!mergedProps.showAll">
-            <s-tooltip :content="item.label" v-bind="item.labelAttrs"></s-tooltip>
+            <s-tooltip :content="parseLabel(item)" v-bind="item.labelAttrs"></s-tooltip>
           </template>
           <template v-else>
-            {{ item.label }}
+            {{ parseLabel(item) }}
           </template>
         </template>
 
         <template v-if="item.render">
-          <render-comp :render="item.render" :item="item" />
+          <render-comp :render="item.render" :item="getRenderItem(item)" />
         </template>
         <template v-else-if="item.valueSlot">
-          <slot :name="item.valueSlot" :item="item" :label="item.label" :value="parseValue(item)" :index="index"></slot>
+          <slot
+            :name="item.valueSlot"
+            :item="item"
+            :label="parseLabel(item)"
+            :value="parseValue(item)"
+            :index="index"
+          ></slot>
         </template>
         <template v-else>
           <template v-if="mergedProps.showAll">
@@ -70,11 +76,14 @@ type DescriptionsProps = {
   column?: number
   labelWidth?: any
   showAll?: boolean
+  label?: string
+  value?: string
 }
 
 type ItemOptions = {
-  label: string
-  value: any
+  [key: string]: any
+  label?: string
+  value?: any
   labelSlot?: string
   valueSlot?: string
   labelRender?: (item: any) => VNode | string
@@ -90,16 +99,34 @@ const props = withDefaults(defineProps<DescriptionsProps>(), {
   column: 3,
   labelWidth: 'auto',
   showAll: false,
+  label: 'label',
+  value: 'value',
 })
 const mergedProps = useGlobalComponentConfig('descriptions', props)
 
+const getOptionField = (item: ItemOptions, key: string, fallbackKey: string) => {
+  if (Object.prototype.hasOwnProperty.call(item, key)) {
+    return item[key]
+  }
+  return item[fallbackKey]
+}
+
+const parseLabel = (item: ItemOptions) => getOptionField(item, mergedProps.value.label || 'label', 'label') ?? ''
+
 const parseValue = (item: ItemOptions) => {
+  const value = getOptionField(item, mergedProps.value.value || 'value', 'value')
   if (item.filter) {
-    return item.filter(item.value)
+    return item.filter(value)
   } else {
-    return item.value
+    return value
   }
 }
+
+const getRenderItem = (item: ItemOptions) => ({
+  ...item,
+  label: parseLabel(item),
+  value: parseValue(item),
+})
 
 // 创建一个用于测量文本宽度的隐藏元素
 const measureElement = ref<HTMLSpanElement | null>(null)
@@ -134,7 +161,7 @@ const labelWidth2 = computed(() => {
   if (mergedProps.value.labelWidth === 'auto' || !mergedProps.value.labelWidth) {
     let maxWidth = 0
     ;(mergedProps.value.options ?? []).forEach((v) => {
-      const labelWidth = getLabelWidth(v.label)
+      const labelWidth = getLabelWidth(parseLabel(v))
       if (labelWidth > maxWidth) {
         maxWidth = labelWidth
       }
