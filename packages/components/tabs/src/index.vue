@@ -358,55 +358,6 @@ onBeforeUnmount(() => {
   }
 }
 
-.s-tabs-box--chenghua {
-  --s-tabs-chenghua-color: #1f2f5c;
-  --s-tabs-chenghua-active-color: var(--s-ch-primary, #2563eb);
-  --s-tabs-chenghua-line-color: rgba(37, 99, 235, 0.14);
-  --s-tabs-chenghua-capsule-bg: linear-gradient(180deg, #4ea1ff 0%, #2563eb 100%);
-
-  :deep(.el-tabs__item) {
-    color: var(--s-tabs-chenghua-color);
-    font-weight: 600;
-  }
-
-  :deep(.el-tabs__item:hover) {
-    color: var(--s-tabs-chenghua-active-color);
-  }
-
-  :deep(.el-tabs__item.is-active) {
-    color: var(--s-tabs-chenghua-active-color);
-  }
-
-  :deep(.el-tabs__active-bar) {
-    height: 3px;
-    border-radius: 999px;
-    background: var(--s-tabs-chenghua-active-color);
-  }
-
-  :deep(.el-tabs__nav-wrap::after) {
-    background: var(--s-tabs-chenghua-line-color);
-  }
-}
-
-.s-tabs-box--chenghua:not(.s-tabs-box--capsule) {
-  :deep(.el-tabs__header) {
-    margin-bottom: 12px;
-  }
-}
-
-.s-tabs-box--chenghua.s-tabs-box--capsule {
-  --s-tabs-capsule-active-bg: var(--s-tabs-chenghua-capsule-bg);
-  --s-tabs-capsule-active-color: #ffffff;
-
-  :deep(.el-tabs__item.is-active) {
-    color: #ffffff;
-  }
-
-  :deep(.el-tabs__item.is-active .s-tabs__label) {
-    color: #ffffff;
-  }
-}
-
 @keyframes s-tabs-capsule-slide-left {
   0% {
     opacity: 0.9;
