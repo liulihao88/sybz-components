@@ -8,3 +8,5 @@ declare module '~dist/sybz-components-es.js' {
   export { createSvg }
   export default SybzComponents
 }
+
+declare module 'virtual:svg-icons-register'
