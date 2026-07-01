@@ -19,7 +19,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, useAttrs, watch, type PropType } from 'vue'
 import type { TabsPropsPublic } from 'element-plus'
 
 defineOptions({
@@ -30,28 +30,44 @@ defineOptions({
 type TabsType = '' | 'capsule' | TabsPropsPublic['type']
 type TabsTheme = '' | 'chenghua'
 
-interface TabsProps {
-  modelValue: string | number | boolean
-  options?: Record<string, any>[]
-  label?: string
-  value?: string
-  subAttrs?: Record<string, any>
-  trigger?: 'click' | 'hover'
-  type?: TabsType
-  theme?: TabsTheme
-  size?: 'small' | 'default' | 'large'
-}
-
 const attrs = useAttrs()
-const props = withDefaults(defineProps<TabsProps>(), {
-  options: () => [],
-  label: 'label',
-  value: 'value',
-  subAttrs: () => ({}),
-  trigger: 'click', // 默认为点击触发，可选值为 'click' 或 'hover'
-  type: '',
-  theme: '',
-  size: 'default',
+const props = defineProps({
+  modelValue: {
+    type: [String, Number, Boolean] as PropType<string | number | boolean>,
+    default: '',
+  },
+  options: {
+    type: Array as PropType<Record<string, any>[]>,
+    default: () => [],
+  },
+  label: {
+    type: String,
+    default: 'label',
+  },
+  value: {
+    type: String,
+    default: 'value',
+  },
+  subAttrs: {
+    type: Object as PropType<Record<string, any>>,
+    default: () => ({}),
+  },
+  trigger: {
+    type: String as PropType<'click' | 'hover'>,
+    default: 'click',
+  },
+  type: {
+    type: String as PropType<TabsType>,
+    default: '',
+  },
+  theme: {
+    type: String as PropType<TabsTheme>,
+    default: '',
+  },
+  size: {
+    type: String as PropType<'small' | 'default' | 'large'>,
+    default: 'default',
+  },
 })
 const emits = defineEmits(['update:modelValue'])
 const slideDirection = ref<'left' | 'right' | ''>('')
@@ -61,13 +77,13 @@ const isCapsuleType = computed(() => props.type === 'capsule')
 const isChenghuaTheme = computed(() => props.theme === 'chenghua')
 
 const forwardedAttrs = computed(() => {
-  const nextAttrs = {
-    ...attrs,
-    type: isCapsuleType.value ? '' : props.type,
-  } as Record<string, unknown>
+  const nextAttrs = { ...attrs } as Record<string, unknown>
 
-  if (!nextAttrs.type) {
-    delete nextAttrs.type
+  delete nextAttrs.type
+  delete nextAttrs.theme
+
+  if (!isCapsuleType.value && props.type) {
+    nextAttrs.type = props.type
   }
 
   return nextAttrs
@@ -346,6 +362,7 @@ onBeforeUnmount(() => {
   --s-tabs-chenghua-color: #1f2f5c;
   --s-tabs-chenghua-active-color: var(--s-ch-primary, #2563eb);
   --s-tabs-chenghua-line-color: rgba(37, 99, 235, 0.14);
+  --s-tabs-chenghua-capsule-bg: linear-gradient(180deg, #4ea1ff 0%, #2563eb 100%);
 
   :deep(.el-tabs__item) {
     color: var(--s-tabs-chenghua-color);
@@ -374,6 +391,19 @@ onBeforeUnmount(() => {
 .s-tabs-box--chenghua:not(.s-tabs-box--capsule) {
   :deep(.el-tabs__header) {
     margin-bottom: 12px;
+  }
+}
+
+.s-tabs-box--chenghua.s-tabs-box--capsule {
+  --s-tabs-capsule-active-bg: var(--s-tabs-chenghua-capsule-bg);
+  --s-tabs-capsule-active-color: #ffffff;
+
+  :deep(.el-tabs__item.is-active) {
+    color: #ffffff;
+  }
+
+  :deep(.el-tabs__item.is-active .s-tabs__label) {
+    color: #ffffff;
   }
 }
 

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const activeTab = ref('audit')
+const capsuleTab = ref('running')
 
 const navList = [
   {
@@ -27,7 +28,7 @@ const navList = [
       <template #warning>异常告警内容</template>
     </s-tabs>
 
-    <s-tabs v-model="activeTab" :options="navList" theme="chenghua" type="capsule">
+    <s-tabs v-model="capsuleTab" :options="navList" theme="chenghua" type="capsule">
       <template #audit>待审核服务内容</template>
       <template #running>运行中服务内容</template>
       <template #warning>异常告警内容</template>
@@ -37,6 +38,10 @@ const navList = [
 
 <style scoped lang="scss">
 .tabs-chenghua-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
   :deep(.el-tabs__content) {
     color: var(--el-text-color-regular);
     font-size: 14px;

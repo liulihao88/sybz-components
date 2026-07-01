@@ -31,7 +31,7 @@ tabs/capsule
 ### chenghua主题
 
 :::demo 基础写法：`<s-tabs :options="navList" theme="chenghua">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
-tabs/chenghua
+tabs/chenghua/base
 :::
 
 ### 通常用法
