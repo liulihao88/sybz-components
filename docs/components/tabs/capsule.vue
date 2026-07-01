@@ -5,6 +5,7 @@ import { Grid, Monitor, SetUp } from '@element-plus/icons-vue'
 const smallActiveTab = ref('skill')
 const defaultActiveTab = ref('skill')
 const largeActiveTab = ref('skill')
+const chenghuaActiveTab = ref('mini')
 
 const navList = [
   {

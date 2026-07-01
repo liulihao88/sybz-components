@@ -405,7 +405,8 @@ export interface STabsSelfProps {
   value?: string
   subAttrs?: SybzRecord
   trigger?: 'click' | 'hover'
-  theme?: '' | 'capsule'
+  type?: '' | 'capsule' | TabsPropsPublic['type']
+  theme?: '' | 'chenghua'
   size?: 'small' | 'default' | 'large'
 }
 

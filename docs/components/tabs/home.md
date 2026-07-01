@@ -28,6 +28,12 @@ tabs/size
 tabs/capsule
 :::
 
+### chenghua主题
+
+:::demo 基础写法：`<s-tabs :options="navList" theme="chenghua">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+tabs/chenghua
+:::
+
 ### 通常用法
 
 :::demo 基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`v-model` 示例值：`navName`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
@@ -85,6 +91,7 @@ tabs/location
 |  `subAttrs`  | 透传给 `el-tab-pane` 的属性                                                 | object                    | `{}`                               |
 |  `trigger`   | 切换触发方式，支持 `click` / `hover`                                        | string                    | `click`                            |
 |    `type`    | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                    | 按内部组件或 Element Plus 对应属性 |
+|   `theme`    | 主题样式，支持 `chenghua`                                                   | `''` / `chenghua`         | `''`                               |
 |    `size`    | 尺寸，支持 `small` / `default` / `large`                                    | string                    | `default`                          |
 
 ### 事件

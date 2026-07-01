@@ -1,5 +1,5 @@
 <template>
-  <div ref="tabsBoxRef" class="s-tabs-box" :class="boxClass">
+  <div class="s-tabs-box" :class="boxClass">
     <el-tabs v-bind="forwardedAttrs" v-model="tabsValue">
       <slot>
         <template v-for="tab in props.options" :key="tab[props.value]">
@@ -19,12 +19,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref, useAttrs } from 'vue'
+import { computed, onBeforeUnmount, ref, useAttrs, watch } from 'vue'
+import type { TabsPropsPublic } from 'element-plus'
 
 defineOptions({
   name: 'STabs',
   inheritAttrs: false,
 })
+
+type TabsType = '' | 'capsule' | TabsPropsPublic['type']
+type TabsTheme = '' | 'chenghua'
+
 interface TabsProps {
   modelValue: string | number | boolean
   options?: Record<string, any>[]
@@ -32,6 +37,8 @@ interface TabsProps {
   value?: string
   subAttrs?: Record<string, any>
   trigger?: 'click' | 'hover'
+  type?: TabsType
+  theme?: TabsTheme
   size?: 'small' | 'default' | 'large'
 }
 
@@ -42,17 +49,24 @@ const props = withDefaults(defineProps<TabsProps>(), {
   value: 'value',
   subAttrs: () => ({}),
   trigger: 'click', // 默认为点击触发，可选值为 'click' 或 'hover'
+  type: '',
+  theme: '',
   size: 'default',
 })
 const emits = defineEmits(['update:modelValue'])
-const tabsBoxRef = ref<HTMLElement>()
+const slideDirection = ref<'left' | 'right' | ''>('')
+let slideDirectionTimer: ReturnType<typeof setTimeout> | undefined
 
-const isCapsuleType = computed(() => attrs.type === 'capsule')
+const isCapsuleType = computed(() => props.type === 'capsule')
+const isChenghuaTheme = computed(() => props.theme === 'chenghua')
 
 const forwardedAttrs = computed(() => {
-  const nextAttrs = { ...attrs } as Record<string, unknown>
+  const nextAttrs = {
+    ...attrs,
+    type: isCapsuleType.value ? '' : props.type,
+  } as Record<string, unknown>
 
-  if (isCapsuleType.value) {
+  if (!nextAttrs.type) {
     delete nextAttrs.type
   }
 
@@ -71,6 +85,9 @@ const tabsValue = computed({
 const boxClass = computed(() => [
   {
     's-tabs-box--capsule': isCapsuleType.value,
+    's-tabs-box--chenghua': isChenghuaTheme.value,
+    's-tabs-box--capsule-slide-left': isCapsuleType.value && slideDirection.value === 'left',
+    's-tabs-box--capsule-slide-right': isCapsuleType.value && slideDirection.value === 'right',
   },
   `s-tabs-box--size-${props.size || 'default'}`,
 ])
@@ -81,6 +98,39 @@ const handleMouseEnter = (tabVal: string) => {
     emits('update:modelValue', tabVal)
   }
 }
+
+watch(
+  () => tabsValue.value,
+  (value, oldValue) => {
+    if (!isCapsuleType.value || oldValue === undefined || value === oldValue) {
+      return
+    }
+
+    const values = props.options.map((item) => item[props.value])
+    const currentIndex = values.findIndex((item) => item === value)
+    const oldIndex = values.findIndex((item) => item === oldValue)
+
+    if (currentIndex === -1 || oldIndex === -1 || currentIndex === oldIndex) {
+      return
+    }
+
+    slideDirection.value = currentIndex > oldIndex ? 'right' : 'left'
+
+    if (slideDirectionTimer) {
+      clearTimeout(slideDirectionTimer)
+    }
+
+    slideDirectionTimer = setTimeout(() => {
+      slideDirection.value = ''
+    }, 320)
+  },
+)
+
+onBeforeUnmount(() => {
+  if (slideDirectionTimer) {
+    clearTimeout(slideDirectionTimer)
+  }
+})
 </script>
 <style lang="scss" scoped>
 .s-tabs-box {
@@ -138,7 +188,6 @@ const handleMouseEnter = (tabVal: string) => {
 }
 
 .s-tabs-box--capsule {
-  position: relative;
   display: inline-flex;
   flex-direction: column;
   max-width: 100%;
@@ -246,8 +295,8 @@ const handleMouseEnter = (tabVal: string) => {
     font-weight: 700;
     line-height: var(--s-tabs-capsule-height);
     transition:
-      background-color 0.24s ease,
-      box-shadow 0.24s ease,
+      background-color 0.22s ease,
+      box-shadow 0.22s ease,
       color 0.2s,
       transform 0.2s;
   }
@@ -262,7 +311,6 @@ const handleMouseEnter = (tabVal: string) => {
       0 10px 20px var(--s-tabs-capsule-active-shadow),
       inset 0 1px 0 rgba(255, 255, 255, 0.16);
     color: var(--s-tabs-capsule-active-color);
-    animation: s-tabs-capsule-label-pop 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   :deep(.el-tabs__item.is-active .s-tabs__label) {
@@ -282,16 +330,73 @@ const handleMouseEnter = (tabVal: string) => {
   }
 }
 
-@keyframes s-tabs-capsule-label-pop {
-  0% {
-    transform: translateY(1px);
+.s-tabs-box--capsule-slide-left {
+  :deep(.el-tabs__item.is-active) {
+    animation: s-tabs-capsule-slide-left 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.s-tabs-box--capsule-slide-right {
+  :deep(.el-tabs__item.is-active) {
+    animation: s-tabs-capsule-slide-right 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.s-tabs-box--chenghua {
+  --s-tabs-chenghua-color: #1f2f5c;
+  --s-tabs-chenghua-active-color: var(--s-ch-primary, #2563eb);
+  --s-tabs-chenghua-line-color: rgba(37, 99, 235, 0.14);
+
+  :deep(.el-tabs__item) {
+    color: var(--s-tabs-chenghua-color);
+    font-weight: 600;
   }
 
-  60% {
-    transform: translateY(-1px);
+  :deep(.el-tabs__item:hover) {
+    color: var(--s-tabs-chenghua-active-color);
+  }
+
+  :deep(.el-tabs__item.is-active) {
+    color: var(--s-tabs-chenghua-active-color);
+  }
+
+  :deep(.el-tabs__active-bar) {
+    height: 3px;
+    border-radius: 999px;
+    background: var(--s-tabs-chenghua-active-color);
+  }
+
+  :deep(.el-tabs__nav-wrap::after) {
+    background: var(--s-tabs-chenghua-line-color);
+  }
+}
+
+.s-tabs-box--chenghua:not(.s-tabs-box--capsule) {
+  :deep(.el-tabs__header) {
+    margin-bottom: 12px;
+  }
+}
+
+@keyframes s-tabs-capsule-slide-left {
+  0% {
+    opacity: 0.9;
+    transform: translateX(-10px);
   }
 
   100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes s-tabs-capsule-slide-right {
+  0% {
+    opacity: 0.9;
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
