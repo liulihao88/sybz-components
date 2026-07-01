@@ -7,33 +7,58 @@ const handleClick = () => {
 </script>
 
 <template>
-  <div>
-    <el-button :time="1000" @click="handleClick">
-      <template #icon>
-        <s-icon name="delete"></s-icon>
-      </template>
-      男人
-    </el-button>
-    <s-button :time="1000" type="primary" @click="handleClick">
-      <template #icon>
-        <s-icon name="delete"></s-icon>
-      </template>
-      男人(s-button)
-    </s-button>
+  <div class="button-slot-demo">
+    <div class="button-slot-demo__row">
+      <s-button type="primary" @click="handleClick">
+        <template #icon>
+          <s-icon name="delete"></s-icon>
+        </template>
+        左侧图标 + 文字
+      </s-button>
 
-    <!-- loading插槽 -->
-    <el-button loading @click="handleClick">
-      <template #loading>
-        <s-icon name="refresh"></s-icon>
-      </template>
-      我是loading插槽
-    </el-button>
+      <s-button type="primary" @click="handleClick">
+        <span class="button-slot-demo__content">
+          <span>文字 + 右侧图标</span>
+          <s-icon name="arrow-right"></s-icon>
+        </span>
+      </s-button>
+    </div>
 
-    <s-button loading type="primary" @click="handleClick">
-      <template #loading>
-        <s-icon name="refresh"></s-icon>
-      </template>
-      我是loading插槽(s-button)
-    </s-button>
+    <div class="button-slot-demo__row">
+      <s-button loading type="primary" @click="handleClick">
+        <template #loading>
+          <s-icon name="refresh"></s-icon>
+        </template>
+        自定义 loading
+      </s-button>
+
+      <s-button :time="1000" type="success" @click="handleClick">
+        <template #icon>
+          <s-icon name="plus"></s-icon>
+        </template>
+        1秒防抖
+      </s-button>
+    </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+.button-slot-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button-slot-demo__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.button-slot-demo__content {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+</style>

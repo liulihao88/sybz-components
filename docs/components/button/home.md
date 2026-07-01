@@ -69,9 +69,9 @@ button/content
 button/throttle
 :::
 
-### slots
+### 插槽（icon / loading / default）
 
-:::demo 基础写法：`<el-button :time="1000" @click="handleClick">...</el-button>`。属性说明：`time` 示例值：`1000`，类型：number(毫秒)，默认值：`0`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-button type="primary"><template #icon>...</template>左侧图标 + 文字</s-button>`。属性说明：`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`loading` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`time` 示例值：`1000`，类型：number(毫秒)，默认值：`0`；`icon` 插槽示例值：`<s-icon name="delete" />`，类型：slot，默认值：未设置；`loading` 插槽示例值：`<s-icon name="refresh" />`，类型：slot，默认值：未设置；`default` 插槽示例值：`文字 + 右侧图标`，类型：slot，默认值：按钮文本内容。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。`icon` 插槽用于左侧图标，`loading` 插槽用于自定义加载图标，默认插槽可以组合成“左侧图标 + 文字”或“文字 + 右侧图标”。
 button/slots
 :::
 
@@ -103,3 +103,11 @@ button/other
 | 事件名  | 说明                                         |
 | :-----: | -------------------------------------------- |
 | `click` | 按钮点击事件，设置 `time` 后会按防抖逻辑触发 |
+
+### 插槽
+
+|  插槽名   | 说明                | 参数 |
+| :-------: | ------------------- | ---- |
+| `default` | 自定义按钮内容      | -    |
+|  `icon`   | 自定义按钮左侧图标  | -    |
+| `loading` | 自定义 loading 图标 | -    |
