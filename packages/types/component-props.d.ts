@@ -239,8 +239,48 @@ export interface SEmptySelfProps {
 
 export type SEmptyProps = SEmptySelfProps & Partial<Omit<EmptyPropsPublic, keyof SEmptySelfProps>>
 
+export type SFormRender = (item: SFormFieldItem) => VNode | string
+
+export interface SFormRule {
+  [key: string]: any
+  message?: string
+  trigger?: string | string[]
+  validator?: any
+}
+
+export interface SFormFieldItem {
+  [key: string]: any
+  attrs?: SybzRecord
+  column?: SFormProps['column']
+  comp?: string
+  directives?: SybzRecord
+  formItemAttrs?: SybzRecord
+  imgAttrs?: SybzRecord
+  isShow?: boolean | ((item: SFormFieldItem) => boolean)
+  label?: string
+  labelRender?: SFormRender
+  placeholder?: string
+  prop?: string
+  render?: SFormRender
+  rules?: SFormRule[]
+  useSlot?: boolean
+}
+
+export interface SFormTitleItem extends Omit<
+  SFormFieldItem,
+  'comp' | 'column' | 'formItemAttrs' | 'placeholder' | 'rules'
+> {
+  type: 'title'
+  title?: string
+  subTitle?: string
+  titleAttrs?: Partial<STitleProps> & SybzRecord
+  titleSlotName?: string
+}
+
+export type SFormFieldList = Array<SFormFieldItem | SFormTitleItem> | Record<string, SFormFieldItem | SFormTitleItem>
+
 export interface SFormProps {
-  fieldList: SybzRecord
+  fieldList: SFormFieldList
   model: SybzRecord
   showFooter?: boolean
   column?: 1 | 2 | 3 | 4 | 5 | 6

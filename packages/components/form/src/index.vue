@@ -4,6 +4,7 @@ import RenderComp from './renderComp.vue'
 import { validateForm, isEmpty, $toast } from '@sybz-components/utils'
 import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
+import STitle from '@/components/title/src/index.vue'
 
 type FormModel = Record<string, unknown>
 type RenderFunction = (...args: unknown[]) => unknown
@@ -36,6 +37,11 @@ interface FormFieldItem {
   prop?: string
   render?: RenderFunction
   rules?: FormRule[]
+  subTitle?: string
+  title?: string
+  titleAttrs?: Record<string, unknown>
+  titleSlotName?: string
+  type?: string
   useSlot?: boolean
 }
 
@@ -131,6 +137,19 @@ const parseIsShow = (item: FormFieldItem) => {
   return item.isShow
 }
 
+const isTitleItem = (item: FormFieldItem) => item.type === 'title'
+
+const getTitleSlotName = (item: FormFieldItem) => item.titleSlotName || item.prop
+
+const getTitleAttrs = (item: FormFieldItem) => {
+  return {
+    title: item.title || item.label || '',
+    theme: 'chenghua',
+    type: 'simple',
+    ...item.attrs,
+  }
+}
+
 const showFormValue = () => {
   $toast({
     dangerouslyUseHTMLString: true,
@@ -183,8 +202,23 @@ defineExpose({
   <div>
     <el-form ref="sFormRef" :model="formModel" v-bind="{ 'label-width': 'auto', ...$attrs }" class="s-form">
       <template v-for="(v, i) in formItems" :key="i">
+        <div v-if="parseIsShow(v) && isTitleItem(v)" class="s-form__title-item">
+          <template v-if="v.useSlot && getTitleSlotName(v)">
+            <slot :name="getTitleSlotName(v)" :item="v"></slot>
+          </template>
+          <template v-else-if="v.render">
+            <render-comp :render="v.render" :item="v" />
+          </template>
+          <template v-else>
+            <s-title v-bind="getTitleAttrs(v)">
+              <template v-if="v.labelRender" #title>
+                <render-comp :render="v.labelRender" :item="v" />
+              </template>
+            </s-title>
+          </template>
+        </div>
         <el-form-item
-          v-if="parseIsShow(v)"
+          v-else-if="parseIsShow(v)"
           :prop="v.prop"
           :label="v.label"
           v-bind="v.formItemAttrs"
@@ -241,6 +275,11 @@ defineExpose({
 .s-form {
   display: flex;
   flex-wrap: wrap;
+}
+
+.s-form__title-item {
+  flex: 0 0 100%;
+  width: 100%;
 }
 
 .s-form__label-image {

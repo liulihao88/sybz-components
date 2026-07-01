@@ -16,6 +16,12 @@
 form/base
 :::
 
+### 分组标题 `type="title"`
+
+:::demo 基础写法：`<s-form :model="formData" :fieldList="fieldList" :column="2" label-width="96">...</s-form>`。属性说明：`fieldList.type` 示例值：`title`，类型：string，可选值：`title`，默认值：未设置；`title` 示例值：`基本信息`，类型：string，默认值：`''`；`subTitle` 示例值：`补充展厅名称与介绍`，类型：string，默认值：`''`；`titleAttrs` 示例值：`{ theme: 'chenghua', type: 'form' }`，类型：object，默认值：`{ type: 'form' }`；`useSlot` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`render` 示例值：`(item) => VNode`，类型：Function，默认值：未设置。本示例展示通过 `fieldList` 配置分组标题，可以直接复制基础写法后按业务替换数据。`type="title"` 会让当前项渲染为独立标题行，支持默认标题、插槽标题和 render 标题。
+form/title
+:::
+
 ### 表单校验规则
 
 :::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`column`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`rules` 示例值：`rules`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示表单场景，可以直接复制基础写法后按业务替换数据。
@@ -91,17 +97,22 @@ form/directives
 
 ## filedList属性
 
-|   属性名    | 说明                  | 类型                 | 默认值    |
-| :---------: | --------------------- | -------------------- | --------- |
-|    label    | 左侧显示的label值     | string, slot, render | -         |
-|    prop     | 值对应的属性          | string               | -         |
-|    comp     | 要渲染的组件名称      | string               | 's-input' |
-|    attrs    | form绑定的属性        | object               | -         |
-|    rules    | 每一项对应的rules规则 | object               | -         |
-| labelRender | 对label的render渲染   | Function             | -         |
-|  imgAttrs   | 左侧图片的属性        | object               | -         |
-|   useSlot   | 使用插槽              | boolean              | -         |
-| directives  | 自定义指令            | object               | -         |
+|    属性名     | 说明                                                            | 类型                 | 默认值             |
+| :-----------: | --------------------------------------------------------------- | -------------------- | ------------------ |
+|     label     | 左侧显示的label值                                               | string, slot, render | -                  |
+|     prop      | 值对应的属性                                                    | string               | -                  |
+|     comp      | 要渲染的组件名称                                                | string               | 's-input'          |
+|     attrs     | form绑定的属性                                                  | object               | -                  |
+|     rules     | 每一项对应的rules规则                                           | object               | -                  |
+|  labelRender  | 对label的render渲染                                             | Function             | -                  |
+|   imgAttrs    | 左侧图片的属性                                                  | object               | -                  |
+|    useSlot    | 使用插槽                                                        | boolean              | -                  |
+|  directives   | 自定义指令                                                      | object               | -                  |
+|     type      | 项类型，设置为 `title` 时渲染分组标题                           | string               | -                  |
+|     title     | `type="title"` 时显示的标题                                     | string               | `''`               |
+|   subTitle    | `type="title"` 时显示的副标题                                   | string               | `''`               |
+|  titleAttrs   | `type="title"` 时透传给 `s-title` 的属性                        | object               | `{ type: 'form' }` |
+| titleSlotName | `type="title"` 且 `useSlot` 时使用的插槽名，未设置时使用 `prop` | string               | -                  |
 
 ## Form Exposes
 
