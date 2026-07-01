@@ -2,7 +2,7 @@
 const options = [
   { label: '名字', value: 'andy' },
   { label: '年龄', value: '18' },
-  { label: '身高很高', value: '1.88' },
+  { label: '身高很高身高很高身高很高身高很高', value: '1.88' },
 ]
 </script>
 

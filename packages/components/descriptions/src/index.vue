@@ -2,6 +2,7 @@
   <el-descriptions
     v-bind="{ border: true, ...$attrs }"
     :column="descriptionColumn"
+    :label-width="labelWidth2"
     class="s-descriptions"
     :class="descriptionsClass"
   >
@@ -42,12 +43,16 @@
         </template>
         <template v-else>
           <template v-if="mergedProps.showAll">
-            {{ parseValue(item) }}
+            <render-comp v-if="isRenderableContent(getValueContent(item))" :render="() => getValueContent(item)" />
+            <template v-else>
+              {{ getTooltipContent(item) }}
+            </template>
           </template>
+          <render-comp v-else-if="isRenderableContent(getValueContent(item))" :render="() => getValueContent(item)" />
           <s-tooltip
             v-else
             class="s-descriptions__tooltip"
-            :content="parseContent(parseValue(item))"
+            :content="getTooltipContent(item)"
             v-bind="item.valueAttrs"
           ></s-tooltip>
         </template>
@@ -58,7 +63,7 @@
 
 <script setup lang="ts">
 import RenderComp from '@/components/common/renderComp.vue'
-import { computed, VNode, ref, useAttrs, onUnmounted } from 'vue'
+import { computed, VNode, ref, useAttrs, onUnmounted, isVNode } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import STooltip from '@/components/tooltip/src/index.vue'
@@ -187,6 +192,17 @@ const parseContent = (value: any) => {
   }
 }
 
+const getValueContent = (item: ItemOptions) => parseContent(parseValue(item))
+
+const isRenderableContent = (value: any) => {
+  return isVNode(value) || (Array.isArray(value) && value.some((item) => isVNode(item)))
+}
+
+const getTooltipContent = (item: ItemOptions) => {
+  const value = getValueContent(item)
+  return value === null || value === undefined ? '' : String(value)
+}
+
 const getTextAlign = computed(() => {
   return attrs.direction === 'vertical' ? 'left' : 'right'
 })
@@ -224,7 +240,7 @@ onUnmounted(() => {
 
   :deep(.el-descriptions__label) {
     width: v-bind(labelWidth2);
-    min-width: 100px;
+    min-width: v-bind(labelWidth2);
     text-align: v-bind(getTextAlign);
   }
 

@@ -24,7 +24,7 @@ const options = computed(() => {
     {
       key: 'filter的时间',
       id: data.value.time,
-      filter: (val) => formatTime(val),
+      filter: ({ val }) => formatTime(val),
     },
     {
       key: '是否锁定',
@@ -66,8 +66,8 @@ init()
       <s-radio
         v-model="showAll"
         :options="[
-          { key: 'showAll为true', value: true },
-          { key: 'showAll为false', value: false },
+          { label: 'showAll:true', value: true },
+          { label: 'showAll:false', value: false },
         ]"
       ></s-radio>
     </s-flex>
