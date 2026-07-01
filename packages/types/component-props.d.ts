@@ -83,10 +83,25 @@ export interface SDescriptionsItemOption {
   valueSlot?: string
   labelRender?: (item: SDescriptionsItemOption) => VNode | string
   render?: (item: SDescriptionsItemOption) => VNode | string
-  filter?: (value: any) => any
+  filter?: (context: SDescriptionsFilterContext) => any
   attrs?: SybzRecord
   labelAttrs?: SybzRecord
   valueAttrs?: SybzRecord
+}
+
+export interface SDescriptionsFilterScope {
+  row: SDescriptionsItemOption
+  $index: number
+  [key: string]: any
+}
+
+export type SDescriptionsFilterContext = Partial<SDescriptionsItemOption> & {
+  row: SDescriptionsItemOption
+  item: SDescriptionsItemOption
+  scope: SDescriptionsFilterScope
+  index: number
+  value: any
+  label: any
 }
 
 export interface SDescriptionsOwnProps {

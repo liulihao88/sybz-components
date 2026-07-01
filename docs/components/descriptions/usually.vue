@@ -24,7 +24,9 @@ const options = computed(() => {
     {
       key: 'filter的时间',
       id: data.value.time,
-      filter: ({ val }) => formatTime(val),
+      filter: ({ value, index, label, row, item }) => {
+        return `${formatTime(value)} : ${index} : ${label} : ${JSON.stringify(row)} : ${JSON.stringify(item)}`
+      },
     },
     {
       key: '是否锁定',
@@ -87,9 +89,9 @@ init()
 
 <style lang="scss" scoped>
 :deep(.my-label) {
-  background: var(--el-color-success-light-9) !important;
+  background: pink !important;
 }
 :deep(.my-content) {
-  background: var(--el-color-danger-light-9);
+  background: skyblue !important;
 }
 </style>

@@ -10,14 +10,14 @@
       <el-descriptions-item v-for="(item, index) in mergedProps.options ?? []" :key="index" v-bind="item.attrs">
         <template #label>
           <template v-if="item.labelRender">
-            <render-comp :render="item.labelRender" :item="getRenderItem(item)" />
+            <render-comp :render="item.labelRender" :item="getRenderItem(item, index)" />
           </template>
           <template v-else-if="item.labelSlot">
             <slot
               :name="item.labelSlot"
               :item="item"
               :label="parseLabel(item)"
-              :value="parseValue(item)"
+              :value="parseValue(item, index)"
               :index="index"
             ></slot>
           </template>
@@ -30,29 +30,35 @@
         </template>
 
         <template v-if="item.render">
-          <render-comp :render="item.render" :item="getRenderItem(item)" />
+          <render-comp :render="item.render" :item="getRenderItem(item, index)" />
         </template>
         <template v-else-if="item.valueSlot">
           <slot
             :name="item.valueSlot"
             :item="item"
             :label="parseLabel(item)"
-            :value="parseValue(item)"
+            :value="parseValue(item, index)"
             :index="index"
           ></slot>
         </template>
         <template v-else>
           <template v-if="mergedProps.showAll">
-            <render-comp v-if="isRenderableContent(getValueContent(item))" :render="() => getValueContent(item)" />
+            <render-comp
+              v-if="isRenderableContent(getValueContent(item, index))"
+              :render="() => getValueContent(item, index)"
+            />
             <template v-else>
-              {{ getTooltipContent(item) }}
+              {{ getTooltipContent(item, index) }}
             </template>
           </template>
-          <render-comp v-else-if="isRenderableContent(getValueContent(item))" :render="() => getValueContent(item)" />
+          <render-comp
+            v-else-if="isRenderableContent(getValueContent(item, index))"
+            :render="() => getValueContent(item, index)"
+          />
           <s-tooltip
             v-else
             class="s-descriptions__tooltip"
-            :content="getTooltipContent(item)"
+            :content="getTooltipContent(item, index)"
             v-bind="item.valueAttrs"
           ></s-tooltip>
         </template>
@@ -93,10 +99,25 @@ type ItemOptions = {
   valueSlot?: string
   labelRender?: (item: any) => VNode | string
   render?: (item: any) => VNode | string
-  filter?: (value: any) => any
+  filter?: (context: FilterContext) => any
   attrs?: Record<string, any>
   labelAttrs?: Record<string, any>
   valueAttrs?: Record<string, any>
+}
+
+type FilterScope = {
+  row: ItemOptions
+  $index: number
+  [key: string]: any
+}
+
+type FilterContext = Partial<ItemOptions> & {
+  row: ItemOptions
+  item: ItemOptions
+  scope: FilterScope
+  index: number
+  value: any
+  label: any
 }
 
 const props = withDefaults(defineProps<DescriptionsProps>(), {
@@ -118,19 +139,38 @@ const getOptionField = (item: ItemOptions, key: string, fallbackKey: string) => 
 
 const parseLabel = (item: ItemOptions) => getOptionField(item, mergedProps.value.label || 'label', 'label') ?? ''
 
-const parseValue = (item: ItemOptions) => {
-  const value = getOptionField(item, mergedProps.value.value || 'value', 'value')
+const getRawValue = (item: ItemOptions) => getOptionField(item, mergedProps.value.value || 'value', 'value')
+
+const getFilterContext = (item: ItemOptions, index: number): FilterContext => {
+  const scope = {
+    row: item,
+    $index: index,
+  }
+
+  return {
+    ...item,
+    row: item,
+    item,
+    scope,
+    index,
+    value: getRawValue(item),
+    label: parseLabel(item),
+  }
+}
+
+const parseValue = (item: ItemOptions, index: number) => {
+  const value = getRawValue(item)
   if (item.filter) {
-    return item.filter(value)
+    return item.filter(getFilterContext(item, index))
   } else {
     return value
   }
 }
 
-const getRenderItem = (item: ItemOptions) => ({
+const getRenderItem = (item: ItemOptions, index: number) => ({
   ...item,
   label: parseLabel(item),
-  value: parseValue(item),
+  value: parseValue(item, index),
 })
 
 // 创建一个用于测量文本宽度的隐藏元素
@@ -192,14 +232,14 @@ const parseContent = (value: any) => {
   }
 }
 
-const getValueContent = (item: ItemOptions) => parseContent(parseValue(item))
+const getValueContent = (item: ItemOptions, index: number) => parseContent(parseValue(item, index))
 
 const isRenderableContent = (value: any) => {
   return isVNode(value) || (Array.isArray(value) && value.some((item) => isVNode(item)))
 }
 
-const getTooltipContent = (item: ItemOptions) => {
-  const value = getValueContent(item)
+const getTooltipContent = (item: ItemOptions, index: number) => {
+  const value = getValueContent(item, index)
   return value === null || value === undefined ? '' : String(value)
 }
 
