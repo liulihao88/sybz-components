@@ -5,9 +5,9 @@ type ElTabsInstance = InstanceType<typeof ElTabs>
 
 export type STabsPublicProps = STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>
 
-export type STabsComponent = {
+export type STabsComponent = typeof ElTabs & {
   new (): {
-    $props: STabsPublicProps
+    $props: STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>
     $emit: ElTabsInstance['$emit']
     $slots: ElTabsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
