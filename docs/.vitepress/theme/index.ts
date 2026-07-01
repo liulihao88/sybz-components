@@ -16,7 +16,6 @@ import ChangelogContent from './components/ChangelogContent.vue'
 import ApiIntro from '../../shared/ApiIntro.vue'
 import ComponentQuickSidebar from '../../shared/ComponentQuickSidebar.vue'
 import DocBasicUsage from '../../shared/DocBasicUsage.vue'
-import RouteContent from '../../shared/RouteContent.vue'
 import ScrollPositionRestore from '../../shared/ScrollPositionRestore.vue'
 
 import { VPDemo } from '../vitepress'
@@ -93,7 +92,6 @@ export default {
 
     ctx.app.component('Demo', VPDemo)
     DefaultTheme.enhanceApp(ctx)
-    ctx.app.component('Content', RouteContent)
     registerBuildDebug()
   },
 }
