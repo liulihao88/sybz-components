@@ -23,6 +23,7 @@ import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
 import Logo from './logo.vue'
 import VueTippy from 'vue-tippy'
+import { registerBuildDebug } from '../../shared/buildDebug'
 
 // 基于element-plus二次封装基础组件
 import '../../../packages/styles/index.scss'
@@ -93,5 +94,6 @@ export default {
     ctx.app.component('Demo', VPDemo)
     DefaultTheme.enhanceApp(ctx)
     ctx.app.component('Content', RouteContent)
+    registerBuildDebug()
   },
 }
