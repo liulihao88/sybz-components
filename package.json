@@ -66,6 +66,7 @@
     "release-deploy": "pnpm release && npm run deploy",
     "update-document": "pnpm build && npm run deploy",
     "deploy-no-build": "bash -x deploy.sh -k",
+    "update": " pnpm add @sybz-components/utils@latest",
     "utils:release": "pnpm run -C packages/utils release",
     "link:bun": "bun link && bun link --cwd packages/utils",
     "link:pnpm": "pnpm link -g && pnpm -C packages/utils link -g",
@@ -81,7 +82,7 @@
     ]
   },
   "dependencies": {
-    "@sybz-components/utils": "^0.0.9",
+    "@sybz-components/utils": "^0.0.10",
     "eslint-config-prettier": "9.1.2"
   },
   "devDependencies": {
