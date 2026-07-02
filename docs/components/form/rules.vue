@@ -5,12 +5,7 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { validate } from '@sybz-components/utils'
-import type { Ref } from 'vue'
-
-interface ColumnType {
-  column?: 1 | 2 | 3 | 4 | 5 | 6 | undefined
-}
-const column = ref(2) as Ref<ColumnType['column']>
+const column = ref(2)
 
 const rules = {
   name: [validate()],
@@ -38,7 +33,7 @@ const formData = ref({
   status: 1, // *状态: 0：停用，1：启用(默认为1)',
 })
 
-async function validateNumber(rule, value, callback) {
+async function validateNumber(rule: any, value: number, callback: (error?: Error) => void) {
   if (value < 10) {
     callback(new Error('不能小于10'))
   } else if (value > 20) {

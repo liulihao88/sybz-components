@@ -1,15 +1,13 @@
 <script setup lang="tsx">
-import { ref, getCurrentInstance, reactive } from 'vue'
-const { proxy } = getCurrentInstance()
-import { validateForm } from '@sybz-components/utils'
+import { ref } from 'vue'
+import { validate } from '@sybz-components/utils'
 const model = ref({
   account: '', // *用户账号
-  password: null, // *用户密码
+  hobby: [], // *用户爱好
 })
 const gFormRef = ref()
 const rules = {
-  account: [proxy.validate()],
-  password: [proxy.validate()],
+  account: [validate()],
 }
 
 const fieldList = [
@@ -18,16 +16,26 @@ const fieldList = [
     prop: 'account',
   },
   {
-    label: '密码',
-    prop: 'password',
+    label: '基础信息',
+    type: 'title',
+  },
+  {
+    label: '爱好',
+    prop: 'hobby',
+    comp: 's-select',
+    rules: [validate('请选择爱好')],
+    attrs: {
+      multiple: true,
+      options: [
+        { label: '吉他', value: '0' },
+        { label: '看书', value: '1' },
+      ],
+    },
   },
 ]
 
 async function testSubmit() {
-  console.log(`111`, 111)
-  console.log(`gFormRef.value`, gFormRef.value)
   await gFormRef.value.validate()
-  // console.log(`***** 222  97行 test/t1.vue  15:52:04`)
 }
 </script>
 
