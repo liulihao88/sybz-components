@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@sybz-components/utils':
-        specifier: ^0.0.11
-        version: 0.0.11(typescript@5.3.3)
+        specifier: ^0.0.12
+        version: 0.0.12(typescript@5.3.3)
       eslint-config-prettier:
         specifier: 9.1.2
         version: 9.1.2(eslint@9.39.4(jiti@2.5.1))
@@ -1406,8 +1406,8 @@ packages:
   '@sxzz/popperjs-es@2.11.7':
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
 
-  '@sybz-components/utils@0.0.11':
-    resolution: {integrity: sha512-kKRAmKF3KUapPM1YAb73GF07aFIjXdJSjm/6CBeDl06V5SCujP12xEBzNDpgmQ4dVIVepGWwEho2oBqKID0YJQ==}
+  '@sybz-components/utils@0.0.12':
+    resolution: {integrity: sha512-ysACw/4L8Qe1SkninLTZKMN5g2Ah925aAGU7+pJx8C8Ax31/6rj1pfQ4XfsBZbVd5wyrVRfxFjLsPOG34+ULUQ==}
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -5634,7 +5634,7 @@ snapshots:
 
   '@sxzz/popperjs-es@2.11.7': {}
 
-  '@sybz-components/utils@0.0.11(typescript@5.3.3)':
+  '@sybz-components/utils@0.0.12(typescript@5.3.3)':
     dependencies:
       '@vue/reactivity': 3.5.26
       '@vue/shared': 3.5.26
@@ -7488,23 +7488,6 @@ snapshots:
       - supports-color
       - terser
 
-  inferred-types@0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1):
-    dependencies:
-      brilliant-errors: 0.7.3(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
-    transitivePeerDependencies:
-      - '@edge-runtime/vm'
-      - '@vitest/browser'
-      - '@vitest/ui'
-      - happy-dom
-      - jsdom
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
   inherits@2.0.4: {}
 
   internal-slot@1.0.7:
@@ -8016,7 +7999,7 @@ snapshots:
   native-dash@1.25.0(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1):
     dependencies:
       brilliant-errors: 0.7.3(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
-      inferred-types: 0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
+      inferred-types: 0.37.6(happy-dom@12.10.3)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
