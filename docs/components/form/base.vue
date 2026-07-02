@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { validate } from '@sybz-components/utils'
 const model = ref({
-  account: '', // *用户账号
-  hobby: [], // *用户爱好
+  account: '',
+  hobby: [],
 })
 const gFormRef = ref()
 const rules = {
