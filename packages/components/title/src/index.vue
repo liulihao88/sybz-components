@@ -41,6 +41,9 @@
             {{ mergedProps.title }}
           </slot>
         </span>
+        <span v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
+          {{ mergedProps.subTitle }}
+        </span>
         <slot></slot>
       </div>
       <div :class="($slots.extra || $slots.right) && 's-title__slot-extra-wrapper'">
@@ -48,9 +51,6 @@
           <slot name="right"></slot>
         </slot>
       </div>
-    </div>
-    <div v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
-      {{ mergedProps.subTitle }}
     </div>
   </div>
 </template>
@@ -152,7 +152,9 @@ const titleClass = computed(() => ({
   box-sizing: border-box;
   .s-title__main {
     display: flex;
+    flex: 1 1 auto;
     align-items: center;
+    min-width: 0;
   }
   .s-title__top {
     display: flex;
@@ -176,6 +178,8 @@ const titleClass = computed(() => ({
     .s-title__slot-extra-wrapper {
       text-align: right;
       display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
   }
 
@@ -185,6 +189,11 @@ const titleClass = computed(() => ({
     font-weight: 800;
     width: 100%;
     border-bottom: 1px dashed var(--el-border-color-lighter);
+
+    .title-text {
+      margin-right: 8px;
+      white-space: nowrap;
+    }
   }
 
   .s-title__top-simple-left {
@@ -226,10 +235,16 @@ const titleClass = computed(() => ({
     }
   }
   .s-title__subTitle {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
     font-size: 14px;
     font-weight: 400;
     color: var(--el-text-color-secondary);
     letter-spacing: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>

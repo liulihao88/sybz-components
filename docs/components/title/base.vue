@@ -5,7 +5,7 @@ import { ref } from 'vue'
 <template>
   <div>
     <s-title title="你好"></s-title>
-    <s-title title="显示左侧树杠" height="40"></s-title>
+    <s-title title="显示左侧树杠" sub-title="我不好"></s-title>
     <s-title title="无左侧树杠" type="simple"></s-title>
     <s-title title="form表单的类型" type="form">
       <template #extra>

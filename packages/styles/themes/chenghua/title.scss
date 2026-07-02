@@ -1,10 +1,11 @@
 .s-title.s-title--chenghua.s-title--chenghua {
   font-family: var(--s-ch-font-family);
+  margin-bottom: 10px;
 
   .s-title__top {
     position: relative;
     min-height: 34px;
-    padding-bottom: 8px;
+    padding-bottom: 0;
     color: var(--s-ch-text);
     font-size: 18px;
     line-height: 1.4;
@@ -74,6 +75,7 @@
 
     .title-text {
       display: inline-block;
+      min-width: 0;
       max-width: 100%;
       margin-right: 10px;
       overflow: hidden;
@@ -96,13 +98,13 @@
       height: 18px;
       border-radius: 4px;
       background: linear-gradient(180deg, var(--s-ch-primary) 0%, var(--s-ch-accent) 100%);
-      transform: translateY(calc(-50% - 4px));
+      transform: translateY(-50%);
     }
   }
 
   .s-title__form-left {
-    padding: 0 0 10px;
-    margin: 0 0 16px;
+    padding: 0;
+    margin: 0;
     border-bottom: 0;
   }
 
@@ -116,9 +118,8 @@
   }
 
   .s-title__subTitle {
-    margin-top: 4px;
     color: var(--s-ch-text-muted);
     font-size: 13px;
-    line-height: 1.5;
+    line-height: 1;
   }
 }
