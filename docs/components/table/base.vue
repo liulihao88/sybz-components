@@ -34,8 +34,6 @@ const columns = [
           content: '编辑',
         },
         disabled: ({ row }) => {
-          console.log(`1141 32行 docs/components/table/base.vue 222 `, 222)
-
           return row.status === 0
         },
       },

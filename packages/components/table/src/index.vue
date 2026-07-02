@@ -12,8 +12,6 @@ import SIcon from '@/components/icon/src/index.vue'
 import { getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
-console.log(`111`, 111)
-
 import type {
   STableButton,
   STableColumn,
