@@ -114,12 +114,12 @@ describe('base utils', () => {
     expect(validate('required')).toEqual({
       required: true,
       message: '请输入',
-      trigger: [],
+      trigger: ['blur', 'change'],
     })
     expect(validate('自定义提示')).toEqual({
       required: true,
       message: '自定义提示',
-      trigger: [],
+      trigger: ['blur', 'change'],
     })
   })
 
