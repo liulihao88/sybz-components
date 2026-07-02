@@ -243,7 +243,7 @@ const templateTableColumns = computed<TableColumnList<TemplateRow>>(() => [
 |           `prop`           | 操作按钮关联字段，回调参数中的 `value` 会读取 `row[prop]`             | string                     | -             |
 |         `content`          | 按钮文案，支持函数                                                    | string / number / function | -             |
 |          `title`           | `reConfirm` 开启时的确认提示文案，支持函数                            | string / number / function | `确定删除吗?` |
-| `dangerouslyUseHTMLString` | 是否把确认提示里的字符串按 HTML 渲染，可用于解析 `<code>`             | boolean                    | `true`        |
+| `dangerouslyUseHTMLString` | 是否把确认提示里的字符串按 HTML 渲染，可用于解析 `<mark>` 高亮文本    | boolean                    | `true`        |
 |         `handler`          | 点击按钮或确认后执行的方法                                            | function                   | -             |
 |          `isShow`          | 控制按钮是否显示，支持布尔值或函数                                    | boolean / function         | `true`        |
 |         `disabled`         | 控制按钮是否禁用，支持布尔值或函数                                    | boolean / function         | `false`       |

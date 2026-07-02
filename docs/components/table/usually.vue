@@ -66,7 +66,10 @@ const columns = [
         disabled: ({ row }) => row.status === 'Loading',
       },
       {
-        title: ({ row }) => `删除后将无法恢复，确定删除<code>${row.name}</code>吗？`,
+        title: ({ row, index }) => {
+          let type = ['', 'danger', 'warning', 'success']
+          return `删除后将无法恢复，确定删除<mark type="${type[index]}">${row.name}</mark>吗？`
+        },
         reConfirm: true,
         handler: () => {},
         comp: 's-icon',
@@ -92,7 +95,7 @@ const columns = [
 const data = ref([])
 const orgData = [
   {
-    name: 'name1',
+    name: 'name1name1name1name1name1name1',
     owner:
       'owner1I want to set some random text, if you like it , please tell me. good wish for you! thank you so much. hive a nice day!I want to set some random text, if you like it , please tell me. good wish for you! thank you so much. hive a nice day!I want to set some random text, if you like it , please tell me. good wish for you! thank you so much. hive a nice day!I want to set some random text, if you like it , please tell me. good wish for you! thank you so much. hive a nice day!I want to set some random text, if you like it , please tell me. good wish for you! thank you so much. hive a nice day!I want to set some random text, if you like it , please tell me. good wish for you! thank you so much. hive a nice day!I want to set some random text, if you like it , please tell me. good wish for you! thank you so much. hive a nice day!',
     endTime: '2022-08-02',

@@ -66,3 +66,39 @@
   --s-code-bg-color: var(--s-code-info-bg-color);
   --s-code-border-color: var(--s-code-info-border-color);
 }
+
+:where(mark) {
+  --s-mark-color: var(--s-code-primary-color);
+
+  padding: 0;
+  margin: 0 2px;
+  background: transparent;
+  color: var(--s-mark-color);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: inherit;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  word-break: break-word;
+}
+
+:where(mark[type='primary'], mark[data-type='primary']) {
+  --s-mark-color: var(--s-code-primary-color);
+}
+
+:where(mark[type='success'], mark[data-type='success']) {
+  --s-mark-color: var(--s-code-success-color);
+}
+
+:where(mark[type='warning'], mark[data-type='warning']) {
+  --s-mark-color: var(--s-code-warning-color);
+}
+
+:where(mark[type='danger'], mark[data-type='danger'], mark[type='error'], mark[data-type='error']) {
+  --s-mark-color: var(--s-code-danger-color);
+}
+
+:where(mark[type='info'], mark[data-type='info']) {
+  --s-mark-color: var(--s-code-info-color);
+}

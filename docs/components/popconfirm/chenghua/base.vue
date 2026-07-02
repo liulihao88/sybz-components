@@ -26,7 +26,7 @@ function confirm() {
       <s-popconfirm
         theme="chenghua"
         title="确认删除任务"
-        content="确定删除<code>智慧档案检索</code>吗?"
+        content="确定删除<mark>智慧档案检索</mark>吗?"
         :dangerously-use-html-string="true"
         width="260"
         trigger="click"
@@ -38,7 +38,7 @@ function confirm() {
       <s-popconfirm
         theme="chenghua"
         title="发布确认"
-        content="将发布到<code>生产环境</code>, 请确认配置无误。"
+        content="将发布到<mark>生产环境</mark>, 请确认配置无误。"
         :dangerously-use-html-string="true"
         width="280"
         trigger="click"

@@ -17,6 +17,7 @@ const ALLOWED_HTML_TAGS = new Set([
   'i',
   'img',
   'li',
+  'mark',
   'ol',
   'p',
   'pre',
@@ -31,6 +32,7 @@ const ALLOWED_GLOBAL_ATTRIBUTES = new Set(['class', 'title'])
 const ALLOWED_ATTRIBUTES_BY_TAG: Record<string, Set<string>> = {
   button: new Set(['type']),
   code: new Set(['type', 'v-pre']),
+  mark: new Set(['type']),
   a: new Set(['href', 'target', 'rel']),
   img: new Set(['src', 'alt', 'width', 'height']),
   pre: new Set(['v-pre']),
