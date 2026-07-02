@@ -25,6 +25,7 @@
 - [getType](/components/utils/getType/home.md)
 - [isEmpty](/components/utils/isEmpty/home.md)
 - [delay](/components/utils/delay/home.md)
+- [throttle](/components/utils/throttle/home.md)
 - [tryCatch](/components/utils/tryCatch/home.md)
 - [mockValue](/components/utils/mockValue/home.md)
 - [validateForm](/components/utils/validateForm/home.md)

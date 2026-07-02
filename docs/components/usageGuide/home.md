@@ -92,31 +92,18 @@ const statusOptions = [
 </script>
 
 <template>
-  <div class="page">
-    <s-title title="我的第一个组件库页面" />
+  <div>
+    <s-title title="我的第一个组件库页面" theme="chenghua" />
 
-    <div class="search-row">
-      <s-input v-model="keyword" placeholder="请输入关键字" clearable width="240px" />
-      <s-select v-model="status" :options="statusOptions" placeholder="请选择状态" width="200px" />
-      <s-button type="primary" @click="showDialog = true">打开弹窗</s-button>
-    </div>
+    <s-flex>
+      <s-input v-model="keyword" />
+      <s-select v-model="status" :options="statusOptions" />
+      <s-button @click="showDialog = true">打开弹窗</s-button>
+    </s-flex>
 
     <s-dialog v-model="showDialog" title="提示"> 这里是弹窗内容 </s-dialog>
   </div>
 </template>
-
-<style scoped>
-.page {
-  padding: 24px;
-}
-
-.search-row {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-top: 16px;
-}
-</style>
 ```
 
 ## 5. 组件的基本语法

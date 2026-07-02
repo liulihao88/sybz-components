@@ -83,7 +83,8 @@ const docsBuildInfo = {
   version: packageJson.version || '',
   repository: repositoryUrl,
   homepage: packageJson.homepage || '',
-  branch: process.env.GITHUB_REF_NAME || process.env.GITHUB_HEAD_REF || runGitCommand('git rev-parse --abbrev-ref HEAD'),
+  branch:
+    process.env.GITHUB_REF_NAME || process.env.GITHUB_HEAD_REF || runGitCommand('git rev-parse --abbrev-ref HEAD'),
   buildTime,
   latestCommitHash: latestCommit?.hash || '',
   latestCommitShortHash: latestCommit?.shortHash || '',
@@ -229,6 +230,14 @@ export default defineConfig({
               link: '/components/utils/dayjs/home.md',
             },
             {
+              text: 'debounce 防抖函数',
+              link: '/components/utils/home.md#debounce',
+            },
+            {
+              text: sybzMark('delay 延迟函数'),
+              link: '/components/utils/delay/home.md',
+            },
+            {
               text: 'formatBytes 字节格式化',
               link: '/components/utils/formatBytes/home.md',
             },
@@ -260,9 +269,10 @@ export default defineConfig({
               text: 'isEmpty 空值判断',
               link: '/components/utils/isEmpty/home.md',
             },
+
             {
-              text: sybzMark('delay 延迟函数'),
-              link: '/components/utils/delay/home.md',
+              text: 'throttle 节流函数',
+              link: '/components/utils/throttle/home.md',
             },
             {
               text: sybzMark('tryCatch Promise 封装'),
