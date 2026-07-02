@@ -1,7 +1,7 @@
 <template>
   <s-form :model="formData" :field-list="fieldList" :column="2" label-width="96">
     <template #slotTitle="{ item }">
-      <s-title v-bind="item.titleAttrs" type="form">
+      <s-title v-bind="item.attrs" type="form">
         <template #title>
           <span class="form-title-demo__slot-title">{{ item.title }}</span>
         </template>
@@ -32,10 +32,28 @@ const fieldList = [
   {
     type: 'title',
     title: '基本信息',
+    subTitle: '补充展厅名称与介绍',
+    attrs: {
+      theme: 'chenghua',
+      type: 'form',
+    },
+  },
+  {
+    label: '展厅描述',
+    prop: 'hallDesc',
+    attrs: {
+      type: 'textarea',
+      rows: 4,
+    },
+    column: 1,
   },
   {
     type: 'title',
     title: '统计配置',
+    attrs: {
+      theme: 'chenghua',
+      type: 'form',
+    },
     render: (item: any) => {
       return (
         <s-title
@@ -47,28 +65,12 @@ const fieldList = [
       )
     },
   },
-  // {
-  //   type: 'title',
-  //   title: '讲解配置',
-  //   prop: 'slotTitle',
-  //   useSlot: true,
-  //   titleAttrs: {
-  //     theme: 'chenghua',
-  //   },
-  // },
+
   {
     label: '展厅名称',
     prop: 'hallName',
   },
-  {
-    label: '展厅描述',
-    prop: 'hallDesc',
-    attrs: {
-      type: 'textarea',
-      rows: 4,
-    },
-    column: 1,
-  },
+
   {
     label: '开始时间',
     prop: 'startTime',

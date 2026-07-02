@@ -8,6 +8,7 @@ import STitle from '@/components/title/src/index.vue'
 
 type FormModel = Record<string, unknown>
 type RenderFunction = (...args: unknown[]) => unknown
+type FormAttrs = Record<string, any>
 
 interface FormRule {
   [key: string]: unknown
@@ -24,7 +25,7 @@ interface FormImageAttrs {
 
 interface FormFieldItem {
   [key: string]: unknown
-  attrs?: Record<string, unknown>
+  attrs?: FormAttrs
   column?: FormSelfProps['column']
   comp?: string
   directives?: Record<string, unknown>
@@ -39,7 +40,7 @@ interface FormFieldItem {
   rules?: FormRule[]
   subTitle?: string
   title?: string
-  titleAttrs?: Record<string, unknown>
+  titleAttrs?: FormAttrs
   titleSlotName?: string
   type?: string
   useSlot?: boolean
@@ -141,11 +142,13 @@ const isTitleItem = (item: FormFieldItem) => item.type === 'title'
 
 const getTitleSlotName = (item: FormFieldItem) => item.titleSlotName || item.prop
 
-const getTitleAttrs = (item: FormFieldItem) => {
+const getTitleAttrs = (item: FormFieldItem): FormAttrs => {
   return {
     title: item.title || item.label || '',
+    subTitle: item.subTitle || '',
     theme: 'chenghua',
-    type: 'simple',
+    type: 'form',
+    ...item.titleAttrs,
     ...item.attrs,
   }
 }

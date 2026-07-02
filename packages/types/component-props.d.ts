@@ -281,11 +281,12 @@ export interface SFormFieldItem {
 
 export interface SFormTitleItem extends Omit<
   SFormFieldItem,
-  'comp' | 'column' | 'formItemAttrs' | 'placeholder' | 'rules'
+  'attrs' | 'comp' | 'column' | 'formItemAttrs' | 'placeholder' | 'rules'
 > {
   type: 'title'
   title?: string
   subTitle?: string
+  attrs?: Partial<STitleProps> & SybzRecord
   titleAttrs?: Partial<STitleProps> & SybzRecord
   titleSlotName?: string
 }
