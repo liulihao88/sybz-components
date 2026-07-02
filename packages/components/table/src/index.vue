@@ -1036,6 +1036,7 @@ defineExpose({
                       <template v-else-if="parseReConfirm(val.reConfirm, scope.row, scope)">
                         <sPopconfirm
                           trigger="click"
+                          :theme="val.theme ?? mergedProps.theme"
                           :title="
                             getType(val.title) === 'function'
                               ? invokeWithContext(
