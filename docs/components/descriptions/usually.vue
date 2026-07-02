@@ -1,8 +1,22 @@
 <script setup lang="tsx">
-import { ref, getCurrentInstance, computed } from 'vue'
-const instance = getCurrentInstance()
+import { ref, computed } from 'vue'
 import { formatTime, delay } from '@sybz-components/utils'
-const data: any = ref({})
+
+type DemoRow = {
+  name?: string
+  time?: number
+  isLock?: boolean
+  more?: string
+}
+
+type DemoFilterContext = {
+  value: number
+  index: number
+  label: string
+  row: DemoRow
+}
+
+const data = ref<DemoRow>({})
 const sizeValue = ref('default')
 const showAll = ref(false)
 const options = computed(() => {
@@ -20,12 +34,15 @@ const options = computed(() => {
     {
       key: '时间',
       id: data.value.time,
+      filter: ({ value }: DemoFilterContext) => {
+        return formatTime(value)
+      },
     },
     {
-      key: 'filter的时间',
+      key: '显示filter下的所有值',
       id: data.value.time,
-      filter: ({ value, index, label, row, item }) => {
-        return `${formatTime(value)} : ${index} : ${label} : ${JSON.stringify(row)} : ${JSON.stringify(item)}`
+      filter: ({ value, index, label, row }: DemoFilterContext) => {
+        return `${formatTime(value)} : ${index} : ${label} : ${JSON.stringify(row)}`
       },
     },
     {
@@ -79,6 +96,7 @@ init()
       :column="1"
       label="key"
       value="id"
+      :row="data"
       :size="sizeValue"
       :show-all="showAll"
       :border="borderValue"

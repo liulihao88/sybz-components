@@ -89,6 +89,7 @@ type DescriptionsProps = {
   showAll?: boolean
   label?: string
   value?: string
+  row?: DescriptionsRow
 }
 
 type ItemOptions = {
@@ -105,16 +106,10 @@ type ItemOptions = {
   valueAttrs?: Record<string, any>
 }
 
-type FilterScope = {
-  row: ItemOptions
-  $index: number
-  [key: string]: any
-}
+type DescriptionsRow = Record<string, any>
 
-type FilterContext = Partial<ItemOptions> & {
-  row: ItemOptions
-  item: ItemOptions
-  scope: FilterScope
+type FilterContext = {
+  row: DescriptionsRow | ItemOptions
   index: number
   value: any
   label: any
@@ -127,6 +122,7 @@ const props = withDefaults(defineProps<DescriptionsProps>(), {
   showAll: false,
   label: 'label',
   value: 'value',
+  row: undefined,
 })
 const mergedProps = useGlobalComponentConfig('descriptions', props)
 
@@ -141,17 +137,13 @@ const parseLabel = (item: ItemOptions) => getOptionField(item, mergedProps.value
 
 const getRawValue = (item: ItemOptions) => getOptionField(item, mergedProps.value.value || 'value', 'value')
 
+const getContextRow = (item: ItemOptions) => mergedProps.value.row ?? item.row ?? item
+
 const getFilterContext = (item: ItemOptions, index: number): FilterContext => {
-  const scope = {
-    row: item,
-    $index: index,
-  }
+  const row = getContextRow(item)
 
   return {
-    ...item,
-    row: item,
-    item,
-    scope,
+    row,
     index,
     value: getRawValue(item),
     label: parseLabel(item),

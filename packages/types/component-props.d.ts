@@ -89,16 +89,10 @@ export interface SDescriptionsItemOption {
   valueAttrs?: SybzRecord
 }
 
-export interface SDescriptionsFilterScope {
-  row: SDescriptionsItemOption
-  $index: number
-  [key: string]: any
-}
+export type SDescriptionsRow = SybzRecord
 
-export type SDescriptionsFilterContext = Partial<SDescriptionsItemOption> & {
-  row: SDescriptionsItemOption
-  item: SDescriptionsItemOption
-  scope: SDescriptionsFilterScope
+export interface SDescriptionsFilterContext {
+  row: SDescriptionsRow | SDescriptionsItemOption
   index: number
   value: any
   label: any
@@ -112,6 +106,7 @@ export interface SDescriptionsOwnProps {
   showAll?: boolean
   label?: string
   value?: string
+  row?: SDescriptionsRow
 }
 
 export type SDialogType = '' | 'drawer'
