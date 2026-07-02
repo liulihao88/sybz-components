@@ -1199,42 +1199,148 @@ export function processWidth(initValue: WidthInput, isBase = false): WidthStyleR
   return isBase ? res : { width: res }
 }
 
+interface ThrottleOptions {
+  /**
+   * 是否在首次调用时立即执行，默认 `true`。
+   */
+  leading?: boolean
+  /**
+   * 是否在节流周期结束时执行最后一次调用，默认 `true`。
+   */
+  trailing?: boolean
+}
+
+type ThrottleOptionsInput = boolean | ThrottleOptions
+
+type ThrottledFunction<T extends Func> = ((...args: Parameters<T>) => ReturnType<T> | undefined) & {
+  cancel: () => void
+  flush: () => ReturnType<T> | undefined
+}
+
+const normalizeThrottleOptions = (options: ThrottleOptionsInput = {}) => {
+  const normalized = typeof options === 'boolean' ? { leading: options } : options
+
+  return {
+    leading: normalized.leading !== false,
+    trailing: normalized.trailing !== false,
+  }
+}
+
 /**
  * 创建节流函数。
  *
  * @param fn 需要节流执行的函数。
  * @param delay 节流间隔，单位毫秒，默认 `1000`。
- * @returns 节流后的函数。
+ * @param options 节流选项。传 `false` 等同于 `{ leading: false }`。
+ * @param resultCallback 每次真正执行后触发的结果回调。
+ * @returns 带 `cancel()` / `flush()` 方法的节流函数。
  *
  * @example
  * const onResize = throttle(() => {
  *   console.log('resize')
  * }, 300)
+ *
+ * @example
+ * const save = throttle(saveDraft, 1000, { leading: false, trailing: true })
+ *
+ * @example
+ * const track = throttle(trackPosition, 200, { trailing: false }, (result) => {
+ *   console.log(result)
+ * })
+ *
+ * track.cancel()
+ * track.flush()
  */
-export function throttle<T extends Func>(fn: T, delay = 1000): (...args: Parameters<T>) => void {
-  // last为上一次触发毁掉的时间，timer是定时器
-  let last = 0
+export function throttle<T extends Func>(
+  fn: T,
+  delay = 1000,
+  options: ThrottleOptionsInput = {},
+  resultCallback?: (result: ReturnType<T>) => void,
+): ThrottledFunction<T> {
+  const { leading, trailing } = normalizeThrottleOptions(options)
   let timer: ReturnType<typeof setTimeout> | undefined = undefined
-  // 将throttle处理结果当做函数返回
-  return function (this: ThisParameterType<T>, ...args: Parameters<T>) {
-    // 保留调用时的this上下文
-    let context = this
-    // 记录本次触发回调的时间
-    let now = +new Date()
-    // 判断上次触发的时间和本次触发的时间差是否小于时间间隔的阈值
-    if (now - last < delay) {
-      // 如果时间间隔小于设定的时间间隔阈值,则为本次触发操作设立一个新的定时器
+  let previous: number | undefined
+  let lastArgs: Parameters<T> | undefined
+  let lastThis: ThisParameterType<T> | undefined
+  let result: ReturnType<T> | undefined
+
+  const cancel = () => {
+    if (timer) {
       clearTimeout(timer)
-      timer = setTimeout(function () {
-        last = now
-        fn.apply(context, args as any)
-      }, delay)
-    } else {
-      // 如果时间间隔超出了设定的时间间隔阈值，那就不等了，无论如何要反馈给用户一次响应
-      last = now
-      fn.apply(context, args as any)
+      timer = undefined
     }
+
+    previous = undefined
+    lastArgs = undefined
+    lastThis = undefined
   }
+
+  const invoke = () => {
+    if (!lastArgs) return result
+
+    previous = Date.now()
+    const args = lastArgs
+    const context = lastThis
+
+    lastArgs = undefined
+    lastThis = undefined
+    result = fn.apply(context, args)
+    resultCallback?.(result)
+    return result
+  }
+
+  const flush = () => {
+    if (timer) {
+      clearTimeout(timer)
+      timer = undefined
+    }
+
+    return invoke()
+  }
+
+  const throttled = function (this: ThisParameterType<T>, ...args: Parameters<T>) {
+    const now = Date.now()
+
+    lastArgs = args
+    lastThis = this
+
+    if (previous === undefined) {
+      if (leading) {
+        return invoke()
+      }
+      previous = now
+    }
+
+    const remaining = delay - (now - previous)
+
+    if (remaining <= 0 || remaining > delay) {
+      if (timer) {
+        clearTimeout(timer)
+        timer = undefined
+      }
+
+      return invoke()
+    }
+
+    if (!timer && trailing) {
+      timer = setTimeout(() => {
+        timer = undefined
+
+        if (!leading) {
+          previous = undefined
+        }
+
+        invoke()
+      }, remaining)
+    }
+
+    return result
+  } as ThrottledFunction<T>
+
+  throttled.cancel = cancel
+  throttled.flush = flush
+
+  return throttled
 }
 
 /**
@@ -1307,6 +1413,13 @@ type DebouncedFunction<T extends Func> = ((...args: Parameters<T>) => Promise<Aw
  * }, 300)
  *
  * await search('sybz')
+ *
+ * @example
+ * const submit = debounce(saveForm, 500, true, (result) => {
+ *   console.log(result)
+ * })
+ *
+ * submit.cancel()
  */
 export function debounce<T extends Func>(
   func: T,

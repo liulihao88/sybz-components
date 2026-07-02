@@ -92,6 +92,19 @@ const search = debounce((keyword: string) => {
 }, 300)
 
 search('sybz')
+
+const submit = debounce(
+  async () => {
+    return await saveForm()
+  },
+  500,
+  true,
+  (result) => {
+    console.log('保存结果:', result)
+  },
+)
+
+submit.cancel()
 ```
 
 ### diffDate
@@ -517,6 +530,21 @@ const handleResize = throttle(() => {
 }, 300)
 
 window.addEventListener('resize', handleResize)
+
+const saveDraft = throttle(
+  (content: string) => {
+    return content.trim()
+  },
+  1000,
+  { leading: false, trailing: true },
+  (result) => {
+    console.log('保存草稿:', result)
+  },
+)
+
+saveDraft('hello')
+saveDraft.flush()
+saveDraft.cancel()
 ```
 
 ### toLine

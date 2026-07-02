@@ -166,6 +166,52 @@ describe('base utils', () => {
     expect(fn).toHaveBeenLastCalledWith('third')
   })
 
+  it('supports throttle leading and trailing options', async () => {
+    vi.useFakeTimers()
+    const leadingFalseFn = vi.fn()
+    const leadingFalse = throttle(leadingFalseFn, 100, { leading: false })
+
+    leadingFalse('first')
+    leadingFalse('second')
+
+    expect(leadingFalseFn).not.toHaveBeenCalled()
+
+    await vi.advanceTimersByTimeAsync(100)
+    expect(leadingFalseFn).toHaveBeenCalledTimes(1)
+    expect(leadingFalseFn).toHaveBeenLastCalledWith('second')
+
+    const trailingFalseFn = vi.fn()
+    const trailingFalse = throttle(trailingFalseFn, 100, { trailing: false })
+
+    trailingFalse('first')
+    trailingFalse('second')
+
+    await vi.advanceTimersByTimeAsync(100)
+    expect(trailingFalseFn).toHaveBeenCalledTimes(1)
+    expect(trailingFalseFn).toHaveBeenLastCalledWith('first')
+  })
+
+  it('supports throttle cancel, flush and result callback', async () => {
+    vi.useFakeTimers()
+    const resultCallback = vi.fn()
+    const fn = vi.fn((value: string) => value.toUpperCase())
+    const throttled = throttle(fn, 100, {}, resultCallback)
+
+    expect(throttled('first')).toBe('FIRST')
+    expect(resultCallback).toHaveBeenLastCalledWith('FIRST')
+
+    throttled('second')
+    expect(throttled.flush()).toBe('SECOND')
+    expect(fn).toHaveBeenCalledTimes(2)
+    expect(resultCallback).toHaveBeenLastCalledWith('SECOND')
+
+    throttled('third')
+    throttled.cancel()
+
+    await vi.advanceTimersByTimeAsync(100)
+    expect(fn).toHaveBeenCalledTimes(2)
+  })
+
   it('debounces repeated calls and supports immediate mode', async () => {
     vi.useFakeTimers()
     const fn = vi.fn((value: string) => value.toUpperCase())
