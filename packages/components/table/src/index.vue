@@ -524,6 +524,13 @@ const parseSlot = (val: Pick<STableButton | STableColumn, 'useSlot' | 'prop'>) =
     return val.useSlot
   }
 }
+
+const getActionButtonClass = (disabled?: boolean) => [
+  's-table__clickable',
+  'hide-btns-button',
+  disabled && 'is-disabled',
+]
+
 const parseReConfirm = (isFn: STableButton['reConfirm'], row?: TableRow, scope?: TableScope) => {
   if (typeof isFn === 'function') {
     const context = createCallbackContext({ row, scope })
@@ -1065,7 +1072,20 @@ defineExpose({
                           <component
                             :is="val.comp"
                             v-if="val.comp"
-                            class="s-table__clickable"
+                            :class="
+                              getActionButtonClass(
+                                parseDisabled(
+                                  val.disabled,
+                                  createCallbackContext({
+                                    row: scope.row,
+                                    scope,
+                                    column: v,
+                                    action: val,
+                                    index: scope.$index,
+                                  }),
+                                ),
+                              )
+                            "
                             v-bind="val.attrs"
                             :disabled="
                               parseDisabled(
@@ -1116,7 +1136,20 @@ defineExpose({
                       <component
                         :is="val.comp"
                         v-else-if="val.comp"
-                        class="s-table__clickable"
+                        :class="
+                          getActionButtonClass(
+                            parseDisabled(
+                              val.disabled,
+                              createCallbackContext({
+                                row: scope.row,
+                                scope,
+                                column: v,
+                                action: val,
+                                index: scope.$index,
+                              }),
+                            ),
+                          )
+                        "
                         v-bind="val.attrs"
                         :disabled="
                           parseDisabled(
@@ -1182,7 +1215,7 @@ defineExpose({
 
                   <template v-if="v.hideBtns.length > 0">
                     <el-dropdown class="" trigger="click">
-                      <s-icon name="more" @click.stop />
+                      <s-icon class="s-table__clickable hide-btns-button" name="more" @click.stop />
                       <template #dropdown>
                         <el-dropdown-menu :hide-on-click="false">
                           <template v-for="(val, idx) in v.hideBtns" :key="idx">
@@ -1237,6 +1270,20 @@ defineExpose({
                                 <component
                                   :is="val.comp"
                                   v-if="val.comp"
+                                  :class="
+                                    getActionButtonClass(
+                                      parseDisabled(
+                                        val.disabled,
+                                        createCallbackContext({
+                                          row: scope.row,
+                                          scope,
+                                          column: v,
+                                          action: val,
+                                          index: scope.$index,
+                                        }),
+                                      ),
+                                    )
+                                  "
                                   v-bind="val.attrs"
                                   :disabled="
                                     parseDisabled(
