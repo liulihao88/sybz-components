@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="tsx">
-import { validateTrigger } from '@sybz-components/utils'
+import { validate } from '@sybz-components/utils'
 import { computed, ref } from 'vue'
 import type { Ref } from 'vue'
 
@@ -43,7 +43,7 @@ const fieldList = computed(() => {
       label: '密码',
       prop: 'password',
       comp: 'el-input',
-      rules: [validateTrigger()],
+      rules: [validate()],
       isShow: isShow.value,
       attrs: {
         type: 'password',

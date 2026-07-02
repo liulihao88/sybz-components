@@ -11,7 +11,7 @@
 
 <script setup lang="tsx">
 import { ref, reactive } from 'vue'
-import { validateTrigger } from '@sybz-components/utils'
+import { validate } from '@sybz-components/utils'
 
 const formData = ref({
   account: '', // *用户账号
@@ -19,7 +19,7 @@ const formData = ref({
 })
 
 const rules = {
-  account: [validateTrigger()],
+  account: [validate()],
 }
 
 const fieldList = [

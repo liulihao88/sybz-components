@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { ref, getCurrentInstance, computed } from 'vue'
-const { proxy } = getCurrentInstance()
+import { ref, computed } from 'vue'
+import { validateOnSubmit, validateForm, $toast } from '@/utils/src/index'
+
 const sameform = ref({})
-const originForm = ref(proxy.clone(sameform))
 const formRef = ref(null)
 
 const rules = computed(() => {
   return {
-    oldPassword: [proxy.validate('length', { min: 1, max: 40 })],
+    oldPassword: [validateOnSubmit('length', { min: 1, max: 40 })],
     newPwd: [
-      proxy.validate('length', { min: 1, max: 40 }),
-      proxy.validate('same', { value: sameform.value.confirmNewPwd }),
+      validateOnSubmit('length', { min: 1, max: 40 }),
+      validateOnSubmit('same', { value: sameform.value.confirmNewPwd }),
     ],
     confirmNewPwd: [
-      proxy.validate('length', { min: 1, max: 40 }),
-      proxy.validate('same', { value: sameform.value.newPwd }),
+      validateOnSubmit('length', { min: 1, max: 40 }),
+      validateOnSubmit('same', { value: sameform.value.newPwd }),
     ],
   }
 })
 
 const confirm = async () => {
-  await proxy.validateForm(formRef)
-  proxy.$toast('校验')
+  await validateForm(formRef)
+  $toast('校验')
 }
 
 const passwordType = computed(() => {

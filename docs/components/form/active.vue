@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { validateTrigger, validate, delay } from '@sybz-components/utils'
+import { validate, delay } from '@sybz-components/utils'
 const sFormRef = ref()
 const form = ref({
   account: '',
@@ -25,7 +25,7 @@ const fieldList = computed(() => {
     dynamicItem.push({
       label: 'formDomains' + v.key,
       prop: 'domains.' + i + '.value',
-      rules: [validateTrigger()],
+      rules: [validate()],
       useSlot: true,
     })
   }

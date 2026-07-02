@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ref, watch, computed, toRaw } from 'vue'
-// import { validateTrigger, validate, validateForm } from '@sybz-components/utils'
-import { validateTrigger, validate, validateForm } from '@/utils/src/index'
+import { ref, computed } from 'vue'
+// import { validateOnSubmit, validate, validateForm } from '@sybz-components/utils'
+import { validateOnSubmit, validate, validateForm } from '@/utils/src/index'
 const formRef = ref(null)
 const form = ref({})
 
 const rules = computed(() => {
   return {
-    number: [validate('length', { min: 1, max: 2 })],
-    number2: [validateTrigger('length', { min: 1, max: 2 })],
+    number: [validateOnSubmit('length', { min: 1, max: 2 })],
+    number2: [validate('length', { min: 1, max: 2 })],
   }
 })
 const submit = async () => {
@@ -22,7 +22,7 @@ const submit = async () => {
       <el-form-item label="长度1-2, 只有提交的时候才校验" prop="number">
         <s-input v-model="form.number" />
       </el-form-item>
-      <el-form-item label="长度1-2, change和blur都校验, 使用validateTrigger" prop="number2">
+      <el-form-item label="长度1-2, change和blur都校验, 使用validate默认触发" prop="number2">
         <s-input v-model="form.number2" />
       </el-form-item>
     </el-form>

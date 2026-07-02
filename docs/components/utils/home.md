@@ -575,15 +575,17 @@ mockValue('number', 6) // 6 位数字
 
 ```ts
 const mobileRule = validate('mobile')
+const selectRule = validate('change') // 默认提示：请选择
+const emailRule = validate({ type: 'email', message: '请输入邮箱' })
 const isIp = validate('ip', '192.168.1.10', true)
 ```
 
-### validateTrigger
+### validateOnSubmit
 
-在 `validate` 基础上补齐默认 `blur` / `change` 触发时机。
+在 `validate` 基础上补齐默认空触发时机，只在提交或手动调用表单校验时触发。`validate` 默认触发时机是 `['blur', 'change']`。
 
 ```ts
-const nameRule = validateTrigger('required', {
+const nameRule = validateOnSubmit('required', {
   message: '请输入名称',
 })
 ```
