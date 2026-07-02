@@ -97,22 +97,21 @@ form/directives
 
 ## filedList属性
 
-|    属性名     | 说明                                                                   | 类型                 | 默认值                                |
-| :-----------: | ---------------------------------------------------------------------- | -------------------- | ------------------------------------- |
-|     label     | 左侧显示的label值                                                      | string, slot, render | -                                     |
-|     prop      | 值对应的属性                                                           | string               | -                                     |
-|     comp      | 要渲染的组件名称                                                       | string               | 's-input'                             |
-|     attrs     | 普通项时透传给表单组件；`type="title"` 时透传给 `s-title`              | object               | -                                     |
-|     rules     | 每一项对应的rules规则                                                  | object               | -                                     |
-|  labelRender  | 对label的render渲染                                                    | Function             | -                                     |
-|   imgAttrs    | 左侧图片的属性                                                         | object               | -                                     |
-|    useSlot    | 使用插槽                                                               | boolean              | -                                     |
-|  directives   | 自定义指令                                                             | object               | -                                     |
-|     type      | 项类型，设置为 `title` 时渲染分组标题                                  | string               | -                                     |
-|     title     | `type="title"` 时显示的标题                                            | string               | `''`                                  |
-|   subTitle    | `type="title"` 时显示的副标题                                          | string               | `''`                                  |
-|  titleAttrs   | `type="title"` 时透传给 `s-title` 的属性，兼容旧写法，推荐使用 `attrs` | object               | `{ theme: 'chenghua', type: 'form' }` |
-| titleSlotName | `type="title"` 且 `useSlot` 时使用的插槽名，未设置时使用 `prop`        | string               | -                                     |
+|    属性名     | 说明                                                            | 类型                 | 默认值    |
+| :-----------: | --------------------------------------------------------------- | -------------------- | --------- |
+|     label     | 左侧显示的label值                                               | string, slot, render | -         |
+|     prop      | 值对应的属性                                                    | string               | -         |
+|     comp      | 要渲染的组件名称                                                | string               | 's-input' |
+|     attrs     | 普通项时透传给表单组件；`type="title"` 时透传给 `s-title`       | object               | -         |
+|     rules     | 每一项对应的rules规则                                           | object               | -         |
+|  labelRender  | 对label的render渲染                                             | Function             | -         |
+|   imgAttrs    | 左侧图片的属性                                                  | object               | -         |
+|    useSlot    | 使用插槽                                                        | boolean              | -         |
+|  directives   | 自定义指令                                                      | object               | -         |
+|     type      | 项类型，设置为 `title` 时渲染分组标题                           | string               | -         |
+|     title     | `type="title"` 时显示的标题                                     | string               | `''`      |
+|   subTitle    | `type="title"` 时显示的副标题                                   | string               | `''`      |
+| titleSlotName | `type="title"` 且 `useSlot` 时使用的插槽名，未设置时使用 `prop` | string               | -         |
 
 ## Form Exposes
 

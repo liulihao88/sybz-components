@@ -40,7 +40,6 @@ interface FormFieldItem {
   rules?: FormRule[]
   subTitle?: string
   title?: string
-  titleAttrs?: FormAttrs
   titleSlotName?: string
   type?: string
   useSlot?: boolean
@@ -148,7 +147,6 @@ const getTitleAttrs = (item: FormFieldItem): FormAttrs => {
     subTitle: item.subTitle || '',
     theme: 'chenghua',
     type: 'form',
-    ...item.titleAttrs,
     ...item.attrs,
   }
 }

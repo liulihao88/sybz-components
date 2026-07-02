@@ -287,7 +287,6 @@ export interface SFormTitleItem extends Omit<
   title?: string
   subTitle?: string
   attrs?: Partial<STitleProps> & SybzRecord
-  titleAttrs?: Partial<STitleProps> & SybzRecord
   titleSlotName?: string
 }
 
