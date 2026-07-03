@@ -12,8 +12,10 @@ import type {
   TablePageChangePayload as TablePageChangePayloadType,
   TableSelectionType as TableSelectionTypeType,
 } from './types/table'
+import type { AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'
 
 type ComponentInstance<T> = T extends new (...args: any[]) => infer R ? R : never
+type JSXComponentProps<Props> = Props & VNodeProps & AllowedComponentProps & ComponentCustomProps & { children?: any }
 
 declare global {
   type TableBtnItem = STableButtonType
@@ -290,5 +292,54 @@ export type STooltipPublicProps = import('./types/components/tooltip').STooltipP
 export type SWarningComponent = (typeof import('./types/components/warning'))['default']
 export type SWarningInstance = ComponentInstance<SWarningComponent>
 export type SWarningPublicProps = SWarningInstance['$props']
+
+declare global {
+  namespace JSX {
+    export interface IntrinsicElements {
+      's-base-header': JSXComponentProps<SBaseHeaderPublicProps>
+      's-basic-layout': JSXComponentProps<SBasicLayoutPublicProps>
+      's-build-time': JSXComponentProps<SBuildTimePublicProps>
+      's-button': JSXComponentProps<SButtonPublicProps>
+      's-capacity-progress': JSXComponentProps<SCapacityProgressPublicProps>
+      's-chart': JSXComponentProps<SChartPublicProps>
+      's-checkbox': JSXComponentProps<SCheckboxPublicProps>
+      's-click-outside': JSXComponentProps<SClickOutsidePublicProps>
+      's-comp-title': JSXComponentProps<SCompTitlePublicProps>
+      's-count-bar': JSXComponentProps<SCountBarPublicProps>
+      's-count-bar-old': JSXComponentProps<SCountBarOldPublicProps>
+      's-date-picker': JSXComponentProps<SDatePickerPublicProps>
+      's-descriptions': JSXComponentProps<SDescriptionsPublicProps>
+      's-dialog': JSXComponentProps<SDialogPublicProps>
+      's-drawer': JSXComponentProps<SDrawerPublicProps>
+      's-empty': JSXComponentProps<SEmptyPublicProps>
+      's-flex': JSXComponentProps<SFlexPublicProps>
+      's-form': JSXComponentProps<SFormPublicProps>
+      's-function-source-code': JSXComponentProps<SFunctionSourceCodePublicProps>
+      's-icon': JSXComponentProps<SIconPublicProps>
+      's-input': JSXComponentProps<SInputPublicProps>
+      's-input-label': JSXComponentProps<SInputLabelPublicProps>
+      's-input-number': JSXComponentProps<SInputNumberPublicProps>
+      's-item': JSXComponentProps<SItemPublicProps>
+      's-item-wrapper': JSXComponentProps<SItemWrapperPublicProps>
+      's-object-line': JSXComponentProps<SObjectLinePublicProps>
+      's-popconfirm': JSXComponentProps<SPopconfirmPublicProps>
+      's-progress': JSXComponentProps<SProgressPublicProps>
+      's-quota-pie': JSXComponentProps<SQuotaPiePublicProps>
+      's-radio': JSXComponentProps<SRadioPublicProps>
+      's-row': JSXComponentProps<SRowPublicProps>
+      's-select': JSXComponentProps<SSelectPublicProps>
+      's-split-pane': JSXComponentProps<SSplitPanePublicProps>
+      's-svg': JSXComponentProps<SSvgPublicProps>
+      's-switch': JSXComponentProps<SSwitchPublicProps>
+      's-table': JSXComponentProps<STablePublicProps>
+      's-tabs': JSXComponentProps<STabsPublicProps>
+      's-tag': JSXComponentProps<STagPublicProps>
+      's-test': JSXComponentProps<STestPublicProps>
+      's-title': JSXComponentProps<STitlePublicProps>
+      's-tooltip': JSXComponentProps<STooltipPublicProps>
+      's-warning': JSXComponentProps<SWarningPublicProps>
+    }
+  }
+}
 
 export {}

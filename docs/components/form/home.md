@@ -58,7 +58,7 @@ form/column
 form/slot
 :::
 
-### 自定义 label jsx 渲染
+### render函数
 
 :::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1">...</s-form>`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`1`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示自定义配置，可以直接复制基础写法后按业务替换数据。
 form/render

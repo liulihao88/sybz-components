@@ -1,23 +1,46 @@
 <template>
-  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :column="1"></s-form>
+  <s-form :model="formData" :field-list="fieldList" :column="1"></s-form>
 </template>
 
 <script setup lang="tsx">
-import { ref, reactive } from 'vue'
+import { reactive, type VNodeChild } from 'vue'
 import { validate } from '@sybz-components/utils'
 
-const formData = ref({
+type FormModel = {
+  account: string
+  date: string[]
+}
+
+type FormRenderContext = {
+  row: FormModel
+  value?: FormModel[keyof FormModel]
+}
+
+type FormFieldItem = {
+  label?: string
+  prop: keyof FormModel
+  rules?: unknown[]
+  comp?: string
+  labelRender?: (context: FormRenderContext) => VNodeChild
+  render?: (context: FormRenderContext) => VNodeChild
+}
+
+const formData = reactive<FormModel>({
   account: '1234', // *用户账号
   date: [],
 })
 
-const fieldList = [
+const updateAccount = (value: string) => {
+  formData.account = value
+}
+
+const fieldList: FormFieldItem[] = [
   {
     label: '账号',
     prop: 'account',
     rules: [validate()],
     labelRender: () => {
-      return <div class="cl-red">labelRender渲染label</div>
+      return <div style={{ color: 'blue' }}>labelRender渲染label</div>
     },
     render: ({ row }) => {
       return (
@@ -26,7 +49,7 @@ const fieldList = [
             placeholder="请输入render"
             modelValue={row.account}
             onUpdate:modelValue={(val) => {
-              formData.value.account = val
+              updateAccount(val)
             }}
           />
           <s-warning content="render渲染value" class="m-l-8" size="small"></s-warning>

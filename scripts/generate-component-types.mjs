@@ -488,8 +488,10 @@ const tableAliases = [
 
 const lines = [
   existingTableImports,
+  "import type { AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'",
   '',
   'type ComponentInstance<T> = T extends new (...args: any[]) => infer R ? R : never',
+  'type JSXComponentProps<Props> = Props & VNodeProps & AllowedComponentProps & ComponentCustomProps & { children?: any }',
   '',
 ]
 
@@ -545,6 +547,22 @@ componentEntries.forEach(({ componentName, wrapperPath, instanceTypeName, public
   }
   lines.push('')
 })
+
+lines.push('declare global {')
+lines.push('  namespace JSX {')
+lines.push('    export interface IntrinsicElements {')
+componentEntries.forEach(({ componentName, tagName, publicPropsTypeName }) => {
+  const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
+  const templateTagName = typedComponent?.tagName || tagName
+
+  if (templateTagName) {
+    lines.push(`      '${templateTagName}': JSXComponentProps<${publicPropsTypeName}>`)
+  }
+})
+lines.push('    }')
+lines.push('  }')
+lines.push('}')
+lines.push('')
 
 lines.push('export {}')
 lines.push('')
