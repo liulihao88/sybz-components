@@ -130,7 +130,8 @@ const jumpUrl = (type: string) => {
         h('div', [
           h(STitle, {
             theme: 'chenghua',
-            title: '请先配置 VITE_SOURCE_DIR 环境变量作为跳转至你电脑本地的路径',
+            title:
+              '此按钮作用是,点击按钮, 直接跳转到本地的对应路由所在路径; 请先配置 VITE_SOURCE_DIR 环境变量作为跳转至你电脑本地的路径',
           }),
           h('div', { class: 'm-tb-8' }, '1. pwd查看当前项目路径并复制'),
           h('div', { class: 'm-b-8' }, '2. 项目根目录新建文件 `.env.local`'),
