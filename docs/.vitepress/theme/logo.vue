@@ -61,10 +61,35 @@ const pkgVersion = ref(pkg.version)
 
 const sourceVisible = ref(false)
 const showPackagesButton = ref(true)
+const componentPackageSourceModules = import.meta.glob('../../../packages/components/**/src/index.vue')
+const componentPackageDocPaths = new Set(
+  Object.keys(componentPackageSourceModules).map((path) =>
+    path.replace('../../../packages/components/', '').replace('/src/index.vue', ''),
+  ),
+)
+
+const getComponentDocPathFromRelativePath = (routePath: string) => {
+  return routePath
+    .replace(/^components\/?/, '')
+    .replace(/\/(?:home|index)\.md$/, '')
+    .replace(/\.md$/, '')
+}
+
+const hasPackagesJumpFile = (compStr: string) => {
+  if (!compStr) return false
+  if (compStr.startsWith('utils') || compStr.startsWith('directives')) return true
+  return componentPackageDocPaths.has(compStr)
+}
+
+const getPackagesTargetPath = (sourceDir: string, compStr: string) => {
+  if (!hasPackagesJumpFile(compStr)) return ''
+  if (compStr.startsWith('utils')) return joinLocalPath(sourceDir, 'packages/utils/src/index.ts')
+  if (compStr.startsWith('directives')) return joinLocalPath(sourceDir, 'packages/directives/gDirectives.js')
+  return joinLocalPath(sourceDir, 'packages/components', compStr, 'src/index.vue')
+}
 
 const shouldshowPackagesButton = (routePath: string) => {
-  const hiddenRoutes = ['components/index.md']
-  return !hiddenRoutes.includes(routePath)
+  return hasPackagesJumpFile(getComponentDocPathFromRelativePath(routePath))
 }
 
 watch(
@@ -100,22 +125,13 @@ const jumpUrl = (type: string) => {
 
   let compStr = getComponentDocPath(pathname)
   let targetPath = ''
-  console.log(`53 type`, type)
   if (type === 'md') {
     targetPath = joinLocalPath(sourceDir, 'docs/components', compStr, 'home.md')
     if (compStr === '') {
       targetPath = joinLocalPath(sourceDir, 'docs/components/index.md')
     }
   } else if (type === 'packages') {
-    targetPath = joinLocalPath(sourceDir, 'packages/components', compStr, 'src/index.vue')
-    console.log(`45 compStr`, compStr)
-    if (compStr.startsWith('utils')) {
-      targetPath = joinLocalPath(sourceDir, 'packages/utils/src/index.ts')
-    }
-    if (compStr.startsWith('directives')) {
-      targetPath = joinLocalPath(sourceDir, 'packages/directives/gDirectives.js')
-    }
-    console.log(`58 targetPath`, targetPath)
+    targetPath = getPackagesTargetPath(sourceDir, compStr)
   } else if (type === 'test/home') {
     router.go(`${getDocsBasePath()}/components/test/home`) // 使用 VitePress 路由进行跳转
     targetPath = joinLocalPath(sourceDir, 'docs/components/test/base.vue')
