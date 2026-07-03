@@ -33,7 +33,7 @@
       class="dev-package-copy"
       @click.stop.prevent="jumpUrl('test/home')"
     >
-      <div class="visible-text">跳转测试页</div>
+      <div class="visible-text">跳转测试页(仅本地)</div>
     </el-button>
   </div>
 </template>
