@@ -420,6 +420,7 @@ export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   content?: string
   reConfirm?: boolean
   theme?: SybzComponentTheme
+  disabled?: boolean
 }
 
 export type SPopconfirmProps = SPopoverConfirmSelfProps &

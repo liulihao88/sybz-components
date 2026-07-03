@@ -529,6 +529,27 @@ const getActionButtonClass = (disabled?: boolean) => [
   disabled && 'is-disabled',
 ]
 
+const createActionContext = (
+  row: TableRow,
+  scope: TableScope,
+  column: STableColumn,
+  action: STableButton,
+  event?: Event,
+) => {
+  return createCallbackContext({
+    row,
+    scope,
+    column,
+    action,
+    index: scope.$index,
+    event,
+  })
+}
+
+const isActionDisabled = (action: STableButton, row: TableRow, scope: TableScope, column: STableColumn) => {
+  return Boolean(parseDisabled(action.disabled, createActionContext(row, scope, column, action)))
+}
+
 const parseReConfirm = (isFn: STableButton['reConfirm'], row?: TableRow, scope?: TableScope) => {
   if (typeof isFn === 'function') {
     const context = createCallbackContext({ row, scope })
@@ -541,24 +562,33 @@ const parseReConfirm = (isFn: STableButton['reConfirm'], row?: TableRow, scope?:
   }
 }
 
-const handleCompClick = (
-  handlerMethod: STableButton['handler'],
+const handleActionClick = (
+  btnItem: STableButton,
   row: TableRow,
   scope: TableScope,
-  btnItem: STableButton,
+  column: STableColumn,
   event: Event,
 ) => {
-  if (handlerMethod) {
-    event.stopPropagation()
-    const context = createCallbackContext({
-      row,
-      scope,
-      column: scope?.column,
-      action: btnItem,
-      event,
-    })
-    invokeWithContext(handlerMethod, context, [row, scope, btnItem, event])
+  event.stopPropagation()
+
+  const context = createActionContext(row, scope, column, btnItem, event)
+
+  if (parseDisabled(btnItem.disabled, context)) {
+    event.preventDefault()
+    return
   }
+
+  invokeWithContext(btnItem.handler, context, [row, scope, btnItem, event])
+}
+
+const handleActionConfirm = (btnItem: STableButton, row: TableRow, scope: TableScope, column: STableColumn) => {
+  const context = createActionContext(row, scope, column, btnItem)
+
+  if (parseDisabled(btnItem.disabled, context)) {
+    return
+  }
+
+  invokeWithContext(btnItem.handler, context, [row, scope, btnItem])
 }
 
 const indexMethod = (index: number) => {
@@ -1035,6 +1065,7 @@ defineExpose({
                         <sPopconfirm
                           trigger="click"
                           :theme="val.theme ?? mergedProps.theme"
+                          :disabled="isActionDisabled(val, scope.row, scope, v)"
                           :title="
                             getType(val.title) === 'function'
                               ? invokeWithContext(
@@ -1054,68 +1085,21 @@ defineExpose({
                             val.dangerouslyUseHTMLString ?? val.dangerouslyUseHtmlString ?? true
                           "
                           class="s-table__actions"
-                          @confirm="
-                            invokeWithContext(
-                              val.handler,
-                              createCallbackContext({
-                                row: scope.row,
-                                scope,
-                                column: v,
-                                action: val,
-                                index: scope.$index,
-                              }),
-                              [scope.row, scope, val],
-                            )
-                          "
+                          @confirm="handleActionConfirm(val, scope.row, scope, v)"
                         >
                           <component
                             :is="val.comp"
                             v-if="val.comp"
-                            :class="
-                              getActionButtonClass(
-                                parseDisabled(
-                                  val.disabled,
-                                  createCallbackContext({
-                                    row: scope.row,
-                                    scope,
-                                    column: v,
-                                    action: val,
-                                    index: scope.$index,
-                                  }),
-                                ),
-                              )
-                            "
+                            :class="getActionButtonClass(isActionDisabled(val, scope.row, scope, v))"
                             v-bind="val.attrs"
-                            :disabled="
-                              parseDisabled(
-                                val.disabled,
-                                createCallbackContext({
-                                  row: scope.row,
-                                  scope,
-                                  column: v,
-                                  action: val,
-                                  index: scope.$index,
-                                }),
-                              )
-                            "
+                            :disabled="isActionDisabled(val, scope.row, scope, v)"
                           />
                           <el-button
                             v-else
                             v-bind="{ ...val }"
                             link
                             class="hide-btns-button"
-                            :disabled="
-                              parseDisabled(
-                                val.disabled,
-                                createCallbackContext({
-                                  row: scope.row,
-                                  scope,
-                                  column: v,
-                                  action: val,
-                                  index: scope.$index,
-                                }),
-                              )
-                            "
+                            :disabled="isActionDisabled(val, scope.row, scope, v)"
                           >
                             {{
                               operatorBtnFn(
@@ -1135,65 +1119,18 @@ defineExpose({
                       <component
                         :is="val.comp"
                         v-else-if="val.comp"
-                        :class="
-                          getActionButtonClass(
-                            parseDisabled(
-                              val.disabled,
-                              createCallbackContext({
-                                row: scope.row,
-                                scope,
-                                column: v,
-                                action: val,
-                                index: scope.$index,
-                              }),
-                            ),
-                          )
-                        "
+                        :class="getActionButtonClass(isActionDisabled(val, scope.row, scope, v))"
                         v-bind="val.attrs"
-                        :disabled="
-                          parseDisabled(
-                            val.disabled,
-                            createCallbackContext({
-                              row: scope.row,
-                              scope,
-                              column: v,
-                              action: val,
-                              index: scope.$index,
-                            }),
-                          )
-                        "
-                        @click="($event) => handleCompClick(val.handler, scope.row, scope, val, $event)"
+                        :disabled="isActionDisabled(val, scope.row, scope, v)"
+                        @click="($event) => handleActionClick(val, scope.row, scope, v, $event)"
                       />
                       <template v-else>
                         <el-button
                           v-bind="{ ...val }"
                           link
-                          :disabled="
-                            parseDisabled(
-                              val.disabled,
-                              createCallbackContext({
-                                row: scope.row,
-                                scope,
-                                column: v,
-                                action: val,
-                                index: scope.$index,
-                              }),
-                            )
-                          "
+                          :disabled="isActionDisabled(val, scope.row, scope, v)"
                           class="hide-btns-button"
-                          @click.stop="
-                            invokeWithContext(
-                              val.handler,
-                              createCallbackContext({
-                                row: scope.row,
-                                scope,
-                                column: v,
-                                action: val,
-                                index: scope.$index,
-                              }),
-                              [scope.row, scope, val],
-                            )
-                          "
+                          @click="($event) => handleActionClick(val, scope.row, scope, v, $event)"
                         >
                           {{
                             operatorBtnFn(
@@ -1233,19 +1170,8 @@ defineExpose({
                                 )
                               "
                               :hide-on-click="false"
-                              @click="
-                                invokeWithContext(
-                                  val.handler,
-                                  createCallbackContext({
-                                    row: scope.row,
-                                    scope,
-                                    column: v,
-                                    action: val,
-                                    index: scope.$index,
-                                  }),
-                                  [scope.row, scope, val],
-                                )
-                              "
+                              :disabled="isActionDisabled(val, scope.row, scope, v)"
+                              @click="($event) => handleActionClick(val, scope.row, scope, v, $event)"
                             >
                               <slot
                                 v-if="val.useSlot"
@@ -1269,51 +1195,16 @@ defineExpose({
                                 <component
                                   :is="val.comp"
                                   v-if="val.comp"
-                                  :class="
-                                    getActionButtonClass(
-                                      parseDisabled(
-                                        val.disabled,
-                                        createCallbackContext({
-                                          row: scope.row,
-                                          scope,
-                                          column: v,
-                                          action: val,
-                                          index: scope.$index,
-                                        }),
-                                      ),
-                                    )
-                                  "
+                                  :class="getActionButtonClass(isActionDisabled(val, scope.row, scope, v))"
                                   v-bind="val.attrs"
-                                  :disabled="
-                                    parseDisabled(
-                                      val.disabled,
-                                      createCallbackContext({
-                                        row: scope.row,
-                                        scope,
-                                        column: v,
-                                        action: val,
-                                        index: scope.$index,
-                                      }),
-                                    )
-                                  "
+                                  :disabled="isActionDisabled(val, scope.row, scope, v)"
                                 />
                                 <el-button
                                   v-else
                                   v-bind="{ ...val }"
                                   link
                                   class="hide-btns-button"
-                                  :disabled="
-                                    parseDisabled(
-                                      val.disabled,
-                                      createCallbackContext({
-                                        row: scope.row,
-                                        scope,
-                                        column: v,
-                                        action: val,
-                                        index: scope.$index,
-                                      }),
-                                    )
-                                  "
+                                  :disabled="isActionDisabled(val, scope.row, scope, v)"
                                 >
                                   {{
                                     operatorBtnFn(
@@ -1451,6 +1342,13 @@ defineExpose({
 
 .s-table__clickable {
   cursor: pointer;
+}
+
+.hide-btns-button.is-disabled,
+.hide-btns-button.is-disabled:hover,
+.s-table__clickable.is-disabled,
+.s-table__clickable.is-disabled:hover {
+  cursor: not-allowed;
 }
 
 .s-table__total {

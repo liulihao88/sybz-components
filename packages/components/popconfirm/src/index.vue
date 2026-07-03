@@ -37,6 +37,8 @@ const closePopoverOnClickOutside = (event: MouseEvent) => {
 }
 const emits = defineEmits(['confirm', 'cancel'])
 function confirm() {
+  if (isDisabled.value) return
+
   close()
   emits('confirm')
 }
@@ -56,6 +58,7 @@ interface PopconfirmProps {
   dangerouslyUseHTMLString?: boolean
   dangerouslyUseHtmlString?: boolean
   theme?: '' | 'chenghua'
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<PopconfirmProps>(), {
@@ -66,6 +69,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   dangerouslyUseHTMLString: undefined,
   dangerouslyUseHtmlString: true,
   theme: '',
+  disabled: false,
 })
 
 const mergedProps = useGlobalComponentConfig('popconfirm', props)
@@ -105,6 +109,7 @@ const hasTitle = computed(() => !!safeTitle.value)
 const htmlStringEnabled = computed(() =>
   Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
 )
+const isDisabled = computed(() => Boolean(mergedProps.value.disabled))
 
 onBeforeUnmount(() => {
   removeClickOutsideListener()
@@ -122,6 +127,7 @@ defineExpose({
     v-model:visible="isPopoverVisible"
     class="s-popconfirm__box"
     :width="mergedProps.width"
+    :disabled="isDisabled"
     :popper-class="popperClass"
     @show="handleShow"
   >
@@ -150,7 +156,10 @@ defineExpose({
   <span
     v-else
     class="s-popconfirm__simple_box"
-    :class="{ 's-popconfirm__simple_box--chenghua': mergedProps.theme === 'chenghua' }"
+    :class="{
+      's-popconfirm__simple_box--chenghua': mergedProps.theme === 'chenghua',
+      'is-disabled': isDisabled,
+    }"
     @click="confirm"
   >
     <slot></slot>
@@ -184,6 +193,10 @@ defineExpose({
 .el-button + .s-popconfirm__simple_box :deep(.el-button),
 .s-popconfirm__simple_box:has(.el-button) + .s-popconfirm__simple_box:has(.el-button) {
   margin-left: 12px !important;
+}
+
+.s-popconfirm__simple_box.is-disabled {
+  cursor: not-allowed;
 }
 
 :global(.s-popconfirm__popper .s-popconfirm__content code),

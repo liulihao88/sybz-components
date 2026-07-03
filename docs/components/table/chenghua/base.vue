@@ -68,7 +68,7 @@ const columns = [
         },
         handler: ({ row }) => deleteRow(row),
         disabled: ({ row }) => row.status === 'Loading',
-        reConfirm: ({ row }) => row.status !== 'Loading',
+        reConfirm: true,
         comp: 's-icon',
         attrs: {
           name: 'delete',
