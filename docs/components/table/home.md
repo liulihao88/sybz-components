@@ -96,7 +96,7 @@ table/reConfirm
 table/wrap
 :::
 
-### render生成html
+### render函数
 
 :::demo 基础写法：`<s-table :columns="columns" :data="data" ref="tableRef">...</s-table>`。属性说明：`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`。本示例展示render生成html配置，可以直接复制基础写法后按业务替换数据。
 table/render
