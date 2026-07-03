@@ -1,4 +1,4 @@
-import type { Component, VNode } from 'vue'
+import type { Component, VNodeChild } from 'vue'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
@@ -21,6 +21,33 @@ import type { RowPropsPublic } from 'element-plus/es/components/row'
 export type SybzComponentTheme = '' | 'chenghua'
 export type SybzComponentSize = '' | 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
+
+export interface SRenderScope<Row extends SybzRecord = SybzRecord> {
+  row: Row
+  $index: number
+  [key: string]: any
+}
+
+export type SRenderContext<
+  Row extends SybzRecord = SybzRecord,
+  Column = SybzRecord,
+  Action = SybzRecord,
+> = Partial<Row> & {
+  row?: Row
+  scope?: SRenderScope<Row>
+  value?: any
+  column?: Column
+  action?: Action
+  index?: number
+  event?: Event
+  item?: any
+  label?: any
+  [key: string]: any
+}
+
+export type SRenderFunction<Row extends SybzRecord = SybzRecord, Column = SybzRecord, Action = SybzRecord> = (
+  context: SRenderContext<Row, Column, Action>,
+) => VNodeChild
 
 export interface SHtmlStringProps {
   /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
@@ -81,8 +108,8 @@ export interface SDescriptionsItemOption {
   value?: any
   labelSlot?: string
   valueSlot?: string
-  labelRender?: (item: SDescriptionsItemOption) => VNode | string
-  render?: (item: SDescriptionsItemOption) => VNode | string
+  labelRender?: SRenderFunction<SDescriptionsRow, SDescriptionsItemOption>
+  render?: SRenderFunction<SDescriptionsRow, SDescriptionsItemOption>
   filter?: (context: SDescriptionsFilterContext) => any
   attrs?: SybzRecord
   labelAttrs?: SybzRecord
@@ -252,7 +279,7 @@ export interface SEmptySelfProps {
 
 export type SEmptyProps = SEmptySelfProps & Partial<Omit<EmptyPropsPublic, keyof SEmptySelfProps>>
 
-export type SFormRender = (item: SFormFieldItem) => VNode | string
+export type SFormRender = SRenderFunction<SybzRecord, SFormFieldItem>
 
 export interface SFormRule {
   [key: string]: any

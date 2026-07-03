@@ -5,9 +5,10 @@ import { validateForm, isEmpty, $toast } from '@sybz-components/utils'
 import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
 import STitle from '@/components/title/src/index.vue'
+import type { RenderFunction } from '@/components/common/render'
 
 type FormModel = Record<string, unknown>
-type RenderFunction = (...args: unknown[]) => unknown
+type FormRenderFunction = RenderFunction<FormModel, FormFieldItem>
 type FormAttrs = Record<string, any>
 
 interface FormRule {
@@ -33,10 +34,10 @@ interface FormFieldItem {
   imgAttrs?: FormImageAttrs
   isShow?: boolean | ((item: FormFieldItem) => boolean)
   label?: string
-  labelRender?: RenderFunction
+  labelRender?: FormRenderFunction
   placeholder?: string
   prop?: string
-  render?: RenderFunction
+  render?: FormRenderFunction
   rules?: FormRule[]
   subTitle?: string
   title?: string
@@ -151,6 +152,20 @@ const getTitleAttrs = (item: FormFieldItem): FormAttrs => {
   }
 }
 
+const getFieldValue = (item: FormFieldItem) => {
+  return item.prop ? formModel.value[item.prop] : undefined
+}
+
+const getRenderProps = (item: FormFieldItem, index: number) => {
+  return {
+    item,
+    row: formModel.value,
+    value: getFieldValue(item),
+    column: item,
+    index,
+  }
+}
+
 const showFormValue = () => {
   $toast({
     dangerouslyUseHTMLString: true,
@@ -208,12 +223,12 @@ defineExpose({
             <slot :name="getTitleSlotName(v)" :item="v"></slot>
           </template>
           <template v-else-if="v.render">
-            <render-comp :render="v.render" :item="v" />
+            <render-comp :render="v.render" v-bind="getRenderProps(v, i)" />
           </template>
           <template v-else>
             <s-title v-bind="getTitleAttrs(v)">
               <template v-if="v.labelRender" #title>
-                <render-comp :render="v.labelRender" :item="v" />
+                <render-comp :render="v.labelRender" v-bind="getRenderProps(v, i)" />
               </template>
             </s-title>
           </template>
@@ -228,7 +243,7 @@ defineExpose({
         >
           <template #label>
             <template v-if="v.labelRender">
-              <render-comp :render="v.labelRender" :item="v" />
+              <render-comp :render="v.labelRender" v-bind="getRenderProps(v, i)" />
             </template>
             <template v-else>
               <slot :name="v.prop + '-label'" :item="v">
@@ -247,7 +262,7 @@ defineExpose({
             <slot :name="v.prop"></slot>
           </template>
           <template v-else-if="v.render">
-            <render-comp :render="v.render" :item="v" />
+            <render-comp :render="v.render" v-bind="getRenderProps(v, i)" />
           </template>
           <template v-else>
             <component

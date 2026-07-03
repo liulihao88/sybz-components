@@ -54,7 +54,7 @@ const fieldList = [
       theme: 'chenghua',
       type: 'form',
     },
-    render: (item: any) => {
+    render: ({ item }: any) => {
       return (
         <s-title
           title={item.title}

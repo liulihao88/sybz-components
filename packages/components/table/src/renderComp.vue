@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
+import { createRenderContext, renderVNode } from '@/components/common/render'
 import type { STableButton, STableColumn, TableRender, TableRow, TableScope } from './types'
 export default defineComponent({
   name: 'RenderComp',
@@ -37,14 +38,17 @@ export default defineComponent({
     },
   },
   render(ctx) {
-    return ctx.render?.({
-      row: ctx?.row,
-      scope: ctx?.scope,
-      value: ctx?.value,
-      column: ctx?.column,
-      action: ctx?.action,
-      index: ctx?.index,
-    })
+    return renderVNode(
+      ctx.render,
+      createRenderContext({
+        row: ctx.row,
+        scope: ctx.scope,
+        value: ctx.value,
+        column: ctx.column,
+        action: ctx.action,
+        index: ctx.index,
+      }),
+    )
   },
 })
 </script>

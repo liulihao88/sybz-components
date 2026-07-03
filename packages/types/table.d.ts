@@ -1,5 +1,6 @@
 import type { Component, VNodeChild } from 'vue'
 import type { PaginationPropsPublic, TableColumnCtx, TableInstance } from 'element-plus'
+import type { SRenderContext } from './component-props'
 
 export type TableRow = Record<string, any>
 
@@ -35,13 +36,14 @@ export type TableContextHandler<TResult = any, Row extends TableRow = TableRow> 
   context: TableCallbackContext<Row>,
 ) => TResult
 
-export type TableCellContext<Row extends TableRow = TableRow, Column = STableColumn<Row>> = Partial<Row> & {
+export type TableCellContext<Row extends TableRow = TableRow, Column = STableColumn<Row>> = SRenderContext<
+  Row,
+  Column | TableColumnCtx<Row>,
+  STableButton<Row>
+> & {
   row: Row
   scope: TableScope<Row>
   column?: Column | TableColumnCtx<Row>
-  value?: any
-  index?: number
-  event?: Event
 }
 
 export type TableLegacyHandler<TResult = any> = (...args: any[]) => TResult

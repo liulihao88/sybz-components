@@ -10,7 +10,7 @@
       <el-descriptions-item v-for="(item, index) in mergedProps.options ?? []" :key="index" v-bind="item.attrs">
         <template #label>
           <template v-if="item.labelRender">
-            <render-comp :render="item.labelRender" :item="getRenderItem(item, index)" />
+            <render-comp :render="item.labelRender" v-bind="getRenderProps(item, index)" />
           </template>
           <template v-else-if="item.labelSlot">
             <slot
@@ -30,7 +30,7 @@
         </template>
 
         <template v-if="item.render">
-          <render-comp :render="item.render" :item="getRenderItem(item, index)" />
+          <render-comp :render="item.render" v-bind="getRenderProps(item, index)" />
         </template>
         <template v-else-if="item.valueSlot">
           <slot
@@ -46,6 +46,7 @@
             <render-comp
               v-if="isRenderableContent(getValueContent(item, index))"
               :render="() => getValueContent(item, index)"
+              v-bind="getRenderProps(item, index)"
             />
             <template v-else>
               {{ getTooltipContent(item, index) }}
@@ -54,6 +55,7 @@
           <render-comp
             v-else-if="isRenderableContent(getValueContent(item, index))"
             :render="() => getValueContent(item, index)"
+            v-bind="getRenderProps(item, index)"
           />
           <s-tooltip
             v-else
@@ -69,11 +71,12 @@
 
 <script setup lang="ts">
 import RenderComp from '@/components/common/renderComp.vue'
-import { computed, VNode, ref, useAttrs, onUnmounted, isVNode } from 'vue'
+import { computed, ref, useAttrs, onUnmounted, isVNode } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import STooltip from '@/components/tooltip/src/index.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import type { RenderFunction } from '@/components/common/render'
 
 defineOptions({
   name: 'SDescriptions',
@@ -98,8 +101,8 @@ type ItemOptions = {
   value?: any
   labelSlot?: string
   valueSlot?: string
-  labelRender?: (item: any) => VNode | string
-  render?: (item: any) => VNode | string
+  labelRender?: RenderFunction<DescriptionsRow, ItemOptions>
+  render?: RenderFunction<DescriptionsRow, ItemOptions>
   filter?: (context: FilterContext) => any
   attrs?: Record<string, any>
   labelAttrs?: Record<string, any>
@@ -164,6 +167,21 @@ const getRenderItem = (item: ItemOptions, index: number) => ({
   label: parseLabel(item),
   value: parseValue(item, index),
 })
+
+const getRenderProps = (item: ItemOptions, index: number) => {
+  const renderItem = getRenderItem(item, index)
+
+  return {
+    item: renderItem,
+    row: getContextRow(item),
+    column: renderItem,
+    value: renderItem.value,
+    index,
+    extra: {
+      label: renderItem.label,
+    },
+  }
+}
 
 // 创建一个用于测量文本宽度的隐藏元素
 const measureElement = ref<HTMLSpanElement | null>(null)

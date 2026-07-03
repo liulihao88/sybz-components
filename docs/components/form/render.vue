@@ -19,12 +19,12 @@ const fieldList = [
     labelRender: () => {
       return <div class="cl-red">labelRender渲染label</div>
     },
-    render: (item) => {
+    render: ({ row }) => {
       return (
         <s-flex>
           <el-input
             placeholder="请输入render"
-            modelValue={formData.value.account}
+            modelValue={row.account}
             onUpdate:modelValue={(val) => {
               formData.value.account = val
             }}

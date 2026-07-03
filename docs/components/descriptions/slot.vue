@@ -1,7 +1,6 @@
 <script setup lang="tsx">
-import { ref, getCurrentInstance, computed, h } from 'vue'
+import { ref, getCurrentInstance, computed } from 'vue'
 const { proxy } = getCurrentInstance()
-import { formatTime } from '@sybz-components/utils'
 type IData = {
   name: string
   age: number
@@ -18,12 +17,12 @@ const options = computed(() => {
     {
       label: '年龄',
       value: data.value.age,
-      labelRender: (item) => {
-        return <div style="color: blue">这是labelRender</div>
+      labelRender: ({ label }) => {
+        return <div style="color: blue">这是labelRender {label}</div>
       },
-      render: (item) => {
-        // return h('div', { class: ['cl-red'] }, `这是render ${item.value}`)
-        return <div class="cl-red">这是render {item.value}</div>
+      render: ({ value }) => {
+        // return h('div', { class: ['cl-red'] }, `这是render ${value}`)
+        return <div class="cl-red">这是render {value}</div>
       },
     },
     {

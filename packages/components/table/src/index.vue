@@ -11,6 +11,7 @@ import SPopconfirm from '@/components/popconfirm/src/index.vue'
 import SIcon from '@/components/icon/src/index.vue'
 import { getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { createRenderContext } from '@/components/common/render'
 
 import type {
   STableButton,
@@ -343,20 +344,15 @@ const createCallbackContext = ({
   event?: Event
   value?: any
 } = {}): TableCallbackContext => {
-  const rowData = row && typeof row === 'object' && !Array.isArray(row) ? row : {}
-  const targetProp = action?.prop ?? column?.prop
-  const finalValue = value !== undefined ? value : targetProp !== undefined ? rowData?.[targetProp] : undefined
-
-  return {
-    ...rowData,
+  return createRenderContext({
     row,
     scope,
     column,
     action,
-    value: finalValue,
-    index: index ?? scope?.$index,
+    value,
+    index,
     event,
-  }
+  })
 }
 
 const invokeWithContext = (fn: any, context: TableCallbackContext, legacyArgs: any[] = []) => {

@@ -1,8 +1,10 @@
+import type { RenderFunction } from '@/components/common/render'
+
 export interface DescItem {
   span?: number
   bind?: Record<string, any>
   label?: string
-  labelRender?: (item: any) => any
+  labelRender?: RenderFunction
   slotName?: string
   tooltip?: string | ((item: any) => any)
   placement?: string
