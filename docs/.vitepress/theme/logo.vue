@@ -39,7 +39,10 @@
 </template>
 
 <script lang="ts" setup>
-import { getStorage, setStorage } from '@sybz-components/utils'
+import { h } from 'vue'
+import { getStorage, setStorage, $toast } from '@sybz-components/utils'
+import STitle from '@/components/title'
+
 import { ElMessage } from 'element-plus'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData, useRouter } from 'vitepress'
@@ -119,7 +122,25 @@ const jumpUrl = (type: string) => {
   const sourceDir = getSourceDir()
 
   if (!sourceDir) {
-    ElMessage.warning('请先配置 VITE_SOURCE_DIR 环境变量，例如 VITE_SOURCE_DIR=/path/to/sybz-components')
+    $toast({
+      type: 'warning',
+      duration: 0,
+      showClose: true,
+      message: () =>
+        h('div', [
+          h(STitle, {
+            theme: 'chenghua',
+            title: '请先配置 VITE_SOURCE_DIR 环境变量作为跳转至你电脑本地的路径',
+          }),
+          h('div', { class: 'm-tb-8' }, '1. pwd查看当前项目路径并复制'),
+          h('div', { class: 'm-b-8' }, '2. 项目根目录新建文件 `.env.local`'),
+          h(
+            'div',
+            { class: 'm-b-8' },
+            '3. .env.local添加 VITE_SOURCE_DIR=当前项目绝对路径; example: VITE_SOURCE_DIR="/Users/xxx/sybz/sybz-components"',
+          ),
+        ]),
+    })
     return
   }
 
