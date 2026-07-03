@@ -32,7 +32,19 @@
     "./utilities.scss": "./dist/utilities.scss"
   },
   "files": [
-    "dist"
+    "dist",
+    "docs/index.md",
+    "docs/vite.config.ts",
+    "docs/tsconfig.json",
+    "docs/public",
+    "docs/components",
+    "docs/shared",
+    "docs/.vitepress/config.ts",
+    "docs/.vitepress/env.d.ts",
+    "docs/.vitepress/config",
+    "docs/.vitepress/theme",
+    "docs/.vitepress/utils",
+    "docs/.vitepress/vitepress"
   ],
   "sideEffects": [
     "*.css",

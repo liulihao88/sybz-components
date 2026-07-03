@@ -30,7 +30,8 @@ coverage
 
 *.tsbuildinfo
 docs/vite.config.ts.timestamp-*.mjs
-docs/.vitepress/cache
+docs/.vitepress/cache/
+docs/.vitepress/dist/
 dist.zip
-.vitepress
+/.vitepress/
 .codex-types-temp
