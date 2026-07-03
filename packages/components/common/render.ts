@@ -90,6 +90,5 @@ export const createRenderContext = <
   } as RenderContext<Row, Column, Action>
 }
 
-export const renderVNode = (render: RenderFunction | undefined, context: RenderContext) => {
-  return typeof render === 'function' ? render(context) : null
-}
+export const renderVNode = (render: RenderFunction | undefined, context: RenderContext) =>
+  typeof render === 'function' ? render(context) : null

@@ -2,21 +2,7 @@
 import { ref, computed } from 'vue'
 import { formatTime, delay } from '@sybz-components/utils'
 
-type DemoRow = {
-  name?: string
-  time?: number
-  isLock?: boolean
-  more?: string
-}
-
-type DemoFilterContext = {
-  value: number
-  index: number
-  label: string
-  row: DemoRow
-}
-
-const data = ref<DemoRow>({})
+const data = ref({})
 const sizeValue = ref('default')
 const showAll = ref(false)
 const options = computed(() => {
@@ -56,8 +42,13 @@ const options = computed(() => {
       },
     },
     {
-      key: '超出文本超出文本超出文本超出文本超出文本',
-      id: data.value.more,
+      key: 'render用法',
+      labelRender: ({ label }) => {
+        return <div style="color: blue">我是labelRender: {label}</div>
+      },
+      render: ({ row }) => {
+        return <div style="color: blue">我是render: {row.more}</div>
+      },
     },
   ]
 })

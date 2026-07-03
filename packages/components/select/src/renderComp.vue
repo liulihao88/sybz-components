@@ -37,19 +37,20 @@ export default defineComponent({
       default: undefined,
     },
   },
-  render(ctx) {
-    return renderVNode(
-      ctx.render,
-      createRenderContext({
-        item: ctx.item,
-        row: ctx.row,
-        scope: ctx.scope,
-        value: ctx.value,
-        column: ctx.column,
-        action: ctx.action,
-        index: ctx.index,
-      }),
-    )
+  setup(props) {
+    return () =>
+      renderVNode(
+        props.render,
+        createRenderContext({
+          item: props.item,
+          row: props.row,
+          scope: props.scope,
+          value: props.value,
+          column: props.column,
+          action: props.action,
+          index: props.index,
+        }),
+      )
   },
 })
 </script>

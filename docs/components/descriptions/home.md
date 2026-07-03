@@ -40,7 +40,7 @@ descriptions/column
 descriptions/vertical
 :::
 
-### slot插槽
+### slot插槽 和 render
 
 :::demo 基础写法：`<s-descriptions :options="options" class="w-block" :column="1" label-width="200px">...</s-descriptions>`。属性说明：`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`1`，类型：number，默认值：`3`；`label-width` 示例值：`200px`，类型：string / number，默认值：`auto`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
 descriptions/slot

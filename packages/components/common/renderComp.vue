@@ -46,21 +46,22 @@ export default defineComponent({
       default: undefined,
     },
   },
-  render(ctx) {
-    return renderVNode(
-      ctx.render,
-      createRenderContext({
-        row: ctx.row,
-        scope: ctx.scope,
-        value: ctx.value,
-        column: ctx.column,
-        action: ctx.action,
-        index: ctx.index,
-        event: ctx.event,
-        item: ctx.item,
-        extra: ctx.extra,
-      }),
-    )
+  setup(props) {
+    return () =>
+      renderVNode(
+        props.render,
+        createRenderContext({
+          row: props.row,
+          scope: props.scope,
+          value: props.value,
+          column: props.column,
+          action: props.action,
+          index: props.index,
+          event: props.event,
+          item: props.item,
+          extra: props.extra,
+        }),
+      )
   },
 })
 </script>
