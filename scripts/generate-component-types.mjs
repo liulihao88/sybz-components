@@ -44,6 +44,12 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SBasicLayoutProps',
       slots: ['default', 'header', 'footer', 'icon'],
+      hoverProps: componentHoverProps('SBasicLayoutProps', [
+        'SBasicLayoutProps',
+        'SybzComponentSize',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
   [
@@ -197,6 +203,11 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SFlexProps',
       slots: ['default'],
+      hoverProps: componentHoverProps(
+        'SFlexProps',
+        ['SFlexAlign', 'SFlexDirection', 'SFlexJustify', 'SFlexProps', 'SFlexWrap', 'SybzComponentSize'],
+        ["import type { Component } from 'vue'"],
+      ),
     },
   ],
   [
@@ -209,6 +220,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'form',
       allowAnySlots: true,
+      hoverProps: componentHoverProps('SFormProps', ['SFormFieldList', 'SFormProps', 'SybzRecord']),
     },
   ],
   ['SFunctionSourceCode', { importPath: componentPropsPath, typeName: 'SFunctionSourceCodeProps' }],
@@ -271,6 +283,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SItemProps',
       slots: ['img', 'label', 'value'],
+      hoverProps: componentHoverProps('SItemProps', ['SItemProps', 'SybzRecord']),
     },
   ],
   [
@@ -279,6 +292,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
       typeName: 'SItemWrapperProps',
       slots: ['default'],
+      hoverProps: componentHoverProps('SItemWrapperProps'),
     },
   ],
   [
@@ -366,6 +380,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SSplitPaneProps',
       slots: ['paneL', 'left', 'paneR', 'extra'],
+      hoverProps: componentHoverProps('SSplitPaneProps', ['SplitPaneDirection', 'SplitPaneSetting', 'SSplitPaneProps']),
     },
   ],
   [
@@ -393,7 +408,23 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: resolve(rootDir, 'packages/types/table.d.ts'),
       typeName: 'STableProps',
+      exportedComponentTypeName: 'STableComponent',
+      publicPropsTypeName: 'STablePublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'table',
       allowAnySlots: true,
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/types/table.d.ts'),
+        interfaceName: 'STableProps',
+        importTypeNames: [
+          'STablePageAttrs',
+          'STableProps',
+          'TableColumnList',
+          'TableModelValue',
+          'TableRow',
+          'TableSelectionType',
+        ],
+      },
     },
   ],
   [
@@ -558,6 +589,23 @@ const getJsDocText = (node, sourceFile) => {
   return jsDocs.map((doc) => doc.getText(sourceFile))
 }
 
+const getTypeParameterDefaults = (declaration, sourceFile) =>
+  new Map(
+    (declaration.typeParameters ?? [])
+      .filter((typeParameter) => typeParameter.default)
+      .map((typeParameter) => [typeParameter.name.text, typeParameter.default.getText(sourceFile)]),
+  )
+
+const applyTypeParameterDefaults = (typeText, typeParameterDefaults) => {
+  let nextTypeText = typeText
+
+  typeParameterDefaults.forEach((defaultType, typeParameterName) => {
+    nextTypeText = nextTypeText.replace(new RegExp(`\\b${typeParameterName}\\b`, 'g'), defaultType)
+  })
+
+  return nextTypeText
+}
+
 const collectInterfaceProps = ({ sourcePath, interfaceName }, seen = new Set()) => {
   const cacheKey = `${sourcePath}:${interfaceName}`
   if (seen.has(cacheKey)) return []
@@ -578,11 +626,12 @@ const collectInterfaceProps = ({ sourcePath, interfaceName }, seen = new Set()) 
       collectInterfaceProps({ sourcePath, interfaceName: extendedInterfaceName }, seen),
     )
 
+  const typeParameterDefaults = getTypeParameterDefaults(declaration, sourceFile)
   const ownProps = declaration.members.filter(ts.isPropertySignature).map((member) => ({
     name: getPropertyDeclarationNameText(member.name, sourceFile),
     omitKey: getPropertyNameText(member.name, sourceFile),
     optional: Boolean(member.questionToken),
-    type: member.type?.getText(sourceFile) ?? 'any',
+    type: applyTypeParameterDefaults(member.type?.getText(sourceFile) ?? 'any', typeParameterDefaults),
     jsDoc: getJsDocText(member, sourceFile),
   }))
 
@@ -673,6 +722,12 @@ const ELEMENT_WRAPPER_CONFIGS = {
     inheritedProps: [{ type: "ElEmptyInstance['$props']" }],
     description: 'Element Plus Empty',
   },
+  form: {
+    valueImports: ['ElForm'],
+    instances: [{ name: 'ElFormInstance', component: 'ElForm' }],
+    inheritedProps: [{ type: "ElFormInstance['$props']" }],
+    description: 'Element Plus Form',
+  },
   input: {
     valueImports: ['ElInput'],
     instances: [{ name: 'ElInputInstance', component: 'ElInput' }],
@@ -732,6 +787,12 @@ const ELEMENT_WRAPPER_CONFIGS = {
     instances: [{ name: 'ElTagInstance', component: 'ElTag' }],
     inheritedProps: [{ type: "ElTagInstance['$props']" }],
     description: 'Element Plus Tag',
+  },
+  table: {
+    valueImports: ['ElTable'],
+    instances: [{ name: 'ElTableInstance', component: 'ElTable' }],
+    inheritedProps: [{ type: "ElTableInstance['$props']" }],
+    description: 'Element Plus Table',
   },
   tooltip: {
     valueImports: ['ElTooltip'],
@@ -1032,614 +1093,6 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
         wrapperDir,
       }).join('\n'),
     )
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'button') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElButton } from 'element-plus'",
-      `import type { SButtonSelfProps } from '${normalizedPropsImportPath}'`,
-      '',
-      'type ElButtonInstance = InstanceType<typeof ElButton>',
-      '',
-    ]
-
-    if (typedComponent.description) {
-      wrapperLines.push('/**')
-      wrapperLines.push(` * ${typedComponent.description}`)
-      wrapperLines.push(' *')
-      wrapperLines.push(' * 先提示 sybz 自身属性，再提示 Element Plus Button 的公开属性。')
-      wrapperLines.push(' */')
-    }
-
-    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = SButtonSelfProps &`)
-    wrapperLines.push("  Omit<ElButtonInstance['$props'], keyof SButtonSelfProps>")
-    wrapperLines.push('')
-    wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = {`)
-    wrapperLines.push('  new (): {')
-    const buttonPropsLines = getExpandedPropsLines({
-      hoverProps: typedComponent.hoverProps,
-      inheritedProps: [{ type: "ElButtonInstance['$props']" }],
-    })
-    wrapperLines.push(`    $props: ${buttonPropsLines[0]}`)
-    wrapperLines.push(...buttonPropsLines.slice(1).map((line) => `    ${line}`))
-    wrapperLines.push("    $emit: ElButtonInstance['$emit']")
-    wrapperLines.push(`    $slots: ${getWrapperSlotsType("ElButtonInstance['$slots']", typedComponent)}`)
-    wrapperLines.push('  }')
-    wrapperLines.push('}')
-    wrapperLines.push('')
-    wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)
-    wrapperLines.push(`export default ${componentName}`)
-    wrapperLines.push('')
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'dialog') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const propsImportNames = typedComponent.hoverProps.importTypeNames.join(', ')
-    const wrapperLines = [
-      "import { ElDialog } from 'element-plus'",
-      "import type { ElDrawer } from 'element-plus'",
-      `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
-      '',
-      'type ElDialogInstance = InstanceType<typeof ElDialog>',
-      'type ElDrawerInstance = InstanceType<typeof ElDrawer>',
-      '',
-    ]
-
-    if (typedComponent.description) {
-      wrapperLines.push('/**')
-      wrapperLines.push(` * ${typedComponent.description}`)
-      wrapperLines.push(' *')
-      wrapperLines.push(' * 先提示 sybz 自身属性，再提示 Element Plus Dialog/Drawer 的公开属性。')
-      wrapperLines.push(' */')
-    }
-
-    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = SDialogSelfProps &`)
-    wrapperLines.push("  Omit<ElDialogInstance['$props'], keyof SDialogSelfProps> &")
-    wrapperLines.push("  Omit<ElDrawerInstance['$props'], keyof SDialogSelfProps | keyof ElDialogInstance['$props']>")
-    wrapperLines.push('')
-    wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = {`)
-    wrapperLines.push('  new (): {')
-    const dialogPropsLines = getExpandedPropsLines({
-      hoverProps: typedComponent.hoverProps,
-      inheritedProps: [
-        { type: "ElDialogInstance['$props']" },
-        {
-          type: "ElDrawerInstance['$props']",
-          extraOmitKeys: ["keyof ElDialogInstance['$props']"],
-        },
-      ],
-    })
-    wrapperLines.push(`    $props: ${dialogPropsLines[0]}`)
-    wrapperLines.push(...dialogPropsLines.slice(1).map((line) => `    ${line}`))
-    wrapperLines.push("    $emit: ElDialogInstance['$emit']")
-    wrapperLines.push(`    $slots: ${getWrapperSlotsType("ElDialogInstance['$slots']", typedComponent)}`)
-    wrapperLines.push('  }')
-    wrapperLines.push('}')
-    wrapperLines.push('')
-    wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)
-    wrapperLines.push(`export default ${componentName}`)
-    wrapperLines.push('')
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'input') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElInput } from 'element-plus'",
-      `import type { ${typedComponent.typeName} } from '${normalizedPropsImportPath}'`,
-      '',
-      'type ElInputInstance = InstanceType<typeof ElInput>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName} &`,
-      `  Omit<ElInputInstance['$props'], keyof ${typedComponent.typeName}>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElInput & {`,
-      '  new (): {',
-      `    $props: ${typedComponent.typeName} & Omit<ElInputInstance['$props'], keyof ${typedComponent.typeName}>`,
-      "    $emit: ElInputInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElInputInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'select') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElSelect } from 'element-plus'",
-      "import type { SSelectProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElSelectInstance = InstanceType<typeof ElSelect>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SSelectProps &`,
-      `  Omit<ElSelectInstance['$props'], keyof SSelectProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElSelect & {`,
-      '  new (): {',
-      `    $props: ${typedComponent.typeName} & Omit<ElSelectInstance['$props'], keyof ${typedComponent.typeName}>`,
-      "    $emit: ElSelectInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElSelectInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'tooltip') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElTooltip } from 'element-plus'",
-      "import type { STooltipProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElTooltipInstance = InstanceType<typeof ElTooltip>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = STooltipProps &`,
-      `  Omit<ElTooltipInstance['$props'], keyof STooltipProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElTooltip & {`,
-      '  new (): {',
-      `    $props: STooltipProps & Omit<ElTooltipInstance['$props'], keyof STooltipProps>`,
-      "    $emit: ElTooltipInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElTooltipInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'checkbox') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElCheckboxGroup } from 'element-plus'",
-      "import type { SCheckboxProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SCheckboxProps &`,
-      `  Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = {`,
-      '  new (): {',
-      `    $props: ${typedComponent.publicPropsTypeName}`,
-      "    $emit: ElCheckboxGroupInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElCheckboxGroupInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'radio') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElRadioGroup } from 'element-plus'",
-      "import type { SRadioProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SRadioProps &`,
-      `  Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = {`,
-      '  new (): {',
-      `    $props: ${typedComponent.publicPropsTypeName}`,
-      "    $emit: ElRadioGroupInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElRadioGroupInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'empty') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElEmpty } from 'element-plus'",
-      "import type { SEmptyProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElEmptyInstance = InstanceType<typeof ElEmpty>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SEmptyProps &`,
-      `  Omit<ElEmptyInstance['$props'], keyof SEmptyProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElEmpty & {`,
-      '  new (): {',
-      `    $props: SEmptyProps & Omit<ElEmptyInstance['$props'], keyof SEmptyProps>`,
-      "    $emit: ElEmptyInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElEmptyInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'tabs') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElTabs } from 'element-plus'",
-      "import type { STabsProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElTabsInstance = InstanceType<typeof ElTabs>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = STabsProps &`,
-      `  Omit<ElTabsInstance['$props'], keyof STabsProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElTabs & {`,
-      '  new (): {',
-      `    $props: STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>`,
-      "    $emit: ElTabsInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElTabsInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'tag') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElTag } from 'element-plus'",
-      "import type { STagProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElTagInstance = InstanceType<typeof ElTag>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = STagProps &`,
-      `  Omit<ElTagInstance['$props'], keyof STagProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElTag & {`,
-      '  new (): {',
-      `    $props: STagProps & Omit<ElTagInstance['$props'], keyof STagProps>`,
-      "    $emit: ElTagInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElTagInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'row') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElRow } from 'element-plus'",
-      "import type { SRowProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElRowInstance = InstanceType<typeof ElRow>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SRowProps &`,
-      `  Omit<ElRowInstance['$props'], keyof SRowProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElRow & {`,
-      '  new (): {',
-      `    $props: SRowProps & Omit<ElRowInstance['$props'], keyof SRowProps>`,
-      "    $emit: ElRowInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElRowInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'switch') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElSwitch } from 'element-plus'",
-      "import type { SSwitchProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElSwitchInstance = InstanceType<typeof ElSwitch>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SSwitchProps &`,
-      `  Omit<ElSwitchInstance['$props'], keyof SSwitchProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElSwitch & {`,
-      '  new (): {',
-      `    $props: SSwitchProps & Omit<ElSwitchInstance['$props'], keyof SSwitchProps>`,
-      "    $emit: ElSwitchInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElSwitchInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'inputNumber') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElInputNumber } from 'element-plus'",
-      "import type { SInputNumberProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElInputNumberInstance = InstanceType<typeof ElInputNumber>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SInputNumberProps &`,
-      `  Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElInputNumber & {`,
-      '  new (): {',
-      `    $props: SInputNumberProps & Omit<ElInputNumberInstance['$props'], keyof SInputNumberProps>`,
-      "    $emit: ElInputNumberInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElInputNumberInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'popover') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElPopover } from 'element-plus'",
-      "import type { SPopconfirmProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElPopoverInstance = InstanceType<typeof ElPopover>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SPopconfirmProps &`,
-      `  Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElPopover & {`,
-      '  new (): {',
-      `    $props: SPopconfirmProps & Omit<ElPopoverInstance['$props'], keyof SPopconfirmProps>`,
-      "    $emit: ElPopoverInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElPopoverInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'datePicker') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElDatePicker } from 'element-plus'",
-      "import type { SDatePickerProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElDatePickerInstance = InstanceType<typeof ElDatePicker>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SDatePickerProps &`,
-      `  Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElDatePicker & {`,
-      '  new (): {',
-      `    $props: SDatePickerProps & Omit<ElDatePickerInstance['$props'], keyof SDatePickerProps>`,
-      "    $emit: ElDatePickerInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElDatePickerInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'drawer') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElDrawer } from 'element-plus'",
-      "import type { SDrawerProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElDrawerInstance = InstanceType<typeof ElDrawer>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SDrawerProps &`,
-      `  Omit<ElDrawerInstance['$props'], keyof SDrawerProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElDrawer & {`,
-      '  new (): {',
-      `    $props: SDrawerProps & Omit<ElDrawerInstance['$props'], keyof SDrawerProps>`,
-      "    $emit: ElDrawerInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElDrawerInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'descriptions') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElDescriptions } from 'element-plus'",
-      "import type { SDescriptionsProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SDescriptionsProps &`,
-      `  Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElDescriptions & {`,
-      '  new (): {',
-      `    $props: SDescriptionsProps & Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsProps>`,
-      "    $emit: ElDescriptionsInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElDescriptionsInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'progress') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElProgress } from 'element-plus'",
-      "import type { SProgressProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElProgressInstance = InstanceType<typeof ElProgress>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SProgressProps &`,
-      `  Omit<ElProgressInstance['$props'], keyof SProgressProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElProgress & {`,
-      '  new (): {',
-      `    $props: SProgressProps & Omit<ElProgressInstance['$props'], keyof SProgressProps>`,
-      "    $emit: ElProgressInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElProgressInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
-    continue
-  }
-
-  if (typedComponent?.explicitComponentType === 'form') {
-    const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
-    const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
-    const wrapperLines = [
-      "import { ElForm } from 'element-plus'",
-      "import type { SFormProps } from '" + normalizedPropsImportPath + "'",
-      '',
-      'type ElFormInstance = InstanceType<typeof ElForm>',
-      '',
-      `export type ${typedComponent.publicPropsTypeName} = SFormProps &`,
-      `  Omit<ElFormInstance['$props'], keyof SFormProps>`,
-      '',
-      `export type ${typedComponent.exportedComponentTypeName} = typeof ElForm & {`,
-      '  new (): {',
-      `    $props: SFormProps & Omit<ElFormInstance['$props'], keyof SFormProps>`,
-      "    $emit: ElFormInstance['$emit']",
-      `    $slots: ${getWrapperSlotsType("ElFormInstance['$slots']", typedComponent)}`,
-      '  }',
-      '}',
-      '',
-      `declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`,
-      `export default ${componentName}`,
-      '',
-    ]
-
-    mkdirSync(wrapperDir, { recursive: true })
-    await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
     continue
   }
 

@@ -1,14 +1,30 @@
-import type { InstallableComponent } from './_shared'
-import type { SBasicLayoutProps } from '../component-props'
+import type { SBasicLayoutProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
 
-declare const SBasicLayout: InstallableComponent<
-  SBasicLayoutProps,
-  {},
-  {
-    default?: () => any
-    header?: () => any
-    footer?: () => any
-    icon?: () => any
+export type SBasicLayoutComponent = {
+  new (): {
+    $props: {
+      modelValue?: boolean
+      size?: SybzComponentSize
+      title?: string
+      boxStyle?: SybzRecord
+      headerStyle?: SybzRecord
+      bodyStyle?: SybzRecord
+      footerStyle?: SybzRecord
+      border?: boolean
+      scroll?: boolean
+      square?: boolean
+      collapsible?: boolean
+      collapseTrigger?: 'icon' | 'header'
+      theme?: SybzComponentTheme
+    }
+    $slots: {
+      default?: () => any
+      header?: () => any
+      footer?: () => any
+      icon?: () => any
+    }
   }
->
+}
+
+declare const SBasicLayout: SBasicLayoutComponent
 export default SBasicLayout

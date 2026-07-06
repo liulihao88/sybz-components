@@ -265,9 +265,9 @@ export type SSwitchComponent = import('./types/components/switch').SSwitchCompon
 export type SSwitchInstance = ComponentInstance<SSwitchComponent>
 export type SSwitchPublicProps = import('./types/components/switch').SSwitchPublicProps
 
-export type STableComponent = (typeof import('./types/components/table'))['default']
+export type STableComponent = import('./types/components/table').STableComponent
 export type STableInstance = ComponentInstance<STableComponent>
-export type STablePublicProps = STableInstance['$props']
+export type STablePublicProps = import('./types/components/table').STablePublicProps
 
 export type STabsComponent = import('./types/components/tabs').STabsComponent
 export type STabsInstance = ComponentInstance<STabsComponent>

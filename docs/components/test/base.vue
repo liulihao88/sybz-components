@@ -12,5 +12,9 @@ const cc = ref(false)
     <s-dialog v-model="cc"></s-dialog>
     <s-empty></s-empty>
     <s-row></s-row>
+    <s-form></s-form>
+    <s-table></s-table>
+    <s-item></s-item>
+    <s-flex></s-flex>
   </div>
 </template>

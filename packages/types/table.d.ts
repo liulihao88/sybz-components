@@ -143,6 +143,8 @@ export interface STableProps<Row extends TableRow = TableRow> {
   columns?: TableColumnList<Row>
   showPage?: boolean
   showIndex?: boolean
+  size?: string
+  theme?: '' | 'chenghua'
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]
