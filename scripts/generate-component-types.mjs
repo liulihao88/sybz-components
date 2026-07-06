@@ -128,6 +128,11 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'dialog',
       slots: ['default', 'header', 'headerIcon', 'footer'],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+        interfaceName: 'SDialogSelfProps',
+        importTypeNames: ['SDialogHandler', 'SDialogSelfProps', 'SDialogTheme', 'SDialogType', 'SybzRecord'],
+      },
     },
   ],
   [
@@ -472,7 +477,7 @@ const collectInterfaceProps = ({ sourcePath, interfaceName }) => {
   }))
 }
 
-const getExpandedPropsLines = ({ hoverProps, inheritedPropsType }) => {
+const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   const props = collectInterfaceProps(hoverProps)
   const lines = ['{']
 
@@ -483,12 +488,17 @@ const getExpandedPropsLines = ({ hoverProps, inheritedPropsType }) => {
     lines.push(`  ${prop.name}${prop.optional ? '?' : ''}: ${prop.type}`)
   })
 
-  lines.push('} & Omit<')
-  lines.push(`  ${inheritedPropsType},`)
-  props.forEach((prop) => {
-    lines.push(`  | '${prop.omitKey}'`)
+  inheritedProps.forEach(({ type, extraOmitKeys = [] }, index) => {
+    lines.push(`${index === 0 ? '}' : ''} & Omit<`)
+    lines.push(`  ${type},`)
+    props.forEach((prop) => {
+      lines.push(`  | '${prop.omitKey}'`)
+    })
+    extraOmitKeys.forEach((key) => {
+      lines.push(`  | ${key}`)
+    })
+    lines.push('>')
   })
-  lines.push('>')
 
   return lines
 }
@@ -677,7 +687,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     wrapperLines.push('  new (): {')
     const buttonPropsLines = getExpandedPropsLines({
       hoverProps: typedComponent.hoverProps,
-      inheritedPropsType: "ElButtonInstance['$props']",
+      inheritedProps: [{ type: "ElButtonInstance['$props']" }],
     })
     wrapperLines.push(`    $props: ${buttonPropsLines[0]}`)
     wrapperLines.push(...buttonPropsLines.slice(1).map((line) => `    ${line}`))
@@ -698,10 +708,11 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
   if (typedComponent?.explicitComponentType === 'dialog') {
     const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))
     const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
+    const propsImportNames = typedComponent.hoverProps.importTypeNames.join(', ')
     const wrapperLines = [
       "import { ElDialog } from 'element-plus'",
       "import type { ElDrawer } from 'element-plus'",
-      `import type { ${typedComponent.typeName} } from '${normalizedPropsImportPath}'`,
+      `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
       '',
       'type ElDialogInstance = InstanceType<typeof ElDialog>',
       'type ElDrawerInstance = InstanceType<typeof ElDrawer>',
@@ -712,21 +723,28 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       wrapperLines.push('/**')
       wrapperLines.push(` * ${typedComponent.description}`)
       wrapperLines.push(' *')
-      wrapperLines.push(' * 支持 Element Plus Dialog/Drawer 的公开属性，并扩展 sybz 自身属性。')
+      wrapperLines.push(' * 先提示 sybz 自身属性，再提示 Element Plus Dialog/Drawer 的公开属性。')
       wrapperLines.push(' */')
     }
 
-    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName} &`)
-    wrapperLines.push(`  Omit<ElDialogInstance['$props'], keyof ${typedComponent.typeName}> &`)
-    wrapperLines.push(
-      `  Omit<ElDrawerInstance['$props'], keyof ${typedComponent.typeName} | keyof ElDialogInstance['$props']>`,
-    )
+    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = SDialogSelfProps &`)
+    wrapperLines.push("  Omit<ElDialogInstance['$props'], keyof SDialogSelfProps> &")
+    wrapperLines.push("  Omit<ElDrawerInstance['$props'], keyof SDialogSelfProps | keyof ElDialogInstance['$props']>")
     wrapperLines.push('')
-    wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = typeof ElDialog & {`)
+    wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = {`)
     wrapperLines.push('  new (): {')
-    wrapperLines.push(
-      `    $props: ${typedComponent.typeName} & Omit<ElDialogInstance['$props'], keyof ${typedComponent.typeName}> & Omit<ElDrawerInstance['$props'], keyof ${typedComponent.typeName} | keyof ElDialogInstance['$props']>`,
-    )
+    const dialogPropsLines = getExpandedPropsLines({
+      hoverProps: typedComponent.hoverProps,
+      inheritedProps: [
+        { type: "ElDialogInstance['$props']" },
+        {
+          type: "ElDrawerInstance['$props']",
+          extraOmitKeys: ["keyof ElDialogInstance['$props']"],
+        },
+      ],
+    })
+    wrapperLines.push(`    $props: ${dialogPropsLines[0]}`)
+    wrapperLines.push(...dialogPropsLines.slice(1).map((line) => `    ${line}`))
     wrapperLines.push("    $emit: ElDialogInstance['$emit']")
     wrapperLines.push(`    $slots: ${getWrapperSlotsType("ElDialogInstance['$slots']", typedComponent)}`)
     wrapperLines.push('  }')
