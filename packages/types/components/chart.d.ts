@@ -1,12 +1,22 @@
-import type { InstallableComponent } from './_shared'
-import type { SChartProps } from '../component-props'
+import type { SChartProps, SybzRecord } from '../component-props'
 
-declare const SChart: InstallableComponent<
-  SChartProps,
-  {},
-  {
-    default?: () => any
-    empty?: () => any
+export type SChartComponent = {
+  new (): {
+    $props: {
+      width?: string
+      height?: string
+      id?: string
+      option: SybzRecord
+      theme?: string
+      isEmpty?: boolean | ((options: SybzRecord) => boolean)
+      description?: string
+    }
+    $slots: {
+      default?: () => any
+      empty?: () => any
+    }
   }
->
+}
+
+declare const SChart: SChartComponent
 export default SChart

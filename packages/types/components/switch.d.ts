@@ -1,13 +1,17 @@
 import { ElSwitch } from 'element-plus'
-import type { SSwitchProps } from '../component-props'
+import type { SSwitchSelfProps, SybzComponentTheme } from '../component-props'
 
 type ElSwitchInstance = InstanceType<typeof ElSwitch>
 
-export type SSwitchPublicProps = SSwitchProps & Omit<ElSwitchInstance['$props'], keyof SSwitchProps>
+export type SSwitchPublicProps = SSwitchSelfProps & Omit<ElSwitchInstance['$props'], keyof SSwitchSelfProps>
 
-export type SSwitchComponent = typeof ElSwitch & {
+export type SSwitchComponent = {
   new (): {
-    $props: SSwitchProps & Omit<ElSwitchInstance['$props'], keyof SSwitchProps>
+    $props: {
+      theme?: SybzComponentTheme
+      beforeChange?: (...args: any[]) => any
+      width?: string | number
+    } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width'>
     $emit: ElSwitchInstance['$emit']
     $slots: ElSwitchInstance['$slots']
   }

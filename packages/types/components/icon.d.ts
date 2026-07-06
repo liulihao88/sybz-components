@@ -1,11 +1,24 @@
-import type { InstallableComponent } from './_shared'
-import type { SIconProps } from '../component-props'
+import type { SIconProps, SybzRecord } from '../component-props'
 
-declare const SIcon: InstallableComponent<
-  SIconProps,
-  {},
-  {
-    default?: () => any
+export type SIconComponent = {
+  new (): {
+    $props: {
+      /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
+      dangerouslyUseHTMLString?: boolean
+      /** 是否按 HTML 字符串渲染，兼容旧写法 */
+      dangerouslyUseHtmlString?: boolean
+      name: string
+      color?: string
+      size?: string | number
+      disabled?: boolean
+      type?: string
+      svgAttrs?: SybzRecord
+    }
+    $slots: {
+      default?: () => any
+    }
   }
->
+}
+
+declare const SIcon: SIconComponent
 export default SIcon

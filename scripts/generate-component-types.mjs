@@ -7,6 +7,7 @@ const rootDir = process.cwd()
 const componentsDir = resolve(rootDir, 'packages/components')
 const outputPath = resolve(rootDir, 'packages/components.d.ts')
 const componentTypeDir = resolve(rootDir, 'packages/types/components')
+const componentPropsPath = resolve(rootDir, 'packages/types/component-props.d.ts')
 const declarationPrettierOptions = (await prettier.resolveConfig(outputPath)) ?? {}
 
 const formatDeclaration = (content) =>
@@ -21,6 +22,13 @@ const writeDeclarationFile = async (filePath, content) => {
 
 const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', 'utils'])
 
+const componentHoverProps = (interfaceName, importTypeNames = [interfaceName], extraImportLines = []) => ({
+  sourcePath: componentPropsPath,
+  interfaceName,
+  importTypeNames,
+  extraImportLines,
+})
+
 const TYPED_COMPONENT_PROPS = new Map([
   [
     'SBaseHeader',
@@ -29,11 +37,11 @@ const TYPED_COMPONENT_PROPS = new Map([
       slots: ['default', 'extra'],
     },
   ],
-  ['SBuildTime', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SBuildTimeProps' }],
+  ['SBuildTime', { importPath: componentPropsPath, typeName: 'SBuildTimeProps' }],
   [
     'SBasicLayout',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SBasicLayoutProps',
       slots: ['default', 'header', 'footer', 'icon'],
     },
@@ -41,7 +49,7 @@ const TYPED_COMPONENT_PROPS = new Map([
   [
     'SButton',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SButtonProps',
       exportedComponentTypeName: 'SButtonComponent',
       tagName: 's-button',
@@ -66,60 +74,82 @@ const TYPED_COMPONENT_PROPS = new Map([
   [
     'SChart',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SChartProps',
       slots: ['default', 'empty'],
+      hoverProps: componentHoverProps('SChartProps', ['SChartProps', 'SybzRecord']),
     },
   ],
   [
     'SCheckbox',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SCheckboxProps',
       exportedComponentTypeName: 'SCheckboxComponent',
       publicPropsTypeName: 'SCheckboxPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'checkbox',
       allowAnySlots: true,
+      hoverProps: componentHoverProps('SCheckboxSelfProps', ['SCheckboxSelfProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],
   [
     'SClickOutside',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SClickOutsideProps',
       slots: ['default'],
+      hoverProps: componentHoverProps('SClickOutsideProps', ['SClickOutsideProps', 'SybzRecord']),
     },
   ],
-  ['SCompTitle', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SCompTitleProps' }],
+  [
+    'SCompTitle',
+    {
+      importPath: componentPropsPath,
+      typeName: 'SCompTitleProps',
+      hoverProps: componentHoverProps('SCompTitleProps', ['SCompTitleProps', 'SybzComponentTheme', 'SybzRecord']),
+    },
+  ],
   [
     'SDatePicker',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SDatePickerProps',
       exportedComponentTypeName: 'SDatePickerComponent',
       publicPropsTypeName: 'SDatePickerPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'datePicker',
       allowAnySlots: true,
+      hoverProps: componentHoverProps(
+        'SDatePickerSelfProps',
+        ['SDatePickerSelfProps', 'SybzComponentTheme', 'SybzRecord'],
+        ["import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'"],
+      ),
     },
   ],
   [
     'SDescriptions',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SDescriptionsProps',
       exportedComponentTypeName: 'SDescriptionsComponent',
       publicPropsTypeName: 'SDescriptionsPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'descriptions',
       allowAnySlots: true,
+      hoverProps: componentHoverProps('SDescriptionsOwnProps', [
+        'SDescriptionsItemOption',
+        'SDescriptionsOwnProps',
+        'SDescriptionsRow',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
   [
     'SDialog',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SDialogProps',
       exportedComponentTypeName: 'SDialogComponent',
       tagName: 's-dialog',
@@ -129,7 +159,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'dialog',
       slots: ['default', 'header', 'headerIcon', 'footer'],
       hoverProps: {
-        sourcePath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+        sourcePath: componentPropsPath,
         interfaceName: 'SDialogSelfProps',
         importTypeNames: ['SDialogHandler', 'SDialogSelfProps', 'SDialogTheme', 'SDialogType', 'SybzRecord'],
       },
@@ -138,31 +168,33 @@ const TYPED_COMPONENT_PROPS = new Map([
   [
     'SDrawer',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SDrawerProps',
       exportedComponentTypeName: 'SDrawerComponent',
       publicPropsTypeName: 'SDrawerPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'drawer',
       slots: ['default', 'header', 'footer'],
+      hoverProps: componentHoverProps('SDrawerSelfProps', ['SDrawerSelfProps', 'SybzRecord']),
     },
   ],
   [
     'SEmpty',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SEmptyProps',
       exportedComponentTypeName: 'SEmptyComponent',
       publicPropsTypeName: 'SEmptyPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'empty',
       slots: ['default', 'image', 'description'],
+      hoverProps: componentHoverProps('SEmptySelfProps', ['SEmptySelfProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],
   [
     'SFlex',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SFlexProps',
       slots: ['default'],
     },
@@ -170,7 +202,7 @@ const TYPED_COMPONENT_PROPS = new Map([
   [
     'SForm',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SFormProps',
       exportedComponentTypeName: 'SFormComponent',
       publicPropsTypeName: 'SFormPublicProps',
@@ -179,50 +211,64 @@ const TYPED_COMPONENT_PROPS = new Map([
       allowAnySlots: true,
     },
   ],
-  [
-    'SFunctionSourceCode',
-    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SFunctionSourceCodeProps' },
-  ],
+  ['SFunctionSourceCode', { importPath: componentPropsPath, typeName: 'SFunctionSourceCodeProps' }],
   [
     'SIcon',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SIconProps',
       slots: ['default'],
+      hoverProps: componentHoverProps('SIconProps', ['SIconProps', 'SybzRecord']),
     },
   ],
   [
     'SInput',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SInputProps',
       exportedComponentTypeName: 'SInputComponent',
       publicPropsTypeName: 'SInputPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'input',
       slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
+      hoverProps: componentHoverProps('SInputSelfProps', [
+        'SInputSelfProps',
+        'SybzComponentSize',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
   [
     'SInputLabel',
-    { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SInputLabelProps' },
+    {
+      importPath: componentPropsPath,
+      typeName: 'SInputLabelProps',
+      hoverProps: componentHoverProps('SInputLabelProps', ['SInputLabelProps', 'SybzRecord']),
+    },
   ],
   [
     'SInputNumber',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SInputNumberProps',
       exportedComponentTypeName: 'SInputNumberComponent',
       publicPropsTypeName: 'SInputNumberPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'inputNumber',
       allowAnySlots: true,
+      hoverProps: componentHoverProps('SInputNumberSelfProps', [
+        'SInputNumberSelfProps',
+        'SybzComponentSize',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
   [
     'SItem',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SItemProps',
       slots: ['img', 'label', 'value'],
     },
@@ -238,81 +284,108 @@ const TYPED_COMPONENT_PROPS = new Map([
   [
     'SPopconfirm',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SPopconfirmProps',
       exportedComponentTypeName: 'SPopconfirmComponent',
       publicPropsTypeName: 'SPopconfirmPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'popover',
       slots: ['default', 'content', 'footer'],
+      hoverProps: componentHoverProps('SPopoverConfirmSelfProps', ['SPopoverConfirmSelfProps', 'SybzComponentTheme']),
     },
   ],
   [
     'SProgress',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SProgressProps',
       exportedComponentTypeName: 'SProgressComponent',
       publicPropsTypeName: 'SProgressPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'progress',
       slots: ['default'],
+      hoverProps: componentHoverProps('SProgressSelfProps'),
     },
   ],
   [
     'SRadio',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SRadioProps',
       exportedComponentTypeName: 'SRadioComponent',
       publicPropsTypeName: 'SRadioPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'radio',
       allowAnySlots: true,
+      hoverProps: componentHoverProps('SRadioSelfProps', [
+        'SRadioOption',
+        'SRadioSelfProps',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
   [
     'SRow',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SRowProps',
       exportedComponentTypeName: 'SRowComponent',
       publicPropsTypeName: 'SRowPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'row',
       slots: ['default'],
+      hoverProps: componentHoverProps(
+        'SRowSelfProps',
+        ['SRowSelfProps', 'SybzRecord'],
+        ["import type { RowPropsPublic } from 'element-plus/es/components/row'"],
+      ),
     },
   ],
   [
     'SSelect',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SSelectProps',
       exportedComponentTypeName: 'SSelectComponent',
       publicPropsTypeName: 'SSelectPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'select',
       allowAnySlots: true,
+      hoverProps: componentHoverProps('SSelectSelfProps', [
+        'SSelectSelfProps',
+        'SybzComponentSize',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
   [
     'SSplitPane',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SSplitPaneProps',
       slots: ['paneL', 'left', 'paneR', 'extra'],
     },
   ],
-  ['SSvg', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'SSvgProps' }],
+  [
+    'SSvg',
+    {
+      importPath: componentPropsPath,
+      typeName: 'SSvgProps',
+      hoverProps: componentHoverProps('SSvgProps', ['SSvgProps', 'SybzRecord']),
+    },
+  ],
   [
     'SSwitch',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SSwitchProps',
       exportedComponentTypeName: 'SSwitchComponent',
       publicPropsTypeName: 'SSwitchPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'switch',
+      hoverProps: componentHoverProps('SSwitchSelfProps', ['SSwitchSelfProps', 'SybzComponentTheme']),
     },
   ],
   [
@@ -326,54 +399,80 @@ const TYPED_COMPONENT_PROPS = new Map([
   [
     'STabs',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'STabsProps',
       exportedComponentTypeName: 'STabsComponent',
       publicPropsTypeName: 'STabsPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tabs',
       allowAnySlots: true,
+      hoverProps: componentHoverProps(
+        'STabsSelfProps',
+        ['STabsSelfProps', 'SybzRecord'],
+        ["import type { TabsPropsPublic } from 'element-plus/es/components/tabs'"],
+      ),
     },
   ],
   [
     'STag',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'STagProps',
       exportedComponentTypeName: 'STagComponent',
       publicPropsTypeName: 'STagPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tag',
       slots: ['default'],
+      hoverProps: componentHoverProps(
+        'STagSelfProps',
+        ['STagSelfProps', 'SybzComponentSize', 'SybzComponentTheme', 'SybzRecord'],
+        ["import type { TagPropsPublic } from 'element-plus/es/components/tag'"],
+      ),
     },
   ],
-  ['STest', { importPath: resolve(rootDir, 'packages/types/component-props.d.ts'), typeName: 'STestProps' }],
+  [
+    'STest',
+    {
+      importPath: componentPropsPath,
+      typeName: 'STestProps',
+      hoverProps: componentHoverProps('STestProps'),
+    },
+  ],
   [
     'STitle',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'STitleProps',
       slots: ['default', 'title', 'icon', 'extra', 'right'],
+      hoverProps: componentHoverProps('STitleProps', ['STitleProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],
   [
     'STooltip',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'STooltipProps',
       exportedComponentTypeName: 'STooltipComponent',
       publicPropsTypeName: 'STooltipPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tooltip',
       slots: ['default', 'content'],
+      hoverProps: componentHoverProps('STooltipSelfProps'),
     },
   ],
   [
     'SWarning',
     {
-      importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
+      importPath: componentPropsPath,
       typeName: 'SWarningProps',
       slots: ['title', 'content'],
+      hoverProps: componentHoverProps('SWarningProps', [
+        'SWarningProps',
+        'SWarningSize',
+        'SWarningType',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
 ])
@@ -459,7 +558,11 @@ const getJsDocText = (node, sourceFile) => {
   return jsDocs.map((doc) => doc.getText(sourceFile))
 }
 
-const collectInterfaceProps = ({ sourcePath, interfaceName }) => {
+const collectInterfaceProps = ({ sourcePath, interfaceName }, seen = new Set()) => {
+  const cacheKey = `${sourcePath}:${interfaceName}`
+  if (seen.has(cacheKey)) return []
+  seen.add(cacheKey)
+
   const sourceText = readFileSync(sourcePath, 'utf-8')
   const sourceFile = ts.createSourceFile(sourcePath, sourceText, ts.ScriptTarget.Latest, true)
   const declaration = findInterfaceDeclaration(sourceFile, interfaceName)
@@ -468,13 +571,22 @@ const collectInterfaceProps = ({ sourcePath, interfaceName }) => {
     throw new Error(`Cannot find interface ${interfaceName} in ${sourcePath}`)
   }
 
-  return declaration.members.filter(ts.isPropertySignature).map((member) => ({
+  const inheritedProps = (declaration.heritageClauses ?? [])
+    .flatMap((clause) => clause.types)
+    .map((typeNode) => typeNode.expression.getText(sourceFile))
+    .flatMap((extendedInterfaceName) =>
+      collectInterfaceProps({ sourcePath, interfaceName: extendedInterfaceName }, seen),
+    )
+
+  const ownProps = declaration.members.filter(ts.isPropertySignature).map((member) => ({
     name: getPropertyDeclarationNameText(member.name, sourceFile),
     omitKey: getPropertyNameText(member.name, sourceFile),
     optional: Boolean(member.questionToken),
     type: member.type?.getText(sourceFile) ?? 'any',
     jsDoc: getJsDocText(member, sourceFile),
   }))
+
+  return [...inheritedProps, ...ownProps]
 }
 
 const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
@@ -487,6 +599,11 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
     })
     lines.push(`  ${prop.name}${prop.optional ? '?' : ''}: ${prop.type}`)
   })
+
+  if (!inheritedProps.length) {
+    lines.push('}')
+    return lines
+  }
 
   inheritedProps.forEach(({ type, extraOmitKeys = [] }, index) => {
     lines.push(`${index === 0 ? '}' : ''} & Omit<`)
@@ -501,6 +618,235 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   })
 
   return lines
+}
+
+const ELEMENT_WRAPPER_CONFIGS = {
+  button: {
+    valueImports: ['ElButton'],
+    instances: [{ name: 'ElButtonInstance', component: 'ElButton' }],
+    inheritedProps: [{ type: "ElButtonInstance['$props']" }],
+    description: 'Element Plus Button',
+  },
+  checkbox: {
+    valueImports: ['ElCheckboxGroup'],
+    instances: [{ name: 'ElCheckboxGroupInstance', component: 'ElCheckboxGroup' }],
+    inheritedProps: [{ type: "ElCheckboxGroupInstance['$props']" }],
+    description: 'Element Plus CheckboxGroup',
+  },
+  datePicker: {
+    valueImports: ['ElDatePicker'],
+    instances: [{ name: 'ElDatePickerInstance', component: 'ElDatePicker' }],
+    inheritedProps: [{ type: "ElDatePickerInstance['$props']" }],
+    description: 'Element Plus DatePicker',
+  },
+  descriptions: {
+    valueImports: ['ElDescriptions'],
+    instances: [{ name: 'ElDescriptionsInstance', component: 'ElDescriptions' }],
+    inheritedProps: [{ type: "ElDescriptionsInstance['$props']" }],
+    description: 'Element Plus Descriptions',
+  },
+  dialog: {
+    valueImports: ['ElDialog'],
+    typeImports: ['ElDrawer'],
+    instances: [
+      { name: 'ElDialogInstance', component: 'ElDialog' },
+      { name: 'ElDrawerInstance', component: 'ElDrawer' },
+    ],
+    inheritedProps: [
+      { type: "ElDialogInstance['$props']" },
+      {
+        type: "ElDrawerInstance['$props']",
+        extraOmitKeys: ["keyof ElDialogInstance['$props']"],
+      },
+    ],
+    description: 'Element Plus Dialog/Drawer',
+  },
+  drawer: {
+    valueImports: ['ElDrawer'],
+    instances: [{ name: 'ElDrawerInstance', component: 'ElDrawer' }],
+    inheritedProps: [{ type: "ElDrawerInstance['$props']" }],
+    description: 'Element Plus Drawer',
+  },
+  empty: {
+    valueImports: ['ElEmpty'],
+    instances: [{ name: 'ElEmptyInstance', component: 'ElEmpty' }],
+    inheritedProps: [{ type: "ElEmptyInstance['$props']" }],
+    description: 'Element Plus Empty',
+  },
+  input: {
+    valueImports: ['ElInput'],
+    instances: [{ name: 'ElInputInstance', component: 'ElInput' }],
+    inheritedProps: [{ type: "ElInputInstance['$props']" }],
+    description: 'Element Plus Input',
+  },
+  inputNumber: {
+    valueImports: ['ElInputNumber'],
+    instances: [{ name: 'ElInputNumberInstance', component: 'ElInputNumber' }],
+    inheritedProps: [{ type: "ElInputNumberInstance['$props']" }],
+    description: 'Element Plus InputNumber',
+  },
+  popover: {
+    valueImports: ['ElPopover'],
+    instances: [{ name: 'ElPopoverInstance', component: 'ElPopover' }],
+    inheritedProps: [{ type: "ElPopoverInstance['$props']" }],
+    description: 'Element Plus Popover',
+  },
+  progress: {
+    valueImports: ['ElProgress'],
+    instances: [{ name: 'ElProgressInstance', component: 'ElProgress' }],
+    inheritedProps: [{ type: "ElProgressInstance['$props']" }],
+    description: 'Element Plus Progress',
+  },
+  radio: {
+    valueImports: ['ElRadioGroup'],
+    instances: [{ name: 'ElRadioGroupInstance', component: 'ElRadioGroup' }],
+    inheritedProps: [{ type: "ElRadioGroupInstance['$props']" }],
+    description: 'Element Plus RadioGroup',
+  },
+  row: {
+    valueImports: ['ElRow'],
+    instances: [{ name: 'ElRowInstance', component: 'ElRow' }],
+    inheritedProps: [{ type: "ElRowInstance['$props']" }],
+    description: 'Element Plus Row',
+  },
+  select: {
+    valueImports: ['ElSelect'],
+    instances: [{ name: 'ElSelectInstance', component: 'ElSelect' }],
+    inheritedProps: [{ type: "ElSelectInstance['$props']" }],
+    description: 'Element Plus Select',
+  },
+  switch: {
+    valueImports: ['ElSwitch'],
+    instances: [{ name: 'ElSwitchInstance', component: 'ElSwitch' }],
+    inheritedProps: [{ type: "ElSwitchInstance['$props']" }],
+    description: 'Element Plus Switch',
+  },
+  tabs: {
+    valueImports: ['ElTabs'],
+    instances: [{ name: 'ElTabsInstance', component: 'ElTabs' }],
+    inheritedProps: [{ type: "ElTabsInstance['$props']" }],
+    description: 'Element Plus Tabs',
+  },
+  tag: {
+    valueImports: ['ElTag'],
+    instances: [{ name: 'ElTagInstance', component: 'ElTag' }],
+    inheritedProps: [{ type: "ElTagInstance['$props']" }],
+    description: 'Element Plus Tag',
+  },
+  tooltip: {
+    valueImports: ['ElTooltip'],
+    instances: [{ name: 'ElTooltipInstance', component: 'ElTooltip' }],
+    inheritedProps: [{ type: "ElTooltipInstance['$props']" }],
+    description: 'Element Plus Tooltip',
+  },
+}
+
+const getNormalizedImportPath = (fromDir, importPath) => {
+  const relativeImportPath = toPosixPath(
+    relative(fromDir, importPath)
+      .replace(/\.d\.ts$/, '')
+      .replace(/\.ts$/, ''),
+  )
+  return relativeImportPath.startsWith('.') ? relativeImportPath : `./${relativeImportPath}`
+}
+
+const getHoverPropsImportTypeNames = (typedComponent) =>
+  typedComponent.hoverProps.importTypeNames ?? [typedComponent.hoverProps.interfaceName]
+
+const pushPublicPropsTypeLines = (wrapperLines, typedComponent, inheritedProps) => {
+  const selfPropsType = typedComponent.hoverProps.interfaceName
+  wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${selfPropsType} &`)
+  inheritedProps.forEach(({ type, extraOmitKeys = [] }, index) => {
+    const omitKeys = [`keyof ${selfPropsType}`, ...extraOmitKeys].join(' | ')
+    const suffix = index === inheritedProps.length - 1 ? '' : ' &'
+    wrapperLines.push(`  Omit<${type}, ${omitKeys}>${suffix}`)
+  })
+}
+
+const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, wrapperConfig }) => {
+  const normalizedPropsImportPath = getNormalizedImportPath(wrapperDir, typedComponent.importPath)
+  const propsImportNames = getHoverPropsImportTypeNames(typedComponent).join(', ')
+  const primaryInstance = wrapperConfig.instances[0]
+  const wrapperLines = [
+    `import { ${wrapperConfig.valueImports.join(', ')} } from 'element-plus'`,
+    ...(wrapperConfig.typeImports?.length
+      ? [`import type { ${wrapperConfig.typeImports.join(', ')} } from 'element-plus'`]
+      : []),
+    ...(typedComponent.hoverProps.extraImportLines ?? []),
+    `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
+    '',
+    ...wrapperConfig.instances.map(({ name, component }) => `type ${name} = InstanceType<typeof ${component}>`),
+    '',
+  ]
+
+  if (typedComponent.description) {
+    wrapperLines.push('/**')
+    wrapperLines.push(` * ${typedComponent.description}`)
+    wrapperLines.push(' *')
+    wrapperLines.push(` * 先提示 sybz 自身属性，再提示 ${wrapperConfig.description} 的公开属性。`)
+    wrapperLines.push(' */')
+  }
+
+  pushPublicPropsTypeLines(wrapperLines, typedComponent, wrapperConfig.inheritedProps)
+  wrapperLines.push('')
+  wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = {`)
+  wrapperLines.push('  new (): {')
+  const propsLines = getExpandedPropsLines({
+    hoverProps: typedComponent.hoverProps,
+    inheritedProps: wrapperConfig.inheritedProps,
+  })
+  wrapperLines.push(`    $props: ${propsLines[0]}`)
+  wrapperLines.push(...propsLines.slice(1).map((line) => `    ${line}`))
+  wrapperLines.push(`    $emit: ${primaryInstance.name}['$emit']`)
+  wrapperLines.push(`    $slots: ${getWrapperSlotsType(`${primaryInstance.name}['$slots']`, typedComponent)}`)
+  wrapperLines.push('  }')
+  wrapperLines.push('}')
+  wrapperLines.push('')
+  wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)
+  wrapperLines.push(`export default ${componentName}`)
+  wrapperLines.push('')
+
+  return wrapperLines
+}
+
+const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => {
+  const normalizedPropsImportPath = getNormalizedImportPath(wrapperDir, typedComponent.importPath)
+  const propsImportNames = getHoverPropsImportTypeNames(typedComponent).join(', ')
+  const componentTypeName = typedComponent.exportedComponentTypeName ?? `${componentName}Component`
+  const wrapperLines = [
+    ...(typedComponent.hoverProps.extraImportLines ?? []),
+    `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
+    '',
+  ]
+
+  if (typedComponent.description) {
+    wrapperLines.push('/**')
+    wrapperLines.push(` * ${typedComponent.description}`)
+    wrapperLines.push(' *')
+    wrapperLines.push(' * 先提示 sybz 自身属性。')
+    wrapperLines.push(' */')
+  }
+
+  wrapperLines.push(`export type ${componentTypeName} = {`)
+  wrapperLines.push('  new (): {')
+  const propsLines = getExpandedPropsLines({
+    hoverProps: typedComponent.hoverProps,
+    inheritedProps: [],
+  })
+  wrapperLines.push(`    $props: ${propsLines[0]}`)
+  wrapperLines.push(...propsLines.slice(1).map((line) => `    ${line}`))
+  const ownSlotsType = getSlotsType(typedComponent)
+  if (ownSlotsType) {
+    wrapperLines.push(`    $slots: ${ownSlotsType}`)
+  }
+  wrapperLines.push('  }')
+  wrapperLines.push('}')
+  wrapperLines.push('')
+  wrapperLines.push(`declare const ${componentName}: ${componentTypeName}`)
+  wrapperLines.push(`export default ${componentName}`)
+  wrapperLines.push('')
+
+  return wrapperLines
 }
 
 const collectComponentEntries = () => {
@@ -660,6 +1006,34 @@ await writeDeclarationFile(outputPath, lines.join('\n'))
 for (const { componentName, wrapperFilePath } of componentEntries) {
   const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
   const wrapperDir = dirname(wrapperFilePath)
+  const elementWrapperConfig = ELEMENT_WRAPPER_CONFIGS[typedComponent?.explicitComponentType]
+
+  if (typedComponent?.hoverProps && elementWrapperConfig) {
+    mkdirSync(wrapperDir, { recursive: true })
+    await writeDeclarationFile(
+      wrapperFilePath,
+      buildElementWrapperLines({
+        componentName,
+        typedComponent,
+        wrapperDir,
+        wrapperConfig: elementWrapperConfig,
+      }).join('\n'),
+    )
+    continue
+  }
+
+  if (typedComponent?.hoverProps) {
+    mkdirSync(wrapperDir, { recursive: true })
+    await writeDeclarationFile(
+      wrapperFilePath,
+      buildOwnWrapperLines({
+        componentName,
+        typedComponent,
+        wrapperDir,
+      }).join('\n'),
+    )
+    continue
+  }
 
   if (typedComponent?.explicitComponentType === 'button') {
     const propsImportPath = toPosixPath(relative(wrapperDir, typedComponent.importPath).replace(/\.d\.ts$/, ''))

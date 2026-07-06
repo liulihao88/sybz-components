@@ -1,13 +1,27 @@
 import { ElTabs } from 'element-plus'
-import type { STabsProps } from '../component-props'
+import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
+import type { STabsSelfProps, SybzRecord } from '../component-props'
 
 type ElTabsInstance = InstanceType<typeof ElTabs>
 
-export type STabsPublicProps = STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>
+export type STabsPublicProps = STabsSelfProps & Omit<ElTabsInstance['$props'], keyof STabsSelfProps>
 
-export type STabsComponent = typeof ElTabs & {
+export type STabsComponent = {
   new (): {
-    $props: STabsProps & Omit<ElTabsInstance['$props'], keyof STabsProps>
+    $props: {
+      modelValue: string | number | boolean
+      options?: any[]
+      label?: string
+      value?: string
+      subAttrs?: SybzRecord
+      trigger?: 'click' | 'hover'
+      type?: '' | 'capsule' | TabsPropsPublic['type']
+      theme?: '' | 'chenghua'
+      size?: 'small' | 'default' | 'large'
+    } & Omit<
+      ElTabsInstance['$props'],
+      'modelValue' | 'options' | 'label' | 'value' | 'subAttrs' | 'trigger' | 'type' | 'theme' | 'size'
+    >
     $emit: ElTabsInstance['$emit']
     $slots: ElTabsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

@@ -1,13 +1,43 @@
 import { ElTag } from 'element-plus'
-import type { STagProps } from '../component-props'
+import type { TagPropsPublic } from 'element-plus/es/components/tag'
+import type { STagSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
 
 type ElTagInstance = InstanceType<typeof ElTag>
 
-export type STagPublicProps = STagProps & Omit<ElTagInstance['$props'], keyof STagProps>
+export type STagPublicProps = STagSelfProps & Omit<ElTagInstance['$props'], keyof STagSelfProps>
 
-export type STagComponent = typeof ElTag & {
+export type STagComponent = {
   new (): {
-    $props: STagProps & Omit<ElTagInstance['$props'], keyof STagProps>
+    $props: {
+      options?: any[]
+      value?: string | number
+      width?: string | number
+      height?: string | number
+      primary?: string | number | boolean | any[]
+      warning?: string | number | boolean | any[]
+      danger?: string | number | boolean | any[]
+      info?: string | number | boolean | any[]
+      other?: string
+      type?: TagPropsPublic['type']
+      theme?: SybzComponentTheme
+      size?: SybzComponentSize
+      config?: SybzRecord
+    } & Omit<
+      ElTagInstance['$props'],
+      | 'options'
+      | 'value'
+      | 'width'
+      | 'height'
+      | 'primary'
+      | 'warning'
+      | 'danger'
+      | 'info'
+      | 'other'
+      | 'type'
+      | 'theme'
+      | 'size'
+      | 'config'
+    >
     $emit: ElTagInstance['$emit']
     $slots: ElTagInstance['$slots'] & {
       default?: () => any

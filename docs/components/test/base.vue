@@ -10,5 +10,7 @@ const cc = ref(false)
 
     <s-button>你好啊</s-button>
     <s-dialog v-model="cc"></s-dialog>
+    <s-empty></s-empty>
+    <s-row></s-row>
   </div>
 </template>

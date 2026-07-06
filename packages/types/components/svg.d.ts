@@ -1,5 +1,16 @@
-import type { InstallableComponent } from './_shared'
-import type { SSvgProps } from '../component-props'
+import type { SSvgProps, SybzRecord } from '../component-props'
 
-declare const SSvg: InstallableComponent<SSvgProps>
+export type SSvgComponent = {
+  new (): {
+    $props: {
+      prefix?: string
+      name: string
+      color?: string
+      customStyle?: SybzRecord
+      size?: string | number
+    }
+  }
+}
+
+declare const SSvg: SSvgComponent
 export default SSvg

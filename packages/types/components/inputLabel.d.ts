@@ -1,5 +1,16 @@
-import type { InstallableComponent } from './_shared'
-import type { SInputLabelProps } from '../component-props'
+import type { SInputLabelProps, SybzRecord } from '../component-props'
 
-declare const SInputLabel: InstallableComponent<SInputLabelProps>
+export type SInputLabelComponent = {
+  new (): {
+    $props: {
+      modelValue?: any[]
+      isComplex?: boolean
+      regexp?: RegExp
+      message?: string
+      inputAttrs?: SybzRecord
+    }
+  }
+}
+
+declare const SInputLabel: SInputLabelComponent
 export default SInputLabel

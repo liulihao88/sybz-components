@@ -1,11 +1,15 @@
-import type { InstallableComponent } from './_shared'
-import type { SClickOutsideProps } from '../component-props'
+import type { SClickOutsideProps, SybzRecord } from '../component-props'
 
-declare const SClickOutside: InstallableComponent<
-  SClickOutsideProps,
-  {},
-  {
-    default?: () => any
+export type SClickOutsideComponent = {
+  new (): {
+    $props: {
+      options?: SybzRecord
+    }
+    $slots: {
+      default?: () => any
+    }
   }
->
+}
+
+declare const SClickOutside: SClickOutsideComponent
 export default SClickOutside

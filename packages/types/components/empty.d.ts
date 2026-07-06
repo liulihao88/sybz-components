@@ -1,13 +1,20 @@
 import { ElEmpty } from 'element-plus'
-import type { SEmptyProps } from '../component-props'
+import type { SEmptySelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
 
 type ElEmptyInstance = InstanceType<typeof ElEmpty>
 
-export type SEmptyPublicProps = SEmptyProps & Omit<ElEmptyInstance['$props'], keyof SEmptyProps>
+export type SEmptyPublicProps = SEmptySelfProps & Omit<ElEmptyInstance['$props'], keyof SEmptySelfProps>
 
-export type SEmptyComponent = typeof ElEmpty & {
+export type SEmptyComponent = {
   new (): {
-    $props: SEmptyProps & Omit<ElEmptyInstance['$props'], keyof SEmptyProps>
+    $props: {
+      description?: string
+      theme?: SybzComponentTheme
+      width?: string | number
+      height?: string | number
+      imgAttrs?: SybzRecord
+      src?: string
+    } & Omit<ElEmptyInstance['$props'], 'description' | 'theme' | 'width' | 'height' | 'imgAttrs' | 'src'>
     $emit: ElEmptyInstance['$emit']
     $slots: ElEmptyInstance['$slots'] & {
       default?: () => any

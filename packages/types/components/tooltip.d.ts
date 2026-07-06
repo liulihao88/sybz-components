@@ -1,13 +1,25 @@
 import { ElTooltip } from 'element-plus'
-import type { STooltipProps } from '../component-props'
+import type { STooltipSelfProps } from '../component-props'
 
 type ElTooltipInstance = InstanceType<typeof ElTooltip>
 
-export type STooltipPublicProps = STooltipProps & Omit<ElTooltipInstance['$props'], keyof STooltipProps>
+export type STooltipPublicProps = STooltipSelfProps & Omit<ElTooltipInstance['$props'], keyof STooltipSelfProps>
 
-export type STooltipComponent = typeof ElTooltip & {
+export type STooltipComponent = {
   new (): {
-    $props: STooltipProps & Omit<ElTooltipInstance['$props'], keyof STooltipProps>
+    $props: {
+      /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
+      dangerouslyUseHTMLString?: boolean
+      /** 是否按 HTML 字符串渲染，兼容旧写法 */
+      dangerouslyUseHtmlString?: boolean
+      width?: string
+      lineClamp?: string | number
+      showSlot?: boolean
+      effect?: string
+    } & Omit<
+      ElTooltipInstance['$props'],
+      'dangerouslyUseHTMLString' | 'dangerouslyUseHtmlString' | 'width' | 'lineClamp' | 'showSlot' | 'effect'
+    >
     $emit: ElTooltipInstance['$emit']
     $slots: ElTooltipInstance['$slots'] & {
       default?: () => any

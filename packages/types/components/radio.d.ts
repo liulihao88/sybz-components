@@ -1,13 +1,36 @@
 import { ElRadioGroup } from 'element-plus'
-import type { SRadioProps } from '../component-props'
+import type { SRadioOption, SRadioSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
-export type SRadioPublicProps = SRadioProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioProps>
+export type SRadioPublicProps = SRadioSelfProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioSelfProps>
 
 export type SRadioComponent = {
   new (): {
-    $props: SRadioPublicProps
+    $props: {
+      title?: string
+      compTitleStyle?: SybzRecord
+      theme?: SybzComponentTheme
+      type?: '' | 'boolean' | 'simple'
+      showType?: 'radio' | 'button'
+      options?: SRadioOption[]
+      border?: boolean
+      value?: string | number | boolean
+      label?: string | number | boolean
+      itemDisabled?: (...args: any[]) => any
+    } & Omit<
+      ElRadioGroupInstance['$props'],
+      | 'title'
+      | 'compTitleStyle'
+      | 'theme'
+      | 'type'
+      | 'showType'
+      | 'options'
+      | 'border'
+      | 'value'
+      | 'label'
+      | 'itemDisabled'
+    >
     $emit: ElRadioGroupInstance['$emit']
     $slots: ElRadioGroupInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

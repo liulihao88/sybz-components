@@ -1,13 +1,18 @@
 import { ElProgress } from 'element-plus'
-import type { SProgressProps } from '../component-props'
+import type { SProgressSelfProps } from '../component-props'
 
 type ElProgressInstance = InstanceType<typeof ElProgress>
 
-export type SProgressPublicProps = SProgressProps & Omit<ElProgressInstance['$props'], keyof SProgressProps>
+export type SProgressPublicProps = SProgressSelfProps & Omit<ElProgressInstance['$props'], keyof SProgressSelfProps>
 
-export type SProgressComponent = typeof ElProgress & {
+export type SProgressComponent = {
   new (): {
-    $props: SProgressProps & Omit<ElProgressInstance['$props'], keyof SProgressProps>
+    $props: {
+      percentage: number
+      animationTime?: number
+      isAnimation?: boolean
+      customColor?: boolean
+    } & Omit<ElProgressInstance['$props'], 'percentage' | 'animationTime' | 'isAnimation' | 'customColor'>
     $emit: ElProgressInstance['$emit']
     $slots: ElProgressInstance['$slots'] & {
       default?: () => any
