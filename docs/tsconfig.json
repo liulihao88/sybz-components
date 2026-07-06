@@ -23,5 +23,14 @@
       "../packages/components.d.ts"
     ]
   },
-  "include": [".vitepress/**/*.ts", ".vitepress/**/*.d.ts", ".vitepress/**/*.vue", "shared/**/*.ts", "shared/**/*.vue"]
+  "include": [
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.d.ts",
+    ".vitepress/**/*.vue",
+    "shared/**/*.ts",
+    "shared/**/*.vue",
+    "components/test/**/*.ts",
+    "components/test/**/*.tsx",
+    "components/test/**/*.vue"
+  ]
 }

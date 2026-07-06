@@ -1,6 +1,7 @@
-import { mkdirSync, readdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import prettier from 'prettier'
+import ts from 'typescript'
 
 const rootDir = process.cwd()
 const componentsDir = resolve(rootDir, 'packages/components')
@@ -49,6 +50,10 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'button',
       allowAnySlots: true,
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/button/src/type.ts'),
+        interfaceName: 'SButtonSelfProps',
+      },
     },
   ],
   [
@@ -415,6 +420,79 @@ const getWrapperSlotsType = (baseSlotsType, typedComponent) => {
   return ownSlotsType ? `${baseSlotsType} & ${ownSlotsType}` : baseSlotsType
 }
 
+const findInterfaceDeclaration = (sourceFile, interfaceName) => {
+  let match
+
+  const visit = (node) => {
+    if (ts.isInterfaceDeclaration(node) && node.name.text === interfaceName) {
+      match = node
+      return
+    }
+
+    ts.forEachChild(node, visit)
+  }
+
+  visit(sourceFile)
+  return match
+}
+
+const getPropertyNameText = (nameNode, sourceFile) => {
+  if (ts.isIdentifier(nameNode) || ts.isStringLiteral(nameNode) || ts.isNumericLiteral(nameNode)) {
+    return nameNode.text
+  }
+
+  return nameNode.getText(sourceFile)
+}
+
+const getPropertyDeclarationNameText = (nameNode, sourceFile) => {
+  if (ts.isIdentifier(nameNode)) return nameNode.text
+  return nameNode.getText(sourceFile)
+}
+
+const getJsDocText = (node, sourceFile) => {
+  const jsDocs = node.jsDoc ?? []
+  return jsDocs.map((doc) => doc.getText(sourceFile))
+}
+
+const collectInterfaceProps = ({ sourcePath, interfaceName }) => {
+  const sourceText = readFileSync(sourcePath, 'utf-8')
+  const sourceFile = ts.createSourceFile(sourcePath, sourceText, ts.ScriptTarget.Latest, true)
+  const declaration = findInterfaceDeclaration(sourceFile, interfaceName)
+
+  if (!declaration) {
+    throw new Error(`Cannot find interface ${interfaceName} in ${sourcePath}`)
+  }
+
+  return declaration.members.filter(ts.isPropertySignature).map((member) => ({
+    name: getPropertyDeclarationNameText(member.name, sourceFile),
+    omitKey: getPropertyNameText(member.name, sourceFile),
+    optional: Boolean(member.questionToken),
+    type: member.type?.getText(sourceFile) ?? 'any',
+    jsDoc: getJsDocText(member, sourceFile),
+  }))
+}
+
+const getExpandedPropsLines = ({ hoverProps, inheritedPropsType }) => {
+  const props = collectInterfaceProps(hoverProps)
+  const lines = ['{']
+
+  props.forEach((prop) => {
+    prop.jsDoc.forEach((comment) => {
+      lines.push(...comment.split('\n').map((line) => `  ${line}`))
+    })
+    lines.push(`  ${prop.name}${prop.optional ? '?' : ''}: ${prop.type}`)
+  })
+
+  lines.push('} & Omit<')
+  lines.push(`  ${inheritedPropsType},`)
+  props.forEach((prop) => {
+    lines.push(`  | '${prop.omitKey}'`)
+  })
+  lines.push('>')
+
+  return lines
+}
+
 const collectComponentEntries = () => {
   const groups = [
     { baseDir: componentsDir, segments: [] },
@@ -578,7 +656,7 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
     const normalizedPropsImportPath = propsImportPath.startsWith('.') ? propsImportPath : `./${propsImportPath}`
     const wrapperLines = [
       "import { ElButton } from 'element-plus'",
-      `import type { ${typedComponent.typeName} } from '${normalizedPropsImportPath}'`,
+      `import type { SButtonSelfProps } from '${normalizedPropsImportPath}'`,
       '',
       'type ElButtonInstance = InstanceType<typeof ElButton>',
       '',
@@ -588,18 +666,21 @@ for (const { componentName, wrapperFilePath } of componentEntries) {
       wrapperLines.push('/**')
       wrapperLines.push(` * ${typedComponent.description}`)
       wrapperLines.push(' *')
-      wrapperLines.push(' * 支持 Element Plus Button 的公开属性，并扩展 sybz 自身属性。')
+      wrapperLines.push(' * 先提示 sybz 自身属性，再提示 Element Plus Button 的公开属性。')
       wrapperLines.push(' */')
     }
 
-    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName} &`)
-    wrapperLines.push(`  Omit<ElButtonInstance['$props'], keyof ${typedComponent.typeName}>`)
+    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = SButtonSelfProps &`)
+    wrapperLines.push("  Omit<ElButtonInstance['$props'], keyof SButtonSelfProps>")
     wrapperLines.push('')
-    wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = typeof ElButton & {`)
+    wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = {`)
     wrapperLines.push('  new (): {')
-    wrapperLines.push(
-      `    $props: ${typedComponent.typeName} & Omit<ElButtonInstance['$props'], keyof ${typedComponent.typeName}>`,
-    )
+    const buttonPropsLines = getExpandedPropsLines({
+      hoverProps: typedComponent.hoverProps,
+      inheritedPropsType: "ElButtonInstance['$props']",
+    })
+    wrapperLines.push(`    $props: ${buttonPropsLines[0]}`)
+    wrapperLines.push(...buttonPropsLines.slice(1).map((line) => `    ${line}`))
     wrapperLines.push("    $emit: ElButtonInstance['$emit']")
     wrapperLines.push(`    $slots: ${getWrapperSlotsType("ElButtonInstance['$slots']", typedComponent)}`)
     wrapperLines.push('  }')
