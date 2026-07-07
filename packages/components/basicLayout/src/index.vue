@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
@@ -7,7 +8,7 @@ defineOptions({
 })
 interface BasicLayoutProps {
   modelValue?: boolean
-  size?: 'default' | 'small' | 'large' | string
+  size?: 'default' | 'small' | 'large' | string | number
   title?: string
   boxStyle?: Record<string, any>
   headerStyle?: Record<string, any>
@@ -155,7 +156,11 @@ const footerMergedStyle = computed(() => {
 
 const compPadding = computed(() => {
   const { size } = mergedProps.value
-  return size === 'default' ? '16px' : size === 'large' ? '24px' : '8px'
+  if (size === 'large') return '24px'
+  if (size === 'small') return '8px'
+  if (size === 'default' || size === '') return '16px'
+  if (size === 0) return '0px'
+  return processWidth(size, true) || '16px'
 })
 
 const layoutClass = computed(() => ({

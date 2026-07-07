@@ -4,7 +4,7 @@ export type SBasicLayoutComponent = {
   new (): {
     $props: {
       modelValue?: boolean
-      size?: SybzComponentSize
+      size?: SybzComponentSize | string | number
       title?: string
       boxStyle?: SybzRecord
       headerStyle?: SybzRecord

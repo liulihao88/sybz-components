@@ -38,9 +38,9 @@ basicLayout/shijingshan/base
 basicLayout/callapse
 :::
 
-### other
+### size 内边距（默认值 `default`）
 
-:::demo 展示other配置。基础写法：`<SBasicLayout :size="size">...</SBasicLayout>`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
+:::demo 展示 size 控制内边距。基础写法：`<SBasicLayout :size="20">...</SBasicLayout>`。属性：`size` 可选 `small / default / large / string / number`，默认值 `default`；传入预设值之外的数字或 CSS 长度时，会通过 `processWidth` 转成 padding 值。
 basicLayout/other
 :::
 
@@ -64,22 +64,22 @@ basicLayout/square
 
 ### API
 
-|          属性名          | 说明                                         | 类型                                   | 默认值    |
-| :----------------------: | -------------------------------------------- | -------------------------------------- | --------- |
-| `v-model` / `modelValue` | 折叠状态，`true` 表示收起                    | boolean                                | `false`   |
-|          `size`          | 内边距尺寸                                   | `small` / `default` / `large`          | `default` |
-|         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染    | string                                 | `''`      |
-|        `boxStyle`        | 最外层容器样式                               | object                                 | `{}`      |
-|      `headerStyle`       | 头部区域样式                                 | object                                 | `{}`      |
-|       `bodyStyle`        | 内容区域样式                                 | object                                 | `{}`      |
-|      `footerStyle`       | 底部区域样式                                 | object                                 | `{}`      |
-|      `transparent`       | 是否使用透明容器背景，同时去掉容器边框和阴影 | boolean                                | `false`   |
-|         `border`         | 是否显示头部下边框                           | boolean                                | `true`    |
-|         `scroll`         | 内容区是否自动撑开并滚动                     | boolean                                | `true`    |
-|         `square`         | 内容区按宽高最大值渲染为正方形               | boolean                                | `false`   |
-|      `collapsible`       | 是否允许点击头部展开/收起                    | boolean                                | `false`   |
-|    `collapseTrigger`     | 折叠触发区域                                 | `icon` / `header`                      | `header`  |
-|         `theme`          | 主题样式                                     | `default` / `chenghua` / `shijingshan` | `default` |
+|          属性名          | 说明                                                          | 类型                                            | 默认值    |
+| :----------------------: | ------------------------------------------------------------- | ----------------------------------------------- | --------- |
+| `v-model` / `modelValue` | 折叠状态，`true` 表示收起                                     | boolean                                         | `false`   |
+|          `size`          | 内边距尺寸，支持预设值或可被 `processWidth` 处理的 padding 值 | `small` / `default` / `large` / string / number | `default` |
+|         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染                     | string                                          | `''`      |
+|        `boxStyle`        | 最外层容器样式                                                | object                                          | `{}`      |
+|      `headerStyle`       | 头部区域样式                                                  | object                                          | `{}`      |
+|       `bodyStyle`        | 内容区域样式                                                  | object                                          | `{}`      |
+|      `footerStyle`       | 底部区域样式                                                  | object                                          | `{}`      |
+|      `transparent`       | 是否使用透明容器背景，同时去掉容器边框和阴影                  | boolean                                         | `false`   |
+|         `border`         | 是否显示头部下边框                                            | boolean                                         | `true`    |
+|         `scroll`         | 内容区是否自动撑开并滚动                                      | boolean                                         | `true`    |
+|         `square`         | 内容区按宽高最大值渲染为正方形                                | boolean                                         | `false`   |
+|      `collapsible`       | 是否允许点击头部展开/收起                                     | boolean                                         | `false`   |
+|    `collapseTrigger`     | 折叠触发区域                                                  | `icon` / `header`                               | `header`  |
+|         `theme`          | 主题样式                                                      | `default` / `chenghua` / `shijingshan`          | `default` |
 
 ### 事件
 

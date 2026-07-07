@@ -210,4 +210,22 @@ describe('component entry guards', () => {
     expect(componentTypes).toContain('transparent?: boolean')
     expect(docs).toContain('<SBasicLayout transparent title="透明背景">')
   })
+
+  it('keeps basic layout size able to control padding with processWidth', () => {
+    const component = readText('packages/components/basicLayout/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const componentTypes = readText('packages/types/components/basicLayout.d.ts')
+    const docs = readText('docs/components/basicLayout/home.md')
+    const demo = readText('docs/components/basicLayout/other.vue')
+
+    expect(component).toContain("import { processWidth } from '@sybz-components/utils'")
+    expect(component).toContain("if (size === 'large') return '24px'")
+    expect(component).toContain("if (size === 'small') return '8px'")
+    expect(component).toContain("if (size === 0) return '0px'")
+    expect(component).toContain("return processWidth(size, true) || '16px'")
+    expect(componentProps).toContain('size?: SybzComponentSize | string | number')
+    expect(componentTypes).toContain('size?: SybzComponentSize | string | number')
+    expect(docs).toContain('`small` / `default` / `large` / string / number')
+    expect(demo).toContain("const sizeOptions = ['large', 'default', 'small', 20, '2rem', 0]")
+  })
 })
