@@ -34,93 +34,349 @@ declare global {
 
 declare module 'vue' {
   export interface GlobalComponents {
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html
+     */
     SBaseHeader: (typeof import('./types/components/company/baseHeader'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html
+     */
     's-base-header': (typeof import('./types/components/company/baseHeader'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/basicLayout/home.html
+     */
     SBasicLayout: (typeof import('./types/components/basicLayout'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/basicLayout/home.html
+     */
     's-basic-layout': (typeof import('./types/components/basicLayout'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/buildTime/home.html
+     */
     SBuildTime: (typeof import('./types/components/buildTime'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/buildTime/home.html
+     */
     's-build-time': (typeof import('./types/components/buildTime'))['default']
-    /** s-button 按钮组件，支持 Element Plus Button 属性和 sybz 扩展属性。 */
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
+     *
+     * s-button 按钮组件，支持 Element Plus Button 属性和 sybz 扩展属性。
+     */
     SButton: (typeof import('./types/components/button'))['default']
-    /** s-button 按钮组件，支持 Element Plus Button 属性和 sybz 扩展属性。 */
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
+     *
+     * s-button 按钮组件，支持 Element Plus Button 属性和 sybz 扩展属性。
+     */
     's-button': (typeof import('./types/components/button'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/capacityProgress/home.html
+     */
     SCapacityProgress: (typeof import('./types/components/company/capacityProgress'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/capacityProgress/home.html
+     */
     's-capacity-progress': (typeof import('./types/components/company/capacityProgress'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/chart/home.html
+     */
     SChart: (typeof import('./types/components/chart'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/chart/home.html
+     */
     's-chart': (typeof import('./types/components/chart'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/checkbox/home.html
+     */
     SCheckbox: (typeof import('./types/components/checkbox'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/checkbox/home.html
+     */
     's-checkbox': (typeof import('./types/components/checkbox'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/clickOutside/home.html
+     */
     SClickOutside: (typeof import('./types/components/clickOutside'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/clickOutside/home.html
+     */
     's-click-outside': (typeof import('./types/components/clickOutside'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/compTitle/home.html
+     */
     SCompTitle: (typeof import('./types/components/compTitle'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/compTitle/home.html
+     */
     's-comp-title': (typeof import('./types/components/compTitle'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBar/home.html
+     */
     SCountBar: (typeof import('./types/components/company/countBar'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBar/home.html
+     */
     's-count-bar': (typeof import('./types/components/company/countBar'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html
+     */
     SCountBarOld: (typeof import('./types/components/company/countBarOld'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html
+     */
     's-count-bar-old': (typeof import('./types/components/company/countBarOld'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/datePicker/home.html
+     */
     SDatePicker: (typeof import('./types/components/datePicker'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/datePicker/home.html
+     */
     's-date-picker': (typeof import('./types/components/datePicker'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
+     */
     SDescriptions: (typeof import('./types/components/descriptions'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
+     */
     's-descriptions': (typeof import('./types/components/descriptions'))['default']
-    /** s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。 */
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/dialog/home.html
+     *
+     * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。
+     */
     SDialog: (typeof import('./types/components/dialog'))['default']
-    /** s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。 */
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/dialog/home.html
+     *
+     * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。
+     */
     's-dialog': (typeof import('./types/components/dialog'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/drawer/home.html
+     */
     SDrawer: (typeof import('./types/components/drawer'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/drawer/home.html
+     */
     's-drawer': (typeof import('./types/components/drawer'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/empty/home.html
+     */
     SEmpty: (typeof import('./types/components/empty'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/empty/home.html
+     */
     's-empty': (typeof import('./types/components/empty'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/flex/home.html
+     */
     SFlex: (typeof import('./types/components/flex'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/flex/home.html
+     */
     's-flex': (typeof import('./types/components/flex'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/form/home.html
+     */
     SForm: (typeof import('./types/components/form'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/form/home.html
+     */
     's-form': (typeof import('./types/components/form'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/functionSourceCode/home.html
+     */
     SFunctionSourceCode: (typeof import('./types/components/functionSourceCode'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/functionSourceCode/home.html
+     */
     's-function-source-code': (typeof import('./types/components/functionSourceCode'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
+     */
     SIcon: (typeof import('./types/components/icon'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
+     */
     's-icon': (typeof import('./types/components/icon'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/input/home.html
+     */
     SInput: (typeof import('./types/components/input'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/input/home.html
+     */
     's-input': (typeof import('./types/components/input'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputLabel/home.html
+     */
     SInputLabel: (typeof import('./types/components/inputLabel'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputLabel/home.html
+     */
     's-input-label': (typeof import('./types/components/inputLabel'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputNumber/home.html
+     */
     SInputNumber: (typeof import('./types/components/inputNumber'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputNumber/home.html
+     */
     's-input-number': (typeof import('./types/components/inputNumber'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/item/home.html
+     */
     SItem: (typeof import('./types/components/item'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/item/home.html
+     */
     's-item': (typeof import('./types/components/item'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/itemWrapper/home.html
+     */
     SItemWrapper: (typeof import('./types/components/itemWrapper'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/itemWrapper/home.html
+     */
     's-item-wrapper': (typeof import('./types/components/itemWrapper'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
+     */
     SObjectLine: (typeof import('./types/components/company/objectLine'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
+     */
     's-object-line': (typeof import('./types/components/company/objectLine'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/popconfirm/home.html
+     */
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/popconfirm/home.html
+     */
     's-popconfirm': (typeof import('./types/components/popconfirm'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/progress/home.html
+     */
     SProgress: (typeof import('./types/components/progress'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/progress/home.html
+     */
     's-progress': (typeof import('./types/components/progress'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html
+     */
     SQuotaPie: (typeof import('./types/components/company/quotaPie'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html
+     */
     's-quota-pie': (typeof import('./types/components/company/quotaPie'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/radio/home.html
+     */
     SRadio: (typeof import('./types/components/radio'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/radio/home.html
+     */
     's-radio': (typeof import('./types/components/radio'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/row/home.html
+     */
     SRow: (typeof import('./types/components/row'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/row/home.html
+     */
     's-row': (typeof import('./types/components/row'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/select/home.html
+     */
     SSelect: (typeof import('./types/components/select'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/select/home.html
+     */
     's-select': (typeof import('./types/components/select'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/splitPane/home.html
+     */
     SSplitPane: (typeof import('./types/components/splitPane'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/splitPane/home.html
+     */
     's-split-pane': (typeof import('./types/components/splitPane'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/svg/home.html
+     */
     SSvg: (typeof import('./types/components/svg'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/svg/home.html
+     */
     's-svg': (typeof import('./types/components/svg'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/switch/home.html
+     */
     SSwitch: (typeof import('./types/components/switch'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/switch/home.html
+     */
     's-switch': (typeof import('./types/components/switch'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/table/home.html
+     */
     STable: (typeof import('./types/components/table'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/table/home.html
+     */
     's-table': (typeof import('./types/components/table'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
+     */
     STabs: (typeof import('./types/components/tabs'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
+     */
     's-tabs': (typeof import('./types/components/tabs'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tag/home.html
+     */
     STag: (typeof import('./types/components/tag'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tag/home.html
+     */
     's-tag': (typeof import('./types/components/tag'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/test/home.html
+     */
     STest: (typeof import('./types/components/test'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/test/home.html
+     */
     's-test': (typeof import('./types/components/test'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
+     */
     STitle: (typeof import('./types/components/title'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
+     */
     's-title': (typeof import('./types/components/title'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tooltip/home.html
+     */
     STooltip: (typeof import('./types/components/tooltip'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tooltip/home.html
+     */
     's-tooltip': (typeof import('./types/components/tooltip'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
+     */
     SWarning: (typeof import('./types/components/warning'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
+     */
     's-warning': (typeof import('./types/components/warning'))['default']
   }
 }

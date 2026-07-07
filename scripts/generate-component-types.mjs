@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import prettier from 'prettier'
 import ts from 'typescript'
@@ -9,6 +9,7 @@ const outputPath = resolve(rootDir, 'packages/components.d.ts')
 const componentTypeDir = resolve(rootDir, 'packages/types/components')
 const componentPropsPath = resolve(rootDir, 'packages/types/component-props.d.ts')
 const declarationPrettierOptions = (await prettier.resolveConfig(outputPath)) ?? {}
+const onlineDocsBaseUrl = 'https://liulihao88.github.io/sybz-components'
 
 const formatDeclaration = (content) =>
   prettier.format(content.endsWith('\n') ? content : `${content}\n`, {
@@ -28,6 +29,8 @@ const componentHoverProps = (interfaceName, importTypeNames = [interfaceName], e
   importTypeNames,
   extraImportLines,
 })
+
+const toOnlineDocsUrl = (docsPath) => `${onlineDocsBaseUrl}${docsPath.replace(/\.md$/, '.html')}`
 
 const TYPED_COMPONENT_PROPS = new Map([
   [
@@ -520,6 +523,31 @@ const toKebabCase = (value) =>
     .replace(/-+/g, '-')
     .toLowerCase()
 
+const getDocsPathFromWrapperPath = (wrapperPath) => `/${wrapperPath.replace('./types/', '')}/home.md`
+
+const getDocsUrlFromWrapperPath = (wrapperPath) => {
+  const docsPath = getDocsPathFromWrapperPath(wrapperPath)
+  const docsFilePath = resolve(rootDir, 'docs', docsPath.slice(1))
+
+  return existsSync(docsFilePath) ? toOnlineDocsUrl(docsPath) : ''
+}
+
+const getComponentDocCommentLines = ({ docsUrl, description }) => {
+  if (!docsUrl && !description) return []
+
+  const lines = ['/**']
+  if (docsUrl) {
+    lines.push(` * 在线文档：${docsUrl}`)
+  }
+  if (description) {
+    if (docsUrl) lines.push(' *')
+    lines.push(` * ${description}`)
+  }
+  lines.push(' */')
+
+  return lines
+}
+
 const formatSlotsType = (slots = []) => {
   if (slots === 'any') return 'Record<string, (...args: any[]) => any>'
   if (!slots.length) return ''
@@ -945,6 +973,7 @@ const componentEntries = collectComponentEntries()
       tagName: `s-${toKebabCase(dirName)}`,
       wrapperPath,
       wrapperFilePath,
+      docsUrl: getDocsUrlFromWrapperPath(wrapperPath),
       instanceTypeName: `${componentName}Instance`,
       publicPropsTypeName: `${componentName}PublicProps`,
     }
@@ -1001,7 +1030,7 @@ if (tableAliases.length) {
 
 lines.push("declare module 'vue' {")
 lines.push('  export interface GlobalComponents {')
-componentEntries.forEach(({ componentName, tagName, wrapperPath }) => {
+componentEntries.forEach(({ componentName, tagName, wrapperPath, docsUrl }) => {
   const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
   const componentType = typedComponent?.exportedComponentTypeName
     ? `import('${wrapperPath}').${typedComponent.exportedComponentTypeName}`
@@ -1010,16 +1039,16 @@ componentEntries.forEach(({ componentName, tagName, wrapperPath }) => {
     ? `(typeof import('${wrapperPath}'))['default']`
     : componentType
 
-  if (typedComponent?.description) {
-    lines.push(`    /** ${typedComponent.description} */`)
-  }
+  getComponentDocCommentLines({ docsUrl, description: typedComponent?.description }).forEach((line) => {
+    lines.push(`    ${line}`)
+  })
   lines.push(`    ${componentName}: ${globalComponentType}`)
 
   const templateTagName = typedComponent?.tagName || tagName
   if (templateTagName) {
-    if (typedComponent?.description) {
-      lines.push(`    /** ${typedComponent.description} */`)
-    }
+    getComponentDocCommentLines({ docsUrl, description: typedComponent?.description }).forEach((line) => {
+      lines.push(`    ${line}`)
+    })
     lines.push(`    '${templateTagName}': ${globalComponentType}`)
   }
 })
