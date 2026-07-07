@@ -29,11 +29,11 @@ npm install
 ::: code-group
 
 ```sh [pnpm]
-pnpm add sybz-components element-plus @element-plus/icons-vue @vueuse/core
+pnpm add sybz-components element-plus
 ```
 
 ```sh [npm]
-npm install sybz-components element-plus @element-plus/icons-vue @vueuse/core
+npm install sybz-components element-plus
 ```
 
 :::

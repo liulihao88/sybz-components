@@ -32,23 +32,23 @@
 推荐使用 `pnpm` 安装组件库和基础 peer 依赖：
 
 ```sh
-pnpm add sybz-components element-plus @element-plus/icons-vue @vueuse/core
+pnpm add sybz-components element-plus
 ```
 
 也可以使用 `npm` 或 `yarn`：
 
 ```sh
-npm install sybz-components element-plus @element-plus/icons-vue @vueuse/core
+npm install sybz-components element-plus
 ```
 
 ```sh
-yarn add sybz-components element-plus @element-plus/icons-vue @vueuse/core
+yarn add sybz-components element-plus
 ```
 
 使用 `bun`：
 
 ```sh
-bun add sybz-components element-plus @element-plus/icons-vue @vueuse/core
+bun add sybz-components element-plus
 ```
 
 如果使用 `SChart` 或 `objectLine` 等基于 `echarts` 的图表组件，再安装：
@@ -223,7 +223,7 @@ app.use(SybzComponents, {
 
 ## Peer 依赖说明
 
-组件库的 peer 依赖只保留基础运行时：`vue`、`element-plus`、`@element-plus/icons-vue` 和 `@vueuse/core`。`echarts`、`vue-echarts` 属于功能型依赖，仅在使用图表能力时由宿主项目按需安装。
+组件库的 peer 依赖只保留宿主项目必须提供的基础运行时：`vue` 和 `element-plus`。`@element-plus/icons-vue`、`@vueuse/core` 由组件库依赖自动安装；`echarts`、`vue-echarts` 属于功能型依赖，仅在使用图表能力时由宿主项目按需安装。
 
 ## 常用组件
 
