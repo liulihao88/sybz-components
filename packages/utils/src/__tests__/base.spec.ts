@@ -101,6 +101,9 @@ describe('base utils', () => {
 
   it('normalizes width values', () => {
     expect(processWidth(200)).toEqual({ width: '200px' })
+    expect(processWidth(0)).toEqual({ width: '0px' })
+    expect(processWidth(0, true)).toBe('0px')
+    expect(processWidth('0', true)).toBe('0px')
     expect(processWidth('50%', true)).toBe('50%')
     expect(processWidth('12rem')).toEqual({ width: '12rem' })
     expect(processWidth('auto')).toEqual({})

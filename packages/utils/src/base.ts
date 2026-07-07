@@ -1184,7 +1184,7 @@ export function processWidth(initValue: WidthInput, isBase?: false): WidthStyleR
 export function processWidth(initValue: WidthInput, isBase = false): WidthStyleResult | {} | string {
   const raw = unref(initValue)
 
-  if (!raw) {
+  if (raw === undefined || raw === null || raw === '') {
     return isBase ? '' : {}
   }
 

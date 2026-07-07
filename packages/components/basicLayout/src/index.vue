@@ -159,7 +159,6 @@ const compPadding = computed(() => {
   if (size === 'large') return '24px'
   if (size === 'small') return '8px'
   if (size === 'default' || size === '') return '16px'
-  if (size === 0) return '0px'
   return processWidth(size, true) || '16px'
 })
 

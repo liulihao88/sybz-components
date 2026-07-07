@@ -221,7 +221,7 @@ describe('component entry guards', () => {
     expect(component).toContain("import { processWidth } from '@sybz-components/utils'")
     expect(component).toContain("if (size === 'large') return '24px'")
     expect(component).toContain("if (size === 'small') return '8px'")
-    expect(component).toContain("if (size === 0) return '0px'")
+    expect(component).not.toContain('if (size === 0)')
     expect(component).toContain("return processWidth(size, true) || '16px'")
     expect(componentProps).toContain('size?: SybzComponentSize | string | number')
     expect(componentTypes).toContain('size?: SybzComponentSize | string | number')
