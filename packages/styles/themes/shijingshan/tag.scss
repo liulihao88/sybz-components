@@ -3,7 +3,14 @@
 
   border-style: solid;
   font-family: var(--s-sjs-font-family);
+  height: 24px;
+  padding: 0 8px;
+  border-color: transparent;
+  background-color: var(--s-sjs-tag-bg);
+  color: var(--s-sjs-tag-text);
+  font-size: 12px;
   font-weight: 500;
+  line-height: 22px;
 
   &.el-tag--primary {
     --s-tag-ch-color: var(--s-sjs-primary);
@@ -73,6 +80,7 @@
   }
 
   .el-tag__close {
+    margin-left: 4px;
     color: var(--el-tag-text-color);
   }
 

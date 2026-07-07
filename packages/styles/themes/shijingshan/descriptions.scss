@@ -11,9 +11,9 @@
 
   .el-descriptions__title {
     color: var(--s-sjs-text);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   .el-descriptions__extra {
@@ -23,9 +23,9 @@
 
   .el-descriptions__body {
     overflow: hidden;
-    border-radius: var(--s-sjs-radius);
-    background: var(--s-sjs-bg);
-    box-shadow: 0 8px 24px rgba(var(--s-sjs-primary-rgb), 0.06);
+    border-radius: var(--s-sjs-radius-card);
+    background: var(--s-sjs-card-bg);
+    box-shadow: var(--s-sjs-shadow-soft);
   }
 
   .el-descriptions__table {
@@ -37,7 +37,7 @@
     border-color: var(--s-sjs-divider) !important;
     color: var(--s-sjs-text-regular);
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   .el-descriptions__label {
@@ -47,7 +47,7 @@
   }
 
   .el-descriptions__content {
-    background: var(--s-sjs-bg);
+    background: var(--s-sjs-card-bg);
     color: var(--s-sjs-text-regular);
     font-weight: 400;
   }

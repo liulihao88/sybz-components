@@ -2,6 +2,7 @@
 import { ref, shallowRef, watch, markRaw, onBeforeUnmount, computed } from 'vue'
 import { debounce, processWidth } from '@sybz-components/utils'
 import { useEcharts } from './useEcharts.ts'
+import { registerShijingshanChartTheme } from './shijingshanTheme.ts'
 
 defineOptions({
   name: 'SChart',
@@ -41,8 +42,14 @@ const initChart = async () => {
 
   if (token !== chartLoadToken || !echartDivRef.value) return
 
+  if (props.theme === 'shijingshan') {
+    registerShijingshanChartTheme(echarts)
+  }
+
+  const chartTheme = props.theme === 'default' ? undefined : props.theme
+
   chart.value?.dispose()
-  chart.value = markRaw(echarts.init(echartDivRef.value, props.theme))
+  chart.value = markRaw(echarts.init(echartDivRef.value, chartTheme))
   // setOption(props.option)
   // 返回chart实例
   emits('chart', chart.value)

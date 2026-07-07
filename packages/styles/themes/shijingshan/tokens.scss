@@ -3,37 +3,56 @@
   --s-sjs-primary-hover: #3f7df6;
   --s-sjs-primary-active: #1f5fd8;
   --s-sjs-primary-rgb: 42, 109, 244;
+
   --s-sjs-accent: #f5a623;
   --s-sjs-accent-hover: #f8b64a;
   --s-sjs-accent-active: #d98b13;
   --s-sjs-accent-rgb: 245, 166, 35;
+
   --s-sjs-success: #10b981;
   --s-sjs-success-rgb: 16, 185, 129;
-  --s-sjs-warning: #f5a623;
-  --s-sjs-warning-rgb: 245, 166, 35;
+  --s-sjs-warning: #f59e0b;
+  --s-sjs-warning-rgb: 245, 158, 11;
   --s-sjs-danger: #ef4444;
   --s-sjs-danger-rgb: 239, 68, 68;
   --s-sjs-info: #6b7280;
   --s-sjs-info-rgb: 107, 114, 128;
-  --s-sjs-bg: #f8f9fa;
-  --s-sjs-bg-soft: #f8fafc;
+
+  --s-sjs-bg-mobile: #f8f9fa;
+  --s-sjs-bg-web: #f9fafb;
   --s-sjs-card-bg: #ffffff;
-  --s-sjs-fill: #f2f4f7;
-  --s-sjs-row-alt: #fbfcfe;
+  --s-sjs-nav-bg: #1e293b;
+  --s-sjs-fill-mobile: #f2f4f7;
+  --s-sjs-fill-web: #f1f5f9;
+  --s-sjs-row-alt: #f9fafb;
   --s-sjs-row-hover: #f2f6ff;
   --s-sjs-disabled-bg: #f2f4f7;
-  --s-sjs-tag-bg: #f2f4f7;
+
   --s-sjs-text: #1e1e1e;
-  --s-sjs-text-regular: #6b7280;
+  --s-sjs-text-regular-mobile: #6b7280;
+  --s-sjs-text-regular-web: #4b5563;
   --s-sjs-text-muted: #9ca3af;
   --s-sjs-text-secondary: #9ca3af;
-  --s-sjs-tag-text: #374151;
-  --s-sjs-divider: #eef2f6;
+  --s-sjs-tag-text-mobile: #374151;
+  --s-sjs-tag-text-web: #334155;
+  --s-sjs-divider-mobile: #eef2f6;
+  --s-sjs-divider-web: #e5e7eb;
+
+  --s-sjs-bg: var(--s-sjs-bg-web);
+  --s-sjs-bg-soft: var(--s-sjs-bg-web);
+  --s-sjs-fill: var(--s-sjs-fill-web);
+  --s-sjs-tag-bg: var(--s-sjs-fill-web);
+  --s-sjs-tag-text: var(--s-sjs-tag-text-web);
+  --s-sjs-text-regular: var(--s-sjs-text-regular-web);
+  --s-sjs-divider: var(--s-sjs-divider-web);
+
   --s-sjs-radius: 8px;
   --s-sjs-radius-small: 4px;
-  --s-sjs-radius-large: 16px;
+  --s-sjs-radius-card: 12px;
+  --s-sjs-radius-large: 12px;
   --s-sjs-shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --s-sjs-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --s-sjs-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
   --s-sjs-primary-soft: rgba(var(--s-sjs-primary-rgb), 0.08);
   --s-sjs-primary-soft-2: rgba(var(--s-sjs-primary-rgb), 0.1);
   --s-sjs-primary-border: rgba(var(--s-sjs-primary-rgb), 0.2);
@@ -41,6 +60,21 @@
   --s-sjs-primary-shadow: rgba(var(--s-sjs-primary-rgb), 0.18);
   --s-sjs-primary-shadow-weak: rgba(var(--s-sjs-primary-rgb), 0.08);
   --s-sjs-comp-title-padding-x: 14px;
-  --s-sjs-header-bg: linear-gradient(180deg, #ffffff 0%, var(--s-sjs-bg-soft) 100%);
+  --s-sjs-header-bg: var(--s-sjs-bg-web);
   --s-sjs-control-bg: #ffffff;
+}
+
+@media (max-width: 430px) {
+  :root {
+    --s-sjs-warning: var(--s-sjs-accent);
+    --s-sjs-warning-rgb: var(--s-sjs-accent-rgb);
+    --s-sjs-bg: var(--s-sjs-bg-mobile);
+    --s-sjs-bg-soft: var(--s-sjs-bg-mobile);
+    --s-sjs-fill: var(--s-sjs-fill-mobile);
+    --s-sjs-tag-bg: var(--s-sjs-fill-mobile);
+    --s-sjs-tag-text: var(--s-sjs-tag-text-mobile);
+    --s-sjs-text-regular: var(--s-sjs-text-regular-mobile);
+    --s-sjs-divider: var(--s-sjs-divider-mobile);
+    --s-sjs-header-bg: var(--s-sjs-bg-mobile);
+  }
 }

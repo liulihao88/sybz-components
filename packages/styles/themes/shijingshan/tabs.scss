@@ -2,7 +2,7 @@
   --s-tabs-shijingshan-color: #1f2f5c;
   --s-tabs-shijingshan-active-color: var(--s-sjs-primary, #2563eb);
   --s-tabs-shijingshan-line-color: rgba(37, 99, 235, 0.14);
-  --s-tabs-shijingshan-capsule-bg: linear-gradient(180deg, var(--s-sjs-primary-hover) 0%, var(--s-sjs-primary) 100%);
+  --s-tabs-shijingshan-capsule-bg: var(--s-sjs-primary);
 
   .el-tabs__item {
     color: var(--s-tabs-shijingshan-color);

@@ -4,13 +4,13 @@
   --el-button-font-weight: 500;
   --el-button-border-radius: var(--s-sjs-radius);
 
-  min-height: 44px;
-  padding: 10px 16px;
+  min-height: 40px;
+  padding: 8px 16px;
   border-radius: var(--s-sjs-radius);
   font-family: var(--s-sjs-font-family);
   font-size: 16px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 1;
   @include s-themed-button-transition(0.2s);
 
   &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
@@ -105,14 +105,14 @@
   }
 
   &.el-button--small {
-    min-height: 36px;
-    padding: 6px 12px;
+    min-height: 32px;
+    padding: 7px 12px;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 1;
   }
 
   &.el-button--large {
-    min-height: 48px;
+    min-height: 44px;
     padding: 12px 20px;
   }
 
@@ -152,7 +152,7 @@
 
     border: 0;
     outline: none;
-    background: linear-gradient(90deg, var(--s-sjs-primary) 0%, var(--s-sjs-accent) 100%);
+    background: var(--s-sjs-primary);
     color: #ffffff;
     box-shadow: var(--s-sjs-shadow-soft);
 
@@ -161,7 +161,7 @@
     &:focus-visible {
       border: 0;
       outline: none;
-      background: linear-gradient(90deg, var(--s-sjs-primary-hover) 0%, var(--s-sjs-accent-hover) 100%);
+      background: var(--s-sjs-primary-hover);
       color: #ffffff;
       box-shadow: var(--s-sjs-shadow-soft);
     }
@@ -169,7 +169,7 @@
     &:active {
       border: 0;
       outline: none;
-      background: linear-gradient(90deg, var(--s-sjs-primary-active) 0%, var(--s-sjs-accent-active) 100%);
+      background: var(--s-sjs-primary-active);
       color: #ffffff;
       box-shadow: var(--s-sjs-shadow-soft);
     }
@@ -180,13 +180,28 @@
     &.is-disabled:active {
       border: 0;
       outline: none;
-      background: linear-gradient(
-        90deg,
-        rgba(var(--s-sjs-primary-rgb), 0.36) 0%,
-        rgba(var(--s-sjs-accent-rgb), 0.36) 100%
-      );
+      background: rgba(var(--s-sjs-primary-rgb), 0.36);
       color: rgba(255, 255, 255, 0.8);
       box-shadow: none;
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .s-button--shijingshan.s-button--shijingshan {
+    min-height: 44px;
+    padding: 12px 16px;
+    line-height: 24px;
+
+    &.el-button--small {
+      min-height: 36px;
+      padding: 8px 12px;
+      line-height: 20px;
+    }
+
+    &.el-button--large {
+      min-height: 48px;
+      padding: 12px 20px;
     }
   }
 }

@@ -25,14 +25,10 @@
   border-color: var(--s-warning-ch-border);
   border-left-color: var(--s-warning-ch-color);
   border-radius: var(--s-sjs-radius);
-  background: linear-gradient(
-    180deg,
-    rgba(var(--s-warning-ch-color-rgb), 0.08) 0%,
-    rgba(var(--s-warning-ch-color-rgb), 0.04) 100%
-  );
+  background: rgba(var(--s-warning-ch-color-rgb), 0.08);
   color: var(--s-sjs-text);
   font-family: var(--s-sjs-font-family);
-  box-shadow: 0 6px 18px rgba(var(--s-warning-ch-color-rgb), 0.06);
+  box-shadow: var(--s-sjs-shadow-soft);
 
   .s-warning-box__title,
   .s-warning-box__title--info,

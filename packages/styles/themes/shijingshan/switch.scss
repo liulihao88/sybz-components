@@ -32,8 +32,8 @@
 
   &.is-checked .el-switch__core {
     border-color: var(--s-sjs-primary);
-    background: linear-gradient(90deg, var(--s-sjs-primary-hover) 0%, var(--s-sjs-accent) 100%);
-    box-shadow: 0 6px 16px rgba(var(--s-sjs-primary-rgb), 0.18);
+    background: var(--s-sjs-primary);
+    box-shadow: var(--s-sjs-shadow-soft);
   }
 
   &.is-checked .el-switch__core .el-switch__action {

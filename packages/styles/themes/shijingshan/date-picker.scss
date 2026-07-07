@@ -65,7 +65,7 @@
 .s-date-picker__popper--shijingshan.s-date-picker__popper--shijingshan {
   border: 1px solid rgba(var(--s-sjs-primary-rgb), 0.14);
   border-radius: var(--s-sjs-radius);
-  box-shadow: 0 12px 32px rgba(var(--s-sjs-primary-rgb), 0.14);
+  box-shadow: var(--s-sjs-shadow-soft);
   font-family: var(--s-sjs-font-family);
 
   .el-picker-panel {

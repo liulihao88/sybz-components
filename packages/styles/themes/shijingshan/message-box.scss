@@ -19,13 +19,15 @@
   max-width: calc(100vw - 32px);
   border: 0;
   border-radius: var(--s-sjs-radius-large);
+  box-shadow: var(--s-sjs-shadow-soft);
   overflow: hidden;
   padding: 0;
   font-family: var(--s-sjs-font-family);
 
   .el-message-box__header {
     padding: 14px 56px 14px 16px;
-    background: linear-gradient(90deg, var(--s-sjs-primary) 0%, var(--s-sjs-primary-hover) 100%);
+    border-bottom: 1px solid var(--s-sjs-divider);
+    background: var(--s-sjs-card-bg);
   }
 
   .el-message-box__header.show-close {
@@ -33,10 +35,10 @@
   }
 
   .el-message-box__title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 1.4;
-    color: #ffffff;
+    color: var(--s-sjs-text);
   }
 
   .el-message-box__headerbtn {
@@ -47,16 +49,16 @@
     border-radius: var(--s-sjs-radius);
 
     .el-message-box__close {
-      color: rgba(255, 255, 255, 0.86);
+      color: var(--s-sjs-text-muted);
       font-size: 22px;
     }
 
     &:hover,
     &:focus {
-      background: rgba(255, 255, 255, 0.14);
+      background: var(--s-sjs-primary-soft);
 
       .el-message-box__close {
-        color: #ffffff;
+        color: var(--s-sjs-primary);
       }
     }
   }
@@ -64,8 +66,8 @@
   .el-message-box__content {
     padding: 16px;
     font-size: 14px;
-    line-height: 1.6;
-    color: #000000;
+    line-height: 1.5;
+    color: var(--s-sjs-text-regular);
 
     code {
       display: inline-flex;

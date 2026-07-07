@@ -1,23 +1,7 @@
-<script setup lang="ts">
-const propRows = [
-  { label: 'theme', value: "'default' | 'chenghua' | 'shijingshan'", defaultValue: "'default'" },
-  { label: 'type', value: "'' | 'primary' | 'success' | 'warning' | 'danger' | 'info'", defaultValue: "''" },
-  { label: 'size', value: "'' | 'small' | 'default' | 'large'", defaultValue: "''" },
-  { label: 'width', value: 'string | number', defaultValue: "''" },
-  { label: 'height', value: 'string | number', defaultValue: "''" },
-]
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="shijingshan-button-demo">
-    <div class="shijingshan-button-demo__meta">
-      <div v-for="item in propRows" :key="item.label">
-        <span>属性: {{ item.label }}</span>
-        <span>可选值: {{ item.value }}</span>
-        <span>默认值: {{ item.defaultValue }}</span>
-      </div>
-    </div>
-
     <div class="shijingshan-button-demo__row">
       <s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>
       <s-button theme="shijingshan" icon="search">查询数据</s-button>

@@ -38,27 +38,6 @@ button/shijingshan/base
 button/hoverAnimation
 :::
 
-### 全局默认配置
-
-button 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
-文档站已全局设置 `dangerouslyUseHTMLString: true`，所以示例里的 `<code>` 默认会被解析；组件源码默认值仍是 `false`。
-
-```js
-app.use(SybzComponents, {
-  theme: 'chenghua',
-  size: 'small',
-  dangerouslyUseHTMLString: true,
-  button: {},
-})
-```
-
-| 配置项                     | 可选值                                     | 默认值    | 说明                                        |
-| -------------------------- | ------------------------------------------ | --------- | ------------------------------------------- |
-| `theme`                    | `'default' \| 'chenghua' \| 'shijingshan'` | `default` | 公共主题，声明同名 prop 的组件会读取        |
-| `size`                     | `'' \| 'small' \| 'default' \| 'large'`    | `''`      | 公共尺寸，button 会作为默认尺寸             |
-| `dangerouslyUseHTMLString` | `true \| false`                            | `false`   | 是否将 content 类提示内容按 HTML 字符串渲染 |
-| `button`                   | object                                     | `{}`      | button 单独默认配置，优先级高于公共配置     |
-
 ### 图标按钮
 
 :::demo 展示 `icon` 的字符串和组件写法。基础写法：`<s-button :icon="Plus" type="primary">导入 Plus</s-button>`。属性：`icon` 类型 `string / Component`，默认值未设置。

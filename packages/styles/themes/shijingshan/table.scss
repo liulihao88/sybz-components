@@ -1,29 +1,29 @@
 .s-table.s-table--shijingshan.s-table--shijingshan {
-  border-radius: var(--s-sjs-radius);
-  background: var(--s-sjs-header-bg) !important;
+  border-radius: var(--s-sjs-radius-card);
+  background: var(--s-sjs-card-bg) !important;
   color: var(--s-sjs-text);
+  font-family: var(--s-sjs-font-family);
 
   .el-table {
     --el-table-border-color: var(--s-sjs-divider);
     --el-table-border: 1px solid var(--s-sjs-divider);
-    --el-table-header-text-color: var(--s-sjs-text);
-    --el-table-text-color: var(--s-sjs-text);
+    --el-table-header-bg-color: var(--s-sjs-bg-web);
+    --el-table-header-text-color: var(--s-sjs-text-regular);
+    --el-table-text-color: var(--s-sjs-text-regular);
     --el-table-row-hover-bg-color: var(--s-sjs-row-hover);
     --el-table-current-row-bg-color: var(--s-sjs-fill);
 
-    border-top-left-radius: var(--s-sjs-radius);
-    border-top-right-radius: var(--s-sjs-radius);
+    border-radius: var(--s-sjs-radius-card);
     border-color: transparent;
-    box-shadow: 0 8px 24px rgba(var(--s-sjs-primary-rgb), 0.08) !important;
+    box-shadow: var(--s-sjs-shadow-soft) !important;
     overflow: hidden;
-    background: var(--s-sjs-header-bg) !important;
+    background: var(--s-sjs-card-bg) !important;
   }
 
   .el-table__inner-wrapper {
     overflow: hidden;
-    border-top-left-radius: var(--s-sjs-radius);
-    border-top-right-radius: var(--s-sjs-radius);
-    background: var(--s-sjs-header-bg) !important;
+    border-radius: var(--s-sjs-radius-card);
+    background: var(--s-sjs-card-bg) !important;
   }
 
   .el-table__header-wrapper,
@@ -32,7 +32,7 @@
   .el-table__header,
   .el-table__header thead,
   .el-table__header tr {
-    background: var(--s-sjs-header-bg) !important;
+    background: var(--s-sjs-bg-web) !important;
   }
 
   .el-table__header,
@@ -52,7 +52,7 @@
   .el-table__fixed-right .el-table__fixed-body-wrapper,
   .el-table__body,
   .el-table__body tbody {
-    background: var(--s-sjs-bg);
+    background: var(--s-sjs-card-bg);
   }
 
   .el-table__inner-wrapper::before,
@@ -66,37 +66,43 @@
   }
 
   .el-table th.el-table__cell {
-    height: 44px;
+    height: 40px;
     overflow: hidden;
     border-bottom: 1px solid var(--s-sjs-divider) !important;
-    background: var(--s-sjs-header-bg) !important;
+    background: var(--s-sjs-bg-web) !important;
     background-clip: padding-box;
+    color: var(--s-sjs-text-regular);
+    font-size: 14px;
+    font-weight: 500;
     letter-spacing: 0;
   }
 
   .el-table__header tr:first-child th.el-table__cell:first-child {
-    border-top-left-radius: var(--s-sjs-radius);
+    border-top-left-radius: var(--s-sjs-radius-card);
   }
 
   .el-table__header tr:first-child th.el-table__cell:last-child,
   .el-table__header tr:first-child th.el-table__cell.gutter {
-    border-top-right-radius: var(--s-sjs-radius);
+    border-top-right-radius: var(--s-sjs-radius-card);
   }
 
   .el-table__fixed-header-wrapper .el-table__header tr:first-child th.el-table__cell:first-child,
   .el-table__fixed-left .el-table__header tr:first-child th.el-table__cell:first-child {
-    border-top-left-radius: var(--s-sjs-radius);
+    border-top-left-radius: var(--s-sjs-radius-card);
   }
 
   .el-table__fixed-right .el-table__header tr:first-child th.el-table__cell:last-child {
-    border-top-right-radius: var(--s-sjs-radius);
+    border-top-right-radius: var(--s-sjs-radius-card);
   }
 
   .el-table th.el-table__cell,
   .el-table td.el-table__cell {
     border-top: 0 !important;
     border-left: 0 !important;
-    border-right: 1px solid var(--s-sjs-divider) !important;
+    border-right: 0 !important;
+    color: var(--s-sjs-text-regular);
+    font-size: 14px;
+    font-weight: 400;
   }
 
   .el-table th.el-table__cell:last-child,
@@ -107,7 +113,7 @@
   }
 
   .el-table th.el-table__cell.is-sortable:hover {
-    background: linear-gradient(180deg, #f2f7ff 0%, #e7f1ff 100%) !important;
+    background: var(--s-sjs-fill) !important;
   }
 
   .el-table tr:not(:last-child) td.el-table__cell,
@@ -119,12 +125,12 @@
   .el-table__body tr.el-table__row > td.el-table__cell {
     --el-table-tr-bg-color: var(--s-sjs-bg);
 
-    background: var(--s-sjs-bg) !important;
+    background: var(--s-sjs-card-bg) !important;
     transition: background-color 0.18s ease;
   }
 
   .el-table__body tr.el-table__row {
-    background: var(--s-sjs-bg) !important;
+    background: var(--s-sjs-card-bg) !important;
   }
 
   .el-table__body tr.el-table__row > td.el-table__cell .cell {
@@ -181,12 +187,12 @@
   }
 
   .el-table-fixed-column--left.is-last-column {
-    border-right: 1px solid var(--s-sjs-divider) !important;
+    border-right: 0 !important;
   }
 
   .el-table-fixed-column--right.is-first-column,
   .el-table-fixed-column--right.is-last-column {
-    border-left: 1px solid var(--s-sjs-divider) !important;
+    border-left: 0 !important;
   }
 
   .hide-btns-button:not(.is-disabled) {
@@ -219,7 +225,7 @@
     border-bottom-left-radius: var(--s-sjs-radius);
     background: var(--s-sjs-control-bg);
     color: var(--s-sjs-text-muted);
-    box-shadow: 0 6px 18px rgba(var(--s-sjs-primary-rgb), 0.04);
+    box-shadow: var(--s-sjs-shadow-soft);
   }
 
   .page-wrap .page-left {
