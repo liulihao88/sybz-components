@@ -6,19 +6,19 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400">...</SObjectLine>`。属性说明：`objectCount` 示例值：`objectCount`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`objectSize` 示例值：`objectSize`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400">...</SObjectLine>`。
 company/objectLine/base
 :::
 
 ### 简单数据
 
-:::demo 基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400">...</SObjectLine>`。属性说明：`objectCount` 示例值：`objectCount`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`objectSize` 示例值：`objectSize`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示简单数据配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示简单数据配置。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400">...</SObjectLine>`。
 company/objectLine/simple
 :::
 
 ### 复杂数据
 
-:::demo 基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400 w-1100">...</SObjectLine>`。属性说明：`objectCount` 示例值：`objectCount`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`objectSize` 示例值：`objectSize`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示复杂数据配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示复杂数据配置。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400 w-1100">...</SObjectLine>`。
 company/objectLine/hard
 :::
 

@@ -14,13 +14,13 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-flex class="h-100">...</s-flex>`。属性说明：该示例不需要额外属性，未传属性时使用组件默认值。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-flex class="h-100">...</s-flex>`。该示例不需要额外属性。
 flex/base
 :::
 
 ### 常用属性
 
-:::demo 基础写法：`<s-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-block">...</s-flex>`。属性说明：`direction` 示例值：`direction`，类型：string，可选值：`row` / `row-reverse` / `column` / `column-reverse`，默认值：`row`；`justify` 示例值：`justify`，类型：string，可选值：`start` / `end` / `center` / `space-between` / `space-around` / `space-evenly` / `normal`，默认值：`normal`；`align` 示例值：`align`，类型：string，可选值：`start` / `end` / `center` / `baseline` / `stretch` / `normal`，默认值：`normal`；`wrap` 示例值：`wrap`，类型：string，可选值：`nowrap` / `wrap` / `wrap-reverse`，默认值：`nowrap`；`gap` 示例值：`gap`，类型：string / number，可选值：`small` / `default` / `large` / 任意可被 `processWidth` 处理的宽度，默认值：`0px`；`component` 示例值：`section`，类型：string / Component，可选值：原生标签名或 Vue 组件，默认值：`div`；`flex` 示例值：`1`，类型：string，可选值：任意合法 CSS `flex` 值，如 `1`、`0 0 180px`，默认值：`''`。本示例展示常用属性配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示常用属性配置。基础写法：`<s-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-block">...</s-flex>`。属性：`direction` 可选 `row / row-reverse / column / column-reverse`，默认值 `row`；`justify` 可选 `start / end / center / space-between / space-around / space-evenly / normal`，默认值 `normal`。
 flex/usually
 :::
 

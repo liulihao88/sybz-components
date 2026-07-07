@@ -10,25 +10,25 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">...</SItem>`。属性说明：`label` 示例值：`label`，类型：string / number，默认值：未设置；`value` 示例值：`value`，类型：string / number，默认值：未设置；`src` 示例值：`https://img.yzcdn.cn/vant/logo.png`，类型：string，默认值：`''`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置；`src` 类型 `string`，默认值 `''`。
 item/base
 :::
 
 ### 包裹用法
 
-:::demo 基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">...</SItem>`。属性说明：`label` 示例值：`label`，类型：string / number，默认值：未设置；`value` 示例值：`value`，类型：string / number，默认值：未设置；`src` 示例值：`https://img.yzcdn.cn/vant/logo.png`，类型：string，默认值：`''`。本示例展示包裹用法配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示包裹用法配置。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
 item/wrapper
 :::
 
 ### 样式
 
-:::demo 基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png" style="background: lightblue" :labelStyle="{ fontSize: '40px', color: 'red' }" :valueStyle="{ fontSize: '30px', color: 'var(--blue)' }">...</SItem>`。属性说明：`label` 示例值：`label`，类型：string / number，默认值：未设置；`value` 示例值：`value`，类型：string / number，默认值：未设置；`src` 示例值：`https://img.yzcdn.cn/vant/logo.png`，类型：string，默认值：`''`；`labelStyle` 示例值：`{ fontSize: '40px', color: 'red' }`，类型：object，默认值：`{}`；`valueStyle` 示例值：`{ fontSize: '30px', color: 'var(-...`，类型：object，默认值：`{}`。本示例展示样式配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示样式配置。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png" style="background: lightblue" :labelStyle="{ fontSize: '40px', color: 'red' }" :valueStyle="{ fontSize: '30px', color: 'var(--blue)' }">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
 item/style
 :::
 
 ### 不同类型
 
-:::demo 基础写法：`<SItem label="这是默认类型" value="123456" src="https://img.yzcdn.cn/vant/logo.png" :imgStyle="{ height: '100px' }" height="300">...</SItem>`。属性说明：`label` 示例值：`这是默认类型`，类型：string / number，默认值：未设置；`value` 示例值：`123456`，类型：string / number，默认值：未设置；`src` 示例值：`https://img.yzcdn.cn/vant/logo.png`，类型：string，默认值：`''`；`imgStyle` 示例值：`{ height: '100px' }`，类型：object，默认值：`{}`；`height` 示例值：`300`，类型：string / number，默认值：`''`；`type` 示例值：`value`，类型：`''` / `value`，默认值：`''`；`attrs` 示例值：`{ formatBytes: true, formatThousa...`，类型：object，默认值：`{}`。本示例展示不同类型配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示不同类型配置。基础写法：`<SItem label="这是默认类型" value="123456" src="https://img.yzcdn.cn/vant/logo.png" :imgStyle="{ height: '100px' }" height="300">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
 item/type
 :::
 

@@ -38,13 +38,13 @@ import 'virtual:svg-icons-register'
 
 ### 基础用法
 
-:::demo 基础写法：`<s-svg name="icon_file-cloud-line">...</s-svg>`。属性说明：`name` 示例值：`icon_file-cloud-line`，类型：string，默认值：未设置；`size` 示例值：`50`，类型：string / number，默认值：`16px`；`color` 示例值：`blue`，类型：string，默认值：未设置。本示例展示基础渲染和最小配置。之所以, options为空, 加红色边框, 是为了减少不必要的点击后才知道数据为空的操作。
+:::demo 展示基础用法。基础写法：`<s-svg name="icon_file-cloud-line">...</s-svg>`。属性：`name` 类型 `string`，默认值未设置；`size` 可选 `'' / small / default / large`，默认值 `''`；`color` 类型 `string`，默认值未设置。
 svg/base
 :::
 
 ### 通常用法
 
-:::demo 基础写法：`<s-svg name="icon_file-cloud-line" :customStyle="{ width: '100px', height: '100px', color: 'red' }">...</s-svg>`。属性说明：`name` 示例值：`icon_file-cloud-line`，类型：string，默认值：未设置；`customStyle` 示例值：`{ width: '100px', height: '100px'...`，类型：object，默认值：`{}`。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示通常用法配置。基础写法：`<s-svg name="icon_file-cloud-line" :customStyle="{ width: '100px', height: '100px', color: 'red' }">...</s-svg>`。属性：`name` 类型 `string`，默认值未设置。
 svg/usually
 :::
 

@@ -12,13 +12,13 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-switch v-model="cc">...</s-switch>`。属性说明：`v-model` 示例值：`cc`，类型由绑定值决定，默认值由绑定变量初始值决定；`active-text` 示例值：`这是active的text`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`inline-prompt` 示例值：`false`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`inactive-text` 示例值：`否`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`active-value` 示例值：`1`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`inactive-value` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`width` 示例值：`100`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`before-change` 示例值：`beforeChange`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置。这是switch的最基础用法。
+:::demo 展示基础用法。基础写法：`<s-switch v-model="cc">...</s-switch>`。属性：`active-text` 类型 `string`，默认值 `''`；`inactive-text` 类型 `string`，默认值 `''`。
 switch/base
 :::
 
 ### 成华主题
 
-:::demo 基础写法：`<s-switch v-model="enabled" theme="chenghua" active-text="启用" inactive-text="停用" />`。属性说明：`v-model` 示例值：`enabled`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`active-text` 示例值：`启用`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`inactive-text` 示例值：`停用`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`width` 示例值：`92`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`active-value` 示例值：`1`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`inactive-value` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题样式；`width` 支持 `string` 和 `number`，默认值是 `''`；`active-text` 和 `inactive-text` 的类型是 `string`，默认值都是 `''`。
+:::demo 展示成华主题样式。基础写法：`<s-switch v-model="enabled" theme="chenghua" active-text="启用" inactive-text="停用" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 switch/chenghua/base
 :::
 

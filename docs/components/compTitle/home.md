@@ -12,13 +12,13 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-comp-title title="默认" />`。属性说明：`title` 示例值：`默认`，类型：string，默认值：`''`；`size` 示例值：`large`，类型：`large` / `default` / `small`，默认值：`default`；`comp-title-style` 示例值：`{ width: 88 }`，类型：object，默认值：`{}`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-comp-title title="默认" />`。属性：`title` 类型 `string`，默认值 `''`；`size` 可选 `'' / small / default / large`，默认值 `''`。
 compTitle/base
 :::
 
 ### 成华主题
 
-:::demo 基础写法：`<s-comp-title title="审核周期" theme="chenghua" :comp-title-style="{ width: 96 }" />`。属性说明：`title` 示例值：`审核周期`，类型：string，默认值：`''`；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`compTitleStyle` 示例值：`{ width: 96 }`，类型：object，默认值：`{}`。本示例展示成华主题样式。theme="chenghua" 时启用成华主题样式。
+:::demo 展示成华主题样式。基础写法：`<s-comp-title title="审核周期" theme="chenghua" :comp-title-style="{ width: 96 }" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 compTitle/chenghua/base
 :::
 

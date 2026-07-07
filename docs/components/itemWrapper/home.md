@@ -10,25 +10,25 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<sItemWrapper>...</sItemWrapper>`。属性说明：该示例不需要额外属性，未传属性时使用组件默认值。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<sItemWrapper>...</sItemWrapper>`。该示例不需要额外属性。
 itemWrapper/base
 :::
 
 ### 更改间距大小 [gap]
 
-:::demo 基础写法：`<s-item-wrapper gap="12">...</s-item-wrapper>`。属性说明：`gap` 示例值：`12`，类型：string / number，默认值：`16px`。本示例展示更改间距大小 [gap]配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示更改间距大小 [gap]配置。基础写法：`<s-item-wrapper gap="12">...</s-item-wrapper>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
 itemWrapper/gap
 :::
 
 ### 一行显示几个 [columns]
 
-:::demo 基础写法：`<sItemWrapper gap="20px" :columns="3">...</sItemWrapper>`。属性说明：`gap` 示例值：`20px`，类型：string / number，默认值：`16px`；`columns` 示例值：`3`，类型：number，默认值：`null`。本示例展示一行显示几个 [columns]配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示一行显示几个 [columns]配置。基础写法：`<sItemWrapper gap="20px" :columns="3">...</sItemWrapper>`。属性：`columnsCount` 类型 `number`，默认值 `null`。
 itemWrapper/columns
 :::
 
 ### 显示在一行, 超出滚动
 
-:::demo 基础写法：`<sItemWrapper gap="20px" :minWidth="'200px'">...</sItemWrapper>`。属性说明：`gap` 示例值：`20px`，类型：string / number，默认值：`16px`；`minWidth` 示例值：`'200px'`，类型：string / number，默认值：`0`。本示例展示显示在一行, 超出滚动配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示显示在一行, 超出滚动配置。基础写法：`<sItemWrapper gap="20px" :minWidth="'200px'">...</sItemWrapper>`。属性：`gap` 类型 `string / number`，默认值按组件配置；`min-width` 类型 `string / number`，默认值 `0`。
 itemWrapper/scroll
 :::
 

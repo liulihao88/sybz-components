@@ -12,61 +12,61 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-tabs :options="navList">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-tabs :options="navList">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/base
 :::
 
 ### 尺寸
 
-:::demo 基础写法：`<s-tabs :options="navList" size="small">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`size` 示例值：`small`，类型：string，默认值：`default`。本示例展示尺寸配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示尺寸配置。基础写法：`<s-tabs :options="navList" size="small">...</s-tabs>`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
 tabs/size
 :::
 
 ### 胶囊类型
 
-:::demo 基础写法：`<s-tabs v-model="smallActiveTab" :options="navList" type="capsule" size="small">...</s-tabs>`。属性说明：`v-model` 示例值：`smallActiveTab`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`navList`，类型：array，默认值：`[]`；`type` 示例值：`capsule`，类型：string，可选值：`capsule` / Element Plus 原生 `type` 值，默认值：按内部组件或 Element Plus 对应属性；`size` 示例值：`small`，类型：string，默认值：`default`。本示例展示胶囊类型切换，可以直接复制基础写法后按业务替换数据。
+:::demo 展示胶囊类型切换。基础写法：`<s-tabs v-model="smallActiveTab" :options="navList" type="capsule" size="small">...</s-tabs>`。属性：`type` 可选 `'' / capsule / card / border-card`，默认值 `''`。
 tabs/capsule
 :::
 
 ### chenghua主题
 
-:::demo 基础写法：`<s-tabs :options="navList" theme="chenghua">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 展示成华主题样式。基础写法：`<s-tabs :options="navList" theme="chenghua">...</s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 tabs/chenghua/base
 :::
 
 ### 通常用法
 
-:::demo 基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`v-model` 示例值：`navName`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示通常用法配置。基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/usually
 :::
 
 ### Slots
 
-:::demo 基础写法：`<s-tabs :options="navList">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
+:::demo 展示插槽内容定制。基础写法：`<s-tabs :options="navList">...</s-tabs>`。插槽：按示例中的插槽名定制内容。
 tabs/slot
 :::
 
 ### Trigger `click|hover`
 
-:::demo 基础写法：`<s-tabs :options="navList" trigger="hover" v-model="navValue">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`trigger` 示例值：`hover`，类型：string，默认值：`click`；`v-model` 示例值：`navValue`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示鼠标移入上移并轻微放大的动效，可以直接复制基础写法后按业务替换数据。
+:::demo 展示触发方式。基础写法：`<s-tabs :options="navList" trigger="hover" v-model="navValue">...</s-tabs>`。属性：`trigger` 可选 `click / hover`，默认值 `click`。
 tabs/trigger
 :::
 
 ### children `支持嵌套 el-tab-pane`
 
-:::demo 基础写法：`<s-tabs v-model="activeName" class="demo-tabs" default-value="third" @tab-click="handleClick" :options="tabs">...</s-tabs>`。属性说明：`v-model` 示例值：`activeName`，类型由绑定值决定，默认值由绑定变量初始值决定；`default-value` 示例值：`third`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`options` 示例值：`tabs`，类型：array，默认值：`[]`。本示例展示children `支持嵌套 el-tab-pane`配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示children `支持嵌套 el-tab-pane`配置。基础写法：`<s-tabs v-model="activeName" class="demo-tabs" default-value="third" @tab-click="handleClick" :options="tabs">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/children
 :::
 
 ### other
 
-:::demo 基础写法：`<s-tabs :options="navList" :type="type" :stretch="stretch">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`type` 示例值：`type`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`stretch` 示例值：`stretch`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示 Element Plus Tabs 属性透传。基础写法：`<s-tabs :options="navList" :type="type" :stretch="stretch">...</s-tabs>`。属性：`type`、`stretch` 等继承 `el-tabs`。
 tabs/other
 :::
 
 ### addRemove
 
-:::demo 基础写法：`<s-tabs v-model="editableTabsValue" type="card" class="demo-tabs" closable @tab-remove="removeTab">...</s-tabs>`。属性说明：`v-model` 示例值：`editableTabsValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`card`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`closable` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示addRemove配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示动态增删页签。基础写法：`<s-tabs v-model="editableTabsValue" type="card" class="demo-tabs" closable @tab-remove="removeTab">...</s-tabs>`。属性：`closable` 可选 `true / false`，默认值按 Element Plus Tabs 配置。
 tabs/addRemove
 :::
 
@@ -76,7 +76,7 @@ tabs/addRemove
 
 标签一共有四个方向的设置 tabPosition="left|right|top|bottom"
 
-:::demo 基础写法：`<s-tabs :options="navList" :tab-position="tabPosition">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`tab-position` 示例值：`tabPosition`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示位置配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示位置配置。基础写法：`<s-tabs :options="navList" :tab-position="tabPosition">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/location
 :::
 

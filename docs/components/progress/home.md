@@ -14,19 +14,19 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-progress :percentage="80">...</s-progress>`。属性说明：`percentage` 示例值：`80`，类型：number，默认值：未设置；`indeterminate` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`color` 示例值：`blue`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`stroke-width` 示例值：`10`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`show-text` 示例值：`false`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`type` 示例值：`circle`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-progress :percentage="80">...</s-progress>`。属性：`color` 类型 `string`，默认值未设置。
 progress/base
 :::
 
 ### 其他用法
 
-:::demo 基础写法：`<s-radio v-model="defaultColor" :options="[true, false]" type="simple" title="不使用el-progress默认颜色">...</s-radio>`。属性说明：`v-model` 示例值：`defaultColor`，类型由绑定值决定，默认值由绑定变量初始值决定；`options` 示例值：`[true, false]`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`type` 示例值：`simple`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`title` 示例值：`不使用el-progress默认颜色`，类型：string，默认值：`""`。本示例展示其他用法配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示其他用法配置。基础写法：`<s-radio v-model="defaultColor" :options="[true, false]" type="simple" title="不使用el-progress默认颜色">...</s-radio>`。属性：`defaultColor` 可选 `true / false`，默认值由示例变量决定。
 progress/other
 :::
 
 ### 自定义颜色
 
-:::demo 基础写法：`<s-progress :percentage="percentage" :color="progressColor">...</s-progress>`。属性说明：`percentage` 示例值：`percentage`，类型：number，默认值：未设置；`color` 示例值：`progressColor`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示自定义配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示自定义配置。基础写法：`<s-progress :percentage="percentage" :color="progressColor">...</s-progress>`。属性：`color` 类型 `string`，默认值未设置。
 progress/color
 :::
 

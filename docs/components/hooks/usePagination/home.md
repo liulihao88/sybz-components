@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-:::demo 基础用法：`const { page, pageSize, total, setPage, setPageSize } = usePagination({ pageSize: 10, total: 86 })`。属性说明：`page` 示例值：`1`，类型：number，默认值：`1`；`pageSize` 示例值：`10`，类型：number，默认值：`10`；`total` 示例值：`86`，类型：number / Ref<number>，默认值：`0`；`pageSizes` 示例值：`[10, 20, 30, 50, 100]`，类型：number[]，默认值：`[10, 20, 30, 50, 100]`；`resetPageOnPageSizeChange` 示例值：`true`，类型：boolean，默认值：`true`。本示例展示 Element Plus 分页联动，可以直接复制基础写法后替换列表请求逻辑。
+:::demo 展示Element Plus 分页联动。基础写法：`const { page, pageSize, total, setPage, setPageSize } = usePagination({ pageSize: 10, total: 86 })`。属性：`page-size` 类型 `number`，默认值 `30`；`page-sizes` 类型 `number[]`，默认值 `[10, 30, 50]`；`page-number` 类型 `number`，默认值 `1`；`page-attrs` 类型 `object`，默认值 `{}`。
 hooks/usePagination/base
 :::
 

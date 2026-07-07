@@ -2,7 +2,7 @@
 
 [Element Plus 数字输入框组件文档](https://element-plus.org/zh-CN/component/input-number.html)
 
-::: tip 常用属性说明
+::: tip 常用属性
 
 - `precision`: 精度
 - `prefix`: 插槽前缀
@@ -23,31 +23,31 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-input-number v-model="value" :min="0" :max="10" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`min` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`max` 示例值：`10`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-input-number v-model="value" :min="0" :max="10" />`。
 inputNumber/base
 :::
 
 ### 成华主题
 
-:::demo 基础写法：`<s-input-number v-model="count" theme="chenghua" title="审核数量" width="240" height="40" :min="0" />`。属性说明：`v-model` 示例值：`count`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`title` 示例值：`审核数量`，类型：string，默认值：`''`；`width` 示例值：`240`，类型：string / number，默认值：`''`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`min` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`step` 示例值：`2`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`controls-position` 示例值：`true`，类型：`''` / `right`，默认值：`right`。本示例展示成华主题样式。theme="chenghua" 时启用成华主题样式。
+:::demo 展示成华主题样式。基础写法：`<s-input-number v-model="count" theme="chenghua" title="审核数量" width="240" height="40" :min="0" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 inputNumber/chenghua/base
 :::
 
 ### 高度
 
-:::demo 基础写法：`<s-input-number v-model="count" title="数量" width="220" height="40" :min="0" />`。属性说明：`v-model` 示例值：`count`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`数量`，类型：string，默认值：`''`；`width` 示例值：`220`，类型：string / number，默认值：`''`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`min` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`step` 示例值：`2`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示高度配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示高度配置。基础写法：`<s-input-number v-model="count" title="数量" width="220" height="40" :min="0" />`。属性：`height` 类型 `string / number`，默认值 `''`。
 inputNumber/height
 :::
 
 ### 尺寸
 
-:::demo 基础写法：`<s-input-number v-model="smallCount" title="小尺寸" size="small" :min="0" />`。属性说明：`v-model` 示例值：`smallCount`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`小尺寸`，类型：string，默认值：`''`；`size` 示例值：`small`，类型：`''` / `large` / `default` / `small`，默认值：`''`；`min` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示尺寸配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示尺寸配置。基础写法：`<s-input-number v-model="smallCount" title="小尺寸" size="small" :min="0" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
 inputNumber/size
 :::
 
 ### usually常用
 
-:::demo 基础写法：`<s-input-number v-model="smallCount" title="宽度" width="200" />`。属性说明：`v-model` 示例值：`smallCount`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`宽度`，类型：string，默认值：`''`；`width` 示例值：`200`，类型：string / number，默认值：`''`；`min` 示例值：`1`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`max` 示例值：`5`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`precision` 示例值：`2`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示usually常用配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示usually常用配置。基础写法：`<s-input-number v-model="smallCount" title="宽度" width="200" />`。属性：`title` 类型 `string`，默认值 `''`；`width` 类型 `string / number`，默认值 `''`。
 inputNumber/usually
 :::
 

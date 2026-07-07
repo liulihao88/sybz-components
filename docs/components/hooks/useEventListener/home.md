@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-:::demo 基础用法：`useEventListener(targetRef, 'click', handler)`。属性说明：`target` 示例值：`targetRef`，类型：EventTarget / Ref<EventTarget | null>，默认值：必传；`event` 示例值：`click`，类型：string，默认值：必传；`handler` 示例值：`(event) => { ... }`，类型：function，默认值：必传。组件卸载时会自动移除事件。本示例展示给指定元素绑定点击事件。
+:::demo 展示给指定元素绑定点击事件。基础写法：`useEventListener(targetRef, 'click', handler)`。
 hooks/useEventListener/base
 :::
 

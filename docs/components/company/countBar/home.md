@@ -6,13 +6,13 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<SCountBar :data="data" style="height: 300px">...</SCountBar>`。属性说明：`data` 示例值：`data`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`options` 示例值：`{ count: 'magazineInCount', size:...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<SCountBar :data="data" style="height: 300px">...</SCountBar>`。属性：`data` 类型 `array`，默认值 `[]`；`options` 类型 `array`，默认值 `[]`。
 company/countBar/base
 :::
 
 ### 数据量大
 
-:::demo 基础写法：`<sCountBar :data="objectDisk" style="min-height: 200px" :options="{ count: 'magazineInCount', size: 'magazineInSize' }" />`。属性说明：`data` 示例值：`objectDisk`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`options` 示例值：`{ count: 'magazineInCount', size:...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示数据量大配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示数据量大配置。基础写法：`<sCountBar :data="objectDisk" style="min-height: 200px" :options="{ count: 'magazineInCount', size: 'magazineInSize' }" />`。属性：`data` 类型 `array`，默认值 `[]`；`options` 类型 `array`，默认值 `[]`。
 company/countBar/moreData
 :::
 

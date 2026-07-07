@@ -12,85 +12,85 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-date-picker v-model="dateValue">...</s-date-picker>`。属性说明：`v-model` 示例值：`dateValue`，类型由绑定值决定，默认值由绑定变量初始值决定。本示例展示基础渲染和最小配置。默认 type="date"，value-format="YYYY-MM-DD"，format="YYYY-MM-DD"。
+:::demo 展示基础用法。基础写法：`<s-date-picker v-model="dateValue">...</s-date-picker>`。
 datePicker/base
 :::
 
 ### 成华主题
 
-:::demo 基础写法：`<s-date-picker v-model="rangeValue" theme="chenghua" type="daterange" title="审核周期" width="520" height="40" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`title` 示例值：`审核周期`，类型：string，默认值：`''`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`compTitleStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`；`placeholder` 示例值：`选择发布日期`，类型：string，默认值：`请选择日期`。本示例展示成华主题样式。theme="chenghua" 时启用成华主题样式。
+:::demo 展示成华主题样式。基础写法：`<s-date-picker v-model="rangeValue" theme="chenghua" type="daterange" title="审核周期" width="520" height="40" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 datePicker/chenghua/base
 :::
 
 ### 日期时间
 
-:::demo 基础写法：`<s-date-picker v-model="datetimeValue" type="datetime" width="360" placeholder="选择日期时间">...</s-date-picker>`。属性说明：`v-model` 示例值：`datetimeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`datetime`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`360`，类型：string / number，默认值：`300px`；`placeholder` 示例值：`选择日期时间`，类型：string，默认值：`请选择日期`；`start-placeholder` 示例值：`开始时间`，类型：string，默认值：`开始日期`；`end-placeholder` 示例值：`结束时间`，类型：string，默认值：`结束日期`。本示例展示日期时间配置。type="datetime" 或 type="datetimerange" 时默认 format 和 value-format 为 YYYY-MM-DD HH:mm:ss。
+:::demo 展示日期时间配置。基础写法：`<s-date-picker v-model="datetimeValue" type="datetime" width="360" placeholder="选择日期时间">...</s-date-picker>`。属性：`type` 可选 `date / datetime / daterange / datetimerange` 等日期选择类型，默认值 `date`。
 datePicker/datetime
 :::
 
 ### 年月周和多选
 
-:::demo 基础写法：`<s-date-picker v-model="yearValue" type="year" placeholder="选择年份">...</s-date-picker>`。属性说明：`v-model` 示例值：`yearValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`year`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`placeholder` 示例值：`选择年份`，类型：string，默认值：`请选择日期`；`show-week-number` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示多选交互。支持 year、years、month、months、week、dates 等 Element Plus DatePicker 类型。
+:::demo 展示年月周和多选类型。基础写法：`<s-date-picker v-model="yearValue" type="year" placeholder="选择年份">...</s-date-picker>`。属性：`type` 可选 `year / years / month / months / week / dates` 等类型，默认值 `date`。
 datePicker/types
 :::
 
 ### 范围选择
 
-:::demo 基础写法：`<s-date-picker v-model="dateRange" type="daterange" width="520" start-placeholder="开始日期" end-placeholder="结束日期">...</s-date-picker>`。属性说明：`v-model` 示例值：`dateRange`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`start-placeholder` 示例值：`开始日期`，类型：string，默认值：`开始日期`；`end-placeholder` 示例值：`结束日期`，类型：string，默认值：`结束日期`；`range-separator` 示例值：`至`，类型：string，默认值：`-`；`unlink-panels` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示范围选择。支持 daterange、datetimerange、monthrange、yearrange。
+:::demo 展示范围选择。基础写法：`<s-date-picker v-model="dateRange" type="daterange" width="520" start-placeholder="开始日期" end-placeholder="结束日期">...</s-date-picker>`。属性：`type` 可选 `daterange / datetimerange / monthrange / yearrange`，默认值 `date`。
 datePicker/range
 :::
 
 ### 禁用状态和禁用日期
 
-:::demo 基础写法：`<s-date-picker v-model="beforeDateValue" type="datetime" value-format="x" width="360" placeholder="仅可选择当前时间之前" :disabled-date="disabledAfterToday">...</s-date-picker>`。属性说明：`v-model` 示例值：`beforeDateValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`datetime`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`value-format` 示例值：`x`，类型：string，默认值：按 `type` 自动设置；`width` 示例值：`360`，类型：string / number，默认值：`300px`；`placeholder` 示例值：`仅可选择当前时间之前`，类型：string，默认值：`请选择日期`；`disabled-date` 示例值：`disabledAfterToday`，类型：function，可选值：`(date: Date) => boolean`，默认值：未设置；`readonly` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示禁用状态。支持 disabled、readonly、disabled-date。
+:::demo 展示禁用状态和禁用日期。基础写法：`<s-date-picker v-model="beforeDateValue" type="datetime" value-format="x" width="360" placeholder="仅可选择当前时间之前" :disabled-date="disabledAfterToday">...</s-date-picker>`。属性：`disabled-date` 类型 `function`，默认值未设置。
 datePicker/disabled
 :::
 
 ### 快捷选项
 
-:::demo 基础写法：`<s-date-picker v-model="dateValue" :shortcuts="shortcuts" placeholder="自定义快捷项">...</s-date-picker>`。属性说明：`v-model` 示例值：`dateValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`shortcuts` 示例值：`shortcuts`，类型：array / false，默认值：内置快捷项；`placeholder` 示例值：`自定义快捷项`，类型：string，默认值：`请选择日期`；`type` 示例值：`datetimerange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`start-placeholder` 示例值：`内置快捷项`，类型：string，默认值：`开始日期`。本示例展示快捷选项配置。默认带内置快捷项，可传 shortcuts 覆盖，也可传 shortcuts=false 关闭。
+:::demo 展示快捷选项配置。基础写法：`<s-date-picker v-model="dateValue" :shortcuts="shortcuts" placeholder="自定义快捷项">...</s-date-picker>`。属性：`shortcuts` 类型 `array / false`，默认值为内置快捷项。
 datePicker/shortcuts
 :::
 
 ### 格式化
 
-:::demo 基础写法：`<s-date-picker v-model="dateValue" format="YYYY/MM/DD" value-format="YYYY/MM/DD">...</s-date-picker>`。属性说明：`v-model` 示例值：`dateValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`format` 示例值：`YYYY/MM/DD`，类型：string，默认值：按 `type` 自动设置；`value-format` 示例值：`YYYY/MM/DD`，类型：string，默认值：按 `type` 自动设置；`type` 示例值：`datetime`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`360`，类型：string / number，默认值：`300px`。本示例展示格式化配置。支持 format 和 value-format。
+:::demo 展示格式化配置。基础写法：`<s-date-picker v-model="dateValue" format="YYYY/MM/DD" value-format="YYYY/MM/DD">...</s-date-picker>`。属性：`format`、`value-format` 类型 `string`，默认值按 `type` 自动设置。
 datePicker/format
 :::
 
 ### 时间戳
 
-:::demo 基础写法：`<s-date-picker v-model="millisecondValue" type="datetime" value-format="x" width="360" placeholder="毫秒时间戳">...</s-date-picker>`。属性说明：`v-model` 示例值：`millisecondValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`datetime`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`value-format` 示例值：`x`，类型：string，默认值：按 `type` 自动设置；`width` 示例值：`360`，类型：string / number，默认值：`300px`；`placeholder` 示例值：`毫秒时间戳`，类型：string，默认值：`请选择日期`；`start-placeholder` 示例值：`开始时间戳`，类型：string，默认值：`开始日期`；`end-placeholder` 示例值：`结束时间戳`，类型：string，默认值：`结束日期`。本示例展示时间戳配置。value-format="x" 返回毫秒时间戳，value-format="X" 返回秒级时间戳。
+:::demo 展示时间戳配置。基础写法：`<s-date-picker v-model="millisecondValue" type="datetime" value-format="x" width="360" placeholder="毫秒时间戳">...</s-date-picker>`。属性：`value-format` 可选 `x / X / 日期格式字符串`，默认值按 `type` 自动设置。
 datePicker/timestamp
 :::
 
 ### 默认面板日期和默认时间
 
-:::demo 基础写法：`<s-date-picker v-model="dateValue" :default-value="defaultValue">...</s-date-picker>`。属性说明：`v-model` 示例值：`dateValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`default-value` 示例值：`defaultValue`，类型：Date / Date[]，默认值：未设置；`type` 示例值：`datetimerange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`640`，类型：string / number，默认值：`300px`；`default-time` 示例值：`defaultTime`，类型：Date / Date[]，默认值：未设置；`start-placeholder` 示例值：`默认 09:00:00`，类型：string，默认值：`开始日期`；`end-placeholder` 示例值：`默认 18:00:00`，类型：string，默认值：`结束日期`。本示例展示默认面板日期和默认时间配置。支持 default-value 和 default-time。
+:::demo 展示默认面板日期和默认时间配置。基础写法：`<s-date-picker v-model="dateValue" :default-value="defaultValue">...</s-date-picker>`。属性：`default-value` 类型 `Date / Date[]`，默认值未设置；`default-time` 类型 `Date / Date[]`，默认值未设置。
 datePicker/defaultValue
 :::
 
 ### 高度
 
-:::demo 基础写法：`<s-date-picker v-model="rangeValue" title="时间范围" type="daterange" width="520" height="40" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`时间范围`，类型：string，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`compTitleStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`。本示例展示高度配置。height 默认值为 ''。
+:::demo 展示高度配置。基础写法：`<s-date-picker v-model="rangeValue" title="时间范围" type="daterange" width="520" height="40" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性：`height` 类型 `string / number`，默认值 `''`。
 datePicker/height
 :::
 
 ### 标题和组合属性
 
-:::demo 基础写法：`<s-date-picker v-model="rangeValue" title="选择日期" type="daterange" width="560" start-placeholder="开始" end-placeholder="结束" range-separator="///" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性说明：`v-model` 示例值：`rangeValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`title` 示例值：`选择日期`，类型：string，默认值：`''`；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`560`，类型：string / number，默认值：`300px`；`start-placeholder` 示例值：`开始`，类型：string，默认值：`开始日期`；`end-placeholder` 示例值：`结束`，类型：string，默认值：`结束日期`；`range-separator` 示例值：`///`，类型：string，默认值：`-`；`compTitleStyle` 示例值：`{ width: 84 }`，类型：object，默认值：`{}`。本示例展示标题和组合属性配置。title 默认值为 ''，compTitleStyle 默认值为 {}。
+:::demo 展示标题和组合属性配置。基础写法：`<s-date-picker v-model="rangeValue" title="选择日期" type="daterange" width="560" start-placeholder="开始" end-placeholder="结束" range-separator="///" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性：`title` 类型 `string`，默认值 `''`；`compTitleStyle` 类型 `object`，默认值 `{}`。
 datePicker/usually
 :::
 
 ### 控制面板和插槽
 
-:::demo 基础写法：`<s-date-picker ref="datePickerRef" v-model="dateValue" :prefix-icon="Clock">...</s-date-picker>`。属性说明：`v-model` 示例值：`dateValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`prefix-icon` 示例值：`Clock`，类型：string / Component，默认值：`''`。本示例展示插槽内容定制。支持 prefix-icon、default 插槽和 handleOpen 等实例方法。
+:::demo 展示插槽内容定制。基础写法：`<s-date-picker ref="datePickerRef" v-model="dateValue" :prefix-icon="Clock">...</s-date-picker>`。插槽：按示例中的插槽名定制内容。
 datePicker/controlled
 :::
 
 ### 选择 7 天以内的日期
 
-:::demo 基础写法：`<s-date-picker v-model="dateRange" type="daterange" width="520" format="YYYY-MM-DD" value-format="YYYY-MM-DD" :disabled-date="disabledDate" @calendar-change="calendarChange">...</s-date-picker>`。属性说明：`v-model` 示例值：`dateRange`，类型由绑定值决定，默认值由绑定变量初始值决定；`type` 示例值：`daterange`，类型：string，可选值：`year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange`，默认值：`date`；`width` 示例值：`520`，类型：string / number，默认值：`300px`；`format` 示例值：`YYYY-MM-DD`，类型：string，默认值：按 `type` 自动设置；`value-format` 示例值：`YYYY-MM-DD`，类型：string，默认值：按 `type` 自动设置；`disabled-date` 示例值：`disabledDate`，类型：function，可选值：`(date: Date) => boolean`，默认值：未设置。本示例展示选择 7 天以内的日期配置。通过 disabled-date 和 calendar-change 限制范围。
+:::demo 展示选择 7 天以内的日期配置。基础写法：`<s-date-picker v-model="dateRange" type="daterange" width="520" format="YYYY-MM-DD" value-format="YYYY-MM-DD" :disabled-date="disabledDate" @calendar-change="calendarChange">...</s-date-picker>`。属性：`disabled-date` 类型 `function`，默认值未设置；`calendar-change` 为日期面板变化事件。
 datePicker/limitRange
 :::
 

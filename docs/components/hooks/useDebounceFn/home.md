@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-:::demo 基础用法：`const search = useDebounceFn((value) => { ... }, 500)`。属性说明：`fn` 示例值：`(value) => { ... }`，类型：function，默认值：必传；`wait` 示例值：`500`，类型：number，默认值：`300`。返回函数额外提供 `cancel` 和 `flush`。本示例展示输入框检索防抖，可以直接复制基础写法后替换查询接口。
+:::demo 展示输入框检索防抖。基础写法：`const search = useDebounceFn((value) => { ... }, 500)`。属性：`time` 类型 `number`，单位毫秒，默认值 `0`。
 hooks/useDebounceFn/base
 :::
 

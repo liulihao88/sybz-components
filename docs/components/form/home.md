@@ -12,79 +12,79 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。属性说明：`model` 示例值：`model`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`rules` 示例值：`rules`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。
 form/base
 :::
 
 ### 分组标题 `type="title"`
 
-:::demo 基础写法：`<s-form :model="formData" :fieldList="fieldList" :column="2" label-width="96">...</s-form>`。属性说明：`fieldList.type` 示例值：`title`，类型：string，可选值：`title`，默认值：未设置；`title` 示例值：`基本信息`，类型：string，默认值：`''`；`subTitle` 示例值：`补充展厅名称与介绍`，类型：string，默认值：`''`；`attrs` 示例值：`{ theme: 'chenghua', type: 'form' }`，类型：object，默认值：`{ theme: 'chenghua', type: 'form' }`；`useSlot` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`render` 示例值：`({ item, row, value, column, index }) => VNode`，类型：Function，默认值：未设置。本示例展示通过 `fieldList` 配置分组标题，可以直接复制基础写法后按业务替换数据。`type="title"` 会让当前项渲染为独立标题行，支持通过 `attrs` 透传 `s-title` 属性，也支持默认标题、插槽标题和 render 标题。
+:::demo 展示通过 `fieldList` 配置分组标题。基础写法：`<s-form :model="formData" :fieldList="fieldList" :column="2" label-width="96">...</s-form>`。属性：`title` 类型 `string`，默认值 `''`。
 form/title
 :::
 
 ### 表单校验规则
 
-:::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`column`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`rules` 示例值：`rules`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示表单场景，可以直接复制基础写法后按业务替换数据。
+:::demo 展示表单场景。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />`。属性：`column` 类型 `number`，默认值 `3`。
 form/rules
 :::
 
 ### 动态显隐 `isShow`
 
-:::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" />`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`size`，类型：string，可选值：`large` / `default` / `small`，默认值：继承全局尺寸或 `default`；`labelPosition` 示例值：`labelPosition`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示动态状态切换，可以直接复制基础写法后按业务替换数据。
+:::demo 展示动态状态切换。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
 form/isShow
 :::
 
 ### 多个属性
 
-:::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" :disabled="isDisabled" />`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`size`，类型：string，可选值：`large` / `default` / `small`，默认值：继承全局尺寸或 `default`；`labelPosition` 示例值：`labelPosition`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`disabled` 示例值：`isDisabled`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示多个属性配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示多个属性配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" :disabled="isDisabled" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
 form/other
 :::
 
 ## 添加/删除表单项
 
-:::demo 基础写法：`<s-form :fieldList="fieldList" :model="form" ref="sFormRef">...</s-form>`。属性说明：`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`model` 示例值：`form`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示多个属性配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示多个属性配置。基础写法：`<s-form :fieldList="fieldList" :model="form" ref="sFormRef">...</s-form>`。
 form/active
 :::
 
 ### 每行展示多少项
 
-:::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" />`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`column`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示每行展示多少项配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示每行展示多少项配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" />`。属性：`column` 类型 `number`，默认值 `3`。
 form/column
 :::
 
 ### 插槽
 
-:::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" :rules="rules">...</s-form>`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`1`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`rules` 示例值：`rules`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
+:::demo 展示插槽内容定制。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" :rules="rules">...</s-form>`。插槽：按示例中的插槽名定制内容。
 form/slot
 :::
 
 ### render函数
 
-:::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1">...</s-form>`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`1`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示自定义配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示自定义配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1">...</s-form>`。属性：`column` 类型 `number`，默认值 `3`。
 form/render
 :::
 
 ### 事件
 
-:::demo 基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" />`。属性说明：`model` 示例值：`formData`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`column` 示例值：`1`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示事件监听，可以直接复制基础写法后按业务替换数据。
+:::demo 展示事件监听。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" />`。属性：`column` 类型 `number`，默认值 `3`。
 form/event
 :::
 
 <!-- ### 通常用法
 
-:::demo 基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。属性说明：`model` 示例值：`model`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`rules` 示例值：`rules`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示事件监听。`model` 示例值：`model`，可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，可选值/默认值按内部组件或 Element Plus 对应属性；`rules` 示例值：`rules`，可选值/默认值按内部组件或 Element Plus 对应属性。
+:::demo 展示事件监听。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。
 form/usually
 :::
 
 ### 远程返回的表单数据
 
-:::demo 基础写法：`<s-form :model="model" :fieldList="fieldList" ref="gFormRef" label-width="100">...</s-form>`。属性说明：`model` 示例值：`model`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`label-width` 示例值：`100`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示表单场景。直接在一个对象里, 处理默认数据和校验规则。
+:::demo 展示表单场景。基础写法：`<s-form :model="model" :fieldList="fieldList" ref="gFormRef" label-width="100">...</s-form>`。属性：`label-width` 类型 `string / number`，默认值 `auto`。
 form/remote
 :::
 
 ### 自定义指令
 
-:::demo 基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。属性说明：`model` 示例值：`model`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`fieldList` 示例值：`fieldList`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`rules` 示例值：`rules`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示自定义配置。直接在一个对象里, 处理默认数据和校验规则。
+:::demo 展示自定义配置。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。
 form/directives
 ::: -->
 

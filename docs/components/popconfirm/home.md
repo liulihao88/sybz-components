@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-popconfirm @confirm="confirm">...</s-popconfirm>`。属性说明：`content` 示例值：`确定删除<mark>123</mark>吗?`，类型：string，默认值：`''`；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`true`；`reConfirm` 示例值：`false`，类型：boolean，默认值：`true`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-popconfirm @confirm="confirm">...</s-popconfirm>`。属性：`content` 类型 `string`，默认值 `''`；`dangerously-use-html-string` 可选 `true / false`，默认值 `false`；`re-confirm` 可选 `true / false`，默认值 `true`。
 popconfirm/base
 :::
 
@@ -20,19 +20,19 @@ popconfirm/base
 
 #### chenghua主题示例
 
-:::demo 基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm">...</s-popconfirm>`。属性说明：`theme` 示例值：`chenghua`，类型：`default / chenghua / shijingshan`，默认值：`default`；`title` 示例值：`确认删除任务`，类型：string，默认值：`确定删除吗?`；`content` 示例值：`确定删除<mark>智慧档案检索</mark>吗?`，类型：string，默认值：`''`；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`true`；`width` 示例值：`260`，类型：string / number，默认值：`200`；`trigger` 示例值：`click`，类型/可选值/默认值按内部组件或 Element Plus 对应属性。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 展示成华主题样式。基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm">...</s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 popconfirm/chenghua/base
 :::
 
 ### 通常用法
 
-:::demo 基础写法：`<s-popconfirm title="自定义title" content="自定义content" @confirm="confirm" trigger="click" width="500">...</s-popconfirm>`。属性说明：`title` 示例值：`自定义title`，类型：string，默认值：`确定删除吗?`；`content` 示例值：`自定义content`，类型：string，默认值：`''`；`trigger` 示例值：`click`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`width` 示例值：`500`，类型：string / number，默认值：`200`；`reConfirm` 示例值：`reConfirm`，类型：boolean，默认值：`true`。本示例展示通常用法配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示通常用法配置。基础写法：`<s-popconfirm title="自定义title" content="自定义content" @confirm="confirm" trigger="click" width="500">...</s-popconfirm>`。属性：`title` 类型 `string`，默认值 `''`；`content` 类型 `string`，默认值 `''`。
 popconfirm/usually
 :::
 
 ### Slots
 
-:::demo 基础写法：`<s-popconfirm trigger="click" @confirm="confirm" title="" ref="popoverRef">...</s-popconfirm>`。属性说明：`trigger` 示例值：`click`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`title` 示例值：`true`，类型：string，默认值：`确定删除吗?`。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。
+:::demo 展示插槽内容定制。基础写法：`<s-popconfirm trigger="click" @confirm="confirm" title="" ref="popoverRef">...</s-popconfirm>`。插槽：按示例中的插槽名定制内容。
 popconfirm/slot
 :::
 

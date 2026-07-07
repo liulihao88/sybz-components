@@ -12,13 +12,13 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-build-time />`。属性说明：该示例不需要额外属性，未传属性时使用组件默认值。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示基础用法。基础写法：`<s-build-time />`。该示例不需要额外属性。
 buildTime/base
 :::
 
 ### 横向展示
 
-:::demo 基础写法：`<s-build-time inline />`。属性说明：`inline` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示横向展示配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示横向展示配置。基础写法：`<s-build-time inline />`。属性：`inline` 可选 `true / false`，默认值 `false`。
 buildTime/inline
 :::
 

@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-:::demo 基础用法：`const handleClick = useThrottleFn(() => { ... }, 1000)`。属性说明：`fn` 示例值：`() => { ... }`，类型：function，默认值：必传；`wait` 示例值：`1000`，类型：number，默认值：`300`；`options.leading` 示例值：`true`，类型：boolean，默认值：`true`；`options.trailing` 示例值：`true`，类型：boolean，默认值：`true`。返回函数额外提供 `cancel` 和 `flush`。本示例展示按钮防重复点击，可以直接复制基础写法后替换业务操作。
+:::demo 展示按钮防重复点击。基础写法：`const handleClick = useThrottleFn(() => { ... }, 1000)`。
 hooks/useThrottleFn/base
 :::
 

@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-:::demo 基础用法：`const { state, setTrue, setFalse, toggle } = useBoolean(false)`。属性说明：`initialValue` 示例值：`false`，类型：boolean，默认值：`false`；返回值 `state` 是布尔 Ref，`setTrue` 设置为 true，`setFalse` 设置为 false，`toggle` 取反。本示例展示弹窗开关这类最常见场景，可以直接复制基础写法后按业务替换变量名。
+:::demo 展示弹窗开关这类最常见场景。基础写法：`const { state, setTrue, setFalse, toggle } = useBoolean(false)`。
 hooks/useBoolean/base
 :::
 
