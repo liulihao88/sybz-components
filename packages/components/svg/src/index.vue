@@ -36,6 +36,7 @@ const parseStyle = computed(() => {
 </script>
 <style lang="scss" scoped>
 .s-svg-box {
+  display: inline;
   fill: currentColor;
   overflow: hidden;
 }
