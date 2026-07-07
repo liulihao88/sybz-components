@@ -1,10 +1,6 @@
 import './styles/index.scss'
 
 import type { App, Component } from 'vue'
-// 全局注册vue-tippy
-import 'tippy.js/dist/tippy.css'
-import 'tippy.js/themes/light.css'
-import VueTippy from 'vue-tippy'
 
 import registerDirectives from './directives/gDirectives.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -70,7 +66,7 @@ const getComponentOptionKey = (component: any) => {
 
 const componentConfigKeys = new Set(Object.values(allComponents).map(getComponentOptionKey).filter(Boolean))
 
-const installOptionKeys = new Set(['registerDirectives', 'registerElementPlusIcons', 'useTippy'])
+const installOptionKeys = new Set(['registerDirectives', 'registerElementPlusIcons'])
 
 const shouldInstallOption = (value: boolean | undefined) => value !== false
 
@@ -122,10 +118,6 @@ const install = (app: App, options: SybzComponentsInstallOptions = {}) => {
     for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
       app.component(`el-icon-${toLine(key)}`, component)
     }
-  }
-
-  if (shouldInstallOption(options.useTippy)) {
-    app.use(VueTippy)
   }
 }
 

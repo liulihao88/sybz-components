@@ -21,7 +21,6 @@ import ScrollPositionRestore from '../../shared/ScrollPositionRestore.vue'
 import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
 import Logo from './logo.vue'
-import VueTippy from 'vue-tippy'
 import { registerBuildDebug } from '../../shared/buildDebug'
 
 // 基于element-plus二次封装基础组件
@@ -88,8 +87,6 @@ export default {
       },
       select: {},
     })
-    ctx.app.use(VueTippy)
-
     ctx.app.component('Demo', VPDemo)
     DefaultTheme.enhanceApp(ctx)
     registerBuildDebug()

@@ -26,8 +26,6 @@ const externalPackages = [
   'element-plus',
   '@element-plus/icons-vue',
   '@vueuse/core',
-  'vue-tippy',
-  'tippy.js',
   '@sybz-components/utils',
   'echarts',
   'vue-echarts',
@@ -37,8 +35,6 @@ const isExternalPackage = (id) =>
   /^element-plus(\/|$)/.test(id) ||
   /^@element-plus\/icons-vue(\/|$)/.test(id) ||
   /^@vueuse\/core(\/|$)/.test(id) ||
-  /^vue-tippy(\/|$)/.test(id) ||
-  /^tippy\.js(\/|$)/.test(id) ||
   /^echarts(\/|$)/.test(id) ||
   /^vue-echarts(\/|$)/.test(id) ||
   /^@sybz-components\/utils(\/|$)/.test(id)
@@ -60,8 +56,6 @@ export default defineConfig({
           'element-plus': 'ElementPlus',
           '@element-plus/icons-vue': 'ElementPlusIconsVue',
           '@vueuse/core': 'VueUse',
-          'vue-tippy': 'VueTippy',
-          'tippy.js': 'tippy',
           '@sybz-components/utils': 'SybzComponentsUtils',
           echarts: 'echarts',
           'echarts/core': 'echarts',

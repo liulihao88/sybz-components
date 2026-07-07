@@ -20,7 +20,7 @@
 ## 项目特色
 
 - 基于真实业务沉淀：组件来自实际项目中的通用场景，不只是 Element Plus 的简单换皮。
-- 默认兼容，按需收敛：一次 `app.use(SybzComponents)` 即可注册组件、内置指令、Element Plus 图标和 VueTippy，也可以关闭部分全局能力，减少安装副作用。
+- 默认兼容，按需收敛：一次 `app.use(SybzComponents)` 即可注册组件、内置指令和 Element Plus 图标，也可以关闭部分全局能力，减少安装副作用。
 - 统一默认配置：支持在安装时传入全局默认属性，例如 `theme`、`size`、组件级默认配置等。
 - 主题扩展：内置 `chenghua` 主题样式，适合在同一套组件里快速切换业务视觉风格。
 - 表格能力增强：提供 `STable` 相关类型和配置能力，适合复杂后台表格场景。
@@ -32,41 +32,59 @@
 推荐使用 `pnpm` 安装组件库和基础 peer 依赖：
 
 ```sh
-pnpm add sybz-components element-plus @element-plus/icons-vue @vueuse/core vue-tippy tippy.js echarts
+pnpm add sybz-components element-plus @element-plus/icons-vue @vueuse/core
 ```
 
 也可以使用 `npm` 或 `yarn`：
 
 ```sh
-npm install sybz-components element-plus @element-plus/icons-vue @vueuse/core vue-tippy tippy.js echarts
+npm install sybz-components element-plus @element-plus/icons-vue @vueuse/core
 ```
 
 ```sh
-yarn add sybz-components element-plus @element-plus/icons-vue @vueuse/core vue-tippy tippy.js echarts
+yarn add sybz-components element-plus @element-plus/icons-vue @vueuse/core
 ```
 
 使用 `bun`：
 
 ```sh
-bun add sybz-components element-plus @element-plus/icons-vue @vueuse/core vue-tippy tippy.js echarts
+bun add sybz-components element-plus @element-plus/icons-vue @vueuse/core
+```
+
+如果使用 `SChart` 或 `objectLine` 等基于 `echarts` 的图表组件，再安装：
+
+```sh
+pnpm add echarts
+```
+
+```sh
+bun add echarts
+```
+
+```sh
+npm install echarts
+```
+
+```sh
+yarn add echarts
 ```
 
 如果使用 `quotaPie`、`countBar` 等基于 `vue-echarts` 的业务图表组件，再安装：
 
 ```sh
-pnpm add vue-echarts
+pnpm add echarts vue-echarts
 ```
 
 ```sh
-bun add vue-echarts
+bun add echarts vue-echarts
 ```
 
 ```sh
-npm install vue-echarts
+npm install echarts vue-echarts
 ```
 
 ```sh
-yarn add vue-echarts
+yarn add echarts vue-echarts
 ```
 
 如需使用工具函数包：
@@ -189,13 +207,12 @@ app.use(SybzComponents, {
 
 ## 可选全局能力
 
-默认安装行为与历史版本保持一致，会注册内置指令、Element Plus 图标别名和 VueTippy。如果项目已经自行管理这些能力，可以在安装时关闭：
+默认安装行为会注册内置指令和 Element Plus 图标别名。如果项目已经自行管理这些能力，可以在安装时关闭：
 
 ```ts
 app.use(SybzComponents, {
   registerDirectives: false,
   registerElementPlusIcons: false,
-  useTippy: false,
 })
 ```
 
@@ -203,11 +220,10 @@ app.use(SybzComponents, {
 | -------------------------- | ----------------------------------------------------- | ------ |
 | `registerDirectives`       | 是否注册 `v-copy`、`v-focus`、`v-throttle` 等内置指令 | `true` |
 | `registerElementPlusIcons` | 是否全局注册 `el-icon-*` 格式的 Element Plus 图标别名 | `true` |
-| `useTippy`                 | 是否执行 `app.use(VueTippy)`                          | `true` |
 
 ## Peer 依赖说明
 
-组件库发布时会把 Vue、Element Plus、图标、VueUse、Tippy、ECharts 等运行时依赖外部化，避免把宿主项目已经安装的依赖再次打进组件库产物。基础使用建议安装 `vue`、`element-plus`、`@element-plus/icons-vue`、`@vueuse/core`、`vue-tippy`、`tippy.js` 和 `echarts`；`vue-echarts` 仅在使用业务图表组件时需要。
+组件库的 peer 依赖只保留基础运行时：`vue`、`element-plus`、`@element-plus/icons-vue` 和 `@vueuse/core`。`echarts`、`vue-echarts` 属于功能型依赖，仅在使用图表能力时由宿主项目按需安装。
 
 ## 常用组件
 

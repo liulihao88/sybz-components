@@ -51,16 +51,6 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     <template #header>
       <div class="card-header">
         <el-space wrap :size="40">
-          <el-link
-            v-tippy="{
-              content: '点击查看详细文档',
-            }"
-            href="https://element-plus.org/zh-CN/component/button.html"
-            target="_blank"
-            style="font-size: 16px; font-weight: 800"
-          >
-            Button 按钮
-          </el-link>
           <el-radio-group v-model="size">
             <el-radio value="large">大尺寸</el-radio>
             <el-radio value="default">默认尺寸</el-radio>
@@ -69,13 +59,6 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
           </el-radio-group>
         </el-space>
       </div>
-      <el-link
-        class="m-t-8"
-        href="https://github.com/pure-admin/vue-pure-admin/blob/main/src/views/components/s-button.vue"
-        target="_blank"
-      >
-        代码位置 src/views/components/s-button.vue
-      </el-link>
     </template>
 
     <div class="m-b-8">基础按钮</div>

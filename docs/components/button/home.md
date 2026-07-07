@@ -77,7 +77,7 @@ button/slots
 
 ### other
 
-:::demo 基础写法：`<el-card shadow="never">...</el-card>`。属性说明：`shadow` 示例值：`never`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`wrap` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`40`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`v-tippy` 示例值：`{ content: '点击查看详细文档', }`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`href` 示例值：`https://element-plus.org/zh-CN/co...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`target` 示例值：`_blank`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`v-model` 示例值：`size`，类型由绑定值决定，默认值由绑定变量初始值决定；`value` 示例值：`large`，类型：string / number，默认值：未设置。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<el-card shadow="never">...</el-card>`。属性说明：`shadow` 示例值：`never`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`wrap` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`40`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`href` 示例值：`https://element-plus.org/zh-CN/co...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`target` 示例值：`_blank`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`v-model` 示例值：`size`，类型由绑定值决定，默认值由绑定变量初始值决定；`value` 示例值：`large`，类型：string / number，默认值：未设置。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
 button/other
 :::
 

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, shallowRef, watch, markRaw, onBeforeUnmount, computed } from 'vue'
-import * as echarts from 'echarts'
 import { debounce, processWidth } from '@sybz-components/utils'
 import { useEcharts } from './useEcharts.ts'
 
@@ -12,6 +11,7 @@ const echartDivRef = shallowRef<HTMLElement | null>(null)
 const emits = defineEmits(['chart'])
 
 const chart = ref()
+let chartLoadToken = 0
 
 const props = withDefaults(
   defineProps<{
@@ -33,14 +33,21 @@ const props = withDefaults(
   },
 )
 
-const initChart = () => {
+const initChart = async () => {
   if (!echartDivRef.value) return
 
+  const token = ++chartLoadToken
+  const echarts = await import('echarts')
+
+  if (token !== chartLoadToken || !echartDivRef.value) return
+
+  chart.value?.dispose()
   chart.value = markRaw(echarts.init(echartDivRef.value, props.theme))
   // setOption(props.option)
   // 返回chart实例
   emits('chart', chart.value)
   setTimeout(() => {
+    if (token !== chartLoadToken || !chart.value) return
     useEcharts(chart.value, props.option)
   }, 0)
 }
@@ -99,6 +106,7 @@ defineExpose({
 })
 
 onBeforeUnmount(() => {
+  chartLoadToken += 1
   // 取消监听
   // window.removeEventListener('resize', resizeChart)
   // 销毁echarts实例

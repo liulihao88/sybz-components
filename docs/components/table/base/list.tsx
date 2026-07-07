@@ -21,7 +21,7 @@ import Layout from './layout.vue'
 import NestProp from './nestProp.vue'
 import ImgPreview from './imgPreview.vue'
 
-const rendContent = (val: string) => `代码位置：src/views/table/base/${val}.vue`
+const rendContent = (val: string) => `代码位置：table/base/${val}.vue`
 
 export const list = [
   {
