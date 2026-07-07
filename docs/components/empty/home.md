@@ -22,6 +22,12 @@ empty/base
 empty/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-empty theme="shijingshan" description="暂无服务申请" width="72">...</s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+empty/shijingshan/base
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-empty description="我是空白的" src="https://atts.w3cschool.cn/rabbit600x600.png" width="300">...</s-empty>`。属性：`description` 类型 `string`，默认值按组件默认配置；`src` 类型 `string`，默认值 `''`。

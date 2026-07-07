@@ -22,6 +22,12 @@ switch/base
 switch/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-switch v-model="enabled" theme="shijingshan" active-text="启用" inactive-text="停用" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+switch/shijingshan/base
+:::
+
 ### 属性
 
 |    属性名     | 说明                                                                             | 类型               | 默认值    |

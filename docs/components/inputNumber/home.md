@@ -33,6 +33,12 @@ inputNumber/base
 inputNumber/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-input-number v-model="count" theme="shijingshan" title="审核数量" width="240" height="40" :min="0" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+inputNumber/shijingshan/base
+:::
+
 ### 高度
 
 :::demo 展示高度配置。基础写法：`<s-input-number v-model="count" title="数量" width="220" height="40" :min="0" />`。属性：`height` 类型 `string / number`，默认值 `''`。

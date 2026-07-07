@@ -22,6 +22,14 @@ title/base
 title/chenghua/base
 :::
 
+### 石景山主题
+
+#### shijingshan主题示例
+
+:::demo 展示石景山主题样式。基础写法：`<s-title title="石景山 AI 服务申请" theme="shijingshan" sub-title="审批中 12 个，待处理 4 个">...</s-title>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+title/shijingshan/base
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-title title="左侧" tb="10" l="10">...</s-title>`。属性：`title` 类型 `string`，默认值 `''`。

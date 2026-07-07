@@ -32,6 +32,20 @@ tag/chenghua/chenghuaBase
 tag/chenghua/chenghuaMap
 :::
 
+### 石景山主题
+
+#### shijingshan基础用法
+
+:::demo 展示石景山基础用法。基础写法：`<s-tag theme="shijingshan" type="primary">运行中</s-tag>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+tag/shijingshan/shijingshanBase
+:::
+
+#### shijingshan映射状态
+
+:::demo 展示石景山主题样式。基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="shijingshan" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+tag/shijingshan/shijingshanMap
+:::
+
 ### 值匹配着色
 
 :::demo 展示值匹配着色配置。基础写法：`<s-tag :primary="[1, 2]" :value="value" :warning="[3, 4]" :danger="[5, 6]" :info="7" width="100" height="100">...</s-tag>`。属性：`value` 类型 `string / number / boolean`，默认值按组件配置；`width` 类型 `string / number`，默认值 `''`。

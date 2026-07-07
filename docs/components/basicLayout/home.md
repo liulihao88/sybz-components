@@ -20,6 +20,12 @@ basicLayout/base
 basicLayout/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-basic-layout v-model="collapsed" theme="shijingshan" title="审核规则管理">...</s-basic-layout>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+basicLayout/shijingshan/base
+:::
+
 ### 展开和收缩
 
 :::demo 展示展开和收缩配置。基础写法：`<SBasicLayout :collapsible="true">...</SBasicLayout>`。

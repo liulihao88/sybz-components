@@ -30,6 +30,14 @@ table/base
 table/chenghua/base
 :::
 
+### 石景山主题
+
+#### shijingshan主题示例
+
+:::demo 展示石景山主题样式。基础写法：`<s-table theme="shijingshan" size="small" :columns="columns" :data="data" :total="36" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+table/shijingshan/base
+:::
+
 ### other
 
 :::demo 展示other配置。基础写法：`<s-table :columns="columns" :data="data" v-bind="otherParams" :pageAttrs="{ layout: 'prev, pager, next, jumper', }">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。

@@ -24,6 +24,14 @@ popconfirm/base
 popconfirm/chenghua/base
 :::
 
+### 石景山主题
+
+#### shijingshan主题示例
+
+:::demo 展示石景山主题样式。基础写法：`<s-popconfirm theme="shijingshan" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm">...</s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+popconfirm/shijingshan/base
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-popconfirm title="自定义title" content="自定义content" @confirm="confirm" trigger="click" width="500">...</s-popconfirm>`。属性：`title` 类型 `string`，默认值 `''`；`content` 类型 `string`，默认值 `''`。

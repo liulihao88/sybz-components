@@ -22,6 +22,12 @@ checkbox/base
 checkbox/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="shijingshan" :options="options" gap="18">...</s-checkbox>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+checkbox/shijingshan/base
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" label="name" value="id">...</s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。

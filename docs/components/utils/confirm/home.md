@@ -18,6 +18,14 @@ utils/confirm/base
 utils/confirm/chenghua/base
 :::
 
+### 石景山主题
+
+#### shijingshan主题示例
+
+:::demo
+utils/confirm/shijingshan/base
+:::
+
 ### 在弹框中使用
 
 :::demo

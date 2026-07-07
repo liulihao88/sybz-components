@@ -22,6 +22,12 @@ radio/base
 radio/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-radio v-model="service" title="服务类型" theme="shijingshan" :options="serviceOptions" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+radio/shijingshan/base
+:::
+
 ### disabled
 
 :::demo 展示禁用状态。基础写法：`<s-radio v-model="value" :options="options" :disabled="true" />`。属性：`options` 类型 `array`，默认值 `[]`。

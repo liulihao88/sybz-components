@@ -20,6 +20,12 @@ warning/base
 warning/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-warning theme="shijingshan" title="服务提示" content="已启用石景山主题的信息提示，可用于展示普通说明。" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+warning/shijingshan/base
+:::
+
 ### 插槽
 
 :::demo 展示插槽内容定制。基础写法：`<s-warning>...</s-warning>`。插槽：按示例中的插槽名定制内容。

@@ -50,6 +50,24 @@ dialog/chenghua/base
 dialog/chenghua/drawer
 :::
 
+### 石景山样式
+
+设置 `theme="shijingshan"` 可以切换到石景山样式。石景山主题默认展示底部按钮，和普通 dialog 行为一致。
+
+#### shijingshan主题示例
+
+:::demo 展示石景山主题样式。基础写法：`<s-dialog title="默认石景山弹框" theme="shijingshan" width="512px" v-model="visible.base">...</s-dialog>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+dialog/shijingshan/base
+:::
+
+#### shijingshan 抽屉式用法
+
+设置 `theme="shijingshan"` 和 `type="drawer"` 时，`s-dialog` 会按石景山主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
+
+:::demo 展示石景山主题样式。基础写法：`<s-dialog v-model="visible" title="石景山抽屉式 dialog" theme="shijingshan" type="drawer" width="1000" confirm-text="保存" cancel-text="关闭">...</s-dialog>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+dialog/shijingshan/drawer
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-dialog ref="dialogRef" title="常用的dialog" @confirm="cusConfirm" width="100%" :closeOnClickModal="false" :confirmAttrs="{ loading: confirmLoading, }" confirmText="保存" v-model="isShow" @cancel="proxy.$toast('哈哈')" cancelText="高级配置" :cancelAttrs="{ type: 'primary', icon: 'el-icon-edit', }">...</s-dialog>`。属性：`title` 类型 `string`，默认值 `''`；`width` 类型 `string / number`，默认值 `''`。

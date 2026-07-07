@@ -24,6 +24,14 @@ input/base
 input/chenghua/base
 :::
 
+### 石景山主题
+
+#### shijingshan主题示例
+
+:::demo 展示石景山主题样式。基础写法：`<s-input v-model="input" width="320" theme="shijingshan" size="large" placeholder="请输入服务名称" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+input/shijingshan/base
+:::
+
 ### size 尺寸
 
 :::demo 展示尺寸配置。基础写法：`<s-input v-model="input" width="220" size="large" placeholder="large" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。

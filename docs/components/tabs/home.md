@@ -34,6 +34,12 @@ tabs/capsule
 tabs/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-tabs :options="navList" theme="shijingshan">...</s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+tabs/shijingshan/base
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。

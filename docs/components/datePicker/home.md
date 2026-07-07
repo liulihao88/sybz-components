@@ -22,6 +22,12 @@ datePicker/base
 datePicker/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-date-picker v-model="rangeValue" theme="shijingshan" type="daterange" title="审核周期" width="520" height="40" :compTitleStyle="{ width: 84 }">...</s-date-picker>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+datePicker/shijingshan/base
+:::
+
 ### 日期时间
 
 :::demo 展示日期时间配置。基础写法：`<s-date-picker v-model="datetimeValue" type="datetime" width="360" placeholder="选择日期时间">...</s-date-picker>`。属性：`type` 可选 `date / datetime / daterange / datetimerange` 等日期选择类型，默认值 `date`。

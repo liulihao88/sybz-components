@@ -22,6 +22,12 @@ compTitle/base
 compTitle/chenghua/base
 :::
 
+### 石景山主题
+
+:::demo 展示石景山主题样式。基础写法：`<s-comp-title title="审核周期" theme="shijingshan" :comp-title-style="{ width: 96 }" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+compTitle/shijingshan/base
+:::
+
 ### API
 
 |      属性名      | 说明                                                    | 类型                                   | 默认值    |
