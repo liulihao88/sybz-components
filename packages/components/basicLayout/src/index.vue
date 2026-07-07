@@ -13,6 +13,7 @@ interface BasicLayoutProps {
   headerStyle?: Record<string, any>
   bodyStyle?: Record<string, any>
   footerStyle?: Record<string, any>
+  transparent?: boolean
   border?: boolean
   scroll?: boolean
   square?: boolean
@@ -29,6 +30,7 @@ const props = withDefaults(defineProps<BasicLayoutProps>(), {
   headerStyle: () => ({}),
   bodyStyle: () => ({}),
   footerStyle: () => ({}),
+  transparent: false,
   border: true,
   scroll: true,
   square: false,
@@ -51,7 +53,16 @@ const headerRef = ref<HTMLDivElement | null>(null)
 const isCollapsed = ref(false)
 
 const boxMergedStyle = computed(() => {
+  const transparentStyle = mergedProps.value.transparent
+    ? {
+        borderColor: 'transparent',
+        background: 'transparent',
+        boxShadow: 'none',
+      }
+    : {}
+
   return {
+    ...transparentStyle,
     ...mergedProps.value.boxStyle,
     ...(mergedProps.value.square
       ? {
@@ -69,7 +80,16 @@ const headerMergedStyle = computed(() => {
       paddingBottom: 0,
     }
   }
+
+  const transparentStyle = mergedProps.value.transparent
+    ? {
+        borderBottom: 'none',
+        background: 'transparent',
+      }
+    : {}
+
   return {
+    ...transparentStyle,
     ...noBorderStyle,
     ...mergedProps.value.headerStyle,
   }
@@ -104,6 +124,35 @@ const squareStyle = computed(() => {
   return {}
 })
 
+const bodyMergedStyle = computed(() => {
+  const transparentStyle = mergedProps.value.transparent
+    ? {
+        background: 'transparent',
+      }
+    : {}
+
+  return {
+    ...transparentStyle,
+    ...mergedProps.value.bodyStyle,
+    ...scrollStyle.value,
+    ...squareStyle.value,
+  }
+})
+
+const footerMergedStyle = computed(() => {
+  const transparentStyle = mergedProps.value.transparent
+    ? {
+        borderTop: 'none',
+        background: 'transparent',
+      }
+    : {}
+
+  return {
+    ...transparentStyle,
+    ...mergedProps.value.footerStyle,
+  }
+})
+
 const compPadding = computed(() => {
   const { size } = mergedProps.value
   return size === 'default' ? '16px' : size === 'large' ? '24px' : '8px'
@@ -112,6 +161,7 @@ const compPadding = computed(() => {
 const layoutClass = computed(() => ({
   's-basic-layout--chenghua': mergedProps.value.theme === 'chenghua',
   's-basic-layout--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-basic-layout--transparent': mergedProps.value.transparent,
   'is-collapsed': isCollapsed.value,
   'is-collapsible': mergedProps.value.collapsible,
 }))
@@ -178,14 +228,10 @@ const handleIconClick = (event) => {
         </slot>
       </span>
     </div>
-    <div
-      v-show="!isCollapsed"
-      class="s-basic-layout__body"
-      :style="{ ...mergedProps.bodyStyle, ...scrollStyle, ...squareStyle }"
-    >
+    <div v-show="!isCollapsed" class="s-basic-layout__body" :style="bodyMergedStyle">
       <slot></slot>
     </div>
-    <div v-if="$slots.footer && !isCollapsed" class="s-basic-layout__footer" :style="mergedProps.footerStyle">
+    <div v-if="$slots.footer && !isCollapsed" class="s-basic-layout__footer" :style="footerMergedStyle">
       <slot name="footer"></slot>
     </div>
   </div>
@@ -199,6 +245,27 @@ const handleIconClick = (event) => {
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  &--transparent {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+
+    > .s-basic-layout__header,
+    > .s-basic-layout__body,
+    > .s-basic-layout__footer {
+      background: transparent;
+    }
+
+    > .s-basic-layout__header {
+      border-bottom-color: transparent;
+    }
+
+    > .s-basic-layout__footer {
+      border-top-color: transparent;
+    }
+  }
+
   &__header {
     padding: v-bind(compPadding);
     border-bottom: v-bind("isCollapsed ? 'none' : '1px solid var(--line)'");

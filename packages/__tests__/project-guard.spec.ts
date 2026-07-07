@@ -196,4 +196,18 @@ describe('component entry guards', () => {
       expect(styleContent, styleFile).toContain(styleFile === 'tokens.scss' ? '--s-sjs-' : 'shijingshan')
     }
   })
+
+  it('keeps basic layout transparent prop wired through component, types and docs', () => {
+    const component = readText('packages/components/basicLayout/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const componentTypes = readText('packages/types/components/basicLayout.d.ts')
+    const docs = readText('docs/components/basicLayout/home.md')
+
+    expect(component).toContain('transparent?: boolean')
+    expect(component).toContain('transparent: false')
+    expect(component).toContain("'s-basic-layout--transparent': mergedProps.value.transparent")
+    expect(componentProps).toContain('transparent?: boolean')
+    expect(componentTypes).toContain('transparent?: boolean')
+    expect(docs).toContain('<SBasicLayout transparent title="透明背景">')
+  })
 })

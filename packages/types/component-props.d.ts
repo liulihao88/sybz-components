@@ -233,6 +233,7 @@ export interface SBasicLayoutProps {
   headerStyle?: SybzRecord
   bodyStyle?: SybzRecord
   footerStyle?: SybzRecord
+  transparent?: boolean
   border?: boolean
   scroll?: boolean
   square?: boolean
