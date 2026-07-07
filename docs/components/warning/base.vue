@@ -54,6 +54,11 @@ const ulContent = `
     <br />
     <s-warning :content="htmlContent"></s-warning>
     <br />
-    <s-warning content="不要icon按钮" title="我是title" :dangerously-use-h-t-m-l-string="true" :icon="false"></s-warning>
+    <s-warning
+      content="不要icon按钮"
+      title="我是title"
+      :dangerously-use-h-t-m-l-string="true"
+      :icon="false"
+    ></s-warning>
   </div>
 </template>

@@ -85,7 +85,9 @@ export function createAlgolia() {
           },
           _snippetResult: {
             ...item._snippetResult,
-            content: isDocSearchHit ? item._snippetResult?.content || item._highlightResult?.content || snippetResult(content) : undefined,
+            content: isDocSearchHit
+              ? item._snippetResult?.content || item._highlightResult?.content || snippetResult(content)
+              : undefined,
             hierarchy: {
               ...item._snippetResult?.hierarchy,
               lvl0: item._snippetResult?.hierarchy?.lvl0 || snippetResult(hierarchy.lvl0),

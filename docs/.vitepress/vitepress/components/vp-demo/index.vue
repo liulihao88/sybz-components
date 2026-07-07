@@ -112,9 +112,8 @@ const handleDescriptionClick = (event: MouseEvent) => {
   const button = target.closest<HTMLButtonElement>('[data-demo-basic-copy]')
   if (!button) return
 
-  const code = button.previousElementSibling?.tagName.toLowerCase() === 'code'
-    ? button.previousElementSibling.textContent
-    : ''
+  const code =
+    button.previousElementSibling?.tagName.toLowerCase() === 'code' ? button.previousElementSibling.textContent : ''
 
   if (!code) {
     ElMessage.warning('未找到可复制的基础写法')

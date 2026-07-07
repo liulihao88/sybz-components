@@ -4,8 +4,9 @@ html {
 
 body {
   overflow-y: auto;
-  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1',
-    Arial, sans-serif !important;
+  font-family:
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial,
+    sans-serif !important;
   font-size: 14px;
   color: var(--vp-c-text-1);
 }
