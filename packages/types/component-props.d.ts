@@ -18,7 +18,7 @@ import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
 import type { TagPropsPublic } from 'element-plus/es/components/tag'
 import type { RowPropsPublic } from 'element-plus/es/components/row'
 
-export type SybzComponentTheme = '' | 'chenghua'
+export type SybzComponentTheme = '' | 'chenghua' | 'shijingshan'
 export type SybzComponentSize = '' | 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 
@@ -70,7 +70,7 @@ export interface SButtonSelfProps extends SHtmlStringProps {
   tooltipAttrs?: SybzRecord
   /** 组件主题 */
   theme?: SybzComponentTheme
-  /** chenghua 主题下的按钮变体 */
+  /** 主题按钮变体 */
   variant?: '' | 'outline' | 'gradient'
   /** 按钮尺寸 */
   size?: SybzComponentSize
@@ -135,7 +135,7 @@ export interface SDescriptionsOwnProps {
 }
 
 export type SDialogType = '' | 'drawer'
-export type SDialogTheme = '' | 'norm' | 'chenghua'
+export type SDialogTheme = '' | 'norm' | 'chenghua' | 'shijingshan'
 export type SDialogHandler = string | ((...args: any[]) => any)
 
 export interface SDialogSelfProps {
@@ -485,7 +485,7 @@ export interface STabsSelfProps {
   subAttrs?: SybzRecord
   trigger?: 'click' | 'hover'
   type?: '' | 'capsule' | TabsPropsPublic['type']
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   size?: 'small' | 'default' | 'large'
 }
 

@@ -19,7 +19,7 @@
           <span v-if="!mergedProps.hideHeaderIcon" class="s-dialog__header-icon-box">
             <slot name="headerIcon">
               <svg
-                v-if="mergedProps.theme !== 'chenghua'"
+                v-if="!isBusinessTheme"
                 class="s-dialog__header-icon"
                 viewBox="0 0 1024 1024"
                 aria-hidden="true"
@@ -139,12 +139,15 @@ const props = withDefaults(defineProps<DialogProps>(), {
   hideHeaderIcon: false,
 })
 const mergedProps = useGlobalComponentConfig('dialog', props)
+const isBusinessTheme = computed(() => ['chenghua', 'shijingshan'].includes(mergedProps.value.theme))
 
 const getThemeClass = computed(() => {
   if (mergedProps.value.theme === 'norm') {
     return 's-norm-dialog'
   } else if (mergedProps.value.theme === 'chenghua') {
     return 's-chenghua-dialog'
+  } else if (mergedProps.value.theme === 'shijingshan') {
+    return 's-shijingshan-dialog'
   } else {
     return ''
   }
@@ -172,6 +175,7 @@ const panelClass = computed(() => {
     attrs.class,
     isDrawer.value ? 's-dialog__drawer' : '',
     isDrawer.value && mergedProps.value.theme === 'chenghua' ? 's-dialog__drawer--chenghua' : '',
+    isDrawer.value && mergedProps.value.theme === 'shijingshan' ? 's-dialog__drawer--shijingshan' : '',
   ].filter(Boolean)
 })
 
@@ -179,20 +183,24 @@ const mergedShowFooter = computed(() => {
   return mergedProps.value.showFooter ?? true
 })
 
-const dialogButtonTheme = computed(() => {
-  return mergedProps.value.theme === 'chenghua' ? 'chenghua' : ''
+const dialogButtonTheme = computed<'' | 'chenghua' | 'shijingshan'>(() => {
+  if (mergedProps.value.theme === 'chenghua' || mergedProps.value.theme === 'shijingshan') {
+    return mergedProps.value.theme
+  }
+
+  return ''
 })
 
 const mergedConfirmAttrs = computed<DialogButtonAttrs>(() => {
   return {
-    icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-check',
+    icon: isBusinessTheme.value ? '' : 'el-icon-check',
     ...mergedProps.value.confirmAttrs,
   }
 })
 
 const mergedCancelAttrs = computed<DialogButtonAttrs>(() => {
   return {
-    icon: mergedProps.value.theme === 'chenghua' ? '' : 'el-icon-close',
+    icon: isBusinessTheme.value ? '' : 'el-icon-close',
     ...mergedProps.value.cancelAttrs,
   }
 })

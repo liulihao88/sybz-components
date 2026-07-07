@@ -1,0 +1,192 @@
+@import '../shared/button.scss';
+
+.s-button--shijingshan.s-button--shijingshan {
+  --el-button-font-weight: 500;
+  --el-button-border-radius: var(--s-sjs-radius);
+
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--s-sjs-radius);
+  font-family: var(--s-sjs-font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  @include s-themed-button-transition(0.2s);
+
+  &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+      .el-button--info
+    ):not(.is-link):not(.is-text) {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: var(--s-sjs-primary);
+    --el-button-text-color: var(--s-sjs-primary);
+    --el-button-hover-bg-color: rgba(var(--s-sjs-primary-rgb), 0.06);
+    --el-button-hover-border-color: var(--s-sjs-primary-hover);
+    --el-button-hover-text-color: var(--s-sjs-primary-hover);
+    --el-button-active-bg-color: rgba(var(--s-sjs-primary-rgb), 0.1);
+    --el-button-active-border-color: var(--s-sjs-primary-active);
+    --el-button-active-text-color: var(--s-sjs-primary-active);
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: var(--s-sjs-divider);
+    --el-button-disabled-text-color: var(--s-sjs-text-muted);
+
+    box-shadow: none;
+  }
+
+  &.el-button--primary {
+    --s-sjs-button-type-color: var(--s-sjs-primary);
+    --s-sjs-button-type-hover: var(--s-sjs-primary-hover);
+    --s-sjs-button-type-active: var(--s-sjs-primary-active);
+    --s-sjs-button-type-disabled: rgba(var(--s-sjs-primary-rgb), 0.36);
+  }
+
+  &.el-button--success {
+    --s-sjs-button-type-color: var(--s-sjs-success);
+    --s-sjs-button-type-hover: #22c55e;
+    --s-sjs-button-type-active: #059669;
+    --s-sjs-button-type-disabled: rgba(16, 185, 129, 0.36);
+  }
+
+  &.el-button--warning {
+    --s-sjs-button-type-color: var(--s-sjs-warning);
+    --s-sjs-button-type-hover: #f8b64a;
+    --s-sjs-button-type-active: #d98b13;
+    --s-sjs-button-type-disabled: rgba(245, 166, 35, 0.36);
+  }
+
+  &.el-button--danger {
+    --s-sjs-button-type-color: var(--s-sjs-danger);
+    --s-sjs-button-type-hover: #f87171;
+    --s-sjs-button-type-active: #dc2626;
+    --s-sjs-button-type-disabled: rgba(239, 68, 68, 0.36);
+  }
+
+  &.el-button--info {
+    --s-sjs-button-type-color: var(--s-sjs-info);
+    --s-sjs-button-type-hover: #7b8390;
+    --s-sjs-button-type-active: #4b5563;
+    --s-sjs-button-type-disabled: rgba(107, 114, 128, 0.36);
+  }
+
+  &.el-button--primary,
+  &.el-button--success,
+  &.el-button--warning,
+  &.el-button--danger,
+  &.el-button--info {
+    --el-button-bg-color: var(--s-sjs-button-type-color);
+    --el-button-border-color: var(--s-sjs-button-type-color);
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: var(--s-sjs-button-type-hover);
+    --el-button-hover-border-color: var(--s-sjs-button-type-hover);
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: var(--s-sjs-button-type-active);
+    --el-button-active-border-color: var(--s-sjs-button-type-active);
+    --el-button-active-text-color: #ffffff;
+    --el-button-disabled-bg-color: var(--s-sjs-button-type-disabled);
+    --el-button-disabled-border-color: transparent;
+    --el-button-disabled-text-color: #ffffff;
+
+    box-shadow: var(--s-sjs-shadow-soft);
+  }
+
+  &.is-link,
+  &.is-text {
+    --el-button-text-color: var(--s-sjs-text-regular);
+    --el-button-hover-text-color: var(--s-sjs-primary);
+    --el-button-active-text-color: var(--s-sjs-primary-active);
+    --el-button-disabled-text-color: var(--s-sjs-text-muted);
+
+    min-height: auto;
+    padding: 0 8px;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    box-shadow: none;
+  }
+
+  &.el-button--small {
+    min-height: 36px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  &.el-button--large {
+    min-height: 48px;
+    padding: 12px 20px;
+  }
+
+  @include s-themed-button-icon-gap(6px);
+
+  &.s-button--shijingshan-outline {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: var(--s-sjs-primary);
+    --el-button-text-color: var(--s-sjs-primary);
+    --el-button-hover-bg-color: rgba(var(--s-sjs-primary-rgb), 0.06);
+    --el-button-hover-border-color: var(--s-sjs-primary-hover);
+    --el-button-hover-text-color: var(--s-sjs-primary-hover);
+    --el-button-active-bg-color: rgba(var(--s-sjs-primary-rgb), 0.1);
+    --el-button-active-border-color: var(--s-sjs-primary-active);
+    --el-button-active-text-color: var(--s-sjs-primary-active);
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: var(--s-sjs-divider);
+    --el-button-disabled-text-color: var(--s-sjs-text-muted);
+
+    box-shadow: none;
+  }
+
+  &.s-button--shijingshan-gradient {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: transparent;
+    --el-button-outline-color: transparent;
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: transparent;
+    --el-button-hover-border-color: transparent;
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: transparent;
+    --el-button-active-border-color: transparent;
+    --el-button-active-text-color: #ffffff;
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: transparent;
+    --el-button-disabled-text-color: rgba(255, 255, 255, 0.8);
+
+    border: 0;
+    outline: none;
+    background: linear-gradient(90deg, var(--s-sjs-primary) 0%, var(--s-sjs-accent) 100%);
+    color: #ffffff;
+    box-shadow: var(--s-sjs-shadow-soft);
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      border: 0;
+      outline: none;
+      background: linear-gradient(90deg, var(--s-sjs-primary-hover) 0%, var(--s-sjs-accent-hover) 100%);
+      color: #ffffff;
+      box-shadow: var(--s-sjs-shadow-soft);
+    }
+
+    &:active {
+      border: 0;
+      outline: none;
+      background: linear-gradient(90deg, var(--s-sjs-primary-active) 0%, var(--s-sjs-accent-active) 100%);
+      color: #ffffff;
+      box-shadow: var(--s-sjs-shadow-soft);
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus,
+    &.is-disabled:active {
+      border: 0;
+      outline: none;
+      background: linear-gradient(
+        90deg,
+        rgba(var(--s-sjs-primary-rgb), 0.36) 0%,
+        rgba(var(--s-sjs-accent-rgb), 0.36) 100%
+      );
+      color: rgba(255, 255, 255, 0.8);
+      box-shadow: none;
+    }
+  }
+}

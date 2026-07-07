@@ -1,0 +1,86 @@
+.s-basic-layout.s-basic-layout--shijingshan.s-basic-layout--shijingshan {
+  --s-basic-layout-border: rgba(var(--s-sjs-primary-rgb), 0.16);
+  --s-basic-layout-shadow: 0 10px 24px rgba(var(--s-sjs-primary-rgb), 0.08);
+  --s-basic-layout-header-bg: linear-gradient(
+    180deg,
+    rgba(var(--s-sjs-primary-rgb), 0.08) 0%,
+    rgba(var(--s-sjs-primary-rgb), 0.04) 100%
+  );
+
+  background: var(--s-sjs-bg);
+  border: 1px solid var(--s-basic-layout-border);
+  border-radius: var(--s-sjs-radius);
+  box-shadow: var(--s-basic-layout-shadow);
+  overflow: hidden;
+  font-family: var(--s-sjs-font-family);
+
+  .s-basic-layout__header,
+  .s-basic-layout__body,
+  .s-basic-layout__footer {
+    background: transparent;
+  }
+
+  .s-basic-layout__header {
+    min-height: 48px;
+    border-bottom: 1px solid rgba(var(--s-sjs-primary-rgb), 0.12);
+    background: var(--s-basic-layout-header-bg);
+  }
+
+  &.is-collapsed .s-basic-layout__header {
+    border-bottom: none;
+  }
+
+  .s-basic-layout__header-main {
+    min-width: 0;
+  }
+
+  .s-basic-layout__body {
+    color: var(--s-sjs-text-regular);
+  }
+
+  .s-basic-layout__footer {
+    border-top: 1px solid rgba(var(--s-sjs-primary-rgb), 0.12);
+    background: rgba(var(--s-sjs-primary-rgb), 0.02);
+  }
+
+  .collapse-arrow {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: var(--s-sjs-primary);
+    background: rgba(var(--s-sjs-primary-rgb), 0.08);
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .collapse-arrow .s-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
+    font-size: 14px;
+  }
+
+  .collapse-arrow:hover {
+    background: rgba(var(--s-sjs-primary-rgb), 0.14);
+    color: var(--s-sjs-primary-hover);
+  }
+
+  .collapse-arrow.collapsed {
+    transform: rotate(-90deg);
+  }
+
+  .s-title.s-title--shijingshan.s-title--shijingshan {
+    margin: 0;
+
+    .s-title__top {
+      padding-bottom: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}

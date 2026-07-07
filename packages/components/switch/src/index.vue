@@ -8,7 +8,7 @@ defineOptions({
 })
 
 interface SwitchProps {
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   beforeChange?: (...args: any[]) => any
   width?: string | number
 }
@@ -45,6 +45,7 @@ const handleWidth = computed(() => {
 
 const switchClass = computed(() => ({
   's-switch--chenghua': mergedProps.value.theme === 'chenghua',
+  's-switch--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
 </script>
 

@@ -28,7 +28,7 @@ defineOptions({
 })
 
 type TabsType = '' | 'capsule' | TabsPropsPublic['type']
-type TabsTheme = '' | 'chenghua'
+type TabsTheme = '' | 'chenghua' | 'shijingshan'
 
 const attrs = useAttrs()
 const props = defineProps({
@@ -75,6 +75,7 @@ let slideDirectionTimer: ReturnType<typeof setTimeout> | undefined
 
 const isCapsuleType = computed(() => props.type === 'capsule')
 const isChenghuaTheme = computed(() => props.theme === 'chenghua')
+const isShijingshanTheme = computed(() => props.theme === 'shijingshan')
 
 const forwardedAttrs = computed(() => {
   const nextAttrs = { ...attrs } as Record<string, unknown>
@@ -102,6 +103,7 @@ const boxClass = computed(() => [
   {
     's-tabs-box--capsule': isCapsuleType.value,
     's-tabs-box--chenghua': isChenghuaTheme.value,
+    's-tabs-box--shijingshan': isShijingshanTheme.value,
     's-tabs-box--capsule-slide-left': isCapsuleType.value && slideDirection.value === 'left',
     's-tabs-box--capsule-slide-right': isCapsuleType.value && slideDirection.value === 'right',
   },

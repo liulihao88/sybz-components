@@ -9,11 +9,7 @@
       <div class="s-title__main" :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }">
         <span :class="($slots.icon || mergedProps.type === 'icon') && 's-title__slot-icon-wrapper'">
           <slot name="icon" class="icon_slot">
-            <span
-              v-if="mergedProps.theme === 'chenghua' && mergedProps.type === 'icon'"
-              class="s-title__chenghua-icon"
-              aria-hidden="true"
-            ></span>
+            <span v-if="isThemeIcon" class="s-title__theme-icon" aria-hidden="true"></span>
             <svg
               v-else-if="mergedProps.type === 'icon'"
               class="s-title__default-icon"
@@ -87,7 +83,7 @@ interface TitleProps {
   tb?: string | number
   height?: string | number
   type?: 'simple' | 'icon' | 'form' | string
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
 }
 
 const props = withDefaults(defineProps<TitleProps>(), {
@@ -143,7 +139,11 @@ const parseClass = computed(() => {
 
 const titleClass = computed(() => ({
   's-title--chenghua': mergedProps.value.theme === 'chenghua',
+  's-title--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
+const isThemeIcon = computed(() => {
+  return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) && mergedProps.value.type === 'icon'
+})
 </script>
 
 <style scoped lang="scss">

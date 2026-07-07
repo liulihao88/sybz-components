@@ -18,7 +18,7 @@ interface BasicLayoutProps {
   square?: boolean
   collapsible?: boolean
   collapseTrigger?: 'icon' | 'header'
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
 }
 
 const props = withDefaults(defineProps<BasicLayoutProps>(), {
@@ -111,6 +111,7 @@ const compPadding = computed(() => {
 
 const layoutClass = computed(() => ({
   's-basic-layout--chenghua': mergedProps.value.theme === 'chenghua',
+  's-basic-layout--shijingshan': mergedProps.value.theme === 'shijingshan',
   'is-collapsed': isCollapsed.value,
   'is-collapsible': mergedProps.value.collapsible,
 }))

@@ -1,0 +1,13 @@
+.s-comp-title.s-comp-title--shijingshan.s-comp-title--shijingshan {
+  border-color: var(--s-sjs-primary-border);
+  border-right: 0;
+  border-top-left-radius: var(--s-sjs-radius);
+  border-bottom-left-radius: var(--s-sjs-radius);
+  background: var(--s-sjs-fill);
+  color: var(--s-sjs-text);
+  box-shadow: none;
+  font-family: var(--s-sjs-font-family);
+  font-weight: 600;
+  padding-left: var(--s-sjs-comp-title-padding-x);
+  padding-right: var(--s-sjs-comp-title-padding-x);
+}

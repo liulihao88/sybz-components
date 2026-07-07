@@ -1,0 +1,30 @@
+.s-button--hover-animation.s-button--hover-animation {
+  transform-origin: center;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.28s ease;
+  will-change: transform;
+
+  &:not(.is-disabled):not(.is-loading):hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+}
+
+@mixin s-themed-button-transition($transform-duration: 0.28s) {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform $transform-duration ease;
+}
+
+@mixin s-themed-button-icon-gap($gap: 8px) {
+  .el-icon + span,
+  span + .el-icon {
+    margin-left: $gap;
+  }
+}

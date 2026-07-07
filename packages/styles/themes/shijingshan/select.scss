@@ -1,0 +1,219 @@
+.s-select.s-select--shijingshan.s-select--shijingshan {
+  font-family: var(--s-sjs-font-family);
+
+  .el-select {
+    --el-select-border-color-hover: var(--s-sjs-primary-border-hover);
+    --el-select-input-focus-border-color: var(--s-sjs-primary);
+  }
+
+  .el-select__wrapper {
+    border-radius: var(--s-sjs-radius);
+    background: var(--s-sjs-control-bg);
+    box-shadow: 0 0 0 1px var(--s-sjs-primary-border) inset;
+    transition:
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .el-select__wrapper:hover {
+    box-shadow: 0 0 0 1px var(--s-sjs-primary-border-hover) inset;
+  }
+
+  .el-select__wrapper.is-focused,
+  .el-select__wrapper.is-hovering:not(.is-focused) {
+    box-shadow:
+      0 0 0 1px var(--s-sjs-primary) inset,
+      0 8px 18px rgba(var(--s-sjs-primary-rgb), 0.08);
+  }
+
+  .el-select__placeholder,
+  .el-select__selected-item {
+    color: var(--s-sjs-text);
+  }
+
+  .el-select__placeholder.is-transparent {
+    color: var(--s-sjs-text-muted);
+  }
+
+  .el-select__caret,
+  .el-select__clear {
+    color: var(--s-sjs-primary);
+  }
+
+  .el-select__selection .el-tag {
+    --el-tag-bg-color: var(--el-color-primary-light-9);
+    --el-tag-border-color: var(--el-color-primary-light-5);
+    --el-tag-hover-color: var(--el-color-primary-light-8);
+    --el-tag-text-color: var(--el-color-primary);
+
+    border-color: var(--el-color-primary-light-5);
+    background-color: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
+  }
+
+  .el-select__selection .el-tag__content {
+    color: var(--el-color-primary);
+  }
+
+  .el-select__selection .el-tag__close {
+    color: var(--el-color-primary);
+  }
+
+  .el-select__selection .el-tag__close:hover {
+    background-color: var(--el-color-primary);
+    color: #ffffff;
+  }
+
+  .s-comp-title {
+    color: var(--s-sjs-text);
+    font-weight: 500;
+  }
+
+  &.has-title .el-select__wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &.has-quick .el-select__wrapper {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .s-select__select-box {
+    border-color: var(--s-sjs-primary-border);
+    background: var(--s-sjs-fill);
+    color: var(--s-sjs-primary);
+  }
+
+  .s-select__select-box__inner {
+    color: var(--s-sjs-primary);
+  }
+
+  .s-select__select-box__inner > .s-icon {
+    width: 100%;
+    flex: 1 1 0;
+    min-height: 0;
+    background: transparent;
+    color: var(--s-sjs-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--s-select-quick-icon-size) !important;
+  }
+
+  .s-select__select-box__inner > .s-icon > span,
+  .s-select__select-box__inner > .s-icon .el-tooltip__trigger {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .s-select__select-box__inner > .s-icon svg {
+    width: var(--s-select-quick-icon-size);
+    height: var(--s-select-quick-icon-size);
+  }
+
+  .s-select__select-box__inner > .s-icon:hover {
+    background: var(--s-sjs-primary-soft);
+    color: var(--s-sjs-primary-hover);
+  }
+
+  .s-select__select-box__inner > .s-icon:hover * {
+    background: transparent;
+    color: inherit;
+  }
+
+  .s-select__divider {
+    background: rgba(var(--s-sjs-primary-rgb), 0.16);
+  }
+
+  .s-select__empty .el-select__wrapper {
+    box-shadow: 0 0 0 1px var(--el-color-danger) inset;
+  }
+}
+
+.s-select__popper--shijingshan.s-select__popper--shijingshan {
+  border: 1px solid rgba(var(--s-sjs-primary-rgb), 0.14);
+  border-radius: var(--s-sjs-radius);
+  box-shadow: 0 12px 32px rgba(var(--s-sjs-primary-rgb), 0.14);
+  font-family: var(--s-sjs-font-family);
+
+  .el-select-dropdown__list {
+    padding: 6px;
+  }
+
+  .el-select-dropdown__item {
+    height: 34px;
+    border-radius: var(--s-sjs-radius-small);
+    color: var(--s-sjs-text);
+    line-height: 34px;
+  }
+
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover {
+    background: var(--s-sjs-primary-soft);
+    color: var(--s-sjs-primary);
+  }
+
+  .el-select-dropdown__item.selected,
+  .el-select-dropdown__item.is-selected {
+    background: transparent;
+    color: var(--s-sjs-primary);
+    font-weight: 600;
+  }
+
+  .el-select-dropdown__item.selected.hover,
+  .el-select-dropdown__item.selected:hover,
+  .el-select-dropdown__item.is-selected.is-hovering,
+  .el-select-dropdown__item.is-selected:hover {
+    background: var(--s-sjs-primary-soft);
+    color: var(--s-sjs-primary);
+  }
+
+  .el-select-dropdown.is-multiple .el-select-dropdown__item.selected::after,
+  .el-select-dropdown.is-multiple .el-select-dropdown__item.is-selected::after {
+    background-color: var(--s-sjs-primary);
+  }
+
+  .el-select-dropdown__item.is-disabled {
+    color: var(--s-sjs-text-muted);
+    opacity: 0.58;
+  }
+
+  .s-select__all-select {
+    --el-checkbox-checked-bg-color: var(--s-sjs-primary);
+    --el-checkbox-checked-input-border-color: var(--s-sjs-primary);
+    --el-checkbox-checked-text-color: var(--s-sjs-primary);
+    --el-checkbox-input-border-color-hover: var(--s-sjs-primary);
+
+    margin: 2px 6px 6px;
+    padding: 6px 10px;
+    border-radius: var(--s-sjs-radius-small);
+    color: var(--s-sjs-text);
+  }
+
+  .s-select__all-select .el-checkbox__input.is-checked .el-checkbox__inner,
+  .s-select__all-select .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    border-color: var(--s-sjs-primary);
+    background-color: var(--s-sjs-primary);
+  }
+
+  .s-select__all-select .el-checkbox__input.is-checked + .el-checkbox__label,
+  .s-select__all-select .el-checkbox__input.is-indeterminate + .el-checkbox__label {
+    color: var(--s-sjs-primary);
+  }
+
+  .s-select__all-select:hover {
+    background: var(--s-sjs-primary-soft);
+  }
+
+  .reverse-select {
+    --el-button-bg-color: var(--s-sjs-primary);
+    --el-button-border-color: var(--s-sjs-primary);
+    --el-button-hover-bg-color: var(--s-sjs-primary-hover);
+    --el-button-hover-border-color: var(--s-sjs-primary-hover);
+  }
+}

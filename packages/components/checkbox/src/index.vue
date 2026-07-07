@@ -29,7 +29,7 @@ interface CheckboxProps {
   customDisabled?: (...args: any[]) => any
   customLabel?: ((...args: any[]) => any) | string
   gap?: number | string
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
 }
 
@@ -136,6 +136,7 @@ const hasGap = computed(() => !isEmpty(getGapValue.value, true))
 const checkboxClass = computed(() => ({
   's-gap-checkbox': hasGap.value,
   's-checkbox--chenghua': mergedProps.value.theme === 'chenghua',
+  's-checkbox--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-checkbox--button': mergedProps.value.showType === 'button',
 }))
 </script>

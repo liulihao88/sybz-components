@@ -6,7 +6,7 @@ const audit = ref(false)
 const priority = ref(1)
 
 const attrs = [
-  { label: 'theme', value: "'' | 'chenghua'", defaultValue: "''" },
+  { label: 'theme', value: "'' | 'chenghua' | 'shijingshan'", defaultValue: "''" },
   { label: 'width', value: 'string | number', defaultValue: "''" },
   { label: 'active-text', value: 'string', defaultValue: "''" },
   { label: 'inactive-text', value: 'string', defaultValue: "''" },

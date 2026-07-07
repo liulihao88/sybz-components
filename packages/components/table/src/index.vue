@@ -62,7 +62,7 @@ interface TableProps {
   showPage?: boolean
   showIndex?: boolean
   size?: string
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]
@@ -127,11 +127,12 @@ const customHeaderCellStyle = computed<Record<string, any>>(() => {
   return (attrs['custom-header-cell-style'] as unknown as Record<string, any>) ?? {}
 })
 const tableHeaderCellStyle = computed<Record<string, any>>(() => {
+  const themeHeaderBg = mergedProps.value.theme === 'shijingshan' ? 'var(--s-sjs-header-bg)' : 'var(--s-ch-header-bg)'
   const baseStyle =
-    mergedProps.value.theme === 'chenghua'
+    mergedProps.value.theme === 'chenghua' || mergedProps.value.theme === 'shijingshan'
       ? {
-          background: 'var(--s-table-ch-header-bg)',
-          color: '#1d2b4f',
+          background: themeHeaderBg,
+          color: mergedProps.value.theme === 'shijingshan' ? 'var(--s-sjs-text)' : '#1d2b4f',
           fontWeight: 600,
           textAlign: 'center',
         }
@@ -889,6 +890,7 @@ const wrapperStyle = computed(() => {
 const tableClass = computed(() => ({
   's-table--fluid-height': !!fluidHeight.value,
   's-table--chenghua': mergedProps.value.theme === 'chenghua',
+  's-table--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
 
 const tableAttrs = computed(() => {

@@ -33,7 +33,7 @@ interface SButtonSelfProps {
   content?: string
   tooltipAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   variant?: '' | 'outline' | 'gradient'
   size?: '' | 'small' | 'default' | 'large'
   width?: string | number
@@ -107,6 +107,10 @@ const buttonClass = computed(() => ({
   's-button--chenghua': mergedProps.value.theme === 'chenghua',
   's-button--chenghua-outline': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'outline',
   's-button--chenghua-gradient': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'gradient',
+  's-button--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-button--shijingshan-outline': mergedProps.value.theme === 'shijingshan' && mergedProps.value.variant === 'outline',
+  's-button--shijingshan-gradient':
+    mergedProps.value.theme === 'shijingshan' && mergedProps.value.variant === 'gradient',
 }))
 
 const handleClick = (evt: MouseEvent) => {

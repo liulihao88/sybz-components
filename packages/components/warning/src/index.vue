@@ -12,7 +12,7 @@ defineOptions({
 interface Props {
   content: string
   title?: string
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
   width?: string | number
   dangerouslyUseHTMLString?: boolean
@@ -63,16 +63,22 @@ const mergedStyle = computed(() => {
 })
 
 const infoIconColor = computed(() => {
-  return mergedProps.value.theme === 'chenghua' ? 'var(--s-ch-primary)' : 'var(--45)'
+  if (mergedProps.value.theme === 'chenghua') return 'var(--s-ch-primary)'
+  if (mergedProps.value.theme === 'shijingshan') return 'var(--s-sjs-primary)'
+  return 'var(--45)'
 })
 
 const errorIconColor = computed(() => {
-  return mergedProps.value.theme === 'chenghua' ? 'var(--s-ch-danger)' : 'var(--el-color-danger)'
+  if (mergedProps.value.theme === 'chenghua') return 'var(--s-ch-danger)'
+  if (mergedProps.value.theme === 'shijingshan') return 'var(--s-sjs-danger)'
+  return 'var(--el-color-danger)'
 })
 
 function parseClass(): string {
   let type = mergedProps.value.type
-  const themeClass = mergedProps.value.theme === 'chenghua' ? ' s-warning-box--chenghua' : ''
+  const themeClass = ['chenghua', 'shijingshan'].includes(mergedProps.value.theme)
+    ? ` s-warning-box--${mergedProps.value.theme}`
+    : ''
   return `s-warning__${type}${themeClass}`
 }
 </script>

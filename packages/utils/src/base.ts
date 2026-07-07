@@ -140,7 +140,7 @@ interface ConfirmOptions extends ElMessageBoxOptions {
   /**
    * 确认框主题。
    */
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   /**
    * 手动传入 appContext，处理多应用或嵌套弹窗场景。
    */
@@ -165,6 +165,9 @@ const DEFAULT_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn'
 const CHENGHUA_CONFIRM_BOX_CLASS = 's-message-box--chenghua'
 const CHENGHUA_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn--chenghua'
 const CHENGHUA_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--chenghua'
+const SHIJINGSHAN_CONFIRM_BOX_CLASS = 's-message-box--shijingshan'
+const SHIJINGSHAN_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn--shijingshan'
+const SHIJINGSHAN_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--shijingshan'
 
 function _getBrowserStorage(isSession = false): Storage | null {
   if (typeof window === 'undefined') {
@@ -1497,6 +1500,7 @@ export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, a
   const resolvedAppendTo = _resolveAppendTarget(appendTo)
   const resolvedAppContext = _resolveAppContext(optionAppContext || appContext)
   const isChenghuaTheme = theme === 'chenghua'
+  const isShijingshanTheme = theme === 'shijingshan'
 
   const mergeOptions = {
     title: '提示',
@@ -1508,15 +1512,21 @@ export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, a
     ...messageBoxOptions,
     appendTo: resolvedAppendTo,
     appContext: resolvedAppContext,
-    customClass: _mergeClassNames(isChenghuaTheme && CHENGHUA_CONFIRM_BOX_CLASS, customClass),
+    customClass: _mergeClassNames(
+      isChenghuaTheme && CHENGHUA_CONFIRM_BOX_CLASS,
+      isShijingshanTheme && SHIJINGSHAN_CONFIRM_BOX_CLASS,
+      customClass,
+    ),
     confirmButtonClass: _mergeClassNames(
       DEFAULT_CONFIRM_BUTTON_CLASS,
       isChenghuaTheme && CHENGHUA_CONFIRM_BUTTON_CLASS,
+      isShijingshanTheme && SHIJINGSHAN_CONFIRM_BUTTON_CLASS,
       confirmButtonClass,
     ),
     cancelButtonClass: _mergeClassNames(
       DEFAULT_CANCEL_BUTTON_CLASS,
       isChenghuaTheme && CHENGHUA_CANCEL_BUTTON_CLASS,
+      isShijingshanTheme && SHIJINGSHAN_CANCEL_BUTTON_CLASS,
       cancelButtonClass,
     ),
   }

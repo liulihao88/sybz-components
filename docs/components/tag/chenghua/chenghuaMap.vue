@@ -13,7 +13,7 @@ const serviceStatus = ['running', 'pending', 'error', 'unknown']
   <div class="tag-chenghua-demo">
     <div class="tag-demo-meta">
       <span>属性: theme</span>
-      <span>可选值: '' | 'chenghua'</span>
+      <span>可选值: '' | 'chenghua' | 'shijingshan'</span>
       <span>默认值: ''</span>
       <span>属性: options</span>
       <span>可选值: array</span>

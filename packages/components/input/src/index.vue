@@ -123,7 +123,7 @@ interface SInputProps {
   hideMaxLengthError?: boolean
   maxLengthErrorText?: string
   size?: InputSize | ''
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   showWordLimit?: boolean | string
   block?: boolean
   disPlaceholder?: string
@@ -172,6 +172,7 @@ const inputClass = computed(() => [
   {
     'has-content': mergedProps.value.content,
     's-input--chenghua': mergedProps.value.theme === 'chenghua',
+    's-input--shijingshan': mergedProps.value.theme === 'shijingshan',
   },
 ])
 

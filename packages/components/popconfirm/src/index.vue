@@ -56,7 +56,7 @@ interface PopconfirmProps {
   content?: string
   reConfirm?: boolean
   dangerouslyUseHTMLString?: boolean
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   disabled?: boolean
 }
 
@@ -91,6 +91,7 @@ const popperClass = computed(() => {
   return [
     's-popconfirm__popper',
     mergedProps.value.theme === 'chenghua' ? 's-popconfirm__popper--chenghua' : '',
+    mergedProps.value.theme === 'shijingshan' ? 's-popconfirm__popper--shijingshan' : '',
     attrPopperClass,
   ]
     .filter(Boolean)
@@ -98,7 +99,7 @@ const popperClass = computed(() => {
 })
 
 const popconfirmButtonTheme = computed(() => {
-  return mergedProps.value.theme === 'chenghua' ? 'chenghua' : ''
+  return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) ? mergedProps.value.theme : ''
 })
 
 const safeTitle = computed(() => String(mergedProps.value.title ?? ''))
@@ -154,6 +155,7 @@ defineExpose({
     class="s-popconfirm__simple_box"
     :class="{
       's-popconfirm__simple_box--chenghua': mergedProps.theme === 'chenghua',
+      's-popconfirm__simple_box--shijingshan': mergedProps.theme === 'shijingshan',
       'is-disabled': isDisabled,
     }"
     @click="confirm"

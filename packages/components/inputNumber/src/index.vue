@@ -31,7 +31,7 @@ interface InputNumberProps {
   compTitleStyle?: Record<string, any>
   width?: string | number
   height?: string | number
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
   subAttrs?: Record<string, any>
 }
@@ -65,6 +65,7 @@ const inputNumberClass = computed(() => [
   attrs.class,
   {
     's-input-number--chenghua': mergedProps.value.theme === 'chenghua',
+    's-input-number--shijingshan': mergedProps.value.theme === 'shijingshan',
     'has-title': !!mergedProps.value.title,
   },
 ])

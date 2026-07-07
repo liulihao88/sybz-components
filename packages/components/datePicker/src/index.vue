@@ -15,7 +15,7 @@ interface DatePickerProps {
   width?: string | number
   height?: string | number
   compTitleStyle?: Record<string, any>
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
 }
 
@@ -256,6 +256,7 @@ const datePickerStyle = computed(() => {
 })
 const datePickerClass = computed(() => ({
   's-date-picker--chenghua': mergedProps.value.theme === 'chenghua',
+  's-date-picker--shijingshan': mergedProps.value.theme === 'shijingshan',
   'has-title': !!mergedProps.value.title,
 }))
 const rootClass = computed<any>(() => [datePickerClass.value, attrs.class])
@@ -277,7 +278,11 @@ const inheritedPopperClass = computed(() => {
   return [attrs['popper-class'], attrs.popperClass].filter((item) => typeof item === 'string' && item.trim()).join(' ')
 })
 const datePickerPopperClass = computed(() => {
-  return [inheritedPopperClass.value, mergedProps.value.theme === 'chenghua' ? 's-date-picker__popper--chenghua' : '']
+  return [
+    inheritedPopperClass.value,
+    mergedProps.value.theme === 'chenghua' ? 's-date-picker__popper--chenghua' : '',
+    mergedProps.value.theme === 'shijingshan' ? 's-date-picker__popper--shijingshan' : '',
+  ]
     .filter(Boolean)
     .join(' ')
 })

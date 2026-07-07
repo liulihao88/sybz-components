@@ -1,0 +1,35 @@
+.s-empty.s-empty--shijingshan.s-empty--shijingshan {
+  --el-empty-padding: 24px 0;
+
+  height: 100%;
+  color: var(--s-sjs-text);
+  font-family: var(--s-sjs-font-family);
+
+  .el-empty__image {
+    width: unset;
+  }
+
+  .el-empty__image img,
+  .el-empty__image svg {
+    display: block;
+    opacity: 0.88;
+    filter: saturate(0.86) drop-shadow(0 10px 18px rgba(var(--s-sjs-primary-rgb), 0.08));
+  }
+
+  .el-empty__description {
+    margin-top: 12px;
+  }
+
+  .el-empty__description p,
+  .el-empty__description {
+    color: #6d7b99;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .el-empty__bottom {
+    margin-top: 14px;
+    color: var(--s-sjs-text-regular);
+  }
+}

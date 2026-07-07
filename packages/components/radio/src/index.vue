@@ -34,7 +34,7 @@ defineOptions({
 interface RadioProps {
   title?: string
   compTitleStyle?: Record<string, any>
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
   type?: 'boolean' | 'simple' | ''
   showType?: 'radio' | 'button'
@@ -109,6 +109,7 @@ const parseOptions = computed(() => {
 const radioClass = computed(() => {
   return {
     's-radio-box--chenghua': mergedProps.value.theme === 'chenghua',
+    's-radio-box--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-radio-box--button': mergedProps.value.showType === 'button',
     's-radio-box--border': Boolean(attrs.border ?? mergedProps.value.border),
   }

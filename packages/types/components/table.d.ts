@@ -20,7 +20,7 @@ export type STableComponent = {
       showPage?: boolean
       showIndex?: boolean
       size?: string
-      theme?: '' | 'chenghua'
+      theme?: '' | 'chenghua' | 'shijingshan'
       pageSize?: number
       pageNumber?: number
       pageSizes?: number[]

@@ -1,17 +1,4 @@
-.s-button--hover-animation.s-button--hover-animation {
-  transform-origin: center;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.28s ease;
-  will-change: transform;
-
-  &:not(.is-disabled):not(.is-loading):hover {
-    transform: translateY(-2px) scale(1.03);
-  }
-}
+@import '../shared/button.scss';
 
 .s-button--chenghua.s-button--chenghua {
   --el-button-font-weight: 500;
@@ -20,12 +7,7 @@
   border-radius: var(--s-ch-radius);
   font-family: var(--s-ch-font-family);
   line-height: 1;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.28s ease;
+  @include s-themed-button-transition();
 
   &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
       .el-button--info
@@ -116,10 +98,7 @@
     font-size: 14px;
   }
 
-  .el-icon + span,
-  span + .el-icon {
-    margin-left: 8px;
-  }
+  @include s-themed-button-icon-gap();
 
   &.s-button--chenghua-outline {
     --el-button-bg-color: var(--s-ch-bg);

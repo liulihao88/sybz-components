@@ -11,7 +11,7 @@ const attrs = useAttrs()
 interface CompTitleProps {
   title?: string
   compTitleStyle?: Record<string, any>
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
 }
 
 const props = withDefaults(defineProps<CompTitleProps>(), {
@@ -41,6 +41,7 @@ const compTitleClass = computed(() => [
   sizeClass.value,
   {
     's-comp-title--chenghua': mergedProps.value.theme === 'chenghua',
+    's-comp-title--shijingshan': mergedProps.value.theme === 'shijingshan',
   },
 ])
 </script>

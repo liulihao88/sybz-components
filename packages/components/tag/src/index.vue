@@ -8,7 +8,7 @@ import { getType, isEmpty } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
-type TagTheme = '' | 'chenghua'
+type TagTheme = '' | 'chenghua' | 'shijingshan'
 type TagSize = '' | 'small' | 'default' | 'large'
 type TagRule = string | number | boolean | any[]
 
@@ -138,6 +138,7 @@ const parseType = computed(() => {
 
 const tagClass = computed(() => ({
   's-tag--chenghua': mergedProps.value.theme === 'chenghua',
+  's-tag--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
 </script>
 

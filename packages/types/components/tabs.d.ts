@@ -16,7 +16,7 @@ export type STabsComponent = {
       subAttrs?: SybzRecord
       trigger?: 'click' | 'hover'
       type?: '' | 'capsule' | TabsPropsPublic['type']
-      theme?: '' | 'chenghua'
+      theme?: '' | 'chenghua' | 'shijingshan'
       size?: 'small' | 'default' | 'large'
     } & Omit<
       ElTabsInstance['$props'],

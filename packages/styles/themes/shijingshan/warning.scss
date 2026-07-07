@@ -1,0 +1,96 @@
+.s-warning-box.s-warning-box--shijingshan.s-warning-box--shijingshan.s-warning-box--shijingshan {
+  --s-warning-ch-color: var(--s-sjs-primary);
+  --s-warning-ch-color-rgb: var(--s-sjs-primary-rgb);
+  --s-warning-ch-soft: rgba(var(--s-warning-ch-color-rgb), 0.08);
+  --s-warning-ch-border: rgba(var(--s-warning-ch-color-rgb), 0.24);
+  --s-warning-ch-border-strong: rgba(var(--s-warning-ch-color-rgb), 0.66);
+  --s-code-primary-color: var(--s-warning-ch-color);
+  --s-code-primary-bg-color: var(--s-warning-ch-soft);
+  --s-code-primary-border-color: var(--s-warning-ch-border);
+  --s-code-success-color: var(--s-sjs-success);
+  --s-code-success-bg-color: rgba(var(--s-sjs-success-rgb), 0.08);
+  --s-code-success-border-color: rgba(var(--s-sjs-success-rgb), 0.18);
+  --s-code-warning-color: var(--s-sjs-warning);
+  --s-code-warning-bg-color: rgba(var(--s-sjs-warning-rgb), 0.08);
+  --s-code-warning-border-color: rgba(var(--s-sjs-warning-rgb), 0.2);
+  --s-code-danger-color: var(--s-sjs-danger);
+  --s-code-danger-bg-color: rgba(var(--s-sjs-danger-rgb), 0.08);
+  --s-code-danger-border-color: rgba(var(--s-sjs-danger-rgb), 0.18);
+  --s-code-info-color: var(--s-sjs-info);
+  --s-code-info-bg-color: rgba(var(--s-sjs-info-rgb), 0.08);
+  --s-code-info-border-color: rgba(var(--s-sjs-info-rgb), 0.18);
+
+  align-items: flex-start;
+  min-height: 40px;
+  border-color: var(--s-warning-ch-border);
+  border-left-color: var(--s-warning-ch-color);
+  border-radius: var(--s-sjs-radius);
+  background: linear-gradient(
+    180deg,
+    rgba(var(--s-warning-ch-color-rgb), 0.08) 0%,
+    rgba(var(--s-warning-ch-color-rgb), 0.04) 100%
+  );
+  color: var(--s-sjs-text);
+  font-family: var(--s-sjs-font-family);
+  box-shadow: 0 6px 18px rgba(var(--s-warning-ch-color-rgb), 0.06);
+
+  .s-warning-box__title,
+  .s-warning-box__title--info,
+  .s-warning-box__title--warning,
+  .s-warning-box__title--error,
+  .s-warning-box__title--simple {
+    color: var(--s-warning-ch-color);
+    font-weight: 600;
+  }
+
+  .s-warning-box__content,
+  .s-warning-box__content--muted {
+    color: var(--s-sjs-text-regular);
+    line-height: 1.6;
+  }
+
+  .s-warning-box__icon,
+  .s-warning-box__img {
+    margin-right: 8px;
+  }
+
+  .s-warning-box__icon {
+    color: var(--s-warning-ch-color);
+  }
+
+  blue {
+    background-color: var(--s-warning-ch-soft);
+    color: var(--s-warning-ch-color);
+  }
+}
+
+.s-warning-box.s-warning-box--shijingshan.s-warning-box--shijingshan.s-warning__info {
+  --s-warning-ch-color: var(--s-sjs-primary);
+  --s-warning-ch-color-rgb: var(--s-sjs-primary-rgb);
+}
+
+.s-warning-box.s-warning-box--shijingshan.s-warning-box--shijingshan.s-warning__warning {
+  --s-warning-ch-color: var(--s-sjs-warning);
+  --s-warning-ch-color-rgb: var(--s-sjs-warning-rgb);
+}
+
+.s-warning-box.s-warning-box--shijingshan.s-warning-box--shijingshan.s-warning__error {
+  --s-warning-ch-color: var(--s-sjs-danger);
+  --s-warning-ch-color-rgb: var(--s-sjs-danger-rgb);
+}
+
+.s-warning-box.s-warning-box--shijingshan.s-warning-box--shijingshan.s-warning__simple {
+  --s-warning-ch-color: var(--s-sjs-info);
+  --s-warning-ch-color-rgb: var(--s-sjs-info-rgb);
+
+  min-height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  .s-warning-box__content,
+  .s-warning-box__content--muted {
+    color: var(--s-sjs-text-muted);
+  }
+}

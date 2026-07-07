@@ -28,7 +28,7 @@ const modeOptions = [
   <div class="radio-chenghua-demo">
     <div class="radio-chenghua-demo__meta">
       <span>属性: theme</span>
-      <span>可选值: '' | 'chenghua'</span>
+      <span>可选值: '' | 'chenghua' | 'shijingshan'</span>
       <span>默认值: ''</span>
       <span>属性: showType</span>
       <span>可选值: radio | button</span>

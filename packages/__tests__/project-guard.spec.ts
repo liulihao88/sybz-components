@@ -162,4 +162,38 @@ describe('component entry guards', () => {
     expect(entry).toContain('shouldInstallOption(options.registerElementPlusIcons)')
     expect(entry).toContain('app.component(`el-icon-${toLine(key)}`, component)')
   })
+
+  it('keeps shijingshan theme wired through global type, class, style and docs', () => {
+    const button = readText('packages/components/button/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const styleEntry = readText('packages/styles/index.scss')
+    const themeEntry = readText('packages/styles/themes/shijingshan.scss')
+    const themeTokens = readText('packages/styles/themes/shijingshan/tokens.scss')
+    const buttonThemeStyle = readText('packages/styles/themes/shijingshan/button.scss')
+    const buttonDocs = readText('docs/components/button/home.md')
+
+    expect(button).toContain("'s-button--shijingshan': mergedProps.value.theme === 'shijingshan'")
+    expect(componentProps).toContain("export type SybzComponentTheme = '' | 'chenghua' | 'shijingshan'")
+    expect(componentProps).not.toContain('SButtonTheme')
+    expect(styleEntry).toContain("@import './themes/shijingshan.scss';")
+    expect(themeEntry).toContain("@import './shijingshan/button.scss';")
+    expect(themeTokens).toContain('--s-sjs-primary: #2a6df4')
+    expect(buttonThemeStyle).toContain('.s-button--shijingshan.s-button--shijingshan')
+    expect(buttonDocs).toContain('button/shijingshan/base')
+  })
+
+  it('keeps shijingshan theme component style coverage aligned with chenghua', () => {
+    const chenghuaEntry = readText('packages/styles/themes/chenghua.scss')
+    const shijingshanEntry = readText('packages/styles/themes/shijingshan.scss')
+    const chenghuaImports = Array.from(chenghuaEntry.matchAll(/@import '\.\/chenghua\/([^']+)';/g)).map(
+      (match) => match[1],
+    )
+
+    for (const styleFile of chenghuaImports) {
+      expect(shijingshanEntry, styleFile).toContain(`@import './shijingshan/${styleFile}';`)
+      const styleContent = readText(`packages/styles/themes/shijingshan/${styleFile}`)
+      expect(styleContent.trim(), styleFile).not.toBe('')
+      expect(styleContent, styleFile).toContain(styleFile === 'tokens.scss' ? '--s-sjs-' : 'shijingshan')
+    }
+  })
 })

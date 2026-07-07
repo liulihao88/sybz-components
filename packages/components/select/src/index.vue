@@ -118,7 +118,7 @@ interface SelectProps {
   showPrefix?: boolean
   showQuick?: boolean
   size?: string
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   title?: string
   compTitleStyle?: Record<string, any>
   connect?: string
@@ -392,7 +392,9 @@ const selectStyle = computed(() => {
   return style
 })
 const themeClass = computed(() => {
-  return mergedProps.value.theme === 'chenghua' ? 's-select--chenghua' : ''
+  if (mergedProps.value.theme === 'chenghua') return 's-select--chenghua'
+  if (mergedProps.value.theme === 'shijingshan') return 's-select--shijingshan'
+  return ''
 })
 const inheritedPopperClass = computed(() => {
   return [attrs['popper-class'], attrs.popperClass].filter((item) => typeof item === 'string' && item.trim()).join(' ')
@@ -402,6 +404,7 @@ const selectPopperClass = computed(() => {
     's-select__multiple-checkbox',
     inheritedPopperClass.value,
     mergedProps.value.theme === 'chenghua' ? 's-select__popper--chenghua' : '',
+    mergedProps.value.theme === 'shijingshan' ? 's-select__popper--shijingshan' : '',
   ]
     .filter(Boolean)
     .join(' ')

@@ -86,7 +86,7 @@ const attrs = useAttrs()
 
 type DescriptionsProps = {
   options: ItemOptions[]
-  theme?: '' | 'chenghua'
+  theme?: '' | 'chenghua' | 'shijingshan'
   column?: number
   labelWidth?: any
   showAll?: boolean
@@ -259,6 +259,7 @@ const getTextAlign = computed(() => {
 
 const descriptionsClass = computed(() => ({
   's-descriptions--chenghua': mergedProps.value.theme === 'chenghua',
+  's-descriptions--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
 
 // 在组件卸载时清理测量元素

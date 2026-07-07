@@ -10,7 +10,7 @@ defineOptions({
 const props = withDefaults(
   defineProps<{
     description?: string
-    theme?: '' | 'chenghua'
+    theme?: '' | 'chenghua' | 'shijingshan'
     width?: string | number
     height?: string | number
     imgAttrs?: Record<string, any>
@@ -32,6 +32,7 @@ const emptyBindProps = computed(() => {
 })
 const emptyClass = computed(() => ({
   's-empty--chenghua': mergedProps.value.theme === 'chenghua',
+  's-empty--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
 /** @使用方式
 <s-empty description="您没有消费订单" width="48"></s-empty>
