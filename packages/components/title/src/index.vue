@@ -98,7 +98,7 @@ const props = withDefaults(defineProps<TitleProps>(), {
   l: '',
   tb: undefined,
   height: '',
-  type: 'icon',
+  type: '',
   theme: 'default',
 })
 const mergedProps = useGlobalComponentConfig('title', props)
@@ -238,6 +238,7 @@ const isThemeIcon = computed(() => {
     display: inline-flex;
     align-items: center;
     min-width: 0;
+    margin-right: 8px;
     overflow: hidden;
     font-size: 14px;
     font-weight: 400;
