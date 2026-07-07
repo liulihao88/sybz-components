@@ -173,7 +173,7 @@ describe('component entry guards', () => {
     const buttonDocs = readText('docs/components/button/home.md')
 
     expect(button).toContain("'s-button--shijingshan': mergedProps.value.theme === 'shijingshan'")
-    expect(componentProps).toContain("export type SybzComponentTheme = '' | 'chenghua' | 'shijingshan'")
+    expect(componentProps).toContain("export type SybzComponentTheme = 'default' | 'chenghua' | 'shijingshan'")
     expect(componentProps).not.toContain('SButtonTheme')
     expect(styleEntry).toContain("@import './themes/shijingshan.scss';")
     expect(themeEntry).toContain("@import './shijingshan/button.scss';")

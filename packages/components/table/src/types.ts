@@ -147,7 +147,7 @@ export interface STableProps<Row extends TableRow = TableRow> {
   showPage?: boolean
   showIndex?: boolean
   size?: string
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]

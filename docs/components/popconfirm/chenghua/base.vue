@@ -12,8 +12,8 @@ function confirm() {
   <div class="popconfirm-chenghua-demo">
     <div class="popconfirm-chenghua-demo__props">
       <span>属性: theme</span>
-      <span>可选值: '' | chenghua | shijingshan</span>
-      <span>默认值: ''</span>
+      <span>可选值: default | chenghua | shijingshan</span>
+      <span>默认值: default</span>
       <span>属性: content</span>
       <span>支持: 文本 | 安全白名单 HTML</span>
       <span>默认值: ''</span>

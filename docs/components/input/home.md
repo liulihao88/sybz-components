@@ -20,7 +20,7 @@ input/base
 
 #### chenghua主题示例
 
-:::demo 基础写法：`<s-input v-model="input" width="320" theme="chenghua" size="large" placeholder="请输入服务名称" />`。属性说明：`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`100%`；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`size` 示例值：`large`，类型：string，默认值：`''`；`placeholder` 示例值：`请输入服务名称`，类型：string，默认值：`""`；`title` 示例值：`负责人`，类型：string，默认值：`""`；`maxlength` 示例值：`10`，类型：string / number，默认值：`10`；`type` 示例值：`textarea`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-input v-model="input" width="320" theme="chenghua" size="large" placeholder="请输入服务名称" />`。属性说明：`v-model` 示例值：`input`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`100%`；`theme` 示例值：`chenghua`，类型：string，默认值：`default`；`size` 示例值：`large`，类型：string，默认值：`''`；`placeholder` 示例值：`请输入服务名称`，类型：string，默认值：`""`；`title` 示例值：`负责人`，类型：string，默认值：`""`；`maxlength` 示例值：`10`，类型：string / number，默认值：`10`；`type` 示例值：`textarea`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 input/chenghua/base
 :::
 
@@ -89,27 +89,27 @@ input/autocomplete
 
 ### 属性
 
-|           属性名           | 说明                                              | 类型             | 默认值  |
-| :------------------------: | ------------------------------------------------- | ---------------- | ------- |
-|        `modelValue`        | 绑定值                                            | any              | -       |
-|      `compTitleStyle`      | 标题前缀组件样式                                  | object           | `{}`    |
-|          `width`           | 输入框宽度                                        | string / number  | `100%`  |
-|          `height`          | 输入框高度                                        | string / number  | `''`    |
-|        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示  | string / number  | `10`    |
-|    `hideMaxLengthError`    | 是否隐藏超出最大长度时的 `$toast` 提示            | boolean          | `false` |
-|    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案          | string           | `''`    |
-|           `size`           | 输入框尺寸                                        | string           | `''`    |
-|          `theme`           | 输入框主题                                        | string           | `''`    |
-|      `showWordLimit`       | 是否显示字数统计                                  | boolean / string | `''`    |
-|          `block`           | 是否按块级宽度展示                                | boolean          | `false` |
-|      `disPlaceholder`      | 禁用态下显示的占位文案                            | string           | `''`    |
-|         `subAttrs`         | 外层容器额外属性                                  | object           | `{}`    |
-|       `tooltipAttrs`       | tooltip 额外属性                                  | object           | `{}`    |
-|        `iconAttrs`         | 右侧提示图标属性                                  | object           | `{}`    |
-|       `hideTooltip`        | 是否关闭溢出提示                                  | boolean          | `false` |
-|         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`    | array            | -       |
-|         `content`          | 右侧说明提示文案                                  | string           | `''`    |
-| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染 | boolean          | `false` |
+|           属性名           | 说明                                              | 类型             | 默认值    |
+| :------------------------: | ------------------------------------------------- | ---------------- | --------- |
+|        `modelValue`        | 绑定值                                            | any              | -         |
+|      `compTitleStyle`      | 标题前缀组件样式                                  | object           | `{}`      |
+|          `width`           | 输入框宽度                                        | string / number  | `100%`    |
+|          `height`          | 输入框高度                                        | string / number  | `''`      |
+|        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示  | string / number  | `10`      |
+|    `hideMaxLengthError`    | 是否隐藏超出最大长度时的 `$toast` 提示            | boolean          | `false`   |
+|    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案          | string           | `''`      |
+|           `size`           | 输入框尺寸                                        | string           | `''`      |
+|          `theme`           | 输入框主题                                        | string           | `default` |
+|      `showWordLimit`       | 是否显示字数统计                                  | boolean / string | `''`      |
+|          `block`           | 是否按块级宽度展示                                | boolean          | `false`   |
+|      `disPlaceholder`      | 禁用态下显示的占位文案                            | string           | `''`      |
+|         `subAttrs`         | 外层容器额外属性                                  | object           | `{}`      |
+|       `tooltipAttrs`       | tooltip 额外属性                                  | object           | `{}`      |
+|        `iconAttrs`         | 右侧提示图标属性                                  | object           | `{}`      |
+|       `hideTooltip`        | 是否关闭溢出提示                                  | boolean          | `false`   |
+|         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`    | array            | -         |
+|         `content`          | 右侧说明提示文案                                  | string           | `''`      |
+| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染 | boolean          | `false`   |
 
 ### 说明
 

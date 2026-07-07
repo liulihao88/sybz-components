@@ -31,7 +31,7 @@ interface InputNumberProps {
   compTitleStyle?: Record<string, any>
   width?: string | number
   height?: string | number
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
   subAttrs?: Record<string, any>
 }
@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   compTitleStyle: undefined,
   width: '',
   height: '',
-  theme: '',
+  theme: 'default',
   size: '',
   subAttrs: () => ({}),
 })

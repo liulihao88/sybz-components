@@ -8,7 +8,7 @@ import { getType, isEmpty } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
-type TagTheme = '' | 'chenghua' | 'shijingshan'
+type TagTheme = 'default' | 'chenghua' | 'shijingshan'
 type TagSize = '' | 'small' | 'default' | 'large'
 type TagRule = string | number | boolean | any[]
 
@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<TagProps>(), {
   info: false,
   other: 'primary',
   type: '',
-  theme: '',
+  theme: 'default',
   size: '',
   config: () => ({}),
 })

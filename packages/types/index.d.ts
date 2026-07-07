@@ -1,9 +1,11 @@
+import type { SybzComponentTheme } from './component-props'
+
 export type SybzComponentInstallConfig = Record<string, any>
 
 export interface SybzComponentsInstallOptions {
   registerDirectives?: boolean
   registerElementPlusIcons?: boolean
-  theme?: string
+  theme?: SybzComponentTheme
   size?: string
   dangerouslyUseHTMLString?: boolean
   button?: SybzComponentInstallConfig

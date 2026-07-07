@@ -102,7 +102,7 @@ interface DialogProps {
   title?: string
   subTitle?: string
   width?: string | number
-  theme?: '' | 'norm' | 'norm16' | 'simple' | 'chenghua' | string
+  theme?: 'default' | 'norm' | 'norm16' | 'simple' | 'chenghua' | 'shijingshan'
   cancel?: DialogAction
   cancelText?: string
   confirmText?: string
@@ -123,7 +123,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   title: '提示',
   subTitle: '',
   width: '',
-  theme: '', // 弹框样式: 默认空, norm norm16 simple chenghua
+  theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan
   cancel: '',
   cancelText: '取消',
   confirmText: '确认',
@@ -183,12 +183,12 @@ const mergedShowFooter = computed(() => {
   return mergedProps.value.showFooter ?? true
 })
 
-const dialogButtonTheme = computed<'' | 'chenghua' | 'shijingshan'>(() => {
+const dialogButtonTheme = computed<'default' | 'chenghua' | 'shijingshan'>(() => {
   if (mergedProps.value.theme === 'chenghua' || mergedProps.value.theme === 'shijingshan') {
     return mergedProps.value.theme
   }
 
-  return ''
+  return 'default'
 })
 
 const mergedConfirmAttrs = computed<DialogButtonAttrs>(() => {

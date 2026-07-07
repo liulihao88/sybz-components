@@ -140,7 +140,7 @@ interface ConfirmOptions extends ElMessageBoxOptions {
   /**
    * 确认框主题。
    */
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   /**
    * 手动传入 appContext，处理多应用或嵌套弹窗场景。
    */

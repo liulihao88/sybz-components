@@ -12,7 +12,7 @@ defineOptions({
 interface Props {
   content: string
   title?: string
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
   width?: string | number
   dangerouslyUseHTMLString?: boolean
@@ -26,7 +26,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   title: '',
-  theme: '',
+  theme: 'default',
   type: 'info',
   width: '100%',
   dangerouslyUseHTMLString: false,

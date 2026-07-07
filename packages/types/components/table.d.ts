@@ -7,6 +7,7 @@ import type {
   TableRow,
   TableSelectionType,
 } from '../table'
+import type { SybzComponentTheme } from '../component-props'
 
 type ElTableInstance = InstanceType<typeof ElTable>
 
@@ -20,7 +21,7 @@ export type STableComponent = {
       showPage?: boolean
       showIndex?: boolean
       size?: string
-      theme?: '' | 'chenghua' | 'shijingshan'
+      theme?: SybzComponentTheme
       pageSize?: number
       pageNumber?: number
       pageSizes?: number[]

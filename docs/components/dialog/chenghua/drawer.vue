@@ -4,7 +4,7 @@ import { ref } from 'vue'
 const visible = ref(false)
 
 const configs = [
-  { label: 'theme', value: 'chenghua', defaultValue: "''" },
+  { label: 'theme', value: 'chenghua', defaultValue: "'default'" },
   { label: 'type', value: 'drawer', defaultValue: "''" },
   { label: 'width', value: 'string / number', defaultValue: "''" },
   { label: 'showFooter', value: 'true / false', defaultValue: 'true' },

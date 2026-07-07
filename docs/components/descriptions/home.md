@@ -18,7 +18,7 @@ descriptions/base
 
 ### 成华主题
 
-:::demo 基础写法：`<s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" label-width="110" show-all />`。属性说明：`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`title` 示例值：`服务基础信息`，类型：string，默认值：`""`；`extra` 示例值：`更新时间 10:24`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`3`，类型：number，默认值：`3`；`label-width` 示例值：`110`，类型：string / number，默认值：`auto`；`show-all` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题样式。`theme` 的可选值是 `''` 和 `chenghua`，默认值是 `''`；`column` 的类型是 `number`，默认值是 `3`；`labelWidth` 支持 `string` 和 `number`，默认值是 `auto`；`showAll` 的可选值是 `true` 和 `false`，默认值是 `false`。
+:::demo 基础写法：`<s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" label-width="110" show-all />`。属性说明：`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`title` 示例值：`服务基础信息`，类型：string，默认值：`""`；`extra` 示例值：`更新时间 10:24`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`options` 示例值：`options`，类型：`ItemOptions[]`，默认值：未设置；`column` 示例值：`3`，类型：number，默认值：`3`；`label-width` 示例值：`110`，类型：string / number，默认值：`auto`；`show-all` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题样式；`column` 的类型是 `number`，默认值是 `3`；`labelWidth` 支持 `string` 和 `number`，默认值是 `auto`；`showAll` 的可选值是 `true` 和 `false`，默认值是 `false`。
 descriptions/chenghua/base
 :::
 
@@ -54,16 +54,16 @@ descriptions/customStyle
 
 ### API
 
-|    属性名    | 说明                                                     | 类型            | 默认值  |
-| :----------: | -------------------------------------------------------- | --------------- | ------- |
-|  `options`   | 描述项配置列表                                           | `ItemOptions[]` | -       |
-|   `theme`    | 主题样式，支持 `''` / `chenghua`                         | string          | `''`    |
-|   `column`   | 一行展示的描述项数量                                     | number          | `3`     |
-| `labelWidth` | label 宽度，传 `auto` 时会按最长 label 自动计算          | string / number | `auto`  |
-|  `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean         | `false` |
-|   `label`    | options 中作为标签文本的字段名                           | string          | `label` |
-|   `value`    | options 中作为内容值的字段名                             | string          | `value` |
-|    `row`     | 当前完整数据对象，会透传给 `filter` 的 `row` 参数        | object          | -       |
+|    属性名    | 说明                                                     | 类型            | 默认值    |
+| :----------: | -------------------------------------------------------- | --------------- | --------- |
+|  `options`   | 描述项配置列表                                           | `ItemOptions[]` | -         |
+|   `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan`    | string          | `default` |
+|   `column`   | 一行展示的描述项数量                                     | number          | `3`       |
+| `labelWidth` | label 宽度，传 `auto` 时会按最长 label 自动计算          | string / number | `auto`    |
+|  `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean         | `false`   |
+|   `label`    | options 中作为标签文本的字段名                           | string          | `label`   |
+|   `value`    | options 中作为内容值的字段名                             | string          | `value`   |
+|    `row`     | 当前完整数据对象，会透传给 `filter` 的 `row` 参数        | object          | -         |
 
 ### ItemOptions
 

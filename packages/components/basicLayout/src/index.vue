@@ -18,7 +18,7 @@ interface BasicLayoutProps {
   square?: boolean
   collapsible?: boolean
   collapseTrigger?: 'icon' | 'header'
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
 }
 
 const props = withDefaults(defineProps<BasicLayoutProps>(), {
@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<BasicLayoutProps>(), {
   square: false,
   collapsible: false,
   collapseTrigger: 'header',
-  theme: '',
+  theme: 'default',
 })
 defineSlots<{
   default?: () => any

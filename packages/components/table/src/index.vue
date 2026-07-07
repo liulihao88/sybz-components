@@ -62,7 +62,7 @@ interface TableProps {
   showPage?: boolean
   showIndex?: boolean
   size?: string
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]
@@ -83,7 +83,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   showPage: true,
   showIndex: true,
   size: '',
-  theme: '',
+  theme: 'default',
   pageSize: 30,
   pageNumber: 1,
   pageSizes: () => [10, 30, 50],

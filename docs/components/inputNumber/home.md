@@ -29,7 +29,7 @@ inputNumber/base
 
 ### 成华主题
 
-:::demo 基础写法：`<s-input-number v-model="count" theme="chenghua" title="审核数量" width="240" height="40" :min="0" />`。属性说明：`v-model` 示例值：`count`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`；`title` 示例值：`审核数量`，类型：string，默认值：`''`；`width` 示例值：`240`，类型：string / number，默认值：`''`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`min` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`step` 示例值：`2`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`controls-position` 示例值：`true`，类型：`''` / `right`，默认值：`right`。本示例展示成华主题样式。theme="chenghua" 时启用成华主题样式。
+:::demo 基础写法：`<s-input-number v-model="count" theme="chenghua" title="审核数量" width="240" height="40" :min="0" />`。属性说明：`v-model` 示例值：`count`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`title` 示例值：`审核数量`，类型：string，默认值：`''`；`width` 示例值：`240`，类型：string / number，默认值：`''`；`height` 示例值：`40`，类型：string / number，默认值：`''`；`min` 示例值：`0`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`step` 示例值：`2`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`controls-position` 示例值：`true`，类型：`''` / `right`，默认值：`right`。本示例展示成华主题样式。theme="chenghua" 时启用成华主题样式。
 inputNumber/chenghua/base
 :::
 
@@ -53,17 +53,17 @@ inputNumber/usually
 
 ### 属性
 
-|       属性名        | 说明             | 类型                                 | 默认值  |
-| :-----------------: | ---------------- | ------------------------------------ | ------- |
-|    `modelValue`     | 绑定值           | any                                  | -       |
-|       `title`       | 左侧标题前缀文案 | string                               | `''`    |
-|  `compTitleStyle`   | 标题前缀组件样式 | object                               | `{}`    |
-|       `width`       | 组件总宽度       | string / number                      | `''`    |
-|      `height`       | 组件总高度       | string / number                      | `''`    |
-|       `theme`       | 主题样式         | `''` / `chenghua`                    | `''`    |
-|       `size`        | 输入框尺寸       | `''` / `large` / `default` / `small` | `''`    |
-| `controls-position` | 控制按钮位置     | `''` / `right`                       | `right` |
-|     `subAttrs`      | 外层容器额外属性 | object                               | `{}`    |
+|       属性名        | 说明             | 类型                                   | 默认值    |
+| :-----------------: | ---------------- | -------------------------------------- | --------- |
+|    `modelValue`     | 绑定值           | any                                    | -         |
+|       `title`       | 左侧标题前缀文案 | string                                 | `''`      |
+|  `compTitleStyle`   | 标题前缀组件样式 | object                                 | `{}`      |
+|       `width`       | 组件总宽度       | string / number                        | `''`      |
+|      `height`       | 组件总高度       | string / number                        | `''`      |
+|       `theme`       | 主题样式         | `default` / `chenghua` / `shijingshan` | `default` |
+|       `size`        | 输入框尺寸       | `''` / `large` / `default` / `small`   | `''`      |
+| `controls-position` | 控制按钮位置     | `''` / `right`                         | `right`   |
+|     `subAttrs`      | 外层容器额外属性 | object                                 | `{}`      |
 
 ### 插槽
 

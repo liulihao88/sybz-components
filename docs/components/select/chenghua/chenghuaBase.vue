@@ -15,8 +15,8 @@ const options = [
   <div class="select-chenghua-demo">
     <div class="select-demo-meta">
       <span>属性: theme</span>
-      <span>可选值: '' | 'chenghua' | 'shijingshan'</span>
-      <span>默认值: ''</span>
+      <span>可选值: 'default' | 'chenghua' | 'shijingshan'</span>
+      <span>默认值: 'default'</span>
       <span>属性: title</span>
       <span>可选值: string</span>
       <span>默认值: ''</span>

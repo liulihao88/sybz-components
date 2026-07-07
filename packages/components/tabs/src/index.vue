@@ -28,7 +28,7 @@ defineOptions({
 })
 
 type TabsType = '' | 'capsule' | TabsPropsPublic['type']
-type TabsTheme = '' | 'chenghua' | 'shijingshan'
+type TabsTheme = 'default' | 'chenghua' | 'shijingshan'
 
 const attrs = useAttrs()
 const props = defineProps({
@@ -62,7 +62,7 @@ const props = defineProps({
   },
   theme: {
     type: String as PropType<TabsTheme>,
-    default: '',
+    default: 'default',
   },
   size: {
     type: String as PropType<'small' | 'default' | 'large'>,

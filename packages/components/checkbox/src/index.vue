@@ -29,7 +29,7 @@ interface CheckboxProps {
   customDisabled?: (...args: any[]) => any
   customLabel?: ((...args: any[]) => any) | string
   gap?: number | string
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
 }
 
@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   // 自定义label显示多个参数的函数
   customLabel: '',
   gap: '',
-  theme: '',
+  theme: 'default',
   size: '',
 })
 const mergedProps = useGlobalComponentConfig('checkbox', props)

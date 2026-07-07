@@ -15,7 +15,7 @@ interface DatePickerProps {
   width?: string | number
   height?: string | number
   compTitleStyle?: Record<string, any>
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
 }
 
@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   width: '300px',
   height: '',
   compTitleStyle: undefined,
-  theme: '',
+  theme: 'default',
   size: '',
 })
 const mergedProps = useGlobalComponentConfig('datePicker', props)

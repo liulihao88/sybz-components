@@ -8,13 +8,13 @@ defineOptions({
 })
 
 interface SwitchProps {
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   beforeChange?: (...args: any[]) => any
   width?: string | number
 }
 
 const props = withDefaults(defineProps<SwitchProps>(), {
-  theme: '',
+  theme: 'default',
   beforeChange: undefined,
   width: '',
 })

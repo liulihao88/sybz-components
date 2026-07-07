@@ -26,7 +26,7 @@ table/base
 
 #### chenghua主题示例
 
-:::demo 基础写法：`<s-table theme="chenghua" size="small" :columns="columns" :data="data" :total="36" />`。属性说明：`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`size` 示例值：`small`，类型：string，默认值：`size` prop 或 Element Plus 全局尺寸；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`total` 示例值：`36`，类型：number，默认值：`total ?? data.length`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-table theme="chenghua" size="small" :columns="columns" :data="data" :total="36" />`。属性说明：`theme` 示例值：`chenghua`，类型：string，默认值：`default`；`size` 示例值：`small`，类型：string，默认值：`size` prop 或 Element Plus 全局尺寸；`columns` 示例值：`columns`，类型：array，默认值：`[]`；`data` 示例值：`data`，类型：array，默认值：`[]`；`total` 示例值：`36`，类型：number，默认值：`total ?? data.length`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 table/chenghua/base
 :::
 
@@ -116,26 +116,26 @@ table/compare
 
 ### 属性
 
-|      属性名       | 说明                                               | 类型    | 默认值         |
-| :---------------: | -------------------------------------------------- | ------- | -------------- |
-|      `data`       | 表格数据源                                         | array   | `[]`           |
-|     `columns`     | 列配置                                             | array   | `[]`           |
-|    `showPage`     | 是否显示分页                                       | boolean | `true`         |
-|    `showIndex`    | 是否显示序号列                                     | boolean | `true`         |
-|      `size`       | 表格和分页尺寸，支持 `small` / `default` / `large` | string  | `''`           |
-|      `theme`      | 主题样式，支持 `chenghua`                          | string  | `''`           |
-|    `pageSize`     | 每页条数                                           | number  | `30`           |
-|   `pageNumber`    | 当前页码                                           | number  | `1`            |
-|    `pageSizes`    | 分页器可选每页条数                                 | array   | `[10, 30, 50]` |
-|      `total`      | 总条数，不传时默认取 `data.length`                 | number  | -              |
-| `columnEmptyText` | 单元格空值占位文案                                 | string  | `-`            |
-|     `loading`     | 表格加载状态                                       | boolean | `false`        |
-|   `indexAttrs`    | 序号列透传给 `el-table-column` 的配置              | object  | `{}`           |
-|   `modelValue`    | 选中值；单选时为当前行，多选时为选中行数组         | any     | -              |
-|  `selectionType`  | 内置选中模式，支持 `single` / `multiple`           | string  | `''`           |
-| `selectionAttrs`  | 内置单选列/多选列透传配置                          | object  | `{}`           |
-|   `asyncUpdate`   | 是否由外部异步控制分页状态                         | boolean | `false`        |
-|    `pageAttrs`    | 分页组件透传配置                                   | object  | `{}`           |
+|      属性名       | 说明                                                  | 类型    | 默认值         |
+| :---------------: | ----------------------------------------------------- | ------- | -------------- |
+|      `data`       | 表格数据源                                            | array   | `[]`           |
+|     `columns`     | 列配置                                                | array   | `[]`           |
+|    `showPage`     | 是否显示分页                                          | boolean | `true`         |
+|    `showIndex`    | 是否显示序号列                                        | boolean | `true`         |
+|      `size`       | 表格和分页尺寸，支持 `small` / `default` / `large`    | string  | `''`           |
+|      `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string  | `default`      |
+|    `pageSize`     | 每页条数                                              | number  | `30`           |
+|   `pageNumber`    | 当前页码                                              | number  | `1`            |
+|    `pageSizes`    | 分页器可选每页条数                                    | array   | `[10, 30, 50]` |
+|      `total`      | 总条数，不传时默认取 `data.length`                    | number  | -              |
+| `columnEmptyText` | 单元格空值占位文案                                    | string  | `-`            |
+|     `loading`     | 表格加载状态                                          | boolean | `false`        |
+|   `indexAttrs`    | 序号列透传给 `el-table-column` 的配置                 | object  | `{}`           |
+|   `modelValue`    | 选中值；单选时为当前行，多选时为选中行数组            | any     | -              |
+|  `selectionType`  | 内置选中模式，支持 `single` / `multiple`              | string  | `''`           |
+| `selectionAttrs`  | 内置单选列/多选列透传配置                             | object  | `{}`           |
+|   `asyncUpdate`   | 是否由外部异步控制分页状态                            | boolean | `false`        |
+|    `pageAttrs`    | 分页组件透传配置                                      | object  | `{}`           |
 
 ### pageAttrs 内部属性
 

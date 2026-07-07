@@ -33,7 +33,7 @@ interface SButtonSelfProps {
   content?: string
   tooltipAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   variant?: '' | 'outline' | 'gradient'
   size?: '' | 'small' | 'default' | 'large'
   width?: string | number
@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   content: '',
   tooltipAttrs: () => ({}),
   dangerouslyUseHTMLString: false,
-  theme: '',
+  theme: 'default',
   variant: '',
   size: '',
   width: '',

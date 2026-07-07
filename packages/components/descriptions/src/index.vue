@@ -86,7 +86,7 @@ const attrs = useAttrs()
 
 type DescriptionsProps = {
   options: ItemOptions[]
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   column?: number
   labelWidth?: any
   showAll?: boolean
@@ -119,7 +119,7 @@ type FilterContext = {
 }
 
 const props = withDefaults(defineProps<DescriptionsProps>(), {
-  theme: '',
+  theme: 'default',
   column: 3,
   labelWidth: 'auto',
   showAll: false,

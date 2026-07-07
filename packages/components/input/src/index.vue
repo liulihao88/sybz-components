@@ -123,7 +123,7 @@ interface SInputProps {
   hideMaxLengthError?: boolean
   maxLengthErrorText?: string
   size?: InputSize | ''
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   showWordLimit?: boolean | string
   block?: boolean
   disPlaceholder?: string
@@ -144,7 +144,7 @@ const props = withDefaults(defineProps<SInputProps>(), {
   hideMaxLengthError: false,
   maxLengthErrorText: '',
   size: '',
-  theme: '',
+  theme: 'default',
   showWordLimit: '',
   block: false,
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性

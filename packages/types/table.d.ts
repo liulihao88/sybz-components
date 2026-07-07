@@ -1,6 +1,6 @@
 import type { Component, VNodeChild } from 'vue'
 import type { PaginationPropsPublic, TableColumnCtx, TableInstance } from 'element-plus'
-import type { SRenderContext } from './component-props'
+import type { SRenderContext, SybzComponentTheme } from './component-props'
 
 export type TableRow = Record<string, any>
 
@@ -144,7 +144,7 @@ export interface STableProps<Row extends TableRow = TableRow> {
   showPage?: boolean
   showIndex?: boolean
   size?: string
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]

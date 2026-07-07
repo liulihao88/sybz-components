@@ -18,7 +18,7 @@ import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
 import type { TagPropsPublic } from 'element-plus/es/components/tag'
 import type { RowPropsPublic } from 'element-plus/es/components/row'
 
-export type SybzComponentTheme = '' | 'chenghua' | 'shijingshan'
+export type SybzComponentTheme = 'default' | 'chenghua' | 'shijingshan'
 export type SybzComponentSize = '' | 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 
@@ -135,7 +135,7 @@ export interface SDescriptionsOwnProps {
 }
 
 export type SDialogType = '' | 'drawer'
-export type SDialogTheme = '' | 'norm' | 'chenghua' | 'shijingshan'
+export type SDialogTheme = SybzComponentTheme | 'norm' | 'norm16' | 'simple'
 export type SDialogHandler = string | ((...args: any[]) => any)
 
 export interface SDialogSelfProps {
@@ -485,7 +485,7 @@ export interface STabsSelfProps {
   subAttrs?: SybzRecord
   trigger?: 'click' | 'hover'
   type?: '' | 'capsule' | TabsPropsPublic['type']
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
 }
 

@@ -118,7 +118,7 @@ interface SelectProps {
   showPrefix?: boolean
   showQuick?: boolean
   size?: string
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   title?: string
   compTitleStyle?: Record<string, any>
   connect?: string
@@ -149,7 +149,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   showPrefix: false,
   showQuick: true,
   size: '',
-  theme: '',
+  theme: 'default',
   title: '',
   compTitleStyle: undefined,
 

@@ -20,19 +20,19 @@ select/base
 
 #### chenghua基础用法
 
-:::demo 基础写法：`<s-select v-model="value" width="320" theme="chenghua" title="服务名称" :options="options" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`title` 示例值：`服务名称`，类型：string，默认值：`''`；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-select v-model="value" width="320" theme="chenghua" title="服务名称" :options="options" />`。属性说明：`v-model` 示例值：`value`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`default`；`title` 示例值：`服务名称`，类型：string，默认值：`''`；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 select/chenghua/chenghuaBase
 :::
 
 #### chenghua尺寸
 
-:::demo 基础写法：`<s-select v-model="smallValue" width="320" theme="chenghua" size="small" :options="options" />`。属性说明：`v-model` 示例值：`smallValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`size` 示例值：`small`，类型：string，默认值：`''`；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-select v-model="smallValue" width="320" theme="chenghua" size="small" :options="options" />`。属性说明：`v-model` 示例值：`smallValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`320`，类型：string / number，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`default`；`size` 示例值：`small`，类型：string，默认值：`''`；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 select/chenghua/chenghuaSize
 :::
 
 #### chenghua多选
 
-:::demo 基础写法：`<s-select v-model="multipleValue" width="100%" theme="chenghua" multiple title="多选服务" :options="options" />`。属性说明：`v-model` 示例值：`multipleValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`100%`，类型：string / number，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`multiple` 示例值：`true`，类型：boolean，默认值：`false`；`title` 示例值：`多选服务`，类型：string，默认值：`''`；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-select v-model="multipleValue" width="100%" theme="chenghua" multiple title="多选服务" :options="options" />`。属性说明：`v-model` 示例值：`multipleValue`，类型由绑定值决定，默认值由绑定变量初始值决定；`width` 示例值：`100%`，类型：string / number，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`default`；`multiple` 示例值：`true`，类型：boolean，默认值：`false`；`title` 示例值：`多选服务`，类型：string，默认值：`''`；`options` 示例值：`options`，类型：array，默认值：`[]`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 select/chenghua/chenghuaMultiple
 :::
 
@@ -116,34 +116,34 @@ select/multipleTableSelect
 
 ### 属性
 
-|           属性名           | 说明                                              | 类型                    | 默认值     |
-| :------------------------: | ------------------------------------------------- | ----------------------- | ---------- |
-|        `modelValue`        | 当前值                                            | array / string / number | -          |
-|          `value`           | 选项值字段名                                      | string                  | `value`    |
-|          `label`           | 选项显示字段名，支持字符串或多字段数组            | string / array          | `label`    |
-|         `options`          | 选项数据                                          | array                   | `[]`       |
-|           `type`           | 数据类型，传 `simple` 时按基础类型数组处理        | string                  | `''`       |
-|         `multiple`         | 是否多选                                          | boolean                 | `false`    |
-|         `showAll`          | 多选时是否显示全选/反选                           | boolean                 | `true`     |
-|        `showPrefix`        | 是否显示前缀数量信息                              | boolean                 | `false`    |
-|        `showQuick`         | 是否显示上下快速切换按钮                          | boolean                 | `true`     |
-|           `size`           | 选择器尺寸，支持 `small` / `default` / `large`    | string                  | `''`       |
-|          `theme`           | 选择器主题，支持 `chenghua`                       | string                  | `''`       |
-|          `title`           | 左侧标题文案                                      | string                  | `''`       |
-|      `compTitleStyle`      | 左侧标题组件样式                                  | object                  | `{}`       |
-|         `connect`          | 多字段 label 拼接符                               | string                  | `/`        |
-|       `customLabel`        | 自定义 label 生成函数                             | function / string       | `''`       |
-|          `width`           | 组件宽度                                          | string / number         | `''`       |
-|          `height`          | 组件高度                                          | string / number         | `''`       |
-|      `disPlaceholder`      | 禁用态占位文案                                    | string                  | `''`       |
-|       `itemDisabled`       | 单项禁用判断函数                                  | function                | `() => {}` |
-|           `url`            | 远程请求地址或方法                                | string / function       | `''`       |
-|        `urlParams`         | 远程请求参数                                      | object                  | `{}`       |
-|    `optionsExpression`     | 远程结果取值表达式                                | string                  | `''`       |
-|        `emptyColor`        | 选项为空时是否高亮边框                            | boolean                 | `false`    |
-|       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                  | boolean                 | `true`     |
-|       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                       | object                  | `{}`       |
-| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染 | boolean                 | `false`    |
+|           属性名           | 说明                                                    | 类型                    | 默认值     |
+| :------------------------: | ------------------------------------------------------- | ----------------------- | ---------- |
+|        `modelValue`        | 当前值                                                  | array / string / number | -          |
+|          `value`           | 选项值字段名                                            | string                  | `value`    |
+|          `label`           | 选项显示字段名，支持字符串或多字段数组                  | string / array          | `label`    |
+|         `options`          | 选项数据                                                | array                   | `[]`       |
+|           `type`           | 数据类型，传 `simple` 时按基础类型数组处理              | string                  | `''`       |
+|         `multiple`         | 是否多选                                                | boolean                 | `false`    |
+|         `showAll`          | 多选时是否显示全选/反选                                 | boolean                 | `true`     |
+|        `showPrefix`        | 是否显示前缀数量信息                                    | boolean                 | `false`    |
+|        `showQuick`         | 是否显示上下快速切换按钮                                | boolean                 | `true`     |
+|           `size`           | 选择器尺寸，支持 `small` / `default` / `large`          | string                  | `''`       |
+|          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` | string                  | `default`  |
+|          `title`           | 左侧标题文案                                            | string                  | `''`       |
+|      `compTitleStyle`      | 左侧标题组件样式                                        | object                  | `{}`       |
+|         `connect`          | 多字段 label 拼接符                                     | string                  | `/`        |
+|       `customLabel`        | 自定义 label 生成函数                                   | function / string       | `''`       |
+|          `width`           | 组件宽度                                                | string / number         | `''`       |
+|          `height`          | 组件高度                                                | string / number         | `''`       |
+|      `disPlaceholder`      | 禁用态占位文案                                          | string                  | `''`       |
+|       `itemDisabled`       | 单项禁用判断函数                                        | function                | `() => {}` |
+|           `url`            | 远程请求地址或方法                                      | string / function       | `''`       |
+|        `urlParams`         | 远程请求参数                                            | object                  | `{}`       |
+|    `optionsExpression`     | 远程结果取值表达式                                      | string                  | `''`       |
+|        `emptyColor`        | 选项为空时是否高亮边框                                  | boolean                 | `false`    |
+|       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                        | boolean                 | `true`     |
+|       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                             | object                  | `{}`       |
+| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染       | boolean                 | `false`    |
 
 ### 事件
 

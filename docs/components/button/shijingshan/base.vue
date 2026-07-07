@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const propRows = [
-  { label: 'theme', value: "'' | 'chenghua' | 'shijingshan'", defaultValue: "''" },
+  { label: 'theme', value: "'default' | 'chenghua' | 'shijingshan'", defaultValue: "'default'" },
   { label: 'type', value: "'' | 'primary' | 'success' | 'warning' | 'danger' | 'info'", defaultValue: "''" },
   { label: 'size', value: "'' | 'small' | 'default' | 'large'", defaultValue: "''" },
   { label: 'width', value: 'string | number', defaultValue: "''" },

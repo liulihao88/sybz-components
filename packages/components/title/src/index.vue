@@ -83,7 +83,7 @@ interface TitleProps {
   tb?: string | number
   height?: string | number
   type?: 'simple' | 'icon' | 'form' | string
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
 }
 
 const props = withDefaults(defineProps<TitleProps>(), {
@@ -99,7 +99,7 @@ const props = withDefaults(defineProps<TitleProps>(), {
   tb: undefined,
   height: '',
   type: 'icon',
-  theme: '',
+  theme: 'default',
 })
 const mergedProps = useGlobalComponentConfig('title', props)
 

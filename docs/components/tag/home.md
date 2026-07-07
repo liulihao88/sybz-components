@@ -22,13 +22,13 @@ tag/base
 
 #### chenghua基础用法
 
-:::demo 基础写法：`<s-tag theme="chenghua" type="primary">运行中</s-tag>`。属性说明：`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`；`type` 示例值：`primary`，类型：`primary` / `success` / `info` / `warning` / `danger`，默认值：未设置；`effect` 示例值：`dark`，类型：`dark` / `light` / `plain`，默认值：`light`；`closable` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-tag theme="chenghua" type="primary">运行中</s-tag>`。属性说明：`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`type` 示例值：`primary`，类型：`primary` / `success` / `info` / `warning` / `danger`，默认值：未设置；`effect` 示例值：`dark`，类型：`dark` / `light` / `plain`，默认值：`light`；`closable` 示例值：`true`，类型：boolean，默认值：`false`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
 tag/chenghua/chenghuaBase
 :::
 
 #### chenghua映射状态
 
-:::demo 基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="chenghua" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。属性说明：`v-for` 示例值：`status in serviceStatus`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`；`value` 示例值：`status`，类型：string / number，默认值：未设置；`options` 示例值：`statusOptions`，类型：array，默认值：`[]`；`config` 示例值：`{ label: 'label', value: 'value' }`，类型：`{ label?: string, value?: string }`，默认值：`{}`；`primary` 示例值：`['running']`，类型：boolean / string / number / array，默认值：未设置；`warning` 示例值：`['pending']`，类型：boolean / string / number / array，默认值：未设置；`danger` 示例值：`['error']`，类型：boolean / string / number / array，默认值：未设置。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="chenghua" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。属性说明：`v-for` 示例值：`status in serviceStatus`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`value` 示例值：`status`，类型：string / number，默认值：未设置；`options` 示例值：`statusOptions`，类型：array，默认值：`[]`；`config` 示例值：`{ label: 'label', value: 'value' }`，类型：`{ label?: string, value?: string }`，默认值：`{}`；`primary` 示例值：`['running']`，类型：boolean / string / number / array，默认值：未设置；`warning` 示例值：`['pending']`，类型：boolean / string / number / array，默认值：未设置；`danger` 示例值：`['error']`，类型：boolean / string / number / array，默认值：未设置。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 tag/chenghua/chenghuaMap
 :::
 
@@ -68,7 +68,7 @@ tag/async
 | :-------: | ----------------------------------------------------------- | ----------------------------------------------------- | --------- |
 |  `value`  | 当前值；未传默认插槽时会作为标签内容或映射源                | string / number                                       | -         |
 |  `type`   | 直接指定标签类型                                            | `primary` / `success` / `info` / `warning` / `danger` | -         |
-|  `theme`  | 标签主题，支持 `chenghua`                                   | `''` / `chenghua`                                     | `''`      |
+|  `theme`  | 标签主题，支持 `default` / `chenghua` / `shijingshan`       | `default` / `chenghua` / `shijingshan`                | `default` |
 |  `size`   | 标签尺寸                                                    | `''` / `large` / `default` / `small`                  | `''`      |
 | `options` | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法 | array                                                 | `[]`      |
 | `config`  | 平铺数组模式下的字段映射配置                                | `{ label?: string, value?: string }`                  | `{}`      |

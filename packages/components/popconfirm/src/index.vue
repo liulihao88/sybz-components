@@ -56,7 +56,7 @@ interface PopconfirmProps {
   content?: string
   reConfirm?: boolean
   dangerouslyUseHTMLString?: boolean
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   disabled?: boolean
 }
 
@@ -66,7 +66,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   content: '',
   reConfirm: true,
   dangerouslyUseHTMLString: true,
-  theme: '',
+  theme: 'default',
   disabled: false,
 })
 
@@ -98,8 +98,8 @@ const popperClass = computed(() => {
     .join(' ')
 })
 
-const popconfirmButtonTheme = computed(() => {
-  return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) ? mergedProps.value.theme : ''
+const popconfirmButtonTheme = computed<'default' | 'chenghua' | 'shijingshan'>(() => {
+  return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) ? mergedProps.value.theme : 'default'
 })
 
 const safeTitle = computed(() => String(mergedProps.value.title ?? ''))

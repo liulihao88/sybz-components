@@ -9,8 +9,8 @@ const dateValue = ref('')
   <div class="date-picker-chenghua-demo">
     <div class="date-picker-chenghua-demo__meta">
       <span>属性: theme</span>
-      <span>可选值: '' | 'chenghua' | 'shijingshan'</span>
-      <span>默认值: ''</span>
+      <span>可选值: 'default' | 'chenghua' | 'shijingshan'</span>
+      <span>默认值: 'default'</span>
       <span>属性: type</span>
       <span>
         可选值: year | years | month | months | date | dates | week | datetime | daterange | datetimerange | monthrange

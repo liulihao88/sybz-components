@@ -11,13 +11,13 @@ const attrs = useAttrs()
 interface CompTitleProps {
   title?: string
   compTitleStyle?: Record<string, any>
-  theme?: '' | 'chenghua' | 'shijingshan'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
 }
 
 const props = withDefaults(defineProps<CompTitleProps>(), {
   title: '',
   compTitleStyle: undefined,
-  theme: '',
+  theme: 'default',
 })
 const mergedProps = useGlobalComponentConfig('compTitle', props)
 

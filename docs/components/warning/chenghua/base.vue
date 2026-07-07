@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const attrs = [
-  { label: 'theme', value: "'' | 'chenghua' | 'shijingshan'", defaultValue: "''" },
+  { label: 'theme', value: "'default' | 'chenghua' | 'shijingshan'", defaultValue: "'default'" },
   { label: 'type', value: 'info | simple | warning | error', defaultValue: 'info' },
   { label: 'size', value: 'small | default', defaultValue: 'default' },
   { label: 'dotted', value: 'true | false', defaultValue: 'false' },

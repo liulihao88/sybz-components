@@ -30,7 +30,7 @@ tabs/capsule
 
 ### chenghua主题
 
-:::demo 基础写法：`<s-tabs :options="navList" theme="chenghua">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-tabs :options="navList" theme="chenghua">...</s-tabs>`。属性说明：`options` 示例值：`navList`，类型：array，默认值：`[]`；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 tabs/chenghua/base
 :::
 
@@ -82,17 +82,17 @@ tabs/location
 
 ### 属性
 
-|    属性名    | 说明                                                                        | 类型                      | 默认值                             |
-| :----------: | --------------------------------------------------------------------------- | ------------------------- | ---------------------------------- |
-| `modelValue` | 当前激活 tab                                                                | string / number / boolean | -                                  |
-|  `options`   | 标签页配置                                                                  | array                     | `[]`                               |
-|   `label`    | 标签标题字段名                                                              | string                    | `label`                            |
-|   `value`    | 标签值字段名                                                                | string                    | `value`                            |
-|  `subAttrs`  | 透传给 `el-tab-pane` 的属性                                                 | object                    | `{}`                               |
-|  `trigger`   | 切换触发方式，支持 `click` / `hover`                                        | string                    | `click`                            |
-|    `type`    | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                    | 按内部组件或 Element Plus 对应属性 |
-|   `theme`    | 主题样式，支持 `chenghua`                                                   | `''` / `chenghua`         | `''`                               |
-|    `size`    | 尺寸，支持 `small` / `default` / `large`                                    | string                    | `default`                          |
+|    属性名    | 说明                                                                        | 类型                                   | 默认值                             |
+| :----------: | --------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------- |
+| `modelValue` | 当前激活 tab                                                                | string / number / boolean              | -                                  |
+|  `options`   | 标签页配置                                                                  | array                                  | `[]`                               |
+|   `label`    | 标签标题字段名                                                              | string                                 | `label`                            |
+|   `value`    | 标签值字段名                                                                | string                                 | `value`                            |
+|  `subAttrs`  | 透传给 `el-tab-pane` 的属性                                                 | object                                 | `{}`                               |
+|  `trigger`   | 切换触发方式，支持 `click` / `hover`                                        | string                                 | `click`                            |
+|    `type`    | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                                 | 按内部组件或 Element Plus 对应属性 |
+|   `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan`                       | `default` / `chenghua` / `shijingshan` | `default`                          |
+|    `size`    | 尺寸，支持 `small` / `default` / `large`                                    | string                                 | `default`                          |
 
 ### 事件
 

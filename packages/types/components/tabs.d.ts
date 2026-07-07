@@ -1,6 +1,6 @@
 import { ElTabs } from 'element-plus'
 import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
-import type { STabsSelfProps, SybzRecord } from '../component-props'
+import type { STabsSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
 
 type ElTabsInstance = InstanceType<typeof ElTabs>
 
@@ -16,7 +16,7 @@ export type STabsComponent = {
       subAttrs?: SybzRecord
       trigger?: 'click' | 'hover'
       type?: '' | 'capsule' | TabsPropsPublic['type']
-      theme?: '' | 'chenghua' | 'shijingshan'
+      theme?: SybzComponentTheme
       size?: 'small' | 'default' | 'large'
     } & Omit<
       ElTabsInstance['$props'],

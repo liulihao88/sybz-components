@@ -16,7 +16,7 @@ basicLayout/base
 
 ### 成华主题
 
-:::demo 基础写法：`<s-basic-layout v-model="collapsed" theme="chenghua" title="审核规则管理">...</s-basic-layout>`。属性说明：`v-model` 示例值：`collapsed`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`''` / `chenghua`，默认值：`''`；`title` 示例值：`审核规则管理`，类型：string，默认值：`''`。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题布局样式。
+:::demo 基础写法：`<s-basic-layout v-model="collapsed" theme="chenghua" title="审核规则管理">...</s-basic-layout>`。属性说明：`v-model` 示例值：`collapsed`，类型由绑定值决定，默认值由绑定变量初始值决定；`theme` 示例值：`chenghua`，类型：`default` / `chenghua` / `shijingshan`，默认值：`default`；`title` 示例值：`审核规则管理`，类型：string，默认值：`''`。本示例展示成华主题样式。`theme="chenghua"` 时启用成华主题布局样式。
 basicLayout/chenghua/base
 :::
 
@@ -52,21 +52,21 @@ basicLayout/square
 
 ### API
 
-|          属性名          | 说明                                      | 类型                          | 默认值    |
-| :----------------------: | ----------------------------------------- | ----------------------------- | --------- |
-| `v-model` / `modelValue` | 折叠状态，`true` 表示收起                 | boolean                       | `false`   |
-|          `size`          | 内边距尺寸                                | `small` / `default` / `large` | `default` |
-|         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染 | string                        | `''`      |
-|        `boxStyle`        | 最外层容器样式                            | object                        | `{}`      |
-|      `headerStyle`       | 头部区域样式                              | object                        | `{}`      |
-|       `bodyStyle`        | 内容区域样式                              | object                        | `{}`      |
-|      `footerStyle`       | 底部区域样式                              | object                        | `{}`      |
-|         `border`         | 是否显示头部下边框                        | boolean                       | `true`    |
-|         `scroll`         | 内容区是否自动撑开并滚动                  | boolean                       | `true`    |
-|         `square`         | 内容区按宽高最大值渲染为正方形            | boolean                       | `false`   |
-|      `collapsible`       | 是否允许点击头部展开/收起                 | boolean                       | `false`   |
-|    `collapseTrigger`     | 折叠触发区域                              | `icon` / `header`             | `header`  |
-|         `theme`          | 主题样式                                  | `''` / `chenghua`             | `''`      |
+|          属性名          | 说明                                      | 类型                                   | 默认值    |
+| :----------------------: | ----------------------------------------- | -------------------------------------- | --------- |
+| `v-model` / `modelValue` | 折叠状态，`true` 表示收起                 | boolean                                | `false`   |
+|          `size`          | 内边距尺寸                                | `small` / `default` / `large`          | `default` |
+|         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染 | string                                 | `''`      |
+|        `boxStyle`        | 最外层容器样式                            | object                                 | `{}`      |
+|      `headerStyle`       | 头部区域样式                              | object                                 | `{}`      |
+|       `bodyStyle`        | 内容区域样式                              | object                                 | `{}`      |
+|      `footerStyle`       | 底部区域样式                              | object                                 | `{}`      |
+|         `border`         | 是否显示头部下边框                        | boolean                                | `true`    |
+|         `scroll`         | 内容区是否自动撑开并滚动                  | boolean                                | `true`    |
+|         `square`         | 内容区按宽高最大值渲染为正方形            | boolean                                | `false`   |
+|      `collapsible`       | 是否允许点击头部展开/收起                 | boolean                                | `false`   |
+|    `collapseTrigger`     | 折叠触发区域                              | `icon` / `header`                      | `header`  |
+|         `theme`          | 主题样式                                  | `default` / `chenghua` / `shijingshan` | `default` |
 
 ### 事件
 

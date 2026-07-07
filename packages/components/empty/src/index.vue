@@ -10,7 +10,7 @@ defineOptions({
 const props = withDefaults(
   defineProps<{
     description?: string
-    theme?: '' | 'chenghua' | 'shijingshan'
+    theme?: 'default' | 'chenghua' | 'shijingshan'
     width?: string | number
     height?: string | number
     imgAttrs?: Record<string, any>
@@ -18,7 +18,7 @@ const props = withDefaults(
   }>(),
   {
     description: '暂无数据',
-    theme: '',
+    theme: 'default',
     width: 60,
     height: undefined,
     imgAttrs: () => ({}),

@@ -18,7 +18,7 @@ title/base
 
 #### chenghua主题示例
 
-:::demo 基础写法：`<s-title title="成华 AI 服务申请" theme="chenghua" sub-title="审批中 12 个，待处理 4 个">...</s-title>`。属性说明：`title` 示例值：`成华 AI 服务申请`，类型：string，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`''`；`sub-title` 示例值：`审批中 12 个，待处理 4 个`，类型：string，默认值：`''`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 基础写法：`<s-title title="成华 AI 服务申请" theme="chenghua" sub-title="审批中 12 个，待处理 4 个">...</s-title>`。属性说明：`title` 示例值：`成华 AI 服务申请`，类型：string，默认值：`''`；`theme` 示例值：`chenghua`，类型：string，默认值：`default`；`sub-title` 示例值：`审批中 12 个，待处理 4 个`，类型：string，默认值：`''`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
 title/chenghua/base
 :::
 
@@ -32,20 +32,20 @@ title/usually
 
 ### 属性
 
-|   属性名   | 说明                                          | 类型            | 默认值  |
-| :--------: | --------------------------------------------- | --------------- | ------- |
-|  `title`   | 主标题文案                                    | string          | `''`    |
-|   `size`   | 尺寸标识，保留字段                            | string          | `''`    |
-| `subTitle` | 副标题文案                                    | string          | `''`    |
-| `subAttrs` | 副标题额外属性                                | object          | `{}`    |
-|  `inner`   | 是否使用内部缩进                              | boolean         | `false` |
-|    `t`     | 上边距                                        | string / number | `''`    |
-|    `b`     | 下边距                                        | string / number | `''`    |
-|    `l`     | 左边距                                        | string / number | `''`    |
-|    `tb`    | 同时设置上下边距                              | string / number | -       |
-|  `height`  | 组件高度                                      | string / number | `''`    |
-|   `type`   | 标题样式类型，支持 `icon` / `simple` / `form` | string          | `icon`  |
-|  `theme`   | 主题样式，支持 `chenghua`                     | string          | `''`    |
+|   属性名   | 说明                                                  | 类型            | 默认值    |
+| :--------: | ----------------------------------------------------- | --------------- | --------- |
+|  `title`   | 主标题文案                                            | string          | `''`      |
+|   `size`   | 尺寸标识，保留字段                                    | string          | `''`      |
+| `subTitle` | 副标题文案                                            | string          | `''`      |
+| `subAttrs` | 副标题额外属性                                        | object          | `{}`      |
+|  `inner`   | 是否使用内部缩进                                      | boolean         | `false`   |
+|    `t`     | 上边距                                                | string / number | `''`      |
+|    `b`     | 下边距                                                | string / number | `''`      |
+|    `l`     | 左边距                                                | string / number | `''`      |
+|    `tb`    | 同时设置上下边距                                      | string / number | -         |
+|  `height`  | 组件高度                                              | string / number | `''`      |
+|   `type`   | 标题样式类型，支持 `icon` / `simple` / `form`         | string          | `icon`    |
+|  `theme`   | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string          | `default` |
 
 ### 插槽
 
