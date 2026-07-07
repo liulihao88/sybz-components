@@ -43,6 +43,7 @@ export default [
       '@typescript-eslint/no-unused-vars': 'off',
       'vue/multi-word-component-names': 'off',
       'vue/no-template-shadow': 'off',
+      'vue/attribute-hyphenation': ['warn', 'always', { ignore: ['dangerouslyUseHTMLString'] }],
     },
   },
   {

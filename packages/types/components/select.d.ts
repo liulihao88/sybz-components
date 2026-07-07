@@ -10,8 +10,6 @@ export type SSelectComponent = {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
-      /** 是否按 HTML 字符串渲染，兼容旧写法 */
-      dangerouslyUseHtmlString?: boolean
       modelValue?: any[] | string | number
       value?: string
       label?: string | string[]
@@ -40,7 +38,6 @@ export type SSelectComponent = {
     } & Omit<
       ElSelectInstance['$props'],
       | 'dangerouslyUseHTMLString'
-      | 'dangerouslyUseHtmlString'
       | 'modelValue'
       | 'value'
       | 'label'

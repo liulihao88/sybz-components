@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
@@ -10,6 +10,21 @@ const readJson = <T = Record<string, any>>(path: string): T => {
 }
 
 const readText = (path: string) => readFileSync(resolve(rootDir, path), 'utf8')
+
+const collectTextFiles = (dir: string): string[] => {
+  const absoluteDir = resolve(rootDir, dir)
+
+  return readdirSync(absoluteDir).flatMap((name) => {
+    const filePath = resolve(absoluteDir, name)
+    const stat = statSync(filePath)
+
+    if (stat.isDirectory()) {
+      return collectTextFiles(`${dir}/${name}`)
+    }
+
+    return /\.(d\.ts|ts|vue|md)$/.test(name) ? [filePath] : []
+  })
+}
 
 describe('project dependency guards', () => {
   it('keeps only host-owned packages in peerDependencies', () => {
@@ -48,6 +63,21 @@ describe('project dependency guards', () => {
     expect(usageGuide).toContain('npm install sybz-components element-plus')
     expect(readme).not.toContain('sybz-components element-plus @element-plus/icons-vue @vueuse/core')
     expect(usageGuide).not.toContain('sybz-components element-plus @element-plus/icons-vue @vueuse/core')
+  })
+
+  it('keeps HTML string rendering API limited to dangerouslyUseHTMLString', () => {
+    const legacyProp = ['dangerouslyUse', 'HtmlString'].join('')
+    const legacyKebab = ['dangerously-use', 'html-string'].join('-')
+    const legacyAcronymKebab = ['dangerously-use', 'h-t-m-l-string'].join('-')
+    const files = [...collectTextFiles('packages'), ...collectTextFiles('docs/components')]
+
+    for (const file of files) {
+      const content = readFileSync(file, 'utf8')
+
+      expect(content, file).not.toContain(legacyProp)
+      expect(content, file).not.toContain(legacyKebab)
+      expect(content, file).not.toContain(legacyAcronymKebab)
+    }
   })
 })
 

@@ -134,7 +134,6 @@ interface SelectProps {
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
-  dangerouslyUseHtmlString?: boolean
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -170,7 +169,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
   showTooltip: true,
   tooltipAttrs: () => ({}),
   dangerouslyUseHTMLString: false,
-  dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
 const compTitleProps = computed(() => {
@@ -216,16 +214,11 @@ const selectTooltipVisible = ref(false)
 const mergedTooltipAttrs = computed(() => {
   const {
     dangerouslyUseHTMLString,
-    dangerouslyUseHtmlString,
     rawContent,
     'raw-content': rawContentKebab,
     ...tooltipAttrs
   } = mergedProps.value.tooltipAttrs ?? {}
-  const htmlStringEnabled =
-    mergedProps.value.dangerouslyUseHTMLString ??
-    mergedProps.value.dangerouslyUseHtmlString ??
-    dangerouslyUseHTMLString ??
-    dangerouslyUseHtmlString
+  const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString ?? dangerouslyUseHTMLString
 
   return {
     placement: 'top',

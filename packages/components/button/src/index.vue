@@ -2,7 +2,7 @@
   <s-tooltip
     v-if="mergedProps.content"
     :content="mergedProps.content"
-    :dangerously-use-html-string="htmlStringEnabled"
+    :dangerouslyUseHTMLString="htmlStringEnabled"
     v-bind="mergedProps.tooltipAttrs"
   >
     <el-button v-bind="buttonAttrs" :class="['s-button-content', buttonClass]" @click="handleClick">
@@ -33,7 +33,6 @@ interface SButtonSelfProps {
   content?: string
   tooltipAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
-  dangerouslyUseHtmlString?: boolean
   theme?: '' | 'chenghua'
   variant?: '' | 'outline' | 'gradient'
   size?: '' | 'small' | 'default' | 'large'
@@ -46,8 +45,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   time: 0,
   content: '',
   tooltipAttrs: () => ({}),
-  dangerouslyUseHTMLString: undefined,
-  dangerouslyUseHtmlString: false,
+  dangerouslyUseHTMLString: false,
   theme: '',
   variant: '',
   size: '',
@@ -58,9 +56,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
 
 const attrs = useAttrs()
 const mergedProps = useGlobalComponentConfig('button', props)
-const htmlStringEnabled = computed(() =>
-  Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
-)
+const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
 
 const emits = defineEmits<{
   click: [evt: MouseEvent]

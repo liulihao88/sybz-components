@@ -56,7 +56,6 @@ interface PopconfirmProps {
   content?: string
   reConfirm?: boolean
   dangerouslyUseHTMLString?: boolean
-  dangerouslyUseHtmlString?: boolean
   theme?: '' | 'chenghua'
   disabled?: boolean
 }
@@ -66,8 +65,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   width: 200,
   content: '',
   reConfirm: true,
-  dangerouslyUseHTMLString: undefined,
-  dangerouslyUseHtmlString: true,
+  dangerouslyUseHTMLString: true,
   theme: '',
   disabled: false,
 })
@@ -106,9 +104,7 @@ const popconfirmButtonTheme = computed(() => {
 const safeTitle = computed(() => String(mergedProps.value.title ?? ''))
 const safeContent = computed(() => String(mergedProps.value.content ?? ''))
 const hasTitle = computed(() => !!safeTitle.value)
-const htmlStringEnabled = computed(() =>
-  Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
-)
+const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
 const isDisabled = computed(() => Boolean(mergedProps.value.disabled))
 
 onBeforeUnmount(() => {

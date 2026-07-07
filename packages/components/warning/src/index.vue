@@ -16,7 +16,6 @@ interface Props {
   type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
   width?: string | number
   dangerouslyUseHTMLString?: boolean
-  dangerouslyUseHtmlString?: boolean
   icon?: boolean
   size?: 'small' | 'default'
   dotted?: boolean
@@ -31,7 +30,6 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'info',
   width: '100%',
   dangerouslyUseHTMLString: false,
-  dangerouslyUseHtmlString: false,
   icon: true,
   size: 'default',
   dotted: false,
@@ -42,9 +40,7 @@ const props = withDefaults(defineProps<Props>(), {
 const mergedProps = useGlobalComponentConfig('warning', props)
 
 const attrs = useAttrs()
-const htmlStringEnabled = computed(() =>
-  Boolean(mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString),
-)
+const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
 
 const mergedStyle = computed(() => {
   let obj: Record<string, any> = {}

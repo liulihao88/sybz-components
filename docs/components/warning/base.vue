@@ -25,12 +25,7 @@ const ulContent = `
       class="m-l-10"
     ></s-warning>
     <br />
-    <s-warning
-      :content="ulContent"
-      :dangerously-use-html-string="true"
-      :icon="false"
-      :style="{ paddingLeft: '20px' }"
-    />
+    <s-warning :content="ulContent" :dangerouslyUseHTMLString="true" :icon="false" :style="{ paddingLeft: '20px' }" />
     <br />
     <s-flex>
       <s-warning title="我是title" content="默认类型, <code>这是code包裹内容</code>" class="m-r-8" />
@@ -54,11 +49,6 @@ const ulContent = `
     <br />
     <s-warning :content="htmlContent"></s-warning>
     <br />
-    <s-warning
-      content="不要icon按钮"
-      title="我是title"
-      :dangerously-use-h-t-m-l-string="true"
-      :icon="false"
-    ></s-warning>
+    <s-warning content="不要icon按钮" title="我是title" :dangerouslyUseHTMLString="true" :icon="false"></s-warning>
   </div>
 </template>

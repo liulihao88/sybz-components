@@ -5,25 +5,8 @@ export const GLOBAL_COMPONENT_COMMON_PROPS_KEY = '__globalProps'
 
 type GlobalComponentConfig = Record<string, Record<string, any> | undefined>
 
-const HTML_STRING_PROP = 'dangerouslyUseHTMLString'
-const HTML_STRING_LEGACY_PROP = 'dangerouslyUseHtmlString'
-
 const hyphenate = (key: string) => key.replace(/\B([A-Z])/g, '-$1').toLowerCase()
 const hasOwn = (target: Record<string, any>, key: string) => Object.prototype.hasOwnProperty.call(target, key)
-
-const normalizeHtmlStringAlias = (props: Record<string, any>) => {
-  if (
-    hasOwn(props, HTML_STRING_LEGACY_PROP) &&
-    (!hasOwn(props, HTML_STRING_PROP) || props[HTML_STRING_PROP] === undefined)
-  ) {
-    return {
-      ...props,
-      [HTML_STRING_PROP]: props[HTML_STRING_LEGACY_PROP],
-    }
-  }
-
-  return props
-}
 
 const getCommonProps = <T extends Record<string, any>>(globalConfig: GlobalComponentConfig, props: T) => {
   const commonProps = globalConfig?.[GLOBAL_COMPONENT_COMMON_PROPS_KEY]
@@ -36,7 +19,7 @@ const getCommonProps = <T extends Record<string, any>>(globalConfig: GlobalCompo
     return matchedProps
   }, {})
 
-  return normalizeHtmlStringAlias(matchedProps)
+  return matchedProps
 }
 
 const getComponentConfig = <T extends Record<string, any>>(
@@ -46,10 +29,10 @@ const getComponentConfig = <T extends Record<string, any>>(
 ) => {
   const componentConfig = globalConfig?.[componentKey]
 
-  return normalizeHtmlStringAlias({
+  return {
     ...getCommonProps(globalConfig, props),
-    ...(componentConfig ? normalizeHtmlStringAlias(componentConfig) : {}),
-  })
+    ...(componentConfig ?? {}),
+  }
 }
 
 const getExplicitProps = <T extends Record<string, any>>(
@@ -65,7 +48,7 @@ const getExplicitProps = <T extends Record<string, any>>(
     return explicitProps
   }, {})
 
-  return normalizeHtmlStringAlias(explicitProps)
+  return explicitProps
 }
 
 const useGlobalComponentConfig = <T extends Record<string, any>>(componentKey: string, props: T) => {

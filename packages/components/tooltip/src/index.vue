@@ -44,7 +44,6 @@ interface TooltipProps {
   showSlot?: boolean
   effect?: string
   dangerouslyUseHTMLString?: boolean
-  dangerouslyUseHtmlString?: boolean
 }
 
 const props = withDefaults(defineProps<TooltipProps>(), {
@@ -53,10 +52,9 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   showSlot: true,
   effect: 'dark',
   dangerouslyUseHTMLString: false,
-  dangerouslyUseHtmlString: false,
 })
 const mergedProps = useGlobalComponentConfig('tooltip', props)
-const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect', 'dangerouslyUseHTMLString', 'dangerouslyUseHtmlString']
+const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect', 'dangerouslyUseHTMLString']
 
 const mergedTooltipAttrs = computed(() => {
   const tooltipAttrs = Object.keys(mergedProps.value).reduce<Record<string, any>>((attrs, key) => {
@@ -65,7 +63,7 @@ const mergedTooltipAttrs = computed(() => {
     }
     return attrs
   }, {})
-  const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString ?? mergedProps.value.dangerouslyUseHtmlString
+  const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString
   const rawContent =
     htmlStringEnabled ||
     attrs.rawContent ||
