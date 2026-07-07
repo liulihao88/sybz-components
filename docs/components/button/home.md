@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 基础写法：`<s-button icon="plus" type="primary">我是按钮</s-button>`。属性说明：`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`content` 示例值：`我是提示文字`，类型：string，默认值：`''`。本示例展示基础渲染和最小配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示 `content` 和 `icon`。基础写法：`<s-button content="我是提示文字" icon="plus">有提示且有icon</s-button>`。属性：`content` 类型 `string`，默认值 `''`；`icon` 类型 `string / Component`，默认值未设置。
 button/base
 :::
 
@@ -20,7 +20,7 @@ button/base
 
 #### chenghua主题示例
 
-:::demo 基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。属性说明：`theme` 示例值：`chenghua`，类型：`'default' \| 'chenghua' \| 'shijingshan'`，默认值：`default`；`variant` 示例值：`gradient`，类型：`'' \| 'outline' \| 'gradient'`，默认值：`''`；`icon` 示例值：`set-up`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`width` 示例值：`288`，类型：string / number，默认值：`''`；`size` 示例值：`large`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示成华主题样式，可以直接复制基础写法后按业务替换数据。
+:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`variant` 可选 `'' / outline / gradient`，默认值 `''`；`width`、`height` 类型 `string / number`，默认值 `''`。
 button/chenghua/base
 :::
 
@@ -28,13 +28,13 @@ button/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。属性说明：`theme` 示例值：`shijingshan`，类型：`'default' \| 'chenghua' \| 'shijingshan'`，默认值：`default`；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`size` 示例值：`large`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`width` 示例值：`180`，类型：string / number，默认值：`''`；`height` 示例值：`44`，类型：string / number，默认值：`''`；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例根据《石景山AI产业服务平台设计规范》展示按钮高度 44px、圆角 8px、主色 `#2A6DF4`、文字 16px/500 和水平/垂直内边距 16px / 12px 的按钮样式，可以直接复制基础写法后按业务替换数据。
+:::demo 展示石景山主题按钮。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`width`、`height` 类型 `string / number`，默认值 `''`。
 button/shijingshan/base
 :::
 
 ### Hover 动效（hoverAnimation 默认值：false）
 
-:::demo 基础写法：`<s-button hover-animation type="primary">移入动效</s-button>`。属性说明：`hover-animation` 示例值：`true`，类型：boolean，默认值：`false`；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`disabled` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示鼠标移入上移并轻微放大的动效。`hoverAnimation` 控制按钮鼠标移入时是否上移并轻微放大，可选值是 `true` 和 `false`，默认值是 `false`。
+:::demo 展示 `hoverAnimation`。基础写法：`<s-button hover-animation type="primary">移入动效</s-button>`。属性：`hoverAnimation` 可选 `true / false`，默认值 `false`。
 button/hoverAnimation
 :::
 
@@ -61,31 +61,31 @@ app.use(SybzComponents, {
 
 ### 图标按钮
 
-:::demo 基础写法：`<s-button :icon="Plus" type="primary">导入 Plus</s-button>`。属性说明：`icon` 示例值：`Plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`size` 示例值：`large`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`plain` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示图标按钮配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示 `icon` 的字符串和组件写法。基础写法：`<s-button :icon="Plus" type="primary">导入 Plus</s-button>`。属性：`icon` 类型 `string / Component`，默认值未设置。
 button/icon
 :::
 
 ### 提示文字
 
-:::demo 基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性说明：`content` 示例值：`我是提示文字`，类型：string，默认值：`''`；`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`dangerouslyUseHTMLString` 示例值：`true`，类型：boolean，默认值：`false`；`tooltipAttrs` 示例值：`{ placement: 'right' }`，类型：Object [去tooltip组件](../tooltip/home)，默认值：`{}`；`text` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示提示内容配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示提示文字。基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`；`tooltipAttrs` 类型 `object`，默认值 `{}`。
 button/content
 :::
 
 ### 防抖
 
-:::demo 基础写法：`<s-button :time="timeValue" @click="handleClick" icon="plus">1秒防抖</s-button>`。属性说明：`time` 示例值：`timeValue`，类型：number(毫秒)，默认值：`0`；`icon` 示例值：`plus`，类型：string / Component，可选值：图标名或图标组件，默认值：未设置；`loading` 示例值：`false`，类型：boolean，可选值：`true` / `false`，默认值：`false`。本示例展示点击频率控制，可以直接复制基础写法后按业务替换数据。
+:::demo 展示点击防抖。基础写法：`<s-button :time="timeValue" icon="plus" @click="handleClick">1秒防抖</s-button>`。属性：`time` 类型 `number`，单位毫秒，默认值 `0`。
 button/throttle
 :::
 
 ### 插槽（icon / loading / default）
 
-:::demo 基础写法：`<s-button type="primary"><template #icon>...</template>左侧图标 + 文字</s-button>`。属性说明：`type` 示例值：`primary`，类型：string，可选值：`primary` / `success` / `warning` / `danger` / `info` / `text`，默认值：`default` 或 `""`；`loading` 示例值：`true`，类型：boolean，可选值：`true` / `false`，默认值：`false`；`time` 示例值：`1000`，类型：number(毫秒)，默认值：`0`；`icon` 插槽示例值：`<s-icon name="delete" />`，类型：slot，默认值：未设置；`loading` 插槽示例值：`<s-icon name="refresh" />`，类型：slot，默认值：未设置；`default` 插槽示例值：`文字 + 右侧图标`，类型：slot，默认值：按钮文本内容。本示例展示插槽内容定制，可以直接复制基础写法后按业务替换数据。`icon` 插槽用于左侧图标，`loading` 插槽用于自定义加载图标，默认插槽可以组合成“左侧图标 + 文字”或“文字 + 右侧图标”。
+:::demo 展示 `icon`、`loading` 和默认插槽。基础写法：`<s-button type="primary"><template #icon>...</template>左侧图标 + 文字</s-button>`。插槽：`default` 默认内容；`icon` 自定义左侧图标；`loading` 自定义加载图标。
 button/slots
 :::
 
 ### other
 
-:::demo 基础写法：`<el-card shadow="never">...</el-card>`。属性说明：`shadow` 示例值：`never`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`wrap` 示例值：`true`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`size` 示例值：`40`，类型：`'' \| 'small' \| 'default' \| 'large'`，默认值：`''`；`href` 示例值：`https://element-plus.org/zh-CN/co...`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`target` 示例值：`_blank`，类型/可选值/默认值按内部组件或 Element Plus 对应属性；`v-model` 示例值：`size`，类型由绑定值决定，默认值由绑定变量初始值决定；`value` 示例值：`large`，类型：string / number，默认值：未设置。本示例展示other配置，可以直接复制基础写法后按业务替换数据。
+:::demo 展示 Element Plus 按钮能力透传。基础写法：`<s-button type="primary" :size="dynamicSize">Primary</s-button>`。属性：该示例主要展示 `el-button` 属性透传，具体可选值以 Element Plus Button 为准。
 button/other
 :::
 

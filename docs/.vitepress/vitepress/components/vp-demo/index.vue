@@ -1,7 +1,13 @@
 <template>
   <ClientOnly>
     <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
-    <SafeHtml class="demo-description" text="sm" :html="descriptionWithCopy" @click="handleDescriptionClick" />
+    <SafeHtml
+      tag="div"
+      class="demo-description"
+      text="sm"
+      :html="descriptionWithCopy"
+      @click="handleDescriptionClick"
+    />
     <div class="example">
       <Example :path="path" />
       <ElDivider class="m-0" />
@@ -137,7 +143,8 @@ const jumpPath = async () => {
 </script>
 <style lang="scss" scoped>
 .demo-description {
-  margin: 1em 0;
+  display: block;
+  margin: 0 0 16px;
   line-height: 1.7;
 
   :deep(p) {
