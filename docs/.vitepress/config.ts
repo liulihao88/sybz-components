@@ -319,10 +319,6 @@ export default defineConfig({
               link: '/components/checkbox/home.md',
             },
             {
-              text: 'chart图表组件',
-              link: '/components/chart/home.md',
-            },
-            {
               text: 'clickOutside外部点击组件',
               link: '/components/clickOutside/home.md',
             },
@@ -471,6 +467,16 @@ export default defineConfig({
             {
               text: 'capacityProgress容量组件',
               link: '/components/company/capacityProgress/home.md',
+            },
+          ],
+        },
+        {
+          text: '业务图表组件（需额外安装插件）',
+          collapsed: false,
+          items: [
+            {
+              text: 'chart图表组件',
+              link: '/components/chart/home.md',
             },
             {
               text: 'countBar数量统计柱状图组件',

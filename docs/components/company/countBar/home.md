@@ -1,5 +1,20 @@
 # 数量统计柱状图组件
 
+## 使用说明
+
+该组件属于业务图表组件，不随 `sybz-components` 主插件一起注册。使用前需要额外安装 `echarts`、`vue-echarts`，并注册图表插件：
+
+```sh
+pnpm add echarts vue-echarts
+```
+
+```ts
+import SybzChartComponents from 'sybz-components/charts'
+import 'sybz-components/charts/style.css'
+
+app.use(SybzChartComponents)
+```
+
 ## Hidden Title {.md-hidden}
 
 <DocBasicUsage code='<SCountBar :data="data" style="height: 300px"></SCountBar>' />

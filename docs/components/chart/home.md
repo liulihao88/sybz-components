@@ -2,6 +2,21 @@
 
 [https://echarts.apache.org/handbook/zh/get-started](https://echarts.apache.org/handbook/zh/get-started)
 
+## 使用说明
+
+图表组件不随 `sybz-components` 主插件一起注册。使用前需要额外安装 `echarts`、`vue-echarts`，并注册图表插件：
+
+```sh
+pnpm add echarts vue-echarts
+```
+
+```ts
+import SybzChartComponents from 'sybz-components/charts'
+import 'sybz-components/charts/style.css'
+
+app.use(SybzChartComponents)
+```
+
 ## Hidden Title {.md-hidden}
 
 <DocBasicUsage code='<s-chart :option="option" />' />
