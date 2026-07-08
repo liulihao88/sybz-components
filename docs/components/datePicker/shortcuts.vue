@@ -12,18 +12,18 @@ const shortcuts = [
     value: () => new Date(),
   },
   {
-    text: '三天后',
+    text: '3天前',
     value: () => {
       const date = new Date()
-      date.setTime(date.getTime() + oneDay * 3)
+      date.setTime(date.getTime() - oneDay * 3)
       return date
     },
   },
   {
-    text: '一周后',
+    text: '14天前',
     value: () => {
       const date = new Date()
-      date.setTime(date.getTime() + oneDay * 7)
+      date.setTime(date.getTime() - oneDay * 14)
       return date
     },
   },
@@ -38,9 +38,9 @@ const shortcuts = [
       <span>默认值: 内置快捷项</span>
       <span>
         日期范围默认值:
-        今天、昨天、最近7天、最近30天、最近90天、最近1年、本周、上周、本月、上月、本季度、上季度、今年、去年
+        今天、昨天、最近7天、最近30天、最近90天、最近1年、本周至今、本月至今、本季度至今、今年至今、上周、上月、上季度、去年
       </span>
-      <span>月份范围默认值: 本月、上月、最近3个月、最近6个月、最近12个月、今年、去年</span>
+      <span>月份范围默认值: 本月、上月、最近3个月、最近6个月、最近12个月、今年至今、去年</span>
       <span>年份范围默认值: 今年、去年、最近3年、最近5年、最近10年</span>
       <span>属性: type</span>
       <span>可选值: date | daterange | datetimerange | monthrange | yearrange</span>
@@ -53,6 +53,7 @@ const shortcuts = [
         v-model="rangeValue"
         type="datetimerange"
         width="520"
+        unlink-panels
         start-placeholder="内置快捷项"
       ></s-date-picker>
       <s-date-picker v-model="noShortcutsValue" :shortcuts="false" placeholder="关闭快捷项"></s-date-picker>

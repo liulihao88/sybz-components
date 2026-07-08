@@ -4,7 +4,7 @@
 
 本页收录 `@sybz-components/utils` 当前对外导出的全部工具方法，并为每个方法补一个最小示例，方便直接查用法。
 
-以下示例默认已经从 `@sybz-components/utils` 引入对应方法；依赖 `window`、`document`、`localStorage`、`Element Plus` 或 `WebSocket` 的方法，需要在浏览器环境中使用。
+以下示例默认已经从 `@sybz-components/utils` 引入对应方法；依赖 `window`、`document`、`localStorage` 或 `Element Plus` 的方法，需要在浏览器环境中使用。
 
 ### 导出入口
 
@@ -583,27 +583,4 @@ await validateForm(formRef, {
   message: '请先完善表单信息',
   detail: true,
 })
-```
-
-### WS
-
-WebSocket 的简单封装，支持自动重连、心跳和 query 参数。
-
-```ts
-const ws = new WS('wss://example.com/ws', {
-  autoReconnect: true,
-  heartbeat: {
-    message: 'ping',
-    interval: 3000,
-  },
-  query: {
-    token: 'demo-token',
-  },
-})
-
-ws.onMessage((message) => {
-  console.log(message)
-})
-
-ws.send('hello')
 ```

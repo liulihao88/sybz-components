@@ -112,32 +112,32 @@ const defaultDateRangeShortcuts = [
     value: () => recentCalendarYears(1),
   },
   {
-    text: '本周',
+    text: '本周至今',
     value: () => rangeToToday(startOfWeek()),
+  },
+  {
+    text: '本月至今',
+    value: () => rangeToToday(startOfMonth()),
+  },
+  {
+    text: '本季度至今',
+    value: () => rangeToToday(startOfQuarter()),
+  },
+  {
+    text: '今年至今',
+    value: () => rangeToToday(startOfYear()),
   },
   {
     text: '上周',
     value: () => getWeekRange(addDays(new Date(), -7)),
   },
   {
-    text: '本月',
-    value: () => rangeToToday(startOfMonth()),
-  },
-  {
     text: '上月',
     value: () => getMonthRange(addMonths(startOfMonth(), -1)),
   },
   {
-    text: '本季度',
-    value: () => rangeToToday(startOfQuarter()),
-  },
-  {
     text: '上季度',
     value: () => getQuarterRange(addMonths(startOfQuarter(), -3)),
-  },
-  {
-    text: '今年',
-    value: () => rangeToToday(startOfYear()),
   },
   {
     text: '去年',
@@ -167,7 +167,7 @@ const defaultMonthRangeShortcuts = [
     value: () => recentMonths(12),
   },
   {
-    text: '今年',
+    text: '今年至今',
     value: () => rangeToCurrentMonth(startOfYear()),
   },
   {
@@ -221,8 +221,12 @@ const defaultSingleShortcuts = [
     value: () => addDays(new Date(), -1),
   },
   {
-    text: '一周前',
+    text: '7天前',
     value: () => addDays(new Date(), -7),
+  },
+  {
+    text: '30天前',
+    value: () => addDays(new Date(), -30),
   },
 ]
 
