@@ -7,6 +7,7 @@ const rootDir = process.cwd()
 const componentsDir = resolve(rootDir, 'packages/components')
 const outputPath = resolve(rootDir, 'packages/components.d.ts')
 const componentTypeDir = resolve(rootDir, 'packages/types/components')
+const chartComponentsOutputPath = resolve(componentTypeDir, 'company/chart/components.d.ts')
 const componentPropsPath = resolve(rootDir, 'packages/types/component-props.d.ts')
 const declarationPrettierOptions = (await prettier.resolveConfig(outputPath)) ?? {}
 const onlineDocsBaseUrl = 'https://liulihao88.github.io/sybz-components'
@@ -22,6 +23,13 @@ const writeDeclarationFile = async (filePath, content) => {
 }
 
 const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', 'utils'])
+const CHART_COMPONENT_PATHS = new Set([
+  'chart',
+  'company/countBar',
+  'company/countBarOld',
+  'company/objectLine',
+  'company/quotaPie',
+])
 
 const componentHoverProps = (interfaceName, importTypeNames = [interfaceName], extraImportLines = []) => ({
   sourcePath: componentPropsPath,
@@ -950,26 +958,29 @@ const collectComponentEntries = () => {
         .filter((entry) => entry.isDirectory() && !EXCLUDED_COMPONENT_DIRS.has(entry.name))
         .map((entry) => ({
           dirName: entry.name,
+          componentPath: entry.name,
           wrapperPath: `./types/components/${entry.name}`,
           wrapperFilePath: resolve(componentTypeDir, `${entry.name}.d.ts`),
         }))
     }
 
     return readdirSync(baseDir, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
+      .filter((entry) => entry.isDirectory() && entry.name !== 'chart')
       .map((entry) => ({
         dirName: entry.name,
+        componentPath: `${segments.join('/')}/${entry.name}`,
         wrapperPath: `./types/components/${segments.join('/')}/${entry.name}`,
         wrapperFilePath: resolve(componentTypeDir, segments.join('/'), `${entry.name}.d.ts`),
       }))
   })
 }
 
-const componentEntries = collectComponentEntries()
-  .map(({ dirName, wrapperPath, wrapperFilePath }) => {
+const allComponentEntries = collectComponentEntries()
+  .map(({ dirName, componentPath, wrapperPath, wrapperFilePath }) => {
     const componentName = `S${toPascalCase(dirName)}`
     return {
       componentName,
+      componentPath,
       tagName: `s-${toKebabCase(dirName)}`,
       wrapperPath,
       wrapperFilePath,
@@ -979,6 +990,13 @@ const componentEntries = collectComponentEntries()
     }
   })
   .sort((left, right) => left.componentName.localeCompare(right.componentName))
+
+const mainComponentEntries = allComponentEntries.filter(
+  ({ componentPath }) => !CHART_COMPONENT_PATHS.has(componentPath),
+)
+const chartComponentEntries = allComponentEntries.filter(({ componentPath }) =>
+  CHART_COMPONENT_PATHS.has(componentPath),
+)
 
 const existingTableImports = `import type {
   STableButton as STableButtonType,
@@ -1010,90 +1028,111 @@ const tableAliases = [
   'STableProps = STablePropsType',
 ]
 
-const lines = [
-  existingTableImports,
-  "import type { AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'",
-  '',
-  'type ComponentInstance<T> = T extends new (...args: any[]) => infer R ? R : never',
-  'type JSXComponentProps<Props> = Props & VNodeProps & AllowedComponentProps & ComponentCustomProps & { children?: any }',
-  '',
-]
+const buildComponentDeclarationLines = (componentEntries, { declarationDir, includeTableAliases = false } = {}) => {
+  const lines = [
+    ...(includeTableAliases ? [existingTableImports] : []),
+    "import type { AllowedComponentProps, ComponentCustomProps, VNodeProps } from 'vue'",
+    '',
+    'type ComponentInstance<T> = T extends new (...args: any[]) => infer R ? R : never',
+    'type JSXComponentProps<Props> = Props & VNodeProps & AllowedComponentProps & ComponentCustomProps & { children?: any }',
+    '',
+  ]
 
-if (tableAliases.length) {
-  lines.push('declare global {')
-  tableAliases.forEach((line) => {
-    lines.push(`  type ${line}`)
-  })
-  lines.push('}')
-  lines.push('')
-}
+  if (includeTableAliases && tableAliases.length) {
+    lines.push('declare global {')
+    tableAliases.forEach((line) => {
+      lines.push(`  type ${line}`)
+    })
+    lines.push('}')
+    lines.push('')
+  }
 
-lines.push("declare module 'vue' {")
-lines.push('  export interface GlobalComponents {')
-componentEntries.forEach(({ componentName, tagName, wrapperPath, docsUrl }) => {
-  const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
-  const componentType = typedComponent?.exportedComponentTypeName
-    ? `import('${wrapperPath}').${typedComponent.exportedComponentTypeName}`
-    : `(typeof import('${wrapperPath}'))['default']`
-  const globalComponentType = typedComponent?.useDefaultExportForGlobal
-    ? `(typeof import('${wrapperPath}'))['default']`
-    : componentType
+  lines.push("declare module 'vue' {")
+  lines.push('  export interface GlobalComponents {')
+  componentEntries.forEach(({ componentName, tagName, wrapperFilePath, docsUrl }) => {
+    const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
+    const wrapperImportPath = getNormalizedImportPath(declarationDir, wrapperFilePath)
+    const componentType = typedComponent?.exportedComponentTypeName
+      ? `import('${wrapperImportPath}').${typedComponent.exportedComponentTypeName}`
+      : `(typeof import('${wrapperImportPath}'))['default']`
+    const globalComponentType = typedComponent?.useDefaultExportForGlobal
+      ? `(typeof import('${wrapperImportPath}'))['default']`
+      : componentType
 
-  getComponentDocCommentLines({ docsUrl, description: typedComponent?.description }).forEach((line) => {
-    lines.push(`    ${line}`)
-  })
-  lines.push(`    ${componentName}: ${globalComponentType}`)
-
-  const templateTagName = typedComponent?.tagName || tagName
-  if (templateTagName) {
     getComponentDocCommentLines({ docsUrl, description: typedComponent?.description }).forEach((line) => {
       lines.push(`    ${line}`)
     })
-    lines.push(`    '${templateTagName}': ${globalComponentType}`)
-  }
-})
-lines.push('  }')
-lines.push('}')
-lines.push('')
+    lines.push(`    ${componentName}: ${globalComponentType}`)
 
-componentEntries.forEach(({ componentName, wrapperPath, instanceTypeName, publicPropsTypeName }) => {
-  const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
-  const componentType = typedComponent?.exportedComponentTypeName
-    ? `import('${wrapperPath}').${typedComponent.exportedComponentTypeName}`
-    : `(typeof import('${wrapperPath}'))['default']`
-
-  lines.push(`export type ${componentName}Component = ${componentType}`)
-  lines.push(`export type ${instanceTypeName} = ComponentInstance<${componentName}Component>`)
-  if (typedComponent?.publicPropsTypeName) {
-    lines.push(`export type ${publicPropsTypeName} = import('${wrapperPath}').${typedComponent.publicPropsTypeName}`)
-  } else {
-    lines.push(`export type ${publicPropsTypeName} = ${instanceTypeName}['$props']`)
-  }
+    const templateTagName = typedComponent?.tagName || tagName
+    if (templateTagName) {
+      getComponentDocCommentLines({ docsUrl, description: typedComponent?.description }).forEach((line) => {
+        lines.push(`    ${line}`)
+      })
+      lines.push(`    '${templateTagName}': ${globalComponentType}`)
+    }
+  })
+  lines.push('  }')
+  lines.push('}')
   lines.push('')
-})
 
-lines.push('declare global {')
-lines.push('  namespace JSX {')
-lines.push('    export interface IntrinsicElements {')
-componentEntries.forEach(({ componentName, tagName, publicPropsTypeName }) => {
-  const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
-  const templateTagName = typedComponent?.tagName || tagName
+  componentEntries.forEach(({ componentName, wrapperFilePath, instanceTypeName, publicPropsTypeName }) => {
+    const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
+    const wrapperImportPath = getNormalizedImportPath(declarationDir, wrapperFilePath)
+    const componentType = typedComponent?.exportedComponentTypeName
+      ? `import('${wrapperImportPath}').${typedComponent.exportedComponentTypeName}`
+      : `(typeof import('${wrapperImportPath}'))['default']`
 
-  if (templateTagName) {
-    lines.push(`      '${templateTagName}': JSXComponentProps<${publicPropsTypeName}>`)
-  }
-})
-lines.push('    }')
-lines.push('  }')
-lines.push('}')
-lines.push('')
+    lines.push(`export type ${componentName}Component = ${componentType}`)
+    lines.push(`export type ${instanceTypeName} = ComponentInstance<${componentName}Component>`)
+    if (typedComponent?.publicPropsTypeName) {
+      lines.push(
+        `export type ${publicPropsTypeName} = import('${wrapperImportPath}').${typedComponent.publicPropsTypeName}`,
+      )
+    } else {
+      lines.push(`export type ${publicPropsTypeName} = ${instanceTypeName}['$props']`)
+    }
+    lines.push('')
+  })
 
-lines.push('export {}')
-lines.push('')
+  lines.push('declare global {')
+  lines.push('  namespace JSX {')
+  lines.push('    export interface IntrinsicElements {')
+  componentEntries.forEach(({ componentName, tagName, publicPropsTypeName }) => {
+    const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
+    const templateTagName = typedComponent?.tagName || tagName
 
-await writeDeclarationFile(outputPath, lines.join('\n'))
+    if (templateTagName) {
+      lines.push(`      '${templateTagName}': JSXComponentProps<${publicPropsTypeName}>`)
+    }
+  })
+  lines.push('    }')
+  lines.push('  }')
+  lines.push('}')
+  lines.push('')
 
-for (const { componentName, wrapperFilePath } of componentEntries) {
+  lines.push('export {}')
+  lines.push('')
+
+  return lines
+}
+
+await writeDeclarationFile(
+  outputPath,
+  buildComponentDeclarationLines(mainComponentEntries, {
+    declarationDir: dirname(outputPath),
+    includeTableAliases: true,
+  }).join('\n'),
+)
+mkdirSync(dirname(chartComponentsOutputPath), { recursive: true })
+await writeDeclarationFile(
+  chartComponentsOutputPath,
+  buildComponentDeclarationLines(chartComponentEntries, { declarationDir: dirname(chartComponentsOutputPath) }).join(
+    '\n',
+  ),
+)
+
+for (const { componentName, wrapperFilePath } of allComponentEntries) {
   const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
   const wrapperDir = dirname(wrapperFilePath)
   const elementWrapperConfig = ELEMENT_WRAPPER_CONFIGS[typedComponent?.explicitComponentType]

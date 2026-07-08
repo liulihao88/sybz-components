@@ -16,6 +16,36 @@
       "import": "./dist/sybz-components-es.js",
       "default": "./dist/sybz-components-es.js"
     },
+    "./charts": {
+      "types": "./dist/types/components/company/chart/index.d.ts",
+      "import": "./dist/charts.js",
+      "default": "./dist/charts.js"
+    },
+    "./charts/chart": {
+      "types": "./dist/types/components/company/chart/chart.d.ts",
+      "import": "./dist/charts/chart.js",
+      "default": "./dist/charts/chart.js"
+    },
+    "./charts/count-bar": {
+      "types": "./dist/types/components/company/chart/count-bar.d.ts",
+      "import": "./dist/charts/count-bar.js",
+      "default": "./dist/charts/count-bar.js"
+    },
+    "./charts/count-bar-old": {
+      "types": "./dist/types/components/company/chart/count-bar-old.d.ts",
+      "import": "./dist/charts/count-bar-old.js",
+      "default": "./dist/charts/count-bar-old.js"
+    },
+    "./charts/object-line": {
+      "types": "./dist/types/components/company/chart/object-line.d.ts",
+      "import": "./dist/charts/object-line.js",
+      "default": "./dist/charts/object-line.js"
+    },
+    "./charts/quota-pie": {
+      "types": "./dist/types/components/company/chart/quota-pie.d.ts",
+      "import": "./dist/charts/quota-pie.js",
+      "default": "./dist/charts/quota-pie.js"
+    },
     "./types": {
       "types": "./dist/types/index.d.ts"
     },
@@ -28,6 +58,8 @@
       "default": "./dist/sybz-components-es.js"
     },
     "./style.css": "./dist/style.css",
+    "./charts/style.css": "./dist/charts-style.css",
+    "./charts-style.css": "./dist/charts-style.css",
     "./skills/sybz-components": "./skills/sybz-components/SKILL.md",
     "./skills/sybz-components/*": "./skills/sybz-components/*",
     "./utilities.css": "./dist/utilities.css",
@@ -60,7 +92,7 @@
   ],
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "pnpm types:generate && vite build",
+    "build": "pnpm types:generate && vite build && vite build --config packages/components/company/chart/vite.config.js",
     "docsbuild": "vitepress build docs",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",

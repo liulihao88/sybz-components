@@ -14,18 +14,25 @@ type InstallableComponent = Component & {
   __name?: string
 }
 
-const componentsGlobal = import.meta.glob<InstallableComponent>('./components/*/index.ts', {
-  eager: true,
-  import: 'default',
-}) // 引入全局基础组件
-const componentsCompany = import.meta.glob<InstallableComponent>('./components/company/*/index.ts', {
-  eager: true,
-  import: 'default',
-}) // 引入业务组件
+const componentsWithoutCharts = import.meta.glob<InstallableComponent>(
+  [
+    './components/*/index.ts',
+    './components/company/*/index.ts',
+    '!./components/chart/index.ts',
+    '!./components/company/chart/index.ts',
+    '!./components/company/countBar/index.ts',
+    '!./components/company/countBarOld/index.ts',
+    '!./components/company/objectLine/index.ts',
+    '!./components/company/quotaPie/index.ts',
+  ],
+  {
+    eager: true,
+    import: 'default',
+  },
+)
 
 const allComponents = {
-  ...componentsGlobal,
-  ...componentsCompany,
+  ...componentsWithoutCharts,
 }
 
 // 1. 批量导出所有组件（作为命名导出）

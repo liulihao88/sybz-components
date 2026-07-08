@@ -1,4 +1,5 @@
 /// <reference path="../../packages/components.d.ts" />
+/// <reference path="../../packages/types/components/company/chart/components.d.ts" />
 /// <reference types="vite/client" />
 
 declare module '~dist/sybz-components-es.js' {
@@ -7,6 +8,12 @@ declare module '~dist/sybz-components-es.js' {
 
   export { createSvg }
   export default SybzComponents
+}
+
+declare module '~dist/charts.js' {
+  const SybzChartComponents: import('vue').Plugin
+
+  export default SybzChartComponents
 }
 
 declare module 'virtual:svg-icons-register'

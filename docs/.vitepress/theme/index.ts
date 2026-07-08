@@ -41,16 +41,21 @@ export default {
   },
   async enhanceApp(ctx) {
     let componentModule
+    let chartComponentModule
 
     if (import.meta.env.DEV) {
       componentModule = await import('@/index.ts')
+      chartComponentModule = await import('@/components/company/chart/index.ts')
     } else {
       await import('~dist/style.css')
       await import('~dist/utilities.css')
+      await import('~dist/charts-style.css')
       componentModule = await import('~dist/sybz-components-es.js')
+      chartComponentModule = await import('~dist/charts.js')
     }
 
     const { default: SybzComponents, createSvg } = componentModule
+    const { default: SybzChartComponents } = chartComponentModule
     const svgIconConfig = createSvg(
       './assets/svg', // 指定本地 SVG 文件夹路径
     )
@@ -90,6 +95,7 @@ export default {
       },
       select: {},
     })
+    ctx.app.use(SybzChartComponents)
     ctx.app.component('Demo', VPDemo)
     DefaultTheme.enhanceApp(ctx)
     registerBuildDebug()

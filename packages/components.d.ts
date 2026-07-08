@@ -79,14 +79,6 @@ declare module 'vue' {
      */
     's-card': (typeof import('./types/components/card'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/chart/home.html
-     */
-    SChart: (typeof import('./types/components/chart'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/chart/home.html
-     */
-    's-chart': (typeof import('./types/components/chart'))['default']
-    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/checkbox/home.html
      */
     SCheckbox: (typeof import('./types/components/checkbox'))['default']
@@ -110,22 +102,6 @@ declare module 'vue' {
      * 在线文档：https://liulihao88.github.io/sybz-components/components/compTitle/home.html
      */
     's-comp-title': (typeof import('./types/components/compTitle'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBar/home.html
-     */
-    SCountBar: (typeof import('./types/components/company/countBar'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBar/home.html
-     */
-    's-count-bar': (typeof import('./types/components/company/countBar'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html
-     */
-    SCountBarOld: (typeof import('./types/components/company/countBarOld'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html
-     */
-    's-count-bar-old': (typeof import('./types/components/company/countBarOld'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/datePicker/home.html
      */
@@ -235,14 +211,6 @@ declare module 'vue' {
      */
     's-item': (typeof import('./types/components/item'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
-     */
-    SObjectLine: (typeof import('./types/components/company/objectLine'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
-     */
-    's-object-line': (typeof import('./types/components/company/objectLine'))['default']
-    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/popconfirm/home.html
      */
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
@@ -258,14 +226,6 @@ declare module 'vue' {
      * 在线文档：https://liulihao88.github.io/sybz-components/components/progress/home.html
      */
     's-progress': (typeof import('./types/components/progress'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html
-     */
-    SQuotaPie: (typeof import('./types/components/company/quotaPie'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html
-     */
-    's-quota-pie': (typeof import('./types/components/company/quotaPie'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/radio/home.html
      */
@@ -401,10 +361,6 @@ export type SCardComponent = (typeof import('./types/components/card'))['default
 export type SCardInstance = ComponentInstance<SCardComponent>
 export type SCardPublicProps = SCardInstance['$props']
 
-export type SChartComponent = (typeof import('./types/components/chart'))['default']
-export type SChartInstance = ComponentInstance<SChartComponent>
-export type SChartPublicProps = SChartInstance['$props']
-
 export type SCheckboxComponent = import('./types/components/checkbox').SCheckboxComponent
 export type SCheckboxInstance = ComponentInstance<SCheckboxComponent>
 export type SCheckboxPublicProps = import('./types/components/checkbox').SCheckboxPublicProps
@@ -416,14 +372,6 @@ export type SClickOutsidePublicProps = SClickOutsideInstance['$props']
 export type SCompTitleComponent = (typeof import('./types/components/compTitle'))['default']
 export type SCompTitleInstance = ComponentInstance<SCompTitleComponent>
 export type SCompTitlePublicProps = SCompTitleInstance['$props']
-
-export type SCountBarComponent = (typeof import('./types/components/company/countBar'))['default']
-export type SCountBarInstance = ComponentInstance<SCountBarComponent>
-export type SCountBarPublicProps = SCountBarInstance['$props']
-
-export type SCountBarOldComponent = (typeof import('./types/components/company/countBarOld'))['default']
-export type SCountBarOldInstance = ComponentInstance<SCountBarOldComponent>
-export type SCountBarOldPublicProps = SCountBarOldInstance['$props']
 
 export type SDatePickerComponent = import('./types/components/datePicker').SDatePickerComponent
 export type SDatePickerInstance = ComponentInstance<SDatePickerComponent>
@@ -477,10 +425,6 @@ export type SItemComponent = (typeof import('./types/components/item'))['default
 export type SItemInstance = ComponentInstance<SItemComponent>
 export type SItemPublicProps = SItemInstance['$props']
 
-export type SObjectLineComponent = (typeof import('./types/components/company/objectLine'))['default']
-export type SObjectLineInstance = ComponentInstance<SObjectLineComponent>
-export type SObjectLinePublicProps = SObjectLineInstance['$props']
-
 export type SPopconfirmComponent = import('./types/components/popconfirm').SPopconfirmComponent
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>
 export type SPopconfirmPublicProps = import('./types/components/popconfirm').SPopconfirmPublicProps
@@ -488,10 +432,6 @@ export type SPopconfirmPublicProps = import('./types/components/popconfirm').SPo
 export type SProgressComponent = import('./types/components/progress').SProgressComponent
 export type SProgressInstance = ComponentInstance<SProgressComponent>
 export type SProgressPublicProps = import('./types/components/progress').SProgressPublicProps
-
-export type SQuotaPieComponent = (typeof import('./types/components/company/quotaPie'))['default']
-export type SQuotaPieInstance = ComponentInstance<SQuotaPieComponent>
-export type SQuotaPiePublicProps = SQuotaPieInstance['$props']
 
 export type SRadioComponent = import('./types/components/radio').SRadioComponent
 export type SRadioInstance = ComponentInstance<SRadioComponent>
@@ -557,12 +497,9 @@ declare global {
       's-button': JSXComponentProps<SButtonPublicProps>
       's-capacity-progress': JSXComponentProps<SCapacityProgressPublicProps>
       's-card': JSXComponentProps<SCardPublicProps>
-      's-chart': JSXComponentProps<SChartPublicProps>
       's-checkbox': JSXComponentProps<SCheckboxPublicProps>
       's-click-outside': JSXComponentProps<SClickOutsidePublicProps>
       's-comp-title': JSXComponentProps<SCompTitlePublicProps>
-      's-count-bar': JSXComponentProps<SCountBarPublicProps>
-      's-count-bar-old': JSXComponentProps<SCountBarOldPublicProps>
       's-date-picker': JSXComponentProps<SDatePickerPublicProps>
       's-descriptions': JSXComponentProps<SDescriptionsPublicProps>
       's-dialog': JSXComponentProps<SDialogPublicProps>
@@ -576,10 +513,8 @@ declare global {
       's-input-label': JSXComponentProps<SInputLabelPublicProps>
       's-input-number': JSXComponentProps<SInputNumberPublicProps>
       's-item': JSXComponentProps<SItemPublicProps>
-      's-object-line': JSXComponentProps<SObjectLinePublicProps>
       's-popconfirm': JSXComponentProps<SPopconfirmPublicProps>
       's-progress': JSXComponentProps<SProgressPublicProps>
-      's-quota-pie': JSXComponentProps<SQuotaPiePublicProps>
       's-radio': JSXComponentProps<SRadioPublicProps>
       's-row': JSXComponentProps<SRowPublicProps>
       's-select': JSXComponentProps<SSelectPublicProps>
