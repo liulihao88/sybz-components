@@ -184,6 +184,10 @@ export default defineConfig({
               link: '/components/usageGuide/home.md',
             },
             {
+              text: 'Skills 使用说明',
+              link: '/components/skills/home.md',
+            },
+            {
               text: '前端代码统一规范',
               link: '/components/codeStandard/home.md',
             },
