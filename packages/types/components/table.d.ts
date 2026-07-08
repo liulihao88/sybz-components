@@ -7,7 +7,6 @@ import type {
   TableRow,
   TableSelectionType,
 } from '../table'
-import type { SybzComponentTheme } from '../component-props'
 
 type ElTableInstance = InstanceType<typeof ElTable>
 

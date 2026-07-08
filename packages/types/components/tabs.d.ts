@@ -1,6 +1,6 @@
 import { ElTabs } from 'element-plus'
 import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
-import type { STabsSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { STabsSelfProps, SybzRecord } from '../component-props'
 
 type ElTabsInstance = InstanceType<typeof ElTabs>
 

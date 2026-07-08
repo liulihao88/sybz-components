@@ -43,14 +43,6 @@ declare module 'vue' {
      */
     's-base-header': (typeof import('./types/components/company/baseHeader'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
-     */
-    SCard: (typeof import('./types/components/card'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
-     */
-    's-card': (typeof import('./types/components/card'))['default']
-    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/buildTime/home.html
      */
     SBuildTime: (typeof import('./types/components/buildTime'))['default']
@@ -78,6 +70,14 @@ declare module 'vue' {
      * 在线文档：https://liulihao88.github.io/sybz-components/components/company/capacityProgress/home.html
      */
     's-capacity-progress': (typeof import('./types/components/company/capacityProgress'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
+     */
+    SCard: (typeof import('./types/components/card'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
+     */
+    's-card': (typeof import('./types/components/card'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/chart/home.html
      */
@@ -235,14 +235,6 @@ declare module 'vue' {
      */
     's-item': (typeof import('./types/components/item'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
-     */
-    SWrapper: (typeof import('./types/components/wrapper'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
-     */
-    's-wrapper': (typeof import('./types/components/wrapper'))['default']
-    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
      */
     SObjectLine: (typeof import('./types/components/company/objectLine'))['default']
@@ -378,16 +370,20 @@ declare module 'vue' {
      * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
      */
     's-warning': (typeof import('./types/components/warning'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
+     */
+    SWrapper: (typeof import('./types/components/wrapper'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
+     */
+    's-wrapper': (typeof import('./types/components/wrapper'))['default']
   }
 }
 
 export type SBaseHeaderComponent = (typeof import('./types/components/company/baseHeader'))['default']
 export type SBaseHeaderInstance = ComponentInstance<SBaseHeaderComponent>
 export type SBaseHeaderPublicProps = SBaseHeaderInstance['$props']
-
-export type SCardComponent = (typeof import('./types/components/card'))['default']
-export type SCardInstance = ComponentInstance<SCardComponent>
-export type SCardPublicProps = SCardInstance['$props']
 
 export type SBuildTimeComponent = (typeof import('./types/components/buildTime'))['default']
 export type SBuildTimeInstance = ComponentInstance<SBuildTimeComponent>
@@ -400,6 +396,10 @@ export type SButtonPublicProps = import('./types/components/button').SButtonPubl
 export type SCapacityProgressComponent = (typeof import('./types/components/company/capacityProgress'))['default']
 export type SCapacityProgressInstance = ComponentInstance<SCapacityProgressComponent>
 export type SCapacityProgressPublicProps = SCapacityProgressInstance['$props']
+
+export type SCardComponent = (typeof import('./types/components/card'))['default']
+export type SCardInstance = ComponentInstance<SCardComponent>
+export type SCardPublicProps = SCardInstance['$props']
 
 export type SChartComponent = (typeof import('./types/components/chart'))['default']
 export type SChartInstance = ComponentInstance<SChartComponent>
@@ -477,10 +477,6 @@ export type SItemComponent = (typeof import('./types/components/item'))['default
 export type SItemInstance = ComponentInstance<SItemComponent>
 export type SItemPublicProps = SItemInstance['$props']
 
-export type SWrapperComponent = (typeof import('./types/components/wrapper'))['default']
-export type SWrapperInstance = ComponentInstance<SWrapperComponent>
-export type SWrapperPublicProps = SWrapperInstance['$props']
-
 export type SObjectLineComponent = (typeof import('./types/components/company/objectLine'))['default']
 export type SObjectLineInstance = ComponentInstance<SObjectLineComponent>
 export type SObjectLinePublicProps = SObjectLineInstance['$props']
@@ -549,14 +545,18 @@ export type SWarningComponent = (typeof import('./types/components/warning'))['d
 export type SWarningInstance = ComponentInstance<SWarningComponent>
 export type SWarningPublicProps = SWarningInstance['$props']
 
+export type SWrapperComponent = (typeof import('./types/components/wrapper'))['default']
+export type SWrapperInstance = ComponentInstance<SWrapperComponent>
+export type SWrapperPublicProps = SWrapperInstance['$props']
+
 declare global {
   namespace JSX {
     export interface IntrinsicElements {
       's-base-header': JSXComponentProps<SBaseHeaderPublicProps>
-      's-card': JSXComponentProps<SCardPublicProps>
       's-build-time': JSXComponentProps<SBuildTimePublicProps>
       's-button': JSXComponentProps<SButtonPublicProps>
       's-capacity-progress': JSXComponentProps<SCapacityProgressPublicProps>
+      's-card': JSXComponentProps<SCardPublicProps>
       's-chart': JSXComponentProps<SChartPublicProps>
       's-checkbox': JSXComponentProps<SCheckboxPublicProps>
       's-click-outside': JSXComponentProps<SClickOutsidePublicProps>
@@ -576,7 +576,6 @@ declare global {
       's-input-label': JSXComponentProps<SInputLabelPublicProps>
       's-input-number': JSXComponentProps<SInputNumberPublicProps>
       's-item': JSXComponentProps<SItemPublicProps>
-      's-wrapper': JSXComponentProps<SWrapperPublicProps>
       's-object-line': JSXComponentProps<SObjectLinePublicProps>
       's-popconfirm': JSXComponentProps<SPopconfirmPublicProps>
       's-progress': JSXComponentProps<SProgressPublicProps>
@@ -594,6 +593,7 @@ declare global {
       's-title': JSXComponentProps<STitlePublicProps>
       's-tooltip': JSXComponentProps<STooltipPublicProps>
       's-warning': JSXComponentProps<SWarningPublicProps>
+      's-wrapper': JSXComponentProps<SWrapperPublicProps>
     }
   }
 }

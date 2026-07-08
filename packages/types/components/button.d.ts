@@ -1,5 +1,5 @@
 import { ElButton } from 'element-plus'
-import type { SButtonSelfProps, SybzComponentTheme } from '../component-props'
+import type { SButtonSelfProps } from '../component-props'
 
 type ElButtonInstance = InstanceType<typeof ElButton>
 
@@ -22,7 +22,7 @@ export type SButtonComponent = {
       /** 是否允许 tooltip 内容作为 HTML 片段渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       /** 组件主题 */
-      theme?: SybzComponentTheme
+      theme?: 'default' | 'chenghua' | 'shijingshan'
       /** 主题按钮变体 */
       variant?: '' | 'outline' | 'gradient'
       /** 按钮尺寸 */
