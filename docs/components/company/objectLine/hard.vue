@@ -961,8 +961,8 @@ setTimeout(() => {
 
 <template>
   <div>
-    <sItemWrapper min-width="1100px">
+    <sWrapper min-width="1100px">
       <SObjectLine :object-count="objectCount" :object-size="objectSize" class="h-400 w-1100"></SObjectLine>
-    </sItemWrapper>
+    </sWrapper>
   </div>
 </template>

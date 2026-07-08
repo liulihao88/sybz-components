@@ -8,7 +8,7 @@ const disabledValue = ref(8)
 
 <template>
   <div class="input-number-shijingshan-demo">
-    <s-item-wrapper flex="1" wrap="wrap">
+    <sWrapper flex="1" wrap="wrap">
       <s-input-number v-model="count" theme="shijingshan" title="审核数量" width="240" height="40" :min="0" />
       <s-input-number
         v-model="quota"
@@ -20,7 +20,7 @@ const disabledValue = ref(8)
         controls-position=""
       />
       <s-input-number v-model="disabledValue" theme="shijingshan" title="禁用项" height="40" :min="0" disabled />
-    </s-item-wrapper>
+    </sWrapper>
   </div>
 </template>
 

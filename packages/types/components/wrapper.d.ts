@@ -1,6 +1,6 @@
-import type { SItemWrapperProps } from '../component-props'
+import type { SWrapperProps } from '../component-props'
 
-export type SItemWrapperComponent = {
+export type SWrapperComponent = {
   new (): {
     $props: {
       gap?: string | number
@@ -13,5 +13,5 @@ export type SItemWrapperComponent = {
   }
 }
 
-declare const SItemWrapper: SItemWrapperComponent
-export default SItemWrapper
+declare const SWrapper: SWrapperComponent
+export default SWrapper

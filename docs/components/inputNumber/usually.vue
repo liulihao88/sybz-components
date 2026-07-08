@@ -6,7 +6,7 @@ const strictCount = ref(2)
 
 <template>
   <div>
-    <s-item-wrapper :columns="2">
+    <sWrapper :columns="2">
       <s-input v-model="smallCount"></s-input>
       <s-input-number v-model="smallCount" title="宽度" width="200" />
       <s-input-number v-model="smallCount" title="最大1, 最小5" :min="1" :max="5" />
@@ -24,6 +24,6 @@ const strictCount = ref(2)
       <s-input-number v-model="smallCount" title="步进2" :step="2" />
       <s-input-number v-model="strictCount" title="严格步进2" :step="2" step-strictly />
       <s-input-number v-model="smallCount" title="当输入框被清空显示的值" :value-on-clear="1" />
-    </s-item-wrapper>
+    </sWrapper>
   </div>
 </template>

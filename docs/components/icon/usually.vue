@@ -23,13 +23,13 @@ const lists = [
 
 <template>
   <div>
-    <sItemWrapper :columns="3">
+    <sWrapper :columns="3">
       <div v-for="(v, i) in lists" :key="i">
         <div class="f-st-ct">
           <div class="m-r-8">{{ v.label }} ({{ v.value }}) -></div>
           <s-icon :name="v.value" color="var(--blue)"></s-icon>
         </div>
       </div>
-    </sItemWrapper>
+    </sWrapper>
   </div>
 </template>

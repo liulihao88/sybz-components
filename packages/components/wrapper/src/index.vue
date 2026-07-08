@@ -1,5 +1,5 @@
 <template>
-  <div class="s-item-wrapper" :class="{ 'with-columns': props.columns }">
+  <div class="s-wrapper" :class="{ 'with-columns': props.columns }">
     <component :is="item" v-for="(item, index) in validSlots" :key="index" class="col" />
   </div>
 </template>
@@ -9,16 +9,16 @@ import { useSlots, computed, type VNode } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 
 defineOptions({
-  name: 'SItemWrapper',
+  name: 'SWrapper',
 })
 
-interface ItemWrapperProps {
+interface WrapperProps {
   gap?: string | number
   columns?: number | null
   minWidth?: string | number
 }
 
-const props = withDefaults(defineProps<ItemWrapperProps>(), {
+const props = withDefaults(defineProps<WrapperProps>(), {
   gap: '16px',
   columns: null, // null 表示不分组，保持原样
   minWidth: 0,
@@ -53,7 +53,7 @@ const validSlots = computed(() => {
 </script>
 
 <!-- <style lang="scss" scoped>
-.s-item-wrapper {
+.s-wrapper {
   display: flex;
   flex-direction: column;
   gap: v-bind('props.gap');
@@ -77,7 +77,7 @@ const validSlots = computed(() => {
 </style> -->
 
 <style lang="scss" scoped>
-.s-item-wrapper {
+.s-wrapper {
   /* 默认 flex 布局（无 columns） */
   display: flex;
   flex-wrap: nowrap;

@@ -431,8 +431,8 @@ export default defineConfig({
               link: '/components/item/home.md',
             },
             {
-              text: 'itemWrapper包裹列表组件',
-              link: '/components/itemWrapper/home.md',
+              text: 'wrapper包裹列表组件',
+              link: '/components/wrapper/home.md',
             },
           ],
         },

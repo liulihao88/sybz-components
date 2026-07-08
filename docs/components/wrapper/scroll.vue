@@ -1,21 +1,21 @@
 <template>
-  <sItemWrapper gap="20px" :min-width="'200px'">
+  <sWrapper gap="20px" :min-width="'200px'">
     <SItem label="label" value="value"></SItem>
     <SItem label="label" value="value"></SItem>
     <SItem label="label" value="value"></SItem>
     <SItem label="label" value="value"></SItem>
     <SItem label="label" value="value"></SItem>
-  </sItemWrapper>
+  </sWrapper>
 
   <s-title title="或者每个item单独设置"></s-title>
 
-  <sItemWrapper gap="20px">
+  <sWrapper gap="20px">
     <SItem label="label" value="value" :style="{ minWidth: '200px' }"></SItem>
     <SItem label="label" value="value" :style="{ minWidth: '200px' }"></SItem>
     <SItem label="label" value="value" :style="{ minWidth: '200px' }"></SItem>
     <SItem label="label" value="value" :style="{ minWidth: '200px' }"></SItem>
     <SItem label="label" value="value" :style="{ minWidth: '200px' }"></SItem>
-  </sItemWrapper>
+  </sWrapper>
 </template>
 
 <style lang="scss" scoped></style>

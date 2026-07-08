@@ -356,7 +356,7 @@ export interface SItemProps {
   attrs?: SybzRecord
 }
 
-export interface SItemWrapperProps {
+export interface SWrapperProps {
   gap?: string | number
   columns?: number | null
   minWidth?: string | number

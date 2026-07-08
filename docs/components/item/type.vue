@@ -1,5 +1,5 @@
 <template>
-  <SItemWrapper :columns="2">
+  <SWrapper :columns="2">
     <SItem
       label="这是默认类型"
       value="123456"
@@ -42,7 +42,7 @@
       }"
       height="300"
     ></SItem>
-  </SItemWrapper>
+  </SWrapper>
 </template>
 
 <style lang="scss" scoped></style>

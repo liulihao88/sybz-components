@@ -235,13 +235,13 @@ declare module 'vue' {
      */
     's-item': (typeof import('./types/components/item'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/itemWrapper/home.html
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
      */
-    SItemWrapper: (typeof import('./types/components/itemWrapper'))['default']
+    SWrapper: (typeof import('./types/components/wrapper'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/itemWrapper/home.html
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
      */
-    's-item-wrapper': (typeof import('./types/components/itemWrapper'))['default']
+    's-wrapper': (typeof import('./types/components/wrapper'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
      */
@@ -477,9 +477,9 @@ export type SItemComponent = (typeof import('./types/components/item'))['default
 export type SItemInstance = ComponentInstance<SItemComponent>
 export type SItemPublicProps = SItemInstance['$props']
 
-export type SItemWrapperComponent = (typeof import('./types/components/itemWrapper'))['default']
-export type SItemWrapperInstance = ComponentInstance<SItemWrapperComponent>
-export type SItemWrapperPublicProps = SItemWrapperInstance['$props']
+export type SWrapperComponent = (typeof import('./types/components/wrapper'))['default']
+export type SWrapperInstance = ComponentInstance<SWrapperComponent>
+export type SWrapperPublicProps = SWrapperInstance['$props']
 
 export type SObjectLineComponent = (typeof import('./types/components/company/objectLine'))['default']
 export type SObjectLineInstance = ComponentInstance<SObjectLineComponent>
@@ -576,7 +576,7 @@ declare global {
       's-input-label': JSXComponentProps<SInputLabelPublicProps>
       's-input-number': JSXComponentProps<SInputNumberPublicProps>
       's-item': JSXComponentProps<SItemPublicProps>
-      's-item-wrapper': JSXComponentProps<SItemWrapperPublicProps>
+      's-wrapper': JSXComponentProps<SWrapperPublicProps>
       's-object-line': JSXComponentProps<SObjectLinePublicProps>
       's-popconfirm': JSXComponentProps<SPopconfirmPublicProps>
       's-progress': JSXComponentProps<SProgressPublicProps>

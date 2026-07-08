@@ -290,12 +290,12 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
-    'SItemWrapper',
+    'SWrapper',
     {
       importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
-      typeName: 'SItemWrapperProps',
+      typeName: 'SWrapperProps',
       slots: ['default'],
-      hoverProps: componentHoverProps('SItemWrapperProps'),
+      hoverProps: componentHoverProps('SWrapperProps'),
     },
   ],
   [
