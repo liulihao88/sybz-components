@@ -6,6 +6,8 @@ export type SBasicLayoutComponent = {
       modelValue?: boolean
       size?: SybzComponentSize | string | number
       title?: string
+      hoverAnimation?: boolean
+      shadow?: 'always' | 'never' | 'hover'
       boxStyle?: SybzRecord
       headerStyle?: SybzRecord
       bodyStyle?: SybzRecord

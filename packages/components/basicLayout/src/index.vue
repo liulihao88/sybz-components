@@ -10,6 +10,8 @@ interface BasicLayoutProps {
   modelValue?: boolean
   size?: 'default' | 'small' | 'large' | string | number
   title?: string
+  hoverAnimation?: boolean
+  shadow?: 'always' | 'never' | 'hover'
   boxStyle?: Record<string, any>
   headerStyle?: Record<string, any>
   bodyStyle?: Record<string, any>
@@ -27,6 +29,8 @@ const props = withDefaults(defineProps<BasicLayoutProps>(), {
   modelValue: false,
   size: 'default', // small large
   title: '',
+  hoverAnimation: false,
+  shadow: 'never',
   boxStyle: () => ({}),
   headerStyle: () => ({}),
   bodyStyle: () => ({}),
@@ -166,6 +170,9 @@ const layoutClass = computed(() => ({
   's-basic-layout--chenghua': mergedProps.value.theme === 'chenghua',
   's-basic-layout--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-basic-layout--transparent': mergedProps.value.transparent,
+  's-basic-layout--hover-animation': mergedProps.value.hoverAnimation,
+  's-basic-layout--shadow-always': mergedProps.value.shadow === 'always',
+  's-basic-layout--shadow-hover': mergedProps.value.shadow === 'hover',
   'is-collapsed': isCollapsed.value,
   'is-collapsible': mergedProps.value.collapsible,
 }))
@@ -249,6 +256,23 @@ const handleIconClick = (event) => {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+
+  &--shadow-always {
+    box-shadow: var(--s-basic-layout-shadow, var(--el-box-shadow-light));
+  }
+
+  &--shadow-hover:hover {
+    box-shadow: var(--s-basic-layout-shadow, var(--el-box-shadow-light));
+  }
+
+  &--hover-animation:hover {
+    transform: translateY(-2px);
+  }
 
   &--transparent {
     border-color: transparent;

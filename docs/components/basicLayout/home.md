@@ -14,6 +14,12 @@
 basicLayout/base
 :::
 
+### 阴影和 Hover 动画（shadow 默认值 `never`，hoverAnimation 默认值 `false`）
+
+:::demo 展示阴影和鼠标移入动画。基础写法：`<SBasicLayout shadow="hover" hover-animation title="阴影与 Hover 动画">...</SBasicLayout>`。属性：`shadow` 可选 `always / never / hover`，默认值 `never`；`hoverAnimation` 可选 `true / false`，默认值 `false`。
+basicLayout/shadow
+:::
+
 ### 透明背景（transparent 默认值 `false`）
 
 :::demo 展示透明背景布局。基础写法：`<SBasicLayout transparent title="透明背景">...</SBasicLayout>`。属性：`transparent` 可选 `true / false`，默认值 `false`。
@@ -69,6 +75,8 @@ basicLayout/square
 | `v-model` / `modelValue` | 折叠状态，`true` 表示收起                                     | boolean                                         | `false`   |
 |          `size`          | 内边距尺寸，支持预设值或可被 `processWidth` 处理的 padding 值 | `small` / `default` / `large` / string / number | `default` |
 |         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染                     | string                                          | `''`      |
+|     `hoverAnimation`     | 鼠标移入容器时是否启用轻微上浮动画                            | boolean                                         | `false`   |
+|         `shadow`         | 阴影显示时机，语义同 Element Plus Card                        | `always` / `never` / `hover`                    | `never`   |
 |        `boxStyle`        | 最外层容器样式                                                | object                                          | `{}`      |
 |      `headerStyle`       | 头部区域样式                                                  | object                                          | `{}`      |
 |       `bodyStyle`        | 内容区域样式                                                  | object                                          | `{}`      |
