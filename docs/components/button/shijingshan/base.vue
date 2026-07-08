@@ -37,25 +37,6 @@
   gap: 16px;
 }
 
-.shijingshan-button-demo__meta {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 8px;
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 10px 12px;
-    border: 1px solid #eef2f6;
-    border-radius: 8px;
-    background: #f8f9fa;
-    color: #374151;
-    font-size: 12px;
-    line-height: 18px;
-  }
-}
-
 .shijingshan-button-demo__row {
   display: flex;
   flex-wrap: wrap;

@@ -7,18 +7,6 @@ const dateSimple = ref('')
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: title</span>
-      <span>可选值: string</span>
-      <span>默认值: ''</span>
-      <span>属性: compTitleStyle</span>
-      <span>可选值: object</span>
-      <span>默认值: {}</span>
-      <span>属性: start-placeholder / end-placeholder</span>
-      <span>可选值: string</span>
-      <span>默认值: 开始日期 / 结束日期</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker
         v-model="rangeValue"
@@ -50,7 +38,6 @@ const dateSimple = ref('')
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
@@ -58,7 +45,6 @@ const dateSimple = ref('')
   align-items: center;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

@@ -11,15 +11,6 @@ const datesValue = ref([])
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: type</span>
-      <span>可选值: year | years | month | months | week | dates</span>
-      <span>默认值: date</span>
-      <span>属性: show-week-number</span>
-      <span>可选值: boolean</span>
-      <span>默认值: false</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker v-model="yearValue" type="year" placeholder="选择年份"></s-date-picker>
       <s-date-picker v-model="yearsValue" type="years" placeholder="选择多个年份"></s-date-picker>
@@ -41,14 +32,12 @@ const datesValue = ref([])
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

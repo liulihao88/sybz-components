@@ -1,17 +1,5 @@
 <template>
   <div class="input-maxlength-demo">
-    <div class="input-demo-meta">
-      <span>属性: maxlength</span>
-      <span>可选值: string | number</span>
-      <span>默认值: 10</span>
-      <span>属性: hideMaxLengthError</span>
-      <span>可选值: true | false</span>
-      <span>默认值: false</span>
-      <span>属性: maxLengthErrorText</span>
-      <span>可选值: string</span>
-      <span>默认值: ''</span>
-    </div>
-
     <s-flex gap="small" direction="column">
       <s-input
         v-model="customValue"
@@ -38,14 +26,5 @@ const hiddenToastValue = ref('')
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.input-demo-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 </style>

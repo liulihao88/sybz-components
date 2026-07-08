@@ -8,15 +8,6 @@ const shadowOptions = ['always', 'never', 'hover']
 
 <template>
   <div class="card-shadow-demo">
-    <div class="card-shadow-demo__meta">
-      <span>属性: shadow</span>
-      <span>可选值: 'always' | 'never' | 'hover'</span>
-      <span>默认值: 'never'</span>
-      <span>属性: hoverAnimation</span>
-      <span>可选值: true | false</span>
-      <span>默认值: false</span>
-    </div>
-
     <div class="card-shadow-demo__controls">
       <s-radio v-model="shadow" :options="shadowOptions" type="button"></s-radio>
       <s-switch v-model="hoverAnimation" active-text="开启动画" inactive-text="关闭动画" />
@@ -36,17 +27,10 @@ const shadowOptions = ['always', 'never', 'hover']
   gap: 12px;
 }
 
-.card-shadow-demo__meta,
 .card-shadow-demo__controls {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
   align-items: center;
-}
-
-.card-shadow-demo__meta {
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 </style>

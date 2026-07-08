@@ -8,15 +8,6 @@ const rangeValue = ref([])
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: value-format</span>
-      <span>可选值: x | X | dayjs 格式字符串</span>
-      <span>默认值: YYYY-MM-DD</span>
-      <span>属性: type</span>
-      <span>可选值: date | datetime | datetimerange</span>
-      <span>默认值: date</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker
         v-model="millisecondValue"
@@ -52,14 +43,12 @@ const rangeValue = ref([])
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

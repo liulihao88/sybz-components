@@ -1,17 +1,5 @@
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: type</span>
-      <span>可选值: daterange | datetimerange | monthrange | yearrange</span>
-      <span>默认值: date</span>
-      <span>属性: unlink-panels</span>
-      <span>可选值: boolean</span>
-      <span>默认值: false</span>
-      <span>属性: range-separator</span>
-      <span>可选值: string</span>
-      <span>默认值: -</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker
         v-model="dateRange"
@@ -64,14 +52,12 @@ const yearRange = ref([])
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

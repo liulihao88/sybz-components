@@ -9,15 +9,6 @@ const defaultTime = [new Date(2000, 1, 1, 9, 0, 0), new Date(2000, 1, 1, 18, 0, 
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: default-value</span>
-      <span>可选值: Date | Date[]</span>
-      <span>默认值: undefined</span>
-      <span>属性: default-time</span>
-      <span>可选值: Date | Date[]</span>
-      <span>默认值: undefined</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker v-model="dateValue" :default-value="defaultValue"></s-date-picker>
       <s-date-picker
@@ -40,14 +31,12 @@ const defaultTime = [new Date(2000, 1, 1, 9, 0, 0), new Date(2000, 1, 1, 18, 0, 
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

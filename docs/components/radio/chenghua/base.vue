@@ -26,18 +26,6 @@ const modeOptions = [
 
 <template>
   <div class="radio-chenghua-demo">
-    <div class="radio-chenghua-demo__meta">
-      <span>属性: theme</span>
-      <span>可选值: 'default' | 'chenghua' | 'shijingshan'</span>
-      <span>默认值: 'default'</span>
-      <span>属性: showType</span>
-      <span>可选值: radio | button</span>
-      <span>默认值: radio</span>
-      <span>属性: border</span>
-      <span>可选值: true | false</span>
-      <span>默认值: false</span>
-    </div>
-
     <div class="radio-chenghua-demo__list">
       <s-radio v-model="service" title="服务类型" theme="chenghua" :options="serviceOptions" />
       <s-radio v-model="priority" theme="chenghua" :options="priorityOptions" border />
@@ -51,15 +39,6 @@ const modeOptions = [
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.radio-chenghua-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .radio-chenghua-demo__list {

@@ -6,21 +6,6 @@ const collapsed = ref(false)
 
 <template>
   <div class="card-shijingshan-demo">
-    <div class="card-shijingshan-demo__meta">
-      <span>属性: theme</span>
-      <span>可选值: 'default' | 'chenghua' | 'shijingshan'</span>
-      <span>默认值: 'default'</span>
-      <span>属性: title</span>
-      <span>可选值: string</span>
-      <span>默认值: ''</span>
-      <span>属性: collapsible</span>
-      <span>可选值: true | false</span>
-      <span>默认值: false</span>
-      <span>属性: collapseTrigger</span>
-      <span>可选值: 'icon' | 'header'</span>
-      <span>默认值: 'header'</span>
-    </div>
-
     <s-card v-model="collapsed" theme="shijingshan" title="我是header">
       <div class="card-shijingshan-demo__content">
         <div class="card-shijingshan-demo__row">
@@ -50,15 +35,6 @@ const collapsed = ref(false)
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.card-shijingshan-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .card-shijingshan-demo__content {

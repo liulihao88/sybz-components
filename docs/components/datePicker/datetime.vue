@@ -7,18 +7,6 @@ const datetimeRangeValue = ref([])
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: type</span>
-      <span>可选值: datetime | datetimerange</span>
-      <span>默认值: date</span>
-      <span>属性: format</span>
-      <span>可选值: dayjs 格式字符串</span>
-      <span>默认值: datetime 时为 YYYY-MM-DD HH:mm:ss</span>
-      <span>属性: value-format</span>
-      <span>可选值: dayjs 格式字符串 | x | X</span>
-      <span>默认值: datetime 时为 YYYY-MM-DD HH:mm:ss</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker v-model="datetimeValue" type="datetime" width="360" placeholder="选择日期时间"></s-date-picker>
       <s-date-picker
@@ -40,14 +28,12 @@ const datetimeRangeValue = ref([])
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

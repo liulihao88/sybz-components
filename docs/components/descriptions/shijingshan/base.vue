@@ -1,11 +1,4 @@
 <script setup lang="tsx">
-const attrs = [
-  { label: 'theme', value: "'default' | 'chenghua' | 'shijingshan'", defaultValue: "'default'" },
-  { label: 'column', value: 'number', defaultValue: '3' },
-  { label: 'labelWidth', value: 'string | number', defaultValue: 'auto' },
-  { label: 'showAll', value: 'true | false', defaultValue: 'false' },
-]
-
 const options = [
   { label: '服务名称', value: '石景山 AI 审核服务' },
   { label: '服务编号', value: 'CH-AI-20260618001' },
@@ -23,12 +16,6 @@ const options = [
 
 <template>
   <div class="descriptions-shijingshan-demo">
-    <div class="descriptions-shijingshan-demo__meta">
-      <span v-for="item in attrs" :key="item.label">
-        属性: {{ item.label }} / 可选值: {{ item.value }} / 默认值: {{ item.defaultValue }}
-      </span>
-    </div>
-
     <s-descriptions
       theme="shijingshan"
       title="服务基础信息"
@@ -46,14 +33,5 @@ const options = [
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.descriptions-shijingshan-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 </style>

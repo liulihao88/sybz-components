@@ -14,12 +14,6 @@ const options = [
 
 <template>
   <div class="select-height-demo">
-    <div class="demo-meta">
-      <span>属性: height</span>
-      <span>可选值: string | number</span>
-      <span>默认值: ''</span>
-    </div>
-
     <s-flex gap="8">
       <s-select v-model="value" title="服务名称" width="200" height="40" :options="options" />
       <s-select v-model="quickValue" title="快速切换1" width="200" size="small" :options="options" />

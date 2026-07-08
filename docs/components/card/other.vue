@@ -6,13 +6,6 @@ const sizeOptions = ['large', 'default', 'small', 20, '2rem', 0]
 
 <template>
   <div class="card-size-demo">
-    <div class="card-size-demo__meta">
-      <span>属性: size</span>
-      <span>可选值: 'small' | 'default' | 'large' | string | number</span>
-      <span>默认值: 'default'</span>
-      <span>当前值: {{ size }}</span>
-    </div>
-
     <s-radio v-model="size" :options="sizeOptions" type="simple"></s-radio>
 
     <SCard :size="size">
@@ -32,14 +25,5 @@ const sizeOptions = ['large', 'default', 'small', 20, '2rem', 0]
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.card-size-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 </style>

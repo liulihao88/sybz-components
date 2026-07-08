@@ -13,15 +13,6 @@ const options = [
 
 <template>
   <div class="select-chenghua-demo">
-    <div class="select-demo-meta">
-      <span>属性: theme</span>
-      <span>可选值: 'default' | 'chenghua' | 'shijingshan'</span>
-      <span>默认值: 'default'</span>
-      <span>属性: multiple</span>
-      <span>可选值: true | false</span>
-      <span>默认值: false</span>
-    </div>
-
     <s-select v-model="multipleValue" width="100%" theme="chenghua" multiple title="多选服务" :options="options" />
   </div>
 </template>
@@ -31,14 +22,5 @@ const options = [
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.select-demo-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 </style>

@@ -7,12 +7,6 @@ const dateValue = ref('')
 
 <template>
   <div class="date-picker-height-demo">
-    <div class="demo-meta">
-      <span>属性: height</span>
-      <span>可选值: string | number</span>
-      <span>默认值: ''</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker
         v-model="rangeValue"
@@ -31,15 +25,6 @@ const dateValue = ref('')
 .date-picker-height-demo {
   display: grid;
   gap: 16px;
-}
-
-.demo-meta {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .demo-list {

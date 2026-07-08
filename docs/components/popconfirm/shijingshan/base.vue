@@ -10,18 +10,6 @@ function confirm() {
 
 <template>
   <div class="popconfirm-shijingshan-demo">
-    <div class="popconfirm-shijingshan-demo__props">
-      <span>属性: theme</span>
-      <span>可选值: default | chenghua | shijingshan</span>
-      <span>默认值: default</span>
-      <span>属性: content</span>
-      <span>支持: 文本 | 安全白名单 HTML</span>
-      <span>默认值: ''</span>
-      <span>属性: dangerouslyUseHTMLString</span>
-      <span>可选值: true | false</span>
-      <span>默认值: false</span>
-    </div>
-
     <div class="popconfirm-shijingshan-demo__actions">
       <s-popconfirm
         theme="shijingshan"
@@ -55,22 +43,6 @@ function confirm() {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.popconfirm-shijingshan-demo__props {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  color: #5f6673;
-  font-size: 13px;
-  line-height: 1.6;
-
-  span {
-    padding: 2px 8px;
-    border: 1px solid #e4e7ed;
-    border-radius: 4px;
-    background: #f8fafc;
-  }
 }
 
 .popconfirm-shijingshan-demo__actions {

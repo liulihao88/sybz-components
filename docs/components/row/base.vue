@@ -1,14 +1,5 @@
 <template>
   <div class="row-demo">
-    <div class="row-demo__meta">
-      <span>属性: col</span>
-      <span>可选值: number | number[]</span>
-      <span>默认值: 24</span>
-      <span>属性: colAttrs</span>
-      <span>可选值: object</span>
-      <span>默认值: {}</span>
-    </div>
-
     <section class="row-demo__section">
       <div class="row-demo__title">自动包裹为 el-col</div>
       <s-row :col="6" :gutter="16">
@@ -57,15 +48,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.row-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .row-demo__section {

@@ -12,18 +12,6 @@ const openPicker = () => {
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: prefix-icon</span>
-      <span>可选值: string | Component</span>
-      <span>默认值: ''</span>
-      <span>插槽: default</span>
-      <span>可选值: 自定义单元格内容</span>
-      <span>默认值: undefined</span>
-      <span>方法: handleOpen</span>
-      <span>可选值: ref 调用</span>
-      <span>默认值: undefined</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker ref="datePickerRef" v-model="dateValue" :prefix-icon="Clock">
         <template #default="cell">
@@ -45,7 +33,6 @@ const openPicker = () => {
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
@@ -53,7 +40,6 @@ const openPicker = () => {
   align-items: center;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

@@ -12,18 +12,6 @@ const disabledAfterToday = (time: Date) => {
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: disabled-date</span>
-      <span>可选值: (date: Date) => boolean</span>
-      <span>默认值: undefined</span>
-      <span>属性: readonly</span>
-      <span>可选值: boolean</span>
-      <span>默认值: false</span>
-      <span>属性: disabled</span>
-      <span>可选值: boolean</span>
-      <span>默认值: false</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker
         v-model="beforeDateValue"
@@ -47,14 +35,12 @@ const disabledAfterToday = (time: Date) => {
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

@@ -4,23 +4,10 @@ import { ref } from 'vue'
 const enabled = ref(true)
 const audit = ref(false)
 const priority = ref(1)
-
-const attrs = [
-  { label: 'theme', value: "'default' | 'chenghua' | 'shijingshan'", defaultValue: "'default'" },
-  { label: 'width', value: 'string | number', defaultValue: "''" },
-  { label: 'active-text', value: 'string', defaultValue: "''" },
-  { label: 'inactive-text', value: 'string', defaultValue: "''" },
-]
 </script>
 
 <template>
   <div class="switch-chenghua-demo">
-    <div class="switch-chenghua-demo__meta">
-      <span v-for="item in attrs" :key="item.label">
-        属性: {{ item.label }} / 可选值: {{ item.value }} / 默认值: {{ item.defaultValue }}
-      </span>
-    </div>
-
     <div class="switch-chenghua-demo__list">
       <s-switch v-model="enabled" theme="chenghua" active-text="启用" inactive-text="停用" />
       <s-switch v-model="audit" theme="chenghua" active-text="自动审核" inactive-text="人工复核" :width="92" />
@@ -42,15 +29,6 @@ const attrs = [
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.switch-chenghua-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .switch-chenghua-demo__list {

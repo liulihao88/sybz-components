@@ -14,21 +14,6 @@ const options = [
 
 <template>
   <div class="comp-title-shijingshan-demo">
-    <div class="comp-title-shijingshan-demo__meta">
-      <span>属性: theme</span>
-      <span>可选值: 'default' | 'chenghua' | 'shijingshan'</span>
-      <span>默认值: 'default'</span>
-      <span>属性: title</span>
-      <span>可选值: string</span>
-      <span>默认值: ''</span>
-      <span>属性: compTitleStyle</span>
-      <span>可选值: object</span>
-      <span>默认值: {}</span>
-      <span>透传属性: size</span>
-      <span>可选值: large | default | small</span>
-      <span>默认值: default</span>
-    </div>
-
     <div class="comp-title-shijingshan-demo__list">
       <s-comp-title title="审核周期" theme="shijingshan" :comp-title-style="{ width: 96 }" />
 
@@ -66,15 +51,6 @@ const options = [
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.comp-title-shijingshan-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .comp-title-shijingshan-demo__list {

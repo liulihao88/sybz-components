@@ -7,13 +7,6 @@ const gap = computed(() => `${gapNumber.value}px`)
 
 <template>
   <div class="row-gap-demo">
-    <div class="row-gap-demo__meta">
-      <span>属性: gap</span>
-      <span>可选值: number | string</span>
-      <span>默认值: ''</span>
-      <span>当前值: {{ gap }}</span>
-    </div>
-
     <el-slider v-model="gapNumber" :min="0" :max="48" show-input />
 
     <s-row :col="8" :gap="gap">
@@ -29,15 +22,6 @@ const gap = computed(() => `${gapNumber.value}px`)
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.row-gap-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .row-gap-demo__block {

@@ -29,15 +29,6 @@ const calendarChange = (value: [Date, Date]) => {
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: disabled-date</span>
-      <span>可选值: (date: Date) => boolean</span>
-      <span>默认值: undefined</span>
-      <span>事件: calendar-change</span>
-      <span>可选值: (value) => void</span>
-      <span>默认值: undefined</span>
-    </div>
-
     <s-date-picker
       v-model="dateRange"
       type="daterange"
@@ -58,13 +49,6 @@ const calendarChange = (value: [Date, Date]) => {
   gap: 12px;
 }
 
-.demo-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-}
-
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;

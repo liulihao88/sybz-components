@@ -1,11 +1,5 @@
 <template>
   <div class="card-transparent-demo">
-    <div class="card-transparent-demo__meta">
-      <span>属性: transparent</span>
-      <span>可选值: true | false</span>
-      <span>默认值: false</span>
-    </div>
-
     <div class="card-transparent-demo__surface">
       <SCard transparent title="透明背景">
         我是内容
@@ -24,15 +18,6 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.card-transparent-demo__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 12px;
-  line-height: 1.5;
 }
 
 .card-transparent-demo__surface {

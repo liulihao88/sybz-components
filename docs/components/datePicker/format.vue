@@ -8,15 +8,6 @@ const customValue = ref('')
 
 <template>
   <div class="date-picker-demo">
-    <div class="demo-meta">
-      <span>属性: format</span>
-      <span>可选值: dayjs 格式字符串</span>
-      <span>默认值: YYYY-MM-DD</span>
-      <span>属性: value-format</span>
-      <span>可选值: dayjs 格式字符串 | x | X</span>
-      <span>默认值: YYYY-MM-DD</span>
-    </div>
-
     <div class="demo-list">
       <s-date-picker v-model="dateValue" format="YYYY/MM/DD" value-format="YYYY/MM/DD"></s-date-picker>
       <s-date-picker v-model="timestampValue" type="datetime" value-format="x" width="360"></s-date-picker>
@@ -33,14 +24,12 @@ const customValue = ref('')
   gap: 12px;
 }
 
-.demo-meta,
 .demo-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
 }
 
-.demo-meta,
 .demo-value {
   color: var(--el-text-color-secondary);
   font-size: 12px;
