@@ -100,7 +100,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "@sybz-components/utils": "^0.0.12",
+    "@sybz-components/utils": "^1.0.0",
     "@vueuse/core": "^10.9.0",
     "eslint-config-prettier": "9.1.2"
   },
