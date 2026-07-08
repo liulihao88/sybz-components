@@ -28,6 +28,8 @@
       "default": "./dist/sybz-components-es.js"
     },
     "./style.css": "./dist/style.css",
+    "./skills/sybz-components": "./skills/sybz-components/SKILL.md",
+    "./skills/sybz-components/*": "./skills/sybz-components/*",
     "./utilities.css": "./dist/utilities.css",
     "./utilities.scss": "./dist/utilities.scss"
   },
@@ -44,7 +46,9 @@
     "docs/.vitepress/config",
     "docs/.vitepress/theme",
     "docs/.vitepress/utils",
-    "docs/.vitepress/vitepress"
+    "docs/.vitepress/vitepress",
+    "skills",
+    "scripts/install-sybz-skill.mjs"
   ],
   "sideEffects": [
     "*.css",
@@ -72,6 +76,7 @@
     "test:watch": "vitest",
     "test:utils": "vitest run packages/utils/src",
     "types:generate": "node ./scripts/generate-component-types.mjs",
+    "skills:install": "node ./scripts/install-sybz-skill.mjs",
     "release": "pnpm build && npm version patch && npm publish",
     "docsserve": "vitepress serve docs",
     "deploy": "bash -x deploy.sh",

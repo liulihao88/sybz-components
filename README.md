@@ -11,6 +11,28 @@
 [![Vue](https://img.shields.io/badge/Vue-3.x-42b883)](https://vuejs.org/)
 [![Element Plus](https://img.shields.io/badge/Element%20Plus-2.x-409eff)](https://element-plus.org/)
 
+## Codex Skills
+
+组件库随 npm 包暴露 `skills/sybz-components`，可安装为 Codex skill，用来指导 Codex 优先使用当前组件库、工具函数和主题规范。
+
+安装组件库后执行：
+
+```sh
+node node_modules/sybz-components/scripts/install-sybz-skill.mjs
+```
+
+在当前仓库内也可以执行：
+
+```sh
+pnpm skills:install
+```
+
+安装后可在 Codex 中这样使用：
+
+```txt
+使用 $sybz-components 把这个页面改成 sybz-components 组件库写法
+```
+
 ## 在线文档
 
 - 文档地址：[https://liulihao88.github.io/sybz-components/](https://liulihao88.github.io/sybz-components/)

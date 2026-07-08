@@ -1,0 +1,5 @@
+interface:
+  display_name: 'sybz-components'
+  short_description: '替换为 sybz 组件库和工具函数'
+  brand_color: '#1677FF'
+  default_prompt: '使用 $sybz-components 把页面里的通用组件和工具函数替换为组件库写法。'
