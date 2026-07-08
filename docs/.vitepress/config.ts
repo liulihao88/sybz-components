@@ -184,24 +184,30 @@ export default defineConfig({
               link: '/components/usageGuide/home.md',
             },
             {
-              text: 'vitepress常用语法',
-              link: '/components/utils/grammar/home.md',
-            },
-            {
-              text: '项目常见写法',
-              link: '/components/projectWriting/home.md',
-            },
-            {
               text: '前端代码统一规范',
               link: '/components/codeStandard/home.md',
             },
             {
-              text: '国际化',
-              link: '/components/utils/i18n/home.md',
-            },
-            {
-              text: 'ChangeLog',
-              link: '/components/utils/changelog/home.md',
+              text: '其他',
+              collapsed: true,
+              items: [
+                {
+                  text: 'vitepress常用语法',
+                  link: '/components/utils/grammar/home.md',
+                },
+                {
+                  text: '项目常见写法',
+                  link: '/components/projectWriting/home.md',
+                },
+                {
+                  text: '国际化',
+                  link: '/components/utils/i18n/home.md',
+                },
+                {
+                  text: 'ChangeLog',
+                  link: '/components/utils/changelog/home.md',
+                },
+              ],
             },
           ],
         },
