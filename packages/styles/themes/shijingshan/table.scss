@@ -1,28 +1,38 @@
 .s-table.s-table--shijingshan.s-table--shijingshan {
+  --s-sjs-table-line: #dce3ee;
+  --s-sjs-table-line-soft: #e8edf5;
+  --s-sjs-table-header-bg: #f3f7fc;
+  --s-sjs-table-row-bg: #ffffff;
+  --s-sjs-table-row-alt: #fbfdff;
+  --s-sjs-table-page-bg: #f5f8fd;
+
   border-radius: var(--s-sjs-radius-card);
+  border: 1px solid var(--s-sjs-table-line);
   background: var(--s-sjs-card-bg) !important;
   color: var(--s-sjs-text);
   font-family: var(--s-sjs-font-family);
+  box-shadow: var(--s-sjs-shadow-soft);
+  overflow: hidden;
 
   .el-table {
-    --el-table-border-color: var(--s-sjs-divider);
-    --el-table-border: 1px solid var(--s-sjs-divider);
-    --el-table-header-bg-color: var(--s-sjs-bg-web);
+    --el-table-border-color: var(--s-sjs-table-line-soft);
+    --el-table-border: 1px solid var(--s-sjs-table-line-soft);
+    --el-table-header-bg-color: var(--s-sjs-table-header-bg);
     --el-table-header-text-color: var(--s-sjs-text-regular);
     --el-table-text-color: var(--s-sjs-text-regular);
     --el-table-row-hover-bg-color: var(--s-sjs-row-hover);
     --el-table-current-row-bg-color: var(--s-sjs-fill);
 
-    border-radius: var(--s-sjs-radius-card);
+    border-radius: var(--s-sjs-radius-card) var(--s-sjs-radius-card) 0 0;
     border-color: transparent;
-    box-shadow: var(--s-sjs-shadow-soft) !important;
+    box-shadow: none !important;
     overflow: hidden;
     background: var(--s-sjs-card-bg) !important;
   }
 
   .el-table__inner-wrapper {
     overflow: hidden;
-    border-radius: var(--s-sjs-radius-card);
+    border-radius: var(--s-sjs-radius-card) var(--s-sjs-radius-card) 0 0;
     background: var(--s-sjs-card-bg) !important;
   }
 
@@ -32,7 +42,7 @@
   .el-table__header,
   .el-table__header thead,
   .el-table__header tr {
-    background: var(--s-sjs-bg-web) !important;
+    background: var(--s-sjs-table-header-bg) !important;
   }
 
   .el-table__header,
@@ -68,12 +78,12 @@
   .el-table th.el-table__cell {
     height: 40px;
     overflow: hidden;
-    border-bottom: 1px solid var(--s-sjs-divider) !important;
-    background: var(--s-sjs-bg-web) !important;
+    border-bottom: 1px solid var(--s-sjs-table-line) !important;
+    background: var(--s-sjs-table-header-bg) !important;
     background-clip: padding-box;
-    color: var(--s-sjs-text-regular);
+    color: var(--s-sjs-text);
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0;
   }
 
@@ -99,7 +109,7 @@
   .el-table td.el-table__cell {
     border-top: 0 !important;
     border-left: 0 !important;
-    border-right: 0 !important;
+    border-right: 1px solid var(--s-sjs-table-line-soft) !important;
     color: var(--s-sjs-text-regular);
     font-size: 14px;
     font-weight: 400;
@@ -113,24 +123,24 @@
   }
 
   .el-table th.el-table__cell.is-sortable:hover {
-    background: var(--s-sjs-fill) !important;
+    background: #edf4ff !important;
   }
 
   .el-table tr:not(:last-child) td.el-table__cell,
   .el-table td.el-table__cell {
-    border-bottom: 1px solid var(--s-sjs-divider) !important;
+    border-bottom: 1px solid var(--s-sjs-table-line-soft) !important;
   }
 
   .el-table__body tr.el-table__row,
   .el-table__body tr.el-table__row > td.el-table__cell {
-    --el-table-tr-bg-color: var(--s-sjs-bg);
+    --el-table-tr-bg-color: var(--s-sjs-table-row-bg);
 
-    background: var(--s-sjs-card-bg) !important;
+    background: var(--s-sjs-table-row-bg) !important;
     transition: background-color 0.18s ease;
   }
 
   .el-table__body tr.el-table__row {
-    background: var(--s-sjs-card-bg) !important;
+    background: var(--s-sjs-table-row-bg) !important;
   }
 
   .el-table__body tr.el-table__row > td.el-table__cell .cell {
@@ -139,13 +149,13 @@
   }
 
   .el-table--striped .el-table__body tr.el-table__row--striped {
-    background: var(--s-sjs-row-alt) !important;
+    background: var(--s-sjs-table-row-alt) !important;
   }
 
   .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
-    --el-table-tr-bg-color: var(--s-sjs-row-alt);
+    --el-table-tr-bg-color: var(--s-sjs-table-row-alt);
 
-    background: var(--s-sjs-row-alt) !important;
+    background: var(--s-sjs-table-row-alt) !important;
   }
 
   .el-table__body tr.el-table__row.current-row,
@@ -187,12 +197,12 @@
   }
 
   .el-table-fixed-column--left.is-last-column {
-    border-right: 0 !important;
+    border-right: 1px solid var(--s-sjs-table-line) !important;
   }
 
   .el-table-fixed-column--right.is-first-column,
   .el-table-fixed-column--right.is-last-column {
-    border-left: 0 !important;
+    border-left: 1px solid var(--s-sjs-table-line) !important;
   }
 
   .hide-btns-button:not(.is-disabled) {
@@ -220,12 +230,15 @@
   }
 
   .page-wrap {
-    border-color: transparent;
+    border-top: 1px solid var(--s-sjs-table-line);
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
     border-bottom-right-radius: var(--s-sjs-radius);
     border-bottom-left-radius: var(--s-sjs-radius);
-    background: var(--s-sjs-control-bg);
+    background: var(--s-sjs-table-page-bg);
     color: var(--s-sjs-text-muted);
-    box-shadow: var(--s-sjs-shadow-soft);
+    box-shadow: none;
   }
 
   .page-wrap .page-left {
@@ -270,7 +283,20 @@
 
   .el-pagination .el-input__wrapper,
   .el-pagination .el-select__wrapper {
+    border: 1px solid var(--s-sjs-table-line-soft);
     border-radius: var(--s-sjs-radius-small);
-    box-shadow: none;
+    background: var(--s-sjs-control-bg);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+
+  .el-pagination .el-input__wrapper:hover,
+  .el-pagination .el-select__wrapper:hover {
+    border-color: var(--s-sjs-primary-border);
+  }
+
+  .el-pagination .el-input__wrapper.is-focus,
+  .el-pagination .el-select__wrapper.is-focused {
+    border-color: var(--s-sjs-primary);
+    box-shadow: 0 0 0 2px var(--s-sjs-primary-soft);
   }
 }

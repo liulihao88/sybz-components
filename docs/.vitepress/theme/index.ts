@@ -73,8 +73,8 @@ export default {
     // 全局注册基础组件
     ctx.app.use(SybzComponents, {
       dangerouslyUseHTMLString: true,
-      theme: 'shijingshan',
-      size: 'large',
+      // theme: 'shijingshan',
+      // size: 'large',
       compTitleStyle: {
         padding: '0 16px',
       },
