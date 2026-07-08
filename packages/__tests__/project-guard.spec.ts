@@ -149,6 +149,8 @@ describe('project build and publish guards', () => {
     expect(output).toContain('Skip version bump: no')
     expect(output).toContain('1. Run utils tests')
     expect(output).toContain('3. Build dist with unbuild')
+    expect(output).toContain('5. git commit -m "chore: release @sybz-components/utils')
+    expect(output).toContain('if staged changes exist')
     expect(output).toContain('6. npm publish')
   })
 
@@ -171,6 +173,8 @@ describe('project build and publish guards', () => {
     expect(output).toContain(`Next version: ${pkg.version}`)
     expect(output).toContain('Skip version bump: yes')
     expect(output).toContain('2. Keep package.json version')
+    expect(output).toContain('if staged changes exist')
+    expect(readText('packages/utils/scripts/release.mjs')).toContain('git commit skipped: no staged files found')
   })
 })
 
