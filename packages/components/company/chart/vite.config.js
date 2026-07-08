@@ -39,7 +39,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: false,
-    cssCodeSplit: true,
+    cssCodeSplit: false,
     lib: {
       entry: {
         charts: resolve(__dirname, './index.ts'),

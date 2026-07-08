@@ -18,6 +18,8 @@ for arg in "$@"; do
 done
 
 if [ "$skip_build" = false ]; then
+    # 先打包组件库，确保 docsbuild 引用的 dist 产物是最新的。
+    pnpm build
     # 打包生成静态文件
     pnpm docsbuild
 elif [ ! -f "docs/.vitepress/dist/index.html" ]; then
