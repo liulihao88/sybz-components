@@ -40,6 +40,22 @@ function run(command, args, options = {}) {
   })
 }
 
+function hasStagedChanges() {
+  try {
+    execFileSync('git', ['diff', '--cached', '--quiet'], {
+      cwd: packageDir,
+      stdio: 'ignore',
+    })
+    return false
+  } catch (error) {
+    if (error?.status === 1) {
+      return true
+    }
+
+    throw error
+  }
+}
+
 function main() {
   const pkg = readPackageJson()
   const nextVersion = skipVersionBump ? pkg.version : bumpPatchVersion(pkg.version)
@@ -54,7 +70,7 @@ function main() {
     console.log(skipVersionBump ? '2. Keep package.json version' : '2. Update package.json version')
     console.log('3. Build dist with unbuild')
     console.log('4. git add -A .')
-    console.log(`5. git commit -m "${commitMessage}"`)
+    console.log(`5. git commit -m "${commitMessage}" if staged changes exist`)
     console.log('6. npm publish')
     return
   }
@@ -71,7 +87,13 @@ function main() {
 
   run('npx', ['unbuild'])
   run('git', ['add', '-A', '.'])
-  run('git', ['commit', '-m', commitMessage])
+
+  if (hasStagedChanges()) {
+    run('git', ['commit', '-m', commitMessage])
+  } else {
+    console.log('\n> git commit skipped: no staged files found')
+  }
+
   run('npm', ['publish'])
 }
 
