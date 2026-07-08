@@ -9,9 +9,9 @@
   .el-dialog__header {
     position: relative;
     padding: 14px 56px 14px 16px;
-    border-bottom: 1px solid var(--s-sjs-divider);
-    background: var(--s-sjs-card-bg);
-    font-weight: 600;
+    border-bottom: 0;
+    background: linear-gradient(90deg, var(--s-sjs-primary) 0%, var(--s-sjs-primary-hover) 100%);
+    font-weight: 700;
   }
 
   .s-dialog__header {
@@ -24,14 +24,14 @@
   }
 
   .s-dialog__header-content {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     line-height: 1.4;
-    color: var(--s-sjs-text);
+    color: #ffffff;
   }
 
   .s-dialog__header-sub-title {
-    color: var(--s-sjs-text-muted);
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .el-dialog__headerbtn {
@@ -53,16 +53,16 @@
       align-items: center;
       justify-content: center;
       line-height: 1;
-      color: var(--s-sjs-text-muted);
+      color: rgba(255, 255, 255, 0.86);
       font-size: 22px;
     }
 
     &:hover,
     &:focus {
-      background: var(--s-sjs-primary-soft);
+      background: rgba(255, 255, 255, 0.14);
 
       .el-dialog__close {
-        color: var(--s-sjs-primary);
+        color: #ffffff;
       }
     }
   }
