@@ -188,6 +188,10 @@ export default defineConfig({
               link: '/components/codeStandard/home.md',
             },
             {
+              text: 'Overview组件总览',
+              link: '/components/overview/home.md',
+            },
+            {
               text: '其他',
               collapsed: true,
               items: [

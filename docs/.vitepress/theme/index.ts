@@ -17,6 +17,7 @@ import ApiIntro from '../../shared/ApiIntro.vue'
 import ComponentQuickSidebar from '../../shared/ComponentQuickSidebar.vue'
 import DocBasicUsage from '../../shared/DocBasicUsage.vue'
 import ScrollPositionRestore from '../../shared/ScrollPositionRestore.vue'
+import OverviewDemo from '../../components/overview/index.vue'
 
 import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
@@ -64,6 +65,7 @@ export default {
     ctx.app.component('ChangelogContent', ChangelogContent)
     ctx.app.component('ApiIntro', ApiIntro)
     ctx.app.component('DocBasicUsage', DocBasicUsage)
+    ctx.app.component('OverviewDemo', OverviewDemo)
     // 注册ElementPlus
     ctx.app.use(ElementPlus, {
       locale, // 语言设置
