@@ -4,9 +4,9 @@ import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
-  name: 'SBasicLayout',
+  name: 'SCard',
 })
-interface BasicLayoutProps {
+interface CardProps {
   modelValue?: boolean
   size?: 'default' | 'small' | 'large' | string | number
   title?: string
@@ -25,7 +25,7 @@ interface BasicLayoutProps {
   theme?: 'default' | 'chenghua' | 'shijingshan'
 }
 
-const props = withDefaults(defineProps<BasicLayoutProps>(), {
+const props = withDefaults(defineProps<CardProps>(), {
   modelValue: false,
   size: 'default', // small large
   title: '',
@@ -49,7 +49,7 @@ defineSlots<{
   footer?: () => any
   icon?: () => any
 }>()
-const mergedProps = useGlobalComponentConfig('basicLayout', props)
+const mergedProps = useGlobalComponentConfig('card', props)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -166,13 +166,13 @@ const compPadding = computed(() => {
   return processWidth(size, true) || '16px'
 })
 
-const layoutClass = computed(() => ({
-  's-basic-layout--chenghua': mergedProps.value.theme === 'chenghua',
-  's-basic-layout--shijingshan': mergedProps.value.theme === 'shijingshan',
-  's-basic-layout--transparent': mergedProps.value.transparent,
-  's-basic-layout--hover-animation': mergedProps.value.hoverAnimation,
-  's-basic-layout--shadow-always': mergedProps.value.shadow === 'always',
-  's-basic-layout--shadow-hover': mergedProps.value.shadow === 'hover',
+const cardClass = computed(() => ({
+  's-card--chenghua': mergedProps.value.theme === 'chenghua',
+  's-card--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-card--transparent': mergedProps.value.transparent,
+  's-card--hover-animation': mergedProps.value.hoverAnimation,
+  's-card--shadow-always': mergedProps.value.shadow === 'always',
+  's-card--shadow-hover': mergedProps.value.shadow === 'hover',
   'is-collapsed': isCollapsed.value,
   'is-collapsible': mergedProps.value.collapsible,
 }))
@@ -210,16 +210,16 @@ const handleIconClick = (event) => {
 </script>
 
 <template>
-  <div ref="boxRef" class="s-basic-layout" :class="layoutClass" :style="boxMergedStyle">
+  <div ref="boxRef" class="s-card" :class="cardClass" :style="boxMergedStyle">
     <div
       v-if="$slots.header || mergedProps.title"
       ref="headerRef"
-      class="s-basic-layout__header"
+      class="s-card__header"
       :style="headerMergedStyle"
       :class="{ collapsible: isHeaderTrigger }"
       @click="handleHeaderClick"
     >
-      <div class="s-basic-layout__header-main">
+      <div class="s-card__header-main">
         <slot name="header">
           <s-title
             :title="mergedProps.title"
@@ -239,17 +239,17 @@ const handleIconClick = (event) => {
         </slot>
       </span>
     </div>
-    <div v-show="!isCollapsed" class="s-basic-layout__body" :style="bodyMergedStyle">
+    <div v-show="!isCollapsed" class="s-card__body" :style="bodyMergedStyle">
       <slot></slot>
     </div>
-    <div v-if="$slots.footer && !isCollapsed" class="s-basic-layout__footer" :style="footerMergedStyle">
+    <div v-if="$slots.footer && !isCollapsed" class="s-card__footer" :style="footerMergedStyle">
       <slot name="footer"></slot>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.s-basic-layout {
+.s-card {
   background: var(--el-bg-color);
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -263,11 +263,11 @@ const handleIconClick = (event) => {
     background-color 0.2s ease;
 
   &--shadow-always {
-    box-shadow: var(--s-basic-layout-shadow, var(--el-box-shadow-light));
+    box-shadow: var(--s-card-shadow, var(--el-box-shadow-light));
   }
 
   &--shadow-hover:hover {
-    box-shadow: var(--s-basic-layout-shadow, var(--el-box-shadow-light));
+    box-shadow: var(--s-card-shadow, var(--el-box-shadow-light));
   }
 
   &--hover-animation:hover {
@@ -279,17 +279,17 @@ const handleIconClick = (event) => {
     background: transparent;
     box-shadow: none;
 
-    > .s-basic-layout__header,
-    > .s-basic-layout__body,
-    > .s-basic-layout__footer {
+    > .s-card__header,
+    > .s-card__body,
+    > .s-card__footer {
       background: transparent;
     }
 
-    > .s-basic-layout__header {
+    > .s-card__header {
       border-bottom-color: transparent;
     }
 
-    > .s-basic-layout__footer {
+    > .s-card__footer {
       border-top-color: transparent;
     }
   }
@@ -308,7 +308,7 @@ const handleIconClick = (event) => {
       user-select: none;
     }
 
-    .s-basic-layout__header-main {
+    .s-card__header-main {
       width: 100%;
       min-width: 0;
       flex: 1 1 auto;

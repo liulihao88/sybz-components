@@ -54,7 +54,7 @@ metadata:
 
 ### 原生组件
 
-- `basicLayout`
+- `card`
 - `flex`
 
 ### Complex 复杂组件

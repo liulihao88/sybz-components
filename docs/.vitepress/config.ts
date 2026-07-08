@@ -427,8 +427,8 @@ export default defineConfig({
               link: '/components/splitPane/home.md',
             },
             {
-              text: sybzMark('basicLayout基础布局组件'),
-              link: '/components/basicLayout/home.md',
+              text: sybzMark('card基础布局组件'),
+              link: '/components/card/home.md',
             },
             {
               text: 'item列表组件',

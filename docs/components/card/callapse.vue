@@ -5,7 +5,7 @@ const isCollapsed = ref(true)
 
 <template>
   <div>
-    <SBasicLayout :collapsible="true">
+    <SCard :collapsible="true">
       我是内部的文件
       <template #header>
         <s-title title="默认点击右侧图标收起">
@@ -19,11 +19,11 @@ const isCollapsed = ref(true)
         <el-button type="primary">测试07</el-button>
         <el-button type="primary">测试07</el-button>
       </template>
-    </SBasicLayout>
+    </SCard>
 
     <hr />
 
-    <SBasicLayout v-model="isCollapsed" collapsible collapse-trigger="header">
+    <SCard v-model="isCollapsed" collapsible collapse-trigger="header">
       我是内部的文件
       <template #header>
         <s-title title="整块头部可点击收起"></s-title>
@@ -32,6 +32,6 @@ const isCollapsed = ref(true)
         <el-button type="primary">测试07</el-button>
         <el-button type="primary">测试07</el-button>
       </template>
-    </SBasicLayout>
+    </SCard>
   </div>
 </template>

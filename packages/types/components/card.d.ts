@@ -1,6 +1,6 @@
-import type { SBasicLayoutProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { SCardProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
 
-export type SBasicLayoutComponent = {
+export type SCardComponent = {
   new (): {
     $props: {
       modelValue?: boolean
@@ -29,5 +29,5 @@ export type SBasicLayoutComponent = {
   }
 }
 
-declare const SBasicLayout: SBasicLayoutComponent
-export default SBasicLayout
+declare const SCard: SCardComponent
+export default SCard

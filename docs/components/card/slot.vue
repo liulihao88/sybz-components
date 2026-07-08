@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SBasicLayout collapsible :box-style="{ border: 'none' }">
+    <SCard collapsible :box-style="{ border: 'none' }">
       <template #header>
         <s-title title="更多">
           <template #extra>
@@ -15,6 +15,6 @@
       <template #footer>
         <el-button type="primary">footer插槽</el-button>
       </template>
-    </SBasicLayout>
+    </SCard>
   </div>
 </template>

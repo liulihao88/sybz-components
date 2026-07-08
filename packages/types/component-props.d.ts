@@ -225,7 +225,7 @@ export interface SCompTitleProps {
   theme?: SybzComponentTheme
 }
 
-export interface SBasicLayoutProps {
+export interface SCardProps {
   modelValue?: boolean
   size?: SybzComponentSize | string | number
   title?: string

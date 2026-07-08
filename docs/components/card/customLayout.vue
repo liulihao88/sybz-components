@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="h-300">
-      <SBasicLayout title="不自适应body的高度" class="m-t-16 h-block" :scroll="false">
+      <SCard title="不自适应body的高度" class="m-t-16 h-block" :scroll="false">
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, blanditiis corporis porro hic ea doloribus
           dolores cumque nulla minima eius fugiat facilis deserunt praesentium tempora in voluptate ex repellendus quod.
@@ -41,10 +41,10 @@
         <template #footer>
           <el-button type="primary">测试07</el-button>
         </template>
-      </SBasicLayout>
+      </SCard>
     </div>
     <div class="h-300">
-      <SBasicLayout title="自适应body的高度(默认自适应)" class="m-t-16 h-block">
+      <SCard title="自适应body的高度(默认自适应)" class="m-t-16 h-block">
         <div>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, blanditiis corporis porro hic ea doloribus
           dolores cumque nulla minima eius fugiat facilis deserunt praesentium tempora in voluptate ex repellendus quod.
@@ -84,7 +84,7 @@
         <template #footer>
           <el-button type="primary">测试07</el-button>
         </template>
-      </SBasicLayout>
+      </SCard>
     </div>
   </div>
 </template>

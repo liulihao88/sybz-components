@@ -43,13 +43,13 @@ declare module 'vue' {
      */
     's-base-header': (typeof import('./types/components/company/baseHeader'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/basicLayout/home.html
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
      */
-    SBasicLayout: (typeof import('./types/components/basicLayout'))['default']
+    SCard: (typeof import('./types/components/card'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/basicLayout/home.html
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
      */
-    's-basic-layout': (typeof import('./types/components/basicLayout'))['default']
+    's-card': (typeof import('./types/components/card'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/buildTime/home.html
      */
@@ -385,9 +385,9 @@ export type SBaseHeaderComponent = (typeof import('./types/components/company/ba
 export type SBaseHeaderInstance = ComponentInstance<SBaseHeaderComponent>
 export type SBaseHeaderPublicProps = SBaseHeaderInstance['$props']
 
-export type SBasicLayoutComponent = (typeof import('./types/components/basicLayout'))['default']
-export type SBasicLayoutInstance = ComponentInstance<SBasicLayoutComponent>
-export type SBasicLayoutPublicProps = SBasicLayoutInstance['$props']
+export type SCardComponent = (typeof import('./types/components/card'))['default']
+export type SCardInstance = ComponentInstance<SCardComponent>
+export type SCardPublicProps = SCardInstance['$props']
 
 export type SBuildTimeComponent = (typeof import('./types/components/buildTime'))['default']
 export type SBuildTimeInstance = ComponentInstance<SBuildTimeComponent>
@@ -553,7 +553,7 @@ declare global {
   namespace JSX {
     export interface IntrinsicElements {
       's-base-header': JSXComponentProps<SBaseHeaderPublicProps>
-      's-basic-layout': JSXComponentProps<SBasicLayoutPublicProps>
+      's-card': JSXComponentProps<SCardPublicProps>
       's-build-time': JSXComponentProps<SBuildTimePublicProps>
       's-button': JSXComponentProps<SButtonPublicProps>
       's-capacity-progress': JSXComponentProps<SCapacityProgressPublicProps>

@@ -5,8 +5,8 @@ const collapsed = ref(false)
 </script>
 
 <template>
-  <div class="basic-layout-chenghua-demo">
-    <div class="basic-layout-chenghua-demo__meta">
+  <div class="card-chenghua-demo">
+    <div class="card-chenghua-demo__meta">
       <span>属性: theme</span>
       <span>可选值: 'default' | 'chenghua' | 'shijingshan'</span>
       <span>默认值: 'default'</span>
@@ -21,17 +21,17 @@ const collapsed = ref(false)
       <span>默认值: 'header'</span>
     </div>
 
-    <s-basic-layout v-model="collapsed" theme="chenghua" title="我是header">
-      <div class="basic-layout-chenghua-demo__content">
-        <div class="basic-layout-chenghua-demo__row">
+    <s-card v-model="collapsed" theme="chenghua" title="我是header">
+      <div class="card-chenghua-demo__content">
+        <div class="card-chenghua-demo__row">
           <span>规则范围</span>
           <strong>对象存储巡检 / AI 审核任务</strong>
         </div>
-        <div class="basic-layout-chenghua-demo__row">
+        <div class="card-chenghua-demo__row">
           <span>最近执行</span>
           <strong>2026-06-17 10:24</strong>
         </div>
-        <div class="basic-layout-chenghua-demo__row">
+        <div class="card-chenghua-demo__row">
           <span>状态</span>
           <strong>已启用</strong>
         </div>
@@ -41,18 +41,18 @@ const collapsed = ref(false)
         <s-button theme="chenghua">取消</s-button>
         <s-button type="primary" theme="chenghua">保存配置</s-button>
       </template>
-    </s-basic-layout>
+    </s-card>
   </div>
 </template>
 
 <style scoped lang="scss">
-.basic-layout-chenghua-demo {
+.card-chenghua-demo {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.basic-layout-chenghua-demo__meta {
+.card-chenghua-demo__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
@@ -61,12 +61,12 @@ const collapsed = ref(false)
   line-height: 1.5;
 }
 
-.basic-layout-chenghua-demo__content {
+.card-chenghua-demo__content {
   display: grid;
   gap: 10px;
 }
 
-.basic-layout-chenghua-demo__row {
+.card-chenghua-demo__row {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -74,7 +74,7 @@ const collapsed = ref(false)
   line-height: 1.6;
 }
 
-.basic-layout-chenghua-demo__row span {
+.card-chenghua-demo__row span {
   color: var(--el-text-color-secondary);
 }
 </style>

@@ -294,7 +294,7 @@ defineExpose({
 </script>
 
 <template>
-  <s-basic-layout class="s-object-line" :body-style="{ padding: 0 }" v-bind="$attrs">
+  <s-card class="s-object-line" :body-style="{ padding: 0 }" v-bind="$attrs">
     <template #header>
       <s-title title="对象数量/大小历史">
         <!-- <template #extra>
@@ -304,7 +304,7 @@ defineExpose({
     </template>
     <s-chart v-if="!isEmpty(data)" ref="chartRef" :option="option" height="100%" />
     <s-empty v-else class="s-object-line__empty" />
-  </s-basic-layout>
+  </s-card>
 </template>
 
 <style scoped lang="scss">

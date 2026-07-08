@@ -12,7 +12,7 @@ const tenantDetails = {
 
 <template>
   <div>
-    <sBasicLayout title="租户容量配额" class="w-300 h-500">
+    <SCard title="租户容量配额" class="w-300 h-500">
       <template #header></template>
       <SQuotaPie
         class="h-block"
@@ -21,9 +21,9 @@ const tenantDetails = {
         :total="tenantDetails.tenantQuota"
         text="总使用量 / 总可用量"
       ></SQuotaPie>
-    </sBasicLayout>
+    </SCard>
     <br />
-    <sBasicLayout title="租户容量配额" class="w-300" :square="true">
+    <SCard title="租户容量配额" class="w-300" :square="true">
       <template #header></template>
       <SQuotaPie
         class="h-block"
@@ -32,12 +32,12 @@ const tenantDetails = {
         :total="tenantDetails.tenantQuota"
         text="总使用量 / 总可用量"
       ></SQuotaPie>
-    </sBasicLayout>
+    </SCard>
 
     <br />
     <hr />
 
-    <sBasicLayout title="租户容量配额" class="h-360" :square="true">
+    <SCard title="租户容量配额" class="h-360" :square="true">
       <template #header></template>
       <SQuotaPie
         class="h-block"
@@ -46,6 +46,6 @@ const tenantDetails = {
         :total="tenantDetails.tenantQuota"
         text="总使用量 / 总可用量"
       ></SQuotaPie>
-    </sBasicLayout>
+    </SCard>
   </div>
 </template>

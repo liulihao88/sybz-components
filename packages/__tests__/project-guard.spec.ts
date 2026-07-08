@@ -197,26 +197,26 @@ describe('component entry guards', () => {
     }
   })
 
-  it('keeps basic layout transparent prop wired through component, types and docs', () => {
-    const component = readText('packages/components/basicLayout/src/index.vue')
+  it('keeps card transparent prop wired through component, types and docs', () => {
+    const component = readText('packages/components/card/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')
-    const componentTypes = readText('packages/types/components/basicLayout.d.ts')
-    const docs = readText('docs/components/basicLayout/home.md')
+    const componentTypes = readText('packages/types/components/card.d.ts')
+    const docs = readText('docs/components/card/home.md')
 
     expect(component).toContain('transparent?: boolean')
     expect(component).toContain('transparent: false')
-    expect(component).toContain("'s-basic-layout--transparent': mergedProps.value.transparent")
+    expect(component).toContain("'s-card--transparent': mergedProps.value.transparent")
     expect(componentProps).toContain('transparent?: boolean')
     expect(componentTypes).toContain('transparent?: boolean')
-    expect(docs).toContain('<SBasicLayout transparent title="透明背景">')
+    expect(docs).toContain('<SCard transparent title="透明背景">')
   })
 
-  it('keeps basic layout size able to control padding with processWidth', () => {
-    const component = readText('packages/components/basicLayout/src/index.vue')
+  it('keeps card size able to control padding with processWidth', () => {
+    const component = readText('packages/components/card/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')
-    const componentTypes = readText('packages/types/components/basicLayout.d.ts')
-    const docs = readText('docs/components/basicLayout/home.md')
-    const demo = readText('docs/components/basicLayout/other.vue')
+    const componentTypes = readText('packages/types/components/card.d.ts')
+    const docs = readText('docs/components/card/home.md')
+    const demo = readText('docs/components/card/other.vue')
 
     expect(component).toContain("import { processWidth } from '@sybz-components/utils'")
     expect(component).toContain("if (size === 'large') return '24px'")
@@ -229,27 +229,27 @@ describe('component entry guards', () => {
     expect(demo).toContain("const sizeOptions = ['large', 'default', 'small', 20, '2rem', 0]")
   })
 
-  it('keeps basic layout shadow and hover animation props wired through component, types, themes and docs', () => {
-    const component = readText('packages/components/basicLayout/src/index.vue')
+  it('keeps card shadow and hover animation props wired through component, types, themes and docs', () => {
+    const component = readText('packages/components/card/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')
-    const componentTypes = readText('packages/types/components/basicLayout.d.ts')
-    const docs = readText('docs/components/basicLayout/home.md')
-    const demo = readText('docs/components/basicLayout/shadow.vue')
-    const chenghuaTheme = readText('packages/styles/themes/chenghua/basic-layout.scss')
-    const shijingshanTheme = readText('packages/styles/themes/shijingshan/basic-layout.scss')
+    const componentTypes = readText('packages/types/components/card.d.ts')
+    const docs = readText('docs/components/card/home.md')
+    const demo = readText('docs/components/card/shadow.vue')
+    const chenghuaTheme = readText('packages/styles/themes/chenghua/card.scss')
+    const shijingshanTheme = readText('packages/styles/themes/shijingshan/card.scss')
 
     expect(component).toContain('hoverAnimation?: boolean')
     expect(component).toContain("shadow?: 'always' | 'never' | 'hover'")
     expect(component).toContain('hoverAnimation: false')
     expect(component).toContain("shadow: 'never'")
-    expect(component).toContain("'s-basic-layout--hover-animation': mergedProps.value.hoverAnimation")
-    expect(component).toContain("'s-basic-layout--shadow-always': mergedProps.value.shadow === 'always'")
-    expect(component).toContain("'s-basic-layout--shadow-hover': mergedProps.value.shadow === 'hover'")
+    expect(component).toContain("'s-card--hover-animation': mergedProps.value.hoverAnimation")
+    expect(component).toContain("'s-card--shadow-always': mergedProps.value.shadow === 'always'")
+    expect(component).toContain("'s-card--shadow-hover': mergedProps.value.shadow === 'hover'")
     expect(componentProps).toContain("shadow?: 'always' | 'never' | 'hover'")
     expect(componentTypes).toContain("shadow?: 'always' | 'never' | 'hover'")
-    expect(docs).toContain('basicLayout/shadow')
+    expect(docs).toContain('card/shadow')
     expect(demo).toContain("const shadowOptions = ['always', 'never', 'hover']")
-    expect(chenghuaTheme).not.toContain('box-shadow: var(--s-basic-layout-shadow);')
-    expect(shijingshanTheme).not.toContain('box-shadow: var(--s-basic-layout-shadow);')
+    expect(chenghuaTheme).not.toContain('box-shadow: var(--s-card-shadow);')
+    expect(shijingshanTheme).not.toContain('box-shadow: var(--s-card-shadow);')
   })
 })

@@ -23,7 +23,7 @@ const tenantDetailsExceed = {
 
 <template>
   <div>
-    <sBasicLayout title="租户容量配额" class="w-200" :square="true">
+    <SCard title="租户容量配额" class="w-200" :square="true">
       <template #header></template>
       <SQuotaPie
         class="h-block"
@@ -32,7 +32,7 @@ const tenantDetailsExceed = {
         :total="tenantDetails.tenantQuota"
         text="总使用量 / 总可用量"
       ></SQuotaPie>
-    </sBasicLayout>
+    </SCard>
 
     <SQuotaPie
       class="h-300"

@@ -42,13 +42,13 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
   ['SBuildTime', { importPath: componentPropsPath, typeName: 'SBuildTimeProps' }],
   [
-    'SBasicLayout',
+    'SCard',
     {
       importPath: componentPropsPath,
-      typeName: 'SBasicLayoutProps',
+      typeName: 'SCardProps',
       slots: ['default', 'header', 'footer', 'icon'],
-      hoverProps: componentHoverProps('SBasicLayoutProps', [
-        'SBasicLayoutProps',
+      hoverProps: componentHoverProps('SCardProps', [
+        'SCardProps',
         'SybzComponentSize',
         'SybzComponentTheme',
         'SybzRecord',
