@@ -146,9 +146,31 @@ describe('project build and publish guards', () => {
     expect(after).toBe(before)
     expect(output).toContain('Current version:')
     expect(output).toContain('Next version:')
+    expect(output).toContain('Skip version bump: no')
     expect(output).toContain('1. Run utils tests')
     expect(output).toContain('3. Build dist with unbuild')
     expect(output).toContain('6. npm publish')
+  })
+
+  it('allows utils release to keep a manually edited version', () => {
+    const packageJsonPath = 'packages/utils/package.json'
+    const before = readText(packageJsonPath)
+    const output = execFileSync('node', ['packages/utils/scripts/release.mjs', '--dry-run'], {
+      cwd: rootDir,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        SKIP_VERSION_BUMP: '1',
+      },
+    })
+    const after = readText(packageJsonPath)
+    const pkg = JSON.parse(before)
+
+    expect(after).toBe(before)
+    expect(output).toContain(`Current version: ${pkg.version}`)
+    expect(output).toContain(`Next version: ${pkg.version}`)
+    expect(output).toContain('Skip version bump: yes')
+    expect(output).toContain('2. Keep package.json version')
   })
 })
 

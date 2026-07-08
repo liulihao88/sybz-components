@@ -8,6 +8,8 @@ const packageDir = resolve(scriptDir, '..')
 const rootDir = resolve(packageDir, '../..')
 const packageJsonPath = resolve(packageDir, 'package.json')
 const dryRun = process.argv.includes('--dry-run')
+const skipVersionBump =
+  process.argv.includes('--skip-version-bump') || ['1', 'true', 'yes'].includes(process.env.SKIP_VERSION_BUMP ?? '')
 
 function readPackageJson() {
   return JSON.parse(readFileSync(packageJsonPath, 'utf8'))
@@ -40,15 +42,16 @@ function run(command, args, options = {}) {
 
 function main() {
   const pkg = readPackageJson()
-  const nextVersion = bumpPatchVersion(pkg.version)
+  const nextVersion = skipVersionBump ? pkg.version : bumpPatchVersion(pkg.version)
   const commitMessage = `chore: release @sybz-components/utils v${nextVersion}`
 
   if (dryRun) {
     console.log(`Current version: ${pkg.version}`)
     console.log(`Next version: ${nextVersion}`)
+    console.log(`Skip version bump: ${skipVersionBump ? 'yes' : 'no'}`)
     console.log('Planned steps:')
     console.log('1. Run utils tests')
-    console.log('2. Update package.json version')
+    console.log(skipVersionBump ? '2. Keep package.json version' : '2. Update package.json version')
     console.log('3. Build dist with unbuild')
     console.log('4. git add -A .')
     console.log(`5. git commit -m "${commitMessage}"`)
@@ -58,10 +61,13 @@ function main() {
 
   run('pnpm', ['test:utils'], { cwd: rootDir })
 
-  pkg.version = nextVersion
-  writePackageJson(pkg)
-
-  console.log(`Version bumped: ${pkg.version}`)
+  if (skipVersionBump) {
+    console.log(`Version kept: ${pkg.version}`)
+  } else {
+    pkg.version = nextVersion
+    writePackageJson(pkg)
+    console.log(`Version bumped: ${pkg.version}`)
+  }
 
   run('npx', ['unbuild'])
   run('git', ['add', '-A', '.'])
