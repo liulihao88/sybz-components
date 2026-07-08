@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
+import { readdirSync } from 'fs'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import terser from '@rollup/plugin-terser'
@@ -7,6 +8,13 @@ import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import Icons from 'unplugin-icons/vite'
 
 const rootDir = resolve(__dirname, '../../../../')
+const chartEntryFiles = readdirSync(__dirname, { withFileTypes: true })
+  .filter((entry) => entry.isFile() && entry.name.endsWith('.ts') && entry.name !== 'index.ts')
+  .map((entry) => entry.name.replace(/\.ts$/, ''))
+
+const chartEntries = Object.fromEntries(
+  chartEntryFiles.map((entryName) => [`charts/${entryName}`, resolve(__dirname, `./${entryName}.ts`)]),
+)
 
 const externalPackages = [
   'vue',
@@ -35,11 +43,7 @@ export default defineConfig({
     lib: {
       entry: {
         charts: resolve(__dirname, './index.ts'),
-        'charts/chart': resolve(__dirname, './chart.ts'),
-        'charts/count-bar': resolve(__dirname, './count-bar.ts'),
-        'charts/count-bar-old': resolve(__dirname, './count-bar-old.ts'),
-        'charts/object-line': resolve(__dirname, './object-line.ts'),
-        'charts/quota-pie': resolve(__dirname, './quota-pie.ts'),
+        ...chartEntries,
       },
       formats: ['es'],
     },
