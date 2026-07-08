@@ -1,5 +1,4 @@
 export * from './base'
-export * from './day'
 export * from './is'
 export * from './ws'
 export * from './format'

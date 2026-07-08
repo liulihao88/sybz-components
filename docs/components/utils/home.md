@@ -15,7 +15,6 @@
 - [$toast](/components/utils/$toast/home.md)
 - [clone](/components/utils/clone/home.md)
 - [confirm](/components/utils/confirm/home.md)
-- [dayjs 函数方法](/components/utils/dayjs/home.md)
 - [formatBytes](/components/utils/formatBytes/home.md)
 - [formatBytesConvert](/components/utils/formatBytesConvert/home.md)
 - [formatDurationTime](/components/utils/formatDurationTime/home.md)
@@ -108,24 +107,6 @@ const submit = debounce(
 submit.cancel()
 ```
 
-### diffDate
-
-计算两个时间之间的差值，默认单位为秒。
-
-```ts
-const seconds = diffDate('2026-04-24 12:00:00', '2026-04-24 11:59:00')
-const minutes = diffDate('2026-04-24 12:00:00', '2026-04-24 11:30:00', 'minute')
-```
-
-### diffDateFromCurrent
-
-将秒数转换成“几分钟前 / 几小时前 / 几天前”这类文案。
-
-```ts
-diffDateFromCurrent(45) // 45秒前
-diffDateFromCurrent(3600) // 1小时前
-```
-
 ### formatBytes
 
 把字节数格式化成更易读的单位字符串。
@@ -142,33 +123,6 @@ formatBytes(1048576, { digit: 1, suffix: '/s' }) // 1.0 MB/s
 ```ts
 formatBytesConvert('1.5GB')
 formatBytesConvert('1,024 KB')
-```
-
-### formatDate
-
-使用 `dayjs` 按指定格式输出日期时间。
-
-```ts
-formatDate('2026-04-24 12:30:45')
-formatDate('2026-04-24 12:30:45', 'YYYY/MM/DD')
-```
-
-### formatDateToDay
-
-把日期格式化成 `YYYY-MM-DD`。
-
-```ts
-formatDateToDay(new Date())
-formatDateToDay('2026-04-24 12:30:45')
-```
-
-### formatDateToMinute
-
-把日期格式化成 `YYYY-MM-DD HH:mm`。
-
-```ts
-formatDateToMinute(new Date())
-formatDateToMinute('2026-04-24 12:30:45')
 ```
 
 ### formatDurationTime

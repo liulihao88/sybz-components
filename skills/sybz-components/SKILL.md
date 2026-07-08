@@ -44,7 +44,7 @@ app.use(SybzComponents)
 ## 常用检索
 
 ```bash
-rg "el-table|el-select|el-form|el-descriptions|ElMessage|ElMessageBox|lodash|dayjs|cloneDeep|debounce|throttle"
+rg "el-table|el-select|el-form|el-descriptions|ElMessage|ElMessageBox|lodash|cloneDeep|debounce|throttle"
 ```
 
 ## 交付格式

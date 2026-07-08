@@ -226,10 +226,6 @@ export default defineConfig({
               link: '/components/utils/confirm/home.md',
             },
             {
-              text: 'dayjs 日期函数',
-              link: '/components/utils/dayjs/home.md',
-            },
-            {
               text: 'debounce 防抖函数',
               link: '/components/utils/home.md#debounce',
             },
