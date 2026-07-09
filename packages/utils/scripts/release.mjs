@@ -8,6 +8,7 @@ const packageDir = resolve(scriptDir, '..')
 const rootDir = resolve(packageDir, '../..')
 const packageJsonPath = resolve(packageDir, 'package.json')
 const dryRun = process.argv.includes('--dry-run')
+const skipCheck = process.argv.includes('--skip-check')
 const skipVersionBump =
   process.argv.includes('--skip-version-bump') || ['1', 'true', 'yes'].includes(process.env.SKIP_VERSION_BUMP ?? '')
 
@@ -65,18 +66,26 @@ function main() {
     console.log(`Current version: ${pkg.version}`)
     console.log(`Next version: ${nextVersion}`)
     console.log(`Skip version bump: ${skipVersionBump ? 'yes' : 'no'}`)
+    console.log(`Skip release check: ${skipCheck ? 'yes' : 'no'}`)
     console.log('Planned steps:')
-    console.log('1. Run utils typecheck and tests')
+    console.log('1. Run utils release:check (typecheck, tests and build)')
     console.log(skipVersionBump ? '2. Keep package.json version' : '2. Update package.json version')
-    console.log('3. Build dist with unbuild')
+    console.log(
+      skipCheck
+        ? '3. Skip release:check because package script already ran it'
+        : '3. release:check must pass before publish',
+    )
     console.log('4. git add -A .')
     console.log(`5. git commit -m "${commitMessage}" if staged changes exist`)
     console.log('6. npm publish')
     return
   }
 
-  run('pnpm', ['exec', 'tsc', '--noEmit', '-p', 'packages/utils/tsconfig.json'], { cwd: rootDir })
-  run('pnpm', ['test:utils'], { cwd: rootDir })
+  if (skipCheck) {
+    console.log('\n> release:check skipped: package script already ran it')
+  } else {
+    run('pnpm', ['release:check'])
+  }
 
   if (skipVersionBump) {
     console.log(`Version kept: ${pkg.version}`)
