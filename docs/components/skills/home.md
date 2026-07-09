@@ -5,13 +5,12 @@
 业务项目安装 `sybz-components` 后，不需要改变使用者习惯，也不需要强制安装到 `.codex` 目录。推荐在业务项目根目录的 `AGENTS.md` 中加入下面这段说明：
 
 ```md
-## sybz-components 组件库规范
+## 当前项目 使用 sybz-components 组件库规范
 
 本项目使用 `sybz-components` 组件库。处理本项目任意文件时，必须先阅读并遵循 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 中的要求；涉及组件、工具函数、主题、迁移或示例写法时，还必须按需阅读并遵循该 skill 的 `references/` 目录下相关规范。
-
-如果 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 不存在，请先安装或更新依赖：`pnpm add sybz-components`。
 ```
 
+如果 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 不存在，请先安装或更新依赖：`pnpm add sybz-components`。
 这样 Codex、Cursor 或其他能读取 `AGENTS.md` / 项目规则的 AI 工具，都可以从当前项目依赖中找到这份规范。
 
 ## 路径说明
