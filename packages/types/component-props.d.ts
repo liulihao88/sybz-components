@@ -280,7 +280,22 @@ export interface SEmptySelfProps {
 
 export type SEmptyProps = SEmptySelfProps & Partial<Omit<EmptyPropsPublic, keyof SEmptySelfProps>>
 
-export type SFormRender = SRenderFunction<SybzRecord, SFormFieldItem>
+export interface SFormContext extends SRenderContext<SybzRecord, SFormFieldItem | SFormTitleItem> {
+  item: SFormFieldItem | SFormTitleItem
+  row: SybzRecord
+  model: SybzRecord
+  prop?: string
+  formRef?: any
+  getValue: (prop: string) => any
+  setValue: (prop: string, value: any) => void
+  setFieldValue: (value: any) => void
+}
+
+export type SFormDynamic<T> = T | ((context: SFormContext) => T)
+
+export type SFormEventHandler = (value: any, context: SFormContext, ...args: any[]) => void
+
+export type SFormRender = SRenderFunction<SybzRecord, SFormFieldItem | SFormTitleItem>
 
 export interface SFormRule {
   [key: string]: any
@@ -291,20 +306,49 @@ export interface SFormRule {
 
 export interface SFormFieldItem {
   [key: string]: any
-  attrs?: SybzRecord
+  /** 透传给表单控件的属性，支持函数动态返回 */
+  attrs?: SFormDynamic<SybzRecord>
+  /** attrs 的兼容别名，优先级低于 attrs */
+  bind?: SFormDynamic<SybzRecord>
+  /** attrs 的语义化别名，优先级介于 bind 和 attrs 之间 */
+  componentProps?: SFormDynamic<SybzRecord>
   column?: SFormProps['column']
-  comp?: string
+  comp?: string | Component
+  /** 默认值别名，只有 model 对应路径不存在时才写入 */
+  default?: any
+  /** 默认值，只有 model 对应路径不存在时才写入 */
+  defaultValue?: any
   directives?: SybzRecord
-  formItemAttrs?: SybzRecord
+  /** formItemAttrs 的兼容别名 */
+  formAttrs?: SFormDynamic<SybzRecord>
+  /** 透传给 el-form-item 的属性，支持函数动态返回 */
+  formItemAttrs?: SFormDynamic<SybzRecord>
+  /** 展示到控件前的值格式化 */
+  formatValue?: (value: any, context: SFormContext) => any
   imgAttrs?: SybzRecord
-  isShow?: boolean | ((item: SFormFieldItem) => boolean)
+  isShow?: SFormDynamic<boolean>
   label?: string
   labelRender?: SFormRender
+  labelSlotName?: string
+  modelEvent?: string
+  modelProp?: string
+  /** 写入 model 前的值转换 */
+  normalize?: (value: any, context: SFormContext) => any
+  onChange?: SFormEventHandler
+  onUpdate?: SFormEventHandler
   placeholder?: string
   prop?: string
+  /** 自定义事件，key 可以是 change / blur / update:modelValue / onChange */
+  events?: Record<string, SFormEventHandler>
   render?: SFormRender
-  rules?: SFormRule[]
+  required?: boolean | string
+  rules?: SFormDynamic<SFormRule | SFormRule[]>
+  slotName?: string
+  /** normalize 的兼容别名 */
+  transform?: (value: any, context: SFormContext) => any
   useSlot?: boolean
+  /** 自定义控件的值属性名，等价于 modelProp */
+  valueProp?: string
 }
 
 export interface SFormTitleItem extends Omit<
@@ -314,7 +358,7 @@ export interface SFormTitleItem extends Omit<
   type: 'title'
   title?: string
   subTitle?: string
-  attrs?: Partial<STitleProps> & SybzRecord
+  attrs?: SFormDynamic<Partial<STitleProps> & SybzRecord>
   titleSlotName?: string
 }
 
@@ -323,9 +367,15 @@ export type SFormFieldList = Array<SFormFieldItem | SFormTitleItem> | Record<str
 export interface SFormProps {
   fieldList: SFormFieldList
   model: SybzRecord
+  /** showFooter 的别名，设置后优先级更高 */
+  footer?: boolean
   showFooter?: boolean
   column?: 1 | 2 | 3 | 4 | 5 | 6
   align?: 'center' | 'top' | 'flex-end'
+  /** 是否自动把 defaultValue/default 初始化到 model 中 */
+  autoSetDefaultValue?: boolean
+  /** 所有 schema 控件的默认透传属性 */
+  componentDefaults?: SybzRecord
 }
 
 export interface SFunctionSourceCodeProps {

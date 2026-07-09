@@ -9,7 +9,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import terser from '@rollup/plugin-terser'
 import { customVitePluginFilePath } from './packages/utils/local/customVitePluginFilePath.ts'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import Icons from 'unplugin-icons/vite'
 import { compile } from 'sass'
 
@@ -71,7 +70,6 @@ export default defineConfig({
     __SYBZ_COMPONENTS_BUILD_TIME__: JSON.stringify(buildTime),
   },
   plugins: [
-    VueSetupExtend(),
     {
       ...terser({
         compress: {

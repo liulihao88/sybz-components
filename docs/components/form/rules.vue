@@ -1,5 +1,12 @@
 <template>
-  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :column="column" :rules="rules" />
+  <s-form
+    ref="TFormDemo"
+    :model="formData"
+    :field-list="fieldList"
+    :column="column"
+    :rules="rules"
+    :show-footer="true"
+  />
 </template>
 
 <script setup lang="tsx">

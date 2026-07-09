@@ -7,7 +7,6 @@ import svgLoader from 'vite-svg-loader'
 import terser from '@rollup/plugin-terser'
 import { customVitePluginFilePath } from '../packages/utils/local/customVitePluginFilePath.js'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import Icons from 'unplugin-icons/vite'
 
 const formatBuildTime = (date: Date) => {
@@ -25,7 +24,6 @@ export default defineConfig({
     devSourcemap: false,
   },
   plugins: [
-    VueSetupExtend(),
     svgLoader({
       defaultImport: 'url', // 将SVG作为URL导入
     }),

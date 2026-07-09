@@ -4,7 +4,6 @@ import { readdirSync } from 'fs'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import terser from '@rollup/plugin-terser'
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import Icons from 'unplugin-icons/vite'
 
 const rootDir = resolve(__dirname, '../../../../')
@@ -57,7 +56,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    VueSetupExtend(),
     {
       ...terser({
         compress: {

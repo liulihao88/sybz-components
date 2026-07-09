@@ -1,5 +1,12 @@
 import { ElForm } from 'element-plus'
-import type { SFormFieldList, SFormProps, SybzRecord } from '../component-props'
+import type {
+  SFormContext,
+  SFormFieldItem,
+  SFormFieldList,
+  SFormProps,
+  SFormTitleItem,
+  SybzRecord,
+} from '../component-props'
 
 type ElFormInstance = InstanceType<typeof ElForm>
 
@@ -10,12 +17,32 @@ export type SFormComponent = {
     $props: {
       fieldList: SFormFieldList
       model: SybzRecord
+      footer?: boolean
       showFooter?: boolean
       column?: 1 | 2 | 3 | 4 | 5 | 6
       align?: 'center' | 'top' | 'flex-end'
-    } & Omit<ElFormInstance['$props'], 'fieldList' | 'model' | 'showFooter' | 'column' | 'align'>
+      autoSetDefaultValue?: boolean
+      componentDefaults?: SybzRecord
+    } & Omit<
+      ElFormInstance['$props'],
+      'fieldList' | 'model' | 'footer' | 'showFooter' | 'column' | 'align' | 'autoSetDefaultValue' | 'componentDefaults'
+    >
     $emit: ElFormInstance['$emit']
-    $slots: ElFormInstance['$slots'] & Record<string, (...args: any[]) => any>
+    $slots: ElFormInstance['$slots'] & Record<string, (scope: SFormContext) => any>
+    validate: (isResetFieldsOrParams?: boolean | SybzRecord, otherParams?: SybzRecord) => Promise<SybzRecord>
+    validateField: ElFormInstance['validateField']
+    resetFields: ElFormInstance['resetFields']
+    clearValidate: ElFormInstance['clearValidate']
+    scrollToField: ElFormInstance['scrollToField']
+    submit: () => Promise<SybzRecord>
+    getModel: () => SybzRecord
+    getValue: (prop: string) => any
+    setValue: (prop: string, value: any) => void
+    getFields: () => Array<SFormFieldItem | SFormTitleItem>
+    getField: (prop: string) => SFormFieldItem | SFormTitleItem | undefined
+    getVisibleFields: () => Array<SFormFieldItem | SFormTitleItem>
+    formRef: ElFormInstance
+    sFormRef: ElFormInstance
   }
 }
 
