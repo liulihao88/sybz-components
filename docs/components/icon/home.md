@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-icon name="delete">...</s-icon>`。属性：`name` 类型 `string`，默认值未设置；`content` 类型 `string`，默认值 `''`；`dangerously-use-html-string` 可选 `true / false`，默认值 `false`。
+:::demo 展示基础用法。基础写法：`<s-icon name="delete">...</s-icon>`。属性：`name` 类型 `string`，默认值未设置；`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
 icon/base
 :::
 

@@ -108,8 +108,14 @@ describe('project build and publish guards', () => {
   it('keeps release scripts ordered around build, version and publish steps', () => {
     const pkg = readJson<{ scripts: Record<string, string> }>('package.json')
 
-    expect(pkg.scripts.build).toBe('pnpm types:generate && vite build')
-    expect(pkg.scripts.release).toBe('pnpm build && npm version patch && npm publish')
+    expect(pkg.scripts.build).toBe(
+      'pnpm types:generate && vite build && vite build --config packages/components/company/chart/vite.config.js',
+    )
+    expect(pkg.scripts['check:components']).toBe('pnpm typecheck && pnpm typecheck:sfc && pnpm test')
+    expect(pkg.scripts['check:utils']).toBe('pnpm exec tsc --noEmit -p packages/utils/tsconfig.json && pnpm test:utils')
+    expect(pkg.scripts['release:check']).toBe('pnpm check:components && pnpm check:utils && pnpm buildAll')
+    expect(pkg.scripts.prepublishOnly).toBe('pnpm release:check')
+    expect(pkg.scripts.release).toBe('pnpm release:check && npm version patch && npm publish')
     expect(pkg.scripts.buildAll).toBe('pnpm build && pnpm run -C packages/utils build')
     expect(pkg.scripts['utils:release']).toBe('pnpm run -C packages/utils release')
   })
@@ -147,7 +153,7 @@ describe('project build and publish guards', () => {
     expect(output).toContain('Current version:')
     expect(output).toContain('Next version:')
     expect(output).toContain('Skip version bump: no')
-    expect(output).toContain('1. Run utils tests')
+    expect(output).toContain('1. Run utils typecheck and tests')
     expect(output).toContain('3. Build dist with unbuild')
     expect(output).toContain('5. git commit -m "chore: release @sybz-components/utils')
     expect(output).toContain('if staged changes exist')

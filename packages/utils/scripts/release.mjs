@@ -66,7 +66,7 @@ function main() {
     console.log(`Next version: ${nextVersion}`)
     console.log(`Skip version bump: ${skipVersionBump ? 'yes' : 'no'}`)
     console.log('Planned steps:')
-    console.log('1. Run utils tests')
+    console.log('1. Run utils typecheck and tests')
     console.log(skipVersionBump ? '2. Keep package.json version' : '2. Update package.json version')
     console.log('3. Build dist with unbuild')
     console.log('4. git add -A .')
@@ -75,6 +75,7 @@ function main() {
     return
   }
 
+  run('pnpm', ['exec', 'tsc', '--noEmit', '-p', 'packages/utils/tsconfig.json'], { cwd: rootDir })
   run('pnpm', ['test:utils'], { cwd: rootDir })
 
   if (skipVersionBump) {

@@ -56,7 +56,7 @@ tooltip/other
 
 ### 显示 HTML / VNode 内容
 
-:::demo 展示显示 HTML / VNode 内容配置。基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。属性：`width` 类型 `string / number`，默认值 `''`；`dangerously-use-html-string` 可选 `true / false`，默认值 `false`。
+:::demo 展示显示 HTML / VNode 内容配置。基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。属性：`width` 类型 `string / number`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
 tooltip/html
 :::
 
