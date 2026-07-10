@@ -6,14 +6,14 @@
 
 | 原写法                                    | 优先替换                  |
 | ----------------------------------------- | ------------------------- |
-| `el-button`                               | `s-button`                |
-| `el-input`                                | `s-input`                 |
+| `el-button`、`button`                     | `s-button`                |
+| `el-input`、`input`                       | `s-input`                 |
 | `el-input-number`                         | `s-input-number`          |
 | `el-select`、手写 `el-option` 循环        | `s-select`                |
 | `el-checkbox-group`                       | `s-checkbox`              |
 | `el-radio-group`、`el-radio`              | `s-radio`                 |
 | `el-switch`                               | `s-switch`                |
-| `el-date-picker`                          | `s-date-picker`           |
+| `el-date-picker`、 `日期或时间选择框`     | `s-date-picker`           |
 | `el-table`、`el-table-column`、分页组合   | `s-table`                 |
 | `el-descriptions`、`el-descriptions-item` | `s-descriptions`          |
 | `el-dialog`、`el-drawer`                  | `s-dialog`                |
@@ -21,9 +21,11 @@
 | `el-tooltip`                              | `s-tooltip`               |
 | `el-popconfirm`                           | `s-popconfirm`            |
 | `el-progress`                             | `s-progress`              |
+| `el-tabs`                                 | `s-tabs`                  |
 | `el-tag`                                  | `s-tag`                   |
 | 页面标题、自定义标题块                    | `s-title`、`s-comp-title` |
 | 卡片容器、区域面板                        | `s-card`                  |
+| 页面切换标题                              | `s-tabs`                  |
 | flex/row 布局包装                         | `s-flex`、`s-row`         |
 
 ## 使用规则
@@ -224,7 +226,7 @@ const enabled = ref(false)
 ### s-tooltip
 
 ```vue
-<s-tooltip width="120" content="这是一段比较长的提示文本，超出宽度后鼠标移入会显示完整内容。" placement="right" />
+<s-tooltip width="120" content="这是一段比较长的提示文本，超出宽度后鼠标移入会显示完整内容。" />
 ```
 
 ### s-warning
@@ -305,6 +307,33 @@ async function submit() {
 ```
 
 复杂布局才写 `column`、`align`、`formItemAttrs`；普通表单保持默认。
+
+### s-tabs
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+const tabsValue = ref('chenghua')
+const navList = [
+  {
+    label: '成华',
+    value: 'chenghua',
+  },
+  {
+    label: '石景山',
+    value: 'shijingshan',
+  },
+]
+</script>
+
+<template>
+  <div>
+    <s-tabs v-model="tabsValue" :options="navList"> </s-tabs>
+    <div v-if="tabsValue === 'chenghua'">成华内容</div>
+    <div v-else>石景山内容</div>
+  </div>
+</template>
+```
 
 ### s-table
 

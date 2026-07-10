@@ -1,29 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+const tabsValue = ref('chenghua')
 const navList = [
   {
-    label: '系统服务参数设置',
-    value: 'sys',
+    label: '成华',
+    value: 'chenghua',
   },
   {
-    label: '基础服务参数设置',
-    value: 'base',
-  },
-  {
-    label: '高级定时任务',
-    value: 'task',
+    label: '石景山',
+    value: 'shijingshan',
   },
 ]
 </script>
 
 <template>
   <div>
-    <s-tabs :options="navList">
-      <template #sys>系统服务</template>
-      <template #base>基础服务</template>
-      <template #task>高级定时</template>
-    </s-tabs>
+    <s-tabs v-model="tabsValue" :options="navList"> </s-tabs>
+    <div v-if="tabsValue === 'chenghua'">成华内容</div>
+    <div v-else>石景山内容</div>
   </div>
 </template>
-
-<style scoped lang="scss"></style>
