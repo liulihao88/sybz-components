@@ -1,22 +1,52 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
 import { ref } from 'vue'
+import { consola } from 'consola'
+
+const elementPlusMocks = vi.hoisted(() => {
+  const message = vi.fn()
+  return {
+    message,
+    closeAll: vi.fn(),
+    confirm: vi.fn(() => Promise.resolve('confirm')),
+  }
+})
+
+vi.mock('element-plus', () => ({
+  ElMessage: Object.assign(elementPlusMocks.message, {
+    closeAll: elementPlusMocks.closeAll,
+  }),
+  ElMessageBox: {
+    confirm: elementPlusMocks.confirm,
+    install: {},
+  },
+}))
+
 import {
+  $toast,
   clearStorage,
   clone,
+  confirm,
+  copy,
   debounce,
   getStorage,
   getType,
+  getUtilsBuildTime,
+  getVariable,
   isEmpty,
+  log,
   merge,
   processWidth,
   random,
   setStorage,
   delay,
+  test,
   throttle,
   toLine,
   tryCatch,
   mockValue,
   validate,
+  validateForm,
+  validateOnSubmit,
 } from '../base'
 
 describe('base utils', () => {
@@ -114,9 +144,15 @@ describe('base utils', () => {
     expect(validate('mobile', '13800138000', true)).toBe(true)
     expect(validate('email', 'wrong', true)).toBe(false)
     expect(validate('ip', '192.168.1.1', true)).toBe(true)
+    expect(validate({ type: 'custom', reg: /^sybz$/, value: 'sybz' }, true)).toBe(true)
     expect(validate('required')).toEqual({
       required: true,
       message: '请输入',
+      trigger: ['blur', 'change'],
+    })
+    expect(validate('change', { required: false, message: '请选择项目' })).toEqual({
+      required: false,
+      message: '请选择项目',
       trigger: ['blur', 'change'],
     })
     expect(validate('自定义提示')).toEqual({
@@ -124,6 +160,34 @@ describe('base utils', () => {
       message: '自定义提示',
       trigger: ['blur', 'change'],
     })
+  })
+
+  it('creates submit-only validation rules and supports pure validation', () => {
+    expect(validateOnSubmit('required')).toEqual({
+      required: true,
+      message: '请输入',
+      trigger: [],
+    })
+    expect(validateOnSubmit({ type: 'mobile', value: '13800138000' }, true)).toBe(true)
+  })
+
+  it('wraps form validation as a promise', async () => {
+    const successForm = {
+      validate(callback: (valid: boolean, status: Record<string, unknown>) => void) {
+        callback(true, { name: 'ok' })
+      },
+    }
+
+    await expect(validateForm(ref(successForm))).resolves.toEqual({ name: 'ok' })
+
+    const errorStatus = { name: [{ message: '请输入名称' }] }
+    const failForm = {
+      validate(callback: (valid: boolean, status: Record<string, unknown>) => void) {
+        callback(false, errorStatus)
+      },
+    }
+
+    await expect(validateForm(failForm, { showMessage: false })).rejects.toBe(errorStatus)
   })
 
   it('delays and invokes optional callback', async () => {
@@ -139,6 +203,7 @@ describe('base utils', () => {
   it('wraps success and failure with tryCatch and toggles loading refs', async () => {
     const loading = ref(false)
 
+    await expect(tryCatch(Promise.resolve('promise-ok'))).resolves.toEqual({ data: 'promise-ok', error: null })
     await expect(tryCatch(() => 'ok', loading)).resolves.toEqual({ data: 'ok', error: null })
     expect(loading.value).toBe(false)
 
@@ -150,6 +215,10 @@ describe('base utils', () => {
     expect(result.data).toBeNull()
     expect(result.error).toBe(error)
     expect(loading.value).toBe(false)
+
+    const warn = vi.spyOn(consola, 'warn').mockImplementation(() => {})
+    await tryCatch(() => 'ok', { value: false } as any)
+    expect(warn).toHaveBeenCalledWith('Cannot modify non-ref sendLoading directly!')
   })
 
   it('throttles repeated calls', async () => {
@@ -217,13 +286,15 @@ describe('base utils', () => {
 
   it('debounces repeated calls and supports immediate mode', async () => {
     vi.useFakeTimers()
+    const resultCallback = vi.fn()
     const fn = vi.fn((value: string) => value.toUpperCase())
-    const debounced = debounce(fn, 100)
+    const debounced = debounce(fn, 100, false, resultCallback)
     const promise = debounced('sybz')
 
     await vi.advanceTimersByTimeAsync(100)
     await expect(promise).resolves.toBe('SYBZ')
     expect(fn).toHaveBeenCalledTimes(1)
+    expect(resultCallback).toHaveBeenCalledWith('SYBZ')
 
     const immediateFn = vi.fn((value: string) => value)
     const immediateDebounced = debounce(immediateFn, 100, true)
@@ -232,8 +303,108 @@ describe('base utils', () => {
     expect(immediateFn).toHaveBeenCalledTimes(1)
   })
 
+  it('supports debounce cancel', async () => {
+    vi.useFakeTimers()
+    const fn = vi.fn()
+    const debounced = debounce(fn, 100)
+
+    debounced('skip')
+    debounced.cancel()
+
+    await vi.advanceTimersByTimeAsync(100)
+    expect(fn).not.toHaveBeenCalled()
+  })
+
   it('returns random integer inside range', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.5)
     expect(random(1, 3)).toBe(2)
+  })
+
+  it('normalizes toast calls and shortcuts', () => {
+    $toast('保存成功', 's', { closeAll: true, duration: 1000 })
+    expect(elementPlusMocks.closeAll).toHaveBeenCalledTimes(1)
+    expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
+      message: '保存成功',
+      type: 'success',
+      closeAll: true,
+      duration: 1000,
+      customClass: 's-antd-message',
+    })
+
+    $toast({ message: '原生样式', type: 'warning', customClass: 'el' })
+    expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
+      message: '原生样式',
+      type: 'warning',
+      customClass: '',
+    })
+
+    $toast.error('失败')
+    expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
+      message: '失败',
+      type: 'error',
+      customClass: 's-antd-message',
+    })
+  })
+
+  it('copies text and optionally hides toast', () => {
+    const execCommand = vi.fn()
+    Object.defineProperty(document, 'execCommand', {
+      value: execCommand,
+      configurable: true,
+    })
+
+    expect(copy('复制内容')).toBe(true)
+    expect(execCommand).toHaveBeenCalledWith('copy')
+    expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
+      message: '复制内容复制成功',
+      type: 'success',
+      customClass: 's-antd-message',
+    })
+
+    elementPlusMocks.message.mockClear()
+    expect(copy('静默复制', { hideToast: true })).toBe(true)
+    expect(elementPlusMocks.message).not.toHaveBeenCalled()
+  })
+
+  it('logs refs and plain values through consola', () => {
+    const logger = vi.spyOn(consola, 'log').mockImplementation(() => {})
+
+    log('count', ref(1))
+    log('data', { id: 1 })
+
+    expect(logger).toHaveBeenCalledTimes(2)
+  })
+
+  it('opens confirm with default, theme and append target options', async () => {
+    const appendTarget = document.createElement('div')
+    appendTarget.id = 'dialogRoot'
+    document.body.appendChild(appendTarget)
+
+    await expect(confirm('确认删除？', { theme: 'chenghua', appendTo: 'dialogRoot' })).resolves.toBe('confirm')
+    expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
+      '确认删除？',
+      expect.objectContaining({
+        title: '提示',
+        draggable: true,
+        showCancelButton: true,
+        cancelButtonText: '取消',
+        confirmButtonText: '确定',
+        dangerouslyUseHTMLString: true,
+        appendTo: appendTarget,
+        customClass: 's-message-box--chenghua',
+        confirmButtonClass: 's-message-box__confirm-btn s-message-box__confirm-btn--chenghua',
+        cancelButtonClass: 's-message-box__cancel-btn s-message-box__cancel-btn--chenghua',
+      }),
+    )
+  })
+
+  it('reads css variables and reports utils build time fallback', () => {
+    document.documentElement.style.setProperty('--sybz-test-color', '#1677ff')
+
+    expect(getVariable('--sybz-test-color')).toBe('#1677ff')
+    expect(getVariable('--sybz-missing-color', 'fallback')).toBe('fallback')
+    expect(getUtilsBuildTime()).toBe('未注入')
+    expect(getUtilsBuildTime('fallback-time')).toBe('fallback-time')
+    expect(test()).toBe('build time: 未注入')
   })
 })
