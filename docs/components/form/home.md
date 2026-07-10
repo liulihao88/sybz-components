@@ -70,6 +70,12 @@ form/column
 form/slot
 :::
 
+|             插槽名              | 说明                                                                  | 插槽参数       |
+| :-----------------------------: | --------------------------------------------------------------------- | -------------- |
+|        `prop / slotName`        | 内容插槽；`useSlot: true` 时启用，未设置 `slotName` 时使用当前 `prop` | `SFormContext` |
+| `${prop}-label / labelSlotName` | label 插槽；未设置 `labelSlotName` 时使用 `${prop}-label`             | `SFormContext` |
+|           `slotName`            | 分组标题插槽；`type="title"` 且 `useSlot: true` 时启用                | `SFormContext` |
+
 ### render函数
 
 :::demo 展示自定义配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1"></s-form>`。
@@ -114,48 +120,41 @@ form/directives
 | autoSetDefaultValue | 是否自动写入字段默认值                     | boolean                   | `true`                                                 |
 |  componentDefaults  | 所有控件的默认透传属性                     | object                    | `{ clearable: true, filterable: true, width: '100%' }` |
 
-## fieldList属性
+### fieldList 内部属性
 
-|     属性名     | 说明                                                                       | 类型                      | 默认值                |
-| :------------: | -------------------------------------------------------------------------- | ------------------------- | --------------------- |
-|     label      | 左侧显示的 label 值                                                        | string                    | -                     |
-|      prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                                  | string                    | -                     |
-|      comp      | 要渲染的组件名称或组件对象                                                 | string / Component        | `s-input`             |
-|     attrs      | 透传给表单控件；`type="title"` 时透传给 `s-title`                          | object / Function         | -                     |
-|      bind      | `attrs` 的兼容别名，优先级低于 `attrs`                                     | object / Function         | -                     |
-| componentProps | `attrs` 的语义化别名，优先级介于 `bind` 和 `attrs` 之间                    | object / Function         | -                     |
-| formItemAttrs  | 透传给 `el-form-item`                                                      | object / Function         | -                     |
-|   formAttrs    | `formItemAttrs` 的兼容别名                                                 | object / Function         | -                     |
-|     rules      | 每一项对应的 rules 规则，函数参数为表单上下文                              | object / array / Function | -                     |
-|    required    | 快速生成必填规则；传字符串时作为错误提示                                   | boolean / string          | -                     |
-|  defaultValue  | 默认值，model 对应路径不存在时写入                                         | any                       | -                     |
-|    default     | `defaultValue` 的兼容别名                                                  | any                       | -                     |
-|  labelRender   | 自定义 label 渲染，参数为表单上下文                                        | Function                  | -                     |
-|     render     | 自定义内容渲染，参数为表单上下文                                           | Function                  | -                     |
-|     isShow     | 是否展示当前项，函数参数为表单上下文                                       | boolean / Function        | `true`                |
-|    disabled    | 是否禁用当前控件，函数参数为表单上下文                                     | boolean / Function        | -                     |
-|    imgAttrs    | 左侧图片或图标的属性                                                       | object                    | -                     |
-|    useSlot     | 使用插槽                                                                   | boolean                   | `false`               |
-|    slotName    | 内容插槽名，未设置时使用 `prop`                                            | string                    | -                     |
-| labelSlotName  | label 插槽名，未设置时使用 `${prop}-label`                                 | string                    | -                     |
-|   directives   | 自定义指令                                                                 | object                    | -                     |
-|   modelProp    | 自定义控件的值属性名                                                       | string                    | `modelValue`          |
-|   modelEvent   | 自定义控件的值更新事件                                                     | string                    | `update:${modelProp}` |
-|   valueProp    | `modelProp` 的兼容别名                                                     | string                    | -                     |
-|   normalize    | 写入 model 前的值转换，函数参数为 `(value, context)`                       | Function                  | -                     |
-|   transform    | `normalize` 的兼容别名                                                     | Function                  | -                     |
-|  formatValue   | 展示到控件前的值格式化，函数参数为 `(value, context)`                      | Function                  | -                     |
-|     events     | 自定义事件，key 支持 `change / blur / update:modelValue / onChange`        | object                    | -                     |
-|    onChange    | `change` 事件快捷写法，参数为 `(value, context, ...args)`                  | Function                  | -                     |
-|    onUpdate    | 值更新事件快捷写法，参数为 `(value, context, ...args)`                     | Function                  | -                     |
-|      type      | 项类型，设置为 `title` 时渲染分组标题；普通项会透传给控件                  | string                    | -                     |
-|     title      | `type="title"` 时显示的标题                                                | string                    | `''`                  |
-|    subTitle    | `type="title"` 时显示的副标题                                              | string                    | `''`                  |
-| titleSlotName  | `type="title"` 且 `useSlot` 时使用的插槽名，未设置时使用 `slotName / prop` | string                    | -                     |
+`fieldList` 是 `s-form` 的表单 schema 配置。每一项只保留表单编排需要的字段；控件属性统一放到 `attrs`，表单项属性统一放到 `formItemAttrs`。例如 `type="title"` 时，`s-title` 的 `title`、`subTitle`、`theme`、`type` 等属性都写到 `attrs` 里。
+
+TypeScript 项目中建议从 `sybz-components/types` 引入表单项类型，让动态函数里的 `model`、`value`、`setFieldValue` 等上下文有明确提示：
+
+```ts
+import type { SFormFieldItem } from 'sybz-components/types'
+
+const fieldList: SFormFieldItem[] = [
+  { label: '账号', prop: 'account', required: true },
+  { label: '角色', prop: 'role', comp: 's-select', attrs: { options: roleOptions } },
+]
+```
+
+|    属性名     | 说明                                                                  | 类型                      | 默认值    |
+| :-----------: | --------------------------------------------------------------------- | ------------------------- | --------- |
+|     label     | 左侧显示的 label 值                                                   | string                    | -         |
+|     prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                             | string                    | -         |
+|     comp      | 要渲染的组件名称或组件对象                                            | string / Component        | `s-input` |
+|     attrs     | 透传给表单控件；`type="title"` 时透传给 `s-title`，标题文案也写在这里 | object / Function         | -         |
+| formItemAttrs | 透传给 `el-form-item`                                                 | object / Function         | -         |
+|     rules     | 当前项校验规则，函数参数为表单上下文                                  | object / array / Function | -         |
+|   required    | 快速生成必填规则；传字符串时作为错误提示                              | boolean / string          | -         |
+| defaultValue  | 默认值，model 对应路径不存在时写入                                    | any                       | -         |
+|    render     | 自定义内容渲染，参数为表单上下文                                      | Function                  | -         |
+|    isShow     | 是否展示当前项，函数参数为表单上下文                                  | boolean / Function        | `true`    |
+|    useSlot    | 使用插槽渲染                                                          | boolean                   | `false`   |
+|   slotName    | 内容插槽名；未设置时使用 `prop`，`type="title"` 时也作为标题插槽名    | string                    | -         |
+| labelSlotName | label 插槽名，未设置时使用 `${prop}-label`                            | string                    | -         |
+|     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`     | string                    | -         |
 
 ## 表单上下文
 
-`attrs`、`bind`、`componentProps`、`formItemAttrs`、`formAttrs`、`rules`、`isShow`、`disabled`、`render`、`labelRender` 和插槽都会拿到同一份上下文：`{ item, row, model, value, prop, column, index, formRef, getValue, setValue, setFieldValue }`。
+`attrs`、`formItemAttrs`、`rules`、`isShow`、`render` 和插槽都会拿到同一份上下文：`{ item, row, model, value, prop, column, index, formRef, getValue, setValue, setFieldValue }`。
 
 ## Form Exposes
 

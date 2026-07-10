@@ -3,7 +3,7 @@
     <template #slotTitle="{ item }">
       <s-title v-bind="item.attrs" type="form">
         <template #title>
-          <span class="form-title-demo__slot-title">{{ item.title }}</span>
+          <span class="form-title-demo__slot-title">{{ item.attrs.title }}</span>
         </template>
         <template #extra>
           <span class="form-title-demo__tip">插槽标题</span>
@@ -31,9 +31,9 @@ const formData = ref({
 const fieldList = [
   {
     type: 'title',
-    title: '基本信息',
-    subTitle: '补充展厅名称与介绍',
     attrs: {
+      title: '基本信息',
+      subTitle: '补充展厅名称与介绍',
       theme: 'chenghua',
       type: 'form',
     },
@@ -49,15 +49,15 @@ const fieldList = [
   },
   {
     type: 'title',
-    title: '统计配置',
     attrs: {
+      title: '统计配置',
       theme: 'chenghua',
       type: 'form',
     },
     render: ({ item }: any) => {
       return (
         <s-title
-          title={item.title}
+          title={item.attrs.title}
           theme="chenghua"
           type="form"
           v-slots={{ extra: () => <span class="form-title-demo__tip">render标题</span> }}

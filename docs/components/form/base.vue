@@ -16,8 +16,8 @@ const fieldList = [
     prop: 'account',
   },
   {
-    label: '基础信息',
     type: 'title',
+    title: '111',
   },
   {
     label: '爱好',
