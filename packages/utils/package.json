@@ -17,10 +17,10 @@
   "scripts": {
     "build": "npx unbuild",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "vitest run src",
+    "test": "vitest run --root ../.. packages/utils/src",
     "stub": "npx unbuild --stub",
     "releaseOld": "npx unbuild && npm version patch && git add . && git commit -m \"chore: release @sybz-components/utils v$(npm pkg get version | sed 's/\"//g')\" && git push origin && npm publish",
-    "release": "pnpm test && node ./scripts/release.mjs --skip-check"
+    "release": "node ./scripts/release.mjs"
   },
   "author": "",
   "dependencies": {
