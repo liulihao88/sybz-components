@@ -4,16 +4,18 @@ export type STitleComponent = {
   new (): {
     $props: {
       title?: string
-      size?: string
+      size?: '' | 'small' | 'default' | 'large'
       subTitle?: string
       subAttrs?: SybzRecord
       inner?: boolean
+      margin?: string | number
+      gap?: string | number
       t?: string | number
       b?: string | number
       l?: string | number
       tb?: string | number
       height?: string | number
-      type?: 'simple' | 'icon' | 'form' | string
+      type?: '' | 'simple' | 'icon' | 'form'
       theme?: SybzComponentTheme
     }
     $slots: {

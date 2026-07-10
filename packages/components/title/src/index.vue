@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="s-title"
-    :class="titleClass"
-    :style="{ ...margin, height: processWidth(mergedProps.height, true) }"
-    v-bind="$attrs"
-  >
+  <div class="s-title" :class="titleClass" :style="titleStyle" v-bind="$attrs">
     <div class="s-title__top" :class="parseClass">
       <div class="s-title__main" :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }">
         <span :class="($slots.icon || mergedProps.type === 'icon') && 's-title__slot-icon-wrapper'">
@@ -52,13 +47,7 @@
 </template>
 
 <script setup lang="ts">
-/**
-<s-title title="使用hooks1" t="100"></s-title>
-<s-title title="我说呢" sub-title="test/t2.vue"></s-title>
-*
-*/
-import { processWidth } from '@sybz-components/utils'
-import { computed } from 'vue'
+import { computed, type CSSProperties } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
@@ -71,28 +60,61 @@ defineSlots<{
   extra?: () => any
   right?: () => any
 }>()
+type TitleSize = 'small' | 'default' | 'large'
+type TitleType = '' | 'simple' | 'icon' | 'form'
 interface TitleProps {
   title?: string
-  size?: string
+  size?: TitleSize
   subTitle?: string
   subAttrs?: Record<string, any>
   inner?: boolean
+  margin?: string | number
+  gap?: string | number
   t?: string | number
   b?: string | number
   l?: string | number
   tb?: string | number
   height?: string | number
-  type?: 'simple' | 'icon' | 'form' | string
+  type?: TitleType
   theme?: 'default' | 'chenghua' | 'shijingshan'
+}
+
+const titleSizeMap: Record<Exclude<TitleSize, ''>, Record<string, string>> = {
+  small: {
+    '--s-title-font-size': '14px',
+    '--s-title-sub-title-font-size': '12px',
+    '--s-title-icon-size': '12px',
+    '--s-title-bar-height': '14px',
+    '--s-title-min-height': '24px',
+    '--s-title-gap': '6px',
+  },
+  default: {
+    '--s-title-font-size': '16px',
+    '--s-title-sub-title-font-size': '14px',
+    '--s-title-icon-size': '14px',
+    '--s-title-bar-height': '16px',
+    '--s-title-min-height': '28px',
+    '--s-title-gap': '8px',
+  },
+  large: {
+    '--s-title-font-size': '18px',
+    '--s-title-sub-title-font-size': '14px',
+    '--s-title-icon-size': '18px',
+    '--s-title-bar-height': '18px',
+    '--s-title-min-height': '34px',
+    '--s-title-gap': '10px',
+  },
 }
 
 const props = withDefaults(defineProps<TitleProps>(), {
   title: '',
-  size: '', // 默认margin 16px 0
+  size: 'default',
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
   subTitle: '',
   subAttrs: () => ({}),
   inner: false,
+  margin: '',
+  gap: '',
   t: '',
   b: '',
   l: '',
@@ -103,27 +125,46 @@ const props = withDefaults(defineProps<TitleProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('title', props)
 
-const margin = computed(() => {
-  const { t, b, l, tb } = mergedProps.value
-  if (!t && !b && !l && !tb) {
-    return {}
-  } else {
-    let obj: any = {}
-    if (tb) {
-      obj.marginTop = processWidth(tb, true)
-      obj.marginBottom = processWidth(tb, true)
-    }
-    if (t) {
-      obj.marginTop = processWidth(t, true)
-    }
-    if (b) {
-      obj.marginBottom = processWidth(b, true)
-    }
-    if (l) {
-      obj.marginLeft = processWidth(l, true)
-    }
-    return obj
+const formatCssValue = (value?: string | number) => {
+  if (value === undefined || value === null || value === '') {
+    return ''
   }
+
+  return typeof value === 'number' || !Number.isNaN(Number(value)) ? `${value}px` : String(value)
+}
+
+const titleStyle = computed(() => {
+  const { size, margin, gap, t, b, l, tb, height } = mergedProps.value
+  const style: CSSProperties = {}
+
+  if (margin) {
+    style.margin = formatCssValue(margin)
+  }
+  if (tb) {
+    style.marginTop = formatCssValue(tb)
+    style.marginBottom = formatCssValue(tb)
+  }
+  if (t) {
+    style.marginTop = formatCssValue(t)
+  }
+  if (b) {
+    style.marginBottom = formatCssValue(b)
+  }
+  if (l) {
+    style.marginLeft = formatCssValue(l)
+  }
+  if (height) {
+    style.height = formatCssValue(height)
+  }
+
+  if (size) {
+    Object.assign(style, titleSizeMap[size])
+  }
+  if (gap) {
+    style['--s-title-gap'] = formatCssValue(gap)
+  }
+
+  return style
 })
 
 const parseClass = computed(() => {
@@ -140,6 +181,7 @@ const parseClass = computed(() => {
 const titleClass = computed(() => ({
   's-title--chenghua': mergedProps.value.theme === 'chenghua',
   's-title--shijingshan': mergedProps.value.theme === 'shijingshan',
+  [`s-title--size-${mergedProps.value.size}`]: !!mergedProps.value.size,
 }))
 const isThemeIcon = computed(() => {
   return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) && mergedProps.value.type === 'icon'
@@ -160,19 +202,19 @@ const isThemeIcon = computed(() => {
     display: flex;
     align-items: center;
     color: var(--el-text-color-primary);
-    font-size: 16px;
+    font-size: var(--s-title-font-size, 16px);
     justify-content: space-between;
     .s-title__slot-icon-wrapper {
-      margin-right: 8px;
-      width: 14px;
-      height: 14px;
+      margin-right: var(--s-title-gap, 8px);
+      width: var(--s-title-icon-size, 14px);
+      height: var(--s-title-icon-size, 14px);
       display: flex;
       align-items: center;
       color: currentColor;
     }
     .s-title__default-icon {
-      width: 14px;
-      height: 14px;
+      width: var(--s-title-icon-size, 14px);
+      height: var(--s-title-icon-size, 14px);
       display: block;
     }
     .s-title__slot-extra-wrapper {
@@ -188,10 +230,9 @@ const isThemeIcon = computed(() => {
     margin: 0 0 16px;
     font-weight: 800;
     width: 100%;
-    border-bottom: 1px dashed var(--el-border-color-lighter);
 
     .title-text {
-      margin-right: 8px;
+      margin-right: var(--s-title-gap, 8px);
       white-space: nowrap;
     }
   }
@@ -205,7 +246,7 @@ const isThemeIcon = computed(() => {
     .title-text {
       letter-spacing: 0;
       font-weight: 600;
-      margin-right: 8px;
+      margin-right: var(--s-title-gap, 8px);
       white-space: nowrap;
     }
   }
@@ -222,7 +263,7 @@ const isThemeIcon = computed(() => {
       width: 3px;
       left: -8px;
       top: 5px;
-      height: calc(100% - 8px);
+      height: var(--s-title-bar-height, calc(100% - 8px));
       bottom: 0;
       letter-spacing: 0;
       background-color: var(--lc, var(--blue)); // 左侧的竖条颜色
@@ -230,7 +271,7 @@ const isThemeIcon = computed(() => {
     .title-text {
       letter-spacing: 0;
       font-weight: 600;
-      margin-right: 8px;
+      margin-right: var(--s-title-gap, 8px);
       white-space: nowrap;
     }
   }
@@ -238,9 +279,9 @@ const isThemeIcon = computed(() => {
     display: inline-flex;
     align-items: center;
     min-width: 0;
-    margin-right: 8px;
+    margin-right: var(--s-title-gap, 8px);
     overflow: hidden;
-    font-size: 14px;
+    font-size: var(--s-title-sub-title-font-size, 14px);
     font-weight: 400;
     color: var(--el-text-color-secondary);
     letter-spacing: 0;

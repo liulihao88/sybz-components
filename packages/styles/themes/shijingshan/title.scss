@@ -4,21 +4,11 @@
 
   .s-title__top {
     position: relative;
-    min-height: 34px;
+    min-height: var(--s-title-min-height, 34px);
     padding-bottom: 0;
     color: var(--s-sjs-text);
-    font-size: 18px;
+    font-size: var(--s-title-font-size, 18px);
     line-height: 1.4;
-
-    &::after {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 1px;
-      background: var(--s-sjs-divider);
-      content: '';
-    }
   }
 
   .s-title__main {
@@ -27,9 +17,9 @@
   }
 
   .s-title__slot-icon-wrapper {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
+    width: var(--s-title-icon-size, 18px);
+    height: var(--s-title-icon-size, 18px);
+    margin-right: var(--s-title-gap, 10px);
     color: var(--s-sjs-primary);
   }
 
@@ -72,7 +62,7 @@
       display: inline-block;
       min-width: 0;
       max-width: 100%;
-      margin-right: 10px;
+      margin-right: var(--s-title-gap, 10px);
       overflow: hidden;
       color: var(--s-sjs-text);
       font-weight: 600;
@@ -90,7 +80,7 @@
       bottom: auto;
       left: 0;
       width: 4px;
-      height: 18px;
+      height: var(--s-title-bar-height, 18px);
       border-radius: 4px;
       background: var(--s-sjs-primary);
       transform: translateY(-50%);
@@ -106,7 +96,7 @@
   .s-title__slot-extra-wrapper {
     display: flex;
     flex: 0 0 auto;
-    gap: 8px;
+    gap: var(--s-title-gap, 8px);
     align-items: center;
     justify-content: flex-end;
     min-width: 0;
@@ -114,7 +104,7 @@
 
   .s-title__subTitle {
     color: var(--s-sjs-text-muted);
-    font-size: 12px;
+    font-size: var(--s-title-sub-title-font-size, 12px);
     line-height: 1.5;
   }
 }

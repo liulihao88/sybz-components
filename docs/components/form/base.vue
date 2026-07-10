@@ -5,7 +5,7 @@ const model = ref({
   account: '',
   hobby: [],
 })
-const gFormRef = ref()
+const formRef = ref()
 const rules = {
   account: [validate()],
 }
@@ -23,7 +23,7 @@ const fieldList = [
     label: '爱好',
     prop: 'hobby',
     comp: 's-select',
-    rules: [validate('请选择爱好')],
+    rules: [validate('change')],
     attrs: {
       multiple: true,
       options: [
@@ -35,13 +35,13 @@ const fieldList = [
 ]
 
 async function testSubmit() {
-  await gFormRef.value.validate()
+  await formRef.value.validate()
 }
 </script>
 
 <template>
   <div>
-    <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules"></s-form>
+    <s-form ref="formRef" :model="model" :field-list="fieldList" :rules="rules"></s-form>
     <el-button type="primary" @click="testSubmit">测试提交1</el-button>
   </div>
 </template>

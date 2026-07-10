@@ -32,7 +32,7 @@ title/shijingshan/base
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-title title="左侧" tb="10" l="10">...</s-title>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示通常用法配置。基础写法：`<s-title title="左侧" margin="10px 0" l="10">...</s-title>`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`；`margin` 类型 `string / number`，默认值 `''`；`gap` 类型 `string / number`，默认值 `''`。
 title/usually
 :::
 
@@ -43,16 +43,18 @@ title/usually
 |   属性名   | 说明                                                  | 类型            | 默认值    |
 | :--------: | ----------------------------------------------------- | --------------- | --------- |
 |  `title`   | 主标题文案                                            | string          | `''`      |
-|   `size`   | 尺寸标识，保留字段                                    | string          | `''`      |
+|   `size`   | 尺寸，支持 `small` / `default` / `large`              | string          | `''`      |
 | `subTitle` | 副标题文案                                            | string          | `''`      |
 | `subAttrs` | 副标题额外属性                                        | object          | `{}`      |
 |  `inner`   | 是否使用内部缩进                                      | boolean         | `false`   |
-|    `t`     | 上边距                                                | string / number | `''`      |
-|    `b`     | 下边距                                                | string / number | `''`      |
-|    `l`     | 左边距                                                | string / number | `''`      |
-|    `tb`    | 同时设置上下边距                                      | string / number | -         |
+|  `margin`  | 外边距，支持 CSS margin 简写                          | string / number | `''`      |
+|   `gap`    | 标题内部间距，控制图标、标题、副标题、右侧区域间距    | string / number | `''`      |
+|    `t`     | 上边距，兼容快捷写法，优先级高于 `margin`             | string / number | `''`      |
+|    `b`     | 下边距，兼容快捷写法，优先级高于 `margin`             | string / number | `''`      |
+|    `l`     | 左边距，兼容快捷写法，优先级高于 `margin`             | string / number | `''`      |
+|    `tb`    | 同时设置上下边距，兼容快捷写法，优先级高于 `margin`   | string / number | -         |
 |  `height`  | 组件高度                                              | string / number | `''`      |
-|   `type`   | 标题样式类型，支持 `icon` / `simple` / `form`         | string          | `icon`    |
+|   `type`   | 标题样式类型，支持 `''` / `icon` / `simple` / `form`  | string          | `''`      |
 |  `theme`   | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string          | `default` |
 
 ### 插槽

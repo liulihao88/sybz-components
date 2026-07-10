@@ -1,13 +1,11 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-</script>
-
 <template>
   <div>
     <s-title title="你好"></s-title>
     <s-title title="显示左侧树杠" sub-title="我不好"></s-title>
     <s-title title="无左侧树杠" type="simple"></s-title>
     <s-title title="form表单的类型" type="form"></s-title>
+    <s-title title="小尺寸标题" size="small" margin="12px 0 0"></s-title>
+    <s-title title="大尺寸标题" size="large" sub-title="统一控制标题和副标题字号" gap="12"></s-title>
     <s-title sub-title="我不服啊" type="simple">
       <template #title> title的slot </template>
       <template #icon>
@@ -21,7 +19,7 @@ import { ref } from 'vue'
     </s-title>
 
     <s-title title="修改竖条颜色" type="icon" :style="{ '--lc': 'red' }"></s-title>
-    <s-title title="左侧" tb="10" l="10">
+    <s-title title="左侧" margin="10px 0" l="10">
       <span class="m-l-16">左侧的slot</span>
       <template #extra>
         <el-button type="primary">右侧的button</el-button>
