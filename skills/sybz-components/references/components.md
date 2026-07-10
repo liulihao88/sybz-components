@@ -63,12 +63,6 @@ const options = [
 </template>
 ```
 
-### s-comp-title
-
-```vue
-<s-comp-title title="账号" />
-```
-
 ### s-date-picker
 
 ```vue
@@ -101,12 +95,12 @@ const options = [
 
 ```vue
 <script setup lang="ts">
-const visible = ref(false)
+const isShow = ref(false)
 </script>
 
 <template>
-  <s-button type="primary" @click="visible = true">显示弹窗</s-button>
-  <s-dialog v-model="visible" title="基础弹窗"> 内容 </s-dialog>
+  <s-button type="primary" @click="isShow = true">显示弹窗</s-button>
+  <s-dialog v-model="isShow" title="基础弹窗"> 内容 </s-dialog>
 </template>
 ```
 
@@ -162,7 +156,7 @@ const options = [
 </script>
 
 <template>
-  <s-radio v-model="value" :options="options" showType="button" />
+  <s-radio v-model="value" :options="options" show-type="button" />
 </template>
 ```
 
@@ -269,7 +263,7 @@ const enabled = ref(false)
 ### s-form
 
 ```vue
-<script setup lang="tsx">
+<script setup lang="ts">
 import { validate } from '@sybz-components/utils'
 
 const model = ref({
@@ -317,7 +311,6 @@ async function submit() {
 ```vue
 <script setup lang="ts">
 const total = 32
-
 const tableData = [{ name: '展厅智能体', status: '运行中', createdAt: '2026-07-02' }]
 
 const editRow = ({ row }) => {}
