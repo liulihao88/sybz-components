@@ -7,7 +7,8 @@
       themeClass,
       {
         'has-title': mergedProps.title,
-        'has-quick': mergedProps.showQuick && !parseDisabled && sOptions.length > 0,
+        'has-quick': mergedProps.showQuick && sOptions.length > 0,
+        'is-disabled': parseDisabled,
         'is-multiple': multiple,
         'has-custom-height': mergedProps.height,
       },
@@ -79,11 +80,11 @@
       </div>
     </el-tooltip>
 
-    <span v-if="mergedProps.showQuick && !parseDisabled && sOptions.length > 0" class="s-select__select-box">
+    <span v-if="mergedProps.showQuick && sOptions.length > 0" class="s-select__select-box">
       <span class="s-select__select-box__inner">
-        <s-icon name="ArrowUp" :size="quickIconSize" @click="quickSelect(false)" />
+        <s-icon name="ArrowUp" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(false)" />
         <div class="s-select__divider" />
-        <s-icon name="ArrowDown" :size="quickIconSize" @click="quickSelect(true)" />
+        <s-icon name="ArrowDown" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(true)" />
       </span>
     </span>
   </div>
@@ -468,7 +469,7 @@ function handleLabel(item: SelectOption) {
 }
 
 const quickSelect = (isPlus: boolean) => {
-  if (disOptions.value.length === 0 || attrs.disabled === '' || !!attrs.disabled === true) {
+  if (parseDisabled.value || disOptions.value.length === 0) {
     return
   }
   let nextIdx = 0
@@ -680,6 +681,25 @@ function _commonEmits(item, selectLabel, selectObj) {
     border-top-right-radius: 0;
     gap: 0;
     border-bottom-right-radius: 0;
+  }
+}
+
+.s-select.is-disabled {
+  .s-select__select-box {
+    cursor: not-allowed;
+    color: var(--el-disabled-text-color);
+    background: var(--el-disabled-bg-color);
+    border-color: var(--el-disabled-border-color);
+  }
+
+  .s-select__select-box__inner > .s-icon,
+  .s-select__select-box__inner > .s-icon:hover {
+    color: var(--el-disabled-text-color);
+    background: transparent;
+  }
+
+  .s-select__divider {
+    background: var(--el-disabled-border-color);
   }
 }
 
