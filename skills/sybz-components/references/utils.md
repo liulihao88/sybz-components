@@ -14,7 +14,6 @@ import {
   formatBytes,
   formatBytesConvert,
   formatDurationTime,
-  formatImg,
   formatThousands,
   formatTime,
   formatToFixed,

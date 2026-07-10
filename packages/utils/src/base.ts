@@ -1287,8 +1287,9 @@ export function throttle<T extends Func>(
 
     lastArgs = undefined
     lastThis = undefined
-    result = fn.apply(context, args)
-    resultCallback?.(result)
+    const nextResult = fn.apply(context, args) as ReturnType<T>
+    result = nextResult
+    resultCallback?.(nextResult)
     return result
   }
 

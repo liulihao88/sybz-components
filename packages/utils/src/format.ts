@@ -43,16 +43,6 @@ export interface FormatBytesConvertOptions {
 }
 
 /**
- * `formatImg` 的配置项。
- */
-export interface FormatImgOptions {
-  /**
-   * 静态资源根目录，默认 `assets/images`。
-   */
-  basePath?: string
-}
-
-/**
  * `formatToFixed` 的配置项。
  */
 export interface FormatToFixedOptions {
@@ -375,37 +365,6 @@ export function formatDurationTime(timestamp: number, cFormat = '{d}天{h}时{i}
     }
     return String(value || '00')
   })
-}
-
-/**
- * 获取 `assets` 目录下的静态资源地址。
- *
- * @param photoName 文件名；未带后缀时会自动补 `.png`。
- * @param addPath 额外子目录，例如 `menu`。
- * @param options 配置项。
- * @returns 静态资源的完整 URL；如果本身已是 `http/https` 地址，则原样返回。
- *
- * @example
- * formatImg('logo')
- *
- * @example
- * formatImg('avatar.png', 'user')
- */
-export function formatImg(
-  photoName: string,
-  addPath = '',
-  { basePath = 'assets/images' }: FormatImgOptions = {},
-): string {
-  if (photoName.startsWith('http') || photoName.startsWith('https')) {
-    return photoName
-  }
-  if (photoName.indexOf('.') === -1) {
-    photoName = photoName + '.png'
-  }
-  const addLastSlash = addPath.endsWith('/') || !addPath ? addPath : `${addPath}/`
-  const addLastBasePathSlash = basePath.endsWith('/') || !basePath ? basePath : `${basePath}/`
-  const mergeSrc = `${addLastSlash}${photoName}`
-  return new URL(`../${addLastBasePathSlash}${mergeSrc}`, import.meta.url).href
 }
 
 /**

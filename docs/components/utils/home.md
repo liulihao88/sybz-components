@@ -134,16 +134,6 @@ formatDurationTime(1162821) // 19分22秒
 formatDurationTime(5 * 60 * 1000, '{i}分{s}秒')
 ```
 
-### formatImg
-
-快速拼接静态资源地址。
-
-```ts
-formatImg('logo')
-formatImg('avatar.png', 'user')
-formatImg('icon.svg', 'common', { basePath: 'assets/images' })
-```
-
 ### formatTextToHtml
 
 将换行和缩进转换为适合直接展示的 HTML 字符串。
