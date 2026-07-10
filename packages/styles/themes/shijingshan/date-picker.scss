@@ -12,7 +12,7 @@
     --el-input-focus-border-color: var(--s-sjs-primary);
     --el-input-text-color: var(--s-sjs-text);
     --el-input-placeholder-color: var(--s-sjs-text-muted);
-    --el-input-bg-color: var(--s-sjs-bg);
+    --el-input-bg-color: var(--s-sjs-control-bg);
 
     border-radius: var(--s-sjs-radius);
     background: var(--s-sjs-control-bg);
@@ -40,6 +40,7 @@
 
   .el-range-input,
   .el-input__inner {
+    background: transparent;
     color: var(--s-sjs-text);
     font-family: var(--s-sjs-font-family);
   }

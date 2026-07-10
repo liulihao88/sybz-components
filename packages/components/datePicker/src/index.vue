@@ -400,5 +400,13 @@ defineExpose({
     height: 100%;
     min-height: var(--s-date-picker-height, var(--el-input-height, 32px));
   }
+
+  &.has-title {
+    :deep(.el-date-editor),
+    :deep(.el-input__wrapper) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
 }
 </style>
