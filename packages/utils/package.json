@@ -20,8 +20,7 @@
     "test": "vitest run src",
     "stub": "npx unbuild --stub",
     "releaseOld": "npx unbuild && npm version patch && git add . && git commit -m \"chore: release @sybz-components/utils v$(npm pkg get version | sed 's/\"//g')\" && git push origin && npm publish",
-    "release": "pnpm test && node ./scripts/release.mjs --skip-check",
-    "release:skip": "pnpm release:check && node ./scripts/release.mjs --skip-version-bump --skip-check"
+    "release": "pnpm test && node ./scripts/release.mjs --skip-check"
   },
   "author": "",
   "dependencies": {
