@@ -20,12 +20,22 @@ export type SFormComponent = {
       footer?: boolean
       showFooter?: boolean
       column?: 1 | 2 | 3 | 4 | 5 | 6
+      /** 多列表单项左右间距，仅 column > 1 时生效，默认 16px */
+      gap?: string | number
       align?: 'center' | 'top' | 'flex-end'
       autoSetDefaultValue?: boolean
       componentDefaults?: SybzRecord
     } & Omit<
       ElFormInstance['$props'],
-      'fieldList' | 'model' | 'footer' | 'showFooter' | 'column' | 'align' | 'autoSetDefaultValue' | 'componentDefaults'
+      | 'fieldList'
+      | 'model'
+      | 'footer'
+      | 'showFooter'
+      | 'column'
+      | 'gap'
+      | 'align'
+      | 'autoSetDefaultValue'
+      | 'componentDefaults'
     >
     $emit: ElFormInstance['$emit']
     $slots: ElFormInstance['$slots'] & Record<string, (scope: SFormContext) => any>

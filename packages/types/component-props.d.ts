@@ -371,6 +371,8 @@ export interface SFormProps {
   footer?: boolean
   showFooter?: boolean
   column?: 1 | 2 | 3 | 4 | 5 | 6
+  /** 多列表单项左右间距，仅 column > 1 时生效，默认 16px */
+  gap?: string | number
   align?: 'center' | 'top' | 'flex-end'
   /** 是否自动把 defaultValue/default 初始化到 model 中 */
   autoSetDefaultValue?: boolean

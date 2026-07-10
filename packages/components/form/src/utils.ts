@@ -1,3 +1,5 @@
+import { processWidth } from '@sybz-components/utils'
+
 export type FormPath = string | number | Array<string | number>
 
 const indexKeyPattern = /^\d+$/
@@ -134,4 +136,17 @@ export const callEventHandler = (handler: unknown, args: unknown[]) => {
   if (typeof handler === 'function') {
     handler(...args)
   }
+}
+
+export const getFormGap = (gap?: string | number) => processWidth(gap, true)
+
+export const getFormItemBasis = (column = 1, gap?: string | number) => {
+  const currentColumn = Math.max(Number(column) || 1, 1)
+  const gapValue = getFormGap(gap)
+
+  if (currentColumn <= 1 || !gapValue) {
+    return `${100 / currentColumn}%`
+  }
+
+  return `calc((100% - ${gapValue} * ${currentColumn - 1}) / ${currentColumn})`
 }

@@ -8,6 +8,8 @@ import STitle from '@/components/title/src/index.vue'
 import {
   callEventHandler,
   cloneDefaultValue,
+  getFormGap,
+  getFormItemBasis,
   getValueByPath,
   hasValueByPath,
   setValueByPath,
@@ -78,6 +80,7 @@ const props = withDefaults(defineProps<SFormProps>(), {
   column: 1,
   align: 'top',
   autoSetDefaultValue: true,
+  gap: '16px',
 })
 
 const sFormRef = ref<FormInstance>()
@@ -87,6 +90,12 @@ const formItems = computed<FormField[]>(() => {
   return Array.isArray(fieldList) ? fieldList : Object.values(fieldList || {})
 })
 const shouldShowFooter = computed(() => props.showFooter)
+const formGap = computed(() => getFormGap(props.gap))
+const hasMultipleColumns = computed(
+  () => Number(props.column) > 1 || formItems.value.some((item) => Number(item.column) > 1),
+)
+const useGap = computed(() => Boolean(formGap.value) && hasMultipleColumns.value)
+const formStyle = computed(() => (useGap.value ? { '--s-form-gap': formGap.value } : undefined))
 
 const getFieldProp = (item: FormField) => item.prop || (typeof item.value === 'string' ? item.value : undefined)
 
@@ -227,8 +236,10 @@ const mergeRules = (item: FormField, index: number) => {
 }
 
 const getChildStyle = (item: FormField) => {
+  const column = item.column || props.column
+
   return {
-    flex: `0 1 ${100 / (item.column || props.column)}%`,
+    flex: `0 1 ${getFormItemBasis(column, useGap.value ? props.gap : undefined)}`,
   }
 }
 
@@ -499,7 +510,14 @@ defineExpose({
 
 <template>
   <div>
-    <el-form ref="sFormRef" :model="formModel" v-bind="{ 'label-width': 'auto', ...$attrs }" class="s-form">
+    <el-form
+      ref="sFormRef"
+      :model="formModel"
+      v-bind="{ 'label-width': 'auto', ...$attrs }"
+      class="s-form"
+      :class="{ 's-form--gap': useGap }"
+      :style="formStyle"
+    >
       <template v-for="(v, i) in formItems" :key="getFieldProp(v) || i">
         <div v-if="parseIsShow(v, i) && isTitleItem(v)" class="s-form__title-item">
           <template v-if="v.useSlot && getTitleSlotName(v)">
@@ -565,6 +583,10 @@ defineExpose({
 .s-form {
   display: flex;
   flex-wrap: wrap;
+}
+
+.s-form--gap {
+  column-gap: var(--s-form-gap);
 }
 
 .s-form__title-item {

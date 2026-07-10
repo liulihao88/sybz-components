@@ -12,8 +12,14 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。
+:::demo 展示基础用法。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`。
 form/base
+:::
+
+### gap 左右间隙，默认值 `16px`
+
+:::demo 展示多列表单项左右间隙配置。基础写法：`<s-form :model="formData" :field-list="fieldList" :column="2" :gap="gap" />`。属性：`gap` 类型 `string / number`，可选值为数字、数字字符串或 CSS 长度值，例如 `0`、`16`、`'16px'`、`'1rem'`、`'5%'`，默认值 `16px`，仅在 `column > 1` 时作为左右间距生效。
+form/gap
 :::
 
 ### 高级 schema 用法
@@ -24,88 +30,89 @@ form/advanced
 
 ### 分组标题 `type="title"`
 
-:::demo 展示通过 `fieldList` 配置分组标题。基础写法：`<s-form :model="formData" :fieldList="fieldList" :column="2" label-width="96">...</s-form>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示通过 `fieldList` 配置分组标题。基础写法：`<s-form :model="formData" :fieldList="fieldList" :column="2" label-width="96"></s-form>`。属性：`title` 类型 `string`，默认值 `''`。
 form/title
 :::
 
 ### 表单校验规则
 
-:::demo 展示表单场景。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />`。属性：`column` 类型 `number`，默认值 `3`。
+:::demo 展示表单场景。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" :rules="rules" />`。
 form/rules
 :::
 
 ### 动态显隐 `isShow`
 
-:::demo 展示动态状态切换。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
+:::demo 展示动态状态切换。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" />`。
 form/isShow
 :::
 
 ### 多个属性
 
-:::demo 展示多个属性配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" :disabled="isDisabled" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
+:::demo 展示多个属性配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" :disabled="isDisabled" />`。
 form/other
 :::
 
 ## 添加/删除表单项
 
-:::demo 展示多个属性配置。基础写法：`<s-form :fieldList="fieldList" :model="form" ref="sFormRef">...</s-form>`。
+:::demo 展示多个属性配置。基础写法：`<s-form :fieldList="fieldList" :model="form" ref="sFormRef"></s-form>`。
 form/active
 :::
 
 ### 每行展示多少项
 
-:::demo 展示每行展示多少项配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" />`。属性：`column` 类型 `number`，默认值 `3`。
+:::demo 展示每行展示多少项配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="column" />`。
 form/column
 :::
 
 ### 插槽
 
-:::demo 展示插槽内容定制。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" :rules="rules">...</s-form>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" :rules="rules"></s-form>`。插槽：按示例中的插槽名定制内容。
 form/slot
 :::
 
 ### render函数
 
-:::demo 展示自定义配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1">...</s-form>`。属性：`column` 类型 `number`，默认值 `3`。
+:::demo 展示自定义配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1"></s-form>`。
 form/render
 :::
 
 ### 事件
 
-:::demo 展示事件监听。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" />`。属性：`column` 类型 `number`，默认值 `3`。
+:::demo 展示事件监听。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :column="1" />`。
 form/event
 :::
 
 <!-- ### 通常用法
 
-:::demo 展示事件监听。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。
+:::demo 展示事件监听。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`。
 form/usually
 :::
 
 ### 远程返回的表单数据
 
-:::demo 展示表单场景。基础写法：`<s-form :model="model" :fieldList="fieldList" ref="gFormRef" label-width="100">...</s-form>`。属性：`label-width` 类型 `string / number`，默认值 `auto`。
+:::demo 展示表单场景。基础写法：`<s-form :model="model" :fieldList="fieldList" ref="gFormRef" label-width="100"></s-form>`。属性：`label-width` 类型 `string / number`，默认值 `auto`。
 form/remote
 :::
 
 ### 自定义指令
 
-:::demo 展示自定义配置。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef">...</s-form>`。
+:::demo 展示自定义配置。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`。
 form/directives
 ::: -->
 
 ## 属性
 
-|       属性名        | 说明                                  | 类型                      | 默认值                                                 |
-| :-----------------: | ------------------------------------- | ------------------------- | ------------------------------------------------------ |
-|      fieldList      | 表单 schema 配置                      | array / object            | -                                                      |
-|        model        | 表单数据对象                          | object                    | -                                                      |
-|       column        | 默认每行展示几项                      | `1 / 2 / 3 / 4 / 5 / 6`   | `1`                                                    |
-|        align        | 表单项垂直对齐                        | `center / top / flex-end` | `top`                                                  |
-|     showFooter      | 是否显示调试按钮                      | boolean                   | 开发环境为 `true`                                      |
-|       footer        | `showFooter` 的别名，设置后优先级更高 | boolean                   | -                                                      |
-| autoSetDefaultValue | 是否自动写入字段默认值                | boolean                   | `true`                                                 |
-|  componentDefaults  | 所有控件的默认透传属性                | object                    | `{ clearable: true, filterable: true, width: '100%' }` |
+|       属性名        | 说明                                       | 类型                      | 默认值                                                 |
+| :-----------------: | ------------------------------------------ | ------------------------- | ------------------------------------------------------ |
+|      fieldList      | 表单 schema 配置                           | array / object            | -                                                      |
+|        model        | 表单数据对象                               | object                    | -                                                      |
+|       column        | 默认每行展示几项                           | `1 / 2 / 3 / 4 / 5 / 6`   | `1`                                                    |
+|         gap         | 多列表单项左右间距，仅 `column > 1` 时生效 | string / number           | `16px`                                                 |
+|        align        | 表单项垂直对齐                             | `center / top / flex-end` | `top`                                                  |
+|     showFooter      | 是否显示调试按钮                           | boolean                   | 开发环境为 `true`                                      |
+|       footer        | `showFooter` 的别名，设置后优先级更高      | boolean                   | -                                                      |
+| autoSetDefaultValue | 是否自动写入字段默认值                     | boolean                   | `true`                                                 |
+|  componentDefaults  | 所有控件的默认透传属性                     | object                    | `{ clearable: true, filterable: true, width: '100%' }` |
 
 ## fieldList属性
 

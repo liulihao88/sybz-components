@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import {
   cloneDefaultValue,
+  getFormGap,
+  getFormItemBasis,
   getValueByPath,
   hasValueByPath,
   normalizeFormPath,
@@ -64,5 +66,25 @@ describe('form event utils', () => {
     expect(toVueEventProp('update:modelValue')).toBe('onUpdate:modelValue')
     expect(toVueEventProp('update:model-value')).toBe('onUpdate:modelValue')
     expect(toVueEventProp('onBlur')).toBe('onBlur')
+  })
+})
+
+describe('form layout utils', () => {
+  it('parses gap values with processWidth rules', () => {
+    expect(getFormGap()).toBe('')
+    expect(getFormGap(16)).toBe('16px')
+    expect(getFormGap('1rem')).toBe('1rem')
+    expect(getFormGap('wrong')).toBe('')
+  })
+
+  it('keeps old basis when gap is not configured', () => {
+    expect(getFormItemBasis(2)).toBe('50%')
+    expect(getFormItemBasis(3, 'wrong')).toBe(`${100 / 3}%`)
+    expect(getFormItemBasis(1, 16)).toBe('100%')
+  })
+
+  it('calculates flex basis with gap included only for multiple columns', () => {
+    expect(getFormItemBasis(2, 16)).toBe('calc((100% - 16px * 1) / 2)')
+    expect(getFormItemBasis(3, '1rem')).toBe('calc((100% - 1rem * 2) / 3)')
   })
 })

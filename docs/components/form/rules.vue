@@ -1,18 +1,10 @@
 <template>
-  <s-form
-    ref="TFormDemo"
-    :model="formData"
-    :field-list="fieldList"
-    :column="column"
-    :rules="rules"
-    :show-footer="true"
-  />
+  <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :rules="rules" :show-footer="true" />
 </template>
 
 <script setup lang="tsx">
 import { ref } from 'vue'
 import { validate } from '@sybz-components/utils'
-const column = ref(2)
 
 const rules = {
   name: [validate()],
