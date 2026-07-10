@@ -13,6 +13,12 @@
       <s-tag theme="shijingshan" type="warning" effect="plain">描边提醒</s-tag>
       <s-tag theme="shijingshan" type="danger" closable>可关闭异常</s-tag>
     </s-flex>
+
+    <s-flex gap="small" align="center">
+      <s-tag theme="shijingshan" type="primary" size="small">small</s-tag>
+      <s-tag theme="shijingshan" type="primary">default</s-tag>
+      <s-tag theme="shijingshan" type="primary" size="large">large</s-tag>
+    </s-flex>
   </div>
 </template>
 
