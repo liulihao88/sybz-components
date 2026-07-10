@@ -63,6 +63,8 @@ const tableColumns = [
   { label: '负责人', prop: 'owner' },
 ]
 
+const isDisabled = ref(false)
+
 const tableData = [
   { name: '对象存储', status: '运行中', owner: '平台组' },
   { name: '日志服务', status: '等待中', owner: '运维组' },
@@ -73,20 +75,68 @@ const tableData = [
 <template>
   <div class="overview-page">
     <div class="overview-toolbar">
-      <s-radio v-model="currentTheme" :options="themes" show-type="button" />
+      <div class="overview-toolbar__item">
+        <span>主题</span>
+        <s-radio v-model="currentTheme" :options="themes" show-type="button" />
+      </div>
+      <div class="overview-toolbar__item">
+        <span>是否禁用</span>
+        <s-switch v-model="isDisabled" active-text="是" inactive-text="否" />
+      </div>
     </div>
 
     <section class="overview-section">
       <s-title title="基础输入" :theme="currentTheme" />
       <div class="overview-grid overview-grid--form">
-        <s-input v-model="keyword" title="关键词" placeholder="请输入关键词" :theme="currentTheme" width="260" />
-        <s-select v-model="selectedStatus" title="状态" :options="statusOptions" :theme="currentTheme" width="260" />
-        <s-select v-model="selectedType" title="服务" :options="serviceOptions" :theme="currentTheme" width="260" />
-        <s-date-picker v-model="selectedDate" title="申请日期" :theme="currentTheme" width="260" />
-        <s-input-number v-model="quotaValue" title="容量" :min="0" :max="100" :theme="currentTheme" width="260" />
+        <s-input
+          v-model="keyword"
+          title="关键词"
+          placeholder="请输入关键词"
+          :theme="currentTheme"
+          width="260"
+          :disabled="isDisabled"
+        />
+        <s-select
+          v-model="selectedStatus"
+          title="状态"
+          :options="statusOptions"
+          :theme="currentTheme"
+          width="260"
+          :disabled="isDisabled"
+        />
+        <s-select
+          v-model="selectedType"
+          title="服务"
+          :options="serviceOptions"
+          :theme="currentTheme"
+          width="260"
+          :disabled="isDisabled"
+        />
+        <s-date-picker
+          v-model="selectedDate"
+          title="申请日期"
+          :theme="currentTheme"
+          width="260"
+          :disabled="isDisabled"
+        />
+        <s-input-number
+          v-model="quotaValue"
+          title="容量"
+          :min="0"
+          :max="100"
+          :theme="currentTheme"
+          width="260"
+          :disabled="isDisabled"
+        />
         <div class="overview-switch">
           <span>启用策略</span>
-          <s-switch v-model="enabled" :theme="currentTheme" active-text="开" inactive-text="关" />
+          <s-switch
+            v-model="enabled"
+            :theme="currentTheme"
+            active-text="开"
+            inactive-text="关"
+            :disabled="isDisabled"
+          />
         </div>
       </div>
     </section>
@@ -94,8 +144,8 @@ const tableData = [
     <section class="overview-section">
       <s-title title="选择和状态" :theme="currentTheme" />
       <div class="overview-stack">
-        <s-checkbox v-model="agreeItems" :options="checkboxOptions" :theme="currentTheme" />
-        <s-radio v-model="radioValue" :options="radioOptions" :theme="currentTheme" />
+        <s-checkbox v-model="agreeItems" :options="checkboxOptions" :theme="currentTheme" :disabled="isDisabled" />
+        <s-radio v-model="radioValue" :options="radioOptions" :theme="currentTheme" :disabled="isDisabled" />
         <div class="overview-tags">
           <s-tag
             v-for="item in tagOptions"
@@ -136,9 +186,11 @@ const tableData = [
     <section class="overview-section">
       <s-title title="反馈组件" :theme="currentTheme" />
       <div class="overview-actions">
-        <s-button type="primary" :theme="currentTheme" @click="showDialog = true">打开弹窗</s-button>
-        <s-popconfirm title="确认提交当前配置吗？" :theme="currentTheme">
-          <s-button :theme="currentTheme">确认提示</s-button>
+        <s-button type="primary" :theme="currentTheme" :disabled="isDisabled" @click="showDialog = true"
+          >打开弹窗</s-button
+        >
+        <s-popconfirm title="确认提交当前配置吗？" :theme="currentTheme" :disabled="isDisabled">
+          <s-button :theme="currentTheme" :disabled="isDisabled">确认提示</s-button>
         </s-popconfirm>
         <s-empty description="暂无更多数据" :theme="currentTheme" width="72" />
       </div>
@@ -162,9 +214,18 @@ const tableData = [
   top: 64px;
   z-index: 2;
   display: flex;
+  gap: 16px;
+  align-items: center;
   justify-content: flex-end;
   padding: 12px 0;
   background: var(--vp-c-bg);
+}
+
+.overview-toolbar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--el-text-color-regular);
 }
 
 .overview-section {
