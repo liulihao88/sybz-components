@@ -97,8 +97,6 @@
     "docsserve": "vitepress serve docs",
     "deploy": "bash -x deploy.sh",
     "release-deploy": "pnpm release && npm run deploy",
-    "update-document": "npm run deploy",
-    "deploy-no-build": "bash -x deploy.sh -k",
     "update": " pnpm add @sybz-components/utils@latest",
     "utils:release": "pnpm run -C packages/utils release",
     "link:bun": "bun link && bun link --cwd packages/utils",
