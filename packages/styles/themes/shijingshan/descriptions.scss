@@ -29,11 +29,20 @@
   }
 
   .el-descriptions__table {
+    width: 100%;
+    overflow: hidden;
     border-collapse: separate;
+    border-radius: inherit;
     border-spacing: 0;
+    background: var(--s-sjs-card-bg);
+  }
+
+  .el-descriptions__table.is-bordered tr {
+    background: var(--s-sjs-card-bg);
   }
 
   .el-descriptions__cell {
+    background-clip: padding-box;
     border-color: var(--s-sjs-divider) !important;
     color: var(--s-sjs-text-regular);
     font-size: 14px;
@@ -67,6 +76,22 @@
 
   .el-descriptions__table.is-bordered .el-descriptions__label {
     box-shadow: inset 3px 0 0 rgba(var(--s-sjs-primary-rgb), 0.22);
+  }
+
+  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:first-child {
+    border-top-left-radius: var(--s-sjs-radius-card);
+  }
+
+  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:last-child {
+    border-top-right-radius: var(--s-sjs-radius-card);
+  }
+
+  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:first-child {
+    border-bottom-left-radius: var(--s-sjs-radius-card);
+  }
+
+  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:last-child {
+    border-bottom-right-radius: var(--s-sjs-radius-card);
   }
 
   .s-descriptions__tooltip {

@@ -87,7 +87,6 @@ init()
       :column="1"
       label="key"
       value="id"
-      :row="data"
       :size="sizeValue"
       :show-all="showAll"
       :border="borderValue"

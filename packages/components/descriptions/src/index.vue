@@ -1,5 +1,6 @@
 <template>
   <el-descriptions
+    ref="descriptionsRef"
     v-bind="{ border: true, ...$attrs }"
     :column="descriptionColumn"
     :label-width="labelWidth2"
@@ -71,12 +72,13 @@
 
 <script setup lang="ts">
 import RenderComp from '@/components/common/renderComp.vue'
-import { computed, ref, useAttrs, onUnmounted, isVNode } from 'vue'
+import { computed, nextTick, onMounted, ref, useAttrs, watch, isVNode } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import STooltip from '@/components/tooltip/src/index.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { RenderFunction } from '@/components/common/render'
+import type { ComponentPublicInstance } from 'vue'
 
 defineOptions({
   name: 'SDescriptions',
@@ -183,46 +185,115 @@ const getRenderProps = (item: ItemOptions, index: number) => {
   }
 }
 
-// 创建一个用于测量文本宽度的隐藏元素
-const measureElement = ref<HTMLSpanElement | null>(null)
+const descriptionsRef = ref<ComponentPublicInstance | null>(null)
+const autoLabelWidth = ref('auto')
+let measureCanvas: HTMLCanvasElement | undefined
 
-const getLabelWidth = (label: string): number => {
-  if (!measureElement.value) {
-    // 创建临时测量元素
-    const tempEl = document.createElement('span')
-    tempEl.style.visibility = 'hidden'
-    tempEl.style.display = 'inline-block'
-    tempEl.style.position = 'absolute'
-    tempEl.style.left = '-9999px'
-    tempEl.style.top = '-9999px'
-    tempEl.style.whiteSpace = 'nowrap'
-    tempEl.style.fontFamily = 'inherit'
-    tempEl.style.fontSize = '14px' // 默认字体大小
-    tempEl.style.fontWeight = 'bold'
-    document.body.appendChild(tempEl)
-    measureElement.value = tempEl
-  }
+// 标签额外宽度补偿值，兜底左右 padding 24px
+const LABEL_EXTRA_WIDTH = 24
+const LABEL_SAFE_WIDTH = 8
 
-  measureElement.value.textContent = label
-  const width = measureElement.value.getBoundingClientRect().width
-  return Math.ceil(width)
+const isAutoLabelWidth = computed(
+  () =>
+    mergedProps.value.labelWidth === 'auto' ||
+    mergedProps.value.labelWidth === '' ||
+    mergedProps.value.labelWidth === undefined ||
+    mergedProps.value.labelWidth === null,
+)
+
+const getDescriptionsElement = () => descriptionsRef.value?.$el as HTMLElement | undefined
+
+const getMeasureContext = () => {
+  if (typeof document === 'undefined') return null
+
+  measureCanvas ??= document.createElement('canvas')
+  return measureCanvas.getContext('2d')
 }
 
-// 标签额外宽度补偿值，左右padding24px
-const LABEL_EXTRA_WIDTH = 24
+const getLabelMeasureStyle = () => {
+  if (typeof window === 'undefined') {
+    return {
+      font: '600 14px sans-serif',
+      extraWidth: LABEL_EXTRA_WIDTH,
+    }
+  }
+
+  const labelElement = getDescriptionsElement()?.querySelector<HTMLElement>('.el-descriptions__label')
+  if (!labelElement) {
+    return {
+      font: '600 14px sans-serif',
+      extraWidth: LABEL_EXTRA_WIDTH,
+    }
+  }
+
+  const style = window.getComputedStyle(labelElement)
+  const paddingLeft = Number.parseFloat(style.paddingLeft) || 0
+  const paddingRight = Number.parseFloat(style.paddingRight) || 0
+
+  return {
+    font: style.font || `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`,
+    extraWidth: paddingLeft + paddingRight || LABEL_EXTRA_WIDTH,
+  }
+}
+
+const getLabelExtraWidth = (labelElement: HTMLElement) => {
+  if (typeof window === 'undefined') return LABEL_EXTRA_WIDTH
+
+  const style = window.getComputedStyle(labelElement)
+  const paddingLeft = Number.parseFloat(style.paddingLeft) || 0
+  const paddingRight = Number.parseFloat(style.paddingRight) || 0
+  const borderLeft = Number.parseFloat(style.borderLeftWidth) || 0
+  const borderRight = Number.parseFloat(style.borderRightWidth) || 0
+
+  return paddingLeft + paddingRight + borderLeft + borderRight || LABEL_EXTRA_WIDTH
+}
+
+const getRenderedLabelWidth = () => {
+  const labelElements = getDescriptionsElement()?.querySelectorAll<HTMLElement>('.el-descriptions__label')
+  if (!labelElements?.length) return 0
+
+  return Array.from(labelElements).reduce((maxWidth, labelElement) => {
+    const tooltipText = labelElement.querySelector<HTMLElement>('.s-tooltip-box__text')
+    const contentWidth = tooltipText
+      ? tooltipText.scrollWidth
+      : labelElement.scrollWidth - getLabelExtraWidth(labelElement)
+
+    return Math.max(maxWidth, contentWidth + getLabelExtraWidth(labelElement))
+  }, 0)
+}
+
+const updateAutoLabelWidth = async () => {
+  if (!isAutoLabelWidth.value) return
+
+  await nextTick()
+
+  const renderedLabelWidth = getRenderedLabelWidth()
+  if (renderedLabelWidth) {
+    autoLabelWidth.value = `${Math.ceil(renderedLabelWidth + LABEL_SAFE_WIDTH)}px`
+    return
+  }
+
+  const context = getMeasureContext()
+  if (!context) {
+    autoLabelWidth.value = 'auto'
+    return
+  }
+
+  const { font, extraWidth } = getLabelMeasureStyle()
+  context.font = font
+
+  const maxLabelWidth = (mergedProps.value.options ?? []).reduce((maxWidth, item) => {
+    const label = parseLabel(item)
+    const labelWidth = context.measureText(label === null || label === undefined ? '' : String(label)).width
+    return Math.max(maxWidth, labelWidth)
+  }, 0)
+
+  autoLabelWidth.value = maxLabelWidth ? `${Math.ceil(maxLabelWidth + extraWidth + LABEL_SAFE_WIDTH)}px` : 'auto'
+}
 
 const labelWidth2 = computed(() => {
-  // 如果设置了 labelWidth 为 "auto" 或者空值，则计算最大宽度
-  if (mergedProps.value.labelWidth === 'auto' || !mergedProps.value.labelWidth) {
-    let maxWidth = 0
-    ;(mergedProps.value.options ?? []).forEach((v) => {
-      const labelWidth = getLabelWidth(parseLabel(v))
-      if (labelWidth > maxWidth) {
-        maxWidth = labelWidth
-      }
-    })
-    // 添加一些padding确保文本不会紧贴边界
-    return maxWidth + LABEL_EXTRA_WIDTH + 'px'
+  if (isAutoLabelWidth.value) {
+    return autoLabelWidth.value
   }
 
   if (mergedProps.value.labelWidth && mergedProps.value.labelWidth !== 'auto') {
@@ -262,11 +333,16 @@ const descriptionsClass = computed(() => ({
   's-descriptions--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
 
-// 在组件卸载时清理测量元素
+watch(() => [mergedProps.value.options, mergedProps.value.label, mergedProps.value.labelWidth], updateAutoLabelWidth, {
+  deep: true,
+  flush: 'post',
+})
 
-onUnmounted(() => {
-  if (measureElement.value) {
-    measureElement.value.remove()
+onMounted(() => {
+  updateAutoLabelWidth()
+
+  if (typeof document !== 'undefined' && document.fonts?.ready) {
+    document.fonts.ready.then(updateAutoLabelWidth)
   }
 })
 </script>
