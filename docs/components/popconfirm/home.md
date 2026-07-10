@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-popconfirm @confirm="confirm">...</s-popconfirm>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`；`re-confirm` 可选 `true / false`，默认值 `true`。
+:::demo 展示基础用法。基础写法：`<s-popconfirm @confirm="confirm"></s-popconfirm>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`；`re-confirm` 可选 `true / false`，默认值 `true`。
 popconfirm/base
 :::
 
@@ -20,7 +20,7 @@ popconfirm/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题样式。基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm">...</s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 popconfirm/chenghua/base
 :::
 
@@ -28,19 +28,19 @@ popconfirm/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题样式。基础写法：`<s-popconfirm theme="shijingshan" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm">...</s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-popconfirm theme="shijingshan" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 popconfirm/shijingshan/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-popconfirm title="自定义title" content="自定义content" @confirm="confirm" trigger="click" width="500">...</s-popconfirm>`。属性：`title` 类型 `string`，默认值 `''`；`content` 类型 `string`，默认值 `''`。
+:::demo 展示通常用法配置。基础写法：`<s-popconfirm title="自定义title" content="自定义content" @confirm="confirm" trigger="click" width="500"></s-popconfirm>`。属性：`title` 类型 `string`，默认值 `''`；`content` 类型 `string`，默认值 `''`。
 popconfirm/usually
 :::
 
 ### Slots
 
-:::demo 展示插槽内容定制。基础写法：`<s-popconfirm trigger="click" @confirm="confirm" title="" ref="popoverRef">...</s-popconfirm>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-popconfirm trigger="click" @confirm="confirm" title="" ref="popoverRef"></s-popconfirm>`。插槽：按示例中的插槽名定制内容。
 popconfirm/slot
 :::
 

@@ -14,19 +14,19 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-row :col="6" :gutter="16">...</s-row>`。
+:::demo 展示基础用法。基础写法：`<s-row :col="6" :gutter="16"></s-row>`。
 row/base
 :::
 
 ### gutter 间距
 
-:::demo 展示gutter 间距配置。基础写法：`<s-row :col="8" :gutter="gutter">...</s-row>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
+:::demo 展示gutter 间距配置。基础写法：`<s-row :col="8" :gutter="gutter"></s-row>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
 row/gutter
 :::
 
 ### gap 间距
 
-:::demo 展示gap 间距配置。基础写法：`<s-row :col="8" :gap="gap">...</s-row>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
+:::demo 展示gap 间距配置。基础写法：`<s-row :col="8" :gap="gap"></s-row>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
 row/gap
 :::
 

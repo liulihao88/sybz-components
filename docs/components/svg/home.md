@@ -38,13 +38,13 @@ import 'virtual:svg-icons-register'
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-svg name="icon_file-cloud-line">...</s-svg>`。属性：`name` 类型 `string`，默认值未设置；`size` 可选 `'' / small / default / large`，默认值 `''`；`color` 类型 `string`，默认值未设置。
+:::demo 展示基础用法。基础写法：`<s-svg name="icon_file-cloud-line"></s-svg>`。属性：`name` 类型 `string`，默认值未设置；`size` 可选 `'' / small / default / large`，默认值 `''`；`color` 类型 `string`，默认值未设置。
 svg/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-svg name="icon_file-cloud-line" :customStyle="{ width: '100px', height: '100px', color: 'red' }">...</s-svg>`。属性：`name` 类型 `string`，默认值未设置。
+:::demo 展示通常用法配置。基础写法：`<s-svg name="icon_file-cloud-line" :customStyle="{ width: '100px', height: '100px', color: 'red' }"></s-svg>`。属性：`name` 类型 `string`，默认值未设置。
 svg/usually
 :::
 

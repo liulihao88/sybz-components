@@ -12,13 +12,13 @@
 
 ### all
 
-:::demo 展示all配置。基础写法：`<el-card shadow="never">...</el-card>`。
+:::demo 展示all配置。基础写法：`<el-card shadow="never"></el-card>`。
 table/all
 :::
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-table :columns="columns" :data="data" :loading="loading">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`；`loading` 可选 `true / false`，默认值 `false`。
+:::demo 展示基础用法。基础写法：`<s-table :columns="columns" :data="data" :loading="loading"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`；`loading` 可选 `true / false`，默认值 `false`。
 table/base
 :::
 
@@ -40,7 +40,7 @@ table/shijingshan/base
 
 ### other
 
-:::demo 展示other配置。基础写法：`<s-table :columns="columns" :data="data" v-bind="otherParams" :pageAttrs="{ layout: 'prev, pager, next, jumper', }">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示other配置。基础写法：`<s-table :columns="columns" :data="data" v-bind="otherParams" :pageAttrs="{ layout: 'prev, pager, next, jumper', }"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/other
 :::
 
@@ -70,49 +70,49 @@ table/select/crossPage
 
 ### 多级表头
 
-:::demo 展示多级表头配置。基础写法：`<s-table :columns="columns" :data="data" :showIndex="false" :showPage="false">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示多级表头配置。基础写法：`<s-table :columns="columns" :data="data" :showIndex="false" :showPage="false"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/groupHeader
 :::
 
 ### 隐藏按钮或列 isShow
 
-:::demo 展示隐藏按钮或列 isShow配置。基础写法：`<s-table :columns="columns" :data="data" :showPage="false">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示隐藏按钮或列 isShow配置。基础写法：`<s-table :columns="columns" :data="data" :showPage="false"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/isShow
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-table :columns="columns" :total="total" :data="data" ref="tableRef">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`total` 类型 `number`，默认值按数据长度计算。
+:::demo 展示通常用法配置。基础写法：`<s-table :columns="columns" :total="total" :data="data" ref="tableRef"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`total` 类型 `number`，默认值按数据长度计算。
 table/usually
 :::
 
 ### 编辑
 
-:::demo 展示编辑配置。基础写法：`<s-table :columns="columns" :data="form.data">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示编辑配置。基础写法：`<s-table :columns="columns" :data="form.data"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/edit
 :::
 
 ### reConfirm再确认
 
-:::demo 展示reConfirm再确认配置。基础写法：`<s-table :columns="columns" :data="data">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示reConfirm再确认配置。基础写法：`<s-table :columns="columns" :data="data"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/reConfirm
 :::
 
 ### 表格里嵌套表格
 
-:::demo 展示表格场景。基础写法：`<s-table :columns="columns" :preserve-expanded-content="preserveExpanded" :data="data" ref="tableRef">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示表格场景。基础写法：`<s-table :columns="columns" :preserve-expanded-content="preserveExpanded" :data="data" ref="tableRef"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/wrap
 :::
 
 ### render函数
 
-:::demo 展示render生成html配置。基础写法：`<s-table :columns="columns" :data="data" ref="tableRef">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示render生成html配置。基础写法：`<s-table :columns="columns" :data="data" ref="tableRef"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/render
 :::
 
 ### 改变操作按钮的属性
 
-:::demo 展示改变操作按钮的属性配置。基础写法：`<s-table :columns="columns" :data="data" ref="tableRef">...</s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
+:::demo 展示改变操作按钮的属性配置。基础写法：`<s-table :columns="columns" :data="data" ref="tableRef"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`。
 table/operator
 :::
 

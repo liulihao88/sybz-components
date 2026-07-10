@@ -90,23 +90,25 @@ function parseClass(): string {
     :style="{ ...processWidth(mergedProps.width), ...mergedStyle }"
     v-bind="attrs"
   >
-    <img v-if="mergedProps.type === 'warning' && mergedProps.icon" src="../notic.png" class="s-warning-box__img" />
-    <s-icon
-      v-else-if="mergedProps.type === 'error' && mergedProps.icon"
-      name="circle-close"
-      :color="errorIconColor"
-      v-bind="mergedProps.iconAttrs"
-      class="s-warning-box__icon"
-      size="16"
-    />
-    <s-icon
-      v-else-if="mergedProps.type !== 'warning' && mergedProps.icon"
-      name="warning"
-      :color="infoIconColor"
-      v-bind="mergedProps.iconAttrs"
-      class="s-warning-box__icon"
-      size="16"
-    />
+    <slot name="icon">
+      <img v-if="mergedProps.type === 'warning' && mergedProps.icon" src="../notic.png" class="s-warning-box__img" />
+      <s-icon
+        v-else-if="mergedProps.type === 'error' && mergedProps.icon"
+        name="circle-close"
+        :color="errorIconColor"
+        v-bind="mergedProps.iconAttrs"
+        class="s-warning-box__icon"
+        size="16"
+      />
+      <s-icon
+        v-else-if="mergedProps.type !== 'warning' && mergedProps.icon"
+        name="warning"
+        :color="infoIconColor"
+        v-bind="mergedProps.iconAttrs"
+        class="s-warning-box__icon"
+        size="16"
+      />
+    </slot>
     <div class="s-warning-box__container">
       <div
         v-if="$slots.title || mergedProps.title"

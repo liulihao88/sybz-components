@@ -10,25 +10,25 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<sWrapper>...</sWrapper>`。该示例不需要额外属性。
+:::demo 展示基础用法。基础写法：`<sWrapper></sWrapper>`。该示例不需要额外属性。
 wrapper/base
 :::
 
 ### 更改间距大小 [gap]
 
-:::demo 展示更改间距大小 [gap]配置。基础写法：`<sWrapper gap="12">...</sWrapper>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
+:::demo 展示更改间距大小 [gap]配置。基础写法：`<sWrapper gap="12"></sWrapper>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
 wrapper/gap
 :::
 
 ### 一行显示几个 [columns]
 
-:::demo 展示一行显示几个 [columns]配置。基础写法：`<sWrapper gap="20px" :columns="3">...</sWrapper>`。属性：`columnsCount` 类型 `number`，默认值 `null`。
+:::demo 展示一行显示几个 [columns]配置。基础写法：`<sWrapper gap="20px" :columns="3"></sWrapper>`。属性：`columnsCount` 类型 `number`，默认值 `null`。
 wrapper/columns
 :::
 
 ### 显示在一行, 超出滚动
 
-:::demo 展示显示在一行, 超出滚动配置。基础写法：`<sWrapper gap="20px" :minWidth="'200px'">...</sWrapper>`。属性：`gap` 类型 `string / number`，默认值按组件配置；`min-width` 类型 `string / number`，默认值 `0`。
+:::demo 展示显示在一行, 超出滚动配置。基础写法：`<sWrapper gap="20px" :minWidth="'200px'"></sWrapper>`。属性：`gap` 类型 `string / number`，默认值按组件配置；`min-width` 类型 `string / number`，默认值 `0`。
 wrapper/scroll
 :::
 

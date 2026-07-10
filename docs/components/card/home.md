@@ -10,61 +10,61 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<SCard title="基础用法">...</SCard>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示基础用法。基础写法：`<SCard title="基础用法"></SCard>`。属性：`title` 类型 `string`，默认值 `''`。
 card/base
 :::
 
 ### 阴影和 Hover 动画（shadow 默认值 `never`，hoverAnimation 默认值 `false`）
 
-:::demo 展示阴影和鼠标移入动画。基础写法：`<SCard shadow="hover" hover-animation title="阴影与 Hover 动画">...</SCard>`。属性：`shadow` 可选 `always / never / hover`，默认值 `never`；`hoverAnimation` 可选 `true / false`，默认值 `false`。
+:::demo 展示阴影和鼠标移入动画。基础写法：`<SCard shadow="hover" hover-animation title="阴影与 Hover 动画"></SCard>`。属性：`shadow` 可选 `always / never / hover`，默认值 `never`；`hoverAnimation` 可选 `true / false`，默认值 `false`。
 card/shadow
 :::
 
 ### 透明背景（transparent 默认值 `false`）
 
-:::demo 展示透明背景布局。基础写法：`<SCard transparent title="透明背景">...</SCard>`。属性：`transparent` 可选 `true / false`，默认值 `false`。
+:::demo 展示透明背景布局。基础写法：`<SCard transparent title="透明背景"></SCard>`。属性：`transparent` 可选 `true / false`，默认值 `false`。
 card/transparent
 :::
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-card v-model="collapsed" theme="chenghua" title="审核规则管理">...</s-card>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-card v-model="collapsed" theme="chenghua" title="审核规则管理"></s-card>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 card/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-card v-model="collapsed" theme="shijingshan" title="审核规则管理">...</s-card>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-card v-model="collapsed" theme="shijingshan" title="审核规则管理"></s-card>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 card/shijingshan/base
 :::
 
 ### 展开和收缩
 
-:::demo 展示展开和收缩配置。基础写法：`<SCard :collapsible="true">...</SCard>`。
+:::demo 展示展开和收缩配置。基础写法：`<SCard :collapsible="true"></SCard>`。
 card/callapse
 :::
 
 ### size 内边距（默认值 `default`）
 
-:::demo 展示 size 控制内边距。基础写法：`<SCard :size="20">...</SCard>`。属性：`size` 可选 `small / default / large / string / number`，默认值 `default`；传入预设值之外的数字或 CSS 长度时，会通过 `processWidth` 转成 padding 值。
+:::demo 展示 size 控制内边距。基础写法：`<SCard :size="20"></SCard>`。属性：`size` 可选 `small / default / large / string / number`，默认值 `default`；传入预设值之外的数字或 CSS 长度时，会通过 `processWidth` 转成 padding 值。
 card/other
 :::
 
 ### 自适应高度
 
-:::demo 展示高度配置。基础写法：`<SCard title="不自适应body的高度" class="m-t-16 h-block" :scroll="false">...</SCard>`。属性：`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示高度配置。基础写法：`<SCard title="不自适应body的高度" class="m-t-16 h-block" :scroll="false"></SCard>`。属性：`height` 类型 `string / number`，默认值 `''`。
 card/customLayout
 :::
 
 ### slot插槽
 
-:::demo 展示插槽内容定制。基础写法：`<SCard collapsible :boxStyle="{ border: 'none' }">...</SCard>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<SCard collapsible :boxStyle="{ border: 'none' }"></SCard>`。插槽：按示例中的插槽名定制内容。
 card/slot
 :::
 
 ### body正方形
 
-:::demo 展示body正方形配置。基础写法：`<SCard title="租户容量配额" class="w-300 h-500">...</SCard>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示body正方形配置。基础写法：`<SCard title="租户容量配额" class="w-300 h-500"></SCard>`。属性：`title` 类型 `string`，默认值 `''`。
 card/square
 :::
 

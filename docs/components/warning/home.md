@@ -10,25 +10,31 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-warning content="这是基础用法" title="我是title">...</s-warning>`。属性：`content` 类型 `string`，默认值 `''`；`title` 类型 `string`，默认值 `''`；`size` 可选 `'' / small / default / large`，默认值 `''`。
+:::demo 展示基础用法。基础写法：`<s-warning content="这是基础用法" title="我是title"></s-warning>`。
 warning/base
 :::
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-warning theme="chenghua" title="服务提示" content="已启用成华主题的信息提示，可用于展示普通说明。" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-warning theme="chenghua" title="服务提示" content="已启用成华主题的信息提示，可用于展示普通说明。" />`。
 warning/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-warning theme="shijingshan" title="服务提示" content="已启用石景山主题的信息提示，可用于展示普通说明。" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-warning theme="shijingshan" title="服务提示" content="已启用石景山主题的信息提示，可用于展示普通说明。" />`。
 warning/shijingshan/base
+:::
+
+### 通常用法
+
+:::demo 展示基础用法。基础写法：`<s-warning content="这是基础用法" title="我是title"></s-warning>`。
+warning/usually
 :::
 
 ### 插槽
 
-:::demo 展示插槽内容定制。基础写法：`<s-warning>...</s-warning>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-warning></s-warning>`。插槽：按示例中的插槽名定制内容。
 warning/slot
 :::
 

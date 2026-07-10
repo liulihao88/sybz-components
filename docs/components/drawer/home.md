@@ -16,13 +16,13 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-drawer title="baseDrawer" v-model="isShowAbandon">...</s-drawer>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示基础用法。基础写法：`<s-drawer title="baseDrawer" v-model="isShowAbandon"></s-drawer>`。属性：`title` 类型 `string`，默认值 `''`。
 drawer/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-drawer ref="dialogRef" title="App" @confirm="cusConfirm" :confirmAttrs="{ loading: confirmLoading, }" v-model="isShow">...</s-drawer>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示通常用法配置。基础写法：`<s-drawer ref="dialogRef" title="App" @confirm="cusConfirm" :confirmAttrs="{ loading: confirmLoading, }" v-model="isShow"></s-drawer>`。属性：`title` 类型 `string`，默认值 `''`。
 drawer/usually
 :::
 

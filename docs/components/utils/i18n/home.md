@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-:::demo 展示中文、英文语言包切换。基础写法：`<el-config-provider :locale="locale">...</el-config-provider>`。
+:::demo 展示中文、英文语言包切换。基础写法：`<el-config-provider :locale="locale"></el-config-provider>`。
 utils/i18n/base
 :::
 

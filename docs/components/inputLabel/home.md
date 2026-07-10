@@ -10,13 +10,13 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-input-label v-model="arr">...</s-input-label>`。
+:::demo 展示基础用法。基础写法：`<s-input-label v-model="arr"></s-input-label>`。
 inputLabel/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-input-label v-model="port" :inputAttrs="{ placeholder: '请输入数字后回车', width: 320 }" :regexp="/^([1-9]|[1-9][0-9]{1,3}|[1-5][0-9]{4}|6[0-5][0-5][0-3][0-5])$/" message="请输入1-65535之间的端口号">...</s-input-label>`。
+:::demo 展示通常用法配置。基础写法：`<s-input-label v-model="port" :inputAttrs="{ placeholder: '请输入数字后回车', width: 320 }" :regexp="/^([1-9]|[1-9][0-9]{1,3}|[1-5][0-9]{4}|6[0-5][0-5][0-3][0-5])$/" message="请输入1-65535之间的端口号"></s-input-label>`。
 inputLabel/usually
 :::
 

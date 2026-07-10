@@ -1,6 +1,6 @@
 # test测试组件. 仅用于本地测试, 不属于任何组件
 
-:::demo 展示base配置。基础写法：`<div>...</div>`。
+:::demo 展示base配置。基础写法：`<div></div>`。
 test/base
 :::
 

@@ -21,7 +21,7 @@ app.use(SybzChartComponents)
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<SCountBar :data="data" style="height: 300px">...</SCountBar>`。属性：`data` 类型 `array`，默认值 `[]`；`options` 类型 `array`，默认值 `[]`。
+:::demo 展示基础用法。基础写法：`<SCountBar :data="data" style="height: 300px"></SCountBar>`。属性：`data` 类型 `array`，默认值 `[]`；`options` 类型 `array`，默认值 `[]`。
 company/countBar/base
 :::
 

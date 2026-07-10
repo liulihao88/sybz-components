@@ -12,25 +12,25 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-split-pane :split-set="setting" @resize="handleResize">...</s-split-pane>`。属性：`split-set` 类型 `{ minPercent?: number; defaultPercent?: number; split?: vertical / horizontal }`，默认值 `{}`。
+:::demo 展示基础用法。基础写法：`<s-split-pane :split-set="setting" @resize="handleResize"></s-split-pane>`。属性：`split-set` 类型 `{ minPercent?: number; defaultPercent?: number; split?: vertical / horizontal }`，默认值 `{}`。
 splitPane/base
 :::
 
 ### 嵌套切割
 
-:::demo 展示嵌套切割配置。基础写法：`<s-split-pane :split-set="settingLR">...</s-split-pane>`。属性：`split-set` 类型 `{ minPercent?: number; defaultPercent?: number; split?: vertical / horizontal }`，默认值 `{}`。
+:::demo 展示嵌套切割配置。基础写法：`<s-split-pane :split-set="settingLR"></s-split-pane>`。属性：`split-set` 类型 `{ minPercent?: number; defaultPercent?: number; split?: vertical / horizontal }`，默认值 `{}`。
 splitPane/nested
 :::
 
 ### 滑块控制左侧宽度
 
-:::demo 展示宽度配置。基础写法：`<s-split-pane v-model="leftPercent" :min-percent="10">...</s-split-pane>`。属性：`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示宽度配置。基础写法：`<s-split-pane v-model="leftPercent" :min-percent="10"></s-split-pane>`。属性：`width` 类型 `string / number`，默认值 `''`。
 splitPane/slider
 :::
 
 ### 多选控制区域显隐
 
-:::demo 展示面板显隐和点击重置。基础写法：`<s-split-pane v-model="splitPercent" :min-percent="0" :reset-on-click="visiblePanels.length === 2">...</s-split-pane>`。属性：`reset-on-click` 可选 `true / false`，默认值 `true`；`min-percent` 类型 `number`，默认值 `0`。
+:::demo 展示面板显隐和点击重置。基础写法：`<s-split-pane v-model="splitPercent" :min-percent="0" :reset-on-click="visiblePanels.length === 2"></s-split-pane>`。属性：`reset-on-click` 可选 `true / false`，默认值 `true`；`min-percent` 类型 `number`，默认值 `0`。
 splitPane/visible
 :::
 

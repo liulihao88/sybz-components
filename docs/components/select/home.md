@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-select v-model="selectVal" :options="options" title="哈哈">...</s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`title` 类型 `string`，默认值 `''`。
+:::demo 展示基础用法。基础写法：`<s-select v-model="selectVal" :options="options" title="哈哈"></s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`title` 类型 `string`，默认值 `''`。
 select/base
 :::
 
@@ -58,7 +58,7 @@ select/shijingshan/shijingshanMultiple
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-select v-model="selectVal" :options="options" label="name" value="id" title="value和label分别设置">...</s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
+:::demo 展示通常用法配置。基础写法：`<s-select v-model="selectVal" :options="options" label="name" value="id" title="value和label分别设置"></s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
 select/usually
 :::
 
@@ -76,43 +76,43 @@ select/size
 
 ### 多选--隐藏多余标签的多选
 
-:::demo 展示多选交互。基础写法：`<s-select title="你好" v-model="optionsId" multiple label="name" value="id" showPrefix @changeSelect="changeSelect" @change="change" :options="stepList">...</s-select>`。属性：`multiple` 可选 `true / false`，默认值 `false`。
+:::demo 展示多选交互。基础写法：`<s-select title="你好" v-model="optionsId" multiple label="name" value="id" showPrefix @changeSelect="changeSelect" @change="change" :options="stepList"></s-select>`。属性：`multiple` 可选 `true / false`，默认值 `false`。
 select/multiple
 :::
 
 ### 调用change方法
 
-:::demo 展示调用change方法配置。基础写法：`<s-select ref="simpleSelectRef" v-model="selectVal" :options="options" @change="selectChange">...</s-select>`。
+:::demo 展示调用change方法配置。基础写法：`<s-select ref="simpleSelectRef" v-model="selectVal" :options="options" @change="selectChange"></s-select>`。
 select/change
 :::
 
 ### 遍历调用change方法
 
-:::demo 展示遍历调用change方法配置。基础写法：`<s-select v-model="v.cc" :options="options" :ref="(el) => getSelectRef(el, i)">...</s-select>`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示遍历调用change方法配置。基础写法：`<s-select v-model="v.cc" :options="options" :ref="(el) => getSelectRef(el, i)"></s-select>`。属性：`options` 类型 `array`，默认值 `[]`。
 select/multyChange
 :::
 
 ### 集成绝大部分属性和方法
 
-:::demo 展示集成绝大部分属性和方法配置。基础写法：`<s-select title="大部分常用属性" v-model="selectVal" :options="options" label="name" value="id" :itemDisabled="itemDisabled" :customLabel="(item) => item.name + '(' + item.id + ')'">...</s-select>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
+:::demo 展示集成绝大部分属性和方法配置。基础写法：`<s-select title="大部分常用属性" v-model="selectVal" :options="options" label="name" value="id" :itemDisabled="itemDisabled" :customLabel="(item) => item.name + '(' + item.id + ')'"></s-select>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
 select/all
 :::
 
 ### customLabel自定义显示label
 
-:::demo 展示自定义配置。基础写法：`<s-select v-model="selectVal" :options="options" :customLabel="customLabel">...</s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`custom-label` 类型 `function / string`，默认值未设置。
+:::demo 展示自定义配置。基础写法：`<s-select v-model="selectVal" :options="options" :customLabel="customLabel"></s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`custom-label` 类型 `function / string`，默认值未设置。
 select/customLabel
 :::
 
 ### 解析html
 
-:::demo 展示解析html配置。基础写法：`<s-select v-model="selectValue" :options="options">...</s-select>`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示解析html配置。基础写法：`<s-select v-model="selectValue" :options="options"></s-select>`。属性：`options` 类型 `array`，默认值 `[]`。
 select/html
 :::
 
 ### 插槽
 
-:::demo 展示插槽内容定制。基础写法：`<s-select v-model="selectValue" :options="options" width="100%">...</s-select>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-select v-model="selectValue" :options="options" width="100%"></s-select>`。插槽：按示例中的插槽名定制内容。
 select/slot
 :::
 
@@ -124,13 +124,13 @@ select/disabled
 
 ### table单选
 
-:::demo 展示表格单选。基础写法：`<s-select v-model="selectName" title="单选的" width="100%" ref="selectRef" value-key="value" @clear="handleCurrentChange(null)">...</s-select>`。属性：`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示表格单选。基础写法：`<s-select v-model="selectName" title="单选的" width="100%" ref="selectRef" value-key="value" @clear="handleCurrentChange(null)"></s-select>`。属性：`width` 类型 `string / number`，默认值 `''`。
 select/simpleTableSelect
 :::
 
 ### table多选
 
-:::demo 展示表格多选。基础写法：`<s-select v-model="selectName" title="多选的" width="100%" ref="selectRef" multiple @change="change" :collapse-tags="true" :collapse-tags-tooltip="true" @clear="clear">...</s-select>`。属性：`multiple` 可选 `true / false`，默认值 `false`。
+:::demo 展示表格多选。基础写法：`<s-select v-model="selectName" title="多选的" width="100%" ref="selectRef" multiple @change="change" :collapse-tags="true" :collapse-tags-tooltip="true" @clear="clear"></s-select>`。属性：`multiple` 可选 `true / false`，默认值 `false`。
 select/multipleTableSelect
 :::
 

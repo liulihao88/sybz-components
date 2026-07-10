@@ -15,7 +15,7 @@
 
 ```vue
 <s-button theme="shijingshan" type="primary">保存</s-button>
-<s-card theme="shijingshan" title="审核规则管理">...</s-card>
+<s-card theme="shijingshan" title="审核规则管理"></s-card>
 <s-title theme="shijingshan" title="企业经营数据" />
 ```
 

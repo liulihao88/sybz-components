@@ -79,19 +79,19 @@ input/formatter
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-input content="这里主要是为了让其鼠标移入显示文本" v-model="iptValue">...</s-input>`。属性：`content` 类型 `string`，默认值 `''`。
+:::demo 展示通常用法配置。基础写法：`<s-input content="这里主要是为了让其鼠标移入显示文本" v-model="iptValue"></s-input>`。属性：`content` 类型 `string`，默认值 `''`。
 input/usually
 :::
 
 ### 复合型输入框
 
-:::demo 展示复合型输入框配置。基础写法：`<s-input v-model="input1" style="max-width: 600px" placeholder="Please input">...</s-input>`。
+:::demo 展示复合型输入框配置。基础写法：`<s-input v-model="input1" style="max-width: 600px" placeholder="Please input"></s-input>`。
 input/slot
 :::
 
 ### 封装el-autocomplete的用法
 
-:::demo 展示封装el-autocomplete的用法配置。基础写法：`<s-input v-model="cc" :options="options" width="300">...</s-input>`。属性：`options` 类型 `array`，默认值 `[]`；`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示封装el-autocomplete的用法配置。基础写法：`<s-input v-model="cc" :options="options" width="300"></s-input>`。属性：`options` 类型 `array`，默认值 `[]`；`width` 类型 `string / number`，默认值 `''`。
 input/autocomplete
 :::
 

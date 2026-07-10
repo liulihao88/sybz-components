@@ -21,19 +21,19 @@ app.use(SybzChartComponents)
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400">...</SObjectLine>`。
+:::demo 展示基础用法。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400"></SObjectLine>`。
 company/objectLine/base
 :::
 
 ### 简单数据
 
-:::demo 展示简单数据配置。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400">...</SObjectLine>`。
+:::demo 展示简单数据配置。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400"></SObjectLine>`。
 company/objectLine/simple
 :::
 
 ### 复杂数据
 
-:::demo 展示复杂数据配置。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400 w-1100">...</SObjectLine>`。
+:::demo 展示复杂数据配置。基础写法：`<SObjectLine :objectCount="objectCount" :objectSize="objectSize" class="h-400 w-1100"></SObjectLine>`。
 company/objectLine/hard
 :::
 

@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-descriptions :options="options" value="value2" label="key">...</s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；`value` 类型 `string / number / boolean`，默认值按组件配置；`label` 类型 `string / number`，默认值按组件配置。
+:::demo 展示基础用法。基础写法：`<s-descriptions :options="options" value="value2" label="key"></s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；`value` 类型 `string / number / boolean`，默认值按组件配置；`label` 类型 `string / number`，默认值按组件配置。
 descriptions/base
 :::
 
@@ -30,31 +30,31 @@ descriptions/shijingshan/base
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra">...</s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
+:::demo 展示通常用法配置。基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra"></s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
 descriptions/usually
 :::
 
 ### 每行展示多少项
 
-:::demo 展示每行展示多少项配置。基础写法：`<s-descriptions :options="DataSource.descData" :column="radioValue">...</s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；`column` 类型 `number`，默认值 `3`。
+:::demo 展示每行展示多少项配置。基础写法：`<s-descriptions :options="DataSource.descData" :column="radioValue"></s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；`column` 类型 `number`，默认值 `3`。
 descriptions/column
 :::
 
 ### 垂直列表
 
-:::demo 展示垂直列表配置。基础写法：`<s-descriptions title="Vertical list with border" direction="vertical" :column="4" :size="size" border>...</s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`direction` 可选 `row / row-reverse / column / column-reverse`，默认值 `row`。
+:::demo 展示垂直列表配置。基础写法：`<s-descriptions title="Vertical list with border" direction="vertical" :column="4" :size="size" border></s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`direction` 可选 `row / row-reverse / column / column-reverse`，默认值 `row`。
 descriptions/vertical
 :::
 
 ### slot插槽 和 render
 
-:::demo 展示插槽内容定制。基础写法：`<s-descriptions :options="options" class="w-block" :column="1" label-width="200px">...</s-descriptions>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-descriptions :options="options" class="w-block" :column="1" label-width="200px"></s-descriptions>`。插槽：按示例中的插槽名定制内容。
 descriptions/slot
 :::
 
 ### 自定义样式
 
-:::demo 展示自定义配置。基础写法：`<s-descriptions :options="options" :column="1" label-width="300">...</s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；`column` 类型 `number`，默认值 `3`。
+:::demo 展示自定义配置。基础写法：`<s-descriptions :options="options" :column="1" label-width="300"></s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；`column` 类型 `number`，默认值 `3`。
 descriptions/customStyle
 :::
 

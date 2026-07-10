@@ -12,43 +12,43 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-checkbox v-model="checkboxValue" :options="options">...</s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示基础用法。基础写法：`<s-checkbox v-model="checkboxValue" :options="options"></s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`。
 checkbox/base
 :::
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="chenghua" :options="options" gap="18">...</s-checkbox>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="chenghua" :options="options" gap="18"></s-checkbox>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 checkbox/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="shijingshan" :options="options" gap="18">...</s-checkbox>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="shijingshan" :options="options" gap="18"></s-checkbox>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 checkbox/shijingshan/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" label="name" value="id">...</s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
+:::demo 展示通常用法配置。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" label="name" value="id"></s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
 checkbox/usually
 :::
 
 ### 多属性用法
 
-:::demo 展示多属性用法配置。基础写法：`<s-checkbox @change="change" v-model="checkboxValue" :options="options" label="name" :showAll="false" size="small" showType="button" value="id" :customDisabled="(item) => item.id === 'xrr'">...</s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
+:::demo 展示多属性用法配置。基础写法：`<s-checkbox @change="change" v-model="checkboxValue" :options="options" label="name" :showAll="false" size="small" showType="button" value="id" :customDisabled="(item) => item.id === 'xrr'"></s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
 checkbox/multyAttrs
 :::
 
 ### 插槽用法
 
-:::demo 展示插槽内容定制。基础写法：`<s-checkbox v-model="value" :options="options" size="large">...</s-checkbox>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-checkbox v-model="value" :options="options" size="large"></s-checkbox>`。插槽：按示例中的插槽名定制内容。
 checkbox/slot
 :::
 
 ### 自定义间距 gap
 
-:::demo 展示自定义配置。基础写法：`<s-checkbox v-model="value" :options="options" :gap="horizontalGap">...</s-checkbox>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
+:::demo 展示自定义配置。基础写法：`<s-checkbox v-model="value" :options="options" :gap="horizontalGap"></s-checkbox>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
 checkbox/customGap
 :::
 

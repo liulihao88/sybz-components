@@ -10,25 +10,25 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置；`src` 类型 `string`，默认值 `''`。
+:::demo 展示基础用法。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置；`src` 类型 `string`，默认值 `''`。
 item/base
 :::
 
 ### 包裹用法
 
-:::demo 展示包裹用法配置。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
+:::demo 展示包裹用法配置。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png"></SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
 item/wrapper
 :::
 
 ### 样式
 
-:::demo 展示样式配置。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png" style="background: lightblue" :labelStyle="{ fontSize: '40px', color: 'red' }" :valueStyle="{ fontSize: '30px', color: 'var(--blue)' }">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
+:::demo 展示样式配置。基础写法：`<SItem label="label" value="value" src="https://img.yzcdn.cn/vant/logo.png" style="background: lightblue" :labelStyle="{ fontSize: '40px', color: 'red' }" :valueStyle="{ fontSize: '30px', color: 'var(--blue)' }"></SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
 item/style
 :::
 
 ### 不同类型
 
-:::demo 展示不同类型配置。基础写法：`<SItem label="这是默认类型" value="123456" src="https://img.yzcdn.cn/vant/logo.png" :imgStyle="{ height: '100px' }" height="300">...</SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
+:::demo 展示不同类型配置。基础写法：`<SItem label="这是默认类型" value="123456" src="https://img.yzcdn.cn/vant/logo.png" :imgStyle="{ height: '100px' }" height="300"></SItem>`。属性：`label` 类型 `string / number`，默认值按组件配置；`value` 类型 `string / number / boolean`，默认值按组件配置。
 item/type
 :::
 

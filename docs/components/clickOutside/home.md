@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<sClickOutside @clickOutside="outer" @mounted="mounted">...</sClickOutside>`。该示例不需要额外属性。
+:::demo 展示基础用法。基础写法：`<sClickOutside @clickOutside="outer" @mounted="mounted"></sClickOutside>`。该示例不需要额外属性。
 clickOutside/base
 :::
 

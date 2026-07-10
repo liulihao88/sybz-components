@@ -14,19 +14,19 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-progress :percentage="80">...</s-progress>`。属性：`color` 类型 `string`，默认值未设置。
+:::demo 展示基础用法。基础写法：`<s-progress :percentage="80"></s-progress>`。属性：`color` 类型 `string`，默认值未设置。
 progress/base
 :::
 
 ### 其他用法
 
-:::demo 展示其他用法配置。基础写法：`<s-radio v-model="defaultColor" :options="[true, false]" type="simple" title="不使用el-progress默认颜色">...</s-radio>`。属性：`defaultColor` 可选 `true / false`，默认值由示例变量决定。
+:::demo 展示其他用法配置。基础写法：`<s-radio v-model="defaultColor" :options="[true, false]" type="simple" title="不使用el-progress默认颜色"></s-radio>`。属性：`defaultColor` 可选 `true / false`，默认值由示例变量决定。
 progress/other
 :::
 
 ### 自定义颜色
 
-:::demo 展示自定义配置。基础写法：`<s-progress :percentage="percentage" :color="progressColor">...</s-progress>`。属性：`color` 类型 `string`，默认值未设置。
+:::demo 展示自定义配置。基础写法：`<s-progress :percentage="percentage" :color="progressColor"></s-progress>`。属性：`color` 类型 `string`，默认值未设置。
 progress/color
 :::
 

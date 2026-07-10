@@ -23,6 +23,7 @@
         size="small"
         content="simple 类型会保持轻量文本提示，不展示边框背景。"
       />
+      <s-warning type="simple" content="警告"></s-warning>
     </div>
   </div>
 </template>

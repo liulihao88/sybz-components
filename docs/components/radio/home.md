@@ -54,7 +54,7 @@ radio/multyAttrs
 
 ### Slots
 
-:::demo 展示插槽内容定制。基础写法：`<s-radio v-model="value" :options="options" size="large" @change="change">...</s-radio>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-radio v-model="value" :options="options" size="large" @change="change"></s-radio>`。插槽：按示例中的插槽名定制内容。
 radio/slot
 :::
 

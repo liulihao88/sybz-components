@@ -48,13 +48,13 @@ tag/shijingshan/shijingshanMap
 
 ### 值匹配着色
 
-:::demo 展示值匹配着色配置。基础写法：`<s-tag :primary="[1, 2]" :value="value" :warning="[3, 4]" :danger="[5, 6]" :info="7" width="100" height="100">...</s-tag>`。属性：`value` 类型 `string / number / boolean`，默认值按组件配置；`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示值匹配着色配置。基础写法：`<s-tag :primary="[1, 2]" :value="value" :warning="[3, 4]" :danger="[5, 6]" :info="7" width="100" height="100"></s-tag>`。属性：`value` 类型 `string / number / boolean`，默认值按组件配置；`width` 类型 `string / number`，默认值 `''`。
 tag/usually
 :::
 
 ### options + config 配置
 
-:::demo 展示options + config 配置配置。基础写法：`<s-tag :primary="['Normal']" :info="['Unknown', 'PowerOff', 'Maintenance']" :warning="['Rebooting', 'Shuttingdown']" :danger="['Issue']" :options="nodeStatus" :config="{ label: 'name', }" :value="value">...</s-tag>`。属性：`options` 类型 `array`，默认值 `[]`；`config` 类型 `object`，默认值 `{}`。
+:::demo 展示options + config 配置配置。基础写法：`<s-tag :primary="['Normal']" :info="['Unknown', 'PowerOff', 'Maintenance']" :warning="['Rebooting', 'Shuttingdown']" :danger="['Issue']" :options="nodeStatus" :config="{ label: 'name', }" :value="value"></s-tag>`。属性：`options` 类型 `array`，默认值 `[]`；`config` 类型 `object`，默认值 `{}`。
 tag/company
 :::
 
@@ -72,7 +72,7 @@ tag/slot
 
 ### 动态切换
 
-:::demo 展示动态状态切换。基础写法：`<s-tag :options="map2" width="100" height="100" :value="value">...</s-tag>`。属性：`options` 类型 `array`，默认值 `[]`；`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示动态状态切换。基础写法：`<s-tag :options="map2" width="100" height="100" :value="value"></s-tag>`。属性：`options` 类型 `array`，默认值 `[]`；`width` 类型 `string / number`，默认值 `''`。
 tag/async
 :::
 

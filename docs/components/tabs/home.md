@@ -12,67 +12,67 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-tabs :options="navList">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示基础用法。基础写法：`<s-tabs :options="navList"></s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/base
 :::
 
 ### 尺寸
 
-:::demo 展示尺寸配置。基础写法：`<s-tabs :options="navList" size="small">...</s-tabs>`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
+:::demo 展示尺寸配置。基础写法：`<s-tabs :options="navList" size="small"></s-tabs>`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
 tabs/size
 :::
 
 ### 胶囊类型
 
-:::demo 展示胶囊类型切换。基础写法：`<s-tabs v-model="smallActiveTab" :options="navList" type="capsule" size="small">...</s-tabs>`。属性：`type` 可选 `'' / capsule / card / border-card`，默认值 `''`。
+:::demo 展示胶囊类型切换。基础写法：`<s-tabs v-model="smallActiveTab" :options="navList" type="capsule" size="small"></s-tabs>`。属性：`type` 可选 `'' / capsule / card / border-card`，默认值 `''`。
 tabs/capsule
 :::
 
 ### chenghua主题
 
-:::demo 展示成华主题样式。基础写法：`<s-tabs :options="navList" theme="chenghua">...</s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-tabs :options="navList" theme="chenghua"></s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 tabs/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-tabs :options="navList" theme="shijingshan">...</s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-tabs :options="navList" theme="shijingshan"></s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
 tabs/shijingshan/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示通常用法配置。基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange"></s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/usually
 :::
 
 ### Slots
 
-:::demo 展示插槽内容定制。基础写法：`<s-tabs :options="navList">...</s-tabs>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-tabs :options="navList"></s-tabs>`。插槽：按示例中的插槽名定制内容。
 tabs/slot
 :::
 
 ### Trigger `click|hover`
 
-:::demo 展示触发方式。基础写法：`<s-tabs :options="navList" trigger="hover" v-model="navValue">...</s-tabs>`。属性：`trigger` 可选 `click / hover`，默认值 `click`。
+:::demo 展示触发方式。基础写法：`<s-tabs :options="navList" trigger="hover" v-model="navValue"></s-tabs>`。属性：`trigger` 可选 `click / hover`，默认值 `click`。
 tabs/trigger
 :::
 
 ### children `支持嵌套 el-tab-pane`
 
-:::demo 展示children `支持嵌套 el-tab-pane`配置。基础写法：`<s-tabs v-model="activeName" class="demo-tabs" default-value="third" @tab-click="handleClick" :options="tabs">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示children `支持嵌套 el-tab-pane`配置。基础写法：`<s-tabs v-model="activeName" class="demo-tabs" default-value="third" @tab-click="handleClick" :options="tabs"></s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/children
 :::
 
 ### other
 
-:::demo 展示 Element Plus Tabs 属性透传。基础写法：`<s-tabs :options="navList" :type="type" :stretch="stretch">...</s-tabs>`。属性：`type`、`stretch` 等继承 `el-tabs`。
+:::demo 展示 Element Plus Tabs 属性透传。基础写法：`<s-tabs :options="navList" :type="type" :stretch="stretch"></s-tabs>`。属性：`type`、`stretch` 等继承 `el-tabs`。
 tabs/other
 :::
 
 ### addRemove
 
-:::demo 展示动态增删页签。基础写法：`<s-tabs v-model="editableTabsValue" type="card" class="demo-tabs" closable @tab-remove="removeTab">...</s-tabs>`。属性：`closable` 可选 `true / false`，默认值按 Element Plus Tabs 配置。
+:::demo 展示动态增删页签。基础写法：`<s-tabs v-model="editableTabsValue" type="card" class="demo-tabs" closable @tab-remove="removeTab"></s-tabs>`。属性：`closable` 可选 `true / false`，默认值按 Element Plus Tabs 配置。
 tabs/addRemove
 :::
 
@@ -82,7 +82,7 @@ tabs/addRemove
 
 标签一共有四个方向的设置 tabPosition="left|right|top|bottom"
 
-:::demo 展示位置配置。基础写法：`<s-tabs :options="navList" :tab-position="tabPosition">...</s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示位置配置。基础写法：`<s-tabs :options="navList" :tab-position="tabPosition"></s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/location
 :::
 

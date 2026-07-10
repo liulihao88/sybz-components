@@ -63,7 +63,7 @@ chart/empty
 
 ### 插槽
 
-:::demo 展示插槽内容定制。基础写法：`<s-chart :option="options">...</s-chart>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-chart :option="options"></s-chart>`。插槽：按示例中的插槽名定制内容。
 chart/slot
 :::
 

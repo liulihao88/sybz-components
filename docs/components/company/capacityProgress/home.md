@@ -6,19 +6,19 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-capacity-progress :total="row.totalSpace" :used="row.usedSpace" width="300">...</s-capacity-progress>`。属性：`total` 类型 `number`，默认值按数据长度计算；`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示基础用法。基础写法：`<s-capacity-progress :total="row.totalSpace" :used="row.usedSpace" width="300"></s-capacity-progress>`。属性：`total` 类型 `number`，默认值按数据长度计算；`width` 类型 `string / number`，默认值 `''`。
 company/capacityProgress/base
 :::
 
 ### 在table中使用
 
-:::demo 展示表格场景。基础写法：`<s-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace">...</s-capacity-progress>`。属性：`total` 类型 `number`，默认值按数据长度计算。
+:::demo 展示表格场景。基础写法：`<s-capacity-progress :total="row.totalSpace" :used="row.overUsedSpace"></s-capacity-progress>`。属性：`total` 类型 `number`，默认值按数据长度计算。
 company/capacityProgress/table
 :::
 
 ### 自定义颜色(其他用法与tag一致)
 
-:::demo 展示自定义配置。基础写法：`<s-capacity-progress :total="row.totalSpace" :used="row.usedSpace" :info="['UNKNOWN']" :warning="['OVERFLOW', 'CRITICAL', 'SHORT', 'OVERHALF']" :primary="['SUFFICIENT']" value="OVERFLOW" :customColor="true">...</s-capacity-progress>`。属性：`total` 类型 `number`，默认值按数据长度计算；`value` 类型 `string / number / boolean`，默认值按组件配置。
+:::demo 展示自定义配置。基础写法：`<s-capacity-progress :total="row.totalSpace" :used="row.usedSpace" :info="['UNKNOWN']" :warning="['OVERFLOW', 'CRITICAL', 'SHORT', 'OVERHALF']" :primary="['SUFFICIENT']" value="OVERFLOW" :customColor="true"></s-capacity-progress>`。属性：`total` 类型 `number`，默认值按数据长度计算；`value` 类型 `string / number / boolean`，默认值按组件配置。
 company/capacityProgress/customColor
 :::
 

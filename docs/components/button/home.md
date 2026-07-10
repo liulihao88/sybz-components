@@ -58,7 +58,7 @@ button/throttle
 
 ### 插槽（icon / loading / default）
 
-:::demo 展示 `icon`、`loading` 和默认插槽。基础写法：`<s-button type="primary"><template #icon>...</template>左侧图标 + 文字</s-button>`。插槽：`default` 默认内容；`icon` 自定义左侧图标；`loading` 自定义加载图标。
+:::demo 展示 `icon`、`loading` 和默认插槽。基础写法：`<s-button type="primary"><template #icon></template>左侧图标 + 文字</s-button>`。插槽：`default` 默认内容；`icon` 自定义左侧图标；`loading` 自定义加载图标。
 button/slots
 :::
 

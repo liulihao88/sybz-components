@@ -14,13 +14,13 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-flex class="h-100">...</s-flex>`。该示例不需要额外属性。
+:::demo 展示基础用法。基础写法：`<s-flex class="h-100"></s-flex>`。该示例不需要额外属性。
 flex/base
 :::
 
 ### 常用属性
 
-:::demo 展示常用属性配置。基础写法：`<s-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-block">...</s-flex>`。属性：`direction` 可选 `row / row-reverse / column / column-reverse`，默认值 `row`；`justify` 可选 `start / end / center / space-between / space-around / space-evenly / normal`，默认值 `normal`。
+:::demo 展示常用属性配置。基础写法：`<s-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-block"></s-flex>`。属性：`direction` 可选 `row / row-reverse / column / column-reverse`，默认值 `row`；`justify` 可选 `start / end / center / space-between / space-around / space-evenly / normal`，默认值 `normal`。
 flex/usually
 :::
 
