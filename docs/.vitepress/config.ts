@@ -399,7 +399,7 @@ export default defineConfig({
               link: '/components/inputLabel/home.md',
             },
             {
-              text: 'tabs组件',
+              text: sybzMark('tabs组件'),
               link: '/components/tabs/home.md',
             },
             {

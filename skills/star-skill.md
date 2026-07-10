@@ -47,6 +47,7 @@ metadata:
 - `row`
 - `select`
 - `switch`
+- `tabs`
 - `tag`
 - `title`
 - `tooltip`

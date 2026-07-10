@@ -14,61 +14,61 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-tooltip width="100" content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" placement="right">...</s-tooltip>`。属性：`width` 类型 `string / number`，默认值 `''`；`content` 类型 `string`，默认值 `''`；`placement` 继承 tooltip 配置。
+:::demo 展示基础用法。基础写法：`<s-tooltip width="100" content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" placement="right"></s-tooltip>`。`placement` 继承 tooltip 配置。
 tooltip/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-tooltip width="220px" placement="right" show-arrow content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" />`。属性：`width` 类型 `string / number`，默认值 `''`；`placement` 继承 tooltip 配置。
+:::demo 展示通常用法配置。基础写法：`<s-tooltip width="220px" placement="right" show-arrow content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" />`。`placement` 继承 tooltip 配置。
 tooltip/usually
 :::
 
 ### 主题与点击事件
 
-:::demo 展示主题切换。基础写法：`<s-tooltip content="默认 dark 主题，文本超出宽度时会显示完整内容。" width="200px" placement="bottom" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示主题切换。基础写法：`<s-tooltip content="默认 dark 主题，文本超出宽度时会显示完整内容。" width="200px" placement="bottom" />`。
 tooltip/theme
 :::
 
 ### 最大行数
 
-:::demo 展示最大行数配置。基础写法：`<s-tooltip :content="longText" width="220px" :line-clamp="2" placement="top" />`。属性：`content` 类型 `string`，默认值 `''`；`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示最大行数配置。基础写法：`<s-tooltip :content="longText" width="220px" :line-clamp="2" placement="top" />`。属性：`width` 类型 `string / number`，默认值 `''`。
 tooltip/lineClamp
 :::
 
 ### 触发方式
 
-:::demo 展示触发方式配置。基础写法：`<s-tooltip content="默认使用 hover 触发" trigger="hover">...</s-tooltip>`。属性：`content` 类型 `string`，默认值 `''`；`trigger` 继承弹层触发方式配置。
+:::demo 展示触发方式配置。基础写法：`<s-tooltip content="默认使用 hover 触发" trigger="hover"></s-tooltip>`。属性：`trigger` 继承弹层触发方式配置。
 tooltip/trigger
 :::
 
 ### 延迟触发
 
-:::demo 展示延迟触发配置。基础写法：`<s-tooltip content="鼠标移入 1 秒后显示 tooltip" :show-after="1000">...</s-tooltip>`。属性：`content` 类型 `string`，默认值 `''`。
+:::demo 展示延迟触发配置。基础写法：`<s-tooltip content="鼠标移入 1 秒后显示 tooltip" :show-after="1000"></s-tooltip>`。
 tooltip/delay
 :::
 
 ### 自定义主题和禁用状态
 
-:::demo 展示禁用状态。基础写法：`<s-tooltip content="默认暗色主题" placement="top">...</s-tooltip>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示禁用状态。基础写法：`<s-tooltip content="默认暗色主题" placement="top"></s-tooltip>`。
 tooltip/other
 :::
 
 ### 显示 HTML / VNode 内容
 
-:::demo 展示显示 HTML / VNode 内容配置。基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。属性：`width` 类型 `string / number`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
+:::demo 展示显示 HTML / VNode 内容配置。基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
 tooltip/html
 :::
 
 ### 自定义插槽
 
-:::demo 展示插槽内容定制。基础写法：`<s-tooltip placement="right">...</s-tooltip>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-tooltip placement="right"></s-tooltip>`。插槽：按示例中的插槽名定制内容。
 tooltip/slot
 :::
 
 ### 受控模式
 
-:::demo 展示受控模式配置。基础写法：`<s-tooltip :visible="visible" content="当前 tooltip 由外部 visible 状态完全控制" placement="top">...</s-tooltip>`。属性：`content` 类型 `string`，默认值 `''`；`placement` 继承 tooltip 配置。
+:::demo 展示受控模式配置。基础写法：`<s-tooltip :visible="visible" content="当前 tooltip 由外部 visible 状态完全控制" placement="top"></s-tooltip>`。属性：`placement` 继承 tooltip 配置。
 tooltip/visible
 :::
 
