@@ -43,6 +43,7 @@ const options = computed(() => {
     },
     {
       key: 'render用法',
+      more: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit et, repudiandae ex impedit ullam eveniet possimus at, in aspernatur blanditiis neque quibusdam est nulla minus error quis doloribus labore doloremque?',
       labelRender: ({ label }) => {
         return <div style="color: blue">我是labelRender: {label}</div>
       },
@@ -63,7 +64,6 @@ const init = async () => {
     name: 'andy',
     time: 1638720415900,
     isLock: false,
-    more: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit et, repudiandae ex impedit ullam eveniet possimus at, in aspernatur blanditiis neque quibusdam est nulla minus error quis doloribus labore doloremque?',
   }
 }
 init()

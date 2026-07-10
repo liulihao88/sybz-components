@@ -106,18 +106,18 @@ export interface SDescriptionsItemOption {
   value?: any
   labelSlot?: string
   valueSlot?: string
-  labelRender?: SRenderFunction<SDescriptionsRow, SDescriptionsItemOption>
-  render?: SRenderFunction<SDescriptionsRow, SDescriptionsItemOption>
+  labelRender?: SRenderFunction<SDescriptionsItemOption, SDescriptionsItemOption>
+  render?: SRenderFunction<SDescriptionsItemOption, SDescriptionsItemOption>
   filter?: (context: SDescriptionsFilterContext) => any
   attrs?: SybzRecord
   labelAttrs?: SybzRecord
   valueAttrs?: SybzRecord
 }
 
-export type SDescriptionsRow = SybzRecord
+export type SDescriptionsRow = SDescriptionsItemOption
 
 export interface SDescriptionsFilterContext {
-  row: SDescriptionsRow | SDescriptionsItemOption
+  row: SDescriptionsItemOption
   index: number
   value: any
   label: any
@@ -131,7 +131,6 @@ export interface SDescriptionsOwnProps {
   showAll?: boolean
   label?: string
   value?: string
-  row?: SDescriptionsRow
 }
 
 export type SDialogType = '' | 'drawer'

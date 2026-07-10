@@ -1,11 +1,5 @@
 import { ElDescriptions } from 'element-plus'
-import type {
-  SDescriptionsItemOption,
-  SDescriptionsOwnProps,
-  SDescriptionsRow,
-  SybzComponentTheme,
-  SybzRecord,
-} from '../component-props'
+import type { SDescriptionsItemOption, SDescriptionsOwnProps, SybzComponentTheme } from '../component-props'
 
 type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>
 
@@ -22,10 +16,9 @@ export type SDescriptionsComponent = {
       showAll?: boolean
       label?: string
       value?: string
-      row?: SDescriptionsRow
     } & Omit<
       ElDescriptionsInstance['$props'],
-      'options' | 'theme' | 'column' | 'labelWidth' | 'showAll' | 'label' | 'value' | 'row'
+      'options' | 'theme' | 'column' | 'labelWidth' | 'showAll' | 'label' | 'value'
     >
     $emit: ElDescriptionsInstance['$emit']
     $slots: ElDescriptionsInstance['$slots'] & Record<string, (...args: any[]) => any>

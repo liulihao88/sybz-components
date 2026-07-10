@@ -94,7 +94,6 @@ type DescriptionsProps = {
   showAll?: boolean
   label?: string
   value?: string
-  row?: DescriptionsRow
 }
 
 type ItemOptions = {
@@ -103,18 +102,16 @@ type ItemOptions = {
   value?: any
   labelSlot?: string
   valueSlot?: string
-  labelRender?: RenderFunction<DescriptionsRow, ItemOptions>
-  render?: RenderFunction<DescriptionsRow, ItemOptions>
+  labelRender?: RenderFunction<ItemOptions, ItemOptions>
+  render?: RenderFunction<ItemOptions, ItemOptions>
   filter?: (context: FilterContext) => any
   attrs?: Record<string, any>
   labelAttrs?: Record<string, any>
   valueAttrs?: Record<string, any>
 }
 
-type DescriptionsRow = Record<string, any>
-
 type FilterContext = {
-  row: DescriptionsRow | ItemOptions
+  row: ItemOptions
   index: number
   value: any
   label: any
@@ -127,7 +124,6 @@ const props = withDefaults(defineProps<DescriptionsProps>(), {
   showAll: false,
   label: 'label',
   value: 'value',
-  row: undefined,
 })
 const mergedProps = useGlobalComponentConfig('descriptions', props)
 
@@ -142,13 +138,9 @@ const parseLabel = (item: ItemOptions) => getOptionField(item, mergedProps.value
 
 const getRawValue = (item: ItemOptions) => getOptionField(item, mergedProps.value.value || 'value', 'value')
 
-const getContextRow = (item: ItemOptions) => mergedProps.value.row ?? item.row ?? item
-
 const getFilterContext = (item: ItemOptions, index: number): FilterContext => {
-  const row = getContextRow(item)
-
   return {
-    row,
+    row: item,
     index,
     value: getRawValue(item),
     label: parseLabel(item),
@@ -175,9 +167,10 @@ const getRenderProps = (item: ItemOptions, index: number) => {
 
   return {
     item: renderItem,
-    row: getContextRow(item),
+    row: renderItem,
     column: renderItem,
     value: renderItem.value,
+    label: renderItem.label,
     index,
     extra: {
       label: renderItem.label,

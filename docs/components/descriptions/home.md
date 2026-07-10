@@ -30,7 +30,7 @@ descriptions/shijingshan/base
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :row="data" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra">...</s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
+:::demo 展示通常用法配置。基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra">...</s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
 descriptions/usually
 :::
 
@@ -69,22 +69,21 @@ descriptions/customStyle
 |  `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean         | `false`   |
 |   `label`    | options 中作为标签文本的字段名                           | string          | `label`   |
 |   `value`    | options 中作为内容值的字段名                             | string          | `value`   |
-|    `row`     | 当前完整数据对象，会透传给 `filter` 的 `row` 参数        | object          | -         |
 
 ### ItemOptions
 
-|    属性名     | 说明                                                                             | 类型                                                              | 默认值 |
-| :-----------: | -------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------ |
-|    `label`    | 标签文本                                                                         | string                                                            | -      |
-|    `value`    | 内容值                                                                           | any                                                               | -      |
-|  `labelSlot`  | 自定义 label 插槽名                                                              | string                                                            | -      |
-|  `valueSlot`  | 自定义 value 插槽名                                                              | string                                                            | -      |
-| `labelRender` | 自定义 label 渲染函数，参数与 table render 保持一致，并额外包含 `item` / `label` | `({ row, value, column, item, label, index }) => VNode \| string` | -      |
-|   `render`    | 自定义 value 渲染函数，参数与 table render 保持一致，并额外包含 `item` / `label` | `({ row, value, column, item, label, index }) => VNode \| string` | -      |
-|   `filter`    | 内容值格式化函数，参数只包含 `value` / `index` / `label` / `row`                 | `({ value, index, label, row }) => any`                           | -      |
-|    `attrs`    | 透传给 `el-descriptions-item` 的属性                                             | object                                                            | -      |
-| `labelAttrs`  | 透传给 label 内部 `s-tooltip` 的属性                                             | object                                                            | -      |
-| `valueAttrs`  | 透传给 value 内部 `s-tooltip` 的属性                                             | object                                                            | -      |
+|    属性名     | 说明                                                     | 类型                                                              | 默认值 |
+| :-----------: | -------------------------------------------------------- | ----------------------------------------------------------------- | ------ |
+|    `label`    | 标签文本                                                 | string                                                            | -      |
+|    `value`    | 内容值                                                   | any                                                               | -      |
+|  `labelSlot`  | 自定义 label 插槽名                                      | string                                                            | -      |
+|  `valueSlot`  | 自定义 value 插槽名                                      | string                                                            | -      |
+| `labelRender` | 自定义 label 渲染函数，`row` / `item` 均为当前描述项数据 | `({ row, value, column, item, label, index }) => VNode \| string` | -      |
+|   `render`    | 自定义 value 渲染函数，`row` / `item` 均为当前描述项数据 | `({ row, value, column, item, label, index }) => VNode \| string` | -      |
+|   `filter`    | 内容值格式化函数，`row` 为当前描述项数据                 | `({ value, index, label, row }) => any`                           | -      |
+|    `attrs`    | 透传给 `el-descriptions-item` 的属性                     | object                                                            | -      |
+| `labelAttrs`  | 透传给 label 内部 `s-tooltip` 的属性                     | object                                                            | -      |
+| `valueAttrs`  | 透传给 value 内部 `s-tooltip` 的属性                     | object                                                            | -      |
 
 ### 插槽
 
