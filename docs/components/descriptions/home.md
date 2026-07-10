@@ -18,7 +18,7 @@ descriptions/base
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" label-width="110" show-all />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" label-width="110" show-all />`。
 descriptions/chenghua/base
 :::
 

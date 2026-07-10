@@ -18,13 +18,13 @@ switch/base
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-switch v-model="enabled" theme="chenghua" active-text="启用" inactive-text="停用" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-switch v-model="enabled" theme="chenghua" active-text="启用" inactive-text="停用" />`。
 switch/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-switch v-model="enabled" theme="shijingshan" active-text="启用" inactive-text="停用" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-switch v-model="enabled" theme="shijingshan" active-text="启用" inactive-text="停用" />`。
 switch/shijingshan/base
 :::
 

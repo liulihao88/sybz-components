@@ -28,13 +28,13 @@ card/transparent
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-card v-model="collapsed" theme="chenghua" title="审核规则管理"></s-card>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-card v-model="collapsed" theme="chenghua" title="审核规则管理"></s-card>`。
 card/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-card v-model="collapsed" theme="shijingshan" title="审核规则管理"></s-card>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-card v-model="collapsed" theme="shijingshan" title="审核规则管理"></s-card>`。
 card/shijingshan/base
 :::
 

@@ -26,7 +26,7 @@ table/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题样式。基础写法：`<s-table theme="chenghua" size="small" :columns="columns" :data="data" :total="36" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-table theme="chenghua" size="small" :columns="columns" :data="data" :total="36" />`。
 table/chenghua/base
 :::
 
@@ -34,7 +34,7 @@ table/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题样式。基础写法：`<s-table theme="shijingshan" size="small" :columns="columns" :data="data" :total="36" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-table theme="shijingshan" size="small" :columns="columns" :data="data" :total="36" />`。
 table/shijingshan/base
 :::
 

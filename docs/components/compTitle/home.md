@@ -18,13 +18,13 @@ compTitle/base
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-comp-title title="审核周期" theme="chenghua" :comp-title-style="{ width: 96 }" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-comp-title title="审核周期" theme="chenghua" :comp-title-style="{ width: 96 }" />`。
 compTitle/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-comp-title title="审核周期" theme="shijingshan" :comp-title-style="{ width: 96 }" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-comp-title title="审核周期" theme="shijingshan" :comp-title-style="{ width: 96 }" />`。
 compTitle/shijingshan/base
 :::
 

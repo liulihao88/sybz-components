@@ -18,7 +18,7 @@ title/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题样式。基础写法：`<s-title title="成华 AI 服务申请" theme="chenghua" sub-title="审批中 12 个，待处理 4 个"></s-title>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-title title="成华 AI 服务申请" theme="chenghua" sub-title="审批中 12 个，待处理 4 个"></s-title>`。
 title/chenghua/base
 :::
 
@@ -26,7 +26,7 @@ title/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题样式。基础写法：`<s-title title="石景山 AI 服务申请" theme="shijingshan" sub-title="审批中 12 个，待处理 4 个"></s-title>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-title title="石景山 AI 服务申请" theme="shijingshan" sub-title="审批中 12 个，待处理 4 个"></s-title>`。
 title/shijingshan/base
 :::
 

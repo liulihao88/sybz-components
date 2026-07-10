@@ -20,7 +20,7 @@ input/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题样式。基础写法：`<s-input v-model="input" width="320" theme="chenghua" size="large" placeholder="请输入服务名称" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-input v-model="input" width="320" theme="chenghua" size="large" placeholder="请输入服务名称" />`。
 input/chenghua/base
 :::
 
@@ -28,7 +28,7 @@ input/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题样式。基础写法：`<s-input v-model="input" width="320" theme="shijingshan" size="large" placeholder="请输入服务名称" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-input v-model="input" width="320" theme="shijingshan" size="large" placeholder="请输入服务名称" />`。
 input/shijingshan/base
 :::
 

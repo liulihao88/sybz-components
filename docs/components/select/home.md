@@ -20,19 +20,19 @@ select/base
 
 #### chenghua基础用法
 
-:::demo 展示chenghua基础用法。基础写法：`<s-select v-model="value" width="320" theme="chenghua" title="服务名称" :options="options" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示chenghua基础用法。基础写法：`<s-select v-model="value" width="320" theme="chenghua" title="服务名称" :options="options" />`。
 select/chenghua/chenghuaBase
 :::
 
 #### chenghua尺寸
 
-:::demo 展示成华主题样式。基础写法：`<s-select v-model="smallValue" width="320" theme="chenghua" size="small" :options="options" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-select v-model="smallValue" width="320" theme="chenghua" size="small" :options="options" />`。
 select/chenghua/chenghuaSize
 :::
 
 #### chenghua多选
 
-:::demo 展示成华主题样式。基础写法：`<s-select v-model="multipleValue" width="100%" theme="chenghua" multiple title="多选服务" :options="options" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-select v-model="multipleValue" width="100%" theme="chenghua" multiple title="多选服务" :options="options" />`。
 select/chenghua/chenghuaMultiple
 :::
 
@@ -40,19 +40,19 @@ select/chenghua/chenghuaMultiple
 
 #### shijingshan基础用法
 
-:::demo 展示石景山基础用法。基础写法：`<s-select v-model="value" width="320" theme="shijingshan" title="服务名称" :options="options" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山基础用法。基础写法：`<s-select v-model="value" width="320" theme="shijingshan" title="服务名称" :options="options" />`。
 select/shijingshan/shijingshanBase
 :::
 
 #### shijingshan尺寸
 
-:::demo 展示石景山主题样式。基础写法：`<s-select v-model="smallValue" width="320" theme="shijingshan" size="small" :options="options" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-select v-model="smallValue" width="320" theme="shijingshan" size="small" :options="options" />`。
 select/shijingshan/shijingshanSize
 :::
 
 #### shijingshan多选
 
-:::demo 展示石景山主题样式。基础写法：`<s-select v-model="multipleValue" width="100%" theme="shijingshan" multiple title="多选服务" :options="options" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-select v-model="multipleValue" width="100%" theme="shijingshan" multiple title="多选服务" :options="options" />`。
 select/shijingshan/shijingshanMultiple
 :::
 

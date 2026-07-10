@@ -38,7 +38,7 @@ dialog/drawerFillSlot
 
 #### chenghua主题示例
 
-:::demo 展示成华主题样式。基础写法：`<s-dialog title="默认成华弹框" theme="chenghua" width="512px" v-model="visible.base"></s-dialog>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-dialog title="默认成华弹框" theme="chenghua" width="512px" v-model="visible.base"></s-dialog>`。
 dialog/chenghua/base
 :::
 
@@ -46,7 +46,7 @@ dialog/chenghua/base
 
 设置 `theme="chenghua"` 和 `type="drawer"` 时，`s-dialog` 会按成华主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
 
-:::demo 展示成华主题样式。基础写法：`<s-dialog v-model="visible" title="成华抽屉式 dialog" theme="chenghua" type="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-dialog v-model="visible" title="成华抽屉式 dialog" theme="chenghua" type="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
 dialog/chenghua/drawer
 :::
 
@@ -56,7 +56,7 @@ dialog/chenghua/drawer
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题样式。基础写法：`<s-dialog title="默认石景山弹框" theme="shijingshan" width="512px" v-model="visible.base"></s-dialog>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-dialog title="默认石景山弹框" theme="shijingshan" width="512px" v-model="visible.base"></s-dialog>`。
 dialog/shijingshan/base
 :::
 
@@ -64,7 +64,7 @@ dialog/shijingshan/base
 
 设置 `theme="shijingshan"` 和 `type="drawer"` 时，`s-dialog` 会按石景山主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
 
-:::demo 展示石景山主题样式。基础写法：`<s-dialog v-model="visible" title="石景山抽屉式 dialog" theme="shijingshan" type="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-dialog v-model="visible" title="石景山抽屉式 dialog" theme="shijingshan" type="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
 dialog/shijingshan/drawer
 :::
 

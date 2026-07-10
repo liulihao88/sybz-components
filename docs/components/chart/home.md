@@ -51,7 +51,7 @@ chart/pie
 
 ### 主题切换
 
-:::demo 展示主题切换。基础写法：`<s-chart :option="options" :theme="theme" style="width: 100%; height: 500px" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示主题切换。基础写法：`<s-chart :option="options" :theme="theme" style="width: 100%; height: 500px" />`。
 chart/theme
 :::
 

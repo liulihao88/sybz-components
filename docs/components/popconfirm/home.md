@@ -20,7 +20,7 @@ popconfirm/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题样式。基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。
 popconfirm/chenghua/base
 :::
 
@@ -28,7 +28,7 @@ popconfirm/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题样式。基础写法：`<s-popconfirm theme="shijingshan" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-popconfirm theme="shijingshan" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。
 popconfirm/shijingshan/base
 :::
 

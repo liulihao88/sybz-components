@@ -18,7 +18,7 @@ tabs/base
 
 ### 尺寸
 
-:::demo 展示尺寸配置。基础写法：`<s-tabs :options="navList" size="small"></s-tabs>`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
+:::demo 展示尺寸配置。基础写法：`<s-tabs :options="navList" size="small"></s-tabs>`。属性：`size` 可选 `'' / small / default / large`，默认值 `default`。
 tabs/size
 :::
 
@@ -30,13 +30,13 @@ tabs/capsule
 
 ### chenghua主题
 
-:::demo 展示成华主题样式。基础写法：`<s-tabs :options="navList" theme="chenghua"></s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-tabs :options="navList" theme="chenghua"></s-tabs>`。
 tabs/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-tabs :options="navList" theme="shijingshan"></s-tabs>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-tabs :options="navList" theme="shijingshan"></s-tabs>`。
 tabs/shijingshan/base
 :::
 

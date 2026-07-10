@@ -18,13 +18,13 @@ empty/base
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-empty theme="chenghua" description="暂无服务申请" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-empty theme="chenghua" description="暂无服务申请" width="72"></s-empty>`。
 empty/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-empty theme="shijingshan" description="暂无服务申请" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-empty theme="shijingshan" description="暂无服务申请" width="72"></s-empty>`。
 empty/shijingshan/base
 :::
 

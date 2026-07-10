@@ -22,13 +22,13 @@ tag/base
 
 #### chenghua基础用法
 
-:::demo 展示chenghua基础用法。基础写法：`<s-tag theme="chenghua" type="primary">运行中</s-tag>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示chenghua基础用法。基础写法：`<s-tag theme="chenghua" type="primary">运行中</s-tag>`。
 tag/chenghua/chenghuaBase
 :::
 
 #### chenghua映射状态
 
-:::demo 展示成华主题样式。基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="chenghua" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="chenghua" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。
 tag/chenghua/chenghuaMap
 :::
 
@@ -36,13 +36,13 @@ tag/chenghua/chenghuaMap
 
 #### shijingshan基础用法
 
-:::demo 展示石景山基础用法。基础写法：`<s-tag theme="shijingshan" type="primary">运行中</s-tag>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山基础用法。基础写法：`<s-tag theme="shijingshan" type="primary">运行中</s-tag>`。
 tag/shijingshan/shijingshanBase
 :::
 
 #### shijingshan映射状态
 
-:::demo 展示石景山主题样式。基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="shijingshan" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="shijingshan" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。
 tag/shijingshan/shijingshanMap
 :::
 

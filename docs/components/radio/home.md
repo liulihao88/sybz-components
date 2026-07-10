@@ -18,13 +18,13 @@ radio/base
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-radio v-model="service" title="服务类型" theme="chenghua" :options="serviceOptions" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-radio v-model="service" title="服务类型" theme="chenghua" :options="serviceOptions" />`。
 radio/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-radio v-model="service" title="服务类型" theme="shijingshan" :options="serviceOptions" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-radio v-model="service" title="服务类型" theme="shijingshan" :options="serviceOptions" />`。
 radio/shijingshan/base
 :::
 

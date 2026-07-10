@@ -18,13 +18,13 @@ checkbox/base
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="chenghua" :options="options" gap="18"></s-checkbox>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="chenghua" :options="options" gap="18"></s-checkbox>`。
 checkbox/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="shijingshan" :options="options" gap="18"></s-checkbox>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="shijingshan" :options="options" gap="18"></s-checkbox>`。
 checkbox/shijingshan/base
 :::
 
