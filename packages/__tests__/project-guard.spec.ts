@@ -119,12 +119,10 @@ describe('project build and publish guards', () => {
     expect(pkg.scripts.release).toBe('pnpm release:check && npm version patch && npm publish')
     expect(pkg.scripts.buildAll).toBe('pnpm build && pnpm run -C packages/utils build')
     expect(pkg.scripts['utils:release']).toBe('pnpm run -C packages/utils release')
-    expect(utilsPkg.scripts['release:check']).toBe('pnpm typecheck && pnpm test && pnpm build')
-    expect(utilsPkg.scripts.prepublishOnly).toBe('pnpm release:check')
-    expect(utilsPkg.scripts.release).toBe('pnpm release:check && node ./scripts/release.mjs --skip-check')
-    expect(utilsPkg.scripts['release:skip']).toBe(
-      'pnpm release:check && node ./scripts/release.mjs --skip-version-bump --skip-check',
-    )
+    expect(utilsPkg.scripts.typecheck).toBe('tsc --noEmit -p tsconfig.json')
+    expect(utilsPkg.scripts.test).toBe('vitest run --root ../.. packages/utils/src')
+    expect(utilsPkg.scripts.build).toBe('npx unbuild')
+    expect(utilsPkg.scripts.release).toBe('node ./scripts/release.mjs')
   })
 
   it('keeps externalized packages aligned with runtime and optional feature dependencies', () => {
@@ -160,9 +158,9 @@ describe('project build and publish guards', () => {
     expect(output).toContain('Current version:')
     expect(output).toContain('Next version:')
     expect(output).toContain('Skip version bump: no')
-    expect(output).toContain('Skip release check: no')
-    expect(output).toContain('1. Run utils release:check (typecheck, tests and build)')
-    expect(output).toContain('3. release:check must pass before publish')
+    expect(output).toContain('Skip check: no')
+    expect(output).toContain('1. Run typecheck and tests')
+    expect(output).toContain('3. Run unbuild')
     expect(output).toContain('5. git commit -m "chore: release @sybz-components/utils')
     expect(output).toContain('if staged changes exist')
     expect(output).toContain('6. npm publish')

@@ -105,20 +105,20 @@ app.use(SybzComponents, {
 |          `width`           | 默认文本触发区域最大宽度                   | string          | `100%`  |
 |        `lineClamp`         | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`     |
 |         `showSlot`         | 是否渲染默认触发内容区域                   | boolean         | `true`  |
-|          `effect`          | tooltip 主题，会透传给 `el-tooltip`        | string          | `dark`  |
+|          `effect`          | tooltip 主题，会透传给 `el-tooltip`        | `dark/light`    | `dark`  |
 | `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染        | boolean         | `false` |
 
 ### 常用透传属性
 
-|    属性名     | 说明                                           | 类型              | 默认值              |
-| :-----------: | ---------------------------------------------- | ----------------- | ------------------- |
-|   `content`   | 提示内容；未传默认插槽时，也会作为默认展示文本 | string / VNode    | -                   |
-|  `placement`  | tooltip 弹出位置                               | string            | Element Plus 默认值 |
-|   `trigger`   | 触发方式，支持单个值或数组                     | string / string[] | Element Plus 默认值 |
-| `show-after`  | 延迟显示时间，单位毫秒                         | number            | `0`                 |
-|   `visible`   | 受控显示状态                                   | boolean           | -                   |
-|  `disabled`   | 是否禁用 tooltip                               | boolean           | `false`             |
-| `raw-content` | Element Plus 原生 HTML 解析属性，仍支持透传    | boolean           | `false`             |
+|    属性名     | 说明                                           | 类型                                                                                                                              | 默认值              |
+| :-----------: | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+|   `content`   | 提示内容；未传默认插槽时，也会作为默认展示文本 | string / VNode                                                                                                                    | -                   |
+|  `placement`  | tooltip 弹出位置                               | `top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end` | bottom              |
+|   `trigger`   | 触发方式，支持单个值或数组                     | string / string[]                                                                                                                 | Element Plus 默认值 |
+| `show-after`  | 延迟显示时间，单位毫秒                         | number                                                                                                                            | `0`                 |
+|   `visible`   | 受控显示状态                                   | boolean                                                                                                                           | -                   |
+|  `disabled`   | 是否禁用 tooltip                               | boolean                                                                                                                           | `false`             |
+| `raw-content` | Element Plus 原生 HTML 解析属性，仍支持透传    | boolean                                                                                                                           | `false`             |
 
 ### 事件
 
