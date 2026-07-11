@@ -26,7 +26,7 @@ export type SButtonComponent = {
       /** 主题按钮变体 */
       variant?: '' | 'outline' | 'gradient'
       /** 按钮尺寸 */
-      size?: 'small' | 'default' | 'large'
+      size?: '' | 'small' | 'default' | 'large'
       /** 按钮宽度，数字会按工具方法补单位 */
       width?: string | number
       /** 按钮高度，数字会按工具方法补单位 */

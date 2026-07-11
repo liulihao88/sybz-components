@@ -93,7 +93,7 @@
     "skills:install": "node ./scripts/install-sybz-skill.mjs",
     "release:check": "pnpm check:components && pnpm check:utils && pnpm buildAll",
     "prepublishOnly": "pnpm release:check",
-    "release": "pnpm release:check && npm version patch && npm publish",
+    "release": "pnpm buildAll && npm version patch && npm publish",
     "docsserve": "vitepress serve docs",
     "deploy": "bash -x deploy.sh",
     "release-deploy": "pnpm release && npm run deploy",
