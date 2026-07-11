@@ -114,9 +114,14 @@ describe('project build and publish guards', () => {
     )
     expect(pkg.scripts['check:components']).toBe('pnpm typecheck && pnpm typecheck:sfc && pnpm test')
     expect(pkg.scripts['check:utils']).toBe('pnpm exec tsc --noEmit -p packages/utils/tsconfig.json && pnpm test:utils')
-    expect(pkg.scripts['release:check']).toBe('pnpm check:components && pnpm check:utils && pnpm buildAll')
+    expect(pkg.scripts['release:check']).toBe(
+      'pnpm typecheck && pnpm typecheck:sfc && pnpm exec tsc --noEmit -p packages/utils/tsconfig.json && pnpm buildAll',
+    )
     expect(pkg.scripts.prepublishOnly).toBe('pnpm release:check')
-    expect(pkg.scripts.release).toBe('pnpm release:check && npm version patch && npm publish')
+    expect(pkg.scripts.release).toBe('pnpm release:check && npm version patch && npm publish --ignore-scripts')
+    expect(pkg.scripts['release-deploy']).toBe('pnpm release && npm run deploy')
+    expect(pkg.scripts['release:check']).not.toContain('pnpm test')
+    expect(pkg.scripts['release:check']).not.toContain('test:utils')
     expect(pkg.scripts.buildAll).toBe('pnpm build && pnpm run -C packages/utils build')
     expect(pkg.scripts['utils:release']).toBe('pnpm run -C packages/utils release')
     expect(utilsPkg.scripts.typecheck).toBe('tsc --noEmit -p tsconfig.json')
