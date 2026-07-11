@@ -35,7 +35,7 @@ interface SButtonSelfProps {
   dangerouslyUseHTMLString?: boolean
   theme?: 'default' | 'chenghua' | 'shijingshan'
   variant?: '' | 'outline' | 'gradient'
-  size?: '' | 'small' | 'default' | 'large'
+  size?: 'small' | 'default' | 'large'
   width?: string | number
   height?: string | number
   hoverAnimation?: boolean
@@ -48,7 +48,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   dangerouslyUseHTMLString: false,
   theme: 'default',
   variant: '',
-  size: '',
+  size: 'default',
   width: '',
   height: '',
   hoverAnimation: false,

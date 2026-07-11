@@ -7,9 +7,8 @@ import { computed } from 'vue'
 import { getType, isEmpty } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import type { SybzComponentSize, SybzComponentTheme } from '@/types/component-props'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
-type TagTheme = 'default' | 'chenghua' | 'shijingshan'
-type TagSize = '' | 'small' | 'default' | 'large'
 type TagRule = string | number | boolean | any[]
 
 interface TagProps {
@@ -23,8 +22,8 @@ interface TagProps {
   info?: TagRule
   other?: TagType
   type?: TagType
-  theme?: TagTheme
-  size?: TagSize
+  theme?: SybzComponentTheme
+  size?: SybzComponentSize
   config?: Record<string, any>
 }
 
@@ -40,7 +39,7 @@ const props = withDefaults(defineProps<TagProps>(), {
   other: 'primary',
   type: '',
   theme: 'default',
-  size: '',
+  size: 'default',
   config: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('tag', props)

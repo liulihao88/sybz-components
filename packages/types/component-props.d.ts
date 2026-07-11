@@ -19,7 +19,7 @@ import type { TagPropsPublic } from 'element-plus/es/components/tag'
 import type { RowPropsPublic } from 'element-plus/es/components/row'
 
 export type SybzComponentTheme = 'default' | 'chenghua' | 'shijingshan'
-export type SybzComponentSize = '' | 'small' | 'default' | 'large'
+export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 
 export interface SRenderScope<Row extends SybzRecord = SybzRecord> {
