@@ -119,7 +119,7 @@ describe('project build and publish guards', () => {
     )
     expect(pkg.scripts.prepublishOnly).toBe('pnpm release:check')
     expect(pkg.scripts.release).toBe('pnpm release:check && npm version patch && npm publish --ignore-scripts')
-    expect(pkg.scripts['release-deploy']).toBe('pnpm release && npm run deploy')
+    expect(pkg.scripts['release-deploy']).toBe('pnpm release && npm run deploy -- --skip_build')
     expect(pkg.scripts['release:check']).not.toContain('pnpm test')
     expect(pkg.scripts['release:check']).not.toContain('test:utils')
     expect(pkg.scripts.buildAll).toBe('pnpm build && pnpm run -C packages/utils build')

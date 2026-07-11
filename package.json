@@ -96,7 +96,7 @@
     "release": "pnpm release:check && npm version patch && npm publish --ignore-scripts",
     "docsserve": "vitepress serve docs",
     "deploy": "bash -x deploy.sh",
-    "release-deploy": "pnpm release && npm run deploy",
+    "release-deploy": "pnpm release && npm run deploy -- --skip_build",
     "update": " pnpm add @sybz-components/utils@latest",
     "utils:release": "pnpm run -C packages/utils release",
     "link:bun": "bun link && bun link --cwd packages/utils",
