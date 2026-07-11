@@ -486,7 +486,12 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'STitleProps',
       slots: ['default', 'title', 'icon', 'extra', 'right'],
-      hoverProps: componentHoverProps('STitleProps', ['STitleProps', 'SybzComponentTheme', 'SybzRecord']),
+      hoverProps: componentHoverProps('STitleProps', [
+        'STitleProps',
+        'SybzComponentTheme',
+        'SybzComponentSize',
+        'SybzRecord',
+      ]),
     },
   ],
   [

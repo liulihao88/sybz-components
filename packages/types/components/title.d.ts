@@ -1,4 +1,4 @@
-import type { STitleProps, SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
+import type { STitleProps, SybzComponentTheme, SybzRecord } from '../component-props'
 
 export type STitleComponent = {
   new (): {
