@@ -1,5 +1,11 @@
 import { ElDescriptions } from 'element-plus'
-import type { SDescriptionsItemOption, SDescriptionsOwnProps, SybzComponentTheme } from '../component-props'
+import type {
+  SDescriptionsItemOption,
+  SDescriptionsOwnProps,
+  SDescriptionsRow,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
 
 type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>
 

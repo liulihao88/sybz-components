@@ -1,12 +1,5 @@
 import { ElForm } from 'element-plus'
-import type {
-  SFormContext,
-  SFormFieldItem,
-  SFormFieldList,
-  SFormProps,
-  SFormTitleItem,
-  SybzRecord,
-} from '../component-props'
+import type { SFormFieldList, SFormProps, SybzRecord } from '../component-props'
 
 type ElFormInstance = InstanceType<typeof ElForm>
 
@@ -17,13 +10,16 @@ export type SFormComponent = {
     $props: {
       fieldList: SFormFieldList
       model: SybzRecord
+      /** showFooter 的别名，设置后优先级更高 */
       footer?: boolean
       showFooter?: boolean
       column?: 1 | 2 | 3 | 4 | 5 | 6
       /** 多列表单项左右间距，仅 column > 1 时生效，默认 16px */
       gap?: string | number
       align?: 'center' | 'top' | 'flex-end'
+      /** 是否自动把 defaultValue/default 初始化到 model 中 */
       autoSetDefaultValue?: boolean
+      /** 所有 schema 控件的默认透传属性 */
       componentDefaults?: SybzRecord
     } & Omit<
       ElFormInstance['$props'],
@@ -38,21 +34,7 @@ export type SFormComponent = {
       | 'componentDefaults'
     >
     $emit: ElFormInstance['$emit']
-    $slots: ElFormInstance['$slots'] & Record<string, (scope: SFormContext) => any>
-    validate: (isResetFieldsOrParams?: boolean | SybzRecord, otherParams?: SybzRecord) => Promise<SybzRecord>
-    validateField: ElFormInstance['validateField']
-    resetFields: ElFormInstance['resetFields']
-    clearValidate: ElFormInstance['clearValidate']
-    scrollToField: ElFormInstance['scrollToField']
-    submit: () => Promise<SybzRecord>
-    getModel: () => SybzRecord
-    getValue: (prop: string) => any
-    setValue: (prop: string, value: any) => void
-    getFields: () => Array<SFormFieldItem | SFormTitleItem>
-    getField: (prop: string) => SFormFieldItem | SFormTitleItem | undefined
-    getVisibleFields: () => Array<SFormFieldItem | SFormTitleItem>
-    formRef: ElFormInstance
-    sFormRef: ElFormInstance
+    $slots: ElFormInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
 

@@ -4,7 +4,7 @@ export type STitleComponent = {
   new (): {
     $props: {
       title?: string
-      size?: '' | 'small' | 'default' | 'large'
+      size?: SybzComponentSize
       subTitle?: string
       subAttrs?: SybzRecord
       inner?: boolean
