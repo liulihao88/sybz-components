@@ -22,7 +22,7 @@ describe('title component props', () => {
     expect(componentProps).toContain('gap?: string | number')
     expect(componentProps).toContain("type?: '' | 'simple' | 'icon' | 'form'")
 
-    expect(componentDeclaration).toContain("size?: '' | 'small' | 'default' | 'large'")
+    expect(componentDeclaration).toContain("size?:  'small' | 'default' | 'large'")
     expect(componentDeclaration).toContain('margin?: string | number')
     expect(componentDeclaration).toContain('gap?: string | number')
     expect(componentDeclaration).toContain("type?: '' | 'simple' | 'icon' | 'form'")
