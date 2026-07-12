@@ -143,6 +143,7 @@ const checkboxClass = computed(() => ({
   's-checkbox--chenghua': mergedProps.value.theme === 'chenghua',
   's-checkbox--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-checkbox--button': mergedProps.value.showType === 'button',
+  's-checkbox--show-all': mergedProps.value.showAll,
 }))
 </script>
 
@@ -209,6 +210,13 @@ const checkboxClass = computed(() => ({
     background: var(--el-color-primary-light-9);
     color: var(--el-color-primary);
     box-shadow: -1px 0 0 0 var(--el-color-primary);
+  }
+}
+
+.s-checkbox--button.s-checkbox--show-all {
+  :deep(.s-checkbox__wrapper .el-checkbox-button:first-child .el-checkbox-button__inner) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
   }
 }
 
