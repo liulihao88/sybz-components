@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SSelectChangeContext } from 'sybz-components'
 import { ref } from 'vue'
 const stepList = [
   { id: '1', name: '开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11开始11' },
@@ -7,11 +8,10 @@ const stepList = [
   { id: '4', name: 'GX1234444' },
 ]
 const optionsId = ref(['1', '3'])
-function changeSelect(value, label, itemObj) {
-  console.log('changeSelect==')
-  console.log(`value, label, itemObj`, value, label, itemObj)
+function changeSelect({ value, label, option, index }: SSelectChangeContext) {
+  console.log(`value, label, option, index`, value, label, option, index)
 }
-function change(...rest) {
+function change(...rest: unknown[]) {
   console.log('change??')
   console.log(`rest`, rest)
 }

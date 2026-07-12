@@ -104,8 +104,19 @@ interface SSelectOptionContext {
   index: number
   value: unknown
 }
+
+interface SSelectChangeContext {
+  value: unknown
+  label: unknown
+  option: SelectOption | SelectOption[] | undefined
+  index: number | number[] | undefined
+}
 const attrs = useAttrs()
-const emits = defineEmits(['changeSelect', 'update:modelValue', 'change'])
+const emits = defineEmits<{
+  changeSelect: [context: SSelectChangeContext]
+  'update:modelValue': [value: unknown]
+  change: [value: unknown]
+}>()
 const slots = useSlots()
 const noDefaultSlots = computed<Record<string, any>>(() => {
   const copySlots = { ...slots } as Record<string, any>
@@ -505,44 +516,52 @@ const quickSelect = (isPlus: boolean) => {
 }
 
 // 处理多选的返回情况
-function changeMulty(item: any[]) {
-  let selectLabel = []
-  const selectObj = sOptions.value.filter((v) => {
-    if (item.includes(handleDifValue(v))) {
-      selectLabel.push(Array.isArray(props.label) ? handleLabel(v) : getOptionProp(v, props.label))
+function changeMulty(value: any[]) {
+  const labels: unknown[] = []
+  const indices: number[] = []
+  const options = sOptions.value.filter((option, index) => {
+    if (value.includes(handleDifValue(option))) {
+      labels.push(props.type === 'simple' ? option : handleLabel(option, index))
+      indices.push(index)
       return true
     } else {
       return false
     }
   })
-  _commonEmits(item, selectLabel, selectObj)
+  emitChangeSelect(value, labels, options, indices)
 }
-// 有些场景， 下拉框不仅需要获取value, 还需要获取选择的对象或者label, el-select原生没有这个属性， 所以changeHandler就做了下处理， 返回的数组包含3个属性， 第一个value, 第二个选中对象， 第三个选中的label。
-function changeHandler(item: any) {
+// changeSelect 额外返回当前值对应的 label、option 和 index。
+function changeHandler(value: any) {
   hideSelectTooltip()
   // 如果val是数组, 证明是多选
-  if (Array.isArray(item)) {
-    changeMulty(item)
+  if (Array.isArray(value)) {
+    changeMulty(value)
     return
   }
-  if (isEmpty(item, true)) {
-    _commonEmits('', '', '')
+  if (isEmpty(value, true)) {
+    emitChangeSelect(undefined, undefined, undefined, undefined)
     return
   }
-  let selectObj = sOptions.value.filter((v) => {
+  const index = sOptions.value.findIndex((option) => {
     if (props.type === 'simple') {
-      return v === item
+      return option === value
     } else {
-      return getOptionProp(v, props.value) === item
+      return getOptionProp(option, props.value) === value
     }
-  })[0]
-  let selectLabel = Array.isArray(props.label) ? handleLabel(selectObj) : getOptionProp(selectObj, props.label)
-  _commonEmits(item, selectLabel, selectObj)
+  })
+  const option = index >= 0 ? sOptions.value[index] : undefined
+  const label = option === undefined ? undefined : props.type === 'simple' ? option : handleLabel(option, index)
+  emitChangeSelect(value, label, option, index >= 0 ? index : undefined)
 }
-function _commonEmits(item, selectLabel, selectObj) {
-  emits('changeSelect', item, selectLabel, selectObj)
-  emits('update:modelValue', item)
-  emits('change', item)
+function emitChangeSelect(
+  value: unknown,
+  label: unknown,
+  option: SSelectChangeContext['option'],
+  index: SSelectChangeContext['index'],
+) {
+  emits('changeSelect', { value, label, option, index })
+  emits('update:modelValue', value)
+  emits('change', value)
 }
 </script>
 

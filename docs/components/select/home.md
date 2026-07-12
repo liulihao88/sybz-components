@@ -167,11 +167,21 @@ select/multipleTableSelect
 
 ### 事件
 
-|       事件名        | 说明                   |
-| :-----------------: | ---------------------- |
-| `update:modelValue` | 选中值变化时触发       |
-|      `change`       | 值变化时触发           |
-|   `changeSelect`    | 组件内部切换选项时触发 |
+|       事件名        | 说明                                                                                                       |
+| :-----------------: | ---------------------------------------------------------------------------------------------------------- |
+| `update:modelValue` | 选中值变化时触发                                                                                           |
+|      `change`       | 值变化时触发                                                                                               |
+|   `changeSelect`    | 组件内部切换选项时触发，参数为 `{ value, label, option, index }`；多选时各字段为数组，清空时为 `undefined` |
+
+命名事件函数需要显式标注类型，TypeScript 无法从模板事件反向推断脚本区函数参数。组件库已导出 `SSelectChangeContext`：
+
+```ts
+import type { SSelectChangeContext } from 'sybz-components'
+
+function changeSelect({ value, label, option, index }: SSelectChangeContext) {
+  console.log(value, label, option, index)
+}
+```
 
 ### 说明
 

@@ -240,6 +240,23 @@ describe('component entry guards', () => {
     expect(selectDocs).toContain('`{ option, index, value }`')
   })
 
+  it('keeps select changeSelect payload as an object with index', () => {
+    const select = readText('packages/components/select/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const componentTypes = readText('packages/types/components/select.d.ts')
+    const docs = readText('docs/components/select/home.md')
+    const demo = readText('docs/components/select/multiple.vue')
+
+    expect(select).toContain("emits('changeSelect', { value, label, option, index })")
+    expect(select).not.toContain("emits('changeSelect', item, selectLabel, selectObj)")
+    expect(componentProps).toContain('export interface SSelectChangeContext')
+    expect(componentProps).toContain('index: number | number[] | undefined')
+    expect(componentTypes).toContain("(event: 'changeSelect', context: SSelectChangeContext): void")
+    expect(docs).toContain('{ value, label, option, index }')
+    expect(demo).toContain('function changeSelect({ value, label, option, index }: SSelectChangeContext)')
+    expect(demo).toContain("import type { SSelectChangeContext } from 'sybz-components'")
+  })
+
   it('keeps form callback and slot context aligned on option', () => {
     const component = readText('packages/components/form/src/index.vue')
     const renderer = readText('packages/components/form/src/renderComp.vue')

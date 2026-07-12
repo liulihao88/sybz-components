@@ -392,6 +392,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'select',
       allowAnySlots: true,
       hoverProps: componentHoverProps('SSelectSelfProps', [
+        'SSelectChangeContext',
         'SSelectOptionContext',
         'SSelectSelfProps',
         'SybzComponentSize',

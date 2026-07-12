@@ -459,6 +459,13 @@ export interface SSelectOptionContext<Option = SybzRecord> {
   value: unknown
 }
 
+export interface SSelectChangeContext<Option = SybzRecord, Value = unknown, Label = unknown> {
+  value: Value | Value[] | undefined
+  label: Label | Label[] | undefined
+  option: Option | Option[] | undefined
+  index: number | number[] | undefined
+}
+
 export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps {
   modelValue?: any[] | string | number
   value?: string

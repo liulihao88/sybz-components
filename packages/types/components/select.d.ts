@@ -1,5 +1,6 @@
 import { ElSelect } from 'element-plus'
 import type {
+  SSelectChangeContext,
   SSelectOptionContext,
   SSelectSelfProps,
   SybzComponentSize,
@@ -7,7 +8,7 @@ import type {
   SybzRecord,
 } from '../component-props'
 
-export type { SSelectOptionContext } from '../component-props'
+export type { SSelectChangeContext, SSelectOptionContext } from '../component-props'
 
 type ElSelectInstance = InstanceType<typeof ElSelect>
 
@@ -72,7 +73,9 @@ export type SSelectComponent = {
       | 'showTooltip'
       | 'tooltipAttrs'
     >
-    $emit: ElSelectInstance['$emit']
+    $emit: ElSelectInstance['$emit'] & {
+      (event: 'changeSelect', context: SSelectChangeContext): void
+    }
     $slots: ElSelectInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }
