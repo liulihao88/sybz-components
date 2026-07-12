@@ -9,13 +9,13 @@
       />
       <s-tooltip width="300px" content="这段文字没有超出宽度，所以不会显示 tooltip。" />
     </div>
+    <s-tooltip content="可以直接包裹按钮、图标等自定义触发内容">
+      <el-button type="primary">按钮触发</el-button>
+    </s-tooltip>
 
     <div class="demo-row">
       <s-tooltip content="">`content` 为空时，`s-tooltip` 会自动禁用提示。</s-tooltip>
     </div>
-    <s-tooltip content="可以直接包裹按钮、图标等自定义触发内容">
-      <el-button type="primary">按钮触发</el-button>
-    </s-tooltip>
   </div>
 </template>
 

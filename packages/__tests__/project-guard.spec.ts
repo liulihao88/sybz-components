@@ -196,6 +196,17 @@ describe('project build and publish guards', () => {
 })
 
 describe('component entry guards', () => {
+  it('keeps tooltip custom triggers sized to their content in flex layouts', () => {
+    const tooltip = readText('packages/components/tooltip/src/index.vue')
+    const demo = readText('docs/components/tooltip/usually.vue')
+
+    expect(tooltip).toContain("'s-tooltip-box__text--custom-trigger': hasDefaultSlot")
+    expect(tooltip).toContain('.s-tooltip-box__text--custom-trigger')
+    expect(tooltip).toContain('width: fit-content')
+    expect(tooltip).toContain('flex: 0 0 auto')
+    expect(demo).toContain('class="demo-flex-row"')
+  })
+
   it('keeps global install options for directives and Element Plus icons', () => {
     const entry = readText('packages/index.ts')
 

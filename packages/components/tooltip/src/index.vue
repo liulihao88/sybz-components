@@ -4,7 +4,10 @@
       v-if="mergedProps.showSlot"
       ref="textRef"
       class="s-tooltip-box__text"
-      :class="{ 's-tooltip-box__text--multiline': isMultiLineClamp }"
+      :class="{
+        's-tooltip-box__text--multiline': isMultiLineClamp,
+        's-tooltip-box__text--custom-trigger': hasDefaultSlot,
+      }"
       :style="textStyle"
       v-bind="triggerAttrs"
       @click="contentClick"
@@ -37,6 +40,7 @@ defineOptions({
 })
 const slots = useSlots()
 const attrs = useAttrs()
+const hasDefaultSlot = computed(() => Boolean(slots.default))
 
 interface TooltipProps {
   width?: string
@@ -186,6 +190,13 @@ function contentClick() {
 
 .s-tooltip-box__text--multiline {
   text-overflow: initial;
+}
+
+.s-tooltip-box__text--custom-trigger {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  flex: 0 0 auto;
 }
 
 .s-tooltip-box__text:has(.el-button) + :deep(.el-button),
