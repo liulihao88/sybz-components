@@ -111,7 +111,9 @@ const parseOptions = computed(() => {
   }
   return mergedProps.value.options.map(normalizeOption)
 })
+const isDisabled = computed(() => attrs.disabled === '' || Boolean(attrs.disabled))
 const getOptionDisabled = (option: RadioItem, index: number) => {
+  if (isDisabled.value) return true
   if (typeof mergedProps.value.customDisabled !== 'function') return false
   return (
     mergedProps.value.customDisabled({ option, index, value: option[mergedProps.value.value as keyof RadioItem] }) ??
