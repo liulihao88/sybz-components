@@ -197,7 +197,13 @@ export interface SInputNumberSelfProps {
 export type SInputNumberProps = SInputNumberSelfProps &
   Partial<Omit<InputNumberPropsPublic, keyof SInputNumberSelfProps>>
 
-export interface SCheckboxSelfProps {
+export interface SCheckboxOptionContext<Option = SybzRecord> {
+  option: Option
+  index: number
+  value: unknown
+}
+
+export interface SCheckboxSelfProps<Option = SybzRecord> {
   type?: '' | 'simple'
   options?: any[]
   showType?: 'check' | 'button'
@@ -206,7 +212,7 @@ export interface SCheckboxSelfProps {
   value?: string
   showAll?: boolean
   attrs?: SybzRecord
-  customDisabled?: (...args: any[]) => any
+  customDisabled?: (context: SCheckboxOptionContext<Option>) => boolean
   customLabel?: string | ((item: any, index: number) => any)
   gap?: string | number
   theme?: SybzComponentTheme

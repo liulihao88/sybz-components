@@ -11,6 +11,9 @@ const options = ref([
 function change(checkValue) {
   console.log(`checkValue`, checkValue)
 }
+function customDisabled({ option, index, value }) {
+  return option.id === 'xrr' || index === 4 || value === 'xyy'
+}
 </script>
 
 <template>
@@ -22,6 +25,7 @@ function change(checkValue) {
     show-type="button"
     theme="chenghua"
     value="id"
+    :custom-disabled="customDisabled"
     @change="change"
   ></s-checkbox>
 </template>

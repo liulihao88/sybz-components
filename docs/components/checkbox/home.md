@@ -36,7 +36,7 @@ checkbox/usually
 
 ### 多属性用法
 
-:::demo 展示按钮模式下一个不选、选中其中几项和全选的区别样式。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button"></s-checkbox>`。属性：`showType` 可选值 `check / button`，默认值 `check`；`showAll` 可选值 `true / false`，默认值 `true`；`options` 类型 `array`，默认值 `[]`；`label` 默认值 `label`；`value` 默认值 `value`。
+:::demo 展示按钮模式和自定义禁用。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button" :customDisabled="customDisabled"></s-checkbox>`。属性：`showType` 可选值 `check / button`，默认值 `check`；`showAll` 可选值 `true / false`，默认值 `true`；`customDisabled` 参数为 `{ option, index, value }`，默认值为未设置；`options` 类型 `array`，默认值 `[]`；`label` 默认值 `label`；`value` 默认值 `value`。
 checkbox/multyAttrs
 :::
 
@@ -63,7 +63,7 @@ checkbox/customGap
 |     value      | 后台的值需要的字段                                 | string                                 | value     |
 |    showAll     | 是否显示全选                                       | boolean                                | true      |
 |     attrs      | 控制el-checkbox组件的参数                          | object                                 | {}        |
-| customDisabled | 自定义的disabled                                   | function                               | {}        |
+| customDisabled | 自定义禁用，参数为 `{ option, index, value }`      | `(context) => boolean`                 | -         |
 |  customLabel   | 自定义显示的label                                  | function/string/''                     | {}        |
 |      gap       | 多个复选框之间的水平间距，支持 `processWidth` 写法 | number/string                          | -         |
 |     theme      | 主题样式                                           | `default` / `chenghua` / `shijingshan` | `default` |
@@ -84,3 +84,4 @@ checkbox/customGap
 ### 说明
 
 - `gap` 支持 `16`、`'16'`、`'16px'`、`'1rem'`、`'5%'` 这类常见写法；纯数字或数字字符串会自动补成 `px`。
+- `customDisabled` 中的 `option` 是当前选项，`index` 是选项下标，`value` 是按 `type` 和 `value` 属性解析后的实际值。

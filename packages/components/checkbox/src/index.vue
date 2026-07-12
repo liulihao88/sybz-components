@@ -18,6 +18,11 @@ defineOptions({
   name: 'SCheckbox',
 })
 const rootAttrs = useAttrs()
+interface CheckboxOptionContext<Option = Record<string, any>> {
+  option: Option
+  index: number
+  value: unknown
+}
 interface CheckboxProps {
   type?: string
   options?: any[]
@@ -27,7 +32,7 @@ interface CheckboxProps {
   value?: string
   showAll?: boolean
   attrs?: Record<string, any>
-  customDisabled?: (...args: any[]) => any
+  customDisabled?: (context: CheckboxOptionContext) => boolean | null
   customLabel?: ((...args: any[]) => any) | string
   gap?: number | string
   theme?: 'default' | 'chenghua' | 'shijingshan'
@@ -43,13 +48,14 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   value: 'value',
   showAll: true,
   attrs: () => ({}),
-  customDisabled: () => {},
+  customDisabled: null,
   // 自定义label显示多个参数的函数
   customLabel: '',
   gap: '',
   theme: 'default',
   size: 'default',
 })
+
 const mergedProps = useGlobalComponentConfig('checkbox', props)
 const checkAll = ref(false)
 const isIndeterminate = ref(false)
@@ -106,6 +112,10 @@ const checkType = computed(() => {
   }
   return obj[mergedProps.value.showType] ?? 'el-checkbox'
 })
+const getOptionValue = (option: any) => (props.type === 'simple' ? option : option[props.value!])
+const getOptionDisabled = (option: any, index: number) => {
+  return props.customDisabled?.({ option, index, value: getOptionValue(option) }) ?? false
+}
 const checkAllClass = computed(() => ({
   's-checkbox__all--none': !checkAll.value && !isIndeterminate.value,
   's-checkbox__all--indeterminate': isIndeterminate.value,
@@ -181,9 +191,9 @@ const checkboxClass = computed(() => ({
           v-for="(item, index) in props.options"
           :key="index"
           :size="mergedProps.size || undefined"
-          :value="props.type === 'simple' ? item : item[props.value!]"
+          :value="getOptionValue(item)"
           :label="props.type === 'simple' ? item : item[props.label!]"
-          :disabled="props.customDisabled(item)"
+          :disabled="getOptionDisabled(item, index)"
           class="s-checkbox__item"
         >
           <slot :name="props.type === 'simple' ? item : item.slot" v-bind="props.type === 'simple' ? {} : item">
