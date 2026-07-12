@@ -34,10 +34,16 @@ checkbox/shijingshan/base
 checkbox/usually
 :::
 
+### disabled
+
+:::demo 展示按钮模式和自定义禁用。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button" :customDisabled="customDisabled"></s-checkbox>`
+checkbox/disabled
+:::
+
 ### 多属性用法
 
-:::demo 展示按钮模式和自定义禁用。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button" :customDisabled="customDisabled"></s-checkbox>`。属性：`showType` 可选值 `check / button`，默认值 `check`；`showAll` 可选值 `true / false`，默认值 `true`；`customDisabled` 参数为 `{ option, index, value }`，默认值为未设置；`options` 类型 `array`，默认值 `[]`；`label` 默认值 `label`；`value` 默认值 `value`。
-checkbox/multyAttrs
+:::demo 展示按钮模式和自定义禁用。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button" :customDisabled="customDisabled"></s-checkbox>`
+checkbox/usually
 :::
 
 ### 插槽用法

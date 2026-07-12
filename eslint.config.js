@@ -44,6 +44,7 @@ export default [
       'vue/multi-word-component-names': 'off',
       'vue/no-template-shadow': 'off',
       'vue/attribute-hyphenation': ['warn', 'always', { ignore: ['dangerouslyUseHTMLString'] }],
+      'vue/require-default-prop': 'off',
     },
   },
   {

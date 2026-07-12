@@ -32,7 +32,7 @@ interface CheckboxProps {
   value?: string
   showAll?: boolean
   attrs?: Record<string, any>
-  customDisabled?: (context: CheckboxOptionContext) => boolean | null
+  customDisabled?: (context: CheckboxOptionContext) => boolean
   customLabel?: ((...args: any[]) => any) | string
   gap?: number | string
   theme?: 'default' | 'chenghua' | 'shijingshan'
@@ -48,7 +48,6 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   value: 'value',
   showAll: true,
   attrs: () => ({}),
-  customDisabled: null,
   // 自定义label显示多个参数的函数
   customLabel: '',
   gap: '',
