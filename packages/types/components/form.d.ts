@@ -10,15 +10,6 @@ import type {
   SybzRecord,
 } from '../component-props'
 
-export type {
-  SFormContext,
-  SFormDynamic,
-  SFormFieldItem,
-  SFormFieldList,
-  SFormRender,
-  SFormTitleItem,
-} from '../component-props'
-
 type ElFormInstance = InstanceType<typeof ElForm>
 
 export type SFormPublicProps = SFormProps & Omit<ElFormInstance['$props'], keyof SFormProps>

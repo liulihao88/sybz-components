@@ -1,8 +1,6 @@
 import { ElCheckboxGroup } from 'element-plus'
 import type { SCheckboxOptionContext, SCheckboxSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
 
-export type { SCheckboxOptionContext } from '../component-props'
-
 type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 
 export type SCheckboxPublicProps = SCheckboxSelfProps &
@@ -19,8 +17,8 @@ export type SCheckboxComponent = {
       value?: string
       showAll?: boolean
       attrs?: SybzRecord
-      customDisabled?: (context: SCheckboxOptionContext) => boolean
-      customLabel?: (context: SCheckboxOptionContext) => any
+      customDisabled?: (context: SCheckboxOptionContext<SybzRecord>) => boolean
+      customLabel?: (context: SCheckboxOptionContext<SybzRecord>) => any
       gap?: string | number
       theme?: SybzComponentTheme
     } & Omit<

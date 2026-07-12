@@ -8,8 +8,6 @@ import type {
   SybzRecord,
 } from '../component-props'
 
-export type { SSelectChangeContext, SSelectOptionContext } from '../component-props'
-
 type ElSelectInstance = InstanceType<typeof ElSelect>
 
 export type SSelectPublicProps = SSelectSelfProps & Omit<ElSelectInstance['$props'], keyof SSelectSelfProps>
@@ -33,11 +31,11 @@ export type SSelectComponent = {
       title?: string
       compTitleStyle?: SybzRecord
       connect?: string
-      customLabel?: (context: SSelectOptionContext) => any
+      customLabel?: (context: SSelectOptionContext<SybzRecord>) => any
       width?: string | number
       height?: string | number
       disPlaceholder?: string
-      customDisabled?: (context: SSelectOptionContext) => boolean
+      customDisabled?: (context: SSelectOptionContext<SybzRecord>) => boolean
       url?: string | ((...args: any[]) => any)
       urlParams?: SybzRecord
       optionsExpression?: string
@@ -73,9 +71,7 @@ export type SSelectComponent = {
       | 'showTooltip'
       | 'tooltipAttrs'
     >
-    $emit: ElSelectInstance['$emit'] & {
-      (event: 'changeSelect', context: SSelectChangeContext): void
-    }
+    $emit: ElSelectInstance['$emit']
     $slots: ElSelectInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
 }

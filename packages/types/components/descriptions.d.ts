@@ -1,8 +1,8 @@
 import { ElDescriptions } from 'element-plus'
 import type {
-  SDescriptionsFilterContext,
   SDescriptionsItemOption,
   SDescriptionsOwnProps,
+  SDescriptionsFilterContext,
   SDescriptionsRenderContext,
   SybzComponentTheme,
 } from '../component-props'
