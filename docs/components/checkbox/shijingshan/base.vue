@@ -21,13 +21,7 @@ const modeOptions = [
   <div class="checkbox-shijingshan-demo">
     <div class="checkbox-shijingshan-demo__list">
       <s-checkbox v-model="checkedServices" theme="shijingshan" :options="options" gap="18"></s-checkbox>
-      <s-checkbox
-        v-model="checkedModes"
-        theme="shijingshan"
-        :options="modeOptions"
-        show-type="button"
-        :show-all="false"
-      ></s-checkbox>
+      <s-checkbox v-model="checkedModes" theme="shijingshan" :options="modeOptions" show-type="button"></s-checkbox>
     </div>
   </div>
 </template>

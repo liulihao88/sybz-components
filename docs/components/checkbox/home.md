@@ -36,7 +36,7 @@ checkbox/usually
 
 ### 多属性用法
 
-:::demo 展示多属性用法配置。基础写法：`<s-checkbox @change="change" v-model="checkboxValue" :options="options" label="name" :showAll="false" size="small" showType="button" value="id" :customDisabled="(item) => item.id === 'xrr'"></s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
+:::demo 展示按钮模式下一个不选、选中其中几项和全选的区别样式。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button"></s-checkbox>`。属性：`showType` 可选值 `check / button`，默认值 `check`；`showAll` 可选值 `true / false`，默认值 `true`；`options` 类型 `array`，默认值 `[]`；`label` 默认值 `label`；`value` 默认值 `value`。
 checkbox/multyAttrs
 :::
 
@@ -58,7 +58,7 @@ checkbox/customGap
 | :------------: | -------------------------------------------------- | -------------------------------------- | --------- |
 |      type      | options参数的类型, 可以设置为simple                | string                                 | -         |
 |    options     | checkbox的选项                                     | object                                 | {}        |
-|    showType    | 显示的样式                                         | string                                 | check     |
+|    showType    | 显示样式，可选 `check` / `button`                  | string                                 | check     |
 |     label      | 显示的文本对应的字段                               | string                                 | label     |
 |     value      | 后台的值需要的字段                                 | string                                 | value     |
 |    showAll     | 是否显示全选                                       | boolean                                | true      |

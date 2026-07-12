@@ -103,8 +103,13 @@ const checkType = computed(() => {
     check: 'el-checkbox',
     button: 'el-checkbox-button',
   }
-  return obj[props.showType] ?? 'el-checkbox'
+  return obj[mergedProps.value.showType] ?? 'el-checkbox'
 })
+const checkAllClass = computed(() => ({
+  's-checkbox__all--none': !checkAll.value && !isIndeterminate.value,
+  's-checkbox__all--indeterminate': isIndeterminate.value,
+  's-checkbox__all--checked': checkAll.value && !isIndeterminate.value,
+}))
 function emitValue(item) {
   allCheckList.value = item
   emits('update:modelValue', allCheckList.value)
@@ -143,17 +148,19 @@ const checkboxClass = computed(() => ({
 
 <template>
   <div class="s-checkbox" :class="checkboxClass">
-    <el-checkbox
+    <component
+      :is="checkType"
       v-if="mergedProps.showAll"
       v-model="checkAll"
       class="s-checkbox__all"
+      :class="checkAllClass"
       :size="mergedProps.size || undefined"
       :indeterminate="isIndeterminate"
       v-bind="$attrs"
       @change="checkAllChange"
     >
       全选
-    </el-checkbox>
+    </component>
     <el-checkbox-group
       v-model="checkboxModel"
       v-bind="{ ...filteredAttrs, size: mergedProps.size || undefined }"
@@ -189,6 +196,19 @@ const checkboxClass = computed(() => ({
     margin-bottom: 0;
     white-space: nowrap;
     margin-right: var(--el-checkbox-margin-right, 24px);
+  }
+}
+
+.s-checkbox--button {
+  .s-checkbox__all {
+    margin-right: 0;
+  }
+
+  :deep(.s-checkbox__all--indeterminate .el-checkbox-button__inner) {
+    border-color: var(--el-color-primary);
+    background: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
+    box-shadow: -1px 0 0 0 var(--el-color-primary);
   }
 }
 
