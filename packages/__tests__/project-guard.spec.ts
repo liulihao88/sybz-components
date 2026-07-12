@@ -240,6 +240,21 @@ describe('component entry guards', () => {
     expect(selectDocs).toContain('`{ option, index, value }`')
   })
 
+  it('keeps checkbox and select customDisabled contexts aligned on option', () => {
+    const select = readText('packages/components/select/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const componentTypes = readText('packages/types/components/select.d.ts')
+    const docs = readText('docs/components/select/home.md')
+
+    expect(select).toContain('customDisabled?: (context: SSelectOptionContext) => boolean | null')
+    expect(select).toContain('props.customDisabled({ option, index, value: getOptionValue(option) })')
+    expect(select).not.toContain('itemDisabled')
+    expect(componentProps).toContain('customDisabled?: (context: SSelectOptionContext<Option>) => boolean')
+    expect(componentTypes).toContain('customDisabled?: (context: SSelectOptionContext) => boolean')
+    expect(docs).toContain('`customDisabled`')
+    expect(docs).not.toContain('`itemDisabled`')
+  })
+
   it('keeps select changeSelect payload as an object with index', () => {
     const select = readText('packages/components/select/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')

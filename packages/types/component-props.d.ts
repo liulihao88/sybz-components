@@ -485,7 +485,7 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
   width?: string | number
   height?: string | number
   disPlaceholder?: string
-  itemDisabled?: (...args: any[]) => any
+  customDisabled?: (context: SSelectOptionContext<Option>) => boolean
   url?: string | ((...args: any[]) => any)
   urlParams?: SybzRecord
   optionsExpression?: string

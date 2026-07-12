@@ -72,7 +72,7 @@
             :key="getOptionKey(item, index)"
             :label="getOptionLabel(item, index)"
             :value="getOptionValue(item)"
-            :disabled="itemDisabled(item, index, sOptions)"
+            :disabled="getOptionDisabled(item, index)"
           >
             <slot :options="sOptions" :item="item" />
           </el-option>
@@ -144,7 +144,7 @@ interface SelectProps {
   width?: string | number
   height?: string | number
   disPlaceholder?: string
-  itemDisabled?: (...args: any[]) => any
+  customDisabled?: (context: SSelectOptionContext) => boolean | null
   url?: string | ((...args: any[]) => any)
   urlParams?: Record<string, any>
   optionsExpression?: string
@@ -178,7 +178,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
   height: '',
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性
   disPlaceholder: '',
-  itemDisabled: () => {},
   url: '',
   urlParams: () => ({}),
   optionsExpression: '',
@@ -217,12 +216,6 @@ watch(
     immediate: true,
   },
 )
-
-const disOptions = computed(() => {
-  return sOptions.value.filter((...rest) => {
-    return !props.itemDisabled(...rest)
-  })
-})
 
 const selectRef = ref<{ $el?: HTMLElement; $emit?: (...args: any[]) => void } | null>(null)
 const selectTooltipContent = ref('')
@@ -299,6 +292,15 @@ const handleDifValue = (item: SelectOption) => {
 }
 
 const getOptionValue = (item: SelectOption) => handleDifValue(item)
+
+const getOptionDisabled = (option: SelectOption, index: number) => {
+  if (typeof props.customDisabled !== 'function') return false
+  return props.customDisabled({ option, index, value: getOptionValue(option) }) ?? false
+}
+
+const disOptions = computed(() => {
+  return sOptions.value.filter((option, index) => !getOptionDisabled(option, index))
+})
 
 const getOptionLabel = (option: SelectOption, index: number): string | number => {
   const label = props.type === 'simple' ? option : handleLabel(option, index)

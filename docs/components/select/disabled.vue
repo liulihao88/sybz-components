@@ -10,10 +10,10 @@ const selectValue1 = ref([])
 const selectValue2 = ref([])
 const selectValue3 = ref([])
 const selectValue4 = ref([])
-const itemDisabled = (item, index) => {
+const customDisabled = ({ index }) => {
   return index % 2 === 0
 }
-const itemDisabled2 = (item, index) => {
+const customDisabled2 = ({ index }) => {
   return index % 2 !== 0
 }
 
@@ -22,22 +22,22 @@ const options2 = ref(['男人', '女人', '爱情'])
 
 <template>
   <div>
-    <s-select v-model="selectValue1" :options="options" :item-disabled="itemDisabled" title="单选正常" />
+    <s-select v-model="selectValue1" :options="options" :custom-disabled="customDisabled" title="单选正常" />
     <s-select
       v-model="selectValue2"
       :options="options2"
-      :item-disabled="itemDisabled2"
+      :custom-disabled="customDisabled2"
       type="simple"
       title="单选简单"
     />
-    <s-select v-model="selectValue3" :options="options" multiple :item-disabled="itemDisabled" title="多选正常" />
+    <s-select v-model="selectValue3" :options="options" multiple :custom-disabled="customDisabled" title="多选正常" />
 
     <s-select
       v-model="selectValue4"
       :options="options2"
       multiple
       type="simple"
-      :item-disabled="itemDisabled2"
+      :custom-disabled="customDisabled2"
       title="多选简单"
     />
   </div>

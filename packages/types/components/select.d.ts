@@ -37,7 +37,7 @@ export type SSelectComponent = {
       width?: string | number
       height?: string | number
       disPlaceholder?: string
-      itemDisabled?: (...args: any[]) => any
+      customDisabled?: (context: SSelectOptionContext) => boolean
       url?: string | ((...args: any[]) => any)
       urlParams?: SybzRecord
       optionsExpression?: string
@@ -65,7 +65,7 @@ export type SSelectComponent = {
       | 'width'
       | 'height'
       | 'disPlaceholder'
-      | 'itemDisabled'
+      | 'customDisabled'
       | 'url'
       | 'urlParams'
       | 'optionsExpression'

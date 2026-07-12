@@ -6,8 +6,8 @@ const options = ref([
   { name: '小月月', id: 'xyy' },
   { name: '小鑫鑫', id: 'xxx' },
 ])
-function itemDisabled(item) {
-  if (item.id === 'xyy') {
+function customDisabled({ option }) {
+  if (option.id === 'xyy') {
     return true
   }
   return false
@@ -22,7 +22,7 @@ function itemDisabled(item) {
       :options="options"
       label="name"
       value="id"
-      :item-disabled="itemDisabled"
+      :custom-disabled="customDisabled"
       :custom-label="({ option }) => option.name + '(' + option.id + ')'"
     ></s-select>
   </div>
