@@ -70,7 +70,7 @@ checkbox/customGap
 |    showAll     | 是否显示全选                                       | boolean                                | true      |
 |     attrs      | 控制el-checkbox组件的参数                          | object                                 | {}        |
 | customDisabled | 自定义禁用，参数为 `{ option, index, value }`      | `(context) => boolean`                 | -         |
-|  customLabel   | 自定义显示的label                                  | function/string/''                     | {}        |
+|  customLabel   | 自定义 label，参数为 `{ option, index, value }`    | function                               | -         |
 |      gap       | 多个复选框之间的水平间距，支持 `processWidth` 写法 | number/string                          | -         |
 |     theme      | 主题样式                                           | `default` / `chenghua` / `shijingshan` | `default` |
 |      size      | 多选尺寸，支持顶层传入和全局默认配置               | `''` / `large` / `default` / `small`   | `''`      |

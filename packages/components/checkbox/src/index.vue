@@ -33,7 +33,7 @@ interface CheckboxProps {
   showAll?: boolean
   attrs?: Record<string, any>
   customDisabled?: (context: CheckboxOptionContext) => boolean
-  customLabel?: ((...args: any[]) => any) | string
+  customLabel?: (context: CheckboxOptionContext) => any
   gap?: number | string
   theme?: 'default' | 'chenghua' | 'shijingshan'
   size?: 'large' | 'default' | 'small'
@@ -49,7 +49,6 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   showAll: true,
   attrs: () => ({}),
   // 自定义label显示多个参数的函数
-  customLabel: '',
   gap: '',
   theme: 'default',
   size: 'default',
@@ -128,12 +127,12 @@ function emitValue(item) {
   allCheckList.value = item
   emits('update:modelValue', allCheckList.value)
 }
-function handleLabel(item, index) {
+function handleLabel(option, index) {
   // 如果customLabel是函数就执行customLabel的函数去处理label显示
   if (typeof props.customLabel === 'function') {
-    return props.customLabel(item, index)
+    return props.customLabel({ option, index, value: getOptionValue(option) })
   } else {
-    let res = props.type === 'simple' ? item : item[props.label]
+    let res = props.type === 'simple' ? option : option[props.label]
     return res
   }
 }

@@ -13,7 +13,7 @@
       v-model="value"
       :options="options"
       size="large"
-      :custom-label="(item) => `${item.label}--${item.value}`"
+      :custom-label="({ option }) => `${option.label}--${option.value}`"
     ></s-checkbox>
   </div>
   <div>

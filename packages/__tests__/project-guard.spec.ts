@@ -223,6 +223,23 @@ describe('component entry guards', () => {
     expect(slotDemo).toContain('#nameLabel="{ option, value, index, label }"')
   })
 
+  it('keeps checkbox and select customLabel contexts aligned on option', () => {
+    const checkbox = readText('packages/components/checkbox/src/index.vue')
+    const select = readText('packages/components/select/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const checkboxDocs = readText('docs/components/checkbox/home.md')
+    const selectDocs = readText('docs/components/select/home.md')
+
+    expect(checkbox).toContain('props.customLabel({ option, index, value: getOptionValue(option) })')
+    expect(select).toContain('props.customLabel({ option, index, value: getOptionValue(option) })')
+    expect(checkbox).not.toContain('props.customLabel(item, index)')
+    expect(select).not.toContain('props.customLabel(item)')
+    expect(componentProps).toContain('customLabel?: (context: SCheckboxOptionContext<Option>) => any')
+    expect(componentProps).toContain('customLabel?: (context: SSelectOptionContext<Option>) => any')
+    expect(checkboxDocs).toContain('`{ option, index, value }`')
+    expect(selectDocs).toContain('`{ option, index, value }`')
+  })
+
   it('keeps shijingshan theme wired through global type, class, style and docs', () => {
     const button = readText('packages/components/button/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')

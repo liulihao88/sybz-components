@@ -20,7 +20,7 @@ export type SCheckboxComponent = {
       showAll?: boolean
       attrs?: SybzRecord
       customDisabled?: (context: SCheckboxOptionContext) => boolean
-      customLabel?: string | ((item: any, index: number) => any)
+      customLabel?: (context: SCheckboxOptionContext) => any
       gap?: string | number
       theme?: SybzComponentTheme
     } & Omit<

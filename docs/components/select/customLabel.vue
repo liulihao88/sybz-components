@@ -6,8 +6,8 @@ const options = ref([
   { label: '小鑫鑫', value: 'xxx', age: 18 },
 ])
 
-const customLabel = (item) => {
-  return `${item.label} - ${item.age}岁`
+const customLabel = ({ option, index, value }) => {
+  return `${option.label} - ${option.age}岁（index: ${index}, value: ${value}）`
 }
 </script>
 

@@ -94,13 +94,13 @@ select/multyChange
 
 ### 集成绝大部分属性和方法
 
-:::demo 展示集成绝大部分属性和方法配置。基础写法：`<s-select title="大部分常用属性" v-model="selectVal" :options="options" label="name" value="id" :itemDisabled="itemDisabled" :customLabel="(item) => item.name + '(' + item.id + ')'"></s-select>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
+:::demo 展示集成绝大部分属性和方法配置。基础写法：`<s-select title="大部分常用属性" v-model="selectVal" :options="options" label="name" value="id" :itemDisabled="itemDisabled" :customLabel="({ option }) => option.name + '(' + option.id + ')'"></s-select>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
 select/all
 :::
 
 ### customLabel自定义显示label
 
-:::demo 展示自定义配置。基础写法：`<s-select v-model="selectVal" :options="options" :customLabel="customLabel"></s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`custom-label` 类型 `function / string`，默认值未设置。
+:::demo 展示自定义配置。基础写法：`<s-select v-model="selectVal" :options="options" :customLabel="customLabel"></s-select>`。属性：`options` 类型 `array`，默认值 `[]`；`customLabel` 类型 `({ option, index, value }) => any`，默认值 `undefined`。
 select/customLabel
 :::
 
@@ -152,7 +152,7 @@ select/multipleTableSelect
 |          `title`           | 左侧标题文案                                            | string                  | `''`       |
 |      `compTitleStyle`      | 左侧标题组件样式                                        | object                  | `{}`       |
 |         `connect`          | 多字段 label 拼接符                                     | string                  | `/`        |
-|       `customLabel`        | 自定义 label 生成函数                                   | function / string       | `''`       |
+|       `customLabel`        | 自定义 label，参数为 `{ option, index, value }`         | function                | -          |
 |          `width`           | 组件宽度                                                | string / number         | `''`       |
 |          `height`          | 组件高度                                                | string / number         | `''`       |
 |      `disPlaceholder`      | 禁用态占位文案                                          | string                  | `''`       |

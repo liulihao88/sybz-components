@@ -213,7 +213,7 @@ export interface SCheckboxSelfProps<Option = SybzRecord> {
   showAll?: boolean
   attrs?: SybzRecord
   customDisabled?: (context: SCheckboxOptionContext<Option>) => boolean
-  customLabel?: string | ((item: any, index: number) => any)
+  customLabel?: (context: SCheckboxOptionContext<Option>) => any
   gap?: string | number
   theme?: SybzComponentTheme
 }
@@ -452,7 +452,13 @@ export interface SRadioSelfProps {
 
 export type SRadioProps = SRadioSelfProps & Partial<Omit<RadioGroupPropsPublic, keyof SRadioSelfProps>>
 
-export interface SSelectSelfProps extends SHtmlStringProps {
+export interface SSelectOptionContext<Option = SybzRecord> {
+  option: Option
+  index: number
+  value: unknown
+}
+
+export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps {
   modelValue?: any[] | string | number
   value?: string
   label?: string | string[]
@@ -467,7 +473,7 @@ export interface SSelectSelfProps extends SHtmlStringProps {
   title?: string
   compTitleStyle?: SybzRecord
   connect?: string
-  customLabel?: string | ((item: any) => any)
+  customLabel?: (context: SSelectOptionContext<Option>) => any
   width?: string | number
   height?: string | number
   disPlaceholder?: string

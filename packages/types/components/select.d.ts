@@ -1,5 +1,13 @@
 import { ElSelect } from 'element-plus'
-import type { SSelectSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type {
+  SSelectOptionContext,
+  SSelectSelfProps,
+  SybzComponentSize,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
+
+export type { SSelectOptionContext } from '../component-props'
 
 type ElSelectInstance = InstanceType<typeof ElSelect>
 
@@ -24,7 +32,7 @@ export type SSelectComponent = {
       title?: string
       compTitleStyle?: SybzRecord
       connect?: string
-      customLabel?: string | ((item: any) => any)
+      customLabel?: (context: SSelectOptionContext) => any
       width?: string | number
       height?: string | number
       disPlaceholder?: string

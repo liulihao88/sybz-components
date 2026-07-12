@@ -23,7 +23,7 @@ function itemDisabled(item) {
       label="name"
       value="id"
       :item-disabled="itemDisabled"
-      :custom-label="(item) => item.name + '(' + item.id + ')'"
+      :custom-label="({ option }) => option.name + '(' + option.id + ')'"
     ></s-select>
   </div>
 </template>

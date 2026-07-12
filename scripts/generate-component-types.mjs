@@ -107,7 +107,12 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'checkbox',
       allowAnySlots: true,
-      hoverProps: componentHoverProps('SCheckboxSelfProps', ['SCheckboxSelfProps', 'SybzComponentTheme', 'SybzRecord']),
+      hoverProps: componentHoverProps('SCheckboxSelfProps', [
+        'SCheckboxOptionContext',
+        'SCheckboxSelfProps',
+        'SybzComponentTheme',
+        'SybzRecord',
+      ]),
     },
   ],
   [
@@ -378,6 +383,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'select',
       allowAnySlots: true,
       hoverProps: componentHoverProps('SSelectSelfProps', [
+        'SSelectOptionContext',
         'SSelectSelfProps',
         'SybzComponentSize',
         'SybzComponentTheme',

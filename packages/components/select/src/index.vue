@@ -70,7 +70,7 @@
           <el-option
             v-for="(item, index) in sOptions"
             :key="getOptionKey(item, index)"
-            :label="getOptionLabel(item)"
+            :label="getOptionLabel(item, index)"
             :value="getOptionValue(item)"
             :disabled="itemDisabled(item, index, sOptions)"
           >
@@ -98,6 +98,12 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 defineOptions({
   name: 'SSelect',
 })
+
+interface SSelectOptionContext {
+  option: SelectOption
+  index: number
+  value: unknown
+}
 const attrs = useAttrs()
 const emits = defineEmits(['changeSelect', 'update:modelValue', 'change'])
 const slots = useSlots()
@@ -123,7 +129,7 @@ interface SelectProps {
   title?: string
   compTitleStyle?: Record<string, any>
   connect?: string
-  customLabel?: ((...args: any[]) => any) | string
+  customLabel?: (context: SSelectOptionContext) => string
   width?: string | number
   height?: string | number
   disPlaceholder?: string
@@ -157,7 +163,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
   // 如果label显示多个参数的连接符
   connect: '/',
   // 自定义label显示多个参数的函数
-  customLabel: '',
   width: '',
   height: '',
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性
@@ -284,8 +289,8 @@ const handleDifValue = (item: SelectOption) => {
 
 const getOptionValue = (item: SelectOption) => handleDifValue(item)
 
-const getOptionLabel = (item: SelectOption): string | number => {
-  const label = props.type === 'simple' ? item : handleLabel(item)
+const getOptionLabel = (option: SelectOption, index: number): string | number => {
+  const label = props.type === 'simple' ? option : handleLabel(option, index)
   return typeof label === 'number' || typeof label === 'string' ? label : String(label ?? '')
 }
 
@@ -448,22 +453,22 @@ const updateSelectTooltip = async () => {
   selectTooltipVisible.value = true
 }
 // 将label作为多个值连接起来。 比如 admin/管理员, 这是两个属性拼接出来的
-function handleLabel(item: SelectOption) {
+function handleLabel(option: SelectOption, index = sOptions.value.indexOf(option)) {
   // 如果customLabel是函数就执行customLabel的函数去处理label显示
   if (typeof props.customLabel === 'function') {
-    return props.customLabel(item)
+    return props.customLabel({ option, index, value: getOptionValue(option) })
   } else {
     // 如果label是数组, 就拼接数组。
     if (Array.isArray(props.label)) {
       let str = ''
       props.label.forEach((v) => {
-        str += getOptionProp(item, v) + props.connect
+        str += getOptionProp(option, v) + props.connect
       })
       let res = str.slice(0, -1)
       return res
     } else {
       // 直接显示label
-      return getOptionProp(item, props.label)
+      return getOptionProp(option, props.label)
     }
   }
 }
