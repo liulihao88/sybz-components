@@ -30,7 +30,7 @@ radio/shijingshan/base
 
 ### disabled
 
-:::demo 展示禁用状态。基础写法：`<s-radio v-model="value" :options="options" :disabled="true" />`。属性：`options` 类型 `array`，默认值 `[]`。
+:::demo 展示禁用状态。基础写法：`<s-radio v-model="value" :options="options" :customDisabled="customDisabled" />`。属性：`options` 类型 `array`，默认值 `[]`；`customDisabled` 类型 `({ option, index, value }) => boolean`，默认值 `undefined`。
 radio/disabled
 :::
 
@@ -60,22 +60,23 @@ radio/slot
 
 ### 属性
 
-|      属性名      | 说明                                                  | 类型                                          | 默认值     |
-| :--------------: | ----------------------------------------------------- | --------------------------------------------- | ---------- |
-|     `title`      | 左侧标题文案                                          | string                                        | -          |
-| `compTitleStyle` | 左侧标题组件样式                                      | object                                        | `{}`       |
-|      `type`      | 数据类型，支持 `''` / `simple` / `boolean`            | string                                        | `''`       |
-|     `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string                                        | `default`  |
-|    `showType`    | 展示形式，支持 `radio` / `button`                     | string                                        | `radio`    |
-|    `options`     | 单选项列表，支持对象数组或基础值数组                  | RadioItem[] / string[] / number[] / boolean[] | `[]`       |
-|     `border`     | 是否显示边框                                          | boolean                                       | `false`    |
-|      `size`      | 单选尺寸，支持顶层传入和全局默认配置                  | `''` / `large` / `default` / `small`          | `''`       |
-|     `value`      | 选项值字段名                                          | string / number / boolean                     | `value`    |
-|     `label`      | 选项展示字段名                                        | string / number / boolean                     | `label`    |
-|  `itemDisabled`  | 单项禁用判断函数                                      | function                                      | `() => {}` |
+|      属性名      | 说明                                                  | 类型                                          | 默认值    |
+| :--------------: | ----------------------------------------------------- | --------------------------------------------- | --------- |
+|     `title`      | 左侧标题文案                                          | string                                        | -         |
+| `compTitleStyle` | 左侧标题组件样式                                      | object                                        | `{}`      |
+|      `type`      | 数据类型，支持 `''` / `simple` / `boolean`            | string                                        | `''`      |
+|     `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string                                        | `default` |
+|    `showType`    | 展示形式，支持 `radio` / `button`                     | string                                        | `radio`   |
+|    `options`     | 单选项列表，支持对象数组或基础值数组                  | RadioItem[] / string[] / number[] / boolean[] | `[]`      |
+|     `border`     | 是否显示边框                                          | boolean                                       | `false`   |
+|      `size`      | 单选尺寸，支持顶层传入和全局默认配置                  | `''` / `large` / `default` / `small`          | `''`      |
+|     `value`      | 选项值字段名                                          | string / number / boolean                     | `value`   |
+|     `label`      | 选项展示字段名                                        | string / number / boolean                     | `label`   |
+| `customDisabled` | 自定义禁用，参数为 `{ option, index, value }`         | `(context) => boolean`                        | -         |
 
 ### 说明
 
 - 组件底层基于 `el-radio-group` 封装，支持透传原生属性和事件。
 - `options` 可以传 `{ label, value }` 对象数组，也可以直接传 string / number / boolean 基础值数组，基础值会自动转换为 `{ label, value }`。
 - `type="boolean"` 时会自动生成 `true / false` 两个选项。
+- `customDisabled` 中的 `option` 是标准化后的当前选项，`index` 是选项下标，`value` 是按 `value` 属性解析后的实际值。

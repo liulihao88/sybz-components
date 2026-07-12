@@ -240,17 +240,27 @@ describe('component entry guards', () => {
     expect(selectDocs).toContain('`{ option, index, value }`')
   })
 
-  it('keeps checkbox and select customDisabled contexts aligned on option', () => {
+  it('keeps checkbox, radio and select customDisabled contexts aligned on option', () => {
+    const radio = readText('packages/components/radio/src/index.vue')
     const select = readText('packages/components/select/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')
+    const radioTypes = readText('packages/types/components/radio.d.ts')
     const componentTypes = readText('packages/types/components/select.d.ts')
+    const radioDocs = readText('docs/components/radio/home.md')
     const docs = readText('docs/components/select/home.md')
 
+    expect(radio).toContain('customDisabled?: (context: RadioOptionContext) => boolean | null')
+    expect(radio).toContain('customDisabled({ option, index, value:')
+    expect(radio).not.toContain('itemDisabled')
     expect(select).toContain('customDisabled?: (context: SSelectOptionContext) => boolean | null')
     expect(select).toContain('props.customDisabled({ option, index, value: getOptionValue(option) })')
     expect(select).not.toContain('itemDisabled')
+    expect(componentProps).toContain('customDisabled?: (context: SRadioOptionContext<Option>) => boolean')
     expect(componentProps).toContain('customDisabled?: (context: SSelectOptionContext<Option>) => boolean')
+    expect(radioTypes).toContain('customDisabled?: (context: SRadioOptionContext) => boolean')
     expect(componentTypes).toContain('customDisabled?: (context: SSelectOptionContext) => boolean')
+    expect(radioDocs).toContain('`customDisabled`')
+    expect(radioDocs).not.toContain('`itemDisabled`')
     expect(docs).toContain('`customDisabled`')
     expect(docs).not.toContain('`itemDisabled`')
   })

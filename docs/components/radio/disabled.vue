@@ -4,7 +4,7 @@
     <s-radio v-model="value" :options="options" :disabled="true" />
 
     <s-title title="选项1,3disabled"></s-title>
-    <s-radio v-model="value" :options="options" :item-disabled="itemDisabled" />
+    <s-radio v-model="value" :options="options" :custom-disabled="customDisabled" />
   </div>
 </template>
 <script setup lang="ts">
@@ -16,7 +16,7 @@ const options = ref([
   { label: 'Option 3', value: 3 },
   { label: 'Option 3', value: 4 },
 ])
-const itemDisabled = (item, index, parseOptions) => {
-  return item.value === 1 || item.value === 3
+const customDisabled = ({ option }) => {
+  return option.value === 1 || option.value === 3
 }
 </script>

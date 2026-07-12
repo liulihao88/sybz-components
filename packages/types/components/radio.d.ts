@@ -1,5 +1,13 @@
 import { ElRadioGroup } from 'element-plus'
-import type { SRadioOption, SRadioSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
+import type {
+  SRadioOption,
+  SRadioOptionContext,
+  SRadioSelfProps,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
+
+export type { SRadioOptionContext } from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
@@ -17,7 +25,7 @@ export type SRadioComponent = {
       border?: boolean
       value?: string | number | boolean
       label?: string | number | boolean
-      itemDisabled?: (...args: any[]) => any
+      customDisabled?: (context: SRadioOptionContext) => boolean
     } & Omit<
       ElRadioGroupInstance['$props'],
       | 'title'
@@ -29,7 +37,7 @@ export type SRadioComponent = {
       | 'border'
       | 'value'
       | 'label'
-      | 'itemDisabled'
+      | 'customDisabled'
     >
     $emit: ElRadioGroupInstance['$emit']
     $slots: ElRadioGroupInstance['$slots'] & Record<string, (...args: any[]) => any>

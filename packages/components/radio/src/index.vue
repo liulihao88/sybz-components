@@ -12,7 +12,7 @@
           :label="item[mergedProps.label!]"
           :value="item[mergedProps.value!]"
           :border="mergedProps.border"
-          :disabled="mergedProps.itemDisabled(item, index, parseOptions)"
+          :disabled="getOptionDisabled(item, index)"
         >
           <slot :name="'slot' in item ? item.slot : undefined" v-bind="item">
             {{ item[mergedProps.label!] }}
@@ -42,7 +42,13 @@ interface RadioProps {
   border?: boolean
   value?: any
   label?: any
-  itemDisabled?: (...args: any[]) => any
+  customDisabled?: (context: RadioOptionContext) => boolean | null
+}
+
+interface RadioOptionContext {
+  option: RadioItem
+  index: number
+  value: unknown
 }
 
 const props = withDefaults(defineProps<RadioProps>(), {
@@ -56,7 +62,6 @@ const props = withDefaults(defineProps<RadioProps>(), {
   border: false,
   value: 'value',
   label: 'label',
-  itemDisabled: () => {},
 })
 const mergedProps = useGlobalComponentConfig('radio', props)
 const attrs = useAttrs()
@@ -106,6 +111,13 @@ const parseOptions = computed(() => {
   }
   return mergedProps.value.options.map(normalizeOption)
 })
+const getOptionDisabled = (option: RadioItem, index: number) => {
+  if (typeof mergedProps.value.customDisabled !== 'function') return false
+  return (
+    mergedProps.value.customDisabled({ option, index, value: option[mergedProps.value.value as keyof RadioItem] }) ??
+    false
+  )
+}
 const radioClass = computed(() => {
   return {
     's-radio-box--chenghua': mergedProps.value.theme === 'chenghua',

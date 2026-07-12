@@ -438,7 +438,13 @@ export interface SRadioItem {
 
 export type SRadioOption = SRadioItem | string | number | boolean
 
-export interface SRadioSelfProps {
+export interface SRadioOptionContext<Option = SRadioItem> {
+  option: Option
+  index: number
+  value: unknown
+}
+
+export interface SRadioSelfProps<Option = SRadioItem> {
   title?: string
   compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme
@@ -448,7 +454,7 @@ export interface SRadioSelfProps {
   border?: boolean
   value?: string | number | boolean
   label?: string | number | boolean
-  itemDisabled?: (...args: any[]) => any
+  customDisabled?: (context: SRadioOptionContext<Option>) => boolean
 }
 
 export type SRadioProps = SRadioSelfProps & Partial<Omit<RadioGroupPropsPublic, keyof SRadioSelfProps>>
