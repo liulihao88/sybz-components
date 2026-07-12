@@ -112,8 +112,10 @@ const checkType = computed(() => {
   return obj[mergedProps.value.showType] ?? 'el-checkbox'
 })
 const getOptionValue = (option: any) => (props.type === 'simple' ? option : option[props.value!])
+const isDisabled = computed(() => rootAttrs.disabled === '' || Boolean(rootAttrs.disabled))
 const getOptionDisabled = (option: any, index: number) => {
-  return props.customDisabled?.({ option, index, value: getOptionValue(option) }) ?? false
+  if (isDisabled.value) return true
+  return props.customDisabled({ option, index, value: getOptionValue(option) }) ?? false
 }
 const checkAllClass = computed(() => ({
   's-checkbox__all--none': !checkAll.value && !isIndeterminate.value,
