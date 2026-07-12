@@ -23,7 +23,7 @@ const size = ref('default')
       :size="size"
       show-type="button"
     ></s-checkbox>
-    <s-checkbox v-model="simpleValue" :options="simpleOptions" type="simple" size="small"></s-checkbox>
+    <s-checkbox v-model="simpleValue" :options="simpleOptions" type="simple" :size="size"></s-checkbox>
   </div>
 </template>
 

@@ -110,6 +110,8 @@ const checkAllClass = computed(() => ({
   's-checkbox__all--none': !checkAll.value && !isIndeterminate.value,
   's-checkbox__all--indeterminate': isIndeterminate.value,
   's-checkbox__all--checked': checkAll.value && !isIndeterminate.value,
+  [`el-checkbox-button--${mergedProps.value.size}`]:
+    mergedProps.value.showType === 'button' && ['small', 'large'].includes(mergedProps.value.size),
 }))
 function emitValue(item) {
   allCheckList.value = item
@@ -210,7 +212,21 @@ const checkboxClass = computed(() => ({
   --s-checkbox-button-soft: var(--el-color-primary-light-9);
 
   .s-checkbox__all {
+    display: inline-flex;
+    align-items: center;
+    font-weight: var(--el-font-weight-primary);
     margin-right: 0;
+    vertical-align: top;
+  }
+
+  .s-checkbox__wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  :deep(.s-checkbox__all .el-checkbox-button__inner) {
+    display: inline-flex;
+    align-items: center;
   }
 
   :deep(.s-checkbox__all--indeterminate .el-checkbox-button__inner) {
