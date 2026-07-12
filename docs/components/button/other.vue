@@ -149,7 +149,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     </s-button>
     <el-divider />
 
-    <s-radio v-model="isDark" :options="[true, false]" type="simple" title="是否黑色"></s-radio>
+    <s-radio v-model="isDark" :options="[true, false]" type="simple" title="是否黑色主题"></s-radio>
     <div class="m-b-16">自定义颜色</div>
     <el-space wrap>
       <s-button color="#626aef" :dark="isDark">Default</s-button>

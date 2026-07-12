@@ -80,7 +80,7 @@ button/other
 | `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                    | `false`   |
 |          `theme`           | 主题样式                            | `'default' \| 'chenghua' \| 'shijingshan'` | `default` |
 |         `variant`          | 主题样式变体                        | `'' \| 'outline' \| 'gradient'`            | `default` |
-|           `size`           | 按钮尺寸                            | `'' \| 'small' \| 'default' \| 'large'`    | `''`      |
+|           `size`           | 按钮尺寸                            | `'small' \| 'default' \| 'large'`          | `''`      |
 |          `width`           | 按钮宽度，支持 `processWidth` 写法  | string / number                            | `''`      |
 |          `height`          | 按钮高度，支持 `processWidth` 写法  | string / number                            | `''`      |
 |      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                    | `false`   |

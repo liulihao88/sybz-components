@@ -11,15 +11,11 @@
     </div>
 
     <div class="demo-row">
-      <s-tooltip content="可以直接包裹按钮、图标等自定义触发内容" show-after="1000">
-        <el-button type="primary">按钮触发</el-button>
-      </s-tooltip>
-      <el-button>普通按钮</el-button>
-    </div>
-
-    <div class="demo-row">
       <s-tooltip content="">`content` 为空时，`s-tooltip` 会自动禁用提示。</s-tooltip>
     </div>
+    <s-tooltip content="可以直接包裹按钮、图标等自定义触发内容">
+      <el-button type="primary">按钮触发</el-button>
+    </s-tooltip>
   </div>
 </template>
 

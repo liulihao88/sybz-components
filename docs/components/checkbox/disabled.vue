@@ -19,6 +19,17 @@ function customDisabled({ option, index, value }) {
 <template>
   <s-checkbox
     v-model="checkboxValue"
+    :disabled="true"
+    :options="options"
+    label="name"
+    size="small"
+    show-type="button"
+    theme="chenghua"
+    value="id"
+    @change="change"
+  ></s-checkbox>
+  <s-checkbox
+    v-model="checkboxValue"
     :options="options"
     label="name"
     size="small"
