@@ -62,6 +62,17 @@ const tableColumns = [
   { label: '状态', prop: 'status' },
   { label: '负责人', prop: 'owner' },
 ]
+const tabsValue = ref('chenghua')
+const navList = [
+  {
+    label: '成华',
+    value: 'chenghua',
+  },
+  {
+    label: '石景山',
+    value: 'shijingshan',
+  },
+]
 
 const isDisabled = ref(false)
 
@@ -141,6 +152,16 @@ const tableData = [
       </div>
     </section>
 
+    <section>
+      <s-title :theme="currentTheme"></s-title>
+
+      <div>
+        <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme"></s-tabs>
+        <s-tooltip v-if="tabsValue === 'chenghua'" content="超出字符就隐藏, 鼠标移入显示全部" width="100"></s-tooltip>
+        <div v-else><s-warning content="这是基础用法" title="我是title"></s-warning></div>
+      </div>
+    </section>
+
     <section class="overview-section">
       <s-title title="选择和状态" :theme="currentTheme" />
       <div class="overview-stack">
@@ -173,14 +194,7 @@ const tableData = [
           <div class="overview-progress-text">当前使用 {{ quotaValue }}%</div>
         </s-card>
       </div>
-      <s-table
-        class="overview-table"
-        :data="tableData"
-        :columns="tableColumns"
-        :theme="currentTheme"
-        :show-page="false"
-        size="small"
-      />
+      <s-table class="overview-table" :data="tableData" :columns="tableColumns" :theme="currentTheme" :total="30" />
     </section>
 
     <section class="overview-section">
@@ -212,7 +226,7 @@ const tableData = [
 .overview-toolbar {
   position: sticky;
   top: 64px;
-  z-index: 2;
+  z-index: 999;
   display: flex;
   gap: 16px;
   align-items: center;
