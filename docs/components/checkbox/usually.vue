@@ -9,11 +9,20 @@ const options = ref([
 
 const simpleValue = ref(['7'])
 const simpleOptions = ['1', '2', '3', '4', '5']
+const size = ref('default')
 </script>
 
 <template>
   <div>
-    <s-checkbox v-model="checkboxValue" :options="options" label="name" value="id"></s-checkbox>
+    <s-radio v-model="size" :options="['small', 'default', 'large']" type="simple"></s-radio>
+    <s-checkbox
+      v-model="checkboxValue"
+      :options="options"
+      label="name"
+      value="id"
+      :size="size"
+      show-type="button"
+    ></s-checkbox>
     <s-checkbox v-model="simpleValue" :options="simpleOptions" type="simple" size="small"></s-checkbox>
   </div>
 </template>

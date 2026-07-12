@@ -10,6 +10,7 @@
 ></s-checkbox>
 */
 import { ref, watch, computed, useAttrs } from 'vue'
+import { Check, Minus } from '@element-plus/icons-vue'
 import { isEmpty, processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -30,7 +31,7 @@ interface CheckboxProps {
   customLabel?: ((...args: any[]) => any) | string
   gap?: number | string
   theme?: 'default' | 'chenghua' | 'shijingshan'
-  size?: '' | 'large' | 'default' | 'small'
+  size?: 'large' | 'default' | 'small'
 }
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
@@ -47,7 +48,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   customLabel: '',
   gap: '',
   theme: 'default',
-  size: '',
+  size: 'default',
 })
 const mergedProps = useGlobalComponentConfig('checkbox', props)
 const checkAll = ref(false)
@@ -160,6 +161,10 @@ const checkboxClass = computed(() => ({
       v-bind="$attrs"
       @change="checkAllChange"
     >
+      <span v-if="mergedProps.showType === 'button'" class="s-checkbox__all-icon" aria-hidden="true">
+        <el-icon v-if="isIndeterminate"><Minus /></el-icon>
+        <el-icon v-else-if="checkAll"><Check /></el-icon>
+      </span>
       全选
     </component>
     <el-checkbox-group
@@ -201,16 +206,58 @@ const checkboxClass = computed(() => ({
 }
 
 .s-checkbox--button {
+  --s-checkbox-button-primary: var(--el-color-primary);
+  --s-checkbox-button-soft: var(--el-color-primary-light-9);
+
   .s-checkbox__all {
     margin-right: 0;
   }
 
   :deep(.s-checkbox__all--indeterminate .el-checkbox-button__inner) {
-    border-color: var(--el-color-primary);
-    background: var(--el-color-primary-light-9);
-    color: var(--el-color-primary);
-    box-shadow: -1px 0 0 0 var(--el-color-primary);
+    border-color: var(--s-checkbox-button-primary);
+    background: var(--s-checkbox-button-soft);
+    color: var(--s-checkbox-button-primary);
+    box-shadow: -1px 0 0 0 var(--s-checkbox-button-primary);
   }
+
+  .s-checkbox__all-icon {
+    display: inline-flex;
+    width: 1em;
+    height: 1em;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    border: 1px solid var(--el-border-color);
+    border-radius: 4px;
+    background: var(--el-fill-color-blank);
+
+    .el-icon {
+      font-size: calc(1em - 4px);
+    }
+  }
+
+  .s-checkbox__all--indeterminate .s-checkbox__all-icon {
+    border-color: var(--s-checkbox-button-primary);
+    background: var(--s-checkbox-button-primary);
+    color: var(--el-color-white);
+  }
+
+  .s-checkbox__all--checked .s-checkbox__all-icon {
+    border-color: var(--el-color-white);
+    background: var(--el-color-white);
+    color: var(--s-checkbox-button-primary);
+  }
+}
+
+.s-checkbox--button.s-checkbox--chenghua {
+  --s-checkbox-button-primary: var(--s-ch-primary);
+  --s-checkbox-button-soft: var(--s-ch-primary-soft);
+}
+
+.s-checkbox--button.s-checkbox--shijingshan {
+  --s-checkbox-button-primary: var(--s-sjs-primary);
+  --s-checkbox-button-soft: var(--s-sjs-primary-soft);
 }
 
 .s-checkbox--button.s-checkbox--show-all {
