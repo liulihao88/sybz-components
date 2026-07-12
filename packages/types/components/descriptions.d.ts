@@ -1,10 +1,10 @@
 import { ElDescriptions } from 'element-plus'
 import type {
+  SDescriptionsFilterContext,
   SDescriptionsItemOption,
   SDescriptionsOwnProps,
-  SDescriptionsRow,
+  SDescriptionsRenderContext,
   SybzComponentTheme,
-  SybzRecord,
 } from '../component-props'
 
 type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>

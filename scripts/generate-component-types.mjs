@@ -157,9 +157,9 @@ const TYPED_COMPONENT_PROPS = new Map([
       hoverProps: componentHoverProps('SDescriptionsOwnProps', [
         'SDescriptionsItemOption',
         'SDescriptionsOwnProps',
-        'SDescriptionsRow',
+        'SDescriptionsFilterContext',
+        'SDescriptionsRenderContext',
         'SybzComponentTheme',
-        'SybzRecord',
       ]),
     },
   ],

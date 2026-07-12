@@ -8,61 +8,61 @@
     :class="descriptionsClass"
   >
     <slot>
-      <el-descriptions-item v-for="(item, index) in mergedProps.options ?? []" :key="index" v-bind="item.attrs">
+      <el-descriptions-item v-for="(option, index) in mergedProps.options ?? []" :key="index" v-bind="option.attrs">
         <template #label>
-          <template v-if="item.labelRender">
-            <render-comp :render="item.labelRender" v-bind="getRenderProps(item, index)" />
+          <template v-if="option.labelRender">
+            <descriptions-render :render="option.labelRender" :context="getRenderProps(option, index)" />
           </template>
-          <template v-else-if="item.labelSlot">
+          <template v-else-if="option.labelSlot">
             <slot
-              :name="item.labelSlot"
-              :item="item"
-              :label="parseLabel(item)"
-              :value="parseValue(item, index)"
+              :name="option.labelSlot"
+              :option="option"
+              :label="parseLabel(option)"
+              :value="parseValue(option, index)"
               :index="index"
             ></slot>
           </template>
           <template v-else-if="!mergedProps.showAll">
-            <s-tooltip :content="parseLabel(item)" v-bind="item.labelAttrs"></s-tooltip>
+            <s-tooltip :content="parseLabel(option)" v-bind="option.labelAttrs"></s-tooltip>
           </template>
           <template v-else>
-            {{ parseLabel(item) }}
+            {{ parseLabel(option) }}
           </template>
         </template>
 
-        <template v-if="item.render">
-          <render-comp :render="item.render" v-bind="getRenderProps(item, index)" />
+        <template v-if="option.render">
+          <descriptions-render :render="option.render" :context="getRenderProps(option, index)" />
         </template>
-        <template v-else-if="item.valueSlot">
+        <template v-else-if="option.valueSlot">
           <slot
-            :name="item.valueSlot"
-            :item="item"
-            :label="parseLabel(item)"
-            :value="parseValue(item, index)"
+            :name="option.valueSlot"
+            :option="option"
+            :label="parseLabel(option)"
+            :value="parseValue(option, index)"
             :index="index"
           ></slot>
         </template>
         <template v-else>
           <template v-if="mergedProps.showAll">
-            <render-comp
-              v-if="isRenderableContent(getValueContent(item, index))"
-              :render="() => getValueContent(item, index)"
-              v-bind="getRenderProps(item, index)"
+            <descriptions-render
+              v-if="isRenderableContent(getValueContent(option, index))"
+              :render="() => getValueContent(option, index)"
+              :context="getRenderProps(option, index)"
             />
             <template v-else>
-              {{ getTooltipContent(item, index) }}
+              {{ getTooltipContent(option, index) }}
             </template>
           </template>
-          <render-comp
-            v-else-if="isRenderableContent(getValueContent(item, index))"
-            :render="() => getValueContent(item, index)"
-            v-bind="getRenderProps(item, index)"
+          <descriptions-render
+            v-else-if="isRenderableContent(getValueContent(option, index))"
+            :render="() => getValueContent(option, index)"
+            :context="getRenderProps(option, index)"
           />
           <s-tooltip
             v-else
             class="s-descriptions__tooltip"
-            :content="getTooltipContent(item, index)"
-            v-bind="item.valueAttrs"
+            :content="getTooltipContent(option, index)"
+            v-bind="option.valueAttrs"
           ></s-tooltip>
         </template>
       </el-descriptions-item>
@@ -71,14 +71,12 @@
 </template>
 
 <script setup lang="ts">
-import RenderComp from '@/components/common/renderComp.vue'
-import { computed, nextTick, onMounted, ref, useAttrs, watch, isVNode } from 'vue'
+import { computed, defineComponent, isVNode, nextTick, onMounted, ref, useAttrs, watch } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import STooltip from '@/components/tooltip/src/index.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
-import type { RenderFunction } from '@/components/common/render'
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, PropType, VNodeChild } from 'vue'
 
 defineOptions({
   name: 'SDescriptions',
@@ -102,8 +100,8 @@ type ItemOptions = {
   value?: any
   labelSlot?: string
   valueSlot?: string
-  labelRender?: RenderFunction<ItemOptions, ItemOptions>
-  render?: RenderFunction<ItemOptions, ItemOptions>
+  labelRender?: (context: RenderContext) => VNodeChild
+  render?: (context: RenderContext) => VNodeChild
   filter?: (context: FilterContext) => any
   attrs?: Record<string, any>
   labelAttrs?: Record<string, any>
@@ -111,11 +109,30 @@ type ItemOptions = {
 }
 
 type FilterContext = {
-  row: ItemOptions
+  option: ItemOptions
   index: number
   value: any
   label: any
 }
+
+type RenderContext = FilterContext
+
+const DescriptionsRender = defineComponent({
+  name: 'SDescriptionsRender',
+  props: {
+    render: {
+      type: Function as PropType<(context: RenderContext) => VNodeChild>,
+      required: true,
+    },
+    context: {
+      type: Object as PropType<RenderContext>,
+      required: true,
+    },
+  },
+  setup(props) {
+    return () => props.render(props.context)
+  },
+})
 
 const props = withDefaults(defineProps<DescriptionsProps>(), {
   theme: 'default',
@@ -127,54 +144,49 @@ const props = withDefaults(defineProps<DescriptionsProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('descriptions', props)
 
-const getOptionField = (item: ItemOptions, key: string, fallbackKey: string) => {
-  if (Object.prototype.hasOwnProperty.call(item, key)) {
-    return item[key]
+const getOptionField = (option: ItemOptions, key: string, fallbackKey: string) => {
+  if (Object.prototype.hasOwnProperty.call(option, key)) {
+    return option[key]
   }
-  return item[fallbackKey]
+  return option[fallbackKey]
 }
 
-const parseLabel = (item: ItemOptions) => getOptionField(item, mergedProps.value.label || 'label', 'label') ?? ''
+const parseLabel = (option: ItemOptions) => getOptionField(option, mergedProps.value.label || 'label', 'label') ?? ''
 
-const getRawValue = (item: ItemOptions) => getOptionField(item, mergedProps.value.value || 'value', 'value')
+const getRawValue = (option: ItemOptions) => getOptionField(option, mergedProps.value.value || 'value', 'value')
 
-const getFilterContext = (item: ItemOptions, index: number): FilterContext => {
+const getFilterContext = (option: ItemOptions, index: number): FilterContext => {
   return {
-    row: item,
+    option,
     index,
-    value: getRawValue(item),
-    label: parseLabel(item),
+    value: getRawValue(option),
+    label: parseLabel(option),
   }
 }
 
-const parseValue = (item: ItemOptions, index: number) => {
-  const value = getRawValue(item)
-  if (item.filter) {
-    return item.filter(getFilterContext(item, index))
+const parseValue = (option: ItemOptions, index: number) => {
+  const value = getRawValue(option)
+  if (option.filter) {
+    return option.filter(getFilterContext(option, index))
   } else {
     return value
   }
 }
 
-const getRenderItem = (item: ItemOptions, index: number) => ({
-  ...item,
-  label: parseLabel(item),
-  value: parseValue(item, index),
+const getRenderOption = (option: ItemOptions, index: number) => ({
+  ...option,
+  label: parseLabel(option),
+  value: parseValue(option, index),
 })
 
-const getRenderProps = (item: ItemOptions, index: number) => {
-  const renderItem = getRenderItem(item, index)
+const getRenderProps = (option: ItemOptions, index: number): RenderContext => {
+  const renderOption = getRenderOption(option, index)
 
   return {
-    item: renderItem,
-    row: renderItem,
-    column: renderItem,
-    value: renderItem.value,
-    label: renderItem.label,
+    option: renderOption,
+    value: renderOption.value,
+    label: renderOption.label,
     index,
-    extra: {
-      label: renderItem.label,
-    },
   }
 }
 
@@ -275,8 +287,8 @@ const updateAutoLabelWidth = async () => {
   const { font, extraWidth } = getLabelMeasureStyle()
   context.font = font
 
-  const maxLabelWidth = (mergedProps.value.options ?? []).reduce((maxWidth, item) => {
-    const label = parseLabel(item)
+  const maxLabelWidth = (mergedProps.value.options ?? []).reduce((maxWidth, option) => {
+    const label = parseLabel(option)
     const labelWidth = context.measureText(label === null || label === undefined ? '' : String(label)).width
     return Math.max(maxWidth, labelWidth)
   }, 0)
@@ -306,14 +318,14 @@ const parseContent = (value: any) => {
   }
 }
 
-const getValueContent = (item: ItemOptions, index: number) => parseContent(parseValue(item, index))
+const getValueContent = (option: ItemOptions, index: number) => parseContent(parseValue(option, index))
 
 const isRenderableContent = (value: any) => {
   return isVNode(value) || (Array.isArray(value) && value.some((item) => isVNode(item)))
 }
 
-const getTooltipContent = (item: ItemOptions, index: number) => {
-  const value = getValueContent(item, index)
+const getTooltipContent = (option: ItemOptions, index: number) => {
+  const value = getValueContent(option, index)
   return value === null || value === undefined ? '' : String(value)
 }
 

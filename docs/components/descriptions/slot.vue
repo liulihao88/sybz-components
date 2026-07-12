@@ -40,8 +40,8 @@ init()
 <template>
   <div>
     <s-descriptions :options="options" class="w-block" :column="1" label-width="200">
-      <template #nameLabel="{ item, value, index, label }">这是自定义label</template>
-      <template #nameValue="{ item, value, index, label }">这是自定义value</template>
+      <template #nameLabel="{ option, value, index, label }">这是自定义label：{{ option.label }}</template>
+      <template #nameValue="{ option, value, index, label }">这是自定义value：{{ option.value }}</template>
     </s-descriptions>
   </div>
 </template>

@@ -27,8 +27,8 @@ const options = computed(() => {
     {
       key: '显示filter下的所有值',
       id: data.value.time,
-      filter: ({ value, index, label, row }: DemoFilterContext) => {
-        return `${formatTime(value)} : ${index} : ${label} : ${JSON.stringify(row)}`
+      filter: ({ value, index, label, option }: DemoFilterContext) => {
+        return `${formatTime(value)} : ${index} : ${label} : ${JSON.stringify(option)}`
       },
     },
     {
@@ -47,8 +47,8 @@ const options = computed(() => {
       labelRender: ({ label }) => {
         return <div style="color: blue">我是labelRender: {label}</div>
       },
-      render: ({ row }) => {
-        return <div style="color: blue">我是render: {row.more}</div>
+      render: ({ option }) => {
+        return <div style="color: blue">我是render: {option.more}</div>
       },
     },
   ]

@@ -206,6 +206,23 @@ describe('component entry guards', () => {
     expect(entry).toContain('app.component(`el-icon-${toLine(key)}`, component)')
   })
 
+  it('keeps descriptions callback and slot context aligned on option', () => {
+    const component = readText('packages/components/descriptions/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const docs = readText('docs/components/descriptions/home.md')
+    const slotDemo = readText('docs/components/descriptions/slot.vue')
+
+    expect(component).toContain('option: ItemOptions')
+    expect(component).toContain(':option="option"')
+    expect(component).not.toContain('row: renderOption')
+    expect(component).not.toContain('item: renderOption')
+    expect(component).not.toContain('column: renderOption')
+    expect(componentProps).toContain('option: SDescriptionsItemOption')
+    expect(componentProps).not.toContain('SDescriptionsRow')
+    expect(docs).toContain('`option` 为当前描述项数据')
+    expect(slotDemo).toContain('#nameLabel="{ option, value, index, label }"')
+  })
+
   it('keeps shijingshan theme wired through global type, class, style and docs', () => {
     const button = readText('packages/components/button/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')

@@ -106,22 +106,22 @@ export interface SDescriptionsItemOption {
   value?: any
   labelSlot?: string
   valueSlot?: string
-  labelRender?: SRenderFunction<SDescriptionsItemOption, SDescriptionsItemOption>
-  render?: SRenderFunction<SDescriptionsItemOption, SDescriptionsItemOption>
+  labelRender?: (context: SDescriptionsRenderContext) => VNodeChild
+  render?: (context: SDescriptionsRenderContext) => VNodeChild
   filter?: (context: SDescriptionsFilterContext) => any
   attrs?: SybzRecord
   labelAttrs?: SybzRecord
   valueAttrs?: SybzRecord
 }
 
-export type SDescriptionsRow = SDescriptionsItemOption
-
 export interface SDescriptionsFilterContext {
-  row: SDescriptionsItemOption
+  option: SDescriptionsItemOption
   index: number
   value: any
   label: any
 }
+
+export type SDescriptionsRenderContext = SDescriptionsFilterContext
 
 export interface SDescriptionsOwnProps {
   options: SDescriptionsItemOption[]
