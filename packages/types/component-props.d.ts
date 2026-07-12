@@ -285,11 +285,12 @@ export interface SEmptySelfProps {
 
 export type SEmptyProps = SEmptySelfProps & Partial<Omit<EmptyPropsPublic, keyof SEmptySelfProps>>
 
-export interface SFormContext extends SRenderContext<SybzRecord, SFormFieldItem | SFormTitleItem> {
-  item: SFormFieldItem | SFormTitleItem
-  row: SybzRecord
+export interface SFormContext {
+  option: SFormFieldItem | SFormTitleItem
   model: SybzRecord
+  value: any
   prop?: string
+  index: number
   formRef?: any
   getValue: (prop: string) => any
   setValue: (prop: string, value: any) => void
@@ -300,7 +301,7 @@ export type SFormDynamic<T> = T | ((context: SFormContext) => T)
 
 export type SFormEventHandler = (value: any, context: SFormContext, ...args: any[]) => void
 
-export type SFormRender = SRenderFunction<SybzRecord, SFormFieldItem | SFormTitleItem>
+export type SFormRender = (context: SFormContext) => VNodeChild
 
 export interface SFormRule {
   [key: string]: any

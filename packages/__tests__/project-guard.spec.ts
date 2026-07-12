@@ -240,6 +240,24 @@ describe('component entry guards', () => {
     expect(selectDocs).toContain('`{ option, index, value }`')
   })
 
+  it('keeps form callback and slot context aligned on option', () => {
+    const component = readText('packages/components/form/src/index.vue')
+    const renderer = readText('packages/components/form/src/renderComp.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const docs = readText('docs/components/form/home.md')
+    const titleDemo = readText('docs/components/form/title.vue')
+
+    expect(component).toContain('option: item')
+    expect(component).not.toContain('row: formModel.value')
+    expect(component).not.toContain('column: item')
+    expect(renderer).toContain('props.render(props.context)')
+    expect(renderer).not.toContain('createRenderContext')
+    expect(componentProps).toContain('option: SFormFieldItem | SFormTitleItem')
+    expect(componentProps).not.toContain('export interface SFormContext extends SRenderContext')
+    expect(docs).toContain('{ option, model, value, prop, index, formRef, getValue, setValue, setFieldValue }')
+    expect(titleDemo).toContain('#slotTitle="{ option }"')
+  })
+
   it('keeps shijingshan theme wired through global type, class, style and docs', () => {
     const button = readText('packages/components/button/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')

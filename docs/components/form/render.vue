@@ -12,7 +12,7 @@ type FormModel = {
 }
 
 type FormRenderContext = {
-  row: FormModel
+  model: FormModel
   value?: FormModel[keyof FormModel]
 }
 
@@ -42,12 +42,12 @@ const fieldList: FormFieldItem[] = [
     labelRender: () => {
       return <div style={{ color: 'blue' }}>labelRender渲染label</div>
     },
-    render: ({ row }) => {
+    render: ({ model }) => {
       return (
         <s-flex>
           <el-input
             placeholder="请输入render"
-            modelValue={row.account}
+            modelValue={model.account}
             onUpdate:modelValue={(val) => {
               updateAccount(val)
             }}

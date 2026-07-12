@@ -1,56 +1,20 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
-import { createRenderContext, renderVNode, type RenderFunction, type RenderRecord } from '@/components/common/render'
+import type { SFormContext, SFormRender } from '@/types/component-props'
 export default defineComponent({
   name: 'RenderComp',
   props: {
     render: {
-      type: Function as PropType<RenderFunction>,
+      type: Function as PropType<SFormRender>,
       default: () => null,
     },
-    item: {
-      type: Object as PropType<Record<string, any>>,
-      default: () => ({}),
-    },
-    row: {
-      type: Object as PropType<RenderRecord>,
-      default: undefined,
-    },
-    scope: {
-      type: Object as PropType<RenderRecord>,
-      default: undefined,
-    },
-    value: {
-      type: null as unknown as PropType<any>,
-      default: undefined,
-    },
-    column: {
-      type: Object as PropType<RenderRecord>,
-      default: undefined,
-    },
-    action: {
-      type: Object as PropType<RenderRecord>,
-      default: undefined,
-    },
-    index: {
-      type: Number,
-      default: undefined,
+    context: {
+      type: Object as PropType<SFormContext>,
+      required: true,
     },
   },
   setup(props) {
-    return () =>
-      renderVNode(
-        props.render,
-        createRenderContext({
-          item: props.item,
-          row: props.row,
-          scope: props.scope,
-          value: props.value,
-          column: props.column,
-          action: props.action,
-          index: props.index,
-        }),
-      )
+    return () => props.render(props.context)
   },
 })
 </script>

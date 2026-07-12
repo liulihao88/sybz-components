@@ -88,7 +88,7 @@ form/render
 form/event
 :::
 
-<!-- ### 通常用法
+### 通常用法
 
 :::demo 展示事件监听。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`。
 form/usually
@@ -104,7 +104,7 @@ form/remote
 
 :::demo 展示自定义配置。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`。
 form/directives
-::: -->
+:::
 
 ## 属性
 
@@ -154,12 +154,12 @@ const fieldList: SFormFieldItem[] = [
 
 ## 表单上下文
 
-`attrs`、`formItemAttrs`、`rules`、`isShow`、`render` 和插槽都会拿到同一份上下文：`{ item, row, model, value, prop, column, index, formRef, getValue, setValue, setFieldValue }`。
+`attrs`、`formItemAttrs`、`rules`、`isShow`、`render` 和插槽都会拿到同一份上下文：`{ option, model, value, prop, index, formRef, getValue, setValue, setFieldValue }`。其中 `option` 是当前 `fieldList` 配置项，`model` 是完整表单数据。
 
 ## Form Exposes
 
 |        名称        | 说明                                 | 类型                                                      |
-| :----------------: | ------------------------------------ | --------------------------------------------------------- |
+| :----------------: | ------------------------------------ | --------------------------------------------------------- | --- |
 |      validate      | 校验 form 表单，成功后返回当前 model | Function(isResetFieldsOrParams = false, otherParams = {}) |
 |   validateField    | 校验指定字段                         | Function                                                  |
 |    resetFields     | 重置 form 表单                       | Function                                                  |
@@ -172,4 +172,4 @@ const fieldList: SFormFieldItem[] = [
 |     getFields      | 获取全部字段配置                     | Function                                                  |
 |      getField      | 获取指定字段配置                     | Function(prop: string)                                    |
 |  getVisibleFields  | 获取当前可见字段配置                 | Function                                                  |
-| formRef / sFormRef | 获取内部 `el-form` 实例              | Ref                                                       |
+| formRef / sFormRef | 获取内部 `el-form` 实例              | Ref                                                       | --> |

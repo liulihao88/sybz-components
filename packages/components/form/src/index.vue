@@ -124,13 +124,10 @@ const getRenderProps = (item: FormField, index: number): SFormContext => {
   const prop = getFieldProp(item)
 
   return {
-    ...item,
-    item,
-    row: formModel.value,
+    option: item,
     model: formModel.value,
     value: getFieldValue(item),
     prop,
-    column: item,
     index,
     formRef: sFormRef.value,
     getValue,
@@ -524,12 +521,12 @@ defineExpose({
             <slot :name="getTitleSlotName(v)" v-bind="getRenderProps(v, i)"></slot>
           </template>
           <template v-else-if="v.render">
-            <render-comp :render="v.render" v-bind="getRenderProps(v, i)" />
+            <render-comp :render="v.render" :context="getRenderProps(v, i)" />
           </template>
           <template v-else>
             <s-title v-bind="getTitleAttrs(v, i)">
               <template v-if="v.labelRender" #title>
-                <render-comp :render="v.labelRender" v-bind="getRenderProps(v, i)" />
+                <render-comp :render="v.labelRender" :context="getRenderProps(v, i)" />
               </template>
             </s-title>
           </template>
@@ -537,7 +534,7 @@ defineExpose({
         <el-form-item v-else-if="parseIsShow(v, i)" v-bind="getFormItemBind(v, i)">
           <template #label>
             <template v-if="v.labelRender">
-              <render-comp :render="v.labelRender" v-bind="getRenderProps(v, i)" />
+              <render-comp :render="v.labelRender" :context="getRenderProps(v, i)" />
             </template>
             <template v-else>
               <slot :name="getLabelSlotName(v)" v-bind="getRenderProps(v, i)">
@@ -556,7 +553,7 @@ defineExpose({
             <slot :name="getFieldSlotName(v)" v-bind="getRenderProps(v, i)"></slot>
           </template>
           <template v-else-if="v.render">
-            <render-comp :render="v.render" v-bind="getRenderProps(v, i)" />
+            <render-comp :render="v.render" :context="getRenderProps(v, i)" />
           </template>
           <template v-else>
             <component

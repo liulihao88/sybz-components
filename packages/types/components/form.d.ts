@@ -1,5 +1,23 @@
 import { ElForm } from 'element-plus'
-import type { SFormFieldList, SFormProps, SybzRecord } from '../component-props'
+import type {
+  SFormContext,
+  SFormDynamic,
+  SFormFieldItem,
+  SFormFieldList,
+  SFormProps,
+  SFormRender,
+  SFormTitleItem,
+  SybzRecord,
+} from '../component-props'
+
+export type {
+  SFormContext,
+  SFormDynamic,
+  SFormFieldItem,
+  SFormFieldList,
+  SFormRender,
+  SFormTitleItem,
+} from '../component-props'
 
 type ElFormInstance = InstanceType<typeof ElForm>
 

@@ -1,9 +1,9 @@
 <template>
   <s-form :model="formData" :field-list="fieldList" :column="2" label-width="96">
-    <template #slotTitle="{ item }">
-      <s-title v-bind="item.attrs" type="form">
+    <template #slotTitle="{ option }">
+      <s-title v-bind="option.attrs" type="form">
         <template #title>
-          <span class="form-title-demo__slot-title">{{ item.attrs.title }}</span>
+          <span class="form-title-demo__slot-title">{{ option.attrs.title }}</span>
         </template>
         <template #extra>
           <span class="form-title-demo__tip">插槽标题</span>
@@ -54,10 +54,10 @@ const fieldList = [
       theme: 'chenghua',
       type: 'form',
     },
-    render: ({ item }: any) => {
+    render: ({ option }: any) => {
       return (
         <s-title
-          title={item.attrs.title}
+          title={option.attrs.title}
           theme="chenghua"
           type="form"
           v-slots={{ extra: () => <span class="form-title-demo__tip">render标题</span> }}

@@ -11,7 +11,7 @@
 */
 import { ref, watch, computed, useAttrs } from 'vue'
 import { Check, Minus } from '@element-plus/icons-vue'
-import { isEmpty, processWidth } from '@sybz-components/utils'
+import { isEmpty, processWidth, getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
@@ -32,7 +32,7 @@ interface CheckboxProps {
   value?: string
   showAll?: boolean
   attrs?: Record<string, any>
-  customDisabled?: (context: CheckboxOptionContext) => boolean
+  customDisabled?: (context: CheckboxOptionContext) => boolean | null
   customLabel?: (context: CheckboxOptionContext) => any
   gap?: number | string
   theme?: 'default' | 'chenghua' | 'shijingshan'
@@ -114,6 +114,9 @@ const getOptionValue = (option: any) => (props.type === 'simple' ? option : opti
 const isDisabled = computed(() => rootAttrs.disabled === '' || Boolean(rootAttrs.disabled))
 const getOptionDisabled = (option: any, index: number) => {
   if (isDisabled.value) return true
+  if (getType(props.customDisabled) !== 'function') {
+    return false
+  }
   return props.customDisabled({ option, index, value: getOptionValue(option) }) ?? false
 }
 const checkAllClass = computed(() => ({
