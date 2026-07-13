@@ -1,14 +1,5 @@
 import { ElRadioGroup } from 'element-plus'
-import type {
-  SRadioItem,
-  SRadioOption,
-  SRadioOptionContext,
-  SRadioSelfProps,
-  SybzComponentTheme,
-  SybzRecord,
-} from '../component-props'
-
-export type { SRadioItemType, SRadioOptionContext } from '../component-props'
+import type { SRadioOption, SRadioSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 

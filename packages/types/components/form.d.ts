@@ -7,7 +7,6 @@ import type {
   SFormProps,
   SFormRender,
   SFormTitleItem,
-  SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
 
