@@ -6,7 +6,7 @@
         <component
           :is="radioType"
           v-for="(item, index) in parseOptions"
-          :key="index"
+          :key="getOptionKey(item, index)"
           :size="mergedProps.size || undefined"
           :label="item[mergedProps.label!]"
           :value="item[mergedProps.value!]"
@@ -14,7 +14,7 @@
           :disabled="getOptionDisabled(item, index)"
           :class="item.class"
           :style="getOptionStyle(item)"
-          v-bind="item"
+          v-bind="getOptionAttrs(item)"
         >
           <slot :name="'slot' in item ? item.slot : undefined" v-bind="item">
             {{ getOptionLabel(item, index) }}
@@ -54,6 +54,14 @@ interface RadioOptionContext {
   index: number
   value: unknown
 }
+
+const radioTypeColors = {
+  primary: 'primary',
+  success: 'success',
+  warning: 'warning',
+  danger: 'danger',
+  info: 'info',
+} as const
 
 const props = withDefaults(defineProps<RadioProps>(), {
   title: undefined,
@@ -115,9 +123,27 @@ const parseOptions = computed(() => {
   }
   return mergedProps.value.options.map(normalizeOption)
 })
+const getOptionKey = (option: RadioItem, index: number) => {
+  const value = option[mergedProps.value.value as keyof RadioItem]
+  return typeof value === 'string' || typeof value === 'number' ? value : index
+}
+const getOptionAttrs = (option: RadioItem) => {
+  const {
+    class: _class,
+    color: _color,
+    disabled: _disabled,
+    label: _label,
+    slot: _slot,
+    style: _style,
+    type: _type,
+    value: _value,
+    ...attrs
+  } = option
+  return attrs
+}
 const isDisabled = computed(() => attrs.disabled === '' || Boolean(attrs.disabled))
 const getOptionDisabled = (option: RadioItem, index: number) => {
-  if (isDisabled.value) return true
+  if (isDisabled.value || option.disabled) return true
   if (typeof mergedProps.value.customDisabled !== 'function') return false
   return (
     mergedProps.value.customDisabled({ option, index, value: option[mergedProps.value.value as keyof RadioItem] }) ??
@@ -132,12 +158,47 @@ const getOptionLabel = (option: RadioItem, index: number) => {
     value: option[mergedProps.value.value as keyof RadioItem],
   })
 }
-const getOptionStyle = (option: RadioItem): CSSProperties | undefined => {
-  if (mergedProps.value.showType !== 'button' || !option.color) return option.style
+const getTypeColors = (type: keyof typeof radioTypeColors) => {
+  console.log(`45 mergedProps.value.theme`, mergedProps.value.theme)
+  if (mergedProps.value.theme === 'chenghua') {
+    return {
+      color: `var(--s-ch-${type})`,
+      hoverBg: `rgba(var(--s-ch-${type}-rgb), 0.08)`,
+      hoverBorder: `rgba(var(--s-ch-${type}-rgb), 0.42)`,
+    }
+  }
+
+  if (mergedProps.value.theme === 'shijingshan') {
+    return {
+      color: `var(--s-sjs-${type})`,
+      hoverBg: `rgba(var(--s-sjs-${type}-rgb), 0.08)`,
+      hoverBorder: `rgba(var(--s-sjs-${type}-rgb), 0.42)`,
+    }
+  }
 
   return {
+    color: `var(--el-color-${type})`,
+    hoverBg: `var(--el-color-${type}-light-9)`,
+    hoverBorder: `var(--el-color-${type}-light-5)`,
+  }
+}
+const getOptionStyle = (option: RadioItem): CSSProperties | undefined => {
+  if (mergedProps.value.showType !== 'button') return option.style
+
+  const type = option.type && radioTypeColors[option.type]
+
+  const typeColors = getTypeColors(type || 'primary')
+
+  return {
+    '--s-radio-button-color': option.color || typeColors?.color,
+    ...(typeColors
+      ? {
+          '--s-radio-button-hover-bg': typeColors.hoverBg,
+          '--s-radio-button-hover-border': typeColors.hoverBorder,
+          '--s-radio-button-hover-text': typeColors.color,
+        }
+      : {}),
     ...option.style,
-    '--s-radio-button-color': option.color,
   } as CSSProperties
 }
 const radioClass = computed(() => {
@@ -162,6 +223,12 @@ const radioClass = computed(() => {
 }
 
 .s-radio-box--button {
+  :deep(.el-radio-button:not(.is-disabled, .is-active) .el-radio-button__inner:hover) {
+    border-color: var(--s-radio-button-hover-border, var(--el-color-primary-light-5));
+    background-color: var(--s-radio-button-hover-bg, var(--el-color-primary-light-9));
+    color: var(--s-radio-button-hover-text, var(--el-color-primary));
+  }
+
   :deep(.el-radio-button.is-active .el-radio-button__inner) {
     border-color: var(--s-radio-button-color, var(--el-color-primary));
     background-color: var(--s-radio-button-color, var(--el-color-primary));

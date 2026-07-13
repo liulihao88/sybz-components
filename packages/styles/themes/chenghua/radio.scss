@@ -100,9 +100,9 @@
   }
 
   .el-radio-button__inner:hover {
-    border-color: var(--s-ch-primary-border-hover);
-    background: var(--s-ch-primary-soft);
-    color: var(--s-ch-primary);
+    border-color: var(--s-radio-button-hover-border, var(--s-ch-primary-border-hover));
+    background: var(--s-radio-button-hover-bg, var(--s-ch-primary-soft));
+    color: var(--s-radio-button-hover-text, var(--s-ch-primary));
   }
 
   :where(.el-radio-button__original-radio:checked) + .el-radio-button__inner {

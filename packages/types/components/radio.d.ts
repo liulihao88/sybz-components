@@ -8,7 +8,7 @@ import type {
   SybzRecord,
 } from '../component-props'
 
-export type { SRadioOptionContext } from '../component-props'
+export type { SRadioItemType, SRadioOptionContext } from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 

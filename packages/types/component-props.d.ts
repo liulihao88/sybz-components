@@ -429,6 +429,8 @@ export interface SInputLabelProps {
   inputAttrs?: SybzRecord
 }
 
+export type SRadioItemType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
+
 export interface SRadioItem {
   value: string | number | boolean
   label: string | number | boolean
@@ -436,6 +438,8 @@ export interface SRadioItem {
   disabled?: boolean
   class?: string | string[] | Record<string, boolean>
   style?: CSSProperties
+  /** button 模式下当前项的语义类型 */
+  type?: SRadioItemType
   /** button 模式下当前项选中时的背景色 */
   color?: string
   [key: string]: any

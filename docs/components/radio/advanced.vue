@@ -15,13 +15,12 @@ const statusOptions = computed(() => {
     {
       label: `待处理 ${pendingCount.value}`,
       value: 'pending',
-      color: '#f0444c',
+      type: 'danger',
       class: ['status-radio', 'pending-radio'],
     },
     {
       label: `已完结 ${completedCount.value}`,
       value: 'completed',
-      color: '#16a66a',
       class: ['status-radio', 'completed-radio'],
     },
   ]
@@ -34,7 +33,7 @@ const statusOptions = computed(() => {
 
 <style scoped lang="scss">
 :deep(.status-radio .el-radio-button__inner) {
-  min-width: 80px;
+  min-width: 100px;
   font-weight: 900;
   // font-size: 16px;
   // background: blue;
