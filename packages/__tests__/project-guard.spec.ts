@@ -196,6 +196,26 @@ describe('project build and publish guards', () => {
 })
 
 describe('component entry guards', () => {
+  it('keeps form themes aligned across props, children, docs and sidebar', () => {
+    const form = readText('packages/components/form/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const componentTypes = readText('packages/types/components/form.d.ts')
+    const docs = readText('docs/components/form/home.md')
+    const sidebar = readText('docs/.vitepress/config.ts')
+
+    expect(form).toContain("theme: 'default'")
+    expect(form).toContain("'s-form--chenghua': props.theme === 'chenghua'")
+    expect(form).toContain("'s-form--shijingshan': props.theme === 'shijingshan'")
+    expect(form).toContain("componentName.startsWith('s-') ? { theme: props.theme } : {}")
+    expect(form).toContain('theme: props.theme')
+    expect(componentProps).toContain('theme?: SybzComponentTheme')
+    expect(componentTypes).toContain('theme?: SybzComponentTheme')
+    expect(docs.indexOf('### 成华主题')).toBeGreaterThan(docs.indexOf('### 基础用法'))
+    expect(docs).toContain('form/chenghua')
+    expect(docs).toContain('form/shijingshan')
+    expect(sidebar).toContain("text: sybzMark('form组件')")
+  })
+
   it('keeps tooltip custom triggers sized to their content in flex layouts', () => {
     const tooltip = readText('packages/components/tooltip/src/index.vue')
     const demo = readText('docs/components/tooltip/usually.vue')

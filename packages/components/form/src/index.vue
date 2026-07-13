@@ -76,6 +76,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<SFormProps>(), {
+  theme: 'default',
   showFooter: import.meta.env.DEV ? true : false,
   column: 1,
   align: 'top',
@@ -96,6 +97,11 @@ const hasMultipleColumns = computed(
 )
 const useGap = computed(() => Boolean(formGap.value) && hasMultipleColumns.value)
 const formStyle = computed(() => (useGap.value ? { '--s-form-gap': formGap.value } : undefined))
+const formClass = computed(() => ({
+  's-form--gap': useGap.value,
+  's-form--chenghua': props.theme === 'chenghua',
+  's-form--shijingshan': props.theme === 'shijingshan',
+}))
 
 const getFieldProp = (item: FormField) => item.prop || (typeof item.value === 'string' ? item.value : undefined)
 
@@ -268,7 +274,7 @@ const getTitleAttrs = (item: FormField, index: number): FormAttrs => {
   return {
     title: item.title || item.label || '',
     subTitle: item.subTitle || '',
-    theme: 'chenghua',
+    theme: props.theme,
     type: 'form',
     ...resolveRecord(item.attrs, item, index),
   }
@@ -307,7 +313,9 @@ const getDisplayValue = (item: FormField, index: number) => {
 
 const getComponentAttrs = (item: FormField, index: number) => {
   const componentDefaults = props.componentDefaults || {}
+  const componentName = typeof item.comp === 'string' ? item.comp.toLowerCase() : item.comp ? '' : 's-input'
   const attrs: FormAttrs = {
+    ...(componentName.startsWith('s-') ? { theme: props.theme } : {}),
     clearable: true,
     filterable: true,
     width: '100%',
@@ -512,7 +520,7 @@ defineExpose({
       :model="formModel"
       v-bind="{ 'label-width': 'auto', ...$attrs }"
       class="s-form"
-      :class="{ 's-form--gap': useGap }"
+      :class="formClass"
       :style="formStyle"
     >
       <template v-for="(v, i) in formItems" :key="getFieldProp(v) || i">
@@ -597,6 +605,34 @@ defineExpose({
 
 .s-form__label-icon {
   margin-right: 4px;
+}
+
+.s-form--chenghua {
+  --s-form-label-color: #000000;
+  --s-form-font-family: 'PingFang SC', sans-serif;
+}
+
+.s-form--shijingshan {
+  --s-form-label-color: #4b5563;
+  --s-form-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.s-form--chenghua,
+.s-form--shijingshan {
+  font-family: var(--s-form-font-family);
+
+  :deep(.el-form-item__label) {
+    color: var(--s-form-label-color);
+    font-weight: 500;
+  }
+
+  :deep(.el-form-item__error) {
+    font-family: var(--s-form-font-family);
+  }
+
+  :deep(.el-form-item__label .s-tooltip-box__text) {
+    color: inherit;
+  }
 }
 :deep(.el-form-item) {
   align-items: v-bind('props.align');

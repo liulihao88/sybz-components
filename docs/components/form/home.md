@@ -16,6 +16,18 @@
 form/base
 :::
 
+### 成华主题
+
+:::demo 展示成华主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="chenghua" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
+form/chenghua
+:::
+
+### 石景山主题
+
+:::demo 展示石景山主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="shijingshan" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
+form/shijingshan
+:::
+
 ### gap 左右间隙，默认值 `16px`
 
 :::demo 展示多列表单项左右间隙配置。基础写法：`<s-form :model="formData" :field-list="fieldList" :column="2" :gap="gap" />`。属性：`gap` 类型 `string / number`，可选值为数字、数字字符串或 CSS 长度值，例如 `0`、`16`、`'16px'`、`'1rem'`、`'5%'`，默认值 `16px`，仅在 `column > 1` 时作为左右间距生效。
@@ -108,17 +120,18 @@ form/directives
 
 ## 属性
 
-|       属性名        | 说明                                       | 类型                      | 默认值                                                 |
-| :-----------------: | ------------------------------------------ | ------------------------- | ------------------------------------------------------ |
-|      fieldList      | 表单 schema 配置                           | array / object            | -                                                      |
-|        model        | 表单数据对象                               | object                    | -                                                      |
-|       column        | 默认每行展示几项                           | `1 / 2 / 3 / 4 / 5 / 6`   | `1`                                                    |
-|         gap         | 多列表单项左右间距，仅 `column > 1` 时生效 | string / number           | `16px`                                                 |
-|        align        | 表单项垂直对齐                             | `center / top / flex-end` | `top`                                                  |
-|     showFooter      | 是否显示调试按钮                           | boolean                   | 开发环境为 `true`                                      |
-|       footer        | `showFooter` 的别名，设置后优先级更高      | boolean                   | -                                                      |
-| autoSetDefaultValue | 是否自动写入字段默认值                     | boolean                   | `true`                                                 |
-|  componentDefaults  | 所有控件的默认透传属性                     | object                    | `{ clearable: true, filterable: true, width: '100%' }` |
+|       属性名        | 说明                                       | 类型                               | 默认值                                                 |
+| :-----------------: | ------------------------------------------ | ---------------------------------- | ------------------------------------------------------ |
+|      fieldList      | 表单 schema 配置                           | array / object                     | -                                                      |
+|        model        | 表单数据对象                               | object                             | -                                                      |
+|        theme        | 主题，传递给 `s-*` 控件和分组标题          | `default / chenghua / shijingshan` | `default`                                              |
+|       column        | 默认每行展示几项                           | `1 / 2 / 3 / 4 / 5 / 6`            | `1`                                                    |
+|         gap         | 多列表单项左右间距，仅 `column > 1` 时生效 | string / number                    | `16px`                                                 |
+|        align        | 表单项垂直对齐                             | `center / top / flex-end`          | `top`                                                  |
+|     showFooter      | 是否显示调试按钮                           | boolean                            | 开发环境为 `true`                                      |
+|       footer        | `showFooter` 的别名，设置后优先级更高      | boolean                            | -                                                      |
+| autoSetDefaultValue | 是否自动写入字段默认值                     | boolean                            | `true`                                                 |
+|  componentDefaults  | 所有控件的默认透传属性                     | object                             | `{ clearable: true, filterable: true, width: '100%' }` |
 
 ### fieldList 内部属性
 

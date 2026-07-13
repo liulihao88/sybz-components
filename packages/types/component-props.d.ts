@@ -373,6 +373,7 @@ export type SFormFieldList = Array<SFormFieldItem | SFormTitleItem> | Record<str
 export interface SFormProps {
   fieldList: SFormFieldList
   model: SybzRecord
+  theme?: SybzComponentTheme
   /** showFooter 的别名，设置后优先级更高 */
   footer?: boolean
   showFooter?: boolean

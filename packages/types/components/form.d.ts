@@ -7,6 +7,7 @@ import type {
   SFormProps,
   SFormRender,
   SFormTitleItem,
+  SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
 
@@ -19,6 +20,7 @@ export type SFormComponent = {
     $props: {
       fieldList: SFormFieldList
       model: SybzRecord
+      theme?: SybzComponentTheme
       /** showFooter 的别名，设置后优先级更高 */
       footer?: boolean
       showFooter?: boolean
@@ -34,6 +36,7 @@ export type SFormComponent = {
       ElFormInstance['$props'],
       | 'fieldList'
       | 'model'
+      | 'theme'
       | 'footer'
       | 'showFooter'
       | 'column'
