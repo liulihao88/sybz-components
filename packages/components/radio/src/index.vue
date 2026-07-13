@@ -4,7 +4,6 @@
     <el-radio-group v-bind="groupAttrs">
       <slot>
         <component
-          v-bind="item"
           :is="radioType"
           v-for="(item, index) in parseOptions"
           :key="index"
@@ -15,6 +14,7 @@
           :disabled="getOptionDisabled(item, index)"
           :class="item.class"
           :style="getOptionStyle(item)"
+          v-bind="item"
         >
           <slot :name="'slot' in item ? item.slot : undefined" v-bind="item">
             {{ getOptionLabel(item, index) }}
@@ -38,7 +38,7 @@ interface RadioProps {
   title?: string
   compTitleStyle?: Record<string, any>
   theme?: 'default' | 'chenghua' | 'shijingshan'
-  size?: '' | 'large' | 'default' | 'small'
+  size?: 'small' | 'default' | 'large'
   type?: 'boolean' | 'simple' | ''
   showType?: 'radio' | 'button'
   options?: RadioOption[]
@@ -59,7 +59,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
   title: undefined,
   compTitleStyle: undefined,
   theme: 'default',
-  size: '',
+  size: 'default',
   type: '',
   showType: 'radio',
   options: () => [],

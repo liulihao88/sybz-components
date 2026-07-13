@@ -15,13 +15,13 @@ const statusOptions = computed(() => {
     {
       label: `待处理 ${pendingCount.value}`,
       value: 'pending',
-      // color: '#f0444c',
+      color: '#f0444c',
       class: ['status-radio', 'pending-radio'],
     },
     {
       label: `已完结 ${completedCount.value}`,
       value: 'completed',
-      // color: '#16a66a',
+      color: '#16a66a',
       class: ['status-radio', 'completed-radio'],
     },
   ]
@@ -29,7 +29,7 @@ const statusOptions = computed(() => {
 </script>
 
 <template>
-  <s-radio v-model="status" show-type="button" :options="statusOptions" size="small" />
+  <s-radio v-model="status" show-type="button" :options="statusOptions" theme="shijingshan" />
 </template>
 
 <style scoped lang="scss">
@@ -38,7 +38,7 @@ const statusOptions = computed(() => {
   font-weight: 900;
   // font-size: 16px;
   // background: blue;
-  color: red;
+  // color: red;
 }
 
 :deep(.pending-radio .el-radio-button__inner) {

@@ -1,4 +1,4 @@
-.s-radio-box.s-radio-box--shijingshan.s-radio-box--shijingshan {
+:where(.s-radio-box.s-radio-box--shijingshan) {
   --el-radio-input-border-color-hover: var(--s-sjs-primary);
   --el-radio-text-color: var(--s-sjs-text-regular);
   --el-radio-checked-text-color: var(--s-sjs-primary);
@@ -105,11 +105,11 @@
     color: var(--s-sjs-primary);
   }
 
-  .el-radio-button__original-radio:checked + .el-radio-button__inner {
-    border-color: var(--s-sjs-primary);
-    background: var(--s-sjs-primary);
+  :where(.el-radio-button__original-radio:checked) + .el-radio-button__inner {
+    border-color: var(--s-radio-button-color, var(--s-sjs-primary));
+    background: var(--s-radio-button-color, var(--s-sjs-primary));
     color: #ffffff;
-    box-shadow: -1px 0 0 0 var(--s-sjs-primary);
+    box-shadow: -1px 0 0 0 var(--s-radio-button-color, var(--s-sjs-primary));
   }
 
   .el-radio-button:first-child .el-radio-button__inner {

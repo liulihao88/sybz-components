@@ -89,5 +89,6 @@ radio/slot
 - `showType="button"` 时，option 的 `color` 可以覆盖当前项的选中背景色，其余样式保持 button 模式不变。
 - `options` 支持直接传入 computed；模板会自动解包，computed 内可以读取外部 `ref` 动态生成 label。
 - option 的 `class` 和 `style` 会应用到对应的 Radio item；在 scoped 样式中可以配合 `:deep()` 修改内部按钮。
+- 显式传入的 option `color`、`class`、`style` 优先于 `chenghua`、`shijingshan` 的默认主题样式。
 - `customLabel` 可读取外部 `ref`，动态生成每个选项的显示内容。
 - `customDisabled` 中的 `option` 是标准化后的当前选项，`index` 是选项下标，`value` 是按 `value` 属性解析后的实际值。
