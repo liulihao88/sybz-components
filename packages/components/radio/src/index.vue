@@ -13,6 +13,7 @@
           :value="item[mergedProps.value!]"
           :border="mergedProps.border"
           :disabled="getOptionDisabled(item, index)"
+          :class="item.class"
           :style="getOptionStyle(item)"
         >
           <slot :name="'slot' in item ? item.slot : undefined" v-bind="item">

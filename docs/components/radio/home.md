@@ -52,9 +52,9 @@ radio/type
 radio/multyAttrs
 :::
 
-### 高级写法：自定义按钮颜色和 label
+### 高级写法：动态 label 和选项样式
 
-:::demo 展示 button 模式下使用独立选中色，并通过 `customLabel` 读取响应式数量。基础写法：`<s-radio v-model="status" showType="button" :options="statusOptions" :customLabel="customLabel" />`。属性：`showType` 可选 `radio / button`，默认值 `radio`；option 的 `color` 类型 `string`，默认值为主题主色；`customLabel` 类型 `({ option, index, value }) => any`，默认值 `undefined`。
+:::demo 展示 button 模式下使用独立选中色，通过 `computed` 动态生成 label，并为每项设置 class。基础写法：`<s-radio v-model="status" showType="button" :options="statusOptions" />`。属性：`showType` 可选 `radio / button`，默认值 `radio`；option 的 `color` 类型 `string`，默认值为主题主色；`class` 类型 `string / string[] / object`，默认值 `undefined`；`style` 类型 `object`，默认值 `undefined`。
 radio/advanced
 :::
 
@@ -87,5 +87,7 @@ radio/slot
 - `options` 可以传 `{ label, value }` 对象数组，也可以直接传 string / number / boolean 基础值数组，基础值会自动转换为 `{ label, value }`。
 - `type="boolean"` 时会自动生成 `true / false` 两个选项。
 - `showType="button"` 时，option 的 `color` 可以覆盖当前项的选中背景色，其余样式保持 button 模式不变。
+- `options` 支持直接传入 computed；模板会自动解包，computed 内可以读取外部 `ref` 动态生成 label。
+- option 的 `class` 和 `style` 会应用到对应的 Radio item；在 scoped 样式中可以配合 `:deep()` 修改内部按钮。
 - `customLabel` 可读取外部 `ref`，动态生成每个选项的显示内容。
 - `customDisabled` 中的 `option` 是标准化后的当前选项，`index` 是选项下标，`value` 是按 `value` 属性解析后的实际值。

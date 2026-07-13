@@ -18,7 +18,10 @@ const priorityOptions = [
 ]
 
 const modeOptions = [
-  { label: '自动处理', value: 'auto' },
+  {
+    label: '自动处理',
+    value: 'auto',
+  },
   { label: '人工复核', value: 'manual' },
   { label: '延后处理', value: 'delay' },
 ]

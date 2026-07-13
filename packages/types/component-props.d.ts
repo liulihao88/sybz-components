@@ -1,4 +1,4 @@
-import type { Component, VNodeChild } from 'vue'
+import type { Component, CSSProperties, VNodeChild } from 'vue'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
@@ -434,6 +434,8 @@ export interface SRadioItem {
   label: string | number | boolean
   slot?: string
   disabled?: boolean
+  class?: string | string[] | Record<string, boolean>
+  style?: CSSProperties
   /** button 模式下当前项选中时的背景色 */
   color?: string
   [key: string]: any
