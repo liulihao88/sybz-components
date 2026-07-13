@@ -81,12 +81,7 @@
       :content="mergedProps.content"
     />
 
-    <s-icon
-      v-if="$attrs.type === 'textarea' && data && !($attrs.disabled === true || $attrs.disabled === '')"
-      name="circle-close"
-      class="s-input__clear"
-      @click="clearTextareaValue"
-    />
+    <s-icon v-if="showTextareaClear" name="circle-close" class="s-input__clear" @click="clearTextareaValue" />
   </div>
 </template>
 
@@ -166,6 +161,11 @@ const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
+const isClearable = computed(() => attrs.clearable !== false)
+const isDisabled = computed(() => attrs.disabled === true || attrs.disabled === '')
+const showTextareaClear = computed(
+  () => attrs.type === 'textarea' && isClearable.value && Boolean(data.value) && !isDisabled.value,
+)
 
 const inputClass = computed(() => [
   attrs.class,
@@ -365,6 +365,9 @@ const mergedAttrs = computed(() => {
       },
       {} as Record<string, any>,
     ),
+  }
+  if (attrs.type === 'textarea') {
+    merged.clearable = false
   }
   return merged
 })

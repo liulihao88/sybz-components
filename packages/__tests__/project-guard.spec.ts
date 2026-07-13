@@ -196,6 +196,20 @@ describe('project build and publish guards', () => {
 })
 
 describe('component entry guards', () => {
+  it('keeps textarea clear controls singular and controlled by clearable', () => {
+    const input = readText('packages/components/input/src/index.vue')
+    const docs = readText('docs/components/input/home.md')
+    const demo = readText('docs/components/input/clearable.vue')
+
+    expect(input).toContain('v-if="showTextareaClear"')
+    expect(input).toContain('const isClearable = computed(() => attrs.clearable !== false)')
+    expect(input).toContain("attrs.type === 'textarea' && isClearable.value")
+    expect(input).toContain("if (attrs.type === 'textarea')")
+    expect(input).toContain('merged.clearable = false')
+    expect(docs).toContain('textarea 始终隐藏 Element Plus 原生清除按钮')
+    expect(demo).toContain(':clearable="false"')
+  })
+
   it('keeps radio button colors and customLabel aligned across implementation, types and docs', () => {
     const radio = readText('packages/components/radio/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')

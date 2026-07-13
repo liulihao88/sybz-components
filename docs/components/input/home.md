@@ -65,9 +65,9 @@ input/disabled
 
 ### 一键清空
 
-使用`clearable`属性即可得到一个可一键清空的输入框, `s-input`默认clearable是`true`的.
+使用 `clearable` 属性即可得到一个可一键清空的输入框，`s-input` 默认值为 `true`。textarea 始终隐藏 Element Plus 原生清除按钮，只显示 `s-input` 自定义清除按钮；设置 `clearable="false"` 后自定义按钮也会隐藏。
 
-:::demo 展示一键清空配置。基础写法：`<el-input v-model="input" style="width: 240px" placeholder="Please input" :clearable="false" />`。
+:::demo 展示 textarea 一键清空配置。基础写法：`<s-input v-model="textarea" type="textarea" :clearable="false" />`。属性：`clearable` 可选 `true / false`，默认值 `true`。
 input/clearable
 :::
 

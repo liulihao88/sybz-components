@@ -8,17 +8,6 @@ const t1 = ref()
   <div>
     <s-button>魔人布欧</s-button>
     <div>docs/components/test/base.vue</div>
-    <s-select
-      v-model="t1"
-      disabled
-      theme="shijingshan"
-      title="简单的"
-      :options="[
-        {
-          label: '莎莎',
-          value: 'ss',
-        },
-      ]"
-    />
+    <s-input v-model="t1" type="textarea"></s-input>
   </div>
 </template>
