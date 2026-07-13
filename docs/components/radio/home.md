@@ -52,6 +52,12 @@ radio/type
 radio/multyAttrs
 :::
 
+### 高级写法：自定义按钮颜色和 label
+
+:::demo 展示 button 模式下使用独立选中色，并通过 `customLabel` 读取响应式数量。基础写法：`<s-radio v-model="status" showType="button" :options="statusOptions" :customLabel="customLabel" />`。属性：`showType` 可选 `radio / button`，默认值 `radio`；option 的 `color` 类型 `string`，默认值为主题主色；`customLabel` 类型 `({ option, index, value }) => any`，默认值 `undefined`。
+radio/advanced
+:::
+
 ### Slots
 
 :::demo 展示插槽内容定制。基础写法：`<s-radio v-model="value" :options="options" size="large" @change="change"></s-radio>`。插槽：按示例中的插槽名定制内容。
@@ -72,6 +78,7 @@ radio/slot
 |      `size`      | 单选尺寸，支持顶层传入和全局默认配置                  | `''` / `large` / `default` / `small`          | `''`      |
 |     `value`      | 选项值字段名                                          | string / number / boolean                     | `value`   |
 |     `label`      | 选项展示字段名                                        | string / number / boolean                     | `label`   |
+|  `customLabel`   | 自定义显示内容，参数为 `{ option, index, value }`     | `(context) => any`                            | -         |
 | `customDisabled` | 自定义禁用，参数为 `{ option, index, value }`         | `(context) => boolean`                        | -         |
 
 ### 说明
@@ -79,4 +86,6 @@ radio/slot
 - 组件底层基于 `el-radio-group` 封装，支持透传原生属性和事件。
 - `options` 可以传 `{ label, value }` 对象数组，也可以直接传 string / number / boolean 基础值数组，基础值会自动转换为 `{ label, value }`。
 - `type="boolean"` 时会自动生成 `true / false` 两个选项。
+- `showType="button"` 时，option 的 `color` 可以覆盖当前项的选中背景色，其余样式保持 button 模式不变。
+- `customLabel` 可读取外部 `ref`，动态生成每个选项的显示内容。
 - `customDisabled` 中的 `option` 是标准化后的当前选项，`index` 是选项下标，`value` 是按 `value` 属性解析后的实际值。

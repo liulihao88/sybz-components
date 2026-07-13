@@ -196,6 +196,29 @@ describe('project build and publish guards', () => {
 })
 
 describe('component entry guards', () => {
+  it('keeps radio button colors and customLabel aligned across implementation, types and docs', () => {
+    const radio = readText('packages/components/radio/src/index.vue')
+    const componentProps = readText('packages/types/component-props.d.ts')
+    const componentTypes = readText('packages/types/components/radio.d.ts')
+    const docs = readText('docs/components/radio/home.md')
+    const demo = readText('docs/components/radio/advanced.vue')
+
+    expect(radio).toContain("showType?: 'radio' | 'button'")
+    expect(radio).toContain("'--s-radio-button-color': option.color")
+    expect(radio).toContain('mergedProps.value.customLabel({')
+    expect(componentProps).toContain("showType?: 'radio' | 'button'")
+    expect(componentProps).not.toContain('count?: string | number')
+    expect(componentProps).toContain('color?: string')
+    expect(componentProps).toContain('customLabel?: (context: SRadioOptionContext<Option>) => any')
+    expect(componentTypes).toContain("showType?: 'radio' | 'button'")
+    expect(docs).toContain('### 高级写法：自定义按钮颜色和 label')
+    expect(demo).toContain('show-type="button"')
+    expect(demo).toContain(':custom-label="customLabel"')
+    expect(demo).toContain('pendingCount.value')
+    expect(demo).toContain("color: '#f0444c'")
+    expect(demo).toContain("color: '#16a66a'")
+  })
+
   it('keeps form themes aligned across props, children, docs and sidebar', () => {
     const form = readText('packages/components/form/src/index.vue')
     const componentProps = readText('packages/types/component-props.d.ts')

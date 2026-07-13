@@ -13,9 +13,10 @@
           :value="item[mergedProps.value!]"
           :border="mergedProps.border"
           :disabled="getOptionDisabled(item, index)"
+          :style="getOptionStyle(item)"
         >
           <slot :name="'slot' in item ? item.slot : undefined" v-bind="item">
-            {{ item[mergedProps.label!] }}
+            {{ getOptionLabel(item, index) }}
           </slot>
         </component>
       </slot>
@@ -25,6 +26,7 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
+import type { CSSProperties } from 'vue'
 import type { RadioItem, RadioOption, RadioOptionValue } from './radio'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -42,6 +44,7 @@ interface RadioProps {
   border?: boolean
   value?: any
   label?: any
+  customLabel?: (context: RadioOptionContext) => any
   customDisabled?: (context: RadioOptionContext) => boolean | null
 }
 
@@ -120,6 +123,22 @@ const getOptionDisabled = (option: RadioItem, index: number) => {
     false
   )
 }
+const getOptionLabel = (option: RadioItem, index: number) => {
+  if (typeof mergedProps.value.customLabel !== 'function') return option[mergedProps.value.label as keyof RadioItem]
+  return mergedProps.value.customLabel({
+    option,
+    index,
+    value: option[mergedProps.value.value as keyof RadioItem],
+  })
+}
+const getOptionStyle = (option: RadioItem): CSSProperties | undefined => {
+  if (mergedProps.value.showType !== 'button' || !option.color) return option.style
+
+  return {
+    ...option.style,
+    '--s-radio-button-color': option.color,
+  } as CSSProperties
+}
 const radioClass = computed(() => {
   return {
     's-radio-box--chenghua': mergedProps.value.theme === 'chenghua',
@@ -138,6 +157,14 @@ const radioClass = computed(() => {
   }
   .s-comp-title {
     border-right: 1px solid var(--el-border-color);
+  }
+}
+
+.s-radio-box--button {
+  :deep(.el-radio-button.is-active .el-radio-button__inner) {
+    border-color: var(--s-radio-button-color, var(--el-color-primary));
+    background-color: var(--s-radio-button-color, var(--el-color-primary));
+    box-shadow: -1px 0 0 0 var(--s-radio-button-color, var(--el-color-primary));
   }
 }
 </style>

@@ -9,6 +9,8 @@ export interface RadioItem {
   label?: RadioOptionValue
   slot?: string
   disabled?: boolean
+  /** button 模式下当前项选中时的背景色 */
+  color?: string
   [key: string]: any
 }
 

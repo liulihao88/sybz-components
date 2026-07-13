@@ -434,6 +434,8 @@ export interface SRadioItem {
   label: string | number | boolean
   slot?: string
   disabled?: boolean
+  /** button 模式下当前项选中时的背景色 */
+  color?: string
   [key: string]: any
 }
 
@@ -455,6 +457,7 @@ export interface SRadioSelfProps<Option = SRadioItem> {
   border?: boolean
   value?: string | number | boolean
   label?: string | number | boolean
+  customLabel?: (context: SRadioOptionContext<Option>) => any
   customDisabled?: (context: SRadioOptionContext<Option>) => boolean
 }
 
