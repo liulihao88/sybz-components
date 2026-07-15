@@ -1,4 +1,5 @@
 import type { ComputedRef, Ref } from 'vue'
+import type { ElementSize, MaybeComputedElementRef, UseResizeObserverOptions } from '@vueuse/core'
 
 export interface UseBooleanReturn {
   state: Ref<boolean>
@@ -24,25 +25,21 @@ export type DebouncedFunction<T extends (...args: any[]) => any> = ((
 
 export declare function useDebounceFn<T extends (...args: any[]) => any>(fn: T, wait?: number): DebouncedFunction<T>
 
-export interface UseElementSizeOptions {
-  initialWidth?: number
-  initialHeight?: number
+export interface UseFlexFillSizeOptions extends Omit<UseResizeObserverOptions, 'box'> {
+  flex?: string
+  overflow?: string
   box?: ResizeObserverBoxOptions
+  initialSize?: ElementSize
 }
 
-export interface UseElementSizeReturn {
+export declare function useFlexFillSize(
+  target: MaybeComputedElementRef,
+  options?: UseFlexFillSizeOptions,
+): {
   width: Ref<number>
   height: Ref<number>
-  size: ComputedRef<{
-    width: number
-    height: number
-  }>
+  stop: () => void
 }
-
-export declare function useElementSize(
-  target: HTMLElement | SVGElement | null | undefined | Ref<HTMLElement | SVGElement | null | undefined>,
-  options?: UseElementSizeOptions,
-): UseElementSizeReturn
 
 export declare function useEventListener(
   target: Ref<EventTarget | null> | EventTarget,

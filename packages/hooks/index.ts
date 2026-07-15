@@ -6,8 +6,8 @@ export { default as useClickOutside } from './useClickOutside'
 export { default as useDebounceFn } from './useDebounceFn'
 export type { DebouncedFunction } from './useDebounceFn'
 
-export { default as useElementSize } from './useElementSize'
-export type { UseElementSizeOptions, UseElementSizeReturn } from './useElementSize'
+export { default as useFlexFillSize } from './useFlexFillSize'
+export type { UseFlexFillSizeOptions } from './useFlexFillSize'
 
 export { default as useEventListener } from './useEventListener'
 
