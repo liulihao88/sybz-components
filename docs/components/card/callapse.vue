@@ -9,7 +9,9 @@ const isCollapsed = ref(true)
       我是内部的文件
       <template #header>
         <s-title title="默认点击右侧图标收起">
-          <el-button type="primary" @click.stop="console.log(1234)">测试96</el-button>
+          <template #append>
+            <el-button type="primary" @click.stop="console.log(1234)">测试96</el-button>
+          </template>
           <template #extra>
             <el-button type="primary" @click.stop="console.log(123)">右侧按钮不再需要手动 stop</el-button>
           </template>

@@ -12,14 +12,16 @@
     <s-input v-model="input" width="240" height="48" title="height: 48" placeholder="height: 48" />
 
     <s-title title="文本域">
-      <s-input
-        v-model="textarea"
-        title="文本域"
-        style="width: 240px"
-        :rows="2"
-        type="textarea"
-        placeholder="Please input"
-      />
+      <template #append>
+        <s-input
+          v-model="textarea"
+          title="文本域"
+          style="width: 240px"
+          :rows="2"
+          type="textarea"
+          placeholder="Please input"
+        />
+      </template>
     </s-title>
 
     <s-input v-model="textarea1" style="width: 240px" autosize type="textarea" placeholder="Please input" />

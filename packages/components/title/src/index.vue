@@ -3,7 +3,7 @@
     <div class="s-title__top" :class="parseClass">
       <div class="s-title__main" :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }">
         <span :class="($slots.icon || mergedProps.type === 'icon') && 's-title__slot-icon-wrapper'">
-          <slot name="icon" class="icon_slot">
+          <slot name="icon">
             <span v-if="isThemeIcon" class="s-title__theme-icon" aria-hidden="true"></span>
             <svg
               v-else-if="mergedProps.type === 'icon'"
@@ -27,20 +27,20 @@
             </svg>
           </slot>
         </span>
-        <span class="title-text">
+        <component :is="mergedProps.tag" class="s-title__text" v-bind="titleA11yAttrs">
           <slot name="title">
-            {{ mergedProps.title }}
+            <slot>{{ mergedProps.title }}</slot>
           </slot>
-        </span>
+        </component>
         <span v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
           {{ mergedProps.subTitle }}
         </span>
-        <slot></slot>
+        <span v-if="$slots.append" class="s-title__append">
+          <slot name="append"></slot>
+        </span>
       </div>
-      <div :class="($slots.extra || $slots.right) && 's-title__slot-extra-wrapper'">
-        <slot name="extra">
-          <slot name="right"></slot>
-        </slot>
+      <div v-if="$slots.extra || $slots.right" class="s-title__slot-extra-wrapper">
+        <slot name="extra"> </slot>
       </div>
     </div>
   </div>
@@ -57,11 +57,14 @@ defineSlots<{
   default?: () => any
   title?: () => any
   icon?: () => any
+  append?: () => any
   extra?: () => any
+  /** @deprecated 使用 extra 插槽代替。 */
   right?: () => any
 }>()
 type TitleSize = 'small' | 'default' | 'large'
 type TitleType = '' | 'simple' | 'icon' | 'form'
+type TitleTag = 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 interface TitleProps {
   title?: string
   size?: TitleSize
@@ -77,9 +80,11 @@ interface TitleProps {
   height?: string | number
   type?: TitleType
   theme?: 'default' | 'chenghua' | 'shijingshan'
+  tag?: TitleTag
+  level?: 1 | 2 | 3 | 4 | 5 | 6
 }
 
-const titleSizeMap: Record<Exclude<TitleSize, ''>, Record<string, string>> = {
+const titleSizeMap: Record<TitleSize, Record<string, string>> = {
   small: {
     '--s-title-font-size': '14px',
     '--s-title-sub-title-font-size': '12px',
@@ -122,6 +127,8 @@ const props = withDefaults(defineProps<TitleProps>(), {
   height: '',
   type: '',
   theme: 'default',
+  tag: 'div',
+  level: 3,
 })
 const mergedProps = useGlobalComponentConfig('title', props)
 
@@ -183,6 +190,14 @@ const titleClass = computed(() => ({
   's-title--shijingshan': mergedProps.value.theme === 'shijingshan',
   [`s-title--size-${mergedProps.value.size}`]: !!mergedProps.value.size,
 }))
+const titleA11yAttrs = computed(() => {
+  if (/^h[1-6]$/.test(mergedProps.value.tag)) return {}
+
+  return {
+    role: 'heading',
+    'aria-level': mergedProps.value.level,
+  }
+})
 const isThemeIcon = computed(() => {
   return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) && mergedProps.value.type === 'icon'
 })
@@ -197,6 +212,20 @@ const isThemeIcon = computed(() => {
     flex: 1 1 auto;
     align-items: center;
     min-width: 0;
+  }
+  .s-title__text {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0 var(--s-title-gap, 8px) 0 0;
+    overflow: hidden;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .s-title__top {
     display: flex;
@@ -218,10 +247,12 @@ const isThemeIcon = computed(() => {
       display: block;
     }
     .s-title__slot-extra-wrapper {
-      text-align: right;
       display: flex;
+      flex: 0 0 auto;
       align-items: center;
       justify-content: flex-end;
+      min-width: 0;
+      text-align: right;
     }
   }
 
@@ -230,11 +261,6 @@ const isThemeIcon = computed(() => {
     margin: 0 0 16px;
     font-weight: 800;
     width: 100%;
-
-    .title-text {
-      margin-right: var(--s-title-gap, 8px);
-      white-space: nowrap;
-    }
   }
 
   .s-title__top-simple-left {
@@ -243,12 +269,6 @@ const isThemeIcon = computed(() => {
     position: relative;
     box-sizing: border-box;
     display: flex;
-    .title-text {
-      letter-spacing: 0;
-      font-weight: 600;
-      margin-right: var(--s-title-gap, 8px);
-      white-space: nowrap;
-    }
   }
   .s-title__top-left {
     width: 100%;
@@ -268,12 +288,12 @@ const isThemeIcon = computed(() => {
       letter-spacing: 0;
       background-color: var(--lc, var(--blue)); // 左侧的竖条颜色
     }
-    .title-text {
-      letter-spacing: 0;
-      font-weight: 600;
-      margin-right: var(--s-title-gap, 8px);
-      white-space: nowrap;
-    }
+  }
+  .s-title__append {
+    display: inline-flex;
+    flex: 0 1 auto;
+    align-items: center;
+    min-width: 0;
   }
   .s-title__subTitle {
     display: inline-flex;

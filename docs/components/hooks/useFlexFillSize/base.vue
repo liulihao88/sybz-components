@@ -13,12 +13,14 @@ const tableData = Array.from({ length: 8 }, (_, index) => ({
 
 <template>
   <div class="flex-fill-demo">
-    <s-title>顶部</s-title>
+    <s-title title="顶部" />
     <el-table ref="tableContainerRef" :data="tableData" :height="height">
       <el-table-column prop="name" label="名称" />
       <el-table-column prop="status" label="状态" />
     </el-table>
-    <s-title title="底部">可用区域：{{ Math.round(width) }}px x {{ Math.round(height) }}px</s-title>
+    <s-title title="底部">
+      <template #append>可用区域：{{ Math.round(width) }}px x {{ Math.round(height) }}px</template>
+    </s-title>
   </div>
 </template>
 

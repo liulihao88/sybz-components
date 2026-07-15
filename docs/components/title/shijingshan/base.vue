@@ -16,7 +16,7 @@
     <s-title title="基础信息" theme="shijingshan" type="form"></s-title>
 
     <s-title title="无图标标题" theme="shijingshan" type="simple">
-      <span class="shijingshan-title-demo__tag">运行中</span>
+      <template #append><span class="shijingshan-title-demo__tag">运行中</span></template>
     </s-title>
   </div>
 </template>

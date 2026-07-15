@@ -1,4 +1,4 @@
-import type { STitleProps, SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
+import type { SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
 
 export type STitleComponent = {
   new (): {
@@ -17,12 +17,16 @@ export type STitleComponent = {
       height?: string | number
       type?: '' | 'simple' | 'icon' | 'form'
       theme?: SybzComponentTheme
+      tag?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+      level?: 1 | 2 | 3 | 4 | 5 | 6
     }
     $slots: {
       default?: () => any
       title?: () => any
       icon?: () => any
+      append?: () => any
       extra?: () => any
+      /** @deprecated 使用 extra 插槽代替。 */
       right?: () => any
     }
   }

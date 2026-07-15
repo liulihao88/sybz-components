@@ -15,12 +15,16 @@
         <el-button type="primary">按钮1</el-button>
         <el-button type="primary">按钮2</el-button>
       </template>
-      我是默认slot
+      <template #append>我是追加内容</template>
     </s-title>
+
+    <s-title>默认插槽标题</s-title>
+    <s-title :level="2">ARIA 二级标题</s-title>
+    <s-title tag="h2">原生二级标题</s-title>
 
     <s-title title="修改竖条颜色" type="icon" :style="{ '--lc': 'red' }"></s-title>
     <s-title title="左侧" margin="10px 0" l="10">
-      <span class="m-l-16">左侧的slot</span>
+      <template #append><span class="m-l-16">标题追加内容</span></template>
       <template #extra>
         <el-button type="primary">右侧的button</el-button>
         <el-button type="primary">右侧的button2</el-button>
