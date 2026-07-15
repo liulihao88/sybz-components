@@ -1,8 +1,7 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type UserConfig } from 'vitepress'
 import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
-import type { ModuleNode, Plugin, ViteDevServer } from 'vite'
 import { mdPlugin } from './config/plugins.ts'
 import { createAlgolia, Github } from './utils/settings.ts'
 
@@ -13,6 +12,13 @@ const sybzMark = (text: string) => `<span class="sybz-components-sidebar-star" a
 const rootDir = fileURLToPath(new URL('../..', import.meta.url))
 const utilsSourceDir = fileURLToPath(new URL('../../packages/utils/src/', import.meta.url))
 const utilsDocsDir = fileURLToPath(new URL('../components/utils/', import.meta.url))
+type VitePressPlugin = Extract<NonNullable<NonNullable<UserConfig['vite']>['plugins']>[number], { name: string }>
+type HookHandler<T> = T extends (...args: any[]) => any
+  ? T
+  : T extends { handler: infer Handler extends (...args: any[]) => any }
+    ? Handler
+    : never
+type VitePressDevServer = Parameters<HookHandler<NonNullable<VitePressPlugin['configureServer']>>>[0]
 
 const formatBuildTime = (date: Date) => {
   const pad = (value: number) => String(value).padStart(2, '0')
@@ -93,16 +99,10 @@ const docsBuildInfo = {
   commits: gitCommits,
 }
 
-const reloadUtilsSourceDocs = (server: ViteDevServer, file: string) => {
+const reloadUtilsSourceDocs = (server: VitePressDevServer, file: string) => {
   if (!file.startsWith(utilsSourceDir) || !file.endsWith('.ts')) return
 
-  const fileToModulesMap = (
-    server.moduleGraph as unknown as {
-      fileToModulesMap?: Map<string, Set<ModuleNode>>
-    }
-  ).fileToModulesMap
-
-  fileToModulesMap?.forEach((modules, moduleFile) => {
+  server.moduleGraph.fileToModulesMap.forEach((modules, moduleFile) => {
     if (!moduleFile.startsWith(utilsDocsDir) || !moduleFile.endsWith('.md')) return
 
     modules.forEach((module) => server.moduleGraph.invalidateModule(module))
@@ -111,7 +111,7 @@ const reloadUtilsSourceDocs = (server: ViteDevServer, file: string) => {
   server.ws.send({ type: 'full-reload' })
 }
 
-const utilsSourceDocsHmrPlugin = (): Plugin => ({
+const utilsSourceDocsHmrPlugin = (): VitePressPlugin => ({
   name: 'vitepress-utils-source-docs-hmr',
   apply: 'serve',
   configureServer(server) {
@@ -548,7 +548,7 @@ export default defineConfig({
               link: '/components/hooks/usePagination/home.md',
             },
             {
-              text: 'useFlexFillSize 自动计算剩余高度',
+              text: sybzMark('useFlexFillSize 自动计算剩余高度'),
               link: '/components/hooks/useFlexFillSize/home.md',
             },
             {
