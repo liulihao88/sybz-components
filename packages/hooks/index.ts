@@ -25,5 +25,3 @@ export type { UsePaginationOptions, UsePaginationReturn } from './usePagination'
 
 export { default as useThrottleFn } from './useThrottleFn'
 export type { ThrottledFunction, UseThrottleFnOptions } from './useThrottleFn'
-
-export { default as useZIndex } from './useZIndex'

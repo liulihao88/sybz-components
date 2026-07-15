@@ -107,11 +107,3 @@ export declare function useThrottleFn<T extends (...args: any[]) => any>(
   wait?: number,
   options?: UseThrottleFnOptions,
 ): ThrottledFunction<T>
-
-export interface UseZIndexReturn {
-  currentZIndex: ComputedRef<number>
-  nextZIndex: () => number
-  initialZIndex: Ref<number>
-}
-
-export declare function useZIndex(initialValue?: number): UseZIndexReturn

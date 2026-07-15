@@ -1,7 +1,8 @@
 import { render, h, shallowReactive } from 'vue'
+import { useZIndex } from 'element-plus'
 import type { CreateMessageProps, MessageContext } from './types'
 import MessageConstructor from './index.vue'
-import useZIndex from '../../hooks/useZIndex'
+
 let seed = 1
 const instances: MessageContext[] = shallowReactive([])
 export const createMessage = (props: CreateMessageProps) => {

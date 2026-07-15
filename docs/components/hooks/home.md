@@ -28,7 +28,6 @@ import { useLoading, usePagination } from 'sybz-components/hooks'
 - [useFlexFillSize Flex 剩余空间尺寸](/components/hooks/useFlexFillSize/home.md)
 - [useEventListener 事件监听](/components/hooks/useEventListener/home.md)
 - [useClickOutside 外部点击](/components/hooks/useClickOutside/home.md)
-- [useZIndex 层级管理](/components/hooks/useZIndex/home.md)
 
 ### 放在哪里更合适
 

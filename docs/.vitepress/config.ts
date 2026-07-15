@@ -567,10 +567,6 @@ export default defineConfig({
               text: 'useClickOutside 外部点击',
               link: '/components/hooks/useClickOutside/home.md',
             },
-            {
-              text: 'useZIndex 层级管理',
-              link: '/components/hooks/useZIndex/home.md',
-            },
           ],
         },
       ],
