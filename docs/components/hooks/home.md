@@ -23,8 +23,6 @@ import { useLoading, usePagination } from 'sybz-components/hooks'
 - [useBoolean 布尔状态](/components/hooks/useBoolean/home.md)
 - [useLoading 加载状态](/components/hooks/useLoading/home.md)
 - [usePagination 分页状态](/components/hooks/usePagination/home.md)
-- [useDebounceFn 防抖函数](/components/hooks/useDebounceFn/home.md)
-- [useThrottleFn 节流函数](/components/hooks/useThrottleFn/home.md)
 - [useFlexFillSize Flex 剩余空间尺寸](/components/hooks/useFlexFillSize/home.md)
 - [useEventListener 事件监听](/components/hooks/useEventListener/home.md)
 - [useClickOutside 外部点击](/components/hooks/useClickOutside/home.md)

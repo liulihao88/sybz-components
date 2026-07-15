@@ -16,15 +16,6 @@ export declare function useClickOutside(
   callback: (e: MouseEvent) => void,
 ): void
 
-export type DebouncedFunction<T extends (...args: any[]) => any> = ((
-  ...args: Parameters<T>
-) => ReturnType<T> | undefined) & {
-  cancel: () => void
-  flush: () => ReturnType<T> | undefined
-}
-
-export declare function useDebounceFn<T extends (...args: any[]) => any>(fn: T, wait?: number): DebouncedFunction<T>
-
 export interface UseFlexFillSizeOptions extends Omit<UseResizeObserverOptions, 'box'> {
   flex?: string
   overflow?: string
@@ -89,21 +80,3 @@ export interface UsePaginationReturn {
 }
 
 export declare function usePagination(options?: UsePaginationOptions): UsePaginationReturn
-
-export interface UseThrottleFnOptions {
-  leading?: boolean
-  trailing?: boolean
-}
-
-export type ThrottledFunction<T extends (...args: any[]) => any> = ((
-  ...args: Parameters<T>
-) => ReturnType<T> | undefined) & {
-  cancel: () => void
-  flush: () => ReturnType<T> | undefined
-}
-
-export declare function useThrottleFn<T extends (...args: any[]) => any>(
-  fn: T,
-  wait?: number,
-  options?: UseThrottleFnOptions,
-): ThrottledFunction<T>

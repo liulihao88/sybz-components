@@ -548,14 +548,6 @@ export default defineConfig({
               link: '/components/hooks/usePagination/home.md',
             },
             {
-              text: 'useDebounceFn 防抖函数',
-              link: '/components/hooks/useDebounceFn/home.md',
-            },
-            {
-              text: 'useThrottleFn 节流函数',
-              link: '/components/hooks/useThrottleFn/home.md',
-            },
-            {
               text: 'useFlexFillSize 自动计算剩余高度',
               link: '/components/hooks/useFlexFillSize/home.md',
             },
