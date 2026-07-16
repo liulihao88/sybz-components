@@ -37,11 +37,13 @@ clone(refData)
 
 ```ts
 const user = clone({ name: 'andy', extra: { id: 1 } })
+// { name: 'andy', extra: { id: 1 } }
 
 const list = clone([1, 2, 3], 2)
 // [1, 2, 3, 1, 2, 3]
 
 const copied = clone(ref([{ id: 1 }]))
+// [{ id: 1 }]
 ```
 
 ### 注意事项
