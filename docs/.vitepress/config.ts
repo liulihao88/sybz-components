@@ -241,7 +241,7 @@ export default defineConfig({
             },
             {
               text: 'debounce 防抖函数',
-              link: '/components/utils/home.md#debounce',
+              link: '/components/utils/debounce/home.md',
             },
             {
               text: sybzMark('delay 延迟函数'),

@@ -15,6 +15,7 @@
 - [$toast](/components/utils/$toast/home.md)
 - [clone](/components/utils/clone/home.md)
 - [confirm](/components/utils/confirm/home.md)
+- [debounce](/components/utils/debounce/home.md)
 - [formatBytes](/components/utils/formatBytes/home.md)
 - [formatBytesConvert](/components/utils/formatBytesConvert/home.md)
 - [formatDurationTime](/components/utils/formatDurationTime/home.md)
