@@ -3,34 +3,53 @@ import { ref } from 'vue'
 import { clone } from '@sybz-components/utils'
 
 const refValue = ref([11, 22, 33])
+const objectValue = {
+  a: 1,
+  b: { c: 2 },
+  d: new Date(),
+  e: /regex/,
+  f: function () {},
+  self: null,
+}
+
+const formatCloneValue = (value: unknown) => {
+  const seen = new WeakSet<object>()
+
+  return (
+    JSON.stringify(value, function (key, currentValue) {
+      const originalValue = key === '' ? value : this[key]
+
+      if (originalValue instanceof Date) return `new Date('${originalValue.toISOString()}')`
+      if (originalValue instanceof RegExp) return originalValue.toString()
+      if (typeof originalValue === 'function') return originalValue.toString()
+      if (originalValue && typeof originalValue === 'object') {
+        if (seen.has(originalValue)) return '[Circular]'
+        seen.add(originalValue)
+      }
+
+      return currentValue
+    }) ?? String(value)
+  )
+}
 
 const options = ref([
-  { label: 'clone([1,2,3])', value: clone([1, 2, 3]) },
+  { label: 'clone([1,2,3])', value: formatCloneValue(clone([1, 2, 3])) },
   {
-    label: ' {a: 1, b:{c:2}, d:new Date(), e: /regex/, f:function(){}, self: null}',
-    value: {
-      a: 1,
-      b: { c: 2 },
-      d: new Date(),
-      e: /regex/,
-      f22: function () {
-        return '123'
-      }, // JSON.stringify 会丢失
-      self: null, // 循环引用
-    },
+    label: 'clone({a: 1, b:{c:2}, d:new Date(), e:/regex/, f:function(){}, self:null})',
+    value: formatCloneValue(clone(objectValue)),
   },
   {
     label: 'clone([1,2,3], 3)',
-    value: clone([1, 2, 3], 3),
+    value: formatCloneValue(clone([1, 2, 3], 3)),
   },
   {
     label: 'clone(12)',
-    value: clone(12),
+    value: formatCloneValue(clone(12)),
   },
   {
     label: 'clone(refValue)',
     labelSlot: 'refValue',
-    value: clone(refValue),
+    value: formatCloneValue(clone(refValue)),
   },
 ])
 </script>
@@ -38,7 +57,7 @@ const options = ref([
 <template>
   <div>
     <s-descriptions :options="options" :column="1" label-width="300" :show-all="true">
-      <template #refValue="{ item }">
+      <template #refValue="{ option, value, index }">
         <s-flex justify="end">
           <div class="m-r-8">clone(refValue)</div>
           <div class="f-st-ct">
@@ -51,3 +70,5 @@ const options = ref([
     </s-descriptions>
   </div>
 </template>
+
+<style scoped></style>
