@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, shallowRef, watch, markRaw, onBeforeUnmount, computed } from 'vue'
+import { ref, shallowRef, watch, markRaw, onMounted, onBeforeUnmount, computed } from 'vue'
 import { debounce, processWidth } from '@sybz-components/utils'
-import { useEcharts } from './useEcharts.ts'
 import { registerShijingshanChartTheme } from './shijingshanTheme.ts'
 
 defineOptions({
@@ -13,6 +12,7 @@ const emits = defineEmits(['chart'])
 
 const chart = ref()
 let chartLoadToken = 0
+let resizeObserver: ResizeObserver | undefined
 
 const props = withDefaults(
   defineProps<{
@@ -55,7 +55,7 @@ const initChart = async () => {
   emits('chart', chart.value)
   setTimeout(() => {
     if (token !== chartLoadToken || !chart.value) return
-    useEcharts(chart.value, props.option)
+    chart.value.setOption(props.option)
   }, 0)
 }
 
@@ -100,6 +100,15 @@ watch(
   },
 )
 
+onMounted(() => {
+  if (typeof ResizeObserver !== 'undefined' && echartDivRef.value) {
+    resizeObserver = new ResizeObserver(() => resizeChart())
+    resizeObserver.observe(echartDivRef.value)
+  } else if (typeof window !== 'undefined') {
+    window.addEventListener('resize', resizeChart)
+  }
+})
+
 const formatEmpty = computed(() => {
   if (typeof props.isEmpty === 'function') {
     return props.isEmpty(props.option)
@@ -114,9 +123,9 @@ defineExpose({
 
 onBeforeUnmount(() => {
   chartLoadToken += 1
-  // 取消监听
-  // window.removeEventListener('resize', resizeChart)
-  // 销毁echarts实例
+  resizeObserver?.disconnect()
+  window.removeEventListener('resize', resizeChart)
+  resizeChart.cancel()
   chart.value?.dispose()
   chart.value = null
 })

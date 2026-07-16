@@ -23,12 +23,8 @@
       ">5GB": 0
   },
  */
-import { ref, onMounted, onBeforeUnmount, watch, defineAsyncComponent } from 'vue'
-// import VChart from 'vue-echarts'
-const VChart = defineAsyncComponent(async () => {
-  await import('@/utils/local/useEcharts')
-  return import('vue-echarts')
-}) // // 因为直接引入vue-echarts, 使用vitepress打包回报错, 在使用 VitePress 打包时，如果引入的 vue-echarts 中包含对 document 的引用，可能会导致 document is not defined 的错误。这是因为 VitePress 使用了服务器端渲染（SSR），而 document 是浏览器环境中的对象，在服务器端环境中不存在。以下是几种可能的解决
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import SChart from '@/components/chart/index.ts'
 import { clone, formatBytes, formatThousands, getVariable } from '@sybz-components/utils'
 
 defineOptions({
@@ -232,17 +228,18 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <template v-if="isEmpty">
-    <s-empty class="s-count-bar-old__empty" />
-  </template>
-  <template v-else>
-    <div class="vChart-box">
-      <VChart class="s-count-bar-old__chart" :option="option" autoresize />
-    </div>
-  </template>
+  <div class="s-count-bar-old">
+    <s-empty v-if="isEmpty" class="s-count-bar-old__empty" />
+    <SChart v-else class="s-count-bar-old__chart" :option="option" width="100%" height="100%" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.s-count-bar-old {
+  min-width: 0;
+  height: 100%;
+}
+
 .s-count-bar-old__empty {
   height: 100%;
 }

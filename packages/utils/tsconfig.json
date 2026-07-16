@@ -17,7 +17,6 @@
   },
   "include": [
     "src/**/*.ts",
-    "local/useEcharts.ts",
     "local/dom.ts",
     "local/packageUtils.ts",
     "local/saveTsFunc.ts",

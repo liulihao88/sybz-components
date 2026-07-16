@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch, computed, defineAsyncComponent } from 'vue'
-const VChart = defineAsyncComponent(async () => {
-  await import('@/utils/local/useEcharts')
-  return import('vue-echarts')
-}) // 因为直接引入vue-echarts, 使用vitepress打包回报错, 在使用 VitePress 打包时，如果引入的 vue-echarts 中包含对 document 的引用，可能会导致 document is not defined 的错误。这是因为 VitePress 使用了服务器端渲染（SSR），而 document 是浏览器环境中的对象，在服务器端环境中不存在。以下是几种可能的解决
+import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
+import SChart from '@/components/chart/index.ts'
 import { getPieColorByDataIndex } from '@/utils/local/packageUtils'
 import { formatBytes, formatBytesConvert, clone, getVariable } from '@sybz-components/utils'
 defineOptions({
@@ -220,18 +217,25 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <template v-if="isEmpty">
-    <s-empty class="s-quota-pie__empty" />
-  </template>
-  <template v-else>
-    <div ref="containerRef" class="vChart-box">
-      <v-chart class="s-quota-pie__chart" :option="options" autoresize />
+  <div class="s-quota-pie">
+    <s-empty v-if="isEmpty" class="s-quota-pie__empty" />
+    <div v-else ref="containerRef" class="s-quota-pie__chart-box">
+      <SChart class="s-quota-pie__chart" :option="options" width="100%" height="100%" />
     </div>
-  </template>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.s-quota-pie {
+  min-width: 0;
+  height: 100%;
+}
+
 .s-quota-pie__empty {
+  height: 100%;
+}
+
+.s-quota-pie__chart-box {
   height: 100%;
 }
 

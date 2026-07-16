@@ -132,6 +132,13 @@ describe('project build and publish guards', () => {
 
   it('keeps externalized packages aligned with runtime and optional feature dependencies', () => {
     const viteConfig = readText('vite.config.js')
+    const chartViteConfig = readText('packages/components/company/chart/vite.config.js')
+    const pkg = readText('package.json')
+    const chartSources = [
+      'packages/components/company/countBar/src/index.vue',
+      'packages/components/company/countBarOld/src/index.vue',
+      'packages/components/company/quotaPie/src/index.vue',
+    ].map(readText)
 
     for (const packageName of [
       'vue',
@@ -140,14 +147,21 @@ describe('project build and publish guards', () => {
       '@vueuse/core',
       '@sybz-components/utils',
       'echarts',
-      'vue-echarts',
     ]) {
       expect(viteConfig).toContain(`'${packageName}'`)
     }
 
     expect(viteConfig).toContain("'@element-plus/icons-vue': 'ElementPlusIconsVue'")
     expect(viteConfig).toContain("'@vueuse/core': 'VueUse'")
-    expect(viteConfig).toContain("'vue-echarts': 'VueECharts'")
+    expect(chartViteConfig).toContain("'echarts'")
+
+    for (const source of [viteConfig, chartViteConfig, pkg, ...chartSources]) {
+      expect(source).not.toContain('vue-echarts')
+    }
+
+    chartSources.forEach((source) => {
+      expect(source).toContain("import SChart from '@/components/chart/index.ts'")
+    })
   })
 
   it('keeps utils release dry-run non-mutating and explicit about publish steps', () => {

@@ -2,10 +2,10 @@
 
 ## 使用说明
 
-该组件属于业务图表组件，不随 `sybz-components` 主插件一起注册。使用前需要额外安装 `echarts`、`vue-echarts`，并注册图表插件：
+该组件属于业务图表组件，不随 `sybz-components` 主插件一起注册。使用前需要额外安装 `echarts`，并注册图表插件：
 
 ```sh
-pnpm add echarts vue-echarts
+pnpm add echarts
 ```
 
 ```ts

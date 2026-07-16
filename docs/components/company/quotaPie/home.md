@@ -2,10 +2,10 @@
 
 ## 使用说明
 
-该组件属于业务图表组件，不随 `sybz-components` 主插件一起注册。使用前需要额外安装 `echarts`、`vue-echarts`，并注册图表插件：
+该组件属于业务图表组件，不随 `sybz-components` 主插件一起注册。使用前需要额外安装 `echarts`，并注册图表插件：
 
 ```sh
-pnpm add echarts vue-echarts
+pnpm add echarts
 ```
 
 ```ts
@@ -17,11 +17,11 @@ app.use(SybzChartComponents)
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='<SCard title="租户容量配额" class="w-200" :square="true"></SCard>' />
+<DocBasicUsage code='<SQuotaPie class="h-300" :used="used" :total="total" />' />
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<SCard title="租户容量配额" class="w-200" :square="true"></SCard>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 同时展示正常、空值和超额等配额占比。基础写法：`<SQuotaPie class="h-300" :used="used" :total="total" />`。属性：`used` 类型 `string / number`，必填，无默认值；`total` 类型 `string / number`，必填，无默认值；`type` 类型 `string`，默认值 `used`；`text` 类型 `string`，默认值 `总使用量 / 总可用量`。
 company/quotaPie/base
 :::
 

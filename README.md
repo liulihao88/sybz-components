@@ -73,7 +73,7 @@ yarn add sybz-components element-plus
 bun add sybz-components element-plus
 ```
 
-如果使用 `SChart` 或 `objectLine` 等基于 `echarts` 的图表组件，再安装：
+如果使用 `SChart`、`objectLine`、`quotaPie`、`countBar` 等图表组件，再安装：
 
 ```sh
 pnpm add echarts
@@ -89,24 +89,6 @@ npm install echarts
 
 ```sh
 yarn add echarts
-```
-
-如果使用 `quotaPie`、`countBar` 等基于 `vue-echarts` 的业务图表组件，再安装：
-
-```sh
-pnpm add echarts vue-echarts
-```
-
-```sh
-bun add echarts vue-echarts
-```
-
-```sh
-npm install echarts vue-echarts
-```
-
-```sh
-yarn add echarts vue-echarts
 ```
 
 如需使用工具函数包：
@@ -245,7 +227,7 @@ app.use(SybzComponents, {
 
 ## Peer 依赖说明
 
-组件库的 peer 依赖只保留宿主项目必须提供的基础运行时：`vue` 和 `element-plus`。`@element-plus/icons-vue`、`@vueuse/core` 由组件库依赖自动安装；`echarts`、`vue-echarts` 属于功能型依赖，仅在使用图表能力时由宿主项目按需安装。
+组件库的 peer 依赖只保留宿主项目必须提供的基础运行时：`vue` 和 `element-plus`。`@element-plus/icons-vue`、`@vueuse/core` 由组件库依赖自动安装；`echarts` 属于功能型依赖，仅在使用图表能力时由宿主项目按需安装。
 
 ## 常用组件
 

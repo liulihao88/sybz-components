@@ -27,7 +27,6 @@ const externalPackages = [
   '@vueuse/core',
   '@sybz-components/utils',
   'echarts',
-  'vue-echarts',
 ]
 const isExternalPackage = (id) =>
   externalPackages.includes(id) ||
@@ -35,7 +34,6 @@ const isExternalPackage = (id) =>
   /^@element-plus\/icons-vue(\/|$)/.test(id) ||
   /^@vueuse\/core(\/|$)/.test(id) ||
   /^echarts(\/|$)/.test(id) ||
-  /^vue-echarts(\/|$)/.test(id) ||
   /^@sybz-components\/utils(\/|$)/.test(id)
 
 export default defineConfig({
@@ -61,7 +59,6 @@ export default defineConfig({
           'echarts/charts': 'echarts',
           'echarts/renderers': 'echarts',
           'echarts/components': 'echarts',
-          'vue-echarts': 'VueECharts',
         },
       },
     },
