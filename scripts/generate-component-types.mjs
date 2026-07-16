@@ -501,13 +501,8 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'STitleProps',
-      slots: ['default', 'title', 'icon', 'extra', 'right'],
-      hoverProps: componentHoverProps('STitleProps', [
-        'STitleProps',
-        'SybzComponentTheme',
-        'SybzComponentSize',
-        'SybzRecord',
-      ]),
+      slots: ['default', 'title', 'icon', 'append', 'extra'],
+      hoverProps: componentHoverProps('STitleProps', ['SybzComponentTheme', 'SybzComponentSize', 'SybzRecord']),
     },
   ],
   [
@@ -581,7 +576,13 @@ const formatSlotsType = (slots = []) => {
   if (slots === 'any') return 'Record<string, (...args: any[]) => any>'
   if (!slots.length) return ''
 
-  return ['{', ...slots.map((slot) => `    ${slot}?: () => any`), '  }'].join('\n')
+  const slotLines = slots.flatMap((slot) => {
+    if (typeof slot === 'string') return `    ${slot}?: () => any`
+
+    return [...(slot.jsDoc ? [`    ${slot.jsDoc}`] : []), `    ${slot.name}?: () => any`]
+  })
+
+  return ['{', ...slotLines, '  }'].join('\n')
 }
 
 const getSlotsType = (typedComponent) => {

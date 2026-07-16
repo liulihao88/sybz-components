@@ -45,6 +45,7 @@ describe('title component props', () => {
   it('renders prop, default slot and title slot through the same title wrapper', () => {
     const component = readText('packages/components/title/src/index.vue')
     const componentDeclaration = readText('packages/types/components/title.d.ts')
+    const componentTypeGenerator = readText('scripts/generate-component-types.mjs')
     const docs = readText('docs/components/title/home.md')
 
     expect(component).toContain('<component :is="mergedProps.tag" class="s-title__text" v-bind="titleA11yAttrs">')
@@ -57,6 +58,7 @@ describe('title component props', () => {
 
     expect(componentDeclaration).toContain('append?: () => any')
     expect(componentDeclaration).toContain('@deprecated 使用 extra 插槽代替。')
+    expect(componentTypeGenerator).toContain("'append'")
     expect(docs).toContain('标题内容按 `title` 命名插槽、默认插槽、`title` 属性的顺序取值')
     expect(docs).toContain('| `append`')
     expect(docs).toContain('|  `right`  | 已废弃')
