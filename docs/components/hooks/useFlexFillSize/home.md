@@ -2,7 +2,8 @@
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='const { height } = useFlexFillSize(tableContainerRef)' />
+<DocBasicUsage code='import { useFlexFillSize } from "sybz-components";
+const { height } = useFlexFillSize(tableContainerRef)' />
 
 ::: warning
 父容器需要设置flex布局
