@@ -27,11 +27,11 @@
       <div class="visible-text">跳转packages(仅本地)</div>
     </el-button>
     <el-button
-      v-if="isDev"
+      v-if="showLocalTestButton"
       type="primary"
       size="small"
       class="dev-package-copy"
-      @click.stop.prevent="jumpUrl('test/home')"
+      @click.stop.prevent="jumpUrl('test/local')"
     >
       <div class="visible-text">跳转测试页(仅本地)</div>
     </el-button>
@@ -64,6 +64,8 @@ const pkgVersion = ref(pkg.version)
 
 const sourceVisible = ref(false)
 const showPackagesButton = ref(true)
+const localTestPageModules = import.meta.glob('../../components/test/local.md')
+const showLocalTestButton = ref(Object.keys(localTestPageModules).length > 0)
 const componentPackageSourceModules = import.meta.glob('../../../packages/components/**/src/index.vue')
 const componentPackageDocPaths = new Set(
   Object.keys(componentPackageSourceModules).map((path) =>
@@ -149,14 +151,18 @@ const jumpUrl = (type: string) => {
   let targetPath = ''
   if (type === 'md') {
     targetPath = joinLocalPath(sourceDir, 'docs/components', compStr, 'home.md')
+    console.log(`63 compStr`, compStr)
     if (compStr === '') {
       targetPath = joinLocalPath(sourceDir, 'docs/components/index.md')
     }
+    if (compStr === 'test/local.html') {
+      targetPath = joinLocalPath(sourceDir, 'docs/components/test/local.md')
+    }
   } else if (type === 'packages') {
     targetPath = getPackagesTargetPath(sourceDir, compStr)
-  } else if (type === 'test/home') {
-    router.go(`${getDocsBasePath()}/components/test/home`) // 使用 VitePress 路由进行跳转
-    targetPath = joinLocalPath(sourceDir, 'docs/components/test/base.vue')
+  } else if (type === 'test/local') {
+    router.go(`${getDocsBasePath()}/components/test/local`)
+    targetPath = joinLocalPath(sourceDir, 'docs/components/test/local.vue')
   }
 
   if (!targetPath) {

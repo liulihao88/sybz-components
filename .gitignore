@@ -35,3 +35,7 @@ docs/.vitepress/dist/
 dist.zip
 /.vitepress/
 .codex-types-temp
+
+# Local component playground
+docs/components/test/local.vue
+docs/components/test/local.md
