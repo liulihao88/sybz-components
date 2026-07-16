@@ -14,6 +14,12 @@ cd my-sybz-app
 pnpm install
 ```
 
+```sh [bun]
+bun create vite my-sybz-app --template vue-ts
+cd my-sybz-app
+bun install
+```
+
 ```sh [npm]
 npm create vite@latest my-sybz-app -- --template vue-ts
 cd my-sybz-app
@@ -32,6 +38,10 @@ npm install
 pnpm add sybz-components element-plus
 ```
 
+```sh [bun]
+bun add sybz-components element-plus
+```
+
 ```sh [npm]
 npm install sybz-components element-plus
 ```
@@ -44,6 +54,10 @@ npm install sybz-components element-plus
 
 ```sh [pnpm]
 pnpm add @sybz-components/utils
+```
+
+```sh [bun]
+bun add @sybz-components/utils
 ```
 
 ```sh [npm]
@@ -256,9 +270,21 @@ app.use(SybzComponents)
 
 优先确认安装的是最新版本：
 
-```sh
+::: code-group
+
+```sh [pnpm]
 pnpm add sybz-components@latest
 ```
+
+```sh [bun]
+bun add sybz-components@latest
+```
+
+```sh [npm]
+npm install sybz-components@latest
+```
+
+:::
 
 如果项目自己有严格的类型配置，重启一下编辑器的 TS 服务，通常即可恢复提示。
 

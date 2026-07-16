@@ -13,7 +13,7 @@
 
 ## 使用包管理器 <el-tag  effect="dark">推荐</el-tag>
 
-**建议您使用包管理器 ([pnpm](https://pnpm.io/)<el-tag  effect="dark">推荐</el-tag> ， [yarn](https://classic.yarnpkg.com/lang/en/)，[npm](https://www.npmjs.com/)) 安装 sybz-components**。
+**建议您使用包管理器 ([pnpm](https://pnpm.io/)<el-tag  effect="dark">推荐</el-tag>、[bun](https://bun.sh/)、[npm](https://www.npmjs.com/)、[yarn](https://classic.yarnpkg.com/lang/en/)) 安装 sybz-components**。
 
 ::: code-group
 
@@ -21,12 +21,16 @@
 pnpm add sybz-components -S
 ```
 
-```sh [yarn]
-yarn add sybz-components
+```sh [bun]
+bun add sybz-components
 ```
 
 ```sh [npm]
 npm install sybz-components -S
+```
+
+```sh [yarn]
+yarn add sybz-components
 ```
 
 :::
@@ -58,12 +62,16 @@ app.use(ElementPlus).use(SybzComponents).mount('#app')
 pnpm add @sybz-components/utils -S
 ```
 
-```sh [yarn]
-yarn add @sybz-components/utils
+```sh [bun]
+bun add @sybz-components/utils
 ```
 
 ```sh [npm]
 npm install @sybz-components/utils -S
+```
+
+```sh [yarn]
+yarn add @sybz-components/utils
 ```
 
 :::
@@ -84,9 +92,25 @@ $toast('我是失败提示', 'e')
 
 ### 升级包
 
-```javascript
-pnpm add sybz-components@latest && pnpm add @sybz-components/utils@latest
+::: code-group
+
+```sh [pnpm]
+pnpm add sybz-components@latest @sybz-components/utils@latest
 ```
+
+```sh [bun]
+bun add sybz-components@latest @sybz-components/utils@latest
+```
+
+```sh [npm]
+npm install sybz-components@latest @sybz-components/utils@latest
+```
+
+```sh [yarn]
+yarn add sybz-components@latest @sybz-components/utils@latest
+```
+
+:::
 
 ### 自定义指令
 

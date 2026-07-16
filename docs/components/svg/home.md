@@ -16,9 +16,23 @@ svg图片存放地址: docs/.vitepress/theme/assets/svg
 
 ### 安装和使用
 
-```js
-pnpm i vite-plugin-svg-icons -D
+::: code-group
 
+```sh [pnpm]
+pnpm i vite-plugin-svg-icons -D
+```
+
+```sh [bun]
+bun add vite-plugin-svg-icons -d
+```
+
+```sh [npm]
+npm install vite-plugin-svg-icons -D
+```
+
+:::
+
+```js
 // vite.config.ts
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 // 这里最重要的把svg路径配置进去, 否则会找不到

@@ -87,12 +87,16 @@ button/base
 pnpm add sybz-components -S
 ```
 
-```sh [yarn]
-yarn add sybz-components
+```sh [bun]
+bun add sybz-components
 ```
 
 ```sh [npm]
 npm install sybz-components -S
+```
+
+```sh [yarn]
+yarn add sybz-components
 ```
 
 ### 9. md中常用组件`el-tag`

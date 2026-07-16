@@ -57,20 +57,14 @@ pnpm skills:install
 pnpm add sybz-components element-plus
 ```
 
-也可以使用 `npm` 或 `yarn`：
-
-```sh
-npm install sybz-components element-plus
-```
-
-```sh
-yarn add sybz-components element-plus
-```
-
-使用 `bun`：
+也可以使用 `bun`、`npm`：
 
 ```sh
 bun add sybz-components element-plus
+```
+
+```sh
+npm install sybz-components element-plus
 ```
 
 如果使用 `SChart`、`objectLine`、`quotaPie`、`countBar` 等图表组件，再安装：

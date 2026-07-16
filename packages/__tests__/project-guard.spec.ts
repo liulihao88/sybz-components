@@ -54,12 +54,13 @@ describe('project dependency guards', () => {
     const usageGuide = readText('docs/components/usageGuide/home.md')
 
     expect(readme).toContain('pnpm add sybz-components element-plus')
+    expect(readme).toContain('bun add sybz-components element-plus')
     expect(readme).toContain('npm install sybz-components element-plus')
     expect(readme).toContain('yarn add sybz-components element-plus')
-    expect(readme).toContain('bun add sybz-components element-plus')
     expect(readme).toContain('`@element-plus/icons-vue`、`@vueuse/core` 由组件库依赖自动安装')
 
     expect(usageGuide).toContain('pnpm add sybz-components element-plus')
+    expect(usageGuide).toContain('bun add sybz-components element-plus')
     expect(usageGuide).toContain('npm install sybz-components element-plus')
     expect(readme).not.toContain('sybz-components element-plus @element-plus/icons-vue @vueuse/core')
     expect(usageGuide).not.toContain('sybz-components element-plus @element-plus/icons-vue @vueuse/core')
