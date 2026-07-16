@@ -26,8 +26,6 @@ export type STitleComponent = {
       icon?: () => any
       append?: () => any
       extra?: () => any
-      /** @deprecated 使用 extra 插槽代替。 */
-      right?: () => any
     }
   }
 }
