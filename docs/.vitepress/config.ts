@@ -339,6 +339,10 @@ export default defineConfig({
               link: '/components/descriptions/home.md',
             },
             {
+              text: sybzMark('markdown渲染组件'),
+              link: '/components/markdown/home.md',
+            },
+            {
               text: sybzMark('dialog组件'),
               link: '/components/dialog/home.md',
             },

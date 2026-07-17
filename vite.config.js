@@ -20,19 +20,11 @@ const formatBuildTime = (date) => {
 }
 
 const buildTime = formatBuildTime(new Date())
-const externalPackages = [
-  'vue',
-  'element-plus',
-  '@element-plus/icons-vue',
-  '@vueuse/core',
-  '@sybz-components/utils',
-  'echarts',
-]
+const externalPackages = ['vue', 'element-plus', '@element-plus/icons-vue', '@sybz-components/utils', 'echarts']
 const isExternalPackage = (id) =>
   externalPackages.includes(id) ||
   /^element-plus(\/|$)/.test(id) ||
   /^@element-plus\/icons-vue(\/|$)/.test(id) ||
-  /^@vueuse\/core(\/|$)/.test(id) ||
   /^echarts(\/|$)/.test(id) ||
   /^@sybz-components\/utils(\/|$)/.test(id)
 
@@ -52,7 +44,6 @@ export default defineConfig({
           vue: 'Vue',
           'element-plus': 'ElementPlus',
           '@element-plus/icons-vue': 'ElementPlusIconsVue',
-          '@vueuse/core': 'VueUse',
           '@sybz-components/utils': 'SybzComponentsUtils',
           echarts: 'echarts',
           'echarts/core': 'echarts',

@@ -250,6 +250,14 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
   ['SFunctionSourceCode', { importPath: componentPropsPath, typeName: 'SFunctionSourceCodeProps' }],
   [
+    'SMarkdown',
+    {
+      importPath: componentPropsPath,
+      typeName: 'SMarkdownProps',
+      hoverProps: componentHoverProps('SMarkdownProps', ['SMarkdownProps']),
+    },
+  ],
+  [
     'SIcon',
     {
       importPath: componentPropsPath,

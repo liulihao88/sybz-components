@@ -391,6 +391,24 @@ export interface SFunctionSourceCodeProps {
   functionName?: string
 }
 
+export interface SMarkdownProps {
+  source?: string
+  allowHtml?: boolean
+  sanitize?: boolean
+  breaks?: boolean
+  linkify?: boolean
+  typographer?: boolean
+  highlight?: boolean
+  copyCode?: boolean
+  mermaid?: boolean
+  math?: boolean
+  headingAnchors?: boolean
+  externalLinks?: boolean
+  baseUrl?: string
+  imageLazy?: boolean
+  emptyText?: string
+}
+
 export interface SIconProps extends SHtmlStringProps {
   name: string
   color?: string

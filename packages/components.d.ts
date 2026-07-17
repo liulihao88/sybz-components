@@ -211,6 +211,14 @@ declare module 'vue' {
      */
     's-item': (typeof import('./types/components/item'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
+     */
+    SMarkdown: (typeof import('./types/components/markdown'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
+     */
+    's-markdown': (typeof import('./types/components/markdown'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/popconfirm/home.html
      */
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
@@ -425,6 +433,10 @@ export type SItemComponent = (typeof import('./types/components/item'))['default
 export type SItemInstance = ComponentInstance<SItemComponent>
 export type SItemPublicProps = SItemInstance['$props']
 
+export type SMarkdownComponent = (typeof import('./types/components/markdown'))['default']
+export type SMarkdownInstance = ComponentInstance<SMarkdownComponent>
+export type SMarkdownPublicProps = SMarkdownInstance['$props']
+
 export type SPopconfirmComponent = import('./types/components/popconfirm').SPopconfirmComponent
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>
 export type SPopconfirmPublicProps = import('./types/components/popconfirm').SPopconfirmPublicProps
@@ -513,6 +525,7 @@ declare global {
       's-input-label': JSXComponentProps<SInputLabelPublicProps>
       's-input-number': JSXComponentProps<SInputNumberPublicProps>
       's-item': JSXComponentProps<SItemPublicProps>
+      's-markdown': JSXComponentProps<SMarkdownPublicProps>
       's-popconfirm': JSXComponentProps<SPopconfirmPublicProps>
       's-progress': JSXComponentProps<SProgressPublicProps>
       's-radio': JSXComponentProps<SRadioPublicProps>
