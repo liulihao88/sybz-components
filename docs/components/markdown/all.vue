@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const source = ref(String.raw`# 完整能力示例
+const fence = '```'
+const source = ref(String.raw`
 
 ## 数学公式
 
@@ -13,12 +14,12 @@ $$
 
 ## Mermaid
 
-\`\`\`mermaid
+${fence}mermaid
 flowchart LR
   A[Markdown] --> B{解析}
   B --> C[HTML]
   B --> D[图表和公式]
-\`\`\`
+${fence}
 
 ## 脚注与定义列表
 
@@ -34,5 +35,5 @@ const handleError = (error: unknown) => console.error(error)
 </script>
 
 <template>
-  <s-markdown :source="source" @error="handleError" />
+  <s-markdown :source="source" :allow-html="true" @error="handleError" />
 </template>

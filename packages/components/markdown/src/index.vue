@@ -169,12 +169,13 @@ const enhanceMermaid = async (version: number) => {
   try {
     const { default: mermaid } = await import('mermaid')
     if (version !== renderVersion) return
-    mermaid.initialize({ startOnLoad: false, securityLevel: props.sanitize ? 'strict' : 'loose', theme: 'default' })
+    mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'default' })
     await Promise.all(
       [...blocks].map(async (block, index) => {
         const source = decodeURIComponent(block.dataset.mermaidSource || '')
         const { svg } = await mermaid.render(`s-markdown-mermaid-${version}-${index}`, source)
-        if (version === renderVersion && block.isConnected) block.innerHTML = sanitizeHtml(svg)
+        // Mermaid strict 模式已处理图表源码；再次按 HTML 过滤会删除 SVG foreignObject 中的文字。
+        if (version === renderVersion && block.isConnected) block.innerHTML = svg
       }),
     )
   } catch (error) {
