@@ -292,6 +292,37 @@ describe('component entry guards', () => {
     expect(sidebar).toContain("text: sybzMark('form组件')")
   })
 
+  it('keeps tag theme available through main.ts global configuration', () => {
+    const tag = readText('packages/components/tag/src/index.vue')
+    const installTypes = readText('packages/types/index.ts')
+    const docs = readText('docs/components/tag/home.md')
+
+    expect(tag).toContain("useGlobalComponentConfig('tag', props)")
+    expect(tag).toContain("'s-tag--chenghua': mergedProps.value.theme === 'chenghua'")
+    expect(tag).toContain("'s-tag--shijingshan': mergedProps.value.theme === 'shijingshan'")
+    expect(installTypes).toContain('theme?: SybzComponentTheme')
+    expect(installTypes).toContain('tag?: SybzComponentInstallConfig')
+    expect(docs.indexOf('### main.ts 全局设置主题')).toBeGreaterThan(docs.indexOf('### 基础用法'))
+    expect(docs).toContain("theme: 'chenghua'")
+    expect(docs).toContain('tag: {')
+  })
+
+  it('keeps tabs props available through main.ts global configuration', () => {
+    const tabs = readText('packages/components/tabs/src/index.vue')
+    const installTypes = readText('packages/types/index.ts')
+    const installDeclarations = readText('packages/types/index.d.ts')
+    const docs = readText('docs/components/tabs/home.md')
+
+    expect(tabs).toContain("useGlobalComponentConfig('tabs', props)")
+    expect(tabs).not.toMatch(/props\.(options|label|value|subAttrs|trigger|type|theme|size)/)
+    expect(tabs).toContain("mergedProps.value.theme === 'chenghua'")
+    expect(tabs).toContain('mergedProps.value.options.map')
+    expect(installTypes).toContain('tabs?: SybzComponentInstallConfig')
+    expect(installDeclarations).toContain('tabs?: SybzComponentInstallConfig')
+    expect(docs.indexOf('### main.ts 全局设置')).toBeGreaterThan(docs.indexOf('### 基础用法'))
+    expect(docs).toContain('tabs: {')
+  })
+
   it('keeps tooltip custom triggers sized to their content in flex layouts', () => {
     const tooltip = readText('packages/components/tooltip/src/index.vue')
     const demo = readText('docs/components/tooltip/usually.vue')

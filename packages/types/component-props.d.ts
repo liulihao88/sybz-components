@@ -17,10 +17,41 @@ import type { RadioGroupPropsPublic } from 'element-plus/es/components/radio'
 import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
 import type { TagPropsPublic } from 'element-plus/es/components/tag'
 import type { RowPropsPublic } from 'element-plus/es/components/row'
+import type {
+  UploadPropsPublic,
+  UploadRawFile,
+  UploadRequestOptions,
+  UploadUserFile,
+} from 'element-plus/es/components/upload'
 
 export type SybzComponentTheme = 'default' | 'chenghua' | 'shijingshan'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
+
+export type SUploadRequestContext = Omit<UploadRequestOptions, 'file'>
+export type SUploadRequest = (file: UploadRawFile, context: SUploadRequestContext) => XMLHttpRequest | Promise<unknown>
+export type SUploadCancel = (file: UploadRawFile, context: SUploadRequestContext) => void | Promise<void>
+export type SUploadValidationReason = 'type' | 'size' | 'before-upload'
+
+export interface SUploadSelfProps {
+  /** 双向绑定的文件列表 */
+  modelValue?: UploadUserFile[]
+  /** 单个文件最大字节数，Infinity 表示不限制 */
+  maxFileSizeBytes?: number
+  /** 自定义上传接口 */
+  request?: SUploadRequest
+  /** 取消上传时调用，可用于取消业务请求或分片任务 */
+  cancel?: SUploadCancel
+  /** 校验失败时是否显示消息提示 */
+  showValidationMessage?: boolean
+  /** 空状态主文案 */
+  placeholder?: string
+  /** 空状态辅助文案 */
+  tip?: string
+}
+
+export type SUploadProps = SUploadSelfProps &
+  Partial<Omit<UploadPropsPublic, keyof SUploadSelfProps | 'fileList' | 'httpRequest' | 'beforeUpload'>>
 
 export interface SRenderScope<Row extends SybzRecord = SybzRecord> {
   row: Row

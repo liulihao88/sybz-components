@@ -367,6 +367,10 @@ export default defineConfig({
               link: '/components/progress/home.md',
             },
             {
+              text: 'upload上传组件',
+              link: '/components/upload/home.md',
+            },
+            {
               text: sybzMark('radio组件'),
               link: '/components/radio/home.md',
             },

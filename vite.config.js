@@ -9,6 +9,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import terser from '@rollup/plugin-terser'
 import { customVitePluginFilePath } from './packages/utils/local/customVitePluginFilePath.ts'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { createHtmlPlugin } from 'vite-plugin-html'
 import Icons from 'unplugin-icons/vite'
 import { compile } from 'sass'
 

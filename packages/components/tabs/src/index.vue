@@ -2,16 +2,16 @@
   <div class="s-tabs-box" :class="boxClass">
     <el-tabs v-bind="forwardedAttrs" v-model="tabsValue">
       <slot>
-        <template v-for="tab in props.options" :key="tab[props.value]">
-          <el-tab-pane :name="tab[props.value]" :label="tab[props.label]" v-bind="subAttrs">
+        <template v-for="tab in mergedProps.options" :key="tab[mergedProps.value]">
+          <el-tab-pane :name="tab[mergedProps.value]" :label="tab[mergedProps.label]" v-bind="mergedProps.subAttrs">
             <template #label>
-              <span class="s-tabs__label" @mouseenter="handleMouseEnter(tab[props.value])">
-                <slot :name="tab[props.value] + '-label'">
-                  <span class="s-tabs__label-text">{{ tab[props.label] }}</span>
+              <span class="s-tabs__label" @mouseenter="handleMouseEnter(tab[mergedProps.value])">
+                <slot :name="tab[mergedProps.value] + '-label'">
+                  <span class="s-tabs__label-text">{{ tab[mergedProps.label] }}</span>
                 </slot>
               </span>
             </template>
-            <slot :name="tab[props.value]"></slot>
+            <slot :name="tab[mergedProps.value]"></slot>
           </el-tab-pane>
         </template>
       </slot>
@@ -20,6 +20,7 @@
 </template>
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, useAttrs, watch, type PropType } from 'vue'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { TabsPropsPublic } from 'element-plus'
 
 defineOptions({
@@ -70,12 +71,13 @@ const props = defineProps({
   },
 })
 const emits = defineEmits(['update:modelValue'])
+const mergedProps = useGlobalComponentConfig('tabs', props)
 const slideDirection = ref<'left' | 'right' | ''>('')
 let slideDirectionTimer: ReturnType<typeof setTimeout> | undefined
 
-const isCapsuleType = computed(() => props.type === 'capsule')
-const isChenghuaTheme = computed(() => props.theme === 'chenghua')
-const isShijingshanTheme = computed(() => props.theme === 'shijingshan')
+const isCapsuleType = computed(() => mergedProps.value.type === 'capsule')
+const isChenghuaTheme = computed(() => mergedProps.value.theme === 'chenghua')
+const isShijingshanTheme = computed(() => mergedProps.value.theme === 'shijingshan')
 
 const forwardedAttrs = computed(() => {
   const nextAttrs = { ...attrs } as Record<string, unknown>
@@ -83,8 +85,8 @@ const forwardedAttrs = computed(() => {
   delete nextAttrs.type
   delete nextAttrs.theme
 
-  if (!isCapsuleType.value && props.type) {
-    nextAttrs.type = props.type
+  if (!isCapsuleType.value && mergedProps.value.type) {
+    nextAttrs.type = mergedProps.value.type
   }
 
   return nextAttrs
@@ -92,7 +94,7 @@ const forwardedAttrs = computed(() => {
 
 const tabsValue = computed({
   get() {
-    return props.modelValue || props.options[0]?.[props.value]
+    return mergedProps.value.modelValue || mergedProps.value.options[0]?.[mergedProps.value.value]
   },
   set(val) {
     emits('update:modelValue', val)
@@ -107,12 +109,12 @@ const boxClass = computed(() => [
     's-tabs-box--capsule-slide-left': isCapsuleType.value && slideDirection.value === 'left',
     's-tabs-box--capsule-slide-right': isCapsuleType.value && slideDirection.value === 'right',
   },
-  `s-tabs-box--size-${props.size || 'default'}`,
+  `s-tabs-box--size-${mergedProps.value.size || 'default'}`,
 ])
 
 // 鼠标悬停时切换标签页
 const handleMouseEnter = (tabVal: string) => {
-  if (props.trigger === 'hover') {
+  if (mergedProps.value.trigger === 'hover') {
     emits('update:modelValue', tabVal)
   }
 }
@@ -124,7 +126,7 @@ watch(
       return
     }
 
-    const values = props.options.map((item) => item[props.value])
+    const values = mergedProps.value.options.map((item) => item[mergedProps.value.value])
     const currentIndex = values.findIndex((item) => item === value)
     const oldIndex = values.findIndex((item) => item === oldValue)
 

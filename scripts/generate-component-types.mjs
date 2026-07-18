@@ -355,6 +355,25 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
+    'SUpload',
+    {
+      importPath: componentPropsPath,
+      typeName: 'SUploadProps',
+      exportedComponentTypeName: 'SUploadComponent',
+      publicPropsTypeName: 'SUploadPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'upload',
+      allowAnySlots: true,
+      hoverProps: componentHoverProps(
+        'SUploadSelfProps',
+        ['SUploadRequestContext', 'SUploadRequest', 'SUploadCancel', 'SUploadValidationReason', 'SUploadSelfProps'],
+        [
+          "import type { UploadRawFile, UploadRequestOptions, UploadUserFile } from 'element-plus/es/components/upload'",
+        ],
+      ),
+    },
+  ],
+  [
     'SRadio',
     {
       importPath: componentPropsPath,
@@ -817,6 +836,17 @@ const ELEMENT_WRAPPER_CONFIGS = {
     instances: [{ name: 'ElProgressInstance', component: 'ElProgress' }],
     inheritedProps: [{ type: "ElProgressInstance['$props']" }],
     description: 'Element Plus Progress',
+  },
+  upload: {
+    valueImports: ['ElUpload'],
+    instances: [{ name: 'ElUploadInstance', component: 'ElUpload' }],
+    inheritedProps: [
+      {
+        type: "ElUploadInstance['$props']",
+        extraOmitKeys: ["'fileList' | 'httpRequest' | 'beforeUpload'"],
+      },
+    ],
+    description: 'Element Plus Upload',
   },
   radio: {
     valueImports: ['ElRadioGroup'],

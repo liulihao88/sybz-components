@@ -19,6 +19,7 @@ export interface SybzComponentsInstallOptions {
   radio?: SybzComponentInstallConfig
   select?: SybzComponentInstallConfig
   switch?: SybzComponentInstallConfig
+  tabs?: SybzComponentInstallConfig
   tag?: SybzComponentInstallConfig
   table?: SybzComponentInstallConfig
   title?: SybzComponentInstallConfig

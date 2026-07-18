@@ -331,6 +331,14 @@ declare module 'vue' {
      */
     's-tooltip': (typeof import('./types/components/tooltip'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/upload/home.html
+     */
+    SUpload: (typeof import('./types/components/upload'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/upload/home.html
+     */
+    's-upload': (typeof import('./types/components/upload'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
      */
     SWarning: (typeof import('./types/components/warning'))['default']
@@ -493,6 +501,10 @@ export type STooltipComponent = import('./types/components/tooltip').STooltipCom
 export type STooltipInstance = ComponentInstance<STooltipComponent>
 export type STooltipPublicProps = import('./types/components/tooltip').STooltipPublicProps
 
+export type SUploadComponent = import('./types/components/upload').SUploadComponent
+export type SUploadInstance = ComponentInstance<SUploadComponent>
+export type SUploadPublicProps = import('./types/components/upload').SUploadPublicProps
+
 export type SWarningComponent = (typeof import('./types/components/warning'))['default']
 export type SWarningInstance = ComponentInstance<SWarningComponent>
 export type SWarningPublicProps = SWarningInstance['$props']
@@ -540,6 +552,7 @@ declare global {
       's-test': JSXComponentProps<STestPublicProps>
       's-title': JSXComponentProps<STitlePublicProps>
       's-tooltip': JSXComponentProps<STooltipPublicProps>
+      's-upload': JSXComponentProps<SUploadPublicProps>
       's-warning': JSXComponentProps<SWarningPublicProps>
       's-wrapper': JSXComponentProps<SWrapperPublicProps>
     }
