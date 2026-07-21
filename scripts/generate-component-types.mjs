@@ -254,12 +254,17 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SMarkdownProps',
+      exportedComponentTypeName: 'SMarkdownComponent',
+      tagName: 's-markdown',
       description: 's-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转和多图切换。',
-      hoverProps: componentHoverProps(
-        'SMarkdownProps',
-        ['SMarkdownProps'],
-        ["import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/src/types'"],
-      ),
+      publicPropsTypeName: 'SMarkdownPublicProps',
+      useDefaultExportForGlobal: true,
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/markdown/src/types.ts'),
+        interfaceName: 'MarkdownProps',
+        importTypeNames: ['SMarkdownProps'],
+        extraImportLines: ["import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/src/types'"],
+      },
       instanceMembers: [
         '$emit: <Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void',
         "render: MarkdownExposed['render']",
@@ -994,6 +999,11 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
     wrapperLines.push(' *')
     wrapperLines.push(' * 先提示 sybz 自身属性。')
     wrapperLines.push(' */')
+  }
+
+  if (typedComponent.publicPropsTypeName) {
+    wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName}`)
+    wrapperLines.push('')
   }
 
   wrapperLines.push(`export type ${componentTypeName} = {`)

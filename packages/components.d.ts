@@ -445,9 +445,9 @@ export type SItemComponent = (typeof import('./types/components/item'))['default
 export type SItemInstance = ComponentInstance<SItemComponent>
 export type SItemPublicProps = SItemInstance['$props']
 
-export type SMarkdownComponent = (typeof import('./types/components/markdown'))['default']
+export type SMarkdownComponent = import('./types/components/markdown').SMarkdownComponent
 export type SMarkdownInstance = ComponentInstance<SMarkdownComponent>
-export type SMarkdownPublicProps = SMarkdownInstance['$props']
+export type SMarkdownPublicProps = import('./types/components/markdown').SMarkdownPublicProps
 
 export type SPopconfirmComponent = import('./types/components/popconfirm').SPopconfirmComponent
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>
