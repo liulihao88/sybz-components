@@ -3,5 +3,5 @@ const source = `"近30天（2026-06-14 20:00至2026-07-13 20:00）各产线平�
 </script>
 
 <template>
-  <s-markdown :source="source" allow-html />
+  <s-markdown :source="source" allow-html :image-preview="false" />
 </template>

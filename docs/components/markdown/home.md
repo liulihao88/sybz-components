@@ -30,7 +30,7 @@ markdown/all
 
 ### 图片预览（默认 `imagePreview=true`）
 
-点击 Markdown 图片后会打开全视口预览，支持放大、缩小、旋转、上一张、下一张和关闭。`imagePreview` 的可选值是 `true` 和 `false`，默认值是 `true`；设置为 `false` 可关闭点击预览。
+点击 Markdown 图片后会打开全视口预览，支持放大、缩小、旋转、上一张、下一张和关闭，也可以聚焦图片后按 Enter 或空格键打开。`imagePreview` 的可选值是 `true` 和 `false`，默认值是 `true`；设置为 `false` 可关闭点击预览。地址为空的图片不会生成破图元素，只显示图片的替代文字。
 
 :::demo 展示图片点击预览配置。基础写法：`<s-markdown :source="source" image-preview />`。属性：`imagePreview` 可选 `true / false`，默认值 `true`；`imageLazy` 可选 `true / false`，默认值 `true`。
 markdown/imagePreview
@@ -79,10 +79,12 @@ markdown/example
 | `render()`     | 主动重新渲染当前内容                       |
 | `renderedHtml` | 当前生成并过滤后的 HTML                    |
 | `headings`     | 标题目录数组，包含 `level`、`text`、`slug` |
+| `state`        | 包含最终 `html` 和 `headings` 的只读状态   |
 
 ### 安全说明
 
 - 默认 `allowHtml=false`，不会执行 Markdown 中的原始 HTML。
 - 需要展示可信 HTML 时设置 `allow-html`，但建议继续保留默认的 `sanitize=true`。
+- 服务端渲染且 `sanitize=true` 时，原始 HTML 会先按普通文字安全输出，自定义 HTML 属性暂不生效；客户端挂载后再通过 DOMPurify 过滤并渲染，避免未过滤内容进入服务端页面。
 - 仅在内容完全可信且业务确实需要脚本级 HTML 能力时关闭 `sanitize`。
 - Mermaid 使用严格安全级别，外部链接自动增加 `noopener noreferrer`。

@@ -14,6 +14,23 @@ export interface MarkdownRenderPayload {
   headings: MarkdownHeading[]
 }
 
+export type MarkdownEmits = {
+  rendered: [payload: MarkdownRenderPayload]
+  error: [error: unknown]
+  copy: [code: string]
+  linkClick: [payload: MarkdownLinkClickPayload]
+}
+
+export interface MarkdownExposed {
+  render: () => Promise<void>
+  renderedHtml: string
+  headings: MarkdownHeading[]
+  state: {
+    html: string
+    headings: MarkdownHeading[]
+  }
+}
+
 export interface MarkdownProps {
   source?: string
   allowHtml?: boolean

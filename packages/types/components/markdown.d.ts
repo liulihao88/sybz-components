@@ -1,3 +1,4 @@
+import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/src/types'
 import type { SMarkdownProps } from '../component-props'
 
 /**
@@ -25,6 +26,11 @@ export type SMarkdownComponent = {
       imagePreview?: boolean
       emptyText?: string
     }
+    $emit: <Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void
+    render: MarkdownExposed['render']
+    renderedHtml: MarkdownExposed['renderedHtml']
+    headings: MarkdownExposed['headings']
+    state: MarkdownExposed['state']
   }
 }
 

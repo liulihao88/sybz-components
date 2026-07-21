@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import DOMPurify from 'dompurify'
 import { ElImageViewer } from 'element-plus'
 import MarkdownIt from 'markdown-it'
@@ -29,7 +29,9 @@ import 'prismjs/components/prism-java'
 import 'prismjs/components/prism-sql'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-markdown'
-import type { MarkdownHeading, MarkdownLinkClickPayload, MarkdownProps, MarkdownRenderPayload } from './types'
+import type { MarkdownEmits, MarkdownHeading, MarkdownProps } from './types'
+
+let markdownInstanceSeed = 0
 
 defineOptions({ name: 'SMarkdown' })
 
@@ -52,12 +54,7 @@ const props = withDefaults(defineProps<MarkdownProps>(), {
   emptyText: '',
 })
 
-const emit = defineEmits<{
-  rendered: [payload: MarkdownRenderPayload]
-  error: [error: unknown]
-  copy: [code: string]
-  linkClick: [payload: MarkdownLinkClickPayload]
-}>()
+const emit = defineEmits<MarkdownEmits>()
 
 const rootRef = ref<HTMLElement | null>(null)
 const renderedHtml = ref('')
@@ -65,6 +62,8 @@ const headings = ref<MarkdownHeading[]>([])
 const previewVisible = ref(false)
 const previewUrls = ref<string[]>([])
 const previewInitialIndex = ref(0)
+const isClientMounted = ref(false)
+const instanceId = ++markdownInstanceSeed
 let renderVersion = 0
 
 const slugify = (text: string) =>
@@ -77,6 +76,7 @@ const slugify = (text: string) =>
     .replace(/-+/g, '-')
 
 const resolveUrl = (value: string) => {
+  if (!value.trim()) return ''
   if (!props.baseUrl || /^(?:[a-z]+:|#|\/\/)/i.test(value)) return value
   try {
     return new URL(value, props.baseUrl).href
@@ -90,8 +90,9 @@ const escapeHtml = (value: string) =>
 
 const createMarkdown = () => {
   const currentHeadings: MarkdownHeading[] = []
+  const canRenderHtmlExtensions = !props.sanitize || isClientMounted.value
   const md = new MarkdownIt({
-    html: props.allowHtml,
+    html: props.allowHtml && canRenderHtmlExtensions,
     breaks: props.breaks,
     linkify: props.linkify,
     typographer: props.typographer,
@@ -101,7 +102,7 @@ const createMarkdown = () => {
     },
   })
 
-  md.use(markdownItAttrs)
+  if (canRenderHtmlExtensions) md.use(markdownItAttrs)
   md.use(markdownItDeflist)
   md.use(markdownItFootnote)
   md.use(markdownItIns)
@@ -149,7 +150,11 @@ const createMarkdown = () => {
   const defaultImage = md.renderer.rules.image!
   md.renderer.rules.image = (tokens, index, options, env, self) => {
     const srcIndex = tokens[index].attrIndex('src')
-    if (srcIndex >= 0) tokens[index].attrs![srcIndex][1] = resolveUrl(tokens[index].attrs![srcIndex][1])
+    if (srcIndex >= 0) {
+      const src = resolveUrl(tokens[index].attrs![srcIndex][1])
+      if (!src) return escapeHtml(tokens[index].content)
+      tokens[index].attrs![srcIndex][1] = src
+    }
     if (props.imageLazy) {
       tokens[index].attrSet('loading', 'lazy')
       tokens[index].attrSet('decoding', 'async')
@@ -178,7 +183,7 @@ const enhanceMermaid = async (version: number) => {
     await Promise.all(
       [...blocks].map(async (block, index) => {
         const source = decodeURIComponent(block.dataset.mermaidSource || '')
-        const { svg } = await mermaid.render(`s-markdown-mermaid-${version}-${index}`, source)
+        const { svg } = await mermaid.render(`s-markdown-mermaid-${instanceId}-${version}-${index}`, source)
         // Mermaid strict 模式已处理图表源码；再次按 HTML 过滤会删除 SVG foreignObject 中的文字。
         if (version === renderVersion && block.isConnected) block.innerHTML = svg
       }),
@@ -200,10 +205,38 @@ const render = async () => {
     renderedHtml.value = html
     await nextTick()
     await enhanceMermaid(version)
-    if (version === renderVersion) emit('rendered', { html, headings: currentHeadings })
+    if (version !== renderVersion) return
+    enhanceImages()
+    const finalHtml = rootRef.value?.querySelector<HTMLElement>('.s-markdown__content')?.innerHTML || html
+    renderedHtml.value = finalHtml
+    emit('rendered', { html: finalHtml, headings: currentHeadings })
   } catch (error) {
     emit('error', error)
   }
+}
+
+const getPreviewImages = () =>
+  [...(rootRef.value?.querySelectorAll<HTMLImageElement>('.s-markdown__content img') || [])].filter((image) =>
+    image.getAttribute('src')?.trim(),
+  )
+
+const enhanceImages = () => {
+  if (!props.imagePreview) return
+  getPreviewImages().forEach((image) => {
+    image.tabIndex = 0
+    image.setAttribute('role', 'button')
+    image.setAttribute('aria-label', `预览图片：${image.alt || '图片'}`)
+  })
+}
+
+const openImagePreview = (image: HTMLImageElement) => {
+  const images = getPreviewImages()
+  const initialIndex = images.indexOf(image)
+  if (initialIndex < 0) return false
+  previewUrls.value = images.map((item) => item.currentSrc || item.src)
+  previewInitialIndex.value = initialIndex
+  previewVisible.value = true
+  return true
 }
 
 const handleClick = async (event: MouseEvent) => {
@@ -222,27 +255,28 @@ const handleClick = async (event: MouseEvent) => {
     return
   }
   const image = target.closest<HTMLImageElement>('.s-markdown__content img')
-  if (props.imagePreview && image) {
-    const images = [...(rootRef.value?.querySelectorAll<HTMLImageElement>('.s-markdown__content img') || [])].filter(
-      (item) => item.getAttribute('src')?.trim(),
-    )
-    const initialIndex = images.indexOf(image)
-    if (initialIndex >= 0) {
-      event.preventDefault()
-      previewUrls.value = images.map((item) => item.currentSrc || item.src)
-      previewInitialIndex.value = initialIndex
-      previewVisible.value = true
-      return
-    }
+  if (props.imagePreview && image && openImagePreview(image)) {
+    event.preventDefault()
+    return
   }
   const anchor = target.closest<HTMLAnchorElement>('a[href]')
   if (anchor) emit('linkClick', { event, href: anchor.href })
+}
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (!props.imagePreview || (event.key !== 'Enter' && event.key !== ' ')) return
+  const image = (event.target as HTMLElement).closest<HTMLImageElement>('.s-markdown__content img')
+  if (image && openImagePreview(image)) event.preventDefault()
 }
 
 const exposed = computed(() => ({ html: renderedHtml.value, headings: headings.value }))
 defineExpose({ render, renderedHtml, headings, state: exposed })
 
 watch(() => ({ ...props }), render, { immediate: true, deep: true })
+onMounted(() => {
+  isClientMounted.value = true
+  render()
+})
 onBeforeUnmount(() => {
   ++renderVersion
   previewVisible.value = false
@@ -250,7 +284,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="rootRef" class="s-markdown" :class="{ 'is-image-preview-enabled': imagePreview }" @click="handleClick">
+  <div
+    ref="rootRef"
+    class="s-markdown"
+    :class="{ 'is-image-preview-enabled': imagePreview }"
+    @click="handleClick"
+    @keydown="handleKeydown"
+  >
     <!-- 输出在赋值前默认经过 DOMPurify；关闭 sanitize 需要由调用方明确选择。 -->
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-if="renderedHtml" class="s-markdown__content" v-html="renderedHtml"></div>

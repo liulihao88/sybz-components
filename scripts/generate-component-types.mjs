@@ -255,7 +255,18 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SMarkdownProps',
       description: 's-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转和多图切换。',
-      hoverProps: componentHoverProps('SMarkdownProps', ['SMarkdownProps']),
+      hoverProps: componentHoverProps(
+        'SMarkdownProps',
+        ['SMarkdownProps'],
+        ["import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/src/types'"],
+      ),
+      instanceMembers: [
+        '$emit: <Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void',
+        "render: MarkdownExposed['render']",
+        "renderedHtml: MarkdownExposed['renderedHtml']",
+        "headings: MarkdownExposed['headings']",
+        "state: MarkdownExposed['state']",
+      ],
     },
   ],
   [
@@ -996,6 +1007,9 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
   const ownSlotsType = getSlotsType(typedComponent)
   if (ownSlotsType) {
     wrapperLines.push(`    $slots: ${ownSlotsType}`)
+  }
+  for (const member of typedComponent.instanceMembers ?? []) {
+    wrapperLines.push(`    ${member}`)
   }
   wrapperLines.push('  }')
   wrapperLines.push('}')
