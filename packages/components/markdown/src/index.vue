@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import DOMPurify from 'dompurify'
+import { ElImageViewer } from 'element-plus'
 import MarkdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
 import markdownItAttrs from 'markdown-it-attrs'
@@ -47,6 +48,7 @@ const props = withDefaults(defineProps<MarkdownProps>(), {
   externalLinks: true,
   baseUrl: '',
   imageLazy: true,
+  imagePreview: true,
   emptyText: '',
 })
 
@@ -60,6 +62,9 @@ const emit = defineEmits<{
 const rootRef = ref<HTMLElement | null>(null)
 const renderedHtml = ref('')
 const headings = ref<MarkdownHeading[]>([])
+const previewVisible = ref(false)
+const previewUrls = ref<string[]>([])
+const previewInitialIndex = ref(0)
 let renderVersion = 0
 
 const slugify = (text: string) =>
@@ -186,6 +191,7 @@ const enhanceMermaid = async (version: number) => {
 
 const render = async () => {
   const version = ++renderVersion
+  previewVisible.value = false
   try {
     const { md, currentHeadings } = createMarkdown()
     const html = sanitizeHtml(md.render(props.source || ''))
@@ -215,6 +221,20 @@ const handleClick = async (event: MouseEvent) => {
     }
     return
   }
+  const image = target.closest<HTMLImageElement>('.s-markdown__content img')
+  if (props.imagePreview && image) {
+    const images = [...(rootRef.value?.querySelectorAll<HTMLImageElement>('.s-markdown__content img') || [])].filter(
+      (item) => item.getAttribute('src')?.trim(),
+    )
+    const initialIndex = images.indexOf(image)
+    if (initialIndex >= 0) {
+      event.preventDefault()
+      previewUrls.value = images.map((item) => item.currentSrc || item.src)
+      previewInitialIndex.value = initialIndex
+      previewVisible.value = true
+      return
+    }
+  }
   const anchor = target.closest<HTMLAnchorElement>('a[href]')
   if (anchor) emit('linkClick', { event, href: anchor.href })
 }
@@ -223,15 +243,25 @@ const exposed = computed(() => ({ html: renderedHtml.value, headings: headings.v
 defineExpose({ render, renderedHtml, headings, state: exposed })
 
 watch(() => ({ ...props }), render, { immediate: true, deep: true })
-onBeforeUnmount(() => ++renderVersion)
+onBeforeUnmount(() => {
+  ++renderVersion
+  previewVisible.value = false
+})
 </script>
 
 <template>
-  <div ref="rootRef" class="s-markdown" @click="handleClick">
+  <div ref="rootRef" class="s-markdown" :class="{ 'is-image-preview-enabled': imagePreview }" @click="handleClick">
     <!-- 输出在赋值前默认经过 DOMPurify；关闭 sanitize 需要由调用方明确选择。 -->
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-if="renderedHtml" class="s-markdown__content" v-html="renderedHtml"></div>
     <div v-else-if="emptyText" class="s-markdown__empty">{{ emptyText }}</div>
+    <el-image-viewer
+      v-if="previewVisible"
+      :url-list="previewUrls"
+      :initial-index="previewInitialIndex"
+      teleported
+      @close="previewVisible = false"
+    />
   </div>
 </template>
 
@@ -299,6 +329,9 @@ onBeforeUnmount(() => ++renderVersion)
   display: block;
   max-width: 100%;
   height: auto;
+}
+.s-markdown.is-image-preview-enabled :deep(.s-markdown__content img) {
+  cursor: zoom-in;
 }
 .s-markdown :deep(hr) {
   border: 0;

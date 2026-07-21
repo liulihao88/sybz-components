@@ -1,5 +1,10 @@
 import type { SMarkdownProps } from '../component-props'
 
+/**
+ * s-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转和多图切换。
+ *
+ * 先提示 sybz 自身属性。
+ */
 export type SMarkdownComponent = {
   new (): {
     $props: {
@@ -17,6 +22,7 @@ export type SMarkdownComponent = {
       externalLinks?: boolean
       baseUrl?: string
       imageLazy?: boolean
+      imagePreview?: boolean
       emptyText?: string
     }
   }

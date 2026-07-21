@@ -29,5 +29,6 @@ export interface MarkdownProps {
   externalLinks?: boolean
   baseUrl?: string
   imageLazy?: boolean
+  imagePreview?: boolean
   emptyText?: string
 }

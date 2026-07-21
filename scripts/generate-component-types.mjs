@@ -254,6 +254,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SMarkdownProps',
+      description: 's-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转和多图切换。',
       hoverProps: componentHoverProps('SMarkdownProps', ['SMarkdownProps']),
     },
   ],

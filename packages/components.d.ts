@@ -212,10 +212,14 @@ declare module 'vue' {
     's-item': (typeof import('./types/components/item'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
+     *
+     * s-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转和多图切换。
      */
     SMarkdown: (typeof import('./types/components/markdown'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
+     *
+     * s-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转和多图切换。
      */
     's-markdown': (typeof import('./types/components/markdown'))['default']
     /**

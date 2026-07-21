@@ -1,6 +1,6 @@
 # Markdown 强大的 Markdown 渲染
 
-`s-markdown` 用于安全渲染 CommonMark/GFM 文本，并扩展代码高亮、任务列表、脚注、数学公式、Mermaid、目录锚点和代码复制能力。
+`s-markdown` 用于安全渲染 CommonMark/GFM 文本，并扩展代码高亮、任务列表、脚注、数学公式、Mermaid、目录锚点、代码复制和图片预览能力。
 
 ## Hidden Title {.md-hidden}
 
@@ -28,6 +28,20 @@ markdown/chenghua
 markdown/all
 :::
 
+### 图片预览（默认 `imagePreview=true`）
+
+点击 Markdown 图片后会打开全视口预览，支持放大、缩小、旋转、上一张、下一张和关闭。`imagePreview` 的可选值是 `true` 和 `false`，默认值是 `true`；设置为 `false` 可关闭点击预览。
+
+:::demo 展示图片点击预览配置。基础写法：`<s-markdown :source="source" image-preview />`。属性：`imagePreview` 可选 `true / false`，默认值 `true`；`imageLazy` 可选 `true / false`，默认值 `true`。
+markdown/imagePreview
+:::
+
+### 石景山项目部分代码示例
+
+:::demo
+markdown/example
+:::
+
 ### API
 
 | 属性名           | 说明                                     | 类型 / 可选值  | 默认值  |
@@ -46,6 +60,7 @@ markdown/all
 | `externalLinks`  | 是否让 HTTP(S) 链接在新窗口安全打开      | `true / false` | `true`  |
 | `baseUrl`        | 相对链接和图片的解析基准地址             | `string`       | `''`    |
 | `imageLazy`      | 是否为图片启用懒加载和异步解码           | `true / false` | `true`  |
+| `imagePreview`   | 是否允许点击图片打开全视口操作预览       | `true / false` | `true`  |
 | `emptyText`      | 无内容时显示的文字                       | `string`       | `''`    |
 
 ### 事件

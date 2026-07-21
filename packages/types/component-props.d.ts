@@ -438,6 +438,7 @@ export interface SMarkdownProps {
   externalLinks?: boolean
   baseUrl?: string
   imageLazy?: boolean
+  imagePreview?: boolean
   emptyText?: string
 }
 
