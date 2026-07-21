@@ -12,7 +12,7 @@ const confirm = async () => {
   }
   await proxy.delay(300)
   proxy.$toast(1)
-  await proxy.delay(300)
+  await proxy.delay(1000)
   proxy.$toast(2)
   isShow.value = false
 }
@@ -25,8 +25,7 @@ const open = (type: string) => {
 <template>
   <div>
     <s-dialog v-model="isShow" :confirm="confirm">
-      <div>1秒后弹出1</div>
-      <div>然后5秒后弹出2并关闭</div>
+      <div>内容</div>
     </s-dialog>
     <el-button type="primary" @click="open('base')">打开dialog</el-button>
     <el-button type="primary" @click="open('noClose')">打开dialog并且点击确认不关闭</el-button>
