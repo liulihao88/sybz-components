@@ -18,13 +18,13 @@ form/base
 
 ### 成华主题
 
-:::demo 展示成华主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="chenghua" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
+:::demo 展示成华主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="chenghua" />`。主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
 form/chenghua
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="shijingshan" />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
+:::demo 展示石景山主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="shijingshan" />`。主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
 form/shijingshan
 :::
 

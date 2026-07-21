@@ -24,7 +24,7 @@ descriptions/chenghua/base
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-descriptions theme="shijingshan" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" show-all />`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`labelWidth` 类型 `string / number`，默认值 `auto`。
+:::demo 展示石景山主题样式。基础写法：`<s-descriptions theme="shijingshan" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" show-all />`。
 descriptions/shijingshan/base
 :::
 

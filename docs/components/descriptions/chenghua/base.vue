@@ -16,7 +16,7 @@ const options = [
 
 <template>
   <div class="descriptions-chenghua-demo">
-    <s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" />
+    <s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" label-width="100" />
   </div>
 </template>
 

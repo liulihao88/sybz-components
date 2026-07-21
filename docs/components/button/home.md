@@ -20,7 +20,7 @@ button/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`variant` 可选 `'' / outline / gradient`，默认值 `''`；`width`、`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。`variant` 可选 `'' / outline / gradient`，默认值 `''`；`width`、`height` 类型 `string / number`，默认值 `''`。
 button/chenghua/base
 :::
 
@@ -28,7 +28,7 @@ button/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题按钮。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`width`、`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示石景山主题按钮。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。`width`、`height` 类型 `string / number`，默认值 `''`。
 button/shijingshan/base
 :::
 
