@@ -16,7 +16,7 @@
 dialog/base
 :::
 
-### 抽屉式用法
+### 抽屉式(drawer)用法
 
 设置 `type="drawer"` 时，`s-dialog` 会按抽屉方式展示。`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`。设置 `width` 可以控制抽屉宽度，`width` 支持 `string` 和 `number`，默认值是 `''`。
 
@@ -86,6 +86,14 @@ dialog/slot
 dialog/fullscreen
 :::
 
+### 最大化高度
+
+设置 `maximize-height` 后，普通 dialog 会尽量占满视口高度，上下各保留 `16px`，标题栏和底部操作区保持可见，内容区占满剩余空间。`maximizeHeight` 的可选值是 `true` 和 `false`，默认值是 `false`；`type="drawer"` 时无需设置，drawer 本身已经占满可用高度；`fullscreen` 与该属性同时使用时，以 `fullscreen` 为准。
+
+:::demo 展示最大化高度配置。基础写法：`<s-dialog v-model="isShow" title="最大化高度 dialog" maximize-height></s-dialog>`。属性：`maximizeHeight` 可选 `true / false`，默认值 `false`。
+dialog/maximizeHeight
+:::
+
 ### 弹框form表单
 
 :::demo 展示表单场景。基础写法：`<s-dialog ref="dialogRef" title="弹框form表单" v-model="isShow" @confirm="confirm"></s-dialog>`。属性：`title` 类型 `string`，默认值 `''`。
@@ -139,6 +147,7 @@ app.use(SybzComponents, {
 |    cancleAttrs    | 取消按钮的属性                                                                          | object                                        | {}        |
 | destroy-on-close  | 当关闭 Dialog 时，销毁其中的元素                                                        | boolean                                       | false     |
 |    fullscreen     | 是否为全屏Dialog                                                                        | boolean                                       | false     |
+|  maximizeHeight   | 是否尽量占满视口高度，上下各保留16px                                                    | boolean                                       | false     |
 |   enableConfirm   | 是否允许使用enter回车键执行confirm事件                                                  | boolean                                       | true      |
 | closeOnClickModal | 是否允许点击模态框关闭弹框                                                              | boolean                                       | true      |
 |      confirm      | 绑定确认按钮的方法, 与方法的区别是, 可以使用属性绑定异步事件而直接让确认按钮加载loading | Function                                      | -         |

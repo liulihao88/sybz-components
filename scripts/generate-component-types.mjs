@@ -175,7 +175,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'SDialogProps',
       exportedComponentTypeName: 'SDialogComponent',
       tagName: 's-dialog',
-      description: 's-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。',
+      description: 's-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 maximizeHeight 等 sybz 扩展属性。',
       publicPropsTypeName: 'SDialogPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'dialog',

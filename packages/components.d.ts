@@ -121,13 +121,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/dialog/home.html
      *
-     * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。
+     * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 maximizeHeight 等 sybz 扩展属性。
      */
     SDialog: (typeof import('./types/components/dialog'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/dialog/home.html
      *
-     * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性和 sybz 扩展属性。
+     * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 maximizeHeight 等 sybz 扩展属性。
      */
     's-dialog': (typeof import('./types/components/dialog'))['default']
     /**

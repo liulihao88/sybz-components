@@ -185,6 +185,7 @@ export interface SDialogSelfProps {
   enableConfirm?: boolean
   confirm?: (...args: any[]) => any
   fillSlot?: boolean
+  maximizeHeight?: boolean
   hideHeaderIcon?: boolean
 }
 

@@ -114,6 +114,7 @@ interface DialogProps {
   enableConfirm?: boolean
   confirm?: (...args: any[]) => any
   fillSlot?: boolean
+  maximizeHeight?: boolean
   hideHeaderIcon?: boolean
 }
 
@@ -136,6 +137,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   enableConfirm: true,
   confirm: undefined,
   fillSlot: false,
+  maximizeHeight: false,
   hideHeaderIcon: false,
 })
 const mergedProps = useGlobalComponentConfig('dialog', props)
@@ -158,6 +160,7 @@ const componentClass = computed(() => {
 })
 
 const isDrawer = computed(() => mergedProps.value.type === 'drawer')
+const isFullscreen = computed(() => attrs.fullscreen === true || attrs.fullscreen === '')
 const panelWidth = computed(() => processWidth(mergedProps.value.width, true))
 
 const defaultPanelAttrs = computed(() => {
@@ -174,6 +177,7 @@ const panelClass = computed(() => {
   return [
     attrs.class,
     isDrawer.value ? 's-dialog__drawer' : '',
+    !isDrawer.value && !isFullscreen.value && mergedProps.value.maximizeHeight ? 's-dialog__maximize-height' : '',
     isDrawer.value && mergedProps.value.theme === 'chenghua' ? 's-dialog__drawer--chenghua' : '',
     isDrawer.value && mergedProps.value.theme === 'shijingshan' ? 's-dialog__drawer--shijingshan' : '',
   ].filter(Boolean)
@@ -228,7 +232,7 @@ const drawerBodyClass = computed(() => {
 
 const fullscreenHeight = ref('calc(100vh - 124px)')
 const slotBoxClass = computed(() => {
-  if (attrs.fullscreen === true || attrs.fullscreen === '') {
+  if (isFullscreen.value) {
     return 'dialog_fullscreen'
   }
   return mergedProps.value.fillSlot ? 'dialog_slot_box dialog_slot_box--fill' : 'dialog_slot_box'
@@ -236,7 +240,7 @@ const slotBoxClass = computed(() => {
 watch(
   () => mergedShowFooter.value,
   (val) => {
-    if (attrs.fullscreen === true || attrs.fullscreen === '') {
+    if (isFullscreen.value) {
       if (val === false) {
         fullscreenHeight.value = 'calc(100vh - 74px)'
       } else {
@@ -367,6 +371,38 @@ onBeforeUnmount(() => {
   }
   :deep(.el-dialog) {
     padding: 0 !important;
+  }
+  :deep(.s-dialog__maximize-height) {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 32px);
+    height: calc(100dvh - 32px);
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    margin-top: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  :deep(.s-dialog__maximize-height .el-dialog__header),
+  :deep(.s-dialog__maximize-height .el-dialog__footer) {
+    flex: 0 0 auto;
+  }
+  :deep(.s-dialog__maximize-height .el-dialog__body) {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  :deep(.s-dialog__maximize-height .el-dialog__body .dialog_slot_box) {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+  }
+  :deep(.s-dialog__maximize-height .el-dialog__body .dialog_slot_box--fill) {
+    height: auto;
   }
   :deep(.el-dialog__body) {
     padding: 16px;
