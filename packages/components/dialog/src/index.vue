@@ -253,9 +253,11 @@ const confirmLoading = ref(false)
 async function confirmHandler() {
   if (mergedProps.value.confirm && getType(mergedProps.value.confirm) === 'function') {
     confirmLoading.value = true
-    await mergedProps.value.confirm().finally(() => {
+    try {
+      await Promise.resolve(mergedProps.value.confirm())
+    } finally {
       confirmLoading.value = false
-    })
+    }
   } else if (typeof attrs.onConfirm === 'function') {
     attrs.onConfirm()
   } else {
