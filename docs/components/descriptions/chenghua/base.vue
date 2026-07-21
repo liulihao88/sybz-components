@@ -7,7 +7,7 @@ const options = [
   { label: '创建时间', value: '2026-06-18 09:30:00' },
   { label: '调用次数', value: '12,860 次' },
   {
-    label: '服务说明',
+    label: '服务说明服务说明服务说明服务说明服务说明服务说明',
     value: '用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。',
     attrs: { span: 3 },
   },
@@ -16,15 +16,7 @@ const options = [
 
 <template>
   <div class="descriptions-chenghua-demo">
-    <s-descriptions
-      theme="chenghua"
-      title="服务基础信息"
-      extra="更新时间 10:24"
-      :options="options"
-      :column="3"
-      label-width="110"
-      show-all
-    />
+    <s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" />
   </div>
 </template>
 

@@ -71,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent, isVNode, nextTick, onMounted, ref, useAttrs, watch } from 'vue'
+import { computed, defineComponent, isVNode, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import STooltip from '@/components/tooltip/src/index.vue'
@@ -197,6 +197,8 @@ let measureCanvas: HTMLCanvasElement | undefined
 // 标签额外宽度补偿值，兜底左右 padding 24px
 const LABEL_EXTRA_WIDTH = 24
 const LABEL_SAFE_WIDTH = 8
+const VALUE_MIN_WIDTH = 100
+let descriptionsResizeObserver: ResizeObserver | undefined
 
 const isAutoLabelWidth = computed(
   () =>
@@ -241,29 +243,14 @@ const getLabelMeasureStyle = () => {
   }
 }
 
-const getLabelExtraWidth = (labelElement: HTMLElement) => {
-  if (typeof window === 'undefined') return LABEL_EXTRA_WIDTH
-
-  const style = window.getComputedStyle(labelElement)
-  const paddingLeft = Number.parseFloat(style.paddingLeft) || 0
-  const paddingRight = Number.parseFloat(style.paddingRight) || 0
-  const borderLeft = Number.parseFloat(style.borderLeftWidth) || 0
-  const borderRight = Number.parseFloat(style.borderRightWidth) || 0
-
-  return paddingLeft + paddingRight + borderLeft + borderRight || LABEL_EXTRA_WIDTH
-}
-
-const getRenderedLabelWidth = () => {
+const getRenderedCustomLabelWidth = () => {
   const labelElements = getDescriptionsElement()?.querySelectorAll<HTMLElement>('.el-descriptions__label')
   if (!labelElements?.length) return 0
 
-  return Array.from(labelElements).reduce((maxWidth, labelElement) => {
-    const tooltipText = labelElement.querySelector<HTMLElement>('.s-tooltip-box__text')
-    const contentWidth = tooltipText
-      ? tooltipText.scrollWidth
-      : labelElement.scrollWidth - getLabelExtraWidth(labelElement)
+  return (mergedProps.value.options ?? []).reduce((maxWidth, option, index) => {
+    if (!option.labelRender && !option.labelSlot) return maxWidth
 
-    return Math.max(maxWidth, contentWidth + getLabelExtraWidth(labelElement))
+    return Math.max(maxWidth, labelElements[index]?.scrollWidth ?? 0)
   }, 0)
 }
 
@@ -271,12 +258,6 @@ const updateAutoLabelWidth = async () => {
   if (!isAutoLabelWidth.value) return
 
   await nextTick()
-
-  const renderedLabelWidth = getRenderedLabelWidth()
-  if (renderedLabelWidth) {
-    autoLabelWidth.value = `${Math.ceil(renderedLabelWidth + LABEL_SAFE_WIDTH)}px`
-    return
-  }
 
   const context = getMeasureContext()
   if (!context) {
@@ -287,13 +268,22 @@ const updateAutoLabelWidth = async () => {
   const { font, extraWidth } = getLabelMeasureStyle()
   context.font = font
 
-  const maxLabelWidth = (mergedProps.value.options ?? []).reduce((maxWidth, option) => {
+  const maxTextLabelWidth = (mergedProps.value.options ?? []).reduce((maxWidth, option) => {
+    if (option.labelRender || option.labelSlot) return maxWidth
+
     const label = parseLabel(option)
     const labelWidth = context.measureText(label === null || label === undefined ? '' : String(label)).width
     return Math.max(maxWidth, labelWidth)
   }, 0)
+  const measuredLabelWidth = Math.max(maxTextLabelWidth + extraWidth, getRenderedCustomLabelWidth()) + LABEL_SAFE_WIDTH
+  const descriptionsWidth = getDescriptionsElement()?.clientWidth ?? 0
+  const column = Math.max(Number(descriptionColumn.value) || 1, 1)
+  const maxLabelWidth = descriptionsWidth
+    ? Math.max(Math.floor(descriptionsWidth / column - VALUE_MIN_WIDTH), 0)
+    : measuredLabelWidth
+  const resolvedLabelWidth = Math.min(measuredLabelWidth, maxLabelWidth)
 
-  autoLabelWidth.value = maxLabelWidth ? `${Math.ceil(maxLabelWidth + extraWidth + LABEL_SAFE_WIDTH)}px` : 'auto'
+  autoLabelWidth.value = measuredLabelWidth ? `${Math.ceil(resolvedLabelWidth)}px` : 'auto'
 }
 
 const labelWidth2 = computed(() => {
@@ -338,18 +328,30 @@ const descriptionsClass = computed(() => ({
   's-descriptions--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
 
-watch(() => [mergedProps.value.options, mergedProps.value.label, mergedProps.value.labelWidth], updateAutoLabelWidth, {
-  deep: true,
-  flush: 'post',
-})
+watch(
+  () => [mergedProps.value.options, mergedProps.value.label, mergedProps.value.labelWidth, mergedProps.value.column],
+  updateAutoLabelWidth,
+  {
+    deep: true,
+    flush: 'post',
+  },
+)
 
 onMounted(() => {
   updateAutoLabelWidth()
+
+  if (typeof ResizeObserver !== 'undefined') {
+    descriptionsResizeObserver = new ResizeObserver(updateAutoLabelWidth)
+    const descriptionsElement = getDescriptionsElement()
+    if (descriptionsElement) descriptionsResizeObserver.observe(descriptionsElement)
+  }
 
   if (typeof document !== 'undefined' && document.fonts?.ready) {
     document.fonts.ready.then(updateAutoLabelWidth)
   }
 })
+
+onBeforeUnmount(() => descriptionsResizeObserver?.disconnect())
 </script>
 
 <style scoped lang="scss">
@@ -372,24 +374,26 @@ onMounted(() => {
 
   :deep(.el-descriptions__label) {
     width: v-bind(labelWidth2);
-    min-width: v-bind(labelWidth2);
+    min-width: 0;
+    flex-shrink: 1;
     text-align: v-bind(getTextAlign);
   }
 
   // 当labelWidth为auto时的样式处理
   :deep(.el-descriptions__label.auto-width) {
     width: auto;
-    flex-shrink: 0;
+    flex-shrink: 1;
   }
 
   :deep(.el-descriptions__content) {
     width: calc((100% - v-bind(labelWidth2) * v-bind(descriptionColumn)) / v-bind(descriptionColumn));
     min-width: 100px;
+    flex-shrink: 0;
   }
 
   /* 去掉选择器中的空格 */
   :deep(.el-descriptions__table tr:last-child .el-descriptions__content:last-child) {
-    flex: 1;
+    flex: 1 0 100px;
     min-width: 100px;
   }
 }
