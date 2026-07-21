@@ -1,6 +1,6 @@
 .s-descriptions.s-descriptions--shijingshan.s-descriptions--shijingshan {
   --el-descriptions-table-border: 1px solid var(--s-sjs-divider);
-  --el-descriptions-item-bordered-label-background: var(--s-sjs-bg-soft);
+  --el-descriptions-item-bordered-label-background: var(--s-sjs-primary-soft);
 
   color: var(--s-sjs-text);
   font-family: var(--s-sjs-font-family);
@@ -10,14 +10,12 @@
   }
 
   .el-descriptions__title {
-    color: var(--s-sjs-text);
     font-size: 18px;
     font-weight: 600;
     line-height: 1.4;
   }
 
   .el-descriptions__extra {
-    color: var(--s-sjs-text-muted);
     font-size: 14px;
   }
 
@@ -50,7 +48,7 @@
   }
 
   .el-descriptions__label {
-    background: var(--s-sjs-bg-soft) !important;
+    background: var(--s-sjs-primary-soft) !important;
     color: var(--s-sjs-text);
     font-weight: 600;
   }
@@ -75,7 +73,7 @@
   }
 
   .el-descriptions__table.is-bordered .el-descriptions__label {
-    box-shadow: inset 3px 0 0 rgba(var(--s-sjs-primary-rgb), 0.22);
+    box-shadow: inset 3px 0 0 var(--s-sjs-primary);
   }
 
   .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:first-child {

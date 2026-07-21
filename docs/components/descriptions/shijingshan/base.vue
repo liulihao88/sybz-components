@@ -20,10 +20,9 @@ const options = [
       theme="shijingshan"
       title="服务基础信息"
       extra="更新时间 10:24"
-      label-width="200"
+      label-width="100px"
       :options="options"
       :column="3"
-      show-all
     />
   </div>
 </template>
