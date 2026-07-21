@@ -36,7 +36,7 @@ tabs/size
 
 ### 胶囊类型
 
-:::demo 展示胶囊类型切换。基础写法：`<s-tabs v-model="smallActiveTab" :options="navList" type="capsule" size="small"></s-tabs>`。属性：`type` 可选 `'' / capsule / card / border-card`，默认值 `''`。
+:::demo 展示胶囊类型切换，激活胶囊会从当前项平滑滑动到目标项。基础写法：`<s-tabs v-model="defaultActiveTab" :options="navList" type="capsule"></s-tabs>`。属性：`type` 可选 `'' / capsule / card / border-card`，默认值 `''`；`size` 可选 `small / default / large`，默认值 `default`。
 tabs/capsule
 :::
 

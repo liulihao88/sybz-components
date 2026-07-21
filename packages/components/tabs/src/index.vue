@@ -1,5 +1,11 @@
 <template>
-  <div class="s-tabs-box" :class="boxClass">
+  <div ref="tabsBoxRef" class="s-tabs-box" :class="boxClass">
+    <span
+      v-if="isCapsuleType"
+      class="s-tabs__capsule-indicator"
+      :class="{ 'is-ready': capsuleIndicatorReady }"
+      :style="capsuleIndicatorStyle"
+    ></span>
     <el-tabs v-bind="forwardedAttrs" v-model="tabsValue">
       <slot>
         <template v-for="tab in mergedProps.options" :key="tab[mergedProps.value]">
@@ -19,7 +25,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, useAttrs, watch, type PropType } from 'vue'
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  useAttrs,
+  watch,
+  type CSSProperties,
+  type PropType,
+} from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { TabsPropsPublic } from 'element-plus'
 
@@ -72,8 +88,10 @@ const props = defineProps({
 })
 const emits = defineEmits(['update:modelValue'])
 const mergedProps = useGlobalComponentConfig('tabs', props)
-const slideDirection = ref<'left' | 'right' | ''>('')
-let slideDirectionTimer: ReturnType<typeof setTimeout> | undefined
+const tabsBoxRef = ref<HTMLElement>()
+const capsuleIndicatorReady = ref(false)
+const capsuleIndicatorStyle = ref<CSSProperties>({})
+let resizeObserver: ResizeObserver | undefined
 
 const isCapsuleType = computed(() => mergedProps.value.type === 'capsule')
 const isChenghuaTheme = computed(() => mergedProps.value.theme === 'chenghua')
@@ -106,11 +124,32 @@ const boxClass = computed(() => [
     's-tabs-box--capsule': isCapsuleType.value,
     's-tabs-box--chenghua': isChenghuaTheme.value,
     's-tabs-box--shijingshan': isShijingshanTheme.value,
-    's-tabs-box--capsule-slide-left': isCapsuleType.value && slideDirection.value === 'left',
-    's-tabs-box--capsule-slide-right': isCapsuleType.value && slideDirection.value === 'right',
   },
   `s-tabs-box--size-${mergedProps.value.size || 'default'}`,
 ])
+
+const updateCapsuleIndicator = async () => {
+  if (!isCapsuleType.value) {
+    capsuleIndicatorReady.value = false
+    return
+  }
+
+  await nextTick()
+
+  const tabsBox = tabsBoxRef.value
+  const activeItem = tabsBox?.querySelector<HTMLElement>('.el-tabs__item.is-active')
+  if (!tabsBox || !activeItem) return
+
+  const boxRect = tabsBox.getBoundingClientRect()
+  const itemRect = activeItem.getBoundingClientRect()
+
+  capsuleIndicatorStyle.value = {
+    width: `${itemRect.width}px`,
+    height: `${itemRect.height}px`,
+    transform: `translate3d(${itemRect.left - boxRect.left}px, ${itemRect.top - boxRect.top}px, 0)`,
+  }
+  capsuleIndicatorReady.value = true
+}
 
 // 鼠标悬停时切换标签页
 const handleMouseEnter = (tabVal: string) => {
@@ -119,38 +158,23 @@ const handleMouseEnter = (tabVal: string) => {
   }
 }
 
-watch(
-  () => tabsValue.value,
-  (value, oldValue) => {
-    if (!isCapsuleType.value || oldValue === undefined || value === oldValue) {
-      return
-    }
+watch(() => tabsValue.value, updateCapsuleIndicator, { flush: 'post' })
 
-    const values = mergedProps.value.options.map((item) => item[mergedProps.value.value])
-    const currentIndex = values.findIndex((item) => item === value)
-    const oldIndex = values.findIndex((item) => item === oldValue)
+watch(() => [isCapsuleType.value, mergedProps.value.size, mergedProps.value.options], updateCapsuleIndicator, {
+  deep: true,
+  flush: 'post',
+})
 
-    if (currentIndex === -1 || oldIndex === -1 || currentIndex === oldIndex) {
-      return
-    }
+onMounted(() => {
+  updateCapsuleIndicator()
 
-    slideDirection.value = currentIndex > oldIndex ? 'right' : 'left'
-
-    if (slideDirectionTimer) {
-      clearTimeout(slideDirectionTimer)
-    }
-
-    slideDirectionTimer = setTimeout(() => {
-      slideDirection.value = ''
-    }, 320)
-  },
-)
-
-onBeforeUnmount(() => {
-  if (slideDirectionTimer) {
-    clearTimeout(slideDirectionTimer)
+  if (tabsBoxRef.value && typeof ResizeObserver !== 'undefined') {
+    resizeObserver = new ResizeObserver(updateCapsuleIndicator)
+    resizeObserver.observe(tabsBoxRef.value)
   }
 })
+
+onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 <style lang="scss" scoped>
 .s-tabs-box {
@@ -208,6 +232,7 @@ onBeforeUnmount(() => {
 }
 
 .s-tabs-box--capsule {
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   max-width: 100%;
@@ -227,6 +252,30 @@ onBeforeUnmount(() => {
   --s-tabs-capsule-item-gap: 4px;
   --s-tabs-capsule-outer-gap: 4px;
   --s-tabs-capsule-border-width: 1px;
+
+  .s-tabs__capsule-indicator {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    border-radius: 999px;
+    background: var(--s-tabs-capsule-active-bg);
+    box-shadow:
+      0 10px 20px var(--s-tabs-capsule-active-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      height 0.2s ease,
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.12s ease;
+    will-change: width, transform;
+  }
+
+  .s-tabs__capsule-indicator.is-ready {
+    opacity: 1;
+  }
 
   &.s-tabs-box--size-small {
     --s-tabs-capsule-height: 40px;
@@ -305,6 +354,7 @@ onBeforeUnmount(() => {
 
   :deep(.el-tabs__item) {
     position: relative;
+    z-index: 3;
     min-width: 0;
     height: var(--s-tabs-capsule-height);
     padding: 0 var(--s-tabs-capsule-padding-x) !important;
@@ -315,8 +365,6 @@ onBeforeUnmount(() => {
     font-weight: 700;
     line-height: var(--s-tabs-capsule-height);
     transition:
-      background-color 0.22s ease,
-      box-shadow 0.22s ease,
       color 0.2s,
       transform 0.2s;
   }
@@ -326,10 +374,8 @@ onBeforeUnmount(() => {
   }
 
   :deep(.el-tabs__item.is-active) {
-    background: var(--s-tabs-capsule-active-bg);
-    box-shadow:
-      0 10px 20px var(--s-tabs-capsule-active-shadow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    background: transparent;
+    box-shadow: none;
     color: var(--s-tabs-capsule-active-color);
   }
 
@@ -350,39 +396,9 @@ onBeforeUnmount(() => {
   }
 }
 
-.s-tabs-box--capsule-slide-left {
-  :deep(.el-tabs__item.is-active) {
-    animation: s-tabs-capsule-slide-left 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-}
-
-.s-tabs-box--capsule-slide-right {
-  :deep(.el-tabs__item.is-active) {
-    animation: s-tabs-capsule-slide-right 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-}
-
-@keyframes s-tabs-capsule-slide-left {
-  0% {
-    opacity: 0.9;
-    transform: translateX(-10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes s-tabs-capsule-slide-right {
-  0% {
-    opacity: 0.9;
-    transform: translateX(10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  .s-tabs-box--capsule .s-tabs__capsule-indicator {
+    transition: opacity 0.12s ease;
   }
 }
 </style>

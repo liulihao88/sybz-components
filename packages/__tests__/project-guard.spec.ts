@@ -316,11 +316,15 @@ describe('component entry guards', () => {
     expect(tabs).toContain("useGlobalComponentConfig('tabs', props)")
     expect(tabs).not.toMatch(/props\.(options|label|value|subAttrs|trigger|type|theme|size)/)
     expect(tabs).toContain("mergedProps.value.theme === 'chenghua'")
-    expect(tabs).toContain('mergedProps.value.options.map')
+    expect(tabs).toContain('v-for="tab in mergedProps.options"')
+    expect(tabs).toContain('class="s-tabs__capsule-indicator"')
+    expect(tabs).toContain("querySelector<HTMLElement>('.el-tabs__item.is-active')")
+    expect(tabs).toContain('transform 0.42s cubic-bezier(0.22, 1, 0.36, 1)')
+    expect(tabs).toContain('@media (prefers-reduced-motion: reduce)')
+    expect(tabs).not.toContain('s-tabs-box--capsule-slide-left')
     expect(installTypes).toContain('tabs?: SybzComponentInstallConfig')
     expect(installDeclarations).toContain('tabs?: SybzComponentInstallConfig')
-    expect(docs.indexOf('### main.ts 全局设置')).toBeGreaterThan(docs.indexOf('### 基础用法'))
-    expect(docs).toContain('tabs: {')
+    expect(docs).toContain('激活胶囊会从当前项平滑滑动到目标项')
   })
 
   it('keeps tooltip custom triggers sized to their content in flex layouts', () => {
