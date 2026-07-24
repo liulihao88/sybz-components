@@ -19,6 +19,7 @@
         </slot>
       </span>
     </span>
+    <slot v-else name="trigger" />
     <template v-if="$slots.content" #content>
       <slot name="content"></slot>
     </template>

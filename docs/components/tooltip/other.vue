@@ -47,12 +47,13 @@ const disabled = ref(false)
 }
 
 .el-popper.is-customized {
-  padding: 6px 12px;
-  background: linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129));
+  // padding: 6px 12px;
+  // background: linear-gradient(90deg, rgb(159, 229, 151), rgb(204, 229, 129));
+  background: red;
 }
 
 .el-popper.is-customized .el-popper__arrow::before {
-  background: linear-gradient(45deg, #b2e68d, #bce689);
-  right: 0;
+  background: yellow;
+  // right: 0;
 }
 </style>

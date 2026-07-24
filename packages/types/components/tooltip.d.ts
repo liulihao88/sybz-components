@@ -18,6 +18,7 @@ export type STooltipComponent = {
     $emit: ElTooltipInstance['$emit']
     $slots: ElTooltipInstance['$slots'] & {
       default?: () => any
+      trigger?: () => any
       content?: () => any
     }
   }

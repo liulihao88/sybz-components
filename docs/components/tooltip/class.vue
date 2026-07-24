@@ -7,5 +7,7 @@
   color: var(--el-color-primary);
   font-size: 16px;
   font-weight: 600;
+  margin: 30px;
+  padding: 30px;
 }
 </style>

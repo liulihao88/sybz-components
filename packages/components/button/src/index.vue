@@ -3,13 +3,16 @@
     v-if="mergedProps.content"
     :content="mergedProps.content"
     :dangerouslyUseHTMLString="htmlStringEnabled"
+    :show-slot="false"
     v-bind="mergedProps.tooltipAttrs"
   >
-    <el-button v-bind="buttonAttrs" :class="['s-button-content', buttonClass]" @click="handleClick">
-      <template v-for="(arg, name, index) in $slots" #[name]>
-        <slot :name="name" v-bind="arg" :index="index" />
-      </template>
-    </el-button>
+    <template #trigger>
+      <el-button v-bind="buttonAttrs" :class="['s-button-content', buttonClass]" @click="handleClick">
+        <template v-for="(arg, name, index) in $slots" #[name]>
+          <slot :name="name" v-bind="arg" :index="index" />
+        </template>
+      </el-button>
+    </template>
   </s-tooltip>
   <el-button v-else v-bind="buttonAttrs" :class="buttonClass" @click="handleClick">
     <template v-for="(arg, name, index) in $slots" #[name]>

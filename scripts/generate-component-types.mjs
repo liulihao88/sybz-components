@@ -558,7 +558,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'STooltipPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tooltip',
-      slots: ['default', 'content'],
+      slots: ['default', 'trigger', 'content'],
       hoverProps: componentHoverProps('STooltipSelfProps'),
     },
   ],
