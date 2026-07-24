@@ -42,6 +42,7 @@ interface SButtonSelfProps {
   width?: string | number
   height?: string | number
   hoverAnimation?: boolean
+  ghost?: boolean
 }
 
 const props = withDefaults(defineProps<SButtonSelfProps>(), {
@@ -55,6 +56,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   width: '',
   height: '',
   hoverAnimation: false,
+  ghost: false,
 })
 
 const attrs = useAttrs()
@@ -107,6 +109,7 @@ const buttonAttrs = computed(() => {
 
 const buttonClass = computed(() => ({
   's-button--hover-animation': mergedProps.value.hoverAnimation,
+  's-button--ghost': mergedProps.value.ghost,
   's-button--chenghua': mergedProps.value.theme === 'chenghua',
   's-button--chenghua-outline': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'outline',
   's-button--chenghua-gradient': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'gradient',
@@ -134,3 +137,74 @@ const handleClick = (evt: MouseEvent) => {
   }
 }
 </script>
+
+<style lang="scss">
+.s-button--ghost.s-button--ghost.s-button--ghost {
+  --el-button-bg-color: transparent;
+  --el-button-border-color: #ffffff;
+  --el-button-text-color: #ffffff;
+  --el-button-hover-bg-color: transparent;
+  --el-button-hover-border-color: var(--el-color-primary-light-3);
+  --el-button-hover-text-color: var(--el-color-primary-light-3);
+  --el-button-active-bg-color: transparent;
+  --el-button-active-border-color: var(--el-color-primary-dark-2);
+  --el-button-active-text-color: var(--el-color-primary-dark-2);
+  --el-button-disabled-bg-color: transparent;
+  --el-button-disabled-border-color: rgba(255, 255, 255, 0.25);
+  --el-button-disabled-text-color: rgba(255, 255, 255, 0.25);
+
+  background: transparent;
+  box-shadow: none;
+
+  &.el-button--primary {
+    --el-button-border-color: var(--el-color-primary);
+    --el-button-text-color: var(--el-color-primary);
+  }
+
+  &.el-button--success {
+    --el-button-border-color: var(--el-color-success);
+    --el-button-text-color: var(--el-color-success);
+    --el-button-hover-border-color: var(--el-color-success-light-3);
+    --el-button-hover-text-color: var(--el-color-success-light-3);
+    --el-button-active-border-color: var(--el-color-success-dark-2);
+    --el-button-active-text-color: var(--el-color-success-dark-2);
+  }
+
+  &.el-button--warning {
+    --el-button-border-color: var(--el-color-warning);
+    --el-button-text-color: var(--el-color-warning);
+    --el-button-hover-border-color: var(--el-color-warning-light-3);
+    --el-button-hover-text-color: var(--el-color-warning-light-3);
+    --el-button-active-border-color: var(--el-color-warning-dark-2);
+    --el-button-active-text-color: var(--el-color-warning-dark-2);
+  }
+
+  &.el-button--danger {
+    --el-button-border-color: var(--el-color-danger);
+    --el-button-text-color: var(--el-color-danger);
+    --el-button-hover-border-color: var(--el-color-danger-light-3);
+    --el-button-hover-text-color: var(--el-color-danger-light-3);
+    --el-button-active-border-color: var(--el-color-danger-dark-2);
+    --el-button-active-text-color: var(--el-color-danger-dark-2);
+  }
+
+  &.el-button--info {
+    --el-button-border-color: var(--el-color-info);
+    --el-button-text-color: var(--el-color-info);
+    --el-button-hover-border-color: var(--el-color-info-light-3);
+    --el-button-hover-text-color: var(--el-color-info-light-3);
+    --el-button-active-border-color: var(--el-color-info-dark-2);
+    --el-button-active-text-color: var(--el-color-info-dark-2);
+  }
+
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &.is-disabled:active {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.25);
+    box-shadow: none;
+  }
+}
+</style>

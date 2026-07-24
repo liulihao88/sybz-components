@@ -70,7 +70,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'SButtonProps',
       exportedComponentTypeName: 'SButtonComponent',
       tagName: 's-button',
-      description: 's-button 按钮组件，支持 Element Plus Button 属性和 sybz 扩展属性。',
+      description: 's-button 按钮组件，支持 ghost 幽灵按钮、Element Plus Button 属性和 sybz 扩展属性。',
       publicPropsTypeName: 'SButtonPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'button',

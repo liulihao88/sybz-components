@@ -170,3 +170,33 @@
     }
   }
 }
+
+.s-button--ghost.s-button--ghost.s-button--chenghua {
+  &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+      .el-button--info
+    ) {
+    --el-button-border-color: var(--s-ch-primary);
+    --el-button-text-color: var(--s-ch-primary);
+    --el-button-hover-border-color: var(--s-ch-primary-hover);
+    --el-button-hover-text-color: var(--s-ch-primary-hover);
+    --el-button-active-border-color: var(--s-ch-primary-active);
+    --el-button-active-text-color: var(--s-ch-primary-active);
+  }
+
+  &.el-button--primary {
+    --el-button-border-color: var(--s-ch-primary);
+    --el-button-text-color: var(--s-ch-primary);
+    --el-button-hover-border-color: var(--s-ch-primary-hover);
+    --el-button-hover-text-color: var(--s-ch-primary-hover);
+    --el-button-active-border-color: var(--s-ch-primary-active);
+    --el-button-active-text-color: var(--s-ch-primary-active);
+  }
+
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &.is-disabled:active {
+    border-color: rgba(151, 151, 151, 0.35);
+    color: var(--s-ch-text-secondary);
+  }
+}

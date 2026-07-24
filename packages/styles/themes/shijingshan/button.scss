@@ -205,3 +205,53 @@
     }
   }
 }
+
+.s-button--ghost.s-button--ghost.s-button--shijingshan {
+  &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+      .el-button--info
+    ) {
+    --el-button-border-color: var(--s-sjs-primary);
+    --el-button-text-color: var(--s-sjs-primary);
+    --el-button-hover-border-color: var(--s-sjs-primary-hover);
+    --el-button-hover-text-color: var(--s-sjs-primary-hover);
+    --el-button-active-border-color: var(--s-sjs-primary-active);
+    --el-button-active-text-color: var(--s-sjs-primary-active);
+  }
+
+  &.el-button--primary {
+    --el-button-border-color: var(--s-sjs-primary);
+    --el-button-text-color: var(--s-sjs-primary);
+    --el-button-hover-border-color: var(--s-sjs-primary-hover);
+    --el-button-hover-text-color: var(--s-sjs-primary-hover);
+    --el-button-active-border-color: var(--s-sjs-primary-active);
+    --el-button-active-text-color: var(--s-sjs-primary-active);
+  }
+
+  &.el-button--success {
+    --el-button-border-color: var(--s-sjs-success);
+    --el-button-text-color: var(--s-sjs-success);
+  }
+
+  &.el-button--warning {
+    --el-button-border-color: var(--s-sjs-warning);
+    --el-button-text-color: var(--s-sjs-warning);
+  }
+
+  &.el-button--danger {
+    --el-button-border-color: var(--s-sjs-danger);
+    --el-button-text-color: var(--s-sjs-danger);
+  }
+
+  &.el-button--info {
+    --el-button-border-color: var(--s-sjs-info);
+    --el-button-text-color: var(--s-sjs-info);
+  }
+
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &.is-disabled:active {
+    border-color: var(--s-sjs-divider);
+    color: var(--s-sjs-text-muted);
+  }
+}

@@ -16,6 +16,13 @@
     </div>
 
     <div class="shijingshan-button-demo__row">
+      <s-button theme="shijingshan" ghost>幽灵按钮</s-button>
+      <s-button theme="shijingshan" type="primary" ghost>主要幽灵按钮</s-button>
+      <s-button theme="shijingshan" type="danger" ghost>危险幽灵按钮</s-button>
+      <s-button theme="shijingshan" ghost disabled>禁用幽灵按钮</s-button>
+    </div>
+
+    <div class="shijingshan-button-demo__row">
       <s-button theme="shijingshan" text>文字按钮</s-button>
       <s-button theme="shijingshan" link>查看详情</s-button>
       <s-button theme="shijingshan" text disabled>禁用文字</s-button>

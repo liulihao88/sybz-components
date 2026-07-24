@@ -53,13 +53,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
      *
-     * s-button 按钮组件，支持 Element Plus Button 属性和 sybz 扩展属性。
+     * s-button 按钮组件，支持 ghost 幽灵按钮、Element Plus Button 属性和 sybz 扩展属性。
      */
     SButton: (typeof import('./types/components/button'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
      *
-     * s-button 按钮组件，支持 Element Plus Button 属性和 sybz 扩展属性。
+     * s-button 按钮组件，支持 ghost 幽灵按钮、Element Plus Button 属性和 sybz 扩展属性。
      */
     's-button': (typeof import('./types/components/button'))['default']
     /**

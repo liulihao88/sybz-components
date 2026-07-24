@@ -20,7 +20,7 @@ button/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。`variant` 可选 `'' / outline / gradient`，默认值 `''`；`width`、`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。`variant` 可选 `'' / outline / gradient`，默认值 `''`；`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
 button/chenghua/base
 :::
 
@@ -28,7 +28,7 @@ button/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题按钮。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。`width`、`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示石景山主题按钮。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
 button/shijingshan/base
 :::
 
@@ -62,6 +62,12 @@ button/throttle
 button/slots
 :::
 
+### 幽灵按钮（ghost 默认值：false）
+
+:::demo 展示透明背景的幽灵按钮，适合在复杂或深色背景中使用。基础写法：`<s-button ghost type="primary">Primary</s-button>`。属性：`ghost` 可选 `true / false`，默认值 `false`；可与 `type`、`disabled` 等按钮属性组合使用。
+button/ghost
+:::
+
 ### other
 
 :::demo 展示 Element Plus 按钮能力透传。基础写法：`<s-button type="primary" :size="dynamicSize">Primary</s-button>`。属性：该示例主要展示 `el-button` 属性透传，具体可选值以 Element Plus Button 为准。
@@ -84,6 +90,7 @@ button/other
 |          `width`           | 按钮宽度，支持 `processWidth` 写法  | string / number                            | `''`      |
 |          `height`          | 按钮高度，支持 `processWidth` 写法  | string / number                            | `''`      |
 |      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                    | `false`   |
+|          `ghost`           | 幽灵按钮，使背景透明                | boolean                                    | `false`   |
 
 ### 事件
 

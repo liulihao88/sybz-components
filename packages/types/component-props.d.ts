@@ -111,6 +111,8 @@ export interface SButtonSelfProps extends SHtmlStringProps {
   height?: string | number
   /** 是否开启 hover 动效 */
   hoverAnimation?: boolean
+  /** 幽灵按钮，使背景透明并反转文字和边框颜色 */
+  ghost?: boolean
 }
 
 export type SButtonProps = SButtonSelfProps & Partial<Omit<ButtonPropsPublic, keyof SButtonSelfProps>>
