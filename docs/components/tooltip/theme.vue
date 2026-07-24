@@ -8,7 +8,12 @@ function handleClick() {
 
 <template>
   <div class="demo-box">
-    <s-tooltip content="默认 dark 主题，文本超出宽度时会显示完整内容。" width="200px" placement="bottom" />
+    <s-tooltip
+      content="默认 dark 主题，文本超出宽度时会显示完整内容。"
+      width="200px"
+      placement="bottom"
+      @click="handleClick"
+    />
 
     <s-tooltip
       content="light 主题也支持默认的溢出检测，点击文字还能触发 click 事件。"

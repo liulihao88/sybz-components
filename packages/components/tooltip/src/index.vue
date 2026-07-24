@@ -13,7 +13,7 @@
       @click="contentClick"
       @mouseover="onMouseOver"
     >
-      <span class="s-tooltip-box__content">
+      <span ref="positionRef" class="s-tooltip-box__content">
         <slot>
           {{ $attrs.content }}
         </slot>
@@ -38,6 +38,7 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'STooltip',
+  inheritAttrs: false,
 })
 const slots = useSlots()
 const attrs = useAttrs()
@@ -69,6 +70,10 @@ const mergedTooltipAttrs = computed(() => {
     }
     return attrs
   }, {})
+  const forwardedAttrs = { ...attrs }
+  delete forwardedAttrs.class
+  delete forwardedAttrs.style
+
   const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString
   const rawContent =
     htmlStringEnabled ||
@@ -78,10 +83,21 @@ const mergedTooltipAttrs = computed(() => {
     tooltipAttrs['raw-content']
 
   return {
+    ...forwardedAttrs,
     ...tooltipAttrs,
     rawContent: Boolean(rawContent),
+    ...(useContentReference.value ? { referenceEl: positionRef.value } : {}),
   }
 })
+
+const positionRef = ref<HTMLElement>()
+const useContentReference = computed(
+  () =>
+    mergedProps.value.showSlot &&
+    (attrs.class != null || attrs.style != null) &&
+    !('referenceEl' in attrs) &&
+    !('reference-el' in attrs),
+)
 
 const triggerAttrs = computed(() => {
   const triggerAttrs = { ...attrs }
