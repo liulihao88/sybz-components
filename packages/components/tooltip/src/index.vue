@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, useAttrs, useSlots } from 'vue'
+import { computed, getCurrentInstance, ref, useAttrs, useSlots } from 'vue'
 import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -40,6 +40,7 @@ defineOptions({
 })
 const slots = useSlots()
 const attrs = useAttrs()
+const callerScopeId = getCurrentInstance()?.vnode.scopeId
 const hasDefaultSlot = computed(() => Boolean(slots.default))
 
 interface TooltipProps {
@@ -100,6 +101,7 @@ const triggerAttrs = computed(() => {
   tooltipOnlyAttrs.forEach((key) => {
     delete triggerAttrs[key]
   })
+  if (callerScopeId) triggerAttrs[callerScopeId] = ''
 
   return triggerAttrs
 })

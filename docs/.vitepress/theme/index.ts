@@ -90,6 +90,9 @@ export default {
       inputNumber: {
         // size: 'small'
       },
+      input: {
+        clearable: false,
+      },
       tooltip: {
         // showAfter: 1500,
       },

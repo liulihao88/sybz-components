@@ -18,6 +18,12 @@
 tooltip/base
 :::
 
+### 自定义文本样式
+
+:::demo `class` 会应用到 `s-tooltip` 的文本触发节点，可直接设置默认插槽文本的颜色、字号和字重，也支持调用方的 scoped 样式。基础写法：`<s-tooltip class="tooltip-custom-text" content="这是自定义文本样式">这是自定义文本样式</s-tooltip>`。属性：`class` 支持 Vue 标准的 `string / array / object`，默认值为空。
+tooltip/class
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-tooltip width="220px" placement="right" show-arrow content="这是一段比较长的提示文本，默认只展示单行，超出当前宽度后鼠标移入会显示完整内容。" />`。`placement` 继承 tooltip 配置。
@@ -71,23 +77,6 @@ tooltip/slot
 :::demo 展示受控模式配置。基础写法：`<s-tooltip :visible="visible" content="当前 tooltip 由外部 visible 状态完全控制" placement="top"></s-tooltip>`。属性：`placement` 继承 tooltip 配置。
 tooltip/visible
 :::
-
-### 全局默认配置
-
-tooltip 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
-除 `width`、`lineClamp`、`showSlot`、`effect` 这些封装属性外，Element Plus Tooltip 的属性可直接写在 `tooltip` 下。
-
-```js
-app.use(SybzComponents, {
-  tooltip: {
-    width: '240px',
-    lineClamp: 2,
-    effect: 'light',
-    placement: 'top',
-    showAfter: 1000,
-  },
-})
-```
 
 | 配置项                             | 可选值          | 默认值              | 说明                                |
 | ---------------------------------- | --------------- | ------------------- | ----------------------------------- |

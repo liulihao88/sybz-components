@@ -18,6 +18,12 @@
 flex/base
 :::
 
+### 按钮间距（`gap` 默认值：`0px`）
+
+:::demo 设置非零 `gap` 后，按钮间距统一由 `s-flex` 管理，Element Plus 按钮默认的 `margin-left` 不再生效。基础写法：`<s-flex wrap="wrap" gap="small"><s-button>按钮</s-button></s-flex>`。属性：`gap` 可选 `small / default / large / 自定义宽度`，默认值 `0px`；`wrap` 可选 `nowrap / wrap / wrap-reverse`，默认值 `nowrap`。
+flex/buttonGap
+:::
+
 ### 常用属性
 
 :::demo 展示常用属性配置。基础写法：`<s-flex :direction="direction" :justify="justify" :align="align" :wrap="wrap" :gap="gap" class="h-100 w-block"></s-flex>`。属性：`direction` 可选 `row / row-reverse / column / column-reverse`，默认值 `row`；`justify` 可选 `start / end / center / space-between / space-around / space-evenly / normal`，默认值 `normal`。

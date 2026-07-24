@@ -161,7 +161,7 @@ const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
-const isClearable = computed(() => attrs.clearable !== false)
+const isClearable = computed(() => mergedProps.value.clearable !== false)
 const isDisabled = computed(() => attrs.disabled === true || attrs.disabled === '')
 const showTextareaClear = computed(
   () => attrs.type === 'textarea' && isClearable.value && Boolean(data.value) && !isDisabled.value,
@@ -353,6 +353,7 @@ const mergedAttrs = computed(() => {
     rows: 2,
     clearable: true,
     size: normalizeInputSize(mergedProps.value.size),
+    ...mergedProps.value,
   }
   const merged = {
     ...baseAttrs,

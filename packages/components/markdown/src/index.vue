@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { Download, FullScreen, RefreshLeft, RefreshRight, ZoomIn, ZoomOut } from '@element-plus/icons-vue'
 import DOMPurify from 'dompurify'
-import { ElImageViewer } from 'element-plus'
+import { ElIcon, ElImageViewer } from 'element-plus'
 import MarkdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
 import markdownItAttrs from 'markdown-it-attrs'
@@ -239,6 +240,49 @@ const openImagePreview = (image: HTMLImageElement) => {
   return true
 }
 
+const getImageFileName = (url: string, index: number) => {
+  try {
+    const parsedUrl = new URL(url, window.location.href)
+    if (!['http:', 'https:', 'file:'].includes(parsedUrl.protocol)) return `image-${index + 1}`
+    const pathname = parsedUrl.pathname
+    const fileName = decodeURIComponent(pathname.split('/').pop() || '').replace(/[\\/:*?"<>|]/g, '-')
+    if (fileName) return fileName
+  } catch {
+    // 使用兜底文件名
+  }
+  return `image-${index + 1}`
+}
+
+const triggerImageDownload = (url: string, fileName: string, openInNewTab = false) => {
+  const link = document.createElement('a')
+  link.href = url
+  link.download = fileName
+  if (openInNewTab) {
+    link.target = '_blank'
+    link.rel = 'noopener noreferrer'
+  }
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+}
+
+const downloadPreviewImage = async (index: number) => {
+  const url = previewUrls.value[index]
+  if (!url) return
+
+  const fileName = getImageFileName(url, index)
+  try {
+    const response = await fetch(url)
+    if (!response.ok) throw new Error(`图片下载失败：${response.status}`)
+    const objectUrl = URL.createObjectURL(await response.blob())
+    triggerImageDownload(objectUrl, fileName)
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0)
+  } catch {
+    // 跨域图片未开放 CORS 时，交由浏览器和图片服务器直接处理下载。
+    triggerImageDownload(url, fileName, true)
+  }
+}
+
 const handleClick = async (event: MouseEvent) => {
   const target = event.target as HTMLElement
   const copyButton = target.closest<HTMLElement>('[data-copy-code]')
@@ -300,8 +344,69 @@ onBeforeUnmount(() => {
       :url-list="previewUrls"
       :initial-index="previewInitialIndex"
       teleported
+      hide-on-click-modal
       @close="previewVisible = false"
-    />
+    >
+      <template #toolbar="{ actions, reset, activeIndex }">
+        <button
+          class="s-markdown__viewer-action"
+          type="button"
+          title="缩小"
+          aria-label="缩小"
+          @click="actions('zoomOut')"
+        >
+          <el-icon><ZoomOut /></el-icon>
+        </button>
+        <button
+          class="s-markdown__viewer-action"
+          type="button"
+          title="放大"
+          aria-label="放大"
+          @click="actions('zoomIn')"
+        >
+          <el-icon><ZoomIn /></el-icon>
+        </button>
+        <i class="el-image-viewer__actions__divider"></i>
+        <button
+          class="s-markdown__viewer-action"
+          type="button"
+          title="切换适应模式"
+          aria-label="切换适应模式"
+          @click="reset"
+        >
+          <el-icon><FullScreen /></el-icon>
+        </button>
+        <i class="el-image-viewer__actions__divider"></i>
+        <button
+          class="s-markdown__viewer-action"
+          type="button"
+          title="逆时针旋转"
+          aria-label="逆时针旋转"
+          @click="actions('anticlockwise')"
+        >
+          <el-icon><RefreshLeft /></el-icon>
+        </button>
+        <button
+          class="s-markdown__viewer-action"
+          type="button"
+          title="顺时针旋转"
+          aria-label="顺时针旋转"
+          @click="actions('clockwise')"
+        >
+          <el-icon><RefreshRight /></el-icon>
+        </button>
+        <i class="el-image-viewer__actions__divider"></i>
+        <button
+          class="s-markdown__viewer-action"
+          type="button"
+          title="下载图片"
+          aria-label="下载图片"
+          @click="downloadPreviewImage(activeIndex)"
+        >
+          <el-icon><Download /></el-icon>
+        </button>
+      </template>
+    </el-image-viewer>
   </div>
 </template>
 
@@ -458,5 +563,16 @@ onBeforeUnmount(() => {
   color: var(--el-text-color-placeholder);
   padding: 24px 0;
   text-align: center;
+}
+.s-markdown__viewer-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
 }
 </style>

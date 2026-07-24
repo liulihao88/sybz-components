@@ -33,7 +33,7 @@ const COLLAPSED_WIDTH = 30
 const MIN_VISIBLE_HEIGHT = 28
 const DEFAULT_POSITION = {
   left: 8,
-  top: 78,
+  top: 8,
 }
 const STORAGE_KEY = 'sybz-component-quick-sidebar-position'
 const EXPANDED_STORAGE_KEY = 'sybz-component-quick-sidebar-expanded'

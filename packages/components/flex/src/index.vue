@@ -1,5 +1,5 @@
 <template>
-  <component :is="component" :style="flexStyles" class="s-flex">
+  <component :is="component" :style="flexStyles" class="s-flex" :class="{ 's-flex--gap': hasGap }">
     <slot />
   </component>
 </template>
@@ -33,17 +33,18 @@ const props = withDefaults(defineProps<FlexProps>(), {
   component: 'div',
 })
 
+const gapValue = computed(() => parseGapValue())
+const hasGap = computed(() => !/^0(?:[a-z%]+)?$/i.test(String(gapValue.value).trim()))
+
 // --- 计算 Style ---
 const flexStyles = computed(() => {
-  let gapValue = parseGapValue()
-
   return {
     'flex-direction': props.direction,
     'flex-wrap': props.wrap,
     'justify-content': props.justify === 'normal' ? undefined : props.justify,
     'align-items': props.align === 'normal' ? undefined : props.align,
     flex: props.flex && props.flex !== 'normal' ? props.flex : undefined,
-    gap: gapValue,
+    gap: gapValue.value,
   }
 })
 
@@ -66,5 +67,9 @@ function parseGapValue() {
   display: flex;
   box-sizing: border-box;
   min-width: 0; /* Important for flex items to shrink properly */
+}
+
+.s-flex--gap > :deep(.el-button + .el-button) {
+  margin-left: 0;
 }
 </style>

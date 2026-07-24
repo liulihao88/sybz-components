@@ -2,7 +2,7 @@ import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/s
 import type { SMarkdownProps } from '../component-props'
 
 /**
- * s-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转和多图切换。
+ * s-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转、多图切换和下载。
  *
  * 先提示 sybz 自身属性。
  */

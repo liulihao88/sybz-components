@@ -1,0 +1,818 @@
+[
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "公司内部技术分享",
+    "bbox": [84, 154, 420, 28]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "从重复造轮子\n到统一交付能力",
+    "bbox": [84, 198, 610, 160]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "sybz-components 如何让业务页面开发更快、体验更统一、维护成本更低",
+    "bbox": [86, 385, 560, 64]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "Vue 3",
+    "bbox": [86, 500, 92, 32]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "Element Plus",
+    "bbox": [188, 500, 128, 32]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "业务沉淀",
+    "bbox": [326, 500, 112, 32]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "一次沉淀，多项目复用",
+    "bbox": [86, 624, 420, 28]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "业务页面组件组合",
+    "bbox": [850, 91, 300, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "<s-form />",
+    "bbox": [786, 166, 178, 68]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "<s-table />",
+    "bbox": [988, 166, 178, 68]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "<s-dialog />",
+    "bbox": [786, 258, 178, 68]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "<s-tooltip />",
+    "bbox": [988, 258, 178, 68]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "theme=\"chenghua\"",
+    "bbox": [786, 368, 380, 58]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "@sybz-components/utils",
+    "bbox": [786, 448, 380, 58]
+  },
+  {
+    "kind": "textbox",
+    "slide": 1,
+    "text": "统一默认值 · 类型提示 · 文档示例",
+    "bbox": [786, 555, 380, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "先看痛点",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "02 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "不用统一组件库，问题不是“写得慢”这么简单",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "它会把一次需求拆成多次实现、多轮沟通和长期维护。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "重复封装",
+    "bbox": [88, 286, 218, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "每个项目都要重新处理表格、表单、弹窗、分页与空状态。",
+    "bbox": [88, 330, 216, 168]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "体验分裂",
+    "bbox": [368, 286, 218, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "相似功能却有不同默认值、按钮间距、校验提示和加载反馈。",
+    "bbox": [368, 330, 216, 168]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "维护扩散",
+    "bbox": [648, 286, 218, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "一个通用问题，需要在多个项目分别定位、修复和回归。",
+    "bbox": [648, 330, 216, 168]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "交接困难",
+    "bbox": [928, 286, 218, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "新成员需要先学习每个项目的私有封装和隐性规范。",
+    "bbox": [928, 330, 216, 168]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "结果：研发成本随着项目数量线性累积，且难以形成组织资产。",
+    "bbox": [64, 568, 1050, 36]
+  },
+  {
+    "kind": "textbox",
+    "slide": 2,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "成本如何放大",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "03 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "同一个需求，在每个项目都要重新走一遍",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "没有共享组件层时，重复实现会逐步演变为重复缺陷。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "1",
+    "bbox": [86, 339, 42, 22]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "需求出现",
+    "bbox": [144, 326, 128, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "例如：带筛选、分页、空状态的列表",
+    "bbox": [86, 393, 184, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "2",
+    "bbox": [376, 339, 42, 22]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "项目 A 封装",
+    "bbox": [434, 326, 128, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "形成局部写法与样式",
+    "bbox": [376, 393, 184, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "3",
+    "bbox": [666, 339, 42, 22]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "项目 B 再实现",
+    "bbox": [724, 326, 128, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "重复处理交互与边界",
+    "bbox": [666, 393, 184, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "4",
+    "bbox": [956, 339, 42, 22]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "问题分别修复",
+    "bbox": [1014, 326, 128, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "维护与回归成本持续叠加",
+    "bbox": [956, 393, 184, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "项目越多，重复建设越多；“局部最优”最终会变成团队的整体负担。",
+    "bbox": [66, 540, 1050, 34]
+  },
+  {
+    "kind": "textbox",
+    "slide": 3,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "组件库定位",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "04 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "sybz-components：把高频业务能力变成共享基础设施",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "它建立在 Vue 3 + Element Plus 之上，保留原生兼容性，同时补齐业务场景。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "业务页面",
+    "bbox": [174, 266, 220, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "页面只关注业务数据、流程和权限",
+    "bbox": [420, 269, 460, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "sybz-components",
+    "bbox": [208, 353, 220, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "表单、表格、弹窗、布局、提示、图表、主题、指令",
+    "bbox": [420, 356, 460, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "Element Plus",
+    "bbox": [242, 440, 220, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "稳定的通用交互能力与成熟生态",
+    "bbox": [420, 443, 460, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "Vue 3",
+    "bbox": [276, 527, 220, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "响应式框架与工程基础",
+    "bbox": [420, 530, 460, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "核心原则",
+    "bbox": [984, 277, 193, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "业务页优先复用组件与工具函数；通用问题优先在组件库解决；页面不再散落重复样式与交互逻辑。",
+    "bbox": [984, 321, 191, 173]
+  },
+  {
+    "kind": "textbox",
+    "slide": 4,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "直接开发收益",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "05 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "把时间从“搭基础能力”还给业务交付",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "组件提供合理默认值、配置化用法与常见边界处理。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "不使用组件库",
+    "bbox": [114, 279, 378, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "每个页面分别处理\n\n• 表单控件与校验\n• 表格、分页与空状态\n• 弹窗和确认操作\n• 文本溢出与提示\n• 主题色与间距细节",
+    "bbox": [114, 323, 376, 204]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "复用",
+    "bbox": [578, 371, 104, 22]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "使用 sybz-components",
+    "bbox": [776, 279, 378, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "页面优先组合现有能力\n\n• SForm / STable / SDescriptions\n• SDialog / SPopconfirm / SWarning\n• STooltip / SEmpty / SFlex\n• 统一默认值与属性透传\n• 主题 token 与组件 theme",
+    "bbox": [776, 323, 376, 204]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "收益不是少写几个标签，而是少维护一套重复的设计与交互决策。",
+    "bbox": [90, 590, 1050, 32]
+  },
+  {
+    "kind": "textbox",
+    "slide": 5,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "体验与品牌一致性",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "06 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "同一套组件，让用户在不同项目中看到一致的行为",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "默认值、状态反馈、操作间距、主题颜色和交互细节由组件层统一。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "交互",
+    "bbox": [164, 281, 160, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "加载、防抖、确认、错误提示",
+    "bbox": [386, 281, 650, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "视觉",
+    "bbox": [164, 351, 160, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "尺寸、圆角、间距、空状态",
+    "bbox": [386, 351, 650, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "主题",
+    "bbox": [164, 421, 160, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "default / chenghua / shijingshan",
+    "bbox": [386, 421, 650, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "配置",
+    "bbox": [164, 491, 160, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "项目级与组件级默认属性",
+    "bbox": [386, 491, 650, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "theme=\"chenghua\"",
+    "bbox": [112, 575, 180, 32]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "theme=\"shijingshan\"",
+    "bbox": [306, 575, 200, 32]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "主题切换不依赖业务页面散落的硬编码颜色。",
+    "bbox": [532, 580, 520, 22]
+  },
+  {
+    "kind": "textbox",
+    "slide": 6,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "工程质量",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "07 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "兼容原生能力，同时把规范前置到开发阶段",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "开发人员无需在“复用组件”和“保留 Element Plus 能力”之间二选一。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "TypeScript 提示",
+    "bbox": [88, 280, 298, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "组件类型同时覆盖 sybz 扩展属性和 Element Plus 原生属性；属性、事件与插槽更易发现。",
+    "bbox": [88, 324, 296, 168]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "全局默认配置",
+    "bbox": [494, 280, 298, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "入口统一设置 theme、size 及组件默认属性，减少页面重复传参。",
+    "bbox": [494, 324, 296, 168]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "文档驱动使用",
+    "bbox": [900, 280, 298, 30]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "基础用法、属性默认值、主题示例和常见场景可直接查看与复制。",
+    "bbox": [900, 324, 296, 168]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "工程结果：更少“口头约定”，更多可发现、可复用、可维护的标准。",
+    "bbox": [64, 568, 1050, 34]
+  },
+  {
+    "kind": "textbox",
+    "slide": 7,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "团队协作",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "08 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "组件、工具函数、文档与 AI 指引，共用一套工作语言",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "让新成员和跨项目协作不再从“先找私有封装”开始。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "1",
+    "bbox": [96, 308, 52, 20]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "开发者",
+    "bbox": [170, 289, 360, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "优先使用 S 组件与 @sybz-components/utils",
+    "bbox": [170, 324, 395, 28]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "2",
+    "bbox": [666, 308, 52, 20]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "项目负责人",
+    "bbox": [740, 289, 360, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "用全局默认配置控制项目级规范",
+    "bbox": [740, 324, 395, 28]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "3",
+    "bbox": [96, 453, 52, 20]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "组件维护者",
+    "bbox": [170, 434, 360, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "通用问题在组件库修复并回流所有项目",
+    "bbox": [170, 469, 395, 28]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "4",
+    "bbox": [666, 453, 52, 20]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "AI 辅助开发",
+    "bbox": [740, 434, 360, 26]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "Codex Skill 引导优先复用组件、工具函数与主题规范",
+    "bbox": [740, 469, 395, 28]
+  },
+  {
+    "kind": "textbox",
+    "slide": 8,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "建议的推广方式",
+    "bbox": [64, 31, 420, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "09 / 09",
+    "bbox": [1095, 31, 120, 24]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "从新页面开始，让组件库成为默认方案",
+    "bbox": [64, 91, 1050, 60]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "不要求一次性重构所有历史页面，而是在增量交付中持续扩大复用面。",
+    "bbox": [66, 158, 960, 50]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "01",
+    "bbox": [86, 305, 90, 38]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "新页面优先使用",
+    "bbox": [86, 362, 190, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "表单、表格、弹窗、布局和提示优先从组件库选择。",
+    "bbox": [86, 430, 198, 62]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "02",
+    "bbox": [376, 305, 90, 38]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "高频重复场景回流",
+    "bbox": [376, 362, 190, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "跨项目重复出现的能力，抽象后沉淀到组件库。",
+    "bbox": [376, 430, 198, 62]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "03",
+    "bbox": [666, 305, 90, 38]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "项目级默认配置",
+    "bbox": [666, 362, 190, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "统一主题、尺寸与通用默认属性，降低页面差异。",
+    "bbox": [666, 430, 198, 62]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "04",
+    "bbox": [956, 305, 90, 38]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "版本升级复用修复",
+    "bbox": [956, 362, 190, 52]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "通用问题集中修复，项目升级后共享收益。",
+    "bbox": [956, 430, 198, 62]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "从“可选工具”逐步变成“团队默认的组件层”。",
+    "bbox": [64, 585, 1050, 32]
+  },
+  {
+    "kind": "textbox",
+    "slide": 9,
+    "text": "sybz-components · Vue 3 + Element Plus 业务组件层",
+    "bbox": [64, 681, 780, 18]
+  }
+]
