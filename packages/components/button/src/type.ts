@@ -23,6 +23,8 @@ export interface SButtonSelfProps {
   hoverAnimation?: boolean
   /** 幽灵按钮，使背景透明并反转文字和边框颜色 */
   ghost?: boolean
+  /** 按钮图标的位置 */
+  iconPlacement?: 'start' | 'end'
 }
 
 export type SButtonProps = SButtonSelfProps & Partial<Omit<ButtonPropsPublic, keyof SButtonSelfProps>>

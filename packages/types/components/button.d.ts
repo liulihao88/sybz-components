@@ -4,7 +4,7 @@ import type { SButtonSelfProps } from '../component-props'
 type ElButtonInstance = InstanceType<typeof ElButton>
 
 /**
- * s-button 按钮组件，支持 ghost 幽灵按钮、Element Plus Button 属性和 sybz 扩展属性。
+ * s-button 按钮组件，支持图标位置、ghost 幽灵按钮、Element Plus Button 属性和 sybz 扩展属性。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Button 的公开属性。
  */
@@ -35,6 +35,8 @@ export type SButtonComponent = {
       hoverAnimation?: boolean
       /** 幽灵按钮，使背景透明并反转文字和边框颜色 */
       ghost?: boolean
+      /** 按钮图标的位置 */
+      iconPlacement?: 'start' | 'end'
     } & Omit<
       ElButtonInstance['$props'],
       | 'time'
@@ -48,6 +50,7 @@ export type SButtonComponent = {
       | 'height'
       | 'hoverAnimation'
       | 'ghost'
+      | 'iconPlacement'
     >
     $emit: ElButtonInstance['$emit']
     $slots: ElButtonInstance['$slots'] & Record<string, (...args: any[]) => any>

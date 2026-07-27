@@ -44,6 +44,12 @@ button/hoverAnimation
 button/icon
 :::
 
+### 图标位置（iconPlacement 默认值：start）
+
+:::demo 展示按钮图标在文字前后的位置。基础写法：`<s-button icon="plus" icon-placement="end">图标在后</s-button>`。属性：`iconPlacement` 可选 `start / end`，默认值 `start`。
+button/iconPlacement
+:::
+
 ### 提示文字
 
 :::demo 展示提示文字。基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`；`tooltipAttrs` 类型 `object`，默认值 `{}`。
@@ -97,6 +103,7 @@ button/customColor
 |          `height`          | 按钮高度，支持 `processWidth` 写法  | string / number                            | `''`      |
 |      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                    | `false`   |
 |          `ghost`           | 幽灵按钮，使背景透明                | boolean                                    | `false`   |
+|      `iconPlacement`       | 按钮图标的位置                      | `'start' \| 'end'`                         | `start`   |
 
 ### 事件
 

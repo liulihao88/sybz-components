@@ -43,6 +43,7 @@ interface SButtonSelfProps {
   height?: string | number
   hoverAnimation?: boolean
   ghost?: boolean
+  iconPlacement?: 'start' | 'end'
 }
 
 const props = withDefaults(defineProps<SButtonSelfProps>(), {
@@ -57,6 +58,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   height: '',
   hoverAnimation: false,
   ghost: false,
+  iconPlacement: 'start',
 })
 
 const attrs = useAttrs()
@@ -110,6 +112,7 @@ const buttonAttrs = computed(() => {
 const buttonClass = computed(() => ({
   's-button--hover-animation': mergedProps.value.hoverAnimation,
   's-button--ghost': mergedProps.value.ghost,
+  's-button--icon-end': mergedProps.value.iconPlacement === 'end',
   's-button--chenghua': mergedProps.value.theme === 'chenghua',
   's-button--chenghua-outline': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'outline',
   's-button--chenghua-gradient': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'gradient',
@@ -139,6 +142,23 @@ const handleClick = (evt: MouseEvent) => {
 </script>
 
 <style lang="scss">
+.s-button--icon-end {
+  flex-direction: row-reverse;
+
+  .el-icon + span {
+    margin-right: 6px;
+    margin-left: 0;
+  }
+
+  &.el-button--large .el-icon + span {
+    margin-right: 8px;
+  }
+
+  &.el-button--small .el-icon + span {
+    margin-right: 4px;
+  }
+}
+
 .s-button--ghost.s-button--ghost.s-button--ghost {
   --el-button-bg-color: transparent;
   --el-button-border-color: #ffffff;
