@@ -74,6 +74,12 @@ button/ghost
 button/other
 :::
 
+### 自定义颜色（color 默认值：''，dark 默认值：false）
+
+:::demo 展示自定义颜色及深色模式下的颜色适配。基础写法：`<s-button color="#626aef">自定义颜色</s-button>`。属性：`color` 类型 `string`，默认值 `''`；`dark` 可选 `true / false`，默认值 `false`；可与 `plain`、`disabled` 组合使用。
+button/customColor
+:::
+
 ### 属性
 
 其他属性默认继承 `el-button`

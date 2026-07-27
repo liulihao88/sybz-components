@@ -7,7 +7,6 @@ defineOptions({
 
 const size = ref('default')
 const dynamicSize = ref()
-const isDark = ref(true)
 
 const baseRadio = ref('default')
 const buttonList = [
@@ -147,17 +146,6 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     >
       a 链接
     </s-button>
-    <el-divider />
-
-    <s-radio v-model="isDark" :options="[true, false]" type="simple" title="是否黑色主题"></s-radio>
-    <div class="m-b-16">自定义颜色</div>
-    <el-space wrap>
-      <s-button color="#626aef" :dark="isDark">Default</s-button>
-      <s-button color="#626aef" :dark="isDark" plain>Plain</s-button>
-
-      <s-button color="#626aef" :dark="isDark" disabled>Disabled</s-button>
-      <s-button color="#626aef" :dark="isDark" disabled plain>Disabled Plain</s-button>
-    </el-space>
   </el-card>
 </template>
 
