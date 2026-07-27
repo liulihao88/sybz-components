@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import type { ElTooltipProps } from 'element-plus'
-import { toLine } from '@sybz-components/utils'
+import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -16,6 +16,7 @@ interface IconProps {
   type?: string
   svgAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
+  rotate?: string | number
 }
 
 const props = withDefaults(defineProps<IconProps>(), {
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   type: '', // svg
   svgAttrs: () => ({}),
   dangerouslyUseHTMLString: false,
+  rotate: '',
 })
 const mergedProps = useGlobalComponentConfig('icon', props)
 const attrs = useAttrs()
@@ -36,6 +38,15 @@ function handleClick($event) {
 const parseColor = computed(() => {
   if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
   return mergedProps.value.color
+})
+
+const parseRotate = computed(() => {
+  const rotate = mergedProps.value.rotate
+  const processedRotate = processWidth(rotate, true)
+
+  if (processedRotate.endsWith('px')) return `${processedRotate.slice(0, -2)}deg`
+  if (typeof rotate === 'string' && /^-?(?:\d+\.?\d*|\.\d+)(?:deg|grad|rad|turn)$/.test(rotate)) return rotate
+  return ''
 })
 
 const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() => {
@@ -55,6 +66,7 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
     :color="parseColor"
     props.disabled
     :size="mergedProps.size"
+    :style="{ transform: parseRotate ? `rotate(${parseRotate})` : undefined }"
     class="s-icon"
     :class="mergedProps.disabled && 's-icon__not-allowed'"
     @click="handleClick"

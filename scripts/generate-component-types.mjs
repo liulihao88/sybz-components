@@ -279,6 +279,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SIconProps',
+      description: 's-icon 图标组件，支持尺寸、颜色、旋转角度、tooltip 和自定义图标内容。',
       slots: ['default'],
       hoverProps: componentHoverProps('SIconProps', ['SIconProps', 'SybzRecord']),
     },

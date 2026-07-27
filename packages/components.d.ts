@@ -172,10 +172,14 @@ declare module 'vue' {
     's-function-source-code': (typeof import('./types/components/functionSourceCode'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
+     *
+     * s-icon 图标组件，支持尺寸、颜色、旋转角度、tooltip 和自定义图标内容。
      */
     SIcon: (typeof import('./types/components/icon'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
+     *
+     * s-icon 图标组件，支持尺寸、颜色、旋转角度、tooltip 和自定义图标内容。
      */
     's-icon': (typeof import('./types/components/icon'))['default']
     /**

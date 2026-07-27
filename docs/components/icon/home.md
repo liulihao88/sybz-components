@@ -34,6 +34,12 @@ icon/usually
 icon/all
 :::
 
+### 旋转角度（rotate 默认值：''）
+
+:::demo 展示图标旋转角度。基础写法：`<s-icon name="arrow-up" :rotate="90"></s-icon>`。属性：`rotate` 类型 `string / number`，默认值 `''`；数字及数字字符串使用 `processWidth` 写法并按 `deg` 处理，也支持带 `deg / grad / rad / turn` 单位的角度字符串。
+icon/rotate
+:::
+
 ### 属性
 
 |           属性名           | 说明                                           | 类型            | 默认值  |
@@ -41,6 +47,7 @@ icon/all
 |           `name`           | 图标名称                                       | string          | -       |
 |          `color`           | 图标颜色                                       | string          | -       |
 |           `size`           | 图标尺寸                                       | string / number | `16px`  |
+|          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理    | string / number | `''`    |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                   | boolean         | `false` |
 |           `type`           | 图标类型，传 `svg` 时走 `s-svg` 渲染           | string          | `''`    |
 |         `svgAttrs`         | 透传给 `s-svg` 的属性                          | object          | `{}`    |
