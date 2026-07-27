@@ -198,8 +198,12 @@ function _parseStorageValue<T = any>(value: string | null): T | string | number 
   return value
 }
 
+type MessageType = 'success' | 'info' | 'error' | 'warning'
+type ShortType = 's' | 'i' | 'e' | 'w'
+type ToastType = MessageType | ShortType
+
 /**
- * 显示消息提示。
+ * @description 显示消息提示。默认展示成功状态，并支持类型简写、完整配置和快捷调用。
  *
  * 支持三种常见写法：
  * 1. `$toast('保存成功')`
@@ -212,23 +216,22 @@ function _parseStorageValue<T = any>(value: string | null): T | string | number 
  * @returns 无返回值。
  *
  * @example
+ * ```ts
+ * import { $toast } from '@sybz-components/utils'
+ *
  * $toast('保存成功')
- *
- * @example
  * $toast('保存失败', 'e')
- *
- * @example
  * $toast({
  *   message: '自定义提示',
  *   type: 'warning',
  *   duration: 1000,
  *   closeAll: true,
  * })
+ * $toast.error('接口请求失败', { showClose: true })
+ * ```
+ *
+ * @see {@link https://liulihao88.github.io/sybz-components/components/utils/$toast/home.html 详细文档}
  */
-type MessageType = 'success' | 'info' | 'error' | 'warning'
-type ShortType = 's' | 'i' | 'e' | 'w'
-type ToastType = MessageType | ShortType
-
 export function $toast(
   message: string | ToastOptions | VNode | (() => VNode),
   type: ToastType | ToastOptions = 'success',
