@@ -41,6 +41,10 @@ const options = [
     value: formatTime(null as any),
   },
   {
+    label: `formatTime("2026-07-28T02:21:53.169Z")`,
+    value: formatTime('2026-07-28T02:21:53.169Z'),
+  },
+  {
     label: `formatTime('--', '{y}-{m}-{d}', 'Invalid Date')`,
     value: formatTime('--', '{y}-{m}-{d}', 'Invalid Date'),
   },

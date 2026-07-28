@@ -270,7 +270,7 @@ export function formatTime(
     } else if (dateOnlyRegex.test(timeStr)) {
       const [, year, month, day] = timeStr.match(dateOnlyRegex)!
       date = new Date(Number(year), Number(month) - 1, Number(day))
-    } else if (timeStr.includes('.') && !isNaN(parseFloat(timeStr))) {
+    } else if (/^[+-]?\d+\.\d+$/.test(timeStr)) {
       date = new Date(parseFloat(timeStr) * 1000)
     } else if (/^\d{10}$/.test(timeStr)) {
       date = new Date(parseInt(timeStr) * 1000)

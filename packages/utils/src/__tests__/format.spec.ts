@@ -46,6 +46,7 @@ describe('format utils', () => {
     expect(formatTime(new Date(2026, 0, 2, 3, 4, 5))).toBe('2026-01-02 03:04:05')
     expect(formatTime(1713926400, '{y}/{m}/{d}')).toBe('2024/04/24')
     expect(formatTime('2026-01-02', '{y}-{m}-{d} {h}:{i}:{s}')).toBe('2026-01-02 00:00:00')
+    expect(formatTime('2026-07-28T02:21:53.169Z', '{y}')).toBe('2026')
     expect(formatTime('not-date', '{y}-{m}-{d}', 'invalid')).toBe('invalid')
   })
 
