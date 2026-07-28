@@ -33,6 +33,7 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
   name: 'SRadio',
+  inheritAttrs: false,
 })
 interface RadioProps {
   title?: string
