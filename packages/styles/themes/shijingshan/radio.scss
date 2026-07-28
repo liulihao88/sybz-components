@@ -89,6 +89,7 @@
 
   .el-radio-button__inner {
     border-color: var(--s-sjs-primary-border);
+    outline-color: var(--s-sjs-primary-border);
     background: var(--s-sjs-bg);
     color: var(--s-sjs-text-regular);
     font-weight: 500;
@@ -101,12 +102,14 @@
 
   .el-radio-button__inner:hover {
     border-color: var(--s-radio-button-hover-border, var(--s-sjs-primary-border-hover));
+    outline-color: var(--s-radio-button-hover-border, var(--s-sjs-primary-border-hover));
     background: var(--s-radio-button-hover-bg, var(--s-sjs-primary-soft));
     color: var(--s-radio-button-hover-text, var(--s-sjs-primary));
   }
 
   :where(.el-radio-button__original-radio:checked) + .el-radio-button__inner {
     border-color: var(--s-radio-button-color, var(--s-sjs-primary));
+    outline-color: var(--s-radio-button-color, var(--s-sjs-primary));
     background: var(--s-radio-button-color, var(--s-sjs-primary));
     color: #ffffff;
     box-shadow: -1px 0 0 0 var(--s-radio-button-color, var(--s-sjs-primary));
@@ -124,6 +127,7 @@
 
   .el-radio-button.is-disabled .el-radio-button__inner {
     border-color: rgba(15, 23, 42, 0.08);
+    outline-color: rgba(15, 23, 42, 0.08);
     background: var(--s-sjs-disabled-bg);
     color: var(--s-sjs-text-muted);
     opacity: 0.58;

@@ -225,12 +225,14 @@ const radioClass = computed(() => {
 .s-radio-box--button {
   :deep(.el-radio-button:not(.is-disabled, .is-active) .el-radio-button__inner:hover) {
     border-color: var(--s-radio-button-hover-border, var(--el-color-primary-light-5));
+    outline-color: var(--s-radio-button-hover-border, var(--el-color-primary-light-5));
     background-color: var(--s-radio-button-hover-bg, var(--el-color-primary-light-9));
     color: var(--s-radio-button-hover-text, var(--el-color-primary));
   }
 
   :deep(.el-radio-button.is-active .el-radio-button__inner) {
     border-color: var(--s-radio-button-color, var(--el-color-primary));
+    outline-color: var(--s-radio-button-color, var(--el-color-primary));
     background-color: var(--s-radio-button-color, var(--el-color-primary));
     box-shadow: -1px 0 0 0 var(--s-radio-button-color, var(--el-color-primary));
   }
