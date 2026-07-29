@@ -217,17 +217,39 @@ const render = async () => {
 }
 
 const getPreviewImages = () =>
-  [...(rootRef.value?.querySelectorAll<HTMLImageElement>('.s-markdown__content img') || [])].filter((image) =>
-    image.getAttribute('src')?.trim(),
+  [...(rootRef.value?.querySelectorAll<HTMLImageElement>('.s-markdown__content img') || [])].filter(
+    (image) =>
+      image.getAttribute('src')?.trim() &&
+      !image.classList.contains('is-image-load-error') &&
+      (!image.complete || image.naturalWidth > 0),
   )
+
+const updateImagePreviewState = (image: HTMLImageElement) => {
+  const isLoadError = image.complete && image.naturalWidth === 0
+  image.classList.toggle('is-image-load-error', isLoadError)
+
+  if (isLoadError) {
+    image.removeAttribute('tabindex')
+    image.removeAttribute('role')
+    image.removeAttribute('aria-label')
+    return
+  }
+
+  image.tabIndex = 0
+  image.setAttribute('role', 'button')
+  image.setAttribute('aria-label', `预览图片：${image.alt || '图片'}`)
+}
+
+const handleImageLoadState = (event: Event) => {
+  if (!props.imagePreview) return
+  const image = (event.target as HTMLElement).closest<HTMLImageElement>('.s-markdown__content img')
+  if (image) updateImagePreviewState(image)
+}
 
 const enhanceImages = () => {
   if (!props.imagePreview) return
-  getPreviewImages().forEach((image) => {
-    image.tabIndex = 0
-    image.setAttribute('role', 'button')
-    image.setAttribute('aria-label', `预览图片：${image.alt || '图片'}`)
-  })
+  const images = rootRef.value?.querySelectorAll<HTMLImageElement>('.s-markdown__content img') || []
+  Array.from(images).forEach(updateImagePreviewState)
 }
 
 const openImagePreview = (image: HTMLImageElement) => {
@@ -334,6 +356,8 @@ onBeforeUnmount(() => {
     :class="{ 'is-image-preview-enabled': imagePreview }"
     @click="handleClick"
     @keydown="handleKeydown"
+    @load.capture="handleImageLoadState"
+    @error.capture="handleImageLoadState"
   >
     <!-- 输出在赋值前默认经过 DOMPurify；关闭 sanitize 需要由调用方明确选择。 -->
     <!-- eslint-disable-next-line vue/no-v-html -->
@@ -477,6 +501,9 @@ onBeforeUnmount(() => {
 }
 .s-markdown.is-image-preview-enabled :deep(.s-markdown__content img) {
   cursor: zoom-in;
+}
+.s-markdown.is-image-preview-enabled :deep(.s-markdown__content img.is-image-load-error) {
+  cursor: default;
 }
 .s-markdown :deep(hr) {
   border: 0;

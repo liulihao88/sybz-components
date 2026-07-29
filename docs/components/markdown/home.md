@@ -30,7 +30,7 @@ markdown/all
 
 ### 图片预览（默认 `imagePreview=true`）
 
-点击 Markdown 图片后会打开全视口预览，支持放大、缩小、旋转、上一张、下一张、下载和关闭，也可以聚焦图片后按 Enter 或空格键打开。`imagePreview` 的可选值是 `true` 和 `false`，默认值是 `true`；设置为 `false` 可关闭点击预览。地址为空的图片不会生成破图元素，只显示图片的替代文字。远程图片下载受浏览器同源策略限制，图片服务器未开放 CORS 时会回退为直接打开原图地址。
+点击 Markdown 图片后会打开全视口预览，支持放大、缩小、旋转、上一张、下一张、下载和关闭，也可以聚焦图片后按 Enter 或空格键打开。`imagePreview` 的可选值是 `true` 和 `false`，默认值是 `true`；设置为 `false` 可关闭点击预览。地址为空的图片不会生成破图元素，只显示图片的替代文字；加载失败或无法解码的图片会保留正文替代文字，但不会进入预览列表，上一张和下一张只会切换加载成功的图片。远程图片下载受浏览器同源策略限制，图片服务器未开放 CORS 时会回退为直接打开原图地址。
 
 :::demo 展示图片点击放大和下载。基础写法：`<s-markdown :source="source" image-preview />`。属性：`imagePreview` 可选 `true / false`，默认值 `true`；`imageLazy` 可选 `true / false`，默认值 `true`。
 markdown/imagePreview
