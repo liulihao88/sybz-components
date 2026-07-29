@@ -3,18 +3,35 @@
 
 // const source = `"工厂当前全部问题综合分析报告已生成就绪，页面将展示报告文件，你可以直接查看。\n该报告覆盖当前全部23个问题的综合分析内容，可参考编号为[REF-REPORT-REPORT-bbc0cf9641574d6796b386f26373154a]的报告文件。\n\n[下载 PDF 报告](/api/v1/files/download?file_id=REPORT-bbc0cf9641574d6796b386f26373154a&format=pdf&user_id=E001) | [下载 DOCX 报告](/api/v1/files/download?file_id=REPORT-bbc0cf9641574d6796b386f26373154a&format=docx&user_id=E001)\n"`
 
+// const source = `
+// 当前最需要优先处理的问题是LINE-12产线D-001设备的<strong>轴承润滑或机械磨损异常</strong>，置信度86%，属于严重故障。
+
+// ### 优先处置依据
+// 1.  故障已造成明确业务影响：关联停机68分钟，关联抽检缺陷14件
+// 2.  核心异常已同步触发告警：轴承温度连续10分钟超80°C，振动值同步升高至3.1mm/s[ALM-001-01-M]，且温度、振动参数在同一时间窗内同步偏离正常区间[LOG-001-03]
+
+// ### 立即执行的处置动作
+// 降低负载并检查轴承温度、振动和润滑状态，必要时停机确认
+// `
+
 const source = `
-当前最需要优先处理的问题是LINE-12产线D-001设备的<strong>轴承润滑或机械磨损异常</strong>，置信度86%，属于严重故障。
+近30天（2026-06-23 20:00:00至2026-07-22 20:00:00）各产线平均制程一次合格率如下：
+- LINE-03：99.05%
+- LINE-05：99.03%
+- LINE-12：98.91%
+- LINE-09：98.89%
+- LINE-07：98.84%
 
-### 优先处置依据
-1.  故障已造成明确业务影响：关联停机68分钟，关联抽检缺陷14件
-2.  核心异常已同步触发告警：轴承温度连续10分钟超80°C，振动值同步升高至3.1mm/s[ALM-001-01-M]，且温度、振动参数在同一时间窗内同步偏离正常区间[LOG-001-03]
+整体平均合格率为98.94%，数据基于150条业务记录聚合[REF-DATA-FIRST-PASS-YIELD-80D3CEF3]。
 
-### 立即执行的处置动作
-降低负载并检查轴承温度、振动和润滑状态，必要时停机确认
+![各产线制程一次合格率对比图](https://via.placeholder.com/800x400?text=各产线制程一次合格率对比图)
+
+## 制程一次合格率对比
+
+![制程一次合格率对比](https://hia.sjsdoubao.com:31118/api/defect-root-cause-analysis/api/v1/files/download?file_id=FILE-ee96761dafdf4ac0b1eb12b3ec4b7438&user_id=3573522668457984)
 `
 </script>
 
 <template>
-  <s-markdown :source="source" allow-html :image-preview="false" />
+  <s-markdown :source="source" allow-html />
 </template>

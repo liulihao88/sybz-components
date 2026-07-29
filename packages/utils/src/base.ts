@@ -446,7 +446,7 @@ function _isObjectWithExclude(obj: ClearStorageInput): obj is ClearStorageExclud
  */
 export function validateForm(
   ref: MaybeRef<FormValidateTarget>,
-  { message = '表单校验错误, 请检查', detail = false, showMessage = true }: ValidateFormOptions = {},
+  { message = '存在必填项未填写，请补充完整', detail = false, showMessage = true }: ValidateFormOptions = {},
 ): Promise<StorageMap> {
   return new Promise((resolve, reject) => {
     unref(ref).validate((valid, status) => {
