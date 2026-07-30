@@ -38,7 +38,7 @@ defineOptions({ name: 'SMarkdown' })
 
 const props = withDefaults(defineProps<MarkdownProps>(), {
   source: '',
-  allowHtml: false,
+  allowHtml: true,
   sanitize: true,
   breaks: false,
   linkify: true,

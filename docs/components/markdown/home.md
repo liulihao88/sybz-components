@@ -10,9 +10,9 @@
 
 <ApiIntro />
 
-### 基础用法（默认 `sanitize=true`、`linkify=true`、`highlight=true`、`mermaid=true`、`math=true`）
+### 基础用法（默认 `allowHtml=true`、`sanitize=true`、`linkify=true`、`highlight=true`、`mermaid=true`、`math=true`）
 
-:::demo 传入 Markdown 字符串即可渲染。基础写法：`<s-markdown :source="source" />`。`source` 默认值 `''`；安全过滤、链接识别、代码高亮、Mermaid、数学公式默认开启，原始 HTML 默认关闭。
+:::demo 传入 Markdown 字符串即可渲染。基础写法：`<s-markdown :source="source" />`。`source` 默认值 `''`；安全过滤、原始 HTML、链接识别、代码高亮、Mermaid、数学公式默认开启。
 markdown/base
 :::
 
@@ -47,7 +47,7 @@ markdown/example
 | 属性名           | 说明                                     | 类型 / 可选值  | 默认值  |
 | ---------------- | ---------------------------------------- | -------------- | ------- |
 | `source`         | Markdown 源文本                          | `string`       | `''`    |
-| `allowHtml`      | 是否解析源文本中的原始 HTML              | `true / false` | `false` |
+| `allowHtml`      | 是否解析源文本中的原始 HTML              | `true / false` | `true`  |
 | `sanitize`       | 是否使用 DOMPurify 过滤输出              | `true / false` | `true`  |
 | `breaks`         | 是否把普通换行转换为 `<br>`              | `true / false` | `false` |
 | `linkify`        | 是否自动识别 URL                         | `true / false` | `true`  |
@@ -83,8 +83,8 @@ markdown/example
 
 ### 安全说明
 
-- 默认 `allowHtml=false`，不会执行 Markdown 中的原始 HTML。
-- 需要展示可信 HTML 时设置 `allow-html`，但建议继续保留默认的 `sanitize=true`。
+- 默认 `allowHtml=true`，会解析 Markdown 中的原始 HTML。
+- 如果内容来源不完全可信，建议继续保留默认的 `sanitize=true`。
 - 服务端渲染且 `sanitize=true` 时，原始 HTML 会先按普通文字安全输出，自定义 HTML 属性暂不生效；客户端挂载后再通过 DOMPurify 过滤并渲染，避免未过滤内容进入服务端页面。
 - 仅在内容完全可信且业务确实需要脚本级 HTML 能力时关闭 `sanitize`。
 - Mermaid 使用严格安全级别，外部链接自动增加 `noopener noreferrer`。
