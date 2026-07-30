@@ -193,7 +193,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .code-toggle {
   position: fixed;
   top: 20px;

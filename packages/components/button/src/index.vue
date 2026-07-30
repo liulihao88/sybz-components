@@ -141,7 +141,7 @@ const handleClick = (evt: MouseEvent) => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .s-button--icon-end {
   flex-direction: row-reverse;
 
