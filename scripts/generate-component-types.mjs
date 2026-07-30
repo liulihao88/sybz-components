@@ -159,13 +159,17 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'descriptions',
       allowAnySlots: true,
-      hoverProps: componentHoverProps('SDescriptionsOwnProps', [
-        'SDescriptionsItemOption',
+      hoverProps: componentHoverProps(
         'SDescriptionsOwnProps',
-        'SDescriptionsFilterContext',
-        'SDescriptionsRenderContext',
-        'SybzComponentTheme',
-      ]),
+        [
+          'SDescriptionsItemOption',
+          'SDescriptionsOwnProps',
+          'SDescriptionsFilterContext',
+          'SDescriptionsRenderContext',
+          'SybzComponentTheme',
+        ],
+        ["import type { VNodeChild } from 'vue'"],
+      ),
     },
   ],
   [
@@ -795,7 +799,7 @@ const ELEMENT_WRAPPER_CONFIGS = {
     valueImports: ['ElDescriptions'],
     instances: [{ name: 'ElDescriptionsInstance', component: 'ElDescriptions' }],
     inheritedProps: [{ type: "ElDescriptionsInstance['$props']" }],
-    description: 'Element Plus Descriptions',
+    description: 'Element Plus Descriptions, supports custom width',
   },
   dialog: {
     valueImports: ['ElDialog'],

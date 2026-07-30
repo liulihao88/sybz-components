@@ -162,10 +162,13 @@ export interface SDescriptionsOwnProps {
   options: SDescriptionsItemOption[]
   theme?: SybzComponentTheme
   column?: number
+  width?: string | number
   labelWidth?: string | number
   showAll?: boolean
   label?: string
   value?: string
+  customLabel?: (context: SDescriptionsRenderContext) => VNodeChild
+  customValue?: (context: SDescriptionsRenderContext) => VNodeChild
 }
 
 export type SDialogType = '' | 'drawer'

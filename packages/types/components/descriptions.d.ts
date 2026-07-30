@@ -1,4 +1,5 @@
 import { ElDescriptions } from 'element-plus'
+import type { VNodeChild } from 'vue'
 import type {
   SDescriptionsItemOption,
   SDescriptionsOwnProps,
@@ -18,13 +19,25 @@ export type SDescriptionsComponent = {
       options: SDescriptionsItemOption[]
       theme?: SybzComponentTheme
       column?: number
+      width?: string | number
       labelWidth?: string | number
       showAll?: boolean
       label?: string
       value?: string
+      customLabel?: (context: SDescriptionsRenderContext) => VNodeChild
+      customValue?: (context: SDescriptionsRenderContext) => VNodeChild
     } & Omit<
       ElDescriptionsInstance['$props'],
-      'options' | 'theme' | 'column' | 'labelWidth' | 'showAll' | 'label' | 'value'
+      | 'options'
+      | 'theme'
+      | 'column'
+      | 'width'
+      | 'labelWidth'
+      | 'showAll'
+      | 'label'
+      | 'value'
+      | 'customLabel'
+      | 'customValue'
     >
     $emit: ElDescriptionsInstance['$emit']
     $slots: ElDescriptionsInstance['$slots'] & Record<string, (...args: any[]) => any>

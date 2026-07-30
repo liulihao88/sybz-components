@@ -2,6 +2,7 @@
   <el-descriptions
     ref="descriptionsRef"
     v-bind="{ border: true, ...$attrs }"
+    :style="descriptionsStyle"
     :column="descriptionColumn"
     :label-width="labelWidth2"
     class="s-descriptions"
@@ -22,6 +23,9 @@
               :index="index"
             ></slot>
           </template>
+          <template v-else-if="mergedProps.customLabel">
+            <descriptions-render :render="mergedProps.customLabel" :context="getRenderProps(option, index)" />
+          </template>
           <template v-else-if="!mergedProps.showAll">
             <s-tooltip :content="parseLabel(option)" v-bind="option.labelAttrs"></s-tooltip>
           </template>
@@ -41,6 +45,9 @@
             :value="parseValue(option, index)"
             :index="index"
           ></slot>
+        </template>
+        <template v-else-if="mergedProps.customValue">
+          <descriptions-render :render="mergedProps.customValue" :context="getRenderProps(option, index)" />
         </template>
         <template v-else>
           <template v-if="mergedProps.showAll">
@@ -88,10 +95,13 @@ type DescriptionsProps = {
   options: ItemOptions[]
   theme?: 'default' | 'chenghua' | 'shijingshan'
   column?: number
+  width?: string | number
   labelWidth?: any
   showAll?: boolean
   label?: string
   value?: string
+  customLabel?: (context: RenderContext) => VNodeChild
+  customValue?: (context: RenderContext) => VNodeChild
 }
 
 type ItemOptions = {
@@ -296,6 +306,11 @@ const labelWidth2 = computed(() => {
   }
 
   return 'auto'
+})
+
+const descriptionsStyle = computed(() => {
+  const width = processWidth(mergedProps.value.width, true)
+  return width ? { width } : undefined
 })
 
 const descriptionColumn = computed(() => mergedProps.value.column)
