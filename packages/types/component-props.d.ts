@@ -379,6 +379,8 @@ export interface SFormFieldItem {
   modelProp?: string
   /** 写入 model 前的值转换 */
   normalize?: (value: any, context: SFormContext) => any
+  /** 提交/校验前是否跳过全局 trim，默认跟随 s-form.trim */
+  trim?: boolean
   onChange?: SFormEventHandler
   onUpdate?: SFormEventHandler
   placeholder?: string
@@ -422,6 +424,8 @@ export interface SFormProps {
   align?: 'center' | 'top' | 'flex-end'
   /** 是否自动把 defaultValue/default 初始化到 model 中 */
   autoSetDefaultValue?: boolean
+  /** 是否自动去除字符串字段值的前后空格，字段 normalize/transform 优先级更高 */
+  trim?: boolean
   /** 所有 schema 控件的默认透传属性 */
   componentDefaults?: SybzRecord
 }

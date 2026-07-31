@@ -118,20 +118,27 @@ form/remote
 form/directives
 :::
 
+### 提交前 trim（默认值 `true`）
+
+:::demo 展示全局 `trim`、字段级 `trim: false` 以及 `normalize`、`transform` 的用法。`trim` 类型为 `boolean`，可选值为 `true / false`，默认值为 `true`。
+form/trim
+:::
+
 ## 属性
 
-|       属性名        | 说明                                       | 类型                               | 默认值                                                 |
-| :-----------------: | ------------------------------------------ | ---------------------------------- | ------------------------------------------------------ |
-|      fieldList      | 表单 schema 配置                           | array / object                     | -                                                      |
-|        model        | 表单数据对象                               | object                             | -                                                      |
-|        theme        | 主题，传递给 `s-*` 控件和分组标题          | `default / chenghua / shijingshan` | `default`                                              |
-|       column        | 默认每行展示几项                           | `1 / 2 / 3 / 4 / 5 / 6`            | `1`                                                    |
-|         gap         | 多列表单项左右间距，仅 `column > 1` 时生效 | string / number                    | `16px`                                                 |
-|        align        | 表单项垂直对齐                             | `center / top / flex-end`          | `top`                                                  |
-|     showFooter      | 是否显示调试按钮                           | boolean                            | 开发环境为 `true`                                      |
-|       footer        | `showFooter` 的别名，设置后优先级更高      | boolean                            | -                                                      |
-| autoSetDefaultValue | 是否自动写入字段默认值                     | boolean                            | `true`                                                 |
-|  componentDefaults  | 所有控件的默认透传属性                     | object                             | `{ clearable: true, filterable: true, width: '100%' }` |
+|       属性名        | 说明                                                                          | 类型                               | 默认值                                                 |
+| :-----------------: | ----------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------ |
+|      fieldList      | 表单 schema 配置                                                              | array / object                     | -                                                      |
+|        model        | 表单数据对象                                                                  | object                             | -                                                      |
+|        theme        | 主题，传递给 `s-*` 控件和分组标题                                             | `default / chenghua / shijingshan` | `default`                                              |
+|       column        | 默认每行展示几项                                                              | `1 / 2 / 3 / 4 / 5 / 6`            | `1`                                                    |
+|         gap         | 多列表单项左右间距，仅 `column > 1` 时生效                                    | string / number                    | `16px`                                                 |
+|        align        | 表单项垂直对齐                                                                | `center / top / flex-end`          | `top`                                                  |
+|     showFooter      | 是否显示调试按钮                                                              | boolean                            | 开发环境为 `true`                                      |
+|       footer        | `showFooter` 的别名，设置后优先级更高                                         | boolean                            | -                                                      |
+| autoSetDefaultValue | 是否自动写入字段默认值                                                        | boolean                            | `true`                                                 |
+|        trim         | 是否自动去除字符串字段值的前后空格；字段 `normalize` / `transform` 优先级更高 | boolean                            | `true`                                                 |
+|  componentDefaults  | 所有控件的默认透传属性                                                        | object                             | `{ clearable: true, filterable: true, width: '100%' }` |
 
 ### fieldList 内部属性
 
@@ -148,22 +155,23 @@ const fieldList: SFormFieldItem[] = [
 ]
 ```
 
-|    属性名     | 说明                                                                  | 类型                      | 默认值    |
-| :-----------: | --------------------------------------------------------------------- | ------------------------- | --------- |
-|     label     | 左侧显示的 label 值                                                   | string                    | -         |
-|     prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                             | string                    | -         |
-|     comp      | 要渲染的组件名称或组件对象                                            | string / Component        | `s-input` |
-|     attrs     | 透传给表单控件；`type="title"` 时透传给 `s-title`，标题文案也写在这里 | object / Function         | -         |
-| formItemAttrs | 透传给 `el-form-item`                                                 | object / Function         | -         |
-|     rules     | 当前项校验规则，函数参数为表单上下文                                  | object / array / Function | -         |
-|   required    | 快速生成必填规则；传字符串时作为错误提示                              | boolean / string          | -         |
-| defaultValue  | 默认值，model 对应路径不存在时写入                                    | any                       | -         |
-|    render     | 自定义内容渲染，参数为表单上下文                                      | Function                  | -         |
-|    isShow     | 是否展示当前项，函数参数为表单上下文                                  | boolean / Function        | `true`    |
-|    useSlot    | 使用插槽渲染                                                          | boolean                   | `false`   |
-|   slotName    | 内容插槽名；未设置时使用 `prop`，`type="title"` 时也作为标题插槽名    | string                    | -         |
-| labelSlotName | label 插槽名，未设置时使用 `${prop}-label`                            | string                    | -         |
-|     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`     | string                    | -         |
+|    属性名     | 说明                                                                  | 类型                      | 默认值             |
+| :-----------: | --------------------------------------------------------------------- | ------------------------- | ------------------ |
+|     label     | 左侧显示的 label 值                                                   | string                    | -                  |
+|     prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                             | string                    | -                  |
+|     comp      | 要渲染的组件名称或组件对象                                            | string / Component        | `s-input`          |
+|     attrs     | 透传给表单控件；`type="title"` 时透传给 `s-title`，标题文案也写在这里 | object / Function         | -                  |
+| formItemAttrs | 透传给 `el-form-item`                                                 | object / Function         | -                  |
+|     rules     | 当前项校验规则，函数参数为表单上下文                                  | object / array / Function | -                  |
+|   required    | 快速生成必填规则；传字符串时作为错误提示                              | boolean / string          | -                  |
+| defaultValue  | 默认值，model 对应路径不存在时写入                                    | any                       | -                  |
+|    render     | 自定义内容渲染，参数为表单上下文                                      | Function                  | -                  |
+|    isShow     | 是否展示当前项，函数参数为表单上下文                                  | boolean / Function        | `true`             |
+|    useSlot    | 使用插槽渲染                                                          | boolean                   | `false`            |
+|   slotName    | 内容插槽名；未设置时使用 `prop`，`type="title"` 时也作为标题插槽名    | string                    | -                  |
+| labelSlotName | label 插槽名，未设置时使用 `${prop}-label`                            | string                    | -                  |
+|     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`     | string                    | -                  |
+|     trim      | 提交/校验前是否对当前字段去除前后空格，设置为 `false` 可跳过全局 trim | boolean                   | 跟随 `s-form.trim` |
 
 ## 表单上下文
 

@@ -29,6 +29,8 @@ export type SFormComponent = {
       align?: 'center' | 'top' | 'flex-end'
       /** 是否自动把 defaultValue/default 初始化到 model 中 */
       autoSetDefaultValue?: boolean
+      /** 是否自动去除字符串字段值的前后空格，字段 normalize/transform 优先级更高 */
+      trim?: boolean
       /** 所有 schema 控件的默认透传属性 */
       componentDefaults?: SybzRecord
     } & Omit<
@@ -42,6 +44,7 @@ export type SFormComponent = {
       | 'gap'
       | 'align'
       | 'autoSetDefaultValue'
+      | 'trim'
       | 'componentDefaults'
     >
     $emit: ElFormInstance['$emit']

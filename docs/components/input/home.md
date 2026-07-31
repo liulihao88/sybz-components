@@ -50,13 +50,6 @@ input/maxlength
 input/other
 :::
 
-### Modifiers
-
-<el-tag>注意</el-tag> : s-input默认设置`trim`为true, 去掉首尾空格. 如果不想要这个设置, 请设置`trim`为false
-:::demo 展示Modifiers配置。基础写法：`<s-input v-model.lazy="input" style="width: 240px" placeholder="lazy" />`。
-input/modifiers
-:::
-
 ### 禁用状态
 
 :::demo 展示禁用状态。基础写法：`<s-input v-model="input" style="width: 240px" disabled placeholder="Please input" />`。

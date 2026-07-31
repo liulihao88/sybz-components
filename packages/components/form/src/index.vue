@@ -63,6 +63,7 @@ const internalFieldKeys = new Set([
   'subTitle',
   'title',
   'titleSlotName',
+  'trim',
   'transform',
   'type',
   'useSlot',
@@ -82,6 +83,7 @@ const props = withDefaults(defineProps<SFormProps>(), {
   align: 'top',
   autoSetDefaultValue: true,
   gap: '16px',
+  trim: true,
 })
 
 const sFormRef = ref<FormInstance>()
@@ -417,6 +419,15 @@ const applyDefaultValues = () => {
 async function validate(isResetFieldsOrParams: boolean | SybzRecord = false, otherParams: SybzRecord = {}) {
   const isResetFields = typeof isResetFieldsOrParams === 'boolean' ? isResetFieldsOrParams : false
   const params = typeof isResetFieldsOrParams === 'boolean' ? otherParams : isResetFieldsOrParams
+
+  if (props.trim) {
+    formItems.value.forEach((item) => {
+      const prop = getFieldProp(item)
+      if (!prop || item.trim === false) return
+      const value = getValueByPath(formModel.value, prop)
+      if (typeof value === 'string') setValueByPath(formModel.value, prop, value.trim())
+    })
+  }
 
   await validateForm(sFormRef.value, params)
 
