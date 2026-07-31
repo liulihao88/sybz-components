@@ -416,19 +416,29 @@ const applyDefaultValues = () => {
   })
 }
 
+const shouldTrimField = (item: FormField) => item.trim ?? props.trim
+
+const trimFieldsBeforeValidate = () => {
+  formItems.value.forEach((item) => {
+    const prop = getFieldProp(item)
+
+    if (!prop || !shouldTrimField(item)) {
+      return
+    }
+
+    const value = getFieldValue(item)
+
+    if (typeof value === 'string') {
+      setFieldValue(item, value.trim())
+    }
+  })
+}
+
 async function validate(isResetFieldsOrParams: boolean | SybzRecord = false, otherParams: SybzRecord = {}) {
   const isResetFields = typeof isResetFieldsOrParams === 'boolean' ? isResetFieldsOrParams : false
   const params = typeof isResetFieldsOrParams === 'boolean' ? otherParams : isResetFieldsOrParams
 
-  if (props.trim) {
-    formItems.value.forEach((item) => {
-      const prop = getFieldProp(item)
-      if (!prop || item.trim === false) return
-      const value = getValueByPath(formModel.value, prop)
-      if (typeof value === 'string') setValueByPath(formModel.value, prop, value.trim())
-    })
-  }
-
+  trimFieldsBeforeValidate()
   await validateForm(sFormRef.value, params)
 
   if (isResetFields) {

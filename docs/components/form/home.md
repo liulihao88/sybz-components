@@ -171,7 +171,7 @@ const fieldList: SFormFieldItem[] = [
 |   slotName    | 内容插槽名；未设置时使用 `prop`，`type="title"` 时也作为标题插槽名    | string                    | -                  |
 | labelSlotName | label 插槽名，未设置时使用 `${prop}-label`                            | string                    | -                  |
 |     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`     | string                    | -                  |
-|     trim      | 提交/校验前是否对当前字段去除前后空格，设置为 `false` 可跳过全局 trim | boolean                   | 跟随 `s-form.trim` |
+|     trim      | 提交/校验前是否对当前字段去除前后空格，可覆盖表单级配置               | boolean                   | 跟随 `s-form.trim` |
 
 ## 表单上下文
 

@@ -379,7 +379,7 @@ export interface SFormFieldItem {
   modelProp?: string
   /** 写入 model 前的值转换 */
   normalize?: (value: any, context: SFormContext) => any
-  /** 提交/校验前是否跳过全局 trim，默认跟随 s-form.trim */
+  /** 提交/校验前是否去除前后空格，默认跟随 s-form.trim，可覆盖表单级配置 */
   trim?: boolean
   onChange?: SFormEventHandler
   onUpdate?: SFormEventHandler
