@@ -5,6 +5,7 @@ import { validateForm, isEmpty, $toast } from '@sybz-components/utils'
 import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
 import STitle from '@/components/title/src/index.vue'
+import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import {
   callEventHandler,
   cloneDefaultValue,
@@ -85,25 +86,27 @@ const props = withDefaults(defineProps<SFormProps>(), {
   gap: '16px',
   trim: true,
 })
+const mergedProps = useGlobalComponentConfig('form', props)
 
 const sFormRef = ref<FormInstance>()
-const formModel = computed<FormModel>(() => (unref(props.model as FormModel) || {}) as FormModel)
+const formModel = computed<FormModel>(() => (unref(mergedProps.value.model as FormModel) || {}) as FormModel)
 const formItems = computed<FormField[]>(() => {
-  const fieldList = props.fieldList as FormFieldList
+  const fieldList = mergedProps.value.fieldList as FormFieldList
   return Array.isArray(fieldList) ? fieldList : Object.values(fieldList || {})
 })
-const shouldShowFooter = computed(() => props.showFooter)
-const formGap = computed(() => getFormGap(props.gap))
+const shouldShowFooter = computed(() => mergedProps.value.footer ?? mergedProps.value.showFooter)
+const formGap = computed(() => getFormGap(mergedProps.value.gap))
 const hasMultipleColumns = computed(
-  () => Number(props.column) > 1 || formItems.value.some((item) => Number(item.column) > 1),
+  () => Number(mergedProps.value.column) > 1 || formItems.value.some((item) => Number(item.column) > 1),
 )
 const useGap = computed(() => Boolean(formGap.value) && hasMultipleColumns.value)
 const formStyle = computed(() => (useGap.value ? { '--s-form-gap': formGap.value } : undefined))
 const formClass = computed(() => ({
   's-form--gap': useGap.value,
-  's-form--chenghua': props.theme === 'chenghua',
-  's-form--shijingshan': props.theme === 'shijingshan',
+  's-form--chenghua': mergedProps.value.theme === 'chenghua',
+  's-form--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
+const formAlign = computed(() => mergedProps.value.align)
 
 const getFieldProp = (item: FormField) => item.prop || (typeof item.value === 'string' ? item.value : undefined)
 
@@ -241,10 +244,10 @@ const mergeRules = (item: FormField, index: number) => {
 }
 
 const getChildStyle = (item: FormField) => {
-  const column = item.column || props.column
+  const column = item.column || mergedProps.value.column
 
   return {
-    flex: `0 1 ${getFormItemBasis(column, useGap.value ? props.gap : undefined)}`,
+    flex: `0 1 ${getFormItemBasis(column, useGap.value ? mergedProps.value.gap : undefined)}`,
   }
 }
 
@@ -276,7 +279,7 @@ const getTitleAttrs = (item: FormField, index: number): FormAttrs => {
   return {
     title: item.title || item.label || '',
     subTitle: item.subTitle || '',
-    theme: props.theme,
+    theme: mergedProps.value.theme,
     type: 'form',
     ...resolveRecord(item.attrs, item, index),
   }
@@ -314,10 +317,10 @@ const getDisplayValue = (item: FormField, index: number) => {
 }
 
 const getComponentAttrs = (item: FormField, index: number) => {
-  const componentDefaults = props.componentDefaults || {}
+  const componentDefaults = mergedProps.value.componentDefaults || {}
   const componentName = typeof item.comp === 'string' ? item.comp.toLowerCase() : item.comp ? '' : 's-input'
   const attrs: FormAttrs = {
-    ...(componentName.startsWith('s-') ? { theme: props.theme } : {}),
+    ...(componentName.startsWith('s-') ? { theme: mergedProps.value.theme } : {}),
     clearable: true,
     filterable: true,
     width: '100%',
@@ -396,7 +399,7 @@ const getDefaultValue = (item: FormField) => {
 }
 
 const applyDefaultValues = () => {
-  if (!props.autoSetDefaultValue) {
+  if (!mergedProps.value.autoSetDefaultValue) {
     return
   }
 
@@ -416,7 +419,7 @@ const applyDefaultValues = () => {
   })
 }
 
-const shouldTrimField = (item: FormField) => item.trim ?? props.trim
+const shouldTrimField = (item: FormField) => item.trim ?? mergedProps.value.trim
 
 const trimFieldsBeforeValidate = () => {
   formItems.value.forEach((item) => {
@@ -500,7 +503,7 @@ const showFieldListValue = () => {
 }
 
 watch(
-  () => props.model,
+  () => mergedProps.value.model,
   () => applyDefaultValues(),
   {
     immediate: true,
@@ -508,7 +511,7 @@ watch(
 )
 
 watch(
-  () => props.fieldList,
+  () => mergedProps.value.fieldList,
   () => applyDefaultValues(),
   {
     deep: true,
@@ -656,7 +659,7 @@ defineExpose({
   }
 }
 :deep(.el-form-item) {
-  align-items: v-bind('props.align');
+  align-items: v-bind('formAlign');
 
   .el-form-item__content {
     display: flex;

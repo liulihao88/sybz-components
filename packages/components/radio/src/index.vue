@@ -160,7 +160,6 @@ const getOptionLabel = (option: RadioItem, index: number) => {
   })
 }
 const getTypeColors = (type: keyof typeof radioTypeColors) => {
-  console.log(`45 mergedProps.value.theme`, mergedProps.value.theme)
   if (mergedProps.value.theme === 'chenghua') {
     return {
       color: `var(--s-ch-${type})`,
