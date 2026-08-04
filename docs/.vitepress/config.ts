@@ -264,7 +264,7 @@ export default defineConfig({
               link: '/components/utils/formatTextToHtml/home.md',
             },
             {
-              text: 'formatTime 时间格式化',
+              text: sybzMark('formatTime 时间格式化'),
               link: '/components/utils/formatTime/home.md',
             },
             {
@@ -276,7 +276,7 @@ export default defineConfig({
               link: '/components/utils/getType/home.md',
             },
             {
-              text: 'isEmpty 空值判断',
+              text: sybzMark('isEmpty 空值判断'),
               link: '/components/utils/isEmpty/home.md',
             },
 
