@@ -4,6 +4,7 @@ export type STitleComponent = {
   new (): {
     $props: {
       title?: string
+      extra?: string
       size?: SybzComponentSize
       subTitle?: string
       subAttrs?: SybzRecord

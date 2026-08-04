@@ -32,7 +32,7 @@ title/shijingshan/base
 
 ### 通常用法
 
-:::demo 展示属性、标题插槽、追加内容和语义化标题。基础写法：`<s-title title="左侧" margin="10px 0" l="10"></s-title>`。属性：`size` 可选 `small / default / large`，默认值 `default`；`margin` 类型 `string / number`，默认值 `''`；`gap` 类型 `string / number`，默认值 `''`；`tag` 可选 `div / h1 / h2 / h3 / h4 / h5 / h6`，默认值 `div`；`level` 可选 `1 / 2 / 3 / 4 / 5 / 6`，默认值 `3`。
+:::demo 展示属性、标题插槽、追加内容和语义化标题。基础写法：`<s-title title="左侧" margin="10px 0" l="10"></s-title>`。属性：`extra` 类型 `string`，默认值 `''`；`size` 可选 `small / default / large`，默认值 `default`；`margin` 类型 `string / number`，默认值 `''`；`gap` 类型 `string / number`，默认值 `''`；`tag` 可选 `div / h1 / h2 / h3 / h4 / h5 / h6`，默认值 `div`；`level` 可选 `1 / 2 / 3 / 4 / 5 / 6`，默认值 `3`。
 title/usually
 :::
 
@@ -63,6 +63,7 @@ title/usually
 |   属性名   | 说明                                                           | 类型            | 默认值    |
 | :--------: | -------------------------------------------------------------- | --------------- | --------- |
 |  `title`   | 主标题文案                                                     | string          | `''`      |
+|  `extra`   | 右侧操作区文本，`extra` 插槽优先于该属性                       | string          | `''`      |
 |   `size`   | 尺寸，支持 `small` / `default` / `large`                       | string          | `default` |
 | `subTitle` | 副标题文案                                                     | string          | `''`      |
 | `subAttrs` | 副标题额外属性                                                 | object          | `{}`      |
@@ -87,4 +88,4 @@ title/usually
 | `default` | 自定义标题内容，未提供 `title` 命名插槽时生效     |
 |  `icon`   | 自定义左侧图标                                    |
 | `append`  | 在标题、副标题后追加状态或其他内容                |
-|  `extra`  | 右侧操作区                                        |
+|  `extra`  | 自定义右侧操作区，优先级高于 `extra` 属性         |

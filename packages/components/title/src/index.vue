@@ -39,8 +39,8 @@
           <slot name="append"></slot>
         </span>
       </div>
-      <div v-if="$slots.extra || $slots.right" class="s-title__slot-extra-wrapper">
-        <slot name="extra"> </slot>
+      <div v-if="$slots.extra || $slots.right || mergedProps.extra" class="s-title__slot-extra-wrapper">
+        <slot name="extra">{{ mergedProps.extra }}</slot>
       </div>
     </div>
   </div>
@@ -67,6 +67,7 @@ type TitleType = '' | 'simple' | 'icon' | 'form'
 type TitleTag = 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 interface TitleProps {
   title?: string
+  extra?: string
   size?: TitleSize
   subTitle?: string
   subAttrs?: Record<string, any>
@@ -113,6 +114,7 @@ const titleSizeMap: Record<TitleSize, Record<string, string>> = {
 
 const props = withDefaults(defineProps<TitleProps>(), {
   title: '',
+  extra: '',
   size: 'default',
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
   subTitle: '',

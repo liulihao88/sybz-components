@@ -38,5 +38,7 @@
         <s-icon name="plus"></s-icon>
       </template>
     </s-title>
+
+    <s-title title="属性设置右侧内容" extra="这是 extra 属性文本"></s-title>
   </div>
 </template>

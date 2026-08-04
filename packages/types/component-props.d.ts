@@ -686,6 +686,7 @@ export interface STestProps {
 
 export interface STitleProps {
   title?: string
+  extra?: string
   size?: SybzComponentSize
   subTitle?: string
   subAttrs?: SybzRecord
