@@ -19,7 +19,7 @@ const isCollapsed = ref(true)
       </template>
       <template #footer>
         <el-button type="primary">测试07</el-button>
-        <el-button type="primary">测试07</el-button>
+        <el-button type="primary">测试32132107</el-button>
       </template>
     </SCard>
 
