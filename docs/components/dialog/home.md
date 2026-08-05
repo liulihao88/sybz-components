@@ -116,9 +116,9 @@ dialog/fillSlot
 
 ### 语义样式（variant 默认值：default）
 
-设置 `variant` 可以快速应用对话框的语义样式。删除场景可使用 `target` 自动生成带危险标签的标准提示：`<s-dialog v-model="visible" variant="delete" target="机器之心公众号" />`。`variant` 可选 `default / delete / warning`，默认值是 `default`；`target` 类型 `string`，默认值未设置；`delete` 默认标题为“删除确认”、确认按钮文字为“删除”，`warning` 默认标题为“警告”。传入默认插槽时优先展示自定义正文。
+设置 `variant` 可以快速应用对话框的语义样式。确认和删除场景都可使用 `target` 自动生成标准提示：`<s-dialog v-model="visible" variant="confirm" target="机器之心公众号" />`。`variant` 可选 `default / confirm / delete / warning`，默认值是 `default`；`target` 类型 `string`，默认值未设置；`confirm` 默认标题和按钮文字均为“确认”，`delete` 默认标题为“删除确认”、确认按钮文字为“删除”，`warning` 默认标题为“警告”。传入默认插槽时优先展示自定义正文。
 
-:::demo 展示 `default`、`delete` 和 `warning` 三种语义样式。属性：`variant` 可选 `default / delete / warning`，默认值 `default`；`title` 类型 `string`，默认值由 `variant` 决定；`confirmText` 类型 `string`，默认值由 `variant` 决定。
+:::demo 展示 `default`、`confirm`、`delete` 和 `warning` 四种语义样式。属性：`variant` 可选 `default / confirm / delete / warning`，默认值 `default`；`target` 类型 `string`，默认值未设置；`title` 类型 `string`，默认值由 `variant` 决定；`confirmText` 类型 `string`，默认值由 `variant` 决定。
 dialog/variant
 :::
 
@@ -144,8 +144,8 @@ app.use(SybzComponents, {
 |       width       | 弹框宽度；当 `mode="drawer"` 时用于控制抽屉宽度                                         | string / number                               | ''        |
 |       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan`    | string                                        | `default` |
 |       mode        | 展示形态，可选 `dialog` / `drawer`                                                      | string                                        | `dialog`  |
-|      variant      | 语义样式，可选 `default` / `delete` / `warning`                                         | string                                        | `default` |
-|      target       | 删除场景中要操作的目标名称                                                              | string                                        | -         |
+|      variant      | 语义样式，可选 `default` / `confirm` / `delete` / `warning`                             | string                                        | `default` |
+|      target       | 确认或删除场景中要操作的目标名称                                                        | string                                        | -         |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                    | boolean                                       | false     |
 |    cancelText     | 取消按钮文本                                                                            | string                                        | 取消      |
 |    confirmText    | 确认按钮文本                                                                            | string                                        | 确认      |
@@ -177,4 +177,4 @@ app.use(SybzComponents, {
 |   header   | 对话框标题内容区；只替换标题文字区域，默认 icon 仍保留 |
 | headerIcon | 对话框标题左侧 icon 内容                               |
 |   footer   | Dialog 按钮操作区的内容                                |
-|   target   | 删除场景中目标名称的自定义内容                         |
+|   target   | 确认或删除场景中目标名称的自定义内容                   |
