@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 
 const visible = reactive({
+  delete: false,
   base: false,
   noFooter: false,
   buttons: false,
@@ -11,10 +12,15 @@ const visible = reactive({
 
 <template>
   <div class="chenghua-dialog-demo">
+    <s-button theme="chenghua" type="primary" @click="visible.delete = true">删除确认</s-button>
     <s-button theme="chenghua" @click="visible.base = true">默认底部按钮</s-button>
     <s-button theme="chenghua" type="primary" @click="visible.noFooter = true">隐藏底部按钮</s-button>
     <s-button theme="chenghua" type="danger" @click="visible.buttons = true">自定义按钮</s-button>
     <s-button theme="chenghua" @click="visible.header = true">自定义标题</s-button>
+
+    <s-dialog v-model="visible.delete" title="删除确认" theme="chenghua">
+      成华主题默认展示底部按钮，和普通 dialog 行为保持一致。
+    </s-dialog>
 
     <s-dialog v-model="visible.base" title="默认成华弹框" theme="chenghua" width="512px">
       成华主题默认展示底部按钮，和普通 dialog 行为保持一致。
