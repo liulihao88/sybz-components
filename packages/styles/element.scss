@@ -109,4 +109,26 @@
     --el-button-active-border-color: var(--el-border-color);
     --el-button-active-text-color: var(--el-text-color-regular);
   }
+
+  .el-message-box__message {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    overflow-x: hidden;
+
+    code {
+      display: inline-flex;
+      box-sizing: border-box;
+      max-width: calc(100% - 8px);
+      height: auto;
+      min-height: 24px;
+      align-items: flex-start;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 20px;
+      vertical-align: middle;
+    }
+  }
 }

@@ -2,16 +2,12 @@
 import { confirm } from '@/utils/src/index'
 
 const deleteConfirm = () => {
-  confirm(
-    '确定删除文件 <code>石景山AI服务申请表.xlsx</code> 吗？<br />删除后无法恢复。 <code type="danger">错误</code> <code type="warning">警告</code><code type="info">消息</code>',
-    {
-      title: '删除确认',
-      theme: 'shijingshan',
-      confirmButtonText: '确认删除',
-      cancelButtonText: '再想想',
-      confirmButtonClass: 's-confirm-danger-button',
-    },
-  )
+  confirm({
+    variant: 'delete',
+    target:
+      '4a731a90594a4af544c0c25941171jpeg.jpeg、小米汽车.png、蓝紫渐变闪粉艺术玻璃花瓶产品参数.xlsx、戴珍珠耳环的少女.png、雕像.png Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga a eveniet corporis, maiores ab laboriosam eligendi quia ex atque aspernatur odit sint numquam assumenda impedit voluptas reiciendis inventore eos veniam!',
+    theme: 'shijingshan',
+  })
 }
 
 const noCancel = () => {
@@ -65,14 +61,9 @@ const differentColorButtons = () => {
 }
 
 const warningConfirm = () => {
-  confirm('当前任务执行后会影响线上配置，建议确认关联服务状态后继续。', {
-    title: '高风险变更',
+  confirm('该操作可能影响现有数据，请确认后继续。', {
+    variant: 'warning',
     theme: 'shijingshan',
-    showClose: false,
-    confirmButtonText: '继续变更',
-    cancelButtonText: '取消变更',
-    confirmButtonClass: 's-confirm-warning-button',
-    cancelButtonClass: 's-confirm-info-button',
   })
 }
 </script>

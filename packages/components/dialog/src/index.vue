@@ -52,7 +52,7 @@
         <template v-if="mergedProps.variant === 'delete' && !$slots.default">
           <template v-if="mergedProps.target !== undefined">
             确认要删除
-            <s-tag type="danger">
+            <s-tag class="s-dialog__target" type="danger" :theme="dialogButtonTheme">
               <slot name="target">{{ mergedProps.target }}</slot>
             </s-tag>
             吗? 删除后不可恢复。
@@ -607,6 +607,32 @@ onBeforeUnmount(() => {
     font-size: 13px;
     font-weight: 400;
     line-height: 20px;
+  }
+
+  .s-dialog__target {
+    display: inline-flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    max-width: calc(100% - 8px);
+    height: auto;
+    min-height: 24px;
+    padding: 0 8px;
+    margin: 0 4px;
+    font-family: 'Roboto Mono', 'PingFang SC', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    vertical-align: middle;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  :deep(.s-dialog__target .el-tag__content) {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
 </style>
