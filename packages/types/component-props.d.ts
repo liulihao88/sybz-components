@@ -179,6 +179,7 @@ export type SDialogHandler = string | ((...args: any[]) => any)
 export interface SDialogSelfProps {
   mode?: SDialogMode
   variant?: SDialogVariant
+  target?: string
   title?: string
   subTitle?: string
   width?: string | number

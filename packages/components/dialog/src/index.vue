@@ -49,7 +49,17 @@
         </div>
       </template>
       <div :class="slotBoxClass">
-        <slot></slot>
+        <template v-if="mergedProps.variant === 'delete' && !$slots.default">
+          <template v-if="mergedProps.target !== undefined">
+            确认要删除
+            <s-tag type="danger">
+              <slot name="target">{{ mergedProps.target }}</slot>
+            </s-tag>
+            吗? 删除后不可恢复。
+          </template>
+          <template v-else>删除后数据将无法恢复，确定继续吗？</template>
+        </template>
+        <slot v-else></slot>
       </div>
       <template v-if="mergedShowFooter" #footer>
         <slot name="footer">
@@ -86,6 +96,7 @@ import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType, processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
+import STag from '@/components/tag/src/index.vue'
 
 defineOptions({
   name: 'SDialog',
@@ -100,6 +111,7 @@ interface DialogProps {
   modelValue?: boolean
   mode?: 'dialog' | 'drawer'
   variant?: 'default' | 'delete' | 'warning'
+  target?: string
   title?: string
   subTitle?: string
   width?: string | number
@@ -123,6 +135,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
   mode: 'dialog',
   variant: 'default',
+  target: undefined,
   subTitle: '',
   width: '',
   theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan

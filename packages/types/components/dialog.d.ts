@@ -26,6 +26,7 @@ export type SDialogComponent = {
     $props: {
       mode?: SDialogMode
       variant?: SDialogVariant
+      target?: string
       title?: string
       subTitle?: string
       width?: string | number
@@ -47,6 +48,7 @@ export type SDialogComponent = {
       ElDialogInstance['$props'],
       | 'mode'
       | 'variant'
+      | 'target'
       | 'title'
       | 'subTitle'
       | 'width'
@@ -69,6 +71,7 @@ export type SDialogComponent = {
         ElDrawerInstance['$props'],
         | 'mode'
         | 'variant'
+        | 'target'
         | 'title'
         | 'subTitle'
         | 'width'
@@ -94,6 +97,7 @@ export type SDialogComponent = {
       header?: () => any
       headerIcon?: () => any
       footer?: () => any
+      target?: () => any
     }
   }
 }
