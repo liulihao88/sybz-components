@@ -49,15 +49,15 @@
         </div>
       </template>
       <div :class="slotBoxClass">
-        <template v-if="isTargetVariant && !$slots.default">
+        <template v-if="mergedProps.variant === 'delete' && !$slots.default">
           <template v-if="mergedProps.target !== undefined">
-            {{ targetContentPrefix }}
-            <s-tag :type="targetTagType">
+            确认要删除
+            <s-tag type="danger">
               <slot name="target">{{ mergedProps.target }}</slot>
             </s-tag>
-            {{ targetContentSuffix }}
+            吗? 删除后不可恢复。
           </template>
-          <template v-else>{{ targetFallbackContent }}</template>
+          <template v-else>删除后数据将无法恢复，确定继续吗？</template>
         </template>
         <slot v-else></slot>
       </div>
@@ -110,7 +110,7 @@ const emits = defineEmits(['update:modelValue'])
 interface DialogProps {
   modelValue?: boolean
   mode?: 'dialog' | 'drawer'
-  variant?: 'default' | 'confirm' | 'delete' | 'warning'
+  variant?: 'default' | 'delete' | 'warning'
   target?: string
   title?: string
   subTitle?: string
@@ -174,10 +174,8 @@ const componentClass = computed(() => {
 })
 
 const isDrawer = computed(() => mergedProps.value.mode === 'drawer')
-const isTargetVariant = computed(() => ['confirm', 'delete'].includes(mergedProps.value.variant))
 const dialogTitle = computed(() => {
   if (mergedProps.value.title !== undefined) return mergedProps.value.title
-  if (mergedProps.value.variant === 'confirm') return '确认'
   if (mergedProps.value.variant === 'delete') return '删除确认'
   if (mergedProps.value.variant === 'warning') return '警告'
   return '提示'
@@ -186,14 +184,6 @@ const dialogConfirmText = computed(() => {
   if (mergedProps.value.confirmText !== undefined) return mergedProps.value.confirmText
   return mergedProps.value.variant === 'delete' ? '删除' : '确认'
 })
-const targetTagType = computed(() => (mergedProps.value.variant === 'delete' ? 'danger' : 'primary'))
-const targetContentPrefix = computed(() => (mergedProps.value.variant === 'delete' ? '确认要删除' : '确认要对'))
-const targetContentSuffix = computed(() =>
-  mergedProps.value.variant === 'delete' ? '吗? 删除后不可恢复。' : '执行此操作吗？',
-)
-const targetFallbackContent = computed(() =>
-  mergedProps.value.variant === 'delete' ? '删除后数据将无法恢复，确定继续吗？' : '确定继续吗？',
-)
 const isFullscreen = computed(() => attrs.fullscreen === true || attrs.fullscreen === '')
 const panelWidth = computed(() => processWidth(mergedProps.value.width, true))
 
@@ -242,7 +232,7 @@ const mergedCancelAttrs = computed<DialogButtonAttrs>(() => {
     icon: isBusinessTheme.value ? '' : 'el-icon-close',
     ...cancelAttrs,
     style:
-      isTargetVariant.value || mergedProps.value.variant === 'warning'
+      mergedProps.value.variant === 'delete' || mergedProps.value.variant === 'warning'
         ? [
             {
               '--el-button-bg-color': 'transparent',
@@ -363,14 +353,12 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .s-dialog {
-  --s-dialog-variant-confirm-color: var(--el-color-primary);
   --s-dialog-variant-delete-color: var(--el-color-danger);
   --s-dialog-variant-warning-color: var(--el-color-warning);
   --s-dialog-semantic-cancel-border-color: var(--el-border-color);
   --s-dialog-semantic-cancel-text-color: var(--el-text-color-regular);
 
   &.s-chenghua-dialog {
-    --s-dialog-variant-confirm-color: var(--s-ch-primary);
     --s-dialog-variant-delete-color: var(--s-ch-danger);
     --s-dialog-variant-warning-color: var(--s-ch-warning);
     --s-dialog-semantic-cancel-border-color: var(--s-ch-divider);
@@ -378,7 +366,6 @@ onBeforeUnmount(() => {
   }
 
   &.s-shijingshan-dialog {
-    --s-dialog-variant-confirm-color: var(--s-sjs-primary);
     --s-dialog-variant-delete-color: var(--s-sjs-danger);
     --s-dialog-variant-warning-color: #f59e0b;
     --s-dialog-semantic-cancel-border-color: var(--s-sjs-divider);
@@ -399,14 +386,6 @@ onBeforeUnmount(() => {
     }
   }
 
-  &.s-dialog--confirm {
-    :deep(.el-dialog__header),
-    :deep(.el-drawer__header) {
-      background: var(--s-dialog-variant-confirm-color) !important;
-      border-bottom-color: var(--s-dialog-variant-confirm-color) !important;
-    }
-  }
-
   &.s-dialog--warning {
     :deep(.el-dialog__header),
     :deep(.el-drawer__header) {
@@ -415,7 +394,6 @@ onBeforeUnmount(() => {
     }
   }
 
-  &.s-dialog--confirm,
   &.s-dialog--delete,
   &.s-dialog--warning {
     .s-dialog__header,

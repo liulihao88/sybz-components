@@ -398,6 +398,25 @@ describe('base utils', () => {
     )
   })
 
+  it('applies delete variant defaults and escapes the target', async () => {
+    await expect(
+      confirm({
+        variant: 'delete',
+        target: '<机器之心>',
+        theme: 'shijingshan',
+      }),
+    ).resolves.toBe('confirm')
+
+    expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
+      '确认要删除<code type="danger">&lt;机器之心&gt;</code>吗? 删除后不可恢复。',
+      expect.objectContaining({
+        title: '删除确认',
+        confirmButtonText: '删除',
+        customClass: 's-message-box--shijingshan s-message-box--delete',
+      }),
+    )
+  })
+
   it('reads css variables and reports utils build time fallback', () => {
     document.documentElement.style.setProperty('--sybz-test-color', '#1677ff')
 

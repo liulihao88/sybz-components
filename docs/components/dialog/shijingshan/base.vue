@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 
 const visible = reactive({
+  delete: false,
   base: false,
   noFooter: false,
   buttons: false,
@@ -11,10 +12,13 @@ const visible = reactive({
 
 <template>
   <div class="shijingshan-dialog-demo">
+    <s-button theme="shijingshan" type="danger" @click="visible.delete = true">删除确认</s-button>
     <s-button theme="shijingshan" @click="visible.base = true">默认底部按钮</s-button>
     <s-button theme="shijingshan" type="primary" @click="visible.noFooter = true">隐藏底部按钮</s-button>
     <s-button theme="shijingshan" type="danger" @click="visible.buttons = true">自定义按钮</s-button>
     <s-button theme="shijingshan" @click="visible.header = true">自定义标题</s-button>
+
+    <s-dialog v-model="visible.delete" theme="shijingshan" variant="delete" target="要删除的内容"> </s-dialog>
 
     <s-dialog v-model="visible.base" title="默认石景山弹框" theme="shijingshan" width="512px">
       石景山主题默认展示底部按钮，和普通 dialog 行为保持一致。

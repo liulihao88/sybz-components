@@ -1,4 +1,4 @@
-import { unref, isRef, toRaw } from 'vue'
+import { unref, isRef, isVNode, toRaw } from 'vue'
 import type { AppContext, VNode } from 'vue'
 import type { Ref } from 'vue'
 import { consola } from 'consola'
@@ -129,6 +129,7 @@ interface CopyOptions extends ToastOptions {
 
 type WidthInput = string | number | Ref<string | number>
 type ConfirmMessage = string | VNode | (() => VNode)
+type ConfirmVariant = 'default' | 'delete' | 'warning'
 type ConfirmAppendTarget = NonNullable<ElMessageBoxOptions['appendTo']>
 type AppRootElement = Element & {
   _vue_app?: {
@@ -136,7 +137,15 @@ type AppRootElement = Element & {
   }
 }
 
-interface ConfirmOptions extends ElMessageBoxOptions {
+export interface ConfirmOptions extends ElMessageBoxOptions {
+  /**
+   * 确认框语义样式。
+   */
+  variant?: ConfirmVariant
+  /**
+   * 删除场景中要操作的目标名称。
+   */
+  target?: string
   /**
    * 确认框主题。
    */
@@ -1489,10 +1498,37 @@ export function debounce<T extends Func>(
  *   showCancelButton: true,
  *   appendTo: '#dialogRoot',
  * })
+ *
+ * @example
+ * await confirm({
+ *   variant: 'delete',
+ *   target: '机器之心公众号',
+ *   theme: 'shijingshan',
+ * })
  */
-export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, appContext: AppContext | null = null) {
+export function confirm(
+  options: ConfirmOptions,
+  appContext?: AppContext | null,
+): ReturnType<typeof ElMessageBox.confirm>
+export function confirm(
+  message: ConfirmMessage,
+  options?: ConfirmOptions,
+  appContext?: AppContext | null,
+): ReturnType<typeof ElMessageBox.confirm>
+export function confirm(
+  messageOrOptions: ConfirmMessage | ConfirmOptions,
+  optionsOrAppContext: ConfirmOptions | AppContext | null = null,
+  appContext: AppContext | null = null,
+) {
+  const isOptionsCall = typeof messageOrOptions === 'object' && messageOrOptions !== null && !isVNode(messageOrOptions)
+  const options = (isOptionsCall ? messageOrOptions : (optionsOrAppContext ?? {})) as ConfirmOptions
+  const message = isOptionsCall ? (options.message ?? '') : (messageOrOptions as ConfirmMessage)
+  const argumentAppContext = isOptionsCall ? (optionsOrAppContext as AppContext | null) : appContext
   const {
+    message: _message,
     theme,
+    variant = 'default',
+    target,
     customClass,
     confirmButtonClass,
     cancelButtonClass,
@@ -1500,11 +1536,21 @@ export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, a
     appContext: optionAppContext,
     ...messageBoxOptions
   } = options
-  const resolvedMessage = typeof message === 'function' ? message() : message
+  const inputMessage = typeof message === 'function' ? message() : message
+  const resolvedMessage =
+    variant === 'delete' && target !== undefined && !inputMessage
+      ? `确认要删除<code type="danger">${_escapeHtml(target)}</code>吗? 删除后不可恢复。`
+      : inputMessage
   const resolvedAppendTo = _resolveAppendTarget(appendTo)
-  const resolvedAppContext = _resolveAppContext(optionAppContext || appContext)
+  const resolvedAppContext = _resolveAppContext(optionAppContext || argumentAppContext)
   const isChenghuaTheme = theme === 'chenghua'
   const isShijingshanTheme = theme === 'shijingshan'
+  const variantOptions =
+    variant === 'delete'
+      ? { title: '删除确认', confirmButtonText: '删除' }
+      : variant === 'warning'
+        ? { title: '警告' }
+        : {}
 
   const mergeOptions = {
     title: '提示',
@@ -1513,12 +1559,14 @@ export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, a
     cancelButtonText: '取消',
     confirmButtonText: '确定',
     dangerouslyUseHTMLString: true,
+    ...variantOptions,
     ...messageBoxOptions,
     appendTo: resolvedAppendTo,
     appContext: resolvedAppContext,
     customClass: _mergeClassNames(
       isChenghuaTheme && CHENGHUA_CONFIRM_BOX_CLASS,
       isShijingshanTheme && SHIJINGSHAN_CONFIRM_BOX_CLASS,
+      variant !== 'default' && `s-message-box--${variant}`,
       customClass,
     ),
     confirmButtonClass: _mergeClassNames(
@@ -1536,6 +1584,19 @@ export function confirm(message: ConfirmMessage, options: ConfirmOptions = {}, a
   }
 
   return ElMessageBox.confirm(resolvedMessage, mergeOptions)
+}
+
+function _escapeHtml(value: string) {
+  return value.replace(/[&<>'"]/g, (character) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;',
+    }
+    return entities[character]
+  })
 }
 
 function _mergeClassNames(...classNames: Array<string | undefined | null | false>) {

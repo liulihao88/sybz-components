@@ -172,7 +172,7 @@ export interface SDescriptionsOwnProps {
 }
 
 export type SDialogMode = 'dialog' | 'drawer'
-export type SDialogVariant = 'default' | 'confirm' | 'delete' | 'warning'
+export type SDialogVariant = 'default' | 'delete' | 'warning'
 export type SDialogTheme = SybzComponentTheme | 'norm' | 'norm16' | 'simple'
 export type SDialogHandler = string | ((...args: any[]) => any)
 

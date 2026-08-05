@@ -48,15 +48,17 @@ utils/confirm/test
 confirm(message)
 confirm(message, options)
 confirm(message, options, appContext)
+confirm(options)
+confirm(options, appContext)
 ```
 
 ### 参数说明
 
-| 参数         | 类型                             | 必填 | 默认值 | 说明                                                                           |
-| ------------ | -------------------------------- | ---- | ------ | ------------------------------------------------------------------------------ |
-| `message`    | `string \| VNode \| () => VNode` | 是   | -      | 确认框内容。可以传普通文本、HTML 字符串、VNode，或返回 VNode 的函数。          |
-| `options`    | `ConfirmOptions`                 | 否   | `{}`   | Element Plus `ElMessageBoxOptions` 配置，并额外支持 `appendTo`、`appContext`。 |
-| `appContext` | `AppContext \| null`             | 否   | `null` | Vue 应用上下文。多应用或需要渲染组件内容时可手动传入。                         |
+| 参数         | 类型                             | 必填 | 默认值 | 说明                                                                                                |
+| ------------ | -------------------------------- | ---- | ------ | --------------------------------------------------------------------------------------------------- |
+| `message`    | `string \| VNode \| () => VNode` | 否   | -      | 确认框内容。对象式调用时可通过 `options.message` 传入。                                             |
+| `options`    | `ConfirmOptions`                 | 否   | `{}`   | Element Plus `ElMessageBoxOptions` 配置，并额外支持 `variant`、`target`、`appendTo`、`appContext`。 |
+| `appContext` | `AppContext \| null`             | 否   | `null` | Vue 应用上下文。多应用或需要渲染组件内容时可手动传入。                                              |
 
 `ConfirmOptions` 常用字段：
 
@@ -64,6 +66,8 @@ confirm(message, options, appContext)
 | -------------------------- | ------------------------------------------ | ------------------- | ----------------------------------------------------------------------- |
 | `title`                    | `string`                                   | `'提示'`            | 确认框标题。                                                            |
 | `theme`                    | `'default' \| 'chenghua' \| 'shijingshan'` | `default`           | 确认框主题，设置为 `'chenghua'` 或 `'shijingshan'` 时使用对应主题样式。 |
+| `variant`                  | `'default' \| 'delete' \| 'warning'`       | `default`           | 语义样式；同步标题、标题栏和确认按钮。                                  |
+| `target`                   | `string`                                   | -                   | `delete` 场景的操作目标；message 为空时自动生成标准删除提示。           |
 | `showCancelButton`         | `boolean`                                  | `true`              | 是否显示取消按钮。                                                      |
 | `showClose`                | `boolean`                                  | Element Plus 默认值 | 是否显示右上角关闭按钮。                                                |
 | `closeOnClickModal`        | `boolean`                                  | Element Plus 默认值 | 是否允许点击遮罩关闭。                                                  |
@@ -84,6 +88,17 @@ confirm(message, options, appContext)
 
 ```ts
 await confirm('确定删除当前记录吗？')
+
+await confirm({
+  variant: 'delete',
+  target: '机器之心公众号',
+  theme: 'shijingshan',
+})
+
+await confirm('该操作可能影响现有数据，请确认后继续。', {
+  variant: 'warning',
+  theme: 'shijingshan',
+})
 
 await confirm('确认提交？', {
   confirmButtonText: '提交',
