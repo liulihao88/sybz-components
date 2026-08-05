@@ -14,7 +14,7 @@ function btnClick2() {
   <div>
     <el-button type="primary" @click="btnClick">打开旧drawer(废弃)</el-button>
     <el-button type="primary" @click="btnClick2">打开新drawer(推荐使用)</el-button>
-    <s-dialog ref="dialogRef" v-model="isShow" title="drawer抽屉" type="drawer">
+    <s-dialog ref="dialogRef" v-model="isShow" title="drawer抽屉" mode="drawer">
       <div>以后请使用这种用法打开drawer</div>
       <div>以后请使用这种用法打开drawer</div>
       <div>以后请使用这种用法打开drawer</div>

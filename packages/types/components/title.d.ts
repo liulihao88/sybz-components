@@ -1,5 +1,10 @@
 import type { SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
 
+/**
+ * s-title 标题组件，支持通过 extra 属性或 extra 插槽设置右侧内容。
+ *
+ * 先提示 sybz 自身属性。
+ */
 export type STitleComponent = {
   new (): {
     $props: {

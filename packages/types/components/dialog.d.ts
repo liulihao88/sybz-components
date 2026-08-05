@@ -1,6 +1,13 @@
 import { ElDialog } from 'element-plus'
 import type { ElDrawer } from 'element-plus'
-import type { SDialogHandler, SDialogSelfProps, SDialogTheme, SDialogType, SybzRecord } from '../component-props'
+import type {
+  SDialogHandler,
+  SDialogMode,
+  SDialogSelfProps,
+  SDialogTheme,
+  SDialogVariant,
+  SybzRecord,
+} from '../component-props'
 
 type ElDialogInstance = InstanceType<typeof ElDialog>
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
@@ -17,7 +24,8 @@ export type SDialogPublicProps = SDialogSelfProps &
 export type SDialogComponent = {
   new (): {
     $props: {
-      type?: SDialogType
+      mode?: SDialogMode
+      variant?: SDialogVariant
       title?: string
       subTitle?: string
       width?: string | number
@@ -37,7 +45,8 @@ export type SDialogComponent = {
       hideHeaderIcon?: boolean
     } & Omit<
       ElDialogInstance['$props'],
-      | 'type'
+      | 'mode'
+      | 'variant'
       | 'title'
       | 'subTitle'
       | 'width'
@@ -58,7 +67,8 @@ export type SDialogComponent = {
     > &
       Omit<
         ElDrawerInstance['$props'],
-        | 'type'
+        | 'mode'
+        | 'variant'
         | 'title'
         | 'subTitle'
         | 'width'

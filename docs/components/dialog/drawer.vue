@@ -14,9 +14,9 @@ const props = [
 <template>
   <div class="dialog-drawer-demo">
     <el-button type="primary" @click="isShow = true">打开 drawer</el-button>
-    <s-dialog v-model="isShow" title="抽屉式 dialog" type="drawer" width="1200">
+    <s-dialog v-model="isShow" title="抽屉式 dialog" mode="drawer" width="1200">
       <div class="dialog-drawer-demo__content">
-        <p>设置 type="drawer" 后，s-dialog 会使用抽屉方式从页面侧边打开；设置 width 可以控制抽屉宽度。</p>
+        <p>设置 mode="drawer" 后，s-dialog 会使用抽屉方式从页面侧边打开；设置 width 可以控制抽屉宽度。</p>
         <div class="dialog-drawer-demo__list">
           <div v-for="item in props" :key="item.name" class="dialog-drawer-demo__item">
             <span>{{ item.name }}</span>

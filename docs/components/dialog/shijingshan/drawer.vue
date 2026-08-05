@@ -5,7 +5,7 @@ const visible = ref(false)
 
 const configs = [
   { label: 'theme', value: 'shijingshan', defaultValue: "'default'" },
-  { label: 'type', value: 'drawer', defaultValue: "''" },
+  { label: 'mode', value: 'drawer', defaultValue: 'dialog' },
   { label: 'width', value: 'string / number', defaultValue: "''" },
   { label: 'showFooter', value: 'true / false', defaultValue: 'true' },
 ]
@@ -18,7 +18,7 @@ const configs = [
       v-model="visible"
       title="石景山抽屉式 dialog"
       theme="shijingshan"
-      type="drawer"
+      mode="drawer"
       width="1000"
       confirm-text="保存"
       cancel-text="关闭"
@@ -27,7 +27,7 @@ const configs = [
         <section class="shijingshan-drawer-demo__section">
           <h4>抽屉式弹层</h4>
           <p>
-            同时设置 theme="shijingshan" 和 type="drawer" 后，会使用石景山主题的右侧抽屉面板；设置 width
+            同时设置 theme="shijingshan" 和 mode="drawer" 后，会使用石景山主题的右侧抽屉面板；设置 width
             可以控制抽屉宽度。
           </p>
         </section>

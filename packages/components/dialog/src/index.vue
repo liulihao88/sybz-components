@@ -39,7 +39,7 @@
           <span class="s-dialog__header-content">
             <slot name="header">
               <span class="s-dialog__header-title">
-                {{ mergedProps.title }}
+                {{ dialogTitle }}
               </span>
               <span v-if="mergedProps.subTitle" class="s-dialog__header-sub-title">
                 {{ mergedProps.subTitle }}
@@ -73,7 +73,7 @@
             :theme="dialogButtonTheme"
             @click="confirmHandler"
           >
-            {{ mergedProps.confirmText }}
+            {{ dialogConfirmText }}
           </s-button>
         </slot>
       </template>
@@ -98,7 +98,8 @@ const attrs = useAttrs()
 const emits = defineEmits(['update:modelValue'])
 interface DialogProps {
   modelValue?: boolean
-  type?: '' | 'drawer'
+  mode?: 'dialog' | 'drawer'
+  variant?: 'default' | 'delete' | 'warning'
   title?: string
   subTitle?: string
   width?: string | number
@@ -120,14 +121,14 @@ interface DialogProps {
 
 const props = withDefaults(defineProps<DialogProps>(), {
   modelValue: false,
-  type: '',
-  title: '提示',
+  mode: 'dialog',
+  variant: 'default',
   subTitle: '',
   width: '',
   theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan
   cancel: '',
   cancelText: '取消',
-  confirmText: '确认',
+  confirmText: undefined,
   // 是否显示底部操作按钮 :footer="null"
   showFooter: undefined,
   showCancel: true,
@@ -156,10 +157,20 @@ const getThemeClass = computed(() => {
 })
 
 const componentClass = computed(() => {
-  return ['s-dialog__panel', getThemeClass.value].filter(Boolean).join(' ')
+  return ['s-dialog__panel', getThemeClass.value, `s-dialog--${mergedProps.value.variant}`].filter(Boolean).join(' ')
 })
 
-const isDrawer = computed(() => mergedProps.value.type === 'drawer')
+const isDrawer = computed(() => mergedProps.value.mode === 'drawer')
+const dialogTitle = computed(() => {
+  if (mergedProps.value.title !== undefined) return mergedProps.value.title
+  if (mergedProps.value.variant === 'delete') return '删除确认'
+  if (mergedProps.value.variant === 'warning') return '警告'
+  return '提示'
+})
+const dialogConfirmText = computed(() => {
+  if (mergedProps.value.confirmText !== undefined) return mergedProps.value.confirmText
+  return mergedProps.value.variant === 'delete' ? '删除' : '确认'
+})
 const isFullscreen = computed(() => attrs.fullscreen === true || attrs.fullscreen === '')
 const panelWidth = computed(() => processWidth(mergedProps.value.width, true))
 
@@ -203,9 +214,27 @@ const mergedConfirmAttrs = computed<DialogButtonAttrs>(() => {
 })
 
 const mergedCancelAttrs = computed<DialogButtonAttrs>(() => {
+  const cancelAttrs = mergedProps.value.cancelAttrs ?? {}
   return {
     icon: isBusinessTheme.value ? '' : 'el-icon-close',
-    ...mergedProps.value.cancelAttrs,
+    ...cancelAttrs,
+    style:
+      mergedProps.value.variant === 'delete' || mergedProps.value.variant === 'warning'
+        ? [
+            {
+              '--el-button-bg-color': 'transparent',
+              '--el-button-border-color': 'var(--s-dialog-delete-cancel-border-color)',
+              '--el-button-text-color': 'var(--s-dialog-delete-cancel-text-color)',
+              '--el-button-hover-bg-color': 'var(--el-fill-color-light)',
+              '--el-button-hover-border-color': 'var(--s-dialog-delete-cancel-border-color)',
+              '--el-button-hover-text-color': 'var(--s-dialog-delete-cancel-text-color)',
+              '--el-button-active-bg-color': 'var(--el-fill-color)',
+              '--el-button-active-border-color': 'var(--s-dialog-delete-cancel-border-color)',
+              '--el-button-active-text-color': 'var(--s-dialog-delete-cancel-text-color)',
+            },
+            cancelAttrs.style,
+          ]
+        : cancelAttrs.style,
   }
 })
 
@@ -217,17 +246,23 @@ const cancelButtonAttrs = computed(() => {
   const { type: _type, ...buttonAttrs } = mergedCancelAttrs.value
   return buttonAttrs
 })
-const cancelButtonType = computed(() => getButtonType(mergedCancelAttrs.value.type))
+const cancelButtonType = computed(() => {
+  return getButtonType(mergedCancelAttrs.value.type)
+})
 
 const confirmButtonAttrs = computed(() => {
   const { type: _type, ...buttonAttrs } = mergedConfirmAttrs.value
   return buttonAttrs
 })
-const confirmButtonType = computed(() => getButtonType(mergedConfirmAttrs.value.type, 'primary'))
+const confirmButtonType = computed(() => {
+  const variantType =
+    mergedProps.value.variant === 'delete' ? 'danger' : mergedProps.value.variant === 'warning' ? 'warning' : 'primary'
+  return getButtonType(mergedConfirmAttrs.value.type, variantType)
+})
 const confirmButtonLoading = computed(() => mergedConfirmAttrs.value.loading === true)
 
 const drawerBodyClass = computed(() => {
-  return mergedProps.value.type === 'drawer' && mergedProps.value.fillSlot ? 's-dialog__drawer-body--fill' : ''
+  return mergedProps.value.mode === 'drawer' && mergedProps.value.fillSlot ? 's-dialog__drawer-body--fill' : ''
 })
 
 const fullscreenHeight = ref('calc(100vh - 124px)')
@@ -305,6 +340,57 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .s-dialog {
+  --s-dialog-variant-delete-color: var(--el-color-danger);
+  --s-dialog-variant-warning-color: var(--el-color-warning);
+  --s-dialog-delete-cancel-border-color: var(--el-border-color);
+  --s-dialog-delete-cancel-text-color: var(--el-text-color-regular);
+
+  &.s-chenghua-dialog {
+    --s-dialog-variant-delete-color: var(--s-ch-danger);
+    --s-dialog-variant-warning-color: var(--s-ch-warning);
+    --s-dialog-delete-cancel-border-color: var(--s-ch-divider);
+    --s-dialog-delete-cancel-text-color: var(--s-ch-text-regular);
+  }
+
+  &.s-shijingshan-dialog {
+    --s-dialog-variant-delete-color: var(--s-sjs-danger);
+    --s-dialog-variant-warning-color: #f59e0b;
+    --s-dialog-delete-cancel-border-color: var(--s-sjs-divider);
+    --s-dialog-delete-cancel-text-color: var(--s-sjs-text-regular);
+  }
+
+  &.s-shijingshan-dialog.s-dialog--warning {
+    :deep(.s-dialog__confirm-button) {
+      --s-sjs-button-type-color: #f59e0b;
+    }
+  }
+
+  &.s-dialog--delete {
+    :deep(.el-dialog__header),
+    :deep(.el-drawer__header) {
+      background: var(--s-dialog-variant-delete-color) !important;
+      border-bottom-color: var(--s-dialog-variant-delete-color) !important;
+    }
+  }
+
+  &.s-dialog--warning {
+    :deep(.el-dialog__header),
+    :deep(.el-drawer__header) {
+      background: var(--s-dialog-variant-warning-color) !important;
+      border-bottom-color: var(--s-dialog-variant-warning-color) !important;
+    }
+  }
+
+  &.s-dialog--delete,
+  &.s-dialog--warning {
+    .s-dialog__header,
+    .s-dialog__header-sub-title,
+    :deep(.el-dialog__close),
+    :deep(.el-drawer__close-btn) {
+      color: #fff !important;
+    }
+  }
+
   :deep(.el-dialog__header),
   :deep(.el-drawer__header) {
     padding: 10px 16px;

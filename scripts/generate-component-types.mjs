@@ -187,7 +187,14 @@ const TYPED_COMPONENT_PROPS = new Map([
       hoverProps: {
         sourcePath: componentPropsPath,
         interfaceName: 'SDialogSelfProps',
-        importTypeNames: ['SDialogHandler', 'SDialogSelfProps', 'SDialogTheme', 'SDialogType', 'SybzRecord'],
+        importTypeNames: [
+          'SDialogHandler',
+          'SDialogMode',
+          'SDialogSelfProps',
+          'SDialogTheme',
+          'SDialogVariant',
+          'SybzRecord',
+        ],
       },
     },
   ],

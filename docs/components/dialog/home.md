@@ -12,15 +12,15 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-dialog title="基础dialog" sub-title="这是一段颜色稍淡的二级标题" v-model="isShow">内容</s-dialog>`。属性：`title` 类型 `string`，默认值 `''`；`subTitle` 类型 `string`，默认值 `''`。
+:::demo 展示基础用法。基础写法：`<s-dialog title="基础dialog" sub-title="这是一段颜色稍淡的二级标题" v-model="isShow">内容</s-dialog>`。属性：`title` 类型 `string`，默认值 `'提示'`；`subTitle` 类型 `string`，默认值 `''`。
 dialog/base
 :::
 
 ### 抽屉式(drawer)用法
 
-设置 `type="drawer"` 时，`s-dialog` 会按抽屉方式展示。`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`。设置 `width` 可以控制抽屉宽度，`width` 支持 `string` 和 `number`，默认值是 `''`。
+设置 `mode="drawer"` 时，`s-dialog` 会按抽屉方式展示。`mode` 的可选值是 `dialog` 和 `drawer`，默认值是 `dialog`。设置 `width` 可以控制抽屉宽度，`width` 支持 `string` 和 `number`，默认值是 `''`。
 
-:::demo 展示抽屉式用法配置。基础写法：`<s-dialog v-model="isShow" title="抽屉式 dialog" type="drawer" width="1200"></s-dialog>`。属性：`type` 可选 `'' / drawer`，默认值 `''`；`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示抽屉式用法配置。基础写法：`<s-dialog v-model="isShow" title="抽屉式 dialog" mode="drawer" width="1200"></s-dialog>`。属性：`mode` 可选 `dialog / drawer`，默认值 `dialog`；`width` 类型 `string / number`，默认值 `''`。
 dialog/drawer
 :::
 
@@ -28,7 +28,7 @@ dialog/drawer
 
 `fillSlot` 的可选值是 `true` 和 `false`，默认值是 `false`。
 
-:::demo 展示插槽内容定制。基础写法：`<s-dialog title="基础dialog" v-model="isShow" fillSlot type="drawer"></s-dialog>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-dialog title="基础dialog" v-model="isShow" fillSlot mode="drawer"></s-dialog>`。属性：`fillSlot` 可选 `true / false`，默认值 `false`；`mode` 可选 `dialog / drawer`，默认值 `dialog`。
 dialog/drawerFillSlot
 :::
 
@@ -44,9 +44,9 @@ dialog/chenghua/base
 
 #### chenghua 抽屉式用法
 
-设置 `theme="chenghua"` 和 `type="drawer"` 时，`s-dialog` 会按成华主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
+设置 `theme="chenghua"` 和 `mode="drawer"` 时，`s-dialog` 会按成华主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`mode` 的可选值是 `dialog` 和 `drawer`，默认值是 `dialog`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
 
-:::demo 展示成华主题样式。基础写法：`<s-dialog v-model="visible" title="成华抽屉式 dialog" theme="chenghua" type="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
+:::demo 展示成华主题样式。基础写法：`<s-dialog v-model="visible" title="成华抽屉式 dialog" theme="chenghua" mode="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
 dialog/chenghua/drawer
 :::
 
@@ -62,15 +62,15 @@ dialog/shijingshan/base
 
 #### shijingshan 抽屉式用法
 
-设置 `theme="shijingshan"` 和 `type="drawer"` 时，`s-dialog` 会按石景山主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`type` 的可选值是 `''` 和 `drawer`，默认值是 `''`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
+设置 `theme="shijingshan"` 和 `mode="drawer"` 时，`s-dialog` 会按石景山主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`mode` 的可选值是 `dialog` 和 `drawer`，默认值是 `dialog`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
 
-:::demo 展示石景山主题样式。基础写法：`<s-dialog v-model="visible" title="石景山抽屉式 dialog" theme="shijingshan" type="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
+:::demo 展示石景山主题样式。基础写法：`<s-dialog v-model="visible" title="石景山抽屉式 dialog" theme="shijingshan" mode="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
 dialog/shijingshan/drawer
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-dialog ref="dialogRef" title="常用的dialog" @confirm="cusConfirm" width="100%" :closeOnClickModal="false" :confirmAttrs="{ loading: confirmLoading, }" confirmText="保存" v-model="isShow" @cancel="proxy.$toast('哈哈')" cancelText="高级配置" :cancelAttrs="{ type: 'primary', icon: 'el-icon-edit', }"></s-dialog>`。属性：`title` 类型 `string`，默认值 `''`；`width` 类型 `string / number`，默认值 `''`。
+:::demo 展示通常用法配置。基础写法：`<s-dialog ref="dialogRef" title="常用的dialog" @confirm="cusConfirm" width="100%" :closeOnClickModal="false" :confirmAttrs="{ loading: confirmLoading, }" confirmText="保存" v-model="isShow" @cancel="proxy.$toast('哈哈')" cancelText="高级配置" :cancelAttrs="{ type: 'primary', icon: 'el-icon-edit', }"></s-dialog>`。属性：`title` 类型 `string`，默认值 `'提示'`；`width` 类型 `string / number`，默认值 `''`。
 dialog/usually
 :::
 
@@ -82,13 +82,13 @@ dialog/slot
 
 ### 全屏
 
-:::demo 展示全屏配置。基础写法：`<s-dialog title="基础dialog" v-model="isShow" fullscreen></s-dialog>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示全屏配置。基础写法：`<s-dialog title="基础dialog" v-model="isShow" fullscreen></s-dialog>`。属性：`title` 类型 `string`，默认值 `'提示'`。
 dialog/fullscreen
 :::
 
 ### 最大化高度
 
-设置 `maximize-height` 后，普通 dialog 会尽量占满视口高度，上下各保留 `16px`，标题栏和底部操作区保持可见，内容区占满剩余空间。`maximizeHeight` 的可选值是 `true` 和 `false`，默认值是 `false`；`type="drawer"` 时无需设置，drawer 本身已经占满可用高度；`fullscreen` 与该属性同时使用时，以 `fullscreen` 为准。
+设置 `maximize-height` 后，普通 dialog 会尽量占满视口高度，上下各保留 `16px`，标题栏和底部操作区保持可见，内容区占满剩余空间。`maximizeHeight` 的可选值是 `true` 和 `false`，默认值是 `false`；`mode="drawer"` 时无需设置，drawer 本身已经占满可用高度；`fullscreen` 与该属性同时使用时，以 `fullscreen` 为准。
 
 :::demo 展示最大化高度配置。基础写法：`<s-dialog v-model="isShow" title="最大化高度 dialog" maximize-height></s-dialog>`。属性：`maximizeHeight` 可选 `true / false`，默认值 `false`。
 dialog/maximizeHeight
@@ -96,7 +96,7 @@ dialog/maximizeHeight
 
 ### 弹框form表单
 
-:::demo 展示表单场景。基础写法：`<s-dialog ref="dialogRef" title="弹框form表单" v-model="isShow" @confirm="confirm"></s-dialog>`。属性：`title` 类型 `string`，默认值 `''`。
+:::demo 展示表单场景。基础写法：`<s-dialog ref="dialogRef" title="弹框form表单" v-model="isShow" @confirm="confirm"></s-dialog>`。属性：`title` 类型 `string`，默认值 `'提示'`。
 dialog/dialogForm
 :::
 
@@ -112,6 +112,14 @@ dialog/confirmLoading
 
 :::demo 展示插槽内容定制。基础写法：`<s-dialog title="基础dialog" v-model="isShow" fillSlot></s-dialog>`。插槽：按示例中的插槽名定制内容。
 dialog/fillSlot
+:::
+
+### 语义样式（variant 默认值：default）
+
+设置 `variant` 可以快速应用对话框的语义样式。基础写法：`<s-dialog v-model="visible" variant="delete">确定删除吗？</s-dialog>`。`variant` 可选 `default / delete / warning`，默认值是 `default`；`delete` 默认标题为“删除确认”、确认按钮文字为“删除”，`warning` 默认标题为“警告”。显式设置 `title`、`confirmText` 或 `confirmAttrs.type` 可以覆盖语义默认值。
+
+:::demo 展示 `default`、`delete` 和 `warning` 三种语义样式。属性：`variant` 可选 `default / delete / warning`，默认值 `default`；`title` 类型 `string`，默认值由 `variant` 决定；`confirmText` 类型 `string`，默认值由 `variant` 决定。
+dialog/variant
 :::
 
 ### 全局默认配置
@@ -133,9 +141,10 @@ app.use(SybzComponents, {
 | :---------------: | --------------------------------------------------------------------------------------- | --------------------------------------------- | --------- |
 |       title       | 顶部title                                                                               | string                                        | 提示      |
 |     subTitle      | 顶部二级标题，显示在 title 下方，颜色稍淡                                               | string                                        | ''        |
-|       width       | 弹框宽度；当 `type="drawer"` 时用于控制抽屉宽度                                         | string / number                               | ''        |
+|       width       | 弹框宽度；当 `mode="drawer"` 时用于控制抽屉宽度                                         | string / number                               | ''        |
 |       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan`    | string                                        | `default` |
-|       type        | 弹框类型，可选 `drawer`                                                                 | string                                        | ''        |
+|       mode        | 展示形态，可选 `dialog` / `drawer`                                                      | string                                        | `dialog`  |
+|      variant      | 语义样式，可选 `default` / `delete` / `warning`                                         | string                                        | `default` |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                    | boolean                                       | false     |
 |    cancelText     | 取消按钮文本                                                                            | string                                        | 取消      |
 |    confirmText    | 确认按钮文本                                                                            | string                                        | 确认      |

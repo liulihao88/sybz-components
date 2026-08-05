@@ -171,12 +171,14 @@ export interface SDescriptionsOwnProps {
   customValue?: (context: SDescriptionsRenderContext) => VNodeChild
 }
 
-export type SDialogType = '' | 'drawer'
+export type SDialogMode = 'dialog' | 'drawer'
+export type SDialogVariant = 'default' | 'delete' | 'warning'
 export type SDialogTheme = SybzComponentTheme | 'norm' | 'norm16' | 'simple'
 export type SDialogHandler = string | ((...args: any[]) => any)
 
 export interface SDialogSelfProps {
-  type?: SDialogType
+  mode?: SDialogMode
+  variant?: SDialogVariant
   title?: string
   subTitle?: string
   width?: string | number
