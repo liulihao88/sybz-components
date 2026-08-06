@@ -545,6 +545,8 @@ export interface SRadioSelfProps<Option = SRadioItem> {
   showType?: 'radio' | 'button'
   options?: SRadioOption[]
   border?: boolean
+  /** 单选项之间的间距，数字按 px 处理 */
+  gap?: string | number
   value?: string | number | boolean
   label?: string | number | boolean
   customLabel?: (context: SRadioOptionContext<Option>) => any

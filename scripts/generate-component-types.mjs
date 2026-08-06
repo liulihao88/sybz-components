@@ -413,7 +413,9 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'radio',
       allowAnySlots: true,
       hoverProps: componentHoverProps('SRadioSelfProps', [
+        'SRadioItem',
         'SRadioOption',
+        'SRadioOptionContext',
         'SRadioSelfProps',
         'SybzComponentTheme',
         'SybzRecord',

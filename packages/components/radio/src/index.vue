@@ -1,7 +1,7 @@
 <template>
   <div class="s-radio-box" :class="radioClass">
     <s-comp-title v-if="mergedProps.title" v-bind="compTitleProps" class="s-radio-box__title"></s-comp-title>
-    <el-radio-group v-bind="groupAttrs">
+    <el-radio-group v-bind="groupAttrs" :class="{ 's-radio-group--custom-gap': hasCustomGap }" :style="groupStyle">
       <slot>
         <component
           :is="radioType"
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import type { CSSProperties } from 'vue'
+import { processWidth } from '@sybz-components/utils'
 import type { RadioItem, RadioOption, RadioOptionValue } from './radio'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -44,6 +45,7 @@ interface RadioProps {
   showType?: 'radio' | 'button'
   options?: RadioOption[]
   border?: boolean
+  gap?: string | number
   value?: any
   label?: any
   customLabel?: (context: RadioOptionContext) => any
@@ -95,6 +97,11 @@ const groupAttrs = computed(() => ({
   ...attrs,
   size: mergedProps.value.size || undefined,
 }))
+const hasCustomGap = computed(() => mergedProps.value.gap !== undefined && mergedProps.value.gap !== '')
+const groupStyle = computed<CSSProperties | undefined>(() => {
+  if (!hasCustomGap.value) return undefined
+  return { gap: processWidth(mergedProps.value.gap, true) }
+})
 const radioType = computed(() => {
   const obj = {
     radio: 'el-radio',
@@ -235,6 +242,22 @@ const radioClass = computed(() => {
     outline-color: var(--s-radio-button-color, var(--el-color-primary));
     background-color: var(--s-radio-button-color, var(--el-color-primary));
     box-shadow: -1px 0 0 0 var(--s-radio-button-color, var(--el-color-primary));
+  }
+}
+
+:deep(.s-radio-group--custom-gap) {
+  flex-wrap: wrap;
+
+  > .el-radio {
+    margin-right: 0;
+  }
+
+  > .el-radio-button .el-radio-button__inner {
+    border-radius: var(--el-border-radius-base);
+  }
+
+  > .el-radio-button.is-active .el-radio-button__inner {
+    box-shadow: none;
   }
 }
 </style>

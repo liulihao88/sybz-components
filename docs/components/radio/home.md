@@ -64,6 +64,12 @@ radio/advanced
 radio/slot
 :::
 
+### 选项间距（默认值：沿用 Element Plus 样式）
+
+:::demo 使用 `gap` 设置单选项之间的间距，内容较多时会自动换行。基础写法：`<s-radio v-model="value" :options="options" :gap="16" />`。属性：`gap` 类型 `string / number`，数字按 `px` 处理，默认值 `undefined`（沿用 Element Plus 样式）。
+radio/gap
+:::
+
 ### 属性
 
 |      属性名      | 说明                                                  | 类型                                          | 默认值    |
@@ -75,6 +81,7 @@ radio/slot
 |    `showType`    | 展示形式，支持 `radio` / `button`                     | string                                        | `radio`   |
 |    `options`     | 单选项列表，支持对象数组或基础值数组                  | RadioItem[] / string[] / number[] / boolean[] | `[]`      |
 |     `border`     | 是否显示边框                                          | boolean                                       | `false`   |
+|      `gap`       | 单选项间距，数字按 `px` 处理                          | string / number                               | -         |
 |      `size`      | 单选尺寸，支持顶层传入和全局默认配置                  | `''` / `large` / `default` / `small`          | `''`      |
 |     `value`      | 选项值字段名                                          | string / number / boolean                     | `value`   |
 |     `label`      | 选项展示字段名                                        | string / number / boolean                     | `label`   |
@@ -87,6 +94,7 @@ radio/slot
 - `options` 可以传 `{ label, value }` 对象数组，也可以直接传 string / number / boolean 基础值数组，基础值会自动转换为 `{ label, value }`。
 - `type="boolean"` 时会自动生成 `true / false` 两个选项。
 - `showType="button"` 时，option 的 `color` 可以覆盖当前项的选中背景色，其余样式保持 button 模式不变。
+- 显式设置 `gap` 后，组件会清除选项的默认外边距并允许自动换行；未设置时保留 Element Plus 的默认间距。
 - option 的 `type` 会同时设置选中、hover、边框和文字颜色，并使用当前 `theme` 对应的语义色；同时传入 `color` 时，`color` 优先覆盖选中主色。
 - `options` 支持直接传入 computed；模板会自动解包，computed 内可以读取外部 `ref` 动态生成 label。
 - option 的 `class` 和 `style` 会应用到对应的 Radio item；在 scoped 样式中可以配合 `:deep()` 修改内部按钮。
