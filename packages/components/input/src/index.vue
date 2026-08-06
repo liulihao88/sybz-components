@@ -238,7 +238,11 @@ watch(
 )
 
 const computedBoxStyle = computed(() => {
-  const compTitleStyle = mergedProps.value.compTitleStyle ?? {}
+  const themeTitleStyle: Record<string, any> = mergedProps.value.theme !== 'default' ? { padding: '0 16px' } : {}
+  const compTitleStyle = {
+    ...themeTitleStyle,
+    ...(mergedProps.value.compTitleStyle ?? {}),
+  }
 
   if (compTitleStyle.width) {
     let minusWidth = parseInt(compTitleStyle.width) - 8 + 'px'
