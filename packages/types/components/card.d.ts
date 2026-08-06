@@ -5,6 +5,7 @@ export type SCardComponent = {
     $props: {
       modelValue?: boolean
       size?: SybzComponentSize | string | number
+      height?: string | number
       title?: string
       hoverAnimation?: boolean
       shadow?: 'always' | 'never' | 'hover'

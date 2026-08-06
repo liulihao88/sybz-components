@@ -275,6 +275,7 @@ export interface SCompTitleProps {
 export interface SCardProps {
   modelValue?: boolean
   size?: SybzComponentSize | string | number
+  height?: string | number
   title?: string
   hoverAnimation?: boolean
   shadow?: 'always' | 'never' | 'hover'

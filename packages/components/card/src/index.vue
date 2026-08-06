@@ -9,6 +9,7 @@ defineOptions({
 interface CardProps {
   modelValue?: boolean
   size?: 'default' | 'small' | 'large' | string | number
+  height?: string | number
   title?: string
   hoverAnimation?: boolean
   shadow?: 'always' | 'never' | 'hover'
@@ -28,6 +29,7 @@ interface CardProps {
 const props = withDefaults(defineProps<CardProps>(), {
   modelValue: false,
   size: 'default', // small large
+  height: undefined,
   title: '',
   hoverAnimation: false,
   shadow: 'never',
@@ -66,9 +68,17 @@ const boxMergedStyle = computed(() => {
       }
     : {}
 
+  const height = processWidth(mergedProps.value.height, true)
+
   return {
     ...transparentStyle,
     ...mergedProps.value.boxStyle,
+    ...(height
+      ? {
+          height,
+          overflow: 'hidden',
+        }
+      : {}),
     ...(mergedProps.value.square
       ? {
           display: 'inline-flex',

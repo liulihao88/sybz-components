@@ -52,7 +52,7 @@ card/other
 
 ### 自适应高度
 
-:::demo 展示高度配置。基础写法：`<SCard title="不自适应body的高度" class="m-t-16 h-block" :scroll="false"></SCard>`。属性：`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示固定高度配置。基础写法：`<SCard title="固定高度并滚动内容" height="280"></SCard>`。属性：`height` 类型 `string / number`，默认值 `''`；设置后卡片保持固定高度，默认由 body 区域滚动内容。
 card/customLayout
 :::
 
@@ -74,6 +74,7 @@ card/square
 | :----------------------: | ------------------------------------------------------------- | ----------------------------------------------- | --------- |
 | `v-model` / `modelValue` | 折叠状态，`true` 表示收起                                     | boolean                                         | `false`   |
 |          `size`          | 内边距尺寸，支持预设值或可被 `processWidth` 处理的 padding 值 | `small` / `default` / `large` / string / number | `default` |
+|         `height`         | 卡片外层高度；设置后内容区在固定高度内滚动                    | string / number                                 | `''`      |
 |         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染                     | string                                          | `''`      |
 |     `hoverAnimation`     | 鼠标移入容器时是否启用轻微上浮动画                            | boolean                                         | `false`   |
 |         `shadow`         | 阴影显示时机，语义同 Element Plus Card                        | `always` / `never` / `hover`                    | `never`   |
