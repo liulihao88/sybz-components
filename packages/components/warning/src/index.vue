@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue'
+import { computed, useAttrs, useSlots } from 'vue'
 import SIcon from '@/components/icon/src/index.vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
 import { processWidth } from '@sybz-components/utils'
@@ -40,7 +40,9 @@ const props = withDefaults(defineProps<Props>(), {
 const mergedProps = useGlobalComponentConfig('warning', props)
 
 const attrs = useAttrs()
+const slots = useSlots()
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
+const hasContent = computed(() => Boolean(slots.content || String(mergedProps.value.content ?? '').trim()))
 
 const mergedStyle = computed(() => {
   let obj: Record<string, any> = {}
@@ -113,7 +115,7 @@ function parseClass(): string {
       <div
         v-if="$slots.title || mergedProps.title"
         class="s-warning-box__title"
-        :class="`s-warning-box__title--${mergedProps.type}`"
+        :class="[`s-warning-box__title--${mergedProps.type}`, { 's-warning-box__title--with-content': hasContent }]"
       >
         <slot name="title">
           {{ mergedProps.title }}
@@ -148,7 +150,10 @@ function parseClass(): string {
   .s-warning-box__title {
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 4px;
+
+    &.s-warning-box__title--with-content {
+      margin-bottom: 4px;
+    }
 
     &.s-warning-box__title--info {
       color: var(--el-color-primary);

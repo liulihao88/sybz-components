@@ -1,5 +1,12 @@
 import { ElRadioGroup } from 'element-plus'
-import type { SRadioOption, SRadioSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
+import type {
+  SRadioItem,
+  SRadioOption,
+  SRadioOptionContext,
+  SRadioSelfProps,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
@@ -15,6 +22,8 @@ export type SRadioComponent = {
       showType?: 'radio' | 'button'
       options?: SRadioOption[]
       border?: boolean
+      /** 单选项之间的间距，数字按 px 处理 */
+      gap?: string | number
       value?: string | number | boolean
       label?: string | number | boolean
       customLabel?: (context: SRadioOptionContext<SRadioItem>) => any
@@ -28,6 +37,7 @@ export type SRadioComponent = {
       | 'showType'
       | 'options'
       | 'border'
+      | 'gap'
       | 'value'
       | 'label'
       | 'customLabel'
