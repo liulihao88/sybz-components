@@ -797,6 +797,16 @@ export function delay(delay: number = 0, fn?: () => void) {
  * const rule = validateOnSubmit('required', { message: '请输入名称' })
  */
 export function validateOnSubmit(
+  type?: ValidateTypeInput,
+  rules?: ValidateInput | false,
+  pureValid?: false,
+): ValidateRuleResult
+export function validateOnSubmit(
+  type: ValidateTypeInput | undefined,
+  rules: ValidateInput | boolean | undefined,
+  pureValid: true,
+): boolean
+export function validateOnSubmit(
   type: ValidateTypeInput = 'required',
   rules: ValidateInput | boolean = {},
   pureValid = false,
@@ -858,6 +868,12 @@ enum ValidateType {
   CUSTOM = 'custom',
 }
 
+export function validate(type?: ValidateTypeInput, rules?: ValidateInput | false, pureValid?: false): ValidateRuleResult
+export function validate(
+  type: ValidateTypeInput | undefined,
+  rules: ValidateInput | boolean | undefined,
+  pureValid: true,
+): boolean
 export function validate(
   type: ValidateTypeInput = 'required',
   rules: ValidateInput | boolean = {},
