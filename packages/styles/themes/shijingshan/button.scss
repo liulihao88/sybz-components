@@ -90,8 +90,8 @@
 
   &.is-link,
   &.is-text {
-    --el-button-text-color: var(--s-sjs-text-regular);
-    --el-button-hover-text-color: var(--s-sjs-primary);
+    --el-button-text-color: var(--s-sjs-primary);
+    --el-button-hover-text-color: var(--s-sjs-primary-hover);
     --el-button-active-text-color: var(--s-sjs-primary-active);
     --el-button-disabled-text-color: var(--s-sjs-text-muted);
 

@@ -538,7 +538,7 @@ defineExpose({
 </script>
 
 <template>
-  <div>
+  <div class="s-form-wrapper" :style="$attrs.style">
     <el-form
       ref="sFormRef"
       :model="formModel"
@@ -612,6 +612,11 @@ defineExpose({
 .s-form {
   display: flex;
   flex-wrap: wrap;
+  height: 100%;
+}
+
+.s-form-wrapper {
+  height: 100%;
 }
 
 .s-form--gap {

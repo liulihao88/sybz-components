@@ -102,7 +102,7 @@ const isShow = ref(false)
 
 <template>
   <s-button type="primary" @click="isShow = true">显示弹窗</s-button>
-  <s-dialog v-model="isShow" title="基础弹窗"> 内容 </s-dialog>
+  <s-dialog v-model="isShow" title="基础弹窗" @confirm="confirm"> 内容 </s-dialog>
 </template>
 ```
 
