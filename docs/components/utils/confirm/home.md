@@ -67,7 +67,7 @@ confirm(options, appContext)
 | `title`                    | `string`                                   | `'提示'`            | 确认框标题。                                                            |
 | `theme`                    | `'default' \| 'chenghua' \| 'shijingshan'` | `default`           | 确认框主题，设置为 `'chenghua'` 或 `'shijingshan'` 时使用对应主题样式。 |
 | `variant`                  | `'default' \| 'delete' \| 'warning'`       | `default`           | 语义样式；同步标题、标题栏和确认按钮。                                  |
-| `target`                   | `string`                                   | -                   | `delete` 场景的操作目标；message 为空时自动生成标准删除提示。           |
+| `target`                   | `string \| number`                         | -                   | `delete` 场景的操作目标；message 为空时自动生成标准删除提示。           |
 | `showCancelButton`         | `boolean`                                  | `true`              | 是否显示取消按钮。                                                      |
 | `showClose`                | `boolean`                                  | Element Plus 默认值 | 是否显示右上角关闭按钮。                                                |
 | `closeOnClickModal`        | `boolean`                                  | Element Plus 默认值 | 是否允许点击遮罩关闭。                                                  |

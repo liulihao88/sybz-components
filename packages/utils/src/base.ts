@@ -128,8 +128,10 @@ interface CopyOptions extends ToastOptions {
 }
 
 type WidthInput = string | number | Ref<string | number>
-type ConfirmMessage = string | VNode | (() => VNode)
-type ConfirmVariant = 'default' | 'delete' | 'warning'
+export type ConfirmMessage = string | VNode | (() => VNode)
+export type ConfirmVariant = 'default' | 'delete' | 'warning'
+export type ConfirmTheme = 'default' | 'chenghua' | 'shijingshan'
+export type ConfirmTarget = string | number
 type ConfirmAppendTarget = NonNullable<ElMessageBoxOptions['appendTo']>
 type AppRootElement = Element & {
   _vue_app?: {
@@ -137,7 +139,7 @@ type AppRootElement = Element & {
   }
 }
 
-export interface ConfirmOptions extends ElMessageBoxOptions {
+export interface ConfirmCustomOptions {
   /**
    * 确认框语义样式。
    */
@@ -145,16 +147,18 @@ export interface ConfirmOptions extends ElMessageBoxOptions {
   /**
    * 删除场景中要操作的目标名称。
    */
-  target?: string
+  target?: ConfirmTarget
   /**
    * 确认框主题。
    */
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: ConfirmTheme
   /**
    * 手动传入 appContext，处理多应用或嵌套弹窗场景。
    */
   appContext?: AppContext | null
 }
+
+export type ConfirmOptions = ElMessageBoxOptions & ConfirmCustomOptions
 
 interface TryCatchResult<T> {
   /**
@@ -1602,8 +1606,8 @@ export function confirm(
   return ElMessageBox.confirm(resolvedMessage, mergeOptions)
 }
 
-function _escapeHtml(value: string) {
-  return value.replace(/[&<>'"]/g, (character) => {
+function _escapeHtml(value: string | number) {
+  return String(value).replace(/[&<>'"]/g, (character) => {
     const entities: Record<string, string> = {
       '&': '&amp;',
       '<': '&lt;',
