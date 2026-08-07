@@ -35,14 +35,17 @@
 }
 
 .s-tabs-box--shijingshan.s-tabs-box--shijingshan.s-tabs-box--capsule {
-  --s-tabs-capsule-active-bg: var(--s-tabs-shijingshan-capsule-bg);
-  --s-tabs-capsule-active-color: #ffffff;
+  --s-tabs-capsule-active-bg: color-mix(in srgb, var(--s-sjs-primary) 10%, #ffffff);
+  --s-tabs-capsule-active-border-color: color-mix(in srgb, var(--s-sjs-primary) 28%, transparent);
+  --s-tabs-capsule-active-color: var(--s-tabs-shijingshan-active-color);
+  --s-tabs-capsule-hover-bg: color-mix(in srgb, var(--s-sjs-primary) 6.5%, transparent);
+  --s-tabs-capsule-hover-color: var(--s-tabs-shijingshan-active-color);
 
   .el-tabs__item.is-active {
-    color: #ffffff;
+    color: var(--s-tabs-shijingshan-active-color);
   }
 
   .el-tabs__item.is-active .s-tabs__label {
-    color: #ffffff;
+    color: inherit;
   }
 }

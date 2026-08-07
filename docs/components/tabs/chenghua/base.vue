@@ -28,7 +28,7 @@ const navList = [
       <template #warning>异常告警内容</template>
     </s-tabs>
 
-    <s-tabs v-model="capsuleTab" :options="navList" theme="chenghua" type="capsule">
+    <s-tabs v-model="capsuleTab" :options="navList" theme="chenghua" type="capsule" size="small">
       <template #audit>待审核服务内容</template>
       <template #running>运行中服务内容</template>
       <template #warning>异常告警内容</template>

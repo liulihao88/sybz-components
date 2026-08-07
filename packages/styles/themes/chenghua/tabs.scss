@@ -2,7 +2,7 @@
   --s-tabs-chenghua-color: #1f2f5c;
   --s-tabs-chenghua-active-color: var(--s-ch-primary, #2563eb);
   --s-tabs-chenghua-line-color: rgba(37, 99, 235, 0.14);
-  --s-tabs-chenghua-capsule-bg: linear-gradient(180deg, #4ea1ff 0%, #2563eb 100%);
+  --s-tabs-chenghua-capsule-bg: color-mix(in srgb, var(--s-ch-primary, #2563eb) 10%, #ffffff);
 
   .el-tabs__item {
     color: var(--s-tabs-chenghua-color);
@@ -36,13 +36,16 @@
 
 .s-tabs-box--chenghua.s-tabs-box--chenghua.s-tabs-box--capsule {
   --s-tabs-capsule-active-bg: var(--s-tabs-chenghua-capsule-bg);
-  --s-tabs-capsule-active-color: #ffffff;
+  --s-tabs-capsule-active-border-color: color-mix(in srgb, var(--s-ch-primary, #2563eb) 28%, transparent);
+  --s-tabs-capsule-active-color: var(--s-tabs-chenghua-active-color);
+  --s-tabs-capsule-hover-bg: color-mix(in srgb, var(--s-ch-primary, #2563eb) 6.5%, transparent);
+  --s-tabs-capsule-hover-color: var(--s-tabs-chenghua-active-color);
 
   .el-tabs__item.is-active {
-    color: #ffffff;
+    color: var(--s-tabs-chenghua-active-color);
   }
 
   .el-tabs__item.is-active .s-tabs__label {
-    color: #ffffff;
+    color: inherit;
   }
 }

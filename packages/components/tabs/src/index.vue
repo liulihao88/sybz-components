@@ -239,8 +239,11 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 
   --s-tabs-capsule-bg: #f3f5fb;
   --s-tabs-capsule-border-color: rgba(16, 24, 40, 0.08);
-  --s-tabs-capsule-active-bg: var(--el-color-primary);
-  --s-tabs-capsule-active-color: #ffffff;
+  --s-tabs-capsule-active-bg: color-mix(in srgb, var(--el-color-primary) 11%, #ffffff);
+  --s-tabs-capsule-active-border-color: color-mix(in srgb, var(--el-color-primary) 32%, transparent);
+  --s-tabs-capsule-active-color: var(--el-color-primary);
+  --s-tabs-capsule-hover-bg: rgba(16, 24, 40, 0.055);
+  --s-tabs-capsule-hover-color: var(--el-color-primary);
   --s-tabs-capsule-color: #1f2937;
   --s-tabs-capsule-muted-color: #7b8190;
   --s-tabs-capsule-active-shadow: rgba(64, 158, 255, 0.22);
@@ -258,11 +261,13 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     z-index: 2;
     top: 0;
     left: 0;
+    box-sizing: border-box;
     border-radius: 999px;
+    border: 1px solid var(--s-tabs-capsule-active-border-color);
     background: var(--s-tabs-capsule-active-bg);
     box-shadow:
-      0 10px 20px var(--s-tabs-capsule-active-shadow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      0 4px 14px var(--s-tabs-capsule-active-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
     opacity: 0;
     pointer-events: none;
     transition:
@@ -304,9 +309,9 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 
   :deep(.el-tabs__header) {
     display: inline-flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: flex-start;
-    min-height: calc(
+    height: calc(
       var(--s-tabs-capsule-height) + (var(--s-tabs-capsule-outer-gap) * 2) + (var(--s-tabs-capsule-border-width) * 2)
     );
     width: auto;
@@ -318,7 +323,8 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     box-sizing: border-box;
     flex: none;
     display: inline-flex;
-    align-items: stretch;
+    align-items: center;
+    height: 100%;
     width: auto;
     max-width: 100%;
     margin-bottom: 0;
@@ -328,7 +334,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.28)), var(--s-tabs-capsule-bg);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.78),
-      0 8px 24px rgba(17, 24, 39, 0.08);
+      0 4px 18px rgba(17, 24, 39, 0.08);
   }
 
   :deep(.el-tabs__nav-wrap::after),
@@ -338,7 +344,9 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
 
   :deep(.el-tabs__nav-scroll) {
     display: inline-flex;
+    align-items: center;
     width: auto;
+    height: 100%;
     max-width: 100%;
   }
 
@@ -346,7 +354,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     position: relative;
     display: inline-flex;
     float: none;
-    align-items: stretch;
+    align-items: center;
     gap: var(--s-tabs-capsule-item-gap);
     width: auto;
     border: 0;
@@ -365,12 +373,17 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     font-weight: 700;
     line-height: var(--s-tabs-capsule-height);
     transition:
+      background-color 0.2s,
       color 0.2s,
+      box-shadow 0.2s,
       transform 0.2s;
   }
 
-  :deep(.el-tabs__item:hover) {
-    color: var(--s-tabs-capsule-active-bg);
+  :deep(.el-tabs__item:not(.is-active):hover) {
+    background: var(--s-tabs-capsule-hover-bg);
+    box-shadow: inset 0 0 0 1px rgba(16, 24, 40, 0.035);
+    color: var(--s-tabs-capsule-hover-color);
+    transform: translateY(-1px);
   }
 
   :deep(.el-tabs__item.is-active) {

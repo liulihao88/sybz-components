@@ -52,7 +52,6 @@ const navList = [
 
 <style scoped lang="scss">
 .tabs-capsule-demo {
-  --s-tabs-capsule-active-bg: var(--el-color-primary);
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -71,7 +70,7 @@ const navList = [
   }
 
   :deep(.el-tabs__item.is-active .s-tabs__label em) {
-    color: rgba(255, 255, 255, 0.86);
+    color: #7c3aed;
   }
 }
 </style>
