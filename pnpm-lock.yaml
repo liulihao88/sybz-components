@@ -12,8 +12,8 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1(vue@3.4.15(typescript@5.3.3))
       '@sybz-components/utils':
-        specifier: ^1.0.3
-        version: 1.0.3(typescript@5.3.3)
+        specifier: ^1.0.4
+        version: 1.0.4(typescript@5.3.3)
     devDependencies:
       '@eslint/js':
         specifier: 9.39.4
@@ -1433,8 +1433,8 @@ packages:
   '@sxzz/popperjs-es@2.11.7':
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
 
-  '@sybz-components/utils@1.0.3':
-    resolution: {integrity: sha512-+UixpJD8RHhX0J+1DUYfoz5auDxhwCvNuLggJ8itlInGoQzjFCbwIR0oxjjPKNXpSr+oGDJxzEu+ZS6/wWmQ2Q==}
+  '@sybz-components/utils@1.0.4':
+    resolution: {integrity: sha512-GZQ9AZ2353a8AHF+qq6VzkJGnwHvURvJTfpYtfypkPVjdKFXWTlvWkWnzFVodI5NDAa37TRkZB9gtqfq1/rEMQ==}
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -5933,7 +5933,7 @@ snapshots:
 
   '@sxzz/popperjs-es@2.11.7': {}
 
-  '@sybz-components/utils@1.0.3(typescript@5.3.3)':
+  '@sybz-components/utils@1.0.4(typescript@5.3.3)':
     dependencies:
       '@vue/reactivity': 3.5.26
       '@vue/shared': 3.5.26
