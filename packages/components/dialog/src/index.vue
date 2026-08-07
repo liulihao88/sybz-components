@@ -111,7 +111,7 @@ interface DialogProps {
   modelValue?: boolean
   mode?: 'dialog' | 'drawer'
   variant?: 'default' | 'delete' | 'warning'
-  target?: string
+  target?: string | number
   title?: string
   subTitle?: string
   width?: string | number
