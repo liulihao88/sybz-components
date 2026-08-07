@@ -825,7 +825,7 @@ export function validateOnSubmit(
       ...normalized.rulesObject,
       trigger: normalized.rulesObject.trigger ?? [],
     },
-    normalized.pureValid,
+    normalized.pureValid as false,
   )
 }
 
