@@ -18,26 +18,6 @@
 tag/base
 :::
 
-### main.ts 全局设置主题
-
-在 `main.ts` 安装组件库时设置 `theme`，未单独传入 `theme` 的 `s-tag` 会使用该主题。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`。
-
-```ts
-app.use(SybzComponents, {
-  theme: 'chenghua',
-})
-```
-
-也可以只设置 Tag 的默认主题；组件上显式传入的 `theme` 优先级最高。
-
-```ts
-app.use(SybzComponents, {
-  tag: {
-    theme: 'chenghua',
-  },
-})
-```
-
 ### 成华主题
 
 #### chenghua基础用法
