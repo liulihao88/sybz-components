@@ -90,6 +90,10 @@ button/customColor
 
 其他属性默认继承 `el-button`
 
+::::demo 展示链接按钮。设置 `href` 后会渲染为链接并直接打开 URL。基础写法：`<s-button href="https://element-plus.org">打开文档</s-button>`。属性：`href` 类型 `string`，默认值 `''`。
+button/href
+:::
+
 |           属性名           | 说明                                | 类型                                       | 默认值    |
 | :------------------------: | ----------------------------------- | ------------------------------------------ | --------- |
 |         `content`          | tooltip 的提示文字                  | string                                     | `''`      |

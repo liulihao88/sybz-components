@@ -23,9 +23,9 @@
     </div>
 
     <div class="shijingshan-button-demo__row">
-      <s-button theme="shijingshan" text>文字按钮</s-button>
-      <s-button theme="shijingshan" link>查看详情</s-button>
-      <s-button theme="shijingshan" text disabled>禁用文字</s-button>
+      <s-button theme="shijingshan" link>文字按钮</s-button>
+      <s-button theme="shijingshan" link type="danger">查看详情</s-button>
+      <s-button theme="shijingshan" text type="success">禁用文字</s-button>
     </div>
 
     <div class="shijingshan-button-demo__row">

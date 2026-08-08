@@ -32,6 +32,7 @@ defineOptions({
 })
 
 interface SButtonSelfProps {
+  href?: string
   time?: number
   content?: string
   tooltipAttrs?: Record<string, any>
@@ -47,6 +48,7 @@ interface SButtonSelfProps {
 }
 
 const props = withDefaults(defineProps<SButtonSelfProps>(), {
+  href: '',
   time: 0,
   content: '',
   tooltipAttrs: () => ({}),
@@ -97,6 +99,8 @@ const buttonAttrs = computed(() => {
   return {
     loading: loading.value,
     size: mergedProps.value.size || undefined,
+    tag: mergedProps.value.href ? 'a' : normalizedAttrs.tag,
+    href: mergedProps.value.href || normalizedAttrs.href,
     ...normalizedAttrs,
     style: [
       {

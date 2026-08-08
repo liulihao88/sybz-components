@@ -1,6 +1,8 @@
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
 
 export interface SButtonSelfProps {
+  /** 链接地址，设置后按钮会渲染为可直接打开 URL 的链接 */
+  href?: string
   /** 点击后进入 loading 状态的毫秒数，0 表示不启用点击节流 loading */
   time?: number
   /** 按钮提示内容，设置后会用 s-tooltip 包裹按钮 */
