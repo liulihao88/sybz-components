@@ -61,5 +61,29 @@
     font-weight: 400;
     line-height: 20px;
     box-shadow: none;
+
+    &.el-button--success {
+      --el-button-text-color: var(--s-theme-success, var(--el-color-success));
+      --el-button-hover-text-color: var(--s-theme-success-hover, var(--el-color-success-light-3));
+      --el-button-active-text-color: var(--s-theme-success-active, var(--el-color-success-dark-2));
+    }
+
+    &.el-button--warning {
+      --el-button-text-color: var(--s-theme-warning, var(--el-color-warning));
+      --el-button-hover-text-color: var(--s-theme-warning-hover, var(--el-color-warning-light-3));
+      --el-button-active-text-color: var(--s-theme-warning-active, var(--el-color-warning-dark-2));
+    }
+
+    &.el-button--danger {
+      --el-button-text-color: var(--s-theme-danger, var(--el-color-danger));
+      --el-button-hover-text-color: var(--s-theme-danger-hover, var(--el-color-danger-light-3));
+      --el-button-active-text-color: var(--s-theme-danger-active, var(--el-color-danger-dark-2));
+    }
+
+    &.el-button--info {
+      --el-button-text-color: var(--s-theme-info, var(--el-color-info));
+      --el-button-hover-text-color: var(--s-theme-info-hover, var(--el-color-info-light-3));
+      --el-button-active-text-color: var(--s-theme-info-active, var(--el-color-info-dark-2));
+    }
   }
 }

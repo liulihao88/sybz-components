@@ -7,6 +7,10 @@
   --s-theme-text-muted: var(--s-sjs-text-muted);
   --s-theme-radius: var(--s-sjs-radius);
   --s-theme-font-family: var(--s-sjs-font-family);
+  --s-theme-success: var(--s-sjs-success);
+  --s-theme-warning: var(--s-sjs-warning);
+  --s-theme-danger: var(--s-sjs-danger);
+  --s-theme-info: var(--s-sjs-info);
   @include s-themed-button-transition(0.2s);
 
   &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(

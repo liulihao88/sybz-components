@@ -7,6 +7,10 @@
   --s-theme-text-muted: var(--s-ch-text-muted);
   --s-theme-radius: var(--s-ch-radius);
   --s-theme-font-family: var(--s-ch-font-family);
+  --s-theme-success: var(--s-ch-success);
+  --s-theme-warning: var(--s-ch-warning);
+  --s-theme-danger: var(--s-ch-danger);
+  --s-theme-info: var(--s-ch-info);
   @include s-themed-button-transition();
 
   &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(

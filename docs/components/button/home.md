@@ -74,6 +74,12 @@ button/slots
 button/ghost
 :::
 
+### link
+
+::::demo 展示不同 `type` 的链接按钮，并支持切换 `default`、`chenghua`、`shijingshan` 主题。基础写法：`<s-button :theme="theme" type="success" href="https://element-plus.org">Success</s-button>`。
+button/link
+:::
+
 ### other
 
 :::demo 展示 Element Plus 按钮能力透传。基础写法：`<s-button type="primary" :size="dynamicSize">Primary</s-button>`。属性：该示例主要展示 `el-button` 属性透传，具体可选值以 Element Plus Button 为准。
@@ -90,8 +96,9 @@ button/customColor
 
 其他属性默认继承 `el-button`
 
-::::demo 展示链接按钮。设置 `href` 后会渲染为链接并直接打开 URL。基础写法：`<s-button href="https://element-plus.org">打开文档</s-button>`。属性：`href` 类型 `string`，默认值 `''`。
+:::demo 展示链接按钮。设置 `href` 后会渲染为链接并直接打开 URL。基础写法：`<s-button href="https://element-plus.org">打开文档</s-button>`。属性：`href` 类型 `string`，默认值 `''`。
 button/href
+
 :::
 
 |           属性名           | 说明                                | 类型                                       | 默认值    |
