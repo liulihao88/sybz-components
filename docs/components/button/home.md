@@ -96,7 +96,7 @@ button/customColor
 
 其他属性默认继承 `el-button`
 
-:::demo 展示链接按钮。设置 `href` 后会渲染为链接并直接打开 URL。基础写法：`<s-button href="https://element-plus.org">打开文档</s-button>`。属性：`href` 类型 `string`，默认值 `''`。
+:::demo 展示链接按钮。设置 `href` 后会渲染为链接并直接打开 URL。基础写法：`<s-button href="https://element-plus.org" target="_blank">在新窗口打开文档</s-button>`。属性：`href` 类型 `string`，默认值 `''`；`target` 可选 `_blank / _parent / _self / _top`，默认值 `_self`。
 button/href
 
 :::
@@ -115,6 +115,9 @@ button/href
 |      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                    | `false`   |
 |          `ghost`           | 幽灵按钮，使背景透明                | boolean                                    | `false`   |
 |      `iconPlacement`       | 按钮图标的位置                      | `'start' \| 'end'`                         | `start`   |
+
+| `href` | 链接地址，设置后渲染为链接 | string | `''` |
+| `target` | 链接打开目标 | `'_blank' \| '_parent' \| '_self' \| '_top'` | `_self` |
 
 ### 事件
 

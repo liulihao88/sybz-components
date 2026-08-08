@@ -5,6 +5,6 @@ const { proxy } = getCurrentInstance()
 
 <template>
   <div>
-    <s-button href="https://element-plus.org">打开文档</s-button>
+    <s-button href="https://element-plus.org" target="_blank">在新窗口打开文档</s-button>
   </div>
 </template>

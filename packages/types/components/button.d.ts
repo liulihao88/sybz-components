@@ -15,6 +15,8 @@ export type SButtonComponent = {
     $props: {
       /** 链接地址，设置后按钮会渲染为可直接打开 URL 的链接 */
       href?: string
+      /** 链接打开目标 */
+      target?: '_blank' | '_parent' | '_self' | '_top'
       /** 点击后进入 loading 状态的毫秒数，0 表示不启用点击节流 loading */
       time?: number
       /** 按钮提示内容，设置后会用 s-tooltip 包裹按钮 */
@@ -41,6 +43,8 @@ export type SButtonComponent = {
       iconPlacement?: 'start' | 'end'
     } & Omit<
       ElButtonInstance['$props'],
+      | 'href'
+      | 'target'
       | 'time'
       | 'content'
       | 'tooltipAttrs'
