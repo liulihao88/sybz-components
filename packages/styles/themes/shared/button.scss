@@ -30,7 +30,7 @@
 }
 // All themed buttons share this contract. A theme only needs to provide the
 // --s-theme-* tokens; component-specific theme files can add visual variants.
-.s-button--theme.s-button--theme {
+.s-button--theme.s-button--theme.s-button--theme {
   --el-button-font-weight: var(--s-theme-button-font-weight, 500);
   --el-button-border-radius: var(--s-theme-radius, 8px);
   border-radius: var(--s-theme-radius, 8px);
@@ -50,9 +50,18 @@
 
   &.is-link,
   &.is-text {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: transparent;
+    --el-button-outline-color: transparent;
     --el-button-text-color: var(--s-theme-primary);
+    --el-button-hover-bg-color: transparent;
+    --el-button-hover-border-color: transparent;
     --el-button-hover-text-color: var(--s-theme-primary-hover, var(--s-theme-primary));
+    --el-button-active-bg-color: transparent;
+    --el-button-active-border-color: transparent;
     --el-button-active-text-color: var(--s-theme-primary-active, var(--s-theme-primary));
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: transparent;
     --el-button-disabled-text-color: var(--s-theme-text-muted, #9ca3af);
     min-height: auto;
     padding: 0 8px;
