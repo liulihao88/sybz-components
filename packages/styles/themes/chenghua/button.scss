@@ -1,12 +1,12 @@
 @import '../shared/button.scss';
 
 .s-button--chenghua.s-button--chenghua {
-  --el-button-font-weight: 500;
-  --el-button-border-radius: var(--s-ch-radius);
-
-  border-radius: var(--s-ch-radius);
-  font-family: var(--s-ch-font-family);
-  line-height: 1;
+  --s-theme-primary: var(--s-ch-primary);
+  --s-theme-primary-hover: var(--s-ch-primary-hover);
+  --s-theme-primary-active: var(--s-ch-primary-active);
+  --s-theme-text-muted: var(--s-ch-text-muted);
+  --s-theme-radius: var(--s-ch-radius);
+  --s-theme-font-family: var(--s-ch-font-family);
   @include s-themed-button-transition();
 
   &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
@@ -83,19 +83,6 @@
     --el-button-disabled-bg-color: var(--s-ch-button-type-disabled);
     --el-button-disabled-border-color: var(--s-ch-button-type-disabled-border);
     --el-button-disabled-text-color: #ffffff;
-  }
-
-  &.is-link,
-  &.is-text {
-    --el-button-text-color: var(--s-ch-primary);
-    --el-button-hover-text-color: var(--s-ch-primary-hover);
-    --el-button-active-text-color: var(--s-ch-primary-active);
-    --el-button-disabled-text-color: var(--s-ch-text-secondary);
-
-    min-height: auto;
-    padding: 0 8px;
-    border-radius: 0;
-    font-size: 14px;
   }
 
   @include s-themed-button-icon-gap();

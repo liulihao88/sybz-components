@@ -28,3 +28,38 @@
     margin-left: $gap;
   }
 }
+// All themed buttons share this contract. A theme only needs to provide the
+// --s-theme-* tokens; component-specific theme files can add visual variants.
+.s-button--theme.s-button--theme {
+  --el-button-font-weight: var(--s-theme-button-font-weight, 500);
+  --el-button-border-radius: var(--s-theme-radius, 8px);
+  border-radius: var(--s-theme-radius, 8px);
+  font-family: var(--s-theme-font-family, inherit);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.28s ease;
+
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+
+  &.is-link,
+  &.is-text {
+    --el-button-text-color: var(--s-theme-primary);
+    --el-button-hover-text-color: var(--s-theme-primary-hover, var(--s-theme-primary));
+    --el-button-active-text-color: var(--s-theme-primary-active, var(--s-theme-primary));
+    --el-button-disabled-text-color: var(--s-theme-text-muted, #9ca3af);
+    min-height: auto;
+    padding: 0 8px;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    box-shadow: none;
+  }
+}

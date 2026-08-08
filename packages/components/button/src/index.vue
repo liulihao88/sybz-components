@@ -110,6 +110,7 @@ const buttonAttrs = computed(() => {
 })
 
 const buttonClass = computed(() => ({
+  's-button--theme': mergedProps.value.theme !== 'default',
   's-button--hover-animation': mergedProps.value.hoverAnimation,
   's-button--ghost': mergedProps.value.ghost,
   's-button--icon-end': mergedProps.value.iconPlacement === 'end',
