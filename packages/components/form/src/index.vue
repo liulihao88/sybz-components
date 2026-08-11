@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, unref, watch } from 'vue'
+import { computed, ref, unref, useAttrs, watch, type StyleValue } from 'vue'
 import RenderComp from './renderComp.vue'
 import { validateForm, isEmpty, $toast } from '@sybz-components/utils'
 import SIcon from '@/components/icon/src/index.vue'
@@ -77,6 +77,8 @@ defineOptions({
   inheritAttrs: false,
 })
 
+const attrs = useAttrs()
+
 const props = withDefaults(defineProps<SFormProps>(), {
   theme: 'default',
   showFooter: import.meta.env.DEV ? true : false,
@@ -101,6 +103,7 @@ const hasMultipleColumns = computed(
 )
 const useGap = computed(() => Boolean(formGap.value) && hasMultipleColumns.value)
 const formStyle = computed(() => (useGap.value ? { '--s-form-gap': formGap.value } : undefined))
+const wrapperStyle = computed<StyleValue | undefined>(() => attrs.style as StyleValue | undefined)
 const formClass = computed(() => ({
   's-form--gap': useGap.value,
   's-form--chenghua': mergedProps.value.theme === 'chenghua',
@@ -538,7 +541,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-form-wrapper" :style="$attrs.style">
+  <div class="s-form-wrapper" :style="wrapperStyle">
     <el-form
       ref="sFormRef"
       :model="formModel"
