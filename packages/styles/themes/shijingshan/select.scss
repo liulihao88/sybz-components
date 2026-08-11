@@ -41,26 +41,26 @@
   }
 
   .el-select__selection .el-tag {
-    --el-tag-bg-color: var(--el-color-primary-light-9);
-    --el-tag-border-color: var(--el-color-primary-light-5);
-    --el-tag-hover-color: var(--el-color-primary-light-8);
-    --el-tag-text-color: var(--el-color-primary);
+    --el-tag-bg-color: var(--s-sjs-primary-soft-2);
+    --el-tag-border-color: var(--s-sjs-primary-border-hover);
+    --el-tag-hover-color: var(--s-sjs-primary-soft);
+    --el-tag-text-color: var(--s-sjs-primary);
 
-    border-color: var(--el-color-primary-light-5);
-    background-color: var(--el-color-primary-light-9);
-    color: var(--el-color-primary);
+    border-color: var(--s-sjs-primary-border-hover);
+    background-color: var(--s-sjs-primary-soft-2);
+    color: var(--s-sjs-primary);
   }
 
   .el-select__selection .el-tag__content {
-    color: var(--el-color-primary);
+    color: var(--s-sjs-primary);
   }
 
   .el-select__selection .el-tag__close {
-    color: var(--el-color-primary);
+    color: var(--s-sjs-primary);
   }
 
   .el-select__selection .el-tag__close:hover {
-    background-color: var(--el-color-primary);
+    background-color: var(--s-sjs-primary);
     color: #ffffff;
   }
 
