@@ -460,11 +460,11 @@ const mergedStyle = computed(() => {
   display: none;
   width: 14px;
   height: 14px;
-  color: var(--45);
+  color: var(--el-input-icon-color, var(--el-text-color-placeholder));
   cursor: pointer;
 
   &:hover {
-    color: var(--blue);
+    color: var(--el-input-clear-hover-color, var(--el-text-color-secondary));
   }
 }
 </style>

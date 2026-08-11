@@ -91,7 +91,7 @@ export default {
         // size: 'small'
       },
       input: {
-        clearable: false,
+        // clearable: false,
       },
       tooltip: {
         // showAfter: 1500,
