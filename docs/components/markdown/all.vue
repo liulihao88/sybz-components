@@ -29,6 +29,12 @@ Markdown 可以包含脚注[^note]。
 : 这是定义列表的内容。
 
 [^note]: 这是脚注内容。
+
+## Emoji 与图片
+
+原生 Emoji：😀 🎉 👍 ❤️
+
+![Markdown 图片](/img/hero.jpg)
 `)
 
 const handleError = (error: unknown) => console.error(error)
