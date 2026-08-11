@@ -173,6 +173,14 @@ const sanitizeHtml = (html: string) => {
   })
 }
 
+// 流式 Markdown 可能暂时只收到标题标记（例如 "##"）。在标题文本到达前
+// 不把不完整语法当作普通文本输出，避免用户看到短暂的原始井号。
+const normalizeStreamingSource = (source: string) => {
+  const match = source.match(/(^|\n)(#{1,6}\s*)$/)
+  if (!match) return source
+  return source.slice(0, match.index! + (match[1]?.length || 0))
+}
+
 const enhanceMermaid = async (version: number) => {
   const container = rootRef.value
   const blocks = container?.querySelectorAll<HTMLElement>('.s-markdown__mermaid')
@@ -200,7 +208,7 @@ const render = async () => {
   previewVisible.value = false
   try {
     const { md, currentHeadings } = createMarkdown()
-    const html = sanitizeHtml(md.render(props.source || ''))
+    const html = sanitizeHtml(md.render(normalizeStreamingSource(props.source || '')))
     if (version !== renderVersion) return
     headings.value = currentHeadings
     renderedHtml.value = html
