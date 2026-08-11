@@ -8062,23 +8062,6 @@ snapshots:
       - supports-color
       - terser
 
-  inferred-types@0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1):
-    dependencies:
-      brilliant-errors: 0.7.3(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
-    transitivePeerDependencies:
-      - '@edge-runtime/vm'
-      - '@vitest/browser'
-      - '@vitest/ui'
-      - happy-dom
-      - jsdom
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
   inherits@2.0.4: {}
 
   internal-slot@1.0.7:
@@ -8653,7 +8636,7 @@ snapshots:
   native-dash@1.25.0(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1):
     dependencies:
       brilliant-errors: 0.7.3(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
-      inferred-types: 0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
+      inferred-types: 0.37.6(happy-dom@12.10.3)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
