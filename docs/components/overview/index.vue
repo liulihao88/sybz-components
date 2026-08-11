@@ -2,6 +2,8 @@
 import { computed, ref } from 'vue'
 
 type ThemeName = 'default' | 'chenghua' | 'shijingshan'
+type RadioShowType = 'radio' | 'button'
+type CheckboxShowType = 'check' | 'button'
 
 const currentTheme = ref<ThemeName>('default')
 const keyword = ref('文件管理')
@@ -13,6 +15,8 @@ const enabled = ref(true)
 const agreeItems = ref(['log'])
 const radioValue = ref('private')
 const showDialog = ref(false)
+const radioShowType = ref<RadioShowType>('radio')
+const checkboxShowType = ref<CheckboxShowType>('check')
 
 const themes: Array<{ label: string; value: ThemeName }> = [
   { label: 'default', value: 'default' },
@@ -42,6 +46,16 @@ const radioOptions = [
   { label: '私有', value: 'private' },
   { label: '团队', value: 'team' },
   { label: '公开', value: 'public' },
+]
+
+const radioShowTypeOptions = [
+  { label: 'radio', value: 'radio' },
+  { label: 'button', value: 'button' },
+]
+
+const checkboxShowTypeOptions = [
+  { label: 'check', value: 'check' },
+  { label: 'button', value: 'button' },
 ]
 
 const tagOptions = [
@@ -153,20 +167,44 @@ const tableData = [
     </section>
 
     <section>
-      <s-title :theme="currentTheme"></s-title>
-
-      <div>
-        <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme"></s-tabs>
-        <s-tooltip v-if="tabsValue === 'chenghua'" content="超出字符就隐藏, 鼠标移入显示全部" width="100"></s-tooltip>
-        <div v-else><s-warning content="这是基础用法" title="我是title"></s-warning></div>
-      </div>
+      <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme"></s-tabs>
+      <s-tooltip content="超出字符就隐藏, 鼠标移入显示全部" width="100"></s-tooltip>
+      <s-warning content="这是基础用法" title="我是title"></s-warning>
     </section>
 
     <section class="overview-section">
       <s-title title="选择和状态" :theme="currentTheme" />
+      <div class="overview-grid overview-grid--form">
+        <s-select
+          v-model="radioShowType"
+          title="单选 showType（默认值：radio）"
+          :options="radioShowTypeOptions"
+          :theme="currentTheme"
+          width="400"
+        />
+        <s-select
+          v-model="checkboxShowType"
+          title="多选 showType（默认值：check）"
+          :options="checkboxShowTypeOptions"
+          width="400"
+          :theme="currentTheme"
+        />
+      </div>
       <div class="overview-stack">
-        <s-checkbox v-model="agreeItems" :options="checkboxOptions" :theme="currentTheme" :disabled="isDisabled" />
-        <s-radio v-model="radioValue" :options="radioOptions" :theme="currentTheme" :disabled="isDisabled" />
+        <s-checkbox
+          v-model="agreeItems"
+          :options="checkboxOptions"
+          :theme="currentTheme"
+          :disabled="isDisabled"
+          :show-type="checkboxShowType"
+        />
+        <s-radio
+          v-model="radioValue"
+          :options="radioOptions"
+          :theme="currentTheme"
+          :disabled="isDisabled"
+          :show-type="radioShowType"
+        />
         <div class="overview-tags">
           <s-tag
             v-for="item in tagOptions"
@@ -186,7 +224,7 @@ const tableData = [
     <section class="overview-section">
       <s-title title="数据展示" :theme="currentTheme" />
       <div class="overview-grid overview-grid--display">
-        <s-card title="服务概览" :theme="currentTheme" shadow="hover">
+        <s-card title="s-descriptions组件" :theme="currentTheme" shadow="hover">
           <s-descriptions :options="descOptions" :theme="currentTheme" :column="2" show-all />
         </s-card>
         <s-card title="容量水位" :theme="currentTheme" shadow="hover">
