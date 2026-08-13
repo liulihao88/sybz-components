@@ -45,6 +45,7 @@ const expanded = ref(true)
 const mounted = ref(false)
 const keyword = ref('')
 const sidebarRef = ref<HTMLElement | null>(null)
+const searchInputRef = ref<HTMLInputElement | null>(null)
 let dragOffsetX = 0
 let dragOffsetY = 0
 let dragStartX = 0
@@ -312,7 +313,7 @@ const consumeSuppressNextClick = () => {
   return false
 }
 
-const goTo = async (item: QuickItem) => {
+const goTo = async (item: QuickItem, keepSearchFocus = false) => {
   if (consumeSuppressNextClick()) {
     return
   }
@@ -320,6 +321,11 @@ const goTo = async (item: QuickItem) => {
   await navigateTo(item.routeLink)
   scrollSidebarToItem(item).catch(() => undefined)
   await nextTick()
+
+  if (keepSearchFocus) {
+    searchInputRef.value?.focus()
+    return
+  }
 
   try {
     const escapedLink =
@@ -333,6 +339,16 @@ const goTo = async (item: QuickItem) => {
   } catch {
     // Focus recovery is optional after navigation.
   }
+}
+
+const handleSearchEnter = (event: KeyboardEvent) => {
+  if (event.isComposing || !keyword.value.trim()) return
+
+  const firstMatchedItem = filteredGroups.value[0]?.items[0]
+  if (!firstMatchedItem) return
+
+  event.preventDefault()
+  goTo(firstMatchedItem, true)
 }
 
 const toggleExpanded = () => {
@@ -496,11 +512,13 @@ onUnmounted(() => {
     <div v-else key="expanded" class="component-quick-sidebar__body" @pointerdown="handlePanelDragStart">
       <div class="component-quick-sidebar__top">
         <input
+          ref="searchInputRef"
           v-model="keyword"
           class="component-quick-sidebar__search"
           type="search"
           placeholder="搜索"
           aria-label="搜索组件"
+          @keydown.enter="handleSearchEnter"
         />
         <button
           class="component-quick-sidebar__handle"
