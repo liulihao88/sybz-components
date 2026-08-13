@@ -74,22 +74,22 @@ button/slots
 button/ghost
 :::
 
-### link
+### 链接 link
 
-::::demo 展示不同 `type` 的链接按钮，并支持切换 `default`、`chenghua`、`shijingshan` 主题。基础写法：`<s-button :theme="theme" type="success" href="https://element-plus.org">Success</s-button>`。
+:::demo
 button/link
-:::
-
-### other
-
-:::demo 展示 Element Plus 按钮能力透传。基础写法：`<s-button type="primary" :size="dynamicSize">Primary</s-button>`。属性：该示例主要展示 `el-button` 属性透传，具体可选值以 Element Plus Button 为准。
-button/other
 :::
 
 ### 自定义颜色（color 默认值：''，dark 默认值：false）
 
 :::demo 展示自定义颜色及深色模式下的颜色适配。基础写法：`<s-button color="#626aef">自定义颜色</s-button>`。属性：`color` 类型 `string`，默认值 `''`；`dark` 可选 `true / false`，默认值 `false`；可与 `plain`、`disabled` 组合使用。
 button/customColor
+:::
+
+### other
+
+:::demo
+button/other
 :::
 
 ### 属性
@@ -101,7 +101,7 @@ button/href
 
 :::
 
-|           属性名           | 说明                                | 类型                                       | 默认值    |
+|           属性名           | 说明                                 | 类型                                       | 默认值    |
 | :------------------------: | ----------------------------------- | ------------------------------------------ | --------- |
 |         `content`          | tooltip 的提示文字                  | string                                     | `''`      |
 |           `time`           | 防抖时长                            | number(毫秒)                               | `0`       |

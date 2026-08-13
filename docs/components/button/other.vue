@@ -60,7 +60,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
       </div>
     </template>
 
-    <div class="m-b-8">基础按钮</div>
+    <s-title title="基础按钮"></s-title>
     <el-radio-group v-model="baseRadio" class="m-b-12">
       <el-radio label="default" value="default" />
       <el-radio label="plain" value="plain" />
@@ -93,27 +93,34 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     </el-space>
     <el-divider />
 
-    <div class="m-b-16">加载状态按钮</div>
-    <s-button text bg type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
-      {{ size === 'disabled' ? '停止加载' : '加载中' }}
-    </s-button>
-    <s-button
-      type="primary"
-      plain
-      :size="dynamicSize"
-      :disabled="size === 'disabled'"
-      :loading-icon="h('ep:eleme')"
-      :loading="size !== 'disabled'"
-    >
-      {{ size === 'disabled' ? '停止加载' : '加载中' }}
-    </s-button>
-    <s-button type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
-      <template #loading>
-        <div class="custom-loading">
-          <svg class="circular" viewBox="-10, -10, 50, 50">
-            <path
-              class="path"
-              d="
+    <s-title title="加载状态按钮">
+      <s-button
+        text
+        bg
+        type="primary"
+        :size="dynamicSize"
+        :disabled="size === 'disabled'"
+        :loading="size !== 'disabled'"
+      >
+        {{ size === 'disabled' ? '停止加载' : '加载中' }}
+      </s-button>
+      <s-button
+        type="primary"
+        plain
+        :size="dynamicSize"
+        :disabled="size === 'disabled'"
+        :loading-icon="h('ep:eleme')"
+        :loading="size !== 'disabled'"
+      >
+        {{ size === 'disabled' ? '停止加载' : '加载中' }}
+      </s-button>
+      <s-button type="primary" :size="dynamicSize" :disabled="size === 'disabled'" :loading="size !== 'disabled'">
+        <template #loading>
+          <div class="custom-loading">
+            <svg class="circular" viewBox="-10, -10, 50, 50">
+              <path
+                class="path"
+                d="
             M 30 15
             L 28 17
             M 25.61 25.61
@@ -121,31 +128,43 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
             A 15 15, 0, 1, 1, 27.99 7.5
             L 15 15
           "
-              style="fill: rgb(0 0 0 / 0%); stroke-width: 4px"
-            />
-          </svg>
-        </div>
-      </template>
-      {{ size === 'disabled' ? '停止加载' : '加载中' }}
-    </s-button>
+                style="fill: rgb(0 0 0 / 0%); stroke-width: 4px"
+              />
+            </svg>
+          </div>
+        </template>
+        {{ size === 'disabled' ? '停止加载' : '加载中' }}
+      </s-button>
+    </s-title>
+
     <el-divider />
 
-    <div class="m-b-16">自定义元素标签。例如：按钮、div、链接</div>
-    <s-button :size="dynamicSize" :disabled="size === 'disabled'">button 标签</s-button>
-    <s-button tag="div" role="button" tabindex="0" :size="dynamicSize" :disabled="size === 'disabled'">
-      div 标签
-    </s-button>
-    <s-button
-      type="primary"
-      tag="a"
-      :href="size === 'disabled' ? 'javascript:void(0);' : 'https://element-plus.org/zh-CN/component/button.html#tag'"
-      :target="size === 'disabled' ? '_self' : '_blank'"
-      rel="noopener noreferrer"
-      :size="dynamicSize"
-      :disabled="size === 'disabled'"
-    >
-      a 链接
-    </s-button>
+    <s-title title="自定义元素标签。例如：按钮、div、链接">
+      <s-button :size="dynamicSize" :disabled="size === 'disabled'">button 标签</s-button>
+      <s-button tag="div" role="button" tabindex="0" :size="dynamicSize" :disabled="size === 'disabled'">
+        div 标签
+      </s-button>
+      <s-button
+        type="primary"
+        tag="a"
+        :href="size === 'disabled' ? 'javascript:void(0);' : 'https://element-plus.org/zh-CN/component/button.html#tag'"
+        :target="size === 'disabled' ? '_self' : '_blank'"
+        rel="noopener noreferrer"
+        :size="dynamicSize"
+        :disabled="size === 'disabled'"
+      >
+        a 链接
+      </s-button>
+    </s-title>
+
+    <el-divider />
+    <s-title title="按钮组">
+      <el-button-group>
+        <s-button size="small" type="primary" theme="shijingshan">日</s-button>
+        <s-button size="small" type="primary" theme="shijingshan">周</s-button>
+        <s-button size="small" type="primary" theme="shijingshan">月</s-button>
+      </el-button-group>
+    </s-title>
   </el-card>
 </template>
 
