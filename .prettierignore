@@ -11,6 +11,10 @@ dist.zip
 pnpm-lock.yaml
 docs/.vitepress/cache/**
 
+# VitePress Markdown 包含 Vue 组件和自定义容器，Prettier 的 Markdown
+# 解析器可能将这些内容误识别为 Markdown 语法。
+**/*.md
+
 # cache
 .cache/
 .temp/
