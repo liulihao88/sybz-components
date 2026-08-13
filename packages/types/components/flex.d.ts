@@ -8,6 +8,11 @@ import type {
   SybzComponentSize,
 } from '../component-props'
 
+/**
+ * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
+ *
+ * 先提示 sybz 自身属性。
+ */
 export type SFlexComponent = {
   new (): {
     $props: {

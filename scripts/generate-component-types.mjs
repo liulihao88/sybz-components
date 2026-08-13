@@ -10,6 +10,8 @@ const componentTypeDir = resolve(rootDir, 'packages/types/components')
 const chartComponentsOutputPath = resolve(componentTypeDir, 'company/chart/components.d.ts')
 const componentPropsPath = resolve(rootDir, 'packages/types/component-props.d.ts')
 const declarationPrettierOptions = (await prettier.resolveConfig(outputPath)) ?? {}
+const checkOnly = process.argv.includes('--check')
+const outdatedDeclarationFiles = []
 const onlineDocsBaseUrl = 'https://liulihao88.github.io/sybz-components'
 
 const formatDeclaration = (content) =>
@@ -19,7 +21,17 @@ const formatDeclaration = (content) =>
   })
 
 const writeDeclarationFile = async (filePath, content) => {
-  writeFileSync(filePath, await formatDeclaration(content))
+  const formattedContent = await formatDeclaration(content)
+
+  if (checkOnly) {
+    if (!existsSync(filePath) || readFileSync(filePath, 'utf-8') !== formattedContent) {
+      outdatedDeclarationFiles.push(relative(rootDir, filePath))
+    }
+    return
+  }
+
+  mkdirSync(dirname(filePath), { recursive: true })
+  writeFileSync(filePath, formattedContent)
 }
 
 const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', 'utils'])
@@ -1227,7 +1239,6 @@ await writeDeclarationFile(
     includeTableAliases: true,
   }).join('\n'),
 )
-mkdirSync(dirname(chartComponentsOutputPath), { recursive: true })
 await writeDeclarationFile(
   chartComponentsOutputPath,
   buildComponentDeclarationLines(chartComponentEntries, { declarationDir: dirname(chartComponentsOutputPath) }).join(
@@ -1241,7 +1252,6 @@ for (const { componentName, wrapperFilePath } of allComponentEntries) {
   const elementWrapperConfig = ELEMENT_WRAPPER_CONFIGS[typedComponent?.explicitComponentType]
 
   if (typedComponent?.hoverProps && elementWrapperConfig) {
-    mkdirSync(wrapperDir, { recursive: true })
     await writeDeclarationFile(
       wrapperFilePath,
       buildElementWrapperLines({
@@ -1255,7 +1265,6 @@ for (const { componentName, wrapperFilePath } of allComponentEntries) {
   }
 
   if (typedComponent?.hoverProps) {
-    mkdirSync(wrapperDir, { recursive: true })
     await writeDeclarationFile(
       wrapperFilePath,
       buildOwnWrapperLines({
@@ -1324,6 +1333,12 @@ for (const { componentName, wrapperFilePath } of allComponentEntries) {
   wrapperLines.push(`export default ${componentName}`)
   wrapperLines.push('')
 
-  mkdirSync(wrapperDir, { recursive: true })
   await writeDeclarationFile(wrapperFilePath, wrapperLines.join('\n'))
+}
+
+if (checkOnly && outdatedDeclarationFiles.length) {
+  console.error('以下组件类型声明不是最新生成结果：')
+  outdatedDeclarationFiles.forEach((filePath) => console.error(`- ${filePath}`))
+  console.error('请先执行 pnpm types:generate，并提交生成后的类型声明。')
+  process.exitCode = 1
 }

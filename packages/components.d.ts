@@ -148,10 +148,14 @@ declare module 'vue' {
     's-empty': (typeof import('./types/components/empty'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/flex/home.html
+     *
+     * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
      */
     SFlex: (typeof import('./types/components/flex'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/flex/home.html
+     *
+     * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
      */
     's-flex': (typeof import('./types/components/flex'))['default']
     /**
@@ -352,10 +356,14 @@ declare module 'vue' {
     's-upload': (typeof import('./types/components/upload'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
+     *
+     * s-warning 警告组件，支持设置 width 和 height；设置 height 后内容会垂直居中。
      */
     SWarning: (typeof import('./types/components/warning'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
+     *
+     * s-warning 警告组件，支持设置 width 和 height；设置 height 后内容会垂直居中。
      */
     's-warning': (typeof import('./types/components/warning'))['default']
     /**

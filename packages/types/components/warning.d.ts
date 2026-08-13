@@ -1,5 +1,10 @@
 import type { SWarningProps, SWarningSize, SWarningType, SybzComponentTheme, SybzRecord } from '../component-props'
 
+/**
+ * s-warning 警告组件，支持设置 width 和 height；设置 height 后内容会垂直居中。
+ *
+ * 先提示 sybz 自身属性。
+ */
 export type SWarningComponent = {
   new (): {
     $props: {
