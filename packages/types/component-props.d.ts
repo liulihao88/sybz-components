@@ -757,6 +757,7 @@ export interface SWarningProps extends SHtmlStringProps {
   theme?: SybzComponentTheme
   type?: SWarningType
   width?: string | number
+  height?: string | number
   icon?: boolean
   size?: SWarningSize
   dotted?: boolean

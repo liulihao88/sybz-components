@@ -5,6 +5,7 @@
     <div class="warning-chenghua-demo__list">
       <s-warning theme="chenghua" title="服务提示" content="已启用成华主题的信息提示，可用于展示普通说明。" />
       <s-warning theme="chenghua" title="服务提示" width="200" />
+      <s-warning theme="chenghua" content="服务内容提示" width="200" />
       <s-warning
         theme="chenghua"
         type="warning"

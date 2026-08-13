@@ -583,6 +583,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SWarningProps',
+      description: 's-warning 警告组件，支持设置 width 和 height；设置 height 后内容会垂直居中。',
       slots: ['title', 'content'],
       hoverProps: componentHoverProps('SWarningProps', [
         'SWarningProps',

@@ -38,6 +38,12 @@ warning/usually
 warning/slot
 :::
 
+### 高度
+
+:::demo 设置 `height` 后，提示内容会在指定高度内垂直居中。基础写法：`<s-warning content="固定高度提示" height="80px" />`。属性：`height` 类型 `string / number`，支持 CSS 长度值，默认不设置。
+warning/height
+:::
+
 ### 属性
 
 |          属性名          | 说明                                                  | 类型                      | 默认值    |
@@ -47,6 +53,7 @@ warning/slot
 |           type           | 提示类型，支持 `info/simple/warning/error`            | string                    | `info`    |
 |         content          | 显示的正文内容                                        | string                    | -         |
 |          width           | 宽度                                                  | string / number           | `100%`    |
+|          height          | 高度，设置后内容垂直居中                              | string / number           | -         |
 | dangerouslyUseHTMLString | 是否将 `content` 作为 HTML 片段处理                   | boolean                   | `false`   |
 |           icon           | 是否显示图标                                          | boolean                   | `true`    |
 |           size           | 组件尺寸，支持 `small/default`                        | string                    | `default` |
