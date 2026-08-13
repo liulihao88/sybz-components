@@ -30,7 +30,6 @@ export type STitleComponent = {
       default?: () => any
       title?: () => any
       icon?: () => any
-      append?: () => any
       extra?: () => any
     }
   }

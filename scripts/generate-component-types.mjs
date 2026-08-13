@@ -574,7 +574,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'STitleProps',
       description: 's-title 标题组件，支持通过 extra 属性或 extra 插槽设置右侧内容。',
-      slots: ['default', 'title', 'icon', 'append', 'extra'],
+      slots: ['default', 'title', 'icon', 'extra'],
       hoverProps: componentHoverProps('STitleProps', ['SybzComponentTheme', 'SybzComponentSize', 'SybzRecord']),
     },
   ],

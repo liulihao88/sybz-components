@@ -6,9 +6,7 @@ const isDark = ref(false)
 
 <template>
   <s-title title="是否使用深色模式" b="24">
-    <template #append>
-      <s-radio v-model="isDark" :options="[true, false]" />
-    </template>
+    <s-radio v-model="isDark" :options="[true, false]" />
   </s-title>
   <el-space wrap>
     <s-button color="red" :dark="isDark" disabled>red</s-button>

@@ -38,23 +38,17 @@ title/usually
 
 `compTitle` 也可以作为独立组件使用，完整文档见 [CompTitle 组件标题前缀](/components/compTitle/home.md)。
 
-### 标题内容
+### 标题和后置内容
 
-标题内容按 `title` 命名插槽、默认插槽、`title` 属性的顺序取值，三种方式共享相同的标题样式：
+普通标题使用 `title` 属性，复杂标题使用 `title` 插槽。默认插槽用于在标题和副标题后追加状态、标签或其他内容：
 
 ```vue
 <s-title title="属性标题" />
-<s-title>默认插槽标题</s-title>
 <s-title>
   <template #title>命名插槽标题</template>
 </s-title>
-```
-
-需要在标题后追加状态、标签或操作内容时，使用 `append` 插槽：
-
-```vue
 <s-title title="服务状态">
-  <template #append><s-tag type="success">运行中</s-tag></template>
+  <s-tag type="success">运行中</s-tag>
 </s-title>
 ```
 
@@ -84,8 +78,7 @@ title/usually
 
 |  插槽名   | 说明                                              |
 | :-------: | ------------------------------------------------- |
-|  `title`  | 自定义标题内容，优先级高于默认插槽和 `title` 属性 |
-| `default` | 自定义标题内容，未提供 `title` 命名插槽时生效     |
+|  `title`  | 自定义标题内容，优先级高于 `title` 属性           |
+| `default` | 在标题和副标题后追加状态、标签或其他内容           |
 |  `icon`   | 自定义左侧图标                                    |
-| `append`  | 在标题、副标题后追加状态或其他内容                |
 |  `extra`  | 自定义右侧操作区，优先级高于 `extra` 属性         |

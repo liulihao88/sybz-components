@@ -16,7 +16,7 @@
     <s-title title="基础信息" theme="chenghua" type="form"></s-title>
 
     <s-title title="无图标标题" theme="chenghua" type="simple">
-      <template #append><span class="chenghua-title-demo__tag">运行中</span></template>
+      <span class="chenghua-title-demo__tag">运行中</span>
     </s-title>
   </div>
 </template>

@@ -29,14 +29,14 @@
         </span>
         <component :is="mergedProps.tag" class="s-title__text" v-bind="titleA11yAttrs">
           <slot name="title">
-            <slot>{{ mergedProps.title }}</slot>
+            {{ mergedProps.title }}
           </slot>
         </component>
         <span v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
           {{ mergedProps.subTitle }}
         </span>
-        <span v-if="$slots.append" class="s-title__append">
-          <slot name="append"></slot>
+        <span v-if="$slots.default" class="s-title__content">
+          <slot></slot>
         </span>
       </div>
       <div v-if="$slots.extra || $slots.right || mergedProps.extra" class="s-title__slot-extra-wrapper">
@@ -57,10 +57,7 @@ defineSlots<{
   default?: () => any
   title?: () => any
   icon?: () => any
-  append?: () => any
   extra?: () => any
-  /** @deprecated 使用 extra 插槽代替。 */
-  right?: () => any
 }>()
 type TitleSize = 'small' | 'default' | 'large'
 type TitleType = '' | 'simple' | 'icon' | 'form'
@@ -291,7 +288,7 @@ const isThemeIcon = computed(() => {
       background-color: var(--lc, var(--blue)); // 左侧的竖条颜色
     }
   }
-  .s-title__append {
+  .s-title__content {
     display: inline-flex;
     flex: 0 1 auto;
     align-items: center;
