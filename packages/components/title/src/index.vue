@@ -281,11 +281,12 @@ const isThemeIcon = computed(() => {
       content: '';
       width: 3px;
       left: -8px;
-      top: 5px;
-      height: var(--s-title-bar-height, calc(100% - 8px));
-      bottom: 0;
+      top: 50%;
+      height: var(--s-title-bar-height, 16px);
+      bottom: auto;
       letter-spacing: 0;
       background-color: var(--lc, var(--blue)); // 左侧的竖条颜色
+      transform: translateY(-50%);
     }
   }
   .s-title__content {
