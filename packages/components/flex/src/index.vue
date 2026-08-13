@@ -19,6 +19,8 @@ interface FlexProps {
   align?: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal'
   flex?: string
   gap?: string | number
+  width?: string | number
+  height?: string | number
   component?: string | Component
 }
 
@@ -45,6 +47,8 @@ const flexStyles = computed(() => {
     'align-items': props.align === 'normal' ? undefined : props.align,
     flex: props.flex && props.flex !== 'normal' ? props.flex : undefined,
     gap: gapValue.value,
+    width: props.width === undefined ? undefined : processWidth(props.width, true),
+    height: props.height === undefined ? undefined : processWidth(props.height, true),
   }
 })
 

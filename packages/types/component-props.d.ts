@@ -314,6 +314,8 @@ export interface SFlexProps {
   align?: SFlexAlign
   flex?: string
   gap?: SybzComponentSize | string | number
+  width?: string | number
+  height?: string | number
   component?: string | Component
 }
 

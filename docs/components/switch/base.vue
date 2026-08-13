@@ -30,7 +30,7 @@ const beforeChange = async () => {
     {{ cc }}
     <br />
 
-    <s-switch v-model="cc" active-text="这是active的text" :inline-prompt="false"></s-switch>
+    <s-switch v-model="cc" active-text="管理员" inactive-text="一线工程师" :inline-prompt="false"></s-switch>
     <br />
     <s-switch v-model="cc" active-text="是" inactive-text="否"></s-switch>
     <br />

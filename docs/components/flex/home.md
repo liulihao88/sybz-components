@@ -30,6 +30,12 @@ flex/buttonGap
 flex/usually
 :::
 
+### 容器尺寸
+
+:::demo 设置容器的宽度和高度。基础写法：`<s-flex width="320px" height="120px" align="center" justify="center"></s-flex>`。属性：`width`、`height` 类型均为 `string / number`，支持 CSS 长度值，默认不设置。
+flex/size
+:::
+
 ### API
 
 |   属性名    | 说明                                                                 | 类型               | 可选值                                                                                    | 默认值   |
@@ -40,6 +46,8 @@ flex/usually
 |   `align`   | 交叉轴对齐方式，对应 `align-items`                                   | string             | `start` / `end` / `center` / `baseline` / `stretch` / `normal`                            | `normal` |
 |    `gap`    | 子元素间距，对应 `gap`                                               | string / number    | `small` / `default` / `large` / 任意可被 `processWidth` 处理的宽度                        | `0px`    |
 |   `flex`    | 当前 `s-flex` 自身在父级 flex 容器中的伸缩规则，对应 CSS `flex` 简写 | string             | 任意合法 CSS `flex` 值，如 `1`、`0 0 180px`                                               | `''`     |
+|   `width`   | 容器宽度                                                             | string / number    | 任意可被 `processWidth` 处理的 CSS 长度                                                   | -        |
+|  `height`   | 容器高度                                                             | string / number    | 任意可被 `processWidth` 处理的 CSS 长度                                                   | -        |
 | `component` | 自定义根节点标签或组件                                               | string / Component | 原生标签名或 Vue 组件                                                                     | `div`    |
 
 ### Gap 预设
