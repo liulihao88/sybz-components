@@ -96,3 +96,20 @@
     }
   }
 }
+
+// Keep themed buttons compatible with Element Plus button groups.
+.el-button-group {
+  > .s-button--theme.s-button--theme.s-button--theme:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  > .s-button--theme.s-button--theme.s-button--theme:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  > .s-button--theme.s-button--theme.s-button--theme:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+}
