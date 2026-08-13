@@ -1,81 +1,18 @@
+@import '../shared/card.scss';
+
 .s-card.s-card--shijingshan.s-card--shijingshan {
   --s-card-border: var(--s-sjs-divider);
   --s-card-shadow: var(--s-sjs-shadow-soft);
   --s-card-header-bg: var(--s-sjs-card-bg);
+  --s-theme-card-bg: var(--s-sjs-card-bg);
+  --s-theme-card-radius: var(--s-sjs-radius-card);
+  --s-theme-card-font-family: var(--s-sjs-font-family);
+  --s-theme-card-divider: var(--s-sjs-divider);
+  --s-theme-card-text: var(--s-sjs-text-regular);
+  --s-theme-card-footer-bg: var(--s-sjs-card-bg);
+  --s-theme-card-primary: var(--s-sjs-primary);
+  --s-theme-card-primary-rgb: var(--s-sjs-primary-rgb);
+  --s-theme-card-primary-hover: var(--s-sjs-primary-hover);
 
-  background: var(--s-sjs-card-bg);
-  border: 1px solid var(--s-card-border);
-  border-radius: var(--s-sjs-radius-card);
-  overflow: hidden;
-  font-family: var(--s-sjs-font-family);
-
-  .s-card__header,
-  .s-card__body,
-  .s-card__footer {
-    background: transparent;
-  }
-
-  .s-card__header {
-    min-height: 48px;
-    border-bottom: 1px solid var(--s-sjs-divider);
-    background: var(--s-card-header-bg);
-  }
-
-  &.is-collapsed .s-card__header {
-    border-bottom: none;
-  }
-
-  .s-card__header-main {
-    min-width: 0;
-  }
-
-  .s-card__body {
-    color: var(--s-sjs-text-regular);
-  }
-
-  .s-card__footer {
-    border-top: 1px solid var(--s-sjs-divider);
-    background: var(--s-sjs-card-bg);
-  }
-
-  .collapse-arrow {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    color: var(--s-sjs-primary);
-    background: rgba(var(--s-sjs-primary-rgb), 0.08);
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease,
-      color 0.2s ease;
-  }
-
-  .collapse-arrow .s-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0;
-    font-size: 14px;
-  }
-
-  .collapse-arrow:hover {
-    background: rgba(var(--s-sjs-primary-rgb), 0.14);
-    color: var(--s-sjs-primary-hover);
-  }
-
-  .collapse-arrow.collapsed {
-    transform: rotate(-90deg);
-  }
-
-  .s-title.s-title--shijingshan.s-title--shijingshan {
-    margin: 0;
-
-    .s-title__top {
-      padding-bottom: 0;
-
-      &::after {
-        display: none;
-      }
-    }
-  }
+  @include s-themed-card;
 }
