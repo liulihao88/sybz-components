@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, unref, useAttrs, watch, type StyleValue } from 'vue'
+import { computed, ref, unref, useAttrs, watch } from 'vue'
 import RenderComp from './renderComp.vue'
 import { validateForm, isEmpty, $toast } from '@sybz-components/utils'
 import SIcon from '@/components/icon/src/index.vue'
@@ -102,8 +102,7 @@ const hasMultipleColumns = computed(
   () => Number(mergedProps.value.column) > 1 || formItems.value.some((item) => Number(item.column) > 1),
 )
 const useGap = computed(() => Boolean(formGap.value) && hasMultipleColumns.value)
-const formStyle = computed(() => (useGap.value ? { '--s-form-gap': formGap.value } : undefined))
-const wrapperStyle = computed<StyleValue | undefined>(() => attrs.style as StyleValue | undefined)
+const formStyle = computed(() => [attrs.style, useGap.value ? { '--s-form-gap': formGap.value } : undefined])
 const formClass = computed(() => ({
   's-form--gap': useGap.value,
   's-form--chenghua': mergedProps.value.theme === 'chenghua',
@@ -541,85 +540,74 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-form-wrapper" :style="wrapperStyle">
-    <el-form
-      ref="sFormRef"
-      :model="formModel"
-      v-bind="{ 'label-width': 'auto', ...$attrs }"
-      class="s-form"
-      :class="formClass"
-      :style="formStyle"
-    >
-      <template v-for="(v, i) in formItems" :key="getFieldProp(v) || i">
-        <div v-if="parseIsShow(v, i) && isTitleItem(v)" class="s-form__title-item">
-          <template v-if="v.useSlot && getTitleSlotName(v)">
-            <slot :name="getTitleSlotName(v)" v-bind="getRenderProps(v, i)"></slot>
-          </template>
-          <template v-else-if="v.render">
-            <render-comp :render="v.render" :context="getRenderProps(v, i)" />
-          </template>
-          <template v-else>
-            <s-title v-bind="getTitleAttrs(v, i)">
-              <template v-if="v.labelRender" #title>
-                <render-comp :render="v.labelRender" :context="getRenderProps(v, i)" />
-              </template>
-            </s-title>
-          </template>
-        </div>
-        <el-form-item v-else-if="parseIsShow(v, i)" v-bind="getFormItemBind(v, i)">
-          <template #label>
-            <template v-if="v.labelRender">
+  <el-form
+    ref="sFormRef"
+    :model="formModel"
+    v-bind="{ 'label-width': 'auto', ...$attrs }"
+    class="s-form"
+    :class="formClass"
+    :style="formStyle"
+  >
+    <template v-for="(v, i) in formItems" :key="getFieldProp(v) || i">
+      <div v-if="parseIsShow(v, i) && isTitleItem(v)" class="s-form__title-item">
+        <template v-if="v.useSlot && getTitleSlotName(v)">
+          <slot :name="getTitleSlotName(v)" v-bind="getRenderProps(v, i)"></slot>
+        </template>
+        <template v-else-if="v.render">
+          <render-comp :render="v.render" :context="getRenderProps(v, i)" />
+        </template>
+        <template v-else>
+          <s-title v-bind="getTitleAttrs(v, i)">
+            <template v-if="v.labelRender" #title>
               <render-comp :render="v.labelRender" :context="getRenderProps(v, i)" />
             </template>
-            <template v-else>
-              <slot :name="getLabelSlotName(v)" v-bind="getRenderProps(v, i)">
-                <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
-                <s-icon
-                  v-else-if="v.imgAttrs?.name"
-                  :name="v.imgAttrs?.name"
-                  class="s-form__label-icon"
-                  v-bind="v.imgAttrs"
-                />
-                <s-tooltip :content="v.label" />
-              </slot>
-            </template>
-          </template>
-          <template v-if="v.useSlot && getFieldSlotName(v)">
-            <slot :name="getFieldSlotName(v)" v-bind="getRenderProps(v, i)"></slot>
-          </template>
-          <template v-else-if="v.render">
-            <render-comp :render="v.render" :context="getRenderProps(v, i)" />
+          </s-title>
+        </template>
+      </div>
+      <el-form-item v-else-if="parseIsShow(v, i)" v-bind="getFormItemBind(v, i)">
+        <template #label>
+          <template v-if="v.labelRender">
+            <render-comp :render="v.labelRender" :context="getRenderProps(v, i)" />
           </template>
           <template v-else>
-            <component
-              :is="v.comp || 's-input'"
-              v-directives="v.directives"
-              v-bind="getComponentAttrs(v, i)"
-            ></component>
+            <slot :name="getLabelSlotName(v)" v-bind="getRenderProps(v, i)">
+              <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
+              <s-icon
+                v-else-if="v.imgAttrs?.name"
+                :name="v.imgAttrs?.name"
+                class="s-form__label-icon"
+                v-bind="v.imgAttrs"
+              />
+              <s-tooltip :content="v.label" />
+            </slot>
           </template>
-        </el-form-item>
-      </template>
-    </el-form>
+        </template>
+        <template v-if="v.useSlot && getFieldSlotName(v)">
+          <slot :name="getFieldSlotName(v)" v-bind="getRenderProps(v, i)"></slot>
+        </template>
+        <template v-else-if="v.render">
+          <render-comp :render="v.render" :context="getRenderProps(v, i)" />
+        </template>
+        <template v-else>
+          <component :is="v.comp || 's-input'" v-directives="v.directives" v-bind="getComponentAttrs(v, i)"></component>
+        </template>
+      </el-form-item>
+    </template>
+  </el-form>
 
-    <s-flex v-if="shouldShowFooter" justify="center">
-      <el-button type="primary" size="small" @click="submit">提交</el-button>
-      <el-button type="" size="small" @click="resetFields">重置</el-button>
-      <el-button type="danger" size="small" @click="clearValidate()">清除校验</el-button>
-      <el-button type="danger" size="small" @click="showFormValue">查看form的值</el-button>
-      <el-button type="danger" size="small" @click="showFieldListValue">查看fieldList的值</el-button>
-    </s-flex>
-  </div>
+  <s-flex v-if="shouldShowFooter" justify="center">
+    <el-button type="primary" size="small" @click="submit">提交</el-button>
+    <el-button type="" size="small" @click="resetFields">重置</el-button>
+    <el-button type="danger" size="small" @click="clearValidate()">清除校验</el-button>
+    <el-button type="danger" size="small" @click="showFormValue">查看form的值</el-button>
+    <el-button type="danger" size="small" @click="showFieldListValue">查看fieldList的值</el-button>
+  </s-flex>
 </template>
 
 <style lang="scss" scoped>
 .s-form {
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
-}
-
-.s-form-wrapper {
-  height: 100%;
 }
 
 .s-form--gap {
