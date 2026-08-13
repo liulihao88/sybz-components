@@ -9,7 +9,7 @@
       show-type="button"
     ></s-radio>
   </s-flex>
-  <s-title title="性别有值的时候显示age"></s-title>
+
   <s-form ref="TFormDemo" :model="formData" :field-list="fieldList" :size="size" :label-position="labelPosition" />
 </template>
 
@@ -33,6 +33,10 @@ const formData = ref({
 
 const fieldList = computed(() => {
   return [
+    {
+      type: 'title',
+      title: '性别有值的时候显示age',
+    },
     {
       label: '账号',
       prop: 'account',
