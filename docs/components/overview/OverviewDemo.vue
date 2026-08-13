@@ -169,34 +169,18 @@ const tableData = [
     <section>
       <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme"></s-tabs>
       <s-tooltip content="超出字符就隐藏, 鼠标移入显示全部" width="100"></s-tooltip>
-      <s-warning content="这是基础用法" title="我是title"></s-warning>
+      <s-warning content="这是基础用法" title="我是title" :theme="currentTheme"></s-warning>
     </section>
 
     <section class="overview-section">
       <s-title title="选择和状态" :theme="currentTheme" />
-      <div class="overview-grid overview-grid--form">
+      <s-flex gap="small" class="m-b-16">
         <s-select
           v-model="radioShowType"
           title="单选 showType（默认值：radio）"
           :options="radioShowTypeOptions"
           :theme="currentTheme"
           width="400"
-        />
-        <s-select
-          v-model="checkboxShowType"
-          title="多选 showType（默认值：check）"
-          :options="checkboxShowTypeOptions"
-          width="400"
-          :theme="currentTheme"
-        />
-      </div>
-      <div class="overview-stack">
-        <s-checkbox
-          v-model="agreeItems"
-          :options="checkboxOptions"
-          :theme="currentTheme"
-          :disabled="isDisabled"
-          :show-type="checkboxShowType"
         />
         <s-radio
           v-model="radioValue"
@@ -205,6 +189,25 @@ const tableData = [
           :disabled="isDisabled"
           :show-type="radioShowType"
         />
+      </s-flex>
+      <s-flex gap="small">
+        <s-select
+          v-model="checkboxShowType"
+          title="多选 showType（默认值：check）"
+          :options="checkboxShowTypeOptions"
+          width="400"
+          :theme="currentTheme"
+        />
+
+        <s-checkbox
+          v-model="agreeItems"
+          :options="checkboxOptions"
+          :theme="currentTheme"
+          :disabled="isDisabled"
+          :show-type="checkboxShowType"
+        />
+      </s-flex>
+      <div class="overview-stack">
         <div class="overview-tags">
           <s-tag
             v-for="item in tagOptions"

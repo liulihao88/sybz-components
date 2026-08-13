@@ -17,7 +17,7 @@ import ApiIntro from '../../shared/ApiIntro.vue'
 import ComponentQuickSidebar from '../../shared/ComponentQuickSidebar.vue'
 import DocBasicUsage from '../../shared/DocBasicUsage.vue'
 import ScrollPositionRestore from '../../shared/ScrollPositionRestore.vue'
-import OverviewDemo from '../../components/overview/index.vue'
+import OverviewDemo from '../../components/overview/OverviewDemo.vue'
 
 import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
