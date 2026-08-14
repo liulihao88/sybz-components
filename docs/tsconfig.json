@@ -29,8 +29,8 @@
     ".vitepress/**/*.vue",
     "shared/**/*.ts",
     "shared/**/*.vue",
-    "components/test/**/*.ts",
-    "components/test/**/*.tsx",
-    "components/test/**/*.vue"
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "components/**/*.vue"
   ]
 }
