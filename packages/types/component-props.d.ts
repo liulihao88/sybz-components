@@ -698,6 +698,8 @@ export interface STitleProps {
   size?: SybzComponentSize
   subTitle?: string
   subAttrs?: SybzRecord
+  showTooltip?: boolean
+  tooltipAttrs?: SybzRecord
   inner?: boolean
   margin?: string | number
   gap?: string | number

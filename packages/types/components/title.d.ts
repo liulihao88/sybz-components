@@ -1,7 +1,7 @@
 import type { SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
 
 /**
- * s-title 标题组件，支持通过 extra 属性或 extra 插槽设置右侧内容。
+ * s-title 标题组件，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
  *
  * 先提示 sybz 自身属性。
  */
@@ -13,6 +13,8 @@ export type STitleComponent = {
       size?: SybzComponentSize
       subTitle?: string
       subAttrs?: SybzRecord
+      showTooltip?: boolean
+      tooltipAttrs?: SybzRecord
       inner?: boolean
       margin?: string | number
       gap?: string | number

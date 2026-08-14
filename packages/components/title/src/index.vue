@@ -29,7 +29,11 @@
         </span>
         <component :is="mergedProps.tag" class="s-title__text" v-bind="titleA11yAttrs">
           <slot name="title">
-            {{ mergedProps.title }}
+            <s-tooltip
+              :content="mergedProps.title"
+              :disabled="!mergedProps.showTooltip"
+              v-bind="mergedProps.tooltipAttrs"
+            />
           </slot>
         </component>
         <span v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
@@ -39,7 +43,7 @@
           <slot></slot>
         </span>
       </div>
-      <div v-if="$slots.extra || $slots.right || mergedProps.extra" class="s-title__slot-extra-wrapper">
+      <div v-if="$slots.extra || mergedProps.extra" class="s-title__slot-extra-wrapper">
         <slot name="extra">{{ mergedProps.extra }}</slot>
       </div>
     </div>
@@ -49,6 +53,7 @@
 <script setup lang="ts">
 import { computed, type CSSProperties } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import STooltip from '@/components/tooltip/src/index.vue'
 
 defineOptions({
   name: 'STitle',
@@ -68,6 +73,8 @@ interface TitleProps {
   size?: TitleSize
   subTitle?: string
   subAttrs?: Record<string, any>
+  showTooltip?: boolean
+  tooltipAttrs?: Record<string, any>
   inner?: boolean
   margin?: string | number
   gap?: string | number
@@ -116,6 +123,8 @@ const props = withDefaults(defineProps<TitleProps>(), {
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
   subTitle: '',
   subAttrs: () => ({}),
+  showTooltip: true,
+  tooltipAttrs: () => ({}),
   inner: false,
   margin: '',
   gap: '',

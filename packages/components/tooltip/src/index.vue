@@ -1,5 +1,5 @@
 <template>
-  <el-tooltip class="s-tooltip-box" :disabled="handleDisabled" :effect="mergedProps.effect" v-bind="mergedTooltipAttrs">
+  <el-tooltip class="s-tooltip-box" v-bind="mergedTooltipAttrs" :disabled="handleDisabled" :effect="mergedProps.effect">
     <span
       v-if="mergedProps.showSlot"
       ref="textRef"
@@ -11,7 +11,6 @@
       :style="textStyle"
       v-bind="triggerAttrs"
       @click="contentClick"
-      @mouseover="onMouseOver"
     >
       <span ref="positionRef" class="s-tooltip-box__content">
         <slot>
@@ -31,7 +30,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, useAttrs, useSlots } from 'vue'
+import {
+  computed,
+  getCurrentInstance,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  useAttrs,
+  useSlots,
+} from 'vue'
 import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -73,6 +82,8 @@ const mergedTooltipAttrs = computed(() => {
   const forwardedAttrs = { ...attrs }
   delete forwardedAttrs.class
   delete forwardedAttrs.style
+  // disabled 由 handleDisabled 统一计算，避免透传属性覆盖溢出判断结果。
+  delete forwardedAttrs.disabled
 
   const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString
   const rawContent =
@@ -169,7 +180,7 @@ const dynamicComponent = computed(() => {
 })
 
 const textRef = ref<HTMLElement>()
-const isDisabled = ref(false)
+const isDisabled = ref(true)
 const handleDisabled = computed<boolean>(() => {
   if (attrs.disabled) {
     return Boolean(attrs.disabled)
@@ -182,17 +193,29 @@ const handleDisabled = computed<boolean>(() => {
   }
   return isDisabled.value
 })
-function onMouseOver() {
-  if (!mergedProps.value.showSlot) {
-    return
-  }
-  // 内容超出，显示文字提示内容
+
+const measureOverflow = () => {
+  if (!mergedProps.value.showSlot || slots.default) return
   const tag = textRef.value
   if (!tag) return
-  const isOverflowWidth = tag.scrollWidth > tag.clientWidth
-  const isOverflowHeight = tag.scrollHeight > tag.clientHeight
-  isDisabled.value = !isOverflowWidth && !isOverflowHeight
+
+  const isWidthOverflow = tag.scrollWidth > tag.clientWidth
+  const isHeightOverflow = isMultiLineClamp.value && tag.scrollHeight > tag.clientHeight
+  isDisabled.value = !isWidthOverflow && !isHeightOverflow
 }
+
+let resizeObserver: ResizeObserver | undefined
+
+onMounted(() => {
+  nextTick(() => {
+    measureOverflow()
+    if (typeof ResizeObserver === 'undefined' || !textRef.value) return
+    resizeObserver = new ResizeObserver(measureOverflow)
+    resizeObserver.observe(textRef.value)
+  })
+})
+onUpdated(() => nextTick(measureOverflow))
+onBeforeUnmount(() => resizeObserver?.disconnect())
 const emits = defineEmits(['click'])
 function contentClick() {
   emits('click')

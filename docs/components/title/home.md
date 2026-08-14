@@ -36,6 +36,12 @@ title/shijingshan/base
 title/usually
 :::
 
+### 标题溢出提示
+
+:::demo 标题文字超出可用宽度时，鼠标移入自动显示完整内容；未超出时不显示。基础写法：`<s-title title="这是一段很长的标题文字" style="width: 220px" />`。属性：`showTooltip` 可选 `true / false`，默认值 `true`；`tooltipAttrs` 类型 `object`，默认值 `{}`。
+title/tooltip
+:::
+
 `compTitle` 也可以作为独立组件使用，完整文档见 [CompTitle 组件标题前缀](/components/compTitle/home.md)。
 
 ### 标题和后置内容
@@ -61,6 +67,8 @@ title/usually
 |   `size`   | 尺寸，支持 `small` / `default` / `large`                       | string          | `default` |
 | `subTitle` | 副标题文案                                                     | string          | `''`      |
 | `subAttrs` | 副标题额外属性                                                 | object          | `{}`      |
+| `showTooltip` | 标题溢出时是否显示完整内容提示                              | boolean         | `true`    |
+| `tooltipAttrs` | `s-tooltip` 额外属性                                       | object          | `{}`      |
 |  `inner`   | 是否使用内部缩进                                               | boolean         | `false`   |
 |  `margin`  | 外边距，支持 CSS margin 简写                                   | string / number | `''`      |
 |   `gap`    | 标题内部间距，控制图标、标题、副标题、右侧区域间距             | string / number | `''`      |
