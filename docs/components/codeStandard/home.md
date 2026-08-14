@@ -249,7 +249,7 @@ pnpm lint:prettier:check
 {
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,vue,mjs,cjs}": ["prettier --write", "eslint --fix --max-warnings=0"],
-    "**/*.{css,scss,json,yaml,yml,html}": ["prettier --write"]
+    "**/*.{css,scss,json,yaml,yml,html,md}": ["prettier --write"]
   }
 }
 ```
