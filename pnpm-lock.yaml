@@ -12,8 +12,8 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1(vue@3.4.15(typescript@5.3.3))
       '@sybz-components/utils':
-        specifier: ^1.0.5
-        version: 1.0.5(typescript@5.3.3)
+        specifier: ^1.0.6
+        version: 1.0.6(typescript@5.3.3)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
     devDependencies:
       '@eslint/js':
         specifier: 9.39.4
@@ -1436,8 +1436,10 @@ packages:
   '@sxzz/popperjs-es@2.11.7':
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
 
-  '@sybz-components/utils@1.0.5':
-    resolution: {integrity: sha512-lgryYhPDabYcMCU7et1fAKOE6YEXNu9b2oXosxe8pkYoLXrEZmDWTmYxMGsGlno0EAXTRtfLeUXhfDtesXlx7A==}
+  '@sybz-components/utils@1.0.6':
+    resolution: {integrity: sha512-ipTDE18poB/I2unByUCdad659bkFVH7DVnZPFJp853QuNdgiwTtPRvvmDGcsL7Pt1LC9qB3N5Rj5Q9mbAjS6aA==}
+    peerDependencies:
+      vite: '>=5 <8'
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -5936,17 +5938,20 @@ snapshots:
 
   '@sxzz/popperjs-es@2.11.7': {}
 
-  '@sybz-components/utils@1.0.5(typescript@5.3.3)':
+  '@sybz-components/utils@1.0.6(typescript@5.3.3)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))':
     dependencies:
       '@vue/reactivity': 3.5.26
       '@vue/shared': 3.5.26
+      code-inspector-plugin: 0.10.1
       consola: 3.4.2
       element-plus: 2.13.0(vue@3.4.15(typescript@5.3.3))
       es-toolkit: 1.49.0
       lodash-es: 4.17.21
+      vite: 5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
       vue: 3.4.15(typescript@5.3.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
+      - supports-color
       - typescript
 
   '@trysound/sax@0.2.0': {}

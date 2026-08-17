@@ -2,7 +2,7 @@ import { defineConfig, type UserConfig } from 'vitepress'
 import { fileURLToPath, URL } from 'node:url'
 import { mdPlugin } from './config/plugins.ts'
 import { createAlgolia, Github } from './utils/settings.ts'
-import { sybzVitePlugins } from '../../packages/utils/src/vite.ts'
+import { sybzVitePlugins } from '@sybz-components/utils/vite'
 
 const isProd = process.env.NODE_ENV === 'production'
 const siteBase = '/sybz-components/'

@@ -37,11 +37,6 @@
       "import": "./dist/sybz-components-es.js",
       "default": "./dist/sybz-components-es.js"
     },
-    "./vite": {
-      "types": "./packages/vite.d.ts",
-      "import": "./packages/vite.mjs",
-      "require": "./packages/vite.cjs"
-    },
     "./style.css": "./dist/style.css",
     "./charts/style.css": "./dist/charts-style.css",
     "./charts-style.css": "./dist/charts-style.css",
@@ -65,10 +60,7 @@
     "docs/.vitepress/utils",
     "docs/.vitepress/vitepress",
     "skills",
-    "scripts/install-sybz-skill.mjs",
-    "packages/vite.mjs",
-    "packages/vite.cjs",
-    "packages/vite.d.ts"
+    "scripts/install-sybz-skill.mjs"
   ],
   "sideEffects": [
     "*.css",
@@ -124,7 +116,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "@sybz-components/utils": "^1.0.5"
+    "@sybz-components/utils": "^1.0.6"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
