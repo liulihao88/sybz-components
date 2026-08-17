@@ -18,7 +18,16 @@ export interface GitCommitLogInfo {
   version: string
   repository: string
   branch: string
+  tag: string
+  describe: string
+  upstream: string
+  sync: string
+  workspace: string
+  mode: string
+  node: string
+  platform: string
   buildTime: string
+  body: string
   commits: GitCommitLogItem[]
 }
 
@@ -27,10 +36,12 @@ export interface GitCommitLogOptions {
   cwd?: string
   /** 构建时最多读取的提交数量，默认 20。 */
   maxCommits?: number
-  /** 调用 b() 时默认展示的提交数量，默认 8。 */
+  /** 调用 b() 时默认展示的提交数量，默认 10。 */
   defaultLimit?: number
   /** 页面加载后自动打印；传数字时同时指定打印条数，默认 false。 */
   autoPrint?: boolean | number
+  /** 打印后是否默认展开控制台分组，默认 false。 */
+  expanded?: boolean
 }
 
 declare global {
@@ -83,7 +94,7 @@ const readProjectPackage = (cwd: string) => {
   }
 }
 
-const createGitCommitLogInfo = (cwd: string, maxCommits: number): GitCommitLogInfo => {
+const createGitCommitLogInfo = (cwd: string, maxCommits: number, mode: string): GitCommitLogInfo => {
   const packageInfo = readProjectPackage(cwd)
   const packageRepository =
     typeof packageInfo.repository === 'string' ? packageInfo.repository : packageInfo.repository?.url || ''
@@ -105,20 +116,39 @@ const createGitCommitLogInfo = (cwd: string, maxCommits: number): GitCommitLogIn
         url: getCommitUrl(repository, hash),
       }
     })
+  const upstream = runGit(cwd, ['rev-parse', '--abbrev-ref', '@{upstream}'])
+  const [ahead = '0', behind = '0'] = upstream
+    ? runGit(cwd, ['rev-list', '--left-right', '--count', `HEAD...${upstream}`]).split(/\s+/)
+    : []
+  const changedFiles = runGit(cwd, ['status', '--porcelain']).split('\n').filter(Boolean).length
 
   return {
     project: packageInfo.name || resolve(cwd).split('/').pop() || '',
     version: packageInfo.version || '',
     repository,
     branch: process.env.GITHUB_REF_NAME || process.env.GITHUB_HEAD_REF || runGit(cwd, ['branch', '--show-current']),
+    tag: runGit(cwd, ['describe', '--tags', '--exact-match']) || '-',
+    describe: runGit(cwd, ['describe', '--tags', '--always', '--dirty']) || '-',
+    upstream: upstream || '-',
+    sync: upstream ? `ahead ${ahead || 0} / behind ${behind || 0}` : '-',
+    workspace: changedFiles ? `${changedFiles} changed` : 'clean',
+    mode,
+    node: process.version,
+    platform: `${process.platform}/${process.arch}`,
     buildTime: new Date().toISOString(),
+    body: runGit(cwd, ['log', '-1', '--pretty=format:%B']),
     commits,
   }
 }
 
 const serialize = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c')
 
-const createClientCode = (info: GitCommitLogInfo, defaultLimit: number, autoPrint: boolean | number) => `
+const createClientCode = (
+  info: GitCommitLogInfo,
+  defaultLimit: number,
+  autoPrint: boolean | number,
+  expanded: boolean,
+) => `
 (() => {
   const info = ${serialize(info)};
   const formatDateTime = (value) => {
@@ -133,9 +163,29 @@ const createClientCode = (info: GitCommitLogInfo, defaultLimit: number, autoPrin
   window.__SYBZ_GIT_COMMIT_LOG__ = info;
   window.b = (limit = ${defaultLimit}) => {
     const commits = info.commits.slice(0, normalizeLimit(limit));
-    console.group(info.project + ' git commits');
-    console.table([{ project: info.project, version: info.version, branch: info.branch, buildTime: formatDateTime(info.buildTime), repository: info.repository }]);
-    console.table(commits.map((commit, index) => ({ index: index + 1, hash: commit.shortHash, committedAt: formatDateTime(commit.committedAt), author: commit.authorName, message: commit.message, url: commit.url })));
+    const latestCommit = commits[0] || info.commits[0] || {};
+    console.${expanded ? 'group' : 'groupCollapsed'}('[build git info]');
+    console.table({
+      authorName: latestCommit.authorName || '-',
+      buildTime: formatDateTime(info.buildTime),
+      mode: info.mode,
+      subject: latestCommit.message || '-',
+      branch: info.branch || '-',
+      tag: info.tag,
+      describe: info.describe,
+      shortHash: latestCommit.shortHash || '-',
+      authorDate: formatDateTime(latestCommit.committedAt),
+      upstream: info.upstream,
+      sync: info.sync,
+      workspace: info.workspace,
+      node: info.node,
+      platform: info.platform,
+    });
+    console.log('repository:', info.repository || '-');
+    console.log('body:\\n' + (info.body || '-'));
+    console.log('recentCommits:\\n' + commits.map((commit, index) =>
+      String(index + 1).padStart(2, '0') + '. ' + formatDateTime(commit.committedAt) + ' [' + commit.shortHash + '] ' + commit.authorName + ': ' + commit.message
+    ).join('\\n'));
     console.groupEnd();
     return info;
   };
@@ -147,23 +197,25 @@ const createClientCode = (info: GitCommitLogInfo, defaultLimit: number, autoPrin
  */
 export const gitCommitLog = (options: GitCommitLogOptions = {}): Plugin => {
   const maxCommits = normalizePositiveInteger(options.maxCommits, 20)
-  const defaultLimit = Math.min(normalizePositiveInteger(options.defaultLimit, 8), maxCommits)
+  const defaultLimit = Math.min(normalizePositiveInteger(options.defaultLimit, 10), maxCommits)
   let viteRoot = process.cwd()
+  let viteMode = 'development'
 
   return {
     name: 'sybz-git-commit-log',
     configResolved(config) {
       viteRoot = config.root
+      viteMode = config.mode
     },
     transformIndexHtml: {
       order: 'pre',
       handler() {
         const cwd = resolve(options.cwd || viteRoot)
-        const info = createGitCommitLogInfo(cwd, maxCommits)
+        const info = createGitCommitLogInfo(cwd, maxCommits, viteMode)
         return [
           {
             tag: 'script',
-            children: createClientCode(info, defaultLimit, options.autoPrint ?? false),
+            children: createClientCode(info, defaultLimit, options.autoPrint ?? false, options.expanded ?? false),
             injectTo: 'head-prepend',
           },
         ]

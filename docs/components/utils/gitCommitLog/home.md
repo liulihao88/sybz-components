@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-在业务项目的 `vite.config.ts` 中注册插件。默认读取当前项目最近 `20` 条提交，并注册全局方法 `b()`；在浏览器控制台调用 `b()` 时，默认打印最近 `8` 条。
+在业务项目的 `vite.config.ts` 中注册插件。默认读取当前项目最近 `20` 条提交，并注册全局方法 `b()`；在浏览器控制台调用 `b()` 时，默认按最新到最旧打印最近 `10` 条。
 
 ```ts
 import { defineConfig } from 'vite'
@@ -20,7 +20,7 @@ export default defineConfig({
 页面打开后，在浏览器控制台调用：
 
 ```ts
-b() // 打印默认 8 条
+b() // 打印默认 10 条
 b(3) // 打印最近 3 条
 ```
 
@@ -34,18 +34,29 @@ plugins: [gitCommitLog({ autoPrint: true })]
 plugins: [gitCommitLog({ autoPrint: 5 })]
 ```
 
+### 默认展开
+
+控制台分组默认处于收起状态。需要打印后直接展开时，设置 `expanded: true`。
+
+```ts
+plugins: [gitCommitLog({ expanded: true })]
+```
+
 ### 配置项
 
 | 属性名称       | 类型                | 可选值              | 默认值          | 说明                                     |
 | -------------- | ------------------- | ------------------- | --------------- | ---------------------------------------- |
 | `cwd`          | `string`            | 有效的 Git 目录     | Vite 项目根目录 | 指定读取提交记录的项目目录。             |
 | `maxCommits`   | `number`            | 正整数              | `20`            | 构建时最多注入到页面的提交数量。         |
-| `defaultLimit` | `number`            | 正整数              | `8`             | 调用 `b()` 且不传参数时的默认打印数量。  |
+| `defaultLimit` | `number`            | 正整数              | `10`            | 调用 `b()` 且不传参数时的默认打印数量。  |
 | `autoPrint`    | `boolean \| number` | `false/true/正整数` | `false`         | 是否在页面加载后自动打印，以及打印条数。 |
+| `expanded`     | `boolean`           | `false/true`        | `false`         | 控制台分组打印后是否默认展开。           |
 
 ### 返回值与全局数据
 
-`b()` 在打印后返回完整的项目信息，也可以通过 `window.__SYBZ_GIT_COMMIT_LOG__` 直接读取。数据包含项目名、版本、分支、仓库地址、构建时间和提交记录。
+`b()` 使用纵向表格显示构建与 Git 状态，并在表格下显示仓库地址、最新提交正文和 recentCommits。recentCommits 按最新到最旧排列，每行包含索引、提交时间、`shortHash`、作者和提交说明。
+
+打印后会返回完整的项目信息，也可以通过 `window.__SYBZ_GIT_COMMIT_LOG__` 直接读取。
 
 ```ts
 const info = b(5)
