@@ -1,9 +1,8 @@
 import { defineConfig, type UserConfig } from 'vitepress'
-import { execSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
 import { mdPlugin } from './config/plugins.ts'
 import { createAlgolia, Github } from './utils/settings.ts'
+import { gitCommitLog } from '../../packages/utils/src/gitCommitLog.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 const siteBase = '/sybz-components/'
@@ -28,76 +27,6 @@ const formatBuildTime = (date: Date) => {
 }
 
 const buildTime = formatBuildTime(new Date())
-
-const runGitCommand = (command: string) => {
-  try {
-    return execSync(command, {
-      cwd: rootDir,
-      encoding: 'utf-8',
-      stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim()
-  } catch {
-    return ''
-  }
-}
-
-const readPackageJson = () => {
-  try {
-    return JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf-8')) as {
-      name?: string
-      version?: string
-      homepage?: string
-      repository?: string | { url?: string }
-    }
-  } catch {
-    return {}
-  }
-}
-
-const normalizeRepositoryUrl = (url = Github) =>
-  url
-    .replace(/^git\+/, '')
-    .replace(/^git@github\.com:/, 'https://github.com/')
-    .replace(/\.git$/, '')
-
-const packageJson = readPackageJson()
-const repositoryUrl = normalizeRepositoryUrl(
-  typeof packageJson.repository === 'string' ? packageJson.repository : packageJson.repository?.url || Github,
-)
-
-const gitCommits = runGitCommand('git log -8 --pretty=format:%H%x1f%h%x1f%an%x1f%ae%x1f%aI%x1f%s')
-  .split('\n')
-  .filter(Boolean)
-  .map((line) => {
-    const [hash = '', shortHash = '', authorName = '', authorEmail = '', committedAt = '', message = ''] =
-      line.split('\x1f')
-
-    return {
-      hash,
-      shortHash,
-      authorName,
-      authorEmail,
-      committedAt,
-      message,
-      url: hash ? `${repositoryUrl}/commit/${hash}` : '',
-    }
-  })
-
-const latestCommit = gitCommits[0]
-const docsBuildInfo = {
-  project: packageJson.name || 'sybz-components',
-  version: packageJson.version || '',
-  repository: repositoryUrl,
-  homepage: packageJson.homepage || '',
-  branch:
-    process.env.GITHUB_REF_NAME || process.env.GITHUB_HEAD_REF || runGitCommand('git rev-parse --abbrev-ref HEAD'),
-  buildTime,
-  latestCommitHash: latestCommit?.hash || '',
-  latestCommitShortHash: latestCommit?.shortHash || '',
-  latestCommitTime: latestCommit?.committedAt || '',
-  latestCommitMessage: latestCommit?.message || '',
-  commits: gitCommits,
-}
 
 const reloadUtilsSourceDocs = (server: VitePressDevServer, file: string) => {
   if (!file.startsWith(utilsSourceDir) || !file.endsWith('.ts')) return
@@ -274,6 +203,10 @@ export default defineConfig({
             {
               text: sybzMark('getType 类型判断'),
               link: '/components/utils/getType/home.md',
+            },
+            {
+              text: sybzMark('gitCommitLog Git 提交记录'),
+              link: '/components/utils/gitCommitLog/home.md',
             },
             {
               text: sybzMark('isEmpty 空值判断'),
@@ -573,7 +506,7 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [utilsSourceDocsHmrPlugin()],
+    plugins: [gitCommitLog({ cwd: rootDir, autoPrint: true }), utilsSourceDocsHmrPlugin()],
     build: {
       minify: 'terser',
       terserOptions: {
@@ -585,7 +518,6 @@ export default defineConfig({
     },
     define: {
       __buildInfos__: JSON.stringify(buildTime),
-      __SYBZ_DOCS_BUILD_INFO__: JSON.stringify(docsBuildInfo),
       __SYBZ_COMPONENTS_BUILD_TIME__: JSON.stringify(buildTime),
       __SYBZ_UTILS_BUILD_TIME__: JSON.stringify(buildTime),
     },

@@ -7,6 +7,23 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./gitCommitLog": {
+      "types": "./dist/gitCommitLog.d.ts",
+      "import": "./dist/gitCommitLog.mjs",
+      "require": "./dist/gitCommitLog.cjs"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.cjs"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -31,5 +48,8 @@
     "es-toolkit": "^1.39.10",
     "lodash-es": "^4.17.21",
     "vue": "3.4.15"
+  },
+  "peerDependencies": {
+    "vite": ">=5 <8"
   }
 }

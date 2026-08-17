@@ -33,6 +33,12 @@ import {
 } from '@sybz-components/utils'
 ```
 
+Vite 构建插件使用独立入口，避免把 Node.js 依赖带入浏览器工具包：
+
+```ts
+import { gitCommitLog } from '@sybz-components/utils/gitCommitLog'
+```
+
 ## 替换方向
 
 | 原写法                            | 优先替换                                        |
@@ -49,6 +55,7 @@ import {
 | 手写千分位、小数处理              | `formatThousands`、`formatToFixed`              |
 | 手写宽高单位处理                  | `processWidth`                                  |
 | 手写表单校验 Promise              | `validateForm`                                  |
+| 手写 Git 提交记录注入             | `gitCommitLog`                                  |
 | `try/catch + loading` 重复模板    | `tryCatch`                                      |
 
 ## 使用规则
@@ -57,6 +64,7 @@ import {
 - 同一文件内同类逻辑要整体替换，不要只改一处。
 - 不为简单函数再包一层同名函数，除非业务确实需要统一副作用。
 - `processWidth` 可处理数字、字符串长度和值为 `0` 的 padding/width 场景。
+- 项目需要在浏览器控制台通过 `b()` 查看自身 Git 提交记录时，在 Vite 配置中注册 `gitCommitLog()`。
 
 ## 示例
 
