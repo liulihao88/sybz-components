@@ -2,6 +2,12 @@ import { codeInspectorPlugin, type CodeInspectorPluginOptions } from 'code-inspe
 import type { Plugin } from 'vite'
 import { gitCommitLog, type GitCommitLogOptions } from './gitCommitLog'
 
+declare global {
+  interface Window {
+    __SYBZ_BUILD_TIME__: string
+  }
+}
+
 export type SybzCodeInspectorOptions = Omit<CodeInspectorPluginOptions, 'bundler'>
 
 export interface SybzVitePluginsOptions {
@@ -9,11 +15,46 @@ export interface SybzVitePluginsOptions {
   codeInspector?: boolean | SybzCodeInspectorOptions
   /** Git 提交信息插件配置；默认启用，设为 false 时关闭。 */
   gitCommitLog?: boolean | GitCommitLogOptions
+  /** 打包时间注入配置；默认启用，设为 false 时关闭。 */
+  buildTime?: boolean | { metaName?: string }
 }
 
 /** 创建预设为 Vite bundler 的代码定位插件。 */
 const createCodeInspector = (options: SybzCodeInspectorOptions = {}): Plugin =>
   codeInspectorPlugin({ ...options, bundler: 'vite' }) as Plugin
+
+const formatBuildTime = (date: Date) => {
+  const pad = (value: number) => String(value).padStart(2, '0')
+
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(
+    date.getMinutes(),
+  )}:${pad(date.getSeconds())}`
+}
+
+const createBuildTime = (metaName = 'buildTime'): Plugin => {
+  const buildTime = formatBuildTime(new Date())
+
+  return {
+    name: 'sybz-build-time',
+    transformIndexHtml: {
+      order: 'pre',
+      handler() {
+        return [
+          {
+            tag: 'meta',
+            attrs: { name: metaName, content: buildTime },
+            injectTo: 'head-prepend',
+          },
+          {
+            tag: 'script',
+            children: `window.__SYBZ_BUILD_TIME__ = ${JSON.stringify(buildTime)};`,
+            injectTo: 'head-prepend',
+          },
+        ]
+      },
+    },
+  }
+}
 
 /** 创建 sybz 项目的 Vite 插件预设，默认包含代码定位和 Git 提交信息。 */
 export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): Plugin[] => {
@@ -25,6 +66,10 @@ export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): Plugin[] 
 
   if (options.gitCommitLog !== false) {
     plugins.push(gitCommitLog(typeof options.gitCommitLog === 'object' ? options.gitCommitLog : {}))
+  }
+
+  if (options.buildTime !== false) {
+    plugins.push(createBuildTime(typeof options.buildTime === 'object' ? options.buildTime.metaName : undefined))
   }
 
   return plugins

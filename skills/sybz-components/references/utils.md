@@ -37,7 +37,7 @@ Vite 构建插件使用独立入口，避免把 Node.js 依赖带入浏览器工
 
 ```ts
 import { gitCommitLog } from '@sybz-components/utils/gitCommitLog'
-import { sybzVitePlugins } from 'sybz-components/vite'
+import { sybzVitePlugins } from '@sybz-components/utils/vite'
 ```
 
 ## 替换方向
@@ -67,7 +67,7 @@ import { sybzVitePlugins } from 'sybz-components/vite'
 - 不为简单函数再包一层同名函数，除非业务确实需要统一副作用。
 - `processWidth` 可处理数字、字符串长度和值为 `0` 的 padding/width 场景。
 - 项目需要在浏览器控制台通过 `b()` 查看自身 Git 提交记录时，在 Vite 配置中注册 `gitCommitLog()`。
-- 项目需要代码定位或 Git 提交记录时，在 Vite 配置中注册 `...sybzVitePlugins()`，通过 `codeInspector` 和 `gitCommitLog` 配置启用、关闭或定制对应能力。
+- 项目需要代码定位、Git 提交记录或打包时间时，在 Vite 配置中注册 `...sybzVitePlugins()`，通过 `codeInspector`、`gitCommitLog` 和 `buildTime` 配置启用、关闭或定制对应能力。
 
 ## 示例
 
