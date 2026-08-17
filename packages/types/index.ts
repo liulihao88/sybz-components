@@ -22,7 +22,7 @@ export interface SybzComponentsInstallOptions {
   tabs?: SybzComponentInstallConfig
   tag?: SybzComponentInstallConfig
   table?: SybzComponentInstallConfig
-  gTableSearch?: SybzComponentInstallConfig
+  tableSearch?: SybzComponentInstallConfig
   title?: SybzComponentInstallConfig
   tooltip?: SybzComponentInstallConfig
   warning?: SybzComponentInstallConfig

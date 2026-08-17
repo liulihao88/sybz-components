@@ -1,63 +1,71 @@
 <template>
-  <div class="g-table-search" :style="{ '--g-table-search-columns': mergedProps.column }">
-    <el-form
-      :model="form"
-      class="g-table-search__form"
-      label-suffix=":"
-      @submit.prevent
-      @keyup.enter.prevent="handleSearch"
-    >
-      <div class="g-table-search__grid">
-        <el-form-item v-for="(item, index) in fields" :key="item.prop || index" :prop="item.prop">
-          <slot v-if="$slots[`field-${item.prop}`]" :name="`field-${item.prop}`" :item="item" :model="form" />
-          <component
-            :is="item.render"
-            v-else-if="item.render"
-            :item="item"
-            :model="form"
-            :value="form[item.prop]"
-            :update="(value: unknown) => updateField(item.prop, value)"
-          />
-          <component
-            :is="item.comp || 's-input'"
-            v-else
-            v-model="form[item.prop]"
-            v-bind="item.attrs"
-            :placeholder="item.attrs?.placeholder || getPlaceholder(item)"
-            :title="item.label"
-            class="g-table-search__field"
-            @update:model-value="emitModelValue"
-            @change="handleFieldEvent(item, 'change', $event)"
-            @clear="handleFieldEvent(item, 'clear', $event)"
-          />
-        </el-form-item>
-      </div>
-    </el-form>
+  <div
+    class="s-table-search"
+    :class="{ 's-table-search--with-actions': hasExtraActions }"
+    :style="{ '--s-table-search-columns': mergedProps.column }"
+  >
+    <div class="s-table-search__layout">
+      <el-form
+        :model="form"
+        class="s-table-search__form"
+        label-suffix=":"
+        @submit.prevent
+        @keyup.enter.prevent="handleSearch"
+      >
+        <div class="s-table-search__grid">
+          <el-form-item v-for="(item, index) in fields" :key="item.prop || index" :prop="item.prop">
+            <slot v-if="$slots[`field-${item.prop}`]" :name="`field-${item.prop}`" :item="item" :model="form" />
+            <component
+              :is="item.render"
+              v-else-if="item.render"
+              :item="item"
+              :model="form"
+              :value="form[item.prop]"
+              :update="(value: unknown) => updateField(item.prop, value)"
+            />
+            <component
+              :is="item.comp || 's-input'"
+              v-else
+              v-model="form[item.prop]"
+              v-bind="item.attrs"
+              :placeholder="item.attrs?.placeholder || getPlaceholder(item)"
+              :title="item.label"
+              class="s-table-search__field"
+              @update:model-value="emitModelValue"
+              @change="handleFieldEvent(item, 'change', $event)"
+              @clear="handleFieldEvent(item, 'clear', $event)"
+            />
+          </el-form-item>
+        </div>
+      </el-form>
 
-    <div class="g-table-search__actions">
-      <div v-if="$slots.actions || $slots.default" class="g-table-search__extra">
-        <slot name="actions"><slot /></slot>
+      <div class="s-table-search__actions">
+        <div v-if="hasExtraActions" class="s-table-search__extra">
+          <slot name="actions"><slot /></slot>
+        </div>
+        <div class="s-table-search__buttons">
+          <s-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</s-button>
+          <s-button v-if="mergedProps.showReset" icon="el-icon-refresh" @click="handleReset">重置</s-button>
+        </div>
       </div>
-      <s-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</s-button>
-      <s-button v-if="mergedProps.showReset" icon="el-icon-refresh" @click="handleReset">重置</s-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, useSlots, watch } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type {
-  GTableSearchEmits,
-  GTableSearchEvent,
-  GTableSearchField,
-  GTableSearchModel,
-  GTableSearchProps,
+  STableSearchEmits,
+  STableSearchEvent,
+  STableSearchField,
+  STableSearchModel,
+  STableSearchProps,
 } from './types'
 
-defineOptions({ name: 'GTableSearch' })
+defineOptions({ name: 'STableSearch' })
 
-const props = withDefaults(defineProps<GTableSearchProps>(), {
+const props = withDefaults(defineProps<STableSearchProps>(), {
   options: () => [],
   items: undefined,
   column: 3,
@@ -66,11 +74,13 @@ const props = withDefaults(defineProps<GTableSearchProps>(), {
   searchOn: undefined,
   showReset: true,
 })
-const emit = defineEmits<GTableSearchEmits>()
-const mergedProps = useGlobalComponentConfig('gTableSearch', props)
+const emit = defineEmits<STableSearchEmits>()
+const slots = useSlots()
+const mergedProps = useGlobalComponentConfig('tableSearch', props)
 
-const form = ref<GTableSearchModel>({ ...props.initialValue, ...props.modelValue })
+const form = ref<STableSearchModel>({ ...props.initialValue, ...props.modelValue })
 const fields = computed(() => mergedProps.value.items ?? mergedProps.value.options ?? [])
+const hasExtraActions = computed(() => Boolean(slots.actions || slots.default))
 
 watch(
   () => props.modelValue,
@@ -97,12 +107,12 @@ const scheduleSearch = () => {
   })
 }
 
-const getPlaceholder = (item: GTableSearchField) => `${item.comp === 's-select' ? '请选择' : '请输入'}${item.label}`
+const getPlaceholder = (item: STableSearchField) => `${item.comp === 's-select' ? '请选择' : '请输入'}${item.label}`
 
-const getDefaultSearchEvents = (item: GTableSearchField): GTableSearchEvent[] =>
+const getDefaultSearchEvents = (item: STableSearchField): STableSearchEvent[] =>
   item.comp === 's-select' ? ['change', 'clear'] : ['clear']
 
-const handleFieldEvent = (item: GTableSearchField, event: GTableSearchEvent, value: unknown) => {
+const handleFieldEvent = (item: STableSearchField, event: STableSearchEvent, value: unknown) => {
   item.on?.[event]?.(value, form.value)
   const searchOn = item.searchOn ?? mergedProps.value.searchOn ?? getDefaultSearchEvents(item)
   if (searchOn !== false && searchOn.includes(event)) scheduleSearch()
@@ -118,7 +128,7 @@ const handleReset = () => {
 </script>
 
 <style scoped lang="scss">
-.g-table-search {
+.s-table-search {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
@@ -126,53 +136,89 @@ const handleReset = () => {
   container-type: inline-size;
 }
 
-.g-table-search__form,
-.g-table-search__grid,
-.g-table-search__field {
+.s-table-search__layout {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
   width: 100%;
   min-width: 0;
 }
 
-.g-table-search__grid {
+.s-table-search__form,
+.s-table-search__grid,
+.s-table-search__field {
+  width: 100%;
+  min-width: 0;
+}
+
+.s-table-search__form {
+  flex: 1 1 0;
+}
+
+.s-table-search__grid {
   display: grid;
-  grid-template-columns: repeat(var(--g-table-search-columns), minmax(0, 1fr));
+  grid-template-columns: repeat(var(--s-table-search-columns), minmax(0, 1fr));
   gap: 16px;
 }
 
-.g-table-search__actions,
-.g-table-search__extra {
+.s-table-search__actions,
+.s-table-search__extra,
+.s-table-search__buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
 }
 
-.g-table-search__actions {
+.s-table-search__actions {
+  flex: 0 0 176px;
   justify-content: flex-end;
-  margin-top: 16px;
 }
 
-.g-table-search__extra {
+.s-table-search__buttons {
+  flex: 0 0 176px;
+}
+
+.s-table-search__buttons :deep(.el-button) {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.s-table-search--with-actions .s-table-search__layout {
+  flex-wrap: wrap;
+}
+
+.s-table-search--with-actions .s-table-search__form,
+.s-table-search--with-actions .s-table-search__actions {
+  flex-basis: 100%;
+}
+
+.s-table-search__extra {
   margin-right: auto;
 }
 
-.g-table-search :deep(.el-form-item) {
+.s-table-search :deep(.el-form-item) {
   min-width: 0;
   margin-bottom: 0;
 }
 
-.g-table-search :deep(.el-form-item__content) {
+.s-table-search :deep(.el-form-item__content) {
   width: 100%;
   min-width: 0;
 }
 
 @container (max-width: 900px) {
-  .g-table-search__grid {
-    grid-template-columns: 1fr;
+  .s-table-search__layout {
+    flex-wrap: wrap;
   }
 
-  .g-table-search__actions {
-    justify-content: flex-start;
+  .s-table-search__form,
+  .s-table-search__actions {
+    flex-basis: 100%;
+  }
+
+  .s-table-search__grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

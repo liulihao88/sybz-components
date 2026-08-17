@@ -404,7 +404,7 @@ export default defineConfig({
               link: '/components/table/home.md',
             },
             {
-              text: 'tableSearch表格搜索组件',
+              text: 'STableSearch表格搜索组件',
               link: '/components/tableSearch/home.md',
             },
           ],

@@ -20,7 +20,7 @@ const fields = [
 </script>
 
 <template>
-  <g-table-search v-model="form" :items="fields" :column="2" @search="count++" />
+  <s-table-search v-model="form" :items="fields" :column="2" @search="count++" />
   <p class="result">已触发搜索 {{ count }} 次</p>
 </template>
 

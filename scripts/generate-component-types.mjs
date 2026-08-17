@@ -54,25 +54,25 @@ const toOnlineDocsUrl = (docsPath) => `${onlineDocsBaseUrl}${docsPath.replace(/\
 
 const TYPED_COMPONENT_PROPS = new Map([
   [
-    'GTableSearch',
+    'STableSearch',
     {
       importPath: resolve(rootDir, 'packages/components/tableSearch/src/types.ts'),
-      typeName: 'GTableSearchProps',
-      emitsTypeName: 'GTableSearchEmits',
-      tagName: 'g-table-search',
+      typeName: 'STableSearchProps',
+      emitsTypeName: 'STableSearchEmits',
+      tagName: 's-table-search',
       allowAnySlots: true,
       instanceMembers: [
-        '$emit: <Event extends keyof GTableSearchEmits>(event: Event, ...args: GTableSearchEmits[Event]) => void',
+        '$emit: <Event extends keyof STableSearchEmits>(event: Event, ...args: STableSearchEmits[Event]) => void',
       ],
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/components/tableSearch/src/types.ts'),
-        interfaceName: 'GTableSearchProps',
+        interfaceName: 'STableSearchProps',
         importTypeNames: [
-          'GTableSearchEmits',
-          'GTableSearchEvent',
-          'GTableSearchField',
-          'GTableSearchModel',
-          'GTableSearchProps',
+          'STableSearchEmits',
+          'STableSearchEvent',
+          'STableSearchField',
+          'STableSearchModel',
+          'STableSearchProps',
         ],
         extraImportLines: ["import type { Component } from 'vue'"],
       },
@@ -1117,11 +1117,11 @@ const collectComponentEntries = () => {
 
 const allComponentEntries = collectComponentEntries()
   .map(({ dirName, componentPath, wrapperPath, wrapperFilePath }) => {
-    const componentName = dirName === 'tableSearch' ? 'GTableSearch' : `S${toPascalCase(dirName)}`
+    const componentName = `S${toPascalCase(dirName)}`
     return {
       componentName,
       componentPath,
-      tagName: dirName === 'tableSearch' ? 'g-table-search' : `s-${toKebabCase(dirName)}`,
+      tagName: `s-${toKebabCase(dirName)}`,
       wrapperPath,
       wrapperFilePath,
       docsUrl: getDocsUrlFromWrapperPath(wrapperPath),

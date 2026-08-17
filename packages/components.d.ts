@@ -35,14 +35,6 @@ declare global {
 declare module 'vue' {
   export interface GlobalComponents {
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
-     */
-    GTableSearch: (typeof import('./types/components/tableSearch'))['default']
-    /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
-     */
-    'g-table-search': (typeof import('./types/components/tableSearch'))['default']
-    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html
      */
     SBaseHeader: (typeof import('./types/components/company/baseHeader'))['default']
@@ -311,6 +303,14 @@ declare module 'vue' {
      */
     's-table': (typeof import('./types/components/table'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
+     */
+    STableSearch: (typeof import('./types/components/tableSearch'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
+     */
+    's-table-search': (typeof import('./types/components/tableSearch'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
      */
     STabs: (typeof import('./types/components/tabs'))['default']
@@ -384,10 +384,6 @@ declare module 'vue' {
     's-wrapper': (typeof import('./types/components/wrapper'))['default']
   }
 }
-
-export type GTableSearchComponent = (typeof import('./types/components/tableSearch'))['default']
-export type GTableSearchInstance = ComponentInstance<GTableSearchComponent>
-export type GTableSearchPublicProps = GTableSearchInstance['$props']
 
 export type SBaseHeaderComponent = (typeof import('./types/components/company/baseHeader'))['default']
 export type SBaseHeaderInstance = ComponentInstance<SBaseHeaderComponent>
@@ -513,6 +509,10 @@ export type STableComponent = import('./types/components/table').STableComponent
 export type STableInstance = ComponentInstance<STableComponent>
 export type STablePublicProps = import('./types/components/table').STablePublicProps
 
+export type STableSearchComponent = (typeof import('./types/components/tableSearch'))['default']
+export type STableSearchInstance = ComponentInstance<STableSearchComponent>
+export type STableSearchPublicProps = STableSearchInstance['$props']
+
 export type STabsComponent = import('./types/components/tabs').STabsComponent
 export type STabsInstance = ComponentInstance<STabsComponent>
 export type STabsPublicProps = import('./types/components/tabs').STabsPublicProps
@@ -548,7 +548,6 @@ export type SWrapperPublicProps = SWrapperInstance['$props']
 declare global {
   namespace JSX {
     export interface IntrinsicElements {
-      'g-table-search': JSXComponentProps<GTableSearchPublicProps>
       's-base-header': JSXComponentProps<SBaseHeaderPublicProps>
       's-build-time': JSXComponentProps<SBuildTimePublicProps>
       's-button': JSXComponentProps<SButtonPublicProps>
@@ -580,6 +579,7 @@ declare global {
       's-svg': JSXComponentProps<SSvgPublicProps>
       's-switch': JSXComponentProps<SSwitchPublicProps>
       's-table': JSXComponentProps<STablePublicProps>
+      's-table-search': JSXComponentProps<STableSearchPublicProps>
       's-tabs': JSXComponentProps<STabsPublicProps>
       's-tag': JSXComponentProps<STagPublicProps>
       's-test': JSXComponentProps<STestPublicProps>

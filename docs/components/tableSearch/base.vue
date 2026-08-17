@@ -24,7 +24,7 @@ const handleSearch = (value: Record<string, unknown>) => {
 </script>
 
 <template>
-  <g-table-search v-model="form" :options="fields" @search="handleSearch" />
+  <s-table-search v-model="form" :options="fields" @search="handleSearch" />
   <p class="result">搜索参数：{{ result }}</p>
 </template>
 
