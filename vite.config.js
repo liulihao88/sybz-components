@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import { readFileSync } from 'fs'
 import fg from 'fast-glob'
 import vue from '@vitejs/plugin-vue'
-import { codeInspectorPlugin } from 'code-inspector-plugin'
+import { sybzVitePlugins } from './packages/utils/src/vite.ts'
 import pkg from './package.json'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import terser from '@rollup/plugin-terser'
@@ -116,9 +116,7 @@ export default defineConfig({
       include: [/\.vue$/],
     }),
     vueJsx(),
-    codeInspectorPlugin({
-      bundler: 'vite',
-    }),
+    ...sybzVitePlugins({ gitCommitLog: false }),
     customVitePluginFilePath(),
     createSvgIconsPlugin({
       iconDirs: [resolve(__dirname, './packages/assets/svg')],

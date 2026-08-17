@@ -63,9 +63,6 @@ importers:
       chalk:
         specifier: ^5.3.0
         version: 5.3.0
-      code-inspector-plugin:
-        specifier: ^0.10.1
-        version: 0.10.1
       consola:
         specifier: ^3.2.3
         version: 3.2.3
@@ -222,6 +219,9 @@ importers:
       '@vue/shared':
         specifier: ^3.5.18
         version: 3.5.26
+      code-inspector-plugin:
+        specifier: ^0.10.1
+        version: 0.10.1
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -234,6 +234,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      vite:
+        specifier: '>=5 <8'
+        version: 5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
       vue:
         specifier: 3.4.15
         version: 3.4.15(typescript@5.3.3)

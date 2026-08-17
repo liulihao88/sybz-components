@@ -2,7 +2,7 @@ import { defineConfig, type UserConfig } from 'vitepress'
 import { fileURLToPath, URL } from 'node:url'
 import { mdPlugin } from './config/plugins.ts'
 import { createAlgolia, Github } from './utils/settings.ts'
-import { gitCommitLog } from '../../packages/utils/src/gitCommitLog.ts'
+import { sybzVitePlugins } from '../../packages/utils/src/vite.ts'
 
 const isProd = process.env.NODE_ENV === 'production'
 const siteBase = '/sybz-components/'
@@ -211,6 +211,10 @@ export default defineConfig({
             {
               text: sybzMark('isEmpty 空值判断'),
               link: '/components/utils/isEmpty/home.md',
+            },
+            {
+              text: sybzMark('sybzVitePlugins Vite 插件预设'),
+              link: '/components/utils/sybzVitePlugins/home.md',
             },
 
             {
@@ -506,7 +510,10 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [gitCommitLog({ cwd: rootDir, autoPrint: true }), utilsSourceDocsHmrPlugin()],
+    plugins: [
+      ...sybzVitePlugins({ codeInspector: true, gitCommitLog: { cwd: rootDir, autoPrint: true } }),
+      utilsSourceDocsHmrPlugin(),
+    ],
     build: {
       minify: 'terser',
       terserOptions: {

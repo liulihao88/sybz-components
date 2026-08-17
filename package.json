@@ -37,6 +37,11 @@
       "import": "./dist/sybz-components-es.js",
       "default": "./dist/sybz-components-es.js"
     },
+    "./vite": {
+      "types": "./packages/vite.d.ts",
+      "import": "./packages/vite.mjs",
+      "require": "./packages/vite.cjs"
+    },
     "./style.css": "./dist/style.css",
     "./charts/style.css": "./dist/charts-style.css",
     "./charts-style.css": "./dist/charts-style.css",
@@ -60,7 +65,10 @@
     "docs/.vitepress/utils",
     "docs/.vitepress/vitepress",
     "skills",
-    "scripts/install-sybz-skill.mjs"
+    "scripts/install-sybz-skill.mjs",
+    "packages/vite.mjs",
+    "packages/vite.cjs",
+    "packages/vite.d.ts"
   ],
   "sideEffects": [
     "*.css",
@@ -135,7 +143,6 @@
     "@vueuse/core": "^10.9.0",
     "autoprefixer": "^10.4.18",
     "chalk": "^5.3.0",
-    "code-inspector-plugin": "^0.10.1",
     "consola": "^3.2.3",
     "dayjs": "^1.11.19",
     "dompurify": "^3.4.12",

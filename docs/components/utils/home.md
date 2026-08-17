@@ -25,6 +25,7 @@
 - [getType](/components/utils/getType/home.md)
 - [gitCommitLog](/components/utils/gitCommitLog/home.md)
 - [isEmpty](/components/utils/isEmpty/home.md)
+- [sybzVitePlugins](/components/utils/sybzVitePlugins/home.md)
 - [delay](/components/utils/delay/home.md)
 - [throttle](/components/utils/throttle/home.md)
 - [tryCatch](/components/utils/tryCatch/home.md)
