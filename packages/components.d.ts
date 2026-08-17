@@ -35,6 +35,14 @@ declare global {
 declare module 'vue' {
   export interface GlobalComponents {
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
+     */
+    GTableSearch: (typeof import('./types/components/tableSearch'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
+     */
+    'g-table-search': (typeof import('./types/components/tableSearch'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html
      */
     SBaseHeader: (typeof import('./types/components/company/baseHeader'))['default']
@@ -377,6 +385,10 @@ declare module 'vue' {
   }
 }
 
+export type GTableSearchComponent = (typeof import('./types/components/tableSearch'))['default']
+export type GTableSearchInstance = ComponentInstance<GTableSearchComponent>
+export type GTableSearchPublicProps = GTableSearchInstance['$props']
+
 export type SBaseHeaderComponent = (typeof import('./types/components/company/baseHeader'))['default']
 export type SBaseHeaderInstance = ComponentInstance<SBaseHeaderComponent>
 export type SBaseHeaderPublicProps = SBaseHeaderInstance['$props']
@@ -536,6 +548,7 @@ export type SWrapperPublicProps = SWrapperInstance['$props']
 declare global {
   namespace JSX {
     export interface IntrinsicElements {
+      'g-table-search': JSXComponentProps<GTableSearchPublicProps>
       's-base-header': JSXComponentProps<SBaseHeaderPublicProps>
       's-build-time': JSXComponentProps<SBuildTimePublicProps>
       's-button': JSXComponentProps<SButtonPublicProps>

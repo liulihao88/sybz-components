@@ -403,6 +403,10 @@ export default defineConfig({
               text: sybzMark('table组件'),
               link: '/components/table/home.md',
             },
+            {
+              text: 'tableSearch表格搜索组件',
+              link: '/components/tableSearch/home.md',
+            },
           ],
         },
         {

@@ -54,6 +54,31 @@ const toOnlineDocsUrl = (docsPath) => `${onlineDocsBaseUrl}${docsPath.replace(/\
 
 const TYPED_COMPONENT_PROPS = new Map([
   [
+    'GTableSearch',
+    {
+      importPath: resolve(rootDir, 'packages/components/tableSearch/src/types.ts'),
+      typeName: 'GTableSearchProps',
+      emitsTypeName: 'GTableSearchEmits',
+      tagName: 'g-table-search',
+      allowAnySlots: true,
+      instanceMembers: [
+        '$emit: <Event extends keyof GTableSearchEmits>(event: Event, ...args: GTableSearchEmits[Event]) => void',
+      ],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/tableSearch/src/types.ts'),
+        interfaceName: 'GTableSearchProps',
+        importTypeNames: [
+          'GTableSearchEmits',
+          'GTableSearchEvent',
+          'GTableSearchField',
+          'GTableSearchModel',
+          'GTableSearchProps',
+        ],
+        extraImportLines: ["import type { Component } from 'vue'"],
+      },
+    },
+  ],
+  [
     'SBaseHeader',
     {
       typeName: 'Record<string, any>',
@@ -1092,11 +1117,11 @@ const collectComponentEntries = () => {
 
 const allComponentEntries = collectComponentEntries()
   .map(({ dirName, componentPath, wrapperPath, wrapperFilePath }) => {
-    const componentName = `S${toPascalCase(dirName)}`
+    const componentName = dirName === 'tableSearch' ? 'GTableSearch' : `S${toPascalCase(dirName)}`
     return {
       componentName,
       componentPath,
-      tagName: `s-${toKebabCase(dirName)}`,
+      tagName: dirName === 'tableSearch' ? 'g-table-search' : `s-${toKebabCase(dirName)}`,
       wrapperPath,
       wrapperFilePath,
       docsUrl: getDocsUrlFromWrapperPath(wrapperPath),
