@@ -119,7 +119,21 @@ tag/async
 
 ### options 数据格式
 
-#### 1. 平铺数组 + `config`
+#### 1. 基础值数组
+
+最简单的写法：直接遍历数组，每一项通过 `value` 显示；`value` 类型为 `string / number`，默认值为 `''`。
+
+```vue
+<script setup lang="ts">
+const options = ['男人', '女人', '太监']
+</script>
+
+<template>
+  <s-tag v-for="item in options" :key="item" :value="item" />
+</template>
+```
+
+#### 2. 平铺数组 + `config`
 
 适合后端直接返回普通枚举列表，再配合 `primary/info/warning/danger` 决定颜色。
 
@@ -142,7 +156,7 @@ const options = [
 />
 ```
 
-#### 2. 分组映射数组
+#### 3. 分组映射数组
 
 适合把“标签文案”和“颜色类型”都直接写在同一份映射里。
 
