@@ -14,6 +14,8 @@ export interface STableSearchField {
   attrs?: Record<string, unknown>
   /** 自定义字段渲染组件 */
   render?: Component
+  /** 使用字段插槽；true 使用 prop 作为插槽名，字符串使用指定插槽名 */
+  useSlot?: boolean | string
   /** 触发搜索的字段事件，false 表示关闭自动搜索 */
   searchOn?: STableSearchEvent[] | false
   /** 字段事件回调 */

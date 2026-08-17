@@ -14,7 +14,14 @@
       >
         <div class="s-table-search__grid">
           <el-form-item v-for="(item, index) in fields" :key="item.prop || index" :prop="item.prop">
-            <slot v-if="$slots[`field-${item.prop}`]" :name="`field-${item.prop}`" :item="item" :model="form" />
+            <slot
+              v-if="getFieldSlotName(item)"
+              :name="getFieldSlotName(item)"
+              :item="item"
+              :model="form"
+              :value="form[item.prop]"
+              :update="(value: unknown) => updateField(item.prop, value)"
+            />
             <component
               :is="item.render"
               v-else-if="item.render"
@@ -95,6 +102,14 @@ const emitModelValue = () => emit('update:modelValue', { ...form.value })
 const updateField = (prop: string, value: unknown) => {
   form.value[prop] = value
   emitModelValue()
+}
+
+const getFieldSlotName = (item: STableSearchField) => {
+  if (item.useSlot === true) return item.prop
+  if (typeof item.useSlot === 'string') return item.useSlot
+
+  const legacySlotName = `field-${item.prop}`
+  return slots[legacySlotName] ? legacySlotName : undefined
 }
 
 let searchPending = false

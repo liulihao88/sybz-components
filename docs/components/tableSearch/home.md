@@ -26,9 +26,9 @@ tableSearch/autoSearch
 
 ### 自定义字段和操作区
 
-通过 `field-${prop}` 插槽自定义字段，通过 `actions` 插槽扩展按钮。存在 `actions` 或默认插槽时，操作区会自动显示在搜索项下方，扩展操作靠左，搜索和重置靠右。基础写法：`<template #field-date="{ item, model }">...</template>`。
+字段配置 `useSlot: true` 时使用 `prop` 作为插槽名，传字符串时使用指定插槽名；原有 `field-${prop}` 插槽继续兼容。通过 `actions` 插槽扩展按钮。存在 `actions` 或默认插槽时，操作区会自动显示在搜索项下方，扩展操作靠左，搜索和重置靠右。基础写法：`<template #date="{ item, model, value, update }">...</template>`。
 
-:::demo 属性：`initialValue` 类型 `object`，默认值 `{}`；字段插槽参数包含 `item` 和 `model`；`actions` 插槽无参数。
+:::demo 属性：`useSlot` 类型 `boolean | string`，可选值 `true / false / 自定义插槽名`，默认值 `false`；`initialValue` 类型 `object`，默认值 `{}`；字段插槽参数包含 `item / model / value / update`；`actions` 插槽无参数。
 tableSearch/custom
 :::
 
@@ -46,15 +46,16 @@ tableSearch/custom
 
 ### options / items 字段属性
 
-|   字段名   | 说明                                    | 类型               | 可选值                       | 默认值      |
-| :--------: | --------------------------------------- | ------------------ | ---------------------------- | ----------- |
-|   `prop`   | 表单字段名                              | string             | -                            | -           |
-|  `label`   | 字段标题，用于生成 placeholder 和 title | string             | -                            | -           |
-|   `comp`   | 字段组件                                | string / Component | 已注册组件或组件对象         | `s-input`   |
-|  `attrs`   | 透传给字段组件的属性                    | object             | -                            | `{}`        |
-|  `render`  | 自定义字段渲染组件                      | Component          | -                            | `undefined` |
-| `searchOn` | 当前字段自动搜索事件，优先于全局配置    | array / false      | `change` / `clear` / `false` | `undefined` |
-|    `on`    | 当前字段的 `change / clear` 回调        | object             | `change` / `clear`           | `{}`        |
+|   字段名   | 说明                                                 | 类型               | 可选值                       | 默认值      |
+| :--------: | ---------------------------------------------------- | ------------------ | ---------------------------- | ----------- |
+|   `prop`   | 表单字段名                                           | string             | -                            | -           |
+|  `label`   | 字段标题，用于生成 placeholder 和 title              | string             | -                            | -           |
+|   `comp`   | 字段组件                                             | string / Component | 已注册组件或组件对象         | `s-input`   |
+|  `attrs`   | 透传给字段组件的属性                                 | object             | -                            | `{}`        |
+|  `render`  | 自定义字段渲染组件                                   | Component          | -                            | `undefined` |
+| `useSlot`  | 使用字段插槽；`true` 使用 `prop`，字符串使用指定名称 | boolean / string   | `true` / `false` / 插槽名    | `false`     |
+| `searchOn` | 当前字段自动搜索事件，优先于全局配置                 | array / false      | `change` / `clear` / `false` | `undefined` |
+|    `on`    | 当前字段的 `change / clear` 回调                     | object             | `change` / `clear`           | `{}`        |
 
 ### 事件
 
@@ -66,8 +67,9 @@ tableSearch/custom
 
 ### 插槽
 
-|     插槽名      | 说明                     | 参数              |
-| :-------------: | ------------------------ | ----------------- |
-| `field-${prop}` | 自定义指定字段           | `{ item, model }` |
-|    `actions`    | 搜索和重置按钮前的操作区 | -                 |
-|    `default`    | `actions` 的兼容写法     | -                 |
+|            插槽名            | 说明                     | 参数                             |
+| :--------------------------: | ------------------------ | -------------------------------- |
+| `prop` 或 `useSlot` 指定名称 | `useSlot` 启用的字段插槽 | `{ item, model, value, update }` |
+|       `field-${prop}`        | 兼容原有的自定义字段写法 | `{ item, model, value, update }` |
+|          `actions`           | 搜索和重置按钮前的操作区 | -                                |
+|          `default`           | `actions` 的兼容写法     | -                                |
