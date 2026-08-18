@@ -13,11 +13,9 @@ export type SItemComponent = {
       padding?: string | number
       clickable?: boolean
       disabled?: boolean
-      labelStyle?: SybzRecord
-      valueStyle?: SybzRecord
-      itemStyle?: SybzRecord
-      imgStyle?: SybzRecord
-      boxStyle?: SybzRecord
+      theme?: SybzComponentTheme
+      shadow?: 'always' | 'never' | 'hover'
+      hoverAnimation?: boolean
     }
     $slots: {
       prefix?: () => any

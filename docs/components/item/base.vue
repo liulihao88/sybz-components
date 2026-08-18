@@ -22,8 +22,12 @@ import { $toast } from '@sybz-components/utils'
       <template #img>
         <img src="https://img.yzcdn.cn/vant/logo.png" class="w-20" />
       </template>
-      <template #title>title插槽</template>
-      <template #subTitle>sub-title插槽</template>
+      <template #title>
+        title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽
+      </template>
+      <template #subTitle>
+        sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽
+      </template>
     </SItem>
   </div>
 </template>

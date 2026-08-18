@@ -101,6 +101,8 @@ export interface SButtonSelfProps extends SHtmlStringProps {
   tooltipAttrs?: SybzRecord
   /** 组件主题 */
   theme?: SybzComponentTheme
+  shadow?: 'always' | 'never' | 'hover'
+  hoverAnimation?: boolean
   /** 主题按钮变体 */
   variant?: '' | 'outline' | 'gradient'
   /** 按钮尺寸 */
@@ -498,11 +500,9 @@ export interface SItemProps {
   padding?: string | number
   clickable?: boolean
   disabled?: boolean
-  labelStyle?: SybzRecord
-  valueStyle?: SybzRecord
-  itemStyle?: SybzRecord
-  imgStyle?: SybzRecord
-  boxStyle?: SybzRecord
+  theme?: SybzComponentTheme
+  shadow?: 'always' | 'never' | 'hover'
+  hoverAnimation?: boolean
 }
 
 export interface SWrapperProps {

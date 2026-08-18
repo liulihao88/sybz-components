@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, useSlots } from 'vue'
+import { computed, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 defineOptions({ name: 'SItem' })
 interface ItemProps {
@@ -14,11 +14,8 @@ interface ItemProps {
   clickable?: boolean
   disabled?: boolean
   theme?: 'default' | 'chenghua' | 'shijingshan'
-  labelStyle?: Record<string, any>
-  valueStyle?: Record<string, any>
-  itemStyle?: Record<string, any>
-  imgStyle?: Record<string, any>
-  boxStyle?: Record<string, any>
+  shadow?: 'always' | 'never' | 'hover'
+  hoverAnimation?: boolean
 }
 const props = withDefaults(defineProps<ItemProps>(), {
   src: '',
@@ -29,11 +26,8 @@ const props = withDefaults(defineProps<ItemProps>(), {
   clickable: false,
   disabled: false,
   theme: 'default',
-  labelStyle: () => ({}),
-  valueStyle: () => ({}),
-  itemStyle: () => ({}),
-  imgStyle: () => ({}),
-  boxStyle: () => ({}),
+  shadow: 'never',
+  hoverAnimation: false,
 })
 const slots = useSlots()
 defineEmits<{ click: [event: MouseEvent] }>()
@@ -48,24 +42,6 @@ defineSlots<{
 }>()
 const title = computed(() => props.title ?? '')
 const subTitle = computed(() => props.subTitle ?? '')
-const titleRef = ref<HTMLElement>()
-const subTitleRef = ref<HTMLElement>()
-const titleOverflow = ref(false)
-const subTitleOverflow = ref(false)
-const measureOverflow = () => {
-  titleOverflow.value = !!titleRef.value && titleRef.value.scrollWidth > titleRef.value.clientWidth
-  subTitleOverflow.value = !!subTitleRef.value && subTitleRef.value.scrollWidth > subTitleRef.value.clientWidth
-}
-onMounted(() =>
-  nextTick(() => {
-    measureOverflow()
-    if (typeof ResizeObserver !== 'undefined') {
-      const observer = new ResizeObserver(measureOverflow)
-      if (titleRef.value) observer.observe(titleRef.value)
-      if (subTitleRef.value) observer.observe(subTitleRef.value)
-    }
-  }),
-)
 const paddingValue = computed(() => {
   if (props.padding !== undefined) return processWidth(props.padding, true)
   if (props.size === 'small') return '8px'
@@ -83,52 +59,28 @@ const hasPrefix = computed(() => !!(slots.prefix || slots.img || props.src))
       'is-disabled': disabled,
       's-item--chenghua': theme === 'chenghua',
       's-item--shijingshan': theme === 'shijingshan',
+      's-item--shadow-always': shadow === 'always',
+      's-item--shadow-hover': shadow === 'hover',
+      's-item--hover-animation': hoverAnimation,
     }"
     :style="{
       padding: paddingValue,
       ...processWidth(width),
       ...(height ? { height: processWidth(height, true) } : {}),
-      ...boxStyle,
     }"
     @click="!disabled && $emit('click', $event)"
   >
-    <div v-if="hasPrefix" class="s-item__prefix" :style="imgStyle">
+    <div v-if="hasPrefix" class="s-item__prefix">
       <slot name="prefix">
         <slot name="img"><img v-if="src" :src="src" alt="" /></slot>
       </slot>
     </div>
-    <div class="s-item__content" :style="itemStyle">
-      <s-tooltip
-        v-if="title || $slots.title"
-        class="s-item__title"
-        :style="labelStyle"
-        :disabled="!titleOverflow"
-        placement="top-start"
-      >
-        <template #default>
-          <span ref="titleRef">
-            <slot name="title">{{ title }}</slot>
-          </span>
-        </template>
-        <template #content>
-          <slot name="title">{{ title }}</slot>
-        </template>
+    <div class="s-item__content">
+      <s-tooltip v-if="title || $slots.title" :content="String(title)" width="100%" placement="top-start">
+        <slot name="title">{{ title }}</slot>
       </s-tooltip>
-      <s-tooltip
-        v-if="subTitle || $slots.subTitle"
-        class="s-item__subtitle"
-        :style="valueStyle"
-        :disabled="!subTitleOverflow"
-        placement="top-start"
-      >
-        <template #default>
-          <span ref="subTitleRef">
-            <slot name="subTitle">{{ subTitle }}</slot>
-          </span>
-        </template>
-        <template #content>
-          <slot name="subTitle">{{ subTitle }}</slot>
-        </template>
+      <s-tooltip v-if="subTitle || $slots.subTitle" :content="String(subTitle)" width="100%" placement="top-start">
+        <slot name="subTitle">{{ subTitle }}</slot>
       </s-tooltip>
       <slot></slot>
     </div>
@@ -138,107 +90,6 @@ const hasPrefix = computed(() => !!(slots.prefix || slots.img || props.src))
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-.s-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-sizing: border-box;
-  min-width: 0;
-  color: var(--el-text-color-primary);
-  background: var(--el-bg-color);
-  border-radius: 4px;
-}
-.s-item.is-clickable {
-  cursor: pointer;
-  transition:
-    background-color 0.2s,
-    box-shadow 0.2s;
-}
-.s-item.is-clickable:hover {
-  background: var(--el-fill-color-light);
-}
-.s-item.is-disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-.s-item__prefix {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.s-item__prefix img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-}
-.s-item__content {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  overflow: hidden;
-}
-.s-item__title,
-.s-item__subtitle {
-  display: block;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.s-item__title {
-  font-weight: 600;
-}
-.s-item__subtitle {
-  color: var(--el-text-color-secondary);
-  font-size: 14px;
-}
-.s-item__extra {
-  flex: 0 0 auto;
-  color: var(--el-text-color-secondary);
-}
-.s-item--chenghua {
-  --s-item-bg: var(--s-ch-card-bg, #fff);
-  --s-item-border: var(--s-ch-border-light, rgba(22, 93, 255, 0.14));
-  --s-item-primary: var(--s-ch-primary, #165dff);
-  --s-item-title: var(--s-ch-text-primary, #000);
-  --s-item-subtitle: var(--s-ch-text-secondary, #979797);
-  border: 1px solid var(--s-item-border);
-  border-radius: var(--s-ch-radius-card, 12px);
-  background: var(--s-item-bg);
-  font-family: var(--s-ch-font-family, 'PingFang SC', sans-serif);
-}
-.s-item--chenghua .s-item__title {
-  color: var(--s-item-title);
-}
-.s-item--chenghua.is-clickable:hover {
-  border-color: var(--s-item-primary);
-  box-shadow: 0 4px 12px rgba(22, 93, 255, 0.12);
-}
-.s-item--shijingshan {
-  --s-item-bg: var(--s-sjs-card-bg, #fff);
-  --s-item-border: var(--s-sjs-divider, #e5e7eb);
-  --s-item-primary: var(--s-sjs-primary, #2a6df4);
-  --s-item-title: var(--s-sjs-text-primary, #1e1e1e);
-  --s-item-subtitle: var(--s-sjs-text-secondary, #6b7280);
-  border: 1px solid var(--s-item-border);
-  border-radius: var(--s-sjs-radius-card, 12px);
-  background: var(--s-item-bg);
-  font-family: var(--s-sjs-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-}
-.s-item--shijingshan .s-item__title {
-  color: var(--s-item-title);
-}
-.s-item--shijingshan .s-item__subtitle {
-  color: var(--s-item-subtitle);
-}
-.s-item--shijingshan.is-clickable:hover {
-  border-color: var(--s-item-primary);
-  box-shadow: var(--s-sjs-shadow-soft, 0 2px 8px rgba(0, 0, 0, 0.05));
-}
+<style lang="scss">
+@import '../../../styles/themes/shared/item.scss';
 </style>

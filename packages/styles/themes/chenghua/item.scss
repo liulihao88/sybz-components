@@ -1,0 +1,17 @@
+.s-item--chenghua {
+  --s-item-bg: var(--s-ch-card-bg, #fff);
+  --s-item-border: var(--s-ch-border-light, rgba(22, 93, 255, 0.14));
+  --s-item-primary: var(--s-ch-primary, #165dff);
+  --s-item-title: var(--s-ch-text-primary, #000);
+  border: 1px solid var(--s-item-border);
+  border-radius: var(--s-ch-radius-card, 12px);
+  background: var(--s-item-bg);
+  font-family: var(--s-ch-font-family, 'PingFang SC', sans-serif);
+}
+.s-item--chenghua .s-item__title {
+  color: var(--s-item-title);
+}
+.s-item--chenghua.is-clickable:hover {
+  border-color: var(--s-item-primary);
+  box-shadow: 0 4px 12px rgba(22, 93, 255, 0.12);
+}

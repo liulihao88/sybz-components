@@ -316,7 +316,6 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     );
     width: auto;
     max-width: 100%;
-    margin: 0 0 16px;
   }
 
   :deep(.el-tabs__nav-wrap) {

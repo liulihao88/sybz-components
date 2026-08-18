@@ -14,6 +14,12 @@
 item/base
 :::
 
+### 阴影和 Hover 动画
+
+:::demo 使用 `shadow="hover"` 与 `hover-animation`。基础写法：`<SItem shadow="hover" hover-animation title="发送邮件给用户" sub-title="抱歉，我无法处理您的请求。" extra="测试" clickable />`。
+item/hover
+:::
+
 ### 成华主题（theme 默认值 `default`）
 
 :::demo 展示成华主题信息项。基础写法：`<SItem theme="chenghua" title="成华企业服务" sub-title="查看企业政策与服务进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan`，默认值 `default`。
