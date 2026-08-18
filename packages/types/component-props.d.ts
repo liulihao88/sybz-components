@@ -694,6 +694,7 @@ export interface STestProps {
 
 export interface STitleProps {
   title?: string
+  icon?: string | Component
   extra?: string
   size?: SybzComponentSize
   subTitle?: string

@@ -2,9 +2,10 @@
   <div class="s-title" :class="titleClass" :style="titleStyle" v-bind="$attrs">
     <div class="s-title__top" :class="parseClass">
       <div class="s-title__main" :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }">
-        <span :class="($slots.icon || mergedProps.type === 'icon') && 's-title__slot-icon-wrapper'">
+        <span v-if="hasIcon" class="s-title__slot-icon-wrapper">
           <slot name="icon">
-            <span v-if="isThemeIcon" class="s-title__theme-icon" aria-hidden="true"></span>
+            <component :is="mergedProps.icon" v-if="mergedProps.icon" class="s-title__prop-icon" aria-hidden="true" />
+            <span v-else-if="isThemeIcon" class="s-title__theme-icon" aria-hidden="true"></span>
             <svg
               v-else-if="mergedProps.type === 'icon'"
               class="s-title__default-icon"
@@ -51,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type CSSProperties } from 'vue'
+import { computed, type Component, type CSSProperties, useSlots } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import STooltip from '@/components/tooltip/src/index.vue'
 
@@ -69,6 +70,7 @@ type TitleType = '' | 'simple' | 'icon' | 'form'
 type TitleTag = 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 interface TitleProps {
   title?: string
+  icon?: string | Component
   extra?: string
   size?: TitleSize
   subTitle?: string
@@ -118,6 +120,7 @@ const titleSizeMap: Record<TitleSize, Record<string, string>> = {
 
 const props = withDefaults(defineProps<TitleProps>(), {
   title: '',
+  icon: '',
   extra: '',
   size: 'default',
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
@@ -139,6 +142,7 @@ const props = withDefaults(defineProps<TitleProps>(), {
   level: 3,
 })
 const mergedProps = useGlobalComponentConfig('title', props)
+const slots = useSlots()
 
 const formatCssValue = (value?: string | number) => {
   if (value === undefined || value === null || value === '') {
@@ -209,6 +213,9 @@ const titleA11yAttrs = computed(() => {
 const isThemeIcon = computed(() => {
   return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) && mergedProps.value.type === 'icon'
 })
+const hasIcon = computed(() => {
+  return !!slots.icon || !!mergedProps.value.icon || mergedProps.value.type === 'icon'
+})
 </script>
 
 <style scoped lang="scss">
@@ -249,7 +256,8 @@ const isThemeIcon = computed(() => {
       align-items: center;
       color: currentColor;
     }
-    .s-title__default-icon {
+    .s-title__default-icon,
+    .s-title__prop-icon {
       width: var(--s-title-icon-size, 14px);
       height: var(--s-title-icon-size, 14px);
       display: block;
@@ -293,6 +301,7 @@ const isThemeIcon = computed(() => {
       content: '';
       width: 3px;
       top: 50%;
+      margin-right: 8px;
       height: var(--s-title-bar-height, 16px);
       letter-spacing: 0;
       background-color: var(--lc, var(--blue)); // 左侧的竖条颜色

@@ -1,7 +1,8 @@
+import type { Component } from 'vue'
 import type { SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
 
 /**
- * s-title 标题组件，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
+ * s-title 标题组件，支持通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
  *
  * 先提示 sybz 自身属性。
  */
@@ -9,6 +10,7 @@ export type STitleComponent = {
   new (): {
     $props: {
       title?: string
+      icon?: string | Component
       extra?: string
       size?: SybzComponentSize
       subTitle?: string

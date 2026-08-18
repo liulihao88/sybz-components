@@ -41,6 +41,8 @@
 
     <s-title title="属性设置右侧内容" extra="这是 extra 属性文本"></s-title>
 
+    <s-title title="通过 icon 属性设置图标" type="simple" icon="el-icon-delete"></s-title>
+    <s-title title="通过 icon 属性设置图标" type="simple" icon="fa-tasks"></s-title>
     <s-title title="自定义图标尺寸后自动布局" type="simple" gap="12">
       <template #icon>
         <s-icon name="plus" :size="40"></s-icon>

@@ -598,9 +598,14 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'STitleProps',
-      description: 's-title 标题组件，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。',
+      description:
+        's-title 标题组件，支持通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。',
       slots: ['default', 'title', 'icon', 'extra'],
-      hoverProps: componentHoverProps('STitleProps', ['SybzComponentTheme', 'SybzComponentSize', 'SybzRecord']),
+      hoverProps: componentHoverProps(
+        'STitleProps',
+        ['SybzComponentTheme', 'SybzComponentSize', 'SybzRecord'],
+        ["import type { Component } from 'vue'"],
+      ),
     },
   ],
   [
