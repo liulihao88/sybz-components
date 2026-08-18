@@ -241,9 +241,9 @@ const tableData = [
     <section class="overview-section">
       <s-title title="反馈组件" :theme="currentTheme" />
       <div class="overview-actions">
-        <s-button type="primary" :theme="currentTheme" :disabled="isDisabled" @click="showDialog = true"
-          >打开弹窗</s-button
-        >
+        <s-button type="primary" :theme="currentTheme" :disabled="isDisabled" @click="showDialog = true">
+          打开弹窗
+        </s-button>
         <s-popconfirm title="确认提交当前配置吗？" :theme="currentTheme" :disabled="isDisabled">
           <s-button :theme="currentTheme" :disabled="isDisabled">确认提示</s-button>
         </s-popconfirm>

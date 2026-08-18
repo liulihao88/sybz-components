@@ -15,7 +15,7 @@ const navList = [
 
 <template>
   <div>
-    <s-tabs v-model="tabsValue" :options="navList"> </s-tabs>
+    <s-tabs v-model="tabsValue" :options="navList"></s-tabs>
     <div v-if="tabsValue === 'chenghua'">成华内容</div>
     <div v-else>石景山内容</div>
   </div>

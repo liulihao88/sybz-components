@@ -102,7 +102,7 @@ const isShow = ref(false)
 
 <template>
   <s-button type="primary" @click="isShow = true">显示弹窗</s-button>
-  <s-dialog v-model="isShow" title="基础弹窗" @confirm="confirm"> 内容 </s-dialog>
+  <s-dialog v-model="isShow" title="基础弹窗" @confirm="confirm">内容</s-dialog>
 </template>
 ```
 
@@ -328,7 +328,7 @@ const navList = [
 
 <template>
   <div>
-    <s-tabs v-model="tabsValue" :options="navList"> </s-tabs>
+    <s-tabs v-model="tabsValue" :options="navList"></s-tabs>
     <div v-if="tabsValue === 'chenghua'">成华内容</div>
     <div v-else>石景山内容</div>
   </div>

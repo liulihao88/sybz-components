@@ -7,7 +7,7 @@
     <s-title title="小尺寸标题" size="small" margin="12px 0 0"></s-title>
     <s-title title="大尺寸标题" size="large" sub-title="统一控制标题和副标题字号" gap="12"></s-title>
     <s-title sub-title="我不服啊" type="simple">
-      <template #title> title的slot </template>
+      <template #title>title的slot</template>
       <template #icon>
         <s-icon name="delete"></s-icon>
       </template>

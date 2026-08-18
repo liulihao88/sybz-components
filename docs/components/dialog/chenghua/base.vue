@@ -18,7 +18,7 @@ const visible = reactive({
     <s-button theme="chenghua" type="danger" @click="visible.buttons = true">自定义按钮</s-button>
     <s-button theme="chenghua" @click="visible.header = true">自定义标题</s-button>
 
-    <s-dialog v-model="visible.delete" theme="chenghua" variant="delete" target="要删除的内容"> </s-dialog>
+    <s-dialog v-model="visible.delete" theme="chenghua" variant="delete" target="要删除的内容"></s-dialog>
 
     <s-dialog v-model="visible.base" title="默认成华弹框" theme="chenghua" width="512px">
       成华主题默认展示底部按钮，和普通 dialog 行为保持一致。

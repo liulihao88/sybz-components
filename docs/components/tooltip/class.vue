@@ -1,5 +1,5 @@
 <template>
-  <s-tooltip class="tooltip-custom-text" content="这是自定义文本样式"> 这是自定义文本样式 </s-tooltip>
+  <s-tooltip class="tooltip-custom-text" content="这是自定义文本样式">这是自定义文本样式</s-tooltip>
 </template>
 
 <style scoped lang="scss">

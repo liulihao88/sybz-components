@@ -115,7 +115,7 @@ const statusOptions = [
       <s-button @click="showDialog = true">打开弹窗</s-button>
     </s-flex>
 
-    <s-dialog v-model="showDialog" title="提示"> 这里是弹窗内容 </s-dialog>
+    <s-dialog v-model="showDialog" title="提示">这里是弹窗内容</s-dialog>
   </div>
 </template>
 ```

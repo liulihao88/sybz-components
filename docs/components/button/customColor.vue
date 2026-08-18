@@ -21,9 +21,9 @@ const isDark = ref(false)
     <s-button color="#626aef" :dark="isDark" text bg>Text BG</s-button>
 
     <s-button color="#626aef" :dark="isDark" disabled>Disabled</s-button>
-    <s-button color="#626aef" :dark="isDark" disabled plain> Disabled Plain </s-button>
-    <s-button color="#626aef" :dark="isDark" disabled link> Disabled Link </s-button>
-    <s-button color="#626aef" :dark="isDark" disabled text> Disabled Text </s-button>
-    <s-button color="#626aef" :dark="isDark" disabled text bg> Disabled Text BG </s-button>
+    <s-button color="#626aef" :dark="isDark" disabled plain>Disabled Plain</s-button>
+    <s-button color="#626aef" :dark="isDark" disabled link>Disabled Link</s-button>
+    <s-button color="#626aef" :dark="isDark" disabled text>Disabled Text</s-button>
+    <s-button color="#626aef" :dark="isDark" disabled text bg>Disabled Text BG</s-button>
   </el-space>
 </template>

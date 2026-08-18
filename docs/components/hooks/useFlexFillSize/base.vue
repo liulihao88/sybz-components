@@ -62,7 +62,7 @@ const toggleLoading = async () => {
   <div class="flex-fill-demo">
     <s-title title="顶部" />
     <s-table ref="tableContainerRef" :columns="columns" :data="data" :loading="loading" :height="height"></s-table>
-    <s-title title="底部"> 可用区域：{{ Math.round(width) }}px x {{ Math.round(height) }}px </s-title>
+    <s-title title="底部">可用区域：{{ Math.round(width) }}px x {{ Math.round(height) }}px</s-title>
   </div>
 </template>
 
