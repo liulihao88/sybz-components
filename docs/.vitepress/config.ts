@@ -382,7 +382,7 @@ export default defineConfig({
               link: '/components/card/home.md',
             },
             {
-              text: 'item列表组件',
+              text: sybzMark('item列表组件'),
               link: '/components/item/home.md',
             },
             {

@@ -482,6 +482,7 @@ export interface SIconProps extends SHtmlStringProps {
   /** 图标旋转角度，数字及数字字符串按 deg 处理 */
   rotate?: string | number
   disabled?: boolean
+  theme?: SybzComponentTheme
   type?: string
   svgAttrs?: SybzRecord
 }

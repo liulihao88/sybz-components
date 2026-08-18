@@ -14,6 +14,18 @@
 item/base
 :::
 
+### 成华主题（theme 默认值 `default`）
+
+:::demo 展示成华主题信息项。基础写法：`<SItem theme="chenghua" title="成华企业服务" sub-title="查看企业政策与服务进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan`，默认值 `default`。
+item/chenghua
+:::
+
+### 石景山主题（theme 默认值 `default`）
+
+:::demo 展示石景山主题信息项。基础写法：`<SItem theme="shijingshan" title="石景山产业服务" sub-title="查看产业服务与申报进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan`，默认值 `default`。
+item/shijingshan
+:::
+
 ### API
 
 | 属性名       | 说明                               | 类型            | 可选值                               | 默认值      |
@@ -26,6 +38,7 @@ item/base
 | `padding`    | 自定义内边距，优先级高于 `size`    | string / number | -                                    | `undefined` |
 | `clickable`  | 是否显示可点击交互样式             | boolean         | `true / false`                       | `false`     |
 | `disabled`   | 是否禁用点击                       | boolean         | `true / false`                       | `false`     |
+| `theme`      | 主题样式                           | string          | `default / chenghua / shijingshan`   | `default`   |
 | `width`      | 组件宽度                           | string / number | -                                    | `''`        |
 | `height`     | 组件高度                           | string / number | -                                    | `''`        |
 | `labelStyle` | 标题样式                           | object          | -                                    | `{}`        |

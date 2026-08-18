@@ -1,4 +1,4 @@
-import type { SItemProps, SybzComponentSize, SybzRecord } from '../component-props'
+import type { SItemProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
 
 export type SItemComponent = {
   new (): {

@@ -13,6 +13,7 @@ interface ItemProps {
   padding?: string | number
   clickable?: boolean
   disabled?: boolean
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   labelStyle?: Record<string, any>
   valueStyle?: Record<string, any>
   itemStyle?: Record<string, any>
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<ItemProps>(), {
   padding: undefined,
   clickable: false,
   disabled: false,
+  theme: 'default',
   labelStyle: () => ({}),
   valueStyle: () => ({}),
   itemStyle: () => ({}),
@@ -76,7 +78,12 @@ const hasPrefix = computed(() => !!(slots.prefix || slots.img || props.src))
 <template>
   <div
     class="s-item"
-    :class="{ 'is-clickable': clickable, 'is-disabled': disabled }"
+    :class="{
+      'is-clickable': clickable,
+      'is-disabled': disabled,
+      's-item--chenghua': theme === 'chenghua',
+      's-item--shijingshan': theme === 'shijingshan',
+    }"
     :style="{
       padding: paddingValue,
       ...processWidth(width),
@@ -194,5 +201,44 @@ const hasPrefix = computed(() => !!(slots.prefix || slots.img || props.src))
 .s-item__extra {
   flex: 0 0 auto;
   color: var(--el-text-color-secondary);
+}
+.s-item--chenghua {
+  --s-item-bg: var(--s-ch-card-bg, #fff);
+  --s-item-border: var(--s-ch-border-light, rgba(22, 93, 255, 0.14));
+  --s-item-primary: var(--s-ch-primary, #165dff);
+  --s-item-title: var(--s-ch-text-primary, #000);
+  --s-item-subtitle: var(--s-ch-text-secondary, #979797);
+  border: 1px solid var(--s-item-border);
+  border-radius: var(--s-ch-radius-card, 12px);
+  background: var(--s-item-bg);
+  font-family: var(--s-ch-font-family, 'PingFang SC', sans-serif);
+}
+.s-item--chenghua .s-item__title {
+  color: var(--s-item-title);
+}
+.s-item--chenghua.is-clickable:hover {
+  border-color: var(--s-item-primary);
+  box-shadow: 0 4px 12px rgba(22, 93, 255, 0.12);
+}
+.s-item--shijingshan {
+  --s-item-bg: var(--s-sjs-card-bg, #fff);
+  --s-item-border: var(--s-sjs-divider, #e5e7eb);
+  --s-item-primary: var(--s-sjs-primary, #2a6df4);
+  --s-item-title: var(--s-sjs-text-primary, #1e1e1e);
+  --s-item-subtitle: var(--s-sjs-text-secondary, #6b7280);
+  border: 1px solid var(--s-item-border);
+  border-radius: var(--s-sjs-radius-card, 12px);
+  background: var(--s-item-bg);
+  font-family: var(--s-sjs-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+}
+.s-item--shijingshan .s-item__title {
+  color: var(--s-item-title);
+}
+.s-item--shijingshan .s-item__subtitle {
+  color: var(--s-item-subtitle);
+}
+.s-item--shijingshan.is-clickable:hover {
+  border-color: var(--s-item-primary);
+  box-shadow: var(--s-sjs-shadow-soft, 0 2px 8px rgba(0, 0, 0, 0.05));
 }
 </style>
