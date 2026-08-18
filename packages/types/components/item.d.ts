@@ -1,25 +1,32 @@
-import type { SItemProps, SybzRecord } from '../component-props'
+import type { SItemProps, SybzComponentSize, SybzRecord } from '../component-props'
 
 export type SItemComponent = {
   new (): {
     $props: {
+      title?: string | number
+      subTitle?: string | number
+      extra?: string | number
       src?: string
-      label: string | number
-      value: string | number
       width?: string | number
       height?: string | number
+      size?: SybzComponentSize | string | number
+      padding?: string | number
+      clickable?: boolean
+      disabled?: boolean
       labelStyle?: SybzRecord
       valueStyle?: SybzRecord
       itemStyle?: SybzRecord
       imgStyle?: SybzRecord
       boxStyle?: SybzRecord
-      type?: '' | 'value'
-      attrs?: SybzRecord
     }
     $slots: {
+      prefix?: () => any
       img?: () => any
-      label?: () => any
-      value?: () => any
+      title?: () => any
+      subTitle?: () => any
+      extra?: () => any
+      actions?: () => any
+      default?: () => any
     }
   }
 }
