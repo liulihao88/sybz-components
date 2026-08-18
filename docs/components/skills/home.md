@@ -7,7 +7,7 @@
 ```md
 ## 当前项目 使用 sybz-components 组件库规范
 
-本项目使用 `sybz-components` 组件库。处理本项目任意文件时，必须先阅读并遵循 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 中的要求；涉及组件、工具函数、主题、迁移或示例写法时，还必须按需阅读并遵循该 skill 的 `references/` 目录下相关规范。
+本项目使用 `sybz-components` 组件库。处理文件时，请先判断任务是否涉及 `sybz-components`、`@sybz-components/utils`、Element Plus 组件迁移、主题或组件示例：涉及这些内容时，先阅读并遵循 `./node_modules/sybz-components/skills/sybz-components/SKILL.md`；涉及具体组件、工具函数或主题时，再按需阅读该 skill 的 `references/` 目录下相关规范。普通业务逻辑（例如接口请求、状态计算、数据转换、路由或与组件库无关的 JS/TS 工具代码）不要求读取这份 skill。若普通逻辑文件直接引入或调用 `@sybz-components/utils`，则按工具函数场景处理。
 ```
 
 如果 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 不存在，请先安装或更新依赖：
