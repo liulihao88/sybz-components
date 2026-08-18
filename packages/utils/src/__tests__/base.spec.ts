@@ -445,7 +445,7 @@ describe('base utils', () => {
     ).resolves.toBe('confirm')
 
     expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
-      '确认要删除<code type="danger">&lt;机器之心&gt;</code>吗? 删除后不可恢复。',
+      '确认要删除<code type="danger">&lt;机器之心&gt;</code>吗？删除后不可恢复。',
       expect.objectContaining({
         title: '删除确认',
         confirmButtonText: '删除',
@@ -458,7 +458,7 @@ describe('base utils', () => {
     await expect(confirm({ variant: 'delete', target: 2 })).resolves.toBe('confirm')
 
     expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
-      '确认要删除<code type="danger">2</code>吗? 删除后不可恢复。',
+      '确认要删除<code type="danger">2</code>吗？删除后不可恢复。',
       expect.objectContaining({
         title: '删除确认',
         confirmButtonText: '删除',

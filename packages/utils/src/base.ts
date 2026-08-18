@@ -1595,7 +1595,7 @@ export function confirm(
   const inputMessage = typeof message === 'function' ? message() : message
   const resolvedMessage =
     variant === 'delete' && target !== undefined && !inputMessage
-      ? `确认要删除<code type="danger">${_escapeHtml(target)}</code>吗? 删除后不可恢复。`
+      ? `确认要删除<code type="danger">${_escapeHtml(target)}</code>吗？删除后不可恢复。`
       : inputMessage
   const resolvedAppendTo = _resolveAppendTarget(appendTo)
   const resolvedAppContext = _resolveAppContext(optionAppContext || argumentAppContext)
