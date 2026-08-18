@@ -6,6 +6,27 @@
 
 以下示例默认已经从 `@sybz-components/utils` 引入对应方法；依赖 `window`、`document`、`localStorage` 或 `Element Plus` 的方法，需要在浏览器环境中使用。
 
+### 全局配置
+
+在应用入口调用一次 `configureUtils`，即可为支持主题的工具函数设置默认主题。`theme` 可选值为 `'default' | 'chenghua' | 'shijingshan'`，默认值为 `'default'`；单次调用传入的 `theme` 优先级更高。
+
+```ts
+import { configureUtils } from '@sybz-components/utils'
+
+configureUtils({ theme: 'shijingshan' })
+```
+
+配置后，`confirm` 和 `$toast` 无需重复传入主题：
+
+```ts
+await confirm({ variant: 'delete', target: '示例数据' })
+$toast('删除成功')
+
+// 单次覆盖全局主题
+$toast({ message: '使用成华主题', theme: 'chenghua' })
+await confirm('使用默认主题', { theme: 'default' })
+```
+
 ### 导出入口
 
 <<< ../../../packages/utils/src/index.ts

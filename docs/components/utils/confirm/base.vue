@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { confirm } from '@/utils/src/index'
+import { confirm, configureUtils } from '@/utils/src/index'
+// configureUtils({ theme: 'shijingshan' })
 const base = () => {
   confirm('确定要执行此操作吗？', { confirmButtonClass: '', cancelButtonClass: '' })
 }
@@ -13,10 +14,8 @@ const useHtml = () => {
 
 const deleteConfirm = () => {
   confirm({
-    variant: 'delete',
     target:
       '4a731a90594a4af544c0c25941171jpeg.jpeg、小米汽车.png、蓝紫渐变闪粉艺术玻璃花瓶产品参数.xlsx、戴珍珠耳环的少女.png、雕像.png Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga a eveniet corporis, maiores ab laboriosam eligendi quia ex atque aspernatur odit sint numquam assumenda impedit voluptas reiciendis inventore eos veniam!',
-    theme: 'shijingshan',
   })
 }
 

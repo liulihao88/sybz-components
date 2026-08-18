@@ -20,6 +20,8 @@ utils/$toast/usually
 
 `$toast` 用于触发 Element Plus 的全局消息提示，适合保存成功、接口失败、普通反馈等场景。它在 `ElMessage` 的基础上增加了类型简写、默认样式和可选的关闭全部旧消息能力。
 
+应用入口可通过 `configureUtils({ theme: 'shijingshan' })` 设置全局默认主题。单次调用的 `theme` 会覆盖全局配置。
+
 ### 调用形式
 
 ```ts
@@ -43,10 +45,11 @@ $toast.warning(message, options)
 
 `ToastOptions` 在 Element Plus `MessageOptions` 基础上额外支持：
 
-| 字段          | 类型      | 默认值             | 说明                                                                     |
-| ------------- | --------- | ------------------ | ------------------------------------------------------------------------ |
-| `closeAll`    | `boolean` | `false`            | 显示当前消息前是否先关闭页面上已有的全部消息。                           |
-| `customClass` | `string`  | `'s-antd-message'` | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生样式，不追加默认类名。 |
+| 字段          | 类型                                       | 默认值               | 说明                                                                     |
+| ------------- | ------------------------------------------ | -------------------- | ------------------------------------------------------------------------ |
+| `theme`       | `'default' \| 'chenghua' \| 'shijingshan'` | 全局主题或 `default` | 消息主题；单次设置会覆盖 `configureUtils` 的全局主题。                   |
+| `closeAll`    | `boolean`                                  | `false`              | 显示当前消息前是否先关闭页面上已有的全部消息。                           |
+| `customClass` | `string`                                   | `'s-antd-message'`   | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生样式，不追加默认类名。 |
 
 ### 返回值
 
@@ -60,6 +63,7 @@ $toast('删除失败', 'e')
 $toast('请检查表单', 'warning', { duration: 5000 })
 $toast({ message: '自定义提示', type: 'info', closeAll: true })
 $toast.error('接口请求失败', { showClose: true })
+$toast({ message: '单次使用成华主题', theme: 'chenghua' })
 ```
 
 ### 注意事项

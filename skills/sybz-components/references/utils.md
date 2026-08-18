@@ -8,6 +8,7 @@
 import {
   $toast,
   clone,
+  configureUtils,
   confirm,
   debounce,
   delay,
@@ -32,6 +33,20 @@ import {
   validateTrigger,
 } from '@sybz-components/utils'
 ```
+
+## 全局主题
+
+在应用入口配置一次默认主题，后续 `confirm` 和 `$toast` 会自动使用该主题：
+
+```ts
+import { configureUtils } from '@sybz-components/utils'
+
+configureUtils({ theme: 'shijingshan' })
+```
+
+- `theme`: `default | chenghua | shijingshan`，默认 `default`。
+- 单次调用传入的 `theme` 优先级高于全局配置。
+- 单次传入 `theme: 'default'` 可关闭该次调用的全局主题。
 
 Vite 构建插件使用独立入口，避免把 Node.js 依赖带入浏览器工具包：
 

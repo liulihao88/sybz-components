@@ -31,11 +31,24 @@ type ValidateRuleResult = {
 type ValidatePrimitiveValue = string | number | boolean | null | undefined
 type MockValueOptionItem<T = any> = { label: string; value: T }
 
-interface ToastOptions extends Partial<MessageOptions> {
+export type UtilsTheme = 'default' | 'chenghua' | 'shijingshan'
+
+export interface SybzUtilsConfig {
+  /**
+   * 工具函数的默认主题。
+   */
+  theme?: UtilsTheme
+}
+
+export interface ToastOptions extends Partial<MessageOptions> {
   /**
    * 调用前是否先关闭全部消息提示。
    */
   closeAll?: boolean
+  /**
+   * 当前消息的主题；未传时使用 utils 全局主题。
+   */
+  theme?: UtilsTheme
 }
 
 interface ClearStorageExcludeOptions {
@@ -130,7 +143,7 @@ interface CopyOptions extends ToastOptions {
 type WidthInput = string | number | Ref<string | number>
 export type ConfirmMessage = string | VNode | (() => VNode)
 export type ConfirmVariant = 'default' | 'delete' | 'warning'
-export type ConfirmTheme = 'default' | 'chenghua' | 'shijingshan'
+export type ConfirmTheme = UtilsTheme
 export type ConfirmTarget = string | number
 type ConfirmAppendTarget = NonNullable<ElMessageBoxOptions['appendTo']>
 type AppRootElement = Element & {
@@ -181,6 +194,24 @@ const CHENGHUA_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--chenghua'
 const SHIJINGSHAN_CONFIRM_BOX_CLASS = 's-message-box--shijingshan'
 const SHIJINGSHAN_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn--shijingshan'
 const SHIJINGSHAN_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--shijingshan'
+const utilsConfig: Required<SybzUtilsConfig> = {
+  theme: 'default',
+}
+
+/**
+ * 配置 `@sybz-components/utils` 的全局默认行为。
+ *
+ * 单次函数调用中传入的配置优先级高于这里的全局配置。
+ *
+ * @example
+ * configureUtils({ theme: 'shijingshan' })
+ */
+export function configureUtils(config: SybzUtilsConfig): Readonly<Required<SybzUtilsConfig>> {
+  if (config.theme !== undefined) {
+    utilsConfig.theme = config.theme
+  }
+  return { ...utilsConfig }
+}
 
 function _getBrowserStorage(isSession = false): Storage | null {
   if (typeof window === 'undefined') {
@@ -265,23 +296,33 @@ export function $toast(
     return typeof obj === 'object' && obj !== null
   }
 
-  // Case 1: message is options object
-  if (isToastOptions(message)) {
-    if (message.closeAll) {
+  function showToast(options: ToastOptions) {
+    const { theme = utilsConfig.theme, customClass, ...messageOptions } = options
+
+    if (options.closeAll) {
       ElMessage.closeAll()
     }
-    message.customClass = message.customClass === 'el' ? '' : 's-antd-message'
-    ElMessage(message)
+
+    const resolvedCustomClass =
+      customClass === 'el'
+        ? ''
+        : _mergeClassNames('s-antd-message', theme !== 'default' && `s-antd-message--${theme}`, customClass)
+
+    ElMessage({
+      ...messageOptions,
+      customClass: resolvedCustomClass,
+    })
+  }
+
+  // Case 1: message is options object
+  if (isToastOptions(message)) {
+    showToast(message)
     return
   }
 
   // Case 2: type is options object
   if (isToastOptions(type)) {
-    if (type.closeAll) {
-      ElMessage.closeAll()
-    }
-    type.customClass = type.customClass === 'el' ? '' : 's-antd-message'
-    ElMessage({
+    showToast({
       message,
       type: 'success',
       ...type,
@@ -290,14 +331,9 @@ export function $toast(
   }
 
   // Case 3: regular message with type and options
-  if (otherParams.closeAll) {
-    ElMessage.closeAll()
-  }
-
   const resolvedType = isShortType(type) ? typeMap[type] : type
 
-  otherParams.customClass = otherParams.customClass === 'el' ? '' : 's-antd-message'
-  ElMessage({
+  showToast({
     message,
     type: resolvedType,
     ...otherParams,
@@ -1546,7 +1582,7 @@ export function confirm(
   const argumentAppContext = isOptionsCall ? (optionsOrAppContext as AppContext | null) : appContext
   const {
     message: _message,
-    theme,
+    theme = utilsConfig.theme,
     variant = 'default',
     target,
     customClass,

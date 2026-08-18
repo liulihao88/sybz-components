@@ -22,6 +22,7 @@ import OverviewDemo from '../../components/overview/OverviewDemo.vue'
 import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
 import Logo from './logo.vue'
+// utils.configureUtils({ theme: 'shijingshan' })
 
 // 基于element-plus二次封装基础组件
 import '../../../packages/styles/index.scss'

@@ -25,6 +25,7 @@ import {
   $toast,
   clearStorage,
   clone,
+  configureUtils,
   confirm,
   copy,
   debounce,
@@ -53,6 +54,7 @@ describe('base utils', () => {
   beforeEach(() => {
     localStorage.clear()
     sessionStorage.clear()
+    configureUtils({ theme: 'default' })
   })
 
   afterEach(() => {
@@ -394,6 +396,41 @@ describe('base utils', () => {
         customClass: 's-message-box--chenghua',
         confirmButtonClass: 's-message-box__confirm-btn s-message-box__confirm-btn--chenghua',
         cancelButtonClass: 's-message-box__cancel-btn s-message-box__cancel-btn--chenghua',
+      }),
+    )
+  })
+
+  it('uses the global utils theme and allows a call to override it', async () => {
+    configureUtils({ theme: 'shijingshan' })
+
+    $toast('全局主题')
+    expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
+      message: '全局主题',
+      type: 'success',
+      customClass: 's-antd-message s-antd-message--shijingshan',
+    })
+
+    $toast({ message: '单次覆盖', theme: 'chenghua' })
+    expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
+      message: '单次覆盖',
+      customClass: 's-antd-message s-antd-message--chenghua',
+    })
+
+    await confirm('使用全局主题')
+    expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
+      '使用全局主题',
+      expect.objectContaining({
+        customClass: 's-message-box--shijingshan',
+        confirmButtonClass: 's-message-box__confirm-btn s-message-box__confirm-btn--shijingshan',
+      }),
+    )
+
+    await confirm('关闭全局主题', { theme: 'default' })
+    expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
+      '关闭全局主题',
+      expect.objectContaining({
+        customClass: '',
+        confirmButtonClass: 's-message-box__confirm-btn',
       }),
     )
   })

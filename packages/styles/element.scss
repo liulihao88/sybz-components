@@ -30,6 +30,16 @@
   }
 }
 
+.s-antd-message--chenghua {
+  border-left: 3px solid var(--s-ch-primary) !important;
+  font-family: var(--s-ch-font-family);
+}
+
+.s-antd-message--shijingshan {
+  border-left: 3px solid var(--s-sjs-primary) !important;
+  font-family: var(--s-sjs-font-family);
+}
+
 .s-message-box__confirm-btn,
 .s-message-box__cancel-btn {
   &::before {
