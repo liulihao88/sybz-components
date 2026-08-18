@@ -116,7 +116,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "@sybz-components/utils": "^1.0.6"
+    "@sybz-components/utils": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
