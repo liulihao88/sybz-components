@@ -219,13 +219,14 @@ const isThemeIcon = computed(() => {
     display: flex;
     flex: 1 1 auto;
     align-items: center;
+    gap: var(--s-title-gap, 8px);
     min-width: 0;
   }
   .s-title__text {
     flex: 0 1 auto;
     min-width: 0;
     max-width: 100%;
-    margin: 0 var(--s-title-gap, 8px) 0 0;
+    margin: 0;
     overflow: hidden;
     color: inherit;
     font: inherit;
@@ -240,11 +241,10 @@ const isThemeIcon = computed(() => {
     align-items: center;
     color: var(--el-text-color-primary);
     font-size: var(--s-title-font-size, 16px);
+    gap: var(--s-title-gap, 8px);
     justify-content: space-between;
     .s-title__slot-icon-wrapper {
-      margin-right: var(--s-title-gap, 8px);
-      width: var(--s-title-icon-size, 14px);
-      height: var(--s-title-icon-size, 14px);
+      flex: 0 0 auto;
       display: flex;
       align-items: center;
       color: currentColor;
@@ -277,6 +277,7 @@ const isThemeIcon = computed(() => {
     position: relative;
     box-sizing: border-box;
     display: flex;
+    gap: 0;
   }
   .s-title__top-left {
     width: 100%;
@@ -284,18 +285,17 @@ const isThemeIcon = computed(() => {
     position: relative;
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    gap: 0;
     &::before {
-      position: absolute;
+      position: static;
+      display: block;
+      flex: 0 0 3px;
       content: '';
       width: 3px;
-      left: -8px;
       top: 50%;
       height: var(--s-title-bar-height, 16px);
-      bottom: auto;
       letter-spacing: 0;
       background-color: var(--lc, var(--blue)); // 左侧的竖条颜色
-      transform: translateY(-50%);
     }
   }
   .s-title__content {
@@ -308,7 +308,7 @@ const isThemeIcon = computed(() => {
     display: inline-flex;
     align-items: center;
     min-width: 0;
-    margin-right: var(--s-title-gap, 8px);
+    margin-right: 0;
     overflow: hidden;
     font-size: var(--s-title-sub-title-font-size, 14px);
     font-weight: 400;
