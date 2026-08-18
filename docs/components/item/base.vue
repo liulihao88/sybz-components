@@ -9,7 +9,7 @@ import { $toast } from '@sybz-components/utils'
     </SItem>
     <hr />
     <SItem
-      title="超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title"
+      title="超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title"
       sub-title="超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title"
       extra="立即进入"
       clickable
