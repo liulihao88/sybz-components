@@ -25,52 +25,26 @@ const navList = [
 </script>
 
 <template>
-  <div class="tabs-capsule-demo">
-    <s-tabs v-model="defaultActiveTab" :options="navList" type="capsule">
-      <template #web-label>
-        <el-icon><Monitor /></el-icon>
-        <span>网页应用</span>
-      </template>
+  <s-tabs v-model="defaultActiveTab" :options="navList" type="capsule">
+    <template #web-label>
+      <el-icon><Monitor /></el-icon>
+      <span>网页应用</span>
+    </template>
 
-      <template #mini-label>
-        <el-icon><Grid /></el-icon>
-        <span>小程序</span>
-        <em>NEW</em>
-      </template>
+    <template #mini-label>
+      <el-icon><Grid /></el-icon>
+      <span>小程序</span>
+    </template>
 
-      <template #skill-label>
-        <el-icon><SetUp /></el-icon>
-        <span>技能创建</span>
-      </template>
+    <template #skill-label>
+      <el-icon><SetUp /></el-icon>
+      <span>技能创建</span>
+    </template>
 
-      <template #web>网页应用内容</template>
-      <template #mini>小程序内容</template>
-      <template #skill>技能创建内容</template>
-    </s-tabs>
-  </div>
+    <template #web>网页应用内容</template>
+    <template #mini>小程序内容</template>
+    <template #skill>技能创建内容</template>
+  </s-tabs>
 </template>
 
-<style scoped lang="scss">
-.tabs-capsule-demo {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  align-items: flex-start;
-
-  :deep(.el-tabs__content) {
-    color: var(--el-text-color-regular);
-    font-size: 14px;
-  }
-
-  :deep(.s-tabs__label em) {
-    color: #8b5cf6;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 800;
-  }
-
-  :deep(.el-tabs__item.is-active .s-tabs__label em) {
-    color: #7c3aed;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

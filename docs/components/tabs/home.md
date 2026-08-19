@@ -40,6 +40,12 @@ tabs/size
 tabs/capsule
 :::
 
+### 胶囊类型内容过多
+
+:::demo 当胶囊页签内容超过容器宽度时，会自动显示左右箭头；箭头支持 hover 状态，并保留激活项的平滑滑动效果。基础写法：`<s-tabs type="capsule" :options="options" />`。属性：`type` 可选值 `capsule`；`options` 类型 `array`，默认值 `[]`。
+tabs/capsuleOverflow
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange"></s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
@@ -99,6 +105,7 @@ tabs/location
 |    `type`    | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                                 | 按内部组件或 Element Plus 对应属性 |
 |   `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan`                       | `default` / `chenghua` / `shijingshan` | `default`                          |
 |    `size`    | 尺寸，支持 `small` / `default` / `large`                                    | string                                 | `default`                          |
+|   `width`    | 组件宽度，数字按 px 处理                                                    | string / number                        | `''`                               |
 
 ### 事件
 

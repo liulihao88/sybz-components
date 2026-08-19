@@ -1,11 +1,5 @@
 <template>
-  <div ref="tabsBoxRef" class="s-tabs-box" :class="boxClass">
-    <span
-      v-if="isCapsuleType"
-      class="s-tabs__capsule-indicator"
-      :class="{ 'is-ready': capsuleIndicatorReady }"
-      :style="capsuleIndicatorStyle"
-    ></span>
+  <div class="s-tabs-box" :class="boxClass" :style="boxStyle">
     <el-tabs v-bind="forwardedAttrs" v-model="tabsValue">
       <slot>
         <template v-for="tab in mergedProps.options" :key="tab[mergedProps.value]">
@@ -25,19 +19,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  useAttrs,
-  watch,
-  type CSSProperties,
-  type PropType,
-} from 'vue'
+import { computed, useAttrs, type PropType } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { TabsPropsPublic } from 'element-plus'
+import { processWidth } from '@sybz-components/utils'
 
 defineOptions({
   name: 'STabs',
@@ -85,13 +70,13 @@ const props = defineProps({
     type: String as PropType<'small' | 'default' | 'large'>,
     default: 'default',
   },
+  width: {
+    type: [String, Number] as PropType<string | number>,
+    default: '',
+  },
 })
 const emits = defineEmits(['update:modelValue'])
 const mergedProps = useGlobalComponentConfig('tabs', props)
-const tabsBoxRef = ref<HTMLElement>()
-const capsuleIndicatorReady = ref(false)
-const capsuleIndicatorStyle = ref<CSSProperties>({})
-let resizeObserver: ResizeObserver | undefined
 
 const isCapsuleType = computed(() => mergedProps.value.type === 'capsule')
 const isChenghuaTheme = computed(() => mergedProps.value.theme === 'chenghua')
@@ -127,29 +112,7 @@ const boxClass = computed(() => [
   },
   `s-tabs-box--size-${mergedProps.value.size || 'default'}`,
 ])
-
-const updateCapsuleIndicator = async () => {
-  if (!isCapsuleType.value) {
-    capsuleIndicatorReady.value = false
-    return
-  }
-
-  await nextTick()
-
-  const tabsBox = tabsBoxRef.value
-  const activeItem = tabsBox?.querySelector<HTMLElement>('.el-tabs__item.is-active')
-  if (!tabsBox || !activeItem) return
-
-  const boxRect = tabsBox.getBoundingClientRect()
-  const itemRect = activeItem.getBoundingClientRect()
-
-  capsuleIndicatorStyle.value = {
-    width: `${itemRect.width}px`,
-    height: `${itemRect.height}px`,
-    transform: `translate3d(${itemRect.left - boxRect.left}px, ${itemRect.top - boxRect.top}px, 0)`,
-  }
-  capsuleIndicatorReady.value = true
-}
+const boxStyle = computed(() => (mergedProps.value.width ? { width: processWidth(mergedProps.value.width) } : {}))
 
 // 鼠标悬停时切换标签页
 const handleMouseEnter = (tabVal: string) => {
@@ -157,24 +120,6 @@ const handleMouseEnter = (tabVal: string) => {
     emits('update:modelValue', tabVal)
   }
 }
-
-watch(() => tabsValue.value, updateCapsuleIndicator, { flush: 'post' })
-
-watch(() => [isCapsuleType.value, mergedProps.value.size, mergedProps.value.options], updateCapsuleIndicator, {
-  deep: true,
-  flush: 'post',
-})
-
-onMounted(() => {
-  updateCapsuleIndicator()
-
-  if (tabsBoxRef.value && typeof ResizeObserver !== 'undefined') {
-    resizeObserver = new ResizeObserver(updateCapsuleIndicator)
-    resizeObserver.observe(tabsBoxRef.value)
-  }
-})
-
-onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 <style lang="scss" scoped>
 .s-tabs-box {
@@ -235,6 +180,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
   position: relative;
   display: inline-flex;
   flex-direction: column;
+  width: 100%;
   max-width: 100%;
 
   --s-tabs-capsule-bg: #f3f5fb;
@@ -255,32 +201,6 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
   --s-tabs-capsule-item-gap: 4px;
   --s-tabs-capsule-outer-gap: 4px;
   --s-tabs-capsule-border-width: 1px;
-
-  .s-tabs__capsule-indicator {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    border-radius: 999px;
-    border: 1px solid var(--s-tabs-capsule-active-border-color);
-    background: var(--s-tabs-capsule-active-bg);
-    box-shadow:
-      0 4px 14px var(--s-tabs-capsule-active-shadow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    opacity: 0;
-    pointer-events: none;
-    transition:
-      width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-      height 0.2s ease,
-      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity 0.12s ease;
-    will-change: width, transform;
-  }
-
-  .s-tabs__capsule-indicator.is-ready {
-    opacity: 1;
-  }
 
   &.s-tabs-box--size-small {
     --s-tabs-capsule-height: 40px;
@@ -303,7 +223,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
   :deep(.el-tabs) {
     display: inline-flex;
     flex-direction: column;
-    width: auto;
+    width: 100%;
     max-width: 100%;
   }
 
@@ -314,7 +234,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     height: calc(
       var(--s-tabs-capsule-height) + (var(--s-tabs-capsule-outer-gap) * 2) + (var(--s-tabs-capsule-border-width) * 2)
     );
-    width: auto;
+    width: 100%;
     max-width: 100%;
   }
 
@@ -324,7 +244,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     display: inline-flex;
     align-items: center;
     height: 100%;
-    width: auto;
+    width: 100%;
     max-width: 100%;
     margin-bottom: 0;
     padding: var(--s-tabs-capsule-outer-gap);
@@ -342,11 +262,10 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
   }
 
   :deep(.el-tabs__nav-scroll) {
-    display: inline-flex;
+    display: block;
     align-items: center;
-    width: auto;
+    width: 100%;
     height: 100%;
-    max-width: 100%;
   }
 
   :deep(.el-tabs__nav) {
@@ -355,8 +274,51 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     float: none;
     align-items: center;
     gap: var(--s-tabs-capsule-item-gap);
-    width: auto;
+    width: max-content;
     border: 0;
+  }
+
+  :deep(.el-tabs__nav-prev),
+  :deep(.el-tabs__nav-next) {
+    z-index: 5;
+    top: 50%;
+    width: 24px;
+    height: 28px;
+    border: 0;
+    border-radius: 50%;
+    color: var(--s-tabs-capsule-active-color);
+    background: transparent;
+    line-height: 28px;
+    transform: translateY(-50%);
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.24s ease;
+  }
+
+  :deep(.el-tabs__nav-prev) {
+    left: 6px;
+  }
+  :deep(.el-tabs__nav-next) {
+    right: 6px;
+  }
+
+  :deep(.el-tabs__nav-prev:hover),
+  :deep(.el-tabs__nav-next:hover) {
+    color: var(--s-tabs-capsule-active-color);
+    background: var(--s-tabs-capsule-hover-bg);
+    transform: translateY(-50%);
+  }
+
+  :deep(.el-tabs__nav-prev.is-disabled),
+  :deep(.el-tabs__nav-next.is-disabled) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  :deep(.el-tabs__nav-wrap.is-scrollable) {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 
   :deep(.el-tabs__item) {
@@ -386,8 +348,11 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
   }
 
   :deep(.el-tabs__item.is-active) {
-    background: transparent;
-    box-shadow: none;
+    border: 1px solid var(--s-tabs-capsule-active-border-color);
+    background: var(--s-tabs-capsule-active-bg);
+    box-shadow:
+      0 4px 14px var(--s-tabs-capsule-active-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
     color: var(--s-tabs-capsule-active-color);
   }
 
@@ -405,12 +370,6 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
   :deep(.s-tabs__label .el-icon) {
     flex: 0 0 auto;
     font-size: var(--s-tabs-capsule-icon-size);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .s-tabs-box--capsule .s-tabs__capsule-indicator {
-    transition: opacity 0.12s ease;
   }
 }
 </style>

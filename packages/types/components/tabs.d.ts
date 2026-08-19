@@ -18,9 +18,10 @@ export type STabsComponent = {
       type?: '' | 'capsule' | TabsPropsPublic['type']
       theme?: SybzComponentTheme
       size?: 'small' | 'default' | 'large'
+      width?: string | number
     } & Omit<
       ElTabsInstance['$props'],
-      'modelValue' | 'options' | 'label' | 'value' | 'subAttrs' | 'trigger' | 'type' | 'theme' | 'size'
+      'modelValue' | 'options' | 'label' | 'value' | 'subAttrs' | 'trigger' | 'type' | 'theme' | 'size' | 'width'
     >
     $emit: ElTabsInstance['$emit']
     $slots: ElTabsInstance['$slots'] & Record<string, (...args: any[]) => any>
