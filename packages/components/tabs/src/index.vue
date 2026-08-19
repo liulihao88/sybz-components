@@ -257,9 +257,34 @@ const handleMouseEnter = (tabVal: string) => {
       0 4px 18px rgba(17, 24, 39, 0.08);
   }
 
-  :deep(.el-tabs__nav-wrap::after),
-  :deep(.el-tabs__active-bar) {
+  :deep(.el-tabs__nav-wrap::after) {
     display: none;
+  }
+
+  :deep(.el-tabs__active-bar) {
+    z-index: 2;
+    bottom: 0;
+    display: block;
+    height: var(--s-tabs-capsule-height) !important;
+    border-radius: 999px;
+    background: transparent !important;
+    transition:
+      width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: width, transform;
+  }
+
+  :deep(.el-tabs__active-bar::before) {
+    position: absolute;
+    inset: 0 calc(var(--s-tabs-capsule-padding-x) * -1);
+    box-sizing: border-box;
+    border: 1px solid var(--s-tabs-capsule-active-border-color);
+    border-radius: inherit;
+    background: var(--s-tabs-capsule-active-bg);
+    box-shadow:
+      0 4px 14px var(--s-tabs-capsule-active-shadow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    content: '';
   }
 
   :deep(.el-tabs__nav-scroll) {
@@ -358,11 +383,9 @@ const handleMouseEnter = (tabVal: string) => {
   }
 
   :deep(.el-tabs__item.is-active) {
-    border: 1px solid var(--s-tabs-capsule-active-border-color);
-    background: var(--s-tabs-capsule-active-bg);
-    box-shadow:
-      0 4px 14px var(--s-tabs-capsule-active-shadow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
     color: var(--s-tabs-capsule-active-color);
   }
 
