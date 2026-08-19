@@ -107,12 +107,13 @@ const tabsValue = computed({
 const boxClass = computed(() => [
   {
     's-tabs-box--capsule': isCapsuleType.value,
+    's-tabs-box--has-width': Boolean(mergedProps.value.width),
     's-tabs-box--chenghua': isChenghuaTheme.value,
     's-tabs-box--shijingshan': isShijingshanTheme.value,
   },
   `s-tabs-box--size-${mergedProps.value.size || 'default'}`,
 ])
-const boxStyle = computed(() => (mergedProps.value.width ? { width: processWidth(mergedProps.value.width) } : {}))
+const boxStyle = computed(() => (mergedProps.value.width ? { width: processWidth(mergedProps.value.width, true) } : {}))
 
 // 鼠标悬停时切换标签页
 const handleMouseEnter = (tabVal: string) => {
@@ -180,7 +181,7 @@ const handleMouseEnter = (tabVal: string) => {
   position: relative;
   display: inline-flex;
   flex-direction: column;
-  width: 100%;
+  width: auto;
   max-width: 100%;
 
   --s-tabs-capsule-bg: #f3f5fb;
@@ -223,7 +224,7 @@ const handleMouseEnter = (tabVal: string) => {
   :deep(.el-tabs) {
     display: inline-flex;
     flex-direction: column;
-    width: 100%;
+    width: auto;
     max-width: 100%;
   }
 
@@ -234,7 +235,7 @@ const handleMouseEnter = (tabVal: string) => {
     height: calc(
       var(--s-tabs-capsule-height) + (var(--s-tabs-capsule-outer-gap) * 2) + (var(--s-tabs-capsule-border-width) * 2)
     );
-    width: 100%;
+    width: auto;
     max-width: 100%;
   }
 
@@ -244,7 +245,7 @@ const handleMouseEnter = (tabVal: string) => {
     display: inline-flex;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: auto;
     max-width: 100%;
     margin-bottom: 0;
     padding: var(--s-tabs-capsule-outer-gap);
@@ -276,6 +277,15 @@ const handleMouseEnter = (tabVal: string) => {
     gap: var(--s-tabs-capsule-item-gap);
     width: max-content;
     border: 0;
+  }
+
+  &.s-tabs-box--has-width {
+    :deep(.el-tabs),
+    :deep(.el-tabs__header),
+    :deep(.el-tabs__nav-wrap),
+    :deep(.el-tabs__nav-scroll) {
+      width: 100%;
+    }
   }
 
   :deep(.el-tabs__nav-prev),

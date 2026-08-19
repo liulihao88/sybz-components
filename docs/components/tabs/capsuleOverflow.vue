@@ -15,7 +15,7 @@ const options = [
 
 <template>
   <div class="capsule-overflow-demo">
-    <s-tabs v-model="active" :options="options" width="100%" />
+    <s-tabs v-model="active" :options="options" />
     <s-tabs v-model="active" :options="options" type="capsule" width="100%" />
     <p>当前选中：{{ active }}</p>
   </div>
