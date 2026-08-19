@@ -188,7 +188,7 @@ const handleDisabled = computed<boolean>(() => {
   if (!attrs.content && !slots.content) {
     return true
   }
-  if (slots.default) {
+  if (slots.default || slots.trigger) {
     return false
   }
   return isDisabled.value
