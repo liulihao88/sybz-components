@@ -188,11 +188,14 @@ const handleDisabled = computed<boolean>(() => {
   if (!attrs.content && !slots.content) {
     return true
   }
+  if (slots.default) {
+    return false
+  }
   return isDisabled.value
 })
 
 const measureOverflow = () => {
-  if (!mergedProps.value.showSlot) return
+  if (!mergedProps.value.showSlot || slots.default) return
   const tag = textRef.value
   if (!tag) return
 
