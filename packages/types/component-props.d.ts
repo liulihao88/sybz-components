@@ -660,7 +660,7 @@ export interface SSvgProps {
 }
 
 export interface STabsSelfProps {
-  modelValue: string | number | boolean
+  modelValue?: string | number | boolean | null
   options?: any[]
   label?: string
   value?: string

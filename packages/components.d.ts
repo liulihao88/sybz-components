@@ -313,13 +313,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
      *
-     * s-tabs 标签页组件，支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。
+     * s-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。
      */
     STabs: (typeof import('./types/components/tabs'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
      *
-     * s-tabs 标签页组件，支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。
+     * s-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。
      */
     's-tabs': (typeof import('./types/components/tabs'))['default']
     /**

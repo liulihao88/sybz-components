@@ -31,11 +31,12 @@ defineOptions({
 
 type TabsType = '' | 'capsule' | TabsPropsPublic['type']
 type TabsTheme = 'default' | 'chenghua' | 'shijingshan'
+type TabsValue = string | number | boolean | null | undefined
 
 const attrs = useAttrs()
 const props = defineProps({
   modelValue: {
-    type: [String, Number, Boolean] as PropType<string | number | boolean>,
+    type: [String, Number, Boolean] as PropType<TabsValue>,
     default: '',
   },
   options: {
@@ -106,10 +107,12 @@ const forwardedAttrs = computed(() => {
 })
 
 const tabsValue = computed({
-  get() {
-    return mergedProps.value.modelValue
+  get(): TabsPropsPublic['modelValue'] {
+    // Element Plus 的声明只包含 string / number，但运行时按值匹配 tab name。
+    // 在适配层保留 s-tabs 支持的 boolean 与空值，避免收窄公共 API。
+    return mergedProps.value.modelValue as TabsPropsPublic['modelValue']
   },
-  set(val) {
+  set(val: TabsPropsPublic['modelValue']) {
     emits('update:modelValue', val)
   },
 })
