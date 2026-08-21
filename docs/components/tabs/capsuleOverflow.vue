@@ -14,21 +14,9 @@ const options = [
 </script>
 
 <template>
-  =={{ active }}??
-  <div class="capsule-overflow-demo">
-    <s-tabs v-model="active" :options="options" />
-    <s-tabs v-model="active" :options="options" type="capsule" width="100%" />
-    <p>当前选中：{{ active }}</p>
-  </div>
+  <s-tabs v-model="active" :options="options" />
+  <s-tabs v-model="active" :options="options" type="capsule" width="100%" />
+  <p>当前选中：{{ active }}</p>
 </template>
 
-<style scoped>
-.capsule-overflow-demo {
-  width: min(100%, 560px);
-}
-.capsule-overflow-demo p {
-  margin: 14px 0 0;
-  color: var(--el-text-color-secondary);
-  font-size: 14px;
-}
-</style>
+<style scoped></style>

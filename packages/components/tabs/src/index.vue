@@ -81,6 +81,12 @@ const mergedProps = useGlobalComponentConfig('tabs', props)
 const isCapsuleType = computed(() => mergedProps.value.type === 'capsule')
 const isChenghuaTheme = computed(() => mergedProps.value.theme === 'chenghua')
 const isShijingshanTheme = computed(() => mergedProps.value.theme === 'shijingshan')
+const hasActiveTab = computed(
+  () =>
+    mergedProps.value.modelValue !== '' &&
+    mergedProps.value.modelValue !== undefined &&
+    mergedProps.value.modelValue !== null,
+)
 
 const forwardedAttrs = computed(() => {
   const nextAttrs = { ...attrs } as Record<string, unknown>
@@ -107,6 +113,7 @@ const tabsValue = computed({
 const boxClass = computed(() => [
   {
     's-tabs-box--capsule': isCapsuleType.value,
+    's-tabs-box--no-active': isCapsuleType.value && !hasActiveTab.value,
     's-tabs-box--has-width': Boolean(mergedProps.value.width),
     's-tabs-box--chenghua': isChenghuaTheme.value,
     's-tabs-box--shijingshan': isShijingshanTheme.value,
@@ -285,6 +292,10 @@ const handleMouseEnter = (tabVal: string) => {
       0 4px 14px var(--s-tabs-capsule-active-shadow),
       inset 0 1px 0 rgba(255, 255, 255, 0.72);
     content: '';
+  }
+
+  &.s-tabs-box--no-active :deep(.el-tabs__active-bar) {
+    display: none;
   }
 
   :deep(.el-tabs__nav-scroll) {
