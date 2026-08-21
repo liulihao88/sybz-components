@@ -122,7 +122,7 @@ const fieldList = [
     },
   },
   {
-    label: '描述',
+    label: '描述(独占一行)',
     prop: 'desc',
     attrs: {
       type: 'textarea',
