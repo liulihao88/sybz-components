@@ -97,7 +97,7 @@ const forwardedAttrs = computed(() => {
 
 const tabsValue = computed({
   get() {
-    return mergedProps.value.modelValue || mergedProps.value.options[0]?.[mergedProps.value.value]
+    return mergedProps.value.modelValue
   },
   set(val) {
     emits('update:modelValue', val)

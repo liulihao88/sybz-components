@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const active = ref('all')
+const active = ref()
 const options = [
-  { label: '全部内容', value: 'all' },
+  { label: '全部内容1', value: 'all2' },
   { label: '对话与任务', value: 'conversation' },
   { label: '知识与内容', value: 'knowledge' },
   { label: '智能体构建', value: 'agent' },
@@ -14,6 +14,7 @@ const options = [
 </script>
 
 <template>
+  =={{ active }}??
   <div class="capsule-overflow-demo">
     <s-tabs v-model="active" :options="options" />
     <s-tabs v-model="active" :options="options" type="capsule" width="100%" />
