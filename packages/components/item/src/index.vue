@@ -76,17 +76,33 @@ const hasPrefix = computed(() => !!(slots.prefix || slots.img || props.src))
       </slot>
     </div>
     <div class="s-item__content">
-      <s-tooltip v-if="title || $slots.title" :content="String(title)" width="100%" placement="top-start">
-        <slot name="title">{{ title }}</slot>
-      </s-tooltip>
-      <s-tooltip v-if="subTitle || $slots.subTitle" :content="String(subTitle)" width="100%" placement="top-start">
-        <slot name="subTitle">{{ subTitle }}</slot>
-      </s-tooltip>
+      <div v-if="title || $slots.title || extra || $slots.extra || $slots.actions" class="s-item__header">
+        <s-tooltip
+          v-if="title && !$slots.title"
+          class="s-item__title"
+          :content="String(title)"
+          width="100%"
+          placement="top-start"
+        />
+        <div v-else-if="$slots.title" class="s-item__title">
+          <slot name="title"></slot>
+        </div>
+        <div v-if="extra || $slots.extra || $slots.actions" class="s-item__extra">
+          <slot name="extra">{{ extra }}</slot>
+          <slot name="actions"></slot>
+        </div>
+      </div>
+      <s-tooltip
+        v-if="subTitle && !$slots.subTitle"
+        class="s-item__subtitle"
+        :content="String(subTitle)"
+        width="100%"
+        placement="top-start"
+      />
+      <div v-else-if="$slots.subTitle" class="s-item__subtitle">
+        <slot name="subTitle"></slot>
+      </div>
       <slot></slot>
-    </div>
-    <div v-if="extra || $slots.extra || $slots.actions" class="s-item__extra">
-      <slot name="extra">{{ extra }}</slot>
-      <slot name="actions"></slot>
     </div>
   </div>
 </template>

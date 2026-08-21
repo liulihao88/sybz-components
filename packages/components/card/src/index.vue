@@ -260,15 +260,16 @@ const handleIconClick = (event) => {
 
 <style lang="scss" scoped>
 .s-card {
+  position: relative;
+  top: 0;
   background: var(--el-bg-color);
   border: 1px solid var(--line);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  overflow: auto;
   transition:
     box-shadow 0.2s ease,
-    transform 0.2s ease,
+    top 0.2s ease,
     border-color 0.2s ease,
     background-color 0.2s ease;
 
@@ -281,7 +282,7 @@ const handleIconClick = (event) => {
   }
 
   &--hover-animation:hover {
-    transform: translateY(-2px);
+    top: -2px;
   }
 
   &--transparent {

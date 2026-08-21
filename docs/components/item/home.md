@@ -10,7 +10,7 @@
 
 ### 基础用法
 
-:::demo `title` 和 `subTitle` 超出可用宽度时默认显示省略号，鼠标移入后显示完整内容。基础写法：`<SItem title="发起对话" sub-title="与数字员工直接交流" extra="立即进入" clickable />`。属性：`title` 类型 `string / number`，默认值 `undefined`；`subTitle` 类型 `string / number`，默认值 `undefined`；`extra` 类型 `string / number`，默认值 `undefined`；`clickable` 类型 `boolean`，可选值 `true / false`，默认值 `false`。
+:::demo `title` 与 `extra` 位于同一行，`subTitle` 独占下一行；`title` 和 `subTitle` 超出可用宽度时默认显示省略号，鼠标移入后显示完整内容。基础写法：`<SItem title="发起对话" sub-title="与数字员工直接交流" extra="立即进入" clickable />`。属性：`title` 类型 `string / number`，默认值 `undefined`；`subTitle` 类型 `string / number`，默认值 `undefined`；`extra` 类型 `string / number`，默认值 `undefined`；`clickable` 类型 `boolean`，可选值 `true / false`，默认值 `false`。
 item/base
 :::
 
@@ -38,7 +38,7 @@ item/shijingshan
 | ------------ | ---------------------------------- | --------------- | ------------------------------------ | ----------- |
 | `title`      | 标题，溢出时鼠标移入显示完整内容   | string / number | -                                    | `undefined` |
 | `subTitle`   | 副标题，溢出时鼠标移入显示完整内容 | string / number | -                                    | `undefined` |
-| `extra`      | 右侧文本                           | string / number | -                                    | `undefined` |
+| `extra`      | 标题同行的右侧文本                 | string / number | -                                    | `undefined` |
 | `src`        | 左侧图片地址                       | string          | -                                    | `''`        |
 | `size`       | 内边距尺寸，也可直接传自定义尺寸   | string / number | `small / default / large / 自定义值` | `default`   |
 | `padding`    | 自定义内边距，优先级高于 `size`    | string / number | -                                    | `undefined` |
@@ -66,8 +66,8 @@ item/shijingshan
 | `prefix`   | 左侧图片、图标或头像       |
 | `title`    | 自定义标题                 |
 | `subTitle` | 自定义副标题               |
-| `extra`    | 自定义右侧内容             |
-| `actions`  | 自定义右侧操作             |
+| `extra`    | 自定义标题同行的右侧内容   |
+| `actions`  | 自定义标题同行的右侧操作   |
 | `default`  | 标题和副标题下方的扩展内容 |
 
 ### 说明
