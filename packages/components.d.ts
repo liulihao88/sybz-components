@@ -177,13 +177,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
      *
-     * s-icon 图标组件，支持尺寸、颜色、旋转角度、tooltip 和自定义图标内容。
+     * s-icon 图标组件，支持 Iconify、Element Plus、本地 SVG、尺寸、颜色、旋转角度和 tooltip。
      */
     SIcon: (typeof import('./types/components/icon'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
      *
-     * s-icon 图标组件，支持尺寸、颜色、旋转角度、tooltip 和自定义图标内容。
+     * s-icon 图标组件，支持 Iconify、Element Plus、本地 SVG、尺寸、颜色、旋转角度和 tooltip。
      */
     's-icon': (typeof import('./types/components/icon'))['default']
     /**

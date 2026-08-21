@@ -13,6 +13,8 @@ export interface SybzComponentsPlugin {
 
 export declare const components: Record<string, InstallableComponent>
 export declare const SSvg: (typeof import('./types/components/svg'))['default']
+export { addIcon as addIconifyIcon, addCollection as addIconifyCollection } from '@iconify/vue'
+export type { IconifyIcon } from '@iconify/vue'
 export declare function createSvg(iconDirs: string[]): Record<string, any>
 
 declare const plugin: SybzComponentsPlugin

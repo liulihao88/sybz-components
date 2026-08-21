@@ -47,6 +47,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('../packages', import.meta.url)),
+      'sybz-components': fileURLToPath(new URL('../packages/index.ts', import.meta.url)),
       // '@sybz-components/utils': fileURLToPath(new URL('../packages/utils/src/index.ts', import.meta.url)),
       '~dist': fileURLToPath(new URL('../dist', import.meta.url)),
     },

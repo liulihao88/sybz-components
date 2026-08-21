@@ -478,15 +478,19 @@ export interface SMarkdownProps {
 }
 
 export interface SIconProps extends SHtmlStringProps {
-  name: string
+  /** 图标名称；包含 `:` 时自动使用 Iconify，例如 `mdi:home` */
+  name?: string
   color?: string
   size?: string | number
   /** 图标旋转角度，数字及数字字符串按 deg 处理 */
   rotate?: string | number
   disabled?: boolean
   theme?: SybzComponentTheme
-  type?: string
+  /** 图标来源；默认根据 name 自动识别 Iconify，否则使用 Element Plus */
+  type?: 'element-plus' | 'iconify' | 'svg' | ''
   svgAttrs?: SybzRecord
+  /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
+  iconifyAttrs?: SybzRecord
 }
 
 export interface SItemProps {

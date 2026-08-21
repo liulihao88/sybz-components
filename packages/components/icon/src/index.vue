@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
 import type { ElTooltipProps } from 'element-plus'
+import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -9,22 +10,25 @@ defineOptions({
   name: 'SIcon',
 })
 interface IconProps {
-  name: string
+  name?: string
   color?: string
   size?: string | number
   disabled?: boolean
-  type?: string
+  type?: 'element-plus' | 'iconify' | 'svg' | ''
   svgAttrs?: Record<string, any>
+  iconifyAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
   rotate?: string | number
 }
 
 const props = withDefaults(defineProps<IconProps>(), {
+  name: '',
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
   disabled: false,
   type: '', // svg
   svgAttrs: () => ({}),
+  iconifyAttrs: () => ({}),
   dangerouslyUseHTMLString: false,
   rotate: '',
 })
@@ -39,6 +43,10 @@ const parseColor = computed(() => {
   if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
   return mergedProps.value.color
 })
+
+const isIconify = computed(
+  () => mergedProps.value.type === 'iconify' || (!mergedProps.value.type && mergedProps.value.name.includes(':')),
+)
 
 const parseRotate = computed(() => {
   const rotate = mergedProps.value.rotate
@@ -77,6 +85,12 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
         <!-- 仅在默认插槽为空时渲染图标 -->
         <template v-else>
           <s-svg v-if="mergedProps.type === 'svg'" v-bind="mergedProps.svgAttrs" :name="mergedProps.name"></s-svg>
+          <iconify-icon
+            v-else-if="isIconify"
+            v-bind="mergedProps.iconifyAttrs"
+            :icon="mergedProps.name"
+            aria-hidden="true"
+          />
           <component :is="`el-icon-${toLine(mergedProps.name || '')}`" v-else></component>
         </template>
       </span>
@@ -87,6 +101,10 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
 <style scoped lang="scss">
 .s-icon {
   // cursor: pointer;
+
+  :deep(.iconify) {
+    display: block;
+  }
 }
 .s-icon__not-allowed {
   cursor: not-allowed;

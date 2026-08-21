@@ -16,6 +16,12 @@
 icon/base
 :::
 
+### Iconify 图标（type 默认值：自动识别）
+
+:::demo 展示 Iconify 在线按需加载与离线注册。基础写法：`<s-icon name="mdi:home"></s-icon>`。属性：`name` 类型 `string`，默认值 `''`，包含 `:` 时自动使用 Iconify；`type` 可选 `'' / element-plus / iconify / svg`，默认值 `''`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
+icon/iconify
+:::
+
 ### 插槽
 
 :::demo 展示插槽内容定制。基础写法：`<s-icon></s-icon>`。插槽：按示例中的插槽名定制内容。
@@ -44,13 +50,14 @@ icon/rotate
 
 |           属性名           | 说明                                           | 类型            | 默认值  |
 | :------------------------: | ---------------------------------------------- | --------------- | ------- |
-|           `name`           | 图标名称                                       | string          | -       |
+|           `name`           | 图标名称，包含 `:` 时自动使用 Iconify          | string          | `''`    |
 |          `color`           | 图标颜色                                       | string          | -       |
 |           `size`           | 图标尺寸                                       | string / number | `16px`  |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理    | string / number | `''`    |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                   | boolean         | `false` |
-|           `type`           | 图标类型，传 `svg` 时走 `s-svg` 渲染           | string          | `''`    |
+|           `type`           | 图标来源，可选 `element-plus / iconify / svg`  | string          | `''`    |
 |         `svgAttrs`         | 透传给 `s-svg` 的属性                          | object          | `{}`    |
+|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`     | object          | `{}`    |
 | `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染 | boolean         | `false` |
 
 ### 事件
@@ -62,3 +69,5 @@ icon/rotate
 ### 说明
 
 - 组件底层使用 `el-icon`，tooltip 相关属性如 `content`、`placement`、`effect` 可直接透传。
+- `name` 包含 `:` 时会自动按 Iconify 图标渲染，例如 `mdi:home`、`lucide:search`，图标名称可在 [Iconify Icon Sets](https://icon-sets.iconify.design/) 查询。
+- 首次使用某个在线图标时，Iconify 会按需从公开 API 加载并缓存；内网或离线项目可通过 `addIconifyIcon(name, data)` 或 `addIconifyCollection(data)` 预注册图标数据。
