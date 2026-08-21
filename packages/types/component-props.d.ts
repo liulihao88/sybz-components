@@ -670,6 +670,7 @@ export interface STabsSelfProps {
   theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
   width?: string | number
+  headerMargin?: string | number
 }
 
 export type STabsProps = STabsSelfProps & Partial<Omit<TabsPropsPublic, keyof STabsSelfProps>>

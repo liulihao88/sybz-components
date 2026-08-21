@@ -42,7 +42,7 @@ tabs/capsule
 
 ### 胶囊类型内容过多
 
-:::demo 当胶囊页签内容超过容器宽度时，会自动显示左右箭头；箭头支持 hover 状态，并保留激活项的平滑滑动效果。基础写法：`<s-tabs type="capsule" :options="options" />`。属性：`type` 可选值 `capsule`；`options` 类型 `array`，默认值 `[]`。
+:::demo 当胶囊页签内容超过容器宽度时，会自动显示左右箭头；箭头支持 hover 状态，并保留激活项的平滑滑动效果。基础写法：`<s-tabs type="capsule" :options="options" header-margin="0" />`。属性：`type` 可选值 `capsule`；`options` 类型 `array`，默认值 `[]`；`headerMargin` 类型 `string / number`，默认值 `undefined`，数字按 px 处理。
 tabs/capsuleOverflow
 :::
 
@@ -94,18 +94,19 @@ tabs/location
 
 ### 属性
 
-|    属性名    | 说明                                                                        | 类型                                   | 默认值                             |
-| :----------: | --------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------- |
-| `modelValue` | 当前激活 tab，空字符串表示不选中任何项                                      | string / number / boolean              | `''`                               |
-|  `options`   | 标签页配置                                                                  | array                                  | `[]`                               |
-|   `label`    | 标签标题字段名                                                              | string                                 | `label`                            |
-|   `value`    | 标签值字段名                                                                | string                                 | `value`                            |
-|  `subAttrs`  | 透传给 `el-tab-pane` 的属性                                                 | object                                 | `{}`                               |
-|  `trigger`   | 切换触发方式，支持 `click` / `hover`                                        | string                                 | `click`                            |
-|    `type`    | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                                 | 按内部组件或 Element Plus 对应属性 |
-|   `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan`                       | `default` / `chenghua` / `shijingshan` | `default`                          |
-|    `size`    | 尺寸，支持 `small` / `default` / `large`                                    | string                                 | `default`                          |
-|   `width`    | 组件宽度，数字按 px 处理                                                    | string / number                        | `''`                               |
+|     属性名     | 说明                                                                        | 类型                                   | 默认值                             |
+| :------------: | --------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------- |
+|  `modelValue`  | 当前激活 tab，空字符串表示不选中任何项                                      | string / number / boolean              | `''`                               |
+|   `options`    | 标签页配置                                                                  | array                                  | `[]`                               |
+|    `label`     | 标签标题字段名                                                              | string                                 | `label`                            |
+|    `value`     | 标签值字段名                                                                | string                                 | `value`                            |
+|   `subAttrs`   | 透传给 `el-tab-pane` 的属性                                                 | object                                 | `{}`                               |
+|   `trigger`    | 切换触发方式，支持 `click` / `hover`                                        | string                                 | `click`                            |
+|     `type`     | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                                 | 按内部组件或 Element Plus 对应属性 |
+|    `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan`                       | `default` / `chenghua` / `shijingshan` | `default`                          |
+|     `size`     | 尺寸，支持 `small` / `default` / `large`                                    | string                                 | `default`                          |
+|    `width`     | 组件宽度，数字按 px 处理                                                    | string / number                        | `''`                               |
+| `headerMargin` | 页签头部外边距，数字按 px 处理，也支持完整 CSS margin                       | string / number                        | `undefined`                        |
 
 ### 事件
 

@@ -312,10 +312,14 @@ declare module 'vue' {
     's-table-search': (typeof import('./types/components/tableSearch'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
+     *
+     * s-tabs 标签页组件，支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。
      */
     STabs: (typeof import('./types/components/tabs'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
+     *
+     * s-tabs 标签页组件，支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。
      */
     's-tabs': (typeof import('./types/components/tabs'))['default']
     /**

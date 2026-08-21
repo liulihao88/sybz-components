@@ -74,6 +74,10 @@ const props = defineProps({
     type: [String, Number] as PropType<string | number>,
     default: '',
   },
+  headerMargin: {
+    type: [String, Number] as PropType<string | number>,
+    default: undefined,
+  },
 })
 const emits = defineEmits(['update:modelValue'])
 const mergedProps = useGlobalComponentConfig('tabs', props)
@@ -115,12 +119,23 @@ const boxClass = computed(() => [
     's-tabs-box--capsule': isCapsuleType.value,
     's-tabs-box--no-active': isCapsuleType.value && !hasActiveTab.value,
     's-tabs-box--has-width': Boolean(mergedProps.value.width),
+    's-tabs-box--custom-header-margin': mergedProps.value.headerMargin !== undefined,
     's-tabs-box--chenghua': isChenghuaTheme.value,
     's-tabs-box--shijingshan': isShijingshanTheme.value,
   },
   `s-tabs-box--size-${mergedProps.value.size || 'default'}`,
 ])
-const boxStyle = computed(() => (mergedProps.value.width ? { width: processWidth(mergedProps.value.width, true) } : {}))
+const boxStyle = computed(() => ({
+  ...(mergedProps.value.width ? { width: processWidth(mergedProps.value.width, true) } : {}),
+  ...(mergedProps.value.headerMargin !== undefined
+    ? {
+        '--s-tabs-header-margin':
+          typeof mergedProps.value.headerMargin === 'number'
+            ? processWidth(mergedProps.value.headerMargin, true)
+            : mergedProps.value.headerMargin,
+      }
+    : {}),
+}))
 
 // 鼠标悬停时切换标签页
 const handleMouseEnter = (tabVal: string) => {
@@ -136,6 +151,10 @@ const handleMouseEnter = (tabVal: string) => {
   --s-tabs-font-size: 16px;
   --s-tabs-icon-size: 18px;
   --s-tabs-label-gap: 6px;
+
+  &.s-tabs-box--custom-header-margin :deep(.el-tabs__header) {
+    margin: var(--s-tabs-header-margin);
+  }
 
   &.s-tabs-box--size-small {
     --s-tabs-item-height: 32px;

@@ -15,7 +15,7 @@ const options = [
 
 <template>
   <s-tabs v-model="active" :options="options" />
-  <s-tabs v-model="active" :options="options" type="capsule" width="100%" />
+  <s-tabs v-model="active" :options="options" type="capsule" width="100%" header-margin="0" />
   <p>当前选中：{{ active }}</p>
 </template>
 
