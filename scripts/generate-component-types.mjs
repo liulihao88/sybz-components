@@ -335,6 +335,21 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
+    'SImage',
+    {
+      importPath: componentPropsPath,
+      typeName: 'SImageProps',
+      exportedComponentTypeName: 'SImageComponent',
+      publicPropsTypeName: 'SImagePublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'image',
+      description: 's-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径和源码资源解析。',
+      allowAnySlots: true,
+      instanceMembers: ['showPreview: () => void'],
+      hoverProps: componentHoverProps('SImageSelfProps', ['SImageProps', 'SImageSelfProps', 'SImageSrcResolver']),
+    },
+  ],
+  [
     'SInput',
     {
       importPath: componentPropsPath,
@@ -903,6 +918,12 @@ const ELEMENT_WRAPPER_CONFIGS = {
     inheritedProps: [{ type: "ElInputInstance['$props']" }],
     description: 'Element Plus Input',
   },
+  image: {
+    valueImports: ['ElImage'],
+    instances: [{ name: 'ElImageInstance', component: 'ElImage' }],
+    inheritedProps: [{ type: "ElImageInstance['$props']" }],
+    description: 'Element Plus Image',
+  },
   inputNumber: {
     valueImports: ['ElInputNumber'],
     instances: [{ name: 'ElInputNumberInstance', component: 'ElInputNumber' }],
@@ -1040,6 +1061,9 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
   wrapperLines.push(...propsLines.slice(1).map((line) => `    ${line}`))
   wrapperLines.push(`    $emit: ${primaryInstance.name}['$emit']`)
   wrapperLines.push(`    $slots: ${getWrapperSlotsType(`${primaryInstance.name}['$slots']`, typedComponent)}`)
+  for (const member of typedComponent.instanceMembers ?? []) {
+    wrapperLines.push(`    ${member}`)
+  }
   wrapperLines.push('  }')
   wrapperLines.push('}')
   wrapperLines.push('')

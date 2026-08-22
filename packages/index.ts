@@ -7,6 +7,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import type { SybzComponentsInstallOptions } from './types/index.ts'
 
 import SSvg from './components/svg/index.ts'
+export { createImageResolver } from './components/image'
 export { addIcon as addIconifyIcon, addCollection as addIconifyCollection } from '@iconify/vue'
 export type { IconifyIcon } from '@iconify/vue'
 import { GLOBAL_COMPONENT_COMMON_PROPS_KEY, GLOBAL_COMPONENT_CONFIG_KEY } from './hooks/useGlobalComponentConfig'

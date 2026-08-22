@@ -18,6 +18,7 @@
 | `el-descriptions`、`el-descriptions-item` | `s-descriptions`          |
 | `el-dialog`、`el-drawer`                  | `s-dialog`                |
 | `el-empty`                                | `s-empty`                 |
+| `el-image`、手写 `<img>`                  | `s-image`                 |
 | `el-tooltip`                              | `s-tooltip`               |
 | `el-popconfirm`                           | `s-popconfirm`            |
 | `el-progress`                             | `s-progress`              |
@@ -123,6 +124,14 @@ const name = ref('')
   <s-input v-model="name" width="300" placeholder="请输入名称" />
 </template>
 ```
+
+### s-image
+
+```vue
+<s-image src="tenant/test1.png" width="240" height="150" fit="cover" />
+```
+
+`public` 图片统一配置 `image.basePath`；`src/assets` 图片统一配置由 `createImageResolver(import.meta.glob(...))` 创建的 `image.resolver`。
 
 ### s-input-number
 

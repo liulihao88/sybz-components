@@ -13,6 +13,7 @@ export interface SybzComponentsInstallOptions {
   dialog?: SybzComponentInstallConfig
   empty?: SybzComponentInstallConfig
   icon?: SybzComponentInstallConfig
+  image?: SybzComponentInstallConfig
   input?: SybzComponentInstallConfig
   popconfirm?: SybzComponentInstallConfig
   radio?: SybzComponentInstallConfig

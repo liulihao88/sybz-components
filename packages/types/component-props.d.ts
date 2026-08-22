@@ -10,6 +10,7 @@ import type { DatePickerPropsPublic } from 'element-plus/es/components/date-pick
 import type { DescriptionPropsPublic } from 'element-plus/es/components/descriptions/src/description'
 import type { SelectPropsPublic } from 'element-plus/es/components/select'
 import type { ElTooltipPropsPublic } from 'element-plus/es/components/tooltip'
+import type { ImagePropsPublic } from 'element-plus/es/components/image/src/image'
 import type { EmptyPropsPublic } from 'element-plus/es/components/empty'
 import type { PopoverPropsPublic } from 'element-plus/es/components/popover'
 import type { ProgressPropsPublic } from 'element-plus/es/components/progress'
@@ -27,6 +28,8 @@ import type {
 export type SybzComponentTheme = 'default' | 'chenghua' | 'shijingshan'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
+
+export type SImageSrcResolver = (src: string) => string | undefined
 
 export type SUploadRequestContext = Omit<UploadRequestOptions, 'file'>
 export type SUploadRequest = (file: UploadRawFile, context: SUploadRequestContext) => XMLHttpRequest | Promise<unknown>
@@ -491,6 +494,33 @@ export interface SIconProps extends SHtmlStringProps {
   svgAttrs?: SybzRecord
   /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
   iconifyAttrs?: SybzRecord
+}
+
+export interface SImageSelfProps {
+  /** 图片地址；相对路径会通过 resolver 或 basePath 解析 */
+  src?: string
+  /** 图片宽度，数字自动补 px */
+  width?: string | number
+  /** 图片高度，数字自动补 px */
+  height?: string | number
+  /** 相对图片的公共基础路径 */
+  basePath?: string
+  /** 源码资源解析函数，通常由 createImageResolver 创建 */
+  resolver?: SImageSrcResolver
+  /** 是否直接使用当前 src 开启单图预览 */
+  preview?: boolean
+  /** 图片预览地址列表，相对路径同样会被解析 */
+  previewSrcList?: string[]
+}
+
+export type SImageProps = SImageSelfProps & Partial<Omit<ImagePropsPublic, keyof SImageSelfProps>>
+
+export type SImageEmits = {
+  load: (evt: Event) => boolean
+  error: (evt: Event) => boolean
+  switch: (index: number) => boolean
+  close: () => boolean
+  show: () => boolean
 }
 
 export interface SItemProps {

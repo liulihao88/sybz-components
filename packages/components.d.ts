@@ -187,6 +187,18 @@ declare module 'vue' {
      */
     's-icon': (typeof import('./types/components/icon'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/image/home.html
+     *
+     * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径和源码资源解析。
+     */
+    SImage: (typeof import('./types/components/image'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/image/home.html
+     *
+     * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径和源码资源解析。
+     */
+    's-image': (typeof import('./types/components/image'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/input/home.html
      */
     SInput: (typeof import('./types/components/input'))['default']
@@ -457,6 +469,10 @@ export type SIconComponent = (typeof import('./types/components/icon'))['default
 export type SIconInstance = ComponentInstance<SIconComponent>
 export type SIconPublicProps = SIconInstance['$props']
 
+export type SImageComponent = import('./types/components/image').SImageComponent
+export type SImageInstance = ComponentInstance<SImageComponent>
+export type SImagePublicProps = import('./types/components/image').SImagePublicProps
+
 export type SInputComponent = import('./types/components/input').SInputComponent
 export type SInputInstance = ComponentInstance<SInputComponent>
 export type SInputPublicProps = import('./types/components/input').SInputPublicProps
@@ -569,6 +585,7 @@ declare global {
       's-form': JSXComponentProps<SFormPublicProps>
       's-function-source-code': JSXComponentProps<SFunctionSourceCodePublicProps>
       's-icon': JSXComponentProps<SIconPublicProps>
+      's-image': JSXComponentProps<SImagePublicProps>
       's-input': JSXComponentProps<SInputPublicProps>
       's-input-label': JSXComponentProps<SInputLabelPublicProps>
       's-input-number': JSXComponentProps<SInputNumberPublicProps>

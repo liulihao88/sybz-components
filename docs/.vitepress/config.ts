@@ -332,6 +332,10 @@ export default defineConfig({
               link: '/components/icon/home.md',
             },
             {
+              text: 'image图片组件',
+              link: '/components/image/home.md',
+            },
+            {
               text: sybzMark('input组件'),
               link: '/components/input/home.md',
             },
