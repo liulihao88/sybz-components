@@ -117,6 +117,10 @@ export default defineConfig({
               link: '/components/skills/home.md',
             },
             {
+              text: 'Portal Dev 门户联调',
+              link: '/components/portalDev/home.md',
+            },
+            {
               text: '前端代码统一规范',
               link: '/components/codeStandard/home.md',
             },
