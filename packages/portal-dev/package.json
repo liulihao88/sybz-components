@@ -1,0 +1,32 @@
+{
+  "name": "@sybz-components/portal-dev",
+  "version": "1.0.0",
+  "description": "成华和石景山门户自动登录与本地前端联调 CLI",
+  "type": "module",
+  "bin": {
+    "portal-dev": "./bin/portal-dev.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    ".env.portal.example"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "skill:install": "node ./bin/portal-dev.mjs skill install",
+    "check": "node --check bin/portal-dev.mjs && node --check src/portal-dev.mjs && node --check src/recognize-captcha.mjs",
+    "release": "pnpm check && npm version patch && npm publish"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.3",
+    "playwright-core": "^1.62.0",
+    "tesseract.js": "^7.0.0"
+  }
+}

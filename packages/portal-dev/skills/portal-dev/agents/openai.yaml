@@ -1,0 +1,4 @@
+interface:
+  display_name: '门户本地调试'
+  short_description: '自动登录成华、石景山门户并启动本地联调'
+  default_prompt: '使用 $portal-dev 启动当前项目的门户本地调试。'

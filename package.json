@@ -93,6 +93,8 @@
     "types:generate": "node ./scripts/generate-component-types.mjs",
     "types:check": "node ./scripts/generate-component-types.mjs --check",
     "skills:install": "node ./scripts/install-sybz-skill.mjs",
+    "portal:skill:install": "pnpm --dir packages/portal-dev skill:install",
+    "portal:release": "pnpm --dir packages/portal-dev release",
     "release:check": "pnpm types:check && pnpm typecheck && pnpm typecheck:sfc && pnpm exec tsc --noEmit -p packages/utils/tsconfig.json && pnpm build:bundle && pnpm run -C packages/utils build",
     "prepublishOnly": "pnpm release:check",
     "release": "pnpm release:check && npm version patch && npm publish --ignore-scripts",
