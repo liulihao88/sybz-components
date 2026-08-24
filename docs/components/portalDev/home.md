@@ -78,23 +78,52 @@ portal-dev --portal chenghua
 
 ## 石景山门户联调
 
-只有明确需要联调前端项目时才使用：
+默认提供两个登录快捷命令：
 
 ```bash
-portal-dev dev --portal sjs
+portal-dev ds # 登录石景山
+portal-dev sc # 登录成华
 ```
 
-此时才会检查当前前端项目、启动 `dev` script、进入智能体样板间并携带门户 Token 打开本地页面。不在项目目录时可使用 `--project <目录>`。
+运行向导可以新增或修改快捷命令，联调参数会写入用户级 JSON：
 
-## 多账号配置格式
+```bash
+portal-dev config command
+```
+
+例如配置 `sjs-dev` 后，日常只运行：
+
+```bash
+portal-dev sjs-dev
+```
+
+该命令才会检查前端项目、启动 `dev` script、进入智能体样板间、获取 Token 并打开本地页面。
+
+## 多账号和快捷命令配置格式
 
 ```json
 {
-  "version": 2,
+  "version": 3,
   "profiles": {
     "sjs": [{ "name": "我的账号", "username": "user1", "password": "******" }],
     "chenghua": [{ "name": "测试账号", "username": "user2", "password": "******" }]
-  }
+  },
+  "commands": [
+    { "alias": "ds", "mode": "login", "portal": "sjs" },
+    { "alias": "sc", "mode": "login", "portal": "chenghua" },
+    {
+      "alias": "sjs-dev",
+      "mode": "dev",
+      "portal": "sjs",
+      "account": "测试账号",
+      "project": "/Users/你的名字/projects/agent-web",
+      "localOrigin": "http://localhost:5173",
+      "localPath": "/exhibition-hall",
+      "roomName": "3D智能展厅智能体",
+      "iframeHost": "hia.sjsdoubao.com:31118",
+      "iframePath": "/exhibition-hall"
+    }
+  ]
 }
 ```
 
@@ -116,14 +145,14 @@ Skill 默认安装到 `~/.codex/skills/portal-dev`。安装后可以让 Codex �
 
 ## 参数
 
-| 参数        | 默认值     | 说明                               |
-| ----------- | ---------- | ---------------------------------- |
-| `--portal`  | `sjs`      | 门户类型，可选 `sjs`、`chenghua`   |
-| `账号名称`  | 第一个账号 | 可选的位置参数，用于指定已配置账号 |
-| `dev`       | -          | 显式启用石景山门户本地联调         |
-| `--project` | 当前目录   | 仅用于 `dev`，指定目标前端项目路径 |
-| `config`    | -          | 交互新增账号或按账号名称更新       |
-| `--help`    | -          | 查看命令帮助                       |
+| 参数             | 默认值      | 说明                               |
+| ---------------- | ----------- | ---------------------------------- |
+| `--portal`       | `sjs`       | 门户类型，可选 `sjs`、`chenghua`   |
+| `账号名称`       | 第一个账号  | 可选的位置参数，用于指定已配置账号 |
+| `快捷命令别名`   | `ds` / `sc` | 运行 JSON 中对应的登录或联调命令   |
+| `config`         | -           | 交互新增账号或按账号名称更新       |
+| `config command` | -           | 交互新增或修改快捷命令             |
+| `--help`         | -           | 查看命令帮助                       |
 
 ## 常见问题
 

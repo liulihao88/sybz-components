@@ -71,27 +71,52 @@ portal-dev --portal sjs
 portal-dev --portal sjs 测试账号
 ```
 
-只有需要石景山门户本地联调时，才进入前端项目运行：
+默认快捷命令：
 
 ```bash
-portal-dev dev --portal sjs
+portal-dev ds # 登录石景山
+portal-dev sc # 登录成华
 ```
 
-也可以从任意目录指定项目：
+别名保存在 JSON 中，可以通过向导新增登录或联调命令：
 
 ```bash
-portal-dev dev --portal sjs --project /你的前端项目目录
+portal-dev config command
 ```
 
-配置文件中的账号使用数组存储：
+例如配置一个别名为 `sjs-dev` 的联调命令后，只需运行：
+
+```bash
+portal-dev sjs-dev
+```
+
+执行时会登录指定账号、启动本地项目、进入样板间搜索智能体，从匹配的 iframe 地址取得 Token，然后保留查询参数打开本地页面。
+
+配置文件中的账号和快捷命令格式：
 
 ```json
 {
-  "version": 2,
+  "version": 3,
   "profiles": {
     "sjs": [{ "name": "我的账号", "username": "user1", "password": "******" }],
     "chenghua": [{ "name": "测试账号", "username": "user2", "password": "******" }]
-  }
+  },
+  "commands": [
+    { "alias": "ds", "mode": "login", "portal": "sjs" },
+    { "alias": "sc", "mode": "login", "portal": "chenghua" },
+    {
+      "alias": "sjs-dev",
+      "mode": "dev",
+      "portal": "sjs",
+      "account": "测试账号",
+      "project": "/Users/你的名字/projects/agent-web",
+      "localOrigin": "http://localhost:5173",
+      "localPath": "/exhibition-hall",
+      "roomName": "3D智能展厅智能体",
+      "iframeHost": "hia.sjsdoubao.com:31118",
+      "iframePath": "/exhibition-hall"
+    }
+  ]
 }
 ```
 

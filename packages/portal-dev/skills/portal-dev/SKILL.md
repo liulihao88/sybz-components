@@ -27,11 +27,14 @@ portal-dev --portal sjs
 portal-dev --portal chenghua
 ```
 
-只有用户明确要求门户本地联调时才执行：
+默认快捷命令：
 
 ```bash
-portal-dev dev --portal sjs --project <project-directory>
+portal-dev ds
+portal-dev sc
 ```
+
+只有用户明确要求门户本地联调时才执行 JSON 中 `mode: "dev"` 的快捷命令，例如 `portal-dev sjs-dev`。项目、本地地址、路由、智能体名称和 iframe 识别参数均从该命令配置读取。脚本从门户 iframe URL 取得 Token 后，必须保留查询参数打开本地地址，且不得输出 Token。
 
 保持进程运行并告诉用户当前状态；只有用户明确要求停止时才终止。不得输出用户名、密码或门户 Token。
 

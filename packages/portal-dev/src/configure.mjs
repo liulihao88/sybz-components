@@ -1,5 +1,5 @@
 import { createInterface } from 'node:readline/promises'
-import { writePortalAccount } from './config-file.mjs'
+import { writePortalAccount, writePortalCommand } from './config-file.mjs'
 
 const args = process.argv.slice(2)
 const readArg = (name) => {
@@ -50,6 +50,47 @@ const askPassword = (message) => {
 
     process.stdin.on('data', onData)
   })
+}
+
+if (args[0] === 'command') {
+  const commandRl = createInterface({ input: process.stdin, output: process.stdout })
+  const alias = (await commandRl.question('请输入快捷命令别名（例如：ds、sc、sjs-dev）：')).trim()
+  if (!alias || !/^[a-zA-Z][\w-]*$/.test(alias)) {
+    commandRl.close()
+    throw new Error('别名只能包含字母、数字、下划线和短横线，并且必须以字母开头')
+  }
+  const modeAnswer = (await commandRl.question('请选择命令类型（1=只登录，2=石景山联调，默认1）：')).trim()
+  const mode = modeAnswer === '2' ? 'dev' : 'login'
+  const portalAnswer =
+    mode === 'dev' ? 'sjs' : (await commandRl.question('请选择门户（1=石景山，2=成华，默认石景山）：')).trim()
+  const portal = portalAnswer === '2' || portalAnswer === 'chenghua' ? 'chenghua' : 'sjs'
+  const account = (await commandRl.question('请输入账号名称（直接回车使用该门户第一个账号）：')).trim()
+  const command = { alias, mode, portal, ...(account ? { account } : {}) }
+
+  if (mode === 'dev') {
+    const project = (await commandRl.question('请输入前端项目绝对路径：')).trim()
+    if (!project) {
+      commandRl.close()
+      throw new Error('联调命令必须配置前端项目路径')
+    }
+    command.project = project
+    command.localOrigin =
+      (await commandRl.question('请输入本地服务地址（默认 http://localhost:5173）：')).trim() || 'http://localhost:5173'
+    command.localPath =
+      (await commandRl.question('请输入本地接收 Token 的路由（默认 /exhibition-hall）：')).trim() || '/exhibition-hall'
+    command.roomName =
+      (await commandRl.question('请输入样板间智能体名称（默认 3D智能展厅智能体）：')).trim() || '3D智能展厅智能体'
+    command.iframeHost =
+      (await commandRl.question('请输入门户 iframe 域名（默认 hia.sjsdoubao.com:31118）：')).trim() ||
+      'hia.sjsdoubao.com:31118'
+    command.iframePath =
+      (await commandRl.question('请输入门户 iframe 路径（默认 /exhibition-hall）：')).trim() || '/exhibition-hall'
+  }
+  commandRl.close()
+  const { configPath, commandCount } = writePortalCommand(command)
+  console.log(`快捷命令配置完成：portal-dev ${alias}`)
+  console.log(`当前共 ${commandCount} 个快捷命令，配置文件：${configPath}`)
+  process.exit(0)
 }
 
 const rl = createInterface({ input: process.stdin, output: process.stdout })

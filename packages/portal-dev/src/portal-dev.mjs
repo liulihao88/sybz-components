@@ -7,6 +7,11 @@ import { recognizeCaptcha } from './recognize-captcha.mjs'
 
 const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds))
 const args = process.argv.slice(2)
+const portalConfig = readPortalConfig()
+const commandAlias = args[0] && args[0] !== 'dev' && !args[0].startsWith('-') ? args[0] : undefined
+const savedCommand = commandAlias ? portalConfig.commands.find((command) => command?.alias === commandAlias) : undefined
+if (commandAlias && !savedCommand)
+  throw new Error(`未找到快捷命令“${commandAlias}”，请运行 portal-dev config command 创建`)
 const readArg = (name) => {
   const index = args.indexOf(name)
   return index >= 0 ? args[index + 1] : undefined
@@ -19,19 +24,19 @@ const readPositionalAccount = () => {
       index += 1
       continue
     }
-    if (argument === 'dev' || argument.startsWith('-')) continue
+    if (argument === 'dev' || argument === commandAlias || argument.startsWith('-')) continue
     return argument
   }
   return undefined
 }
 
-const portal = readArg('--portal') || 'sjs'
+const portal = savedCommand?.portal || readArg('--portal') || 'sjs'
 if (!['sjs', 'chenghua'].includes(portal)) throw new Error(`不支持的门户：${portal}，可选值为 sjs、chenghua`)
-const devMode = args[0] === 'dev' || args.includes('--dev')
+const devMode = savedCommand?.mode === 'dev' || args[0] === 'dev'
 if (devMode && portal === 'chenghua') throw new Error('门户联调目前只支持石景山；成华命令只负责门户登录')
 
 const findProject = () => {
-  const explicit = readArg('--project')
+  const explicit = savedCommand?.project || readArg('--project')
   if (explicit) return resolve(explicit)
   let current = process.cwd()
   while (true) {
@@ -46,7 +51,7 @@ const findProject = () => {
 const projectDir = devMode ? findProject() : undefined
 if (projectDir && !existsSync(resolve(projectDir, 'package.json')))
   throw new Error(`目标项目不存在或缺少 package.json：${projectDir}`)
-const configuredAccounts = readPortalConfig().profiles[portal]
+const configuredAccounts = portalConfig.profiles[portal]
 const portalAccounts = Array.isArray(configuredAccounts)
   ? configuredAccounts.filter(
       (account) => account?.name && typeof account.username === 'string' && typeof account.password === 'string',
@@ -59,7 +64,7 @@ if (!portalAccounts.length) {
 }
 
 const selectAccount = () => {
-  const accountName = readPositionalAccount()
+  const accountName = savedCommand?.account || readPositionalAccount()
   if (accountName) {
     const matched = portalAccounts.find((account) => account.name === accountName)
     if (!matched) throw new Error(`未找到账号“${accountName}”，请检查账号名称或重新配置`)
@@ -85,10 +90,11 @@ const configs = {
 const config = configs[portal]
 if (!config.username || !config.password) throw new Error(`账号“${portalAccount.name}”的配置不完整，请重新配置`)
 
-const localOrigin = 'http://localhost:5173'
-const iframeHost = 'hia.sjsdoubao.com:31118'
-const iframePath = '/exhibition-hall'
-const roomName = '3D智能展厅智能体'
+const localOrigin = (savedCommand?.localOrigin || 'http://localhost:5173').replace(/\/$/, '')
+const localPath = savedCommand?.localPath
+const iframeHost = savedCommand?.iframeHost || 'hia.sjsdoubao.com:31118'
+const iframePath = savedCommand?.iframePath || '/exhibition-hall'
+const roomName = savedCommand?.roomName || '3D智能展厅智能体'
 const chromeCandidates = {
   darwin: [
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -259,7 +265,7 @@ for (let index = 0; index < 180; index += 1) {
 }
 
 if (!targetUrl) throw new Error(`未找到目标智能体入口：${roomName}`)
-const destination = new URL(`${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`, localOrigin)
+const destination = new URL(`${localPath || targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`, localOrigin)
 await context.newPage().then((localPage) => localPage.goto(destination.href))
 console.log(`门户本地调试已就绪：${localOrigin}${targetUrl.pathname}`)
 console.log('Token 未打印、未写入文件。按 Ctrl+C 结束。')
