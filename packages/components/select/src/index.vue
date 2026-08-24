@@ -231,7 +231,6 @@ const mergedTooltipAttrs = computed(() => {
   const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString ?? dangerouslyUseHTMLString
 
   return {
-    placement: 'top',
     effect: 'dark',
     ...tooltipAttrs,
     rawContent: Boolean(htmlStringEnabled || rawContent || rawContentKebab),
