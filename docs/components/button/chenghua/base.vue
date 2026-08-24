@@ -44,7 +44,7 @@
     <div class="chenghua-button-demo__size">
       <s-button theme="chenghua" type="primary" width="100%">width="100%"</s-button>
       <s-button theme="chenghua" width="180">width="180"</s-button>
-      <s-button theme="chenghua" height="60">height="60"</s-button>
+      <s-button theme="chenghua" height="10">height="10"</s-button>
       <s-button theme="chenghua" type="danger" width="280" height="30" ghost>width + height + 幽灵按钮</s-button>
     </div>
   </div>
