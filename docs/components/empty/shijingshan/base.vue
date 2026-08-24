@@ -3,10 +3,10 @@
 <template>
   <div class="empty-shijingshan-demo">
     <div class="empty-shijingshan-demo__list">
-      <s-empty theme="shijingshan" description="暂无服务申请" width="72">
+      <s-empty theme="shijingshan" title="暂无服务申请" sub-title="创建申请后将在这里展示" width="72">
         <s-button theme="shijingshan" type="primary" size="small">新建申请</s-button>
       </s-empty>
-      <s-empty theme="shijingshan" description="当前筛选条件下暂无数据" width="84" />
+      <s-empty theme="shijingshan" title="当前筛选条件下暂无数据" sub-title="请尝试调整筛选条件" width="84" />
     </div>
   </div>
 </template>

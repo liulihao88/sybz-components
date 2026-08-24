@@ -3,23 +3,28 @@ import type { SEmptySelfProps, SybzComponentTheme, SybzRecord } from '../compone
 
 type ElEmptyInstance = InstanceType<typeof ElEmpty>
 
-export type SEmptyPublicProps = SEmptySelfProps & Omit<ElEmptyInstance['$props'], keyof SEmptySelfProps>
+export type SEmptyPublicProps = SEmptySelfProps & Omit<ElEmptyInstance['$props'], keyof SEmptySelfProps | 'description'>
 
 export type SEmptyComponent = {
   new (): {
     $props: {
-      description?: string
+      title?: string
+      subTitle?: string
       theme?: SybzComponentTheme
       width?: string | number
       height?: string | number
       imgAttrs?: SybzRecord
       src?: string
-    } & Omit<ElEmptyInstance['$props'], 'description' | 'theme' | 'width' | 'height' | 'imgAttrs' | 'src'>
+    } & Omit<
+      ElEmptyInstance['$props'],
+      'title' | 'subTitle' | 'theme' | 'width' | 'height' | 'imgAttrs' | 'src' | 'description'
+    >
     $emit: ElEmptyInstance['$emit']
     $slots: ElEmptyInstance['$slots'] & {
       default?: () => any
       image?: () => any
-      description?: () => any
+      title?: () => any
+      'sub-title'?: () => any
     }
   }
 }

@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
@@ -9,8 +7,9 @@ import { ref } from 'vue'
         这是image的插槽
         <img src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif" class="img-box" />
       </template>
-      <template #description>这是description的插槽</template>
-      这是属于默认default的底部文字
+      <template #title>这是 title 插槽</template>
+      <template #sub-title>这是 sub-title 插槽</template>
+      <s-button type="primary">这是默认插槽</s-button>
     </s-empty>
   </div>
 </template>

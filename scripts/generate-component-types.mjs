@@ -258,7 +258,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SEmptyPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'empty',
-      slots: ['default', 'image', 'description'],
+      slots: ['default', 'image', 'title', { name: "'sub-title'" }],
       hoverProps: componentHoverProps('SEmptySelfProps', ['SEmptySelfProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],
@@ -903,7 +903,7 @@ const ELEMENT_WRAPPER_CONFIGS = {
   empty: {
     valueImports: ['ElEmpty'],
     instances: [{ name: 'ElEmptyInstance', component: 'ElEmpty' }],
-    inheritedProps: [{ type: "ElEmptyInstance['$props']" }],
+    inheritedProps: [{ type: "ElEmptyInstance['$props']", extraOmitKeys: ["'description'"] }],
     description: 'Element Plus Empty',
   },
   form: {

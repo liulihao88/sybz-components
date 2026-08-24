@@ -325,7 +325,8 @@ export interface SFlexProps {
 }
 
 export interface SEmptySelfProps {
-  description?: string
+  title?: string
+  subTitle?: string
   theme?: SybzComponentTheme
   width?: string | number
   height?: string | number
@@ -333,7 +334,7 @@ export interface SEmptySelfProps {
   src?: string
 }
 
-export type SEmptyProps = SEmptySelfProps & Partial<Omit<EmptyPropsPublic, keyof SEmptySelfProps>>
+export type SEmptyProps = SEmptySelfProps & Partial<Omit<EmptyPropsPublic, keyof SEmptySelfProps | 'description'>>
 
 export interface SFormContext {
   option: SFormFieldItem | SFormTitleItem
