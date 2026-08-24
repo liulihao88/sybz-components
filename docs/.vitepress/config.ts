@@ -523,7 +523,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      ...sybzVitePlugins({ codeInspector: true, gitCommitLog: { cwd: rootDir, autoPrint: true } }),
+      sybzVitePlugins({
+        codeInspector: true,
+        gitCommitLog: { cwd: rootDir, autoPrint: true, expanded: false },
+      }),
       utilsSourceDocsHmrPlugin(),
     ],
     build: {

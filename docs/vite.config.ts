@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { resolve } from 'path'
 import { fileURLToPath, URL } from 'node:url'
-import { sybzVitePlugins } from '@sybz-components/utils/vite'
 import svgLoader from 'vite-svg-loader'
 import terser from '@rollup/plugin-terser'
 import { customVitePluginFilePath } from '../packages/utils/local/customVitePluginFilePath.js'
@@ -28,7 +27,6 @@ export default defineConfig({
       defaultImport: 'url', // 将SVG作为URL导入
     }),
     vueJsx(),
-    sybzVitePlugins(),
     terser({
       compress: {
         drop_console: false, // 保留 console，方便线上排查偶发路由问题

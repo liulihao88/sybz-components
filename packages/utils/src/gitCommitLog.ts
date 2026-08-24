@@ -40,7 +40,7 @@ export interface GitCommitLogOptions {
   defaultLimit?: number
   /** 页面加载后自动打印；传数字时同时指定打印条数，默认 true。 */
   autoPrint?: boolean | number
-  /** 打印后是否默认展开控制台分组，默认 true。 */
+  /** 打印后是否默认展开控制台分组，默认 false。 */
   expanded?: boolean
 }
 
@@ -222,7 +222,7 @@ export const gitCommitLog = (options: GitCommitLogOptions = {}): Plugin => {
         return [
           {
             tag: 'script',
-            children: createClientCode(info, defaultLimit, options.autoPrint ?? true, options.expanded ?? true),
+            children: createClientCode(info, defaultLimit, options.autoPrint ?? true, options.expanded ?? false),
             injectTo: 'head-prepend',
           },
         ]

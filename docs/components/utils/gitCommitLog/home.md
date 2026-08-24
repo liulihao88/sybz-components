@@ -42,12 +42,12 @@ plugins: [gitCommitLog({ autoPrint: 5 })]
 plugins: [gitCommitLog({ autoPrint: false })]
 ```
 
-### 默认展开
+### 展开详情
 
-控制台分组默认展开。希望只显示包含最新提交的摘要、点击后再查看详情时，设置 `expanded: false`。
+控制台分组默认收起，只显示包含最新提交的摘要。希望页面打开后直接展开完整详情时，设置 `expanded: true`。
 
 ```ts
-plugins: [gitCommitLog({ expanded: false })]
+plugins: [gitCommitLog({ expanded: true })]
 ```
 
 ### 配置项
@@ -58,7 +58,7 @@ plugins: [gitCommitLog({ expanded: false })]
 | `maxCommits`   | `number`            | 正整数              | `20`            | 构建时最多注入到页面的提交数量。         |
 | `defaultLimit` | `number`            | 正整数              | `10`            | 调用 `b()` 且不传参数时的默认打印数量。  |
 | `autoPrint`    | `boolean \| number` | `false/true/正整数` | `true`          | 是否在页面加载后自动打印，以及打印条数。 |
-| `expanded`     | `boolean`           | `false/true`        | `true`          | 控制台分组打印后是否默认展开。           |
+| `expanded`     | `boolean`           | `false/true`        | `false`         | 控制台分组打印后是否默认展开。           |
 
 ### 返回值与全局数据
 

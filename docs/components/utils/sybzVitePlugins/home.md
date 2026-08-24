@@ -63,7 +63,7 @@ plugins: [
     },
     gitCommitLog: {
       autoPrint: true,
-      expanded: true,
+      expanded: false,
       defaultLimit: 10,
     },
     buildTime: {
