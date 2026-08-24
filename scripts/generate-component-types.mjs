@@ -285,6 +285,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SFormPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'form',
+      description:
+        's-form 表单组件，支持 schema 字段编排、动态配置、字段标签 tooltip 提示及 dangerouslyUseHTMLString。',
       allowAnySlots: true,
       hoverProps: componentHoverProps('SFormProps', [
         'SFormContext',

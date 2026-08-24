@@ -387,6 +387,10 @@ export interface SFormFieldItem {
   label?: string
   labelRender?: SFormRender
   labelSlotName?: string
+  /** 标签右侧提示图标的悬浮内容，支持函数动态返回 */
+  tooltip?: SFormDynamic<string>
+  /** 透传给提示图标及 Tooltip 的属性，支持 dangerouslyUseHTMLString */
+  tooltipAttrs?: SFormDynamic<SybzRecord>
   modelEvent?: string
   modelProp?: string
   /** 写入 model 前的值转换 */

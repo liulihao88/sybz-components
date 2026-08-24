@@ -124,6 +124,12 @@ form/directives
 form/trim
 :::
 
+### 标签提示 `tooltip`（默认值为空）
+
+:::demo 展示标签右侧提示图标及 HTML 内容。基础写法：`{ label: '日期组件', prop: 'date', tooltip: '请选择业务发生日期' }`。属性：`tooltip` 类型为 `string / Function`，默认值为空；`tooltipAttrs` 类型为 `object / Function`，默认值为空；设置 `tooltipAttrs: { dangerouslyUseHTMLString: true }` 后支持 HTML 内容。HTML 字符串必须来自可信内容，禁止直接渲染未经处理的用户输入。
+form/tooltip
+:::
+
 ## 属性
 
 |       属性名        | 说明                                                                          | 类型                               | 默认值                                                 |
@@ -170,6 +176,8 @@ const fieldList: SFormFieldItem[] = [
 |    useSlot    | 使用插槽渲染                                                          | boolean                   | `false`            |
 |   slotName    | 内容插槽名；未设置时使用 `prop`，`type="title"` 时也作为标题插槽名    | string                    | -                  |
 | labelSlotName | label 插槽名，未设置时使用 `${prop}-label`                            | string                    | -                  |
+|    tooltip    | 标签右侧提示图标的悬浮内容，支持函数动态返回                          | string / Function         | -                  |
+| tooltipAttrs  | 提示图标及 Tooltip 属性，支持 `dangerouslyUseHTMLString`              | object / Function         | -                  |
 |     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`     | string                    | -                  |
 |     trim      | 提交/校验前是否对当前字段去除前后空格，可覆盖表单级配置               | boolean                   | 跟随 `s-form.trim` |
 

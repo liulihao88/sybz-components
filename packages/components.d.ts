@@ -160,10 +160,14 @@ declare module 'vue' {
     's-flex': (typeof import('./types/components/flex'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/form/home.html
+     *
+     * s-form 表单组件，支持 schema 字段编排、动态配置、字段标签 tooltip 提示及 dangerouslyUseHTMLString。
      */
     SForm: (typeof import('./types/components/form'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/form/home.html
+     *
+     * s-form 表单组件，支持 schema 字段编排、动态配置、字段标签 tooltip 提示及 dangerouslyUseHTMLString。
      */
     's-form': (typeof import('./types/components/form'))['default']
     /**

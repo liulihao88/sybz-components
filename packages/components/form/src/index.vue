@@ -64,6 +64,8 @@ const internalFieldKeys = new Set([
   'subTitle',
   'title',
   'titleSlotName',
+  'tooltip',
+  'tooltipAttrs',
   'trim',
   'transform',
   'type',
@@ -161,6 +163,10 @@ const resolveRecord = (source: FormDynamic<FormAttrs> | undefined, item: FormFie
   const result = resolveDynamic<FormAttrs>(source, item, index, {})
   return result || {}
 }
+
+const getFieldTooltip = (item: FormField, index: number) =>
+  resolveDynamic<string | undefined>(item.tooltip, item, index, undefined)
+const getFieldTooltipAttrs = (item: FormField, index: number) => resolveRecord(item.tooltipAttrs, item, index)
 
 const getPlaceholderPrefix = (item: FormField) => {
   const comp = String(item.comp || 's-input').toLowerCase()
@@ -571,14 +577,24 @@ defineExpose({
           </template>
           <template v-else>
             <slot :name="getLabelSlotName(v)" v-bind="getRenderProps(v, i)">
-              <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
-              <s-icon
-                v-else-if="v.imgAttrs?.name"
-                :name="v.imgAttrs?.name"
-                class="s-form__label-icon"
-                v-bind="v.imgAttrs"
-              />
-              <s-tooltip :content="v.label" />
+              <span class="s-form__label-content">
+                <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
+                <s-icon
+                  v-else-if="v.imgAttrs?.name"
+                  :name="v.imgAttrs?.name"
+                  class="s-form__label-icon"
+                  v-bind="v.imgAttrs"
+                />
+                <s-tooltip :content="v.label" />
+                <s-icon
+                  v-if="getFieldTooltip(v, i)"
+                  v-bind="getFieldTooltipAttrs(v, i)"
+                  name="Warning"
+                  :content="getFieldTooltip(v, i)"
+                  class="s-form__label-tooltip-icon"
+                  aria-label="字段说明"
+                />
+              </span>
             </slot>
           </template>
         </template>
@@ -623,8 +639,26 @@ defineExpose({
   height: 16px;
 }
 
+.s-form__label-content {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
 .s-form__label-icon {
   margin-right: 4px;
+}
+
+.s-form__label-tooltip-icon {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  flex: none;
+  margin-left: 6px;
+  color: var(--65);
+  cursor: help;
 }
 
 .s-form--chenghua {
