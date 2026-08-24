@@ -1,12 +1,11 @@
 # @sybz-components/portal-dev
 
-成华、石景山门户自动登录与本地前端联调 CLI。支持自动启动项目开发服务、识别图形验证码、登录门户，以及携带门户 Token 打开本地页面。
+成华、石景山门户自动登录 CLI，也可按需启动石景山门户本地联调。
 
 ## 环境要求
 
 - Node.js 18+
 - Google Chrome 或 Microsoft Edge
-- 目标项目已安装依赖，并提供 `dev` script
 
 ## 安装
 
@@ -24,7 +23,7 @@ pnpm add -g @sybz-components/portal-dev
 portal-dev config
 ```
 
-根据中文提示选择门户、输入账号和密码即可。密码输入时会显示为 `*`。账号配置属于当前电脑用户，与具体项目无关，只需配置一次。
+根据中文提示输入账号名称、用户名和密码即可。密码输入时会显示为 `*`。同一个门户可以重复执行该命令保存多个账号；账号名称相同时会更新原账号。
 
 默认配置文件位置：
 
@@ -33,7 +32,7 @@ portal-dev config
 
 程序会自动创建目录，并尽可能将配置文件权限设为仅当前用户可读写。
 
-配置完成后直接运行：
+配置完成后可以在任意目录直接运行：
 
 ```bash
 portal-dev
@@ -48,23 +47,52 @@ portal-dev config --portal chenghua
 
 ## 使用
 
-石景山门户会启动本地开发服务、进入智能体样板间，并携带门户 Token 打开本地页面：
+只登录石景山门户，不读取或启动任何前端项目：
 
 ```bash
 portal-dev
 ```
 
-成华门户完成自动登录后进入智能体广场：
+只登录成华门户并进入智能体广场，不读取或启动任何前端项目：
 
 ```bash
 portal-dev --portal chenghua
 ```
 
-不在项目目录时可以指定项目路径：
+配置多个账号后，不写账号名称会直接使用数组中的第一个账号：
 
 ```bash
-portal-dev --portal sjs --project .
-portal-dev --portal chenghua --project .
+portal-dev --portal sjs
+```
+
+在命令末尾写账号名称，可以使用指定账号：
+
+```bash
+portal-dev --portal sjs 测试账号
+```
+
+只有需要石景山门户本地联调时，才进入前端项目运行：
+
+```bash
+portal-dev dev --portal sjs
+```
+
+也可以从任意目录指定项目：
+
+```bash
+portal-dev dev --portal sjs --project /你的前端项目目录
+```
+
+配置文件中的账号使用数组存储：
+
+```json
+{
+  "version": 2,
+  "profiles": {
+    "sjs": [{ "name": "我的账号", "username": "user1", "password": "******" }],
+    "chenghua": [{ "name": "测试账号", "username": "user2", "password": "******" }]
+  }
+}
 ```
 
 查看命令帮助：

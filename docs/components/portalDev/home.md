@@ -1,12 +1,12 @@
 # Portal Dev 门户联调工具
 
-`@sybz-components/portal-dev` 是成华、石景山门户自动登录与本地前端联调 CLI。它属于 `sybz-components` 工具生态，但作为独立 npm 包发布，不会增加组件主包的浏览器端体积。
+`@sybz-components/portal-dev` 是全局使用的成华、石景山门户自动登录 CLI，也可按需启动石景山门户本地联调。它作为独立 npm 包发布，不会增加组件主包的浏览器端体积。
 
 ## 能力
 
-- 自动启动目标项目的开发服务。
 - 自动填写门户账号和密码。
 - 自动识别图形验证码并登录。
+- 每个门户支持保存多个账号，并可按账号名称登录。
 - 石景山门户可进入智能体样板间，获取门户 Token 后打开本地页面。
 - 成华门户可在登录成功后进入智能体广场。
 - 随包提供 Codex `portal-dev` Skill。
@@ -15,7 +15,6 @@
 
 - Node.js 18+
 - Google Chrome 或 Microsoft Edge
-- 目标项目已安装依赖，并提供 `dev` script
 
 ## 安装
 
@@ -31,12 +30,12 @@ pnpm add -g @sybz-components/portal-dev
 portal-dev config
 ```
 
-第一条命令会用中文询问门户、账号和密码。密码显示为 `*`，账号配置保存在当前电脑用户的专属配置文件中，所有项目都能复用，只需配置一次。
+第一条命令会用中文询问门户、账号名称、用户名和密码。密码显示为 `*`，配置保存在当前电脑用户的专属文件中。同一门户可以保存多个账号，账号名称相同时会更新原账号。
 
 - macOS / Linux：`~/.config/sybz-components/portal-dev.json`
 - Windows：`%APPDATA%\sybz-components\portal-dev.json`
 
-之后进入目标前端项目文件夹并运行：
+之后可以在任意目录运行：
 
 ```bash
 portal-dev
@@ -49,27 +48,25 @@ portal-dev config --portal chenghua
 portal-dev --portal chenghua
 ```
 
-运行联调时不在项目目录，可以指定项目文件夹：
+配置多个账号后，不写账号名称默认使用数组中的第一个账号：
 
 ```bash
-portal-dev --portal sjs --project /你的项目目录
+portal-dev --portal sjs
 ```
 
-## 石景山门户联调
+在命令末尾写账号名称，可以使用指定账号：
+
+```bash
+portal-dev --portal sjs 测试账号
+```
+
+## 石景山门户登录
 
 ```bash
 portal-dev
 ```
 
-默认流程：
-
-1. 检查 `http://localhost:5173` 是否已经启动。
-2. 未启动时执行目标项目的 `dev` script。
-3. 打开石景山门户并自动登录。
-4. 进入智能体样板间并搜索 `3D智能展厅智能体`。
-5. 获取门户页面中的 Token，并打开对应的本地页面。
-
-Token 不会输出到终端，也不会写入文件。
+该命令只打开石景山门户并自动登录，完全不检查前端项目。
 
 ## 成华门户登录
 
@@ -77,7 +74,29 @@ Token 不会输出到终端，也不会写入文件。
 portal-dev --portal chenghua
 ```
 
-成华模式只完成门户登录，并进入智能体广场，不启动本地项目、不执行石景山样板间跳转流程。
+该命令只完成门户登录并进入智能体广场，完全不检查前端项目。
+
+## 石景山门户联调
+
+只有明确需要联调前端项目时才使用：
+
+```bash
+portal-dev dev --portal sjs
+```
+
+此时才会检查当前前端项目、启动 `dev` script、进入智能体样板间并携带门户 Token 打开本地页面。不在项目目录时可使用 `--project <目录>`。
+
+## 多账号配置格式
+
+```json
+{
+  "version": 2,
+  "profiles": {
+    "sjs": [{ "name": "我的账号", "username": "user1", "password": "******" }],
+    "chenghua": [{ "name": "测试账号", "username": "user2", "password": "******" }]
+  }
+}
+```
 
 ## 安装 Codex Skill
 
@@ -97,13 +116,14 @@ Skill 默认安装到 `~/.codex/skills/portal-dev`。安装后可以让 Codex �
 
 ## 参数
 
-| 参数           | 默认值       | 说明                             |
-| -------------- | ------------ | -------------------------------- |
-| `--portal`     | `sjs`        | 门户类型，可选 `sjs`、`chenghua` |
-| `--project`    | 当前目录     | 目标前端项目路径                 |
-| `config`       | -            | 交互创建或更新用户级配置文件     |
-| `--login-only` | 成华默认启用 | 只登录门户，不启动本地联调       |
-| `--help`       | -            | 查看命令帮助                     |
+| 参数        | 默认值     | 说明                               |
+| ----------- | ---------- | ---------------------------------- |
+| `--portal`  | `sjs`      | 门户类型，可选 `sjs`、`chenghua`   |
+| `账号名称`  | 第一个账号 | 可选的位置参数，用于指定已配置账号 |
+| `dev`       | -          | 显式启用石景山门户本地联调         |
+| `--project` | 当前目录   | 仅用于 `dev`，指定目标前端项目路径 |
+| `config`    | -          | 交互新增账号或按账号名称更新       |
+| `--help`    | -          | 查看命令帮助                       |
 
 ## 常见问题
 

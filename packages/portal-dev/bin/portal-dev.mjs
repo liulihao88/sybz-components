@@ -35,12 +35,12 @@ if (args[0] === 'config') {
   console.log(`用法：
   portal-dev
   portal-dev config [--portal sjs|chenghua]
-  portal-dev --portal sjs [--project <目录>]
-  portal-dev --portal chenghua [--project <目录>]
+  portal-dev --portal sjs|chenghua [账号名称]
+  portal-dev dev --portal sjs [账号名称] [--project <目录>]
   portal-dev skill install [Codex skills 目录]
 
 首次使用只需运行一次 portal-dev config。
-之后在项目目录运行 portal-dev 即可，默认使用石景山门户。`)
+不写账号名称时默认使用该门户的第一个账号；只有 dev 命令需要前端项目。`)
   process.exit(0)
 } else {
   const child = spawn(process.execPath, [resolve(packageDir, 'src/portal-dev.mjs'), ...args], {

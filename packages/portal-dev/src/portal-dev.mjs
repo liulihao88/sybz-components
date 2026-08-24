@@ -11,10 +11,24 @@ const readArg = (name) => {
   const index = args.indexOf(name)
   return index >= 0 ? args[index + 1] : undefined
 }
+const readPositionalAccount = () => {
+  const valueOptions = new Set(['--portal', '--project'])
+  for (let index = 0; index < args.length; index += 1) {
+    const argument = args[index]
+    if (valueOptions.has(argument)) {
+      index += 1
+      continue
+    }
+    if (argument === 'dev' || argument.startsWith('-')) continue
+    return argument
+  }
+  return undefined
+}
 
 const portal = readArg('--portal') || 'sjs'
 if (!['sjs', 'chenghua'].includes(portal)) throw new Error(`不支持的门户：${portal}，可选值为 sjs、chenghua`)
-const loginOnly = args.includes('--login-only') || portal === 'chenghua'
+const devMode = args[0] === 'dev' || args.includes('--dev')
+if (devMode && portal === 'chenghua') throw new Error('门户联调目前只支持石景山；成华命令只负责门户登录')
 
 const findProject = () => {
   const explicit = readArg('--project')
@@ -29,29 +43,47 @@ const findProject = () => {
   throw new Error('未找到前端项目，请先进入项目目录，或使用 --project <路径> 指定')
 }
 
-const projectDir = findProject()
-if (!existsSync(resolve(projectDir, 'package.json')))
+const projectDir = devMode ? findProject() : undefined
+if (projectDir && !existsSync(resolve(projectDir, 'package.json')))
   throw new Error(`目标项目不存在或缺少 package.json：${projectDir}`)
-const portalProfile = readPortalConfig().profiles[portal] || {}
-
-const configs = {
-  sjs: {
-    loginUrl: 'http://115.190.54.111:1880/passport/login/userLogin',
-    username: portalProfile.username,
-    password: portalProfile.password,
-  },
-  chenghua: {
-    loginUrl: 'https://www.chenghua-ai.com/passport/login/userLogin',
-    username: portalProfile.username,
-    password: portalProfile.password,
-  },
-}
-const config = configs[portal]
-if (!config.username || !config.password) {
+const configuredAccounts = readPortalConfig().profiles[portal]
+const portalAccounts = Array.isArray(configuredAccounts)
+  ? configuredAccounts.filter(
+      (account) => account?.name && typeof account.username === 'string' && typeof account.password === 'string',
+    )
+  : []
+if (!portalAccounts.length) {
   throw new Error(
     `尚未配置${portal === 'chenghua' ? '成华' : '石景山'}门户账号，请先运行 portal-dev config --portal ${portal}`,
   )
 }
+
+const selectAccount = () => {
+  const accountName = readPositionalAccount()
+  if (accountName) {
+    const matched = portalAccounts.find((account) => account.name === accountName)
+    if (!matched) throw new Error(`未找到账号“${accountName}”，请检查账号名称或重新配置`)
+    return matched
+  }
+  return portalAccounts[0]
+}
+
+const portalAccount = selectAccount()
+
+const configs = {
+  sjs: {
+    loginUrl: 'http://115.190.54.111:1880/passport/login/userLogin',
+    username: portalAccount.username,
+    password: portalAccount.password,
+  },
+  chenghua: {
+    loginUrl: 'https://www.chenghua-ai.com/passport/login/userLogin',
+    username: portalAccount.username,
+    password: portalAccount.password,
+  },
+}
+const config = configs[portal]
+if (!config.username || !config.password) throw new Error(`账号“${portalAccount.name}”的配置不完整，请重新配置`)
 
 const localOrigin = 'http://localhost:5173'
 const iframeHost = 'hia.sjsdoubao.com:31118'
@@ -82,7 +114,7 @@ const isReady = async () => {
 }
 
 let devServer
-if (!loginOnly && !(await isReady())) {
+if (devMode && !(await isReady())) {
   const packageJson = JSON.parse(readFileSync(resolve(projectDir, 'package.json'), 'utf8'))
   if (!packageJson.scripts?.dev) throw new Error(`目标项目没有 dev script：${projectDir}`)
   const runner = existsSync(resolve(projectDir, 'bun.lock'))
@@ -185,9 +217,10 @@ const login = async () => {
 }
 
 if (page.url().includes('/passport/login/') || portal === 'chenghua') await login()
-if (loginOnly) {
-  await page.goto('https://www.chenghua-ai.com/chat/pages/application', { waitUntil: 'domcontentloaded' })
-  console.log('成华门户登录已完成，按 Ctrl+C 结束。')
+if (!devMode) {
+  if (portal === 'chenghua')
+    await page.goto('https://www.chenghua-ai.com/chat/pages/application', { waitUntil: 'domcontentloaded' })
+  console.log(`${portal === 'chenghua' ? '成华' : '石景山'}门户登录已完成，按 Ctrl+C 结束。`)
   await new Promise(() => undefined)
 }
 

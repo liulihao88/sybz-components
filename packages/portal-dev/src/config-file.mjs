@@ -10,7 +10,7 @@ export const getPortalConfigPath = () => {
 
 export const readPortalConfig = () => {
   const configPath = getPortalConfigPath()
-  if (!existsSync(configPath)) return { version: 1, profiles: {} }
+  if (!existsSync(configPath)) return { version: 2, profiles: {} }
   try {
     const config = JSON.parse(readFileSync(configPath, 'utf8'))
     if (!config || typeof config !== 'object' || Array.isArray(config)) throw new Error('根节点必须是对象')
@@ -20,13 +20,22 @@ export const readPortalConfig = () => {
   }
 }
 
-export const writePortalProfile = (portal, profile) => {
+export const writePortalAccount = (portal, account) => {
   const configPath = getPortalConfigPath()
   const config = readPortalConfig()
+  const normalizedProfiles = {
+    sjs: Array.isArray(config.profiles.sjs) ? config.profiles.sjs : [],
+    chenghua: Array.isArray(config.profiles.chenghua) ? config.profiles.chenghua : [],
+  }
+  const accounts = normalizedProfiles[portal]
+  const accountIndex = accounts.findIndex((item) => item.name === account.name)
+  const nextAccounts = [...accounts]
+  if (accountIndex >= 0) nextAccounts[accountIndex] = account
+  else nextAccounts.push(account)
   const nextConfig = {
     ...config,
-    version: 1,
-    profiles: { ...config.profiles, [portal]: profile },
+    version: 2,
+    profiles: { ...normalizedProfiles, [portal]: nextAccounts },
   }
   mkdirSync(dirname(configPath), { recursive: true, mode: 0o700 })
   writeFileSync(configPath, `${JSON.stringify(nextConfig, null, 2)}\n`, { mode: 0o600 })
@@ -35,5 +44,5 @@ export const writePortalProfile = (portal, profile) => {
   } catch {
     // Windows 等不支持 POSIX 权限的环境由系统用户目录权限保护。
   }
-  return configPath
+  return { configPath, accountCount: nextAccounts.length }
 }
