@@ -311,8 +311,8 @@ const handleMouseEnter = (tabVal: string) => {
     border-radius: inherit;
     background: var(--s-tabs-capsule-active-bg);
     box-shadow:
-      0 4px 14px var(--s-tabs-capsule-active-shadow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      0 2px 14px var(--s-tabs-capsule-active-shadow),
+      inset 0 0px 0 rgba(255, 255, 255, 0.72);
     content: '';
   }
 
@@ -404,15 +404,13 @@ const handleMouseEnter = (tabVal: string) => {
     transition:
       background-color 0.2s,
       color 0.2s,
-      box-shadow 0.2s,
-      transform 0.2s;
+      box-shadow 0.2s;
   }
 
   :deep(.el-tabs__item:not(.is-active):hover) {
     background: var(--s-tabs-capsule-hover-bg);
     box-shadow: inset 0 0 0 1px rgba(16, 24, 40, 0.035);
     color: var(--s-tabs-capsule-hover-color);
-    transform: translateY(-1px);
   }
 
   :deep(.el-tabs__item.is-active) {
