@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-在业务项目的 `vite.config.ts` 中注册插件。默认读取当前项目最近 `20` 条提交，并注册全局方法 `b()`；在浏览器控制台调用 `b()` 时，默认按最新到最旧打印最近 `10` 条。
+在业务项目的 `vite.config.ts` 中注册插件。默认读取当前项目最近 `20` 条提交，页面打开后自动展开并打印最近 `10` 条，同时注册全局方法 `b()` 供再次查看。
 
 ```ts
 import { defineConfig } from 'vite'
@@ -17,7 +17,13 @@ export default defineConfig({
 })
 ```
 
-页面打开后，在浏览器控制台调用：
+页面打开后会自动显示包含构建时间、短哈希、作者和最新提交说明的摘要，例如：
+
+```text
+[build git info] · 2026/8/24 10:30:00 · a1b2c3d · 张三 · feat: 新增图片预览
+```
+
+即使控制台分组处于收起状态，也能直接看到最新提交。需要再次查看或改变条数时调用：
 
 ```ts
 b() // 打印默认 10 条
@@ -26,20 +32,22 @@ b(3) // 打印最近 3 条
 
 ### 自动打印
 
-`autoPrint` 默认值为 `false`。设置为 `true` 时，页面打开后直接打印默认条数；传入正整数时，页面打开后直接打印指定条数。
+`autoPrint` 默认值为 `true`。传入正整数时，页面打开后直接打印指定条数；不希望自动打印时设置为 `false`。
 
 ```ts
 plugins: [gitCommitLog({ autoPrint: true })]
 
 plugins: [gitCommitLog({ autoPrint: 5 })]
+
+plugins: [gitCommitLog({ autoPrint: false })]
 ```
 
 ### 默认展开
 
-控制台分组默认处于收起状态。需要打印后直接展开时，设置 `expanded: true`。
+控制台分组默认展开。希望只显示包含最新提交的摘要、点击后再查看详情时，设置 `expanded: false`。
 
 ```ts
-plugins: [gitCommitLog({ expanded: true })]
+plugins: [gitCommitLog({ expanded: false })]
 ```
 
 ### 配置项
@@ -49,8 +57,8 @@ plugins: [gitCommitLog({ expanded: true })]
 | `cwd`          | `string`            | 有效的 Git 目录     | Vite 项目根目录 | 指定读取提交记录的项目目录。             |
 | `maxCommits`   | `number`            | 正整数              | `20`            | 构建时最多注入到页面的提交数量。         |
 | `defaultLimit` | `number`            | 正整数              | `10`            | 调用 `b()` 且不传参数时的默认打印数量。  |
-| `autoPrint`    | `boolean \| number` | `false/true/正整数` | `false`         | 是否在页面加载后自动打印，以及打印条数。 |
-| `expanded`     | `boolean`           | `false/true`        | `false`         | 控制台分组打印后是否默认展开。           |
+| `autoPrint`    | `boolean \| number` | `false/true/正整数` | `true`          | 是否在页面加载后自动打印，以及打印条数。 |
+| `expanded`     | `boolean`           | `false/true`        | `true`          | 控制台分组打印后是否默认展开。           |
 
 ### 返回值与全局数据
 

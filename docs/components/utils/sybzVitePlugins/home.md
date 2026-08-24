@@ -2,7 +2,7 @@
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code="...sybzVitePlugins()" />
+<DocBasicUsage code="sybzVitePlugins()" />
 
 ### 基础用法
 
@@ -14,9 +14,13 @@ import vue from '@vitejs/plugin-vue'
 import { sybzVitePlugins } from '@sybz-components/utils/vite'
 
 export default defineConfig({
-  plugins: [vue(), ...sybzVitePlugins()],
+  plugins: [vue(), sybzVitePlugins()],
 })
 ```
+
+`sybzVitePlugins()` 内部包含多个插件。Vite 的 `PluginOption` 原生支持插件数组并会自动扁平化，因此直接放入 `plugins`，无需使用展开运算符。
+
+`...sybzVitePlugins()` 已废弃且不再提供类型兼容，请统一迁移为 `sybzVitePlugins()`。
 
 ### 配置项
 
@@ -46,20 +50,20 @@ const globalBuildTime = window.__SYBZ_BUILD_TIME__
 不需要打包时间时可关闭：
 
 ```ts
-plugins: [...sybzVitePlugins({ buildTime: false })]
+plugins: [sybzVitePlugins({ buildTime: false })]
 ```
 
 ### 自定义配置
 
 ```ts
 plugins: [
-  ...sybzVitePlugins({
+  sybzVitePlugins({
     codeInspector: {
       needEnvInspector: true,
     },
     gitCommitLog: {
       autoPrint: true,
-      expanded: false,
+      expanded: true,
       defaultLimit: 10,
     },
     buildTime: {
@@ -73,10 +77,10 @@ plugins: [
 
 ```ts
 // 只启用代码定位
-plugins: [...sybzVitePlugins({ gitCommitLog: false })]
+plugins: [sybzVitePlugins({ gitCommitLog: false })]
 
 // 只启用 Git 提交信息
-plugins: [...sybzVitePlugins({ codeInspector: false })]
+plugins: [sybzVitePlugins({ codeInspector: false })]
 ```
 
 :::utils-source sybzVitePlugins

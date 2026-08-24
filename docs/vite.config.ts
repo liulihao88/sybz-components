@@ -28,7 +28,7 @@ export default defineConfig({
       defaultImport: 'url', // 将SVG作为URL导入
     }),
     vueJsx(),
-    ...sybzVitePlugins({ gitCommitLog: false }),
+    sybzVitePlugins(),
     terser({
       compress: {
         drop_console: false, // 保留 console，方便线上排查偶发路由问题

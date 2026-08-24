@@ -116,7 +116,7 @@ export default defineConfig({
       include: [/\.vue$/],
     }),
     vueJsx(),
-    ...sybzVitePlugins({ gitCommitLog: false }),
+    sybzVitePlugins(),
     customVitePluginFilePath(),
     createSvgIconsPlugin({
       iconDirs: [resolve(__dirname, './packages/assets/svg')],

@@ -38,9 +38,9 @@ export interface GitCommitLogOptions {
   maxCommits?: number
   /** 调用 b() 时默认展示的提交数量，默认 10。 */
   defaultLimit?: number
-  /** 页面加载后自动打印；传数字时同时指定打印条数，默认 false。 */
+  /** 页面加载后自动打印；传数字时同时指定打印条数，默认 true。 */
   autoPrint?: boolean | number
-  /** 打印后是否默认展开控制台分组，默认 false。 */
+  /** 打印后是否默认展开控制台分组，默认 true。 */
   expanded?: boolean
 }
 
@@ -164,7 +164,14 @@ const createClientCode = (
   window.b = (limit = ${defaultLimit}) => {
     const commits = info.commits.slice(0, normalizeLimit(limit));
     const latestCommit = commits[0] || info.commits[0] || {};
-    console.${expanded ? 'group' : 'groupCollapsed'}('[build git info]');
+    const summary = [
+      '[build git info]',
+      formatDateTime(info.buildTime) || '-',
+      latestCommit.shortHash || '-',
+      latestCommit.authorName || '-',
+      latestCommit.message || '-',
+    ].join(' · ');
+    console.${expanded ? 'group' : 'groupCollapsed'}(summary);
     console.table({
       authorName: latestCommit.authorName || '-',
       buildTime: formatDateTime(info.buildTime),
@@ -193,7 +200,7 @@ const createClientCode = (
 })();`
 
 /**
- * 为 Vite 项目注册 Git 提交记录调试工具。页面加载后可在控制台调用 `b()` 查看。
+ * 为 Vite 项目注册 Git 提交记录调试工具。页面加载后默认打印，也可调用 `b()` 再次查看。
  */
 export const gitCommitLog = (options: GitCommitLogOptions = {}): Plugin => {
   const maxCommits = normalizePositiveInteger(options.maxCommits, 20)
@@ -215,7 +222,7 @@ export const gitCommitLog = (options: GitCommitLogOptions = {}): Plugin => {
         return [
           {
             tag: 'script',
-            children: createClientCode(info, defaultLimit, options.autoPrint ?? false, options.expanded ?? false),
+            children: createClientCode(info, defaultLimit, options.autoPrint ?? true, options.expanded ?? true),
             injectTo: 'head-prepend',
           },
         ]
