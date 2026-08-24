@@ -94,6 +94,7 @@
     "types:check": "node ./scripts/generate-component-types.mjs --check",
     "skills:install": "node ./scripts/install-sybz-skill.mjs",
     "portal:skill:install": "pnpm --dir packages/portal-dev skill:install",
+    "utils:release": "pnpm run -C packages/utils release",
     "portal:release": "pnpm --dir packages/portal-dev release",
     "release:check": "pnpm types:check && pnpm typecheck && pnpm typecheck:sfc && pnpm exec tsc --noEmit -p packages/utils/tsconfig.json && pnpm build:bundle && pnpm run -C packages/utils build",
     "prepublishOnly": "pnpm release:check",
@@ -102,7 +103,6 @@
     "deploy": "bash -x deploy.sh",
     "release-deploy": "pnpm release && npm run deploy -- --skip_build",
     "update": " pnpm add @sybz-components/utils@latest",
-    "utils:release": "pnpm run -C packages/utils release",
     "link:bun": "bun link && bun link --cwd packages/utils",
     "link:pnpm": "pnpm link -g && pnpm -C packages/utils link -g",
     "unlink:bun": "bun unlink && bun unlink --cwd packages/utils"
