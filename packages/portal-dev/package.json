@@ -10,8 +10,7 @@
     "bin",
     "src",
     "skills",
-    "README.md",
-    ".env.portal.example"
+    "README.md"
   ],
   "engines": {
     "node": ">=18"
@@ -22,7 +21,7 @@
   },
   "scripts": {
     "skill:install": "node ./bin/portal-dev.mjs skill install",
-    "check": "node --check bin/portal-dev.mjs && node --check src/portal-dev.mjs && node --check src/recognize-captcha.mjs",
+    "check": "node --check bin/portal-dev.mjs && node --check src/config-file.mjs && node --check src/configure.mjs && node --check src/portal-dev.mjs && node --check src/recognize-captcha.mjs",
     "release": "pnpm check && npm version patch && npm publish"
   },
   "dependencies": {

@@ -9,6 +9,12 @@ description: 启动前端项目的石景山门户本地联调，或自动登录�
 
 ## 执行
 
+缺少账号配置时先执行：
+
+```bash
+portal-dev config --portal sjs
+```
+
 石景山门户联调：
 
 ```bash
@@ -25,10 +31,4 @@ portal-dev --portal chenghua --project <project-directory>
 
 ## 配置
 
-从目标项目 `.env.local`、`.env` 或进程环境变量读取：
-
-- 石景山：`SJS_PORTAL_USERNAME`、`SJS_PORTAL_PASSWORD`。
-- 成华：`CHENGHUA_PORTAL_USERNAME`、`CHENGHUA_PORTAL_PASSWORD`。
-- 可选：`SJS_PORTAL_LOGIN_URL`、`CHENGHUA_PORTAL_LOGIN_URL`、`PORTAL_LOCAL_ORIGIN`、`PORTAL_IFRAME_HOST`、`PORTAL_IFRAME_PATH`、`PORTAL_ROOM_NAME`、`CHROME_PATH`。
-
-缺少凭据时，指出需要配置的变量名，不索要或展示具体密码。
+账号密码只从当前用户的专属配置文件读取，`portal-dev config` 会交互式创建该文件。缺少凭据时，引导用户在本机终端运行 `portal-dev config`，不索要或展示具体密码。

@@ -21,24 +21,37 @@ if (args[0] === 'skill' && args[1] === 'install') {
   process.exit(0)
 }
 
-if (args.includes('--help') || args.includes('-h')) {
+if (args[0] === 'config') {
+  const child = spawn(process.execPath, [resolve(packageDir, 'src/configure.mjs'), ...args.slice(1)], {
+    cwd: process.cwd(),
+    env: process.env,
+    stdio: 'inherit',
+  })
+  child.on('error', (error) => {
+    throw error
+  })
+  child.on('exit', (code, signal) => (signal ? process.kill(process.pid, signal) : process.exit(code ?? 0)))
+} else if (args.includes('--help') || args.includes('-h')) {
   console.log(`用法：
+  portal-dev
+  portal-dev config [--portal sjs|chenghua]
   portal-dev --portal sjs [--project <目录>]
   portal-dev --portal chenghua [--project <目录>]
   portal-dev skill install [Codex skills 目录]
 
-默认门户为 sjs，默认项目目录为当前目录。凭据从项目 .env.local、.env 或进程环境变量读取。`)
+首次使用只需运行一次 portal-dev config。
+之后在项目目录运行 portal-dev 即可，默认使用石景山门户。`)
   process.exit(0)
+} else {
+  const child = spawn(process.execPath, [resolve(packageDir, 'src/portal-dev.mjs'), ...args], {
+    cwd: process.cwd(),
+    env: process.env,
+    stdio: 'inherit',
+  })
+
+  for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => child.kill(signal))
+  child.on('error', (error) => {
+    throw error
+  })
+  child.on('exit', (code, signal) => (signal ? process.kill(process.pid, signal) : process.exit(code ?? 0)))
 }
-
-const child = spawn(process.execPath, [resolve(packageDir, 'src/portal-dev.mjs'), ...args], {
-  cwd: process.cwd(),
-  env: process.env,
-  stdio: 'inherit',
-})
-
-for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => child.kill(signal))
-child.on('error', (error) => {
-  throw error
-})
-child.on('exit', (code, signal) => (signal ? process.kill(process.pid, signal) : process.exit(code ?? 0)))

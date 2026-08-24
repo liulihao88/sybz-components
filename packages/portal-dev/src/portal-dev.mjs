@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { spawn } from 'node:child_process'
 import { dirname, resolve } from 'node:path'
 import { chromium } from 'playwright-core'
+import { readPortalConfig } from './config-file.mjs'
 import { recognizeCaptcha } from './recognize-captcha.mjs'
 
 const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds))
@@ -11,12 +12,12 @@ const readArg = (name) => {
   return index >= 0 ? args[index + 1] : undefined
 }
 
-const portal = readArg('--portal') || process.env.PORTAL_PROFILE || 'sjs'
+const portal = readArg('--portal') || 'sjs'
 if (!['sjs', 'chenghua'].includes(portal)) throw new Error(`不支持的门户：${portal}，可选值为 sjs、chenghua`)
 const loginOnly = args.includes('--login-only') || portal === 'chenghua'
 
 const findProject = () => {
-  const explicit = readArg('--project') || process.env.PORTAL_PROJECT_DIR
+  const explicit = readArg('--project')
   if (explicit) return resolve(explicit)
   let current = process.cwd()
   while (true) {
@@ -25,52 +26,37 @@ const findProject = () => {
     if (parent === current) break
     current = parent
   }
-  throw new Error('未找到前端项目，请使用 --project <路径> 或 PORTAL_PROJECT_DIR 指定')
-}
-
-const loadEnvFile = (path) => {
-  if (!existsSync(path)) return
-  for (const line of readFileSync(path, 'utf8').split(/\r?\n/)) {
-    const match = line.match(/^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/)
-    if (!match || process.env[match[1]] !== undefined) continue
-    let value = match[2]
-    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'")))
-      value = value.slice(1, -1)
-    process.env[match[1]] = value
-  }
+  throw new Error('未找到前端项目，请先进入项目目录，或使用 --project <路径> 指定')
 }
 
 const projectDir = findProject()
 if (!existsSync(resolve(projectDir, 'package.json')))
   throw new Error(`目标项目不存在或缺少 package.json：${projectDir}`)
-loadEnvFile(resolve(projectDir, '.env.local'))
-loadEnvFile(resolve(projectDir, '.env'))
+const portalProfile = readPortalConfig().profiles[portal] || {}
 
 const configs = {
   sjs: {
-    loginUrl:
-      process.env.SJS_PORTAL_LOGIN_URL ||
-      process.env.PORTAL_LOGIN_URL ||
-      'http://115.190.54.111:1880/passport/login/userLogin',
-    username: process.env.SJS_PORTAL_USERNAME || process.env.PORTAL_USERNAME,
-    password: process.env.SJS_PORTAL_PASSWORD || process.env.PORTAL_PASSWORD,
+    loginUrl: 'http://115.190.54.111:1880/passport/login/userLogin',
+    username: portalProfile.username,
+    password: portalProfile.password,
   },
   chenghua: {
-    loginUrl: process.env.CHENGHUA_PORTAL_LOGIN_URL || 'https://www.chenghua-ai.com/passport/login/userLogin',
-    username: process.env.CHENGHUA_PORTAL_USERNAME,
-    password: process.env.CHENGHUA_PORTAL_PASSWORD,
+    loginUrl: 'https://www.chenghua-ai.com/passport/login/userLogin',
+    username: portalProfile.username,
+    password: portalProfile.password,
   },
 }
 const config = configs[portal]
 if (!config.username || !config.password) {
-  const prefix = portal === 'chenghua' ? 'CHENGHUA_PORTAL' : 'SJS_PORTAL'
-  throw new Error(`缺少 ${prefix}_USERNAME 或 ${prefix}_PASSWORD，请在目标项目 .env.local 或环境变量中配置`)
+  throw new Error(
+    `尚未配置${portal === 'chenghua' ? '成华' : '石景山'}门户账号，请先运行 portal-dev config --portal ${portal}`,
+  )
 }
 
-const localOrigin = (process.env.PORTAL_LOCAL_ORIGIN || 'http://localhost:5173').replace(/\/$/, '')
-const iframeHost = process.env.PORTAL_IFRAME_HOST || 'hia.sjsdoubao.com:31118'
-const iframePath = process.env.PORTAL_IFRAME_PATH || '/exhibition-hall'
-const roomName = process.env.PORTAL_ROOM_NAME || '3D智能展厅智能体'
+const localOrigin = 'http://localhost:5173'
+const iframeHost = 'hia.sjsdoubao.com:31118'
+const iframePath = '/exhibition-hall'
+const roomName = '3D智能展厅智能体'
 const chromeCandidates = {
   darwin: [
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
@@ -83,8 +69,8 @@ const chromeCandidates = {
   ],
   linux: ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'],
 }
-const executablePath = process.env.CHROME_PATH || chromeCandidates[process.platform]?.find(existsSync)
-if (!executablePath) throw new Error('未找到 Chrome/Edge，请安装浏览器或配置 CHROME_PATH')
+const executablePath = chromeCandidates[process.platform]?.find(existsSync)
+if (!executablePath) throw new Error('未找到 Chrome 或 Edge，请先安装浏览器')
 
 const localUrl = new URL(localOrigin)
 const isReady = async () => {
@@ -200,9 +186,7 @@ const login = async () => {
 
 if (page.url().includes('/passport/login/') || portal === 'chenghua') await login()
 if (loginOnly) {
-  const destination =
-    process.env.CHENGHUA_PORTAL_AFTER_LOGIN_URL || 'https://www.chenghua-ai.com/chat/pages/application'
-  await page.goto(destination, { waitUntil: 'domcontentloaded' })
+  await page.goto('https://www.chenghua-ai.com/chat/pages/application', { waitUntil: 'domcontentloaded' })
   console.log('成华门户登录已完成，按 Ctrl+C 结束。')
   await new Promise(() => undefined)
 }
@@ -221,7 +205,7 @@ for (let index = 0; index < 180; index += 1) {
       )
         targetUrl = candidate
     } catch {
-      return {}
+      continue
     }
   }
   if (targetUrl) break
