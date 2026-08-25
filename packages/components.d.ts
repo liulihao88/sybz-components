@@ -104,10 +104,14 @@ declare module 'vue' {
     's-comp-title': (typeof import('./types/components/compTitle'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/datePicker/home.html
+     *
+     * s-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
      */
     SDatePicker: (typeof import('./types/components/datePicker'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/datePicker/home.html
+     *
+     * s-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
      */
     's-date-picker': (typeof import('./types/components/datePicker'))['default']
     /**

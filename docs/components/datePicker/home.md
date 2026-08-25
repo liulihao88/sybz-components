@@ -100,6 +100,12 @@ datePicker/controlled
 datePicker/limitRange
 :::
 
+### 仅选择未来日期
+
+:::demo 开启后仅可选择当前日期或时刻以后的值，并默认提供明天、后天、一周后、一个月后快捷项。基础写法：`<s-date-picker v-model="dateValue" future-only></s-date-picker>`。属性：`futureOnly` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`datetime` 类型会同时禁用今天已经过去的时、分、秒；显式传入 `shortcuts` 会覆盖未来快捷项，传 `false` 可关闭快捷项。
+datePicker/futureOnly
+:::
+
 ### 属性
 
 |       属性名        | 说明                                                         | 类型                           | 可选值                                                                                                                                      | 默认值             |
@@ -109,6 +115,7 @@ datePicker/limitRange
 |       `title`       | 左侧标题文案                                                 | string                         | -                                                                                                                                           | `''`               |
 |       `width`       | 组件整体宽度                                                 | string / number                | -                                                                                                                                           | `300px`            |
 |      `height`       | 组件整体高度                                                 | string / number                | -                                                                                                                                           | `''`               |
+|    `futureOnly`     | 仅允许选择当前日期、时刻或周期之后的值，并启用未来快捷项     | boolean                        | `true` / `false`                                                                                                                            | `false`            |
 |  `compTitleStyle`   | 左侧标题组件样式                                             | object                         | -                                                                                                                                           | `{}`               |
 |       `theme`       | 主题样式                                                     | string                         | `default` / `chenghua` / `shijingshan`                                                                                                      | `default`          |
 |      `format`       | 显示在输入框中的格式                                         | string                         | -                                                                                                                                           | 按 `type` 自动设置 |
@@ -169,7 +176,8 @@ datePicker/limitRange
 - `month` / `months` / `monthrange` 默认 `format` 和 `value-format` 为 `YYYY-MM`。
 - 范围快捷项会按自然日边界计算，日期时间范围开始为 `00:00:00.000`，结束为 `23:59:59.999`。
 - 非范围选择内置快捷项：今天、昨天、7天前、30天前。
+- `futureOnly` 开启后，非范围选择快捷项为：明天、后天、一周后、一个月后；范围选择快捷项为：明天、后天、未来一周、未来一个月。
 - `daterange` / `datetimerange` 内置快捷项：今天、昨天、最近7天、最近30天、最近90天、最近1年、本周至今、本月至今、本季度至今、今年至今、上周、上月、上季度、去年。
 - `monthrange` 内置快捷项：本月、上月、最近3个月、最近6个月、最近12个月、今年至今、去年。
 - `yearrange` 内置快捷项：今年、去年、最近3年、最近5年、最近10年。
-- 组件继承 `el-date-picker` 的属性、事件、插槽，并额外支持 `title`、`width`、`height`、`theme`。
+- 组件继承 `el-date-picker` 的属性、事件、插槽，并额外支持 `title`、`width`、`height`、`futureOnly`、`theme`。

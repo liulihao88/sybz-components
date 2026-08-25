@@ -180,6 +180,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'datePicker',
       allowAnySlots: true,
+      description:
+        's-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。',
       hoverProps: componentHoverProps(
         'SDatePickerSelfProps',
         ['SDatePickerSelfProps', 'SybzComponentTheme', 'SybzRecord'],

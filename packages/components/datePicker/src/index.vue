@@ -14,6 +14,7 @@ interface DatePickerProps {
   title?: string
   width?: string | number
   height?: string | number
+  futureOnly?: boolean
   compTitleStyle?: Record<string, any>
   theme?: 'default' | 'chenghua' | 'shijingshan'
   size?: '' | 'large' | 'default' | 'small'
@@ -23,6 +24,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   title: '',
   width: '300px',
   height: '',
+  futureOnly: false,
   compTitleStyle: undefined,
   theme: 'default',
   size: '',
@@ -40,8 +42,21 @@ const addDays = (date: Date, amount: number) => {
   result.setDate(result.getDate() + amount)
   return result
 }
-const addMonths = (date: Date, amount: number) => new Date(date.getFullYear(), date.getMonth() + amount, date.getDate())
 const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate()
+const addMonths = (date: Date, amount: number) => {
+  const targetMonth = new Date(date.getFullYear(), date.getMonth() + amount, 1)
+  const day = Math.min(date.getDate(), getDaysInMonth(targetMonth.getFullYear(), targetMonth.getMonth()))
+
+  return new Date(
+    targetMonth.getFullYear(),
+    targetMonth.getMonth(),
+    day,
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
+    date.getMilliseconds(),
+  )
+}
 const addYears = (date: Date, amount: number) => {
   const year = date.getFullYear() + amount
   const month = date.getMonth()
@@ -230,6 +245,44 @@ const defaultSingleShortcuts = [
   },
 ]
 
+const futureSingleShortcuts = [
+  {
+    text: '明天',
+    value: () => addDays(new Date(), 1),
+  },
+  {
+    text: '后天',
+    value: () => addDays(new Date(), 2),
+  },
+  {
+    text: '一周后',
+    value: () => addDays(new Date(), 7),
+  },
+  {
+    text: '一个月后',
+    value: () => addMonths(new Date(), 1),
+  },
+]
+
+const futureRangeShortcuts = [
+  {
+    text: '明天',
+    value: () => getDayRange(addDays(new Date(), 1)),
+  },
+  {
+    text: '后天',
+    value: () => getDayRange(addDays(new Date(), 2)),
+  },
+  {
+    text: '未来一周',
+    value: () => [startOfDay(addDays(new Date(), 1)), endOfDay(addDays(new Date(), 7))],
+  },
+  {
+    text: '未来一个月',
+    value: () => [startOfDay(addDays(new Date(), 1)), endOfDay(addMonths(new Date(), 1))],
+  },
+]
+
 const shortcuts = computed(() => {
   if (Array.isArray(attrs.shortcuts)) {
     return attrs.shortcuts
@@ -239,8 +292,112 @@ const shortcuts = computed(() => {
     return undefined
   }
 
+  if (mergedProps.value.futureOnly) {
+    return isRangeType.value ? futureRangeShortcuts : futureSingleShortcuts
+  }
+
   return isRangeType.value ? defaultRangeShortcuts.value : defaultSingleShortcuts
 })
+
+const inheritedDisabledDate = computed(() => {
+  const disabledDate = attrs['disabled-date'] ?? attrs.disabledDate
+  return typeof disabledDate === 'function' ? (disabledDate as (date: Date) => boolean) : undefined
+})
+const isBeforeCurrentPeriod = (date: Date) => {
+  const now = new Date()
+
+  if (['year', 'years', 'yearrange'].includes(pickerType.value)) {
+    return date.getFullYear() < now.getFullYear()
+  }
+
+  if (['month', 'months', 'monthrange'].includes(pickerType.value)) {
+    return (
+      date.getFullYear() < now.getFullYear() ||
+      (date.getFullYear() === now.getFullYear() && date.getMonth() < now.getMonth())
+    )
+  }
+
+  return endOfDay(date).getTime() < now.getTime()
+}
+const disabledDate = computed<((date: Date) => boolean) | undefined>(() => {
+  if (!mergedProps.value.futureOnly) {
+    return inheritedDisabledDate.value
+  }
+
+  return (date: Date) => isBeforeCurrentPeriod(date) || Boolean(inheritedDisabledDate.value?.(date))
+})
+
+const parseDate = (value: unknown) => {
+  if (value instanceof Date) return new Date(value)
+  if (typeof value === 'number') return new Date(value)
+  if (typeof value !== 'string' || !value) return undefined
+
+  const normalizedValue = value.replace(/-/g, '/').replace('T', ' ')
+  const date = new Date(normalizedValue)
+  return Number.isNaN(date.getTime()) ? undefined : date
+}
+const getSelectedDate = (role = '') => {
+  const modelValue = attrs.modelValue
+  const value = Array.isArray(modelValue) ? modelValue[role === 'end' ? 1 : 0] : modelValue
+  const defaultValue = attrs['default-value'] ?? attrs.defaultValue
+  const fallbackValue = Array.isArray(defaultValue) ? defaultValue[role === 'end' ? 1 : 0] : defaultValue
+
+  return parseDate(value) ?? parseDate(fallbackValue) ?? new Date()
+}
+const isSameDay = (date: Date, target: Date) =>
+  date.getFullYear() === target.getFullYear() &&
+  date.getMonth() === target.getMonth() &&
+  date.getDate() === target.getDate()
+const mergeDisabledTime = (customValues: unknown, futureValues: number[]) =>
+  Array.from(
+    new Set([
+      ...(Array.isArray(customValues)
+        ? customValues.filter((value): value is number => typeof value === 'number')
+        : []),
+      ...futureValues,
+    ]),
+  ).sort((a, b) => a - b)
+const inheritedDisabledHours = attrs['disabled-hours'] ?? attrs.disabledHours
+const inheritedDisabledMinutes = attrs['disabled-minutes'] ?? attrs.disabledMinutes
+const inheritedDisabledSeconds = attrs['disabled-seconds'] ?? attrs.disabledSeconds
+const disabledHours = (role: string, comparingDate?: unknown) => {
+  const customValues =
+    typeof inheritedDisabledHours === 'function' ? inheritedDisabledHours(role, comparingDate) : undefined
+  if (!mergedProps.value.futureOnly) return customValues
+
+  const now = new Date()
+  const selectedDate = getSelectedDate(role)
+  const futureValues = isSameDay(selectedDate, now) ? Array.from({ length: now.getHours() }, (_, hour) => hour) : []
+  return mergeDisabledTime(customValues, futureValues)
+}
+const disabledMinutes = (hour: number, role: string, comparingDate?: unknown) => {
+  const customValues =
+    typeof inheritedDisabledMinutes === 'function' ? inheritedDisabledMinutes(hour, role, comparingDate) : undefined
+  if (!mergedProps.value.futureOnly) return customValues
+
+  const now = new Date()
+  const selectedDate = getSelectedDate(role)
+  const futureValues =
+    isSameDay(selectedDate, now) && hour === now.getHours()
+      ? Array.from({ length: now.getMinutes() }, (_, minute) => minute)
+      : []
+  return mergeDisabledTime(customValues, futureValues)
+}
+const disabledSeconds = (hour: number, minute: number, role: string, comparingDate?: unknown) => {
+  const customValues =
+    typeof inheritedDisabledSeconds === 'function'
+      ? inheritedDisabledSeconds(hour, minute, role, comparingDate)
+      : undefined
+  if (!mergedProps.value.futureOnly) return customValues
+
+  const now = new Date()
+  const selectedDate = getSelectedDate(role)
+  const futureValues =
+    isSameDay(selectedDate, now) && hour === now.getHours() && minute === now.getMinutes()
+      ? Array.from({ length: now.getSeconds() }, (_, second) => second)
+      : []
+  return mergeDisabledTime(customValues, futureValues)
+}
 
 const datePickerStyle = computed(() => {
   const style: Record<string, any> = {}
@@ -350,6 +507,14 @@ const mergedAttrs = computed(() => {
           'popper-class',
           'popperClass',
           'shortcuts',
+          'disabled-date',
+          'disabledDate',
+          'disabled-hours',
+          'disabledHours',
+          'disabled-minutes',
+          'disabledMinutes',
+          'disabled-seconds',
+          'disabledSeconds',
           'size',
         ].includes(key)
       ) {
@@ -361,6 +526,22 @@ const mergedAttrs = computed(() => {
 
   if (shortcuts.value) {
     merged.shortcuts = shortcuts.value
+  }
+
+  if (disabledDate.value) {
+    merged['disabled-date'] = disabledDate.value
+  }
+
+  if (mergedProps.value.futureOnly || typeof inheritedDisabledHours === 'function') {
+    merged['disabled-hours'] = disabledHours
+  }
+
+  if (mergedProps.value.futureOnly || typeof inheritedDisabledMinutes === 'function') {
+    merged['disabled-minutes'] = disabledMinutes
+  }
+
+  if (mergedProps.value.futureOnly || typeof inheritedDisabledSeconds === 'function') {
+    merged['disabled-seconds'] = disabledSeconds
   }
 
   if (datePickerPopperClass.value) {
