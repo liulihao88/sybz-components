@@ -75,6 +75,10 @@ const props = defineProps({
     type: [String, Number] as PropType<string | number>,
     default: '',
   },
+  height: {
+    type: [String, Number] as PropType<string | number>,
+    default: '',
+  },
   headerMargin: {
     type: [String, Number] as PropType<string | number>,
     default: undefined,
@@ -122,6 +126,7 @@ const boxClass = computed(() => [
     's-tabs-box--capsule': isCapsuleType.value,
     's-tabs-box--no-active': isCapsuleType.value && !hasActiveTab.value,
     's-tabs-box--has-width': Boolean(mergedProps.value.width),
+    's-tabs-box--has-height': Boolean(mergedProps.value.height),
     's-tabs-box--custom-header-margin': mergedProps.value.headerMargin !== undefined,
     's-tabs-box--chenghua': isChenghuaTheme.value,
     's-tabs-box--shijingshan': isShijingshanTheme.value,
@@ -130,6 +135,11 @@ const boxClass = computed(() => [
 ])
 const boxStyle = computed(() => ({
   ...(mergedProps.value.width ? { width: processWidth(mergedProps.value.width, true) } : {}),
+  ...(mergedProps.value.height
+    ? {
+        '--s-tabs-height': processWidth(mergedProps.value.height, true),
+      }
+    : {}),
   ...(mergedProps.value.headerMargin !== undefined
     ? {
         '--s-tabs-header-margin':
@@ -173,6 +183,22 @@ const handleMouseEnter = (tabVal: string) => {
     --s-tabs-font-size: 18px;
     --s-tabs-icon-size: 22px;
     --s-tabs-label-gap: 8px;
+  }
+
+  &.s-tabs-box--has-height {
+    --s-tabs-item-height: var(--s-tabs-height);
+  }
+
+  &.s-tabs-box--has-height:not(.s-tabs-box--capsule) {
+    height: var(--s-tabs-height);
+
+    :deep(.el-tabs),
+    :deep(.el-tabs__header),
+    :deep(.el-tabs__nav-wrap),
+    :deep(.el-tabs__nav-scroll),
+    :deep(.el-tabs__nav) {
+      height: 100%;
+    }
   }
 
   :deep(.el-tabs__item) {
@@ -250,6 +276,39 @@ const handleMouseEnter = (tabVal: string) => {
     --s-tabs-capsule-item-gap: 4px;
   }
 
+  &.s-tabs-box--has-height {
+    height: var(--s-tabs-height);
+
+    :deep(.el-tabs),
+    :deep(.el-tabs__header),
+    :deep(.el-tabs__nav-wrap),
+    :deep(.el-tabs__nav-scroll) {
+      height: 100%;
+    }
+
+    :deep(.el-tabs__nav) {
+      height: 100%;
+    }
+
+    :deep(.el-tabs__item),
+    :deep(.el-tabs__active-bar) {
+      height: 100% !important;
+      line-height: normal;
+    }
+
+    :deep(.el-tabs__nav-wrap) {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.78),
+        0 1px 4px rgba(17, 24, 39, 0.08);
+    }
+
+    :deep(.el-tabs__active-bar::before) {
+      box-shadow:
+        0 0 0 1px var(--s-tabs-capsule-active-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+  }
+
   :deep(.el-tabs) {
     display: inline-flex;
     flex-direction: column;
@@ -321,7 +380,7 @@ const handleMouseEnter = (tabVal: string) => {
   }
 
   :deep(.el-tabs__nav-scroll) {
-    display: block;
+    display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -334,6 +393,7 @@ const handleMouseEnter = (tabVal: string) => {
     align-items: center;
     gap: var(--s-tabs-capsule-item-gap);
     width: max-content;
+    height: var(--s-tabs-capsule-height);
     border: 0;
   }
 

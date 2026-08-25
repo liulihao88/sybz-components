@@ -709,6 +709,7 @@ export interface STabsSelfProps {
   theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
   width?: string | number
+  height?: string | number
   headerMargin?: string | number
 }
 

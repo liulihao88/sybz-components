@@ -92,6 +92,12 @@ tabs/addRemove
 tabs/location
 :::
 
+### 自定义高度
+
+:::demo 展示组件完整跟随父容器高度。基础写法：`<s-tabs height="100%" type="capsule" :options="navList"></s-tabs>`。属性：`height` 类型 `string / number`，默认值 `''`；数字按 px 处理，字符串支持 `100%` 等 CSS 高度。胶囊外框使用固定的 `4px` 内边距，上下左右始终一致，不随组件高度变化。
+tabs/height
+:::
+
 ### 属性
 
 |     属性名     | 说明                                                                        | 类型                                   | 默认值                             |
@@ -106,6 +112,7 @@ tabs/location
 |    `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan`                       | `default` / `chenghua` / `shijingshan` | `default`                          |
 |     `size`     | 尺寸，支持 `small` / `default` / `large`                                    | string                                 | `default`                          |
 |    `width`     | 组件宽度，数字按 px 处理                                                    | string / number                        | `''`                               |
+|    `height`    | 组件高度，数字按 px 处理，也支持 `100%` 等 CSS 高度                         | string / number                        | `''`                               |
 | `headerMargin` | 页签头部外边距，数字按 px 处理，也支持完整 CSS margin                       | string / number                        | `undefined`                        |
 
 ### 事件

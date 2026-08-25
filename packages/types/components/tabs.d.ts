@@ -5,7 +5,7 @@ import type { STabsSelfProps, SybzRecord } from '../component-props'
 type ElTabsInstance = InstanceType<typeof ElTabs>
 
 /**
- * s-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。
+ * s-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule 类型、主题、尺寸、宽高以及通过 headerMargin 自定义头部外边距。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Tabs 的公开属性。
  */
@@ -24,6 +24,7 @@ export type STabsComponent = {
       theme?: SybzComponentTheme
       size?: 'small' | 'default' | 'large'
       width?: string | number
+      height?: string | number
       headerMargin?: string | number
     } & Omit<
       ElTabsInstance['$props'],
@@ -37,6 +38,7 @@ export type STabsComponent = {
       | 'theme'
       | 'size'
       | 'width'
+      | 'height'
       | 'headerMargin'
     >
     $emit: ElTabsInstance['$emit']

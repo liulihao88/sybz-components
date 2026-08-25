@@ -584,7 +584,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'tabs',
       allowAnySlots: true,
       description:
-        's-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule 类型、主题、尺寸、宽度以及通过 headerMargin 自定义头部外边距。',
+        's-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule 类型、主题、尺寸、宽高以及通过 headerMargin 自定义头部外边距。',
       hoverProps: componentHoverProps(
         'STabsSelfProps',
         ['STabsSelfProps', 'SybzRecord'],
