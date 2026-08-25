@@ -404,7 +404,11 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'SItemProps',
       slots: ['prefix', 'img', 'title', 'subTitle', 'extra', 'actions', 'default'],
       hoverProps: componentHoverProps('SItemProps', [
+        'SItemAlign',
+        'SItemExtraPlacement',
         'SItemProps',
+        'SItemStyleKey',
+        'SItemStyles',
         'SybzComponentSize',
         'SybzComponentTheme',
         'SybzRecord',

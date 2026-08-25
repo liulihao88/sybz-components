@@ -3,33 +3,37 @@ import { $toast } from '@sybz-components/utils'
 </script>
 
 <template>
-  <div>
-    <SItem title="发起对话" sub-title="与数字员工直接交流" extra="立即进入" clickable>
+  <div class="item-demo-list">
+    <SItem title="发起对话" sub-title="与数字员工直接交流" extra="立即进入" clickable border>
       <template #prefix>💬</template>
     </SItem>
-    <hr />
-    <SItem
-      title="超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title超长title"
-      sub-title="超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title超长sub-title"
-      extra="立即进入"
-      clickable
-      @click="$toast('123')"
-    >
-      <template #prefix>💬</template>
-    </SItem>
-    <s-title title="插槽用法" tb="8"></s-title>
-    <SItem class="abc">
+
+    <SItem title="插槽用法" sub-title="标题、前缀、右侧操作和正文均可替换" border>
       <template #img>
-        <img src="https://img.yzcdn.cn/vant/logo.png" class="w-20" />
+        <span class="avatar">AI</span>
       </template>
-      <template #title>
-        title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽title插槽
+      <template #actions>
+        <el-button text type="primary" @click.stop="$toast('已打开')">打开</el-button>
       </template>
-      <template #subTitle>
-        sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽sub-title插槽
-      </template>
+      最近更新：今天 10:30
     </SItem>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.item-demo-list {
+  display: grid;
+  gap: 12px;
+  max-width: 680px;
+}
+
+.avatar {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  background: #409eff;
+  border-radius: 50%;
+  place-items: center;
+}
+</style>
