@@ -37,7 +37,7 @@ app.use(SybzComponents)
 - 优先使用 `sybz-components` 已有组件，不把能力拆回 Element Plus 子组件。
 - 优先使用 `@sybz-components/utils` 已有函数，不重复手写通用逻辑。
 - 组件库已有默认属性不重复声明，例如默认宽度、默认空态、默认分页配置、默认样式、默认大小、默认clearable。
-- 代码尽量短，能靠组件配置完成的，不额外写复杂类型、泛型、包装函数或中间变量。
+- 代码尽量短，能靠组件配置完成的，不额外写复杂类型、泛型、包装函数或中间变量。 有默认属性和方法的不要重复写
 - 替换后的样式以组件库用法为准；只有业务明确要求时才保持旧页面像素级样式。
 - 主题 UI 要使用组件的 `theme` 属性和主题 token，避免在业务页面零散硬编码主题色。
 
@@ -55,4 +55,3 @@ rg "el-table|el-select|el-form|el-descriptions|ElMessage|ElMessageBox|lodash|clo
 2. 替换或新增了哪些 `@sybz-components/utils` 函数。
 3. 应用了哪个主题规范。
 4. 删除了哪些多余代码。
-5. 已运行或未运行的校验命令。

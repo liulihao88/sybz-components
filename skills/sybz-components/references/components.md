@@ -110,7 +110,7 @@ const isShow = ref(false)
 ### s-empty
 
 ```vue
-<s-empty />
+<s-empty title="暂无数据" />
 ```
 
 ### s-input
@@ -121,7 +121,7 @@ const name = ref('')
 </script>
 
 <template>
-  <s-input v-model="name" width="300" placeholder="请输入名称" />
+  <s-input v-model="name" width="300" />
 </template>
 ```
 
@@ -388,5 +388,3 @@ const pageChange = ({ pageNumber, pageSize }) => {
   <s-table :data="tableData" :columns="columns" :total="total" @page-change="pageChange" />
 </template>
 ```
-
-简单表格不要额外写 `showPage`、`pageSize`、`width="100%"` 这类默认或非必要属性。
