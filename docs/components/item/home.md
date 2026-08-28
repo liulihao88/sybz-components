@@ -16,7 +16,7 @@ item/base
 
 ### 背景、边框与分割线
 
-:::demo 外观可直接通过属性控制，也可继续使用原生 `class / style`。基础写法：`<SItem background="#f3f8ff" border="1px solid #a8cbff" border-radius="14" />`。属性：`background / hoverBackground` 类型 `string`，默认值 `''`；`border` 类型 `boolean / string`，可选值 `true / false / CSS border`，默认值 `true`；`borderRadius` 类型 `string / number`，默认值 `''`；`divider` 类型 `boolean`，可选值 `true / false`，默认值 `false`。
+:::demo 外观可直接通过属性控制，也可继续使用原生 `class / style`。`background` 和 `hoverBackground` 接收完整的 CSS `background`，支持纯色、`linear-gradient()`、`radial-gradient()` 等背景。基础写法：`<SItem background="linear-gradient(135deg, #eaf4ff, #f3edff)" />`。属性：`background / hoverBackground` 类型 `string`，默认值 `''`；`border` 类型 `boolean / string`，可选值 `true / false / CSS border`，默认值 `true`；`borderRadius` 类型 `string / number`，默认值 `''`；`divider` 类型 `boolean`，可选值 `true / false`，默认值 `false`。
 item/appearance
 :::
 
@@ -65,8 +65,8 @@ item/shijingshan
 | `gap`             | 前缀、主内容及标题右侧区域之间的间距                     | string / number  | -                                    | `12`        |
 | `contentGap`      | 标题、副标题、正文及操作项之间的间距                     | string / number  | -                                    | `4`         |
 | `align`           | 前缀与主内容在交叉轴上的对齐方式                         | string           | `start / center / end / stretch`     | `center`    |
-| `background`      | 根节点背景色                                             | string           | CSS 颜色                             | `''`        |
-| `hoverBackground` | 可点击状态的悬停背景色；未设置时沿用 `background`        | string           | CSS 颜色                             | `''`        |
+| `background`      | 根节点 CSS 背景，支持纯色、线性渐变和径向渐变            | string           | 合法 CSS `background`                | `''`        |
+| `hoverBackground` | 可点击状态的悬停背景；未设置时沿用 `background`          | string           | 合法 CSS `background`                | `''`        |
 | `border`          | 显示默认边框或传入完整 CSS border；传 `false` 可关闭边框 | boolean / string | `true / false / CSS border`          | `true`      |
 | `borderRadius`    | 圆角，数字按 px 处理                                     | string / number  | -                                    | `''`        |
 | `divider`         | 是否显示底部分割线                                       | boolean          | `true / false`                       | `false`     |

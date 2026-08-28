@@ -147,12 +147,13 @@ const count = ref(1)
 
 ### s-item
 
-`s-item` 默认显示边框，不需要额外添加 border class；无边框场景显式传 `:border="false"`。
+`s-item` 默认显示边框，不需要额外添加 border class；无边框场景显式传 `:border="false"`。`background` 接收完整的 CSS 背景值，支持纯色和渐变。
 
 ```vue
 <s-item title="事项标题" sub-title="事项说明" />
 <s-item title="无边框事项" :border="false" />
 <s-item title="自定义边框" border="1px solid #409eff" />
+<s-item title="渐变背景" background="linear-gradient(135deg, #eaf4ff, #f3edff)" />
 ```
 
 ### s-popconfirm

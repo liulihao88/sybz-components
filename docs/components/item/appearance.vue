@@ -11,6 +11,16 @@
     />
 
     <SItem
+      title="渐变背景"
+      sub-title="background 接收完整的 CSS background，线性渐变和径向渐变均可直接使用"
+      background="linear-gradient(135deg, #eaf4ff 0%, #f3edff 52%, #fff1ec 100%)"
+      hover-background="linear-gradient(135deg, #ddecff 0%, #ebe2ff 52%, #ffe8df 100%)"
+      border="1px solid rgba(124, 104, 238, 0.22)"
+      border-radius="14"
+      clickable
+    />
+
+    <SItem
       title="列表分割线"
       sub-title="border=false 时不显示外框，divider 只保留底部分隔"
       :border="false"

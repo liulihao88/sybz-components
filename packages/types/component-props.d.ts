@@ -567,7 +567,7 @@ export interface SItemProps {
   contentGap?: string | number
   /** 前缀与主内容在交叉轴上的对齐方式 */
   align?: SItemAlign
-  /** 根节点背景色 */
+  /** 根节点 CSS background，支持纯色、线性渐变和径向渐变 */
   background?: string
   /** clickable 状态下的悬停背景色 */
   hoverBackground?: string

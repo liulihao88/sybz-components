@@ -31,6 +31,7 @@ interface ItemProps {
   gap?: string | number
   contentGap?: string | number
   align?: ItemAlign
+  /** CSS background，支持纯色、渐变及其他合法背景值 */
   background?: string
   hoverBackground?: string
   border?: boolean | string
