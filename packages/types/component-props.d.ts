@@ -571,7 +571,7 @@ export interface SItemProps {
   background?: string
   /** clickable 状态下的悬停背景色 */
   hoverBackground?: string
-  /** 是否显示默认边框，或直接传入完整 CSS border */
+  /** 是否显示默认边框，或直接传入完整 CSS border；默认 true */
   border?: boolean | string
   borderRadius?: string | number
   /** 是否显示底部分割线 */

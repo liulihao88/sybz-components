@@ -20,7 +20,6 @@ const sideStyles = {
       :sub-title-lines="2"
       :styles="sideStyles"
       height="132"
-      border
       border-radius="12"
     >
       <template #prefix><span class="icon">📄</span></template>
@@ -41,7 +40,6 @@ const sideStyles = {
           background: '#fafafa',
         },
       }"
-      border
       border-radius="12"
     >
       <template #actions>

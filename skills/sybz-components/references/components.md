@@ -145,6 +145,16 @@ const count = ref(1)
 </template>
 ```
 
+### s-item
+
+`s-item` 默认显示边框，不需要额外添加 border class；无边框场景显式传 `:border="false"`。
+
+```vue
+<s-item title="事项标题" sub-title="事项说明" />
+<s-item title="无边框事项" :border="false" />
+<s-item title="自定义边框" border="1px solid #409eff" />
+```
+
 ### s-popconfirm
 
 ```vue

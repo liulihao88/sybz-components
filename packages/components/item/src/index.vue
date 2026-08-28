@@ -59,7 +59,7 @@ const props = withDefaults(defineProps<ItemProps>(), {
   align: 'center',
   background: '',
   hoverBackground: '',
-  border: undefined,
+  border: true,
   borderRadius: '',
   divider: false,
   titleLines: 1,
@@ -138,8 +138,9 @@ const rootStyle = computed<CSSProperties>(() => {
     '--s-item-hover-background': props.hoverBackground || props.background || undefined,
   }
 
-  if (props.border === true) style.border = '1px solid var(--el-border-color-light)'
-  else if (props.border === false) style.border = 'none'
+  if (props.border === true) {
+    style.border = '1px solid var(--s-item-border, var(--el-border-color-light))'
+  } else if (props.border === false) style.border = 'none'
   else if (typeof props.border === 'string') style.border = props.border
 
   return { ...style, ...props.styles?.root }

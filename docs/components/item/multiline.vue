@@ -6,7 +6,6 @@
       :sub-title-lines="2"
       align="start"
       extra="两行"
-      border
     >
       正文区域也可以放标签、按钮、状态或任意业务内容。
     </SItem>
@@ -16,7 +15,6 @@
       sub-title="title-lines 和 sub-title-lines 传 0 时不做截断，内容会自然撑开信息项。这个模式适合公告、说明和描述长度不可预期的场景。"
       :sub-title-lines="0"
       align="start"
-      border
     />
   </div>
 </template>

@@ -4,11 +4,11 @@ import { $toast } from '@sybz-components/utils'
 
 <template>
   <div class="item-demo-list">
-    <SItem title="发起对话" sub-title="与数字员工直接交流" extra="立即进入" clickable border>
+    <SItem title="发起对话" sub-title="与数字员工直接交流" extra="立即进入" clickable>
       <template #prefix>💬</template>
     </SItem>
 
-    <SItem title="插槽用法" sub-title="标题、前缀、右侧操作和正文均可替换" border>
+    <SItem title="插槽用法" sub-title="标题、前缀、右侧操作和正文均可替换">
       <template #img>
         <span class="avatar">AI</span>
       </template>
