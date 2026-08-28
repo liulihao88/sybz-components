@@ -1,6 +1,6 @@
 {
   "name": "sybz-components",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Vue3 中基于Element-plus二次封装基础组件文档",
   "private": false,
   "type": "module",
