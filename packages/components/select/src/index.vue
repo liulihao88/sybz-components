@@ -628,10 +628,6 @@ function emitChangeSelect(
     min-height: 0;
   }
 
-  :deep(.el-select__placeholder) {
-    line-height: 1;
-  }
-
   :deep(.el-select__suffix) {
     height: 100%;
     align-items: center;
