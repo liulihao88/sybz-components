@@ -276,7 +276,7 @@ const waitForPortalReady = async () => {
 }
 
 const login = async () => {
-  for (let attempt = 1; attempt <= 3; attempt += 1) {
+  for (let attempt = 1; attempt <= 5; attempt += 1) {
     let captcha
     try {
       captcha = await visibleLocator([
@@ -290,7 +290,7 @@ const login = async () => {
       const captchaText = await recognizeCaptcha(
         captchaUrl && !captchaUrl.startsWith('blob:') ? captchaUrl : await captcha.screenshot(),
       )
-      console.log(`已识别图形验证码（第 ${attempt}/3 次）`)
+      console.log(`已识别图形验证码（第 ${attempt}/5 次）`)
       const usernameInput = await visibleLocator([
         'input[autocomplete="username"]',
         'input[name="username"]',
@@ -327,7 +327,7 @@ const login = async () => {
       throw new Error('登录未成功')
     } catch (error) {
       console.error(`第 ${attempt} 次登录失败：${error instanceof Error ? error.message : error}`)
-      if (attempt < 3) await captcha?.click().catch(() => undefined)
+      if (attempt < 5) await captcha?.click().catch(() => undefined)
       await sleep(800)
     }
   }
@@ -378,15 +378,17 @@ const loginWithoutCaptcha = async () => {
   console.log(`自定义网站“${portalAccount.name}”已填写账号密码并点击登录。`)
 }
 
-if (portal === 'custom') await loginWithoutCaptcha()
-else if (page.url().includes('/passport/login/') || portal === 'chenghua') await login()
+const loginFormVisible = Boolean(await visibleLocator(['input[type="password"]', 'input[placeholder*="密码"]']))
+if (portal === 'custom' && loginFormVisible) await loginWithoutCaptcha()
+else if (page.url().includes('/passport/login/') && loginFormVisible) await login()
 if (!devMode) {
   if (portal === 'chenghua')
     await page.goto('https://www.chenghua-ai.com/chat/pages/application', { waitUntil: 'domcontentloaded' })
   console.log(
-    `${portal === 'custom' ? `自定义网站“${portalAccount.name}”` : `${portal === 'chenghua' ? '成华' : '石景山'}门户`}登录流程已完成，按 Ctrl+C 结束。`,
+    `${portal === 'custom' ? `自定义网站“${portalAccount.name}”` : `${portal === 'chenghua' ? '成华' : '石景山'}门户`}登录流程已完成。`,
   )
-  await new Promise(() => undefined)
+  await browser.close()
+  process.exit(0)
 }
 
 await waitForPortalReady()

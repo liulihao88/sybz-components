@@ -131,23 +131,31 @@ const fillAndSubmit = async (tab, { username, password, captchaText, custom }) =
   )
 
 const login = async (tab, config, recognizeCaptcha, custom) => {
-  for (let attempt = 1; attempt <= (custom ? 1 : 3); attempt += 1) {
+  for (let attempt = 1; attempt <= (custom ? 1 : 5); attempt += 1) {
     let captchaText = ''
     if (!custom) {
       const captchaUrl = await execute(
         tab,
         `(() => { const image = document.querySelector('img.code-img, img[class*="captcha" i], img[alt*="验证码"], img[title*="验证码"]'); return image ? (image.currentSrc || image.src || '') : ''; })()`,
       )
-      if (!captchaUrl) throw new Error('未找到图形验证码')
+      if (!captchaUrl) {
+        const state = await pageState(tab)
+        if (!state.url.includes('/passport/login/')) return
+        throw new Error('未找到图形验证码')
+      }
       captchaText = await recognizeCaptcha(captchaUrl)
-      console.log(`已识别图形验证码（第 ${attempt}/3 次）`)
+      console.log(`已识别图形验证码（第 ${attempt}/5 次）`)
     }
     const result = await fillAndSubmit(tab, { ...config, captchaText, custom })
-    if (!result.submitted) throw new Error(result.reason || '登录表单字段不完整或未找到登录按钮')
+    if (!result.submitted) {
+      const state = await pageState(tab)
+      if (custom || !state.url.includes('/passport/login/')) return
+      throw new Error(result.reason || '登录表单字段不完整或未找到登录按钮')
+    }
     await sleep(1800)
     const state = await pageState(tab)
     if (custom || !state.url.includes('/passport/login/')) return
-    if (attempt < 3)
+    if (attempt < 5)
       await execute(
         tab,
         `(() => { const image = document.querySelector('img.code-img, img[class*="captcha" i]'); if (image) image.click(); return ''; })()`,
@@ -172,16 +180,16 @@ export const runInExistingChrome = async ({
   const tab = await openTab(config.loginUrl)
   await sleep(800)
   const state = await pageState(tab)
-  if (portal === 'custom') await login(tab, config, recognizeCaptcha, true)
-  else if (state.url.includes('/passport/login/') || portal === 'chenghua')
-    await login(tab, config, recognizeCaptcha, false)
+  if (portal === 'custom') {
+    if (state.url === config.loginUrl || state.url.startsWith(`${config.loginUrl}#`))
+      await login(tab, config, recognizeCaptcha, true)
+  } else if (state.url.includes('/passport/login/')) await login(tab, config, recognizeCaptcha, false)
 
   if (!devMode) {
     if (portal === 'chenghua') {
       await execute(tab, `location.href = 'https://www.chenghua-ai.com/chat/pages/application'; ''`)
     }
-    console.log(`${portalName}登录流程已完成，按 Ctrl+C 结束。`)
-    await waitForExitSignal()
+    console.log(`${portalName}登录流程已完成。`)
     return
   }
 

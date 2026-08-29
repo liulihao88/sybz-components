@@ -58,6 +58,8 @@ portal-dev config --portal custom
 portal-dev login
 ```
 
+`mode: "login"` 登录成功后会立即结束 CLI 并释放终端；如果当前浏览器会话已经登录，会直接视为成功，不再查找登录表单。
+
 示例：
 
 ```text
