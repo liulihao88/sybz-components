@@ -136,3 +136,15 @@ CLI 最多自动尝试五次。连续失败时可以重新运行命令，或检�
 ### 如果我有个网站, 通过custom的用户名和密码或者有二维码滑动条等无法识别怎么办?
 
 升级npm包, 做适配和单独定制
+
+### 快速登录
+
+建议结合alias, 实现快速登录的目的. 比如
+
+```bash
+
+alias ch='portal-dev ch'
+alias sjs='portal-dev sjs'
+alias ll='portal-dev login'
+alias op='open ~/.config/sybz-components/portal-dev.json'
+```
