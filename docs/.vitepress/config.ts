@@ -133,6 +133,10 @@ export default defineConfig({
               collapsed: true,
               items: [
                 {
+                  text: 'Shell Alias 快捷命令',
+                  link: '/components/alias/home.md',
+                },
+                {
                   text: 'vitepress常用语法',
                   link: '/components/utils/grammar/home.md',
                 },
