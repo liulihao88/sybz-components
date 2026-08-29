@@ -83,13 +83,15 @@ const fillAndSubmit = async (tab, { username, password, captchaText, custom }) =
         const visible = (element) => { const style = getComputedStyle(element); const rect = element.getBoundingClientRect(); return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0; };
         const inputs = Array.from(document.querySelectorAll('input')).filter(visible);
         const setValue = (element, value) => { const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set; setter.call(element, value); element.dispatchEvent(new Event('input', {bubbles:true})); element.dispatchEvent(new Event('change', {bubbles:true})); };
-        const usernameInput = inputs.find((input) => input.autocomplete === 'username' || ['username','account','login','user','email'].includes(input.name) || /用户名|账号|邮箱|手机/.test(input.placeholder));
-        const passwordInput = inputs.find((input) => input.autocomplete === 'current-password' || input.name === 'password' || input.type === 'password' || input.placeholder.includes('密码'));
-        const captchaInput = inputs.find((input) => /验证码/.test(input.placeholder) || /captcha|code/i.test(input.name));
-        if (!usernameInput || !passwordInput || (!${custom} && !captchaInput)) return JSON.stringify({submitted:false});
+        const attribute = (input, name) => input.getAttribute(name) || '';
+        const passwordInput = inputs.find((input) => attribute(input, 'autocomplete') === 'current-password' || /^password$/i.test(attribute(input, 'name')) || input.type === 'password' || /密码/.test(attribute(input, 'placeholder')));
+        const captchaInput = inputs.find((input) => /验证码/.test(attribute(input, 'placeholder')) || /captcha|code/i.test(attribute(input, 'name')));
+        const usernameInput = inputs.find((input) => attribute(input, 'autocomplete') === 'username' || /^(username|account|login|user|email|phone)$/i.test(attribute(input, 'name')) || /用户名|账号|邮箱|手机/.test(attribute(input, 'placeholder'))) || inputs.find((input) => input !== passwordInput && input !== captchaInput && /^(text|email|tel|number)$/.test(input.type));
+        const missing = [!usernameInput && '账号输入框', !passwordInput && '密码输入框', !${custom} && !captchaInput && '验证码输入框'].filter(Boolean);
+        if (missing.length) return JSON.stringify({submitted:false, reason:'未找到' + missing.join('、')});
         setValue(usernameInput, values.username); setValue(passwordInput, values.password); if (captchaInput) setValue(captchaInput, values.captchaText);
         const button = Array.from(document.querySelectorAll('button, input[type="submit"], [role="button"], .btn-box .btn')).filter(visible).find((element) => element.type === 'submit' || /登录|Login|Sign in/i.test(element.textContent || element.value || ''));
-        if (!button) return JSON.stringify({submitted:false}); button.click(); return JSON.stringify({submitted:true});
+        if (!button) return JSON.stringify({submitted:false, reason:'未找到登录按钮'}); button.click(); return JSON.stringify({submitted:true});
       })()`,
     ),
   )
@@ -107,7 +109,7 @@ const login = async (tab, config, recognizeCaptcha, custom) => {
       console.log(`已识别图形验证码（第 ${attempt}/3 次）`)
     }
     const result = await fillAndSubmit(tab, { ...config, captchaText, custom })
-    if (!result.submitted) throw new Error('登录表单字段不完整或未找到登录按钮')
+    if (!result.submitted) throw new Error(result.reason || '登录表单字段不完整或未找到登录按钮')
     await sleep(1800)
     const state = await pageState(tab)
     if (custom || !state.url.includes('/passport/login/')) return

@@ -209,6 +209,7 @@ const login = async () => {
         'input[name="username"]',
         'input[placeholder*="用户名"]',
         'input[placeholder*="账号"]',
+        'input[autocomplete="off"]:not([type="password"]):not([placeholder*="验证码"])',
       ])
       const passwordInput = await visibleLocator([
         'input[autocomplete="current-password"]',
