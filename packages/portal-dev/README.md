@@ -50,6 +50,39 @@ portal-dev config --portal custom
 
 ## 使用
 
+列出所有已配置的石景山、成华和自定义网站账号，输入序号后直接登录：
+
+```bash
+portal-dev login
+```
+
+示例：
+
+```text
+请选择要登录的账号：
+  1. 石景山 - 测试账号
+  2. 成华 - 管理员
+  3. 自定义网站 - 内部系统
+请输入序号（1-3）：
+```
+
+### 本地调试
+
+修改 `portal-dev` 源码后不需要发布或全局安装，在本包目录直接运行：
+
+```bash
+pnpm dev sjs
+pnpm dev login
+```
+
+该命令直接执行当前源码，效果与发布后的 `portal-dev sjs` 一致。其他参数也可以原样传入，例如：
+
+```bash
+pnpm dev --portal sjs
+pnpm dev config --portal sjs
+pnpm dev --help
+```
+
 只登录石景山门户，不读取或启动任何前端项目：
 
 ```bash

@@ -20,6 +20,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
+    "dev": "node ./bin/portal-dev.mjs",
     "skill:install": "node ./bin/portal-dev.mjs skill install",
     "check": "node --check bin/portal-dev.mjs && node --check src/config-file.mjs && node --check src/configure.mjs && node --check src/macos-chrome.mjs && node --check src/portal-dev.mjs && node --check src/recognize-captcha.mjs",
     "release": "node ./scripts/release.mjs"
