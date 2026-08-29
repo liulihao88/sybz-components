@@ -4,6 +4,7 @@ import { dirname, resolve } from 'node:path'
 import { chromium } from 'playwright-core'
 import { readPortalConfig } from './config-file.mjs'
 import { recognizeCaptcha } from './recognize-captcha.mjs'
+import { runInExistingChrome } from './macos-chrome.mjs'
 
 const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds))
 const args = process.argv.slice(2)
@@ -143,6 +144,22 @@ if (devMode && !(await isReady())) {
   })
   for (let index = 0; index < 120 && !(await isReady()); index += 1) await sleep(500)
   if (!(await isReady())) throw new Error(`本地开发服务启动超时：${localOrigin}`)
+}
+
+if (process.platform === 'darwin') {
+  await runInExistingChrome({
+    config,
+    devMode,
+    localOrigin,
+    localPath,
+    iframeHost,
+    iframePath,
+    roomName,
+    portal,
+    portalName:
+      portal === 'custom' ? `自定义网站“${portalAccount.name}”` : `${portal === 'chenghua' ? '成华' : '石景山'}门户`,
+    recognizeCaptcha,
+  })
 }
 
 const browser = await chromium.launch({ headless: false, executablePath })

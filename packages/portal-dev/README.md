@@ -7,6 +7,8 @@
 - Node.js 18+
 - Google Chrome 或 Microsoft Edge
 
+macOS 会直接复用当前打开的 Google Chrome，在现有窗口中新建标签页完成登录和本地联调，不会启动独立的 Chrome 实例。Windows / Linux 使用独立浏览器实例作为兼容方案。
+
 ## 安装
 
 全局安装：
