@@ -21,8 +21,8 @@
   },
   "scripts": {
     "skill:install": "node ./bin/portal-dev.mjs skill install",
-    "check": "node --check bin/portal-dev.mjs && node --check src/config-file.mjs && node --check src/configure.mjs && node --check src/portal-dev.mjs && node --check src/recognize-captcha.mjs",
-    "release": "pnpm check && npm version patch && npm publish"
+    "check": "node --check bin/portal-dev.mjs && node --check src/config-file.mjs && node --check src/configure.mjs && node --check src/macos-chrome.mjs && node --check src/portal-dev.mjs && node --check src/recognize-captcha.mjs",
+    "release": "pnpm check && npm version patch && npm publish && git push --follow-tags"
   },
   "dependencies": {
     "@napi-rs/canvas": "^1.0.3",

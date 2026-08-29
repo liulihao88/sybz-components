@@ -178,4 +178,4 @@ pnpm portal:skill:install
 pnpm portal:release
 ```
 
-`portal:release` 会执行检查、升级 patch 版本并发布 npm 包，执行前请确认当前分支和版本状态。
+`portal:release` 会执行检查、升级 patch 版本、创建版本提交和 Git tag、发布 npm 包，最后将当前分支及 tags 推送到 Git 远端。执行前请确认当前分支、远端和工作区状态。
