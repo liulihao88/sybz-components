@@ -43,7 +43,7 @@ portal-dev --portal chenghua
 portal-dev --portal custom <账号名称>
 ```
 
-每个 profile 可以直接配置 `alias` 和 `mode`。只有用户明确要求门户本地联调时才执行 `mode: "dev"` 的快捷别名，例如 `portal-dev sjs-dev`。项目、本地地址、路由、智能体名称和 iframe 识别参数均从该 profile 读取。脚本从门户 iframe URL 取得 Token 后，必须保留查询参数打开本地地址，且不得输出 Token。
+每个 profile 可以直接配置 `alias` 和 `mode`。只有用户明确要求门户本地联调时才执行 `mode: "dev"` 的快捷别名，例如 `portal-dev sjs-dev`。`project` 仅用于需要 CLI 自动启动前端项目的情况，未配置时直接使用默认本地地址 `http://localhost:5173`。本地地址、路由、智能体名称和 iframe 识别参数均从该 profile 读取。脚本从门户 iframe URL 取得 Token 后，必须保留查询参数打开本地地址，且不得输出 Token。
 
 保持进程运行并告诉用户当前状态；只有用户明确要求停止时才终止。不得输出用户名、密码或门户 Token。
 

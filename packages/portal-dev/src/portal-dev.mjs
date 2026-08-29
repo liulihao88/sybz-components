@@ -10,21 +10,29 @@ const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resol
 const args = process.argv.slice(2)
 const portalConfig = readPortalConfig()
 const commandAlias = args[0] && args[0] !== 'dev' && !args[0].startsWith('-') ? args[0] : undefined
+const readArg = (name) => {
+  const index = args.indexOf(name)
+  return index >= 0 ? args[index + 1] : undefined
+}
+const selectedProfileName = readArg('--profile')
 const savedCommand = commandAlias
   ? Object.entries(portalConfig.profiles)
       .flatMap(([portal, profiles]) =>
         (Array.isArray(profiles) ? profiles : []).map((profile) => ({ ...profile, portal })),
       )
       .find((profile) => profile.alias === commandAlias)
-  : undefined
+  : selectedProfileName
+    ? Object.entries(portalConfig.profiles)
+        .flatMap(([portal, profiles]) =>
+          (Array.isArray(profiles) ? profiles : []).map((profile) => ({ ...profile, portal })),
+        )
+        .find((profile) => profile.portal === readArg('--portal') && profile.name === selectedProfileName)
+    : undefined
 if (commandAlias && !savedCommand)
   throw new Error(`未找到快捷命令“${commandAlias}”，请运行 portal-dev config 为账号配置别名`)
-const readArg = (name) => {
-  const index = args.indexOf(name)
-  return index >= 0 ? args[index + 1] : undefined
-}
+if (selectedProfileName && !savedCommand) throw new Error(`未找到账号“${selectedProfileName}”`)
 const readPositionalAccount = () => {
-  const valueOptions = new Set(['--portal', '--project'])
+  const valueOptions = new Set(['--portal', '--project', '--profile', '--host', '--port'])
   for (let index = 0; index < args.length; index += 1) {
     const argument = args[index]
     if (valueOptions.has(argument)) {
@@ -56,7 +64,8 @@ const findProject = () => {
   throw new Error('未找到前端项目，请先进入项目目录，或使用 --project <路径> 指定')
 }
 
-const projectDir = devMode ? findProject() : undefined
+const configuredProject = savedCommand?.project || readArg('--project')
+const projectDir = devMode && (configuredProject || args[0] === 'dev') ? findProject() : undefined
 if (projectDir && !existsSync(resolve(projectDir, 'package.json')))
   throw new Error(`目标项目不存在或缺少 package.json：${projectDir}`)
 const configuredAccounts = portalConfig.profiles[portal]
@@ -135,7 +144,7 @@ const isReady = async () => {
 }
 
 let devServer
-if (devMode && !(await isReady())) {
+if (devMode && projectDir && !(await isReady())) {
   const packageJson = JSON.parse(readFileSync(resolve(projectDir, 'package.json'), 'utf8'))
   if (!packageJson.scripts?.dev) throw new Error(`目标项目没有 dev script：${projectDir}`)
   const runner = existsSync(resolve(projectDir, 'bun.lock'))
@@ -151,6 +160,8 @@ if (devMode && !(await isReady())) {
   })
   for (let index = 0; index < 120 && !(await isReady()); index += 1) await sleep(500)
   if (!(await isReady())) throw new Error(`本地开发服务启动超时：${localOrigin}`)
+} else if (devMode && !projectDir && !(await isReady())) {
+  console.log(`未配置 project，不自动启动前端项目，后续将直接打开默认地址：${localOrigin}`)
 }
 
 if (process.platform === 'darwin') {
@@ -167,6 +178,8 @@ if (process.platform === 'darwin') {
       portal === 'custom' ? `自定义网站“${portalAccount.name}”` : `${portal === 'chenghua' ? '成华' : '石景山'}门户`,
     recognizeCaptcha,
   })
+  devServer?.kill('SIGTERM')
+  process.exit(0)
 }
 
 const browser = await chromium.launch({ headless: false, executablePath })

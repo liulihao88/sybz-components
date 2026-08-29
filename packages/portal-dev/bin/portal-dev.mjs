@@ -38,7 +38,7 @@ if (args[0] === 'login') {
   if (!Number.isInteger(selectedIndex) || !options[selectedIndex]) throw new Error(`无效的选项：${answer || '(空)'}`)
 
   const selected = options[selectedIndex]
-  args = ['--portal', selected.portal, selected.account.name]
+  args = ['--profile', selected.account.name, '--portal', selected.portal]
 }
 
 if (args[0] === 'skill' && args[1] === 'install') {

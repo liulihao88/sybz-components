@@ -3,6 +3,18 @@ import { promisify } from 'node:util'
 
 const execFileAsync = promisify(execFile)
 const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds))
+const waitForExitSignal = () =>
+  new Promise((resolve) => {
+    const keepAlive = setInterval(() => undefined, 60_000)
+    const finish = () => {
+      clearInterval(keepAlive)
+      process.removeListener('SIGINT', finish)
+      process.removeListener('SIGTERM', finish)
+      resolve()
+    }
+    process.once('SIGINT', finish)
+    process.once('SIGTERM', finish)
+  })
 const escapeAppleScript = (value) => value.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\r?\n/g, ' ')
 
 const runAppleScript = async (script) => {
@@ -73,6 +85,28 @@ const fillSearch = async (tab, roomName) =>
       setter.call(input, ${JSON.stringify(roomName)}); input.dispatchEvent(new Event('input', {bubbles:true})); input.dispatchEvent(new Event('change', {bubbles:true})); return 'true';
     })()`,
   )) === 'true'
+
+const waitForPortalReady = async (tab) => {
+  let stableCount = 0
+  for (let index = 0; index < 120; index += 1) {
+    const ready =
+      (await execute(
+        tab,
+        `(() => {
+          const visible = (element) => { const style = getComputedStyle(element); const rect = element.getBoundingClientRect(); return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0' && rect.width > 0 && rect.height > 0; };
+          const loading = Array.from(document.querySelectorAll('.el-loading-mask, .ant-spin-spinning, .n-spin-body, .loading-mask, .loading-overlay, .v-loading-mask, [aria-busy="true"]')).some(visible);
+          return document.readyState === 'complete' && !loading ? 'true' : 'false';
+        })()`,
+      )) === 'true'
+    stableCount = ready ? stableCount + 1 : 0
+    if (stableCount >= 2) {
+      await sleep(800)
+      return
+    }
+    await sleep(500)
+  }
+  throw new Error('门户页面 loading 等待超时')
+}
 
 const fillAndSubmit = async (tab, { username, password, captchaText, custom }) =>
   JSON.parse(
@@ -147,9 +181,13 @@ export const runInExistingChrome = async ({
       await execute(tab, `location.href = 'https://www.chenghua-ai.com/chat/pages/application'; ''`)
     }
     console.log(`${portalName}登录流程已完成，按 Ctrl+C 结束。`)
-    await new Promise(() => undefined)
+    await waitForExitSignal()
+    return
   }
 
+  console.log('正在等待门户页面加载完成。')
+  await waitForPortalReady(tab)
+  console.log('门户页面已加载，正在进入智能体样板间。')
   let sampleRoomClicked = false
   let searched = false
   for (let index = 0; index < 180; index += 1) {
@@ -160,7 +198,8 @@ export const runInExistingChrome = async ({
       await openTab(destination.href)
       console.log(`门户本地调试已就绪：${localOrigin}${targetUrl.pathname}`)
       console.log('Token 未打印、未写入文件。按 Ctrl+C 结束。')
-      return new Promise(() => undefined)
+      await waitForExitSignal()
+      return
     }
     if (!sampleRoomClicked) sampleRoomClicked = await clickText(tab, '智能体样板间')
     else if (!searched) searched = await fillSearch(tab, roomName)

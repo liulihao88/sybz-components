@@ -76,11 +76,8 @@ const modeAnswer = portal === 'sjs' ? (await rl.question('请选择模式（1=�
 const mode = modeAnswer === '2' ? 'dev' : 'login'
 const profileOptions = { ...(alias ? { alias } : {}), mode }
 if (mode === 'dev') {
-  profileOptions.project = (await rl.question('请输入前端项目绝对路径：')).trim()
-  if (!profileOptions.project) {
-    rl.close()
-    throw new Error('本地联调必须配置前端项目路径')
-  }
+  const project = (await rl.question('请输入需要自动启动的前端项目绝对路径（可直接回车跳过）：')).trim()
+  if (project) profileOptions.project = project
   profileOptions.localOrigin =
     (await rl.question('请输入本地服务地址（默认 http://localhost:5173）：')).trim() || 'http://localhost:5173'
   profileOptions.localPath =
