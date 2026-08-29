@@ -9,6 +9,8 @@
 
 macOS 会直接复用当前打开的 Google Chrome，在现有窗口中新建标签页完成登录和本地联调，不会启动独立的 Chrome 实例。Windows / Linux 使用独立浏览器实例作为兼容方案。
 
+Windows 会优先读取 `CHROME_PATH`，然后自动查找 Chrome 和 Microsoft Edge 的常见安装位置。配置文件优先使用 `%APPDATA%`；自动启动前端项目时通过 `cmd.exe` 运行 npm、pnpm 或 Bun，结束时会清理对应的进程树。
+
 ## 安装
 
 全局安装：

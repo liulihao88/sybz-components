@@ -4,7 +4,9 @@ import { dirname, resolve } from 'node:path'
 
 export const getPortalConfigPath = () => {
   const configRoot =
-    process.platform === 'win32' ? resolve(homedir(), 'AppData', 'Roaming') : resolve(homedir(), '.config')
+    process.platform === 'win32'
+      ? process.env.APPDATA || resolve(homedir(), 'AppData', 'Roaming')
+      : resolve(homedir(), '.config')
   return resolve(configRoot, 'sybz-components', 'portal-dev.json')
 }
 

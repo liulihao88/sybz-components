@@ -128,11 +128,16 @@ const chromeCandidates = {
     `${process.env.PROGRAMFILES || ''}\\Google\\Chrome\\Application\\chrome.exe`,
     `${process.env['PROGRAMFILES(X86)'] || ''}\\Google\\Chrome\\Application\\chrome.exe`,
     `${process.env.LOCALAPPDATA || ''}\\Google\\Chrome\\Application\\chrome.exe`,
+    `${process.env.PROGRAMFILES || ''}\\Microsoft\\Edge\\Application\\msedge.exe`,
+    `${process.env['PROGRAMFILES(X86)'] || ''}\\Microsoft\\Edge\\Application\\msedge.exe`,
+    `${process.env.LOCALAPPDATA || ''}\\Microsoft\\Edge\\Application\\msedge.exe`,
   ],
   linux: ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'],
 }
-const executablePath = chromeCandidates[process.platform]?.find(existsSync)
-if (!executablePath) throw new Error('未找到 Chrome 或 Edge，请先安装浏览器')
+const executablePath = [process.env.CHROME_PATH, ...(chromeCandidates[process.platform] || [])]
+  .filter(Boolean)
+  .find(existsSync)
+if (!executablePath) throw new Error('未找到 Chrome 或 Edge，请先安装浏览器，或通过 CHROME_PATH 指定可执行文件')
 
 const localUrl = new URL(localOrigin)
 const isReady = async () => {
@@ -144,6 +149,14 @@ const isReady = async () => {
 }
 
 let devServer
+const stopDevServer = () => {
+  if (!devServer?.pid) return
+  if (process.platform === 'win32') {
+    spawn('taskkill.exe', ['/pid', String(devServer.pid), '/t', '/f'], { stdio: 'ignore' }).unref()
+  } else {
+    devServer.kill('SIGTERM')
+  }
+}
 if (devMode && projectDir && !(await isReady())) {
   const packageJson = JSON.parse(readFileSync(resolve(projectDir, 'package.json'), 'utf8'))
   if (!packageJson.scripts?.dev) throw new Error(`目标项目没有 dev script：${projectDir}`)
@@ -152,12 +165,20 @@ if (devMode && projectDir && !(await isReady())) {
     : existsSync(resolve(projectDir, 'pnpm-lock.yaml'))
       ? 'pnpm'
       : 'npm'
+  const runnerArgs = ['run', 'dev', '--', '--host', localUrl.hostname, '--port', localUrl.port || '80']
   console.log(`正在启动项目开发服务：${projectDir}`)
-  devServer = spawn(runner, ['run', 'dev', '--', '--host', localUrl.hostname, '--port', localUrl.port || '80'], {
-    cwd: projectDir,
-    env: process.env,
-    stdio: 'inherit',
-  })
+  devServer =
+    process.platform === 'win32'
+      ? spawn(process.env.ComSpec || 'cmd.exe', ['/d', '/s', '/c', runner, ...runnerArgs], {
+          cwd: projectDir,
+          env: process.env,
+          stdio: 'inherit',
+        })
+      : spawn(runner, runnerArgs, {
+          cwd: projectDir,
+          env: process.env,
+          stdio: 'inherit',
+        })
   for (let index = 0; index < 120 && !(await isReady()); index += 1) await sleep(500)
   if (!(await isReady())) throw new Error(`本地开发服务启动超时：${localOrigin}`)
 } else if (devMode && !projectDir && !(await isReady())) {
@@ -178,13 +199,23 @@ if (process.platform === 'darwin') {
       portal === 'custom' ? `自定义网站“${portalAccount.name}”` : `${portal === 'chenghua' ? '成华' : '石景山'}门户`,
     recognizeCaptcha,
   })
-  devServer?.kill('SIGTERM')
+  stopDevServer()
   process.exit(0)
 }
 
 const browser = await chromium.launch({ headless: false, executablePath })
 const context = await browser.newContext()
 const page = await context.newPage()
+let closing = false
+const shutdown = async () => {
+  if (closing) return
+  closing = true
+  stopDevServer()
+  await browser.close().catch(() => undefined)
+  process.exit(0)
+}
+process.on('SIGINT', shutdown)
+process.on('SIGTERM', shutdown)
 await page.goto(config.loginUrl, { waitUntil: 'domcontentloaded' })
 
 const visibleLocator = async (selectors) => {
@@ -206,6 +237,42 @@ const clickText = async (text) => {
     }
   }
   return false
+}
+
+const waitForPortalReady = async () => {
+  console.log('正在等待门户页面加载完成。')
+  let stableCount = 0
+  for (let index = 0; index < 120; index += 1) {
+    const ready = await page
+      .evaluate(() => {
+        const visible = (element) => {
+          const style = getComputedStyle(element)
+          const rect = element.getBoundingClientRect()
+          return (
+            style.display !== 'none' &&
+            style.visibility !== 'hidden' &&
+            style.opacity !== '0' &&
+            rect.width > 0 &&
+            rect.height > 0
+          )
+        }
+        const loading = Array.from(
+          document.querySelectorAll(
+            '.el-loading-mask, .ant-spin-spinning, .n-spin-body, .loading-mask, .loading-overlay, .v-loading-mask, [aria-busy="true"]',
+          ),
+        ).some(visible)
+        return document.readyState === 'complete' && !loading
+      })
+      .catch(() => false)
+    stableCount = ready ? stableCount + 1 : 0
+    if (stableCount >= 2) {
+      await sleep(800)
+      console.log('门户页面已加载，正在进入智能体样板间。')
+      return
+    }
+    await sleep(500)
+  }
+  throw new Error('门户页面 loading 等待超时')
 }
 
 const login = async () => {
@@ -322,6 +389,7 @@ if (!devMode) {
   await new Promise(() => undefined)
 }
 
+await waitForPortalReady()
 let sampleRoomClicked = false
 let searched = false
 let targetUrl
@@ -362,11 +430,4 @@ await context.newPage().then((localPage) => localPage.goto(destination.href))
 console.log(`门户本地调试已就绪：${localOrigin}${targetUrl.pathname}`)
 console.log('Token 未打印、未写入文件。按 Ctrl+C 结束。')
 
-const shutdown = async () => {
-  devServer?.kill('SIGTERM')
-  await browser.close().catch(() => undefined)
-  process.exit(0)
-}
-process.on('SIGINT', shutdown)
-process.on('SIGTERM', shutdown)
 await new Promise(() => undefined)
