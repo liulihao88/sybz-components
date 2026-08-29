@@ -62,8 +62,13 @@ if (args[0] === 'command') {
   const modeAnswer = (await commandRl.question('请选择命令类型（1=只登录，2=石景山联调，默认1）：')).trim()
   const mode = modeAnswer === '2' ? 'dev' : 'login'
   const portalAnswer =
-    mode === 'dev' ? 'sjs' : (await commandRl.question('请选择门户（1=石景山，2=成华，默认石景山）：')).trim()
-  const portal = portalAnswer === '2' || portalAnswer === 'chenghua' ? 'chenghua' : 'sjs'
+    mode === 'dev' ? 'sjs' : (await commandRl.question('请选择门户（1=石景山，2=成华，3=自定义，默认石景山）：')).trim()
+  const portal =
+    portalAnswer === '3' || portalAnswer === 'custom'
+      ? 'custom'
+      : portalAnswer === '2' || portalAnswer === 'chenghua'
+        ? 'chenghua'
+        : 'sjs'
   const account = (await commandRl.question('请输入账号名称（直接回车使用该门户第一个账号）：')).trim()
   const command = { alias, mode, portal, ...(account ? { account } : {}) }
 
@@ -95,22 +100,42 @@ if (args[0] === 'command') {
 
 const rl = createInterface({ input: process.stdin, output: process.stdout })
 const portalArg = readArg('--portal')
-const portalAnswer = portalArg || (await rl.question('请选择门户（1=石景山，2=成华，直接回车默认石景山）：'))
-const portal = portalAnswer === '2' || portalAnswer === 'chenghua' ? 'chenghua' : 'sjs'
-const portalName = portal === 'chenghua' ? '成华' : '石景山'
+const portalAnswer = portalArg || (await rl.question('请选择门户（1=石景山，2=成华，3=自定义，直接回车默认石景山）：'))
+const portal =
+  portalAnswer === '3' || portalAnswer === 'custom'
+    ? 'custom'
+    : portalAnswer === '2' || portalAnswer === 'chenghua'
+      ? 'chenghua'
+      : 'sjs'
+const portalName = portal === 'custom' ? '自定义网站' : portal === 'chenghua' ? '成华' : '石景山'
 const name = (await rl.question('请输入账号名称（例如：我的账号、测试账号）：')).trim()
 if (!name) {
   rl.close()
   throw new Error('账号名称不能为空')
 }
-const username = (await rl.question(`请输入${portalName}门户账号：`)).trim()
+let loginUrl
+if (portal === 'custom') {
+  loginUrl = (await rl.question('请输入登录页 URL（例如：https://example.com/login）：')).trim()
+  try {
+    if (!['http:', 'https:'].includes(new URL(loginUrl).protocol)) throw new Error()
+  } catch {
+    rl.close()
+    throw new Error('登录页 URL 必须是有效的 http 或 https 地址')
+  }
+}
+const username = (await rl.question(`请输入${portalName}账号：`)).trim()
 rl.close()
 if (!username) throw new Error('账号不能为空')
-const password = await askPassword(`请输入${portalName}门户密码（输入内容会隐藏）：`)
+const password = await askPassword(`请输入${portalName}密码（输入内容会隐藏）：`)
 if (!password) throw new Error('密码不能为空')
 
-const { configPath, accountCount } = writePortalAccount(portal, { name, username, password })
+const { configPath, accountCount } = writePortalAccount(portal, {
+  name,
+  username,
+  password,
+  ...(loginUrl ? { loginUrl } : {}),
+})
 
-console.log(`配置完成：${portalName}门户现有 ${accountCount} 个账号`)
+console.log(`配置完成：${portalName}现有 ${accountCount} 个账号`)
 console.log(`配置文件：${configPath}`)
 console.log(`现在可以在任意目录运行：portal-dev --portal ${portal}`)

@@ -15,7 +15,7 @@ export const getPortalConfigPath = () => {
 
 export const readPortalConfig = () => {
   const configPath = getPortalConfigPath()
-  if (!existsSync(configPath)) return { version: 3, profiles: {}, commands: defaultCommands() }
+  if (!existsSync(configPath)) return { version: 4, profiles: {}, commands: defaultCommands() }
   try {
     const config = JSON.parse(readFileSync(configPath, 'utf8'))
     if (!config || typeof config !== 'object' || Array.isArray(config)) throw new Error('根节点必须是对象')
@@ -33,8 +33,10 @@ export const writePortalAccount = (portal, account) => {
   const configPath = getPortalConfigPath()
   const config = readPortalConfig()
   const normalizedProfiles = {
+    ...config.profiles,
     sjs: Array.isArray(config.profiles.sjs) ? config.profiles.sjs : [],
     chenghua: Array.isArray(config.profiles.chenghua) ? config.profiles.chenghua : [],
+    custom: Array.isArray(config.profiles.custom) ? config.profiles.custom : [],
   }
   const accounts = normalizedProfiles[portal]
   const accountIndex = accounts.findIndex((item) => item.name === account.name)
@@ -43,7 +45,7 @@ export const writePortalAccount = (portal, account) => {
   else nextAccounts.push(account)
   const nextConfig = {
     ...config,
-    version: 3,
+    version: 4,
     profiles: { ...normalizedProfiles, [portal]: nextAccounts },
     commands: config.commands,
   }
@@ -64,7 +66,7 @@ export const writePortalCommand = (command) => {
   const nextCommands = [...config.commands]
   if (commandIndex >= 0) nextCommands[commandIndex] = command
   else nextCommands.push(command)
-  const nextConfig = { ...config, version: 3, commands: nextCommands }
+  const nextConfig = { ...config, version: 4, commands: nextCommands }
   mkdirSync(dirname(configPath), { recursive: true, mode: 0o700 })
   writeFileSync(configPath, `${JSON.stringify(nextConfig, null, 2)}\n`, { mode: 0o600 })
   try {

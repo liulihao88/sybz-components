@@ -34,10 +34,10 @@ if (args[0] === 'config') {
 } else if (args.includes('--help') || args.includes('-h')) {
   console.log(`用法：
   portal-dev
-  portal-dev config [--portal sjs|chenghua]
+  portal-dev config [--portal sjs|chenghua|custom]
   portal-dev config command
   portal-dev <快捷命令别名>
-  portal-dev --portal sjs|chenghua [账号名称]
+  portal-dev --portal sjs|chenghua|custom [账号名称]
   portal-dev skill install [Codex skills 目录]
 
 首次使用只需运行一次 portal-dev config。

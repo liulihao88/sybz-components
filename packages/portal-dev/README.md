@@ -1,6 +1,6 @@
 # @sybz-components/portal-dev
 
-成华、石景山门户自动登录 CLI，也可按需启动石景山门户本地联调。
+成华、石景山门户自动登录 CLI，也可登录只需用户名和密码的自定义网站，并按需启动石景山门户本地联调。
 
 ## 环境要求
 
@@ -43,6 +43,7 @@ portal-dev
 ```bash
 portal-dev config --portal sjs
 portal-dev config --portal chenghua
+portal-dev config --portal custom
 ```
 
 ## 使用
@@ -78,6 +79,15 @@ portal-dev ds # 登录石景山
 portal-dev sc # 登录成华
 ```
 
+配置并登录普通网站：
+
+```bash
+portal-dev config --portal custom
+portal-dev --portal custom 我的账号
+```
+
+配置时依次输入登录页 URL、用户名和密码。登录时会自动查找常见的用户名、邮箱、密码输入框，以及“登录”、“Login”或“Sign in”按钮；该模式不会执行验证码识别、样板间搜索或 Token 跳转。
+
 别名保存在 JSON 中，可以通过向导新增登录或联调命令：
 
 ```bash
@@ -96,10 +106,13 @@ portal-dev sjs-dev
 
 ```json
 {
-  "version": 3,
+  "version": 4,
   "profiles": {
     "sjs": [{ "name": "我的账号", "username": "user1", "password": "******" }],
-    "chenghua": [{ "name": "测试账号", "username": "user2", "password": "******" }]
+    "chenghua": [{ "name": "测试账号", "username": "user2", "password": "******" }],
+    "custom": [
+      { "name": "内部系统", "loginUrl": "https://example.com/login", "username": "user3", "password": "******" }
+    ]
   },
   "commands": [
     { "alias": "ds", "mode": "login", "portal": "sjs" },

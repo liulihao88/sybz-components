@@ -31,9 +31,10 @@ const readPositionalAccount = () => {
 }
 
 const portal = savedCommand?.portal || readArg('--portal') || 'sjs'
-if (!['sjs', 'chenghua'].includes(portal)) throw new Error(`不支持的门户：${portal}，可选值为 sjs、chenghua`)
+if (!['sjs', 'chenghua', 'custom'].includes(portal))
+  throw new Error(`不支持的门户：${portal}，可选值为 sjs、chenghua、custom`)
 const devMode = savedCommand?.mode === 'dev' || args[0] === 'dev'
-if (devMode && portal === 'chenghua') throw new Error('门户联调目前只支持石景山；成华命令只负责门户登录')
+if (devMode && portal !== 'sjs') throw new Error('门户联调目前只支持石景山；成华和自定义命令只负责登录')
 
 const findProject = () => {
   const explicit = savedCommand?.project || readArg('--project')
@@ -59,7 +60,7 @@ const portalAccounts = Array.isArray(configuredAccounts)
   : []
 if (!portalAccounts.length) {
   throw new Error(
-    `尚未配置${portal === 'chenghua' ? '成华' : '石景山'}门户账号，请先运行 portal-dev config --portal ${portal}`,
+    `尚未配置${portal === 'custom' ? '自定义网站' : portal === 'chenghua' ? '成华' : '石景山'}账号，请先运行 portal-dev config --portal ${portal}`,
   )
 }
 
@@ -86,9 +87,15 @@ const configs = {
     username: portalAccount.username,
     password: portalAccount.password,
   },
+  custom: {
+    loginUrl: portalAccount.loginUrl,
+    username: portalAccount.username,
+    password: portalAccount.password,
+  },
 }
 const config = configs[portal]
 if (!config.username || !config.password) throw new Error(`账号“${portalAccount.name}”的配置不完整，请重新配置`)
+if (portal === 'custom' && !config.loginUrl) throw new Error(`账号“${portalAccount.name}”缺少登录页 URL，请重新配置`)
 
 const localOrigin = (savedCommand?.localOrigin || 'http://localhost:5173').replace(/\/$/, '')
 const localPath = savedCommand?.localPath
@@ -222,11 +229,58 @@ const login = async () => {
   throw new Error('自动登录失败，已达到最多重试次数')
 }
 
-if (page.url().includes('/passport/login/') || portal === 'chenghua') await login()
+const loginWithoutCaptcha = async () => {
+  const usernameInput = await visibleLocator([
+    'input[autocomplete="username"]',
+    'input[name="username"]',
+    'input[name="account"]',
+    'input[name="login"]',
+    'input[name="user"]',
+    'input[name="email"]',
+    'input[type="email"]',
+    'input[type="tel"]',
+    'input[placeholder*="用户名"]',
+    'input[placeholder*="账号"]',
+    'input[placeholder*="邮箱"]',
+    'input[placeholder*="手机"]',
+  ])
+  const passwordInput = await visibleLocator([
+    'input[autocomplete="current-password"]',
+    'input[name="password"]',
+    'input[type="password"]',
+    'input[placeholder*="密码"]',
+  ])
+  if (!usernameInput || !passwordInput) throw new Error('未找到常见的用户名或密码输入框')
+  await usernameInput.fill(config.username)
+  await passwordInput.fill(config.password)
+  const button = await visibleLocator([
+    'button[type="submit"]',
+    'input[type="submit"]',
+    'button:has-text("登录")',
+    '[role="button"]:has-text("登录")',
+    'button:has-text("Login")',
+    '[role="button"]:has-text("Login")',
+    'button:has-text("Sign in")',
+    '[role="button"]:has-text("Sign in")',
+  ])
+  if (!button) throw new Error('未找到常见的登录按钮')
+  const originalUrl = page.url()
+  await button.click()
+  await Promise.race([
+    page.waitForURL((url) => url.href !== originalUrl, { timeout: 15000 }),
+    passwordInput.waitFor({ state: 'hidden', timeout: 15000 }),
+  ]).catch(() => undefined)
+  console.log(`自定义网站“${portalAccount.name}”已填写账号密码并点击登录。`)
+}
+
+if (portal === 'custom') await loginWithoutCaptcha()
+else if (page.url().includes('/passport/login/') || portal === 'chenghua') await login()
 if (!devMode) {
   if (portal === 'chenghua')
     await page.goto('https://www.chenghua-ai.com/chat/pages/application', { waitUntil: 'domcontentloaded' })
-  console.log(`${portal === 'chenghua' ? '成华' : '石景山'}门户登录已完成，按 Ctrl+C 结束。`)
+  console.log(
+    `${portal === 'custom' ? `自定义网站“${portalAccount.name}”` : `${portal === 'chenghua' ? '成华' : '石景山'}门户`}登录流程已完成，按 Ctrl+C 结束。`,
+  )
   await new Promise(() => undefined)
 }
 
