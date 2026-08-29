@@ -1,5 +1,7 @@
 # Portal Dev 门户联调工具(可快速写入用户名密码验证码以节省登录时间的目的)
 
+<img src="./image.png" alt="Portal Dev 门户联调工具" style="width: 420px; max-width: 100%; height: auto" />
+
 `@sybz-components/portal-dev` 是全局使用的成华、石景山门户或自定义网站自动登录 CLI，也可按需启动石景山门户本地联调。它作为独立 npm 包发布，不会增加组件主包的浏览器端体积。
 
 ## 能力
