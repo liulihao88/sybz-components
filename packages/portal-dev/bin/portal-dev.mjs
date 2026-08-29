@@ -10,6 +10,63 @@ const packageDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const selectionKeys = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let args = process.argv.slice(2)
 
+const printHelp = () => {
+  console.log(`portal-dev - 成华、石景山门户与自定义网站自动登录/本地联调 CLI
+
+用法
+  portal-dev login
+  portal-dev [--portal <sjs|chenghua|custom>] [账号名称]
+  portal-dev <profile 快捷别名>
+  portal-dev dev [--project <项目路径>]
+  portal-dev config [--portal <sjs|chenghua|custom>]
+  portal-dev skill install [Codex skills 目录]
+  portal-dev help | --help | -h
+
+命令
+  login          列出所有已配置账号，按键后直接登录或联调
+  config         新增账号，或按账号名称更新账号、别名和模式
+  dev            启动石景山本地联调，默认使用当前项目
+  skill install  安装随包提供的 Codex portal-dev Skill
+  help           显示帮助
+
+参数
+  --portal <类型>  门户类型：sjs（默认）、chenghua 或 custom
+  --project <路径> 需要 CLI 自动启动的前端项目路径
+  --help, -h       显示帮助，不执行登录
+
+账号选择
+  1-9             选择第 1-9 个账号，无需回车
+  A-Z             选择第 10-35 个账号，无需回车
+  超过 35 个账号或终端不支持单键输入时，输入完整序号后回车。
+
+联调默认值
+  localOrigin     http://localhost:5173
+  localPath       从门户 iframe 地址继承
+  roomName        3D智能展厅智能体
+  iframeHost      hia.sjsdoubao.com:31118
+  iframePath      /exhibition-hall
+
+环境变量
+  CHROME_PATH     手动指定 Chrome 或 Edge 可执行文件
+
+配置文件
+  macOS / Linux   ~/.config/sybz-components/portal-dev.json
+  Windows         %APPDATA%\\sybz-components\\portal-dev.json
+
+示例
+  portal-dev config --portal sjs
+  portal-dev login
+  portal-dev --portal chenghua 成华账号
+  portal-dev --portal custom 内部系统
+  portal-dev sjs-dev
+  portal-dev skill install`)
+}
+
+if (args[0] === 'help' || args.includes('--help') || args.includes('-h')) {
+  printHelp()
+  process.exit(0)
+}
+
 const readSingleKey = (validKeys) =>
   new Promise((resolveKey, reject) => {
     const wasRaw = process.stdin.isRaw
@@ -107,19 +164,6 @@ if (args[0] === 'config') {
     throw error
   })
   child.on('exit', (code, signal) => (signal ? process.kill(process.pid, signal) : process.exit(code ?? 0)))
-} else if (args.includes('--help') || args.includes('-h')) {
-  console.log(`用法：
-  portal-dev
-  portal-dev login
-  portal-dev config [--portal sjs|chenghua|custom]
-  portal-dev <快捷命令别名>
-  portal-dev --portal sjs|chenghua|custom [账号名称]
-  portal-dev skill install [Codex skills 目录]
-
-首次使用只需运行一次 portal-dev config。
-运行 portal-dev login 可列出所有已配置账号，输入序号直接登录。
-每个账号都可在 portal-dev config 时配置别名和登录/联调模式。`)
-  process.exit(0)
 } else {
   const child = spawn(process.execPath, [resolve(packageDir, 'src/portal-dev.mjs'), ...args], {
     cwd: process.cwd(),

@@ -183,7 +183,10 @@ portal-dev sjs-dev
 
 ```bash
 portal-dev --help
+portal-dev help
 ```
+
+帮助中包含所有命令、参数、单键菜单规则、联调默认值、配置位置、环境变量和常用示例。`portal-dev login --help` 也只会显示帮助，不会打开账号选择菜单。
 
 ## 安装 Codex Skill
 

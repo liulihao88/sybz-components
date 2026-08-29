@@ -108,6 +108,13 @@ portal-dev config
 | `config`       | -          | 交互新增账号或按账号名称更新               |
 | `--help`       | -          | 查看命令帮助                               |
 
+查看完整命令、参数、默认值、环境变量和使用示例：
+
+```bash
+portal-dev --help
+portal-dev help
+```
+
 ## 常见问题
 
 ### 提示缺少账号密码
