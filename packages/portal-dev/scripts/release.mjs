@@ -40,6 +40,26 @@ function publishedVersion(name, version) {
   }
 }
 
+async function verifyNpmLogin() {
+  let lastError
+
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const username = run('npm', ['whoami', `--registry=${registry}`], { capture: true }).trim()
+      console.log(`npm 已登录：${username}`)
+      return
+    } catch (error) {
+      lastError = error
+      if (attempt < 3) {
+        console.warn(`npm 身份校验失败，2 秒后重试（${attempt}/3）…`)
+        await new Promise((resolvePromise) => setTimeout(resolvePromise, 2000))
+      }
+    }
+  }
+
+  throw new Error('npm 身份校验连续失败，请运行 npm login 后重试', { cause: lastError })
+}
+
 async function verifyPublishedVersion(name, version) {
   const expected = version.trim()
   let lastError
@@ -65,7 +85,7 @@ async function verifyPublishedVersion(name, version) {
 try {
   ensureCleanWorktree()
   run('pnpm', ['check'])
-  run('npm', ['whoami', `--registry=${registry}`])
+  await verifyNpmLogin()
   run('npm', ['version', 'patch', '--no-git-tag-version'])
 
   const { name, version } = packageInfo()
