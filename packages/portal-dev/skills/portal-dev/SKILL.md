@@ -43,17 +43,10 @@ portal-dev --portal chenghua
 portal-dev --portal custom <账号名称>
 ```
 
-默认快捷命令：
-
-```bash
-portal-dev ds
-portal-dev sc
-```
-
-只有用户明确要求门户本地联调时才执行 JSON 中 `mode: "dev"` 的快捷命令，例如 `portal-dev sjs-dev`。项目、本地地址、路由、智能体名称和 iframe 识别参数均从该命令配置读取。脚本从门户 iframe URL 取得 Token 后，必须保留查询参数打开本地地址，且不得输出 Token。
+每个 profile 可以直接配置 `alias` 和 `mode`。只有用户明确要求门户本地联调时才执行 `mode: "dev"` 的快捷别名，例如 `portal-dev sjs-dev`。项目、本地地址、路由、智能体名称和 iframe 识别参数均从该 profile 读取。脚本从门户 iframe URL 取得 Token 后，必须保留查询参数打开本地地址，且不得输出 Token。
 
 保持进程运行并告诉用户当前状态；只有用户明确要求停止时才终止。不得输出用户名、密码或门户 Token。
 
 ## 配置
 
-账号密码只从当前用户的专属配置文件读取，每个门户可保存多个账号。`portal-dev config` 会新增账号或按账号名称更新已有账号；登录命令不写账号名称时使用数组第一个账号，在命令末尾追加账号名称时使用指定账号。普通网站使用 `portal-dev config --portal custom` 配置登录 URL、账号名称、用户名和密码。缺少凭据时，引导用户在本机终端运行 `portal-dev config`，不索要或展示具体密码。
+账号密码只从当前用户的专属配置文件读取，每个门户可保存多个账号。`portal-dev config` 会新增账号或按账号名称更新已有账号，并在 profile 中直接配置别名和模式；登录命令不写账号名称时使用数组第一个账号，在命令末尾追加账号名称时使用指定账号。普通网站使用 `portal-dev config --portal custom` 配置登录 URL、账号名称、用户名和密码。缺少凭据时，引导用户在本机终端运行 `portal-dev config`，不索要或展示具体密码。

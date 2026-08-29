@@ -70,15 +70,13 @@ if (args[0] === 'config') {
   portal-dev
   portal-dev login
   portal-dev config [--portal sjs|chenghua|custom]
-  portal-dev config command
   portal-dev <快捷命令别名>
   portal-dev --portal sjs|chenghua|custom [账号名称]
   portal-dev skill install [Codex skills 目录]
 
 首次使用只需运行一次 portal-dev config。
 运行 portal-dev login 可列出所有已配置账号，输入序号直接登录。
-默认快捷命令：portal-dev ds 登录石景山，portal-dev sc 登录成华。
-运行 portal-dev config command 可新增或修改快捷命令。`)
+每个账号都可在 portal-dev config 时配置别名和登录/联调模式。`)
   process.exit(0)
 } else {
   const child = spawn(process.execPath, [resolve(packageDir, 'src/portal-dev.mjs'), ...args], {

@@ -2,11 +2,6 @@ import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'n
 import { homedir } from 'node:os'
 import { dirname, resolve } from 'node:path'
 
-const defaultCommands = () => [
-  { alias: 'ds', mode: 'login', portal: 'sjs' },
-  { alias: 'sc', mode: 'login', portal: 'chenghua' },
-]
-
 export const getPortalConfigPath = () => {
   const configRoot =
     process.platform === 'win32' ? resolve(homedir(), 'AppData', 'Roaming') : resolve(homedir(), '.config')
@@ -15,17 +10,41 @@ export const getPortalConfigPath = () => {
 
 export const readPortalConfig = () => {
   const configPath = getPortalConfigPath()
-  if (!existsSync(configPath)) return { version: 4, profiles: {}, commands: defaultCommands() }
+  if (!existsSync(configPath)) return { version: 5, profiles: {} }
   try {
     const config = JSON.parse(readFileSync(configPath, 'utf8'))
     if (!config || typeof config !== 'object' || Array.isArray(config)) throw new Error('根节点必须是对象')
-    return {
-      ...config,
-      profiles: config.profiles && typeof config.profiles === 'object' ? config.profiles : {},
-      commands: Array.isArray(config.commands) ? config.commands : defaultCommands(),
+    const profiles = config.profiles && typeof config.profiles === 'object' ? structuredClone(config.profiles) : {}
+
+    for (const command of Array.isArray(config.commands) ? config.commands : []) {
+      if (!command?.alias || !['sjs', 'chenghua', 'custom'].includes(command.portal)) continue
+      const accounts = Array.isArray(profiles[command.portal]) ? profiles[command.portal] : []
+      const accountIndex = command.account
+        ? accounts.findIndex((account) => account?.name === command.account)
+        : accounts.length
+          ? 0
+          : -1
+      if (accountIndex < 0) continue
+      const { portal: _portal, account: _account, ...profileOptions } = command
+      accounts[accountIndex] = { ...accounts[accountIndex], ...profileOptions }
+      profiles[command.portal] = accounts
     }
+
+    const normalizedConfig = { version: 5, profiles }
+    if (config.version !== 5 || Object.hasOwn(config, 'commands')) writeConfig(configPath, normalizedConfig)
+    return normalizedConfig
   } catch (error) {
     throw new Error(`门户配置文件格式错误：${configPath}\n${error.message}`)
+  }
+}
+
+const writeConfig = (configPath, config) => {
+  mkdirSync(dirname(configPath), { recursive: true, mode: 0o700 })
+  writeFileSync(configPath, `${JSON.stringify(config, null, 2)}\n`, { mode: 0o600 })
+  try {
+    chmodSync(configPath, 0o600)
+  } catch {
+    // Windows 等不支持 POSIX 权限的环境由系统用户目录权限保护。
   }
 }
 
@@ -44,35 +63,9 @@ export const writePortalAccount = (portal, account) => {
   if (accountIndex >= 0) nextAccounts[accountIndex] = account
   else nextAccounts.push(account)
   const nextConfig = {
-    ...config,
-    version: 4,
+    version: 5,
     profiles: { ...normalizedProfiles, [portal]: nextAccounts },
-    commands: config.commands,
   }
-  mkdirSync(dirname(configPath), { recursive: true, mode: 0o700 })
-  writeFileSync(configPath, `${JSON.stringify(nextConfig, null, 2)}\n`, { mode: 0o600 })
-  try {
-    chmodSync(configPath, 0o600)
-  } catch {
-    // Windows 等不支持 POSIX 权限的环境由系统用户目录权限保护。
-  }
+  writeConfig(configPath, nextConfig)
   return { configPath, accountCount: nextAccounts.length }
-}
-
-export const writePortalCommand = (command) => {
-  const configPath = getPortalConfigPath()
-  const config = readPortalConfig()
-  const commandIndex = config.commands.findIndex((item) => item.alias === command.alias)
-  const nextCommands = [...config.commands]
-  if (commandIndex >= 0) nextCommands[commandIndex] = command
-  else nextCommands.push(command)
-  const nextConfig = { ...config, version: 4, commands: nextCommands }
-  mkdirSync(dirname(configPath), { recursive: true, mode: 0o700 })
-  writeFileSync(configPath, `${JSON.stringify(nextConfig, null, 2)}\n`, { mode: 0o600 })
-  try {
-    chmodSync(configPath, 0o600)
-  } catch {
-    // Windows 等不支持 POSIX 权限的环境由系统用户目录权限保护。
-  }
-  return { configPath, commandCount: nextCommands.length }
 }

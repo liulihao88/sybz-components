@@ -107,13 +107,6 @@ portal-dev --portal sjs
 portal-dev --portal sjs 测试账号
 ```
 
-默认快捷命令：
-
-```bash
-portal-dev ds # 登录石景山
-portal-dev sc # 登录成华
-```
-
 配置并登录普通网站：
 
 ```bash
@@ -123,50 +116,60 @@ portal-dev --portal custom 我的账号
 
 配置时依次输入登录页 URL、用户名和密码。登录时会自动查找常见的用户名、邮箱、密码输入框，以及“登录”、“Login”或“Sign in”按钮；该模式不会执行验证码识别、样板间搜索或 Token 跳转。
 
-别名保存在 JSON 中，可以通过向导新增登录或联调命令：
+执行 `portal-dev config` 时，可以直接为账号设置快捷别名。石景山账号还可选择“只登录”或“本地联调”模式。例如将某个账号的别名配置为 `sjs-dev`：
 
 ```bash
-portal-dev config command
-```
-
-例如配置一个别名为 `sjs-dev` 的联调命令后，只需运行：
-
-```bash
+portal-dev config --portal sjs
 portal-dev sjs-dev
 ```
 
 执行时会登录指定账号、启动本地项目、进入样板间搜索智能体，从匹配的 iframe 地址取得 Token，然后保留查询参数打开本地页面。
 
-配置文件中的账号和快捷命令格式：
+配置文件中，别名、模式和联调参数都直接属于对应账号，不再有独立的 `commands`：
 
 ```json
 {
-  "version": 4,
+  "version": 5,
   "profiles": {
-    "sjs": [{ "name": "我的账号", "username": "user1", "password": "******" }],
-    "chenghua": [{ "name": "测试账号", "username": "user2", "password": "******" }],
+    "sjs": [
+      {
+        "name": "测试账号",
+        "username": "user1",
+        "password": "******",
+        "alias": "sjs-dev",
+        "mode": "dev",
+        "project": "/Users/你的名字/projects/agent-web",
+        "localOrigin": "http://localhost:5173",
+        "localPath": "/exhibition-hall",
+        "roomName": "3D智能展厅智能体",
+        "iframeHost": "hia.sjsdoubao.com:31118",
+        "iframePath": "/exhibition-hall"
+      }
+    ],
+    "chenghua": [
+      {
+        "name": "成华账号",
+        "username": "user2",
+        "password": "******",
+        "alias": "ch",
+        "mode": "login"
+      }
+    ],
     "custom": [
-      { "name": "内部系统", "loginUrl": "https://example.com/login", "username": "user3", "password": "******" }
+      {
+        "name": "内部系统",
+        "loginUrl": "https://example.com/login",
+        "username": "user3",
+        "password": "******",
+        "alias": "internal",
+        "mode": "login"
+      }
     ]
-  },
-  "commands": [
-    { "alias": "ds", "mode": "login", "portal": "sjs" },
-    { "alias": "sc", "mode": "login", "portal": "chenghua" },
-    {
-      "alias": "sjs-dev",
-      "mode": "dev",
-      "portal": "sjs",
-      "account": "测试账号",
-      "project": "/Users/你的名字/projects/agent-web",
-      "localOrigin": "http://localhost:5173",
-      "localPath": "/exhibition-hall",
-      "roomName": "3D智能展厅智能体",
-      "iframeHost": "hia.sjsdoubao.com:31118",
-      "iframePath": "/exhibition-hall"
-    }
-  ]
+  }
 }
 ```
+
+首次读取旧版 `version: 4` 配置时，CLI 会自动将 `commands` 合并到对应 profile 并升级为 `version: 5`。
 
 查看命令帮助：
 

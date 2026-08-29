@@ -10,9 +10,15 @@ const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resol
 const args = process.argv.slice(2)
 const portalConfig = readPortalConfig()
 const commandAlias = args[0] && args[0] !== 'dev' && !args[0].startsWith('-') ? args[0] : undefined
-const savedCommand = commandAlias ? portalConfig.commands.find((command) => command?.alias === commandAlias) : undefined
+const savedCommand = commandAlias
+  ? Object.entries(portalConfig.profiles)
+      .flatMap(([portal, profiles]) =>
+        (Array.isArray(profiles) ? profiles : []).map((profile) => ({ ...profile, portal })),
+      )
+      .find((profile) => profile.alias === commandAlias)
+  : undefined
 if (commandAlias && !savedCommand)
-  throw new Error(`未找到快捷命令“${commandAlias}”，请运行 portal-dev config command 创建`)
+  throw new Error(`未找到快捷命令“${commandAlias}”，请运行 portal-dev config 为账号配置别名`)
 const readArg = (name) => {
   const index = args.indexOf(name)
   return index >= 0 ? args[index + 1] : undefined
@@ -66,7 +72,8 @@ if (!portalAccounts.length) {
 }
 
 const selectAccount = () => {
-  const accountName = savedCommand?.account || readPositionalAccount()
+  if (savedCommand) return savedCommand
+  const accountName = readPositionalAccount()
   if (accountName) {
     const matched = portalAccounts.find((account) => account.name === accountName)
     if (!matched) throw new Error(`未找到账号“${accountName}”，请检查账号名称或重新配置`)
