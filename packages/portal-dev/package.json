@@ -1,6 +1,6 @@
 {
   "name": "@sybz-components/portal-dev",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "成华和石景山门户自动登录与本地前端联调 CLI",
   "type": "module",
   "bin": {
