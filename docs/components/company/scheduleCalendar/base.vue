@@ -30,7 +30,7 @@ const handleTaskClick = (task: ScheduleCalendarTask) => console.log('点击任�
 </script>
 
 <template>
-  {{ currentMonth }} ?? {{ view }}
+  {{ currentMonth }} ?? {{ view }} == {{ type }}
   <s-schedule-calendar
     v-model="currentMonth"
     v-model:view="view"

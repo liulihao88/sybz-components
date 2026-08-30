@@ -540,6 +540,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'select',
       allowAnySlots: true,
+      description:
+        's-select 下拉选择组件，支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换；options 模式额外支持全选、反选和完整选项上下文。',
       hoverProps: componentHoverProps('SSelectSelfProps', [
         'SSelectChangeContext',
         'SSelectOptionContext',

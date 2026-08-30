@@ -134,6 +134,14 @@ select/simpleTableSelect
 select/multipleTableSelect
 :::
 
+### 直接传入选项
+
+未传 `options` 时，可以在默认插槽中直接传入 `el-option`。这种写法支持 `v-model`、多选、快速切换以及 `el-select` 的原生属性和事件，快速切换会自动跳过禁用选项；全选、反选和包含完整选项上下文的 `changeSelect` 依赖 `options` 数据，使用这些功能时仍应采用 `options` 写法。
+
+:::demo 展示直接传入 `el-option`。基础写法：`<s-select v-model="value"><el-option label="全部类型" value="all" /></s-select>`。属性：`options` 类型 `array`，默认值 `[]`；默认插槽在未传 `options` 时作为原生选项容器。
+select/inlineOptions
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                    | 类型                    | 默认值    |
@@ -187,3 +195,4 @@ function changeSelect({ value, label, option, index }: SSelectChangeContext) {
 
 - 组件基于 `el-select` 封装，绝大多数原生属性都可以直接透传。
 - 多选模式下支持全选、反选和上下快速切换。
+- 默认推荐使用 `options` 配置；未传 `options` 时，也支持在默认插槽中直接书写 `el-option`。

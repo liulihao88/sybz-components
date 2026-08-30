@@ -7,7 +7,7 @@
       themeClass,
       {
         'has-title': mergedProps.title,
-        'has-quick': mergedProps.showQuick && sOptions.length > 0,
+        'has-quick': mergedProps.showQuick && hasQuickOptions,
         'is-disabled': parseDisabled,
         'is-multiple': multiple,
         'has-custom-height': mergedProps.height,
@@ -55,7 +55,7 @@
             <slot :name="name" v-bind="arg" :index="index" />
           </template>
 
-          <div v-if="multiple && mergedProps.showAll" class="s-select__bulk-actions">
+          <div v-if="multiple && mergedProps.showAll && sOptions.length > 0" class="s-select__bulk-actions">
             <el-checkbox
               v-model="selectChecked"
               :indeterminate="indeterminate"
@@ -67,20 +67,23 @@
             <el-button type="primary" size="small" class="reverse-select" @click.stop="reverseSelect">反选</el-button>
           </div>
 
-          <el-option
-            v-for="(item, index) in sOptions"
-            :key="getOptionKey(item, index)"
-            :label="getOptionLabel(item, index)"
-            :value="getOptionValue(item)"
-            :disabled="getOptionDisabled(item, index)"
-          >
-            <slot :options="sOptions" :item="item" />
-          </el-option>
+          <slot v-if="sOptions.length === 0" :options="sOptions" :item="{}" />
+          <template v-else>
+            <el-option
+              v-for="(item, index) in sOptions"
+              :key="getOptionKey(item, index)"
+              :label="getOptionLabel(item, index)"
+              :value="getOptionValue(item)"
+              :disabled="getOptionDisabled(item, index)"
+            >
+              <slot :options="sOptions" :item="item" />
+            </el-option>
+          </template>
         </el-select>
       </div>
     </el-tooltip>
 
-    <span v-if="mergedProps.showQuick && sOptions.length > 0" class="s-select__select-box">
+    <span v-if="mergedProps.showQuick && hasQuickOptions" class="s-select__select-box">
       <span class="s-select__select-box__inner">
         <s-icon name="ArrowUp" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(false)" />
         <div class="s-select__divider" />
@@ -203,6 +206,16 @@ const compTitleProps = computed(() => {
 
 type SelectOption = Record<string, any> | string | number | boolean
 type SelectModelValue = any[] | string | number | undefined
+type InlineOption = {
+  value: unknown
+  isDisabled?: boolean | { value?: boolean }
+  states?: { groupDisabled?: boolean }
+}
+type SelectRef = {
+  $el?: HTMLElement
+  $emit?: (...args: any[]) => void
+  optionsArray?: InlineOption[] | { value?: InlineOption[] }
+}
 
 const sOptions = ref<SelectOption[]>(props.options)
 
@@ -217,7 +230,7 @@ watch(
   },
 )
 
-const selectRef = ref<{ $el?: HTMLElement; $emit?: (...args: any[]) => void } | null>(null)
+const selectRef = ref<SelectRef | null>(null)
 const selectTooltipContent = ref('')
 const selectTooltipDisabled = ref(true)
 const selectTooltipVisible = ref(false)
@@ -299,6 +312,24 @@ const getOptionDisabled = (option: SelectOption, index: number) => {
 const disOptions = computed(() => {
   return sOptions.value.filter((option, index) => !getOptionDisabled(option, index))
 })
+
+const inlineOptions = computed<InlineOption[]>(() => {
+  const options = selectRef.value?.optionsArray
+  if (Array.isArray(options)) return options
+  return Array.isArray(options?.value) ? options.value : []
+})
+
+const isInlineOptionDisabled = (option: InlineOption) => {
+  const disabled = typeof option.isDisabled === 'object' ? option.isDisabled?.value : option.isDisabled
+  return Boolean(disabled || option.states?.groupDisabled)
+}
+
+const quickOptionValues = computed(() => {
+  if (sOptions.value.length > 0) return disOptions.value.map((option) => handleDifValue(option))
+  return inlineOptions.value.filter((option) => !isInlineOptionDisabled(option)).map((option) => option.value)
+})
+
+const hasQuickOptions = computed(() => quickOptionValues.value.length > 0)
 
 const getOptionLabel = (option: SelectOption, index: number): string | number => {
   const label = props.type === 'simple' ? option : handleLabel(option, index)
@@ -485,29 +516,30 @@ function handleLabel(option: SelectOption, index = sOptions.value.indexOf(option
 }
 
 const quickSelect = (isPlus: boolean) => {
-  if (parseDisabled.value || disOptions.value.length === 0) {
+  const values = quickOptionValues.value
+  if (parseDisabled.value || values.length === 0) {
     return
   }
   let nextIdx = 0
   if (isEmpty(props.modelValue, true) || (props.multiple === true && getModelValueArray().length > 1)) {
     nextIdx = 0
   } else {
-    let nowIdx = disOptions.value.findIndex((v) => {
+    let nowIdx = values.findIndex((value) => {
       if (props.multiple === true) {
-        return handleDifValue(v) === getModelValueArray()[0]
+        return value === getModelValueArray()[0]
       } else {
-        return handleDifValue(v) === props.modelValue
+        return value === props.modelValue
       }
     })
     nextIdx = nowIdx + (isPlus ? 1 : -1)
-    if (nextIdx === disOptions.value.length) {
+    if (nextIdx === values.length) {
       nextIdx = 0
     }
     if (nextIdx < 0) {
-      nextIdx = disOptions.value.length - 1
+      nextIdx = values.length - 1
     }
   }
-  let getValue = handleDifValue(disOptions.value[nextIdx])
+  const getValue = values[nextIdx]
   if (props.multiple === true) {
     selectRef.value?.$emit?.('change', [getValue])
   } else {
