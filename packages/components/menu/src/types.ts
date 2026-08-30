@@ -66,6 +66,7 @@ export interface SMenuSelfProps {
   activeTextColor?: string
   collapse?: boolean
   variant?: 'dark' | 'light'
+  theme?: 'default' | 'chenghua' | 'shijingshan'
   header?: SMenuHeaderConfig
   /** @deprecated 请使用 header */
   headerConfig?: SMenuHeaderConfig

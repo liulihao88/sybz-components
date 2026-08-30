@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<SMenuSelfProps>(), {
   activeTextColor: '#ffffff',
   collapse: false,
   variant: 'dark',
+  theme: 'default',
 })
 
 const emit = defineEmits<{
@@ -60,10 +61,26 @@ const openedMenus = computed(() =>
     : mergedProps.value.defaultOpeneds,
 )
 const resolvedHeader = computed(() => mergedProps.value.header || mergedProps.value.headerConfig)
+const menuColors = computed(() => {
+  if (mergedProps.value.theme === 'chenghua') {
+    return { background: '#ffffff', text: '#000000', activeText: '#165dff' }
+  }
+  if (mergedProps.value.theme === 'shijingshan') {
+    return { background: '#1e293b', text: '#ffffff', activeText: '#ffffff' }
+  }
+  if (mergedProps.value.variant === 'light') {
+    return { background: '#ffffff', text: '#536f8d', activeText: '#008f83' }
+  }
+  return {
+    background: mergedProps.value.backgroundColor,
+    text: mergedProps.value.textColor,
+    activeText: mergedProps.value.activeTextColor,
+  }
+})
 const rootStyle = computed(() => ({
   width: processWidth(mergedProps.value.width, true),
   height: processWidth(mergedProps.value.height, true),
-  '--s-menu-bg': mergedProps.value.variant === 'light' ? '#ffffff' : mergedProps.value.backgroundColor,
+  '--s-menu-bg': menuColors.value.background,
 }))
 const handleSelect = (...args: any[]) => {
   emit('update:modelValue', args[0])
@@ -75,7 +92,11 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
 <template>
   <aside
     class="s-menu"
-    :class="[`s-menu--${mergedProps.variant}`, { 'is-collapse': mergedProps.collapse }]"
+    :class="[
+      `s-menu--${mergedProps.variant}`,
+      `s-menu--theme-${mergedProps.theme}`,
+      { 'is-collapse': mergedProps.collapse },
+    ]"
     :style="rootStyle"
   >
     <header v-if="$slots.header || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
@@ -111,9 +132,9 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
       :default-openeds="openedMenus"
       :router="mergedProps.router"
       :collapse="mergedProps.collapse"
-      :background-color="mergedProps.variant === 'light' ? '#ffffff' : mergedProps.backgroundColor"
-      :text-color="mergedProps.variant === 'light' ? '#536f8d' : mergedProps.textColor"
-      :active-text-color="mergedProps.variant === 'light' ? '#008f83' : mergedProps.activeTextColor"
+      :background-color="menuColors.background"
+      :text-color="menuColors.text"
+      :active-text-color="menuColors.activeText"
       @select="handleSelect"
     >
       <MenuNode
@@ -293,6 +314,115 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
     :deep(.el-menu-item:hover),
     :deep(.el-sub-menu__title:hover) {
       background: #f1f6fb;
+    }
+  }
+
+  &--theme-chenghua {
+    border: 1px solid #e5e7eb;
+    font-family: 'PingFang SC', sans-serif;
+
+    .s-menu__brand {
+      border-color: #e5e7eb;
+      color: #000;
+    }
+    .s-menu__brand-icon {
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1e6efc, #00c5e7);
+    }
+    .s-menu__action {
+      height: 44px;
+      border-radius: 8px;
+      background: #165dff;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .s-menu__action:hover {
+      background: #0e4ee8;
+    }
+    .s-menu__account {
+      border-color: #e5e7eb;
+      color: #000;
+    }
+    .s-menu__account > span {
+      background: #e8f0ff;
+      color: #165dff;
+    }
+
+    :deep(.el-menu-item),
+    :deep(.el-sub-menu__title) {
+      height: 44px;
+      margin: 4px 8px;
+      color: #000;
+      font-size: 16px;
+    }
+    :deep(.el-menu-item.is-active) {
+      background: #e8f0ff;
+      color: #165dff;
+      font-weight: 500;
+    }
+    :deep(.el-menu-item:hover),
+    :deep(.el-sub-menu__title:hover) {
+      background: #f3f7ff;
+    }
+  }
+
+  &--theme-shijingshan {
+    border: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    .s-menu__brand {
+      min-height: 40px;
+      padding: 12px;
+      border-color: #334155;
+      color: #fff;
+    }
+    .s-menu__brand-icon {
+      width: 32px;
+      height: 32px;
+      background: #2a6df4;
+    }
+    .s-menu__brand strong {
+      font-size: 18px;
+    }
+    .s-menu__action {
+      height: 40px;
+      margin: 12px 8px;
+      border-radius: 8px;
+      background: #2a6df4;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .s-menu__action:hover {
+      background: #1e5fdc;
+    }
+    .s-menu__account {
+      padding: 12px 8px;
+      border-color: #334155;
+      color: #fff;
+    }
+    .s-menu__account > span {
+      width: 32px;
+      height: 32px;
+      background: #334155;
+      font-size: 16px;
+    }
+
+    :deep(.el-menu-item),
+    :deep(.el-sub-menu__title) {
+      height: 40px;
+      margin: 2px 8px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+    }
+    :deep(.el-menu-item.is-active) {
+      background: #2a6df4;
+      color: #fff;
+      font-weight: 600;
+    }
+    :deep(.el-menu-item:hover),
+    :deep(.el-sub-menu__title:hover) {
+      background: #334155;
     }
   }
 }

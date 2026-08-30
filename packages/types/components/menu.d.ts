@@ -10,6 +10,11 @@ import type {
   SMenuSelfProps,
 } from '../../components/menu/src/types'
 
+/**
+ * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、内置头尾区域以及 default / chenghua / shijingshan 主题。
+ *
+ * 先提示 sybz 自身属性。
+ */
 export type SMenuComponent = {
   new (): {
     $props: {
@@ -26,6 +31,7 @@ export type SMenuComponent = {
       activeTextColor?: string
       collapse?: boolean
       variant?: 'dark' | 'light'
+      theme?: 'default' | 'chenghua' | 'shijingshan'
       header?: SMenuHeaderConfig
       /** @deprecated 请使用 header */
       headerConfig?: SMenuHeaderConfig

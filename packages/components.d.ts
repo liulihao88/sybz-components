@@ -252,10 +252,14 @@ declare module 'vue' {
     's-markdown': (typeof import('./types/components/markdown'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/menu/home.html
+     *
+     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、内置头尾区域以及 default / chenghua / shijingshan 主题。
      */
     SMenu: (typeof import('./types/components/menu'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/menu/home.html
+     *
+     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、内置头尾区域以及 default / chenghua / shijingshan 主题。
      */
     's-menu': (typeof import('./types/components/menu'))['default']
     /**
