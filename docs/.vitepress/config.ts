@@ -356,6 +356,10 @@ export default defineConfig({
               link: '/components/inputLabel/home.md',
             },
             {
+              text: 'menu菜单组件',
+              link: '/components/menu/home.md',
+            },
+            {
               text: sybzMark('tabs组件'),
               link: '/components/tabs/home.md',
             },

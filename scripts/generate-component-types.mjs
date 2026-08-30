@@ -606,6 +606,30 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
+    'SMenu',
+    {
+      importPath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
+      typeName: 'SMenuProps',
+      slots: ['header', 'footer'],
+      instanceMembers: ["$emit: (event: 'update:modelValue' | 'select' | 'actionClick', ...args: any[]) => void"],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
+        interfaceName: 'SMenuSelfProps',
+        importTypeNames: [
+          'SMenuFieldNames',
+          'SMenuActionConfig',
+          'SMenuFooterConfig',
+          'SMenuHeaderConfig',
+          'SMenuIcon',
+          'SMenuItem',
+          'SMenuItemDetail',
+          'SMenuProps',
+          'SMenuSelfProps',
+        ],
+      },
+    },
+  ],
+  [
     'STabs',
     {
       importPath: componentPropsPath,
