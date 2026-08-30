@@ -127,6 +127,30 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
+    'SScheduleCalendar',
+    {
+      importPath: resolve(rootDir, 'packages/components/company/scheduleCalendar/src/types.ts'),
+      typeName: 'ScheduleCalendarProps',
+      emitsTypeName: 'ScheduleCalendarEmits',
+      tagName: 's-schedule-calendar',
+      slots: ['filters', 'day', 'task', 'empty'],
+      instanceMembers: [
+        '$emit: <Event extends keyof ScheduleCalendarEmits>(event: Event, ...args: ScheduleCalendarEmits[Event]) => void',
+      ],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/company/scheduleCalendar/src/types.ts'),
+        interfaceName: 'ScheduleCalendarProps',
+        importTypeNames: [
+          'ScheduleCalendarDay',
+          'ScheduleCalendarEmits',
+          'ScheduleCalendarProps',
+          'ScheduleCalendarTask',
+          'ScheduleCalendarView',
+        ],
+      },
+    },
+  ],
+  [
     'SChart',
     {
       importPath: componentPropsPath,

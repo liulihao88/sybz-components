@@ -48,6 +48,13 @@ export const components = Object.values(allComponents).reduce((acc, component) =
 // 按需导入
 export { SSvg }
 export * from './hooks'
+export type {
+  ScheduleCalendarDay,
+  ScheduleCalendarEmits,
+  ScheduleCalendarProps,
+  ScheduleCalendarTask,
+  ScheduleCalendarView,
+} from './components/company/scheduleCalendar/src/types'
 
 const isConfigRecord = (value: unknown): value is Record<string, any> => {
   return value !== null && typeof value === 'object' && !Array.isArray(value)

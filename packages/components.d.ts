@@ -283,6 +283,14 @@ declare module 'vue' {
      */
     's-row': (typeof import('./types/components/row'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/scheduleCalendar/home.html
+     */
+    SScheduleCalendar: (typeof import('./types/components/company/scheduleCalendar'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/scheduleCalendar/home.html
+     */
+    's-schedule-calendar': (typeof import('./types/components/company/scheduleCalendar'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/select/home.html
      */
     SSelect: (typeof import('./types/components/select'))['default']
@@ -517,6 +525,10 @@ export type SRowComponent = import('./types/components/row').SRowComponent
 export type SRowInstance = ComponentInstance<SRowComponent>
 export type SRowPublicProps = import('./types/components/row').SRowPublicProps
 
+export type SScheduleCalendarComponent = (typeof import('./types/components/company/scheduleCalendar'))['default']
+export type SScheduleCalendarInstance = ComponentInstance<SScheduleCalendarComponent>
+export type SScheduleCalendarPublicProps = SScheduleCalendarInstance['$props']
+
 export type SSelectComponent = import('./types/components/select').SSelectComponent
 export type SSelectInstance = ComponentInstance<SSelectComponent>
 export type SSelectPublicProps = import('./types/components/select').SSelectPublicProps
@@ -603,6 +615,7 @@ declare global {
       's-progress': JSXComponentProps<SProgressPublicProps>
       's-radio': JSXComponentProps<SRadioPublicProps>
       's-row': JSXComponentProps<SRowPublicProps>
+      's-schedule-calendar': JSXComponentProps<SScheduleCalendarPublicProps>
       's-select': JSXComponentProps<SSelectPublicProps>
       's-split-pane': JSXComponentProps<SSplitPanePublicProps>
       's-svg': JSXComponentProps<SSvgPublicProps>

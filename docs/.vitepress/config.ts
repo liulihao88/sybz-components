@@ -433,6 +433,10 @@ export default defineConfig({
               text: 'capacityProgress容量组件',
               link: '/components/company/capacityProgress/home.md',
             },
+            {
+              text: 'scheduleCalendar业务日历',
+              link: '/components/company/scheduleCalendar/home.md',
+            },
           ],
         },
         {
