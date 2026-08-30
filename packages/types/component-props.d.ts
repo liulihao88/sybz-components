@@ -806,6 +806,8 @@ export interface SMenuSelfProps {
   activeTextColor?: string
   collapse?: boolean
   variant?: 'dark' | 'light'
+  header?: SMenuHeaderConfig
+  /** @deprecated 请使用 header */
   headerConfig?: SMenuHeaderConfig
   actionConfig?: SMenuActionConfig
   footerConfig?: SMenuFooterConfig

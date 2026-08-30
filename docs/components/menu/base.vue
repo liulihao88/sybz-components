@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Collection, EditPen, Link, Setting, Timer } from '@element-plus/icons-vue'
+import { ChatDotRound, Collection, EditPen, Link, Setting, Timer } from '@element-plus/icons-vue'
 
 const active = ref('/material')
+const header = { title: '公众号自动化', subtitle: 'WECHAT AUTOMATION', icon: ChatDotRound }
 const menus = [
   { path: '/material', title: '素材', icon: Collection },
   { path: '/writing', title: '写作', icon: EditPen },
@@ -33,27 +34,7 @@ const menus = [
 </script>
 
 <template>
-  <div class="menu-demo">
-    <SMenu v-model="active" :options="menus" :router="false" width="320px" height="680px">
-      <template #header>
-        <div class="brand">
-          <span class="brand__logo">S</span>
-          <div>
-            <b>公众号自动化</b>
-            <small>WECHAT AUTOMATION</small>
-          </div>
-        </div>
-      </template>
-      <template #footer><div class="footer">☰</div></template>
-    </SMenu>
-  </div>
+  <SMenu v-model="active" :header="header" :options="menus" :router="false" width="320px" height="680px" />
 </template>
 
-<style scoped>
-/* .menu-demo { display: flex; justify-content: center; }
-.brand { display: flex; align-items: center; gap: 14px; padding: 24px; color: white; }
-.brand__logo { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #07c160; font-weight: 700; }
-.brand b { display: block; font-size: 22px; }
-.brand small { display: block; margin-top: 4px; color: #aeb7c6; letter-spacing: 2px; }
-.footer { padding: 18px; border-top: 1px solid #294057; background: #061f31; color: #cbd5e1; text-align: center; font-size: 20px; } */
-</style>
+<style scoped></style>

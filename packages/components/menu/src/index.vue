@@ -59,6 +59,7 @@ const openedMenus = computed(() =>
     ? Array.from(new Set([...collectParentIndexes(mergedProps.value.options), ...mergedProps.value.defaultOpeneds]))
     : mergedProps.value.defaultOpeneds,
 )
+const resolvedHeader = computed(() => mergedProps.value.header || mergedProps.value.headerConfig)
 const rootStyle = computed(() => ({
   width: processWidth(mergedProps.value.width, true),
   height: processWidth(mergedProps.value.height, true),
@@ -77,16 +78,16 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
     :class="[`s-menu--${mergedProps.variant}`, { 'is-collapse': mergedProps.collapse }]"
     :style="rootStyle"
   >
-    <header v-if="$slots.header || mergedProps.headerConfig || mergedProps.actionConfig" class="s-menu__header">
+    <header v-if="$slots.header || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
       <slot name="header">
-        <div v-if="mergedProps.headerConfig" class="s-menu__brand">
-          <el-icon v-if="isComponentIcon(mergedProps.headerConfig.icon)">
-            <component :is="mergedProps.headerConfig.icon" />
-          </el-icon>
-          <SIcon v-else-if="mergedProps.headerConfig.icon" :name="String(mergedProps.headerConfig.icon)" />
-          <div>
-            <strong>{{ mergedProps.headerConfig.title }}</strong>
-            <small v-if="mergedProps.headerConfig.subtitle">{{ mergedProps.headerConfig.subtitle }}</small>
+        <div v-if="resolvedHeader" class="s-menu__brand">
+          <span v-if="resolvedHeader.icon" class="s-menu__brand-icon">
+            <el-icon v-if="isComponentIcon(resolvedHeader.icon)"><component :is="resolvedHeader.icon" /></el-icon>
+            <SIcon v-else :name="String(resolvedHeader.icon)" />
+          </span>
+          <div class="s-menu__brand-content">
+            <strong>{{ resolvedHeader.title }}</strong>
+            <small v-if="resolvedHeader.subtitle">{{ resolvedHeader.subtitle }}</small>
           </div>
         </div>
         <button
@@ -164,10 +165,23 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
     border-bottom: 1px solid #294057;
     color: #fff;
   }
-  &__brand > .el-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 34px;
+  &__brand-icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    place-items: center;
+    border-radius: 50%;
+    background: #07c160;
+    color: #fff;
+  }
+  &__brand-icon > .el-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 26px;
+  }
+  &__brand-content {
+    min-width: 0;
   }
   &__brand strong {
     display: block;
@@ -250,6 +264,12 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
     .s-menu__brand {
       border-color: #dce5ef;
       color: #193957;
+    }
+    .s-menu__brand-icon {
+      border: 1px solid #b9cee4;
+      border-radius: 10px;
+      background: #fff;
+      color: #285b8d;
     }
     .s-menu__account {
       border-color: #dce5ef;

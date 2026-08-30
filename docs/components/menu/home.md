@@ -4,7 +4,7 @@
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='<SMenu v-model="active" :options="menus"><template #header>品牌区域</template><template #footer>底部区域</template></SMenu>' />
+<DocBasicUsage code='<SMenu v-model="active" :header="header" :options="menus" />' />
 
 ## 属性事件插槽简介
 
@@ -12,13 +12,13 @@
 
 ### 基础用法（`defaultOpenAll` 默认值 `true`）
 
-:::demo `SMenu` 支持任意层级递归菜单、路由跳转、字符串或 Vue 组件图标，并默认展开全部父级。基础写法：`<SMenu v-model="active" :options="menus" />`。属性：`options` 类型 `SMenuItem[]`，默认值 `[]`；`router` 可选值 `true / false`，默认值 `true`；`defaultOpenAll` 可选值 `true / false`，默认值 `true`；`width` 类型 `string / number`，默认值 `256`；`height` 类型 `string / number`，默认值 `100%`。
+:::demo 传入 `header` 的 `icon / title / subtitle` 即可显示内置头部样式；同时支持任意层级递归菜单、路由跳转和图标，并默认展开全部父级。基础写法：`<SMenu v-model="active" :header="header" :options="menus" />`。属性：`header` 类型 `SMenuHeaderConfig`，默认值 `undefined`；`options` 类型 `SMenuItem[]`，默认值 `[]`；`router` 可选值 `true / false`，默认值 `true`；`defaultOpenAll` 可选值 `true / false`，默认值 `true`；`width` 类型 `string / number`，默认值 `256`；`height` 类型 `string / number`，默认值 `100%`。
 menu/base
 :::
 
 ### 浅色分组菜单（`variant` 默认值 `dark`）
 
-:::demo 浅色菜单内置品牌区、主操作按钮和账号区样式，业务只需传配置，无需复制 CSS；同时支持功能菜单、历史记录分组、标签、尾部图标和鼠标移入详情卡片。基础写法：`<SMenu variant="light" :options="menus" :header-config="headerConfig" :action-config="actionConfig" :footer-config="footerConfig" />`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`headerConfig / actionConfig / footerConfig` 默认值均为 `undefined`；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
+:::demo 浅色菜单内置品牌区、主操作按钮和账号区样式，业务只需传配置，无需复制 CSS；同时支持功能菜单、历史记录分组、标签、尾部图标和鼠标移入详情卡片。基础写法：`<SMenu variant="light" :options="menus" :header="header" :action-config="actionConfig" :footer-config="footerConfig" />`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`header / actionConfig / footerConfig` 默认值均为 `undefined`；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
 menu/light
 :::
 
@@ -39,7 +39,8 @@ menu/light
 | `activeTextColor` | 激活文字颜色                                 | string              | CSS 颜色       | `#ffffff`   |
 | `collapse`        | 是否折叠菜单                                 | boolean             | `true / false` | `false`     |
 | `variant`         | 菜单外观                                     | string              | `dark / light` | `dark`      |
-| `headerConfig`    | 内置头部品牌配置，支持标题、副标题和图标     | `SMenuHeaderConfig` | -              | `undefined` |
+| `header`          | 内置头部配置，传入标题和图标即应用默认样式   | `SMenuHeaderConfig` | -              | `undefined` |
+| `headerConfig`    | `header` 的兼容属性，已废弃                  | `SMenuHeaderConfig` | -              | `undefined` |
 | `actionConfig`    | 内置主操作按钮配置，支持文字和图标           | `SMenuActionConfig` | -              | `undefined` |
 | `footerConfig`    | 内置底部账号配置，支持标题、副标题和头像文字 | `SMenuFooterConfig` | -              | `undefined` |
 

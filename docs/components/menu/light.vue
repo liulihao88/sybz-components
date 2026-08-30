@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { Calendar, ChatDotRound, Document, FolderOpened, Plus, Right } from '@element-plus/icons-vue'
 
 const active = ref('/chat')
-const headerConfig = { title: '合同智管', icon: Document }
+const header = { title: '合同智管', icon: Document }
 const actionConfig = { text: '新建对话', icon: Plus }
 const footerConfig = { title: '管理员用户', subtitle: '系统管理员', avatar: '管' }
 const handleNewChat = () => {
@@ -68,7 +68,7 @@ const menus = [
     variant="light"
     :options="menus"
     :router="false"
-    :header-config="headerConfig"
+    :header="header"
     :action-config="actionConfig"
     :footer-config="footerConfig"
     width="360px"
