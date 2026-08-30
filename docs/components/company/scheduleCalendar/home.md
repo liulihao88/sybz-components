@@ -6,7 +6,7 @@
 
 ### 基础用法（`view` 默认值：`month`，`tasks` 默认值：`[]`，`maxTasksPerDay` 默认值：`3`）
 
-使用 `v-model` 控制当前月份，使用 `v-model:view` 在月历和日程间切换。筛选条件通过 `filters` 插槽传入；点击日期触发 `day-click`，点击任务触发 `task-click`。单日任务超过 `maxTasksPerDay` 时，日期格右上角显示“更多”，点击后以下拉层展示剩余任务；下拉任务与直接展示的任务触发相同事件。
+使用 `v-model` 控制当前月份，使用 `v-model:view` 在月历和日程间切换。日程模式使用 `s-table` 展示日期、履约事项、所属合同、提醒时间和操作。筛选条件通过 `filters` 插槽传入；点击日期触发 `day-click`，点击月历任务、日程事项或“查看”操作都会触发 `task-click`。单日任务超过 `maxTasksPerDay` 时，日期格右上角显示“更多”，点击后以下拉层展示剩余任务；下拉任务与直接展示的任务触发相同事件。
 
 :::demo 展示月份联动、视图切换、筛选插槽和点击事件。基础写法：`<s-schedule-calendar v-model="currentMonth" v-model:view="view" :tasks="tasks" />`。属性：`modelValue` 类型 `string / number / Date`，默认值为当前日期；`view` 可选值 `month / schedule`，默认值 `month`；`tasks` 类型 `ScheduleCalendarTask[]`，默认值 `[]`；`maxTasksPerDay` 类型 `number`，默认值 `3`。
 company/scheduleCalendar/base
@@ -24,22 +24,26 @@ company/scheduleCalendar/base
 
 ### ScheduleCalendarTask
 
-| 字段            | 说明               | 类型                     | 默认值    |
-| --------------- | ------------------ | ------------------------ | --------- |
-| id              | 任务唯一标识       | `string / number`        | —         |
-| title           | 任务标题           | `string`                 | —         |
-| date            | 任务日期           | `string / number / Date` | —         |
-| color           | 文字和左侧标记颜色 | `string`                 | `#2761a5` |
-| backgroundColor | 任务背景色         | `string`                 | `#eaf2ff` |
+| 字段            | 说明                                 | 类型                     | 默认值    |
+| --------------- | ------------------------------------ | ------------------------ | --------- |
+| id              | 任务唯一标识                         | `string / number`        | —         |
+| title           | 任务标题                             | `string`                 | —         |
+| date            | 任务日期                             | `string / number / Date` | —         |
+| type            | 履约事项类型，显示在日程事项标题下方 | `string`                 | `-`       |
+| contractName    | 所属合同                             | `string`                 | `-`       |
+| reminder        | 提醒时间                             | `string`                 | `-`       |
+| color           | 文字和左侧标记颜色                   | `string`                 | `#2761a5` |
+| backgroundColor | 任务背景色                           | `string`                 | `#eaf2ff` |
 
 ### 插槽
 
-| 插槽名  | 说明                               | 插槽参数                |
-| ------- | ---------------------------------- | ----------------------- |
-| filters | 工具栏右侧的搜索、选择等业务筛选项 | `{ currentDate, view }` |
-| day     | 自定义月历日期内容                 | `{ day }`               |
-| task    | 自定义月历和日程中的任务内容       | `{ task, day }`         |
-| empty   | 自定义日程空状态                   | —                       |
+| 插槽名         | 说明                                     | 插槽参数                |
+| -------------- | ---------------------------------------- | ----------------------- |
+| filters        | 工具栏右侧的搜索、选择等业务筛选项       | `{ currentDate, view }` |
+| day            | 自定义月历日期内容                       | `{ day }`               |
+| task           | 自定义月历任务及日程表格中的履约事项标题 | `{ task, day }`         |
+| scheduleAction | 自定义日程表格操作列，默认显示“查看”按钮 | `{ task, day }`         |
+| empty          | 自定义日程空状态                         | —                       |
 
 ### 事件
 

@@ -133,7 +133,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'ScheduleCalendarProps',
       emitsTypeName: 'ScheduleCalendarEmits',
       tagName: 's-schedule-calendar',
-      slots: ['filters', 'day', 'task', 'empty'],
+      slots: ['filters', 'day', 'task', 'scheduleAction', 'empty'],
       instanceMembers: [
         '$emit: <Event extends keyof ScheduleCalendarEmits>(event: Event, ...args: ScheduleCalendarEmits[Event]) => void',
       ],

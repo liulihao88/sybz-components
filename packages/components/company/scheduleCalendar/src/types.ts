@@ -4,6 +4,9 @@ export interface ScheduleCalendarTask {
   id: string | number
   title: string
   date: string | number | Date
+  type?: string
+  contractName?: string
+  reminder?: string
   color?: string
   backgroundColor?: string
   [key: string]: unknown

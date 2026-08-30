@@ -7,6 +7,7 @@ import type {
   ScheduleCalendarTask,
   ScheduleCalendarView,
 } from './types'
+import type { STableColumn } from '@/components/table/src/types'
 
 defineOptions({ name: 'SScheduleCalendar' })
 
@@ -24,6 +25,7 @@ defineSlots<{
   filters(props: { currentDate: Date; view: ScheduleCalendarView }): any
   day(props: { day: ScheduleCalendarDay }): any
   task(props: { task: ScheduleCalendarTask; day: ScheduleCalendarDay }): any
+  scheduleAction(props: { task: ScheduleCalendarTask; day: ScheduleCalendarDay }): any
   empty(): any
 }>()
 
@@ -95,7 +97,41 @@ const calendarDays = computed<ScheduleCalendarDay[]>(() => {
   })
 })
 
-const scheduleDays = computed(() => calendarDays.value.filter((day) => day.isCurrentMonth && day.tasks.length))
+interface ScheduleTableRow extends Record<string, unknown> {
+  id: string | number
+  dateText: string
+  title: string
+  type: string
+  contractName: string
+  reminder: string
+  task: ScheduleCalendarTask
+  day: ScheduleCalendarDay
+}
+
+const scheduleRows = computed<ScheduleTableRow[]>(() =>
+  calendarDays.value
+    .filter((day) => day.isCurrentMonth)
+    .flatMap((day) =>
+      day.tasks.map((task) => ({
+        id: task.id,
+        dateText: `${pad(day.date.getMonth() + 1)}-${pad(day.date.getDate())}`,
+        title: task.title,
+        type: task.type ?? '-',
+        contractName: task.contractName ?? '-',
+        reminder: task.reminder ?? '-',
+        task,
+        day,
+      })),
+    ),
+)
+
+const scheduleColumns: STableColumn<ScheduleTableRow>[] = [
+  { label: '日期', prop: 'dateText', width: 150 },
+  { label: '履约事项', prop: 'title', minWidth: 320, useSlot: 'scheduleTask' },
+  { label: '所属合同', prop: 'contractName', minWidth: 360 },
+  { label: '提醒时间', prop: 'reminder', width: 160 },
+  { label: '操作', prop: 'operation', width: 100, useSlot: 'scheduleAction' },
+]
 
 const setMonth = (value: Date) => {
   expandedDayKey.value = ''
@@ -138,9 +174,6 @@ const taskStyle = (task: ScheduleCalendarTask) => ({
   '--s-schedule-task-color': task.color ?? '#2761a5',
   '--s-schedule-task-bg': task.backgroundColor ?? '#eaf2ff',
 })
-
-const formatScheduleDate = (date: Date) =>
-  `${date.getMonth() + 1}月${date.getDate()}日 ${weekNames[(date.getDay() + 6) % 7]}`
 </script>
 
 <template>
@@ -231,32 +264,32 @@ const formatScheduleDate = (date: Date) =>
     </div>
 
     <div v-else class="s-schedule-calendar__schedule-view">
-      <template v-if="scheduleDays.length">
-        <div
-          v-for="day in scheduleDays"
-          :key="day.dateKey"
-          class="s-schedule-calendar__schedule-day"
-          role="button"
-          tabindex="0"
-          @click="handleDayClick(day)"
-          @keydown.enter="handleDayClick(day)"
-          @keydown.space.prevent="handleDayClick(day)"
-        >
-          <span class="s-schedule-calendar__schedule-date">{{ formatScheduleDate(day.date) }}</span>
-          <span class="s-schedule-calendar__schedule-tasks">
-            <button
-              v-for="task in day.tasks"
-              :key="task.id"
-              class="s-schedule-calendar__schedule-task"
-              type="button"
-              :style="taskStyle(task)"
-              @click="handleTaskClick(task, day, $event)"
-            >
-              <slot name="task" :task="task" :day="day">{{ task.title }}</slot>
-            </button>
-          </span>
-        </div>
-      </template>
+      <s-table
+        v-if="scheduleRows.length"
+        :columns="scheduleColumns"
+        :data="scheduleRows"
+        :show-index="false"
+        :show-page="false"
+        row-key="id"
+      >
+        <template #scheduleTask="{ row }">
+          <button
+            class="s-schedule-calendar__schedule-title"
+            type="button"
+            @click="handleTaskClick(row.task, row.day, $event)"
+          >
+            <strong>
+              <slot name="task" :task="row.task" :day="row.day">{{ row.title }}</slot>
+            </strong>
+            <span>{{ row.type }}</span>
+          </button>
+        </template>
+        <template #scheduleAction="{ row }">
+          <slot name="scheduleAction" :task="row.task" :day="row.day">
+            <s-button type="primary" link @click="handleTaskClick(row.task, row.day, $event)">查看</s-button>
+          </slot>
+        </template>
+      </s-table>
       <div v-else class="s-schedule-calendar__empty">
         <slot name="empty">{{ emptyText }}</slot>
       </div>
@@ -422,8 +455,7 @@ const formatScheduleDate = (date: Date) =>
   gap: 5px;
   min-width: 0;
 }
-.s-schedule-calendar__task,
-.s-schedule-calendar__schedule-task {
+.s-schedule-calendar__task {
   overflow: hidden;
   border: 0;
   border-left: 4px solid var(--s-schedule-task-color);
@@ -440,8 +472,7 @@ const formatScheduleDate = (date: Date) =>
   width: 100%;
   padding: 6px 8px;
 }
-.s-schedule-calendar__task:hover,
-.s-schedule-calendar__schedule-task:hover {
+.s-schedule-calendar__task:hover {
   filter: brightness(0.97);
 }
 .s-schedule-calendar__more-button {
@@ -482,39 +513,25 @@ const formatScheduleDate = (date: Date) =>
 
 .s-schedule-calendar__schedule-view {
   overflow: hidden;
-  border: 1px solid var(--s-schedule-border);
   border-radius: 10px;
   background: #fff;
 }
-.s-schedule-calendar__schedule-day {
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  width: 100%;
-  padding: 18px 20px;
+.s-schedule-calendar__schedule-title {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
   border: 0;
-  border-bottom: 1px solid var(--s-schedule-border);
-  background: #fff;
-  color: inherit;
+  background: transparent;
+  color: #526a84;
   text-align: left;
   cursor: pointer;
 }
-.s-schedule-calendar__schedule-day:last-child {
-  border-bottom: 0;
+.s-schedule-calendar__schedule-title:hover strong {
+  color: #1769d5;
 }
-.s-schedule-calendar__schedule-day:hover {
-  background: #f8fbff;
-}
-.s-schedule-calendar__schedule-date {
-  padding-top: 7px;
-  font-weight: 600;
-}
-.s-schedule-calendar__schedule-tasks {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.s-schedule-calendar__schedule-task {
-  padding: 9px 12px;
+.s-schedule-calendar__schedule-title span {
+  color: #91a0b1;
+  font-size: 12px;
 }
 .s-schedule-calendar__empty {
   padding: 72px 20px;

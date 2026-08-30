@@ -19,6 +19,7 @@ export type SScheduleCalendarComponent = {
       filters?: () => any
       day?: () => any
       task?: () => any
+      scheduleAction?: () => any
       empty?: () => any
     }
     $emit: <Event extends keyof ScheduleCalendarEmits>(event: Event, ...args: ScheduleCalendarEmits[Event]) => void

@@ -12,17 +12,84 @@ const keyword = ref('')
 const type = ref('all')
 
 const tasks: ScheduleCalendarTask[] = [
-  { id: 1, title: '项目启动会', date: '2026-08-05', color: '#7b4cc9', backgroundColor: '#f3ecff' },
-  { id: 2, title: '首期服务费付款', date: '2026-08-12' },
-  { id: 3, title: '软件交付确认', date: '2026-08-12', color: '#16866f', backgroundColor: '#e8f6f2' },
-  { id: 3, title: '软件交付确认2', date: '2026-08-12', color: '#16866f', backgroundColor: '#e8f6f2' },
-  { id: 3, title: '软件交付确认3', date: '2026-08-12', color: '#16866f', backgroundColor: '#e8f6f2' },
-  { id: 3, title: '软件交付确认4', date: '2026-08-12', color: '#16866f', backgroundColor: '#e8f6f2' },
-  { id: 4, title: '阶段成果提交', date: '2026-08-18', color: '#16866f', backgroundColor: '#e8f6f2' },
-  { id: 5, title: '场地租金支付', date: '2026-08-25' },
-  { id: 6, title: '设备到场验收', date: '2026-08-25' },
-  { id: 7, title: '第二期服务费付款', date: '2026-08-29' },
-  { id: 8, title: '质保金退还', date: '2026-08-31' },
+  {
+    id: 1,
+    title: '项目启动会',
+    date: '2026-08-05',
+    type: '会议',
+    contractName: '数字内容产业服务平台技术服务合同',
+    reminder: '提前1天',
+    color: '#7b4cc9',
+    backgroundColor: '#f3ecff',
+  },
+  {
+    id: 2,
+    title: '首期服务费付款',
+    date: '2026-08-12',
+    type: '付款',
+    contractName: '数字内容产业服务平台技术服务合同',
+    reminder: '提前3天',
+  },
+  {
+    id: 3,
+    title: '软件交付确认',
+    date: '2026-08-12',
+    type: '交付',
+    contractName: '年度软件采购框架协议',
+    reminder: '提前1天',
+    color: '#16866f',
+    backgroundColor: '#e8f6f2',
+  },
+  {
+    id: 4,
+    title: '阶段成果提交',
+    date: '2026-08-18',
+    type: '交付',
+    contractName: '金牛山项目施工合同',
+    reminder: '提前7天',
+    color: '#16866f',
+    backgroundColor: '#e8f6f2',
+  },
+  {
+    id: 5,
+    title: '场地租金支付',
+    date: '2026-08-25',
+    type: '付款',
+    contractName: '文儒坊办公场地租赁合同',
+    reminder: '提前3天',
+  },
+  {
+    id: 6,
+    title: '设备到场验收',
+    date: '2026-08-25',
+    type: '验收',
+    contractName: '金牛山项目施工合同',
+    reminder: '提前1天',
+  },
+  {
+    id: 7,
+    title: '服务报告提交',
+    date: '2026-08-25',
+    type: '交付',
+    contractName: '数字内容产业服务平台技术服务合同',
+    reminder: '当天提醒',
+  },
+  {
+    id: 8,
+    title: '第二期服务费付款',
+    date: '2026-08-29',
+    type: '付款',
+    contractName: '数字内容产业服务平台技术服务合同',
+    reminder: '当天提醒',
+  },
+  {
+    id: 9,
+    title: '质保金退还',
+    date: '2026-08-31',
+    type: '付款',
+    contractName: '年度软件采购框架协议',
+    reminder: '提前7天',
+  },
 ]
 
 const handleDayClick = (day: ScheduleCalendarDay) => console.log('点击日期：', day.dateKey)
@@ -30,7 +97,6 @@ const handleTaskClick = (task: ScheduleCalendarTask) => console.log('点击任�
 </script>
 
 <template>
-  {{ currentMonth }} ?? {{ view }} == {{ type }}
   <s-schedule-calendar
     v-model="currentMonth"
     v-model:view="view"
