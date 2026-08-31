@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-icon name="delete"></s-icon>`。属性：`name` 类型 `string`，默认值未设置；`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
+:::demo 展示基础用法。基础写法：`<s-icon name="delete"></s-icon>`。属性：`name` 类型 `SIconName`，默认值未设置，编辑器会提示 Element Plus 图标名，同时支持任意自定义名称；`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
 icon/base
 :::
 
@@ -48,17 +48,17 @@ icon/rotate
 
 ### 属性
 
-|           属性名           | 说明                                           | 类型            | 默认值  |
-| :------------------------: | ---------------------------------------------- | --------------- | ------- |
-|           `name`           | 图标名称，包含 `:` 时自动使用 Iconify          | string          | `''`    |
-|          `color`           | 图标颜色                                       | string          | -       |
-|           `size`           | 图标尺寸                                       | string / number | `16px`  |
-|          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理    | string / number | `''`    |
-|         `disabled`         | 是否禁用，禁用后不会触发点击                   | boolean         | `false` |
-|           `type`           | 图标来源，可选 `element-plus / iconify / svg`  | string          | `''`    |
-|         `svgAttrs`         | 透传给 `s-svg` 的属性                          | object          | `{}`    |
-|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`     | object          | `{}`    |
-| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染 | boolean         | `false` |
+|           属性名           | 说明                                                            | 类型            | 默认值  |
+| :------------------------: | --------------------------------------------------------------- | --------------- | ------- |
+|           `name`           | 图标名称，提示 Element Plus 图标名；包含 `:` 时自动使用 Iconify | SIconName       | `''`    |
+|          `color`           | 图标颜色                                                        | string          | -       |
+|           `size`           | 图标尺寸                                                        | string / number | `16px`  |
+|          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                     | string / number | `''`    |
+|         `disabled`         | 是否禁用，禁用后不会触发点击                                    | boolean         | `false` |
+|           `type`           | 图标来源，可选 `element-plus / iconify / svg`                   | string          | `''`    |
+|         `svgAttrs`         | 透传给 `s-svg` 的属性                                           | object          | `{}`    |
+|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                      | object          | `{}`    |
+| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                  | boolean         | `false` |
 
 ### 事件
 
@@ -69,5 +69,6 @@ icon/rotate
 ### 说明
 
 - 组件底层使用 `el-icon`，tooltip 相关属性如 `content`、`placement`、`effect` 可直接透传。
+- 在支持 Vue 模板类型提示的编辑器中，输入 `name` 会提示 Element Plus 图标名；同时仍可输入小写、短横线、自定义 SVG 或 Iconify 名称。
 - `name` 包含 `:` 时会自动按 Iconify 图标渲染，例如 `mdi:home`、`lucide:search`，图标名称可在 [Iconify Icon Sets](https://icon-sets.iconify.design/) 查询。
 - 首次使用某个在线图标时，Iconify 会按需从公开 API 加载并缓存；内网或离线项目可通过 `addIconifyIcon(name, data)` 或 `addIconifyCollection(data)` 预注册图标数据。

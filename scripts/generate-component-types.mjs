@@ -9,6 +9,11 @@ const outputPath = resolve(rootDir, 'packages/components.d.ts')
 const componentTypeDir = resolve(rootDir, 'packages/types/components')
 const chartComponentsOutputPath = resolve(componentTypeDir, 'company/chart/components.d.ts')
 const componentPropsPath = resolve(rootDir, 'packages/types/component-props.d.ts')
+const elementPlusIconNamesOutputPath = resolve(rootDir, 'packages/types/element-plus-icon-names.d.ts')
+const elementPlusIconComponentsPath = resolve(
+  rootDir,
+  'node_modules/@element-plus/icons-vue/dist/types/components/index.d.ts',
+)
 const declarationPrettierOptions = (await prettier.resolveConfig(outputPath)) ?? {}
 const checkOnly = process.argv.includes('--check')
 const outdatedDeclarationFiles = []
@@ -33,6 +38,26 @@ const writeDeclarationFile = async (filePath, content) => {
   mkdirSync(dirname(filePath), { recursive: true })
   writeFileSync(filePath, formattedContent)
 }
+
+const elementPlusIconNames = [
+  ...readFileSync(elementPlusIconComponentsPath, 'utf-8').matchAll(/export \{ default as (\w+) \}/g),
+].map((match) => match[1])
+const elementPlusIconNameSuggestions = [
+  ...new Set([
+    ...elementPlusIconNames.map((name) =>
+      name.replace(/([A-Z])/g, (letter, _matchedLetter, offset) => `${offset === 0 ? '' : '-'}${letter.toLowerCase()}`),
+    ),
+    ...elementPlusIconNames,
+  ]),
+]
+
+await writeDeclarationFile(
+  elementPlusIconNamesOutputPath,
+  [
+    '/** Element Plus 提供的图标名称，由 scripts/generate-component-types.mjs 自动生成。 */',
+    `export type SElementPlusIconName = ${elementPlusIconNameSuggestions.map((name) => `'${name}'`).join(' | ')}`,
+  ].join('\n'),
+)
 
 const EXCLUDED_COMPONENT_DIRS = new Set(['common', 'company', 'customMessage', 'utils'])
 const CHART_COMPONENT_PATHS = new Set([
@@ -359,7 +384,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'SIconProps',
       description: 's-icon 图标组件，支持 Iconify、Element Plus、本地 SVG、尺寸、颜色、旋转角度和 tooltip。',
       slots: ['default'],
-      hoverProps: componentHoverProps('SIconProps', ['SIconProps', 'SybzRecord']),
+      hoverProps: componentHoverProps('SIconProps', ['SIconName', 'SIconProps', 'SybzRecord']),
     },
   ],
   [

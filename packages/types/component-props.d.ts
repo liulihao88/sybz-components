@@ -25,10 +25,13 @@ import type {
   UploadRequestOptions,
   UploadUserFile,
 } from 'element-plus/es/components/upload'
+import type { SElementPlusIconName } from './element-plus-icon-names'
 
 export type SybzComponentTheme = 'default' | 'chenghua' | 'shijingshan'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
+export type { SElementPlusIconName } from './element-plus-icon-names'
+export type SIconName = SElementPlusIconName | (string & {})
 
 export type SImageSrcResolver = (src: string) => string | undefined
 
@@ -489,8 +492,8 @@ export interface SMarkdownProps {
 }
 
 export interface SIconProps extends SHtmlStringProps {
-  /** 图标名称；包含 `:` 时自动使用 Iconify，例如 `mdi:home` */
-  name?: string
+  /** 图标名称；支持 Element Plus 图标名提示，包含 `:` 时自动使用 Iconify，例如 `mdi:home` */
+  name?: SIconName
   color?: string
   size?: string | number
   /** 图标旋转角度，数字及数字字符串按 deg 处理 */

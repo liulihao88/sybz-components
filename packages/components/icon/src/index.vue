@@ -5,12 +5,13 @@ import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import type { SIconName } from '@/types/component-props'
 
 defineOptions({
   name: 'SIcon',
 })
 interface IconProps {
-  name?: string
+  name?: SIconName
   color?: string
   size?: string | number
   disabled?: boolean
