@@ -79,6 +79,28 @@ const toOnlineDocsUrl = (docsPath) => `${onlineDocsBaseUrl}${docsPath.replace(/\
 
 const TYPED_COMPONENT_PROPS = new Map([
   [
+    'SPagination',
+    {
+      importPath: componentPropsPath,
+      typeName: 'SPaginationProps',
+      exportedComponentTypeName: 'SPaginationComponent',
+      tagName: 's-pagination',
+      description: 's-pagination 分页组件，支持主题、页码切换、回车跳页、总数展示以及内容超宽时横向滚动。',
+      publicPropsTypeName: 'SPaginationPublicProps',
+      useDefaultExportForGlobal: true,
+      instanceMembers: [
+        '$emit: <Event extends keyof SPaginationEmits>(event: Event, ...args: SPaginationEmits[Event]) => void',
+      ],
+      hoverProps: componentHoverProps('SPaginationSelfProps', [
+        'SPaginationEmits',
+        'SPaginationProps',
+        'SPaginationSelfProps',
+        'SybzComponentSize',
+        'SybzComponentTheme',
+      ]),
+    },
+  ],
+  [
     'STableSearch',
     {
       importPath: resolve(rootDir, 'packages/components/tableSearch/src/types.ts'),

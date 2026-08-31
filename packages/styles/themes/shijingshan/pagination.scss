@@ -1,0 +1,36 @@
+.s-pagination--shijingshan.s-pagination--shijingshan {
+  color: var(--s-sjs-text-regular);
+  font-family: var(--s-sjs-font-family);
+
+  .el-pagination {
+    --el-color-primary: var(--s-sjs-primary);
+    --el-pagination-hover-color: var(--s-sjs-primary-hover);
+    --el-pagination-button-color: var(--s-sjs-text-regular);
+    --el-pagination-button-bg-color: var(--s-sjs-primary-soft);
+    --el-pagination-button-disabled-color: var(--s-sjs-text-muted);
+    --el-pagination-button-disabled-bg-color: var(--s-sjs-disabled-bg);
+    --el-pagination-border-radius: var(--s-sjs-radius);
+  }
+
+  .s-pagination__total {
+    color: var(--s-sjs-text-muted);
+  }
+
+  .s-pagination__total-value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 24px;
+    margin: 0 8px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--s-sjs-primary-soft-2);
+    color: var(--s-sjs-primary);
+    font-weight: 700;
+  }
+
+  .s-pagination__jumper {
+    color: var(--s-sjs-text-regular);
+  }
+}

@@ -308,6 +308,10 @@ export default defineConfig({
               link: '/components/popconfirm/home.md',
             },
             {
+              text: sybzMark('pagination分页组件'),
+              link: '/components/pagination/home.md',
+            },
+            {
               text: 'progress组件',
               link: '/components/progress/home.md',
             },

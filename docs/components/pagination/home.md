@@ -1,0 +1,72 @@
+# Pagination 分页组件
+
+`s-pagination` 基于 Element Plus Pagination 封装，根据 `total / pageSize` 自动计算总页数，并支持页码切换、手动输入回车跳页、主题样式和窄容器横向滚动。
+
+## Hidden Title {.md-hidden}
+
+<DocBasicUsage code='<s-pagination v-model:current-page="page" :total="100" :page-size="10" @change="handleChange" />' />
+
+## 属性事件插槽简介
+
+<ApiIntro />
+
+### 基础用法（currentPage 默认值：1，total 默认值：0，pageSize 默认值：10）
+
+:::demo 展示页码切换和总数，总页数会按照 `Math.ceil(total / pageSize)` 自动计算。基础写法：`<s-pagination v-model:current-page="page" :total="96" :page-size="10" @change="handleChange" />`。属性：`currentPage` 类型 `number`，默认值 `1`；`total` 类型 `number`，默认值 `0`；`pageSize` 类型 `number`，默认值 `10`；`background` 可选值 `true / false`，默认值 `true`。
+pagination/base
+:::
+
+### 主题（theme 默认值：default）
+
+:::demo 展示成华和石景山主题分页。基础写法：`<s-pagination theme="chenghua" :total="80" :page-size="10" />`。属性：`theme` 可选值 `default / chenghua / shijingshan`，默认值 `default`；`total` 类型 `number`，默认值 `0`；`pageSize` 类型 `number`，默认值 `10`；`currentPage` 类型 `number`，默认值 `1`。
+pagination/theme
+:::
+
+### 手动输入回车跳页（showJumper 默认值：true）
+
+:::demo 在输入框填写页码并按回车后切换页面，同时触发 `update:currentPage / change / jump`。基础写法：`<s-pagination v-model:current-page="page" :total="200" :page-size="10" @jump="handleJump" />`。属性：`showJumper` 可选值 `true / false`，默认值 `true`；`jumpText` 类型 `string`，默认值 `跳至`；`pageText` 类型 `string`，默认值 `页`；输入值自动限制在 `1` 到自动计算出的总页数之间。
+pagination/jumper
+:::
+
+### 超宽滚动
+
+:::demo 当分页内容宽度超过容器时自动显示横向滚动，不会撑破外层布局。基础写法：`<s-pagination :total="990" :page-size="10" :pager-count="11" />`。属性：`pagerCount` 类型 `number`，默认值 `7`；`showTotal` 可选值 `true / false`，默认值 `true`；`showJumper` 可选值 `true / false`，默认值 `true`。
+pagination/scroll
+:::
+
+### 仅显示页码（showTotal 默认值：true，showJumper 默认值：true）
+
+:::demo 隐藏“共 X 条”和“跳至 X 页”，只保留上一页、页码和下一页。基础写法：`<s-pagination :total="100" :show-total="false" :show-jumper="false" />`。属性：`showTotal` 可选值 `true / false`，默认值 `true`；`showJumper` 可选值 `true / false`，默认值 `true`；`total` 类型 `number`，默认值 `0`；`pageSize` 类型 `number`，默认值 `10`。
+pagination/simple
+:::
+
+### 属性
+
+| 属性名             | 说明                                                        | 类型    | 可选值                             | 默认值    |
+| ------------------ | ----------------------------------------------------------- | ------- | ---------------------------------- | --------- |
+| `currentPage`      | 当前页码，支持 `v-model:current-page`                       | number  | `1` 到总页数                       | `1`       |
+| `total`            | 数据总条数                                                  | number  | 非负整数                           | `0`       |
+| `pageSize`         | 每页条数，总页数按照 `Math.ceil(total / pageSize)` 自动计算 | number  | 正整数                             | `10`      |
+| `pagerCount`       | 页码按钮数量                                                | number  | Element Plus 支持的奇数            | `7`       |
+| `theme`            | 主题样式                                                    | string  | `default / chenghua / shijingshan` | `default` |
+| `background`       | 是否显示分页按钮背景                                        | boolean | `true / false`                     | `true`    |
+| `disabled`         | 是否禁用分页和跳页输入                                      | boolean | `true / false`                     | `false`   |
+| `showTotal`        | 是否显示总条数                                              | boolean | `true / false`                     | `true`    |
+| `showJumper`       | 是否显示回车跳页输入框                                      | boolean | `true / false`                     | `true`    |
+| `showOnSinglePage` | 只有一页时是否仍然显示                                      | boolean | `true / false`                     | `false`   |
+| `totalText`        | 总条数前缀文字                                              | string  | 任意文本                           | `共`      |
+| `jumpText`         | 跳页输入框前缀文字                                          | string  | 任意文本                           | `跳至`    |
+| `pageText`         | 跳页输入框后缀文字                                          | string  | 任意文本                           | `页`      |
+| `size`             | 分页及输入框尺寸                                            | string  | `small / default / large`          | `default` |
+
+其他属性会透传给内部 `el-pagination`，但 `pageCount` 由组件内部计算，`layout` 固定为 `prev, pager, next`，手动跳页由 `s-pagination` 统一提供。
+
+### 事件
+
+| 事件名               | 说明                                      | 回调参数 |
+| -------------------- | ----------------------------------------- | -------- |
+| `update:currentPage` | 当前页码更新，用于 `v-model:current-page` | `(page)` |
+| `change`             | 点击页码、上一页、下一页或回车跳页时触发  | `(page)` |
+| `jump`               | 在手动输入框按回车后触发                  | `(page)` |
+| `prev-click`         | 点击上一页时触发                          | `(page)` |
+| `next-click`         | 点击下一页时触发                          | `(page)` |

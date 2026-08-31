@@ -267,6 +267,18 @@ declare module 'vue' {
      */
     's-menu': (typeof import('./types/components/menu'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/pagination/home.html
+     *
+     * s-pagination 分页组件，支持主题、页码切换、回车跳页、总数展示以及内容超宽时横向滚动。
+     */
+    SPagination: (typeof import('./types/components/pagination'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/pagination/home.html
+     *
+     * s-pagination 分页组件，支持主题、页码切换、回车跳页、总数展示以及内容超宽时横向滚动。
+     */
+    's-pagination': (typeof import('./types/components/pagination'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/popconfirm/home.html
      */
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
@@ -537,6 +549,10 @@ export type SMenuComponent = (typeof import('./types/components/menu'))['default
 export type SMenuInstance = ComponentInstance<SMenuComponent>
 export type SMenuPublicProps = SMenuInstance['$props']
 
+export type SPaginationComponent = import('./types/components/pagination').SPaginationComponent
+export type SPaginationInstance = ComponentInstance<SPaginationComponent>
+export type SPaginationPublicProps = import('./types/components/pagination').SPaginationPublicProps
+
 export type SPopconfirmComponent = import('./types/components/popconfirm').SPopconfirmComponent
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>
 export type SPopconfirmPublicProps = import('./types/components/popconfirm').SPopconfirmPublicProps
@@ -640,6 +656,7 @@ declare global {
       's-item': JSXComponentProps<SItemPublicProps>
       's-markdown': JSXComponentProps<SMarkdownPublicProps>
       's-menu': JSXComponentProps<SMenuPublicProps>
+      's-pagination': JSXComponentProps<SPaginationPublicProps>
       's-popconfirm': JSXComponentProps<SPopconfirmPublicProps>
       's-progress': JSXComponentProps<SProgressPublicProps>
       's-radio': JSXComponentProps<SRadioPublicProps>

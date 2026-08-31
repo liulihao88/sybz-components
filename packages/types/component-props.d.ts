@@ -14,6 +14,7 @@ import type { ImagePropsPublic } from 'element-plus/es/components/image/src/imag
 import type { EmptyPropsPublic } from 'element-plus/es/components/empty'
 import type { PopoverPropsPublic } from 'element-plus/es/components/popover'
 import type { ProgressPropsPublic } from 'element-plus/es/components/progress'
+import type { PaginationPropsPublic } from 'element-plus/es/components/pagination/src/pagination'
 import type { RadioGroupPropsPublic } from 'element-plus/es/components/radio'
 import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
 import type { MenuProps } from 'element-plus'
@@ -735,6 +736,48 @@ export interface SProgressSelfProps {
 }
 
 export type SProgressProps = SProgressSelfProps & Partial<Omit<ProgressPropsPublic, keyof SProgressSelfProps>>
+
+export interface SPaginationSelfProps {
+  /** 当前页码；默认值：1 */
+  currentPage?: number
+  /** 数据总条数；默认值：0 */
+  total?: number
+  /** 每页条数，用于根据 total 计算总页数；默认值：10 */
+  pageSize?: number
+  /** 页码按钮数量；默认值：7 */
+  pagerCount?: number
+  /** 主题；默认值：default */
+  theme?: SybzComponentTheme
+  /** 是否使用带背景色的分页按钮；默认值：true */
+  background?: boolean
+  /** 是否禁用；默认值：false */
+  disabled?: boolean
+  /** 是否显示总条数；默认值：true */
+  showTotal?: boolean
+  /** 是否显示手动跳页；默认值：true */
+  showJumper?: boolean
+  /** 只有一页时是否仍然显示；默认值：false */
+  showOnSinglePage?: boolean
+  /** 总数前缀文本；默认值：共 */
+  totalText?: string
+  /** 跳页前缀文本；默认值：跳至 */
+  jumpText?: string
+  /** 跳页后缀文本；默认值：页 */
+  pageText?: string
+  /** 分页尺寸；默认值：default */
+  size?: SybzComponentSize
+}
+
+export type SPaginationProps = SPaginationSelfProps &
+  Partial<Omit<PaginationPropsPublic, keyof SPaginationSelfProps | 'pageCount' | 'layout' | 'hideOnSinglePage'>>
+
+export type SPaginationEmits = {
+  'update:currentPage': [page: number]
+  change: [page: number]
+  jump: [page: number]
+  'prev-click': [page: number]
+  'next-click': [page: number]
+}
 
 export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   title?: string
