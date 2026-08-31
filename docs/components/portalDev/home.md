@@ -28,12 +28,15 @@ npm install -g @sybz-components/portal-dev
 
 ## 全局安装后的傻瓜式配置
 
-- macOS / Linux：`open ~/.config/sybz-components/portal-dev.json`
-- Windows：`%APPDATA%\sybz-components\portal-dev.json`
+macOS、Windows 和 Linux 都可以执行以下命令，使用系统默认应用打开配置文件：
+
+```bash
+portal-dev open
+```
 
 ```bash
 {
-  "version": 5,
+  "version": 11,
   "profiles": {
     "sjs": [
       {
@@ -88,7 +91,9 @@ npm install -g @sybz-components/portal-dev
 portal-dev login
 ```
 
-选择菜单中的账号时不需要回车：前 9 项使用 `1-9`，第 10 项起使用 `A-Z`。账号超过 35 个时，会自动改为输入完整序号后回车。
+也可以直接传入序号，例如 `portal-dev login 1` 会立即登录第 1 个账号，不再等待输入；`portal-dev login 10` 和 `portal-dev login A` 都会选择第 10 个账号。
+
+不传选择参数时，菜单中的账号不需要回车：前 9 项使用 `1-9`，第 10 项起使用 `A-Z`。账号超过 35 个时，会自动改为输入完整序号后回车。
 
 也可以快速启动(alias就是快速启动的命令)
 
@@ -123,7 +128,7 @@ portal-dev help
 
 ### 提示缺少账号密码
 
-在本机终端运行 `open ~/.config/sybz-components/portal-dev.json`，配置完成后直接重新执行联调命令。
+在本机终端运行 `portal-dev open`，配置完成后直接重新执行联调命令。
 
 ### 找不到 Chrome 或 Edge
 
