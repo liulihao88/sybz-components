@@ -48,6 +48,7 @@ const parseColor = computed(() => {
   if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
   if (mergedProps.value.color) return mergedProps.value.color
   if (!mergedProps.value.type) return undefined
+  if (mergedProps.value.type === 'default') return 'var(--el-text-color-regular)'
   if (mergedProps.value.variant === 'solid') return 'var(--el-color-white)'
   return `var(--el-color-${mergedProps.value.type})`
 })
@@ -126,20 +127,22 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
   }
 
   &--light {
-    background-color: var(--el-color-primary-light-9);
+    background-color: var(--el-fill-color-light);
   }
 
   &--solid {
-    background-color: var(--el-color-primary);
+    background-color: var(--el-bg-color);
+    border: 1px solid var(--el-border-color);
   }
 
-  @each $type in success, warning, danger, info {
+  @each $type in primary, success, warning, danger, info {
     &--#{$type}.s-icon--light {
       background-color: var(--el-color-#{$type}-light-9);
     }
 
     &--#{$type}.s-icon--solid {
       background-color: var(--el-color-#{$type});
+      border-color: var(--el-color-#{$type});
     }
   }
 

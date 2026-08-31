@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-const types = ['primary', 'success', 'warning', 'danger', 'info'] as const
+const types = ['default', 'primary', 'success', 'warning', 'danger', 'info'] as const
 const variants = ['plain', 'light', 'solid'] as const
 </script>
 

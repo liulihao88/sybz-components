@@ -48,25 +48,25 @@ icon/rotate
 
 ### 语义类型与背景样式（type 默认值：未设置，variant 默认值：plain）
 
-:::demo 展示图标的语义颜色和背景样式。基础写法：`<s-icon name="warning" type="warning" variant="light"></s-icon>`。属性：`type` 可选 `primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`；`color` 类型 `string`，默认值未设置，显式设置时优先于语义颜色。
+:::demo 展示图标的语义颜色和背景样式。基础写法：`<s-icon name="warning" type="warning" variant="light"></s-icon>`。属性：`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`；`color` 类型 `string`，默认值未设置，显式设置时优先于语义颜色；`type="default"` 配合 `variant="solid"` 时使用白色背景和默认边框。
 icon/type
 :::
 
 ### 属性
 
-|           属性名           | 说明                                                            | 类型            | 默认值  |
-| :------------------------: | --------------------------------------------------------------- | --------------- | ------- |
-|           `name`           | 图标名称，提示 Element Plus 图标名；包含 `:` 时自动使用 Iconify | SIconName       | `''`    |
-|          `color`           | 图标颜色                                                        | string          | -       |
-|           `size`           | 图标尺寸                                                        | string / number | `16px`  |
-|          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                     | string / number | `''`    |
-|         `disabled`         | 是否禁用，禁用后不会触发点击                                    | boolean         | `false` |
-|          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg`            | string          | `auto`  |
-|           `type`           | 语义类型，可选 `primary / success / warning / danger / info`    | string          | -       |
-|         `variant`          | 视觉样式，可选 `plain / light / solid`                          | string          | `plain` |
-|         `svgAttrs`         | 透传给 `s-svg` 的属性                                           | object          | `{}`    |
-|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                      | object          | `{}`    |
-| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                  | boolean         | `false` |
+|           属性名           | 说明                                                                   | 类型            | 默认值  |
+| :------------------------: | ---------------------------------------------------------------------- | --------------- | ------- |
+|           `name`           | 图标名称，提示 Element Plus 图标名；包含 `:` 时自动使用 Iconify        | SIconName       | `''`    |
+|          `color`           | 图标颜色                                                               | string          | -       |
+|           `size`           | 图标尺寸                                                               | string / number | `16px`  |
+|          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                            | string / number | `''`    |
+|         `disabled`         | 是否禁用，禁用后不会触发点击                                           | boolean         | `false` |
+|          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg`                   | string          | `auto`  |
+|           `type`           | 语义类型，可选 `default / primary / success / warning / danger / info` | string          | -       |
+|         `variant`          | 视觉样式，可选 `plain / light / solid`                                 | string          | `plain` |
+|         `svgAttrs`         | 透传给 `s-svg` 的属性                                                  | object          | `{}`    |
+|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                             | object          | `{}`    |
+| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                         | boolean         | `false` |
 
 ### 事件
 
