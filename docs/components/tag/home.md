@@ -76,6 +76,12 @@ tag/slot
 tag/async
 :::
 
+### 文本溢出提示
+
+:::demo 标签宽度不足时，文本自动显示省略号，鼠标移入后显示完整内容；文本未溢出时不显示提示，原有逻辑保持不变。基础写法：`<s-tag width="120">这是一段较长的标签文本</s-tag>`。属性：`width` 类型 `string / number`，默认值未设置，数字自动补 `px`；`height` 类型 `string / number`，默认值未设置；默认插槽用于标签文本，默认值为 `value` 或映射后的标签文案。
+tag/overflow
+:::
+
 ### 属性
 
 |  属性名   | 说明                                                        | 类型                                                  | 默认值    |
@@ -93,6 +99,8 @@ tag/async
 |  `other`  | 未命中任何规则时的兜底标签类型                              | string                                                | `primary` |
 |  `width`  | 标签宽度，会经过 `handleWidthHeight` 处理                   | string / number                                       | -         |
 | `height`  | 标签高度，会经过 `handleWidthHeight` 处理                   | string / number                                       | -         |
+
+文本超出标签可用宽度时会自动显示省略号，并仅在鼠标移入溢出文本时显示完整内容。`closable` 标签的关闭图标不会被文本挤压。
 
 ### 常用透传属性
 

@@ -697,6 +697,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tag',
       slots: ['default'],
+      description: 's-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。',
       hoverProps: componentHoverProps(
         'STagSelfProps',
         ['STagSelfProps', 'SybzComponentSize', 'SybzComponentTheme', 'SybzRecord'],

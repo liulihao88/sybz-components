@@ -372,10 +372,14 @@ declare module 'vue' {
     's-tabs': (typeof import('./types/components/tabs'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tag/home.html
+     *
+     * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
      */
     STag: (typeof import('./types/components/tag'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tag/home.html
+     *
+     * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
      */
     's-tag': (typeof import('./types/components/tag'))['default']
     /**

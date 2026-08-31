@@ -4,6 +4,11 @@ import type { STagSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord }
 
 type ElTagInstance = InstanceType<typeof ElTag>
 
+/**
+ * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus Tag 的公开属性。
+ */
 export type STagPublicProps = STagSelfProps & Omit<ElTagInstance['$props'], keyof STagSelfProps>
 
 export type STagComponent = {

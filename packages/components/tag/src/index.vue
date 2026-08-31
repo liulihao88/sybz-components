@@ -3,7 +3,7 @@ defineOptions({
   name: 'STag',
 })
 
-import { computed } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue'
 import { getType, isEmpty } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -136,9 +136,35 @@ const parseType = computed(() => {
 })
 
 const tagClass = computed(() => ({
+  's-tag': true,
   's-tag--chenghua': mergedProps.value.theme === 'chenghua',
   's-tag--shijingshan': mergedProps.value.theme === 'shijingshan',
 }))
+
+const textRef = ref<HTMLElement>()
+const tooltipContent = ref('')
+const isOverflow = ref(false)
+
+const updateOverflow = () => {
+  const text = textRef.value
+  if (!text) return
+
+  tooltipContent.value = text.textContent?.trim() ?? ''
+  isOverflow.value = Boolean(tooltipContent.value) && text.scrollWidth > text.clientWidth
+}
+
+let resizeObserver: ResizeObserver | undefined
+
+onMounted(() => {
+  nextTick(() => {
+    updateOverflow()
+    if (typeof ResizeObserver === 'undefined' || !textRef.value) return
+    resizeObserver = new ResizeObserver(updateOverflow)
+    resizeObserver.observe(textRef.value)
+  })
+})
+onUpdated(() => nextTick(updateOverflow))
+onBeforeUnmount(() => resizeObserver?.disconnect())
 </script>
 
 <template>
@@ -149,8 +175,33 @@ const tagClass = computed(() => ({
     :class="tagClass"
     :style="{ ...handleWidthHeight(mergedProps.width, mergedProps.height) }"
   >
-    <slot>
-      {{ parseContent }}
-    </slot>
+    <s-tooltip :content="tooltipContent" :disabled="!isOverflow" :show-slot="false" placement="top">
+      <template #trigger>
+        <span ref="textRef" class="s-tag__text" @mouseenter="updateOverflow">
+          <slot>
+            {{ parseContent }}
+          </slot>
+        </span>
+      </template>
+    </s-tooltip>
   </el-tag>
 </template>
+
+<style scoped lang="scss">
+.s-tag {
+  max-width: 100%;
+}
+
+.s-tag :deep(.el-tag__content) {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.s-tag__text {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
