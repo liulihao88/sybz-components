@@ -5,6 +5,7 @@ import type {
   SIconSource,
   SIconType,
   SIconVariant,
+  SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
 

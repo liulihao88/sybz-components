@@ -393,6 +393,7 @@ const TYPED_COMPONENT_PROPS = new Map([
         'SIconSource',
         'SIconType',
         'SIconVariant',
+        'SybzComponentTheme',
         'SybzRecord',
       ]),
     },
