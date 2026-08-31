@@ -4,7 +4,7 @@
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='<s-svg name="icon_file-cloud-line"></s-svg>' />
+<DocBasicUsage code='<s-svg icon="icon_file-cloud-line"></s-svg>' />
 
 ## 属性事件插槽简介
 
@@ -47,18 +47,18 @@ plugins: [
 import 'virtual:svg-icons-register'
 
 // 可以使用了
-<s-svg name="test" color="blue"></s-svg>
+<s-svg icon="test" color="blue"></s-svg>
 ```
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-svg name="icon_file-cloud-line"></s-svg>`。属性：`name` 类型 `string`，默认值未设置；`size` 可选 `'' / small / default / large`，默认值 `''`；`color` 类型 `string`，默认值未设置。
+:::demo 展示基础用法。基础写法：`<s-svg icon="icon_file-cloud-line"></s-svg>`。属性：`icon` 类型 `string`，无默认值且必填；`size` 类型 `string / number`，默认值 `16px`；`color` 类型 `string`，默认值未设置。
 svg/base
 :::
 
 ### 通常用法
 
-:::demo 展示通常用法配置。基础写法：`<s-svg name="icon_file-cloud-line" :customStyle="{ width: '100px', height: '100px', color: 'red' }"></s-svg>`。属性：`name` 类型 `string`，默认值未设置。
+:::demo 展示通常用法配置。基础写法：`<s-svg icon="icon_file-cloud-line" :customStyle="{ width: '100px', height: '100px', color: 'red' }"></s-svg>`。属性：`icon` 类型 `string`，无默认值且必填；`customStyle` 类型 `object`，默认值 `{}`。
 svg/usually
 :::
 
@@ -67,7 +67,7 @@ svg/usually
 |    属性名     | 说明           | 类型            | 默认值 |
 | :-----------: | -------------- | --------------- | ------ |
 |   `prefix`    | symbol 前缀    | string          | `icon` |
-|    `name`     | svg 图标名称   | string          | -      |
+|    `icon`     | svg 图标名称   | string          | -      |
 |    `color`    | 图标颜色       | string          | -      |
 | `customStyle` | 自定义样式对象 | object          | `{}`   |
 |    `size`     | 图标尺寸       | string / number | `16px` |

@@ -19,7 +19,7 @@ const silentText = ref('静默复制的文本')
         <span>
           {{ text }}
         </span>
-        <s-icon name="copy-document"></s-icon>
+        <s-icon icon="copy-document"></s-icon>
       </s-flex>
     </div>
     <div class="m-t-8">

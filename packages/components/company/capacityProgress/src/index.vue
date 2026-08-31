@@ -211,7 +211,7 @@ onUnmounted(() => {
     </s-progress>
     <s-icon
       v-if="percentage > 100"
-      name="warning"
+      icon="warning"
       content="已用容量远超总容量, 请扩容 "
       class="s-capacity-progress__warning"
       v-bind="iconAttrs"

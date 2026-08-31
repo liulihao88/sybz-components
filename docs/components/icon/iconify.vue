@@ -13,37 +13,37 @@ addIconifyIcon('project:rocket', {
   <div class="iconify-demo">
     <div class="iconify-demo__item">
       <!-- 最简单的在线用法：检测到名称包含冒号后自动使用 Iconify。 -->
-      <s-icon name="tabler:home" size="28" content="Tabler Icons" />
+      <s-icon icon="tabler:home" size="28" content="Tabler Icons" />
       <span>Tabler 默认推荐</span>
     </div>
 
     <div class="iconify-demo__item">
       <!-- 需要明确指定来源时，可以传 source="iconify"。 -->
-      <s-icon name="tabler:search" source="iconify" size="28" type="primary" content="Tabler Icons" />
+      <s-icon icon="tabler:search" source="iconify" size="28" type="primary" content="Tabler Icons" />
       <span>指定来源</span>
     </div>
 
     <div class="iconify-demo__item">
       <!-- 单色图标使用 currentColor，可以通过 type 或 color 修改颜色。 -->
-      <s-icon name="tabler:book" size="28" type="success" />
+      <s-icon icon="tabler:book" size="28" type="success" />
       <span>语义颜色</span>
     </div>
 
     <div class="iconify-demo__item">
       <!-- iconifyAttrs 会直接传给 Iconify Icon。 -->
-      <s-icon name="tabler:login" size="28" :iconify-attrs="{ flip: 'horizontal' }" />
+      <s-icon icon="tabler:login" size="28" :iconify-attrs="{ flip: 'horizontal' }" />
       <span>水平翻转</span>
     </div>
 
     <div class="iconify-demo__item">
       <!-- logos 图标集通常自带多种颜色，设置 color 不一定会改变它。 -->
-      <s-icon name="logos:vue" size="28" content="多彩图标" />
+      <s-icon icon="logos:vue" size="28" content="多彩图标" />
       <span>多彩图标</span>
     </div>
 
     <div class="iconify-demo__item">
       <!-- project:rocket 已在 script 中注册，可在无网络环境下使用。 -->
-      <s-icon name="project:rocket" size="28" type="danger" content="离线注册" />
+      <s-icon icon="project:rocket" size="28" type="danger" content="离线注册" />
       <span>离线图标</span>
     </div>
   </div>

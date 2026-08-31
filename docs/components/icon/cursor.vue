@@ -1,11 +1,11 @@
 <template>
   <div class="icon-cursors">
     <div v-for="item in cursors" :key="item.cursor" class="icon-cursors__item">
-      <s-icon name="tabler:hand-click" :cursor="item.cursor" size="24" type="primary" variant="light" />
+      <s-icon icon="tabler:hand-click" :cursor="item.cursor" size="24" type="primary" variant="light" />
       <span>{{ item.cursor }}</span>
     </div>
     <div class="icon-cursors__item">
-      <s-icon name="tabler:hand-stop" cursor="pointer" size="24" type="info" variant="light" disabled />
+      <s-icon icon="tabler:hand-stop" cursor="pointer" size="24" type="info" variant="light" disabled />
       <span>disabled</span>
     </div>
   </div>

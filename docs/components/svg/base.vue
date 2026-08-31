@@ -4,10 +4,10 @@ import { ref } from 'vue'
 
 <template>
   <div>
-    <s-svg name="icon_file-cloud-line"></s-svg>
+    <s-svg icon="icon_file-cloud-line"></s-svg>
     <s-title title="改变大小 size"></s-title>
-    <s-svg name="icon_file-cloud-line" size="50" color="blue"></s-svg>
+    <s-svg icon="icon_file-cloud-line" size="50" color="blue"></s-svg>
     <s-title title="改变颜色 color"></s-title>
-    <s-svg name="icon_file-cloud-line" size="50" color="red"></s-svg>
+    <s-svg icon="icon_file-cloud-line" size="50" color="red"></s-svg>
   </div>
 </template>

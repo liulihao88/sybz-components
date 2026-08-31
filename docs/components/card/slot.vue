@@ -10,7 +10,7 @@
       </template>
       默认插槽
       <template #icon>
-        <s-icon name="plus" content="自定义折叠icon"></s-icon>
+        <s-icon icon="plus" content="自定义折叠icon"></s-icon>
       </template>
       <template #footer>
         <el-button type="primary">footer插槽</el-button>

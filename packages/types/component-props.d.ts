@@ -33,6 +33,7 @@ export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})
+export type SIconValue = SIconName | Component
 export type SIconSource = 'auto' | 'element-plus' | 'iconify' | 'svg'
 export type SIconType = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
 export type SIconVariant = 'plain' | 'light' | 'solid'
@@ -508,8 +509,8 @@ export interface SMarkdownProps {
 }
 
 export interface SIconProps extends SHtmlStringProps {
-  /** 图标名称；支持 Element Plus 图标名提示，包含 `:` 时自动使用 Iconify，业务图标推荐使用 Tabler，例如 `tabler:home` */
-  name?: SIconName
+  /** 图标；支持 Vue 组件和 Element Plus 图标名提示，字符串包含 `:` 时自动使用 Iconify，业务图标推荐使用 Tabler，例如 `tabler:home` */
+  icon?: SIconValue
   color?: string
   size?: string | number
   /** 背景圆角，数字自动补 px；默认由 variant 和 theme 决定 */
@@ -520,7 +521,7 @@ export interface SIconProps extends SHtmlStringProps {
   rotate?: string | number
   disabled?: boolean
   theme?: SybzComponentTheme
-  /** 图标来源；默认值：auto，根据 name 自动识别 Iconify，否则使用 Element Plus */
+  /** 图标来源；默认值：auto，根据 icon 自动识别 Iconify，否则使用 Element Plus */
   source?: SIconSource
   /** 图标语义类型；默认值：undefined */
   type?: SIconType
@@ -811,7 +812,7 @@ export interface SSplitPaneProps {
 
 export interface SSvgProps {
   prefix?: string
-  name: string
+  icon: string
   color?: string
   customStyle?: SybzRecord
   size?: string | number

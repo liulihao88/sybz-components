@@ -35,9 +35,9 @@ const options = computed(() => {
       key: '是否锁定',
       id: () => {
         if (data.value.isLock) {
-          return <s-icon name="lock"></s-icon>
+          return <s-icon icon="lock"></s-icon>
         } else {
-          return <s-icon name="unlock"></s-icon>
+          return <s-icon icon="unlock"></s-icon>
         }
       },
     },

@@ -133,7 +133,7 @@ defineExpose({
         @blur="blurInput"
       />
     </div>
-    <s-icon v-if="labelarr.length > 0" name="circle-close" class="s-input-label__clear" @click="clearAll"></s-icon>
+    <s-icon v-if="labelarr.length > 0" icon="circle-close" class="s-input-label__clear" @click="clearAll"></s-icon>
   </div>
 </template>
 

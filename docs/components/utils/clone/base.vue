@@ -62,7 +62,7 @@ const options = ref([
           <div class="m-r-8">clone(refValue)</div>
           <div class="f-st-ct">
             <s-tooltip content="const refValue = ref([11, 22, 33])" class="h-16">
-              <s-icon name="warning"></s-icon>
+              <s-icon icon="warning"></s-icon>
             </s-tooltip>
           </div>
         </s-flex>

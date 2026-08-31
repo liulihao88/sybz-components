@@ -4,7 +4,7 @@ export type SSvgComponent = {
   new (): {
     $props: {
       prefix?: string
-      name: string
+      icon: string
       color?: string
       customStyle?: SybzRecord
       size?: string | number

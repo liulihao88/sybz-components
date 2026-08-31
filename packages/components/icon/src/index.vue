@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
+import type { Component } from 'vue'
 import type { ElTooltipProps } from 'element-plus'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
@@ -18,7 +19,7 @@ defineOptions({
   name: 'SIcon',
 })
 interface IconProps {
-  name?: SIconName
+  icon?: SIconName | Component
   color?: string
   size?: string | number
   borderRadius?: string | number
@@ -35,7 +36,7 @@ interface IconProps {
 }
 
 const props = withDefaults(defineProps<IconProps>(), {
-  name: '',
+  icon: '',
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
   borderRadius: '',
@@ -69,8 +70,15 @@ const parseColor = computed(() => {
 const isIconify = computed(
   () =>
     mergedProps.value.source === 'iconify' ||
-    (mergedProps.value.source === 'auto' && mergedProps.value.name.includes(':')),
+    (mergedProps.value.source === 'auto' &&
+      typeof mergedProps.value.icon === 'string' &&
+      mergedProps.value.icon.includes(':')),
 )
+
+const resolvedIcon = computed(() => {
+  if (typeof mergedProps.value.icon !== 'string') return mergedProps.value.icon
+  return `el-icon-${toLine(mergedProps.value.icon)}`
+})
 
 const iconClasses = computed(() => [
   mergedProps.value.theme !== 'default' && `s-icon--${mergedProps.value.theme}`,
@@ -119,14 +127,18 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
         <slot v-if="$slots.default"></slot>
         <!-- 仅在默认插槽为空时渲染图标 -->
         <template v-else>
-          <s-svg v-if="mergedProps.source === 'svg'" v-bind="mergedProps.svgAttrs" :name="mergedProps.name"></s-svg>
+          <s-svg
+            v-if="mergedProps.source === 'svg' && typeof mergedProps.icon === 'string'"
+            v-bind="mergedProps.svgAttrs"
+            :icon="mergedProps.icon"
+          ></s-svg>
           <iconify-icon
             v-else-if="isIconify"
             v-bind="mergedProps.iconifyAttrs"
-            :icon="mergedProps.name"
+            :icon="String(mergedProps.icon)"
             aria-hidden="true"
           />
-          <component :is="`el-icon-${toLine(mergedProps.name || '')}`" v-else></component>
+          <component :is="resolvedIcon" v-else></component>
         </template>
       </span>
     </el-tooltip>

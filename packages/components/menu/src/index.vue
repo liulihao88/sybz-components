@@ -104,7 +104,7 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
         <div v-if="resolvedHeader" class="s-menu__brand">
           <span v-if="resolvedHeader.icon" class="s-menu__brand-icon">
             <el-icon v-if="isComponentIcon(resolvedHeader.icon)"><component :is="resolvedHeader.icon" /></el-icon>
-            <SIcon v-else :name="String(resolvedHeader.icon)" />
+            <SIcon v-else :icon="String(resolvedHeader.icon)" />
           </span>
           <div class="s-menu__brand-content">
             <strong>{{ resolvedHeader.title }}</strong>
@@ -120,7 +120,7 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
           <el-icon v-if="isComponentIcon(mergedProps.actionConfig.icon)">
             <component :is="mergedProps.actionConfig.icon" />
           </el-icon>
-          <SIcon v-else-if="mergedProps.actionConfig.icon" :name="String(mergedProps.actionConfig.icon)" />
+          <SIcon v-else-if="mergedProps.actionConfig.icon" :icon="String(mergedProps.actionConfig.icon)" />
           {{ mergedProps.actionConfig.text }}
         </button>
       </slot>

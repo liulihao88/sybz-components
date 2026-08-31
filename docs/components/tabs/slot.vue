@@ -20,15 +20,15 @@ const navList = [
   <div>
     <s-tabs :options="navList">
       <template #sys-label>
-        <s-icon name="plus"></s-icon>
+        <s-icon icon="plus"></s-icon>
         系统服务
       </template>
       <template #base-label>
-        <s-icon name="delete"></s-icon>
+        <s-icon icon="delete"></s-icon>
         基础服务
       </template>
       <template #task-label>
-        <s-icon name="refresh"></s-icon>
+        <s-icon icon="refresh"></s-icon>
         高级定时
       </template>
 

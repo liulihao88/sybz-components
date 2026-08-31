@@ -137,7 +137,7 @@ init()
           "
         >
           <template #icon>
-            <s-icon name="download" />
+            <s-icon icon="download" />
           </template>
           下载
         </el-button>

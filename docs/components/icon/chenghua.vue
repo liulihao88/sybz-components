@@ -5,7 +5,7 @@
       <s-icon
         v-for="type in types"
         :key="type"
-        name="warning"
+        icon="warning"
         theme="chenghua"
         :type="type"
         :variant="variant"

@@ -53,7 +53,7 @@ const deleteItem = async (i) => {
       <template v-for="(v, i) in form.domains" :key="v.key" #[`domains.${i}.value`]>
         <s-flex align="center" gap="small">
           <s-input v-model="form.domains[i].value" />
-          <s-icon name="delete" @click="deleteItem(i)"></s-icon>
+          <s-icon icon="delete" @click="deleteItem(i)"></s-icon>
         </s-flex>
       </template>
     </s-form>

@@ -85,9 +85,9 @@
 
     <span v-if="mergedProps.showQuick && hasQuickOptions" class="s-select__select-box">
       <span class="s-select__select-box__inner">
-        <s-icon name="ArrowUp" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(false)" />
+        <s-icon icon="ArrowUp" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(false)" />
         <div class="s-select__divider" />
-        <s-icon name="ArrowDown" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(true)" />
+        <s-icon icon="ArrowDown" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(true)" />
       </span>
     </span>
   </div>

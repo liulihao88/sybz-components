@@ -30,7 +30,7 @@ const suffixIconName = computed(() => (typeof suffixIcon.value === 'string' ? su
   <el-sub-menu v-else-if="children.length" :index="index" :disabled="Boolean(read('disabled'))">
     <template #title>
       <el-icon v-if="icon && isComponentIcon"><component :is="icon" /></el-icon>
-      <SIcon v-else-if="icon" :name="icon" />
+      <SIcon v-else-if="icon" :icon="icon" />
       <span>{{ read('title') }}</span>
     </template>
     <SMenuNode
@@ -50,14 +50,14 @@ const suffixIconName = computed(() => (typeof suffixIcon.value === 'string' ? su
     </template>
     <el-menu-item :index="index" :route="read('route') || read('path')" :disabled="Boolean(read('disabled'))">
       <el-icon v-if="icon && isComponentIcon"><component :is="icon" /></el-icon>
-      <SIcon v-else-if="icon" :name="icon" />
+      <SIcon v-else-if="icon" :icon="icon" />
       <template #title>
         <span v-if="item.tag" class="s-menu-node__tag" :style="{ color: item.tagColor }">{{ item.tag }}</span>
         <span class="s-menu-node__title">{{ read('title') }}</span>
         <el-icon v-if="suffixIcon && isComponentSuffixIcon" class="s-menu-node__suffix">
           <component :is="suffixIcon" />
         </el-icon>
-        <SIcon v-else-if="suffixIconName" class="s-menu-node__suffix" :name="suffixIconName" />
+        <SIcon v-else-if="suffixIconName" class="s-menu-node__suffix" :icon="suffixIconName" />
       </template>
     </el-menu-item>
   </el-tooltip>

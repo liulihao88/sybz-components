@@ -9,7 +9,7 @@ const columns = [
       return (
         <>
           <sFlex align="center">
-            <sIcon name="delete"></sIcon> <span class="cl-blue">render1111</span>
+            <sIcon icon="delete"></sIcon> <span class="cl-blue">render1111</span>
           </sFlex>
         </>
       )
@@ -28,7 +28,7 @@ const columns = [
         render: ({ row, scope, value, column, action, index }) => {
           return (
             <>
-              <sIcon name="delete"></sIcon> <span class="cl-blue">render</span>
+              <sIcon icon="delete"></sIcon> <span class="cl-blue">render</span>
             </>
           )
         },
@@ -40,7 +40,7 @@ const columns = [
         render: ({ row, scope, value, column, action, index }) => {
           return (
             <>
-              <sIcon name="plus"></sIcon> <span class="cl-blue">我是蓝色</span>
+              <sIcon icon="plus"></sIcon> <span class="cl-blue">我是蓝色</span>
             </>
           )
         },

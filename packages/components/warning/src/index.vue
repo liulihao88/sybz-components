@@ -102,7 +102,7 @@ function parseClass(): string {
         <img v-if="mergedProps.type === 'warning' && mergedProps.icon" src="../notic.png" class="s-warning-box__img" />
         <s-icon
           v-else-if="mergedProps.type === 'error' && mergedProps.icon"
-          name="circle-close"
+          icon="circle-close"
           :color="errorIconColor"
           v-bind="mergedProps.iconAttrs"
           class="s-warning-box__icon"
@@ -110,7 +110,7 @@ function parseClass(): string {
         />
         <s-icon
           v-else-if="mergedProps.type !== 'warning' && mergedProps.icon"
-          name="warning"
+          icon="warning"
           :color="infoIconColor"
           v-bind="mergedProps.iconAttrs"
           class="s-warning-box__icon"

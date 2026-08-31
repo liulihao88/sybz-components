@@ -68,7 +68,7 @@ const fieldList: FormFieldItem[] = [
         <s-flex align="center" gap="small">
           日期组件
           <el-tooltip content="自定义label" placement="right">
-            <s-icon name="warning"></s-icon>
+            <s-icon icon="warning"></s-icon>
           </el-tooltip>
         </s-flex>
       )

@@ -2,7 +2,7 @@
   <div class="demo-row">
     <s-tooltip placement="right">
       <el-button circle>
-        <s-icon name="plus"></s-icon>
+        <s-icon icon="plus"></s-icon>
       </el-button>
       <template #content>
         <div>这是 `content` 插槽</div>

@@ -2,7 +2,7 @@
   <div class="icon-types">
     <div v-for="variant in variants" :key="variant" class="icon-types__row">
       <span>{{ variant }}</span>
-      <s-icon v-for="type in types" :key="type" name="warning" :type="type" :variant="variant" size="20" />
+      <s-icon v-for="type in types" :key="type" icon="warning" :type="type" :variant="variant" size="20" />
     </div>
   </div>
 </template>

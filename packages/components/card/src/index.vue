@@ -255,7 +255,7 @@ const handleIconClick = (event) => {
         @click="handleIconClick"
       >
         <slot name="icon">
-          <s-icon name="arrow-down"></s-icon>
+          <s-icon icon="arrow-down"></s-icon>
         </slot>
       </span>
     </div>

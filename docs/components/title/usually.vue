@@ -9,7 +9,7 @@
     <s-title sub-title="我不服啊" type="simple">
       <template #title>title的slot</template>
       <template #icon>
-        <s-icon name="delete"></s-icon>
+        <s-icon icon="delete"></s-icon>
       </template>
       <template #extra>
         <el-button type="primary">按钮1</el-button>
@@ -35,7 +35,7 @@
 
     <s-title title="icon" type="simple">
       <template #icon>
-        <s-icon name="plus"></s-icon>
+        <s-icon icon="plus"></s-icon>
       </template>
     </s-title>
 
@@ -45,7 +45,7 @@
     <s-title title="通过 icon 属性设置图标" type="simple" icon="fa-tasks"></s-title>
     <s-title title="自定义图标尺寸后自动布局" type="simple" gap="12">
       <template #icon>
-        <s-icon name="plus" :size="40"></s-icon>
+        <s-icon icon="plus" :size="40"></s-icon>
       </template>
     </s-title>
   </div>

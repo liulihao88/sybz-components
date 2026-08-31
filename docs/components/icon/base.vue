@@ -31,26 +31,26 @@ const iconLists = ref([
 
 <template>
   <div>
-    <s-icon name="delete"></s-icon>
-    <s-icon name="warning" content="警告"></s-icon>
-    <s-icon name="info-filled" content="支持 <code>HTML</code> 提示" :dangerouslyUseHTMLString="true"></s-icon>
-    <s-icon name="refresh" content="刷新" color="var(--yellow)" size="50" placement="right" @click="tt"></s-icon>
-    <s-icon name="close" class="is-loading"></s-icon>
-    <s-icon name="refresh" content="刷新" class="cl-blue"></s-icon>
+    <s-icon icon="delete"></s-icon>
+    <s-icon icon="warning" content="警告"></s-icon>
+    <s-icon icon="info-filled" content="支持 <code>HTML</code> 提示" :dangerouslyUseHTMLString="true"></s-icon>
+    <s-icon icon="refresh" content="刷新" color="var(--yellow)" size="50" placement="right" @click="tt"></s-icon>
+    <s-icon icon="close" class="is-loading"></s-icon>
+    <s-icon icon="refresh" content="刷新" class="cl-blue"></s-icon>
 
     <hr />
 
     <div>
       <template v-for="(v, i) in iconLists" :key="i">
-        <s-icon :name="v" :content="v"></s-icon>
+        <s-icon :icon="v" :content="v"></s-icon>
       </template>
     </div>
 
     <hr />
     <s-title title="支持首字母大写, 驼峰, 中划线命名"></s-title>
-    <s-icon name="AddLocation"></s-icon>
-    <s-icon name="addLocation"></s-icon>
-    <s-icon name="add-location"></s-icon>
+    <s-icon icon="AddLocation"></s-icon>
+    <s-icon icon="addLocation"></s-icon>
+    <s-icon icon="add-location"></s-icon>
     <br />
   </div>
 </template>

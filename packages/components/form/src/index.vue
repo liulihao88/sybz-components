@@ -581,7 +581,7 @@ defineExpose({
                 <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
                 <s-icon
                   v-else-if="v.imgAttrs?.name"
-                  :name="v.imgAttrs?.name"
+                  :icon="v.imgAttrs?.name"
                   class="s-form__label-icon"
                   v-bind="v.imgAttrs"
                 />
@@ -589,7 +589,7 @@ defineExpose({
                 <s-icon
                   v-if="getFieldTooltip(v, i)"
                   v-bind="getFieldTooltipAttrs(v, i)"
-                  name="Warning"
+                  icon="Warning"
                   :content="getFieldTooltip(v, i)"
                   class="s-form__label-tooltip-icon"
                   aria-label="字段说明"

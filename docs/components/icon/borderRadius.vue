@@ -1,7 +1,7 @@
 <template>
   <div class="icon-radiuses">
     <div v-for="item in radiuses" :key="String(item.value)" class="icon-radiuses__item">
-      <s-icon name="tabler:trash" type="danger" variant="solid" size="24" :border-radius="item.value" />
+      <s-icon icon="tabler:trash" type="danger" variant="solid" size="24" :border-radius="item.value" />
       <span>{{ item.label }}</span>
     </div>
   </div>

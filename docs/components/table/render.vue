@@ -9,7 +9,7 @@ const columns = computed(() => {
       render: ({ row, scope, value, column, index }) => {
         return (
           <s-flex align="center" gap="small">
-            <sIcon name="delete"></sIcon> <span class="cl-blue">render1111</span>
+            <sIcon icon="delete"></sIcon> <span class="cl-blue">render1111</span>
           </s-flex>
         )
       },
@@ -29,7 +29,7 @@ const columns = computed(() => {
           render: ({ row, scope, value, column, action, index }) => {
             return (
               <>
-                <sIcon name="delete"></sIcon> <span class="cl-blue">render</span>
+                <sIcon icon="delete"></sIcon> <span class="cl-blue">render</span>
               </>
             )
           },
@@ -39,7 +39,7 @@ const columns = computed(() => {
           render: ({ row, scope, value, column, action, index }) => {
             return (
               <>
-                <sIcon name="plus"></sIcon> <span class="cl-blue">我是蓝色</span>
+                <sIcon icon="plus"></sIcon> <span class="cl-blue">我是蓝色</span>
               </>
             )
           },

@@ -11,7 +11,7 @@ const handleClick = () => {
     <div class="button-slot-demo__row">
       <s-button type="primary" @click="handleClick">
         <template #icon>
-          <s-icon name="delete"></s-icon>
+          <s-icon icon="delete"></s-icon>
         </template>
         左侧图标 + 文字
       </s-button>
@@ -19,7 +19,7 @@ const handleClick = () => {
       <s-button type="primary" @click="handleClick">
         <span class="button-slot-demo__content">
           <span>文字 + 右侧图标</span>
-          <s-icon name="arrow-right"></s-icon>
+          <s-icon icon="arrow-right"></s-icon>
         </span>
       </s-button>
     </div>
@@ -27,14 +27,14 @@ const handleClick = () => {
     <div class="button-slot-demo__row">
       <s-button loading type="primary" @click="handleClick">
         <template #loading>
-          <s-icon name="refresh"></s-icon>
+          <s-icon icon="refresh"></s-icon>
         </template>
         自定义 loading
       </s-button>
 
       <s-button :time="1000" type="success" @click="handleClick">
         <template #icon>
-          <s-icon name="plus"></s-icon>
+          <s-icon icon="plus"></s-icon>
         </template>
         1秒防抖
       </s-button>

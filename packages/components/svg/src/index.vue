@@ -13,7 +13,7 @@ defineOptions({
 })
 interface SvgProps {
   prefix?: string
-  name: string
+  icon: string
   color?: string
   customStyle?: Record<string, any>
   size?: string | number
@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<SvgProps>(), {
   customStyle: () => ({}),
   size: '16px',
 })
-const symbolId = computed(() => `#${props.prefix}-${props.name}`)
+const symbolId = computed(() => `#${props.prefix}-${props.icon}`)
 const parseStyle = computed(() => {
   return {
     width: processWidth(props.size, true),

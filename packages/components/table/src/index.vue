@@ -1147,7 +1147,7 @@ defineExpose({
 
                   <template v-if="v.hideBtns.length > 0">
                     <el-dropdown class="" trigger="click">
-                      <s-icon class="s-table__clickable hide-btns-button" name="more" @click.stop />
+                      <s-icon class="s-table__clickable hide-btns-button" icon="more" @click.stop />
                       <template #dropdown>
                         <el-dropdown-menu :hide-on-click="false">
                           <template v-for="(val, idx) in v.hideBtns" :key="idx">

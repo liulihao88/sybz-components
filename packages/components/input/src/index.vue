@@ -72,7 +72,7 @@
       v-if="mergedProps.content"
       class="s-input__icon"
       v-bind="{
-        name: 'warning',
+        icon: 'warning',
         color: 'var(--el-disabled-text-color)',
         size: '16px',
         dangerouslyUseHTMLString: htmlStringEnabled,
@@ -81,7 +81,7 @@
       :content="mergedProps.content"
     />
 
-    <s-icon v-if="showTextareaClear" name="circle-close" class="s-input__clear" @click="clearTextareaValue" />
+    <s-icon v-if="showTextareaClear" icon="circle-close" class="s-input__clear" @click="clearTextareaValue" />
   </div>
 </template>
 

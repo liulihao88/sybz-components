@@ -18,7 +18,7 @@ function cusConfirm() {
         <el-button size="small" type="primary" @click="cusConfirm">我是slot的footer</el-button>
       </template>
       <el-button type="danger">
-        <s-icon name="delete"></s-icon>
+        <s-icon icon="delete"></s-icon>
         你好啊
       </el-button>
     </s-popconfirm>
