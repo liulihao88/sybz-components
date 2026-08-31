@@ -10,6 +10,7 @@ addIconifyIcon('project:rocket', {
 <template>
   <div class="iconify-demo">
     <s-icon name="mdi:home" size="28" content="Material Design Icons" />
+    <s-icon name="mdi:book-edit"></s-icon>
     <s-icon name="lucide:search" size="28" color="#409eff" content="Lucide" />
     <s-icon name="logos:vue" size="28" content="多彩图标" />
     <s-icon name="project:rocket" size="28" color="#f56c6c" content="离线注册" />

@@ -16,9 +16,9 @@
 icon/base
 :::
 
-### Iconify 图标（type 默认值：自动识别）
+### Iconify 图标（source 默认值：auto）
 
-:::demo 展示 Iconify 在线按需加载与离线注册。基础写法：`<s-icon name="mdi:home"></s-icon>`。属性：`name` 类型 `string`，默认值 `''`，包含 `:` 时自动使用 Iconify；`type` 可选 `'' / element-plus / iconify / svg`，默认值 `''`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
+:::demo 展示 Iconify 在线按需加载与离线注册。基础写法：`<s-icon name="mdi:home"></s-icon>`。属性：`name` 类型 `string`，默认值 `''`，包含 `:` 时自动使用 Iconify；`source` 可选 `auto / element-plus / iconify / svg`，默认值 `auto`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
 icon/iconify
 :::
 
@@ -46,6 +46,12 @@ icon/all
 icon/rotate
 :::
 
+### 语义类型与背景样式（type 默认值：未设置，variant 默认值：plain）
+
+:::demo 展示图标的语义颜色和背景样式。基础写法：`<s-icon name="warning" type="warning" variant="light"></s-icon>`。属性：`type` 可选 `primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`；`color` 类型 `string`，默认值未设置，显式设置时优先于语义颜色。
+icon/type
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                            | 类型            | 默认值  |
@@ -55,7 +61,9 @@ icon/rotate
 |           `size`           | 图标尺寸                                                        | string / number | `16px`  |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                     | string / number | `''`    |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                    | boolean         | `false` |
-|           `type`           | 图标来源，可选 `element-plus / iconify / svg`                   | string          | `''`    |
+|          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg`            | string          | `auto`  |
+|           `type`           | 语义类型，可选 `primary / success / warning / danger / info`    | string          | -       |
+|         `variant`          | 视觉样式，可选 `plain / light / solid`                          | string          | `plain` |
 |         `svgAttrs`         | 透传给 `s-svg` 的属性                                           | object          | `{}`    |
 |       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                      | object          | `{}`    |
 | `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                  | boolean         | `false` |

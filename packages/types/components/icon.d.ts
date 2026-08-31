@@ -1,7 +1,7 @@
-import type { SIconName, SIconProps, SybzRecord } from '../component-props'
+import type { SIconName, SIconProps, SIconSource, SIconType, SIconVariant, SybzRecord } from '../component-props'
 
 /**
- * s-icon 图标组件，支持 Iconify、Element Plus、本地 SVG、尺寸、颜色、旋转角度和 tooltip。
+ * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、旋转角度和 tooltip。
  *
  * 先提示 sybz 自身属性。
  */
@@ -18,8 +18,12 @@ export type SIconComponent = {
       rotate?: string | number
       disabled?: boolean
       theme?: SybzComponentTheme
-      /** 图标来源；默认根据 name 自动识别 Iconify，否则使用 Element Plus */
-      type?: 'element-plus' | 'iconify' | 'svg' | ''
+      /** 图标来源；默认值：auto，根据 name 自动识别 Iconify，否则使用 Element Plus */
+      source?: SIconSource
+      /** 图标语义类型；默认值：undefined */
+      type?: SIconType
+      /** 图标视觉样式；默认值：plain */
+      variant?: SIconVariant
       svgAttrs?: SybzRecord
       /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
       iconifyAttrs?: SybzRecord

@@ -32,6 +32,9 @@ export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})
+export type SIconSource = 'auto' | 'element-plus' | 'iconify' | 'svg'
+export type SIconType = 'primary' | 'success' | 'warning' | 'danger' | 'info'
+export type SIconVariant = 'plain' | 'light' | 'solid'
 
 export type SImageSrcResolver = (src: string) => string | undefined
 
@@ -501,8 +504,12 @@ export interface SIconProps extends SHtmlStringProps {
   rotate?: string | number
   disabled?: boolean
   theme?: SybzComponentTheme
-  /** 图标来源；默认根据 name 自动识别 Iconify，否则使用 Element Plus */
-  type?: 'element-plus' | 'iconify' | 'svg' | ''
+  /** 图标来源；默认值：auto，根据 name 自动识别 Iconify，否则使用 Element Plus */
+  source?: SIconSource
+  /** 图标语义类型；默认值：undefined */
+  type?: SIconType
+  /** 图标视觉样式；默认值：plain */
+  variant?: SIconVariant
   svgAttrs?: SybzRecord
   /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
   iconifyAttrs?: SybzRecord

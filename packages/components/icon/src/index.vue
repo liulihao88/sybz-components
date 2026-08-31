@@ -5,7 +5,7 @@ import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
-import type { SIconName } from '@/types/component-props'
+import type { SIconName, SIconSource, SIconType, SIconVariant } from '@/types/component-props'
 
 defineOptions({
   name: 'SIcon',
@@ -15,7 +15,9 @@ interface IconProps {
   color?: string
   size?: string | number
   disabled?: boolean
-  type?: 'element-plus' | 'iconify' | 'svg' | ''
+  source?: SIconSource
+  type?: SIconType
+  variant?: SIconVariant
   svgAttrs?: Record<string, any>
   iconifyAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
@@ -27,7 +29,9 @@ const props = withDefaults(defineProps<IconProps>(), {
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
   disabled: false,
-  type: '', // svg
+  source: 'auto',
+  type: undefined,
+  variant: 'plain',
   svgAttrs: () => ({}),
   iconifyAttrs: () => ({}),
   dangerouslyUseHTMLString: false,
@@ -42,12 +46,23 @@ function handleClick($event) {
 }
 const parseColor = computed(() => {
   if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
-  return mergedProps.value.color
+  if (mergedProps.value.color) return mergedProps.value.color
+  if (!mergedProps.value.type) return undefined
+  if (mergedProps.value.variant === 'solid') return 'var(--el-color-white)'
+  return `var(--el-color-${mergedProps.value.type})`
 })
 
 const isIconify = computed(
-  () => mergedProps.value.type === 'iconify' || (!mergedProps.value.type && mergedProps.value.name.includes(':')),
+  () =>
+    mergedProps.value.source === 'iconify' ||
+    (mergedProps.value.source === 'auto' && mergedProps.value.name.includes(':')),
 )
+
+const iconClasses = computed(() => [
+  mergedProps.value.type && `s-icon--${mergedProps.value.type}`,
+  mergedProps.value.type && `s-icon--${mergedProps.value.variant}`,
+  mergedProps.value.disabled && 's-icon__not-allowed',
+])
 
 const parseRotate = computed(() => {
   const rotate = mergedProps.value.rotate
@@ -77,7 +92,7 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
     :size="mergedProps.size"
     :style="{ transform: parseRotate ? `rotate(${parseRotate})` : undefined }"
     class="s-icon"
-    :class="mergedProps.disabled && 's-icon__not-allowed'"
+    :class="iconClasses"
     @click="handleClick"
   >
     <el-tooltip :disabled="!tooltipAttrs.content" v-bind="tooltipAttrs">
@@ -85,7 +100,7 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
         <slot v-if="$slots.default"></slot>
         <!-- 仅在默认插槽为空时渲染图标 -->
         <template v-else>
-          <s-svg v-if="mergedProps.type === 'svg'" v-bind="mergedProps.svgAttrs" :name="mergedProps.name"></s-svg>
+          <s-svg v-if="mergedProps.source === 'svg'" v-bind="mergedProps.svgAttrs" :name="mergedProps.name"></s-svg>
           <iconify-icon
             v-else-if="isIconify"
             v-bind="mergedProps.iconifyAttrs"
@@ -102,6 +117,31 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
 <style scoped lang="scss">
 .s-icon {
   // cursor: pointer;
+
+  &--light,
+  &--solid {
+    box-sizing: content-box;
+    padding: 4px;
+    border-radius: 4px;
+  }
+
+  &--light {
+    background-color: var(--el-color-primary-light-9);
+  }
+
+  &--solid {
+    background-color: var(--el-color-primary);
+  }
+
+  @each $type in success, warning, danger, info {
+    &--#{$type}.s-icon--light {
+      background-color: var(--el-color-#{$type}-light-9);
+    }
+
+    &--#{$type}.s-icon--solid {
+      background-color: var(--el-color-#{$type});
+    }
+  }
 
   :deep(.iconify) {
     display: block;
