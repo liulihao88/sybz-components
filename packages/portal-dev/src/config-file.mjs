@@ -2,6 +2,15 @@ import { chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'n
 import { homedir } from 'node:os'
 import { dirname, resolve } from 'node:path'
 
+const createEmptyConfig = () => ({
+  version: 5,
+  profiles: {
+    sjs: [],
+    chenghua: [],
+    custom: [],
+  },
+})
+
 export const getPortalConfigPath = () => {
   const configRoot =
     process.platform === 'win32'
@@ -48,6 +57,13 @@ const writeConfig = (configPath, config) => {
   } catch {
     // Windows 等不支持 POSIX 权限的环境由系统用户目录权限保护。
   }
+}
+
+export const ensurePortalConfig = () => {
+  const configPath = getPortalConfigPath()
+  if (existsSync(configPath)) return { configPath, created: false }
+  writeConfig(configPath, createEmptyConfig())
+  return { configPath, created: true }
 }
 
 export const writePortalAccount = (portal, account) => {

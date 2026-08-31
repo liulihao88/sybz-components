@@ -4,7 +4,7 @@ import { spawn } from 'node:child_process'
 import { dirname, resolve } from 'node:path'
 import { createInterface } from 'node:readline/promises'
 import { fileURLToPath } from 'node:url'
-import { readPortalConfig } from '../src/config-file.mjs'
+import { ensurePortalConfig, readPortalConfig } from '../src/config-file.mjs'
 
 const packageDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const selectionKeys = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -150,7 +150,9 @@ if (args[0] === 'skill' && args[1] === 'install') {
   mkdirSync(targetRoot, { recursive: true })
   rmSync(targetDir, { recursive: true, force: true })
   cpSync(sourceDir, targetDir, { recursive: true })
+  const { configPath, created } = ensurePortalConfig()
   console.log(`portal-dev Skill 已安装到 ${targetDir}`)
+  console.log(`${created ? '默认配置文件已创建' : '配置文件已存在'}：${configPath}`)
   process.exit(0)
 }
 

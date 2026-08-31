@@ -24,6 +24,8 @@
 npm install -g @sybz-components/portal-dev
 ```
 
+安装完成后会自动创建默认配置文件；已有配置不会被覆盖，可以直接打开文件修改。
+
 ## 全局安装后的傻瓜式配置
 
 - macOS / Linux：`open ~/.config/sybz-components/portal-dev.json`
@@ -31,7 +33,7 @@ npm install -g @sybz-components/portal-dev
 
 ```bash
 {
-  "version": 10,
+  "version": 5,
   "profiles": {
     "sjs": [
       {

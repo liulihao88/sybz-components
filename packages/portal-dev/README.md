@@ -19,6 +19,8 @@ Windows 会优先读取 `CHROME_PATH`，然后自动查找 Chrome 和 Microsoft 
 pnpm add -g @sybz-components/portal-dev
 ```
 
+安装完成后会自动创建默认配置文件；如果文件已经存在，不会覆盖原有内容。可以直接打开配置文件修改账号和联调参数。
+
 ## 第一次使用（推荐）
 
 全局安装后，在任意目录运行：
@@ -34,7 +36,7 @@ portal-dev config
 - macOS / Linux：`~/.config/sybz-components/portal-dev.json`
 - Windows：`%APPDATA%\sybz-components\portal-dev.json`
 
-程序会自动创建目录，并尽可能将配置文件权限设为仅当前用户可读写。
+安装时会自动创建目录和空白配置文件，并尽可能将配置文件权限设为仅当前用户可读写。执行 `portal-dev skill install` 时也会补充创建缺失的配置文件，已有文件不会被覆盖。
 
 配置完成后可以在任意目录直接运行：
 
