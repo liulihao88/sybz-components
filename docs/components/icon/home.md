@@ -215,6 +215,12 @@ icon/all
 icon/cursor
 :::
 
+### 背景圆角（borderRadius 默认值：8px）
+
+:::demo 展示 `light / solid` 背景的圆角设置。基础写法：`<s-icon name="tabler:trash" type="danger" variant="solid" border-radius="12"></s-icon>`。属性：`borderRadius` 类型 `string / number`，默认值 `8px`，数字和数字字符串自动补 `px`，也支持 `rem / em / %` 等 CSS 单位；`variant` 可选值 `plain / light / solid`，默认值 `plain`。成华和石景山主题默认使用各自的常规圆角 token，显式设置 `borderRadius` 时优先。
+icon/borderRadius
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                                   | 类型            | 默认值    |
@@ -222,6 +228,7 @@ icon/cursor
 |           `name`           | 图标名称，提示 Element Plus 图标名；包含 `:` 时自动使用 Iconify        | SIconName       | `''`      |
 |          `color`           | 图标颜色                                                               | string          | -         |
 |           `size`           | 图标尺寸                                                               | string / number | `16px`    |
+|       `borderRadius`       | 背景圆角，数字自动补 `px`，显式设置时覆盖主题圆角                      | string / number | `8px`     |
 |          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                           | SIconCursor     | `pointer` |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                            | string / number | `''`      |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                           | boolean         | `false`   |

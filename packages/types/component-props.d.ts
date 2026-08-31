@@ -511,6 +511,8 @@ export interface SIconProps extends SHtmlStringProps {
   name?: SIconName
   color?: string
   size?: string | number
+  /** 背景圆角，数字自动补 px；默认由 variant 和 theme 决定 */
+  borderRadius?: string | number
   /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */
   cursor?: SIconCursor
   /** 图标旋转角度，数字及数字字符串按 deg 处理 */

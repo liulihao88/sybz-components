@@ -21,6 +21,7 @@ interface IconProps {
   name?: SIconName
   color?: string
   size?: string | number
+  borderRadius?: string | number
   cursor?: SIconCursor
   disabled?: boolean
   theme?: SybzComponentTheme
@@ -37,6 +38,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   name: '',
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
+  borderRadius: '',
   cursor: 'pointer',
   disabled: false,
   theme: 'default',
@@ -105,6 +107,7 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
     :size="mergedProps.size"
     :style="{
       cursor: mergedProps.disabled ? 'not-allowed' : mergedProps.cursor,
+      borderRadius: mergedProps.borderRadius ? processWidth(mergedProps.borderRadius, true) : undefined,
       transform: parseRotate ? `rotate(${parseRotate})` : undefined,
     }"
     class="s-icon"
@@ -136,7 +139,7 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
   &--solid {
     box-sizing: content-box;
     padding: 4px;
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
   &--light {
