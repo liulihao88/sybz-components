@@ -30,26 +30,159 @@ icon/shijingshan
 
 ### Iconify 图标（source 默认值：auto）
 
-:::demo 展示 Iconify 在线按需加载与离线注册。基础写法：`<s-icon name="mdi:home"></s-icon>`。属性：`name` 类型 `string`，默认值 `''`，包含 `:` 时自动使用 Iconify；`source` 可选 `auto / element-plus / iconify / svg`，默认值 `auto`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
+Iconify 汇集了大量开源图标集。使用 `s-icon` 时不需要单独安装 `@iconify/vue`，也不需要导入每一个图标组件，只要提供图标名称即可。
+
+#### 组件库默认推荐：Tabler Icons
+
+`sybz-components` 默认推荐业务项目使用 [Tabler Icons](https://icon-sets.iconify.design/tabler/)，图标名称统一以 `tabler:` 开头，例如：
+
+```vue
+<s-icon name="tabler:layout-dashboard" />
+<s-icon name="tabler:user" />
+<s-icon name="tabler:settings" />
+<s-icon name="tabler:search" />
+<s-icon name="tabler:trash" />
+```
+
+Tabler 很适合后台管理系统：它以线性图标为主，线宽、圆角和视觉尺寸比较统一，覆盖菜单、表格操作、表单、文件、用户、权限、数据看板等常见后台场景。
+
+项目使用时遵循以下约定：
+
+- 新增业务功能图标时，优先从 `tabler:*` 中选择。
+- 同一个页面不要混用 `tabler:*`、`mdi:*`、`lucide:*` 等多套线性图标。
+- 企业或产品 Logo 可以使用 `logos:*`，这是品牌图标的例外情况。
+- 项目已有 Element Plus 图标不要求立即替换；新增或统一改造时优先使用 Tabler。
+
+这里的“默认推荐”是组件库的视觉规范，不会偷偷修改图标名称。仍然需要写完整的 `tabler:图标名`，这样代码中可以直接看出图标来源。
+
+#### 第一步：查找图标
+
+优先打开 [Tabler Icons 图标集](https://icon-sets.iconify.design/tabler/)，搜索需要的图标并复制名称。例如首页图标的名称是 `tabler:home`。如果 Tabler 确实没有合适的图标，再到 [Iconify Icon Sets](https://icon-sets.iconify.design/) 的全部图标集中搜索。
+
+Iconify 名称由两部分组成，中间使用英文冒号连接：
+
+```text
+tabler:home
+│      └─ 图标名称：home
+└──────── 图标集前缀：tabler（Tabler Icons）
+```
+
+后台项目常用名称包括 `tabler:layout-dashboard`、`tabler:user`、`tabler:settings`、`tabler:search`、`tabler:edit` 和 `tabler:trash`。
+
+#### 第二步：直接使用
+
+将复制的名称传给 `name`。当名称包含 `:` 时，`source="auto"` 会自动识别为 Iconify 图标，因此通常不用手动设置 `source`：
+
+```vue
+<s-icon name="tabler:home" />
+```
+
+第一次显示某个在线图标时，浏览器会从 Iconify API 获取图标数据并缓存。组件库只加载页面实际使用的图标，不会把整个图标库打包进项目。
+
+:::demo 展示默认推荐的 Tabler 图标、显式指定来源、语义颜色、属性透传、品牌图标和离线注册。基础写法：`<s-icon name="tabler:home"></s-icon>`。属性：`name` 类型 `string`，默认值 `''`，格式为 `图标集前缀:图标名称`；`source` 可选 `auto / element-plus / iconify / svg`，默认值 `auto`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`color` 类型 `string`，默认值未设置；`size` 类型 `string / number`，默认值 `16px`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
 icon/iconify
 :::
+
+#### 修改大小、颜色和提示文字
+
+Iconify 图标与普通 `s-icon` 使用相同的 `size`、`color`、`type`、`variant` 和 tooltip 属性：
+
+```vue
+<s-icon name="tabler:home" size="24" />
+<s-icon name="tabler:circle-check" type="success" size="28" />
+<s-icon name="tabler:alert-triangle" type="warning" variant="light" size="24" />
+<s-icon name="tabler:search" color="#165dff" content="搜索" placement="top" />
+```
+
+大部分线性、单色图标使用 `currentColor`，可以通过 `color` 或 `type` 改色。`logos:vue` 这类品牌图标自身包含多种颜色，通常不会跟随 `color` 改变。
+
+#### 什么时候需要 source="iconify"
+
+默认的 `source="auto"` 已经能识别 `tabler:home` 这类带冒号的名称。只有希望明确限定图标来源，或者自定义名称无法被自动识别时，才需要显式设置：
+
+```vue
+<s-icon name="tabler:search" source="iconify" />
+```
+
+`source` 的全部可选值为 `auto / element-plus / iconify / svg`，默认值为 `auto`。
+
+#### 透传 Iconify 专属属性
+
+通过 `iconifyAttrs` 可以把属性直接传给底层 Iconify Icon，例如翻转图标或监听加载完成：
+
+```vue
+<script setup lang="ts">
+const handleLoad = () => {
+  console.log('图标加载完成')
+}
+</script>
+
+<template>
+  <s-icon
+    name="tabler:login"
+    :iconify-attrs="{
+      flip: 'horizontal',
+      onLoad: handleLoad,
+    }"
+  />
+</template>
+```
+
+#### 内网或离线项目
+
+在线模式需要浏览器能够访问 Iconify API。如果项目运行在内网、离线环境，或者不希望运行时发送图标请求，可以提前注册图标数据。
+
+注册单个图标时，从 `sybz-components` 导入 `addIconifyIcon`：
+
+```ts
+import { addIconifyIcon } from 'sybz-components'
+
+addIconifyIcon('project:rocket', {
+  width: 24,
+  height: 24,
+  body: '<path fill="currentColor" d="这里填写图标的 SVG path" />',
+})
+```
+
+注册后使用方式与在线图标完全相同：
+
+```vue
+<s-icon name="project:rocket" />
+```
+
+需要一次注册多个图标时，可以使用 `addIconifyCollection`：
+
+```ts
+import { addIconifyCollection } from 'sybz-components'
+
+addIconifyCollection({
+  prefix: 'project',
+  width: 24,
+  height: 24,
+  icons: {
+    home: {
+      body: '<path fill="currentColor" d="这里填写 home 图标路径" />',
+    },
+    user: {
+      body: '<path fill="currentColor" d="这里填写 user 图标路径" />',
+    },
+  },
+})
+```
+
+之后分别通过 `project:home` 和 `project:user` 使用。建议在应用入口文件中统一注册，确保页面渲染前图标数据已经可用。
+
+#### 常见问题
+
+- 图标不显示：先检查名称是否包含英文冒号，并确认图标名称在 Iconify 网站中存在。
+- 本地开发能显示、内网不能显示：通常是内网无法访问 Iconify API，应改用离线注册。
+- 设置 `color` 没有效果：图标可能是 `logos:*` 这类自带颜色的品牌图标。
+- 想使用普通 Element Plus 图标：直接写 `<s-icon name="delete" />`，名称不含冒号时，`source="auto"` 会按 Element Plus 图标处理。
 
 ### 插槽
 
 :::demo 展示插槽内容定制。基础写法：`<s-icon></s-icon>`。插槽：按示例中的插槽名定制内容。
 icon/slot
-:::
-
-### 常用图标查找
-
-:::demo 展示图标按钮配置。基础写法：`<s-icon :name="v.value" color="var(--blue)"></s-icon>`。属性：`icon` 类型 `string / Component`，默认值未设置。
-icon/usually
-:::
-
-### 所有图标
-
-:::demo 展示图标按钮。基础写法：`<s-icon :name="iconName" class="item"></s-icon>`。属性：`name` 类型 `string`，默认值未设置。
-icon/all
 :::
 
 ### 旋转角度（rotate 默认值：''）
@@ -62,6 +195,18 @@ icon/rotate
 
 :::demo 展示图标的语义颜色和背景样式。基础写法：`<s-icon name="warning" type="warning" variant="light"></s-icon>`。属性：`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`；`color` 类型 `string`，默认值未设置，显式设置时优先于语义颜色；`type="default"` 配合 `variant="solid"` 时使用白色背景和默认边框。
 icon/type
+:::
+
+### 常用图标查找
+
+:::demo 展示图标按钮配置。基础写法：`<s-icon :name="v.value" color="var(--blue)"></s-icon>`。属性：`icon` 类型 `string / Component`，默认值未设置。
+icon/usually
+:::
+
+### 所有图标
+
+:::demo 展示图标按钮。基础写法：`<s-icon :name="iconName" class="item"></s-icon>`。属性：`name` 类型 `string`，默认值未设置。
+icon/all
 :::
 
 ### 属性
@@ -91,5 +236,4 @@ icon/type
 
 - 组件底层使用 `el-icon`，tooltip 相关属性如 `content`、`placement`、`effect` 可直接透传。
 - 在支持 Vue 模板类型提示的编辑器中，输入 `name` 会提示 Element Plus 图标名；同时仍可输入小写、短横线、自定义 SVG 或 Iconify 名称。
-- `name` 包含 `:` 时会自动按 Iconify 图标渲染，例如 `mdi:home`、`lucide:search`，图标名称可在 [Iconify Icon Sets](https://icon-sets.iconify.design/) 查询。
-- 首次使用某个在线图标时，Iconify 会按需从公开 API 加载并缓存；内网或离线项目可通过 `addIconifyIcon(name, data)` 或 `addIconifyCollection(data)` 预注册图标数据。
+- `name` 包含 `:` 时会自动按 Iconify 图标渲染；完整的在线、离线用法见上方“Iconify 图标”章节。

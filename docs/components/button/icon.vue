@@ -9,6 +9,7 @@ import { Plus, Search, StarFilled } from '@element-plus/icons-vue'
     <s-button icon="el-icon-plus" type="primary">el-icon-plus</s-button>
     <s-button :icon="Search" type="success" size="large">大按钮</s-button>
     <s-button icon="el-icon-plus" type="warning" size="small">小按钮</s-button>
+    <s-button icon="tabler:user-dollar" type="warning" size="large">iconify图标</s-button>
     <s-button type="primary" plain size="large">
       <template #icon>
         <StarFilled class="button-icon-demo__custom-icon" />

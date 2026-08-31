@@ -10,7 +10,7 @@ export type SIconComponent = {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
-      /** 图标名称；支持 Element Plus 图标名提示，包含 `:` 时自动使用 Iconify，例如 `mdi:home` */
+      /** 图标名称；支持 Element Plus 图标名提示，包含 `:` 时自动使用 Iconify，业务图标推荐使用 Tabler，例如 `tabler:home` */
       name?: SIconName
       color?: string
       size?: string | number
