@@ -14,7 +14,7 @@ const printHelp = () => {
   console.log(`portal-dev - 成华、石景山门户与自定义网站自动登录/本地联调 CLI
 
 用法
-  portal-dev login
+  portal-dev login [序号或按键]
   portal-dev [--portal <sjs|chenghua|custom>] [账号名称]
   portal-dev <profile 快捷别名>
   portal-dev dev [--project <项目路径>]
@@ -24,7 +24,7 @@ const printHelp = () => {
   portal-dev help | --help | -h
 
 命令
-  login          列出所有已配置账号，按键后直接登录或联调
+  login          选择已配置账号，传入序号或按键时直接登录或联调
   config         新增账号，或按账号名称更新账号、别名和模式
   open           使用系统默认应用打开配置文件
   dev            启动石景山本地联调，默认使用当前项目
@@ -37,6 +37,9 @@ const printHelp = () => {
   --help, -h       显示帮助，不执行登录
 
 账号选择
+  login 1         直接选择第 1 个账号
+  login 10        直接选择第 10 个账号
+  login A         直接选择第 10 个账号（快捷键写法）
   1-9             选择第 1-9 个账号，无需回车
   A-Z             选择第 10-35 个账号，无需回车
   超过 35 个账号或终端不支持单键输入时，输入完整序号后回车。
@@ -59,6 +62,7 @@ const printHelp = () => {
   portal-dev config --portal sjs
   portal-dev open
   portal-dev login
+  portal-dev login 1
   portal-dev --portal chenghua 成华账号
   portal-dev --portal custom 内部系统
   portal-dev sjs-dev
@@ -134,26 +138,32 @@ if (args[0] === 'login') {
 
   if (!options.length) throw new Error('没有可登录的已配置账号，请先运行 portal-dev config')
 
-  const singleKeyMode =
-    options.length <= selectionKeys.length && Boolean(process.stdin.isTTY && process.stdin.setRawMode)
-  console.log('请选择要登录的账号：')
-  options.forEach(({ portal, account }, index) => {
-    const label = singleKeyMode ? selectionKeys[index] : String(index + 1)
-    console.log(`  ${label}. ${portalNames[portal]} - ${account.name}`)
-  })
+  const directSelection = args[1]?.trim().toUpperCase()
+  let answer = directSelection
+  let selectedIndex = /^\d+$/.test(directSelection || '')
+    ? Number(directSelection) - 1
+    : selectionKeys.indexOf(directSelection)
 
-  let answer
-  let selectedIndex
-  if (singleKeyMode) {
-    const validKeys = selectionKeys.slice(0, options.length)
-    process.stdout.write('请按对应按键（无需回车）：')
-    answer = await readSingleKey(validKeys)
-    selectedIndex = validKeys.indexOf(answer)
-  } else {
-    const readline = createInterface({ input: process.stdin, output: process.stdout })
-    answer = (await readline.question(`请输入序号（1-${options.length}）：`)).trim()
-    readline.close()
-    selectedIndex = Number(answer) - 1
+  if (!directSelection) {
+    const singleKeyMode =
+      options.length <= selectionKeys.length && Boolean(process.stdin.isTTY && process.stdin.setRawMode)
+    console.log('请选择要登录的账号：')
+    options.forEach(({ portal, account }, index) => {
+      const label = singleKeyMode ? selectionKeys[index] : String(index + 1)
+      console.log(`  ${label}. ${portalNames[portal]} - ${account.name}`)
+    })
+
+    if (singleKeyMode) {
+      const validKeys = selectionKeys.slice(0, options.length)
+      process.stdout.write('请按对应按键（无需回车）：')
+      answer = await readSingleKey(validKeys)
+      selectedIndex = validKeys.indexOf(answer)
+    } else {
+      const readline = createInterface({ input: process.stdin, output: process.stdout })
+      answer = (await readline.question(`请输入序号（1-${options.length}）：`)).trim()
+      readline.close()
+      selectedIndex = Number(answer) - 1
+    }
   }
   if (!Number.isInteger(selectedIndex) || !options[selectedIndex]) throw new Error(`无效的选项：${answer || '(空)'}`)
 
