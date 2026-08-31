@@ -19,6 +19,7 @@ interface CardProps {
   footerStyle?: Record<string, any>
   transparent?: boolean
   border?: boolean
+  mergeSections?: boolean
   scroll?: boolean
   square?: boolean
   collapsible?: boolean
@@ -39,6 +40,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   footerStyle: () => ({}),
   transparent: false,
   border: true,
+  mergeSections: false,
   scroll: true,
   square: false,
   collapsible: false,
@@ -89,7 +91,7 @@ const boxMergedStyle = computed(() => {
 
 const headerMergedStyle = computed(() => {
   let noBorderStyle = {}
-  if (!mergedProps.value.border) {
+  if (!mergedProps.value.border || mergedProps.value.mergeSections) {
     noBorderStyle = {
       borderBottom: 'none',
       paddingBottom: 0,
@@ -155,6 +157,13 @@ const bodyMergedStyle = computed(() => {
 })
 
 const footerMergedStyle = computed(() => {
+  const mergedSectionStyle = mergedProps.value.mergeSections
+    ? {
+        borderTop: 'none',
+        paddingTop: 0,
+      }
+    : {}
+
   const transparentStyle = mergedProps.value.transparent
     ? {
         borderTop: 'none',
@@ -164,6 +173,7 @@ const footerMergedStyle = computed(() => {
 
   return {
     ...transparentStyle,
+    ...mergedSectionStyle,
     ...mergedProps.value.footerStyle,
   }
 })

@@ -116,6 +116,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SCardProps',
+      description: 's-card 卡片组件，支持区块合并、展开收起、阴影、透明背景和主题样式。',
       slots: ['default', 'header', 'footer', 'icon'],
       hoverProps: componentHoverProps('SCardProps', [
         'SCardProps',

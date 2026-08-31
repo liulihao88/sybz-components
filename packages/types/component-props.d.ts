@@ -296,6 +296,7 @@ export interface SCardProps {
   footerStyle?: SybzRecord
   transparent?: boolean
   border?: boolean
+  mergeSections?: boolean
   scroll?: boolean
   square?: boolean
   collapsible?: boolean

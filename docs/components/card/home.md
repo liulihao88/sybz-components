@@ -68,6 +68,12 @@ card/slot
 card/square
 :::
 
+### 合并区块间距（mergeSections 默认值 `false`）
+
+:::demo 去掉头部下边框和底部上边框，并将相邻区块重复的上下间距合并为一份。基础写法：`<SCard title="已合并区块" merge-sections></SCard>`。属性：`mergeSections` 可选 `true / false`，默认值 `false`。
+card/mergeSections
+:::
+
 ### API
 
 |          属性名          | 说明                                                          | 类型                                            | 默认值    |
@@ -84,6 +90,7 @@ card/square
 |      `footerStyle`       | 底部区域样式                                                  | object                                          | `{}`      |
 |      `transparent`       | 是否使用透明容器背景，同时去掉容器边框和阴影                  | boolean                                         | `false`   |
 |         `border`         | 是否显示头部下边框                                            | boolean                                         | `true`    |
+|     `mergeSections`      | 是否去掉头部、底部分割线，并合并相邻区块的上下间距            | boolean                                         | `false`   |
 |         `scroll`         | 内容区是否自动撑开并滚动                                      | boolean                                         | `true`    |
 |         `square`         | 卡片内容区按宽高最大值渲染为正方形                            | boolean                                         | `false`   |
 |      `collapsible`       | 是否允许点击头部展开/收起                                     | boolean                                         | `false`   |

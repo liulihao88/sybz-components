@@ -72,10 +72,14 @@ declare module 'vue' {
     's-capacity-progress': (typeof import('./types/components/company/capacityProgress'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
+     *
+     * s-card 卡片组件，支持区块合并、展开收起、阴影、透明背景和主题样式。
      */
     SCard: (typeof import('./types/components/card'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
+     *
+     * s-card 卡片组件，支持区块合并、展开收起、阴影、透明背景和主题样式。
      */
     's-card': (typeof import('./types/components/card'))['default']
     /**
