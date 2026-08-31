@@ -7,7 +7,7 @@ description: 启动前端项目的石景山门户本地联调，自动登录成�
 
 调用已安装的 `portal-dev` CLI，不要复制或改写登录自动化逻辑。
 
-macOS 会复用用户当前打开的 Google Chrome，并在现有窗口的标签页中完成登录；不要另外启动 Chrome。Windows / Linux 使用 CLI 内置的浏览器兼容方案。
+macOS 会复用用户当前打开的 Google Chrome，并在现有窗口的标签页中完成登录；Windows 会复用门户专用 Chrome，仅在首次运行时启动；不要为每次登录另外启动浏览器。Linux 使用 CLI 内置的浏览器兼容方案。
 
 ## 执行
 

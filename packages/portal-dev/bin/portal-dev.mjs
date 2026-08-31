@@ -52,7 +52,8 @@ const printHelp = () => {
   iframePath      /exhibition-hall
 
 环境变量
-  CHROME_PATH     手动指定 Chrome 或 Edge 可执行文件
+  CHROME_PATH                 手动指定 Chrome 或 Edge 可执行文件
+  PORTAL_CHROME_DEBUG_PORT    Windows 门户 Chrome 复用端口，默认 9229
 
 配置文件
   macOS / Linux   ~/.config/sybz-components/portal-dev.json

@@ -5,6 +5,7 @@ import { chromium } from 'playwright-core'
 import { readPortalConfig } from './config-file.mjs'
 import { recognizeCaptcha } from './recognize-captcha.mjs'
 import { runInExistingChrome } from './macos-chrome.mjs'
+import { connectWindowsChrome } from './windows-chrome.mjs'
 
 const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds))
 const args = process.argv.slice(2)
@@ -203,15 +204,20 @@ if (process.platform === 'darwin') {
   process.exit(0)
 }
 
-const browser = await chromium.launch({ headless: false, executablePath })
-const context = await browser.newContext()
+const reusableWindowsChrome = process.platform === 'win32'
+const { browser, context } = reusableWindowsChrome
+  ? await connectWindowsChrome(executablePath)
+  : await chromium.launch({ headless: false, executablePath }).then(async (launchedBrowser) => ({
+      browser: launchedBrowser,
+      context: await launchedBrowser.newContext(),
+    }))
 const page = await context.newPage()
 let closing = false
 const shutdown = async () => {
   if (closing) return
   closing = true
   stopDevServer()
-  await browser.close().catch(() => undefined)
+  if (!reusableWindowsChrome) await browser.close().catch(() => undefined)
   process.exit(0)
 }
 process.on('SIGINT', shutdown)
@@ -387,7 +393,7 @@ if (!devMode) {
   console.log(
     `${portal === 'custom' ? `自定义网站“${portalAccount.name}”` : `${portal === 'chenghua' ? '成华' : '石景山'}门户`}登录流程已完成。`,
   )
-  await browser.close()
+  if (!reusableWindowsChrome) await browser.close()
   process.exit(0)
 }
 
