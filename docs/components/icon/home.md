@@ -209,6 +209,12 @@ icon/usually
 icon/all
 :::
 
+### 鼠标指针（cursor 默认值：pointer）
+
+:::demo 展示图标的鼠标指针样式。基础写法：`<s-icon name="tabler:trash" cursor="pointer"></s-icon>`。属性：`cursor` 类型 `SIconCursor`，默认值 `pointer`，支持任意合法的 CSS `cursor` 值，常用值包括 `pointer / default / help / move / grab / grabbing / not-allowed / zoom-in / zoom-out`；`disabled` 可选值 `true / false`，默认值 `false`，禁用时始终使用 `not-allowed`。
+icon/cursor
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                                   | 类型            | 默认值    |
@@ -216,6 +222,7 @@ icon/all
 |           `name`           | 图标名称，提示 Element Plus 图标名；包含 `:` 时自动使用 Iconify        | SIconName       | `''`      |
 |          `color`           | 图标颜色                                                               | string          | -         |
 |           `size`           | 图标尺寸                                                               | string / number | `16px`    |
+|          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                           | SIconCursor     | `pointer` |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                            | string / number | `''`      |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                           | boolean         | `false`   |
 |          `theme`           | 主题，可选 `default / chenghua / shijingshan`                          | string          | `default` |

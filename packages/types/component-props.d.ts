@@ -35,6 +35,17 @@ export type SIconName = SElementPlusIconName | (string & {})
 export type SIconSource = 'auto' | 'element-plus' | 'iconify' | 'svg'
 export type SIconType = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
 export type SIconVariant = 'plain' | 'light' | 'solid'
+export type SIconCursor =
+  | 'pointer'
+  | 'default'
+  | 'help'
+  | 'move'
+  | 'grab'
+  | 'grabbing'
+  | 'not-allowed'
+  | 'zoom-in'
+  | 'zoom-out'
+  | (string & {})
 
 export type SImageSrcResolver = (src: string) => string | undefined
 
@@ -500,6 +511,8 @@ export interface SIconProps extends SHtmlStringProps {
   name?: SIconName
   color?: string
   size?: string | number
+  /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */
+  cursor?: SIconCursor
   /** 图标旋转角度，数字及数字字符串按 deg 处理 */
   rotate?: string | number
   disabled?: boolean

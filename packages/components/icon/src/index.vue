@@ -5,7 +5,14 @@ import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
-import type { SIconName, SIconSource, SIconType, SIconVariant, SybzComponentTheme } from '@/types/component-props'
+import type {
+  SIconCursor,
+  SIconName,
+  SIconSource,
+  SIconType,
+  SIconVariant,
+  SybzComponentTheme,
+} from '@/types/component-props'
 
 defineOptions({
   name: 'SIcon',
@@ -14,6 +21,7 @@ interface IconProps {
   name?: SIconName
   color?: string
   size?: string | number
+  cursor?: SIconCursor
   disabled?: boolean
   theme?: SybzComponentTheme
   source?: SIconSource
@@ -29,6 +37,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   name: '',
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
+  cursor: 'pointer',
   disabled: false,
   theme: 'default',
   source: 'auto',
@@ -94,7 +103,10 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
     :color="parseColor"
     props.disabled
     :size="mergedProps.size"
-    :style="{ transform: parseRotate ? `rotate(${parseRotate})` : undefined }"
+    :style="{
+      cursor: mergedProps.disabled ? 'not-allowed' : mergedProps.cursor,
+      transform: parseRotate ? `rotate(${parseRotate})` : undefined,
+    }"
     class="s-icon"
     :class="iconClasses"
     @click="handleClick"
@@ -120,8 +132,6 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
 
 <style scoped lang="scss">
 .s-icon {
-  // cursor: pointer;
-
   &--light,
   &--solid {
     box-sizing: content-box;
