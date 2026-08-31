@@ -98,6 +98,7 @@ const TYPED_COMPONENT_PROPS = new Map([
           'STableSearchField',
           'STableSearchModel',
           'STableSearchProps',
+          'STableSearchTheme',
         ],
         extraImportLines: ["import type { Component } from 'vue'"],
       },

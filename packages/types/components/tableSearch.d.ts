@@ -5,11 +5,14 @@ import type {
   STableSearchField,
   STableSearchModel,
   STableSearchProps,
+  STableSearchTheme,
 } from '../../components/tableSearch/src/types'
 
 export type STableSearchComponent = {
   new (): {
     $props: {
+      /** 统一应用于内部字段组件和操作按钮的主题 */
+      theme?: STableSearchTheme
       /** 搜索字段配置 */
       options?: STableSearchField[]
       /** 搜索字段配置，优先级高于 options */

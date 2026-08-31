@@ -10,11 +10,18 @@ const fields = [
 
 <template>
   <s-table-search v-model="form" :options="fields" theme="shijingshan" :column="2">
-    <template #date="{ value, update }">
-      <s-date-picker :model-value="value" type="date" title="创建日期" width="100%" @update:model-value="update" />
+    <template #date="{ value, update, theme }">
+      <s-date-picker
+        :model-value="value"
+        :theme="theme"
+        type="date"
+        title="创建日期"
+        width="100%"
+        @update:model-value="update"
+      />
     </template>
-    <template #actions>
-      <s-button>导出</s-button>
+    <template #actions="{ theme }">
+      <s-button :theme="theme">导出</s-button>
     </template>
   </s-table-search>
 </template>

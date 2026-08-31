@@ -1,7 +1,7 @@
 <template>
   <div
     class="s-table-search"
-    :class="{ 's-table-search--with-actions': hasExtraActions }"
+    :class="[`s-table-search--${mergedProps.theme}`, { 's-table-search--with-actions': hasExtraActions }]"
     :style="{ '--s-table-search-columns': mergedProps.column }"
   >
     <div class="s-table-search__layout">
@@ -20,6 +20,7 @@
               :item="item"
               :model="form"
               :value="form[item.prop]"
+              :theme="getFieldTheme(item)"
               :update="(value: unknown) => updateField(item.prop, value)"
             />
             <component
@@ -28,6 +29,7 @@
               :item="item"
               :model="form"
               :value="form[item.prop]"
+              :theme="getFieldTheme(item)"
               :update="(value: unknown) => updateField(item.prop, value)"
             />
             <component
@@ -36,6 +38,7 @@
               v-model="form[item.prop]"
               v-bind="item.attrs"
               :placeholder="item.attrs?.placeholder || getPlaceholder(item)"
+              :theme="getFieldTheme(item)"
               :title="item.label"
               class="s-table-search__field"
               @update:model-value="emitModelValue"
@@ -48,11 +51,21 @@
 
       <div class="s-table-search__actions">
         <div v-if="hasExtraActions" class="s-table-search__extra">
-          <slot name="actions"><slot /></slot>
+          <slot name="actions" :theme="mergedProps.theme"><slot :theme="mergedProps.theme" /></slot>
         </div>
         <div class="s-table-search__buttons">
-          <s-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</s-button>
-          <s-button v-if="mergedProps.showReset" icon="el-icon-refresh" @click="handleReset">重置</s-button>
+          <s-button :theme="mergedProps.theme" type="primary" icon="el-icon-search" height="32" @click="handleSearch">
+            搜索
+          </s-button>
+          <s-button
+            v-if="mergedProps.showReset"
+            :theme="mergedProps.theme"
+            icon="el-icon-refresh"
+            height="32"
+            @click="handleReset"
+          >
+            重置
+          </s-button>
         </div>
       </div>
     </div>
@@ -68,11 +81,13 @@ import type {
   STableSearchField,
   STableSearchModel,
   STableSearchProps,
+  STableSearchTheme,
 } from './types'
 
 defineOptions({ name: 'STableSearch' })
 
 const props = withDefaults(defineProps<STableSearchProps>(), {
+  theme: 'default',
   options: () => [],
   items: undefined,
   column: 3,
@@ -123,6 +138,8 @@ const scheduleSearch = () => {
 }
 
 const getPlaceholder = (item: STableSearchField) => `${item.comp === 's-select' ? '请选择' : '请输入'}${item.label}`
+const getFieldTheme = (item: STableSearchField): STableSearchTheme =>
+  (item.attrs?.theme as STableSearchTheme | undefined) ?? mergedProps.value.theme
 
 const getDefaultSearchEvents = (item: STableSearchField): STableSearchEvent[] =>
   item.comp === 's-select' ? ['change', 'clear'] : ['clear']

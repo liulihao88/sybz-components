@@ -420,7 +420,7 @@ export default defineConfig({
               link: '/components/table/home.md',
             },
             {
-              text: 'STableSearch表格搜索组件',
+              text: sybzMark('STableSearch表格搜索组件'),
               link: '/components/tableSearch/home.md',
             },
           ],

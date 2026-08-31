@@ -16,6 +16,14 @@
 tableSearch/base
 :::
 
+### 主题（`theme` 默认 `default`）
+
+只需要在 `s-table-search` 上设置一次 `theme`，配置生成的字段组件、`render` 字段组件以及内置搜索和重置按钮都会自动使用相同主题。字段通过 `attrs.theme` 设置时可单独覆盖容器主题。基础写法：`<s-table-search theme="chenghua" :options="fields" />`。
+
+:::demo 属性：`theme` 类型 `STableSearchTheme`，可选值 `default / chenghua / shijingshan`，默认值 `default`；`options` 类型 `STableSearchField[]`，默认值 `[]`；`column` 类型 `number`，默认值 `3`；`showReset` 类型 `boolean`，可选值 `true / false`，默认值 `true`。
+tableSearch/theme
+:::
+
 ### 自动搜索（`searchOn` 默认按字段组件决定）
 
 `s-select` 默认在 `change / clear` 时搜索，其他组件默认只在 `clear` 时搜索；字段的 `searchOn` 优先于组件的全局 `searchOn`。基础写法：`<s-table-search :items="fields" :search-on="['change']" @search="handleSearch" />`。
@@ -26,23 +34,24 @@ tableSearch/autoSearch
 
 ### 自定义字段和操作区
 
-字段配置 `useSlot: true` 时使用 `prop` 作为插槽名，传字符串时使用指定插槽名；原有 `field-${prop}` 插槽继续兼容。通过 `actions` 插槽扩展按钮。存在 `actions` 或默认插槽时，操作区会自动显示在搜索项下方，扩展操作靠左，搜索和重置靠右。基础写法：`<template #date="{ item, model, value, update }">...</template>`。
+字段配置 `useSlot: true` 时使用 `prop` 作为插槽名，传字符串时使用指定插槽名；原有 `field-${prop}` 插槽继续兼容。字段插槽会提供当前 `theme`。通过 `actions` 插槽扩展按钮时也可以接收 `theme`，用于业务自定义组件。存在 `actions` 或默认插槽时，操作区会自动显示在搜索项下方，扩展操作靠左，搜索和重置靠右。基础写法：`<template #date="{ item, model, value, update, theme }">...</template>`。
 
-:::demo 属性：`useSlot` 类型 `boolean | string`，可选值 `true / false / 自定义插槽名`，默认值 `false`；`initialValue` 类型 `object`，默认值 `{}`；字段插槽参数包含 `item / model / value / update`；`actions` 插槽无参数。
+:::demo 属性：`useSlot` 类型 `boolean | string`，可选值 `true / false / 自定义插槽名`，默认值 `false`；`initialValue` 类型 `object`，默认值 `{}`；字段插槽参数包含 `item / model / value / update / theme`；`actions` 和默认插槽参数包含 `theme`。
 tableSearch/custom
 :::
 
 ### 属性
 
-|     属性名     | 说明                               | 类型                  | 可选值                       | 默认值      |
-| :------------: | ---------------------------------- | --------------------- | ---------------------------- | ----------- |
-|  `modelValue`  | 搜索表单值，支持 `v-model`         | object                | -                            | `undefined` |
-|   `options`    | 搜索字段配置                       | `STableSearchField[]` | -                            | `[]`        |
-|    `items`     | 搜索字段配置，优先级高于 `options` | `STableSearchField[]` | -                            | `undefined` |
-|    `column`    | 每行字段数                         | number                | 正整数                       | `3`         |
-| `initialValue` | 初始值及重置后的值                 | object                | -                            | `{}`        |
-|   `searchOn`   | 全局自动搜索事件，传 `false` 关闭  | array / false         | `change` / `clear` / `false` | `undefined` |
-|  `showReset`   | 是否显示重置按钮                   | boolean               | `true` / `false`             | `true`      |
+|     属性名     | 说明                               | 类型                  | 可选值                             | 默认值      |
+| :------------: | ---------------------------------- | --------------------- | ---------------------------------- | ----------- |
+|  `modelValue`  | 搜索表单值，支持 `v-model`         | object                | -                                  | `undefined` |
+|    `theme`     | 内部字段组件和操作按钮的统一主题   | `STableSearchTheme`   | `default / chenghua / shijingshan` | `default`   |
+|   `options`    | 搜索字段配置                       | `STableSearchField[]` | -                                  | `[]`        |
+|    `items`     | 搜索字段配置，优先级高于 `options` | `STableSearchField[]` | -                                  | `undefined` |
+|    `column`    | 每行字段数                         | number                | 正整数                             | `3`         |
+| `initialValue` | 初始值及重置后的值                 | object                | -                                  | `{}`        |
+|   `searchOn`   | 全局自动搜索事件，传 `false` 关闭  | array / false         | `change` / `clear` / `false`       | `undefined` |
+|  `showReset`   | 是否显示重置按钮                   | boolean               | `true` / `false`                   | `true`      |
 
 ### options / items 字段属性
 
@@ -67,9 +76,9 @@ tableSearch/custom
 
 ### 插槽
 
-|            插槽名            | 说明                     | 参数                             |
-| :--------------------------: | ------------------------ | -------------------------------- |
-| `prop` 或 `useSlot` 指定名称 | `useSlot` 启用的字段插槽 | `{ item, model, value, update }` |
-|       `field-${prop}`        | 兼容原有的自定义字段写法 | `{ item, model, value, update }` |
-|          `actions`           | 搜索和重置按钮前的操作区 | -                                |
-|          `default`           | `actions` 的兼容写法     | -                                |
+|            插槽名            | 说明                     | 参数                                    |
+| :--------------------------: | ------------------------ | --------------------------------------- |
+| `prop` 或 `useSlot` 指定名称 | `useSlot` 启用的字段插槽 | `{ item, model, value, update, theme }` |
+|       `field-${prop}`        | 兼容原有的自定义字段写法 | `{ item, model, value, update, theme }` |
+|          `actions`           | 搜索和重置按钮前的操作区 | `{ theme }`                             |
+|          `default`           | `actions` 的兼容写法     | `{ theme }`                             |

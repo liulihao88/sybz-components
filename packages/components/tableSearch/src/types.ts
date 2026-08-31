@@ -1,7 +1,9 @@
 import type { Component } from 'vue'
+import type { SybzComponentTheme } from '../../../types/component-props'
 
 export type STableSearchEvent = 'change' | 'clear'
 export type STableSearchModel = Record<string, unknown>
+export type STableSearchTheme = SybzComponentTheme
 
 export interface STableSearchField {
   /** 表单字段名 */
@@ -23,6 +25,8 @@ export interface STableSearchField {
 }
 
 export interface STableSearchProps {
+  /** 统一应用于内部字段组件和操作按钮的主题 */
+  theme?: STableSearchTheme
   /** 搜索字段配置 */
   options?: STableSearchField[]
   /** 搜索字段配置，优先级高于 options */
