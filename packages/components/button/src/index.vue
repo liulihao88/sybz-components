@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="tsx">
-import { computed, ref, useAttrs } from 'vue'
+import { computed, h, ref, useAttrs } from 'vue'
+import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -79,6 +80,9 @@ const loading = ref(false)
 
 const normalizeIcon = (icon: unknown) => {
   if (typeof icon !== 'string' || !icon || icon.startsWith('el-icon-')) return icon
+  if (icon.includes(':')) {
+    return () => h(IconifyIcon, { icon, 'aria-hidden': true })
+  }
   return `el-icon-${toLine(icon)}`
 }
 

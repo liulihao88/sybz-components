@@ -134,7 +134,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       exportedComponentTypeName: 'SButtonComponent',
       tagName: 's-button',
       description:
-        's-button 按钮组件，支持链接地址和打开目标、图标位置、ghost 幽灵按钮、Element Plus Button 属性和 sybz 扩展属性。',
+        's-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称和 Iconify 名称，并支持链接、主题、图标位置与 ghost 幽灵按钮。',
       publicPropsTypeName: 'SButtonPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'button',

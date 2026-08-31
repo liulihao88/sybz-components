@@ -40,7 +40,7 @@ button/hoverAnimation
 
 ### 图标按钮
 
-:::demo 展示 `icon` 的字符串和组件写法。基础写法：`<s-button :icon="Plus" type="primary">导入 Plus</s-button>`。属性：`icon` 类型 `string / Component`，默认值未设置。
+:::demo 展示 `icon` 的 Element Plus 组件、图标名称和 Iconify 写法。基础写法：`<s-button icon="tabler:user-dollar" type="warning">Iconify 图标</s-button>`。属性：`icon` 类型 `string / Component`，默认值未设置；字符串包含 `:` 时自动使用 Iconify，后台业务图标默认推荐 `tabler:*`；普通字符串按 Element Plus 图标名称处理。
 button/icon
 :::
 
