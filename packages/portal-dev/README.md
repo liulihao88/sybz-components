@@ -38,6 +38,12 @@ portal-dev config
 
 安装时会自动创建目录和空白配置文件，并尽可能将配置文件权限设为仅当前用户可读写。执行 `portal-dev skill install` 时也会补充创建缺失的配置文件，已有文件不会被覆盖。
 
+可以在 macOS、Windows 和 Linux 上使用同一个命令，通过系统默认应用直接打开配置文件：
+
+```bash
+portal-dev open
+```
+
 配置完成后可以在任意目录直接运行：
 
 ```bash

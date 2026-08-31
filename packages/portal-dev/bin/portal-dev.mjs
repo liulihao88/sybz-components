@@ -19,12 +19,14 @@ const printHelp = () => {
   portal-dev <profile 快捷别名>
   portal-dev dev [--project <项目路径>]
   portal-dev config [--portal <sjs|chenghua|custom>]
+  portal-dev open
   portal-dev skill install [Codex skills 目录]
   portal-dev help | --help | -h
 
 命令
   login          列出所有已配置账号，按键后直接登录或联调
   config         新增账号，或按账号名称更新账号、别名和模式
+  open           使用系统默认应用打开配置文件
   dev            启动石景山本地联调，默认使用当前项目
   skill install  安装随包提供的 Codex portal-dev Skill
   help           显示帮助
@@ -55,6 +57,7 @@ const printHelp = () => {
 
 示例
   portal-dev config --portal sjs
+  portal-dev open
   portal-dev login
   portal-dev --portal chenghua 成华账号
   portal-dev --portal custom 内部系统
@@ -64,6 +67,24 @@ const printHelp = () => {
 
 if (args[0] === 'help' || args.includes('--help') || args.includes('-h')) {
   printHelp()
+  process.exit(0)
+}
+
+if (args[0] === 'open') {
+  const { configPath } = ensurePortalConfig()
+  const [command, commandArgs] =
+    process.platform === 'win32'
+      ? ['cmd.exe', ['/d', '/c', 'start', '', configPath]]
+      : process.platform === 'darwin'
+        ? ['open', [configPath]]
+        : ['xdg-open', [configPath]]
+  const child = spawn(command, commandArgs, { detached: true, stdio: 'ignore' })
+  await new Promise((resolveOpen, reject) => {
+    child.once('error', reject)
+    child.once('spawn', resolveOpen)
+  })
+  child.unref()
+  console.log(`配置文件已打开：${configPath}`)
   process.exit(0)
 }
 

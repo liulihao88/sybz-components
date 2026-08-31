@@ -25,6 +25,14 @@ portal-dev login
 portal-dev config --portal sjs
 ```
 
+用户希望直接编辑配置文件时执行：
+
+```bash
+portal-dev open
+```
+
+该命令会在 macOS、Windows 和 Linux 上使用系统默认应用打开当前用户的配置文件，并在文件缺失时先创建默认配置。
+
 只登录石景山门户（不依赖前端项目）：
 
 ```bash
