@@ -5,7 +5,7 @@ import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
-import type { SIconName, SIconSource, SIconType, SIconVariant } from '@/types/component-props'
+import type { SIconName, SIconSource, SIconType, SIconVariant, SybzComponentTheme } from '@/types/component-props'
 
 defineOptions({
   name: 'SIcon',
@@ -15,6 +15,7 @@ interface IconProps {
   color?: string
   size?: string | number
   disabled?: boolean
+  theme?: SybzComponentTheme
   source?: SIconSource
   type?: SIconType
   variant?: SIconVariant
@@ -29,6 +30,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
   disabled: false,
+  theme: 'default',
   source: 'auto',
   type: undefined,
   variant: 'plain',
@@ -48,9 +50,9 @@ const parseColor = computed(() => {
   if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
   if (mergedProps.value.color) return mergedProps.value.color
   if (!mergedProps.value.type) return undefined
-  if (mergedProps.value.type === 'default') return 'var(--el-text-color-regular)'
+  if (mergedProps.value.type === 'default') return 'var(--s-icon-color)'
   if (mergedProps.value.variant === 'solid') return 'var(--el-color-white)'
-  return `var(--el-color-${mergedProps.value.type})`
+  return 'var(--s-icon-color)'
 })
 
 const isIconify = computed(
@@ -60,6 +62,7 @@ const isIconify = computed(
 )
 
 const iconClasses = computed(() => [
+  mergedProps.value.theme !== 'default' && `s-icon--${mergedProps.value.theme}`,
   mergedProps.value.type && `s-icon--${mergedProps.value.type}`,
   mergedProps.value.type && `s-icon--${mergedProps.value.variant}`,
   mergedProps.value.disabled && 's-icon__not-allowed',
@@ -127,22 +130,27 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
   }
 
   &--light {
-    background-color: var(--el-fill-color-light);
+    background-color: var(--s-icon-light-bg);
   }
 
   &--solid {
-    background-color: var(--el-bg-color);
-    border: 1px solid var(--el-border-color);
+    background-color: var(--s-icon-solid-bg);
+    border: 1px solid var(--s-icon-solid-border);
+  }
+
+  &--default {
+    --s-icon-color: var(--el-text-color-regular);
+    --s-icon-light-bg: var(--el-fill-color-light);
+    --s-icon-solid-bg: var(--el-bg-color);
+    --s-icon-solid-border: var(--el-border-color);
   }
 
   @each $type in primary, success, warning, danger, info {
-    &--#{$type}.s-icon--light {
-      background-color: var(--el-color-#{$type}-light-9);
-    }
-
-    &--#{$type}.s-icon--solid {
-      background-color: var(--el-color-#{$type});
-      border-color: var(--el-color-#{$type});
+    &--#{$type} {
+      --s-icon-color: var(--el-color-#{$type});
+      --s-icon-light-bg: var(--el-color-#{$type}-light-9);
+      --s-icon-solid-bg: var(--el-color-#{$type});
+      --s-icon-solid-border: var(--el-color-#{$type});
     }
   }
 

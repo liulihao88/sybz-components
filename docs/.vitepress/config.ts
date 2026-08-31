@@ -336,7 +336,7 @@ export default defineConfig({
               link: '/components/svg/home.md',
             },
             {
-              text: 'icon组件',
+              text: sybzMark('icon组件'),
               link: '/components/icon/home.md',
             },
             {

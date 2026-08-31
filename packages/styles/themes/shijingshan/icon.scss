@@ -1,0 +1,20 @@
+.s-icon--shijingshan.s-icon--shijingshan {
+  &.s-icon--default {
+    --s-icon-color: var(--s-sjs-primary);
+    --s-icon-light-bg: var(--s-sjs-primary-soft);
+    --s-icon-solid-bg: var(--s-sjs-card-bg);
+    --s-icon-solid-border: var(--s-sjs-primary);
+  }
+
+  @each $type in primary, success, warning, danger, info {
+    &.s-icon--#{$type} {
+      --s-icon-color: var(--s-sjs-#{$type});
+      --s-icon-light-bg: rgba(var(--s-sjs-#{$type}-rgb), 0.08);
+      --s-icon-solid-bg: var(--s-sjs-#{$type});
+      --s-icon-solid-border: var(--s-sjs-#{$type});
+    }
+  }
+
+  border-radius: var(--s-sjs-radius-small);
+  font-family: var(--s-sjs-font-family);
+}

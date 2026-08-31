@@ -1,0 +1,20 @@
+.s-icon--chenghua.s-icon--chenghua {
+  &.s-icon--default {
+    --s-icon-color: var(--s-ch-primary);
+    --s-icon-light-bg: var(--s-ch-primary-soft);
+    --s-icon-solid-bg: var(--s-ch-bg);
+    --s-icon-solid-border: rgba(var(--s-ch-primary-rgb), 0.45);
+  }
+
+  @each $type in primary, success, warning, danger, info {
+    &.s-icon--#{$type} {
+      --s-icon-color: var(--s-ch-#{$type});
+      --s-icon-light-bg: rgba(var(--s-ch-#{$type}-rgb), 0.08);
+      --s-icon-solid-bg: var(--s-ch-#{$type});
+      --s-icon-solid-border: var(--s-ch-#{$type});
+    }
+  }
+
+  border-radius: var(--s-ch-radius-small);
+  font-family: var(--s-ch-font-family);
+}
