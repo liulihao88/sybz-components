@@ -12,6 +12,8 @@
 
 如果 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 不存在，请先安装或更新依赖：
 
+<div class="skill-rule-code-anchor"></div>
+
 ```md
 ## 当前项目使用 sybz-components 组件库规范
 
