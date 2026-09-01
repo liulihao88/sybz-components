@@ -50,7 +50,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   disabled: false,
   theme: 'default',
   source: 'auto',
-  type: undefined,
+  type: 'default',
   variant: 'plain',
   svgAttrs: () => ({}),
   iconifyAttrs: () => ({}),
