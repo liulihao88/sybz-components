@@ -30,6 +30,11 @@
 
 .s-item.is-clickable {
   cursor: pointer;
+}
+
+.s-item.is-clickable,
+.s-item--shadow-hover,
+.s-item--hover-animation {
   transition:
     background-color 0.24s ease,
     box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
