@@ -12,6 +12,11 @@
     --el-pagination-border-radius: var(--s-ch-radius);
   }
 
+  .el-pagination .el-select__wrapper {
+    border-radius: var(--s-ch-radius-small);
+    box-shadow: none;
+  }
+
   .s-pagination__total {
     color: var(--s-ch-text-muted);
   }

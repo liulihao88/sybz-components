@@ -12,6 +12,40 @@
     --el-pagination-border-radius: var(--s-sjs-radius);
   }
 
+  .el-pagination .el-select__wrapper {
+    border: 1px solid var(--s-sjs-primary-border);
+    border-radius: var(--s-sjs-radius-small);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    transition:
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+
+    &:hover {
+      border-color: var(--s-sjs-primary-border-hover);
+    }
+
+    &.is-focused {
+      border-color: var(--s-sjs-primary);
+      background: var(--s-sjs-control-bg);
+      box-shadow: 0 0 0 2px var(--s-sjs-primary-soft);
+    }
+
+    &.is-disabled {
+      border-color: var(--s-sjs-table-line-soft);
+      background: var(--s-sjs-disabled-bg);
+      box-shadow: none;
+    }
+  }
+
+  .el-pagination .el-select__selected-item {
+    color: var(--s-sjs-text-regular);
+  }
+
+  .el-pagination .el-select__caret {
+    color: var(--s-sjs-primary);
+  }
+
   .s-pagination__total {
     color: var(--s-sjs-text-muted);
   }

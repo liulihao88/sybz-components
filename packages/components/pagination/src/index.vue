@@ -19,7 +19,9 @@ const props = withDefaults(defineProps<SPaginationSelfProps>(), {
   disabled: false,
   showTotal: true,
   showJumper: true,
-  showOnSinglePage: false,
+  showSizes: true,
+  pageSizes: () => [10, 20, 30, 50],
+  hideOnSinglePage: false,
   totalText: '共',
   jumpText: '前往',
   pageText: '页',
@@ -30,9 +32,16 @@ const attrs = useAttrs()
 const mergedProps = useGlobalComponentConfig('pagination', props)
 const rootStyle = computed(() => attrs.style as StyleValue)
 
+const normalizePageSize = (value: unknown) => {
+  const numericPageSize = Number(value)
+  return Number.isFinite(numericPageSize) && numericPageSize > 0 ? Math.floor(numericPageSize) : 10
+}
+
+const activePageSize = ref(normalizePageSize(props.pageSize))
+
 const resolvedPageCount = computed(() => {
   if (mergedProps.value.total <= 0) return 0
-  return Math.ceil(mergedProps.value.total / Math.max(mergedProps.value.pageSize, 1))
+  return Math.ceil(mergedProps.value.total / activePageSize.value)
 })
 
 const normalizePage = (value: unknown) => {
@@ -43,8 +52,12 @@ const normalizePage = (value: unknown) => {
 
 const activePage = ref(normalizePage(props.currentPage))
 const jumpPage = ref(activePage.value)
-const visible = computed(
-  () => mergedProps.value.showOnSinglePage || resolvedPageCount.value > 1 || mergedProps.value.total > 0,
+const visible = computed(() => {
+  if (mergedProps.value.total <= 0) return false
+  return !(mergedProps.value.hideOnSinglePage && resolvedPageCount.value <= 1)
+})
+const paginationLayout = computed(() =>
+  mergedProps.value.showSizes ? 'prev, pager, next, sizes' : 'prev, pager, next',
 )
 const paginationAttrs = computed(() => {
   const paginationAttrs = { ...attrs }
@@ -54,6 +67,14 @@ const paginationAttrs = computed(() => {
   delete paginationAttrs['page-count']
   return paginationAttrs
 })
+
+watch(
+  () => mergedProps.value.pageSize,
+  (pageSize) => {
+    activePageSize.value = normalizePageSize(pageSize)
+  },
+  { immediate: true },
+)
 
 watch(
   () => mergedProps.value.currentPage,
@@ -84,6 +105,13 @@ const handleJump = () => {
   emit('jump', page)
 }
 
+const handleSizeChange = (pageSize: number) => {
+  const normalizedPageSize = normalizePageSize(pageSize)
+  activePageSize.value = normalizedPageSize
+  emit('update:pageSize', normalizedPageSize)
+  emit('size-change', normalizedPageSize)
+}
+
 const handlePrevClick = (page: number) => emit('prev-click', page)
 const handleNextClick = (page: number) => emit('next-click', page)
 </script>
@@ -104,19 +132,21 @@ const handleNextClick = (page: number) => emit('next-click', page)
         </span>
 
         <el-pagination
-          v-if="resolvedPageCount > 1"
+          v-if="resolvedPageCount > 0"
           v-bind="paginationAttrs"
           :background="mergedProps.background"
           :current-page="activePage"
           :disabled="mergedProps.disabled"
-          :page-count="resolvedPageCount"
-          :page-size="mergedProps.pageSize"
+          :layout="paginationLayout"
+          :page-size="activePageSize"
+          :page-sizes="mergedProps.pageSizes"
           :pager-count="mergedProps.pagerCount"
           :size="mergedProps.size || undefined"
-          layout="prev, pager, next"
+          :total="mergedProps.total"
           @current-change="changePage"
           @prev-click="handlePrevClick"
           @next-click="handleNextClick"
+          @size-change="handleSizeChange"
         />
 
         <div v-if="mergedProps.showJumper && resolvedPageCount > 1" class="s-pagination__jumper">

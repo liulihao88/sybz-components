@@ -7,7 +7,7 @@ import type {
 } from '../component-props'
 
 /**
- * s-pagination 分页组件，支持主题、页码切换、回车跳页、总数展示以及内容超宽时横向滚动。
+ * s-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。
  *
  * 先提示 sybz 自身属性。
  */
@@ -34,8 +34,12 @@ export type SPaginationComponent = {
       showTotal?: boolean
       /** 是否显示手动跳页；默认值：true */
       showJumper?: boolean
-      /** 只有一页时是否仍然显示；默认值：false */
-      showOnSinglePage?: boolean
+      /** 是否显示每页条数选择器；默认值：true */
+      showSizes?: boolean
+      /** 每页条数选择器的选项；默认值：[10, 20, 30, 50] */
+      pageSizes?: number[]
+      /** 只有一页时是否隐藏分页器；默认值：false */
+      hideOnSinglePage?: boolean
       /** 总数前缀文本；默认值：共 */
       totalText?: string
       /** 跳页前缀文本；默认值：跳至 */

@@ -269,13 +269,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/pagination/home.html
      *
-     * s-pagination 分页组件，支持主题、页码切换、回车跳页、总数展示以及内容超宽时横向滚动。
+     * s-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。
      */
     SPagination: (typeof import('./types/components/pagination'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/pagination/home.html
      *
-     * s-pagination 分页组件，支持主题、页码切换、回车跳页、总数展示以及内容超宽时横向滚动。
+     * s-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。
      */
     's-pagination': (typeof import('./types/components/pagination'))['default']
     /**

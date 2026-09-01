@@ -85,7 +85,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'SPaginationProps',
       exportedComponentTypeName: 'SPaginationComponent',
       tagName: 's-pagination',
-      description: 's-pagination 分页组件，支持主题、页码切换、回车跳页、总数展示以及内容超宽时横向滚动。',
+      description:
+        's-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。',
       publicPropsTypeName: 'SPaginationPublicProps',
       useDefaultExportForGlobal: true,
       instanceMembers: [

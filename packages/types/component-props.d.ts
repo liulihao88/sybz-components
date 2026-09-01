@@ -767,8 +767,12 @@ export interface SPaginationSelfProps {
   showTotal?: boolean
   /** 是否显示手动跳页；默认值：true */
   showJumper?: boolean
-  /** 只有一页时是否仍然显示；默认值：false */
-  showOnSinglePage?: boolean
+  /** 是否显示每页条数选择器；默认值：true */
+  showSizes?: boolean
+  /** 每页条数选择器的选项；默认值：[10, 20, 30, 50] */
+  pageSizes?: number[]
+  /** 只有一页时是否隐藏分页器；默认值：false */
+  hideOnSinglePage?: boolean
   /** 总数前缀文本；默认值：共 */
   totalText?: string
   /** 跳页前缀文本；默认值：跳至 */
@@ -780,11 +784,13 @@ export interface SPaginationSelfProps {
 }
 
 export type SPaginationProps = SPaginationSelfProps &
-  Partial<Omit<PaginationPropsPublic, keyof SPaginationSelfProps | 'pageCount' | 'layout' | 'hideOnSinglePage'>>
+  Partial<Omit<PaginationPropsPublic, keyof SPaginationSelfProps | 'pageCount' | 'layout'>>
 
 export type SPaginationEmits = {
   'update:currentPage': [page: number]
+  'update:pageSize': [pageSize: number]
   change: [page: number]
+  'size-change': [pageSize: number]
   jump: [page: number]
   'prev-click': [page: number]
   'next-click': [page: number]
