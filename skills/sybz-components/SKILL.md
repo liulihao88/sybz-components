@@ -21,6 +21,19 @@ app.use(SybzComponents)
 
 工具函数从 `@sybz-components/utils` 引入。
 
+## 新项目自动接入
+
+当用户在其他 Vue 项目中首次引入本组件库，优先读取 [references/setup.md](references/setup.md)，并检查项目的 `package.json`、`src/main.ts`（或 `main.js`）和 `vite.config.*`。如果用户明确要求接入，直接在目标项目完成以下工作，不只给出片段：
+
+1. 安装 `sybz-components`、`@sybz-components/utils` 及其 peer 依赖 `vue`、`element-plus`。
+2. 在应用入口统一注册 `SybzComponents`、可选的 `SybzChartComponents`，导入两个样式文件，并将 `configureUtils` 和工具函数挂载到 `globalProperties`。
+3. 按用户指定主题写入组件全局默认配置；未指定时使用 `default`，不擅自覆盖业务已有配置。
+4. 检查 Vite 是否启用 `@vitejs/plugin-vue`；项目存在 JSX/TSX 文件或组件库被 TSX 方式使用时，补充 `@vitejs/plugin-vue-jsx` 和 `vueJsx()`，并同步 TypeScript 的 JSX 配置。
+5. 首次接入时在 Vite 配置中导入并注册 `sybzVitePlugins`（来自 `@sybz-components/utils/vite`），保留用户已有插件顺序和配置，只补充缺失项。
+6. 完成后运行项目已有的类型检查或 lint，不主动执行 build。
+
+如果用户只是咨询用法，提供模板并说明需要由项目执行安装命令；不要未经授权修改用户项目。
+
 ## 工作流程
 
 1. 先读当前代码，确认项目已有注册方式、样式约定和组件使用习惯。
