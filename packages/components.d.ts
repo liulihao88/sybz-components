@@ -53,13 +53,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
      *
-     * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称和 Iconify 名称，并支持链接、主题、图标位置与 ghost 幽灵按钮。
+     * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称、Iconify 名称和 HTTP 图片，并支持链接、主题、图标位置与 ghost 幽灵按钮。
      */
     SButton: (typeof import('./types/components/button'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
      *
-     * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称和 Iconify 名称，并支持链接、主题、图标位置与 ghost 幽灵按钮。
+     * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称、Iconify 名称和 HTTP 图片，并支持链接、主题、图标位置与 ghost 幽灵按钮。
      */
     's-button': (typeof import('./types/components/button'))['default']
     /**

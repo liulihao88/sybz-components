@@ -40,7 +40,7 @@ button/hoverAnimation
 
 ### 图标按钮
 
-:::demo 展示 `icon` 的 Element Plus 组件、图标名称和 Iconify 写法。基础写法：`<s-button icon="tabler:user-dollar" type="warning">Iconify 图标</s-button>`。属性：`icon` 类型 `string / Component`，默认值未设置；字符串包含 `:` 时自动使用 Iconify，后台业务图标默认推荐 `tabler:*`；普通字符串按 Element Plus 图标名称处理。
+:::demo 展示 `icon` 的 Element Plus 组件、图标名称、Iconify 名称和 HTTP 图片写法。基础写法：`<s-button icon="https://api.iconify.design/mdi/home.svg" type="primary">HTTP 图片图标</s-button>`。属性：`icon` 类型 `string / Component`，默认值未设置；`http://`、`https://`、`//` 开头的字符串按在线图片处理；符合 `图标集前缀:图标名称` 格式的字符串按 Iconify 处理，后台业务图标默认推荐 `tabler:*`；普通字符串按 Element Plus 图标名称处理。
 button/icon
 :::
 

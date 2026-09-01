@@ -5,6 +5,7 @@ import type { ElTooltipProps } from 'element-plus'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
+import { isIconifyIconName, isRemoteIconUrl } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type {
   SIconCursor,
@@ -76,13 +77,13 @@ const parseColor = computed(() => {
 const isRemoteImage = computed(() => {
   if (mergedProps.value.source === 'url') return typeof mergedProps.value.icon === 'string'
   if (mergedProps.value.source !== 'auto' || typeof mergedProps.value.icon !== 'string') return false
-  return /^(?:https?:)?\/\//i.test(mergedProps.value.icon)
+  return isRemoteIconUrl(mergedProps.value.icon)
 })
 
 const isIconify = computed(() => {
   if (mergedProps.value.source === 'iconify') return true
   if (mergedProps.value.source !== 'auto' || typeof mergedProps.value.icon !== 'string') return false
-  return /^(?:@[a-z\d._-]+:)?[a-z\d][a-z\d._-]*:[a-z\d][a-z\d._-]*$/i.test(mergedProps.value.icon)
+  return isIconifyIconName(mergedProps.value.icon)
 })
 
 const resolvedIcon = computed(() => {

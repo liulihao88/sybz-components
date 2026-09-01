@@ -25,6 +25,7 @@
 import { computed, h, ref, useAttrs } from 'vue'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
+import { isIconifyIconName, isRemoteIconUrl } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
@@ -80,7 +81,21 @@ const loading = ref(false)
 
 const normalizeIcon = (icon: unknown) => {
   if (typeof icon !== 'string' || !icon || icon.startsWith('el-icon-')) return icon
-  if (icon.includes(':')) {
+  if (isRemoteIconUrl(icon)) {
+    return () =>
+      h('img', {
+        src: icon,
+        alt: '',
+        'aria-hidden': true,
+        style: {
+          display: 'block',
+          width: '1em',
+          height: '1em',
+          objectFit: 'contain',
+        },
+      })
+  }
+  if (isIconifyIconName(icon)) {
     return () => h(IconifyIcon, { icon, 'aria-hidden': true })
   }
   return `el-icon-${toLine(icon)}`
