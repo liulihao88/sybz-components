@@ -34,7 +34,7 @@ item/extraPlacement
 
 ### 阴影和 Hover 动画
 
-:::demo `shadow="hover"` 与 `hover-animation` 均可独立生效，不需要设置 `clickable`。基础写法：`<SItem shadow="hover" hover-animation />`。属性：`shadow` 可选值 `always / never / hover`，默认值 `never`；`hoverAnimation` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clickable` 只控制点击交互、键盘可访问性和悬停背景，默认值 `false`。
+:::demo `shadow="hover"` 与 `hover-animation` 均可独立生效，基础写法：`<SItem shadow="hover" hover-animation />`。属性：`shadow` 可选值 `always / never / hover`，默认值 `never`；`hoverAnimation` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clickable` 只控制点击交互、键盘可访问性和悬停背景，默认值 `false`。
 item/hover
 :::
 
