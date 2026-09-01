@@ -6,7 +6,7 @@ license: MIT
 
 # sybz-components
 
-本 skill 帮助 Codex 在 Vue 3 项目中优先使用 `sybz-components`、`@sybz-components/utils`，并按组件库已有主题规范交付代码。所有说明、总结、代码注释和交付描述都使用中文。
+本 skill 为 Claude Code、Cursor、Codex 等 AI 编程工具提供统一的 Vue 3 项目规范：优先使用 `sybz-components`、`@sybz-components/utils`，并按组件库已有主题规范完成组件接入、Element Plus 迁移和主题开发。所有说明、总结、代码注释和交付描述都使用中文。
 
 ## 使用前检查
 
@@ -32,7 +32,7 @@ app.use(SybzComponents)
 5. 首次接入时在 Vite 配置中导入并注册 `sybzVitePlugins`（来自 `@sybz-components/utils/vite`），保留用户已有插件顺序和配置，只补充缺失项。
 6. 完成后运行项目已有的类型检查或 lint，不主动执行 build。
 
-如果用户只是咨询用法，提供模板并说明需要由项目执行安装命令；不要未经授权修改用户项目。
+如果用户只是咨询用法，提供模板并说明需要由项目执行安装命令；不要未经授权修改用户项目。该 skill 通过项目规则文件生效，不要求用户使用特定 AI 工具或安装到特定工具目录。
 
 ## 工作流程
 

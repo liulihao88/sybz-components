@@ -1,16 +1,22 @@
 # Skills 使用说明
 
-## 推荐使用方式
+## 推荐接入方式（Claude Code、Cursor、Codex 通用）
 
-业务项目安装 `sybz-components` 后，不需要改变使用者习惯，也不需要强制安装到 `.codex` 目录。推荐在业务项目根目录的 `AGENTS.md` 中加入下面这段说明：
+业务项目安装 `sybz-components` 后，不需要改变开发者习惯，也不需要把规则强制安装到某个 AI 工具的全局目录。推荐把下面这段项目约定放在业务项目根目录的规则文件中：
 
-```md
-## 当前项目 使用 sybz-components 组件库规范
+- Claude Code：`CLAUDE.md`
+- Cursor：`.cursor/rules/sybz-components.mdc`（旧版也可使用项目根目录的 `.cursorrules`）
+- Codex 或其他支持项目规则的工具：`AGENTS.md`
 
-本项目使用 `sybz-components` 组件库。处理文件时，请先判断任务是否涉及 `sybz-components`、`@sybz-components/utils`、Element Plus 组件迁移、主题或组件示例：涉及这些内容时，先阅读并遵循 `./node_modules/sybz-components/skills/sybz-components/SKILL.md`；涉及具体组件、工具函数或主题时，再按需阅读该 skill 的 `references/` 目录下相关规范。普通业务逻辑（例如接口请求、状态计算、数据转换、路由或与组件库无关的 JS/TS 工具代码）不要求读取这份 skill。若普通逻辑文件直接引入或调用 `@sybz-components/utils`，则按工具函数场景处理。
-```
+同一个项目可以同时保留这些文件；内容保持一致即可。不要把规则写死为只能读取 `.codex` 目录。
 
 如果 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 不存在，请先安装或更新依赖：
+
+```md
+## 当前项目使用 sybz-components 组件库规范
+
+本项目使用 `sybz-components` 组件库。处理文件时，请先判断任务是否涉及 `sybz-components`、`@sybz-components/utils`、Element Plus 组件迁移、主题或组件示例：涉及这些内容时，先阅读并遵循 `./node_modules/sybz-components/skills/sybz-components/SKILL.md`；涉及具体组件、工具函数或主题时，再按需阅读该 skill 的 `references/` 目录下相关规范。普通业务逻辑（例如接口请求、状态计算、数据转换、路由或与组件库无关的 JS/TS 工具代码）不要求读取这份 skill。若普通逻辑文件直接引入或调用 `@sybz-components/utils`，则按工具函数场景处理。修改前先检查当前项目已有实现，保留已有配置，只补充缺失的组件注册、样式导入和 Vite 插件。
+```
 
 ::: code-group
 
@@ -27,7 +33,7 @@ npm install sybz-components
 ```
 
 :::
-这样 Codex、Cursor 或其他能读取 `AGENTS.md` / 项目规则的 AI 工具，都可以从当前项目依赖中找到这份规范。
+这样 Claude Code、Cursor、Codex 以及其他支持项目级规则的 AI 工具，都可以从当前项目依赖中读取同一份规范。
 
 ## 路径说明
 
@@ -43,7 +49,7 @@ npm install sybz-components
 ./node_modules/sybz-components/skills/sybz-components/references/
 ```
 
-这套方式不依赖 `.codex` 目录，也不要求使用者额外执行安装命令。AI 工具只要能读取项目根目录规则，并能访问 `node_modules`，就可以按规则找到当前组件库的 skill。
+这套方式不依赖 `.codex` 目录，也不要求使用者额外执行全局安装命令。AI 工具只要能读取项目规则文件，并能访问 `node_modules`，就可以按规则找到当前组件库的 skill。
 
 ## 暴露路径
 
@@ -65,9 +71,9 @@ npm install sybz-components
 - `skills/sybz-components/references/chenghua-ui.md`：成华主题规范
 - `skills/sybz-components/references/shijingshan-ui.md`：石景山主题规范
 
-## 可选：安装到 Codex 全局目录
+## 可选：安装到 AI 工具的全局目录
 
-如果希望 Codex 在任意项目中都能自动发现该 skill，可以额外执行：
+如果希望某个 AI 工具在任意项目中都能自动发现该 skill，可以额外复制到该工具的全局规则目录。Codex 可执行：
 
 ```sh
 pnpm skills:install
@@ -85,7 +91,7 @@ pnpm skills:install
 node ./node_modules/sybz-components/scripts/install-sybz-skill.mjs
 ```
 
-这是 Codex 的增强用法，不是默认推荐用法。
+这是特定工具的增强用法，不是跨工具的默认推荐方式；跨 Claude Code、Cursor、Codex 协作时，优先使用项目根目录规则文件。
 
 ## 适用场景
 
