@@ -24,6 +24,8 @@ interface IconProps {
   size?: string | number
   borderRadius?: string | number
   cursor?: SIconCursor
+  hoverAnimation?: boolean
+  shadow?: 'always' | 'never' | 'hover'
   disabled?: boolean
   theme?: SybzComponentTheme
   source?: SIconSource
@@ -41,6 +43,8 @@ const props = withDefaults(defineProps<IconProps>(), {
   size: '16px', // 1em, 10px 10, 100%,
   borderRadius: '',
   cursor: 'pointer',
+  hoverAnimation: false,
+  shadow: 'never',
   disabled: false,
   theme: 'default',
   source: 'auto',
@@ -84,6 +88,9 @@ const iconClasses = computed(() => [
   mergedProps.value.theme !== 'default' && `s-icon--${mergedProps.value.theme}`,
   mergedProps.value.type && `s-icon--${mergedProps.value.type}`,
   mergedProps.value.type && `s-icon--${mergedProps.value.variant}`,
+  mergedProps.value.hoverAnimation && 's-icon--hover-animation',
+  mergedProps.value.shadow === 'always' && 's-icon--shadow-always',
+  mergedProps.value.shadow === 'hover' && 's-icon--shadow-hover',
   mergedProps.value.disabled && 's-icon__not-allowed',
 ])
 
@@ -147,6 +154,24 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
 
 <style scoped lang="scss">
 .s-icon {
+  position: relative;
+  top: 0;
+  transition:
+    top 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &--shadow-always {
+    box-shadow: var(--s-icon-shadow, var(--el-box-shadow-light));
+  }
+
+  &--shadow-hover:not(.s-icon__not-allowed):hover {
+    box-shadow: var(--s-icon-shadow, var(--el-box-shadow-light));
+  }
+
+  &--hover-animation:not(.s-icon__not-allowed):hover {
+    top: -2px;
+  }
+
   &--light,
   &--solid {
     box-sizing: content-box;

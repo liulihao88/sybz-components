@@ -10,7 +10,7 @@ import type {
 } from '../component-props'
 
 /**
- * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、鼠标指针、旋转角度和 tooltip。
+ * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
  *
  * 先提示 sybz 自身属性。
  */
@@ -27,6 +27,10 @@ export type SIconComponent = {
       borderRadius?: string | number
       /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */
       cursor?: SIconCursor
+      /** 鼠标移入时是否启用轻微上浮动画；默认值：false */
+      hoverAnimation?: boolean
+      /** 阴影显示时机，语义同 s-card；默认值：never */
+      shadow?: 'always' | 'never' | 'hover'
       /** 图标旋转角度，数字及数字字符串按 deg 处理 */
       rotate?: string | number
       disabled?: boolean

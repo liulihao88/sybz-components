@@ -532,6 +532,10 @@ export interface SIconProps extends SHtmlStringProps {
   borderRadius?: string | number
   /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */
   cursor?: SIconCursor
+  /** 鼠标移入时是否启用轻微上浮动画；默认值：false */
+  hoverAnimation?: boolean
+  /** 阴影显示时机，语义同 s-card；默认值：never */
+  shadow?: 'always' | 'never' | 'hover'
   /** 图标旋转角度，数字及数字字符串按 deg 处理 */
   rotate?: string | number
   disabled?: boolean

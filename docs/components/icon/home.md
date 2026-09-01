@@ -221,6 +221,12 @@ icon/cursor
 icon/borderRadius
 :::
 
+### 阴影和 Hover 动画（shadow 默认值：never，hoverAnimation 默认值：false）
+
+:::demo 展示图标阴影和鼠标移入上浮动画。基础写法：`<s-icon icon="tabler:trash" shadow="hover" hover-animation></s-icon>`。属性：`shadow` 可选值 `always / never / hover`，默认值 `never`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。两个属性可以单独使用，也可以组合使用；禁用状态下不会触发 Hover 效果。
+icon/hoverShadow
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                                   | 类型            | 默认值    |
@@ -230,6 +236,8 @@ icon/borderRadius
 |           `size`           | 图标尺寸                                                               | string / number | `16px`    |
 |       `borderRadius`       | 背景圆角，数字自动补 `px`，显式设置时覆盖主题圆角                      | string / number | `8px`     |
 |          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                           | SIconCursor     | `pointer` |
+|      `hoverAnimation`      | 鼠标移入时是否启用轻微上浮动画                                         | boolean         | `false`   |
+|          `shadow`          | 阴影显示时机，可选 `always / never / hover`                            | string          | `never`   |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                            | string / number | `''`      |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                           | boolean         | `false`   |
 |          `theme`           | 主题，可选 `default / chenghua / shijingshan`                          | string          | `default` |

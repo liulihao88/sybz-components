@@ -189,13 +189,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
      *
-     * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、鼠标指针、旋转角度和 tooltip。
+     * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
      */
     SIcon: (typeof import('./types/components/icon'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
      *
-     * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、鼠标指针、旋转角度和 tooltip。
+     * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
      */
     's-icon': (typeof import('./types/components/icon'))['default']
     /**
