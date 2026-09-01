@@ -82,23 +82,31 @@ tag/async
 tag/overflow
 :::
 
+### 公共外观属性（hoverAnimation 默认值：false）
+
+:::demo `width / height / color / hoverAnimation` 由公共 Hook 统一处理。基础写法：`<s-tag width="120" height="36" color="#7c3aed" hover-animation>公共属性标签</s-tag>`。属性：`width / height` 类型 `string / number`，默认值 `''`；`color` 类型 `string`，默认值 `''`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。
+tag/commonProps
+:::
+
 ### 属性
 
-|  属性名   | 说明                                                        | 类型                                                  | 默认值    |
-| :-------: | ----------------------------------------------------------- | ----------------------------------------------------- | --------- |
-|  `value`  | 当前值；未传默认插槽时会作为标签内容或映射源                | string / number                                       | -         |
-|  `type`   | 直接指定标签类型                                            | `primary` / `success` / `info` / `warning` / `danger` | -         |
-|  `theme`  | 标签主题，支持 `default` / `chenghua` / `shijingshan`       | `default` / `chenghua` / `shijingshan`                | `default` |
-|  `size`   | 标签尺寸                                                    | `''` / `large` / `default` / `small`                  | `''`      |
-| `options` | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法 | array                                                 | `[]`      |
-| `config`  | 平铺数组模式下的字段映射配置                                | `{ label?: string, value?: string }`                  | `{}`      |
-| `primary` | 匹配为主色标签的规则                                        | boolean / string / number / array                     | -         |
-|  `info`   | 匹配为信息标签的规则                                        | boolean / string / number / array                     | -         |
-| `warning` | 匹配为警告标签的规则                                        | boolean / string / number / array                     | -         |
-| `danger`  | 匹配为危险标签的规则                                        | boolean / string / number / array                     | -         |
-|  `other`  | 未命中任何规则时的兜底标签类型                              | string                                                | `primary` |
-|  `width`  | 标签宽度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
-| `height`  | 标签高度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
+|      属性名      | 说明                                                        | 类型                                                  | 默认值    |
+| :--------------: | ----------------------------------------------------------- | ----------------------------------------------------- | --------- |
+|     `value`      | 当前值；未传默认插槽时会作为标签内容或映射源                | string / number                                       | -         |
+|      `type`      | 直接指定标签类型                                            | `primary` / `success` / `info` / `warning` / `danger` | -         |
+|     `theme`      | 标签主题，支持 `default` / `chenghua` / `shijingshan`       | `default` / `chenghua` / `shijingshan`                | `default` |
+|      `size`      | 标签尺寸                                                    | `''` / `large` / `default` / `small`                  | `''`      |
+|    `options`     | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法 | array                                                 | `[]`      |
+|     `config`     | 平铺数组模式下的字段映射配置                                | `{ label?: string, value?: string }`                  | `{}`      |
+|    `primary`     | 匹配为主色标签的规则                                        | boolean / string / number / array                     | -         |
+|      `info`      | 匹配为信息标签的规则                                        | boolean / string / number / array                     | -         |
+|    `warning`     | 匹配为警告标签的规则                                        | boolean / string / number / array                     | -         |
+|     `danger`     | 匹配为危险标签的规则                                        | boolean / string / number / array                     | -         |
+|     `other`      | 未命中任何规则时的兜底标签类型                              | string                                                | `primary` |
+|     `width`      | 标签宽度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
+|     `height`     | 标签高度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
+|     `color`      | 标签文字颜色                                                | string                                                | `''`      |
+| `hoverAnimation` | 是否启用公共悬停上移动画                                    | boolean                                               | `false`   |
 
 文本超出标签可用宽度时会自动显示省略号，并仅在鼠标移入溢出文本时显示完整内容。`closable` 标签的关闭图标不会被文本挤压。
 

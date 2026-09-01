@@ -7,8 +7,8 @@
 
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { delay, formatBytes, getType } from '@sybz-components/utils'
-import useWidthHeightStyle from '@/hooks/useWidthHeightStyle'
-import type { SWidthHeightProps } from '@/types/component-props'
+import useCommonProps from '@/hooks/useCommonProps'
+import type { SCommonProps } from '@/types/component-props'
 
 defineOptions({
   name: 'SCapacityProgress',
@@ -17,7 +17,7 @@ defineOptions({
 const progressBoxRef = ref(null)
 const percentageRef = ref(null)
 const showRight = ref(true)
-interface CapacityProgressProps extends SWidthHeightProps {
+interface CapacityProgressProps extends SCommonProps {
   total: string | number
   used: string | number
   iconAttrs?: Record<string, any>
@@ -37,6 +37,8 @@ const props = withDefaults(defineProps<CapacityProgressProps>(), {
   iconAttrs: () => ({}),
   width: undefined,
   height: undefined,
+  color: '',
+  hoverAnimation: false,
   options: () => [],
   warning: undefined,
   primary: undefined,
@@ -47,7 +49,7 @@ const props = withDefaults(defineProps<CapacityProgressProps>(), {
   type: undefined,
   customColor: false,
 })
-const widthHeightStyle = useWidthHeightStyle(props)
+const { commonClass, commonStyle } = useCommonProps(props)
 function format() {
   if (percentage.value < 0) {
     return '?%'
@@ -183,7 +185,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="s-capacity-progress" :style="widthHeightStyle">
+  <div class="s-capacity-progress" :class="commonClass" :style="commonStyle">
     <s-progress
       ref="progressBoxRef"
       class="progress-box"

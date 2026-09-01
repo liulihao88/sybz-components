@@ -34,7 +34,7 @@ item/extraPlacement
 
 ### 阴影和 Hover 动画
 
-:::demo `shadow="hover"` 与 `hover-animation` 均可独立生效，基础写法：`<SItem shadow="hover" hover-animation />`。属性：`shadow` 可选值 `always / never / hover`，默认值 `never`；`hoverAnimation` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clickable` 只控制点击交互、键盘可访问性和悬停背景，默认值 `false`。
+:::demo `width / height / color / hoverAnimation` 由公共 Hook 统一处理，`shadow="hover"` 与 `hover-animation` 均可独立生效。基础写法：`<SItem shadow="hover" hover-animation color="#7c3aed" />`。属性：`shadow` 可选值 `always / never / hover`，默认值 `never`；`color` 类型 `string`，默认值 `''`；`hoverAnimation` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clickable` 只控制点击交互、键盘可访问性和悬停背景，默认值 `false`。
 item/hover
 :::
 
@@ -60,6 +60,7 @@ item/shijingshan
 | `src`             | 左侧图片地址                                             | string           | -                                    | `''`        |
 | `width`           | 组件宽度，数字按 px 处理                                 | string / number  | -                                    | `''`        |
 | `height`          | 组件高度，数字按 px 处理                                 | string / number  | -                                    | `''`        |
+| `color`           | 组件文字颜色                                             | string           | 合法 CSS 颜色                        | `''`        |
 | `size`            | 预设内边距，也可直接传自定义尺寸                         | string / number  | `small / default / large / CSS 尺寸` | `default`   |
 | `padding`         | 内容内边距，优先级高于 `size`                            | string / number  | -                                    | `undefined` |
 | `gap`             | 前缀、主内容及标题右侧区域之间的间距                     | string / number  | -                                    | `12`        |

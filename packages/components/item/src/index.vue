@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, useSlots } from 'vue'
 import type { CSSProperties } from 'vue'
+import useCommonProps from '@/hooks/useCommonProps'
+import type { SCommonProps } from '@/types/component-props'
 
 defineOptions({ name: 'SItem' })
 
@@ -19,13 +21,11 @@ type ItemStyleKey =
   | 'extra'
   | 'actions'
 
-interface ItemProps {
+interface ItemProps extends SCommonProps {
   title?: string | number
   subTitle?: string | number
   extra?: string | number
   src?: string
-  width?: string | number
-  height?: string | number
   size?: 'small' | 'default' | 'large' | string | number
   padding?: string | number
   gap?: string | number
@@ -46,13 +46,13 @@ interface ItemProps {
   disabled?: boolean
   theme?: 'default' | 'chenghua' | 'shijingshan'
   shadow?: 'always' | 'never' | 'hover'
-  hoverAnimation?: boolean
 }
 
 const props = withDefaults(defineProps<ItemProps>(), {
   src: '',
   width: '',
   height: '',
+  color: '',
   size: 'default',
   padding: undefined,
   gap: 12,
@@ -76,6 +76,7 @@ const props = withDefaults(defineProps<ItemProps>(), {
 })
 
 const slots = useSlots()
+const { commonClass, commonStyle } = useCommonProps(props)
 defineEmits<{ click: [event: MouseEvent] }>()
 defineSlots<{
   prefix?: () => any
@@ -127,8 +128,7 @@ const paddingValue = computed(() => {
 
 const rootStyle = computed<CSSProperties>(() => {
   const style: CSSProperties & Record<string, string | number | undefined> = {
-    width: props.width ? cssSize(props.width) : undefined,
-    height: props.height ? cssSize(props.height) : undefined,
+    ...commonStyle.value,
     background: props.background || undefined,
     borderRadius: props.borderRadius ? cssSize(props.borderRadius) : undefined,
     '--s-item-padding': paddingValue.value,
@@ -165,16 +165,18 @@ const handleKeydown = (event: KeyboardEvent) => {
 <template>
   <div
     class="s-item"
-    :class="{
-      'is-clickable': clickable,
-      'is-disabled': disabled,
-      'has-divider': divider,
-      's-item--chenghua': theme === 'chenghua',
-      's-item--shijingshan': theme === 'shijingshan',
-      's-item--shadow-always': shadow === 'always',
-      's-item--shadow-hover': shadow === 'hover',
-      's-item--hover-animation': hoverAnimation,
-    }"
+    :class="[
+      {
+        'is-clickable': clickable,
+        'is-disabled': disabled,
+        'has-divider': divider,
+        's-item--chenghua': theme === 'chenghua',
+        's-item--shijingshan': theme === 'shijingshan',
+        's-item--shadow-always': shadow === 'always',
+        's-item--shadow-hover': shadow === 'hover',
+      },
+      commonClass,
+    ]"
     :style="rootStyle"
     :role="clickable ? 'button' : undefined"
     :tabindex="clickable && !disabled ? 0 : undefined"

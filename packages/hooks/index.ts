@@ -3,6 +3,9 @@ export type { UseBooleanReturn } from './useBoolean'
 
 export { default as useClickOutside } from './useClickOutside'
 
+export { default as useCommonProps } from './useCommonProps'
+export type { UseCommonPropsReturn } from './useCommonProps'
+
 export { default as useFlexFillSize } from './useFlexFillSize'
 export type { UseFlexFillSizeOptions } from './useFlexFillSize'
 
@@ -19,5 +22,3 @@ export type { UseLoadingReturn } from './useLoading'
 
 export { default as usePagination } from './usePagination'
 export type { UsePaginationOptions, UsePaginationReturn } from './usePagination'
-
-export { default as useWidthHeightStyle } from './useWidthHeightStyle'

@@ -1,6 +1,6 @@
 import { ElTag } from 'element-plus'
 import type { TagPropsPublic } from 'element-plus/es/components/tag'
-import type { STagSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { SCommonProps, STagSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
 
 type ElTagInstance = InstanceType<typeof ElTag>
 
@@ -16,6 +16,8 @@ export type STagComponent = {
     $props: {
       width?: string | number
       height?: string | number
+      color?: string
+      hoverAnimation?: boolean
       options?: any[]
       value?: string | number
       primary?: string | number | boolean | any[]
@@ -31,6 +33,8 @@ export type STagComponent = {
       ElTagInstance['$props'],
       | 'width'
       | 'height'
+      | 'color'
+      | 'hoverAnimation'
       | 'options'
       | 'value'
       | 'primary'

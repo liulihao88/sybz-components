@@ -33,8 +33,7 @@
 }
 
 .s-item.is-clickable,
-.s-item--shadow-hover,
-.s-item--hover-animation {
+.s-item--shadow-hover {
   transition:
     background-color 0.24s ease,
     box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
@@ -66,10 +65,6 @@
 
 .s-item--shadow-hover:hover {
   box-shadow: var(--el-box-shadow-light);
-}
-
-.s-item--hover-animation:hover {
-  transform: translateY(-2px);
 }
 
 .s-item.is-disabled {
@@ -127,7 +122,7 @@
 }
 
 .s-item__subtitle {
-  color: var(--el-text-color-secondary);
+  color: var(--s-common-color, var(--el-text-color-secondary));
   font-size: 14px;
 }
 

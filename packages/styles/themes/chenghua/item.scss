@@ -9,7 +9,7 @@
   font-family: var(--s-ch-font-family, 'PingFang SC', sans-serif);
 }
 .s-item--chenghua .s-item__title {
-  color: var(--s-item-title);
+  color: var(--s-common-color, var(--s-item-title));
 }
 .s-item--chenghua.is-clickable:hover {
   border-color: var(--s-item-primary);

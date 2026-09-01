@@ -487,6 +487,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'SItemProps',
       slots: ['prefix', 'img', 'title', 'subTitle', 'extra', 'actions', 'default'],
       hoverProps: componentHoverProps('SItemProps', [
+        'SCommonProps',
         'SItemAlign',
         'SItemExtraPlacement',
         'SItemProps',
@@ -722,7 +723,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       description: 's-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。',
       hoverProps: componentHoverProps(
         'STagSelfProps',
-        ['STagSelfProps', 'SybzComponentSize', 'SybzComponentTheme', 'SybzRecord'],
+        ['SCommonProps', 'STagSelfProps', 'SybzComponentSize', 'SybzComponentTheme', 'SybzRecord'],
         ["import type { TagPropsPublic } from 'element-plus/es/components/tag'"],
       ),
     },

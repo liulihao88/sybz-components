@@ -114,6 +114,12 @@ export interface SWidthHeightProps {
   height?: string | number
 }
 
+/** 组件通用外观属性，由 useCommonProps 统一转换为样式和交互类名 */
+export interface SCommonProps extends SWidthHeightProps {
+  color?: string
+  hoverAnimation?: boolean
+}
+
 export interface SBuildTimeProps {
   componentsLabel?: string
   utilsLabel?: string
@@ -581,7 +587,7 @@ export type SItemStyleKey =
   | 'actions'
 export type SItemStyles = Partial<Record<SItemStyleKey, CSSProperties>>
 
-export interface SItemProps {
+export interface SItemProps extends SCommonProps {
   /** 主标题 */
   title?: string | number
   /** 副标题 */
@@ -590,8 +596,6 @@ export interface SItemProps {
   extra?: string | number
   /** 左侧图片地址 */
   src?: string
-  width?: string | number
-  height?: string | number
   /** 预设内边距尺寸，也可直接传 CSS 尺寸 */
   size?: SybzComponentSize | string | number
   /** 内容内边距，优先级高于 size */
@@ -625,7 +629,6 @@ export interface SItemProps {
   disabled?: boolean
   theme?: SybzComponentTheme
   shadow?: 'always' | 'never' | 'hover'
-  hoverAnimation?: boolean
 }
 
 export interface SWrapperProps {
@@ -908,7 +911,7 @@ export interface STabsSelfProps {
 
 export type STabsProps = STabsSelfProps & Partial<Omit<TabsPropsPublic, keyof STabsSelfProps>>
 
-export interface STagSelfProps extends SWidthHeightProps {
+export interface STagSelfProps extends SCommonProps {
   options?: any[]
   value?: string | number
   primary?: string | number | boolean | any[]

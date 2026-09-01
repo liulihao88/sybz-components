@@ -5,13 +5,13 @@ defineOptions({
 
 import { computed, nextTick, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue'
 import { getType, isEmpty } from '@sybz-components/utils'
-import useWidthHeightStyle from '@/hooks/useWidthHeightStyle'
+import useCommonProps from '@/hooks/useCommonProps'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
-import type { SybzComponentSize, SybzComponentTheme, SWidthHeightProps } from '@/types/component-props'
+import type { SCommonProps, SybzComponentSize, SybzComponentTheme } from '@/types/component-props'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
 type TagRule = string | number | boolean | any[]
 
-interface TagProps extends SWidthHeightProps {
+interface TagProps extends SCommonProps {
   options?: Record<string, any>[]
   value?: string | number
   primary?: TagRule
@@ -30,6 +30,8 @@ const props = withDefaults(defineProps<TagProps>(), {
   value: '',
   width: '',
   height: '',
+  color: '',
+  hoverAnimation: false,
   primary: false,
   warning: false,
   danger: false,
@@ -41,7 +43,7 @@ const props = withDefaults(defineProps<TagProps>(), {
   config: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('tag', props)
-const widthHeightStyle = useWidthHeightStyle(mergedProps)
+const { commonClass, commonStyle } = useCommonProps(mergedProps)
 
 const hasValue = computed(() => !isEmpty(mergedProps.value.value, true))
 const hasOptions = computed(() => mergedProps.value.options.length > 0)
@@ -171,8 +173,8 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     v-bind="$attrs"
     :type="parseType"
     :size="mergedProps.size || undefined"
-    :class="tagClass"
-    :style="widthHeightStyle"
+    :class="[tagClass, commonClass]"
+    :style="commonStyle"
   >
     <s-tooltip :content="tooltipContent" :disabled="!isOverflow" :show-slot="false" placement="top">
       <template #trigger>

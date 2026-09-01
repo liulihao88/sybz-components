@@ -10,10 +10,10 @@
   font-family: var(--s-sjs-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
 }
 .s-item--shijingshan .s-item__title {
-  color: var(--s-item-title);
+  color: var(--s-common-color, var(--s-item-title));
 }
 .s-item--shijingshan .s-item__subtitle {
-  color: var(--s-item-subtitle);
+  color: var(--s-common-color, var(--s-item-subtitle));
 }
 .s-item--shijingshan.is-clickable:hover {
   border-color: var(--s-item-primary);

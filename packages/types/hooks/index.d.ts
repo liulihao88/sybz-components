@@ -1,6 +1,6 @@
 import type { ComputedRef, CSSProperties, MaybeRefOrGetter, Ref } from 'vue'
 import type { ElementSize, MaybeComputedElementRef, UseResizeObserverOptions } from '@vueuse/core'
-import type { SWidthHeightProps } from '../component-props'
+import type { SCommonProps } from '../component-props'
 
 export interface UseBooleanReturn {
   state: Ref<boolean>
@@ -82,4 +82,9 @@ export interface UsePaginationReturn {
 
 export declare function usePagination(options?: UsePaginationOptions): UsePaginationReturn
 
-export declare function useWidthHeightStyle(source: MaybeRefOrGetter<SWidthHeightProps>): ComputedRef<CSSProperties>
+export interface UseCommonPropsReturn {
+  commonStyle: ComputedRef<CSSProperties>
+  commonClass: ComputedRef<Record<string, boolean>>
+}
+
+export declare function useCommonProps(source: MaybeRefOrGetter<SCommonProps>): UseCommonPropsReturn

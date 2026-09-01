@@ -1,4 +1,5 @@
 import type {
+  SCommonProps,
   SItemAlign,
   SItemExtraPlacement,
   SItemProps,
@@ -12,6 +13,10 @@ import type {
 export type SItemComponent = {
   new (): {
     $props: {
+      width?: string | number
+      height?: string | number
+      color?: string
+      hoverAnimation?: boolean
       /** 主标题 */
       title?: string | number
       /** 副标题 */
@@ -20,8 +25,6 @@ export type SItemComponent = {
       extra?: string | number
       /** 左侧图片地址 */
       src?: string
-      width?: string | number
-      height?: string | number
       /** 预设内边距尺寸，也可直接传 CSS 尺寸 */
       size?: SybzComponentSize | string | number
       /** 内容内边距，优先级高于 size */
@@ -55,7 +58,6 @@ export type SItemComponent = {
       disabled?: boolean
       theme?: SybzComponentTheme
       shadow?: 'always' | 'never' | 'hover'
-      hoverAnimation?: boolean
     }
     $slots: {
       prefix?: () => any
