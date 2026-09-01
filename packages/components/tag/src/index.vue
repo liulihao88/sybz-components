@@ -31,6 +31,7 @@ const props = withDefaults(defineProps<TagProps>(), {
   width: '',
   height: '',
   color: '',
+  background: '',
   hoverAnimation: false,
   primary: false,
   warning: false,

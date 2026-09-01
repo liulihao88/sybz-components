@@ -12,12 +12,13 @@ const hasSizeValue = (value: string | number | undefined) => value !== undefined
 
 const useCommonProps = (source: MaybeRefOrGetter<SCommonProps>): UseCommonPropsReturn => ({
   commonStyle: computed(() => {
-    const { width, height, color } = toValue(source)
+    const { width, height, color, background } = toValue(source)
 
     return {
       width: hasSizeValue(width) ? processWidth(width, true) : undefined,
       height: hasSizeValue(height) ? processWidth(height, true) : undefined,
       color: color || undefined,
+      background: background || undefined,
       '--s-common-color': color || undefined,
     } as CSSProperties
   }),

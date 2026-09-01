@@ -34,7 +34,7 @@ item/extraPlacement
 
 ### 阴影和 Hover 动画
 
-:::demo `width / height / color / hoverAnimation` 由公共 Hook 统一处理，`shadow="hover"` 与 `hover-animation` 均可独立生效。基础写法：`<SItem shadow="hover" hover-animation color="#7c3aed" />`。属性：`shadow` 可选值 `always / never / hover`，默认值 `never`；`color` 类型 `string`，默认值 `''`；`hoverAnimation` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clickable` 只控制点击交互、键盘可访问性和悬停背景，默认值 `false`。
+:::demo `width / height / color / background / hoverAnimation` 由公共 Hook 统一处理，`background` 支持普通颜色和渐变，`shadow="hover"` 与 `hover-animation` 均可独立生效。基础写法：`<SItem shadow="hover" hover-animation color="#7c3aed" background="linear-gradient(135deg, #faf5ff, #ede9fe)" />`。属性：`shadow` 可选值 `always / never / hover`，默认值 `never`；`color / background` 类型 `string`，默认值 `''`；`hoverAnimation` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clickable` 只控制点击交互、键盘可访问性和悬停背景，默认值 `false`。
 item/hover
 :::
 

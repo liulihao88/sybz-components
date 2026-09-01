@@ -6,6 +6,7 @@
     sub-title="抱歉，我无法处理您的请求。"
     extra="测试"
     color="#7c3aed"
+    background="linear-gradient(135deg, #faf5ff, #ede9fe)"
   >
     <template #prefix><span class="item-icon">ANDY</span></template>
   </SItem>

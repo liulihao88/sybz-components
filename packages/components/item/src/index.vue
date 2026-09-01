@@ -31,8 +31,6 @@ interface ItemProps extends SCommonProps {
   gap?: string | number
   contentGap?: string | number
   align?: ItemAlign
-  /** CSS background，支持纯色、渐变及其他合法背景值 */
-  background?: string
   hoverBackground?: string
   border?: boolean | string
   borderRadius?: string | number
@@ -129,7 +127,6 @@ const paddingValue = computed(() => {
 const rootStyle = computed<CSSProperties>(() => {
   const style: CSSProperties & Record<string, string | number | undefined> = {
     ...commonStyle.value,
-    background: props.background || undefined,
     borderRadius: props.borderRadius ? cssSize(props.borderRadius) : undefined,
     '--s-item-padding': paddingValue.value,
     '--s-item-gap': cssSize(props.gap),

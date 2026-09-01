@@ -24,7 +24,7 @@ company/capacityProgress/customColor
 
 ### 公共外观属性（hoverAnimation 默认值：false）
 
-:::demo `width / height / color / hoverAnimation` 由公共 Hook 统一处理。基础写法：`<s-capacity-progress :total="100" :used="38" width="320" height="32" color="#7c3aed" hover-animation />`。属性：`width / height` 类型 `string / number`，默认值未设置；`color` 类型 `string`，默认值 `''`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。
+:::demo `width / height / color / background / hoverAnimation` 由公共 Hook 统一处理，`background` 同时支持普通颜色和渐变。基础写法：`<s-capacity-progress :total="100" :used="38" width="320" height="32" color="#7c3aed" background="linear-gradient(135deg, #faf5ff, #ede9fe)" hover-animation />`。属性：`width / height` 类型 `string / number`，默认值未设置；`color / background` 类型 `string`，默认值 `''`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。
 company/capacityProgress/commonProps
 :::
 

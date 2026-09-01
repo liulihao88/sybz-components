@@ -84,7 +84,7 @@ tag/overflow
 
 ### 公共外观属性（hoverAnimation 默认值：false）
 
-:::demo `width / height / color / hoverAnimation` 由公共 Hook 统一处理。基础写法：`<s-tag width="120" height="36" color="#7c3aed" hover-animation>公共属性标签</s-tag>`。属性：`width / height` 类型 `string / number`，默认值 `''`；`color` 类型 `string`，默认值 `''`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。
+:::demo `width / height / color / background / hoverAnimation` 由公共 Hook 统一处理，`background` 同时支持普通颜色和渐变。基础写法：`<s-tag width="160" height="36" color="#4c1d95" background="linear-gradient(135deg, #ede9fe, #ddd6fe)" hover-animation>公共属性标签</s-tag>`。属性：`width / height` 类型 `string / number`，默认值 `''`；`color / background` 类型 `string`，默认值 `''`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。
 tag/commonProps
 :::
 
@@ -106,6 +106,7 @@ tag/commonProps
 |     `width`      | 标签宽度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
 |     `height`     | 标签高度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
 |     `color`      | 标签文字颜色                                                | string                                                | `''`      |
+|   `background`   | 标签背景，支持普通颜色、渐变及其他合法 CSS background       | string                                                | `''`      |
 | `hoverAnimation` | 是否启用公共悬停上移动画                                    | boolean                                               | `false`   |
 
 文本超出标签可用宽度时会自动显示省略号，并仅在鼠标移入溢出文本时显示完整内容。`closable` 标签的关闭图标不会被文本挤压。

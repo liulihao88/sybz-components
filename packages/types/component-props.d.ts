@@ -117,6 +117,8 @@ export interface SWidthHeightProps {
 /** 组件通用外观属性，由 useCommonProps 统一转换为样式和交互类名 */
 export interface SCommonProps extends SWidthHeightProps {
   color?: string
+  /** CSS background，支持纯色、渐变及其他合法背景值 */
+  background?: string
   hoverAnimation?: boolean
 }
 
@@ -606,8 +608,6 @@ export interface SItemProps extends SCommonProps {
   contentGap?: string | number
   /** 前缀与主内容在交叉轴上的对齐方式 */
   align?: SItemAlign
-  /** 根节点 CSS background，支持纯色、线性渐变和径向渐变 */
-  background?: string
   /** clickable 状态下的悬停背景色 */
   hoverBackground?: string
   /** 是否显示默认边框，或直接传入完整 CSS border；默认 true */

@@ -17,6 +17,8 @@ export type STagComponent = {
       width?: string | number
       height?: string | number
       color?: string
+      /** CSS background，支持纯色、渐变及其他合法背景值 */
+      background?: string
       hoverAnimation?: boolean
       options?: any[]
       value?: string | number
@@ -34,6 +36,7 @@ export type STagComponent = {
       | 'width'
       | 'height'
       | 'color'
+      | 'background'
       | 'hoverAnimation'
       | 'options'
       | 'value'

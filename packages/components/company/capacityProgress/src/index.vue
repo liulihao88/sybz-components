@@ -38,6 +38,7 @@ const props = withDefaults(defineProps<CapacityProgressProps>(), {
   width: undefined,
   height: undefined,
   color: '',
+  background: '',
   hoverAnimation: false,
   options: () => [],
   warning: undefined,
