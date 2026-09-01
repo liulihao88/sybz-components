@@ -28,7 +28,7 @@ icon/chenghua
 icon/shijingshan
 :::
 
-### Iconify 图标（source 默认值：auto）
+### Iconify 图标（ https://icon-sets.iconify.design/ ）
 
 Iconify 汇集了大量开源图标集。使用 `s-icon` 时不需要单独安装 `@iconify/vue`，也不需要导入每一个图标组件，只要提供图标名称即可。
 
@@ -79,7 +79,7 @@ tabler:home
 
 第一次显示某个在线图标时，浏览器会从 Iconify API 获取图标数据并缓存。组件库只加载页面实际使用的图标，不会把整个图标库打包进项目。
 
-:::demo 展示默认推荐的 Tabler 图标、显式指定来源、语义颜色、属性透传、品牌图标和离线注册。基础写法：`<s-icon icon="tabler:home"></s-icon>`。属性：`icon` 类型 `SIconValue`，默认值 `''`，字符串格式为 `图标集前缀:图标名称`；`source` 可选 `auto / element-plus / iconify / svg`，默认值 `auto`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`color` 类型 `string`，默认值未设置；`size` 类型 `string / number`，默认值 `16px`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
+:::demo 展示默认推荐的 Tabler 图标、显式指定来源、语义颜色、属性透传、品牌图标和离线注册。基础写法：`<s-icon icon="tabler:home"></s-icon>`。属性：`icon` 类型 `SIconValue`，默认值 `''`，Iconify 字符串格式为 `图标集前缀:图标名称`；`source` 可选 `auto / element-plus / iconify / svg / url`，默认值 `auto`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`color` 类型 `string`，默认值未设置；`size` 类型 `string / number`，默认值 `16px`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
 icon/iconify
 :::
 
@@ -104,7 +104,7 @@ Iconify 图标与普通 `s-icon` 使用相同的 `size`、`color`、`type`、`va
 <s-icon icon="tabler:search" source="iconify" />
 ```
 
-`source` 的全部可选值为 `auto / element-plus / iconify / svg`，默认值为 `auto`。
+`source` 的全部可选值为 `auto / element-plus / iconify / svg / url`，默认值为 `auto`。
 
 #### 透传 Iconify 专属属性
 
@@ -227,11 +227,17 @@ icon/borderRadius
 icon/hoverShadow
 :::
 
+### 在线图片（source 默认值：auto）
+
+:::demo `icon` 支持传入 `http://`、`https://` 和 `//` 开头的在线图片地址，`source="auto"` 会优先识别 URL，不会因为地址中包含 `:` 而误判为 Iconify 名称。基础写法：`<s-icon icon="https://api.iconify.design/mdi/home.svg" size="32"></s-icon>`。属性：`source` 可选值 `auto / element-plus / iconify / svg / url`，默认值 `auto`；`imageAttrs` 类型 `object`，默认值 `{}`，用于向内部 `img` 透传 `alt / crossorigin / referrerpolicy` 等属性；也可以通过 `source="url"` 显式指定图片来源。
+icon/url
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                                   | 类型            | 默认值    |
 | :------------------------: | ---------------------------------------------------------------------- | --------------- | --------- |
-|           `icon`           | 图标组件或名称，字符串包含 `:` 时自动使用 Iconify                      | SIconValue      | `''`      |
+|           `icon`           | 图标组件、名称或在线图片 URL                                           | SIconValue      | `''`      |
 |          `color`           | 图标颜色                                                               | string          | -         |
 |           `size`           | 图标尺寸                                                               | string / number | `16px`    |
 |       `borderRadius`       | 背景圆角，数字自动补 `px`，显式设置时覆盖主题圆角                      | string / number | `8px`     |
@@ -241,11 +247,12 @@ icon/hoverShadow
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                            | string / number | `''`      |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                           | boolean         | `false`   |
 |          `theme`           | 主题，可选 `default / chenghua / shijingshan`                          | string          | `default` |
-|          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg`                   | string          | `auto`    |
+|          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg / url`             | string          | `auto`    |
 |           `type`           | 语义类型，可选 `default / primary / success / warning / danger / info` | string          | -         |
 |         `variant`          | 视觉样式，可选 `plain / light / solid`                                 | string          | `plain`   |
 |         `svgAttrs`         | 透传给 `s-svg` 的属性                                                  | object          | `{}`      |
 |       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                             | object          | `{}`      |
+|        `imageAttrs`        | 透传给在线图片 `img` 的属性，如 `alt`、`crossorigin`                   | object          | `{}`      |
 | `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                         | boolean         | `false`   |
 
 ### 事件
@@ -258,4 +265,4 @@ icon/hoverShadow
 
 - 组件底层使用 `el-icon`，tooltip 相关属性如 `content`、`placement`、`effect` 可直接透传。
 - 在支持 Vue 模板类型提示的编辑器中，输入 `icon` 会提示 Element Plus 图标名；同时仍可传入 Vue 图标组件、小写、短横线、自定义 SVG 或 Iconify 名称。
-- `icon` 字符串包含 `:` 时会自动按 Iconify 图标渲染；完整的在线、离线用法见上方“Iconify 图标”章节。
+- `source="auto"` 会先识别在线图片 URL，再按 `图标集前缀:图标名称` 格式识别 Iconify；完整用法见上方“Iconify 图标”和“在线图片”章节。

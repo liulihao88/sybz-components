@@ -10,7 +10,7 @@ import type {
 } from '../component-props'
 
 /**
- * s-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
+ * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
  *
  * 先提示 sybz 自身属性。
  */
@@ -19,7 +19,7 @@ export type SIconComponent = {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
-      /** 图标；支持 Vue 组件和 Element Plus 图标名提示，字符串包含 `:` 时自动使用 Iconify，业务图标推荐使用 Tabler，例如 `tabler:home` */
+      /** 图标；支持 Vue 组件、Element Plus 图标名、Iconify 名称和在线图片 URL，业务图标推荐使用 Tabler，例如 `tabler:home` */
       icon?: SIconValue
       color?: string
       size?: string | number
@@ -35,7 +35,7 @@ export type SIconComponent = {
       rotate?: string | number
       disabled?: boolean
       theme?: SybzComponentTheme
-      /** 图标来源；默认值：auto，根据 icon 自动识别 Iconify，否则使用 Element Plus */
+      /** 图标来源；默认值：auto，可自动识别在线图片 URL 和 Iconify 名称 */
       source?: SIconSource
       /** 图标语义类型；默认值：undefined */
       type?: SIconType
@@ -44,6 +44,8 @@ export type SIconComponent = {
       svgAttrs?: SybzRecord
       /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
       iconifyAttrs?: SybzRecord
+      /** 透传给在线图片 img 元素的属性，如 alt、crossorigin、referrerpolicy */
+      imageAttrs?: SybzRecord
     }
     $slots: {
       default?: () => any

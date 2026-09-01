@@ -408,7 +408,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SIconProps',
       description:
-        's-icon 图标组件，支持多种图标来源、语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。',
+        's-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。',
       slots: ['default'],
       hoverProps: componentHoverProps('SIconProps', [
         'SIconValue',

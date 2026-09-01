@@ -34,7 +34,7 @@ export type SybzRecord = Record<string, any>
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})
 export type SIconValue = SIconName | Component
-export type SIconSource = 'auto' | 'element-plus' | 'iconify' | 'svg'
+export type SIconSource = 'auto' | 'element-plus' | 'iconify' | 'svg' | 'url'
 export type SIconType = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
 export type SIconVariant = 'plain' | 'light' | 'solid'
 export type SIconCursor =
@@ -524,7 +524,7 @@ export interface SMarkdownProps {
 }
 
 export interface SIconProps extends SHtmlStringProps {
-  /** 图标；支持 Vue 组件和 Element Plus 图标名提示，字符串包含 `:` 时自动使用 Iconify，业务图标推荐使用 Tabler，例如 `tabler:home` */
+  /** 图标；支持 Vue 组件、Element Plus 图标名、Iconify 名称和在线图片 URL，业务图标推荐使用 Tabler，例如 `tabler:home` */
   icon?: SIconValue
   color?: string
   size?: string | number
@@ -540,7 +540,7 @@ export interface SIconProps extends SHtmlStringProps {
   rotate?: string | number
   disabled?: boolean
   theme?: SybzComponentTheme
-  /** 图标来源；默认值：auto，根据 icon 自动识别 Iconify，否则使用 Element Plus */
+  /** 图标来源；默认值：auto，可自动识别在线图片 URL 和 Iconify 名称 */
   source?: SIconSource
   /** 图标语义类型；默认值：undefined */
   type?: SIconType
@@ -549,6 +549,8 @@ export interface SIconProps extends SHtmlStringProps {
   svgAttrs?: SybzRecord
   /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
   iconifyAttrs?: SybzRecord
+  /** 透传给在线图片 img 元素的属性，如 alt、crossorigin、referrerpolicy */
+  imageAttrs?: SybzRecord
 }
 
 export interface SImageSelfProps {

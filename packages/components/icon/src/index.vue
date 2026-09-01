@@ -33,6 +33,7 @@ interface IconProps {
   variant?: SIconVariant
   svgAttrs?: Record<string, any>
   iconifyAttrs?: Record<string, any>
+  imageAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
   rotate?: string | number
 }
@@ -52,6 +53,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   variant: 'plain',
   svgAttrs: () => ({}),
   iconifyAttrs: () => ({}),
+  imageAttrs: () => ({}),
   dangerouslyUseHTMLString: false,
   rotate: '',
 })
@@ -71,13 +73,17 @@ const parseColor = computed(() => {
   return 'var(--s-icon-color)'
 })
 
-const isIconify = computed(
-  () =>
-    mergedProps.value.source === 'iconify' ||
-    (mergedProps.value.source === 'auto' &&
-      typeof mergedProps.value.icon === 'string' &&
-      mergedProps.value.icon.includes(':')),
-)
+const isRemoteImage = computed(() => {
+  if (mergedProps.value.source === 'url') return typeof mergedProps.value.icon === 'string'
+  if (mergedProps.value.source !== 'auto' || typeof mergedProps.value.icon !== 'string') return false
+  return /^(?:https?:)?\/\//i.test(mergedProps.value.icon)
+})
+
+const isIconify = computed(() => {
+  if (mergedProps.value.source === 'iconify') return true
+  if (mergedProps.value.source !== 'auto' || typeof mergedProps.value.icon !== 'string') return false
+  return /^(?:@[a-z\d._-]+:)?[a-z\d][a-z\d._-]*:[a-z\d][a-z\d._-]*$/i.test(mergedProps.value.icon)
+})
 
 const resolvedIcon = computed(() => {
   if (typeof mergedProps.value.icon !== 'string') return mergedProps.value.icon
@@ -134,8 +140,15 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
         <slot v-if="$slots.default"></slot>
         <!-- 仅在默认插槽为空时渲染图标 -->
         <template v-else>
+          <img
+            v-if="isRemoteImage"
+            v-bind="mergedProps.imageAttrs"
+            class="s-icon__image"
+            :src="String(mergedProps.icon)"
+            :alt="String(mergedProps.imageAttrs.alt || '')"
+          />
           <s-svg
-            v-if="mergedProps.source === 'svg' && typeof mergedProps.icon === 'string'"
+            v-else-if="mergedProps.source === 'svg' && typeof mergedProps.icon === 'string'"
             v-bind="mergedProps.svgAttrs"
             :icon="mergedProps.icon"
           ></s-svg>
@@ -206,6 +219,13 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
 
   :deep(.iconify) {
     display: block;
+  }
+
+  &__image {
+    display: block;
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
   }
 }
 .s-icon__not-allowed {
