@@ -21,7 +21,7 @@
   </el-button>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="ts">
 import { computed, h, ref, useAttrs } from 'vue'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
