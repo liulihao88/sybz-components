@@ -14,10 +14,10 @@ export type STagPublicProps = STagSelfProps & Omit<ElTagInstance['$props'], keyo
 export type STagComponent = {
   new (): {
     $props: {
-      options?: any[]
-      value?: string | number
       width?: string | number
       height?: string | number
+      options?: any[]
+      value?: string | number
       primary?: string | number | boolean | any[]
       warning?: string | number | boolean | any[]
       danger?: string | number | boolean | any[]
@@ -29,10 +29,10 @@ export type STagComponent = {
       config?: SybzRecord
     } & Omit<
       ElTagInstance['$props'],
-      | 'options'
-      | 'value'
       | 'width'
       | 'height'
+      | 'options'
+      | 'value'
       | 'primary'
       | 'warning'
       | 'danger'

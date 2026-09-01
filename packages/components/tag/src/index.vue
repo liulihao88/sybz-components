@@ -7,15 +7,13 @@ import { computed, nextTick, onBeforeUnmount, onMounted, onUpdated, ref } from '
 import { getType, isEmpty } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
-import type { SybzComponentSize, SybzComponentTheme } from '@/types/component-props'
+import type { SybzComponentSize, SybzComponentTheme, SWidthHeightProps } from '@/types/component-props'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
 type TagRule = string | number | boolean | any[]
 
-interface TagProps {
+interface TagProps extends SWidthHeightProps {
   options?: Record<string, any>[]
   value?: string | number
-  width?: string | number
-  height?: string | number
   primary?: TagRule
   warning?: TagRule
   danger?: TagRule
@@ -173,7 +171,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     :type="parseType"
     :size="mergedProps.size || undefined"
     :class="tagClass"
-    :style="{ ...handleWidthHeight(mergedProps.width, mergedProps.height) }"
+    :style="handleWidthHeight(mergedProps)"
   >
     <s-tooltip :content="tooltipContent" :disabled="!isOverflow" :show-slot="false" placement="top">
       <template #trigger>

@@ -8,6 +8,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { delay, formatBytes, getType } from '@sybz-components/utils'
 import { handleWidthHeight } from '@/components/utils/local.ts'
+import type { SWidthHeightProps } from '@/types/component-props'
 
 defineOptions({
   name: 'SCapacityProgress',
@@ -16,12 +17,10 @@ defineOptions({
 const progressBoxRef = ref(null)
 const percentageRef = ref(null)
 const showRight = ref(true)
-interface CapacityProgressProps {
+interface CapacityProgressProps extends SWidthHeightProps {
   total: string | number
   used: string | number
   iconAttrs?: Record<string, any>
-  width?: string | number
-  height?: string | number
   options?: Record<string, any[]>[]
   warning?: string | number | any[]
   primary?: string | number | any[]
@@ -183,7 +182,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="s-capacity-progress" :style="{ ...handleWidthHeight(props.width, props.height) }">
+  <div class="s-capacity-progress" :style="handleWidthHeight(props)">
     <s-progress
       ref="progressBoxRef"
       class="progress-box"

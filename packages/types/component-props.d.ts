@@ -108,6 +108,12 @@ export interface SHtmlStringProps {
   dangerouslyUseHTMLString?: boolean
 }
 
+/** 组件通用宽高属性，数字及数字字符串按 px 处理 */
+export interface SWidthHeightProps {
+  width?: string | number
+  height?: string | number
+}
+
 export interface SBuildTimeProps {
   componentsLabel?: string
   utilsLabel?: string
@@ -902,11 +908,9 @@ export interface STabsSelfProps {
 
 export type STabsProps = STabsSelfProps & Partial<Omit<TabsPropsPublic, keyof STabsSelfProps>>
 
-export interface STagSelfProps {
+export interface STagSelfProps extends SWidthHeightProps {
   options?: any[]
   value?: string | number
-  width?: string | number
-  height?: string | number
   primary?: string | number | boolean | any[]
   warning?: string | number | boolean | any[]
   danger?: string | number | boolean | any[]
