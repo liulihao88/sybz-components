@@ -20,7 +20,7 @@ flex/base
 
 ### 按钮间距（`gap` 默认值：`0px`）
 
-:::demo 设置非零 `gap` 后，按钮间距统一由 `s-flex` 管理，Element Plus 按钮默认的 `margin-left` 不再生效。基础写法：`<s-flex wrap="wrap" gap="small"><s-button>按钮</s-button></s-flex>`。属性：`gap` 可选 `small / default / large / 自定义宽度`，默认值 `0px`；`wrap` 可选 `nowrap / wrap / wrap-reverse`，默认值 `nowrap`。
+:::demo 设置非零 `gap` 后，按钮间距统一由 `s-flex` 管理，Element Plus 按钮默认的 `margin-left` 不再生效；裸写 `wrap` 等价于 `wrap="wrap"`。基础写法：`<s-flex wrap gap="small"><s-button>按钮</s-button></s-flex>`。属性：`gap` 可选 `small / default / large / 自定义宽度`，默认值 `0px`；`wrap` 可选 `true / false / nowrap / wrap / wrap-reverse`，默认值 `nowrap`，其中 `true` 等价于 `wrap`，`false` 等价于 `nowrap`。
 flex/buttonGap
 :::
 
@@ -41,7 +41,7 @@ flex/size
 |   属性名    | 说明                                                                 | 类型               | 可选值                                                                                    | 默认值   |
 | :---------: | -------------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------- | -------- |
 | `direction` | 主轴方向，对应 `flex-direction`                                      | string             | `row` / `row-reverse` / `column` / `column-reverse`                                       | `row`    |
-|   `wrap`    | 是否换行，对应 `flex-wrap`                                           | string             | `nowrap` / `wrap` / `wrap-reverse`                                                        | `nowrap` |
+|   `wrap`    | 是否换行；裸写或传 `true` 等价于 `wrap`，传 `false` 等价于 `nowrap`  | boolean / string   | `true` / `false` / `nowrap` / `wrap` / `wrap-reverse`                                     | `nowrap` |
 |  `justify`  | 主轴对齐方式，对应 `justify-content`                                 | string             | `start` / `end` / `center` / `space-between` / `space-around` / `space-evenly` / `normal` | `normal` |
 |   `align`   | 交叉轴对齐方式，对应 `align-items`                                   | string             | `start` / `end` / `center` / `baseline` / `stretch` / `normal`                            | `normal` |
 |    `gap`    | 子元素间距，对应 `gap`                                               | string / number    | `small` / `default` / `large` / 任意可被 `processWidth` 处理的宽度                        | `0px`    |

@@ -14,7 +14,7 @@ defineOptions({
 
 interface FlexProps {
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
-  wrap?: 'nowrap' | 'wrap' | 'wrap-reverse'
+  wrap?: boolean | 'nowrap' | 'wrap' | 'wrap-reverse'
   justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'normal'
   align?: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal'
   flex?: string
@@ -37,12 +37,17 @@ const props = withDefaults(defineProps<FlexProps>(), {
 
 const gapValue = computed(() => parseGapValue())
 const hasGap = computed(() => !/^0(?:[a-z%]+)?$/i.test(String(gapValue.value).trim()))
+const wrapValue = computed(() => {
+  if (props.wrap === true) return 'wrap'
+  if (props.wrap === false) return 'nowrap'
+  return props.wrap
+})
 
 // --- 计算 Style ---
 const flexStyles = computed(() => {
   return {
     'flex-direction': props.direction,
-    'flex-wrap': props.wrap,
+    'flex-wrap': wrapValue.value,
     'justify-content': props.justify === 'normal' ? undefined : props.justify,
     'align-items': props.align === 'normal' ? undefined : props.align,
     flex: props.flex && props.flex !== 'normal' ? props.flex : undefined,

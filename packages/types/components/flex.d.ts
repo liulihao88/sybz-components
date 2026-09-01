@@ -17,7 +17,8 @@ export type SFlexComponent = {
   new (): {
     $props: {
       direction?: SFlexDirection
-      wrap?: SFlexWrap
+      /** 是否换行；true 等价于 wrap，false 等价于 nowrap */
+      wrap?: boolean | SFlexWrap
       justify?: SFlexJustify
       align?: SFlexAlign
       flex?: string
