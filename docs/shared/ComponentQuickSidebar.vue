@@ -407,6 +407,17 @@ const handleSidebarTab = (event: KeyboardEvent) => {
 }
 
 const handleWindowKeydown = (event: KeyboardEvent) => {
+  const isSearchShortcut =
+    event.metaKey && !event.ctrlKey && !event.altKey && !event.shiftKey && event.key.toLowerCase() === 'd'
+
+  if (shouldShow.value && isSearchShortcut) {
+    event.preventDefault()
+    event.stopPropagation()
+    setExpandedState(true)
+    nextTick(() => searchInputRef.value?.focus())
+    return
+  }
+
   handleSidebarTab(event)
 }
 
@@ -518,6 +529,7 @@ onUnmounted(() => {
           type="search"
           placeholder="搜索"
           aria-label="搜索组件"
+          title="搜索组件（快捷键 Cmd+D聚焦, Esc直接跳转）"
           @keydown.enter="handleSearchEnter"
         />
         <button
