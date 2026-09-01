@@ -7,7 +7,7 @@
 
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { delay, formatBytes, getType } from '@sybz-components/utils'
-import { handleWidthHeight } from '@/components/utils/local.ts'
+import useWidthHeightStyle from '@/hooks/useWidthHeightStyle'
 import type { SWidthHeightProps } from '@/types/component-props'
 
 defineOptions({
@@ -47,6 +47,7 @@ const props = withDefaults(defineProps<CapacityProgressProps>(), {
   type: undefined,
   customColor: false,
 })
+const widthHeightStyle = useWidthHeightStyle(props)
 function format() {
   if (percentage.value < 0) {
     return '?%'
@@ -182,7 +183,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="s-capacity-progress" :style="handleWidthHeight(props)">
+  <div class="s-capacity-progress" :style="widthHeightStyle">
     <s-progress
       ref="progressBoxRef"
       class="progress-box"

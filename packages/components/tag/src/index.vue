@@ -5,7 +5,7 @@ defineOptions({
 
 import { computed, nextTick, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue'
 import { getType, isEmpty } from '@sybz-components/utils'
-import { handleWidthHeight } from '@/components/utils/local.ts'
+import useWidthHeightStyle from '@/hooks/useWidthHeightStyle'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { SybzComponentSize, SybzComponentTheme, SWidthHeightProps } from '@/types/component-props'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
@@ -41,6 +41,7 @@ const props = withDefaults(defineProps<TagProps>(), {
   config: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('tag', props)
+const widthHeightStyle = useWidthHeightStyle(mergedProps)
 
 const hasValue = computed(() => !isEmpty(mergedProps.value.value, true))
 const hasOptions = computed(() => mergedProps.value.options.length > 0)
@@ -171,7 +172,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     :type="parseType"
     :size="mergedProps.size || undefined"
     :class="tagClass"
-    :style="handleWidthHeight(mergedProps)"
+    :style="widthHeightStyle"
   >
     <s-tooltip :content="tooltipContent" :disabled="!isOverflow" :show-slot="false" placement="top">
       <template #trigger>

@@ -19,3 +19,5 @@ export type { UseLoadingReturn } from './useLoading'
 
 export { default as usePagination } from './usePagination'
 export type { UsePaginationOptions, UsePaginationReturn } from './usePagination'
+
+export { default as useWidthHeightStyle } from './useWidthHeightStyle'

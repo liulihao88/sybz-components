@@ -97,8 +97,8 @@ tag/overflow
 | `warning` | 匹配为警告标签的规则                                        | boolean / string / number / array                     | -         |
 | `danger`  | 匹配为危险标签的规则                                        | boolean / string / number / array                     | -         |
 |  `other`  | 未命中任何规则时的兜底标签类型                              | string                                                | `primary` |
-|  `width`  | 标签宽度，会经过 `handleWidthHeight` 处理                   | string / number                                       | -         |
-| `height`  | 标签高度，会经过 `handleWidthHeight` 处理                   | string / number                                       | -         |
+|  `width`  | 标签宽度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
+| `height`  | 标签高度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
 
 文本超出标签可用宽度时会自动显示省略号，并仅在鼠标移入溢出文本时显示完整内容。`closable` 标签的关闭图标不会被文本挤压。
 
