@@ -11,7 +11,9 @@ import { Plus, Search, StarFilled } from '@element-plus/icons-vue'
     <s-button icon="el-icon-plus" type="warning" size="small">小按钮</s-button>
     <s-button icon="tabler:user-dollar" type="warning" size="large">Tabler Iconify 图标</s-button>
     <s-button icon="mdi:account-tie-woman" type="danger" size="large">Tabler Iconify 图标2</s-button>
-    <s-button icon="https://api.iconify.design/mdi/home.svg" type="primary" size="large">HTTP 图片图标</s-button>
+    <s-button icon="https://cdn.jsdelivr.net/gh/themusecatcher/resources@0.1.2/1.jpg" type="primary">
+      HTTP 线上图片图标
+    </s-button>
     <s-button type="primary" plain size="large">
       <template #icon>
         <StarFilled class="button-icon-demo__custom-icon" />
