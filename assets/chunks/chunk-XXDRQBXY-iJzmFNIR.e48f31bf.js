@@ -1,0 +1,1 @@
+import{_ as e,d as o}from"./mermaid.core-NGOSwdJm.358e9943.js";var r=e(((e,r)=>{let t;return"sandbox"===r&&(t=o("#i"+e)),o("sandbox"===r?t.nodes()[0].contentDocument.body:"body").select(`[id="${e}"]`)}),"getDiagramElement");export{r};
