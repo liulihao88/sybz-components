@@ -114,6 +114,9 @@ const syncingSingleSelection = ref(false)
 
 const isSingleSelection = computed(() => mergedProps.value.selectionType === 'single')
 const isMultipleSelection = computed(() => mergedProps.value.selectionType === 'multiple')
+const shouldShowIndex = computed(
+  () => mergedProps.value.showIndex && (mergedProps.value.columns.length > 0 || mergedProps.value.data.length > 0),
+)
 const normalizedSelectionAttrs = computed<Record<string, any>>(() => {
   const selectionAttrs = mergedProps.value.selectionAttrs as unknown as Record<string, any> | undefined
   if (selectionAttrs && typeof selectionAttrs === 'object') {
@@ -975,7 +978,7 @@ defineExpose({
         </template>
       </el-table-column>
       <el-table-column
-        v-if="isSingleSelection && mergedProps.showIndex"
+        v-if="isSingleSelection && shouldShowIndex"
         type="index"
         :width="tableTotal >= 10000 || mergedProps.size === 'large' ? 70 : 60"
         align="center"
@@ -990,7 +993,7 @@ defineExpose({
       </el-table-column>
       <slot />
       <el-table-column
-        v-if="!isSingleSelection && mergedProps.showIndex"
+        v-if="!isSingleSelection && shouldShowIndex"
         type="index"
         :width="tableTotal >= 10000 || mergedProps.size === 'large' ? 70 : 60"
         align="center"

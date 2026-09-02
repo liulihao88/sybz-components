@@ -22,6 +22,12 @@ table/all
 table/base
 :::
 
+### 后端返回表头与数据
+
+:::demo 展示表头配置和表格数据均由后端返回，前端补充列样式、状态插槽和容器样式。基础写法：`<s-table :columns="columns" :data="data" :loading="loading" :show-page="false"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`；`loading` 可选 `true / false`，默认值 `false`；`show-page` 可选 `true / false`，默认值 `true`；列样式使用 `className` 和 `labelClassName`，默认值未设置。
+table/backend
+:::
+
 ### 成华主题
 
 #### chenghua主题示例
