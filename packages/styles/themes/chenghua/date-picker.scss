@@ -22,6 +22,10 @@
       background-color 0.18s ease;
   }
 
+  .el-date-editor .el-input__wrapper {
+    border-radius: var(--s-ch-radius);
+  }
+
   .el-date-editor:hover {
     box-shadow: 0 0 0 1px var(--s-ch-primary-border-hover) inset;
   }
@@ -34,6 +38,11 @@
   }
 
   &.has-title .el-date-editor {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &.has-title .el-date-editor .el-input__wrapper {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
