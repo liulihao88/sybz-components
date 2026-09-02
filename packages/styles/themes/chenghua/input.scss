@@ -23,6 +23,8 @@
   }
 
   .el-input-group--prepend .el-input-group__prepend {
+    border-top-left-radius: var(--s-ch-radius);
+    border-bottom-left-radius: var(--s-ch-radius);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
