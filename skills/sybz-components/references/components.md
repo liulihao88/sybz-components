@@ -47,7 +47,7 @@
 
 ```vue
 <s-icon icon="tabler:search" content="搜索" @click="search" />
-<s-icon icon="tabler:trash" type="danger" variant="light" content="删除" @click="remove" />
+<s-icon icon="delete" type="danger" variant="solid" content="删除" @click="remove" />
 ```
 
 完整的图标来源、属性、离线注册和选择规则见 [icon.md](icon.md)。
