@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
+import { validate } from '@sybz-components/utils'
 const header = [
   {
     label: '名字',
@@ -51,7 +52,7 @@ const columns = [
 
 const formRules = ref({
   name: [proxy.validate()],
-  age: [{ required: true, message: '请输入年龄', trigger: ['change', 'blur'] }],
+  age: [validate(), validate('between', { min: 1, max: 100 })],
 })
 
 const form = ref({
