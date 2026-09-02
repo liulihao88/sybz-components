@@ -22,10 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, ref, useAttrs } from 'vue'
-import { Icon as IconifyIcon } from '@iconify/vue'
-import { processWidth, toLine } from '@sybz-components/utils'
-import { isIconifyIconName, isRemoteIconUrl } from '@/components/utils/icon'
+import { computed, ref, useAttrs } from 'vue'
+import { processWidth } from '@sybz-components/utils'
+import { resolveIconValue } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
 defineOptions({
@@ -79,42 +78,20 @@ const lastClickTime = ref<number | null>(null)
 
 const loading = ref(false)
 
-const normalizeIcon = (icon: unknown) => {
-  if (typeof icon !== 'string' || !icon || icon.startsWith('el-icon-')) return icon
-  if (isRemoteIconUrl(icon)) {
-    return () =>
-      h('img', {
-        src: icon,
-        alt: '',
-        'aria-hidden': true,
-        style: {
-          display: 'block',
-          width: '1em',
-          height: '1em',
-          objectFit: 'contain',
-        },
-      })
-  }
-  if (isIconifyIconName(icon)) {
-    return () => h(IconifyIcon, { icon, 'aria-hidden': true })
-  }
-  return `el-icon-${toLine(icon)}`
-}
-
 const buttonAttrs = computed(() => {
   const normalizedAttrs = { ...attrs }
   const buttonHeight = processWidth(mergedProps.value.height, true)
 
   if ('icon' in normalizedAttrs) {
-    normalizedAttrs.icon = normalizeIcon(normalizedAttrs.icon)
+    normalizedAttrs.icon = resolveIconValue(normalizedAttrs.icon)
   }
 
   if ('loadingIcon' in normalizedAttrs) {
-    normalizedAttrs.loadingIcon = normalizeIcon(normalizedAttrs.loadingIcon)
+    normalizedAttrs.loadingIcon = resolveIconValue(normalizedAttrs.loadingIcon)
   }
 
   if ('loading-icon' in normalizedAttrs) {
-    normalizedAttrs['loading-icon'] = normalizeIcon(normalizedAttrs['loading-icon'])
+    normalizedAttrs['loading-icon'] = resolveIconValue(normalizedAttrs['loading-icon'])
   }
 
   return {

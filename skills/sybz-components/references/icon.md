@@ -16,20 +16,22 @@
 
 - `source` 默认是 `auto`，`tabler:home` 等含英文冒号的合法名称会自动使用 Iconify，无需写 `source="iconify"`。
 - Iconify 图标由 `s-icon` 提供，业务代码无需安装或导入 `@iconify/vue`，也无需逐个导入图标组件。
+- `s-button` 的 `icon`、`loading-icon` 和 `loadingIcon` 与 `s-icon` 共用同一套字符串解析规则，因此也支持 Tabler、远程图片、Emoji 和 Element Plus 图标名。
 - 在线 Iconify 首次显示时需要访问 Iconify API；内网或离线项目按下方方式预注册。
 - 已有 Element Plus 图标可以继续写 `icon="delete"`，新增或统一改造时优先使用 Tabler。
 
 ## 按来源选择
 
-| 场景              | 写法                                             | 说明                                       |
-| ----------------- | ------------------------------------------------ | ------------------------------------------ |
-| 新增业务图标      | `<s-icon icon="tabler:user" />`                  | 首选，自动识别为 Iconify                   |
-| Element Plus 图标 | `<s-icon icon="delete" />`                       | 名称支持大小写、驼峰和短横线               |
-| 明确指定 Iconify  | `<s-icon icon="tabler:user" source="iconify" />` | 仅在需要限定来源时使用                     |
-| 项目 SVG          | `<s-icon icon="custom-name" source="svg" />`     | 交给项目已配置的 `s-svg` 解析              |
-| 在线图片          | `<s-icon icon="https://example.com/icon.svg" />` | `http://`、`https://`、`//` 自动识别为 URL |
-| Vue 图标组件      | `<s-icon :icon="Search" />`                      | 需要在脚本中导入 `Search`                  |
-| 自定义内容        | `<s-icon><CustomIcon /></s-icon>`                | 默认插槽优先于 `icon` 属性                 |
+| 场景              | 写法                                             | 说明                                           |
+| ----------------- | ------------------------------------------------ | ---------------------------------------------- |
+| 新增业务图标      | `<s-icon icon="tabler:user" />`                  | 首选，自动识别为 Iconify                       |
+| Element Plus 图标 | `<s-icon icon="delete" />`                       | 名称支持大小写、驼峰和短横线                   |
+| 明确指定 Iconify  | `<s-icon icon="tabler:user" source="iconify" />` | 仅在需要限定来源时使用                         |
+| 项目 SVG          | `<s-icon icon="custom-name" source="svg" />`     | 交给项目已配置的 `s-svg` 解析                  |
+| 在线图片          | `<s-icon icon="https://example.com/icon.svg" />` | `http://`、`https://`、`//` 自动识别为 URL     |
+| Emoji 文本        | `<s-icon icon="❌" />`                           | `source="auto"` 下按文本字形渲染，不当作图标名 |
+| Vue 图标组件      | `<s-icon :icon="Search" />`                      | 需要在脚本中导入 `Search`                      |
+| 自定义内容        | `<s-icon><CustomIcon /></s-icon>`                | 默认插槽优先于 `icon` 属性                     |
 
 不要给能被自动识别的普通用法重复传 `source="auto"`。只有名称格式特殊或业务需要强制来源时才显式设置 `source`。
 

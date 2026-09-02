@@ -5,7 +5,7 @@ import type { ElTooltipProps } from 'element-plus'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth, toLine } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
-import { isIconifyIconName, isRemoteIconUrl } from '@/components/utils/icon'
+import { isEmojiIcon, isIconifyIconName, isRemoteIconUrl } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type {
   SIconCursor,
@@ -86,6 +86,13 @@ const isIconify = computed(() => {
   return isIconifyIconName(mergedProps.value.icon)
 })
 
+const isEmoji = computed(
+  () =>
+    mergedProps.value.source === 'auto' &&
+    typeof mergedProps.value.icon === 'string' &&
+    isEmojiIcon(mergedProps.value.icon),
+)
+
 const resolvedIcon = computed(() => {
   if (typeof mergedProps.value.icon !== 'string') return mergedProps.value.icon
   return `el-icon-${toLine(mergedProps.value.icon)}`
@@ -148,6 +155,7 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
             :src="String(mergedProps.icon)"
             :alt="String(mergedProps.imageAttrs.alt || '')"
           />
+          <span v-else-if="isEmoji" class="s-icon__emoji" aria-hidden="true">{{ mergedProps.icon }}</span>
           <s-svg
             v-else-if="mergedProps.source === 'svg' && typeof mergedProps.icon === 'string'"
             v-bind="mergedProps.svgAttrs"
@@ -227,6 +235,12 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
     width: 1em;
     height: 1em;
     object-fit: contain;
+  }
+
+  &__emoji {
+    display: block;
+    font-size: 1em;
+    line-height: 1;
   }
 }
 .s-icon__not-allowed {

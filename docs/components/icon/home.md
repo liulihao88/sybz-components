@@ -16,6 +16,8 @@
 icon/base
 :::
 
+`icon` 也支持直接传入 Emoji 文本，例如 `<s-icon icon="❌" />`；`source="auto"` 下会按文本字形渲染，不会当作 Element Plus 图标名解析。
+
 ### 成华主题
 
 :::demo 展示成华主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="chenghua" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。
