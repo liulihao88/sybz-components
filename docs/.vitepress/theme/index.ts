@@ -16,6 +16,7 @@ import ChangelogContent from './components/ChangelogContent.vue'
 import ApiIntro from '../../shared/ApiIntro.vue'
 import ComponentQuickSidebar from '../../shared/ComponentQuickSidebar.vue'
 import DocBasicUsage from '../../shared/DocBasicUsage.vue'
+import RouteHistoryControls from '../../shared/RouteHistoryControls.vue'
 import ScrollPositionRestore from '../../shared/ScrollPositionRestore.vue'
 import OverviewDemo from '../../components/overview/OverviewDemo.vue'
 
@@ -36,6 +37,7 @@ export default {
   Layout() {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-title-before': () => h(Logo),
+      'nav-bar-content-before': () => h(RouteHistoryControls),
       'layout-bottom': () => [h(ComponentQuickSidebar), h(ScrollPositionRestore)],
     })
   },
