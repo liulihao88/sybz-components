@@ -19,6 +19,7 @@
 | `el-dialog`、`el-drawer`                  | `s-dialog`                |
 | `el-empty`                                | `s-empty`                 |
 | `el-image`、手写 `<img>`                  | `s-image`                 |
+| `el-icon`、手写图标容器                   | `s-icon`                  |
 | `el-tooltip`                              | `s-tooltip`               |
 | `el-popconfirm`                           | `s-popconfirm`            |
 | `el-progress`                             | `s-progress`              |
@@ -39,6 +40,17 @@
 ## 星标组件基础用法
 
 星标组件来自 `skills/star-skill.md` 的组件清单。迁移页面时优先使用这些组件。
+
+### s-icon
+
+新增业务图标优先使用 Tabler Icons；`source="auto"` 会根据名称自动判断来源，不需要导入单个图标组件：
+
+```vue
+<s-icon icon="tabler:search" content="搜索" @click="search" />
+<s-icon icon="tabler:trash" type="danger" variant="light" content="删除" @click="remove" />
+```
+
+完整的图标来源、属性、离线注册和选择规则见 [icon.md](icon.md)。
 
 ### s-button
 

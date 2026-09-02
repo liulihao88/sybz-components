@@ -1,6 +1,6 @@
 ---
 name: sybz-components
-description: 在 Vue 项目中使用或迁移到 sybz-components 组件库和 @sybz-components/utils 工具库；需要查询组件/函数用法、替换 Element Plus 写法、应用 chenghua 或 shijingshan 主题规范时使用。
+description: 在 Vue 项目中使用或迁移到 sybz-components 组件库和 @sybz-components/utils 工具库；需要查询 s-icon 等组件或函数用法、替换 Element Plus 写法、应用 chenghua 或 shijingshan 主题规范时使用。
 license: MIT
 ---
 
@@ -38,12 +38,13 @@ app.use(SybzComponents)
 
 1. 先读当前代码，确认项目已有注册方式、样式约定和组件使用习惯。
 2. 需要替换组件时，读取 [references/components.md](references/components.md)。
-3. 需要替换工具函数时，读取 [references/utils.md](references/utils.md)。
-4. 需要按主题实现 UI 时，先读取 [references/themes.md](references/themes.md)，再按需读取：
+3. 使用、迁移或生成 `s-icon` 时，读取 [references/icon.md](references/icon.md)，按其中的来源选择、命名和属性规则直接编写。
+4. 需要替换工具函数时，读取 [references/utils.md](references/utils.md)。
+5. 需要按主题实现 UI 时，先读取 [references/themes.md](references/themes.md)，再按需读取：
    - 成华主题：[references/chenghua-ui.md](references/chenghua-ui.md)
    - 石景山主题：[references/shijingshan-ui.md](references/shijingshan-ui.md)
-5. 修改后删除不再需要的 import、类型、样式、计算属性和辅助函数。
-6. 交付时说明替换了哪些组件/函数、是否应用主题、运行了哪些校验。
+6. 修改后删除不再需要的 import、类型、样式、计算属性和辅助函数。
+7. 交付时说明替换了哪些组件/函数、是否应用主题、运行了哪些校验。
 
 ## 核心原则
 
