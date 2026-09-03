@@ -124,7 +124,10 @@ const fillAndSubmit = async (tab, { username, password, captchaText, custom }) =
         const missing = [!usernameInput && '账号输入框', !passwordInput && '密码输入框', !${custom} && !captchaInput && '验证码输入框'].filter(Boolean);
         if (missing.length) return JSON.stringify({submitted:false, reason:'未找到' + missing.join('、')});
         setValue(usernameInput, values.username); setValue(passwordInput, values.password); if (captchaInput) setValue(captchaInput, values.captchaText);
-        const button = Array.from(document.querySelectorAll('button, input[type="submit"], [role="button"], .btn-box .btn')).filter(visible).find((element) => element.type === 'submit' || /登录|Login|Sign in/i.test(element.textContent || element.value || ''));
+        const button = Array.from(document.querySelectorAll('button, input[type="submit"], [role="button"], .btn-box .btn')).filter(visible).find((element) => {
+          const label = (element.textContent || element.value || '').replace(/\\s+/g, '');
+          return element.type === 'submit' || /登录|login|signin/i.test(label);
+        });
         if (!button) return JSON.stringify({submitted:false, reason:'未找到登录按钮'}); button.click(); return JSON.stringify({submitted:true});
       })()`,
     ),

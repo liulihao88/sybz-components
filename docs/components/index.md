@@ -100,7 +100,7 @@ $toast('我是成功提示')
 $toast('我是失败提示', 'e')
 ```
 
-### 升级包
+### 升级包(由于sybz-components依赖@ysbz-components/utils, 请务必保证把这两个包同时升级)
 
 ::: code-group
 

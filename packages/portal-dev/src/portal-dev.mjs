@@ -234,6 +234,25 @@ const visibleLocator = async (selectors) => {
   return null
 }
 
+const findLoginButton = async () => {
+  for (const frame of page.frames()) {
+    const candidates = frame.locator('button, input[type="submit"], [role="button"], .btn-box .btn')
+    const count = await candidates.count().catch(() => 0)
+    for (let index = 0; index < count; index += 1) {
+      const candidate = candidates.nth(index)
+      if (!(await candidate.isVisible().catch(() => false))) continue
+      const { label, type } = await candidate
+        .evaluate((element) => ({
+          label: (element.textContent || element.value || '').replace(/\s+/g, ''),
+          type: element.getAttribute('type') || '',
+        }))
+        .catch(() => ({ label: '', type: '' }))
+      if (type.toLowerCase() === 'submit' || /登录|login|signin/i.test(label)) return candidate
+    }
+  }
+  return null
+}
+
 const clickText = async (text) => {
   for (const frame of page.frames()) {
     const locator = frame.getByText(text, { exact: false }).filter({ visible: true }).first()
@@ -364,16 +383,7 @@ const loginWithoutCaptcha = async () => {
   if (!usernameInput || !passwordInput) throw new Error('未找到常见的用户名或密码输入框')
   await usernameInput.fill(config.username)
   await passwordInput.fill(config.password)
-  const button = await visibleLocator([
-    'button[type="submit"]',
-    'input[type="submit"]',
-    'button:has-text("登录")',
-    '[role="button"]:has-text("登录")',
-    'button:has-text("Login")',
-    '[role="button"]:has-text("Login")',
-    'button:has-text("Sign in")',
-    '[role="button"]:has-text("Sign in")',
-  ])
+  const button = await findLoginButton()
   if (!button) throw new Error('未找到常见的登录按钮')
   const originalUrl = page.url()
   await button.click()
