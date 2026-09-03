@@ -2,11 +2,21 @@
 
 ## Hidden Title {.md-hidden}
 
+::: warning 重要声明
+
+组件库目前仍在持续建设和完善中，部分组件可能存在缺陷、API 设计不够合理、功能覆盖不完整，或需要进一步优化升级的情况。
+
+如果各位同事在使用过程中发现 Bug、API 使用不便、功能缺失或有更好的改进建议，请及时沟通和反馈。每一次真实使用中的问题与建议，都会帮助我们持续完善组件库、提升组件质量，让大家获得更加稳定、高效、顺畅的开发体验。
+
+欢迎大家共同参与建设，让组件库在实际项目中不断成长、越来越好用。
+
+:::
+
 ::: tip 提示
 
 1. sybz-components 是基于 Vue3 + Element-plus + 部分原生js组件 再次封装的基础组件, 适用于前端项目开发
 2. @sybz-components/utils是工作中常用的封装的函数库组件
-3. sybz-components全局注册了@element-plus/icons-vue的icon, 使用方式`el-icon-xxx`
+3. @sybz-components/portal-dev用户快速登录门户
    :::
 
 ### 安装
