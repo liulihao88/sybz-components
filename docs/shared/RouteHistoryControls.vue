@@ -19,6 +19,7 @@ let pendingPath = ''
 const normalizePath = (path: string) => path.replace(/\/$/, '') || '/'
 const currentPath = () => normalizePath(route.path)
 const currentTitle = () => route.data.title || currentPath()
+const isNotFoundRoute = () => route.data.isNotFound === true
 
 const saveHistory = () => {
   try {
@@ -47,6 +48,18 @@ const loadHistory = () => {
 
 const recordCurrentRoute = () => {
   const path = currentPath()
+
+  if (isNotFoundRoute()) {
+    const removedIndex = historyItems.value.findIndex((item) => item.path === path)
+    if (removedIndex >= 0) {
+      historyItems.value.splice(removedIndex, 1)
+      if (removedIndex <= currentIndex.value) currentIndex.value -= 1
+      saveHistory()
+    }
+    pendingPath = ''
+    return
+  }
+
   const title = currentTitle()
 
   if (pendingPath === path) {
@@ -98,6 +111,15 @@ watch(
 
 onMounted(() => {
   historyItems.value = loadHistory()
+  if (isNotFoundRoute()) {
+    const path = currentPath()
+    historyItems.value = historyItems.value.filter((item) => item.path !== path)
+    currentIndex.value = historyItems.value.length - 1
+    saveHistory()
+    mounted.value = true
+    return
+  }
+
   const existingIndex = historyItems.value.findIndex((item) => item.path === currentPath())
 
   if (existingIndex >= 0) {
