@@ -802,6 +802,8 @@ export type SPaginationEmits = {
   'next-click': [page: number]
 }
 
+export type SPopconfirmButtonType = NonNullable<ButtonPropsPublic['type']>
+
 export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   title?: string
   width?: string | number
@@ -809,6 +811,14 @@ export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   reConfirm?: boolean
   theme?: SybzComponentTheme
   disabled?: boolean
+  /** 确认按钮文字；默认值：确定 */
+  confirmButtonText?: string
+  /** 取消按钮文字；默认值：取消 */
+  cancelButtonText?: string
+  /** 确认按钮类型；默认值：primary */
+  confirmButtonType?: SPopconfirmButtonType
+  /** 取消按钮类型；默认值：text */
+  cancelButtonType?: SPopconfirmButtonType
 }
 
 export type SPopconfirmProps = SPopoverConfirmSelfProps &

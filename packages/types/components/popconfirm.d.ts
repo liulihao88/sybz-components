@@ -1,5 +1,5 @@
 import { ElPopover } from 'element-plus'
-import type { SPopoverConfirmSelfProps, SybzComponentTheme } from '../component-props'
+import type { SPopconfirmButtonType, SPopoverConfirmSelfProps, SybzComponentTheme } from '../component-props'
 
 type ElPopoverInstance = InstanceType<typeof ElPopover>
 
@@ -17,9 +17,27 @@ export type SPopconfirmComponent = {
       reConfirm?: boolean
       theme?: SybzComponentTheme
       disabled?: boolean
+      /** 确认按钮文字；默认值：确定 */
+      confirmButtonText?: string
+      /** 取消按钮文字；默认值：取消 */
+      cancelButtonText?: string
+      /** 确认按钮类型；默认值：primary */
+      confirmButtonType?: SPopconfirmButtonType
+      /** 取消按钮类型；默认值：text */
+      cancelButtonType?: SPopconfirmButtonType
     } & Omit<
       ElPopoverInstance['$props'],
-      'dangerouslyUseHTMLString' | 'title' | 'width' | 'content' | 'reConfirm' | 'theme' | 'disabled'
+      | 'dangerouslyUseHTMLString'
+      | 'title'
+      | 'width'
+      | 'content'
+      | 'reConfirm'
+      | 'theme'
+      | 'disabled'
+      | 'confirmButtonText'
+      | 'cancelButtonText'
+      | 'confirmButtonType'
+      | 'cancelButtonType'
     >
     $emit: ElPopoverInstance['$emit']
     $slots: ElPopoverInstance['$slots'] & {

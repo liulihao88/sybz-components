@@ -519,7 +519,11 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'popover',
       slots: ['default', 'content', 'footer'],
-      hoverProps: componentHoverProps('SPopoverConfirmSelfProps', ['SPopoverConfirmSelfProps', 'SybzComponentTheme']),
+      hoverProps: componentHoverProps('SPopoverConfirmSelfProps', [
+        'SPopconfirmButtonType',
+        'SPopoverConfirmSelfProps',
+        'SybzComponentTheme',
+      ]),
     },
   ],
   [

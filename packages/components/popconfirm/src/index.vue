@@ -10,6 +10,7 @@ import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
+import type { SPopconfirmButtonType } from '@/types/component-props'
 
 const attrs = useAttrs()
 const isPopoverVisible = ref(false)
@@ -58,6 +59,10 @@ interface PopconfirmProps {
   dangerouslyUseHTMLString?: boolean
   theme?: 'default' | 'chenghua' | 'shijingshan'
   disabled?: boolean
+  confirmButtonText?: string
+  cancelButtonText?: string
+  confirmButtonType?: SPopconfirmButtonType
+  cancelButtonType?: SPopconfirmButtonType
 }
 
 const props = withDefaults(defineProps<PopconfirmProps>(), {
@@ -68,6 +73,10 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   dangerouslyUseHTMLString: true,
   theme: 'default',
   disabled: false,
+  confirmButtonText: '确定',
+  cancelButtonText: '取消',
+  confirmButtonType: 'primary',
+  cancelButtonType: 'info',
 })
 
 const mergedProps = useGlobalComponentConfig('popconfirm', props)
@@ -140,12 +149,30 @@ defineExpose({
         <div v-else class="s-popconfirm__content" v-text="safeContent"></div>
       </template>
     </slot>
-    <div class="s-popconfirm__footer">
-      <slot name="footer">
-        <SButton size="small" type="info" :theme="popconfirmButtonTheme" @click="cancel">取消</SButton>
-        <SButton size="small" type="primary" :theme="popconfirmButtonTheme" @click="confirm">确定</SButton>
-      </slot>
-    </div>
+    <slot name="footer">
+      <div class="s-popconfirm__footer">
+        <SButton
+          size="small"
+          height="30"
+          :type="mergedProps.cancelButtonType === 'text' ? '' : mergedProps.cancelButtonType"
+          :text="mergedProps.cancelButtonType === 'text'"
+          :theme="popconfirmButtonTheme"
+          @click="cancel"
+        >
+          {{ mergedProps.cancelButtonText }}
+        </SButton>
+        <SButton
+          size="small"
+          height="30"
+          :type="mergedProps.confirmButtonType === 'text' ? '' : mergedProps.confirmButtonType"
+          :text="mergedProps.confirmButtonType === 'text'"
+          :theme="popconfirmButtonTheme"
+          @click="confirm"
+        >
+          {{ mergedProps.confirmButtonText }}
+        </SButton>
+      </div>
+    </slot>
     <template #reference>
       <slot></slot>
     </template>
@@ -176,7 +203,6 @@ defineExpose({
 .s-popconfirm__footer {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
   text-align: right;
   margin: 0;
   margin-top: 16px;

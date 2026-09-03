@@ -171,10 +171,20 @@ const count = ref(1)
 ### s-popconfirm
 
 ```vue
-<s-popconfirm content="确定删除这条数据吗？" @confirm="remove">
+<s-popconfirm
+  content="确定删除这条数据吗？"
+  confirm-button-text="删除"
+  cancel-button-text="暂不删除"
+  confirm-button-type="danger"
+  cancel-button-type="text"
+  @confirm="remove"
+>
   <s-button type="danger">删除</s-button>
 </s-popconfirm>
 ```
+
+确认与取消按钮兼容 Element Plus 的 `confirm-button-text`、`cancel-button-text`、
+`confirm-button-type`、`cancel-button-type`。默认分别为 `确定`、`取消`、`primary`、`text`。
 
 ### s-radio
 
