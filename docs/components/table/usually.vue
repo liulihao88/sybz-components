@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { ref, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 function handleDetail({ row }) {
@@ -19,9 +19,6 @@ const columns = [
     width: 200,
     sortable: true,
     handler: handleDetail,
-    // filter: ({ row }) => {
-    //   return row.status === 0 ? '进行中' : '已完成'
-    // },
   },
   {
     label: '负责人',
@@ -33,13 +30,16 @@ const columns = [
   {
     label: '结束时间',
     prop: 'endTime',
-    filter: 'formatTime',
+    filter: ({ value }) => {
+      return proxy.formatTime(value)
+    },
   },
   {
     label: '状态',
     prop: 'status',
-    filter: ({ row, value, scope, index, event, column }) => {
-      return row.status === 0 ? '进行中' : '已完成'
+    align: 'center',
+    render: ({ row }) => {
+      return row.status === 0 ? <s-tag type="primary">进行中</s-tag> : <s-tag type="success">已完成</s-tag>
     },
   },
   {
