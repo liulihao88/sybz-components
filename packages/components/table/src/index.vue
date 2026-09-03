@@ -1063,7 +1063,7 @@ defineExpose({
                       />
 
                       <template v-else-if="parseReConfirm(val.reConfirm, scope.row, scope)">
-                        <sPopconfirm
+                        <s-popconfirm
                           trigger="click"
                           :theme="val.theme ?? mergedProps.theme"
                           :disabled="isActionDisabled(val, scope.row, scope, v)"
@@ -1084,6 +1084,8 @@ defineExpose({
                           "
                           :dangerouslyUseHTMLString="val.dangerouslyUseHTMLString ?? true"
                           class="s-table__actions"
+                          confirm-button-type="danger"
+                          confirm-button-text="删除"
                           @confirm="handleActionConfirm(val, scope.row, scope, v)"
                         >
                           <component
@@ -1113,7 +1115,7 @@ defineExpose({
                               )
                             }}
                           </el-button>
-                        </sPopconfirm>
+                        </s-popconfirm>
                       </template>
                       <component
                         :is="val.comp"
