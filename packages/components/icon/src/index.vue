@@ -68,7 +68,9 @@ function handleClick($event) {
 const parseColor = computed(() => {
   if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
   if (mergedProps.value.color) return mergedProps.value.color
-  if (!mergedProps.value.type) return undefined
+  if (!mergedProps.value.type || (mergedProps.value.type === 'default' && mergedProps.value.variant === 'plain')) {
+    return undefined
+  }
   if (mergedProps.value.type === 'default') return 'var(--s-icon-color)'
   if (mergedProps.value.variant === 'solid') return 'var(--el-color-white)'
   return 'var(--s-icon-color)'

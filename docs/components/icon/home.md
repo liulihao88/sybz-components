@@ -240,7 +240,7 @@ icon/url
 |           属性名           | 说明                                                                   | 类型            | 默认值    |
 | :------------------------: | ---------------------------------------------------------------------- | --------------- | --------- |
 |           `icon`           | 图标组件、名称或在线图片 URL                                           | SIconValue      | `''`      |
-|          `color`           | 图标颜色                                                               | string          | -         |
+|          `color`           | 图标颜色；未设置时，`default + plain` 继承父元素的 `currentColor`      | string          | -         |
 |           `size`           | 图标尺寸                                                               | string / number | `16px`    |
 |       `borderRadius`       | 背景圆角，数字自动补 `px`，显式设置时覆盖主题圆角                      | string / number | `8px`     |
 |          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                           | SIconCursor     | `pointer` |

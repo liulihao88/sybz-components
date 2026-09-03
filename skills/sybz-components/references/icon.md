@@ -42,7 +42,7 @@
 | `icon`                        | `string / Component`                                    | `''`       | 图标名、组件或在线图片 URL                                             |
 | `source`                      | `auto / element-plus / iconify / svg / url`             | `auto`     | 图标来源                                                               |
 | `size`                        | `string / number`                                       | `16px`     | 图标尺寸，数字自动补 `px`                                              |
-| `color`                       | `string`                                                | 未设置     | 显式颜色，优先于 `type`，禁用态除外                                    |
+| `color`                       | `string`                                                | 未设置     | 显式颜色，优先于 `type`，禁用态除外；`default + plain` 继承父元素颜色  |
 | `type`                        | `default / primary / success / warning / danger / info` | `default`  | 语义颜色                                                               |
 | `variant`                     | `plain / light / solid`                                 | `plain`    | 无背景、浅色背景、实色背景                                             |
 | `border-radius`               | `string / number`                                       | 未显式设置 | 背景圆角；数字自动补 `px`，`light/solid` 默认呈现 8px 圆角，主题可覆盖 |
