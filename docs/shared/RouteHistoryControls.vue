@@ -140,7 +140,7 @@ onMounted(() => {
     <s-button
       class="route-history-controls__button"
       :disabled="!previousItem"
-      :content="(previousItem ? `后退：${previousItem.title}` : '没有更早的访问记录') + '(cmd+左箭头)'"
+      :content="previousItem ? `后退：${previousItem.title}` : '没有更早的访问记录'"
       :tooltip-attrs="{
         showAfter: 1000,
       }"
@@ -154,7 +154,7 @@ onMounted(() => {
     <s-button
       class="route-history-controls__button"
       :disabled="!nextItem"
-      :content="(nextItem ? `前进：${nextItem.title}` : '没有更新的访问记录') + '(cmd+右箭头)'"
+      :content="nextItem ? `前进：${nextItem.title}` : '没有更新的访问记录'"
       :tooltip-attrs="{
         showAfter: 1000,
       }"
