@@ -414,6 +414,7 @@ const handleWindowKeydown = (event: KeyboardEvent) => {
     event.preventDefault()
     event.stopPropagation()
     setExpandedState(true)
+    searchInputRef.value?.select()
     nextTick(() => searchInputRef.value?.focus())
     return
   }
