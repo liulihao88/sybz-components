@@ -16,7 +16,7 @@ function confirm() {
   <s-popconfirm
     theme="chenghua"
     variant="warning"
-    content="将发布到<mark>生产环境</mark>, 请确认配置无误。"
+    content="将<code>发布</code>到<mark>生产环境</mark>, 请确认配置无误。"
     @confirm="confirm"
   >
     <s-button theme="chenghua" type="primary">警告</s-button>

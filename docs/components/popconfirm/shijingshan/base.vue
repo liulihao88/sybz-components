@@ -9,31 +9,20 @@ function confirm() {
 </script>
 
 <template>
-  <s-popconfirm
-    theme="shijingshan"
-    variant="delete"
-    target="智慧档案检索"
-    width="260"
-    trigger="click"
-    confirm-button-text="删除"
-    cancel-button-text="暂不删除"
-    confirm-button-type="danger"
-    cancel-button-type="text"
-    @confirm="confirm"
-  >
-    <s-button theme="shijingshan" type="danger">删除服务</s-button>
+  <s-popconfirm theme="shijingshan" variant="delete" target="智慧档案检索" @confirm="confirm">
+    <s-button theme="shijingshan" type="danger">删除</s-button>
   </s-popconfirm>
 
   <s-popconfirm
     theme="shijingshan"
     variant="warning"
-    content="将发布到<mark>生产环境</mark>, 请确认配置无误。"
-    :dangerouslyUseHTMLString="true"
-    width="280"
-    trigger="click"
+    content="将<code>发布</code>到<mark>生产环境</mark>, 请确认配置无误。"
     @confirm="confirm"
   >
-    <s-button theme="shijingshan" type="primary">发布配置</s-button>
+    <s-button theme="shijingshan" type="primary">警告</s-button>
+  </s-popconfirm>
+  <s-popconfirm theme="shijingshan" content="是否确认?" @confirm="confirm">
+    <s-button theme="shijingshan" type="primary">常规</s-button>
   </s-popconfirm>
 </template>
 
