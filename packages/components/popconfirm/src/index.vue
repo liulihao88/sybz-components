@@ -20,15 +20,24 @@ let showTimer: number | undefined
 
 const handleShow = () => {
   window.clearTimeout(showTimer)
+  document.removeEventListener('keydown', closePopoverOnEscape)
+  document.addEventListener('keydown', closePopoverOnEscape)
   showTimer = window.setTimeout(() => {
     document.removeEventListener('click', closePopoverOnClickOutside)
     document.addEventListener('click', closePopoverOnClickOutside)
   }, 0)
 }
 
-const removeClickOutsideListener = () => {
+const removeDocumentListeners = () => {
   window.clearTimeout(showTimer)
   document.removeEventListener('click', closePopoverOnClickOutside)
+  document.removeEventListener('keydown', closePopoverOnEscape)
+}
+
+function closePopoverOnEscape(event: KeyboardEvent) {
+  if (event.key !== 'Escape' || !isPopoverVisible.value) return
+
+  close()
 }
 
 const closePopoverOnClickOutside = (event: MouseEvent) => {
@@ -47,7 +56,7 @@ function confirm() {
 }
 function close() {
   isPopoverVisible.value = false
-  removeClickOutsideListener()
+  removeDocumentListeners()
 }
 function cancel() {
   close()
@@ -147,7 +156,7 @@ const popconfirmWidth = computed(() => {
 })
 
 onBeforeUnmount(() => {
-  removeClickOutsideListener()
+  removeDocumentListeners()
 })
 
 defineExpose({
@@ -165,6 +174,7 @@ defineExpose({
     :disabled="isDisabled"
     :popper-class="popperClass"
     @show="handleShow"
+    @hide="removeDocumentListeners"
   >
     <slot name="title">
       <template v-if="hasTitle">

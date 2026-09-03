@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-popconfirm @confirm="confirm"></s-popconfirm>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`；`re-confirm` 可选 `true / false`，默认值 `true`。
+:::demo 展示基础用法，弹层打开后可按 `Esc` 快速关闭。基础写法：`<s-popconfirm @confirm="confirm"></s-popconfirm>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `true`；`re-confirm` 可选 `true / false`，默认值 `true`。
 popconfirm/base
 :::
 
