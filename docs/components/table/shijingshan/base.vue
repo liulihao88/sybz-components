@@ -48,7 +48,7 @@ const columns = [
         handler: ({ row }) => eidtRow(row),
         comp: 's-icon',
         attrs: {
-          name: 'edit',
+          icon: 'edit',
           content: '编辑',
         },
         disabled: ({ row }) => row.status === 'Loading',
@@ -57,7 +57,7 @@ const columns = [
         handler: ({ row }) => viewRow(row),
         comp: 's-icon',
         attrs: {
-          name: 'view',
+          icon: 'view',
           content: '查看',
         },
         disabled: ({ row }) => row.status !== 'Loading',
@@ -71,7 +71,7 @@ const columns = [
         reConfirm: true,
         comp: 's-icon',
         attrs: {
-          name: 'delete',
+          icon: 'delete',
           content: '删除',
         },
       },
@@ -79,7 +79,7 @@ const columns = [
         prop: 'download',
         comp: 's-icon',
         attrs: {
-          name: 'download',
+          icon: 'download',
           content: '下载',
         },
         handler: ({ row }) => downloadRow(row),

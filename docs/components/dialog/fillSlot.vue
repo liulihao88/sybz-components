@@ -59,7 +59,7 @@ const columns = [
         content: '编辑',
         comp: 's-icon',
         attrs: {
-          name: 'edit',
+          icon: 'edit',
           content: '编辑',
         },
       },
@@ -67,7 +67,7 @@ const columns = [
         content: '删除',
         comp: 's-icon',
         attrs: {
-          name: 'delete',
+          icon: 'delete',
           content: '删除',
         },
       },

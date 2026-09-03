@@ -30,7 +30,7 @@ const columns = [
         content: '编辑',
         comp: 's-icon',
         attrs: {
-          name: 'edit',
+          icon: 'edit',
           content: '编辑',
         },
         handler: editRow,

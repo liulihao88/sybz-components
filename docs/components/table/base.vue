@@ -30,7 +30,7 @@ const columns = [
         handler: () => {},
         comp: 's-icon',
         attrs: {
-          name: 'edit',
+          icon: 'edit',
           content: '编辑',
         },
         disabled: ({ row }) => {

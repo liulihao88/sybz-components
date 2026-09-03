@@ -389,14 +389,14 @@ const columns = [
       {
         content: '编辑',
         comp: 's-icon',
-        attrs: { name: 'edit', content: '编辑' },
+        attrs: { icon: 'edit', content: '编辑' },
         handler: editRow,
       },
       {
         content: '删除',
         type: 'danger',
         comp: 's-icon',
-        attrs: { name: 'delete', content: '删除' },
+        attrs: { icon: 'delete', content: '删除' },
         reConfirm: true,
         handler: deleteRow,
       },

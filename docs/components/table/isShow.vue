@@ -32,7 +32,7 @@ const columns = [
         },
         comp: 's-icon',
         attrs: {
-          name: 'edit',
+          icon: 'edit',
           content: '编辑',
         },
         disabled: ({ row }) => row.status === 'Loading',
@@ -41,7 +41,7 @@ const columns = [
         content: 'haha',
         comp: 's-icon',
         attrs: {
-          name: 'delete',
+          icon: 'delete',
           content: '删除',
         },
         isShow: true,
