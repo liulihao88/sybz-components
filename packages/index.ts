@@ -11,6 +11,9 @@ export { createImageResolver } from './components/image'
 export { addIcon as addIconifyIcon, addCollection as addIconifyCollection } from '@iconify/vue'
 export type { IconifyIcon } from '@iconify/vue'
 import { GLOBAL_COMPONENT_COMMON_PROPS_KEY, GLOBAL_COMPONENT_CONFIG_KEY } from './hooks/useGlobalComponentConfig'
+import { applySybzThemeColors } from './theme.ts'
+
+export { resetSybzThemeColors, setSybzThemeColors } from './theme.ts'
 
 type InstallableComponent = Component & {
   name?: string
@@ -83,7 +86,7 @@ const getComponentOptionKey = (component: any) => {
 
 const componentConfigKeys = new Set(Object.values(allComponents).map(getComponentOptionKey).filter(Boolean))
 
-const installOptionKeys = new Set(['registerDirectives', 'registerElementPlusIcons'])
+const installOptionKeys = new Set(['registerDirectives', 'registerElementPlusIcons', 'themeColors'])
 
 const shouldInstallOption = (value: boolean | undefined) => value !== false
 
@@ -116,6 +119,7 @@ const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}
 }
 
 const install = (app: App, options: SybzComponentsInstallOptions = {}) => {
+  applySybzThemeColors(options.theme, options.themeColors)
   const componentDefaults = resolveGlobalComponentConfig(options)
 
   if (Object.keys(componentDefaults).length) {

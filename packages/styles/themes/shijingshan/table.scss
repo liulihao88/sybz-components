@@ -1,11 +1,4 @@
 .s-table.s-table--shijingshan.s-table--shijingshan {
-  --s-sjs-table-line: #dce3ee;
-  --s-sjs-table-line-soft: #e8edf5;
-  --s-sjs-table-header-bg: #f3f7fc;
-  --s-sjs-table-row-bg: #ffffff;
-  --s-sjs-table-row-alt: #fbfdff;
-  --s-sjs-table-page-bg: #f5f8fd;
-
   border-radius: var(--s-sjs-radius-card);
   border: 1px solid var(--s-sjs-table-line);
   background: var(--s-sjs-card-bg) !important;
@@ -123,7 +116,7 @@
   }
 
   .el-table th.el-table__cell.is-sortable:hover {
-    background: #edf4ff !important;
+    background: var(--s-sjs-primary-soft-2) !important;
   }
 
   .el-table tr:not(:last-child) td.el-table__cell,

@@ -40,4 +40,10 @@
   --s-ch-comp-title-padding-x: 14px;
   --s-ch-header-bg: linear-gradient(180deg, var(--s-ch-bg-soft) 0%, #eef5ff 100%);
   --s-ch-control-bg: linear-gradient(180deg, var(--s-ch-bg) 0%, var(--s-ch-bg-soft) 100%);
+  --s-ch-table-line: var(--s-ch-divider);
+  --s-ch-table-line-soft: var(--s-ch-divider);
+  --s-ch-table-header-bg: var(--s-ch-header-bg);
+  --s-ch-table-row-bg: var(--s-ch-bg);
+  --s-ch-table-row-alt: var(--s-ch-row-alt);
+  --s-ch-table-page-bg: var(--s-ch-control-bg);
 }

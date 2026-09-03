@@ -29,6 +29,14 @@ sybzUtils.configureUtils({ theme: 'shijingshan' })
 export default function installSybz(app: App): void {
   app.use(SybzComponents, {
     theme: 'shijingshan',
+    themeColors: {
+      primary: '#7c3aed',
+      accent: '#ec4899',
+      background: '#faf8ff',
+      fill: '#f3efff',
+      text: '#241f31',
+      divider: '#ded7eb',
+    },
     card: {
       shadow: 'hover',
     },
@@ -55,6 +63,59 @@ app.mount('#app')
 ```
 
 图表不是必需依赖；不使用图表时，可以删除 `SybzChartComponents` 和 `sybz-components/charts/style.css` 两行及 `app.use(SybzChartComponents)`。
+
+## 自定义主题色
+
+全局 `theme` 为 `chenghua` 或 `shijingshan` 时，可以通过 `themeColors` 替换该主题的色彩，组件结构、圆角、尺寸和交互保持原主题不变：
+
+```ts
+app.use(SybzComponents, {
+  theme: 'shijingshan',
+  themeColors: {
+    primary: '#7c3aed',
+    accent: '#ec4899',
+    success: '#16a34a',
+    warning: '#d97706',
+    danger: '#dc2626',
+    info: '#64748b',
+    background: '#faf8ff',
+    backgroundSoft: '#f7f4ff',
+    cardBackground: '#ffffff',
+    fill: '#f3efff',
+    rowHover: '#f5f1ff',
+    text: '#241f31',
+    textRegular: '#574f68',
+    textMuted: '#8b829a',
+    divider: '#ded7eb',
+    headerBackground: '#f6f2ff',
+    controlBackground: '#ffffff',
+  },
+})
+```
+
+`primary` 和 `accent` 使用十六进制或 `rgb(...)` 时，会自动生成 hover、active 和 RGB 通道；`success / warning / danger / info` 会自动生成 RGB 通道，标签、阴影、边框和提示组件会一起换色。`background / fill / textRegular / divider` 会同步覆盖移动端和 Web 端 token，也可以用 `backgroundMobile`、`backgroundWeb` 等字段分别覆盖。
+
+需要同时预设两套主题时使用嵌套配置，此时不依赖全局 `theme`：
+
+```ts
+app.use(SybzComponents, {
+  themeColors: {
+    chenghua: { primary: '#2563eb', accent: '#06b6d4' },
+    shijingshan: { primary: '#7c3aed', accent: '#ec4899' },
+  },
+})
+```
+
+运行时切换颜色：
+
+```ts
+import { resetSybzThemeColors, setSybzThemeColors } from 'sybz-components'
+
+setSybzThemeColors('shijingshan', { primary: '#7c3aed', accent: '#ec4899' })
+resetSybzThemeColors('shijingshan')
+```
+
+运行时再次调用 `setSybzThemeColors` 会先清理上一次通过该函数写入的颜色；`resetSybzThemeColors` 恢复组件库内置主题色。若使用 `var(...)`、`hsl(...)` 等无法直接提取 RGB 的颜色表达式，需要同时传 `primaryRgb`、`successRgb` 等 RGB 通道值，例如 `primaryRgb: '124, 58, 237'`。
 
 ## Vite 的 Vue/TSX 配置
 

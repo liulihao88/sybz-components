@@ -79,6 +79,26 @@ export default {
     })
     // 全局注册基础组件
     ctx.app.use(SybzComponents, {
+      // theme:'shijingshan',
+      themeColors: {
+        // primary: 'blue',
+        // accent: '#ec4899',
+        // success: '#16a34a',
+        // warning: '#d97706',
+        // danger: '#dc2626',
+        // info: '#64748b',
+        // background: '#faf8ff',
+        // backgroundSoft: '#f7f4ff',
+        // cardBackground: '#ffffff',
+        // fill: '#f3efff',
+        // rowHover: '#f5f1ff',
+        // text: '#241f31',
+        // textRegular: '#574f68',
+        // textMuted: '#8b829a',
+        // divider: '#ded7eb',
+        // headerBackground: '#f6f2ff',
+        // controlBackground: '#ffffff',
+      },
       dangerouslyUseHTMLString: true,
       // theme: 'shijingshan',
       // size: 'large',

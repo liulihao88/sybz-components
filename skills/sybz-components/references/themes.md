@@ -19,6 +19,26 @@
 <s-title theme="shijingshan" title="企业经营数据" />
 ```
 
+## 自定义主题色
+
+业务项目需要保留成华或石景山主题功能、只替换品牌色时，使用安装配置的 `themeColors`，不要在每个组件上重复写 CSS：
+
+```ts
+app.use(SybzComponents, {
+  theme: 'shijingshan',
+  themeColors: {
+    primary: '#7c3aed',
+    accent: '#ec4899',
+    background: '#faf8ff',
+    fill: '#f3efff',
+    text: '#241f31',
+    divider: '#ded7eb',
+  },
+})
+```
+
+完整字段、两套主题同时配置和运行时换色见 [setup.md](setup.md#自定义主题色)。
+
 ## 落地原则
 
 - 先检查目标项目是否已有主题 token、主题样式文件或全局主题切换逻辑。

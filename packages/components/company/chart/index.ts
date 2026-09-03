@@ -7,6 +7,7 @@ import SCountBarOld from '../countBarOld/index.ts'
 import SObjectLine from '../objectLine/index.ts'
 import SQuotaPie from '../quotaPie/index.ts'
 import { GLOBAL_COMPONENT_COMMON_PROPS_KEY, GLOBAL_COMPONENT_CONFIG_KEY } from '@/hooks/useGlobalComponentConfig'
+import { applySybzThemeColors } from '@/theme.ts'
 
 type InstallableComponent = Component & {
   name?: string
@@ -59,6 +60,8 @@ const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}
   const resolvedConfig: Record<string, Record<string, any>> = {}
 
   Object.entries(options).forEach(([key, value]) => {
+    if (key === 'themeColors') return
+
     if (componentConfigKeys.has(key)) {
       if (isConfigRecord(value)) {
         resolvedConfig[key] = value
@@ -77,6 +80,7 @@ const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}
 }
 
 const install = (app: App, options: SybzComponentsInstallOptions = {}) => {
+  applySybzThemeColors(options.theme, options.themeColors)
   const componentDefaults = resolveGlobalComponentConfig(options)
 
   if (Object.keys(componentDefaults).length) {

@@ -234,6 +234,15 @@ await delay(500)
 
 ```ts
 app.use(SybzComponents, {
+  theme: 'shijingshan',
+  themeColors: {
+    primary: '#7c3aed',
+    accent: '#ec4899',
+    background: '#faf8ff',
+    fill: '#f3efff',
+    text: '#241f31',
+    divider: '#ded7eb',
+  },
   button: {
     size: 'small',
   },
@@ -245,6 +254,8 @@ app.use(SybzComponents, {
   },
 })
 ```
+
+`themeColors` 只替换主题颜色，组件功能、布局、圆角和交互仍沿用 `shijingshan`。主色使用十六进制或 `rgb(...)` 时会自动派生 hover、active、浅色背景、边框和阴影所需颜色。也可以从 `sybz-components` 导入 `setSybzThemeColors` 和 `resetSybzThemeColors` 在运行时换色或恢复默认主题色。
 
 ## 11. 常见问题
 
