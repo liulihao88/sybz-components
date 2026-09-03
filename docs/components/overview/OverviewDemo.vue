@@ -2,10 +2,12 @@
 import { computed, ref } from 'vue'
 
 type ThemeName = 'default' | 'chenghua' | 'shijingshan'
+type SizeName = 'small' | 'default' | 'large'
 type RadioShowType = 'radio' | 'button'
 type CheckboxShowType = 'check' | 'button'
 
 const currentTheme = ref<ThemeName>('default')
+const currentSize = ref<SizeName>('default')
 const keyword = ref('文件管理')
 const selectedStatus = ref('running')
 const selectedType = ref('compute')
@@ -22,6 +24,12 @@ const themes: Array<{ label: string; value: ThemeName }> = [
   { label: 'default', value: 'default' },
   { label: 'chenghua', value: 'chenghua' },
   { label: 'shijingshan', value: 'shijingshan' },
+]
+
+const sizes: Array<{ label: string; value: SizeName }> = [
+  { label: 'small', value: 'small' },
+  { label: 'default', value: 'default' },
+  { label: 'large', value: 'large' },
 ]
 
 const statusOptions = [
@@ -105,6 +113,10 @@ const tableData = [
         <s-radio v-model="currentTheme" :options="themes" show-type="button" />
       </div>
       <div class="overview-toolbar__item">
+        <span>尺寸</span>
+        <s-radio v-model="currentSize" :options="sizes" show-type="button" />
+      </div>
+      <div class="overview-toolbar__item">
         <span>是否禁用</span>
         <s-switch v-model="isDisabled" active-text="是" inactive-text="否" />
       </div>
@@ -118,6 +130,7 @@ const tableData = [
           title="关键词"
           placeholder="请输入关键词"
           :theme="currentTheme"
+          :size="currentSize"
           width="260"
           :disabled="isDisabled"
         />
@@ -126,6 +139,7 @@ const tableData = [
           title="状态"
           :options="statusOptions"
           :theme="currentTheme"
+          :size="currentSize"
           width="260"
           :disabled="isDisabled"
         />
@@ -134,6 +148,7 @@ const tableData = [
           title="服务"
           :options="serviceOptions"
           :theme="currentTheme"
+          :size="currentSize"
           width="260"
           :disabled="isDisabled"
         />
@@ -141,6 +156,7 @@ const tableData = [
           v-model="selectedDate"
           title="申请日期"
           :theme="currentTheme"
+          :size="currentSize"
           width="260"
           :disabled="isDisabled"
         />
@@ -150,6 +166,7 @@ const tableData = [
           :min="0"
           :max="100"
           :theme="currentTheme"
+          :size="currentSize"
           width="260"
           :disabled="isDisabled"
         />
@@ -158,6 +175,7 @@ const tableData = [
           <s-switch
             v-model="enabled"
             :theme="currentTheme"
+            :size="currentSize"
             active-text="开"
             inactive-text="关"
             :disabled="isDisabled"
@@ -167,7 +185,7 @@ const tableData = [
     </section>
 
     <section>
-      <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme"></s-tabs>
+      <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme" :size="currentSize"></s-tabs>
       <s-tooltip content="超出字符就隐藏, 鼠标移入显示全部" width="100"></s-tooltip>
       <s-warning content="这是基础用法" title="我是title" :theme="currentTheme"></s-warning>
     </section>
@@ -180,12 +198,14 @@ const tableData = [
           title="单选 showType（默认值：radio）"
           :options="radioShowTypeOptions"
           :theme="currentTheme"
+          :size="currentSize"
           width="400"
         />
         <s-radio
           v-model="radioValue"
           :options="radioOptions"
           :theme="currentTheme"
+          :size="currentSize"
           :disabled="isDisabled"
           :show-type="radioShowType"
         />
@@ -197,12 +217,14 @@ const tableData = [
           :options="checkboxShowTypeOptions"
           width="400"
           :theme="currentTheme"
+          :size="currentSize"
         />
 
         <s-checkbox
           v-model="agreeItems"
           :options="checkboxOptions"
           :theme="currentTheme"
+          :size="currentSize"
           :disabled="isDisabled"
           :show-type="checkboxShowType"
         />
@@ -213,6 +235,7 @@ const tableData = [
             v-for="item in tagOptions"
             :key="item.value"
             :theme="currentTheme"
+            :size="currentSize"
             :value="item.value"
             :options="tagOptions"
             :config="{ label: 'label', value: 'value' }"
@@ -227,25 +250,41 @@ const tableData = [
     <section class="overview-section">
       <s-title title="数据展示" :theme="currentTheme" />
       <div class="overview-grid overview-grid--display">
-        <s-card title="s-descriptions组件" :theme="currentTheme" shadow="hover">
+        <s-card title="s-descriptions组件" :theme="currentTheme" :size="currentSize" shadow="hover">
           <s-descriptions :options="descOptions" :theme="currentTheme" :column="2" show-all />
         </s-card>
-        <s-card title="容量水位" :theme="currentTheme" shadow="hover">
+        <s-card title="容量水位" :theme="currentTheme" :size="currentSize" shadow="hover">
           <s-progress :percentage="quotaValue" />
           <div class="overview-progress-text">当前使用 {{ quotaValue }}%</div>
         </s-card>
       </div>
-      <s-table class="overview-table" :data="tableData" :columns="tableColumns" :theme="currentTheme" :total="30" />
+      <s-table
+        class="overview-table"
+        :data="tableData"
+        :columns="tableColumns"
+        :theme="currentTheme"
+        :size="currentSize"
+        :total="30"
+      />
     </section>
 
     <section class="overview-section">
       <s-title title="反馈组件" :theme="currentTheme" />
       <div class="overview-actions">
-        <s-button type="primary" :theme="currentTheme" :disabled="isDisabled" @click="showDialog = true">
+        <s-button
+          type="primary"
+          :theme="currentTheme"
+          :size="currentSize"
+          :disabled="isDisabled"
+          icon="tabler:folder-open"
+          @click="showDialog = true"
+        >
           打开弹窗
         </s-button>
         <s-popconfirm title="确认提交当前配置吗？" :theme="currentTheme" :disabled="isDisabled">
-          <s-button :theme="currentTheme" :disabled="isDisabled">确认提示</s-button>
+          <s-button :theme="currentTheme" :size="currentSize" :disabled="isDisabled" icon="tabler:tooltip">
+            确认提示
+          </s-button>
         </s-popconfirm>
         <s-empty description="暂无更多数据" :theme="currentTheme" width="72" />
       </div>

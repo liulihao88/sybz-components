@@ -666,7 +666,6 @@ function emitChangeSelect(
   }
 
   :deep(.s-comp-title) {
-    height: var(--s-select-min-height) !important;
     min-height: var(--s-select-min-height) !important;
     font-size: var(--s-select-title-font-size) !important;
     line-height: 1 !important;
