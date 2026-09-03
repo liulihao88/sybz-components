@@ -74,9 +74,9 @@
 
 .s-message-box--delete,
 .s-message-box--warning {
-  --s-message-box-variant-color: var(--el-color-warning);
-  --s-message-box-variant-hover-color: var(--el-color-warning-light-3);
-  --s-message-box-variant-active-color: var(--el-color-warning-dark-2);
+  --s-message-box-variant-color: var(--s-confirm-semantic-color);
+  --s-message-box-variant-hover-color: var(--s-confirm-semantic-hover-color);
+  --s-message-box-variant-active-color: var(--s-confirm-semantic-active-color);
 
   width: 512px;
   max-width: calc(100vw - 32px);
@@ -154,24 +154,18 @@
   }
 }
 
-.s-message-box--delete {
-  --s-message-box-variant-color: var(--el-color-danger);
-  --s-message-box-variant-hover-color: var(--el-color-danger-light-3);
-  --s-message-box-variant-active-color: var(--el-color-danger-dark-2);
-}
-
 .s-message-box--delete,
 .s-message-box--warning {
   .s-message-box__cancel-btn {
     --el-button-bg-color: transparent;
-    --el-button-border-color: var(--el-border-color);
-    --el-button-text-color: var(--el-text-color-regular);
+    --el-button-border-color: var(--s-confirm-semantic-cancel-border-color);
+    --el-button-text-color: var(--s-confirm-semantic-cancel-text-color);
     --el-button-hover-bg-color: var(--el-fill-color-light);
-    --el-button-hover-border-color: var(--el-border-color);
-    --el-button-hover-text-color: var(--el-text-color-regular);
+    --el-button-hover-border-color: var(--s-confirm-semantic-cancel-border-color);
+    --el-button-hover-text-color: var(--s-confirm-semantic-cancel-text-color);
     --el-button-active-bg-color: var(--el-fill-color);
-    --el-button-active-border-color: var(--el-border-color);
-    --el-button-active-text-color: var(--el-text-color-regular);
+    --el-button-active-border-color: var(--s-confirm-semantic-cancel-border-color);
+    --el-button-active-text-color: var(--s-confirm-semantic-cancel-text-color);
   }
 
   .el-message-box__message {

@@ -86,6 +86,22 @@ confirm(options, appContext)
 
 返回 `ElMessageBox.confirm` 的 `Promise`。用户点击确认时 resolve；点击取消或关闭时 reject。
 
+### 公共语义解析
+
+`confirm()`、`s-dialog` 和 `s-popconfirm` 内部统一使用 `resolveConfirmSemantic()`。业务需要在自定义确认界面中复用相同规则时，也可以直接调用：
+
+```ts
+import { resolveConfirmSemantic } from '@sybz-components/utils'
+
+const semantic = resolveConfirmSemantic({
+  variant: 'delete',
+  target: '机器之心公众号',
+  theme: 'shijingshan',
+})
+```
+
+返回结果包含 `title`、`confirmButtonText`、`confirmButtonType`、`defaultMessage`、`classNames` 和目标状态。显式传入的标题及确认按钮配置优先于语义默认值。
+
 ### 常用场景
 
 ```ts

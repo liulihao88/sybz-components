@@ -26,6 +26,7 @@ import {
   isUrl,
   merge,
   processWidth,
+  resolveConfirmSemantic,
   throttle,
   tryCatch,
   validate,
@@ -33,6 +34,8 @@ import {
   validateTrigger,
 } from '@sybz-components/utils'
 ```
+
+`resolveConfirmSemantic({ variant, target, theme })` 是 `confirm()`、`s-dialog`、`s-popconfirm` 共用的语义解析方法。自定义确认界面需要保持相同标题、正文、按钮和语义 class 时直接复用，不要重新拼装。
 
 ## 全局主题
 

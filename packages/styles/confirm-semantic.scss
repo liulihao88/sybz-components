@@ -1,0 +1,61 @@
+.s-confirm-semantic,
+.s-message-box--delete,
+.s-message-box--warning {
+  --s-confirm-semantic-color: var(--el-color-primary);
+  --s-confirm-semantic-hover-color: var(--el-color-primary-light-3);
+  --s-confirm-semantic-active-color: var(--el-color-primary-dark-2);
+  --s-confirm-semantic-cancel-border-color: var(--el-border-color);
+  --s-confirm-semantic-cancel-text-color: var(--el-text-color-regular);
+}
+
+.s-confirm-semantic--delete,
+.s-message-box--delete {
+  --s-confirm-semantic-color: var(--el-color-danger);
+  --s-confirm-semantic-hover-color: var(--el-color-danger-light-3);
+  --s-confirm-semantic-active-color: var(--el-color-danger-dark-2);
+}
+
+.s-confirm-semantic--warning,
+.s-message-box--warning {
+  --s-confirm-semantic-color: var(--el-color-warning);
+  --s-confirm-semantic-hover-color: var(--el-color-warning-light-3);
+  --s-confirm-semantic-active-color: var(--el-color-warning-dark-2);
+}
+
+.s-confirm-semantic--chenghua,
+.s-message-box--chenghua.s-message-box--delete,
+.s-message-box--chenghua.s-message-box--warning {
+  --s-confirm-semantic-cancel-border-color: var(--s-ch-divider);
+  --s-confirm-semantic-cancel-text-color: var(--s-ch-text-regular);
+}
+
+.s-confirm-semantic--chenghua.s-confirm-semantic--delete,
+.s-message-box--chenghua.s-message-box--delete {
+  --s-confirm-semantic-color: var(--s-ch-danger);
+}
+
+.s-confirm-semantic--chenghua.s-confirm-semantic--warning,
+.s-message-box--chenghua.s-message-box--warning {
+  --s-confirm-semantic-color: var(--s-ch-warning);
+}
+
+.s-confirm-semantic--shijingshan,
+.s-message-box--shijingshan.s-message-box--delete,
+.s-message-box--shijingshan.s-message-box--warning {
+  --s-confirm-semantic-cancel-border-color: var(--s-sjs-divider);
+  --s-confirm-semantic-cancel-text-color: var(--s-sjs-text-regular);
+}
+
+.s-confirm-semantic--shijingshan.s-confirm-semantic--delete,
+.s-message-box--shijingshan.s-message-box--delete {
+  --s-confirm-semantic-color: var(--s-sjs-danger);
+  --s-confirm-semantic-hover-color: #f87171;
+  --s-confirm-semantic-active-color: #dc2626;
+}
+
+.s-confirm-semantic--shijingshan.s-confirm-semantic--warning,
+.s-message-box--shijingshan.s-message-box--warning {
+  --s-confirm-semantic-color: #f59e0b;
+  --s-confirm-semantic-hover-color: #f8b64a;
+  --s-confirm-semantic-active-color: #d98b13;
+}

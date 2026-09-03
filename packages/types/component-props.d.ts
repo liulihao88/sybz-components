@@ -811,13 +811,17 @@ export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   reConfirm?: boolean
   theme?: SybzComponentTheme
   disabled?: boolean
+  /** 语义样式；默认值：default */
+  variant?: SDialogVariant
+  /** 删除场景中要操作的目标名称 */
+  target?: string | number
   /** 确认按钮文字；默认值：确定 */
   confirmButtonText?: string
   /** 取消按钮文字；默认值：取消 */
   cancelButtonText?: string
   /** 确认按钮类型；默认值：primary */
   confirmButtonType?: SPopconfirmButtonType
-  /** 取消按钮类型；默认值：text */
+  /** 取消按钮类型；默认值：info */
   cancelButtonType?: SPopconfirmButtonType
 }
 

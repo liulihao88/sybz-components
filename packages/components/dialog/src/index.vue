@@ -49,15 +49,15 @@
         </div>
       </template>
       <div :class="slotBoxClass">
-        <template v-if="mergedProps.variant === 'delete' && !$slots.default">
-          <template v-if="mergedProps.target !== undefined">
+        <template v-if="confirmSemantic.variant === 'delete' && !$slots.default">
+          <template v-if="confirmSemantic.hasTarget">
             确认要删除
             <s-tag class="s-dialog__target" type="danger" :theme="dialogButtonTheme">
-              <slot name="target">{{ mergedProps.target }}</slot>
+              <slot name="target">{{ confirmSemantic.target }}</slot>
             </s-tag>
             吗? 删除后不可恢复。
           </template>
-          <template v-else>删除后数据将无法恢复，确定继续吗？</template>
+          <template v-else>{{ confirmSemantic.defaultMessage }}</template>
         </template>
         <slot v-else></slot>
       </div>
@@ -94,6 +94,7 @@
 <script setup lang="ts">
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType, processWidth } from '@sybz-components/utils'
+import { resolveConfirmSemantic } from '@/utils/src/confirmSemantic'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
 import STag from '@/components/tag/src/index.vue'
@@ -170,20 +171,19 @@ const getThemeClass = computed(() => {
 })
 
 const componentClass = computed(() => {
-  return ['s-dialog__panel', getThemeClass.value, `s-dialog--${mergedProps.value.variant}`].filter(Boolean).join(' ')
+  return [
+    's-dialog__panel',
+    getThemeClass.value,
+    `s-dialog--${mergedProps.value.variant}`,
+    ...confirmSemantic.value.classNames,
+  ]
+    .filter(Boolean)
+    .join(' ')
 })
 
 const isDrawer = computed(() => mergedProps.value.mode === 'drawer')
-const dialogTitle = computed(() => {
-  if (mergedProps.value.title !== undefined) return mergedProps.value.title
-  if (mergedProps.value.variant === 'delete') return '删除确认'
-  if (mergedProps.value.variant === 'warning') return '警告'
-  return '提示'
-})
-const dialogConfirmText = computed(() => {
-  if (mergedProps.value.confirmText !== undefined) return mergedProps.value.confirmText
-  return mergedProps.value.variant === 'delete' ? '删除' : '确认'
-})
+const dialogTitle = computed(() => confirmSemantic.value.title)
+const dialogConfirmText = computed(() => confirmSemantic.value.confirmButtonText)
 const isFullscreen = computed(() => attrs.fullscreen === true || attrs.fullscreen === '')
 const panelWidth = computed(() => processWidth(mergedProps.value.width, true))
 
@@ -219,6 +219,16 @@ const dialogButtonTheme = computed<'default' | 'chenghua' | 'shijingshan'>(() =>
   return 'default'
 })
 
+const confirmSemantic = computed(() =>
+  resolveConfirmSemantic({
+    variant: mergedProps.value.variant,
+    target: mergedProps.value.target,
+    theme: dialogButtonTheme.value,
+    title: mergedProps.value.title,
+    confirmButtonText: mergedProps.value.confirmText,
+  }),
+)
+
 const mergedConfirmAttrs = computed<DialogButtonAttrs>(() => {
   return {
     icon: isBusinessTheme.value ? '' : 'el-icon-check',
@@ -236,14 +246,14 @@ const mergedCancelAttrs = computed<DialogButtonAttrs>(() => {
         ? [
             {
               '--el-button-bg-color': 'transparent',
-              '--el-button-border-color': 'var(--s-dialog-semantic-cancel-border-color)',
-              '--el-button-text-color': 'var(--s-dialog-semantic-cancel-text-color)',
+              '--el-button-border-color': 'var(--s-confirm-semantic-cancel-border-color)',
+              '--el-button-text-color': 'var(--s-confirm-semantic-cancel-text-color)',
               '--el-button-hover-bg-color': 'var(--el-fill-color-light)',
-              '--el-button-hover-border-color': 'var(--s-dialog-semantic-cancel-border-color)',
-              '--el-button-hover-text-color': 'var(--s-dialog-semantic-cancel-text-color)',
+              '--el-button-hover-border-color': 'var(--s-confirm-semantic-cancel-border-color)',
+              '--el-button-hover-text-color': 'var(--s-confirm-semantic-cancel-text-color)',
               '--el-button-active-bg-color': 'var(--el-fill-color)',
-              '--el-button-active-border-color': 'var(--s-dialog-semantic-cancel-border-color)',
-              '--el-button-active-text-color': 'var(--s-dialog-semantic-cancel-text-color)',
+              '--el-button-active-border-color': 'var(--s-confirm-semantic-cancel-border-color)',
+              '--el-button-active-text-color': 'var(--s-confirm-semantic-cancel-text-color)',
             },
             cancelAttrs.style,
           ]
@@ -268,9 +278,7 @@ const confirmButtonAttrs = computed(() => {
   return buttonAttrs
 })
 const confirmButtonType = computed(() => {
-  const variantType =
-    mergedProps.value.variant === 'delete' ? 'danger' : mergedProps.value.variant === 'warning' ? 'warning' : 'primary'
-  return getButtonType(mergedConfirmAttrs.value.type, variantType)
+  return getButtonType(mergedConfirmAttrs.value.type, confirmSemantic.value.confirmButtonType)
 })
 const confirmButtonLoading = computed(() => mergedConfirmAttrs.value.loading === true)
 
@@ -353,25 +361,6 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .s-dialog {
-  --s-dialog-variant-delete-color: var(--el-color-danger);
-  --s-dialog-variant-warning-color: var(--el-color-warning);
-  --s-dialog-semantic-cancel-border-color: var(--el-border-color);
-  --s-dialog-semantic-cancel-text-color: var(--el-text-color-regular);
-
-  &.s-chenghua-dialog {
-    --s-dialog-variant-delete-color: var(--s-ch-danger);
-    --s-dialog-variant-warning-color: var(--s-ch-warning);
-    --s-dialog-semantic-cancel-border-color: var(--s-ch-divider);
-    --s-dialog-semantic-cancel-text-color: var(--s-ch-text-regular);
-  }
-
-  &.s-shijingshan-dialog {
-    --s-dialog-variant-delete-color: var(--s-sjs-danger);
-    --s-dialog-variant-warning-color: #f59e0b;
-    --s-dialog-semantic-cancel-border-color: var(--s-sjs-divider);
-    --s-dialog-semantic-cancel-text-color: var(--s-sjs-text-regular);
-  }
-
   &.s-shijingshan-dialog.s-dialog--warning {
     :deep(.s-dialog__confirm-button) {
       --s-sjs-button-type-color: #f59e0b;
@@ -381,16 +370,16 @@ onBeforeUnmount(() => {
   &.s-dialog--delete {
     :deep(.el-dialog__header),
     :deep(.el-drawer__header) {
-      background: var(--s-dialog-variant-delete-color) !important;
-      border-bottom-color: var(--s-dialog-variant-delete-color) !important;
+      background: var(--s-confirm-semantic-color) !important;
+      border-bottom-color: var(--s-confirm-semantic-color) !important;
     }
   }
 
   &.s-dialog--warning {
     :deep(.el-dialog__header),
     :deep(.el-drawer__header) {
-      background: var(--s-dialog-variant-warning-color) !important;
-      border-bottom-color: var(--s-dialog-variant-warning-color) !important;
+      background: var(--s-confirm-semantic-color) !important;
+      border-bottom-color: var(--s-confirm-semantic-color) !important;
     }
   }
 

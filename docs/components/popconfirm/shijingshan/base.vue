@@ -11,9 +11,8 @@ function confirm() {
 <template>
   <s-popconfirm
     theme="shijingshan"
-    title="确认删除任务"
-    content="确定删除<mark>智慧档案检索</mark>吗?"
-    :dangerouslyUseHTMLString="true"
+    variant="delete"
+    target="智慧档案检索"
     width="260"
     trigger="click"
     confirm-button-text="删除"
@@ -27,7 +26,7 @@ function confirm() {
 
   <s-popconfirm
     theme="shijingshan"
-    title="发布确认"
+    variant="warning"
     content="将发布到<mark>生产环境</mark>, 请确认配置无误。"
     :dangerouslyUseHTMLString="true"
     width="280"

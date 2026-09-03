@@ -20,7 +20,7 @@ popconfirm/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题样式。基础写法：`<s-popconfirm theme="chenghua" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。
+:::demo 展示成华主题样式和语义确认框。基础写法：`<s-popconfirm theme="chenghua" variant="delete" target="智慧档案检索" @confirm="confirm"></s-popconfirm>`。属性：`variant` 可选 `default / delete / warning`，默认值 `default`；`target` 类型 `string / number`，默认值未设置。
 popconfirm/chenghua/base
 :::
 
@@ -28,7 +28,7 @@ popconfirm/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题样式。基础写法：`<s-popconfirm theme="shijingshan" title="确认删除任务" content="确定删除<mark>智慧档案检索</mark>吗?" width="260" trigger="click" @confirm="confirm"></s-popconfirm>`。
+:::demo 展示石景山主题样式和语义确认框。基础写法：`<s-popconfirm theme="shijingshan" variant="delete" target="智慧档案检索" @confirm="confirm"></s-popconfirm>`。属性：`variant` 可选 `default / delete / warning`，默认值 `default`；`target` 类型 `string / number`，默认值未设置。
 popconfirm/shijingshan/base
 :::
 
@@ -46,18 +46,20 @@ popconfirm/slot
 
 ### 属性
 
-|           属性名           | 说明                                                                            | 类型                                                           | 默认值        |
-| :------------------------: | ------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------- |
-|          `title`           | 标题文案；配合 `dangerouslyUseHTMLString` 可解析 HTML                           | string                                                         | `确定删除吗?` |
-|          `width`           | 弹层宽度                                                                        | string / number                                                | `200`         |
-|         `content`          | 正文内容，默认按安全白名单 HTML 渲染                                            | string                                                         | `''`          |
-|        `reConfirm`         | 是否启用二次确认，关闭后点击即直接确认                                          | boolean                                                        | `true`        |
-| `dangerouslyUseHTMLString` | 是否将 `title` / `content` 按安全白名单 HTML 字符串渲染，可用 `<mark>` 高亮文本 | boolean                                                        | `true`        |
-|          `theme`           | 主题                                                                            | `default` / `chenghua` / `shijingshan`                         | `default`     |
-|    `confirmButtonText`     | 确认按钮文字                                                                    | string                                                         | `确定`        |
-|     `cancelButtonText`     | 取消按钮文字                                                                    | string                                                         | `取消`        |
-|    `confirmButtonType`     | 确认按钮类型                                                                    | `default / primary / success / warning / info / danger / text` | `primary`     |
-|     `cancelButtonType`     | 取消按钮类型                                                                    | `default / primary / success / warning / info / danger / text` | `text`        |
+|           属性名           | 说明                                                                            | 类型                                                           | 默认值                     |
+| :------------------------: | ------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------- |
+|          `title`           | 标题文案；未设置时由 `variant` 生成                                             | string                                                         | 由 `variant` 决定          |
+|          `width`           | 弹层宽度；语义态默认使用更适合确认内容的宽度                                    | string / number                                                | 普通态 `200`，语义态 `320` |
+|         `content`          | 正文内容，默认按安全白名单 HTML 渲染                                            | string                                                         | `''`                       |
+|        `reConfirm`         | 是否启用二次确认，关闭后点击即直接确认                                          | boolean                                                        | `true`                     |
+| `dangerouslyUseHTMLString` | 是否将 `title` / `content` 按安全白名单 HTML 字符串渲染，可用 `<mark>` 高亮文本 | boolean                                                        | `true`                     |
+|          `theme`           | 主题                                                                            | `default` / `chenghua` / `shijingshan`                         | `default`                  |
+|         `variant`          | 语义样式，并统一标题、正文、确认按钮和主题颜色                                  | `default` / `delete` / `warning`                               | `default`                  |
+|          `target`          | 删除场景中要操作的目标名称；未传 `content` 时自动生成标准提示                   | string / number                                                | -                          |
+|    `confirmButtonText`     | 确认按钮文字；未设置时由 `variant` 生成                                         | string                                                         | 由 `variant` 决定          |
+|     `cancelButtonText`     | 取消按钮文字                                                                    | string                                                         | `取消`                     |
+|    `confirmButtonType`     | 确认按钮类型                                                                    | `default / primary / success / warning / info / danger / text` | `primary`                  |
+|     `cancelButtonType`     | 取消按钮类型                                                                    | `default / primary / success / warning / info / danger / text` | `info`                     |
 
 ### 事件
 
@@ -74,6 +76,7 @@ popconfirm/slot
 |  `title`  | 自定义标题内容                           |
 | `content` | 自定义正文内容，富文本内容请使用这个插槽 |
 | `footer`  | 自定义底部操作区                         |
+| `target`  | 自定义删除场景中的目标内容               |
 
 ### Exposes
 

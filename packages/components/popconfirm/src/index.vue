@@ -9,7 +9,9 @@ defineOptions({
 import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import SButton from '@/components/button/src/index.vue'
+import STag from '@/components/tag/src/index.vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
+import { resolveConfirmSemantic } from '@/utils/src/confirmSemantic'
 import type { SPopconfirmButtonType } from '@/types/component-props'
 
 const attrs = useAttrs()
@@ -59,6 +61,8 @@ interface PopconfirmProps {
   dangerouslyUseHTMLString?: boolean
   theme?: 'default' | 'chenghua' | 'shijingshan'
   disabled?: boolean
+  variant?: 'default' | 'delete' | 'warning'
+  target?: string | number
   confirmButtonText?: string
   cancelButtonText?: string
   confirmButtonType?: SPopconfirmButtonType
@@ -66,16 +70,18 @@ interface PopconfirmProps {
 }
 
 const props = withDefaults(defineProps<PopconfirmProps>(), {
-  title: '确定删除吗?',
-  width: 200,
+  title: undefined,
+  width: undefined,
   content: '',
   reConfirm: true,
   dangerouslyUseHTMLString: true,
   theme: 'default',
   disabled: false,
-  confirmButtonText: '确定',
+  variant: 'default',
+  target: undefined,
+  confirmButtonText: undefined,
   cancelButtonText: '取消',
-  confirmButtonType: 'primary',
+  confirmButtonType: undefined,
   cancelButtonType: 'info',
 })
 
@@ -101,6 +107,7 @@ const popperClass = computed(() => {
     's-popconfirm__popper',
     mergedProps.value.theme === 'chenghua' ? 's-popconfirm__popper--chenghua' : '',
     mergedProps.value.theme === 'shijingshan' ? 's-popconfirm__popper--shijingshan' : '',
+    ...confirmSemantic.value.classNames,
     attrPopperClass,
   ]
     .filter(Boolean)
@@ -111,11 +118,33 @@ const popconfirmButtonTheme = computed<'default' | 'chenghua' | 'shijingshan'>((
   return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) ? mergedProps.value.theme : 'default'
 })
 
-const safeTitle = computed(() => String(mergedProps.value.title ?? ''))
+const confirmSemantic = computed(() =>
+  resolveConfirmSemantic({
+    variant: mergedProps.value.variant,
+    target: mergedProps.value.target,
+    theme: popconfirmButtonTheme.value,
+    title: mergedProps.value.title,
+    confirmButtonText: mergedProps.value.confirmButtonText,
+    confirmButtonType: mergedProps.value.confirmButtonType,
+  }),
+)
+
+const safeTitle = computed(() => confirmSemantic.value.title)
 const safeContent = computed(() => String(mergedProps.value.content ?? ''))
 const hasTitle = computed(() => !!safeTitle.value)
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
 const isDisabled = computed(() => Boolean(mergedProps.value.disabled))
+const showSemanticContent = computed(() => confirmSemantic.value.variant === 'delete' && !mergedProps.value.content)
+const cancelButtonIsText = computed(() => mergedProps.value.cancelButtonType === 'text')
+const confirmButtonIsText = computed(() => confirmSemantic.value.confirmButtonType === 'text')
+const resolvedCancelButtonType = computed(() => (cancelButtonIsText.value ? '' : mergedProps.value.cancelButtonType))
+const resolvedConfirmButtonType = computed(() =>
+  confirmButtonIsText.value ? '' : confirmSemantic.value.confirmButtonType,
+)
+const popconfirmWidth = computed(() => {
+  if (mergedProps.value.width !== undefined && mergedProps.value.width !== '') return mergedProps.value.width
+  return confirmSemantic.value.variant === 'default' ? 200 : 320
+})
 
 onBeforeUnmount(() => {
   removeClickOutsideListener()
@@ -132,7 +161,7 @@ defineExpose({
     v-bind="$attrs"
     v-model:visible="isPopoverVisible"
     class="s-popconfirm__box"
-    :width="mergedProps.width"
+    :width="popconfirmWidth"
     :disabled="isDisabled"
     :popper-class="popperClass"
     @show="handleShow"
@@ -148,28 +177,40 @@ defineExpose({
         <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__content" :html="safeContent" />
         <div v-else class="s-popconfirm__content" v-text="safeContent"></div>
       </template>
+      <div v-else-if="showSemanticContent" class="s-popconfirm__content">
+        <template v-if="confirmSemantic.hasTarget">
+          确认要删除
+          <STag class="s-popconfirm__target" type="danger" :theme="popconfirmButtonTheme">
+            <slot name="target">{{ confirmSemantic.target }}</slot>
+          </STag>
+          吗？删除后不可恢复。
+        </template>
+        <template v-else>{{ confirmSemantic.defaultMessage }}</template>
+      </div>
     </slot>
     <slot name="footer">
       <div class="s-popconfirm__footer">
         <SButton
+          class="s-popconfirm__cancel-button"
           size="small"
-          height="30"
-          :type="mergedProps.cancelButtonType === 'text' ? '' : mergedProps.cancelButtonType"
-          :text="mergedProps.cancelButtonType === 'text'"
+          height="36"
+          :type="resolvedCancelButtonType"
+          :text="cancelButtonIsText"
           :theme="popconfirmButtonTheme"
           @click="cancel"
         >
           {{ mergedProps.cancelButtonText }}
         </SButton>
         <SButton
+          class="s-popconfirm__confirm-button"
           size="small"
-          height="30"
-          :type="mergedProps.confirmButtonType === 'text' ? '' : mergedProps.confirmButtonType"
-          :text="mergedProps.confirmButtonType === 'text'"
+          height="36"
+          :type="resolvedConfirmButtonType"
+          :text="confirmButtonIsText"
           :theme="popconfirmButtonTheme"
           @click="confirm"
         >
-          {{ mergedProps.confirmButtonText }}
+          {{ confirmSemantic.confirmButtonText }}
         </SButton>
       </div>
     </slot>
@@ -238,5 +279,100 @@ defineExpose({
   font-size: 12px;
   line-height: 18px;
   vertical-align: baseline;
+}
+
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning) {
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  padding: 0 !important;
+  overflow: visible;
+  border: 1px solid var(--el-border-color-lighter) !important;
+  border-radius: 8px !important;
+  box-shadow: var(--el-box-shadow-light) !important;
+}
+
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete .s-popconfirm__title),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning .s-popconfirm__title) {
+  box-sizing: border-box;
+  min-height: 52px;
+  padding: 14px 20px !important;
+  margin: 0 !important;
+  border-radius: 7px 7px 0 0;
+  background: var(--s-confirm-semantic-color) !important;
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 24px !important;
+}
+
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete .s-popconfirm__content),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning .s-popconfirm__content) {
+  padding: 20px 20px 12px !important;
+  color: var(--el-text-color-regular) !important;
+  font-size: 14px !important;
+  line-height: 22px !important;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete .s-popconfirm__footer),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning .s-popconfirm__footer) {
+  padding: 8px 20px 20px !important;
+  margin-top: 0;
+}
+
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete .s-popconfirm__confirm-button),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete .s-popconfirm__cancel-button),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning .s-popconfirm__confirm-button),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning .s-popconfirm__cancel-button) {
+  min-width: 76px;
+  height: 36px !important;
+  padding: 0 16px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete .s-popconfirm__confirm-button),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning .s-popconfirm__confirm-button) {
+  --el-button-bg-color: var(--s-confirm-semantic-color);
+  --el-button-border-color: var(--s-confirm-semantic-color);
+  --el-button-text-color: #fff;
+  --el-button-hover-bg-color: var(--s-confirm-semantic-hover-color);
+  --el-button-hover-border-color: var(--s-confirm-semantic-hover-color);
+  --el-button-hover-text-color: #fff;
+  --el-button-active-bg-color: var(--s-confirm-semantic-active-color);
+  --el-button-active-border-color: var(--s-confirm-semantic-active-color);
+  --el-button-active-text-color: #fff;
+}
+
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--delete .s-popconfirm__cancel-button),
+:global(.s-popconfirm__popper.s-confirm-semantic.s-confirm-semantic--warning .s-popconfirm__cancel-button) {
+  --el-button-bg-color: transparent;
+  --el-button-border-color: var(--s-confirm-semantic-cancel-border-color);
+  --el-button-text-color: var(--s-confirm-semantic-cancel-text-color);
+  --el-button-hover-bg-color: var(--el-fill-color-light);
+  --el-button-hover-border-color: var(--s-confirm-semantic-cancel-border-color);
+  --el-button-hover-text-color: var(--s-confirm-semantic-cancel-text-color);
+  --el-button-active-bg-color: var(--el-fill-color);
+  --el-button-active-border-color: var(--s-confirm-semantic-cancel-border-color);
+  --el-button-active-text-color: var(--s-confirm-semantic-cancel-text-color);
+
+  border-color: var(--s-confirm-semantic-cancel-border-color) !important;
+}
+
+:global(.s-popconfirm__target) {
+  display: inline-flex;
+  max-width: calc(100% - 8px);
+  height: auto;
+  min-height: 22px;
+  padding: 0 6px;
+  margin: 0 3px;
+  font-family: 'Roboto Mono', 'PingFang SC', monospace;
+  font-weight: 600;
+  vertical-align: middle;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
 }
 </style>

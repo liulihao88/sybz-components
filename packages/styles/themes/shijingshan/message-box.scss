@@ -200,18 +200,6 @@
   }
 }
 
-.s-message-box--shijingshan.s-message-box--delete {
-  --s-message-box-variant-color: var(--s-sjs-danger);
-  --s-message-box-variant-hover-color: #f87171;
-  --s-message-box-variant-active-color: #dc2626;
-}
-
-.s-message-box--shijingshan.s-message-box--warning {
-  --s-message-box-variant-color: #f59e0b;
-  --s-message-box-variant-hover-color: #f8b64a;
-  --s-message-box-variant-active-color: #d98b13;
-}
-
 .s-message-box--shijingshan.s-message-box--delete,
 .s-message-box--shijingshan.s-message-box--warning {
   .s-message-box__confirm-btn--shijingshan {
@@ -227,12 +215,12 @@
 .s-message-box--shijingshan.s-message-box--delete .s-message-box__cancel-btn--shijingshan,
 .s-message-box--shijingshan.s-message-box--warning .s-message-box__cancel-btn--shijingshan {
   --el-button-bg-color: transparent;
-  --el-button-border-color: var(--s-sjs-divider);
-  --el-button-text-color: var(--s-sjs-text-regular);
+  --el-button-border-color: var(--s-confirm-semantic-cancel-border-color);
+  --el-button-text-color: var(--s-confirm-semantic-cancel-text-color);
   --el-button-hover-bg-color: var(--el-fill-color-light);
-  --el-button-hover-border-color: var(--s-sjs-divider);
-  --el-button-hover-text-color: var(--s-sjs-text-regular);
+  --el-button-hover-border-color: var(--s-confirm-semantic-cancel-border-color);
+  --el-button-hover-text-color: var(--s-confirm-semantic-cancel-text-color);
   --el-button-active-bg-color: var(--el-fill-color);
-  --el-button-active-border-color: var(--s-sjs-divider);
-  --el-button-active-text-color: var(--s-sjs-text-regular);
+  --el-button-active-border-color: var(--s-confirm-semantic-cancel-border-color);
+  --el-button-active-text-color: var(--s-confirm-semantic-cancel-text-color);
 }

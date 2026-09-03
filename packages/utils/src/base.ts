@@ -4,7 +4,11 @@ import type { Ref } from 'vue'
 import { consola } from 'consola'
 import { cloneDeep } from 'es-toolkit' // 这里不要lodash-es的原因是, 体积太大, 超过500kb无法打包
 import { formatTime } from './format'
+import { resolveConfirmSemantic } from './confirmSemantic'
+import type { ConfirmTarget, ConfirmVariant } from './confirmSemantic'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageOptions } from 'element-plus'
+
+export type { ConfirmTarget, ConfirmVariant } from './confirmSemantic'
 
 type Func<Args extends any[] = any[], Return = any> = (...args: Args) => Return
 type StorageValue = unknown
@@ -142,9 +146,7 @@ interface CopyOptions extends ToastOptions {
 
 type WidthInput = string | number | Ref<string | number>
 export type ConfirmMessage = string | VNode | (() => VNode)
-export type ConfirmVariant = 'default' | 'delete' | 'warning'
 export type ConfirmTheme = UtilsTheme
-export type ConfirmTarget = string | number
 type ConfirmAppendTarget = NonNullable<ElMessageBoxOptions['appendTo']>
 type AppRootElement = Element & {
   _vue_app?: {
@@ -1593,29 +1595,31 @@ export function confirm(
     ...messageBoxOptions
   } = options
   const inputMessage = typeof message === 'function' ? message() : message
+  const semantic = resolveConfirmSemantic({
+    variant,
+    target,
+    theme,
+    title: typeof messageBoxOptions.title === 'string' ? messageBoxOptions.title : undefined,
+    confirmButtonText: messageBoxOptions.confirmButtonText,
+  })
   const resolvedMessage =
-    variant === 'delete' && target !== undefined && !inputMessage
-      ? `确认要删除<code type="danger">${_escapeHtml(target)}</code>吗？删除后不可恢复。`
-      : inputMessage
+    variant === 'delete' && semantic.hasTarget && !inputMessage
+      ? `确认要删除<code type="danger">${_escapeHtml(semantic.target!)}</code>吗？删除后不可恢复。`
+      : variant === 'delete' && !inputMessage
+        ? semantic.defaultMessage
+        : inputMessage
   const resolvedAppendTo = _resolveAppendTarget(appendTo)
   const resolvedAppContext = _resolveAppContext(optionAppContext || argumentAppContext)
   const isChenghuaTheme = theme === 'chenghua'
   const isShijingshanTheme = theme === 'shijingshan'
-  const variantOptions =
-    variant === 'delete'
-      ? { title: '删除确认', confirmButtonText: '删除' }
-      : variant === 'warning'
-        ? { title: '警告' }
-        : {}
 
   const mergeOptions = {
-    title: '提示',
+    title: semantic.title,
     draggable: true,
     showCancelButton: true,
     cancelButtonText: '取消',
-    confirmButtonText: '确定',
+    confirmButtonText: semantic.confirmButtonText,
     dangerouslyUseHTMLString: true,
-    ...variantOptions,
     ...messageBoxOptions,
     appendTo: resolvedAppendTo,
     appContext: resolvedAppContext,
