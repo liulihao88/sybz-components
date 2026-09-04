@@ -6,7 +6,95 @@ outline: 2
 
 这里汇总业务项目使用 `sybz-components` 时的常见问题和推荐写法。
 
-## 1. 如何在保留公司主题规范的同时快速修改主题色？
+## 1. 如何全局注册组件、设置组件默认属性和工具函数？
+
+建议在项目中创建统一的安装文件，例如 `installSybz.ts`，集中注册组件库、图表组件、主题、组件默认属性和工具函数：
+
+```ts
+import type { App } from 'vue'
+import SybzComponents from 'sybz-components'
+import SybzChartComponents from 'sybz-components/charts'
+import * as sybzUtils from '@sybz-components/utils'
+import 'sybz-components/style.css'
+import 'sybz-components/charts/style.css'
+
+sybzUtils.configureUtils({ theme: 'shijingshan' })
+
+export default function installSybz(app: App): void {
+  app.use(SybzComponents, {
+    theme: 'shijingshan',
+    button: { size: 'small' },
+    compTitleStyle: { padding: '0 16px' },
+    card: {
+      hoverAnimation: true,
+      shadow: 'hover',
+      mergeSections: true,
+    },
+    dialog: {
+      appendToBody: true,
+    },
+    table: {
+      pageSizes: [10, 20, 50, 100],
+      pageSize: 20,
+      showPage: false,
+    },
+    input: {
+      maxlength: 100,
+      showWordLimit: false,
+    },
+  })
+  app.use(SybzChartComponents)
+
+  Object.entries(sybzUtils).forEach(([key, value]) => {
+    app.config.globalProperties[key] = value
+  })
+}
+```
+
+这里包含三类全局配置：
+
+- `theme` 和 `compTitleStyle` 是组件公共默认属性，会应用到所有声明了对应属性的组件。例如 `compTitleStyle` 会同时影响支持标题样式的输入框、选择器、日期选择器等组件。
+- `button`、`card`、`dialog`、`table` 和 `input` 是组件级默认配置，键名使用组件去掉 `s-` 后的驼峰名称。例如 `s-comp-title` 对应 `compTitle`，`s-date-picker` 对应 `datePicker`。
+- `configureUtils({ theme: 'shijingshan' })` 设置工具函数的全局默认主题；把 `sybzUtils` 挂载到 `app.config.globalProperties` 后，可以在组件实例中直接使用 `$toast` 等工具函数。
+
+组件上显式传入的属性优先级最高，可以覆盖全局默认值。例如全局设置按钮尺寸为 `small` 后，下面的按钮仍然会使用 `large`：
+
+```vue
+<s-button size="large">大按钮</s-button>
+```
+
+全局配置的默认值是未配置；未设置的属性继续使用各组件自身的默认值。示例中各项配置的含义如下：
+
+| 配置                        | 示例值                  | 作用                         |
+| --------------------------- | ----------------------- | ---------------------------- |
+| `theme`                     | `shijingshan`           | 设置组件默认主题             |
+| `button.size`               | `small`                 | 设置按钮默认尺寸             |
+| `compTitleStyle`            | `{ padding: '0 16px' }` | 设置标题容器公共默认内边距   |
+| `card.hoverAnimation`       | `true`                  | 默认启用卡片悬浮动画         |
+| `card.shadow`               | `hover`                 | 鼠标移入卡片时显示阴影       |
+| `card.mergeSections`        | `true`                  | 默认合并卡片各区块的重复间距 |
+| `dialog.appendToBody`       | `true`                  | 默认将弹窗挂载到 body        |
+| `table.pageSizes`           | `[10, 20, 50, 100]`     | 设置分页条数选项             |
+| `table.pageSize`            | `20`                    | 设置表格默认每页条数         |
+| `table.showPage`            | `false`                 | 默认隐藏表格分页器           |
+| `input.maxlength`           | `100`                   | 设置输入框默认最大长度       |
+| `input.showWordLimit`       | `false`                 | 默认不显示输入字数统计       |
+| `configureUtils` 的 `theme` | `shijingshan`           | 设置工具函数默认主题         |
+
+最后在应用入口安装一次：
+
+```ts
+import { createApp } from 'vue'
+import App from './App.vue'
+import installSybz from './installSybz'
+
+const app = createApp(App)
+
+installSybz(app)
+app.mount('#app')
+```
+
+## 2. 如何在保留公司主题规范的同时快速修改主题色？
 
 `chenghua` 和 `shijingshan` 主题已经包含符合公司规范的组件布局、圆角和交互样式。如果项目只需要替换品牌色，在注册组件库时同时配置 `theme` 和 `themeColors` 即可，不需要在业务页面重写组件样式。
 
@@ -88,7 +176,7 @@ resetSybzThemeColors('chenghua')
 
 `setSybzThemeColors` 的 `theme` 可选值是 `chenghua` 和 `shijingshan`，没有默认值；`colors` 没有默认值，只需传入本次要替换的颜色。`resetSybzThemeColors` 会移除运行时设置的颜色，恢复对应主题的内置值。
 
-## 2. s-icon 如何使用，怎样使用 Iconify 图标？
+## 3. s-icon 如何使用，怎样使用 Iconify 图标？
 
 根据 Iconify 官方图标库集 的最新实时统计，Iconify 目前总共拥有 超过 34.4 万个（具体为 344,208 个） 开源矢量图标。这些图标来自于 222 个 不同的开源图标集（如熟悉的 Material Design、FontAwesome、Remix Icon、Tabler 等), 已集成至s-icon内部, 均可以通过s-icon进行使用.
 
