@@ -14,7 +14,26 @@
 
   .el-pagination .el-select__wrapper {
     border-radius: var(--s-ch-radius-small);
-    box-shadow: none;
+    background: var(--s-ch-control-bg);
+    box-shadow: 0 0 0 1px var(--s-ch-primary-border) inset;
+    transition:
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+
+    &:hover {
+      box-shadow: 0 0 0 1px var(--s-ch-primary-border-hover) inset;
+    }
+
+    &.is-focused {
+      box-shadow:
+        0 0 0 1px var(--s-ch-primary) inset,
+        0 8px 18px rgba(var(--s-ch-primary-rgb), 0.08);
+    }
+
+    &.is-disabled {
+      background: var(--s-ch-disabled-bg);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08) inset;
+    }
   }
 
   .s-pagination__total {

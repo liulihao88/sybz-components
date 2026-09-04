@@ -19,6 +19,7 @@ const radioValue = ref('private')
 const showDialog = ref(false)
 const radioShowType = ref<RadioShowType>('radio')
 const checkboxShowType = ref<CheckboxShowType>('check')
+const currentPage = ref(1)
 
 const themes: Array<{ label: string; value: ThemeName }> = [
   { label: 'default', value: 'default' },
@@ -293,7 +294,7 @@ const tableData = [
         </s-button>
         <s-popconfirm title="确认提交当前配置吗？" :theme="currentTheme" :disabled="isDisabled">
           <s-button :theme="currentTheme" :size="currentSize" :disabled="isDisabled" icon="tabler:tooltip">
-            确认提示
+            popconfirm
           </s-button>
         </s-popconfirm>
         <s-empty description="暂无更多数据" :theme="currentTheme" width="72" />
@@ -318,6 +319,10 @@ const tableData = [
       <s-tag :theme="currentTheme" class="m-r-8" type="warning">警告</s-tag>
       <s-tag :theme="currentTheme" class="m-r-8" type="danger">危险</s-tag>
       <s-tag :theme="currentTheme" class="m-r-8" type="info">未知</s-tag>
+    </s-title>
+
+    <s-title title="pagination">
+      <s-pagination v-model:current-page="currentPage" :theme="currentTheme" :total="80" :page-size="10" />
     </s-title>
 
     <s-dialog v-model="showDialog" title="主题预览" :theme="currentTheme" width="520">
