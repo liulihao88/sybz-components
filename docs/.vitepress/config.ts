@@ -217,10 +217,6 @@ export default defineConfig({
               link: '/components/utils/getType/home.md',
             },
             {
-              text: sybzMark('gitCommitLog Git 提交记录'),
-              link: '/components/utils/gitCommitLog/home.md',
-            },
-            {
               text: sybzMark('isEmpty 空值判断'),
               link: '/components/utils/isEmpty/home.md',
             },
