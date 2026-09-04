@@ -299,13 +299,19 @@ const tableData = [
         <s-empty description="暂无更多数据" :theme="currentTheme" width="72" />
       </div>
     </section>
-    <s-title title="icon">
-      <s-icon icon="tabler:layout-dashboard" hover-animation size="40" type="primary" />
-      <s-icon icon="tabler:user" type="danger" hover-animation size="40" />
-      <s-icon icon="tabler:settings" type="info" hover-animation size="40" />
-      <s-icon icon="tabler:search" type="default" hover-animation size="40" />
-      <s-icon icon="tabler:trash" type="warning" hover-animation size="40" />
-      <s-icon icon="el-element-plus" type="info" hover-animation size="40"></s-icon>
+    <s-title title="icon" :theme="currentTheme">
+      <s-icon :theme="currentTheme" icon="tabler:layout-dashboard" hover-animation size="40" type="primary" />
+      <s-icon :theme="currentTheme" icon="tabler:user" type="danger" hover-animation size="40" />
+      <s-icon :theme="currentTheme" icon="tabler:settings" type="info" hover-animation size="40" />
+      <s-icon :theme="currentTheme" icon="tabler:search" type="default" hover-animation size="40" />
+      <s-icon :theme="currentTheme" icon="tabler:trash" type="warning" hover-animation size="40" />
+      <s-icon :theme="currentTheme" icon="el-icon-plus" type="info" hover-animation size="40"></s-icon>
+      <s-button :theme="currentTheme" icon="tabler:layout-dashboard" hover-animation size="40" type="primary" />
+      <s-button :theme="currentTheme" icon="tabler:user" type="danger" hover-animation />
+      <s-button :theme="currentTheme" icon="tabler:settings" type="info" hover-animation />
+      <s-button :theme="currentTheme" icon="tabler:search" type="default" hover-animation />
+      <s-button :theme="currentTheme" icon="tabler:trash" type="warning" hover-animation />
+      <s-button :theme="currentTheme" icon="el-icon-plus" type="info" hover-animation></s-button>
     </s-title>
     <s-title title="tag">
       <s-tag :theme="currentTheme" class="m-r-8" type="primary">默认</s-tag>

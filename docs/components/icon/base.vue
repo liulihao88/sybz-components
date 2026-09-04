@@ -51,6 +51,7 @@ const iconLists = ref([
     <s-icon icon="AddLocation"></s-icon>
     <s-icon icon="addLocation"></s-icon>
     <s-icon icon="add-location"></s-icon>
+    <s-icon icon="el-icon-plus"></s-icon>
     <br />
   </div>
 </template>

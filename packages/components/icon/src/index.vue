@@ -3,9 +3,9 @@ import { computed, useAttrs } from 'vue'
 import type { Component } from 'vue'
 import type { ElTooltipProps } from 'element-plus'
 import { Icon as IconifyIcon } from '@iconify/vue'
-import { processWidth, toLine } from '@sybz-components/utils'
+import { processWidth } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
-import { isEmojiIcon, isIconifyIconName, isRemoteIconUrl } from '@/components/utils/icon'
+import { isEmojiIcon, isIconifyIconName, isRemoteIconUrl, resolveIconValue } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type {
   SIconCursor,
@@ -95,10 +95,7 @@ const isEmoji = computed(
     isEmojiIcon(mergedProps.value.icon),
 )
 
-const resolvedIcon = computed(() => {
-  if (typeof mergedProps.value.icon !== 'string') return mergedProps.value.icon
-  return `el-icon-${toLine(mergedProps.value.icon)}`
-})
+const resolvedIcon = computed(() => resolveIconValue(mergedProps.value.icon))
 
 const iconClasses = computed(() => [
   mergedProps.value.theme !== 'default' && `s-icon--${mergedProps.value.theme}`,
