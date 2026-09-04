@@ -102,4 +102,4 @@ export const createSybzEslintConfig = (...extensions: Linter.Config[]): Linter.C
 ]
 
 /** 公司前端项目默认的 ESLint flat config。 */
-export const sybzEslintConfig = createSybzEslintConfig()
+export const sybzEslintConfig: SybzEslintConfig[] = createSybzEslintConfig()
