@@ -94,7 +94,65 @@ installSybz(app)
 app.mount('#app')
 ```
 
-## 2. 如何在保留公司主题规范的同时快速修改主题色？
+## 2. 如何在 Vite 中注册 sybzVitePlugins？
+
+`sybzVitePlugins()` 是组件库项目推荐的 Vite 插件预设，默认同时提供代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，在 `vite.config.ts` 中直接注册即可：
+
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { sybzVitePlugins } from '@sybz-components/utils/vite'
+
+export default defineConfig({
+  plugins: [vue(), sybzVitePlugins()],
+})
+```
+
+`sybzVitePlugins()` 返回 Vite 支持的插件数组，Vite 会自动将其扁平化，因此直接放进 `plugins` 即可，不要写成 `...sybzVitePlugins()`。
+
+默认启用的功能如下：
+
+| 配置项          | 功能                                 | 类型                                  | 默认值 |
+| --------------- | ------------------------------------ | ------------------------------------- | ------ |
+| `codeInspector` | 在开发环境中从页面元素定位到对应源码 | `boolean \| SybzCodeInspectorOptions` | `true` |
+| `gitCommitLog`  | 提供项目 Git 提交信息                | `boolean \| GitCommitLogOptions`      | `true` |
+| `buildTime`     | 向页面注入本次构建时间               | `boolean \| { metaName?: string }`    | `true` |
+
+每项功能都可以单独关闭，也可以传入配置对象进行定制：
+
+```ts
+export default defineConfig({
+  plugins: [
+    vue(),
+    sybzVitePlugins({
+      codeInspector: {
+        needEnvInspector: true,
+      },
+      gitCommitLog: {
+        autoPrint: true,
+        expanded: false,
+        defaultLimit: 10,
+      },
+      buildTime: {
+        metaName: 'buildTime',
+      },
+    }),
+  ],
+})
+```
+
+例如只需要代码定位功能时，可以关闭另外两项：
+
+```ts
+sybzVitePlugins({
+  gitCommitLog: false,
+  buildTime: false,
+})
+```
+
+启用 `buildTime` 后，插件默认会向 HTML 头部注入名为 `buildTime` 的 meta，并提供 `window.__SYBZ_BUILD_TIME__`。更完整的配置说明可查看 [sybzVitePlugins 文档](/components/utils/sybzVitePlugins/home.md)。
+
+## 3. 如何在保留公司主题规范的同时快速修改主题色？
 
 `chenghua` 和 `shijingshan` 主题已经包含符合公司规范的组件布局、圆角和交互样式。如果项目只需要替换品牌色，在注册组件库时同时配置 `theme` 和 `themeColors` 即可，不需要在业务页面重写组件样式。
 
@@ -176,7 +234,7 @@ resetSybzThemeColors('chenghua')
 
 `setSybzThemeColors` 的 `theme` 可选值是 `chenghua` 和 `shijingshan`，没有默认值；`colors` 没有默认值，只需传入本次要替换的颜色。`resetSybzThemeColors` 会移除运行时设置的颜色，恢复对应主题的内置值。
 
-## 3. s-icon 如何使用，怎样使用 Iconify 图标？
+## 4. s-icon 如何使用，怎样使用 Iconify 图标？
 
 根据 Iconify 官方图标库集 的最新实时统计，Iconify 目前总共拥有 超过 34.4 万个（具体为 344,208 个） 开源矢量图标。这些图标来自于 222 个 不同的开源图标集（如熟悉的 Material Design、FontAwesome、Remix Icon、Tabler 等), 已集成至s-icon内部, 均可以通过s-icon进行使用.
 
