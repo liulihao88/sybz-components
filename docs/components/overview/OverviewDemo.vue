@@ -185,7 +185,17 @@ const tableData = [
     </section>
 
     <section>
-      <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme" :size="currentSize"></s-tabs>
+      <s-flex gap="16">
+        <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme" :size="currentSize" width="200"></s-tabs>
+        <s-tabs
+          v-model="tabsValue"
+          :options="navList"
+          :theme="currentTheme"
+          :size="currentSize"
+          height="100%"
+          type="capsule"
+        ></s-tabs>
+      </s-flex>
       <s-tooltip content="超出字符就隐藏, 鼠标移入显示全部" width="100"></s-tooltip>
       <s-warning content="这是基础用法" title="我是title" :theme="currentTheme"></s-warning>
     </section>
@@ -289,6 +299,20 @@ const tableData = [
         <s-empty description="暂无更多数据" :theme="currentTheme" width="72" />
       </div>
     </section>
+    <s-title title="icon">
+      <s-icon icon="tabler:layout-dashboard" hover-animation size="40" type="primary" />
+      <s-icon icon="tabler:user" type="danger" hover-animation size="40" />
+      <s-icon icon="tabler:settings" type="info" hover-animation size="40" />
+      <s-icon icon="tabler:search" type="default" hover-animation size="40" />
+      <s-icon icon="tabler:trash" type="warning" hover-animation size="40" />
+      <s-icon icon="el-element-plus" type="info" hover-animation size="40"></s-icon>
+    </s-title>
+    <s-title title="tag">
+      <s-tag :theme="currentTheme" class="m-r-8" type="primary">默认</s-tag>
+      <s-tag :theme="currentTheme" class="m-r-8" type="warning">警告</s-tag>
+      <s-tag :theme="currentTheme" class="m-r-8" type="danger">危险</s-tag>
+      <s-tag :theme="currentTheme" class="m-r-8" type="info">未知</s-tag>
+    </s-title>
 
     <s-dialog v-model="showDialog" title="主题预览" :theme="currentTheme" width="520">
       当前总览页正在使用 {{ currentTheme }} 主题。
