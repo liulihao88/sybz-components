@@ -27,3 +27,4 @@ $toast('删除成功')
 - `import { sybzVitePlugins } from '@sybz-components/utils/vite'`。
 - `sybzVitePlugins()` 管理 Tailwind v4、代码定位、Git 记录、构建时间；已有 Tailwind 插件传 `{ tailwind:false }`，插件数组无需展开。
 - 代码规范从 `@sybz-components/utils/codeStandard` 导入，不放入 Vite 插件；项目通过一行配置分别复用 ESLint、Prettier 和 lint-staged 预设。
+- 新项目优先执行 `pnpm exec sybz-code-standard init`，自动生成规范入口、scripts 和 Husky hook。

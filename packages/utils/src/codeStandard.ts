@@ -22,8 +22,11 @@ export const sybzPrettierConfig: PrettierConfig = {
 
 /** 公司前端项目统一使用的 lint-staged 配置。 */
 export const sybzLintStagedConfig: Record<string, string[]> = {
-  '**/*.{js,jsx,ts,tsx,vue,mjs,cjs}': ['prettier --write', 'eslint --fix --max-warnings=0'],
-  '**/*.{css,scss,json,yaml,yml,html,md}': ['prettier --write'],
+  '**/*.{js,jsx,ts,tsx,vue,mjs,cjs}': [
+    'sybz-code-standard prettier --write',
+    'sybz-code-standard eslint --fix --max-warnings=0',
+  ],
+  '**/*.{css,scss,json,yaml,yml,html,md}': ['sybz-code-standard prettier --write'],
 }
 
 const baseEslintConfig = [
