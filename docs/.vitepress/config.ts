@@ -113,6 +113,10 @@ export default defineConfig({
               link: '/components/usageGuide/home.md',
             },
             {
+              text: '项目使用组件常见问题',
+              link: '/components/faq/home.md',
+            },
+            {
               text: 'Skills 使用说明',
               link: '/components/skills/home.md',
             },

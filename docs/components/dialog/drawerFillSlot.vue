@@ -81,8 +81,8 @@ const columns = [
     <s-dialog v-model="isShow" title="基础dialog" fill-slot mode="drawer">
       <s-table ref="tableRef" :columns="columns" :data="data" height="100%"></s-table>
     </s-dialog>
-    <el-button type="primary" @click="isShow = true">基础</el-button>
-    <el-button type="primary" @click="isShow2 = true">复杂些的</el-button>
+    <s-button type="primary" @click="isShow = true">基础</s-button>
+    <s-button type="primary" @click="isShow2 = true">复杂些的</s-button>
     <s-dialog v-model="isShow2" title="基础dialog" fill-slot mode="drawer">
       <s-flex direction="column" class="h-block">
         <div class="m-b-16">这是上面的数据</div>
