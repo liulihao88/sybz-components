@@ -85,7 +85,7 @@ import { sybzVitePlugins } from '@sybz-components/utils/vite'
 - 不为简单函数再包一层同名函数，除非业务确实需要统一副作用。
 - `processWidth` 可处理数字、字符串长度和值为 `0` 的 padding/width 场景。
 - 项目需要查看自身 Git 提交记录时，在 Vite 配置中注册 `gitCommitLog()`；页面打开后默认打印，也可通过 `b()` 再次查看。
-- 项目需要代码定位、Git 提交记录或打包时间时，在 Vite 配置中注册 `sybzVitePlugins()`；Vite 会自动扁平化插件数组，无需展开运算符。通过 `codeInspector`、`gitCommitLog` 和 `buildTime` 配置启用、关闭或定制对应能力。
+- 项目需要 Tailwind CSS v4、代码定位、Git 提交记录或打包时间时，在 Vite 配置中注册 `sybzVitePlugins()`；Vite 会自动扁平化插件数组，无需展开运算符。通过 `tailwind`、`codeInspector`、`gitCommitLog` 和 `buildTime` 配置启用、关闭或定制对应能力。项目自行注册 `@tailwindcss/vite` 时，使用 `sybzVitePlugins({ tailwind: false })`。
 
 ## 示例
 

@@ -9,9 +9,10 @@
     "strict": true,
     "noImplicitAny": false,
     "baseUrl": ".",
+    "rootDir": ".",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "skipLibCheck": true
   },

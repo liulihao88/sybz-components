@@ -132,7 +132,7 @@ export default defineConfig({
 })
 ```
 
-`sybzVitePlugins()` 是组件库推荐的 Vite 开发插件入口，会统一提供代码检查、Git 提交信息和构建时间等能力；默认配置即可使用，也可以传入配置对象关闭或定制单项能力。首次接入时应自动加入 Vite 配置，即使项目暂时没有 TSX 文件。
+`sybzVitePlugins()` 是组件库推荐的 Vite 开发插件入口，会统一提供 Tailwind CSS v4、代码检查、Git 提交信息和构建时间等能力；默认配置即可使用，也可以传入配置对象关闭或定制单项能力。项目已经自行注册 `@tailwindcss/vite` 时，使用 `sybzVitePlugins({ tailwind: false })` 避免重复启用。首次接入时应自动加入 Vite 配置，即使项目暂时没有 TSX 文件。
 
 如果项目没有任何 `.jsx`/`.tsx` 文件，`vueJsx()` 可以不加；使用组件库的普通 Vue 模板不要求业务项目启用 JSX。TSX 项目还应在 `tsconfig.json` 中确认：
 
@@ -152,4 +152,5 @@ export default defineConfig({
 - `configureUtils` 在创建 Vue 应用前调用。
 - Vite 已有 `@vitejs/plugin-vue` 时不要重复添加；已有 `vueJsx()` 时只检查配置，不重复添加。
 - Vite 已有 `sybzVitePlugins()` 时不要重复添加；导入路径必须是 `@sybz-components/utils/vite`。
+- 项目只保留一个 Tailwind Vite 插件和一个 Tailwind CSS 入口；自行管理 Tailwind 时关闭 `sybzVitePlugins` 的 `tailwind`。
 - 主题配置优先放在 `app.use(SybzComponents, options)`，页面只在需要局部覆盖时传 `theme` 或组件属性。

@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-`sybzVitePlugins()` 默认同时启用代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `code-inspector-plugin`、`vite-plugin-html`。
+`sybzVitePlugins()` 默认同时启用 Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
 
 ```ts
 import { defineConfig } from 'vite'
@@ -26,11 +26,18 @@ export default defineConfig({
 
 | 属性名称        | 类型                                  | 可选值                | 默认值 | 说明                                |
 | --------------- | ------------------------------------- | --------------------- | ------ | ----------------------------------- |
+| `tailwind`      | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true` | 是否启用 Tailwind CSS v4。          |
 | `codeInspector` | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true` | 是否启用代码定位，或传入插件配置。  |
 | `gitCommitLog`  | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true` | 是否启用 Git 信息，或传入插件配置。 |
 | `buildTime`     | `boolean \| object`                   | `false/true/配置对象` | `true` | 是否注入打包时间及其 meta 配置。    |
 
 `bundler` 已固定为 `vite`，业务项目无需重复传入。
+
+项目只保留一个 Tailwind Vite 插件和一个包含 `@import "tailwindcss"` 的 CSS 入口。若项目已经自行注册 `@tailwindcss/vite`，请关闭预设中的 Tailwind：
+
+```ts
+plugins: [tailwindcss(), sybzVitePlugins({ tailwind: false })]
+```
 
 ### 查看打包时间
 
@@ -69,6 +76,9 @@ plugins: [
     buildTime: {
       metaName: 'buildTime',
     },
+    tailwind: {
+      optimize: true,
+    },
   }),
 ]
 ```
@@ -81,6 +91,9 @@ plugins: [sybzVitePlugins({ gitCommitLog: false })]
 
 // 只启用 Git 提交信息
 plugins: [sybzVitePlugins({ codeInspector: false })]
+
+// 使用项目自行配置的 Tailwind 插件
+plugins: [tailwindcss(), sybzVitePlugins({ tailwind: false })]
 ```
 
 :::utils-source sybzVitePlugins
