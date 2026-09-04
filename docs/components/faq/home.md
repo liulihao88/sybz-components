@@ -313,4 +313,4 @@ addIconifyIcon('project:rocket', {
 
 需要一次注册一组图标时，可以使用 `addIconifyCollection`。建议在应用入口统一完成注册，确保页面渲染前图标数据已经可用。
 
-如果图标没有显示，依次检查图标名称是否使用英文冒号、名称是否存在，以及当前网络是否能够访问 Iconify API。更完整的属性和示例可查看 [icon 图标组件文档](/components/icon/)。
+如果图标没有显示，依次检查图标名称是否使用英文冒号、名称是否存在，以及当前网络是否能够访问 Iconify API。更完整的属性和示例可查看 [icon 图标组件文档](/components/icon/home.md)。
