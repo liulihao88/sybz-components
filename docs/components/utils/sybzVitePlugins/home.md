@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-`sybzVitePlugins()` 默认同时启用 Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
+`sybzVitePlugins()` 默认同时启用 Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@tailwindcss/vite`、`code-inspector-plugin`[不同ide配置列表](https://inspector.fe-dev.cn/guide/ide.html)、`vite-plugin-html`。
 
 ```ts
 import { defineConfig } from 'vite'
@@ -19,8 +19,6 @@ export default defineConfig({
 ```
 
 `sybzVitePlugins()` 内部包含多个插件。Vite 的 `PluginOption` 原生支持插件数组并会自动扁平化，因此直接放入 `plugins`，无需使用展开运算符。
-
-`...sybzVitePlugins()` 已废弃且不再提供类型兼容，请统一迁移为 `sybzVitePlugins()`。
 
 ### 配置项
 
