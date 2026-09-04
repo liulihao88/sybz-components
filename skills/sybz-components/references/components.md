@@ -1,415 +1,91 @@
-# sybz-components 组件参考
+# 组件选择与迁移
 
-用于把 Element Plus 或手写 UI 替换为 `sybz-components`。替换时优先保留业务语义，删除只服务旧组件写法的多余 class、插槽和计算属性。
+保留业务语义，删除只服务旧写法的 class、插槽、计算属性和 import。API 细节优先检索组件源码、类型与 `docs/components/<name>/home.md`。
 
-## 替换方向
+## 映射
 
-| 原写法                                    | 优先替换                  |
-| ----------------------------------------- | ------------------------- |
-| `el-button`、`button`                     | `s-button`                |
-| `el-input`、`input`                       | `s-input`                 |
-| `el-input-number`                         | `s-input-number`          |
-| `el-select`、手写 `el-option` 循环        | `s-select`                |
-| `el-checkbox-group`                       | `s-checkbox`              |
-| `el-radio-group`、`el-radio`              | `s-radio`                 |
-| `el-switch`                               | `s-switch`                |
-| `el-date-picker`、 `日期或时间选择框`     | `s-date-picker`           |
-| `el-table`、`el-table-column`、分页组合   | `s-table`                 |
-| `el-descriptions`、`el-descriptions-item` | `s-descriptions`          |
-| `el-dialog`、`el-drawer`                  | `s-dialog`                |
-| `el-empty`                                | `s-empty`                 |
-| `el-image`、手写 `<img>`                  | `s-image`                 |
-| `el-icon`、手写图标容器                   | `s-icon`                  |
-| `el-tooltip`                              | `s-tooltip`               |
-| `el-popconfirm`                           | `s-popconfirm`            |
-| `el-progress`                             | `s-progress`              |
-| `el-tabs`                                 | `s-tabs`                  |
-| `el-tag`                                  | `s-tag`                   |
-| 页面标题、自定义标题块                    | `s-title`、`s-comp-title` |
-| 卡片容器、区域面板                        | `s-card`                  |
-| 页面切换标题                              | `s-tabs`                  |
-| flex/row 布局包装                         | `s-flex`、`s-row`         |
+| 原写法                                                | 使用                                                   |
+| ----------------------------------------------------- | ------------------------------------------------------ |
+| `button/el-button`                                    | `s-button`                                             |
+| `input/el-input`、`el-input-number`                   | `s-input`、`s-input-number`                            |
+| `el-select` + `el-option`                             | `s-select :options`                                    |
+| checkbox/radio/switch/date-picker                     | `s-checkbox`/`s-radio`/`s-switch`/`s-date-picker`      |
+| table + column + pagination                           | `s-table :columns`                                     |
+| descriptions + item                                   | `s-descriptions :options`                              |
+| dialog/drawer                                         | `s-dialog`                                             |
+| empty/image/icon/tooltip/popconfirm/progress/tabs/tag | 对应 `s-*`                                             |
+| 标题/卡片/布局                                        | `s-title`、`s-comp-title`、`s-card`、`s-flex`、`s-row` |
+| form                                                  | `s-form :field-list`                                   |
 
-## 使用规则
+星标组件见仓库 `skills/star-skill.md`。主题场景传 `theme="chenghua|shijingshan"`。
 
-- 简单组件只传业务必要属性，不重复传组件默认值。
-- 表单、表格优先使用配置化写法，避免继续堆大量模板。
-- 只有业务确实需要自定义渲染时才写插槽、`render` 或额外 class。
-- 主题场景优先传 `theme="chenghua"` 或 `theme="shijingshan"`。
-
-## 星标组件基础用法
-
-星标组件来自 `skills/star-skill.md` 的组件清单。迁移页面时优先使用这些组件。
-
-### s-icon
-
-新增业务图标优先使用 Tabler Icons；`source="auto"` 会根据名称自动判断来源，不需要导入单个图标组件：
+## 最小用法
 
 ```vue
-<s-icon icon="tabler:search" content="搜索" @click="search" />
-<s-icon icon="delete" type="danger" variant="solid" content="删除" @click="remove" />
-```
-
-完整的图标来源、属性、离线注册和选择规则见 [icon.md](icon.md)。
-
-### s-button
-
-```vue
-<s-button type="primary" icon="plus" content="新增数据">
-  新增
-</s-button>
-```
-
-### s-checkbox
-
-```vue
-<script setup lang="ts">
-const checkedList = ref([])
-
-const options = [
-  { label: '小月月', value: 'xyy' },
-  { label: '小鑫鑫', value: 'xxx' },
-  { label: '小瑞瑞', value: 'xrr' },
-]
-</script>
-
-<template>
-  <s-checkbox v-model="checkedList" :options="options" />
-</template>
-```
-
-### s-date-picker
-
-```vue
-<script setup lang="ts">
-const dateValue = ref('')
-</script>
-
-<template>
-  <s-date-picker v-model="dateValue" />
-</template>
-```
-
-### s-descriptions
-
-```vue
-<script setup lang="ts">
-const options = [
-  { label: '名字', value: 'andy' },
-  { label: '年龄', value: '18' },
-  { label: '身高', value: '1.88' },
-]
-</script>
-
-<template>
-  <s-descriptions :options="options" />
-</template>
-```
-
-### s-dialog
-
-```vue
-<script setup lang="ts">
-const isShow = ref(false)
-</script>
-
-<template>
-  <s-button type="primary" @click="isShow = true">显示弹窗</s-button>
-  <s-dialog v-model="isShow" title="基础弹窗" @confirm="confirm">内容</s-dialog>
-</template>
-```
-
-### s-empty
-
-```vue
+<s-button type="primary" icon="plus">新增</s-button>
+<s-input v-model="name" width="300" />
+<s-input-number v-model="count" :min="0" :max="10" />
+<s-select v-model="status" :options="statusOptions" />
+<s-checkbox v-model="checked" :options="options" />
+<s-radio v-model="value" :options="options" show-type="button" />
+<s-switch v-model="enabled" active-text="启用" inactive-text="停用" />
+<s-date-picker v-model="date" />
+<s-descriptions :options="infoOptions" />
 <s-empty title="暂无数据" />
-```
-
-### s-input
-
-```vue
-<script setup lang="ts">
-const name = ref('')
-</script>
-
-<template>
-  <s-input v-model="name" width="300" />
-</template>
-```
-
-### s-image
-
-```vue
-<s-image src="tenant/test1.png" width="240" height="150" fit="cover" />
-```
-
-`public` 图片统一配置 `image.basePath`；`src/assets` 图片统一配置由 `createImageResolver(import.meta.glob(...))` 创建的 `image.resolver`。
-
-### s-input-number
-
-```vue
-<script setup lang="ts">
-const count = ref(1)
-</script>
-
-<template>
-  <s-input-number v-model="count" :min="0" :max="10" />
-</template>
-```
-
-### s-item
-
-`s-item` 默认显示边框，不需要额外添加 border class；无边框场景显式传 `:border="false"`。`background` 接收完整的 CSS 背景值，支持纯色和渐变。
-
-```vue
-<s-item title="事项标题" sub-title="事项说明" />
-<s-item title="无边框事项" :border="false" />
-<s-item title="自定义边框" border="1px solid #409eff" />
-<s-item title="渐变背景" background="linear-gradient(135deg, #eaf4ff, #f3edff)" />
-```
-
-### s-popconfirm
-
-```vue
-<s-popconfirm variant="delete" target="这条数据" @confirm="remove">
-  <s-button type="danger">删除</s-button>
-</s-popconfirm>
-```
-
-`variant` 支持 `default / delete / warning`，`target` 用于生成标准删除提示；语义标题、正文、按钮文案、按钮类型和颜色与 `confirm()`、`s-dialog` 一致。显式传入 `title`、`content`、`confirm-button-text` 或 `confirm-button-type` 时优先使用显式值。确认与取消按钮也兼容 Element Plus 的 `confirm-button-text`、`cancel-button-text`、`confirm-button-type`、`cancel-button-type`。
-
-### s-radio
-
-```vue
-<script setup lang="ts">
-const value = ref(2)
-
-const options = [
-  { label: 'Option 1', value: 1 },
-  { label: 'Option 2', value: 2 },
-  { label: 'Option 3', value: 3 },
-]
-</script>
-
-<template>
-  <s-radio v-model="value" :options="options" show-type="button" />
-</template>
-```
-
-### s-row
-
-```vue
-<s-row :col="6" :gutter="16">
-  <div>span 6</div>
-  <div>span 6</div>
-  <div>span 6</div>
-  <div>span 6</div>
-</s-row>
-```
-
-### s-select
-
-```vue
-<script setup lang="ts">
-const form = ref({ status: '' })
-
-const statusOptions = [
-  { label: '启用', value: 'enabled' },
-  { label: '停用', value: 'disabled' },
-]
-</script>
-
-<template>
-  <s-select v-model="form.status" :options="statusOptions" />
-</template>
-```
-
-多选或自定义字段只保留必要属性：
-
-```vue
-<s-select v-model="form.userIds" multiple value="id" label="name" :options="users" />
-```
-
-### s-switch
-
-```vue
-<script setup lang="ts">
-const enabled = ref(false)
-</script>
-
-<template>
-  <s-switch v-model="enabled" active-text="启用" inactive-text="停用" />
-</template>
-```
-
-### s-tag
-
-```vue
-<s-tag type="primary">默认</s-tag>
-<s-tag type="warning">警告</s-tag>
-<s-tag type="danger">危险</s-tag>
-<s-tag type="info">未知</s-tag>
-```
-
-### s-title
-
-```vue
+<s-image src="tenant/a.png" width="240" height="150" fit="cover" />
+<s-tooltip width="120" content="完整提示" />
 <s-title title="企业经营数据" />
+<s-card title="基础信息"><s-descriptions :options="infoOptions" /></s-card>
+<s-flex gap="12" align="center"><s-button>取消</s-button><s-button type="primary">保存</s-button></s-flex>
+<s-row :col="6" :gutter="16"><div v-for="item in 4" :key="item" /></s-row>
+<s-tabs v-model="tab" :options="tabs" />
 ```
 
-### s-tooltip
+- `s-select` 自定义字段：`<s-select v-model="ids" multiple value="id" label="name" :options="users" />`。
+- `s-image`：public 路径配置 `image.basePath`；assets 路径配置 `createImageResolver(import.meta.glob(...))` 的 `image.resolver`。
+- `s-item` 默认有边框；无边框传 `:border="false"`；`border` 接受 CSS 边框，`background` 接受纯色/渐变。
+- `s-card` 无背景传 `transparent`。复杂表单才传 `column`、`align`、`formItemAttrs`。
+- `s-table` 通常只需 `data/columns/total/@page-change`，不要重复 `showPage`、`pageSize`、`width="100%"`。
+
+## 语义确认
 
 ```vue
-<s-tooltip width="120" content="这是一段比较长的提示文本，超出宽度后鼠标移入会显示完整内容。" />
+<s-dialog v-model="visible" title="详情" mode="drawer">内容</s-dialog>
+<s-dialog v-model="visible" variant="delete" target="该数据" theme="shijingshan" />
+<s-popconfirm variant="delete" target="该数据" @confirm="remove"><s-button type="danger">删除</s-button></s-popconfirm>
 ```
 
-### s-warning
+- `s-dialog` 抽屉用 `mode="drawer"`，不用旧 `type="drawer"`。
+- `variant`: `default|delete|warning`（默认 `default`）；`target` 生成标准删除正文。三种确认组件语义应一致。
+- 显式标题、正文、按钮文案/类型/attrs 覆盖语义默认值；默认插槽优先于自动正文。
 
-```vue
-<s-warning title="提示" content="这里展示重要提示内容。" />
-<s-warning type="warning" title="警告" content="请确认配置后再提交。" />
-<s-warning type="error" title="错误" content="当前操作失败。" />
-```
+## 配置化示例
 
-### s-card
-
-```vue
-<s-card title="基础信息" shadow="hover" hover-animation>
-  <s-descriptions :options="infoOptions" />
-</s-card>
-```
-
-透明背景直接使用：
-
-```vue
-<s-card transparent title="透明区域">
-  内容
-</s-card>
-```
-
-### s-flex
-
-```vue
-<s-flex gap="12" align="center">
-  <s-button>取消</s-button>
-  <s-button type="primary">保存</s-button>
-</s-flex>
-```
-
-### s-form
-
-```vue
-<script setup lang="ts">
-import { validate } from '@sybz-components/utils'
-
-const model = ref({
-  account: '',
-  hobby: [],
-})
-const formRef = ref()
-const rules = {
-  account: [validate()],
-}
-
+```ts
 const fieldList = [
   { label: '账号', prop: 'account' },
-  { label: '基础信息', type: 'title' },
   {
     label: '爱好',
     prop: 'hobby',
     comp: 's-select',
     rules: [validate('请选择爱好')],
-    attrs: {
-      multiple: true,
-      options: [
-        { label: '吉他', value: '0' },
-        { label: '看书', value: '1' },
-      ],
-    },
+    attrs: { multiple: true, options },
   },
 ]
-
-async function submit() {
-  await formRef.value.validate()
-}
-</script>
-
-<template>
-  <s-form ref="formRef" :model="model" :field-list="fieldList" :rules="rules" />
-  <s-button type="primary" @click="submit">提交</s-button>
-</template>
-```
-
-复杂布局才写 `column`、`align`、`formItemAttrs`；普通表单保持默认。
-
-### s-tabs
-
-```vue
-<script setup lang="ts">
-import { ref } from 'vue'
-const tabsValue = ref('chenghua')
-const navList = [
-  {
-    label: '成华',
-    value: 'chenghua',
-  },
-  {
-    label: '石景山',
-    value: 'shijingshan',
-  },
-]
-</script>
-
-<template>
-  <div>
-    <s-tabs v-model="tabsValue" :options="navList"></s-tabs>
-    <div v-if="tabsValue === 'chenghua'">成华内容</div>
-    <div v-else>石景山内容</div>
-  </div>
-</template>
-```
-
-### s-table
-
-```vue
-<script setup lang="ts">
-const total = 32
-const tableData = [{ name: '展厅智能体', status: '运行中', createdAt: '2026-07-02' }]
-
-const editRow = ({ row }) => {}
-const deleteRow = ({ row }) => {}
-
 const columns = [
   { label: '名称', prop: 'name' },
-  { label: '状态', prop: 'status' },
-  { label: '创建时间', prop: 'createdAt' },
   {
     label: '操作',
     btns: [
-      {
-        content: '编辑',
-        comp: 's-icon',
-        attrs: { icon: 'edit', content: '编辑' },
-        handler: editRow,
-      },
       {
         content: '删除',
         type: 'danger',
         comp: 's-icon',
         attrs: { icon: 'delete', content: '删除' },
         reConfirm: true,
-        handler: deleteRow,
+        handler: remove,
       },
     ],
   },
 ]
-
-const pageChange = ({ pageNumber, pageSize }) => {
-  console.log(pageNumber, pageSize)
-}
-</script>
-
-<template>
-  <s-table :data="tableData" :columns="columns" :total="total" @page-change="pageChange" />
-</template>
 ```
