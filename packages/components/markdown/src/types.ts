@@ -32,9 +32,11 @@ export interface MarkdownExposed {
 }
 
 export interface MarkdownProps {
-  /** Markdown 源文本，默认值：'' */
+  /** Markdown 或 HTML 源文本，默认值：'' */
   source?: string
-  /** 是否允许渲染源文本中的原始 HTML，默认值：false */
+  /** 源文本的解析模式，HTML 模式会跳过 Markdown 解析，默认值：'markdown' */
+  contentType?: 'markdown' | 'html'
+  /** 是否允许渲染 Markdown 源文本中的原始 HTML，默认值：true */
   allowHtml?: boolean
   /** 是否使用 DOMPurify 过滤渲染后的 HTML，默认值：true */
   sanitize?: boolean

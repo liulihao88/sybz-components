@@ -2,7 +2,7 @@ import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/s
 import type { SMarkdownProps } from '../component-props'
 
 /**
- * s-markdown Markdown 渲染组件，支持图片全屏预览、缩放、旋转、多图切换和下载。
+ * s-markdown Markdown 与纯 HTML 渲染组件，支持安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
  *
  * 先提示 sybz 自身属性。
  */
@@ -11,9 +11,11 @@ export type SMarkdownPublicProps = SMarkdownProps
 export type SMarkdownComponent = {
   new (): {
     $props: {
-      /** Markdown 源文本，默认值：'' */
+      /** Markdown 或 HTML 源文本，默认值：'' */
       source?: string
-      /** 是否允许渲染源文本中的原始 HTML，默认值：false */
+      /** 源文本的解析模式，HTML 模式会跳过 Markdown 解析，默认值：'markdown' */
+      contentType?: 'markdown' | 'html'
+      /** 是否允许渲染 Markdown 源文本中的原始 HTML，默认值：true */
       allowHtml?: boolean
       /** 是否使用 DOMPurify 过滤渲染后的 HTML，默认值：true */
       sanitize?: boolean

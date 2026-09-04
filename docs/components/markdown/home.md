@@ -1,6 +1,6 @@
 # Markdown 强大的 Markdown 渲染
 
-`s-markdown` 用于安全渲染 CommonMark/GFM 文本，并扩展代码高亮、任务列表、脚注、数学公式、Mermaid、目录锚点、代码复制、图片预览和图片下载能力。
+`s-markdown` 用于安全渲染 CommonMark/GFM 或完整 HTML 片段，并扩展代码高亮、任务列表、脚注、数学公式、Mermaid、目录锚点、代码复制、图片预览和图片下载能力。
 
 ## Hidden Title {.md-hidden}
 
@@ -42,26 +42,35 @@ markdown/imagePreview
 markdown/example
 :::
 
+### 纯 HTML（默认 `contentType='markdown'`）
+
+接口直接返回完整 HTML 片段时，使用 `content-type="html"` 跳过 Markdown 语法解析，避免 HTML 中的空行和缩进被识别为代码块。HTML 仍会经过默认开启的 DOMPurify 安全过滤。`contentType` 可选值为 `markdown / html`，默认值为 `markdown`。
+
+:::demo 基础写法：`<s-markdown :source="source" content-type="html" />`。属性：`source` 默认值 `''`；`contentType` 可选 `markdown / html`，默认值 `markdown`；`sanitize` 可选 `true / false`，默认值 `true`。
+markdown/html
+:::
+
 ### API
 
-| 属性名           | 说明                                     | 类型 / 可选值  | 默认值  |
-| ---------------- | ---------------------------------------- | -------------- | ------- |
-| `source`         | Markdown 源文本                          | `string`       | `''`    |
-| `allowHtml`      | 是否解析源文本中的原始 HTML              | `true / false` | `true`  |
-| `sanitize`       | 是否使用 DOMPurify 过滤输出              | `true / false` | `true`  |
-| `breaks`         | 是否把普通换行转换为 `<br>`              | `true / false` | `false` |
-| `linkify`        | 是否自动识别 URL                         | `true / false` | `true`  |
-| `typographer`    | 是否启用排版替换                         | `true / false` | `true`  |
-| `highlight`      | 是否使用 Prism 高亮常用语言              | `true / false` | `true`  |
-| `copyCode`       | 是否显示代码复制按钮                     | `true / false` | `true`  |
-| `mermaid`        | 是否渲染 `mermaid` 代码块                | `true / false` | `true`  |
-| `math`           | 是否通过 KaTeX 渲染 `$...$` 与 `$$...$$` | `true / false` | `true`  |
-| `headingAnchors` | 是否为标题生成稳定 ID                    | `true / false` | `true`  |
-| `externalLinks`  | 是否让 HTTP(S) 链接在新窗口安全打开      | `true / false` | `true`  |
-| `baseUrl`        | 相对链接和图片的解析基准地址             | `string`       | `''`    |
-| `imageLazy`      | 是否为图片启用懒加载和异步解码           | `true / false` | `true`  |
-| `imagePreview`   | 是否允许点击图片打开全视口操作预览       | `true / false` | `true`  |
-| `emptyText`      | 无内容时显示的文字                       | `string`       | `''`    |
+| 属性名           | 说明                                     | 类型 / 可选值     | 默认值     |
+| ---------------- | ---------------------------------------- | ----------------- | ---------- |
+| `source`         | Markdown 或 HTML 源文本                  | `string`          | `''`       |
+| `contentType`    | 源文本解析模式，HTML 模式跳过 Markdown   | `markdown / html` | `markdown` |
+| `allowHtml`      | 是否解析源文本中的原始 HTML              | `true / false`    | `true`     |
+| `sanitize`       | 是否使用 DOMPurify 过滤输出              | `true / false`    | `true`     |
+| `breaks`         | 是否把普通换行转换为 `<br>`              | `true / false`    | `false`    |
+| `linkify`        | 是否自动识别 URL                         | `true / false`    | `true`     |
+| `typographer`    | 是否启用排版替换                         | `true / false`    | `true`     |
+| `highlight`      | 是否使用 Prism 高亮常用语言              | `true / false`    | `true`     |
+| `copyCode`       | 是否显示代码复制按钮                     | `true / false`    | `true`     |
+| `mermaid`        | 是否渲染 `mermaid` 代码块                | `true / false`    | `true`     |
+| `math`           | 是否通过 KaTeX 渲染 `$...$` 与 `$$...$$` | `true / false`    | `true`     |
+| `headingAnchors` | 是否为标题生成稳定 ID                    | `true / false`    | `true`     |
+| `externalLinks`  | 是否让 HTTP(S) 链接在新窗口安全打开      | `true / false`    | `true`     |
+| `baseUrl`        | 相对链接和图片的解析基准地址             | `string`          | `''`       |
+| `imageLazy`      | 是否为图片启用懒加载和异步解码           | `true / false`    | `true`     |
+| `imagePreview`   | 是否允许点击图片打开全视口操作预览       | `true / false`    | `true`     |
+| `emptyText`      | 无内容时显示的文字                       | `string`          | `''`       |
 
 ### 事件
 
@@ -84,6 +93,7 @@ markdown/example
 ### 安全说明
 
 - 默认 `allowHtml=true`，会解析 Markdown 中的原始 HTML。
+- 完整 HTML 片段应设置 `contentType='html'`，跳过 Markdown 解析；`sanitize` 仍然生效。
 - 如果内容来源不完全可信，建议继续保留默认的 `sanitize=true`。
 - 服务端渲染且 `sanitize=true` 时，原始 HTML 会先按普通文字安全输出，自定义 HTML 属性暂不生效；客户端挂载后再通过 DOMPurify 过滤并渲染，避免未过滤内容进入服务端页面。
 - 仅在内容完全可信且业务确实需要脚本级 HTML 能力时关闭 `sanitize`。

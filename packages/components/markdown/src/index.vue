@@ -38,6 +38,7 @@ defineOptions({ name: 'SMarkdown' })
 
 const props = withDefaults(defineProps<MarkdownProps>(), {
   source: '',
+  contentType: 'markdown',
   allowHtml: true,
   sanitize: true,
   breaks: false,
@@ -173,6 +174,12 @@ const sanitizeHtml = (html: string) => {
   })
 }
 
+const renderHtmlSource = (source: string) => {
+  // 服务端没有 DOMPurify 所需的 DOM，先安全输出文本，挂载后再渲染过滤后的 HTML。
+  if (props.sanitize && typeof window === 'undefined') return escapeHtml(source)
+  return sanitizeHtml(source)
+}
+
 // 流式 Markdown 可能暂时只收到标题标记（例如 "##"）。在标题文本到达前
 // 不把不完整语法当作普通文本输出，避免用户看到短暂的原始井号。
 const normalizeStreamingSource = (source: string) => {
@@ -207,8 +214,12 @@ const render = async () => {
   const version = ++renderVersion
   previewVisible.value = false
   try {
+    const source = props.source || ''
     const { md, currentHeadings } = createMarkdown()
-    const html = sanitizeHtml(md.render(normalizeStreamingSource(props.source || '')))
+    const html =
+      props.contentType === 'html'
+        ? renderHtmlSource(source)
+        : sanitizeHtml(md.render(normalizeStreamingSource(source)))
     if (version !== renderVersion) return
     headings.value = currentHeadings
     renderedHtml.value = html

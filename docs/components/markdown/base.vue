@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const source = `# Markdown 渲染
 
-支持 **粗体**、*斜体*、~~删除线~~、==高亮==、[链接](https://example.com) 与图片 <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" width="100" />。 视频 <video src="https://vjs.zencdn.net/v/oceans.mp4" />
+支持 **粗体**、*斜体*、~~删除线~~、==高亮==、[链接](https://example.com) 与图片 <img src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" width="100" />。 视频 <video src="https://vjs.zencdn.net/v/oceans.mp4" width="200" />
 
 > 这是引用内容。
 
