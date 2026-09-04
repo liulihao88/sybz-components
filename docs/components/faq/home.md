@@ -87,3 +87,84 @@ resetSybzThemeColors('chenghua')
 ```
 
 `setSybzThemeColors` 的 `theme` 可选值是 `chenghua` 和 `shijingshan`，没有默认值；`colors` 没有默认值，只需传入本次要替换的颜色。`resetSybzThemeColors` 会移除运行时设置的颜色，恢复对应主题的内置值。
+
+## 2. s-icon 如何使用，怎样使用 Iconify 图标？
+
+根据 Iconify 官方图标库集 的最新实时统计，Iconify 目前总共拥有 超过 34.4 万个（具体为 344,208 个） 开源矢量图标。这些图标来自于 222 个 不同的开源图标集（如熟悉的 Material Design、FontAwesome、Remix Icon、Tabler 等), 已集成至s-icon内部, 均可以通过s-icon进行使用.
+
+`s-icon` 可以统一展示 Element Plus 图标、Iconify 图标、SVG、在线图片和 Vue 图标组件。最简单的写法是直接把图标名称传给 `icon`：
+
+```vue
+<s-icon icon="delete" />
+```
+
+名称不含冒号时，默认会按照 Element Plus 图标处理。常用属性如下：
+
+```vue
+<s-icon icon="delete" size="20" color="#f56c6c" content="删除" />
+<s-icon icon="warning" type="warning" variant="light" />
+<s-icon icon="refresh" :rotate="90" />
+```
+
+| 属性      | 可选值或类型                                            | 默认值    |
+| --------- | ------------------------------------------------------- | --------- |
+| `icon`    | 图标名称或 Vue 组件                                     | `''`      |
+| `source`  | `auto / element-plus / iconify / svg / url`             | `auto`    |
+| `size`    | `string / number`                                       | `16px`    |
+| `color`   | CSS 颜色值                                              | 未设置    |
+| `type`    | `default / primary / success / warning / danger / info` | `default` |
+| `variant` | `plain / light / solid`                                 | `plain`   |
+| `content` | tooltip 提示文字                                        | `''`      |
+
+### 使用 Iconify 图标
+
+[Iconify](https://icon-sets.iconify.design/) 汇集了大量开源图标集。项目使用 `s-icon` 时不需要单独安装 `@iconify/vue`，也不需要逐个导入图标组件，直接传入完整的 Iconify 名称即可：
+
+```vue
+<s-icon icon="tabler:home" />
+<s-icon icon="tabler:user" size="20" />
+<s-icon icon="tabler:circle-check" type="success" />
+<s-icon icon="logos:vue" size="24" />
+```
+
+Iconify 名称的格式是 `图标集前缀:图标名称`。例如 `tabler:home` 中，`tabler` 是图标集前缀，`home` 是图标名称。业务项目推荐优先使用 [Tabler Icons](https://icon-sets.iconify.design/tabler/)，同一页面尽量使用同一套图标，避免线条粗细和视觉风格不一致；企业或产品 Logo 可以使用 `logos:*`。
+
+`source` 的默认值是 `auto`。只要 `icon` 是 `tabler:home` 这样的完整名称，`s-icon` 就会自动识别为 Iconify 图标，通常不需要再写 `source`。如果需要明确限定来源，也可以这样写：
+
+```vue
+<s-icon icon="tabler:search" source="iconify" />
+```
+
+Iconify 图标支持与其他 `s-icon` 相同的大小、颜色、语义类型、背景样式和 tooltip 属性。还可以通过 `iconifyAttrs` 将属性透传给底层 Iconify Icon；`iconifyAttrs` 类型是 `object`，默认值是 `{}`：
+
+```vue
+<s-icon icon="tabler:login" size="24" color="#165dff" content="登录" :iconify-attrs="{ flip: 'horizontal' }" />
+```
+
+大部分线性单色图标使用 `currentColor`，可以通过 `color` 或 `type` 改色；`logos:vue` 这类自带多种颜色的品牌图标通常不会跟随 `color` 改变。
+
+### Iconify 在线加载与内网使用
+
+默认情况下，浏览器会在第一次显示某个 Iconify 图标时从 Iconify API 获取图标数据并缓存，只加载页面实际使用的图标，不会把整个图标库打包进项目。因此项目运行环境需要能够访问 Iconify API。
+
+如果项目部署在内网、离线环境，或者不希望在运行时请求外部服务，可以在应用入口提前注册图标数据：
+
+```ts
+import { addIconifyIcon } from 'sybz-components'
+
+addIconifyIcon('project:rocket', {
+  width: 24,
+  height: 24,
+  body: '<path fill="currentColor" d="这里填写图标的 SVG path" />',
+})
+```
+
+注册后仍然通过 `s-icon` 使用，不需要修改业务组件的写法：
+
+```vue
+<s-icon icon="project:rocket" />
+```
+
+需要一次注册一组图标时，可以使用 `addIconifyCollection`。建议在应用入口统一完成注册，确保页面渲染前图标数据已经可用。
+
+如果图标没有显示，依次检查图标名称是否使用英文冒号、名称是否存在，以及当前网络是否能够访问 Iconify API。更完整的属性和示例可查看 [icon 图标组件文档](/components/icon/)。
