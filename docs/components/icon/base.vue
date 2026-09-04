@@ -35,7 +35,7 @@ const iconLists = ref([
     <s-icon icon="warning" content="警告"></s-icon>
     <s-icon icon="info-filled" content="支持 <code>HTML</code> 提示" :dangerouslyUseHTMLString="true"></s-icon>
     <s-icon icon="refresh" content="刷新" color="var(--yellow)" size="50" placement="right" @click="tt"></s-icon>
-    <s-icon icon="close" class="is-loading"></s-icon>
+    <s-icon icon="loading" class="is-loading"></s-icon>
     <s-icon icon="refresh" content="刷新" class="cl-blue"></s-icon>
 
     <hr />
