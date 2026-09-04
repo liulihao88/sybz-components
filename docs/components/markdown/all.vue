@@ -34,7 +34,7 @@ Markdown 可以包含脚注[^note]。
 
 原生 Emoji：😀 🎉 👍 ❤️
 
-![Markdown 图片](/img/hero.jpg)
+![Markdown 图片](/img/hero.jpg){ width="100"}
 `)
 
 const handleError = (error: unknown) => console.error(error)
