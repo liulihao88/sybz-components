@@ -20,6 +20,10 @@ export default defineConfig({
 
 `sybzVitePlugins()` 内部包含多个插件。Vite 的 `PluginOption` 原生支持插件数组并会自动扁平化，因此直接放入 `plugins`，无需使用展开运算符。
 
+:::tip 代码统一规范为什么不放进 Vite 插件？
+ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行、Git 提交和 CI 阶段，不属于 Vite 生命周期。把它们放进 `sybzVitePlugins()` 会导致只有启动或构建 Vite 时才生效。统一规则已由同一工具包的 `@sybz-components/utils/codeStandard` 集中提供，业务项目只需导入预设，升级工具包即可同步规则。
+:::
+
 ### 配置项
 
 | 属性名称        | 类型                                  | 可选值                | 默认值 | 说明                                |

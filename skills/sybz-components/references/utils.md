@@ -11,6 +11,7 @@
 | 字节/千分位/小数/尺寸/时间  | `formatBytes,formatBytesConvert`/`formatThousands`/`formatToFixed`/`processWidth`/`formatTime,formatDurationTime` |
 | 表单校验/try-catch+loading  | `validate,validateForm,validateTrigger`/`tryCatch`                                                                |
 | Vite 开发能力/Git 记录      | `sybzVitePlugins`/`gitCommitLog`（独立入口）                                                                      |
+| 前端代码统一规范            | `sybzEslintConfig`/`createSybzEslintConfig`/`sybzPrettierConfig`/`sybzLintStagedConfig`（独立入口）               |
 
 另有 `delay`、`merge`、`configureUtils`、`resolveConfirmSemantic`。`processWidth` 支持数字、字符串和 0。
 
@@ -25,3 +26,4 @@ $toast('删除成功')
 - `theme:'default'` 可关闭该次全局主题。
 - `import { sybzVitePlugins } from '@sybz-components/utils/vite'`。
 - `sybzVitePlugins()` 管理 Tailwind v4、代码定位、Git 记录、构建时间；已有 Tailwind 插件传 `{ tailwind:false }`，插件数组无需展开。
+- 代码规范从 `@sybz-components/utils/codeStandard` 导入，不放入 Vite 插件；项目通过一行配置分别复用 ESLint、Prettier 和 lint-staged 预设。

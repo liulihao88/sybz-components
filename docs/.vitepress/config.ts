@@ -156,6 +156,10 @@ export default defineConfig({
                   text: 'ChangeLog',
                   link: '/components/utils/changelog/home.md',
                 },
+                {
+                  text: '前端代码统一规范(new), 对插件和用法做了封装',
+                  link: '/components/codeStandard/new.md',
+                },
               ],
             },
           ],
@@ -167,6 +171,10 @@ export default defineConfig({
             {
               text: 'utils 方法总览（A-Z）',
               link: '/components/utils/home.md',
+            },
+            {
+              text: sybzMark('sybzVitePlugins Vite 插件预设'),
+              link: '/components/utils/sybzVitePlugins/home.md',
             },
             {
               text: sybzMark('$toast 消息提示'),
@@ -220,11 +228,6 @@ export default defineConfig({
               text: sybzMark('isEmpty 空值判断'),
               link: '/components/utils/isEmpty/home.md',
             },
-            {
-              text: sybzMark('sybzVitePlugins Vite 插件预设'),
-              link: '/components/utils/sybzVitePlugins/home.md',
-            },
-
             {
               text: 'throttle 节流函数',
               link: '/components/utils/throttle/home.md',

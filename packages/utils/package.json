@@ -23,6 +23,11 @@
       "import": "./dist/vite.mjs",
       "require": "./dist/vite.cjs"
     },
+    "./codeStandard": {
+      "types": "./dist/codeStandard.d.ts",
+      "import": "./dist/codeStandard.mjs",
+      "require": "./dist/codeStandard.cjs"
+    },
     "./*": {
       "types": "./dist/*.d.ts",
       "import": "./dist/*.mjs",
@@ -46,16 +51,25 @@
   },
   "author": "",
   "dependencies": {
+    "@eslint/js": "9.39.4",
     "@tailwindcss/vite": "^4.3.3",
+    "@typescript-eslint/eslint-plugin": "8.62.0",
+    "@typescript-eslint/parser": "8.62.0",
     "@vue/reactivity": "^3.5.18",
     "@vue/shared": "^3.5.18",
     "code-inspector-plugin": "^0.10.1",
     "consola": "^3.4.2",
     "element-plus": "^2.11.5",
+    "eslint": "9.39.4",
+    "eslint-config-prettier": "9.1.2",
+    "eslint-plugin-vue": "10.9.2",
     "es-toolkit": "^1.39.10",
     "lodash-es": "^4.17.21",
+    "globals": "16.5.0",
+    "prettier": "3.8.4",
     "tailwindcss": "^4.3.3",
-    "vue": "3.4.15"
+    "vue": "3.4.15",
+    "vue-eslint-parser": "10.4.1"
   },
   "peerDependencies": {
     "vite": ">=5 <8"
