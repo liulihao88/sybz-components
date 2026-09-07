@@ -6,6 +6,8 @@
 
 <DocBasicUsage code='<s-table :columns="columns" :data="data" :loading="loading"></s-table>' />
 
+无数据时默认使用 `s-empty`，图标、标题样式及默认配置与独立使用 `s-empty` 一致。可通过 `empty-text` 自定义标题，设置为空字符串可隐藏空状态；加载期间不显示空状态。
+
 ## 属性事件插槽简介
 
 <ApiIntro />

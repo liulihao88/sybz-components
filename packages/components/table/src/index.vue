@@ -9,6 +9,7 @@ import RenderComp from './renderComp.vue'
 import HeaderTooltip from './headerTooltip.vue'
 import SPopconfirm from '@/components/popconfirm/src/index.vue'
 import SIcon from '@/components/icon/src/index.vue'
+import SEmpty from '@/components/empty/src/index.vue'
 import { getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { createRenderContext } from '@/components/common/render'
@@ -851,12 +852,6 @@ watch(
 const tableLoading = computed(() => {
   return mergedProps.value.loading ?? false
 })
-const parseEmptyText = computed(() => {
-  if (tableLoading.value === true) {
-    return ''
-  }
-  return '暂无数据'
-})
 const compEmptyText = computed(() => {
   if (hasOwn(attrs, 'empty-text')) {
     return String(attrs['empty-text'] ?? '')
@@ -864,7 +859,7 @@ const compEmptyText = computed(() => {
   if (hasOwn(attrs, 'emptyText')) {
     return String(attrs['emptyText'] ?? '')
   }
-  return parseEmptyText.value
+  return undefined
 })
 
 const fluidHeight = computed(() => {
@@ -950,7 +945,6 @@ defineExpose({
       ref="tableRef"
       :data="mergedProps.data"
       :header-cell-style="tableHeaderCellStyle"
-      :empty-text="compEmptyText"
       v-bind="{
         stripe: true,
         border: true,
@@ -961,6 +955,9 @@ defineExpose({
       @row-click="handleTableRowClick"
       @header-dragend="handleHeaderDragend"
     >
+      <template #empty>
+        <SEmpty v-if="!tableLoading && compEmptyText !== ''" :title="compEmptyText" />
+      </template>
       <el-table-column v-if="isMultipleSelection" v-bind="multipleSelectionColumnAttrs" />
       <el-table-column v-else-if="isSingleSelection" v-bind="singleSelectionColumnAttrs">
         <template v-if="selectionHeaderLabel" #header>
