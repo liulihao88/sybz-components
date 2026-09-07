@@ -28,11 +28,19 @@ switch/chenghua/base
 switch/shijingshan/base
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+switch/sybzTheme
+:::
+
 ### 属性
 
 |    属性名     | 说明                                                                             | 类型               | 默认值    |
 | :-----------: | -------------------------------------------------------------------------------- | ------------------ | --------- |
-|     theme     | 主题样式，支持 `default` / `chenghua` / `shijingshan`                            | string             | `default` |
+|     theme     | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                   | string             | `default` |
 |  active-text  | switch 打开时的文字描述                                                          | string             | ''        |
 | inactive-text | switch 的状态为 off 时的文字描述                                                 | string             | ''        |
 | before-change | switch 状态改变前的钩子， 返回 `false` 或者返回 `Promise` 且被 reject 则停止切换 | boolean / Function | -         |

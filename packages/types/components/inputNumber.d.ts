@@ -13,6 +13,7 @@ export type SInputNumberComponent = {
       compTitleStyle?: SybzRecord
       width?: string | number
       height?: string | number
+
       theme?: SybzComponentTheme
       size?: SybzComponentSize
       subAttrs?: SybzRecord

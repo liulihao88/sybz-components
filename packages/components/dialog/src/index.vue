@@ -92,6 +92,8 @@
 </template>
 
 <script setup lang="ts">
+import { isSybzTheme } from '../../../utils/src/theme'
+import type { SDialogTheme, SybzComponentTheme } from '../../../types/component-props'
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType, processWidth } from '@sybz-components/utils'
 import { resolveConfirmSemantic } from '@/utils/src/confirmSemantic'
@@ -116,7 +118,7 @@ interface DialogProps {
   title?: string
   subTitle?: string
   width?: string | number
-  theme?: 'default' | 'norm' | 'norm16' | 'simple' | 'chenghua' | 'shijingshan'
+  theme?: SDialogTheme
   cancel?: DialogAction
   cancelText?: string
   confirmText?: string
@@ -139,7 +141,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   target: undefined,
   subTitle: '',
   width: '',
-  theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan
+  theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan, sybz
   cancel: '',
   cancelText: '取消',
   confirmText: undefined,
@@ -156,13 +158,15 @@ const props = withDefaults(defineProps<DialogProps>(), {
   hideHeaderIcon: false,
 })
 const mergedProps = useGlobalComponentConfig('dialog', props)
-const isBusinessTheme = computed(() => ['chenghua', 'shijingshan'].includes(mergedProps.value.theme))
+const isBusinessTheme = computed(() => isSybzTheme(mergedProps.value.theme))
 
 const getThemeClass = computed(() => {
   if (mergedProps.value.theme === 'norm') {
     return 's-norm-dialog'
   } else if (mergedProps.value.theme === 'chenghua') {
     return 's-chenghua-dialog'
+  } else if (mergedProps.value.theme === 'sybz') {
+    return 's-sybz-dialog'
   } else if (mergedProps.value.theme === 'shijingshan') {
     return 's-shijingshan-dialog'
   } else {
@@ -204,6 +208,7 @@ const panelClass = computed(() => {
     !isDrawer.value && !isFullscreen.value && mergedProps.value.maximizeHeight ? 's-dialog__maximize-height' : '',
     isDrawer.value && mergedProps.value.theme === 'chenghua' ? 's-dialog__drawer--chenghua' : '',
     isDrawer.value && mergedProps.value.theme === 'shijingshan' ? 's-dialog__drawer--shijingshan' : '',
+    isDrawer.value && mergedProps.value.theme === 'sybz' ? 's-dialog__drawer--sybz' : '',
   ].filter(Boolean)
 })
 
@@ -211,8 +216,8 @@ const mergedShowFooter = computed(() => {
   return mergedProps.value.showFooter ?? true
 })
 
-const dialogButtonTheme = computed<'default' | 'chenghua' | 'shijingshan'>(() => {
-  if (mergedProps.value.theme === 'chenghua' || mergedProps.value.theme === 'shijingshan') {
+const dialogButtonTheme = computed<SybzComponentTheme>(() => {
+  if (isSybzTheme(mergedProps.value.theme)) {
     return mergedProps.value.theme
   }
 
@@ -364,6 +369,11 @@ onBeforeUnmount(() => {
   &.s-shijingshan-dialog.s-dialog--warning {
     :deep(.s-dialog__confirm-button) {
       --s-sjs-button-type-color: #f59e0b;
+    }
+  }
+  &.s-sybz-dialog.s-dialog--warning {
+    :deep(.s-dialog__confirm-button) {
+      --s-sybz-button-type-color: var(--s-sybz-warning);
     }
   }
 

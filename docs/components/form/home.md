@@ -130,21 +130,29 @@ form/trim
 form/tooltip
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+form/sybzTheme
+:::
+
 ## 属性
 
-|       属性名        | 说明                                                                          | 类型                               | 默认值                                                 |
-| :-----------------: | ----------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------ |
-|      fieldList      | 表单 schema 配置                                                              | array / object                     | -                                                      |
-|        model        | 表单数据对象                                                                  | object                             | -                                                      |
-|        theme        | 主题，传递给 `s-*` 控件和分组标题                                             | `default / chenghua / shijingshan` | `default`                                              |
-|       column        | 默认每行展示几项                                                              | `1 / 2 / 3 / 4 / 5 / 6`            | `1`                                                    |
-|         gap         | 多列表单项左右间距，仅 `column > 1` 时生效                                    | string / number                    | `16px`                                                 |
-|        align        | 表单项垂直对齐                                                                | `center / top / flex-end`          | `top`                                                  |
-|     showFooter      | 是否显示调试按钮                                                              | boolean                            | 开发环境为 `true`                                      |
-|       footer        | `showFooter` 的别名，设置后优先级更高                                         | boolean                            | -                                                      |
-| autoSetDefaultValue | 是否自动写入字段默认值                                                        | boolean                            | `true`                                                 |
-|        trim         | 是否自动去除字符串字段值的前后空格；字段 `normalize` / `transform` 优先级更高 | boolean                            | `true`                                                 |
-|  componentDefaults  | 所有控件的默认透传属性                                                        | object                             | `{ clearable: true, filterable: true, width: '100%' }` |
+|       属性名        | 说明                                                                          | 类型                                      | 默认值                                                 |
+| :-----------------: | ----------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------ |
+|      fieldList      | 表单 schema 配置                                                              | array / object                            | -                                                      |
+|        model        | 表单数据对象                                                                  | object                                    | -                                                      |
+|        theme        | 主题，传递给 `s-*` 控件和分组标题                                             | `default / chenghua / shijingshan / sybz` | `default`                                              |
+|       column        | 默认每行展示几项                                                              | `1 / 2 / 3 / 4 / 5 / 6`                   | `1`                                                    |
+|         gap         | 多列表单项左右间距，仅 `column > 1` 时生效                                    | string / number                           | `16px`                                                 |
+|        align        | 表单项垂直对齐                                                                | `center / top / flex-end`                 | `top`                                                  |
+|     showFooter      | 是否显示调试按钮                                                              | boolean                                   | 开发环境为 `true`                                      |
+|       footer        | `showFooter` 的别名，设置后优先级更高                                         | boolean                                   | -                                                      |
+| autoSetDefaultValue | 是否自动写入字段默认值                                                        | boolean                                   | `true`                                                 |
+|        trim         | 是否自动去除字符串字段值的前后空格；字段 `normalize` / `transform` 优先级更高 | boolean                                   | `true`                                                 |
+|  componentDefaults  | 所有控件的默认透传属性                                                        | object                                    | `{ clearable: true, filterable: true, width: '100%' }` |
 
 ### fieldList 内部属性
 

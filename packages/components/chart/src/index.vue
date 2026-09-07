@@ -2,6 +2,7 @@
 import { ref, shallowRef, watch, markRaw, onMounted, onBeforeUnmount, computed } from 'vue'
 import { debounce, processWidth } from '@sybz-components/utils'
 import { registerShijingshanChartTheme } from './shijingshanTheme.ts'
+import { registerSybzChartTheme } from './sybzTheme.ts'
 
 defineOptions({
   name: 'SChart',
@@ -42,6 +43,7 @@ const initChart = async () => {
 
   if (token !== chartLoadToken || !echartDivRef.value) return
 
+  if (props.theme === 'sybz') registerSybzChartTheme(echarts)
   if (props.theme === 'shijingshan') {
     registerShijingshanChartTheme(echarts)
   }

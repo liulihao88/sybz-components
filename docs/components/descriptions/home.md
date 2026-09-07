@@ -64,20 +64,28 @@ descriptions/customStyle
 descriptions/custom
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+descriptions/sybzTheme
+:::
+
 ### API
 
-|    属性名     | 说明                                                     | 类型            | 默认值    |
-| :-----------: | -------------------------------------------------------- | --------------- | --------- |
-|   `options`   | 描述项配置列表                                           | `ItemOptions[]` | -         |
-|    `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan`    | string          | `default` |
-|   `column`    | 一行展示的描述项数量                                     | number          | `3`       |
-|    `width`    | 描述列表容器宽度                                         | string / number | -         |
-| `labelWidth`  | label 宽度，传 `auto` 时会按最长 label 自动计算          | string / number | `auto`    |
-|   `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示 | boolean         | `false`   |
-|    `label`    | options 中作为标签文本的字段名                           | string          | `label`   |
-|    `value`    | options 中作为内容值的字段名                             | string          | `value`   |
-| `customLabel` | 统一自定义标签内容，单项 `labelRender`、`labelSlot` 优先 | function        | -         |
-| `customValue` | 统一自定义值内容，单项 `render`、`valueSlot` 优先        | function        | -         |
+|    属性名     | 说明                                                           | 类型            | 默认值    |
+| :-----------: | -------------------------------------------------------------- | --------------- | --------- |
+|   `options`   | 描述项配置列表                                                 | `ItemOptions[]` | -         |
+|    `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string          | `default` |
+|   `column`    | 一行展示的描述项数量                                           | number          | `3`       |
+|    `width`    | 描述列表容器宽度                                               | string / number | -         |
+| `labelWidth`  | label 宽度，传 `auto` 时会按最长 label 自动计算                | string / number | `auto`    |
+|   `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示       | boolean         | `false`   |
+|    `label`    | options 中作为标签文本的字段名                                 | string          | `label`   |
+|    `value`    | options 中作为内容值的字段名                                   | string          | `value`   |
+| `customLabel` | 统一自定义标签内容，单项 `labelRender`、`labelSlot` 优先       | function        | -         |
+| `customValue` | 统一自定义值内容，单项 `render`、`valueSlot` 优先              | function        | -         |
 
 ### ItemOptions
 

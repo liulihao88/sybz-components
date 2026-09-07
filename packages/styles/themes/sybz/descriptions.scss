@@ -1,0 +1,98 @@
+.s-descriptions.s-descriptions--sybz.s-descriptions--sybz {
+  --el-descriptions-table-border: 1px solid var(--s-sybz-divider);
+  --el-descriptions-item-bordered-label-background: var(--s-sybz-primary-soft);
+
+  color: var(--s-sybz-text);
+  font-family: var(--s-sybz-font-family);
+
+  .el-descriptions__header {
+    margin-bottom: 12px;
+  }
+
+  .el-descriptions__title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .el-descriptions__extra {
+    font-size: 14px;
+  }
+
+  .el-descriptions__body {
+    overflow: hidden;
+    border-radius: var(--s-sybz-radius-card);
+    background: var(--s-sybz-card-bg);
+    box-shadow: var(--s-sybz-shadow-soft);
+  }
+
+  .el-descriptions__table {
+    width: 100%;
+    overflow: hidden;
+    border-collapse: separate;
+    border-radius: inherit;
+    border-spacing: 0;
+    background: var(--s-sybz-card-bg);
+  }
+
+  .el-descriptions__table.is-bordered tr {
+    background: var(--s-sybz-card-bg);
+  }
+
+  .el-descriptions__cell {
+    background-clip: padding-box;
+    border-color: var(--s-sybz-divider) !important;
+    color: var(--s-sybz-text-regular);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .el-descriptions__label {
+    background: var(--s-sybz-primary-soft) !important;
+    color: var(--s-sybz-text);
+    font-weight: 600;
+  }
+
+  .el-descriptions__content {
+    background: var(--s-sybz-card-bg);
+    color: var(--s-sybz-text-regular);
+    font-weight: 400;
+  }
+
+  .el-descriptions__table:not(.is-bordered) .el-descriptions__label {
+    background: transparent !important;
+    color: var(--s-sybz-text-muted);
+  }
+
+  .el-descriptions__table:not(.is-bordered) .el-descriptions__content {
+    color: var(--s-sybz-text);
+  }
+
+  .el-descriptions__table.is-bordered .el-descriptions__cell {
+    padding: 12px 14px;
+  }
+
+  .el-descriptions__table.is-bordered .el-descriptions__label {
+    box-shadow: inset 3px 0 0 var(--s-sybz-primary);
+  }
+
+  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:first-child {
+    border-top-left-radius: var(--s-sybz-radius-card);
+  }
+
+  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:last-child {
+    border-top-right-radius: var(--s-sybz-radius-card);
+  }
+
+  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:first-child {
+    border-bottom-left-radius: var(--s-sybz-radius-card);
+  }
+
+  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:last-child {
+    border-bottom-right-radius: var(--s-sybz-radius-card);
+  }
+
+  .s-descriptions__tooltip {
+    color: var(--s-sybz-text-regular);
+  }
+}

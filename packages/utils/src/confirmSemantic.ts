@@ -1,6 +1,7 @@
+import type { SybzComponentTheme } from './theme'
 export type ConfirmVariant = 'default' | 'delete' | 'warning'
 export type ConfirmTarget = string | number
-export type ConfirmSemanticTheme = 'default' | 'chenghua' | 'shijingshan'
+export type ConfirmSemanticTheme = SybzComponentTheme
 export type ConfirmSemanticButtonType = 'default' | 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'text' | ''
 
 export interface ConfirmSemanticOptions {

@@ -42,6 +42,14 @@ title/usually
 title/tooltip
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+title/sybzTheme
+:::
+
 `compTitle` 也可以作为独立组件使用，完整文档见 [CompTitle 组件标题前缀](/components/compTitle/home.md)。
 
 ### 标题和后置内容
@@ -79,7 +87,7 @@ title/tooltip
 |      `tb`      | 同时设置上下边距，兼容快捷写法，优先级高于 `margin`                            | string / number    | -         |
 |    `height`    | 组件高度                                                                       | string / number    | `''`      |
 |     `type`     | 标题样式类型，支持 `''` / `icon` / `simple` / `form`                           | string             | `''`      |
-|    `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan`                          | string             | `default` |
+|    `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                 | string             | `default` |
 |     `tag`      | 标题标签，支持 `div` / `h1` / `h2` / `h3` / `h4` / `h5` / `h6`                 | string             | `div`     |
 |    `level`     | 非原生标题标签的无障碍标题层级，支持 `1` 到 `6`                                | number             | `3`       |
 

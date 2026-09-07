@@ -28,13 +28,21 @@ compTitle/chenghua/base
 compTitle/shijingshan/base
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+compTitle/sybzTheme
+:::
+
 ### API
 
-|      属性名      | 说明                                                    | 类型                                   | 默认值    |
-| :--------------: | ------------------------------------------------------- | -------------------------------------- | --------- |
-|     `title`      | 标题文案；为空时不渲染组件                              | string                                 | `''`      |
-| `compTitleStyle` | 标题容器样式，支持 `width` 并会经过 `processWidth` 处理 | object                                 | `{}`      |
-|     `theme`      | 主题样式                                                | `default` / `chenghua` / `shijingshan` | `default` |
+|      属性名      | 说明                                                    | 类型                                            | 默认值    |
+| :--------------: | ------------------------------------------------------- | ----------------------------------------------- | --------- |
+|     `title`      | 标题文案；为空时不渲染组件                              | string                                          | `''`      |
+| `compTitleStyle` | 标题容器样式，支持 `width` 并会经过 `processWidth` 处理 | object                                          | `{}`      |
+|     `theme`      | 主题样式                                                | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
 
 ### 透传属性
 

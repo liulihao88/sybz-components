@@ -39,6 +39,10 @@
   border-left: 3px solid var(--s-sjs-primary) !important;
   font-family: var(--s-sjs-font-family);
 }
+.s-antd-message--sybz {
+  border-left: 3px solid var(--s-sybz-primary) !important;
+  font-family: var(--s-sybz-font-family);
+}
 
 .s-message-box__confirm-btn,
 .s-message-box__cancel-btn {

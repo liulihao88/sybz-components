@@ -20,13 +20,13 @@ icon/base
 
 ### 成华主题
 
-:::demo 展示成华主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="chenghua" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。
+:::demo 展示成华主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="chenghua" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。
 icon/chenghua
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="shijingshan" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。
+:::demo 展示石景山主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="shijingshan" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。
 icon/shijingshan
 :::
 
@@ -235,6 +235,14 @@ icon/hoverShadow
 icon/url
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+icon/sybzTheme
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                                   | 类型            | 默认值    |
@@ -248,7 +256,7 @@ icon/url
 |          `shadow`          | 阴影显示时机，可选 `always / never / hover`                            | string          | `never`   |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                            | string / number | `''`      |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                           | boolean         | `false`   |
-|          `theme`           | 主题，可选 `default / chenghua / shijingshan`                          | string          | `default` |
+|          `theme`           | 主题，可选 `default / chenghua / shijingshan / sybz`                   | string          | `default` |
 |          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg / url`             | string          | `auto`    |
 |           `type`           | 语义类型，可选 `default / primary / success / warning / danger / info` | string          | -         |
 |         `variant`          | 视觉样式，可选 `plain / light / solid`                                 | string          | `plain`   |

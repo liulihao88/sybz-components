@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { useAttrs, computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -11,7 +12,7 @@ const attrs = useAttrs()
 interface CompTitleProps {
   title?: string
   compTitleStyle?: Record<string, any>
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
 }
 
 const props = withDefaults(defineProps<CompTitleProps>(), {
@@ -42,6 +43,7 @@ const compTitleClass = computed(() => [
   {
     's-comp-title--chenghua': mergedProps.value.theme === 'chenghua',
     's-comp-title--shijingshan': mergedProps.value.theme === 'shijingshan',
+    's-comp-title--sybz': mergedProps.value.theme === 'sybz',
   },
 ])
 </script>

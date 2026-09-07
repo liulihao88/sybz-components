@@ -40,47 +40,55 @@ item/hover
 
 ### 成华主题（theme 默认值 `default`）
 
-:::demo 展示成华主题信息项。基础写法：`<SItem theme="chenghua" title="成华企业服务" sub-title="查看企业政策与服务进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示成华主题信息项。基础写法：`<SItem theme="chenghua" title="成华企业服务" sub-title="查看企业政策与服务进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
 item/chenghua
 :::
 
 ### 石景山主题（theme 默认值 `default`）
 
-:::demo 展示石景山主题信息项。基础写法：`<SItem theme="shijingshan" title="石景山产业服务" sub-title="查看产业服务与申报进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan`，默认值 `default`。
+:::demo 展示石景山主题信息项。基础写法：`<SItem theme="shijingshan" title="石景山产业服务" sub-title="查看产业服务与申报进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
 item/shijingshan
+:::
+
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+item/sybzTheme
 :::
 
 ### API
 
-| 属性名            | 说明                                                     | 类型             | 可选值                               | 默认值      |
-| ----------------- | -------------------------------------------------------- | ---------------- | ------------------------------------ | ----------- |
-| `title`           | 标题，截断且溢出时鼠标移入显示完整内容                   | string / number  | -                                    | `undefined` |
-| `subTitle`        | 副标题，截断且溢出时鼠标移入显示完整内容                 | string / number  | -                                    | `undefined` |
-| `extra`           | 扩展区域的简单文本                                       | string / number  | -                                    | `undefined` |
-| `src`             | 左侧图片地址                                             | string           | -                                    | `''`        |
-| `width`           | 组件宽度，数字按 px 处理                                 | string / number  | -                                    | `''`        |
-| `height`          | 组件高度，数字按 px 处理                                 | string / number  | -                                    | `''`        |
-| `color`           | 组件文字颜色                                             | string           | 合法 CSS 颜色                        | `''`        |
-| `size`            | 预设内边距，也可直接传自定义尺寸                         | string / number  | `small / default / large / CSS 尺寸` | `default`   |
-| `padding`         | 内容内边距，优先级高于 `size`                            | string / number  | -                                    | `undefined` |
-| `gap`             | 前缀、主内容及标题右侧区域之间的间距                     | string / number  | -                                    | `12`        |
-| `contentGap`      | 标题、副标题、正文及操作项之间的间距                     | string / number  | -                                    | `4`         |
-| `align`           | 前缀与主内容在交叉轴上的对齐方式                         | string           | `start / center / end / stretch`     | `center`    |
-| `background`      | 根节点 CSS 背景，支持纯色、线性渐变和径向渐变            | string           | 合法 CSS `background`                | `''`        |
-| `hoverBackground` | 可点击状态的悬停背景；未设置时沿用 `background`          | string           | 合法 CSS `background`                | `''`        |
-| `border`          | 显示默认边框或传入完整 CSS border；传 `false` 可关闭边框 | boolean / string | `true / false / CSS border`          | `true`      |
-| `borderRadius`    | 圆角，数字按 px 处理                                     | string / number  | -                                    | `''`        |
-| `divider`         | 是否显示底部分割线                                       | boolean          | `true / false`                       | `false`     |
-| `titleLines`      | 标题最大行数，`0` 表示不限制                             | number           | `0 / 正整数`                         | `1`         |
-| `subTitleLines`   | 副标题最大行数，`0` 表示不限制                           | number           | `0 / 正整数`                         | `1`         |
-| `extraPlacement`  | `extra / actions` 的布局位置                             | string           | `header / side / bottom`             | `header`    |
-| `extraAlign`      | `side` 布局下扩展区域的垂直对齐方式                      | string           | `start / center / end / stretch`     | `center`    |
-| `styles`          | 各语义区域的内联样式                                     | `SItemStyles`    | 见“语义样式区域”                     | `undefined` |
-| `clickable`       | 是否显示点击交互，并支持 Enter / Space 键盘触发          | boolean          | `true / false`                       | `false`     |
-| `disabled`        | 是否禁用点击                                             | boolean          | `true / false`                       | `false`     |
-| `theme`           | 主题样式                                                 | string           | `default / chenghua / shijingshan`   | `default`   |
-| `shadow`          | 阴影显示时机                                             | string           | `always / never / hover`             | `never`     |
-| `hoverAnimation`  | 悬停时是否上移动画                                       | boolean          | `true / false`                       | `false`     |
+| 属性名            | 说明                                                     | 类型             | 可选值                                    | 默认值      |
+| ----------------- | -------------------------------------------------------- | ---------------- | ----------------------------------------- | ----------- |
+| `title`           | 标题，截断且溢出时鼠标移入显示完整内容                   | string / number  | -                                         | `undefined` |
+| `subTitle`        | 副标题，截断且溢出时鼠标移入显示完整内容                 | string / number  | -                                         | `undefined` |
+| `extra`           | 扩展区域的简单文本                                       | string / number  | -                                         | `undefined` |
+| `src`             | 左侧图片地址                                             | string           | -                                         | `''`        |
+| `width`           | 组件宽度，数字按 px 处理                                 | string / number  | -                                         | `''`        |
+| `height`          | 组件高度，数字按 px 处理                                 | string / number  | -                                         | `''`        |
+| `color`           | 组件文字颜色                                             | string           | 合法 CSS 颜色                             | `''`        |
+| `size`            | 预设内边距，也可直接传自定义尺寸                         | string / number  | `small / default / large / CSS 尺寸`      | `default`   |
+| `padding`         | 内容内边距，优先级高于 `size`                            | string / number  | -                                         | `undefined` |
+| `gap`             | 前缀、主内容及标题右侧区域之间的间距                     | string / number  | -                                         | `12`        |
+| `contentGap`      | 标题、副标题、正文及操作项之间的间距                     | string / number  | -                                         | `4`         |
+| `align`           | 前缀与主内容在交叉轴上的对齐方式                         | string           | `start / center / end / stretch`          | `center`    |
+| `background`      | 根节点 CSS 背景，支持纯色、线性渐变和径向渐变            | string           | 合法 CSS `background`                     | `''`        |
+| `hoverBackground` | 可点击状态的悬停背景；未设置时沿用 `background`          | string           | 合法 CSS `background`                     | `''`        |
+| `border`          | 显示默认边框或传入完整 CSS border；传 `false` 可关闭边框 | boolean / string | `true / false / CSS border`               | `true`      |
+| `borderRadius`    | 圆角，数字按 px 处理                                     | string / number  | -                                         | `''`        |
+| `divider`         | 是否显示底部分割线                                       | boolean          | `true / false`                            | `false`     |
+| `titleLines`      | 标题最大行数，`0` 表示不限制                             | number           | `0 / 正整数`                              | `1`         |
+| `subTitleLines`   | 副标题最大行数，`0` 表示不限制                           | number           | `0 / 正整数`                              | `1`         |
+| `extraPlacement`  | `extra / actions` 的布局位置                             | string           | `header / side / bottom`                  | `header`    |
+| `extraAlign`      | `side` 布局下扩展区域的垂直对齐方式                      | string           | `start / center / end / stretch`          | `center`    |
+| `styles`          | 各语义区域的内联样式                                     | `SItemStyles`    | 见“语义样式区域”                          | `undefined` |
+| `clickable`       | 是否显示点击交互，并支持 Enter / Space 键盘触发          | boolean          | `true / false`                            | `false`     |
+| `disabled`        | 是否禁用点击                                             | boolean          | `true / false`                            | `false`     |
+| `theme`           | 主题样式                                                 | string           | `default / chenghua / shijingshan / sybz` | `default`   |
+| `shadow`          | 阴影显示时机                                             | string           | `always / never / hover`                  | `never`     |
+| `hoverAnimation`  | 悬停时是否上移动画                                       | boolean          | `true / false`                            | `false`     |
 
 ### 语义样式区域
 

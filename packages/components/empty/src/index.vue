@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import group_null from '@/assets/images/group_null.png'
@@ -12,7 +13,7 @@ const props = withDefaults(
   defineProps<{
     title?: string
     subTitle?: string
-    theme?: 'default' | 'chenghua' | 'shijingshan'
+    theme?: SybzComponentTheme
     width?: string | number
     height?: string | number
     imgAttrs?: Record<string, any>
@@ -48,6 +49,7 @@ const emptyBindProps = computed(() => {
 const emptyClass = computed(() => ({
   's-empty--chenghua': mergedProps.value.theme === 'chenghua',
   's-empty--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-empty--sybz': mergedProps.value.theme === 'sybz',
 }))
 /** @使用方式
 <s-empty title="您没有消费订单" sub-title="请调整筛选条件后重试" width="48"></s-empty>

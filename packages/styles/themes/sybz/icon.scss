@@ -1,0 +1,20 @@
+.s-icon--sybz.s-icon--sybz {
+  &.s-icon--default {
+    --s-icon-color: var(--s-sybz-primary);
+    --s-icon-light-bg: var(--s-sybz-primary-soft);
+    --s-icon-solid-bg: var(--s-sybz-card-bg);
+    --s-icon-solid-border: var(--s-sybz-primary);
+  }
+
+  @each $type in primary, success, warning, danger, info {
+    &.s-icon--#{$type} {
+      --s-icon-color: var(--s-sybz-#{$type});
+      --s-icon-light-bg: rgba(var(--s-sybz-#{$type}-rgb), 0.08);
+      --s-icon-solid-bg: var(--s-sybz-#{$type});
+      --s-icon-solid-border: var(--s-sybz-#{$type});
+    }
+  }
+
+  border-radius: var(--s-sybz-radius);
+  font-family: var(--s-sybz-font-family);
+}

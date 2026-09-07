@@ -94,6 +94,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -139,7 +140,7 @@ interface SelectProps {
   showPrefix?: boolean
   showQuick?: boolean
   size?: string
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   title?: string
   compTitleStyle?: Record<string, any>
   connect?: string
@@ -442,6 +443,7 @@ const selectStyle = computed(() => {
 const themeClass = computed(() => {
   if (mergedProps.value.theme === 'chenghua') return 's-select--chenghua'
   if (mergedProps.value.theme === 'shijingshan') return 's-select--shijingshan'
+  if (mergedProps.value.theme === 'sybz') return 's-select--sybz'
   return ''
 })
 const inheritedPopperClass = computed(() => {
@@ -453,6 +455,7 @@ const selectPopperClass = computed(() => {
     inheritedPopperClass.value,
     mergedProps.value.theme === 'chenghua' ? 's-select__popper--chenghua' : '',
     mergedProps.value.theme === 'shijingshan' ? 's-select__popper--shijingshan' : '',
+    mergedProps.value.theme === 'sybz' ? 's-select__popper--sybz' : '',
   ]
     .filter(Boolean)
     .join(' ')

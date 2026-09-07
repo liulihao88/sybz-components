@@ -44,23 +44,31 @@ warning/slot
 warning/height
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+warning/sybzTheme
+:::
+
 ### 属性
 
-|          属性名          | 说明                                                  | 类型                      | 默认值    |
-| :----------------------: | ----------------------------------------------------- | ------------------------- | --------- |
-|          title           | 标题内容                                              | string                    | `''`      |
-|          theme           | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string                    | `default` |
-|           type           | 提示类型，支持 `info/simple/warning/error`            | string                    | `info`    |
-|         content          | 显示的正文内容                                        | string                    | -         |
-|          width           | 宽度                                                  | string / number           | `100%`    |
-|          height          | 高度，设置后内容垂直居中                              | string / number           | -         |
-| dangerouslyUseHTMLString | 是否将 `content` 作为 HTML 片段处理                   | boolean                   | `false`   |
-|           icon           | 是否显示图标                                          | boolean                   | `true`    |
-|           size           | 组件尺寸，支持 `small/default`                        | string                    | `default` |
-|          dotted          | 是否使用虚线边框                                      | boolean                   | `false`   |
-|       customStyle        | 自定义样式对象                                        | object                    | `{}`      |
-|        iconAttrs         | 图标额外属性                                          | object                    | `{}`      |
-|           left           | 左侧额外间距，传 `true` 时默认 `8px`                  | boolean / string / number | `false`   |
+|          属性名          | 说明                                                           | 类型                      | 默认值    |
+| :----------------------: | -------------------------------------------------------------- | ------------------------- | --------- |
+|          title           | 标题内容                                                       | string                    | `''`      |
+|          theme           | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string                    | `default` |
+|           type           | 提示类型，支持 `info/simple/warning/error`                     | string                    | `info`    |
+|         content          | 显示的正文内容                                                 | string                    | -         |
+|          width           | 宽度                                                           | string / number           | `100%`    |
+|          height          | 高度，设置后内容垂直居中                                       | string / number           | -         |
+| dangerouslyUseHTMLString | 是否将 `content` 作为 HTML 片段处理                            | boolean                   | `false`   |
+|           icon           | 是否显示图标                                                   | boolean                   | `true`    |
+|           size           | 组件尺寸，支持 `small/default`                                 | string                    | `default` |
+|          dotted          | 是否使用虚线边框                                               | boolean                   | `false`   |
+|       customStyle        | 自定义样式对象                                                 | object                    | `{}`      |
+|        iconAttrs         | 图标额外属性                                                   | object                    | `{}`      |
+|           left           | 左侧额外间距，传 `true` 时默认 `8px`                           | boolean / string / number | `false`   |
 
 ### Slots
 

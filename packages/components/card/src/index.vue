@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, computed, watch } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -24,7 +25,7 @@ interface CardProps {
   square?: boolean
   collapsible?: boolean
   collapseTrigger?: 'icon' | 'header'
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -189,6 +190,7 @@ const compPadding = computed(() => {
 const cardClass = computed(() => ({
   's-card--chenghua': mergedProps.value.theme === 'chenghua',
   's-card--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-card--sybz': mergedProps.value.theme === 'sybz',
   's-card--transparent': mergedProps.value.transparent,
   's-card--hover-animation': mergedProps.value.hoverAnimation,
   's-card--shadow-always': mergedProps.value.shadow === 'always',

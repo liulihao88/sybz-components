@@ -1,0 +1,135 @@
+:where(.s-radio-box.s-radio-box--sybz) {
+  --el-radio-input-border-color-hover: var(--s-sybz-primary);
+  --el-radio-text-color: var(--s-sybz-text-regular);
+  --el-radio-checked-text-color: var(--s-sybz-primary);
+  --el-radio-checked-input-border-color: var(--s-sybz-primary);
+  --el-radio-checked-bg-color: var(--s-sybz-primary);
+  --el-radio-disabled-input-border-color: rgba(15, 23, 42, 0.08);
+  --el-radio-disabled-checked-input-border-color: rgba(15, 23, 42, 0.08);
+  --el-radio-disabled-checked-input-fill: var(--s-sybz-disabled-bg);
+  --el-radio-disabled-checked-icon-color: var(--s-sybz-text-muted);
+
+  color: var(--s-sybz-text);
+  font-family: var(--s-sybz-font-family);
+
+  .s-radio-box__title {
+    color: var(--s-sybz-text);
+    font-weight: 500;
+  }
+
+  .el-radio {
+    color: var(--s-sybz-text-regular);
+    font-weight: 500;
+  }
+
+  .el-radio__inner {
+    border-color: var(--s-sybz-primary-border);
+    background: var(--s-sybz-bg);
+    transition:
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .el-radio__inner:hover,
+  .el-radio__input.is-focus .el-radio__inner {
+    border-color: var(--s-sybz-primary);
+    box-shadow: 0 0 0 3px var(--s-sybz-primary-soft);
+  }
+
+  .el-radio__input.is-checked .el-radio__inner {
+    border-color: var(--s-sybz-primary);
+    background: var(--s-sybz-primary);
+    box-shadow: 0 4px 10px rgba(var(--s-sybz-primary-rgb), 0.18);
+  }
+
+  .el-radio__input.is-checked + .el-radio__label {
+    color: var(--s-sybz-primary);
+  }
+
+  .el-radio__input.is-disabled .el-radio__inner,
+  .el-radio__input.is-disabled.is-checked .el-radio__inner {
+    border-color: rgba(15, 23, 42, 0.08);
+    background: var(--s-sybz-disabled-bg);
+    box-shadow: none;
+  }
+
+  .el-radio__input.is-disabled + .el-radio__label {
+    color: var(--s-sybz-text-muted);
+    opacity: 0.58;
+  }
+
+  .el-radio.is-bordered {
+    height: 36px;
+    padding: 8px 14px 8px 10px;
+    border-color: var(--s-sybz-primary-border);
+    border-radius: var(--s-sybz-radius);
+    background: var(--s-sybz-control-bg);
+    transition:
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .el-radio.is-bordered:hover {
+    border-color: var(--s-sybz-primary-border-hover);
+    box-shadow: 0 6px 14px rgba(var(--s-sybz-primary-rgb), 0.08);
+  }
+
+  .el-radio.is-bordered.is-checked {
+    border-color: var(--s-sybz-primary);
+    background: var(--s-sybz-primary-soft);
+  }
+
+  .el-radio.is-bordered.is-disabled {
+    border-color: rgba(15, 23, 42, 0.08);
+    background: var(--s-sybz-disabled-bg);
+    box-shadow: none;
+  }
+
+  .el-radio-button__inner {
+    border-color: var(--s-sybz-primary-border);
+    // outline-color: var(--s-sybz-primary-border);
+    background: var(--s-sybz-bg);
+    color: var(--s-sybz-text-regular);
+    font-weight: 500;
+    transition:
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .el-radio-button__inner:hover {
+    border-color: var(--s-radio-button-hover-border, var(--s-sybz-primary-border-hover));
+    outline-color: var(--s-radio-button-hover-border, var(--s-sybz-primary-border-hover));
+    background: var(--s-radio-button-hover-bg, var(--s-sybz-primary-soft));
+    color: var(--s-radio-button-hover-text, var(--s-sybz-primary));
+  }
+
+  :where(.el-radio-button__original-radio:checked) + .el-radio-button__inner {
+    border-color: var(--s-radio-button-color, var(--s-sybz-primary));
+    outline-color: var(--s-radio-button-color, var(--s-sybz-primary));
+    background: var(--s-radio-button-color, var(--s-sybz-primary));
+    color: #ffffff;
+    box-shadow: -1px 0 0 0 var(--s-radio-button-color, var(--s-sybz-primary));
+  }
+
+  .el-radio-button:first-child .el-radio-button__inner {
+    border-top-left-radius: var(--s-sybz-radius);
+    border-bottom-left-radius: var(--s-sybz-radius);
+  }
+
+  .el-radio-button:last-child .el-radio-button__inner {
+    border-top-right-radius: var(--s-sybz-radius);
+    border-bottom-right-radius: var(--s-sybz-radius);
+  }
+
+  .el-radio-button.is-disabled .el-radio-button__inner {
+    border-color: rgba(15, 23, 42, 0.08);
+    outline-color: rgba(15, 23, 42, 0.08);
+    background: var(--s-sybz-disabled-bg);
+    color: var(--s-sybz-text-muted);
+    opacity: 0.58;
+  }
+}

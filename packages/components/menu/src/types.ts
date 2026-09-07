@@ -1,3 +1,4 @@
+import type { SybzComponentTheme } from '../../../types/component-props'
 import type { Component } from 'vue'
 import type { MenuProps } from 'element-plus'
 
@@ -66,7 +67,7 @@ export interface SMenuSelfProps {
   activeTextColor?: string
   collapse?: boolean
   variant?: 'dark' | 'light'
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   header?: SMenuHeaderConfig
   /** @deprecated 请使用 header */
   headerConfig?: SMenuHeaderConfig

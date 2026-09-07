@@ -26,6 +26,7 @@ export type STitleComponent = {
       tb?: string | number
       height?: string | number
       type?: '' | 'simple' | 'icon' | 'form'
+
       theme?: SybzComponentTheme
       tag?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
       level?: 1 | 2 | 3 | 4 | 5 | 6

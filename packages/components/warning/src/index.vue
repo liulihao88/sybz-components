@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { isSybzTheme } from '../../../utils/src/theme'
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs, useSlots } from 'vue'
 import SIcon from '@/components/icon/src/index.vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
@@ -12,7 +14,7 @@ defineOptions({
 interface Props {
   content: string
   title?: string
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
   width?: string | number
   height?: string | number
@@ -72,20 +74,20 @@ const mergedStyle = computed(() => {
 const infoIconColor = computed(() => {
   if (mergedProps.value.theme === 'chenghua') return 'var(--s-ch-primary)'
   if (mergedProps.value.theme === 'shijingshan') return 'var(--s-sjs-primary)'
+  if (mergedProps.value.theme === 'sybz') return 'var(--s-sybz-primary)'
   return 'var(--45)'
 })
 
 const errorIconColor = computed(() => {
   if (mergedProps.value.theme === 'chenghua') return 'var(--s-ch-danger)'
   if (mergedProps.value.theme === 'shijingshan') return 'var(--s-sjs-danger)'
+  if (mergedProps.value.theme === 'sybz') return 'var(--s-sybz-danger)'
   return 'var(--el-color-danger)'
 })
 
 function parseClass(): string {
   let type = mergedProps.value.type
-  const themeClass = ['chenghua', 'shijingshan'].includes(mergedProps.value.theme)
-    ? ` s-warning-box--${mergedProps.value.theme}`
-    : ''
+  const themeClass = isSybzTheme(mergedProps.value.theme) ? ` s-warning-box--${mergedProps.value.theme}` : ''
   return `s-warning__${type}${themeClass}`
 }
 </script>

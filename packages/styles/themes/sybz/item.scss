@@ -1,0 +1,21 @@
+.s-item--sybz {
+  --s-item-bg: var(--s-sybz-card-bg, #fff);
+  --s-item-border: var(--s-sybz-divider, #d5d7da);
+  --s-item-primary: var(--s-sybz-primary);
+  --s-item-title: var(--s-sybz-text, #181d27);
+  --s-item-subtitle: var(--s-sybz-text-secondary, var(--s-sybz-info));
+  border: 1px solid var(--s-item-border);
+  border-radius: var(--s-sybz-radius-card, 12px);
+  background: var(--s-item-bg);
+  font-family: var(--s-sybz-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+}
+.s-item--sybz .s-item__title {
+  color: var(--s-common-color, var(--s-item-title));
+}
+.s-item--sybz .s-item__subtitle {
+  color: var(--s-common-color, var(--s-item-subtitle));
+}
+.s-item--sybz.is-clickable:hover {
+  border-color: var(--s-item-primary);
+  box-shadow: var(--s-sybz-shadow-soft, 0 2px 8px rgba(0, 0, 0, 0.05));
+}

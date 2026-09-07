@@ -1,0 +1,12 @@
+@import '../shared/title.scss';
+
+.s-title.s-title--sybz.s-title--sybz {
+  --s-title-theme-font-family: var(--s-sybz-font-family);
+  --s-title-theme-text: var(--s-sybz-text);
+  --s-title-theme-text-muted: var(--s-sybz-text-muted);
+  --s-title-theme-primary: var(--s-sybz-primary);
+  --s-title-theme-icon-background: var(--s-sybz-primary);
+  --s-title-theme-icon-accent: var(--s-sybz-success);
+  --s-title-theme-bar-background: var(--s-sybz-primary);
+  --s-title-theme-sub-title-line-height: 1.5;
+}

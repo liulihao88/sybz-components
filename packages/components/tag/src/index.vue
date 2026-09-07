@@ -141,6 +141,7 @@ const tagClass = computed(() => ({
   's-tag': true,
   's-tag--chenghua': mergedProps.value.theme === 'chenghua',
   's-tag--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-tag--sybz': mergedProps.value.theme === 'sybz',
 }))
 
 const textRef = ref<HTMLElement>()

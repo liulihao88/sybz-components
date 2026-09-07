@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useSlots } from 'vue'
 import type { CSSProperties } from 'vue'
 import useCommonProps from '@/hooks/useCommonProps'
@@ -42,7 +43,7 @@ interface ItemProps extends SCommonProps {
   styles?: Partial<Record<ItemStyleKey, CSSProperties>>
   clickable?: boolean
   disabled?: boolean
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   shadow?: 'always' | 'never' | 'hover'
 }
 
@@ -169,6 +170,7 @@ const handleKeydown = (event: KeyboardEvent) => {
         'has-divider': divider,
         's-item--chenghua': theme === 'chenghua',
         's-item--shijingshan': theme === 'shijingshan',
+        's-item--sybz': theme === 'sybz',
         's-item--shadow-always': shadow === 'always',
         's-item--shadow-hover': shadow === 'hover',
       },

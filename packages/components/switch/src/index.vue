@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, ref } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -8,7 +9,7 @@ defineOptions({
 })
 
 interface SwitchProps {
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   beforeChange?: (...args: any[]) => any
   width?: string | number
 }
@@ -46,6 +47,7 @@ const handleWidth = computed(() => {
 const switchClass = computed(() => ({
   's-switch--chenghua': mergedProps.value.theme === 'chenghua',
   's-switch--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-switch--sybz': mergedProps.value.theme === 'sybz',
 }))
 </script>
 

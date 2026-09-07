@@ -5,6 +5,7 @@ export type SCompTitleComponent = {
     $props: {
       title?: string
       compTitleStyle?: SybzRecord
+
       theme?: SybzComponentTheme
     }
   }

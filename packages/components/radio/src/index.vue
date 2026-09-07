@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
@@ -39,7 +40,7 @@ defineOptions({
 interface RadioProps {
   title?: string
   compTitleStyle?: Record<string, any>
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
   type?: 'boolean' | 'simple' | ''
   showType?: 'radio' | 'button'
@@ -182,6 +183,13 @@ const getTypeColors = (type: keyof typeof radioTypeColors) => {
       hoverBorder: `rgba(var(--s-sjs-${type}-rgb), 0.42)`,
     }
   }
+  if (mergedProps.value.theme === 'sybz') {
+    return {
+      color: `var(--s-sybz-${type})`,
+      hoverBg: `rgba(var(--s-sybz-${type}-rgb), 0.08)`,
+      hoverBorder: `rgba(var(--s-sybz-${type}-rgb), 0.42)`,
+    }
+  }
 
   return {
     color: `var(--el-color-${type})`,
@@ -212,6 +220,7 @@ const radioClass = computed(() => {
   return {
     's-radio-box--chenghua': mergedProps.value.theme === 'chenghua',
     's-radio-box--shijingshan': mergedProps.value.theme === 'shijingshan',
+    's-radio-box--sybz': mergedProps.value.theme === 'sybz',
     's-radio-box--button': mergedProps.value.showType === 'button',
     's-radio-box--border': Boolean(attrs.border ?? mergedProps.value.border),
   }

@@ -130,28 +130,36 @@ table/operator
 table/compare
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+table/sybzTheme
+:::
+
 ### 属性
 
-|      属性名       | 说明                                                  | 类型    | 默认值         |
-| :---------------: | ----------------------------------------------------- | ------- | -------------- |
-|      `data`       | 表格数据源                                            | array   | `[]`           |
-|     `columns`     | 列配置                                                | array   | `[]`           |
-|    `showPage`     | 是否显示分页                                          | boolean | `true`         |
-|    `showIndex`    | 是否显示序号列                                        | boolean | `true`         |
-|      `size`       | 表格和分页尺寸，支持 `small` / `default` / `large`    | string  | `''`           |
-|      `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string  | `default`      |
-|    `pageSize`     | 每页条数                                              | number  | `30`           |
-|   `pageNumber`    | 当前页码                                              | number  | `1`            |
-|    `pageSizes`    | 分页器可选每页条数                                    | array   | `[10, 30, 50]` |
-|      `total`      | 总条数，不传时默认取 `data.length`                    | number  | -              |
-| `columnEmptyText` | 单元格空值占位文案                                    | string  | `-`            |
-|     `loading`     | 表格加载状态                                          | boolean | `false`        |
-|   `indexAttrs`    | 序号列透传给 `el-table-column` 的配置                 | object  | `{}`           |
-|   `modelValue`    | 选中值；单选时为当前行，多选时为选中行数组            | any     | -              |
-|  `selectionType`  | 内置选中模式，支持 `single` / `multiple`              | string  | `''`           |
-| `selectionAttrs`  | 内置单选列/多选列透传配置                             | object  | `{}`           |
-|   `asyncUpdate`   | 是否由外部异步控制分页状态                            | boolean | `false`        |
-|    `pageAttrs`    | 分页组件透传配置                                      | object  | `{}`           |
+|      属性名       | 说明                                                           | 类型    | 默认值         |
+| :---------------: | -------------------------------------------------------------- | ------- | -------------- |
+|      `data`       | 表格数据源                                                     | array   | `[]`           |
+|     `columns`     | 列配置                                                         | array   | `[]`           |
+|    `showPage`     | 是否显示分页                                                   | boolean | `true`         |
+|    `showIndex`    | 是否显示序号列                                                 | boolean | `true`         |
+|      `size`       | 表格和分页尺寸，支持 `small` / `default` / `large`             | string  | `''`           |
+|      `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string  | `default`      |
+|    `pageSize`     | 每页条数                                                       | number  | `30`           |
+|   `pageNumber`    | 当前页码                                                       | number  | `1`            |
+|    `pageSizes`    | 分页器可选每页条数                                             | array   | `[10, 30, 50]` |
+|      `total`      | 总条数，不传时默认取 `data.length`                             | number  | -              |
+| `columnEmptyText` | 单元格空值占位文案                                             | string  | `-`            |
+|     `loading`     | 表格加载状态                                                   | boolean | `false`        |
+|   `indexAttrs`    | 序号列透传给 `el-table-column` 的配置                          | object  | `{}`           |
+|   `modelValue`    | 选中值；单选时为当前行，多选时为选中行数组                     | any     | -              |
+|  `selectionType`  | 内置选中模式，支持 `single` / `multiple`                       | string  | `''`           |
+| `selectionAttrs`  | 内置单选列/多选列透传配置                                      | object  | `{}`           |
+|   `asyncUpdate`   | 是否由外部异步控制分页状态                                     | boolean | `false`        |
+|    `pageAttrs`    | 分页组件透传配置                                               | object  | `{}`           |
 
 ### pageAttrs 内部属性
 

@@ -44,6 +44,14 @@ popconfirm/usually
 popconfirm/slot
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+popconfirm/sybzTheme
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                                            | 类型                                                           | 默认值                     |
@@ -53,7 +61,7 @@ popconfirm/slot
 |         `content`          | 正文内容，默认按安全白名单 HTML 渲染                                            | string                                                         | `''`                       |
 |        `reConfirm`         | 是否启用二次确认，关闭后点击即直接确认                                          | boolean                                                        | `true`                     |
 | `dangerouslyUseHTMLString` | 是否将 `title` / `content` 按安全白名单 HTML 字符串渲染，可用 `<mark>` 高亮文本 | boolean                                                        | `true`                     |
-|          `theme`           | 主题                                                                            | `default` / `chenghua` / `shijingshan`                         | `default`                  |
+|          `theme`           | 主题                                                                            | `default` / `chenghua` / `shijingshan` / `sybz`                | `default`                  |
 |         `variant`          | 语义样式，并统一标题、正文、确认按钮和主题颜色                                  | `default` / `delete` / `warning`                               | `default`                  |
 |          `target`          | 删除场景中要操作的目标名称；未传 `content` 时自动生成标准提示                   | string / number                                                | -                          |
 |    `confirmButtonText`     | 确认按钮文字；未设置时由 `variant` 生成                                         | string                                                         | 由 `variant` 决定          |

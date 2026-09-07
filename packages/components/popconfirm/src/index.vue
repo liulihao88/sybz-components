@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { isSybzTheme } from '../../../utils/src/theme'
+import type { SybzComponentTheme } from '../../../types/component-props'
 /**
  * <g-popover @confirm="confirm" trigger="click"></g-popover>
  */
@@ -68,7 +70,7 @@ interface PopconfirmProps {
   content?: string
   reConfirm?: boolean
   dangerouslyUseHTMLString?: boolean
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   disabled?: boolean
   variant?: 'default' | 'delete' | 'warning'
   target?: string | number
@@ -116,6 +118,7 @@ const popperClass = computed(() => {
     's-popconfirm__popper',
     mergedProps.value.theme === 'chenghua' ? 's-popconfirm__popper--chenghua' : '',
     mergedProps.value.theme === 'shijingshan' ? 's-popconfirm__popper--shijingshan' : '',
+    mergedProps.value.theme === 'sybz' ? 's-popconfirm__popper--sybz' : '',
     ...confirmSemantic.value.classNames,
     attrPopperClass,
   ]
@@ -123,8 +126,8 @@ const popperClass = computed(() => {
     .join(' ')
 })
 
-const popconfirmButtonTheme = computed<'default' | 'chenghua' | 'shijingshan'>(() => {
-  return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) ? mergedProps.value.theme : 'default'
+const popconfirmButtonTheme = computed<SybzComponentTheme>(() => {
+  return isSybzTheme(mergedProps.value.theme) ? mergedProps.value.theme : 'default'
 })
 
 const confirmSemantic = computed(() =>
@@ -234,6 +237,7 @@ defineExpose({
     :class="{
       's-popconfirm__simple_box--chenghua': mergedProps.theme === 'chenghua',
       's-popconfirm__simple_box--shijingshan': mergedProps.theme === 'shijingshan',
+      's-popconfirm__simple_box--sybz': mergedProps.theme === 'sybz',
       'is-disabled': isDisabled,
     }"
     @click="confirm"

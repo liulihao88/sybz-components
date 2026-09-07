@@ -101,6 +101,14 @@ button/href
 
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+button/sybzTheme
+:::
+
 |           属性名           | 说明                                | 类型                                       | 默认值    |
 | :------------------------: | ----------------------------------- | ------------------------------------------ | --------- |
 |         `content`          | tooltip 的提示文字                  | string                                     | `''`      |

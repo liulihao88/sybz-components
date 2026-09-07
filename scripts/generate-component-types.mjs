@@ -676,13 +676,13 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
       typeName: 'SMenuProps',
-      description:
-        's-menu 递归菜单组件，支持路由、图标、分组、默认展开、内置头尾区域以及 default / chenghua / shijingshan 主题。',
+      description: 's-menu 递归菜单组件，支持路由、图标、分组、默认展开、内置头尾区域以及公共组件主题。',
       slots: ['header', 'footer'],
       instanceMembers: ["$emit: (event: 'update:modelValue' | 'select' | 'actionClick', ...args: any[]) => void"],
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
         interfaceName: 'SMenuSelfProps',
+        extraImportLines: ["import type { SybzComponentTheme } from '../component-props'"],
         importTypeNames: [
           'SMenuFieldNames',
           'SMenuActionConfig',
@@ -949,8 +949,23 @@ const collectInterfaceProps = ({ sourcePath, interfaceName }, seen = new Set()) 
   return [...inheritedProps, ...ownProps]
 }
 
+// 与运行时共用注册表，生成提示不再手写主题名称。
+const themeRegistrySource = readFileSync(resolve(rootDir, 'packages/utils/src/theme.ts'), 'utf8')
+const themeNames = ['default', ...Array.from(themeRegistrySource.matchAll(/^ {2}(\w+): '--s-/gm), (match) => match[1])]
+const componentThemeDescription = `主题可选 ${themeNames.join(' / ')}；默认值：default。`
+
 const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   const props = collectInterfaceProps(hoverProps)
+  // 所有主题组件共用生成配置，保留组件自身属性在 Element Plus 属性之前。
+  for (const prop of props) {
+    if (prop.name === 'theme' && /SybzComponentTheme|SDialogTheme|STableSearchTheme/.test(prop.type)) {
+      const description =
+        prop.type === 'SDialogTheme'
+          ? `${componentThemeDescription} Dialog 另支持 norm / norm16 / simple。`
+          : componentThemeDescription
+      prop.jsDoc = [...prop.jsDoc, `/** ${description} */`]
+    }
+  }
   const lines = ['{']
 
   props.forEach((prop) => {

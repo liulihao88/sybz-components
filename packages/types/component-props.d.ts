@@ -1,3 +1,4 @@
+import type { SybzComponentTheme } from '@sybz-components/utils'
 import type { Component, CSSProperties, VNodeChild } from 'vue'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
@@ -28,7 +29,8 @@ import type {
 } from 'element-plus/es/components/upload'
 import type { SElementPlusIconName } from './element-plus-icon-names'
 
-export type SybzComponentTheme = 'default' | 'chenghua' | 'shijingshan'
+/** 组件主题：default（默认）、chenghua、shijingshan、sybz（思云博智）。 */
+export type { SybzComponentTheme } from '@sybz-components/utils'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 export type { SElementPlusIconName } from './element-plus-icon-names'

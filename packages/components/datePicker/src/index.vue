@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import SCompTitle from '@/components/compTitle'
@@ -16,7 +17,7 @@ interface DatePickerProps {
   height?: string | number
   futureOnly?: boolean
   compTitleStyle?: Record<string, any>
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   size?: '' | 'large' | 'default' | 'small'
 }
 
@@ -418,6 +419,7 @@ const datePickerStyle = computed(() => {
 const datePickerClass = computed(() => ({
   's-date-picker--chenghua': mergedProps.value.theme === 'chenghua',
   's-date-picker--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-date-picker--sybz': mergedProps.value.theme === 'sybz',
   'has-title': !!mergedProps.value.title,
 }))
 const rootClass = computed<any>(() => [datePickerClass.value, attrs.class])
@@ -443,6 +445,7 @@ const datePickerPopperClass = computed(() => {
     inheritedPopperClass.value,
     mergedProps.value.theme === 'chenghua' ? 's-date-picker__popper--chenghua' : '',
     mergedProps.value.theme === 'shijingshan' ? 's-date-picker__popper--shijingshan' : '',
+    mergedProps.value.theme === 'sybz' ? 's-date-picker__popper--sybz' : '',
   ]
     .filter(Boolean)
     .join(' ')

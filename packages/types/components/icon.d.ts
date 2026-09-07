@@ -34,6 +34,7 @@ export type SIconComponent = {
       /** 图标旋转角度，数字及数字字符串按 deg 处理 */
       rotate?: string | number
       disabled?: boolean
+
       theme?: SybzComponentTheme
       /** 图标来源；默认值：auto，可自动识别在线图片 URL 和 Iconify 名称 */
       source?: SIconSource

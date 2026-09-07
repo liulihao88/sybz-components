@@ -19,6 +19,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs, type PropType } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { TabsPropsPublic } from 'element-plus'
@@ -30,7 +31,7 @@ defineOptions({
 })
 
 type TabsType = '' | 'capsule' | TabsPropsPublic['type']
-type TabsTheme = 'default' | 'chenghua' | 'shijingshan'
+type TabsTheme = SybzComponentTheme
 type TabsValue = string | number | boolean | null | undefined
 
 const attrs = useAttrs()
@@ -90,6 +91,7 @@ const mergedProps = useGlobalComponentConfig('tabs', props)
 const isCapsuleType = computed(() => mergedProps.value.type === 'capsule')
 const isChenghuaTheme = computed(() => mergedProps.value.theme === 'chenghua')
 const isShijingshanTheme = computed(() => mergedProps.value.theme === 'shijingshan')
+const isSybzTheme = computed(() => mergedProps.value.theme === 'sybz')
 const hasActiveTab = computed(
   () =>
     mergedProps.value.modelValue !== '' &&
@@ -130,6 +132,7 @@ const boxClass = computed(() => [
     's-tabs-box--custom-header-margin': mergedProps.value.headerMargin !== undefined,
     's-tabs-box--chenghua': isChenghuaTheme.value,
     's-tabs-box--shijingshan': isShijingshanTheme.value,
+    's-tabs-box--sybz': isSybzTheme.value,
   },
   `s-tabs-box--size-${mergedProps.value.size || 'default'}`,
 ])

@@ -183,6 +183,7 @@ const options = ref({
 })
 
 const themeList = ref([
+  { label: 'sybz', value: 'sybz' },
   { label: '默认', value: '' },
   { label: 'light', value: 'light' },
   { label: 'dark', value: 'dark' },

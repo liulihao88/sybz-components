@@ -21,6 +21,7 @@ export type STabsComponent = {
       subAttrs?: SybzRecord
       trigger?: 'click' | 'hover'
       type?: '' | 'capsule' | TabsPropsPublic['type']
+
       theme?: SybzComponentTheme
       size?: 'small' | 'default' | 'large'
       width?: string | number

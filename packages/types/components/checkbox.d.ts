@@ -20,6 +20,7 @@ export type SCheckboxComponent = {
       customDisabled?: (context: SCheckboxOptionContext<SybzRecord>) => boolean
       customLabel?: (context: SCheckboxOptionContext<SybzRecord>) => any
       gap?: string | number
+
       theme?: SybzComponentTheme
     } & Omit<
       ElCheckboxGroupInstance['$props'],

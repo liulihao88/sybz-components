@@ -56,6 +56,7 @@ export type SItemComponent = {
       styles?: SItemStyles
       clickable?: boolean
       disabled?: boolean
+
       theme?: SybzComponentTheme
       shadow?: 'always' | 'never' | 'hover'
     }

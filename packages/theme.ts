@@ -1,9 +1,8 @@
+import { SYBZ_THEME_PREFIX, isSybzTheme } from './utils/src/theme'
 import type { SybzComponentTheme, SybzThemeColorConfig, SybzThemeColorsConfig, SybzThemeName } from './types/index.ts'
 
-const THEME_PREFIX: Record<SybzThemeName, string> = {
-  chenghua: '--s-ch-',
-  shijingshan: '--s-sjs-',
-}
+const THEME_PREFIX = SYBZ_THEME_PREFIX
+const themeNames = Object.keys(THEME_PREFIX) as SybzThemeName[]
 
 const COLOR_TOKEN_MAP: Record<keyof SybzThemeColorConfig, string> = {
   primary: 'primary',
@@ -175,15 +174,16 @@ export const applySybzThemeColors = (
   if (!config || !isRecord(config)) return
 
   const nestedConfig = config as Partial<Record<SybzThemeName, SybzThemeColorConfig>>
-  const hasNestedConfig = isRecord(nestedConfig.chenghua) || isRecord(nestedConfig.shijingshan)
+  const hasNestedConfig = themeNames.some((name) => isRecord(nestedConfig[name]))
 
   if (hasNestedConfig) {
-    if (nestedConfig.chenghua) setSybzThemeColors('chenghua', nestedConfig.chenghua)
-    if (nestedConfig.shijingshan) setSybzThemeColors('shijingshan', nestedConfig.shijingshan)
+    themeNames.forEach((name) => {
+      if (nestedConfig[name]) setSybzThemeColors(name, nestedConfig[name])
+    })
     return
   }
 
-  if (theme === 'chenghua' || theme === 'shijingshan') {
+  if (isSybzTheme(theme)) {
     setSybzThemeColors(theme, config as SybzThemeColorConfig)
   }
 }

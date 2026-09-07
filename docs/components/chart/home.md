@@ -63,7 +63,7 @@ chart/pie
 
 ### 主题切换
 
-:::demo 展示主题切换。基础写法：`<s-chart :option="options" :theme="theme" style="width: 100%; height: 500px" />`。
+:::demo 展示主题切换，支持 `sybz` 品牌配色；`theme` 类型为 `string`，默认值为 `default`，也支持 ECharts 已注册的主题名称。基础写法：`<s-chart :option="options" :theme="theme" style="width: 100%; height: 500px" />`。
 chart/theme
 :::
 

@@ -1,0 +1,241 @@
+@import '../shared/button.scss';
+
+.s-button--sybz.s-button--sybz {
+  --s-theme-primary: var(--s-sybz-primary);
+  --s-theme-primary-hover: var(--s-sybz-primary-hover);
+  --s-theme-primary-active: var(--s-sybz-primary-active);
+  --s-theme-text-muted: var(--s-sybz-text-muted);
+  --s-theme-radius: var(--s-sybz-radius);
+  --s-theme-font-family: var(--s-sybz-font-family);
+  --s-theme-success: var(--s-sybz-success);
+  --s-theme-warning: var(--s-sybz-warning);
+  --s-theme-danger: var(--s-sybz-danger);
+  --s-theme-info: var(--s-sybz-info);
+  @include s-themed-button-transition(0.2s);
+
+  &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+      .el-button--info
+    ):not(.is-link):not(.is-text) {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: var(--s-sybz-primary);
+    --el-button-text-color: var(--s-sybz-primary);
+    --el-button-hover-bg-color: rgba(var(--s-sybz-primary-rgb), 0.06);
+    --el-button-hover-border-color: var(--s-sybz-primary-hover);
+    --el-button-hover-text-color: var(--s-sybz-primary-hover);
+    --el-button-active-bg-color: rgba(var(--s-sybz-primary-rgb), 0.1);
+    --el-button-active-border-color: var(--s-sybz-primary-active);
+    --el-button-active-text-color: var(--s-sybz-primary-active);
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: var(--s-sybz-divider);
+    --el-button-disabled-text-color: var(--s-sybz-text-muted);
+
+    box-shadow: none;
+  }
+
+  &.el-button--primary {
+    --s-sybz-button-type-color: var(--s-sybz-primary);
+    --s-sybz-button-type-hover: var(--s-sybz-primary-hover);
+    --s-sybz-button-type-active: var(--s-sybz-primary-active);
+    --s-sybz-button-type-disabled: rgba(var(--s-sybz-primary-rgb), 0.36);
+  }
+
+  &.el-button--success {
+    --s-sybz-button-type-color: var(--s-sybz-success);
+    --s-sybz-button-type-hover: var(--s-sybz-success-300);
+    --s-sybz-button-type-active: var(--s-sybz-success-700);
+    --s-sybz-button-type-disabled: rgba(var(--s-sybz-success-rgb), 0.36);
+  }
+
+  &.el-button--warning {
+    --s-sybz-button-type-color: var(--s-sybz-warning);
+    --s-sybz-button-type-hover: var(--s-sybz-warning-300);
+    --s-sybz-button-type-active: var(--s-sybz-warning-700);
+    --s-sybz-button-type-disabled: rgba(var(--s-sybz-warning-rgb), 0.36);
+  }
+
+  &.el-button--danger {
+    --s-sybz-button-type-color: var(--s-sybz-danger);
+    --s-sybz-button-type-hover: var(--s-sybz-danger-300);
+    --s-sybz-button-type-active: var(--s-sybz-danger-700);
+    --s-sybz-button-type-disabled: rgba(var(--s-sybz-danger-rgb), 0.36);
+  }
+
+  &.el-button--info {
+    --s-sybz-button-type-color: var(--s-sybz-info);
+    --s-sybz-button-type-hover: var(--s-sybz-gray-300);
+    --s-sybz-button-type-active: var(--s-sybz-text-regular);
+    --s-sybz-button-type-disabled: rgba(var(--s-sybz-info-rgb), 0.36);
+  }
+
+  &.el-button--primary,
+  &.el-button--success,
+  &.el-button--warning,
+  &.el-button--danger,
+  &.el-button--info {
+    --el-button-bg-color: var(--s-sybz-button-type-color);
+    --el-button-border-color: var(--s-sybz-button-type-color);
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: var(--s-sybz-button-type-hover);
+    --el-button-hover-border-color: var(--s-sybz-button-type-hover);
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: var(--s-sybz-button-type-active);
+    --el-button-active-border-color: var(--s-sybz-button-type-active);
+    --el-button-active-text-color: #ffffff;
+    --el-button-disabled-bg-color: var(--s-sybz-button-type-disabled);
+    --el-button-disabled-border-color: transparent;
+    --el-button-disabled-text-color: #ffffff;
+
+    box-shadow: var(--s-sybz-shadow-soft);
+  }
+
+  &.el-button--small {
+    min-height: 32px;
+    padding: 7px 12px;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  &.el-button--large {
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+
+  @include s-themed-button-icon-gap(6px);
+
+  &.s-button--sybz-outline {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: var(--s-sybz-primary);
+    --el-button-text-color: var(--s-sybz-primary);
+    --el-button-hover-bg-color: rgba(var(--s-sybz-primary-rgb), 0.06);
+    --el-button-hover-border-color: var(--s-sybz-primary-hover);
+    --el-button-hover-text-color: var(--s-sybz-primary-hover);
+    --el-button-active-bg-color: rgba(var(--s-sybz-primary-rgb), 0.1);
+    --el-button-active-border-color: var(--s-sybz-primary-active);
+    --el-button-active-text-color: var(--s-sybz-primary-active);
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: var(--s-sybz-divider);
+    --el-button-disabled-text-color: var(--s-sybz-text-muted);
+
+    box-shadow: none;
+  }
+
+  &.s-button--sybz-gradient {
+    --el-button-bg-color: transparent;
+    --el-button-border-color: transparent;
+    --el-button-outline-color: transparent;
+    --el-button-text-color: #ffffff;
+    --el-button-hover-bg-color: transparent;
+    --el-button-hover-border-color: transparent;
+    --el-button-hover-text-color: #ffffff;
+    --el-button-active-bg-color: transparent;
+    --el-button-active-border-color: transparent;
+    --el-button-active-text-color: #ffffff;
+    --el-button-disabled-bg-color: transparent;
+    --el-button-disabled-border-color: transparent;
+    --el-button-disabled-text-color: rgba(255, 255, 255, 0.8);
+
+    border: 0;
+    outline: none;
+    background: var(--s-sybz-primary);
+    color: #ffffff;
+    box-shadow: var(--s-sybz-shadow-soft);
+
+    &:hover,
+    &:focus,
+    &:focus-visible {
+      border: 0;
+      outline: none;
+      background: var(--s-sybz-primary-hover);
+      color: #ffffff;
+      box-shadow: var(--s-sybz-shadow-soft);
+    }
+
+    &:active {
+      border: 0;
+      outline: none;
+      background: var(--s-sybz-primary-active);
+      color: #ffffff;
+      box-shadow: var(--s-sybz-shadow-soft);
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus,
+    &.is-disabled:active {
+      border: 0;
+      outline: none;
+      background: rgba(var(--s-sybz-primary-rgb), 0.36);
+      color: rgba(255, 255, 255, 0.8);
+      box-shadow: none;
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .s-button--sybz.s-button--sybz {
+    min-height: 44px;
+    padding: 12px 16px;
+    line-height: 24px;
+
+    &.el-button--small {
+      min-height: 36px;
+      padding: 8px 12px;
+      line-height: 20px;
+    }
+
+    &.el-button--large {
+      min-height: 48px;
+      padding: 12px 20px;
+    }
+  }
+}
+
+.s-button--ghost.s-button--ghost.s-button--sybz {
+  &:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+      .el-button--info
+    ) {
+    --el-button-border-color: var(--s-sybz-primary);
+    --el-button-text-color: var(--s-sybz-primary);
+    --el-button-hover-border-color: var(--s-sybz-primary-hover);
+    --el-button-hover-text-color: var(--s-sybz-primary-hover);
+    --el-button-active-border-color: var(--s-sybz-primary-active);
+    --el-button-active-text-color: var(--s-sybz-primary-active);
+  }
+
+  &.el-button--primary {
+    --el-button-border-color: var(--s-sybz-primary);
+    --el-button-text-color: var(--s-sybz-primary);
+    --el-button-hover-border-color: var(--s-sybz-primary-hover);
+    --el-button-hover-text-color: var(--s-sybz-primary-hover);
+    --el-button-active-border-color: var(--s-sybz-primary-active);
+    --el-button-active-text-color: var(--s-sybz-primary-active);
+  }
+
+  &.el-button--success {
+    --el-button-border-color: var(--s-sybz-success);
+    --el-button-text-color: var(--s-sybz-success);
+  }
+
+  &.el-button--warning {
+    --el-button-border-color: var(--s-sybz-warning);
+    --el-button-text-color: var(--s-sybz-warning);
+  }
+
+  &.el-button--danger {
+    --el-button-border-color: var(--s-sybz-danger);
+    --el-button-text-color: var(--s-sybz-danger);
+  }
+
+  &.el-button--info {
+    --el-button-border-color: var(--s-sybz-info);
+    --el-button-text-color: var(--s-sybz-info);
+  }
+
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &.is-disabled:active {
+    border-color: var(--s-sybz-divider);
+    color: var(--s-sybz-text-muted);
+  }
+}

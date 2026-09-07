@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { isSybzTheme } from '../../../utils/src/theme'
+import type { SybzComponentTheme } from '../../../types/component-props'
 defineOptions({
   name: 'STable',
 })
@@ -63,7 +65,7 @@ interface TableProps {
   showPage?: boolean
   showIndex?: boolean
   size?: string
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]
@@ -131,20 +133,29 @@ const customHeaderCellStyle = computed<Record<string, any>>(() => {
   return (attrs['custom-header-cell-style'] as unknown as Record<string, any>) ?? {}
 })
 const tableHeaderCellStyle = computed<Record<string, any>>(() => {
-  const themeHeaderBg = mergedProps.value.theme === 'shijingshan' ? 'var(--s-sjs-header-bg)' : 'var(--s-ch-header-bg)'
-  const baseStyle =
-    mergedProps.value.theme === 'chenghua' || mergedProps.value.theme === 'shijingshan'
-      ? {
-          background: themeHeaderBg,
-          color: mergedProps.value.theme === 'shijingshan' ? 'var(--s-sjs-text)' : '#1d2b4f',
-          fontWeight: 600,
-          textAlign: 'center',
-        }
-      : {
-          background: 'var(--el-fill-color-light)',
-          color: 'var(--el-text-color-primary)',
-          textAlign: 'center',
-        }
+  const themeHeaderBg =
+    mergedProps.value.theme === 'sybz'
+      ? 'var(--s-sybz-header-bg)'
+      : mergedProps.value.theme === 'shijingshan'
+        ? 'var(--s-sjs-header-bg)'
+        : 'var(--s-ch-header-bg)'
+  const baseStyle = isSybzTheme(mergedProps.value.theme)
+    ? {
+        background: themeHeaderBg,
+        color:
+          mergedProps.value.theme === 'sybz'
+            ? 'var(--s-sybz-text)'
+            : mergedProps.value.theme === 'shijingshan'
+              ? 'var(--s-sjs-text)'
+              : '#1d2b4f',
+        fontWeight: 600,
+        textAlign: 'center',
+      }
+    : {
+        background: 'var(--el-fill-color-light)',
+        color: 'var(--el-text-color-primary)',
+        textAlign: 'center',
+      }
 
   return {
     ...baseStyle,
@@ -889,6 +900,7 @@ const tableClass = computed(() => ({
   's-table--fluid-height': !!fluidHeight.value,
   's-table--chenghua': mergedProps.value.theme === 'chenghua',
   's-table--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-table--sybz': mergedProps.value.theme === 'sybz',
 }))
 
 const tableAttrs = computed(() => {

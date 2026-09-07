@@ -18,7 +18,7 @@ pagination/base
 
 ### 主题（theme 默认值：default）
 
-:::demo 展示成华和石景山主题分页。基础写法：`<s-pagination theme="chenghua" :total="80" :page-size="10" />`。属性：`theme` 可选值 `default / chenghua / shijingshan`，默认值 `default`；`total` 类型 `number`，默认值 `0`；`pageSize` 类型 `number`，默认值 `10`；`currentPage` 类型 `number`，默认值 `1`。
+:::demo 展示成华和石景山主题分页。基础写法：`<s-pagination theme="chenghua" :total="80" :page-size="10" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`；`total` 类型 `number`，默认值 `0`；`pageSize` 类型 `number`，默认值 `10`；`currentPage` 类型 `number`，默认值 `1`。
 pagination/theme
 :::
 
@@ -52,26 +52,34 @@ pagination/pageSize
 pagination/hideOnSinglePage
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+pagination/sybzTheme
+:::
+
 ### 属性
 
-| 属性名             | 说明                                                        | 类型     | 可选值                             | 默认值             |
-| ------------------ | ----------------------------------------------------------- | -------- | ---------------------------------- | ------------------ |
-| `currentPage`      | 当前页码，支持 `v-model:current-page`                       | number   | `1` 到总页数                       | `1`                |
-| `total`            | 数据总条数                                                  | number   | 非负整数                           | `0`                |
-| `pageSize`         | 每页条数，总页数按照 `Math.ceil(total / pageSize)` 自动计算 | number   | 正整数                             | `10`               |
-| `pageSizes`        | 每页条数选择器的选项                                        | number[] | 正整数数组                         | `[10, 20, 30, 50]` |
-| `pagerCount`       | 页码按钮数量                                                | number   | Element Plus 支持的奇数            | `7`                |
-| `theme`            | 主题样式                                                    | string   | `default / chenghua / shijingshan` | `default`          |
-| `background`       | 是否显示分页按钮背景                                        | boolean  | `true / false`                     | `true`             |
-| `disabled`         | 是否禁用分页和跳页输入                                      | boolean  | `true / false`                     | `false`            |
-| `showTotal`        | 是否显示总条数                                              | boolean  | `true / false`                     | `true`             |
-| `showJumper`       | 是否显示回车跳页输入框                                      | boolean  | `true / false`                     | `true`             |
-| `showSizes`        | 是否显示“X 条/页”选择器                                     | boolean  | `true / false`                     | `true`             |
-| `hideOnSinglePage` | 只有一页时是否隐藏整个分页器                                | boolean  | `true / false`                     | `false`            |
-| `totalText`        | 总条数前缀文字                                              | string   | 任意文本                           | `共`               |
-| `jumpText`         | 跳页输入框前缀文字                                          | string   | 任意文本                           | `跳至`             |
-| `pageText`         | 跳页输入框后缀文字                                          | string   | 任意文本                           | `页`               |
-| `size`             | 分页及输入框尺寸                                            | string   | `small / default / large`          | `default`          |
+| 属性名             | 说明                                                        | 类型     | 可选值                                    | 默认值             |
+| ------------------ | ----------------------------------------------------------- | -------- | ----------------------------------------- | ------------------ |
+| `currentPage`      | 当前页码，支持 `v-model:current-page`                       | number   | `1` 到总页数                              | `1`                |
+| `total`            | 数据总条数                                                  | number   | 非负整数                                  | `0`                |
+| `pageSize`         | 每页条数，总页数按照 `Math.ceil(total / pageSize)` 自动计算 | number   | 正整数                                    | `10`               |
+| `pageSizes`        | 每页条数选择器的选项                                        | number[] | 正整数数组                                | `[10, 20, 30, 50]` |
+| `pagerCount`       | 页码按钮数量                                                | number   | Element Plus 支持的奇数                   | `7`                |
+| `theme`            | 主题样式                                                    | string   | `default / chenghua / shijingshan / sybz` | `default`          |
+| `background`       | 是否显示分页按钮背景                                        | boolean  | `true / false`                            | `true`             |
+| `disabled`         | 是否禁用分页和跳页输入                                      | boolean  | `true / false`                            | `false`            |
+| `showTotal`        | 是否显示总条数                                              | boolean  | `true / false`                            | `true`             |
+| `showJumper`       | 是否显示回车跳页输入框                                      | boolean  | `true / false`                            | `true`             |
+| `showSizes`        | 是否显示“X 条/页”选择器                                     | boolean  | `true / false`                            | `true`             |
+| `hideOnSinglePage` | 只有一页时是否隐藏整个分页器                                | boolean  | `true / false`                            | `false`            |
+| `totalText`        | 总条数前缀文字                                              | string   | 任意文本                                  | `共`               |
+| `jumpText`         | 跳页输入框前缀文字                                          | string   | 任意文本                                  | `跳至`             |
+| `pageText`         | 跳页输入框后缀文字                                          | string   | 任意文本                                  | `页`               |
+| `size`             | 分页及输入框尺寸                                            | string   | `small / default / large`                 | `default`          |
 
 其他属性会透传给内部 `el-pagination`，但 `pageCount` 由 `total / pageSize` 自动计算；内部布局会根据 `showSizes` 自动加入或移除每页条数选择器，手动跳页由 `s-pagination` 统一提供。
 

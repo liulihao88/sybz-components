@@ -59,3 +59,24 @@
   --s-confirm-semantic-hover-color: #f8b64a;
   --s-confirm-semantic-active-color: #d98b13;
 }
+
+.s-confirm-semantic--sybz,
+.s-message-box--sybz.s-message-box--delete,
+.s-message-box--sybz.s-message-box--warning {
+  --s-confirm-semantic-cancel-border-color: var(--s-sybz-divider);
+  --s-confirm-semantic-cancel-text-color: var(--s-sybz-text-regular);
+}
+
+.s-confirm-semantic--sybz.s-confirm-semantic--delete,
+.s-message-box--sybz.s-message-box--delete {
+  --s-confirm-semantic-color: var(--s-sybz-danger);
+  --s-confirm-semantic-hover-color: var(--s-sybz-danger-300);
+  --s-confirm-semantic-active-color: var(--s-sybz-danger-700);
+}
+
+.s-confirm-semantic--sybz.s-confirm-semantic--warning,
+.s-message-box--sybz.s-message-box--warning {
+  --s-confirm-semantic-color: var(--s-sybz-warning);
+  --s-confirm-semantic-hover-color: var(--s-sybz-warning-300);
+  --s-confirm-semantic-active-color: var(--s-sybz-warning-700);
+}

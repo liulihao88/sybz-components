@@ -1,3 +1,4 @@
+import type { SybzComponentTheme } from './theme'
 import { unref, isRef, isVNode, toRaw } from 'vue'
 import type { AppContext, VNode } from 'vue'
 import type { Ref } from 'vue'
@@ -35,7 +36,7 @@ type ValidateRuleResult = {
 type ValidatePrimitiveValue = string | number | boolean | null | undefined
 type MockValueOptionItem<T = any> = { label: string; value: T }
 
-export type UtilsTheme = 'default' | 'chenghua' | 'shijingshan'
+export type UtilsTheme = SybzComponentTheme
 
 export interface SybzUtilsConfig {
   /**
@@ -194,8 +195,11 @@ const CHENGHUA_CONFIRM_BOX_CLASS = 's-message-box--chenghua'
 const CHENGHUA_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn--chenghua'
 const CHENGHUA_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--chenghua'
 const SHIJINGSHAN_CONFIRM_BOX_CLASS = 's-message-box--shijingshan'
+const SYBZ_CONFIRM_BOX_CLASS = 's-message-box--sybz'
 const SHIJINGSHAN_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn--shijingshan'
+const SYBZ_CONFIRM_BUTTON_CLASS = 's-message-box__confirm-btn--sybz'
 const SHIJINGSHAN_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--shijingshan'
+const SYBZ_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--sybz'
 const utilsConfig: Required<SybzUtilsConfig> = {
   theme: 'default',
 }
@@ -1612,6 +1616,7 @@ export function confirm(
   const resolvedAppContext = _resolveAppContext(optionAppContext || argumentAppContext)
   const isChenghuaTheme = theme === 'chenghua'
   const isShijingshanTheme = theme === 'shijingshan'
+  const isSybzTheme = theme === 'sybz'
 
   const mergeOptions = {
     title: semantic.title,
@@ -1626,6 +1631,7 @@ export function confirm(
     customClass: _mergeClassNames(
       isChenghuaTheme && CHENGHUA_CONFIRM_BOX_CLASS,
       isShijingshanTheme && SHIJINGSHAN_CONFIRM_BOX_CLASS,
+      isSybzTheme && SYBZ_CONFIRM_BOX_CLASS,
       variant !== 'default' && `s-message-box--${variant}`,
       customClass,
     ),
@@ -1633,12 +1639,14 @@ export function confirm(
       DEFAULT_CONFIRM_BUTTON_CLASS,
       isChenghuaTheme && CHENGHUA_CONFIRM_BUTTON_CLASS,
       isShijingshanTheme && SHIJINGSHAN_CONFIRM_BUTTON_CLASS,
+      isSybzTheme && SYBZ_CONFIRM_BUTTON_CLASS,
       confirmButtonClass,
     ),
     cancelButtonClass: _mergeClassNames(
       DEFAULT_CANCEL_BUTTON_CLASS,
       isChenghuaTheme && CHENGHUA_CANCEL_BUTTON_CLASS,
       isShijingshanTheme && SHIJINGSHAN_CANCEL_BUTTON_CLASS,
+      isSybzTheme && SYBZ_CANCEL_BUTTON_CLASS,
       cancelButtonClass,
     ),
   }

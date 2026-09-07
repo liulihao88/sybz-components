@@ -1,0 +1,18 @@
+@import '../shared/card.scss';
+
+.s-card.s-card--sybz.s-card--sybz {
+  --s-card-border: var(--s-sybz-divider);
+  --s-card-shadow: var(--s-sybz-shadow-soft);
+  --s-card-header-bg: var(--s-sybz-card-bg);
+  --s-theme-card-bg: var(--s-sybz-card-bg);
+  --s-theme-card-radius: var(--s-sybz-radius-card);
+  --s-theme-card-font-family: var(--s-sybz-font-family);
+  --s-theme-card-divider: var(--s-sybz-divider);
+  --s-theme-card-text: var(--s-sybz-text-regular);
+  --s-theme-card-footer-bg: var(--s-sybz-card-bg);
+  --s-theme-card-primary: var(--s-sybz-primary);
+  --s-theme-card-primary-rgb: var(--s-sybz-primary-rgb);
+  --s-theme-card-primary-hover: var(--s-sybz-primary-hover);
+
+  @include s-themed-card;
+}

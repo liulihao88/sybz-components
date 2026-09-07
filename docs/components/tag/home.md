@@ -88,26 +88,34 @@ tag/overflow
 tag/commonProps
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+tag/sybzTheme
+:::
+
 ### 属性
 
-|      属性名      | 说明                                                        | 类型                                                  | 默认值    |
-| :--------------: | ----------------------------------------------------------- | ----------------------------------------------------- | --------- |
-|     `value`      | 当前值；未传默认插槽时会作为标签内容或映射源                | string / number                                       | -         |
-|      `type`      | 直接指定标签类型                                            | `primary` / `success` / `info` / `warning` / `danger` | -         |
-|     `theme`      | 标签主题，支持 `default` / `chenghua` / `shijingshan`       | `default` / `chenghua` / `shijingshan`                | `default` |
-|      `size`      | 标签尺寸                                                    | `''` / `large` / `default` / `small`                  | `''`      |
-|    `options`     | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法 | array                                                 | `[]`      |
-|     `config`     | 平铺数组模式下的字段映射配置                                | `{ label?: string, value?: string }`                  | `{}`      |
-|    `primary`     | 匹配为主色标签的规则                                        | boolean / string / number / array                     | -         |
-|      `info`      | 匹配为信息标签的规则                                        | boolean / string / number / array                     | -         |
-|    `warning`     | 匹配为警告标签的规则                                        | boolean / string / number / array                     | -         |
-|     `danger`     | 匹配为危险标签的规则                                        | boolean / string / number / array                     | -         |
-|     `other`      | 未命中任何规则时的兜底标签类型                              | string                                                | `primary` |
-|     `width`      | 标签宽度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
-|     `height`     | 标签高度，数字及数字字符串自动按 `px` 处理                  | string / number                                       | -         |
-|     `color`      | 标签文字颜色                                                | string                                                | `''`      |
-|   `background`   | 标签背景，支持普通颜色、渐变及其他合法 CSS background       | string                                                | `''`      |
-| `hoverAnimation` | 是否启用公共悬停上移动画                                    | boolean                                               | `false`   |
+|      属性名      | 说明                                                           | 类型                                                  | 默认值    |
+| :--------------: | -------------------------------------------------------------- | ----------------------------------------------------- | --------- |
+|     `value`      | 当前值；未传默认插槽时会作为标签内容或映射源                   | string / number                                       | -         |
+|      `type`      | 直接指定标签类型                                               | `primary` / `success` / `info` / `warning` / `danger` | -         |
+|     `theme`      | 标签主题，支持 `default` / `chenghua` / `shijingshan` / `sybz` | `default` / `chenghua` / `shijingshan` / `sybz`       | `default` |
+|      `size`      | 标签尺寸                                                       | `''` / `large` / `default` / `small`                  | `''`      |
+|    `options`     | 映射数据源，支持“平铺数组 + config”和“分组映射数组”两种写法    | array                                                 | `[]`      |
+|     `config`     | 平铺数组模式下的字段映射配置                                   | `{ label?: string, value?: string }`                  | `{}`      |
+|    `primary`     | 匹配为主色标签的规则                                           | boolean / string / number / array                     | -         |
+|      `info`      | 匹配为信息标签的规则                                           | boolean / string / number / array                     | -         |
+|    `warning`     | 匹配为警告标签的规则                                           | boolean / string / number / array                     | -         |
+|     `danger`     | 匹配为危险标签的规则                                           | boolean / string / number / array                     | -         |
+|     `other`      | 未命中任何规则时的兜底标签类型                                 | string                                                | `primary` |
+|     `width`      | 标签宽度，数字及数字字符串自动按 `px` 处理                     | string / number                                       | -         |
+|     `height`     | 标签高度，数字及数字字符串自动按 `px` 处理                     | string / number                                       | -         |
+|     `color`      | 标签文字颜色                                                   | string                                                | `''`      |
+|   `background`   | 标签背景，支持普通颜色、渐变及其他合法 CSS background          | string                                                | `''`      |
+| `hoverAnimation` | 是否启用公共悬停上移动画                                       | boolean                                               | `false`   |
 
 文本超出标签可用宽度时会自动显示省略号，并仅在鼠标移入溢出文本时显示完整内容。`closable` 标签的关闭图标不会被文本挤压。
 

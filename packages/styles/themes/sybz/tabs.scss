@@ -1,0 +1,51 @@
+.s-tabs-box--sybz.s-tabs-box--sybz {
+  --s-tabs-sybz-color: var(--s-sybz-text);
+  --s-tabs-sybz-active-color: var(--s-sybz-primary, #4876ef);
+  --s-tabs-sybz-line-color: rgba(var(--s-sybz-primary-rgb), 0.14);
+  --s-tabs-sybz-capsule-bg: var(--s-sybz-primary);
+
+  .el-tabs__item {
+    color: var(--s-tabs-sybz-color);
+    font-weight: 600;
+  }
+
+  .el-tabs__item:hover {
+    color: var(--s-tabs-sybz-active-color);
+  }
+
+  .el-tabs__item.is-active {
+    color: var(--s-tabs-sybz-active-color);
+  }
+
+  .el-tabs__active-bar {
+    height: 3px;
+    border-radius: 999px;
+    background: var(--s-tabs-sybz-active-color);
+  }
+
+  .el-tabs__nav-wrap::after {
+    background: var(--s-tabs-sybz-line-color);
+  }
+}
+
+.s-tabs-box--sybz.s-tabs-box--sybz:not(.s-tabs-box--capsule) {
+  .el-tabs__header {
+    margin-bottom: 12px;
+  }
+}
+
+.s-tabs-box--sybz.s-tabs-box--sybz.s-tabs-box--capsule {
+  --s-tabs-capsule-active-bg: color-mix(in srgb, var(--s-sybz-primary) 10%, #ffffff);
+  --s-tabs-capsule-active-border-color: color-mix(in srgb, var(--s-sybz-primary) 28%, transparent);
+  --s-tabs-capsule-active-color: var(--s-tabs-sybz-active-color);
+  --s-tabs-capsule-hover-bg: color-mix(in srgb, var(--s-sybz-primary) 6.5%, transparent);
+  --s-tabs-capsule-hover-color: var(--s-tabs-sybz-active-color);
+
+  .el-tabs__item.is-active {
+    color: var(--s-tabs-sybz-active-color);
+  }
+
+  .el-tabs__item.is-active .s-tabs__label {
+    color: inherit;
+  }
+}

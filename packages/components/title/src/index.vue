@@ -52,6 +52,8 @@
 </template>
 
 <script setup lang="ts">
+import { isSybzTheme } from '../../../utils/src/theme'
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, type Component, type CSSProperties, useSlots } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import STooltip from '@/components/tooltip/src/index.vue'
@@ -86,7 +88,7 @@ interface TitleProps {
   tb?: string | number
   height?: string | number
   type?: TitleType
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   tag?: TitleTag
   level?: 1 | 2 | 3 | 4 | 5 | 6
 }
@@ -200,6 +202,7 @@ const parseClass = computed(() => {
 const titleClass = computed(() => ({
   's-title--chenghua': mergedProps.value.theme === 'chenghua',
   's-title--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-title--sybz': mergedProps.value.theme === 'sybz',
   [`s-title--size-${mergedProps.value.size}`]: !!mergedProps.value.size,
 }))
 const titleA11yAttrs = computed(() => {
@@ -211,7 +214,7 @@ const titleA11yAttrs = computed(() => {
   }
 })
 const isThemeIcon = computed(() => {
-  return ['chenghua', 'shijingshan'].includes(mergedProps.value.theme) && mergedProps.value.type === 'icon'
+  return isSybzTheme(mergedProps.value.theme) && mergedProps.value.type === 'icon'
 })
 const hasIcon = computed(() => {
   return !!slots.icon || !!mergedProps.value.icon || mergedProps.value.type === 'icon'

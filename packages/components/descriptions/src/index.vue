@@ -78,6 +78,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, defineComponent, isVNode, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
@@ -93,7 +94,7 @@ const attrs = useAttrs()
 
 type DescriptionsProps = {
   options: ItemOptions[]
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   column?: number
   width?: string | number
   labelWidth?: any
@@ -341,6 +342,7 @@ const getTextAlign = computed(() => {
 const descriptionsClass = computed(() => ({
   's-descriptions--chenghua': mergedProps.value.theme === 'chenghua',
   's-descriptions--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-descriptions--sybz': mergedProps.value.theme === 'sybz',
 }))
 
 watch(

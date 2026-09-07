@@ -122,6 +122,14 @@ dialog/fillSlot
 dialog/variant
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / norm / norm16 / simple / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+dialog/sybzTheme
+:::
+
 ### 全局默认配置
 
 dialog 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
@@ -137,31 +145,31 @@ app.use(SybzComponents, {
 
 ### 属性
 
-|      属性名       | 说明                                                                                    | 类型                                          | 默认值    |
-| :---------------: | --------------------------------------------------------------------------------------- | --------------------------------------------- | --------- |
-|       title       | 顶部title                                                                               | string                                        | 提示      |
-|     subTitle      | 顶部二级标题，显示在 title 下方，颜色稍淡                                               | string                                        | ''        |
-|       width       | 弹框宽度；当 `mode="drawer"` 时用于控制抽屉宽度                                         | string / number                               | ''        |
-|       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan`    | string                                        | `default` |
-|       mode        | 展示形态，可选 `dialog` / `drawer`                                                      | string                                        | `dialog`  |
-|      variant      | 语义样式，可选 `default` / `delete` / `warning`                                         | string                                        | `default` |
-|      target       | 删除场景中要操作的目标名称                                                              | string                                        | -         |
-|  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                    | boolean                                       | false     |
-|    cancelText     | 取消按钮文本                                                                            | string                                        | 取消      |
-|    confirmText    | 确认按钮文本                                                                            | string                                        | 确认      |
-|      footer       | 是否显示底部操作按钮                                                                    | object                                        | -         |
-|    showFooter     | 是否显示底部操作按钮                                                                    | boolean                                       | true      |
-|    showCancel     | 是否显示取消按钮                                                                        | boolean <s-tip content="true\|false"></s-tip> | true      |
-|    showConfirm    | 是否显示确认按钮                                                                        | boolean                                       | true      |
-|   confirmAttrs    | 确认按钮的属性                                                                          | object                                        | {}        |
-|    cancleAttrs    | 取消按钮的属性                                                                          | object                                        | {}        |
-| destroy-on-close  | 当关闭 Dialog 时，销毁其中的元素                                                        | boolean                                       | false     |
-|    fullscreen     | 是否为全屏Dialog                                                                        | boolean                                       | false     |
-|  maximizeHeight   | 是否尽量占满视口高度，上下各保留16px                                                    | boolean                                       | false     |
-|   enableConfirm   | 是否允许使用enter回车键执行confirm事件                                                  | boolean                                       | true      |
-| closeOnClickModal | 是否允许点击模态框关闭弹框                                                              | boolean                                       | true      |
-|      confirm      | 绑定确认按钮的方法, 与方法的区别是, 可以使用属性绑定异步事件而直接让确认按钮加载loading | Function                                      | -         |
-|     fillSlot      | 是否让默认slot内容区撑满dialog body高度, 并由slot内部自行处理滚动                       | boolean                                       | false     |
+|      属性名       | 说明                                                                                          | 类型                                          | 默认值    |
+| :---------------: | --------------------------------------------------------------------------------------------- | --------------------------------------------- | --------- |
+|       title       | 顶部title                                                                                     | string                                        | 提示      |
+|     subTitle      | 顶部二级标题，显示在 title 下方，颜色稍淡                                                     | string                                        | ''        |
+|       width       | 弹框宽度；当 `mode="drawer"` 时用于控制抽屉宽度                                               | string / number                               | ''        |
+|       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |
+|       mode        | 展示形态，可选 `dialog` / `drawer`                                                            | string                                        | `dialog`  |
+|      variant      | 语义样式，可选 `default` / `delete` / `warning`                                               | string                                        | `default` |
+|      target       | 删除场景中要操作的目标名称                                                                    | string                                        | -         |
+|  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                          | boolean                                       | false     |
+|    cancelText     | 取消按钮文本                                                                                  | string                                        | 取消      |
+|    confirmText    | 确认按钮文本                                                                                  | string                                        | 确认      |
+|      footer       | 是否显示底部操作按钮                                                                          | object                                        | -         |
+|    showFooter     | 是否显示底部操作按钮                                                                          | boolean                                       | true      |
+|    showCancel     | 是否显示取消按钮                                                                              | boolean <s-tip content="true\|false"></s-tip> | true      |
+|    showConfirm    | 是否显示确认按钮                                                                              | boolean                                       | true      |
+|   confirmAttrs    | 确认按钮的属性                                                                                | object                                        | {}        |
+|    cancleAttrs    | 取消按钮的属性                                                                                | object                                        | {}        |
+| destroy-on-close  | 当关闭 Dialog 时，销毁其中的元素                                                              | boolean                                       | false     |
+|    fullscreen     | 是否为全屏Dialog                                                                              | boolean                                       | false     |
+|  maximizeHeight   | 是否尽量占满视口高度，上下各保留16px                                                          | boolean                                       | false     |
+|   enableConfirm   | 是否允许使用enter回车键执行confirm事件                                                        | boolean                                       | true      |
+| closeOnClickModal | 是否允许点击模态框关闭弹框                                                                    | boolean                                       | true      |
+|      confirm      | 绑定确认按钮的方法, 与方法的区别是, 可以使用属性绑定异步事件而直接让确认按钮加载loading       | Function                                      | -         |
+|     fillSlot      | 是否让默认slot内容区撑满dialog body高度, 并由slot内部自行处理滚动                             | boolean                                       | false     |
 
 ### 方法
 

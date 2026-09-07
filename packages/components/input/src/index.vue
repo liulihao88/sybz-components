@@ -86,6 +86,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, computed, useAttrs, watch, nextTick } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
@@ -118,7 +119,7 @@ interface SInputProps {
   hideMaxLengthError?: boolean
   maxLengthErrorText?: string
   size?: InputSize | ''
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   showWordLimit?: boolean | string
   block?: boolean
   disPlaceholder?: string
@@ -173,6 +174,7 @@ const inputClass = computed(() => [
     'has-content': mergedProps.value.content,
     's-input--chenghua': mergedProps.value.theme === 'chenghua',
     's-input--shijingshan': mergedProps.value.theme === 'shijingshan',
+    's-input--sybz': mergedProps.value.theme === 'sybz',
   },
 ])
 

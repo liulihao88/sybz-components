@@ -68,6 +68,9 @@ const menuColors = computed(() => {
   if (mergedProps.value.theme === 'shijingshan') {
     return { background: '#1e293b', text: '#ffffff', activeText: '#ffffff' }
   }
+  if (mergedProps.value.theme === 'sybz') {
+    return { background: 'var(--s-sybz-nav-bg)', text: '#ffffff', activeText: '#ffffff' }
+  }
   if (mergedProps.value.variant === 'light') {
     return { background: '#ffffff', text: '#536f8d', activeText: '#008f83' }
   }
@@ -423,6 +426,65 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
     :deep(.el-menu-item:hover),
     :deep(.el-sub-menu__title:hover) {
       background: #334155;
+    }
+  }
+  &--theme-sybz {
+    border: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    .s-menu__brand {
+      min-height: 40px;
+      padding: 12px;
+      border-color: var(--s-sybz-blue-700);
+      color: #fff;
+    }
+    .s-menu__brand-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--s-sybz-primary);
+    }
+    .s-menu__brand strong {
+      font-size: 18px;
+    }
+    .s-menu__action {
+      height: 40px;
+      margin: 12px 8px;
+      border-radius: 8px;
+      background: var(--s-sybz-primary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .s-menu__action:hover {
+      background: var(--s-sybz-primary-hover);
+    }
+    .s-menu__account {
+      padding: 12px 8px;
+      border-color: var(--s-sybz-blue-700);
+      color: #fff;
+    }
+    .s-menu__account > span {
+      width: 32px;
+      height: 32px;
+      background: var(--s-sybz-blue-700);
+      font-size: 16px;
+    }
+
+    :deep(.el-menu-item),
+    :deep(.el-sub-menu__title) {
+      height: 40px;
+      margin: 2px 8px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+    }
+    :deep(.el-menu-item.is-active) {
+      background: var(--s-sybz-primary);
+      color: #fff;
+      font-weight: 600;
+    }
+    :deep(.el-menu-item:hover),
+    :deep(.el-sub-menu__title:hover) {
+      background: var(--s-sybz-blue-700);
     }
   }
 }

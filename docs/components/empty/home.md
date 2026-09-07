@@ -18,13 +18,13 @@ empty/base
 
 ### 成华主题
 
-:::demo 展示成华主题样式。基础写法：`<s-empty theme="chenghua" title="暂无服务申请" sub-title="创建申请后将在这里展示" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`title` 默认值 `暂无数据`；`sub-title` 默认值为空。
+:::demo 展示成华主题样式。基础写法：`<s-empty theme="chenghua" title="暂无服务申请" sub-title="创建申请后将在这里展示" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`title` 默认值 `暂无数据`；`sub-title` 默认值为空。
 empty/chenghua/base
 :::
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-empty theme="shijingshan" title="暂无服务申请" sub-title="创建申请后将在这里展示" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan`，默认值 `default`；`title` 默认值 `暂无数据`；`sub-title` 默认值为空。
+:::demo 展示石景山主题样式。基础写法：`<s-empty theme="shijingshan" title="暂无服务申请" sub-title="创建申请后将在这里展示" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`title` 默认值 `暂无数据`；`sub-title` 默认值为空。
 empty/shijingshan/base
 :::
 
@@ -40,17 +40,25 @@ empty/usually
 empty/slot
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+empty/sybzTheme
+:::
+
 ### 属性
 
-|   属性名    | 说明                                                  | 类型            | 默认值       |
-| :---------: | ----------------------------------------------------- | --------------- | ------------ |
-|   `title`   | 空状态主标题                                          | string          | `暂无数据`   |
-| `sub-title` | 空状态副标题                                          | string          | -            |
-|   `theme`   | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string          | `default`    |
-|   `width`   | 图片宽度                                              | string / number | `60`         |
-|  `height`   | 图片高度                                              | string / number | -            |
-| `imgAttrs`  | 图片额外样式或属性                                    | object          | `{}`         |
-|    `src`    | 自定义空状态图片地址                                  | string          | 内置空状态图 |
+|   属性名    | 说明                                                           | 类型            | 默认值       |
+| :---------: | -------------------------------------------------------------- | --------------- | ------------ |
+|   `title`   | 空状态主标题                                                   | string          | `暂无数据`   |
+| `sub-title` | 空状态副标题                                                   | string          | -            |
+|   `theme`   | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string          | `default`    |
+|   `width`   | 图片宽度                                                       | string / number | `60`         |
+|  `height`   | 图片高度                                                       | string / number | -            |
+| `imgAttrs`  | 图片额外样式或属性                                             | object          | `{}`         |
+|    `src`    | 自定义空状态图片地址                                           | string          | 内置空状态图 |
 
 ### 插槽
 

@@ -98,22 +98,30 @@ tabs/location
 tabs/height
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+tabs/sybzTheme
+:::
+
 ### 属性
 
-|     属性名     | 说明                                                                        | 类型                                   | 默认值                             |
-| :------------: | --------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------- |
-|  `modelValue`  | 当前激活 tab，空字符串、`null` 或 `undefined` 表示不选中任何项              | string / number / boolean / null       | `''`                               |
-|   `options`    | 标签页配置                                                                  | array                                  | `[]`                               |
-|    `label`     | 标签标题字段名                                                              | string                                 | `label`                            |
-|    `value`     | 标签值字段名                                                                | string                                 | `value`                            |
-|   `subAttrs`   | 透传给 `el-tab-pane` 的属性                                                 | object                                 | `{}`                               |
-|   `trigger`    | 切换触发方式，支持 `click` / `hover`                                        | string                                 | `click`                            |
-|     `type`     | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                                 | 按内部组件或 Element Plus 对应属性 |
-|    `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan`                       | `default` / `chenghua` / `shijingshan` | `default`                          |
-|     `size`     | 尺寸，支持 `small` / `default` / `large`                                    | string                                 | `default`                          |
-|    `width`     | 组件宽度，数字按 px 处理                                                    | string / number                        | `''`                               |
-|    `height`    | 组件高度，数字按 px 处理，也支持 `100%` 等 CSS 高度                         | string / number                        | `''`                               |
-| `headerMargin` | 页签头部外边距，数字按 px 处理，也支持完整 CSS margin                       | string / number                        | `undefined`                        |
+|     属性名     | 说明                                                                        | 类型                                            | 默认值                             |
+| :------------: | --------------------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------- |
+|  `modelValue`  | 当前激活 tab，空字符串、`null` 或 `undefined` 表示不选中任何项              | string / number / boolean / null                | `''`                               |
+|   `options`    | 标签页配置                                                                  | array                                           | `[]`                               |
+|    `label`     | 标签标题字段名                                                              | string                                          | `label`                            |
+|    `value`     | 标签值字段名                                                                | string                                          | `value`                            |
+|   `subAttrs`   | 透传给 `el-tab-pane` 的属性                                                 | object                                          | `{}`                               |
+|   `trigger`    | 切换触发方式，支持 `click` / `hover`                                        | string                                          | `click`                            |
+|     `type`     | 标签类型，支持 `capsule` 和 Element Plus 原生 `card` / `border-card` 等类型 | string                                          | 按内部组件或 Element Plus 对应属性 |
+|    `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`              | `default` / `chenghua` / `shijingshan` / `sybz` | `default`                          |
+|     `size`     | 尺寸，支持 `small` / `default` / `large`                                    | string                                          | `default`                          |
+|    `width`     | 组件宽度，数字按 px 处理                                                    | string / number                                 | `''`                               |
+|    `height`    | 组件高度，数字按 px 处理，也支持 `100%` 等 CSS 高度                         | string / number                                 | `''`                               |
+| `headerMargin` | 页签头部外边距，数字按 px 处理，也支持完整 CSS margin                       | string / number                                 | `undefined`                        |
 
 ### 事件
 

@@ -305,3 +305,43 @@ npm install sybz-components@latest
 2. 看 [Button 按钮](/components/button/home.md)、[Input 输入框](/components/input/home.md)、[Select 选择器](/components/select/home.md)。
 3. 再看 [Dialog 弹窗](/components/dialog/home.md)、[Table 表格](/components/table/home.md)、[Form 表单](/components/form/home.md)。
 4. 最后看 [项目常见写法](/components/projectWriting/home.md)，统一项目里的写法风格。
+
+## sybz 思云博智主题（theme 默认值：default）
+
+全局设置 `theme: 'sybz'`，或在单个组件设置 `theme="sybz"`。组件主题可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。Dialog 另保留 `norm / norm16 / simple` 布局主题。
+
+```ts
+app.use(SybzComponents, { theme: 'sybz' })
+```
+
+```vue
+<s-button theme="sybz" type="primary">保存</s-button>
+<s-icon theme="sybz" icon="edit" type="primary" variant="solid" />
+<s-table theme="sybz" :columns="columns" :data="rows" />
+```
+
+| 语义        | 颜色      | CSS 变量           |
+| ----------- | --------- | ------------------ |
+| 品牌蓝      | `#4876EF` | `--s-sybz-primary` |
+| AI 辅助绿   | `#00D3AB` | `--s-sybz-accent`  |
+| 成功        | `#17B26A` | `--s-sybz-success` |
+| 错误 / 删除 | `#E5484D` | `--s-sybz-danger`  |
+| 警告        | `#EF6820` | `--s-sybz-warning` |
+| 中性信息    | `#717680` | `--s-sybz-info`    |
+| 页面浅底色  | `#F5F8FF` | `--s-sybz-bg`      |
+
+色阶保留 `25 / 100 / 300 / 500 / 700 / 900 / 950`，例如 `var(--s-sybz-blue-100)`。扩展色集包括 `sky / azure / purple / rose / pink / red / yellow`，用于图表与分类标识。主按钮使用品牌蓝，辅助绿用于 AI 场景，功能色保持独立语义；颜色以设计图中的 HEX 标注为准。
+
+```ts
+// 可选：覆盖颜色；省略 themeColors 时使用内置配色。
+app.use(SybzComponents, {
+  theme: 'sybz',
+  themeColors: { sybz: { primary: '#4876EF', accent: '#00D3AB' } },
+})
+```
+
+工具包消息与确认框可使用 `configureUtils({ theme: 'sybz' })`；图表插件注册后设置 `<s-chart theme="sybz" :option="option" />`。布局和交互沿用现有主题组件规范。
+
+### 主题维护入口
+
+内置主题名称与颜色前缀统一在 `packages/utils/src/theme.ts` 的 `SYBZ_THEME_PREFIX` 注册；组件使用公共 `SybzComponentTheme`，Dialog 使用扩展类型 `SDialogTheme`。类型提示由 `types:generate` 自动同步。只调整颜色时直接使用 `themeColors` 或 `setSybzThemeColors`，无需修改组件的属性类型。

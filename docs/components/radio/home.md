@@ -70,23 +70,31 @@ radio/slot
 radio/gap
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+radio/sybzTheme
+:::
+
 ### 属性
 
-|      属性名      | 说明                                                  | 类型                                          | 默认值    |
-| :--------------: | ----------------------------------------------------- | --------------------------------------------- | --------- |
-|     `title`      | 左侧标题文案                                          | string                                        | -         |
-| `compTitleStyle` | 左侧标题组件样式                                      | object                                        | `{}`      |
-|      `type`      | 数据类型，支持 `''` / `simple` / `boolean`            | string                                        | `''`      |
-|     `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` | string                                        | `default` |
-|    `showType`    | 展示形式，支持 `radio` / `button`                     | string                                        | `radio`   |
-|    `options`     | 单选项列表，支持对象数组或基础值数组                  | RadioItem[] / string[] / number[] / boolean[] | `[]`      |
-|     `border`     | 是否显示边框                                          | boolean                                       | `false`   |
-|      `gap`       | 单选项间距，数字按 `px` 处理                          | string / number                               | -         |
-|      `size`      | 单选尺寸，支持顶层传入和全局默认配置                  | `''` / `large` / `default` / `small`          | `''`      |
-|     `value`      | 选项值字段名                                          | string / number / boolean                     | `value`   |
-|     `label`      | 选项展示字段名                                        | string / number / boolean                     | `label`   |
-|  `customLabel`   | 自定义显示内容，参数为 `{ option, index, value }`     | `(context) => any`                            | -         |
-| `customDisabled` | 自定义禁用，参数为 `{ option, index, value }`         | `(context) => boolean`                        | -         |
+|      属性名      | 说明                                                           | 类型                                          | 默认值    |
+| :--------------: | -------------------------------------------------------------- | --------------------------------------------- | --------- |
+|     `title`      | 左侧标题文案                                                   | string                                        | -         |
+| `compTitleStyle` | 左侧标题组件样式                                               | object                                        | `{}`      |
+|      `type`      | 数据类型，支持 `''` / `simple` / `boolean`                     | string                                        | `''`      |
+|     `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |
+|    `showType`    | 展示形式，支持 `radio` / `button`                              | string                                        | `radio`   |
+|    `options`     | 单选项列表，支持对象数组或基础值数组                           | RadioItem[] / string[] / number[] / boolean[] | `[]`      |
+|     `border`     | 是否显示边框                                                   | boolean                                       | `false`   |
+|      `gap`       | 单选项间距，数字按 `px` 处理                                   | string / number                               | -         |
+|      `size`      | 单选尺寸，支持顶层传入和全局默认配置                           | `''` / `large` / `default` / `small`          | `''`      |
+|     `value`      | 选项值字段名                                                   | string / number / boolean                     | `value`   |
+|     `label`      | 选项展示字段名                                                 | string / number / boolean                     | `label`   |
+|  `customLabel`   | 自定义显示内容，参数为 `{ option, index, value }`              | `(context) => any`                            | -         |
+| `customDisabled` | 自定义禁用，参数为 `{ option, index, value }`                  | `(context) => boolean`                        | -         |
 
 ### 说明
 

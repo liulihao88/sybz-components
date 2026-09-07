@@ -12,6 +12,7 @@ export type SWarningComponent = {
       dangerouslyUseHTMLString?: boolean
       content: string
       title?: string
+
       theme?: SybzComponentTheme
       type?: SWarningType
       width?: string | number

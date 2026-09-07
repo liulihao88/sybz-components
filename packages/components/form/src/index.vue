@@ -109,6 +109,7 @@ const formClass = computed(() => ({
   's-form--gap': useGap.value,
   's-form--chenghua': mergedProps.value.theme === 'chenghua',
   's-form--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-form--sybz': mergedProps.value.theme === 'sybz',
 }))
 const formAlign = computed(() => mergedProps.value.align)
 
@@ -671,8 +672,29 @@ defineExpose({
   --s-form-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
+.s-form--sybz {
+  --s-form-label-color: var(--s-sybz-text-regular);
+  --s-form-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
 .s-form--chenghua,
 .s-form--shijingshan {
+  font-family: var(--s-form-font-family);
+
+  :deep(.el-form-item__label) {
+    color: var(--s-form-label-color);
+    font-weight: 500;
+  }
+
+  :deep(.el-form-item__error) {
+    font-family: var(--s-form-font-family);
+  }
+
+  :deep(.el-form-item__label .s-tooltip-box__text) {
+    color: inherit;
+  }
+}
+.s-form--sybz {
   font-family: var(--s-form-font-family);
 
   :deep(.el-form-item__label) {

@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -31,7 +32,7 @@ interface InputNumberProps {
   compTitleStyle?: Record<string, any>
   width?: string | number
   height?: string | number
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   size?: '' | 'large' | 'default' | 'small'
   subAttrs?: Record<string, any>
 }
@@ -66,6 +67,7 @@ const inputNumberClass = computed(() => [
   {
     's-input-number--chenghua': mergedProps.value.theme === 'chenghua',
     's-input-number--shijingshan': mergedProps.value.theme === 'shijingshan',
+    's-input-number--sybz': mergedProps.value.theme === 'sybz',
     'has-title': !!mergedProps.value.title,
   },
 ])

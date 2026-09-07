@@ -1,3 +1,4 @@
+import type { SybzComponentTheme } from '../../../types/component-props'
 import type { PaginationPropsPublic, TableColumnCtx, TableInstance } from 'element-plus'
 import type { Component, VNodeChild } from 'vue'
 import type { RenderContext } from '@/components/common/render'
@@ -147,7 +148,7 @@ export interface STableProps<Row extends TableRow = TableRow> {
   showPage?: boolean
   showIndex?: boolean
   size?: string
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]

@@ -106,6 +106,14 @@ datePicker/limitRange
 datePicker/futureOnly
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+datePicker/sybzTheme
+:::
+
 ### 属性
 
 |       属性名        | 说明                                                         | 类型                           | 可选值                                                                                                                                      | 默认值             |
@@ -117,7 +125,7 @@ datePicker/futureOnly
 |      `height`       | 组件整体高度                                                 | string / number                | -                                                                                                                                           | `''`               |
 |    `futureOnly`     | 仅允许选择当前日期、时刻或周期之后的值，并启用未来快捷项     | boolean                        | `true` / `false`                                                                                                                            | `false`            |
 |  `compTitleStyle`   | 左侧标题组件样式                                             | object                         | -                                                                                                                                           | `{}`               |
-|       `theme`       | 主题样式                                                     | string                         | `default` / `chenghua` / `shijingshan`                                                                                                      | `default`          |
+|       `theme`       | 主题样式                                                     | string                         | `default` / `chenghua` / `shijingshan` / `sybz`                                                                                             | `default`          |
 |      `format`       | 显示在输入框中的格式                                         | string                         | -                                                                                                                                           | 按 `type` 自动设置 |
 |   `value-format`    | 绑定值的格式，支持传 `x` 返回毫秒时间戳，传 `X` 返回秒时间戳 | string                         | -                                                                                                                                           | 按 `type` 自动设置 |
 |    `placeholder`    | 非范围选择时的占位文案                                       | string                         | -                                                                                                                                           | `请选择日期`       |

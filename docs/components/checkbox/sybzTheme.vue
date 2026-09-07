@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const checkedServices = ref(['storage'])
+const checkedModes = ref(['auto'])
+
+const options = [
+  { label: '对象存储巡检', value: 'storage' },
+  { label: 'AI 审核任务', value: 'audit' },
+  { label: '容量预警订阅', value: 'quota' },
+]
+
+const modeOptions = [
+  { label: '自动审核', value: 'auto' },
+  { label: '人工复核', value: 'manual' },
+  { label: '延后处理', value: 'delay' },
+]
+</script>
+
+<template>
+  <div class="checkbox-sybz-demo">
+    <div class="checkbox-sybz-demo__list">
+      <s-checkbox v-model="checkedServices" theme="sybz" :options="options" gap="18"></s-checkbox>
+      <s-checkbox v-model="checkedModes" theme="sybz" :options="modeOptions" show-type="button"></s-checkbox>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.checkbox-sybz-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.checkbox-sybz-demo__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+</style>

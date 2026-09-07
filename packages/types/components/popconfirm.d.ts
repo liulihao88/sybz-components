@@ -20,6 +20,7 @@ export type SPopconfirmComponent = {
       width?: string | number
       content?: string
       reConfirm?: boolean
+
       theme?: SybzComponentTheme
       disabled?: boolean
       /** 语义样式；默认值：default */

@@ -1,0 +1,189 @@
+.s-date-picker.s-date-picker--sybz.s-date-picker--sybz {
+  font-family: var(--s-sybz-font-family);
+
+  .s-comp-title {
+    color: var(--s-sybz-text);
+    font-weight: 500;
+  }
+
+  .el-date-editor {
+    --el-input-border-color: var(--s-sybz-primary-border);
+    --el-input-hover-border-color: var(--s-sybz-primary-border-hover);
+    --el-input-focus-border-color: var(--s-sybz-primary);
+    --el-input-text-color: var(--s-sybz-text);
+    --el-input-placeholder-color: var(--s-sybz-text-muted);
+    --el-input-bg-color: var(--s-sybz-control-bg);
+
+    border-radius: var(--s-sybz-radius);
+    background: var(--s-sybz-control-bg);
+    box-shadow: 0 0 0 1px var(--s-sybz-primary-border) inset;
+    transition:
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .el-date-editor .el-input__wrapper {
+    border-radius: var(--s-sybz-radius);
+  }
+
+  .el-date-editor:hover {
+    box-shadow: 0 0 0 1px var(--s-sybz-primary-border-hover) inset;
+  }
+
+  .el-date-editor.is-active,
+  .el-date-editor.is-focus {
+    box-shadow:
+      0 0 0 1px var(--s-sybz-primary) inset,
+      0 8px 18px rgba(var(--s-sybz-primary-rgb), 0.08);
+  }
+
+  &.has-title .el-date-editor {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &.has-title .el-date-editor .el-input__wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .el-range-input,
+  .el-input__inner {
+    background: transparent;
+    color: var(--s-sybz-text);
+    font-family: var(--s-sybz-font-family);
+  }
+
+  .el-range-input::placeholder,
+  .el-input__inner::placeholder {
+    color: var(--s-sybz-text-muted);
+  }
+
+  .el-range-separator,
+  .el-range__icon,
+  .el-input__prefix,
+  .el-input__suffix {
+    color: var(--s-sybz-text-muted);
+  }
+
+  .el-range__close-icon,
+  .el-input__clear {
+    color: var(--s-sybz-primary);
+  }
+}
+
+.s-date-picker__popper--sybz.s-date-picker__popper--sybz {
+  border: 1px solid rgba(var(--s-sybz-primary-rgb), 0.14);
+  border-radius: var(--s-sybz-radius);
+  box-shadow: var(--s-sybz-shadow-soft);
+  font-family: var(--s-sybz-font-family);
+
+  .el-picker-panel {
+    border-radius: var(--s-sybz-radius);
+    color: var(--s-sybz-text);
+  }
+
+  .el-picker-panel__sidebar {
+    border-right-color: var(--s-sybz-divider);
+    background: var(--s-sybz-bg-soft);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .el-picker-panel__sidebar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .el-picker-panel__shortcut {
+    width: calc(100% - 12px);
+    margin: 4px 6px;
+    padding: 7px 10px;
+    border-radius: var(--s-sybz-radius-small);
+    color: var(--s-sybz-text-regular);
+    line-height: 1.35;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .el-picker-panel__shortcut:hover {
+    background: var(--s-sybz-primary-soft);
+    color: var(--s-sybz-primary);
+  }
+
+  .el-picker-panel__body-wrapper,
+  .el-picker-panel__body {
+    border-radius: inherit;
+  }
+
+  .el-date-range-picker__header,
+  .el-date-picker__header {
+    color: var(--s-sybz-text);
+    font-weight: 600;
+  }
+
+  .el-picker-panel__icon-btn,
+  .el-date-picker__header-label {
+    color: var(--s-sybz-text);
+  }
+
+  .el-picker-panel__icon-btn:hover,
+  .el-date-picker__header-label:hover {
+    color: var(--s-sybz-primary);
+  }
+
+  .el-date-table th {
+    color: var(--s-sybz-text-muted);
+    font-weight: 500;
+  }
+
+  .el-date-table td {
+    color: var(--s-sybz-text-regular);
+  }
+
+  .el-date-table td.available:hover {
+    color: var(--s-sybz-primary);
+  }
+
+  .el-date-table td.today .el-date-table-cell__text {
+    color: var(--s-sybz-primary);
+    font-weight: 700;
+  }
+
+  .el-date-table td.in-range .el-date-table-cell {
+    background: rgba(var(--s-sybz-primary-rgb), 0.08);
+  }
+
+  .el-date-table td.start-date .el-date-table-cell,
+  .el-date-table td.end-date .el-date-table-cell {
+    color: #ffffff;
+  }
+
+  .el-date-table td.current:not(.disabled) .el-date-table-cell__text,
+  .el-date-table td.start-date .el-date-table-cell__text,
+  .el-date-table td.end-date .el-date-table-cell__text {
+    background: var(--s-sybz-primary);
+    color: #ffffff;
+  }
+
+  .el-date-table td.disabled .el-date-table-cell {
+    background: var(--s-sybz-disabled-bg);
+    color: var(--s-sybz-text-muted);
+    opacity: 0.58;
+  }
+
+  .el-picker-panel__footer {
+    border-top-color: var(--s-sybz-divider);
+    background: var(--s-sybz-bg-soft);
+  }
+
+  .el-picker-panel__footer .el-button--primary {
+    --el-button-bg-color: var(--s-sybz-primary);
+    --el-button-border-color: var(--s-sybz-primary);
+    --el-button-hover-bg-color: var(--s-sybz-primary-hover);
+    --el-button-hover-border-color: var(--s-sybz-primary-hover);
+    --el-button-active-bg-color: var(--s-sybz-primary-active);
+    --el-button-active-border-color: var(--s-sybz-primary-active);
+  }
+}

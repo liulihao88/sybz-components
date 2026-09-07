@@ -10,6 +10,7 @@ export type SEmptyComponent = {
     $props: {
       title?: string
       subTitle?: string
+
       theme?: SybzComponentTheme
       width?: string | number
       height?: string | number

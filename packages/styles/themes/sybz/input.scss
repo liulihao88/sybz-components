@@ -1,0 +1,91 @@
+.s-input.s-input--sybz.s-input--sybz {
+  font-family: var(--s-sybz-font-family);
+
+  .el-input,
+  .el-textarea,
+  .el-autocomplete {
+    --el-input-border-color: var(--s-sybz-primary-border);
+    --el-input-hover-border-color: var(--s-sybz-primary-border-hover);
+    --el-input-focus-border-color: var(--s-sybz-primary);
+    --el-input-text-color: var(--s-sybz-text);
+    --el-input-placeholder-color: var(--s-sybz-text-muted);
+    --el-input-bg-color: var(--s-sybz-bg);
+  }
+
+  .el-input__wrapper,
+  .el-textarea__inner {
+    border-radius: var(--s-sybz-radius);
+    background: var(--s-sybz-control-bg);
+    box-shadow: 0 0 0 1px var(--s-sybz-primary-border) inset;
+    transition:
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .el-input-group--prepend .el-input-group__prepend {
+    border-top-left-radius: var(--s-sybz-radius);
+    border-bottom-left-radius: var(--s-sybz-radius);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .el-input-group--prepend .el-input__wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .el-input-group--append .el-input-group__append {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .el-input-group--append .el-input__wrapper {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .el-input__wrapper:hover,
+  .el-textarea__inner:hover {
+    box-shadow: 0 0 0 1px var(--s-sybz-primary-border-hover) inset;
+  }
+
+  .el-input__wrapper.is-focus,
+  .el-textarea__inner:focus {
+    box-shadow:
+      0 0 0 1px var(--s-sybz-primary) inset,
+      0 8px 18px rgba(var(--s-sybz-primary-rgb), 0.08);
+  }
+
+  .el-input-group__prepend,
+  .el-input-group__append {
+    border-color: transparent;
+    background: var(--s-sybz-fill);
+    color: var(--s-sybz-text);
+    box-shadow: 0 0 0 1px var(--s-sybz-primary-border) inset;
+    font-weight: 500;
+  }
+
+  .s-input__title {
+    color: var(--s-sybz-text);
+    font-weight: 500;
+  }
+
+  .el-input__prefix,
+  .el-input__suffix,
+  .el-input__count,
+  .el-textarea .el-input__count {
+    color: var(--s-sybz-text-muted);
+  }
+
+  .el-input__clear,
+  .s-input__clear,
+  .el-input__password {
+    color: var(--s-sybz-primary);
+  }
+
+  .el-input.is-disabled .el-input__wrapper,
+  .el-textarea.is-disabled .el-textarea__inner {
+    background: var(--s-sybz-disabled-bg);
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08) inset;
+  }
+}

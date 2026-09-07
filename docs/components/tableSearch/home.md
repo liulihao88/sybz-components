@@ -20,7 +20,7 @@ tableSearch/base
 
 只需要在 `s-table-search` 上设置一次 `theme`，配置生成的字段组件、`render` 字段组件以及内置搜索和重置按钮都会自动使用相同主题。字段通过 `attrs.theme` 设置时可单独覆盖容器主题。基础写法：`<s-table-search theme="chenghua" :options="fields" />`。
 
-:::demo 属性：`theme` 类型 `STableSearchTheme`，可选值 `default / chenghua / shijingshan`，默认值 `default`；`options` 类型 `STableSearchField[]`，默认值 `[]`；`column` 类型 `number`，默认值 `3`；`showReset` 类型 `boolean`，可选值 `true / false`，默认值 `true`。
+:::demo 属性：`theme` 类型 `STableSearchTheme`，可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`；`options` 类型 `STableSearchField[]`，默认值 `[]`；`column` 类型 `number`，默认值 `3`；`showReset` 类型 `boolean`，可选值 `true / false`，默认值 `true`。
 tableSearch/theme
 :::
 
@@ -40,18 +40,26 @@ tableSearch/autoSearch
 tableSearch/custom
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+tableSearch/sybzTheme
+:::
+
 ### 属性
 
-|     属性名     | 说明                               | 类型                  | 可选值                             | 默认值      |
-| :------------: | ---------------------------------- | --------------------- | ---------------------------------- | ----------- |
-|  `modelValue`  | 搜索表单值，支持 `v-model`         | object                | -                                  | `undefined` |
-|    `theme`     | 内部字段组件和操作按钮的统一主题   | `STableSearchTheme`   | `default / chenghua / shijingshan` | `default`   |
-|   `options`    | 搜索字段配置                       | `STableSearchField[]` | -                                  | `[]`        |
-|    `items`     | 搜索字段配置，优先级高于 `options` | `STableSearchField[]` | -                                  | `undefined` |
-|    `column`    | 每行字段数                         | number                | 正整数                             | `3`         |
-| `initialValue` | 初始值及重置后的值                 | object                | -                                  | `{}`        |
-|   `searchOn`   | 全局自动搜索事件，传 `false` 关闭  | array / false         | `change` / `clear` / `false`       | `undefined` |
-|  `showReset`   | 是否显示重置按钮                   | boolean               | `true` / `false`                   | `true`      |
+|     属性名     | 说明                               | 类型                  | 可选值                                    | 默认值      |
+| :------------: | ---------------------------------- | --------------------- | ----------------------------------------- | ----------- |
+|  `modelValue`  | 搜索表单值，支持 `v-model`         | object                | -                                         | `undefined` |
+|    `theme`     | 内部字段组件和操作按钮的统一主题   | `STableSearchTheme`   | `default / chenghua / shijingshan / sybz` | `default`   |
+|   `options`    | 搜索字段配置                       | `STableSearchField[]` | -                                         | `[]`        |
+|    `items`     | 搜索字段配置，优先级高于 `options` | `STableSearchField[]` | -                                         | `undefined` |
+|    `column`    | 每行字段数                         | number                | 正整数                                    | `3`         |
+| `initialValue` | 初始值及重置后的值                 | object                | -                                         | `{}`        |
+|   `searchOn`   | 全局自动搜索事件，传 `false` 关闭  | array / false         | `change` / `clear` / `false`              | `undefined` |
+|  `showReset`   | 是否显示重置按钮                   | boolean               | `true` / `false`                          | `true`      |
 
 ### options / items 字段属性
 

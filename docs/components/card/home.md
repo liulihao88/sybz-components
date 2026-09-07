@@ -74,6 +74,14 @@ card/square
 card/mergeSections
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+card/sybzTheme
+:::
+
 ### API
 
 |          属性名          | 说明                                                          | 类型                                            | 默认值    |
@@ -95,7 +103,7 @@ card/mergeSections
 |         `square`         | 卡片内容区按宽高最大值渲染为正方形                            | boolean                                         | `false`   |
 |      `collapsible`       | 是否允许点击头部展开/收起                                     | boolean                                         | `false`   |
 |    `collapseTrigger`     | 折叠触发区域                                                  | `icon` / `header`                               | `header`  |
-|         `theme`          | 主题样式                                                      | `default` / `chenghua` / `shijingshan`          | `default` |
+|         `theme`          | 主题样式                                                      | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
 
 ### 事件
 

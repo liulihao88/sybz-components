@@ -57,19 +57,27 @@ inputNumber/size
 inputNumber/usually
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+inputNumber/sybzTheme
+:::
+
 ### 属性
 
-|       属性名        | 说明             | 类型                                   | 默认值    |
-| :-----------------: | ---------------- | -------------------------------------- | --------- |
-|    `modelValue`     | 绑定值           | any                                    | -         |
-|       `title`       | 左侧标题前缀文案 | string                                 | `''`      |
-|  `compTitleStyle`   | 标题前缀组件样式 | object                                 | `{}`      |
-|       `width`       | 组件总宽度       | string / number                        | `''`      |
-|      `height`       | 组件总高度       | string / number                        | `''`      |
-|       `theme`       | 主题样式         | `default` / `chenghua` / `shijingshan` | `default` |
-|       `size`        | 输入框尺寸       | `''` / `large` / `default` / `small`   | `''`      |
-| `controls-position` | 控制按钮位置     | `''` / `right`                         | `right`   |
-|     `subAttrs`      | 外层容器额外属性 | object                                 | `{}`      |
+|       属性名        | 说明             | 类型                                            | 默认值    |
+| :-----------------: | ---------------- | ----------------------------------------------- | --------- |
+|    `modelValue`     | 绑定值           | any                                             | -         |
+|       `title`       | 左侧标题前缀文案 | string                                          | `''`      |
+|  `compTitleStyle`   | 标题前缀组件样式 | object                                          | `{}`      |
+|       `width`       | 组件总宽度       | string / number                                 | `''`      |
+|      `height`       | 组件总高度       | string / number                                 | `''`      |
+|       `theme`       | 主题样式         | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
+|       `size`        | 输入框尺寸       | `''` / `large` / `default` / `small`            | `''`      |
+| `controls-position` | 控制按钮位置     | `''` / `right`                                  | `right`   |
+|     `subAttrs`      | 外层容器额外属性 | object                                          | `{}`      |
 
 ### 插槽
 

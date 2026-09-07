@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import { resolveIconValue } from '@/components/utils/icon'
@@ -39,7 +40,7 @@ interface SButtonSelfProps {
   content?: string
   tooltipAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   variant?: '' | 'outline' | 'gradient'
   size?: 'small' | 'default' | 'large'
   width?: string | number
@@ -121,9 +122,12 @@ const buttonClass = computed(() => ({
   's-button--chenghua-outline': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'outline',
   's-button--chenghua-gradient': mergedProps.value.theme === 'chenghua' && mergedProps.value.variant === 'gradient',
   's-button--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-button--sybz': mergedProps.value.theme === 'sybz',
   's-button--shijingshan-outline': mergedProps.value.theme === 'shijingshan' && mergedProps.value.variant === 'outline',
+  's-button--sybz-outline': mergedProps.value.theme === 'sybz' && mergedProps.value.variant === 'outline',
   's-button--shijingshan-gradient':
     mergedProps.value.theme === 'shijingshan' && mergedProps.value.variant === 'gradient',
+  's-button--sybz-gradient': mergedProps.value.theme === 'sybz' && mergedProps.value.variant === 'gradient',
 }))
 
 const handleClick = (evt: MouseEvent) => {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { SybzComponentTheme } from '../../../types/component-props'
 /** @使用方式
 <s-checkbox
   v-model="formData.categoryIds"
@@ -35,7 +36,7 @@ interface CheckboxProps {
   customDisabled?: (context: CheckboxOptionContext) => boolean | null
   customLabel?: (context: CheckboxOptionContext) => any
   gap?: number | string
-  theme?: 'default' | 'chenghua' | 'shijingshan'
+  theme?: SybzComponentTheme
   size?: 'large' | 'default' | 'small'
 }
 
@@ -158,6 +159,7 @@ const checkboxClass = computed(() => ({
   's-gap-checkbox': hasGap.value,
   's-checkbox--chenghua': mergedProps.value.theme === 'chenghua',
   's-checkbox--shijingshan': mergedProps.value.theme === 'shijingshan',
+  's-checkbox--sybz': mergedProps.value.theme === 'sybz',
   's-checkbox--button': mergedProps.value.showType === 'button',
   's-checkbox--show-all': mergedProps.value.showAll,
 }))
@@ -287,6 +289,11 @@ const checkboxClass = computed(() => ({
 .s-checkbox--button.s-checkbox--shijingshan {
   --s-checkbox-button-primary: var(--s-sjs-primary);
   --s-checkbox-button-soft: var(--s-sjs-primary-soft);
+}
+
+.s-checkbox--button.s-checkbox--sybz {
+  --s-checkbox-button-primary: var(--s-sybz-primary);
+  --s-checkbox-button-soft: var(--s-sybz-primary-soft);
 }
 
 .s-checkbox--button.s-checkbox--show-all {
