@@ -455,10 +455,12 @@ const mergedStyle = computed(() => {
   }
 }
 
-.s-input__clear {
+.s-input .s-input__clear {
   position: absolute;
   right: 8px;
-  bottom: calc(50% - 6px);
+  // 覆盖 s-icon 的 top 定位，避免通用图标样式使清除按钮偏离中心。
+  top: 50%;
+  transform: translateY(-50%);
   display: none;
   width: 14px;
   height: 14px;
