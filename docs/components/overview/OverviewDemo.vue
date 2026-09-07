@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-type ThemeName = 'default' | 'chenghua' | 'shijingshan'
+type ThemeName = 'default' | 'chenghua' | 'shijingshan' | 'sybz'
 type SizeName = 'small' | 'default' | 'large'
 type RadioShowType = 'radio' | 'button'
 type CheckboxShowType = 'check' | 'button'
@@ -25,6 +25,7 @@ const themes: Array<{ label: string; value: ThemeName }> = [
   { label: 'default', value: 'default' },
   { label: 'chenghua', value: 'chenghua' },
   { label: 'shijingshan', value: 'shijingshan' },
+  { label: 'sybz', value: 'sybz' },
 ]
 
 const sizes: Array<{ label: string; value: SizeName }> = [
@@ -88,12 +89,16 @@ const tableColumns = [
 const tabsValue = ref('chenghua')
 const navList = [
   {
-    label: '成华',
+    label: 'chenghua',
     value: 'chenghua',
   },
   {
-    label: '石景山',
+    label: 'shijingshan',
     value: 'shijingshan',
+  },
+  {
+    label: 'sybz',
+    value: 'sybz',
   },
 ]
 
