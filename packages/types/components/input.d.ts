@@ -18,7 +18,6 @@ export type SInputComponent = {
       hideMaxLengthError?: boolean
       maxLengthErrorText?: string
       size?: SybzComponentSize
-
       theme?: SybzComponentTheme
       showWordLimit?: boolean | string
       block?: boolean

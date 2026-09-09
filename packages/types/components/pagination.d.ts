@@ -25,7 +25,6 @@ export type SPaginationComponent = {
       /** 页码按钮数量；默认值：7 */
       pagerCount?: number
       /** 主题；默认值：default */
-
       theme?: SybzComponentTheme
       /** 是否使用带背景色的分页按钮；默认值：true */
       background?: boolean

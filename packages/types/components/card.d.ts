@@ -25,7 +25,6 @@ export type SCardComponent = {
       square?: boolean
       collapsible?: boolean
       collapseTrigger?: 'icon' | 'header'
-
       theme?: SybzComponentTheme
     }
     $slots: {

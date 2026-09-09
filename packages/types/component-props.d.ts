@@ -532,6 +532,10 @@ export interface SIconProps extends SHtmlStringProps {
   icon?: SIconValue
   color?: string
   size?: string | number
+  /** 容器宽度，数字自动补 px；默认未设置，仅设置宽度时高度与宽度一致 */
+  width?: string | number
+  /** 容器高度，数字自动补 px；默认未设置，仅设置高度时宽度与高度一致；100% 需要父容器具有可解析的高度 */
+  height?: string | number
   /** 背景圆角，数字自动补 px；默认由 variant 和 theme 决定 */
   borderRadius?: string | number
   /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */

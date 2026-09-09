@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import type { Component } from 'vue'
+import type { Component, CSSProperties } from 'vue'
 import type { ElTooltipProps } from 'element-plus'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth } from '@sybz-components/utils'
@@ -23,6 +23,8 @@ interface IconProps {
   icon?: SIconName | Component
   color?: string
   size?: string | number
+  width?: string | number
+  height?: string | number
   borderRadius?: string | number
   cursor?: SIconCursor
   hoverAnimation?: boolean
@@ -43,6 +45,8 @@ const props = withDefaults(defineProps<IconProps>(), {
   icon: '',
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
+  width: undefined,
+  height: undefined,
   borderRadius: '',
   cursor: 'pointer',
   hoverAnimation: false,
@@ -60,6 +64,23 @@ const props = withDefaults(defineProps<IconProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('icon', props)
 const attrs = useAttrs()
+const dimensionStyle = computed<CSSProperties>(() => {
+  const { width, height } = mergedProps.value
+  const hasWidth = width !== undefined && width !== null && width !== ''
+  const hasHeight = height !== undefined && height !== null && height !== ''
+  if (!hasWidth && !hasHeight) return {}
+
+  return {
+    width: hasWidth ? processWidth(width, true) : 'auto',
+    height: hasHeight ? processWidth(height, true) : 'auto',
+    // 百分比只用于指定的一边，另一边由宽高比计算，避免相对父容器的不同边取值。
+    aspectRatio: hasWidth && hasHeight ? 'auto' : '1',
+    boxSizing: 'border-box',
+    flexShrink: 0,
+    minWidth: 0,
+    minHeight: 0,
+  }
+})
 const emits = defineEmits(['click'])
 function handleClick($event) {
   if (mergedProps.value.disabled) return
@@ -134,6 +155,7 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
     props.disabled
     :size="mergedProps.size"
     :style="{
+      ...dimensionStyle,
       cursor: mergedProps.disabled ? 'not-allowed' : mergedProps.cursor,
       borderRadius: mergedProps.borderRadius ? processWidth(mergedProps.borderRadius, true) : undefined,
       transform: parseRotate ? `rotate(${parseRotate})` : undefined,

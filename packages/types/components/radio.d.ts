@@ -17,7 +17,6 @@ export type SRadioComponent = {
     $props: {
       title?: string
       compTitleStyle?: SybzRecord
-
       theme?: SybzComponentTheme
       type?: '' | 'boolean' | 'simple'
       showType?: 'radio' | 'button'

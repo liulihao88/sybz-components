@@ -243,27 +243,39 @@ icon/url
 icon/sybzTheme
 :::
 
+### 容器宽高（width / height 默认值：未设置，size 默认值：16px）
+
+基础写法：`<s-icon icon="search" height="100%" />`。`width`、`height` 支持数字、数字字符串和 CSS 长度（如 `px / rem / em / % / calc()`），数字自动补 `px`。只设置一边时另一边保持相等；同时设置两边时分别生效。未设置宽高时保留原有尺寸行为，`size` 控制内部图案大小，图案在容器中居中。
+
+:::demo 展示单边正方形、独立宽高和表单输入框等高布局。属性：`width / height` 类型 `string / number`，默认未设置；`size` 类型 `string / number`，默认 `16px`；`variant` 可选 `plain / light / solid`，默认 `plain`。
+icon/dimensions
+:::
+
+`height="100%"` 相对直接父容器计算，需要父容器有可解析的高度。示例让表单字段容器具有 `40px` 高度，输入框和图标都设置 `height="100%"`，图标自动成为 `40 × 40` 的正方形。父容器仅由内容撑高时，不能仅凭 `100%` 自动跟随整个表单高度。显式宽高包含背景内边距和边框。
+
 ### 属性
 
-|           属性名           | 说明                                                                   | 类型            | 默认值    |
-| :------------------------: | ---------------------------------------------------------------------- | --------------- | --------- |
-|           `icon`           | 图标组件、名称或在线图片 URL                                           | SIconValue      | `''`      |
-|          `color`           | 图标颜色；未设置时，`default + plain` 继承父元素的 `currentColor`      | string          | -         |
-|           `size`           | 图标尺寸                                                               | string / number | `16px`    |
-|       `borderRadius`       | 背景圆角，数字自动补 `px`，显式设置时覆盖主题圆角                      | string / number | `8px`     |
-|          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                           | SIconCursor     | `pointer` |
-|      `hoverAnimation`      | 鼠标移入时是否启用轻微上浮动画                                         | boolean         | `false`   |
-|          `shadow`          | 阴影显示时机，可选 `always / never / hover`                            | string          | `never`   |
-|          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                            | string / number | `''`      |
-|         `disabled`         | 是否禁用，禁用后不会触发点击                                           | boolean         | `false`   |
-|          `theme`           | 主题，可选 `default / chenghua / shijingshan / sybz`                   | string          | `default` |
-|          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg / url`             | string          | `auto`    |
-|           `type`           | 语义类型，可选 `default / primary / success / warning / danger / info` | string          | -         |
-|         `variant`          | 视觉样式，可选 `plain / light / solid`                                 | string          | `plain`   |
-|         `svgAttrs`         | 透传给 `s-svg` 的属性                                                  | object          | `{}`      |
-|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                             | object          | `{}`      |
-|        `imageAttrs`        | 透传给在线图片 `img` 的属性，如 `alt`、`crossorigin`                   | object          | `{}`      |
-| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                         | boolean         | `false`   |
+|           属性名           | 说明                                                                      | 类型            | 默认值    |
+| :------------------------: | ------------------------------------------------------------------------- | --------------- | --------- |
+|           `icon`           | 图标组件、名称或在线图片 URL                                              | SIconValue      | `''`      |
+|          `color`           | 图标颜色；未设置时，`default + plain` 继承父元素的 `currentColor`         | string          | -         |
+|           `size`           | 内部图案尺寸                                                              | string / number | `16px`    |
+|          `width`           | 容器宽度；仅设置宽度时高度与宽度一致，数字自动补 `px`                     | string / number | 未设置    |
+|          `height`          | 容器高度；仅设置高度时宽度与高度一致，支持 `100%`（父容器需有可解析高度） | string / number | 未设置    |
+|       `borderRadius`       | 背景圆角，数字自动补 `px`，显式设置时覆盖主题圆角                         | string / number | `8px`     |
+|          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                              | SIconCursor     | `pointer` |
+|      `hoverAnimation`      | 鼠标移入时是否启用轻微上浮动画                                            | boolean         | `false`   |
+|          `shadow`          | 阴影显示时机，可选 `always / never / hover`                               | string          | `never`   |
+|          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                               | string / number | `''`      |
+|         `disabled`         | 是否禁用，禁用后不会触发点击                                              | boolean         | `false`   |
+|          `theme`           | 主题，可选 `default / chenghua / shijingshan / sybz`                      | string          | `default` |
+|          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg / url`                | string          | `auto`    |
+|           `type`           | 语义类型，可选 `default / primary / success / warning / danger / info`    | string          | -         |
+|         `variant`          | 视觉样式，可选 `plain / light / solid`                                    | string          | `plain`   |
+|         `svgAttrs`         | 透传给 `s-svg` 的属性                                                     | object          | `{}`      |
+|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                                | object          | `{}`      |
+|        `imageAttrs`        | 透传给在线图片 `img` 的属性，如 `alt`、`crossorigin`                      | object          | `{}`      |
+| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                            | boolean         | `false`   |
 
 ### 事件
 

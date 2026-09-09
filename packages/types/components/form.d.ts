@@ -24,7 +24,6 @@ export type SFormComponent = {
     $props: {
       fieldList: SFormFieldList
       model: SybzRecord
-
       theme?: SybzComponentTheme
       /** showFooter 的别名，设置后优先级更高 */
       footer?: boolean

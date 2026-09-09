@@ -32,7 +32,6 @@ export type SSelectComponent = {
       showPrefix?: boolean
       showQuick?: boolean
       size?: SybzComponentSize
-
       theme?: SybzComponentTheme
       title?: string
       compTitleStyle?: SybzRecord

@@ -189,13 +189,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
      *
-     * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
+     * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
      */
     SIcon: (typeof import('./types/components/icon'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
      *
-     * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
+     * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
      */
     's-icon': (typeof import('./types/components/icon'))['default']
     /**

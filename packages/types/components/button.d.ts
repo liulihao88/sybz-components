@@ -26,7 +26,6 @@ export type SButtonComponent = {
       /** 是否允许 tooltip 内容作为 HTML 片段渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       /** 组件主题 */
-
       theme?: SybzComponentTheme
       /** 主题按钮变体 */
       variant?: '' | 'outline' | 'gradient'

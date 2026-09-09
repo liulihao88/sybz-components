@@ -12,7 +12,6 @@ export type STableSearchComponent = {
   new (): {
     $props: {
       /** 统一应用于内部字段组件和操作按钮的主题 */
-
       theme?: STableSearchTheme
       /** 搜索字段配置 */
       options?: STableSearchField[]

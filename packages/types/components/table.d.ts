@@ -20,7 +20,6 @@ export type STableComponent = {
       showPage?: boolean
       showIndex?: boolean
       size?: string
-
       theme?: SybzComponentTheme
       pageSize?: number
       pageNumber?: number

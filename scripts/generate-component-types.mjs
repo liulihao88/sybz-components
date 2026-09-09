@@ -408,7 +408,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SIconProps',
       description:
-        's-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。',
+        's-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。',
       slots: ['default'],
       hoverProps: componentHoverProps('SIconProps', [
         'SIconValue',
@@ -949,23 +949,8 @@ const collectInterfaceProps = ({ sourcePath, interfaceName }, seen = new Set()) 
   return [...inheritedProps, ...ownProps]
 }
 
-// 与运行时共用注册表，生成提示不再手写主题名称。
-const themeRegistrySource = readFileSync(resolve(rootDir, 'packages/utils/src/theme.ts'), 'utf8')
-const themeNames = ['default', ...Array.from(themeRegistrySource.matchAll(/^ {2}(\w+): '--s-/gm), (match) => match[1])]
-const componentThemeDescription = `主题可选 ${themeNames.join(' / ')}；默认值：default。`
-
 const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   const props = collectInterfaceProps(hoverProps)
-  // 所有主题组件共用生成配置，保留组件自身属性在 Element Plus 属性之前。
-  for (const prop of props) {
-    if (prop.name === 'theme' && /SybzComponentTheme|SDialogTheme|STableSearchTheme/.test(prop.type)) {
-      const description =
-        prop.type === 'SDialogTheme'
-          ? `${componentThemeDescription} Dialog 另支持 norm / norm16 / simple。`
-          : componentThemeDescription
-      prop.jsDoc = [...prop.jsDoc, `/** ${description} */`]
-    }
-  }
   const lines = ['{']
 
   props.forEach((prop) => {

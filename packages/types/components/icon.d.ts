@@ -10,7 +10,7 @@ import type {
 } from '../component-props'
 
 /**
- * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip。
+ * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
  *
  * 先提示 sybz 自身属性。
  */
@@ -23,6 +23,10 @@ export type SIconComponent = {
       icon?: SIconValue
       color?: string
       size?: string | number
+      /** 容器宽度，数字自动补 px；默认未设置，仅设置宽度时高度与宽度一致 */
+      width?: string | number
+      /** 容器高度，数字自动补 px；默认未设置，仅设置高度时宽度与高度一致；100% 需要父容器具有可解析的高度 */
+      height?: string | number
       /** 背景圆角，数字自动补 px；默认由 variant 和 theme 决定 */
       borderRadius?: string | number
       /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */
@@ -34,7 +38,6 @@ export type SIconComponent = {
       /** 图标旋转角度，数字及数字字符串按 deg 处理 */
       rotate?: string | number
       disabled?: boolean
-
       theme?: SybzComponentTheme
       /** 图标来源；默认值：auto，可自动识别在线图片 URL 和 Iconify 名称 */
       source?: SIconSource

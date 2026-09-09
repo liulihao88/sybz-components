@@ -17,7 +17,6 @@ export type SDescriptionsComponent = {
   new (): {
     $props: {
       options: SDescriptionsItemOption[]
-
       theme?: SybzComponentTheme
       column?: number
       width?: string | number

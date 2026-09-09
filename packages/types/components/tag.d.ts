@@ -28,7 +28,6 @@ export type STagComponent = {
       info?: string | number | boolean | any[]
       other?: string
       type?: TagPropsPublic['type']
-
       theme?: SybzComponentTheme
       size?: SybzComponentSize
       config?: SybzRecord
