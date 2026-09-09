@@ -724,6 +724,7 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
   multiple?: boolean
   showAll?: boolean
   showPrefix?: boolean
+  /** 是否显示上下快速切换按钮，默认 true；空选项时仍显示 */
   showQuick?: boolean
   size?: SybzComponentSize
   theme?: SybzComponentTheme

@@ -7,7 +7,7 @@
       themeClass,
       {
         'has-title': mergedProps.title,
-        'has-quick': mergedProps.showQuick && hasQuickOptions,
+        'has-quick': mergedProps.showQuick,
         'is-disabled': parseDisabled,
         'is-multiple': multiple,
         'has-custom-height': mergedProps.height,
@@ -83,7 +83,7 @@
       </div>
     </el-tooltip>
 
-    <span v-if="mergedProps.showQuick && hasQuickOptions" class="s-select__select-box">
+    <span v-if="mergedProps.showQuick" class="s-select__select-box">
       <span class="s-select__select-box__inner">
         <s-icon icon="ArrowUp" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(false)" />
         <div class="s-select__divider" />
@@ -138,6 +138,7 @@ interface SelectProps {
   multiple?: boolean
   showAll?: boolean
   showPrefix?: boolean
+  /** 是否显示上下快速切换按钮，默认 true；空选项时仍显示 */
   showQuick?: boolean
   size?: string
   theme?: SybzComponentTheme
@@ -329,8 +330,6 @@ const quickOptionValues = computed(() => {
   if (sOptions.value.length > 0) return disOptions.value.map((option) => handleDifValue(option))
   return inlineOptions.value.filter((option) => !isInlineOptionDisabled(option)).map((option) => option.value)
 })
-
-const hasQuickOptions = computed(() => quickOptionValues.value.length > 0)
 
 const getOptionLabel = (option: SelectOption, index: number): string | number => {
   const label = props.type === 'simple' ? option : handleLabel(option, index)

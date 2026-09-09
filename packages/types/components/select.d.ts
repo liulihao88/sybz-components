@@ -11,7 +11,7 @@ import type {
 type ElSelectInstance = InstanceType<typeof ElSelect>
 
 /**
- * s-select 下拉选择组件，支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换；options 模式额外支持全选、反选和完整选项上下文。
+ * s-select 下拉选择组件，支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Select 的公开属性。
  */
@@ -30,6 +30,7 @@ export type SSelectComponent = {
       multiple?: boolean
       showAll?: boolean
       showPrefix?: boolean
+      /** 是否显示上下快速切换按钮，默认 true；空选项时仍显示 */
       showQuick?: boolean
       size?: SybzComponentSize
       theme?: SybzComponentTheme

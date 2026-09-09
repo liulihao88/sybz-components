@@ -150,6 +150,14 @@ select/inlineOptions
 select/sybzTheme
 :::
 
+### 快速切换按钮（showQuick 默认值：true）
+
+`showQuick` 可选 `true / false`，默认值为 `true`。基础写法：`<s-select :options="[]" />`，空选项时也显示上下按钮；设置 `:show-quick="false"` 隐藏按钮。
+
+:::demo 按钮显示与选项数量无关；没有可切换选项时，点击按钮不会改变当前值。
+select/quick
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                             | 类型                    | 默认值    |
@@ -162,7 +170,7 @@ select/sybzTheme
 |         `multiple`         | 是否多选                                                         | boolean                 | `false`   |
 |         `showAll`          | 多选时是否显示全选/反选                                          | boolean                 | `true`    |
 |        `showPrefix`        | 是否显示前缀数量信息                                             | boolean                 | `false`   |
-|        `showQuick`         | 是否显示上下快速切换按钮                                         | boolean                 | `true`    |
+|        `showQuick`         | 是否显示上下快速切换按钮，仅由 showQuick 控制，空选项时仍显示    | boolean                 | `true`    |
 |           `size`           | 选择器尺寸，支持 `small` / `default` / `large`                   | string                  | `''`      |
 |          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string                  | `default` |
 |          `title`           | 左侧标题文案                                                     | string                  | `''`      |
