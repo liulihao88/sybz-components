@@ -39,7 +39,7 @@ inputNumber/chenghua/base
 inputNumber/shijingshan/base
 :::
 
-### 高度
+### 高度和宽度
 
 :::demo 展示高度配置。基础写法：`<s-input-number v-model="count" title="数量" width="220" height="40" :min="0" />`。属性：`height` 类型 `string / number`，默认值 `''`。
 inputNumber/height

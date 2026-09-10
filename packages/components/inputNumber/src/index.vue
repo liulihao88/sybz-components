@@ -97,7 +97,6 @@ const inputNumberStyle = computed(() => {
     const inputNumberHeight = processWidth(mergedProps.value.height, true)
     style.height = inputNumberHeight
     style['--s-input-number-height'] = inputNumberHeight
-    style['--s-input-number-controls-height'] = `calc((${inputNumberHeight} - 2px) / 2)`
     style['--el-input-height'] = inputNumberHeight
   }
 
@@ -125,8 +124,9 @@ const inputNumberStyle = computed(() => {
 
   :deep(.el-input-number.is-controls-right .el-input-number__decrease),
   :deep(.el-input-number.is-controls-right .el-input-number__increase) {
-    height: var(--s-input-number-controls-height, var(--el-input-number-controls-height));
-    line-height: var(--s-input-number-controls-height, var(--el-input-number-controls-height));
+    // 按实际容器高度平分，兼容表单拉伸及百分比高度。
+    height: calc(50% - 1px);
+    line-height: normal;
   }
 
   .s-comp-title + :deep(.el-input-number .el-input__wrapper),

@@ -23,11 +23,13 @@ const model = ref({
   sex: 'sex2',
   lock: '',
   name: '',
+  age: null,
 })
 const rules = {
   account: [proxy.validate()],
   pwd: [proxy.validate()],
   name: [proxy.validate()],
+  age: [proxy.validate()],
 }
 const fieldList = [
   {
@@ -101,6 +103,12 @@ const fieldList = [
     prop: 'lock',
     comp: 'el-switch',
   },
+  {
+    label: '年龄',
+    prop: 'age',
+    comp: 's-input-number',
+    useSlot: true,
+  },
 
   {
     label: '描述',
@@ -126,6 +134,11 @@ async function isTest16() {
       <template #name-label>这里我是特殊的name的label</template>
       <template #name>
         <s-input v-model="model.name" placeholder="我是name" width="300" />
+      </template>
+      <template #age>
+        <div class="h-100">
+          <s-input-number v-model="model.age" width="300" height="100%" />
+        </div>
       </template>
     </s-form>
     <el-button type="primary" @click="isTest16">测试36</el-button>
