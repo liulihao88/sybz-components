@@ -148,6 +148,7 @@ interface SelectProps {
   connect?: string
   customLabel?: (context: SSelectOptionContext) => string
   width?: string | number
+  /** 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度，默认空字符串 */
   height?: string | number
   disPlaceholder?: string
   customDisabled?: (context: SSelectOptionContext) => boolean | null
@@ -431,11 +432,16 @@ const selectStyle = computed(() => {
   if (mergedProps.value.height) {
     const selectHeight = processWidth(mergedProps.value.height, true)
     style.height = selectHeight
-    style.minHeight = selectHeight
-    style['--s-select-min-height'] = selectHeight
-    style['--el-input-height'] = selectHeight
-    style['--s-select-title-font-size'] = `clamp(8px, calc(${selectHeight} - 8px), 14px)`
-    style['--s-select-quick-icon-size'] = getCompactIconSize(selectHeight)
+    // 百分比只用于外层高度，避免内部最小高度重复解析及字号使用百分比计算。
+    const isPercentageHeight = selectHeight.includes('%')
+    const minHeight = isPercentageHeight ? '0px' : selectHeight
+    style.minHeight = minHeight
+    style['--s-select-min-height'] = minHeight
+    style['--el-input-height'] = minHeight
+    if (!isPercentageHeight) {
+      style['--s-select-title-font-size'] = `clamp(8px, calc(${selectHeight} - 8px), 14px)`
+      style['--s-select-quick-icon-size'] = getCompactIconSize(selectHeight)
+    }
   }
 
   return style

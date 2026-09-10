@@ -20,6 +20,10 @@ const options = [
       <s-select v-model="quickValue" title="快速切换2" width="200" height="32" :options="options" />
       <s-select v-model="quickValue" title="快速切换2" width="200" height="20" :options="options" />
     </s-flex>
+    <p>height="100%"：填满 80px 高的父容器（height 默认值：''）。</p>
+    <div style="height: 80px">
+      <s-select v-model="value" title="父容器高度" width="300" height="100%" :options="options" />
+    </div>
   </div>
 </template>
 

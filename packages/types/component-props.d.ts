@@ -734,6 +734,7 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
   connect?: string
   customLabel?: (context: SSelectOptionContext<Option>) => any
   width?: string | number
+  /** 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度，默认空字符串 */
   height?: string | number
   disPlaceholder?: string
   customDisabled?: (context: SSelectOptionContext<Option>) => boolean
