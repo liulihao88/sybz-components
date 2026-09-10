@@ -160,36 +160,45 @@ select/sybzTheme
 select/quick
 :::
 
+### 空选项占位文案（emptyPlaceholder 默认值：暂无数据）
+
+基础写法：`<s-select :options="[]" empty-placeholder="暂无可选服务" />`。`emptyPlaceholder` 支持任意字符串（包括空字符串），默认值为 `暂无数据`。
+
+:::demo 没有选项时优先显示 emptyPlaceholder（包括禁用态）；有 options 或插槽 el-option 时恢复原有 placeholder / disPlaceholder 逻辑。占位文案仅在没有选中值时显示，不会替换已选中的文本。
+select/emptyPlaceholder
+:::
+
 ### 属性
 
-|           属性名           | 说明                                                               | 类型                    | 默认值    |
-| :------------------------: | ------------------------------------------------------------------ | ----------------------- | --------- |
-|        `modelValue`        | 当前值                                                             | array / string / number | -         |
-|          `value`           | 选项值字段名                                                       | string                  | `value`   |
-|          `label`           | 选项显示字段名，支持字符串或多字段数组                             | string / array          | `label`   |
-|         `options`          | 选项数据                                                           | array                   | `[]`      |
-|           `type`           | 数据类型，传 `simple` 时按基础类型数组处理                         | string                  | `''`      |
-|         `multiple`         | 是否多选                                                           | boolean                 | `false`   |
-|         `showAll`          | 多选时是否显示全选/反选                                            | boolean                 | `true`    |
-|        `showPrefix`        | 是否显示前缀数量信息                                               | boolean                 | `false`   |
-|        `showQuick`         | 是否显示上下快速切换按钮，仅由 showQuick 控制，空选项时仍显示      | boolean                 | `true`    |
-|           `size`           | 选择器尺寸，支持 `small` / `default` / `large`                     | string                  | `''`      |
-|          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` / `sybz`   | string                  | `default` |
-|          `title`           | 左侧标题文案                                                       | string                  | `''`      |
-|      `compTitleStyle`      | 左侧标题组件样式                                                   | object                  | `{}`      |
-|         `connect`          | 多字段 label 拼接符                                                | string                  | `/`       |
-|       `customLabel`        | 自定义 label，参数为 `{ option, index, value }`                    | function                | -         |
-|          `width`           | 组件宽度                                                           | string / number         | `''`      |
-|          `height`          | 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度 | string / number         | `''`      |
-|      `disPlaceholder`      | 禁用态占位文案                                                     | string                  | `''`      |
-|      `customDisabled`      | 自定义禁用，参数为 `{ option, index, value }`                      | `(context) => boolean`  | -         |
-|           `url`            | 远程请求地址或方法                                                 | string / function       | `''`      |
-|        `urlParams`         | 远程请求参数                                                       | object                  | `{}`      |
-|    `optionsExpression`     | 远程结果取值表达式                                                 | string                  | `''`      |
-|        `emptyColor`        | 选项为空时是否高亮边框                                             | boolean                 | `false`   |
-|       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                                   | boolean                 | `true`    |
-|       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                                        | object                  | `{}`      |
-| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染                  | boolean                 | `false`   |
+|           属性名           | 说明                                                               | 类型                    | 默认值     |
+| :------------------------: | ------------------------------------------------------------------ | ----------------------- | ---------- |
+|        `modelValue`        | 当前值                                                             | array / string / number | -          |
+|          `value`           | 选项值字段名                                                       | string                  | `value`    |
+|          `label`           | 选项显示字段名，支持字符串或多字段数组                             | string / array          | `label`    |
+|         `options`          | 选项数据                                                           | array                   | `[]`       |
+|           `type`           | 数据类型，传 `simple` 时按基础类型数组处理                         | string                  | `''`       |
+|         `multiple`         | 是否多选                                                           | boolean                 | `false`    |
+|         `showAll`          | 多选时是否显示全选/反选                                            | boolean                 | `true`     |
+|        `showPrefix`        | 是否显示前缀数量信息                                               | boolean                 | `false`    |
+|        `showQuick`         | 是否显示上下快速切换按钮，仅由 showQuick 控制，空选项时仍显示      | boolean                 | `true`     |
+|           `size`           | 选择器尺寸，支持 `small` / `default` / `large`                     | string                  | `''`       |
+|          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` / `sybz`   | string                  | `default`  |
+|          `title`           | 左侧标题文案                                                       | string                  | `''`       |
+|      `compTitleStyle`      | 左侧标题组件样式                                                   | object                  | `{}`       |
+|         `connect`          | 多字段 label 拼接符                                                | string                  | `/`        |
+|       `customLabel`        | 自定义 label，参数为 `{ option, index, value }`                    | function                | -          |
+|          `width`           | 组件宽度                                                           | string / number         | `''`       |
+|          `height`          | 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度 | string / number         | `''`       |
+|     `emptyPlaceholder`     | 没有选项时的占位文案，优先于 placeholder 和 disPlaceholder         | string                  | `暂无数据` |
+|      `disPlaceholder`      | 禁用态占位文案                                                     | string                  | `''`       |
+|      `customDisabled`      | 自定义禁用，参数为 `{ option, index, value }`                      | `(context) => boolean`  | -          |
+|           `url`            | 远程请求地址或方法                                                 | string / function       | `''`       |
+|        `urlParams`         | 远程请求参数                                                       | object                  | `{}`       |
+|    `optionsExpression`     | 远程结果取值表达式                                                 | string                  | `''`       |
+|        `emptyColor`        | 选项为空时是否高亮边框                                             | boolean                 | `false`    |
+|       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                                   | boolean                 | `true`     |
+|       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                                        | object                  | `{}`       |
+| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染                  | boolean                 | `false`    |
 
 ### 事件
 

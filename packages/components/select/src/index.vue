@@ -150,6 +150,8 @@ interface SelectProps {
   width?: string | number
   /** 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度，默认空字符串 */
   height?: string | number
+  /** 选项为空时的占位文案，默认 暂无数据 */
+  emptyPlaceholder?: string
   disPlaceholder?: string
   customDisabled?: (context: SSelectOptionContext) => boolean | null
   url?: string | ((...args: any[]) => any)
@@ -184,6 +186,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   width: '',
   height: '',
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性
+  emptyPlaceholder: '暂无数据',
   disPlaceholder: '',
   url: '',
   urlParams: () => ({}),
@@ -255,7 +258,7 @@ const mergedTooltipAttrs = computed(() => {
 
 const selectAttrs = computed<Record<string, any>>(() => {
   const nextAttrs = Object.entries(attrs).reduce<Record<string, any>>((obj, [key, value]) => {
-    if (!['class', 'style', 'popper-class', 'popperClass'].includes(key)) {
+    if (!['class', 'style', 'popper-class', 'popperClass', 'placeholder'].includes(key)) {
       obj[key] = value
     }
     return obj
@@ -468,6 +471,9 @@ const selectPopperClass = computed(() => {
 })
 
 const selectPlaceholder = computed(() => {
+  if (sOptions.value.length === 0 && inlineOptions.value.length === 0) {
+    return mergedProps.value.emptyPlaceholder
+  }
   let res = attrs.disabled ? mergedProps.value.disPlaceholder : attrs.placeholder || '请选择'
   return typeof res === 'string' ? res : String(res ?? '')
 })
