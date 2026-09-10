@@ -1,4 +1,8 @@
+@import '../shared/select.scss';
+
 .s-select.s-select--sybz.s-select--sybz {
+  --s-theme-radius: var(--s-sybz-radius);
+
   font-family: var(--s-sybz-font-family);
 
   .el-select {
@@ -7,7 +11,6 @@
   }
 
   .el-select__wrapper {
-    border-radius: var(--s-sybz-radius);
     background: var(--s-sybz-control-bg);
     box-shadow: 0 0 0 1px var(--s-sybz-primary-border) inset;
     transition:
@@ -97,16 +100,6 @@
   .s-comp-title {
     color: var(--s-sybz-text);
     font-weight: 500;
-  }
-
-  &.has-title .el-select__wrapper {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  &.has-quick .el-select__wrapper {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
   }
 
   .s-select__select-box {

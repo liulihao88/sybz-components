@@ -6,6 +6,7 @@
       sizeClass,
       themeClass,
       {
+        's-select--theme': !!themeClass,
         'has-title': mergedProps.title,
         'has-quick': mergedProps.showQuick,
         'is-disabled': parseDisabled,

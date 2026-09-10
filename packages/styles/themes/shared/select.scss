@@ -1,0 +1,20 @@
+// 主题只需提供 --s-theme-radius，输入框与快捷按钮共用圆角规则。
+.s-select.s-select--theme.s-select--theme {
+  .el-select__wrapper {
+    border-radius: var(--s-theme-radius, 8px);
+  }
+
+  &.has-title .el-select__wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &.has-quick .el-select__wrapper {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .s-select__select-box {
+    border-radius: 0 var(--s-theme-radius, 8px) var(--s-theme-radius, 8px) 0;
+  }
+}
