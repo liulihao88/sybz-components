@@ -573,31 +573,27 @@ defineExpose({
       </div>
       <el-form-item v-else-if="parseIsShow(v, i)" v-bind="getFormItemBind(v, i)">
         <template #label>
-          <template v-if="v.labelRender">
-            <render-comp :render="v.labelRender" :context="getRenderProps(v, i)" />
-          </template>
-          <template v-else>
-            <slot :name="getLabelSlotName(v)" v-bind="getRenderProps(v, i)">
-              <span class="s-form__label-content">
-                <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
-                <s-icon
-                  v-else-if="v.imgAttrs?.name"
-                  :icon="v.imgAttrs?.name"
-                  class="s-form__label-icon"
-                  v-bind="v.imgAttrs"
-                />
-                <s-tooltip :content="v.label" />
-                <s-icon
-                  v-if="getFieldTooltip(v, i)"
-                  v-bind="getFieldTooltipAttrs(v, i)"
-                  icon="Warning"
-                  :content="getFieldTooltip(v, i)"
-                  class="s-form__label-tooltip-icon"
-                  aria-label="字段说明"
-                />
-              </span>
+          <span class="s-form__label-content">
+            <render-comp v-if="v.labelRender" :render="v.labelRender" :context="getRenderProps(v, i)" />
+            <slot v-else :name="getLabelSlotName(v)" v-bind="getRenderProps(v, i)">
+              <img v-if="v.imgAttrs?.src" :src="v.imgAttrs?.src" class="s-form__label-image" v-bind="v.imgAttrs" />
+              <s-icon
+                v-else-if="v.imgAttrs?.name"
+                :icon="v.imgAttrs?.name"
+                class="s-form__label-icon"
+                v-bind="v.imgAttrs"
+              />
+              <s-tooltip :content="v.label" />
             </slot>
-          </template>
+            <s-icon
+              v-if="getFieldTooltip(v, i)"
+              v-bind="getFieldTooltipAttrs(v, i)"
+              icon="Warning"
+              :content="getFieldTooltip(v, i)"
+              class="s-form__label-tooltip-icon"
+              aria-label="字段说明"
+            />
+          </span>
         </template>
         <template v-if="v.useSlot && getFieldSlotName(v)">
           <slot :name="getFieldSlotName(v)" v-bind="getRenderProps(v, i)"></slot>

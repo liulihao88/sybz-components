@@ -425,9 +425,10 @@ export interface SFormFieldItem {
   imgAttrs?: SybzRecord
   isShow?: SFormDynamic<boolean>
   label?: string
+  /** 自定义标签渲染，可与 tooltip 同时使用。 */
   labelRender?: SFormRender
   labelSlotName?: string
-  /** 标签右侧提示图标的悬浮内容，支持函数动态返回 */
+  /** 标签右侧提示图标的悬浮内容，支持函数动态返回，可与 labelRender 或标签插槽同时使用。 */
   tooltip?: SFormDynamic<string>
   /** 透传给提示图标及 Tooltip 的属性，支持 dangerouslyUseHTMLString */
   tooltipAttrs?: SFormDynamic<SybzRecord>

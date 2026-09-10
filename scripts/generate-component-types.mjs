@@ -362,7 +362,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'form',
       description:
-        's-form 表单组件，支持 schema 字段编排、动态配置、字段标签 tooltip 提示及 dangerouslyUseHTMLString。',
+        's-form 表单组件，支持 schema 字段编排、动态配置、字段标签 tooltip 提示及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。',
       allowAnySlots: true,
       hoverProps: componentHoverProps('SFormProps', [
         'SFormContext',

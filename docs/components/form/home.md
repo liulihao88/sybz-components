@@ -126,7 +126,7 @@ form/trim
 
 ### 标签提示 `tooltip`（默认值为空）
 
-:::demo 展示标签右侧提示图标及 HTML 内容。基础写法：`{ label: '日期组件', prop: 'date', tooltip: '请选择业务发生日期' }`。属性：`tooltip` 类型为 `string / Function`，默认值为空；`tooltipAttrs` 类型为 `object / Function`，默认值为空；设置 `tooltipAttrs: { dangerouslyUseHTMLString: true }` 后支持 HTML 内容。HTML 字符串必须来自可信内容，禁止直接渲染未经处理的用户输入。
+:::demo 展示默认标签、自定义标签右侧的提示图标及 HTML 内容。`labelRender` 类型为 `Function`，默认值为空，可与 `tooltip`、`tooltipAttrs` 同时使用；标签插槽同样支持提示图标。基础写法：`{ label: '日期组件', prop: 'date', tooltip: '请选择业务发生日期' }`。属性：`tooltip` 类型为 `string / Function`，默认值为空；`tooltipAttrs` 类型为 `object / Function`，默认值为空；设置 `tooltipAttrs: { dangerouslyUseHTMLString: true }` 后支持 HTML 内容。HTML 字符串必须来自可信内容，禁止直接渲染未经处理的用户输入。
 form/tooltip
 :::
 
@@ -169,25 +169,26 @@ const fieldList: SFormFieldItem[] = [
 ]
 ```
 
-|    属性名     | 说明                                                                  | 类型                      | 默认值             |
-| :-----------: | --------------------------------------------------------------------- | ------------------------- | ------------------ |
-|     label     | 左侧显示的 label 值                                                   | string                    | -                  |
-|     prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                             | string                    | -                  |
-|     comp      | 要渲染的组件名称或组件对象                                            | string / Component        | `s-input`          |
-|     attrs     | 透传给表单控件；`type="title"` 时透传给 `s-title`，标题文案也写在这里 | object / Function         | -                  |
-| formItemAttrs | 透传给 `el-form-item`                                                 | object / Function         | -                  |
-|     rules     | 当前项校验规则，函数参数为表单上下文                                  | object / array / Function | -                  |
-|   required    | 快速生成必填规则；传字符串时作为错误提示                              | boolean / string          | -                  |
-| defaultValue  | 默认值，model 对应路径不存在时写入                                    | any                       | -                  |
-|    render     | 自定义内容渲染，参数为表单上下文                                      | Function                  | -                  |
-|    isShow     | 是否展示当前项，函数参数为表单上下文                                  | boolean / Function        | `true`             |
-|    useSlot    | 使用插槽渲染                                                          | boolean                   | `false`            |
-|   slotName    | 内容插槽名；未设置时使用 `prop`，`type="title"` 时也作为标题插槽名    | string                    | -                  |
-| labelSlotName | label 插槽名，未设置时使用 `${prop}-label`                            | string                    | -                  |
-|    tooltip    | 标签右侧提示图标的悬浮内容，支持函数动态返回                          | string / Function         | -                  |
-| tooltipAttrs  | 提示图标及 Tooltip 属性，支持 `dangerouslyUseHTMLString`              | object / Function         | -                  |
-|     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`     | string                    | -                  |
-|     trim      | 提交/校验前是否对当前字段去除前后空格，可覆盖表单级配置               | boolean                   | 跟随 `s-form.trim` |
+|    属性名     | 说明                                                                                | 类型                      | 默认值             |
+| :-----------: | ----------------------------------------------------------------------------------- | ------------------------- | ------------------ |
+|     label     | 左侧显示的 label 值                                                                 | string                    | -                  |
+|     prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                                           | string                    | -                  |
+|     comp      | 要渲染的组件名称或组件对象                                                          | string / Component        | `s-input`          |
+|     attrs     | 透传给表单控件；`type="title"` 时透传给 `s-title`，标题文案也写在这里               | object / Function         | -                  |
+| formItemAttrs | 透传给 `el-form-item`                                                               | object / Function         | -                  |
+|     rules     | 当前项校验规则，函数参数为表单上下文                                                | object / array / Function | -                  |
+|   required    | 快速生成必填规则；传字符串时作为错误提示                                            | boolean / string          | -                  |
+| defaultValue  | 默认值，model 对应路径不存在时写入                                                  | any                       | -                  |
+|    render     | 自定义内容渲染，参数为表单上下文                                                    | Function                  | -                  |
+|    isShow     | 是否展示当前项，函数参数为表单上下文                                                | boolean / Function        | `true`             |
+|    useSlot    | 使用插槽渲染                                                                        | boolean                   | `false`            |
+|   slotName    | 内容插槽名；未设置时使用 `prop`，`type="title"` 时也作为标题插槽名                  | string                    | -                  |
+| labelSlotName | label 插槽名，未设置时使用 `${prop}-label`                                          | string                    | -                  |
+|  labelRender  | 自定义标签渲染，可与 `tooltip` 同时使用，优先于标签插槽                             | Function                  | -                  |
+|    tooltip    | 标签右侧提示图标的悬浮内容，支持函数动态返回，可与 `labelRender` 或标签插槽同时使用 | string / Function         | -                  |
+| tooltipAttrs  | 提示图标及 Tooltip 属性，支持 `dangerouslyUseHTMLString`                            | object / Function         | -                  |
+|     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`                   | string                    | -                  |
+|     trim      | 提交/校验前是否对当前字段去除前后空格，可覆盖表单级配置                             | boolean                   | 跟随 `s-form.trim` |
 
 ## 表单上下文
 

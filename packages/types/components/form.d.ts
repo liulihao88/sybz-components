@@ -13,7 +13,7 @@ import type {
 type ElFormInstance = InstanceType<typeof ElForm>
 
 /**
- * s-form 表单组件，支持 schema 字段编排、动态配置、字段标签 tooltip 提示及 dangerouslyUseHTMLString。
+ * s-form 表单组件，支持 schema 字段编排、动态配置、字段标签 tooltip 提示及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Form 的公开属性。
  */

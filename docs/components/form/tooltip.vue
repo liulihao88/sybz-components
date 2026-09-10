@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { reactive } from 'vue'
 import type { SFormFieldItem } from 'sybz-components/types'
 
@@ -14,6 +14,14 @@ const fieldList: SFormFieldItem[] = [
   {
     label: '负责人',
     prop: 'owner',
+    labelRender: () => {
+      return (
+        <div>
+          <strong style="color: #f56c6c;">负责人：</strong>
+          <span>请填写业务实际负责人</span>
+        </div>
+      )
+    },
     tooltip: ({ model }) =>
       model.date
         ? `<strong style="color: #f56c6c;">当前日期：</strong>${model.date}`
