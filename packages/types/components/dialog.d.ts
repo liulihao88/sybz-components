@@ -96,6 +96,7 @@ export type SDialogComponent = {
       default?: () => any
       header?: () => any
       headerIcon?: () => any
+      append?: () => any
       footer?: () => any
       target?: () => any
     }

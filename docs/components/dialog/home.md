@@ -130,6 +130,14 @@ dialog/variant
 dialog/sybzTheme
 :::
 
+### 标题追加内容（append 默认无内容）
+
+使用 `<template #append>` 在主标题后追加按钮或标签，副标题仍显示在下一行。`title` 类型为 `string`，默认值为 `'提示'`；`subTitle` 类型为 `string`，默认值为 `''`。`append` 无插槽参数；使用 `header` 自定义整个标题内容区时，`append` 不生效。
+
+:::demo 点击标题后的添加按钮更新正文计数，副标题保持显示。
+dialog/append
+:::
+
 ### 全局默认配置
 
 dialog 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
@@ -180,9 +188,10 @@ app.use(SybzComponents, {
 
 ### Slots
 
-|   插槽名   | 说明                                                   |
-| :--------: | ------------------------------------------------------ |
-|   header   | 对话框标题内容区；只替换标题文字区域，默认 icon 仍保留 |
-| headerIcon | 对话框标题左侧 icon 内容                               |
-|   footer   | Dialog 按钮操作区的内容                                |
-|   target   | 删除场景中目标名称的自定义内容                         |
+|   插槽名   | 说明                                                       |
+| :--------: | ---------------------------------------------------------- |
+|   header   | 替换主标题和副标题，默认 icon 仍保留；使用后 append 不生效 |
+|   append   | 在主标题后追加内容，与标题同行，不影响副标题；无插槽参数   |
+| headerIcon | 对话框标题左侧 icon 内容                                   |
+|   footer   | Dialog 按钮操作区的内容                                    |
+|   target   | 删除场景中目标名称的自定义内容                             |

@@ -297,7 +297,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SDialogPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'dialog',
-      slots: ['default', 'header', 'headerIcon', 'footer', 'target'],
+      slots: ['default', 'header', 'headerIcon', 'append', 'footer', 'target'],
       hoverProps: {
         sourcePath: componentPropsPath,
         interfaceName: 'SDialogSelfProps',

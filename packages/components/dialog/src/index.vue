@@ -38,8 +38,13 @@
           </span>
           <span class="s-dialog__header-content">
             <slot name="header">
-              <span class="s-dialog__header-title">
-                {{ dialogTitle }}
+              <span class="s-dialog__header-title-row">
+                <span class="s-dialog__header-title">
+                  {{ dialogTitle }}
+                </span>
+                <span v-if="$slots.append" class="s-dialog__header-append">
+                  <slot name="append" />
+                </span>
               </span>
               <span v-if="mergedProps.subTitle" class="s-dialog__header-sub-title">
                 {{ mergedProps.subTitle }}
@@ -597,8 +602,23 @@ onBeforeUnmount(() => {
     word-break: break-word;
   }
 
+  .s-dialog__header-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
   .s-dialog__header-title {
+    min-width: 0;
     line-height: 22px;
+  }
+
+  .s-dialog__header-append {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
   }
 
   .s-dialog__header-sub-title {
