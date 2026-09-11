@@ -46,6 +46,12 @@ tabs/capsule
 tabs/capsuleOverflow
 :::
 
+### 胶囊类型主题圆角
+
+:::demo `capsule-theme` 保持胶囊类型的布局和交互，仅将圆角改为跟随当前主题的基础圆角。基础写法：`<s-tabs :options="navList" type="capsule-theme"></s-tabs>`。属性：`type` 可选 `capsule / capsule-theme`，默认值 `''`。
+tabs/capsuleTheme
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-tabs :options="navList" v-model="navName" @tabChange="tabChange"></s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。

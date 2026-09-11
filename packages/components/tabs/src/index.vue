@@ -30,7 +30,7 @@ defineOptions({
   inheritAttrs: false,
 })
 
-type TabsType = '' | 'capsule' | TabsPropsPublic['type']
+type TabsType = '' | 'capsule' | 'capsule-theme' | TabsPropsPublic['type']
 type TabsTheme = SybzComponentTheme
 type TabsValue = string | number | boolean | null | undefined
 
@@ -88,7 +88,8 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue'])
 const mergedProps = useGlobalComponentConfig('tabs', props)
 
-const isCapsuleType = computed(() => mergedProps.value.type === 'capsule')
+const isCapsuleType = computed(() => ['capsule', 'capsule-theme'].includes(mergedProps.value.type as string))
+const isThemeRadiusCapsule = computed(() => mergedProps.value.type === 'capsule-theme')
 const isChenghuaTheme = computed(() => mergedProps.value.theme === 'chenghua')
 const isShijingshanTheme = computed(() => mergedProps.value.theme === 'shijingshan')
 const isSybzTheme = computed(() => mergedProps.value.theme === 'sybz')
@@ -126,6 +127,7 @@ const tabsValue = computed({
 const boxClass = computed(() => [
   {
     's-tabs-box--capsule': isCapsuleType.value,
+    's-tabs-box--capsule-theme': isThemeRadiusCapsule.value,
     's-tabs-box--no-active': isCapsuleType.value && !hasActiveTab.value,
     's-tabs-box--has-width': Boolean(mergedProps.value.width),
     's-tabs-box--has-height': Boolean(mergedProps.value.height),
@@ -260,6 +262,11 @@ const handleMouseEnter = (tabVal: string) => {
   --s-tabs-capsule-item-gap: 4px;
   --s-tabs-capsule-outer-gap: 4px;
   --s-tabs-capsule-border-width: 1px;
+  --s-tabs-capsule-radius: 999px;
+
+  &.s-tabs-box--capsule-theme {
+    --s-tabs-capsule-radius: var(--s-theme-radius, 8px);
+  }
 
   &.s-tabs-box--size-small {
     --s-tabs-capsule-height: 40px;
@@ -341,7 +348,7 @@ const handleMouseEnter = (tabVal: string) => {
     margin-bottom: 0;
     padding: var(--s-tabs-capsule-outer-gap);
     border: var(--s-tabs-capsule-border-width) solid var(--s-tabs-capsule-border-color);
-    border-radius: 999px;
+    border-radius: var(--s-tabs-capsule-radius);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.28)), var(--s-tabs-capsule-bg);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.78),
@@ -357,7 +364,7 @@ const handleMouseEnter = (tabVal: string) => {
     bottom: 0;
     display: block;
     height: var(--s-tabs-capsule-height) !important;
-    border-radius: 999px;
+    border-radius: var(--s-tabs-capsule-radius);
     background: transparent !important;
     transition:
       width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
@@ -370,7 +377,7 @@ const handleMouseEnter = (tabVal: string) => {
     inset: 0 calc(var(--s-tabs-capsule-padding-x) * -1);
     box-sizing: border-box;
     border: 1px solid var(--s-tabs-capsule-active-border-color);
-    border-radius: inherit;
+    border-radius: var(--s-tabs-capsule-radius);
     background: var(--s-tabs-capsule-active-bg);
     box-shadow:
       0 2px 14px var(--s-tabs-capsule-active-shadow),
@@ -459,7 +466,7 @@ const handleMouseEnter = (tabVal: string) => {
     height: var(--s-tabs-capsule-height);
     padding: 0 var(--s-tabs-capsule-padding-x) !important;
     border: 0;
-    border-radius: 999px;
+    border-radius: var(--s-tabs-capsule-radius);
     color: var(--s-tabs-capsule-color);
     font-size: var(--s-tabs-capsule-font-size);
     font-weight: 700;

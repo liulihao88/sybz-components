@@ -945,7 +945,7 @@ export interface STabsSelfProps {
   value?: string
   subAttrs?: SybzRecord
   trigger?: 'click' | 'hover'
-  type?: '' | 'capsule' | TabsPropsPublic['type']
+  type?: '' | 'capsule' | 'capsule-theme' | TabsPropsPublic['type']
   theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
   width?: string | number
