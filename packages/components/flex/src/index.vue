@@ -78,7 +78,8 @@ function parseGapValue() {
   min-width: 0; /* Important for flex items to shrink properly */
 }
 
-.s-flex--gap > :deep(.el-button + .el-button) {
+.s-flex--gap > :deep(.el-button + .el-button),
+.s-flex--gap > :deep(.s-icon + .s-icon) {
   margin-left: 0;
 }
 </style>

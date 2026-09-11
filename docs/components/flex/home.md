@@ -36,6 +36,14 @@ flex/usually
 flex/size
 :::
 
+### 图标间距（gap 默认值：0px）
+
+基础写法：`<s-flex gap="12"><s-icon icon="Edit" /><s-icon icon="Delete" /></s-flex>`。`gap` 支持 `small / default / large`（8 / 16 / 24px）、数字和带单位的长度，默认值为 `0px`。
+
+:::demo 设置非零 gap 后，直接子级 s-icon 的默认相邻间距会被清除，横向和纵向间距统一由 gap 控制。未设置 gap 时保留图标默认的 8px 相邻间距。
+flex/iconGap
+:::
+
 ### API
 
 |   属性名    | 说明                                                                 | 类型               | 可选值                                                                                    | 默认值   |
