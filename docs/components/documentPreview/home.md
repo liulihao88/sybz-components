@@ -6,6 +6,14 @@
 documentPreview/base
 :::
 
+:::demo 本地pdf
+documentPreview/local
+:::
+
+:::demo 本地word
+documentPreview/localWord
+:::
+
 ### 属性
 
 | 属性               | 说明                                     | 类型                         | 默认值         |
