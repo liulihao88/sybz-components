@@ -13,17 +13,25 @@ defineOptions({
 })
 
 interface WrapperProps {
+  /** 容器宽度，支持数字、px、百分比等，默认空字符串 */
+  width?: string | number
+  /** 容器高度，支持数字、px、百分比等；百分比需要父容器具有明确高度，默认空字符串 */
+  height?: string | number
   gap?: string | number
   columns?: number | null
   minWidth?: string | number
 }
 
 const props = withDefaults(defineProps<WrapperProps>(), {
+  width: '',
+  height: '',
   gap: '16px',
   columns: null, // null 表示不分组，保持原样
   minWidth: 0,
 })
 
+const widthValue = computed(() => processWidth(props.width, true))
+const heightValue = computed(() => processWidth(props.height, true))
 const gapValue = computed(() => processWidth(props.gap, true))
 const minWidthValue = computed(() => processWidth(props.minWidth, true))
 
@@ -78,6 +86,9 @@ const validSlots = computed(() => {
 
 <style lang="scss" scoped>
 .s-wrapper {
+  width: v-bind(widthValue);
+  height: v-bind(heightValue);
+
   /* 默认 flex 布局（无 columns） */
   display: flex;
   flex-wrap: nowrap;

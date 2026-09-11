@@ -505,6 +505,8 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: resolve(rootDir, 'packages/types/component-props.d.ts'),
       typeName: 'SWrapperProps',
+      description:
+        's-wrapper 布局容器，width 和 height 支持数字、px、百分比等，默认不设置宽高；百分比高度需要父容器具有明确高度。',
       slots: ['default'],
       hoverProps: componentHoverProps('SWrapperProps'),
     },

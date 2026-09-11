@@ -444,10 +444,14 @@ declare module 'vue' {
     's-warning': (typeof import('./types/components/warning'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
+     *
+     * s-wrapper 布局容器，width 和 height 支持数字、px、百分比等，默认不设置宽高；百分比高度需要父容器具有明确高度。
      */
     SWrapper: (typeof import('./types/components/wrapper'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
+     *
+     * s-wrapper 布局容器，width 和 height 支持数字、px、百分比等，默认不设置宽高；百分比高度需要父容器具有明确高度。
      */
     's-wrapper': (typeof import('./types/components/wrapper'))['default']
   }

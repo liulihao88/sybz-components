@@ -32,10 +32,20 @@ wrapper/columns
 wrapper/scroll
 :::
 
+### 容器宽高（width / height 默认值：空字符串）
+
+基础写法：`<s-wrapper width="360" height="120">内容</s-wrapper>`。`width`、`height` 类型为 `string / number`，支持数字、数字字符串、px、rem、百分比等长度，默认值均为 `''`，不设置宽高。
+
+:::demo 数字和数字字符串自动补 px；百分比宽高相对于父容器计算，使用百分比高度时需为父容器设置明确高度。
+wrapper/size
+:::
+
 ### API
 
 |   属性名   | 说明                                           | 类型            | 默认值 |
 | :--------: | ---------------------------------------------- | --------------- | ------ |
+|  `width`   | 容器宽度，数字自动补 px，支持百分比等长度      | string / number | `''`   |
+|  `height`  | 容器高度，百分比需要父容器具有明确高度         | string / number | `''`   |
 |   `gap`    | 子项之间的间距，内部会经过 `processWidth` 处理 | string / number | `16px` |
 | `columns`  | 每行展示的列数；不传时保持横向 flex 布局       | number          | `null` |
 | `minWidth` | 子项最小宽度，内部会经过 `processWidth` 处理   | string / number | `0`    |
