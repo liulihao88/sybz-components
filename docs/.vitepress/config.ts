@@ -177,6 +177,10 @@ export default defineConfig({
               link: '/components/utils/sybzVitePlugins/home.md',
             },
             {
+              text: sybzMark('http 请求工具'),
+              link: '/components/utils/http/home.md',
+            },
+            {
               text: sybzMark('$toast 消息提示'),
               link: '/components/utils/$toast/home.md',
             },
