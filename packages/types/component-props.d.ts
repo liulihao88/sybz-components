@@ -938,6 +938,15 @@ export interface SMenuSelfProps {
 }
 export type SMenuProps = SMenuSelfProps & Partial<Omit<MenuProps, keyof SMenuSelfProps>>
 
+export interface SDocumentPreviewSelfProps {
+  src: string
+  type?: 'auto' | 'pdf' | 'word'
+  wordPreview?: 'office' | 'google' | 'download'
+  height?: string | number
+  width?: string | number
+  download?: boolean
+}
+
 export interface STabsSelfProps {
   modelValue?: string | number | boolean | null
   options?: any[]

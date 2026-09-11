@@ -139,6 +139,18 @@ declare module 'vue' {
      */
     's-dialog': (typeof import('./types/components/dialog'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/documentPreview/home.html
+     *
+     * 文档预览组件，支持 PDF 原生预览和 Word 在线预览，并提供下载兜底。
+     */
+    SDocumentPreview: (typeof import('./types/components/documentPreview'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/documentPreview/home.html
+     *
+     * 文档预览组件，支持 PDF 原生预览和 Word 在线预览，并提供下载兜底。
+     */
+    's-document-preview': (typeof import('./types/components/documentPreview'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/drawer/home.html
      */
     SDrawer: (typeof import('./types/components/drawer'))['default']
@@ -501,6 +513,10 @@ export type SDialogComponent = import('./types/components/dialog').SDialogCompon
 export type SDialogInstance = ComponentInstance<SDialogComponent>
 export type SDialogPublicProps = import('./types/components/dialog').SDialogPublicProps
 
+export type SDocumentPreviewComponent = import('./types/components/documentPreview').SDocumentPreviewComponent
+export type SDocumentPreviewInstance = ComponentInstance<SDocumentPreviewComponent>
+export type SDocumentPreviewPublicProps = import('./types/components/documentPreview').SDocumentPreviewPublicProps
+
 export type SDrawerComponent = import('./types/components/drawer').SDrawerComponent
 export type SDrawerInstance = ComponentInstance<SDrawerComponent>
 export type SDrawerPublicProps = import('./types/components/drawer').SDrawerPublicProps
@@ -647,6 +663,7 @@ declare global {
       's-date-picker': JSXComponentProps<SDatePickerPublicProps>
       's-descriptions': JSXComponentProps<SDescriptionsPublicProps>
       's-dialog': JSXComponentProps<SDialogPublicProps>
+      's-document-preview': JSXComponentProps<SDocumentPreviewPublicProps>
       's-drawer': JSXComponentProps<SDrawerPublicProps>
       's-empty': JSXComponentProps<SEmptyPublicProps>
       's-flex': JSXComponentProps<SFlexPublicProps>

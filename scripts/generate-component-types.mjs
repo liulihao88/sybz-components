@@ -79,6 +79,19 @@ const toOnlineDocsUrl = (docsPath) => `${onlineDocsBaseUrl}${docsPath.replace(/\
 
 const TYPED_COMPONENT_PROPS = new Map([
   [
+    'SDocumentPreview',
+    {
+      importPath: componentPropsPath,
+      typeName: 'SDocumentPreviewProps',
+      exportedComponentTypeName: 'SDocumentPreviewComponent',
+      publicPropsTypeName: 'SDocumentPreviewPublicProps',
+      useDefaultExportForGlobal: true,
+      explicitComponentType: 'documentPreview',
+      description: '文档预览组件，支持 PDF 原生预览和 Word 在线预览，并提供下载兜底。',
+      hoverProps: componentHoverProps('SDocumentPreviewSelfProps', ['SDocumentPreviewSelfProps']),
+    },
+  ],
+  [
     'SPagination',
     {
       importPath: componentPropsPath,

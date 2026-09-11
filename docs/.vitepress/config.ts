@@ -430,6 +430,10 @@ export default defineConfig({
               text: sybzMark('STableSearch表格搜索组件'),
               link: '/components/tableSearch/home.md',
             },
+            {
+              text: sybzMark('documentPreview文档预览组件'),
+              link: '/components/documentPreview/home.md',
+            },
           ],
         },
         {
