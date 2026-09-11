@@ -1,14 +1,20 @@
 # document-preview 文档预览组件
 
-## 基础用法
+##
 
-:::demo PDF 使用浏览器原生预览；Word 默认使用 Office Online，文件地址必须可被公网访问。基础写法：`<s-document-preview src="文件地址" />`。
+### 基础用法
+
+:::demo PDF 使用浏览器原生预览；Word 使用浏览器端渲染，不要求文件公网可访问。基础写法：`<s-document-preview src="文件地址" />`。
 documentPreview/base
 :::
+
+### 本地pdf
 
 :::demo 本地pdf
 documentPreview/local
 :::
+
+### 本地word
 
 :::demo 本地word
 documentPreview/localWord

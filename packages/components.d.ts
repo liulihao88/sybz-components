@@ -141,13 +141,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/documentPreview/home.html
      *
-     * 文档预览组件，支持 PDF 原生预览和 Word 在线预览，并提供下载兜底。
+     * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。
      */
     SDocumentPreview: (typeof import('./types/components/documentPreview'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/documentPreview/home.html
      *
-     * 文档预览组件，支持 PDF 原生预览和 Word 在线预览，并提供下载兜底。
+     * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。
      */
     's-document-preview': (typeof import('./types/components/documentPreview'))['default']
     /**

@@ -87,7 +87,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SDocumentPreviewPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'documentPreview',
-      description: '文档预览组件，支持 PDF 原生预览和 Word 在线预览，并提供下载兜底。',
+      description: '文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。',
       hoverProps: componentHoverProps('SDocumentPreviewSelfProps', ['SDocumentPreviewSelfProps']),
     },
   ],

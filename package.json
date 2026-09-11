@@ -203,7 +203,13 @@
     "llh"
   ],
   "peerDependencies": {
+    "docx-preview": "^0.4.0",
     "element-plus": ">=2.3.0 <3",
     "vue": ">=3.4.0 <4"
+  },
+  "peerDependenciesMeta": {
+    "docx-preview": {
+      "optional": true
+    }
   }
 }
