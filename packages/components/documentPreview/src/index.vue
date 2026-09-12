@@ -85,8 +85,6 @@ const renderWord = async () => {
 const renderExcel = async () => {
   if (!isExcel.value || !excelRef.value) return
   try {
-    console.log(`1174 79行 packages/components/documentPreview/src/index.vue 111 `, 111)
-
     failed.value = false
     excelRef.value.replaceChildren()
     if (!xlsxModule) {
@@ -95,9 +93,7 @@ const renderExcel = async () => {
     }
     const response = await fetch(props.src)
     if (!response.ok) throw new Error('Excel 文件加载失败')
-    console.log(`2286 89行 packages/components/documentPreview/src/index.vue 222 `, 222)
-
-    const workbook = xlsxModule.read(await response.arrayBuffer(), { type: 'array' })
+    const workbook = xlsxModule.read(await response.arrayBuffer(), { type: 'array', cellStyles: true })
     workbook.SheetNames.forEach((sheetName) => {
       const section = document.createElement('section')
       section.className = 's-document-preview__sheet'
@@ -106,10 +102,44 @@ const renderExcel = async () => {
       section.append(title)
       const table = document.createElement('div')
       const sheet = workbook.Sheets[sheetName]
-      table.innerHTML = sheet?.['!ref'] ? xlsxModule.utils.sheet_to_html(sheet) : '<p>空白工作表</p>'
+      if (sheet?.['!ref']) {
+        table.innerHTML = xlsxModule.utils.sheet_to_html(sheet)
+        const htmlTable = table.querySelector('table')
+        if (htmlTable) {
+          htmlTable.className = 's-document-preview__table'
+          sheet['!cols']?.forEach((column, index) => {
+            if (column?.wch)
+              htmlTable.querySelectorAll(`tr > :nth-child(${index + 1})`).forEach((cell) => {
+                ;(cell as HTMLElement).style.width = `${Math.max(column.wch! * 8, 60)}px`
+              })
+          })
+          sheet['!rows']?.forEach((row, index) => {
+            if (row?.hpt)
+              htmlTable.querySelectorAll(`tr:nth-child(${index + 1})`).forEach((tr) => {
+                ;(tr as HTMLElement).style.height = `${row.hpt}px`
+              })
+          })
+          Object.keys(sheet).forEach((address) => {
+            if (address.startsWith('!')) return
+            const cell = sheet[address]
+            const element = htmlTable.querySelector<HTMLElement>(`#sjs-${address}`)
+            if (!element || !cell?.s) return
+            const style = cell.s
+            const fill = style.fgColor?.rgb || style.bgColor?.rgb
+            if (fill) element.style.backgroundColor = `#${fill.slice(-6)}`
+            if (style.font?.bold) element.style.fontWeight = '700'
+            if (style.font?.italic) element.style.fontStyle = 'italic'
+            if (style.font?.sz) element.style.fontSize = `${style.font.sz}pt`
+            if (style.font?.color?.rgb) element.style.color = `#${style.font.color.rgb.slice(-6)}`
+            if (style.alignment?.horizontal) element.style.textAlign = style.alignment.horizontal
+            if (style.alignment?.vertical) element.style.verticalAlign = style.alignment.vertical
+            if (style.alignment?.wrapText) element.style.whiteSpace = 'pre-wrap'
+          })
+        }
+      } else {
+        table.innerHTML = '<p>空白工作表</p>'
+      }
       section.append(table)
-      console.log(`29 table`, table)
-      console.log(`93 section`, section)
       excelRef.value?.append(section)
     })
   } catch (error) {
@@ -205,6 +235,7 @@ const frameStyle = computed(() => ({
 .s-document-preview__excel :deep(table) {
   border-collapse: collapse;
   font-size: 13px;
+  background: #fff;
 }
 .s-document-preview__excel :deep(td),
 .s-document-preview__excel :deep(th) {
@@ -212,6 +243,10 @@ const frameStyle = computed(() => ({
   padding: 6px 8px;
   border: 1px solid var(--el-border-color-light);
   white-space: pre-wrap;
+}
+.s-document-preview__excel :deep(td:empty),
+.s-document-preview__excel :deep(th:empty) {
+  min-width: 24px;
 }
 .s-document-preview__word :deep(.docx-wrapper) {
   padding: 0;
