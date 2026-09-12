@@ -4,7 +4,7 @@ import { renderAsync } from 'docx-preview'
 
 defineOptions({ name: 'SDocumentPreview' })
 
-type DocumentPreviewType = 'auto' | 'pdf' | 'word'
+type DocumentPreviewType = 'auto' | 'pdf' | 'word' | 'excel'
 
 const props = withDefaults(
   defineProps<{
@@ -20,6 +20,8 @@ const props = withDefaults(
 const failed = ref(false)
 const detectedType = ref<DocumentPreviewType>()
 const wordRef = ref<HTMLElement>()
+const excelRef = ref<HTMLElement>()
+let xlsxModule: typeof import('xlsx') | undefined
 const pathname = computed(() => {
   try {
     return new URL(props.src, window.location.href).pathname
@@ -29,7 +31,11 @@ const pathname = computed(() => {
 })
 const ext = computed(() => pathname.value.split('.').pop()?.toLowerCase())
 const activeType = ref<DocumentPreviewType>(
-  props.type === 'pdf' && ['doc', 'docx'].includes(ext.value) ? 'word' : props.type,
+  props.type === 'pdf' && ['doc', 'docx'].includes(ext.value)
+    ? 'word'
+    : props.type === 'pdf' && ['xls', 'xlsx', 'xlsm'].includes(ext.value)
+      ? 'excel'
+      : props.type,
 )
 const isPdf = computed(
   () =>
@@ -40,6 +46,12 @@ const isWord = computed(
   () =>
     activeType.value === 'word' ||
     (activeType.value === 'auto' && (['doc', 'docx'].includes(ext.value || '') || detectedType.value === 'word')),
+)
+const isExcel = computed(
+  () =>
+    activeType.value === 'excel' ||
+    (activeType.value === 'auto' &&
+      (['xls', 'xlsx', 'xlsm'].includes(ext.value || '') || detectedType.value === 'excel')),
 )
 const detectType = async () => {
   if (activeType.value !== 'auto' || ext.value) return
@@ -52,6 +64,7 @@ const detectType = async () => {
     const response = await fetch(props.src, { method: 'HEAD' })
     const contentType = response.headers.get('content-type') || ''
     if (contentType.includes('application/pdf')) detectedType.value = 'pdf'
+    else if (contentType.includes('spreadsheet') || contentType.includes('excel')) detectedType.value = 'excel'
     else if (contentType.includes('word') || contentType.includes('officedocument')) detectedType.value = 'word'
   } catch {
     // 跨域无法读取响应头时，保留下载兜底。
@@ -69,15 +82,56 @@ const renderWord = async () => {
     failed.value = true
   }
 }
+const renderExcel = async () => {
+  if (!isExcel.value || !excelRef.value) return
+  try {
+    console.log(`1174 79行 packages/components/documentPreview/src/index.vue 111 `, 111)
+
+    failed.value = false
+    excelRef.value.replaceChildren()
+    if (!xlsxModule) {
+      const loadedXlsx = await import('xlsx')
+      xlsxModule = (loadedXlsx.default ?? loadedXlsx) as typeof import('xlsx')
+    }
+    const response = await fetch(props.src)
+    if (!response.ok) throw new Error('Excel 文件加载失败')
+    console.log(`2286 89行 packages/components/documentPreview/src/index.vue 222 `, 222)
+
+    const workbook = xlsxModule.read(await response.arrayBuffer(), { type: 'array' })
+    workbook.SheetNames.forEach((sheetName) => {
+      const section = document.createElement('section')
+      section.className = 's-document-preview__sheet'
+      const title = document.createElement('h3')
+      title.textContent = sheetName
+      section.append(title)
+      const table = document.createElement('div')
+      const sheet = workbook.Sheets[sheetName]
+      table.innerHTML = sheet?.['!ref'] ? xlsxModule.utils.sheet_to_html(sheet) : '<p>空白工作表</p>'
+      section.append(table)
+      console.log(`29 table`, table)
+      console.log(`93 section`, section)
+      excelRef.value?.append(section)
+    })
+  } catch (error) {
+    console.error('[s-document-preview] Excel 文件预览失败', error)
+    failed.value = true
+  }
+}
 onMounted(renderWord)
+onMounted(renderExcel)
 onMounted(detectType)
 watch(
   () => props.src,
-  () => nextTick(renderWord),
+  () =>
+    nextTick(() => {
+      renderWord()
+      renderExcel()
+    }),
 )
 watch(() => props.src, detectType)
 watch(detectedType, () => nextTick(renderWord))
 watch(isWord, () => nextTick(renderWord))
+watch(isExcel, () => nextTick(renderExcel))
 watch(
   () => props.type,
   (value) => {
@@ -88,7 +142,12 @@ watch(
 watch(
   () => props.src,
   () => {
-    activeType.value = props.type === 'pdf' && ['doc', 'docx'].includes(ext.value) ? 'word' : props.type
+    activeType.value =
+      props.type === 'pdf' && ['doc', 'docx'].includes(ext.value)
+        ? 'word'
+        : props.type === 'pdf' && ['xls', 'xlsx', 'xlsm'].includes(ext.value)
+          ? 'excel'
+          : props.type
     failed.value = false
   },
 )
@@ -104,6 +163,7 @@ const frameStyle = computed(() => ({
       <iframe :src="src" title="PDF 预览" frameborder="0" @error="activeType = 'word'" />
     </div>
     <div v-else-if="isWord && !failed" ref="wordRef" class="s-document-preview__word" />
+    <div v-else-if="isExcel && !failed" ref="excelRef" class="s-document-preview__excel" />
     <div v-else class="s-document-preview__fallback">
       <slot name="fallback">当前环境无法在线预览，请下载文件后查看。</slot>
       <a v-if="download" :href="src" target="_blank" rel="noopener noreferrer" download>下载文件</a>
@@ -129,6 +189,29 @@ const frameStyle = computed(() => ({
   min-height: 100%;
   padding: 24px;
   background: #f5f6f8;
+}
+.s-document-preview__excel {
+  min-height: 100%;
+  padding: 16px;
+  overflow: auto;
+}
+.s-document-preview__sheet + .s-document-preview__sheet {
+  margin-top: 24px;
+}
+.s-document-preview__sheet h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+.s-document-preview__excel :deep(table) {
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.s-document-preview__excel :deep(td),
+.s-document-preview__excel :deep(th) {
+  min-width: 80px;
+  padding: 6px 8px;
+  border: 1px solid var(--el-border-color-light);
+  white-space: pre-wrap;
 }
 .s-document-preview__word :deep(.docx-wrapper) {
   padding: 0;

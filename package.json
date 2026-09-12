@@ -186,7 +186,8 @@
     "vue": "^3.4.15",
     "vue-eslint-parser": "10.4.1",
     "vue-router": "^4.2.5",
-    "vue-tsc": "^3.1.5"
+    "vue-tsc": "^3.1.5",
+    "xlsx": "^0.18.5"
   },
   "repository": {
     "type": "git",
@@ -205,10 +206,14 @@
   "peerDependencies": {
     "docx-preview": "^0.4.0",
     "element-plus": ">=2.3.0 <3",
+    "xlsx": "^0.18.5",
     "vue": ">=3.4.0 <4"
   },
   "peerDependenciesMeta": {
     "docx-preview": {
+      "optional": true
+    },
+    "xlsx": {
       "optional": true
     }
   }

@@ -11,7 +11,7 @@ export type SDocumentPreviewComponent = {
   new (): {
     $props: {
       src: string
-      type?: 'auto' | 'pdf' | 'word'
+      type?: 'auto' | 'pdf' | 'word' | 'excel'
       height?: string | number
       width?: string | number
       download?: boolean

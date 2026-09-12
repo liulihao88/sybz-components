@@ -940,7 +940,7 @@ export type SMenuProps = SMenuSelfProps & Partial<Omit<MenuProps, keyof SMenuSel
 
 export interface SDocumentPreviewSelfProps {
   src: string
-  type?: 'auto' | 'pdf' | 'word'
+  type?: 'auto' | 'pdf' | 'word' | 'excel'
   height?: string | number
   width?: string | number
   download?: boolean
