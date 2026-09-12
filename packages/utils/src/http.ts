@@ -2,6 +2,7 @@ import axios, {
   AxiosError,
   AxiosHeaders,
   type AxiosInstance,
+  type InternalAxiosRequestConfig,
   type AxiosRequestConfig,
   type AxiosResponse,
   type CreateAxiosDefaults,
@@ -111,13 +112,13 @@ export function createHttp<D = unknown>(options: CreateHttpOptions<D> = {}): Htt
   }
   instance.interceptors.request.use((config) => {
     const requestConfig = config as HttpRequestConfig
-    requestConfig.headers = AxiosHeaders.from(requestConfig.headers)
+    requestConfig.headers = AxiosHeaders.from(requestConfig.headers as Parameters<typeof AxiosHeaders.from>[0])
     if (!requestConfig.skipAuth) {
       const token = getToken?.()
       if (token && !requestConfig.headers.has('Authorization'))
         requestConfig.headers.set('Authorization', `Bearer ${token}`)
     }
-    return (onRequest?.(requestConfig) as typeof requestConfig) || requestConfig
+    return ((onRequest?.(requestConfig) as typeof requestConfig) || requestConfig) as InternalAxiosRequestConfig
   })
   instance.interceptors.response.use(
     (response) => {
