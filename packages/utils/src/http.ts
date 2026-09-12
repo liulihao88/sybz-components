@@ -7,11 +7,15 @@ import axios, {
   type CreateAxiosDefaults,
   type Method,
 } from 'axios'
+import { $toast } from './base'
 
 export interface HttpRequestConfig<D = unknown> extends AxiosRequestConfig<D> {
   rawResponse?: boolean
   skipAuth?: boolean
-  skipErrorToast?: boolean
+  /** 是否显示当前请求的错误提示；默认继承全局配置。 */
+  showErrorToast?: boolean
+  /** 当前请求的自定义错误文案。 */
+  message?: string | ((error: HttpError) => string)
 }
 
 export class HttpError<T = unknown> extends Error {
@@ -34,7 +38,7 @@ export interface CreateHttpOptions<D = unknown> extends CreateAxiosDefaults<D> {
   getBusinessMessage?: (data: unknown, fallback: string) => string
   /** 统一转换响应体，适用于 { data: ... } 等包装格式。 */
   transformResponseData?: (data: D, response: AxiosResponse<D>) => unknown
-  /** 是否自动使用 $toast 提示错误。 */
+  /** 是否自动使用 $toast.error 提示错误；默认 `true`。 */
   showErrorToast?: boolean
   toast?: (message: string) => void
   normalizeError?: (error: unknown) => HttpError
@@ -49,9 +53,11 @@ export interface CreateHttpOptions<D = unknown> extends CreateAxiosDefaults<D> {
 }
 
 export type HttpClient = Omit<AxiosInstance, 'get' | 'post' | 'put' | 'patch' | 'delete'> & {
+  <T = unknown, D = unknown>(url: string, config?: HttpRequestConfig<D>): Promise<T>
   <T = unknown, D = unknown>(url: string, params?: unknown, config?: HttpRequestConfig<D>): Promise<T>
   send<T = unknown, D = unknown>(config: HttpRequestConfig<D> & { rawResponse: true }): Promise<AxiosResponse<T>>
   send<T = unknown, D = unknown>(config: HttpRequestConfig<D> & { rawResponse?: false }): Promise<T>
+  get<T = unknown>(url: string, config?: HttpRequestConfig): Promise<T>
   get<T = unknown>(url: string, params?: unknown, config?: HttpRequestConfig): Promise<T>
   post<T = unknown, D = unknown>(url: string, data?: D, config?: HttpRequestConfig<D>): Promise<T>
   put<T = unknown, D = unknown>(url: string, data?: D, config?: HttpRequestConfig<D>): Promise<T>
@@ -73,8 +79,8 @@ export function createHttp<D = unknown>(options: CreateHttpOptions<D> = {}): Htt
     isBusinessSuccess = (data) => !(record(data) && data.success === false),
     getBusinessMessage = defaultMessage,
     transformResponseData,
-    showErrorToast = false,
-    toast,
+    showErrorToast = true,
+    toast = (message) => $toast.error(message),
     normalizeError,
     getToken,
     onRequest,
@@ -132,8 +138,11 @@ export function createHttp<D = unknown>(options: CreateHttpOptions<D> = {}): Htt
     async (error) => {
       const normalized = normalizeError ? normalizeError(error) : normalize(error)
       const response = axios.isAxiosError(error) ? error.response : undefined
-      if (showErrorToast && !(response?.config as HttpRequestConfig | undefined)?.skipErrorToast)
-        toast?.(normalized.message)
+      const requestConfig = response?.config as HttpRequestConfig | undefined
+      const customMessage = requestConfig?.message
+      const message =
+        typeof customMessage === 'function' ? customMessage(normalized) : customMessage || normalized.message
+      if (requestConfig?.showErrorToast ?? showErrorToast) toast?.(message)
       await onError?.(normalized, response)
       throw normalized
     },
@@ -142,11 +151,19 @@ export function createHttp<D = unknown>(options: CreateHttpOptions<D> = {}): Htt
     const response = await instance.request<T, AxiosResponse<T>, B>(config)
     return config.rawResponse ? response : response.data
   }
-  const request = (url: string, params?: unknown, config: HttpRequestConfig = {}) =>
-    send({ ...config, method: 'GET', url, params, rawResponse: false }) as Promise<unknown>
+  const isRequestConfig = (value: unknown): value is HttpRequestConfig =>
+    record(value) &&
+    ['url', 'method', 'headers', 'timeout', 'rawResponse', 'skipAuth', 'showErrorToast', 'message'].some(
+      (key) => key in value,
+    )
+  const request = (url: string, paramsOrConfig?: unknown, config: HttpRequestConfig = {}) => {
+    const params = isRequestConfig(paramsOrConfig) ? undefined : paramsOrConfig
+    const requestConfig = isRequestConfig(paramsOrConfig) ? paramsOrConfig : config
+    return send({ ...requestConfig, method: 'GET', url, params, rawResponse: false }) as Promise<unknown>
+  }
   const client = Object.assign(request, instance, {
     send,
-    get: (url: string, params?: unknown, config?: HttpRequestConfig) => request(url, params, config),
+    get: (url: string, paramsOrConfig?: unknown, config?: HttpRequestConfig) => request(url, paramsOrConfig, config),
     post: (url: string, data?: unknown, config?: HttpRequestConfig) =>
       send({ ...config, method: 'POST' as Method, url, data, rawResponse: false }),
     put: (url: string, data?: unknown, config?: HttpRequestConfig) =>
@@ -161,4 +178,10 @@ export function createHttp<D = unknown>(options: CreateHttpOptions<D> = {}): Htt
   return client
 }
 
-export const http = createHttp()
+/** 全局 HTTP 客户端；通过 configureUtils({ http: ... }) 配置一次。 */
+export let http: HttpClient = createHttp()
+
+export function configureHttp(options: CreateHttpOptions = {}): HttpClient {
+  http = createHttp(options)
+  return http
+}

@@ -12,7 +12,7 @@ utils/http/base
 
 ### 说明
 
-`http` 是基于 Axios 的请求封装，默认返回响应体数据，并统一处理业务失败和网络错误。也可以使用 `createHttp` 创建带有 `baseURL`、请求头、错误提示和响应转换配置的客户端。
+`http` 是基于 Axios 的全局请求封装，默认返回响应体数据，并统一处理业务失败和网络错误。应用入口通过 `configureUtils({ http: ... })` 配置一次后，业务代码直接引入 `http` 使用；需要创建隔离客户端时仍可使用 `createHttp`。
 
 ### 调用形式
 
@@ -40,19 +40,32 @@ createHttp(options?)
 
 ### createHttp 配置
 
-| 配置项                  | 类型                            | 默认值                            | 说明                            |
-| ----------------------- | ------------------------------- | --------------------------------- | ------------------------------- |
-| `isBusinessSuccess`     | `(data, response) => boolean`   | `data.success !== false`          | 返回 `false` 时视为业务失败。   |
-| `getBusinessMessage`    | `(data, fallback) => string`    | 读取 `detail`、`error`、`message` | 提取业务错误文案。              |
-| `transformResponseData` | `(data, response) => unknown`   | 未设置                            | 统一转换响应体。                |
-| `showErrorToast`        | `boolean`                       | `false`                           | 是否自动调用 `toast` 提示错误。 |
-| `toast`                 | `(message: string) => void`     | 未设置                            | 错误提示函数。                  |
-| `normalizeError`        | `(error: unknown) => HttpError` | 内置转换                          | 自定义错误转换。                |
+| 配置项                  | 类型                            | 默认值                            | 说明                                   |
+| ----------------------- | ------------------------------- | --------------------------------- | -------------------------------------- |
+| `isBusinessSuccess`     | `(data, response) => boolean`   | `data.success !== false`          | 返回 `false` 时视为业务失败。          |
+| `getBusinessMessage`    | `(data, fallback) => string`    | 读取 `detail`、`error`、`message` | 提取业务错误文案。                     |
+| `transformResponseData` | `(data, response) => unknown`   | 未设置                            | 统一转换响应体。                       |
+| `showErrorToast`        | `boolean`                       | `true`                            | 是否自动调用 `$toast.error` 提示错误。 |
+| `toast`                 | `(message: string) => void`     | `$toast.error`                    | 自定义错误提示函数。                   |
+| `normalizeError`        | `(error: unknown) => HttpError` | 内置转换                          | 自定义错误转换。                       |
+
+每个请求都可以单独控制错误提示：
+
+```ts
+await http.get('/users', { showErrorToast: false })
+await http.get('/users', { message: '用户列表加载失败' })
+await http.get('/users', {
+  message: (error) => `请求失败：${error.status ?? '网络异常'}`,
+})
+```
 
 ### 常用场景
 
 ```ts
-import { createHttp, http, type HttpError } from '@sybz-components/utils'
+import { configureUtils, http, type HttpError } from '@sybz-components/utils'
+
+// 应用入口配置一次
+configureUtils({ http: { baseURL: '/api' } })
 
 const users = await http.get<User[]>('/api/users', { page: 1 })
 await http.post('/api/users', { name: '张三' })
@@ -64,15 +77,8 @@ const response = await http.send<{ id: number }>({
 })
 console.log(response.status, response.data)
 
-const client = createHttp({
-  baseURL: '/api',
-  showErrorToast: true,
-  toast: (message) => console.error(message),
-  transformResponseData: (data) => (data as { data: unknown }).data,
-})
-
 try {
-  await client.delete('/users/1')
+  await http.delete('/users/1')
 } catch (error) {
   const requestError = error as HttpError
   console.log(requestError.status, requestError.message)
@@ -83,7 +89,7 @@ const file = await http.download('/api/export', { type: 'xlsx' })
 
 ### 返回值
 
-普通请求返回响应体数据；`rawResponse: true` 返回 Axios `AxiosResponse`；`download` 返回 `Blob`。请求失败时抛出 `HttpError`，包含 `status`、`code`、`data` 和 `cause`。
+普通请求返回响应体数据；`rawResponse: true` 返回 Axios `AxiosResponse`；`download` 返回 `Blob`。请求失败时默认通过 `$toast.error` 提示并抛出 `HttpError`，包含 `status`、`code`、`data` 和 `cause`。
 
 :::utils-source http
 :::

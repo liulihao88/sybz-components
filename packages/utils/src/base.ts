@@ -8,6 +8,7 @@ import { formatTime } from './format'
 import { resolveConfirmSemantic } from './confirmSemantic'
 import type { ConfirmTarget, ConfirmVariant } from './confirmSemantic'
 import { ElMessage, ElMessageBox, type ElMessageBoxOptions, type MessageOptions } from 'element-plus'
+import { configureHttp, type CreateHttpOptions } from './http'
 
 export type { ConfirmTarget, ConfirmVariant } from './confirmSemantic'
 
@@ -43,6 +44,8 @@ export interface SybzUtilsConfig {
    * 工具函数的默认主题。
    */
   theme?: UtilsTheme
+  /** HTTP 客户端的全局配置，应用入口配置一次即可。 */
+  http?: CreateHttpOptions
 }
 
 export interface ToastOptions extends Partial<MessageOptions> {
@@ -202,6 +205,7 @@ const SHIJINGSHAN_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--shijingshan'
 const SYBZ_CANCEL_BUTTON_CLASS = 's-message-box__cancel-btn--sybz'
 const utilsConfig: Required<SybzUtilsConfig> = {
   theme: 'default',
+  http: {},
 }
 
 /**
@@ -215,6 +219,10 @@ const utilsConfig: Required<SybzUtilsConfig> = {
 export function configureUtils(config: SybzUtilsConfig): Readonly<Required<SybzUtilsConfig>> {
   if (config.theme !== undefined) {
     utilsConfig.theme = config.theme
+  }
+  if (config.http !== undefined) {
+    utilsConfig.http = config.http
+    configureHttp(config.http)
   }
   return { ...utilsConfig }
 }

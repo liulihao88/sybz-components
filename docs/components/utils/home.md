@@ -13,7 +13,13 @@
 ```ts
 import { configureUtils } from '@sybz-components/utils'
 
-configureUtils({ theme: 'shijingshan' })
+configureUtils({
+  theme: 'shijingshan',
+  http: {
+    baseURL: '/api',
+    getToken: () => localStorage.getItem('token'),
+  },
+})
 ```
 
 配置后，`confirm` 和 `$toast` 无需重复传入主题：
@@ -25,6 +31,14 @@ $toast('删除成功')
 // 单次覆盖全局主题
 $toast({ message: '使用成华主题', theme: 'chenghua' })
 await confirm('使用默认主题', { theme: 'default' })
+```
+
+`http` 也在这里配置一次，之后直接从 `@sybz-components/utils` 引入全局客户端：
+
+```ts
+import { http } from '@sybz-components/utils'
+
+const users = await http.get('/users')
 ```
 
 ### 导出入口
