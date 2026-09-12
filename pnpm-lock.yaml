@@ -15,8 +15,8 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1(vue@3.4.15(typescript@5.3.3))
       '@sybz-components/utils':
-        specifier: ^1.0.11
-        version: 1.0.11(jiti@2.7.0)(typescript@5.3.3)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
+        specifier: ^1.0.12
+        version: 1.0.12(jiti@2.7.0)(typescript@5.3.3)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
       docx-preview:
         specifier: ^0.4.0
         version: 0.4.0
@@ -1574,8 +1574,8 @@ packages:
   '@sxzz/popperjs-es@2.11.8':
     resolution: {integrity: sha512-wOwESXvvED3S8xBmcPWHs2dUuzrE4XiZeFu7e1hROIJkm02a49N120pmOXxY33sBb6hArItm5W5tcg1cBtV+HQ==}
 
-  '@sybz-components/utils@1.0.11':
-    resolution: {integrity: sha512-8nfm3eaQNUl+o1l/mloTBxkmTl3NeagWvuOgPlpmjUbxsn1SD2/1FbHstb32xdP6ZE7XwuwemSYm0PmVgxQsTw==}
+  '@sybz-components/utils@1.0.12':
+    resolution: {integrity: sha512-EAkaK/uwfVTnKPgDwfTTsdLAu8cTMQI5EGn5ZPxdPuynU6zyMYGeLuA63Gg/B1tTDpBeqKRya/OjfOKZajNLyg==}
     hasBin: true
     peerDependencies:
       vite: '>=5 <8'
@@ -6429,7 +6429,7 @@ snapshots:
 
   '@sxzz/popperjs-es@2.11.8': {}
 
-  '@sybz-components/utils@1.0.11(jiti@2.7.0)(typescript@5.3.3)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))':
+  '@sybz-components/utils@1.0.12(jiti@2.7.0)(typescript@5.3.3)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))':
     dependencies:
       '@eslint/js': 9.39.4
       '@tailwindcss/vite': 4.3.3(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
@@ -6437,6 +6437,7 @@ snapshots:
       '@typescript-eslint/parser': 8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.3.3)
       '@vue/reactivity': 3.5.42
       '@vue/shared': 3.5.42
+      axios: 1.20.0
       code-inspector-plugin: 0.10.1
       consola: 3.4.2
       element-plus: 2.13.0(vue@3.4.15(typescript@5.3.3))
@@ -6456,6 +6457,7 @@ snapshots:
     transitivePeerDependencies:
       - '@stylistic/eslint-plugin'
       - '@vue/composition-api'
+      - debug
       - jiti
       - supports-color
       - typescript
@@ -7362,7 +7364,7 @@ snapshots:
     dependencies:
       bumpp: 8.2.1
       callsites: 4.1.0
-      inferred-types: 0.37.6
+      inferred-types: 0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
       vitest: 0.25.8(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -8752,10 +8754,6 @@ snapshots:
       resolve-from: 4.0.0
 
   imurmurhash@0.1.4: {}
-
-  inferred-types@0.37.6:
-    dependencies:
-      brilliant-errors: 0.7.3(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
 
   inferred-types@0.37.6(happy-dom@12.10.3)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1):
     dependencies:
