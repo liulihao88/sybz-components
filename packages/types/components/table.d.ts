@@ -21,6 +21,8 @@ export type STableComponent = {
       showIndex?: boolean
       size?: string
       theme?: SybzComponentTheme
+      background?: string
+      transparent?: boolean
       pageSize?: number
       pageNumber?: number
       pageSizes?: number[]
@@ -41,6 +43,8 @@ export type STableComponent = {
       | 'showIndex'
       | 'size'
       | 'theme'
+      | 'background'
+      | 'transparent'
       | 'pageSize'
       | 'pageNumber'
       | 'pageSizes'

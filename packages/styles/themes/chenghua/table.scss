@@ -1,6 +1,6 @@
 .s-table.s-table--chenghua.s-table--chenghua {
   border-radius: var(--s-ch-radius);
-  background: var(--s-ch-table-header-bg) !important;
+  background: var(--s-table-background, var(--s-ch-table-header-bg)) !important;
   color: var(--s-ch-text);
 
   .el-table {
@@ -16,14 +16,14 @@
     border-color: transparent;
     box-shadow: 0 8px 24px rgba(var(--s-ch-primary-rgb), 0.08) !important;
     overflow: hidden;
-    background: var(--s-ch-table-header-bg) !important;
+    background: var(--s-table-background, var(--s-ch-table-header-bg)) !important;
   }
 
   .el-table__inner-wrapper {
     overflow: hidden;
     border-top-left-radius: var(--s-ch-radius);
     border-top-right-radius: var(--s-ch-radius);
-    background: var(--s-ch-table-header-bg) !important;
+    background: var(--s-table-background, var(--s-ch-table-header-bg)) !important;
   }
 
   .el-table__header-wrapper,
@@ -52,7 +52,7 @@
   .el-table__fixed-right .el-table__fixed-body-wrapper,
   .el-table__body,
   .el-table__body tbody {
-    background: var(--s-ch-bg);
+    background: var(--s-table-background, var(--s-ch-bg));
   }
 
   .el-table__inner-wrapper::before,

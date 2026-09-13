@@ -148,6 +148,8 @@ table/sybzTheme
 |    `showIndex`    | 是否显示序号列                                                 | boolean | `true`         |
 |      `size`       | 表格和分页尺寸，支持 `small` / `default` / `large`             | string  | `''`           |
 |      `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string  | `default`      |
+|   `background`    | 表格自身及表体背景色，支持 CSS 颜色值和 `transparent`          | string  | -              |
+|   `transparent`   | 是否去除表格自身背景，融入外层容器                             | boolean | `false`        |
 |    `pageSize`     | 每页条数                                                       | number  | `30`           |
 |   `pageNumber`    | 当前页码                                                       | number  | `1`            |
 |    `pageSizes`    | 分页器可选每页条数                                             | array   | `[10, 30, 50]` |

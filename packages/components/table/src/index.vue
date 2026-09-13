@@ -66,6 +66,10 @@ interface TableProps {
   showIndex?: boolean
   size?: string
   theme?: SybzComponentTheme
+  /** 表格自身及表体背景色，支持 CSS 颜色值和 transparent */
+  background?: string
+  /** 是否去除表格自身背景，融入外层容器 */
+  transparent?: boolean
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]
@@ -87,6 +91,8 @@ const props = withDefaults(defineProps<TableProps>(), {
   showIndex: true,
   size: '',
   theme: 'default',
+  background: undefined,
+  transparent: false,
   pageSize: 30,
   pageNumber: 1,
   pageSizes: () => [10, 30, 50],
@@ -887,17 +893,18 @@ const fluidHeight = computed(() => {
 })
 
 const wrapperStyle = computed(() => {
-  if (!fluidHeight.value) {
-    return {}
-  }
-
   return {
-    height: fluidHeight.value,
+    ...(fluidHeight.value ? { height: fluidHeight.value } : {}),
+    ...(mergedProps.value.transparent || mergedProps.value.background
+      ? { '--s-table-background': mergedProps.value.transparent ? 'transparent' : mergedProps.value.background }
+      : {}),
   }
 })
 
 const tableClass = computed(() => ({
   's-table--fluid-height': !!fluidHeight.value,
+  's-table--custom-background': !!(mergedProps.value.transparent || mergedProps.value.background),
+  's-table--horizontal-border': mergedProps.value.transparent,
   's-table--chenghua': mergedProps.value.theme === 'chenghua',
   's-table--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-table--sybz': mergedProps.value.theme === 'sybz',
@@ -1368,6 +1375,54 @@ defineExpose({
 
 .s-table {
   box-shadow: none !important;
+
+  &.s-table--custom-background {
+    :deep(.el-table),
+    :deep(.el-table__inner-wrapper),
+    :deep(.el-table__body-wrapper),
+    :deep(.el-table__fixed-body-wrapper),
+    :deep(.el-table__body),
+    :deep(.el-table__body tbody),
+    :deep(.el-table__body tr.el-table__row),
+    :deep(.el-table__body tr.el-table__row > td.el-table__cell) {
+      background: var(--s-table-background) !important;
+    }
+  }
+
+  &.s-table--horizontal-border {
+    :deep(.el-table th.el-table__cell),
+    :deep(.el-table td.el-table__cell) {
+      border-left: 0 !important;
+      border-right: 0 !important;
+    }
+
+    :deep(.el-table th.el-table__cell) {
+      border-top: 1px solid var(--el-border-color-lighter) !important;
+    }
+
+    :deep(.el-table-fixed-column--left.is-last-column),
+    :deep(.el-table-fixed-column--right.is-first-column),
+    :deep(.el-table-fixed-column--right.is-last-column),
+    :deep(.el-table-fixed-column--left.is-first-column) {
+      border-left: 0 !important;
+      border-right: 0 !important;
+    }
+
+    :deep(.el-table-fixed-column--right.is-first-column::before),
+    :deep(.el-table-fixed-column--right.is-last-column::before),
+    :deep(.el-table-fixed-column--left.is-last-column::before),
+    :deep(.el-table-fixed-column--left.is-first-column::before) {
+      display: none !important;
+      box-shadow: none !important;
+    }
+
+    :deep(.el-table__fixed-right),
+    :deep(.el-table__fixed-left) {
+      border-left: 0 !important;
+      border-right: 0 !important;
+      box-shadow: none !important;
+    }
+  }
 
   &.s-table--fluid-height {
     display: flex;

@@ -1,7 +1,7 @@
 .s-table.s-table--sybz.s-table--sybz {
   border-radius: var(--s-sybz-radius-card);
   border: 1px solid var(--s-sybz-table-line);
-  background: var(--s-sybz-card-bg) !important;
+  background: var(--s-table-background, var(--s-sybz-card-bg)) !important;
   color: var(--s-sybz-text);
   font-family: var(--s-sybz-font-family);
   box-shadow: var(--s-sybz-shadow-soft);
@@ -20,13 +20,13 @@
     border-color: transparent;
     box-shadow: none !important;
     overflow: hidden;
-    background: var(--s-sybz-card-bg) !important;
+    background: var(--s-table-background, var(--s-sybz-card-bg)) !important;
   }
 
   .el-table__inner-wrapper {
     overflow: hidden;
     border-radius: var(--s-sybz-radius-card) var(--s-sybz-radius-card) 0 0;
-    background: var(--s-sybz-card-bg) !important;
+    background: var(--s-table-background, var(--s-sybz-card-bg)) !important;
   }
 
   .el-table__header-wrapper,
@@ -55,7 +55,7 @@
   .el-table__fixed-right .el-table__fixed-body-wrapper,
   .el-table__body,
   .el-table__body tbody {
-    background: var(--s-sybz-card-bg);
+    background: var(--s-table-background, var(--s-sybz-card-bg));
   }
 
   .el-table__inner-wrapper::before,

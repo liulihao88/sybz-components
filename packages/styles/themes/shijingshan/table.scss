@@ -1,7 +1,7 @@
 .s-table.s-table--shijingshan.s-table--shijingshan {
   border-radius: var(--s-sjs-radius-card);
   border: 1px solid var(--s-sjs-table-line);
-  background: var(--s-sjs-card-bg) !important;
+  background: var(--s-table-background, var(--s-sjs-card-bg)) !important;
   color: var(--s-sjs-text);
   font-family: var(--s-sjs-font-family);
   box-shadow: var(--s-sjs-shadow-soft);
@@ -20,13 +20,13 @@
     border-color: transparent;
     box-shadow: none !important;
     overflow: hidden;
-    background: var(--s-sjs-card-bg) !important;
+    background: var(--s-table-background, var(--s-sjs-card-bg)) !important;
   }
 
   .el-table__inner-wrapper {
     overflow: hidden;
     border-radius: var(--s-sjs-radius-card) var(--s-sjs-radius-card) 0 0;
-    background: var(--s-sjs-card-bg) !important;
+    background: var(--s-table-background, var(--s-sjs-card-bg)) !important;
   }
 
   .el-table__header-wrapper,
@@ -55,7 +55,7 @@
   .el-table__fixed-right .el-table__fixed-body-wrapper,
   .el-table__body,
   .el-table__body tbody {
-    background: var(--s-sjs-card-bg);
+    background: var(--s-table-background, var(--s-sjs-card-bg));
   }
 
   .el-table__inner-wrapper::before,
