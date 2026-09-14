@@ -5,6 +5,7 @@ import { validateForm, isEmpty, $toast } from '@sybz-components/utils'
 import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
 import STitle from '@/components/title/src/index.vue'
+import SafeHtml from '@/components/utils/SafeHtml.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import {
   callEventHandler,
@@ -37,6 +38,7 @@ const internalFieldKeys = new Set([
   'bind',
   'componentProps',
   'column',
+  'copy',
   'comp',
   'default',
   'defaultValue',
@@ -168,6 +170,10 @@ const resolveRecord = (source: FormDynamic<FormAttrs> | undefined, item: FormFie
 const getFieldTooltip = (item: FormField, index: number) =>
   resolveDynamic<string | undefined>(item.tooltip, item, index, undefined)
 const getFieldTooltipAttrs = (item: FormField, index: number) => resolveRecord(item.tooltipAttrs, item, index)
+const getFieldTooltipCopy = (item: FormField, index: number, tooltip: string) => {
+  const copy = item.copy
+  return copy === false ? undefined : typeof copy === 'string' ? copy : tooltip
+}
 
 const getPlaceholderPrefix = (item: FormField) => {
   const comp = String(item.comp || 's-input').toLowerCase()
@@ -585,14 +591,32 @@ defineExpose({
               />
               <s-tooltip :content="v.label" />
             </slot>
-            <s-icon
+            <s-tooltip
               v-if="getFieldTooltip(v, i)"
               v-bind="getFieldTooltipAttrs(v, i)"
-              icon="Warning"
               :content="getFieldTooltip(v, i)"
-              class="s-form__label-tooltip-icon"
-              aria-label="字段说明"
-            />
+              class="s-form__label-tooltip"
+            >
+              <s-icon icon="Warning" class="s-form__label-tooltip-icon" aria-label="字段说明" />
+              <template #content>
+                <span class="s-form__label-tooltip-content">
+                  <SafeHtml
+                    v-if="getFieldTooltipAttrs(v, i).dangerouslyUseHTMLString"
+                    class="s-form__label-tooltip-text"
+                    :html="getFieldTooltip(v, i)"
+                  />
+                  <span v-else class="s-form__label-tooltip-text">{{ getFieldTooltip(v, i) }}</span>
+                  <s-icon
+                    v-if="getFieldTooltipCopy(v, i, getFieldTooltip(v, i)!)"
+                    v-copy:click="getFieldTooltipCopy(v, i, getFieldTooltip(v, i)!)"
+                    icon="CopyDocument"
+                    class="s-form__label-tooltip-copy"
+                    aria-label="复制字段说明"
+                    title="复制字段说明"
+                  />
+                </span>
+              </template>
+            </s-tooltip>
           </span>
         </template>
         <template v-if="v.useSlot && getFieldSlotName(v)">
@@ -654,8 +678,45 @@ defineExpose({
   align-self: center;
   flex: none;
   margin-left: 6px;
+  position: relative;
+  top: 2px;
+  line-height: 1;
   color: var(--65);
   cursor: help;
+}
+
+.s-form__label-tooltip {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+
+  :deep(.s-tooltip-box__text) {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    vertical-align: middle;
+  }
+}
+
+.s-form__label-tooltip-copy {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  flex: none;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.s-form__label-tooltip-text {
+  display: block;
+  line-height: 1.2;
+  margin-right: 6px;
+}
+
+.s-form__label-tooltip-content {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
 
 .s-form--chenghua {

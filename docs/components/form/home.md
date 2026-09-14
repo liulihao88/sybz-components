@@ -126,7 +126,7 @@ form/trim
 
 ### 标签提示 `tooltip`（默认值为空）
 
-:::demo 展示默认标签、自定义标签右侧的提示图标及 HTML 内容。`labelRender` 类型为 `Function`，默认值为空，可与 `tooltip`、`tooltipAttrs` 同时使用；标签插槽同样支持提示图标。基础写法：`{ label: '日期组件', prop: 'date', tooltip: '请选择业务发生日期' }`。属性：`tooltip` 类型为 `string / Function`，默认值为空；`tooltipAttrs` 类型为 `object / Function`，默认值为空；设置 `tooltipAttrs: { dangerouslyUseHTMLString: true }` 后支持 HTML 内容。HTML 字符串必须来自可信内容，禁止直接渲染未经处理的用户输入。
+:::demo 展示默认标签右侧的提示图标，以及 tooltip 弹层文字后面的复制图标。复制图标仅在 tooltip 弹层中展示，不占用表单标签空间，点击后复制文本。`labelRender` 类型为 `Function`，默认值为空，可与 `tooltip`、`tooltipAttrs` 同时使用；标签插槽同样支持提示图标。基础写法：`{ label: '日期组件', prop: 'date', tooltip: '请选择业务发生日期' }`。属性：`tooltip` 类型为 `string / Function`，默认值为空；`tooltipAttrs` 类型为 `object / Function`，默认值为空；`copy` 类型为 `boolean / string`，可选值为 `true / false / 自定义字符串`，默认值为 `true`；设置 `copy: false` 隐藏复制图标，设置字符串复制指定文本。设置 `tooltipAttrs: { dangerouslyUseHTMLString: true }` 后支持 HTML 内容。HTML 字符串必须来自可信内容，禁止直接渲染未经处理的用户输入。
 form/tooltip
 :::
 
@@ -187,6 +187,7 @@ const fieldList: SFormFieldItem[] = [
 |  labelRender  | 自定义标签渲染，可与 `tooltip` 同时使用，优先于标签插槽                             | Function                  | -                  |
 |    tooltip    | 标签右侧提示图标的悬浮内容，支持函数动态返回，可与 `labelRender` 或标签插槽同时使用 | string / Function         | -                  |
 | tooltipAttrs  | 提示图标及 Tooltip 属性，支持 `dangerouslyUseHTMLString`                            | object / Function         | -                  |
+|     copy      | 是否显示 tooltip 复制图标；传字符串时复制指定文本                                   | boolean / string          | `true`             |
 |     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`                   | string                    | -                  |
 |     trim      | 提交/校验前是否对当前字段去除前后空格，可覆盖表单级配置                             | boolean                   | 跟随 `s-form.trim` |
 

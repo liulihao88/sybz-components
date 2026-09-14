@@ -10,6 +10,7 @@ const fieldList: SFormFieldItem[] = [
     comp: 's-date-picker',
     required: true,
     tooltip: '请选择业务实际发生的日期，提交后不可修改',
+    copy: '日期组件 tooltip 的复制文本',
   },
   {
     label: '负责人',
@@ -30,6 +31,13 @@ const fieldList: SFormFieldItem[] = [
       dangerouslyUseHTMLString: true,
       placement: 'top',
     },
+    copy: true,
+  },
+  {
+    label: '禁用复制',
+    prop: 'noCopy',
+    tooltip: '设置 copy: false 可隐藏复制图标',
+    copy: false,
   },
 ]
 </script>
