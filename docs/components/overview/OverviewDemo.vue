@@ -321,6 +321,14 @@ const tableData = [
       <s-icon :theme="currentTheme" icon="tabler:search" type="default" hover-animation size="40" />
       <s-icon :theme="currentTheme" icon="tabler:trash" type="warning" hover-animation size="40" />
       <s-icon :theme="currentTheme" icon="el-icon-plus" type="info" hover-animation size="40"></s-icon>
+      <s-icon
+        :theme="currentTheme"
+        icon="el-icon-plus"
+        hover-animation
+        variant="solid"
+        side="20"
+        class="m-r-4"
+      ></s-icon>
       <s-button :theme="currentTheme" icon="tabler:layout-dashboard" hover-animation size="40" type="primary" />
       <s-button :theme="currentTheme" icon="tabler:user" type="danger" hover-animation />
       <s-button :theme="currentTheme" icon="tabler:settings" type="info" hover-animation />
