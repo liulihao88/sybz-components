@@ -139,6 +139,7 @@ onMounted(() => {
   <nav class="route-history-controls" aria-label="文档浏览历史">
     <s-icon
       class="route-history-controls__button"
+      :class="{ 'is-disabled': !previousItem }"
       :disabled="!previousItem"
       :content="previousItem ? `后退：${previousItem.title}` : '没有更早的访问记录'"
       :tooltip-attrs="{
@@ -153,6 +154,7 @@ onMounted(() => {
     </s-icon>
     <s-icon
       class="route-history-controls__button"
+      :class="{ 'is-disabled': !nextItem }"
       :disabled="!nextItem"
       :content="nextItem ? `前进：${nextItem.title}` : '没有更新的访问记录'"
       :tooltip-attrs="{
@@ -208,7 +210,16 @@ onMounted(() => {
 }
 
 .route-history-controls__button:disabled {
-  opacity: 0.38;
+  border-color: var(--vp-c-divider);
+  color: var(--vp-c-text-3);
+  background: var(--vp-c-bg-soft);
+  cursor: not-allowed;
+}
+
+.route-history-controls__button.is-disabled {
+  border-color: var(--vp-c-divider);
+  color: var(--vp-c-text-3);
+  background: var(--vp-c-bg-soft);
   cursor: not-allowed;
 }
 
