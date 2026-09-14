@@ -1,6 +1,6 @@
 import './styles/index.scss'
 
-import type { App, Component } from 'vue'
+import { isReactive, reactive, watch, type App, type Component } from 'vue'
 
 import registerDirectives from './directives/gDirectives.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -120,10 +120,21 @@ const resolveGlobalComponentConfig = (options: SybzComponentsInstallOptions = {}
 
 const install = (app: App, options: SybzComponentsInstallOptions = {}) => {
   applySybzThemeColors(options.theme, options.themeColors)
-  const componentDefaults = resolveGlobalComponentConfig(options)
+  const componentDefaults = reactive(resolveGlobalComponentConfig(options))
 
   if (Object.keys(componentDefaults).length) {
     app.provide(GLOBAL_COMPONENT_CONFIG_KEY, componentDefaults)
+  }
+
+  if (isReactive(options)) {
+    watch(
+      () => options.theme,
+      (theme) => {
+        applySybzThemeColors(theme, options.themeColors)
+        const commonProps = componentDefaults[GLOBAL_COMPONENT_COMMON_PROPS_KEY]
+        if (commonProps) commonProps.theme = theme
+      },
+    )
   }
 
   Object.keys(allComponents).forEach((key) => {

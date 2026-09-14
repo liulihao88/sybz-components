@@ -137,7 +137,7 @@ onMounted(() => {
 
 <template>
   <nav class="route-history-controls" aria-label="文档浏览历史">
-    <s-button
+    <s-icon
       class="route-history-controls__button"
       :disabled="!previousItem"
       :content="previousItem ? `后退：${previousItem.title}` : '没有更早的访问记录'"
@@ -150,8 +150,8 @@ onMounted(() => {
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="m15 18-6-6 6-6" />
       </svg>
-    </s-button>
-    <s-button
+    </s-icon>
+    <s-icon
       class="route-history-controls__button"
       :disabled="!nextItem"
       :content="nextItem ? `前进：${nextItem.title}` : '没有更新的访问记录'"
@@ -164,7 +164,7 @@ onMounted(() => {
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="m9 18 6-6-6-6" />
       </svg>
-    </s-button>
+    </s-icon>
   </nav>
 </template>
 

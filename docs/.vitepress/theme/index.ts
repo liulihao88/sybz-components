@@ -4,7 +4,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import locale from 'element-plus/es/locale/lang/zh-cn'
-import { h } from 'vue'
+import { h, reactive, watch } from 'vue'
 import '/public/css/index.css'
 import './assets/styles/index.css'
 
@@ -23,6 +23,8 @@ import OverviewDemo from '../../components/overview/OverviewDemo.vue'
 import { VPDemo } from '../vitepress'
 import * as utils from '@/utils/src/index.ts'
 import Logo from './logo.vue'
+import { docThemeState } from './theme'
+import ThemeSelector from './components/ThemeSelector.vue'
 // utils.configureUtils({ theme: 'shijingshan' })
 
 // 基于element-plus二次封装基础组件
@@ -38,6 +40,7 @@ export default {
     return h(DefaultTheme.Layout, null, {
       'nav-bar-title-before': () => h(Logo),
       'nav-bar-content-before': () => h(RouteHistoryControls),
+      'nav-bar-content-after': () => h(ThemeSelector),
       'layout-bottom': () => [h(ComponentQuickSidebar), h(ScrollPositionRestore)],
     })
   },
@@ -78,7 +81,8 @@ export default {
       locale, // 语言设置
     })
     // 全局注册基础组件
-    ctx.app.use(SybzComponents, {
+    const sybzInstallOptions = reactive({
+      ...docThemeState,
       // theme:'shijingshan',
       themeColors: {
         // primary: 'blue',
@@ -120,6 +124,13 @@ export default {
       },
       select: {},
     })
+    watch(
+      () => docThemeState.theme,
+      (theme) => {
+        sybzInstallOptions.theme = theme
+      },
+    )
+    ctx.app.use(SybzComponents, sybzInstallOptions)
     ctx.app.use(SybzChartComponents)
     ctx.app.component('Demo', VPDemo)
     DefaultTheme.enhanceApp(ctx)

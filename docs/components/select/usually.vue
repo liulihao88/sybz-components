@@ -18,6 +18,7 @@ const baseOptions = ref([
   { label: 'andy', value: 1 },
   { label: '凌云', value: 2, disabled: true },
 ])
+const simpleValue = ref(2)
 
 const checkAll = ref(false)
 const indeterminate = ref(false)
@@ -60,18 +61,10 @@ watch(value, (val) => {
     indeterminate.value = true
   }
 })
-
-const handleCheckAll = (val) => {
-  indeterminate.value = false
-  if (val) {
-    value.value = cities.value.map((_) => _.value)
-  } else {
-    value.value = []
-  }
-}
 </script>
 
 <template>
+  <s-select v-model="simpleValue" :options="[1, 2, 3]" type="simple" title="简单"></s-select>
   <div>
     <s-flex direction="column" gap="8">
       <s-select v-model="selectVal" :options="options" label="name" value="id" title="value和label分别设置"></s-select>
