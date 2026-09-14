@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { SybzComponentTheme } from '../../../types/component-props'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 
@@ -48,6 +48,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   collapseTrigger: 'header',
   theme: 'default',
 })
+const slots = useSlots()
 defineSlots<{
   default?: () => any
   header?: () => any
@@ -55,6 +56,10 @@ defineSlots<{
   icon?: () => any
 }>()
 const mergedProps = useGlobalComponentConfig('card', props)
+
+const hasHeader = computed(() => Boolean(slots.header || mergedProps.value.title))
+const hasBody = computed(() => Boolean(slots.default))
+const hasFooter = computed(() => Boolean(slots.footer))
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -90,12 +95,27 @@ const boxMergedStyle = computed(() => {
   }
 })
 
+const compPadding = computed(() => {
+  const { size } = mergedProps.value
+  if (size === 'large') return '24px'
+  if (size === 'small') return '8px'
+  if (size === 'default' || size === '') return '16px'
+  return processWidth(size, true) || '16px'
+})
+
 const headerMergedStyle = computed(() => {
   let noBorderStyle = {}
   if (!mergedProps.value.border || mergedProps.value.mergeSections) {
     noBorderStyle = {
       borderBottom: 'none',
-      paddingBottom: 0,
+      paddingBottom: mergedProps.value.mergeSections && hasBody.value ? compPadding.value : 0,
+    }
+  }
+
+  if (mergedProps.value.mergeSections && hasBody.value) {
+    noBorderStyle = {
+      ...noBorderStyle,
+      marginBottom: 0,
     }
   }
 
@@ -143,6 +163,13 @@ const squareStyle = computed(() => {
 })
 
 const bodyMergedStyle = computed(() => {
+  const mergedSectionStyle = mergedProps.value.mergeSections
+    ? {
+        ...(hasHeader.value ? { paddingTop: 0 } : {}),
+        ...(hasFooter.value ? { paddingBottom: 0 } : {}),
+      }
+    : {}
+
   const transparentStyle = mergedProps.value.transparent
     ? {
         background: 'transparent',
@@ -151,6 +178,7 @@ const bodyMergedStyle = computed(() => {
 
   return {
     ...transparentStyle,
+    ...mergedSectionStyle,
     ...mergedProps.value.bodyStyle,
     ...scrollStyle.value,
     ...squareStyle.value,
@@ -159,10 +187,12 @@ const bodyMergedStyle = computed(() => {
 
 const footerMergedStyle = computed(() => {
   const mergedSectionStyle = mergedProps.value.mergeSections
-    ? {
-        borderTop: 'none',
-        paddingTop: 0,
-      }
+    ? hasBody.value
+      ? {
+          borderTop: 'none',
+          paddingTop: compPadding.value,
+        }
+      : {}
     : {}
 
   const transparentStyle = mergedProps.value.transparent
@@ -177,14 +207,6 @@ const footerMergedStyle = computed(() => {
     ...mergedSectionStyle,
     ...mergedProps.value.footerStyle,
   }
-})
-
-const compPadding = computed(() => {
-  const { size } = mergedProps.value
-  if (size === 'large') return '24px'
-  if (size === 'small') return '8px'
-  if (size === 'default' || size === '') return '16px'
-  return processWidth(size, true) || '16px'
 })
 
 const cardClass = computed(() => ({
@@ -319,8 +341,8 @@ const handleIconClick = (event) => {
 
   &__header {
     padding: v-bind(compPadding);
-    border-bottom: none;
-    margin-bottom: v-bind("isCollapsed ? '0' : '16px'");
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -353,14 +375,10 @@ const handleIconClick = (event) => {
   }
   &__body {
     padding: v-bind(compPadding);
-
-    &:has(+ .s-card__footer) {
-      padding-bottom: 0;
-    }
   }
   &__footer {
-    border-top: none;
-    padding: 0 v-bind(compPadding) v-bind(compPadding);
+    border-top: 1px solid var(--line);
+    padding: v-bind(compPadding);
   }
 }
 </style>

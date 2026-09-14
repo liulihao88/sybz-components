@@ -2,13 +2,14 @@
 import { ref } from 'vue'
 const size = ref<string | number>('default')
 const sizeOptions = ['large', 'default', 'small', 20, '2rem', 0]
+const isMerge = ref(false)
 </script>
 
 <template>
   <div class="card-size-demo">
     <s-radio v-model="size" :options="sizeOptions" type="simple"></s-radio>
-
-    <SCard :size="size">
+    <s-radio v-model="isMerge" type="boolean" title="是否合并" show-type="button"></s-radio>
+    <SCard :size="size" :merge-sections="isMerge">
       size 会控制 header、body、footer 的 padding。预设值之外的数字或 CSS 长度会通过 processWidth 转成可用样式。
       <template #header>
         <s-title title="自定义 padding"></s-title>
