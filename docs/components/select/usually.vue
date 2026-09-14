@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, provide } from 'vue'
-
-// main.js
-provide('GLOBAL_COMPONENT_CONFIG', {
-  select: {
-    showPrefix: true,
-  },
-})
+import { ref, watch } from 'vue'
 
 const selectVal = ref('xxx')
 const options = ref([
@@ -64,10 +57,17 @@ watch(value, (val) => {
 </script>
 
 <template>
-  <s-select v-model="simpleValue" :options="[1, 2, 3]" type="simple" title="简单"></s-select>
+  <s-select v-model="simpleValue" :options="[1, 2, 3]" type="simple" title="简单" show-prefix></s-select>
   <div>
     <s-flex direction="column" gap="8">
-      <s-select v-model="selectVal" :options="options" label="name" value="id" title="value和label分别设置"></s-select>
+      <s-select
+        v-model="selectVal"
+        :options="options"
+        label="name"
+        value="id"
+        title="value和label分别设置"
+        show-prefix
+      ></s-select>
       <s-select
         v-model="selectVal"
         :options="options"
@@ -75,15 +75,24 @@ watch(value, (val) => {
         value="id"
         title="内容超宽时显示tooltip"
         width="220"
+        show-prefix
       ></s-select>
     </s-flex>
-    <s-select v-model="selectVal" title="有禁用状态" :options="baseOptions"></s-select>
-    <s-select v-model="selectVal" title="快速切换2" width="200" :options="baseOptions" />
+    <s-select v-model="selectVal" title="有禁用状态" :options="baseOptions" show-prefix></s-select>
+    <s-select v-model="selectVal" title="快速切换2" width="200" :options="baseOptions" show-prefix />
 
     <s-title title="禁用状态, 可清空" sub-title="disabled, clearable" t="10"></s-title>
     <s-title title="自定义下拉框菜单的头部和底部" sub-title="slot 中的header 和 footer" t="10"></s-title>
-    <s-select v-model="selectVal" :options="baseOptions" size="large" disabled clearable show-quick></s-select>
-    <s-select v-model="selectVal" :options="baseOptions" size="large">
+    <s-select
+      v-model="selectVal"
+      :options="baseOptions"
+      size="large"
+      disabled
+      clearable
+      show-quick
+      show-prefix
+    ></s-select>
+    <s-select v-model="selectVal" :options="baseOptions" size="large" show-prefix>
       <template #header>我来组成头部</template>
       <template #default="{ options, item }">
         <span>{{ item.label }}</span>
