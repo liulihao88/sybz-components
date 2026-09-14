@@ -198,7 +198,6 @@ const handleReset = () => {
 .s-table-search__buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   align-items: center;
 }
 

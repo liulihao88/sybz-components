@@ -72,6 +72,7 @@ const columns = [
         comp: 's-icon',
         attrs: {
           icon: 'delete',
+          type: 'danger',
           content: '删除',
         },
       },
