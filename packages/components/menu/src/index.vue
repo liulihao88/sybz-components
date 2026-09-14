@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue'
+import { computed, ref, useAttrs, watch } from 'vue'
+import { Expand, Fold } from '@element-plus/icons-vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import MenuNode from './MenuNode.vue'
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<SMenuSelfProps>(), {
 
 const emit = defineEmits<{
   'update:modelValue': [index: string]
+  'update:collapse': [collapse: boolean]
   select: [...args: any[]]
   actionClick: [event: MouseEvent]
 }>()
@@ -34,6 +36,13 @@ defineSlots<{ header?: () => any; footer?: () => any }>()
 
 const attrs = useAttrs()
 const mergedProps = useGlobalComponentConfig('menu', props)
+const isCollapsed = ref(mergedProps.value.collapse)
+watch(
+  () => mergedProps.value.collapse,
+  (value) => {
+    isCollapsed.value = value
+  },
+)
 const fields = computed<Required<SMenuFieldNames>>(() => ({
   index: 'index',
   path: 'path',
@@ -81,10 +90,14 @@ const menuColors = computed(() => {
   }
 })
 const rootStyle = computed(() => ({
-  width: processWidth(mergedProps.value.width, true),
+  width: processWidth(isCollapsed.value ? 64 : mergedProps.value.width, true),
   height: processWidth(mergedProps.value.height, true),
   '--s-menu-bg': menuColors.value.background,
 }))
+const toggleCollapse = () => {
+  isCollapsed.value = !isCollapsed.value
+  emit('update:collapse', isCollapsed.value)
+}
 const handleSelect = (...args: any[]) => {
   emit('update:modelValue', args[0])
   emit('select', ...args)
@@ -95,13 +108,21 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
 <template>
   <aside
     class="s-menu"
-    :class="[
-      `s-menu--${mergedProps.variant}`,
-      `s-menu--theme-${mergedProps.theme}`,
-      { 'is-collapse': mergedProps.collapse },
-    ]"
+    :class="[`s-menu--${mergedProps.variant}`, `s-menu--theme-${mergedProps.theme}`, { 'is-collapse': isCollapsed }]"
     :style="rootStyle"
   >
+    <button
+      class="s-menu__collapse-trigger"
+      type="button"
+      :aria-label="isCollapsed ? '展开菜单' : '收缩菜单'"
+      :title="isCollapsed ? '展开菜单' : '收缩菜单'"
+      @click="toggleCollapse"
+    >
+      <el-icon>
+        <Expand v-if="isCollapsed" />
+        <Fold v-else />
+      </el-icon>
+    </button>
     <header v-if="$slots.header || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
       <slot name="header">
         <div v-if="resolvedHeader" class="s-menu__brand">
@@ -134,7 +155,7 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
       :default-active="mergedProps.modelValue"
       :default-openeds="openedMenus"
       :router="mergedProps.router"
-      :collapse="mergedProps.collapse"
+      :collapse="isCollapsed"
       :background-color="menuColors.background"
       :text-color="menuColors.text"
       :active-text-color="menuColors.activeText"
@@ -145,6 +166,7 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
         :key="itemIndex(item) || String(item[fields.title] || index)"
         :item="item"
         :field-names="fields"
+        :collapsed="isCollapsed"
       />
     </el-menu>
     <footer v-if="$slots.footer || mergedProps.footerConfig" class="s-menu__footer">
@@ -165,9 +187,67 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
 .s-menu {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   box-sizing: border-box;
   background: var(--s-menu-bg);
+  position: relative;
+  transition: width 0.2s ease;
+
+  &__collapse-trigger {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: -12px;
+    display: grid;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    transform: translateY(-50%);
+    place-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #334155;
+    box-shadow: 0 2px 8px rgb(15 23 42 / 18%);
+    cursor: pointer;
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  &:hover &__collapse-trigger,
+  &__collapse-trigger:focus-visible {
+    opacity: 1;
+  }
+
+  &.is-collapse {
+    .s-menu__brand {
+      justify-content: center;
+      padding: 12px 8px;
+    }
+    .s-menu__brand-content,
+    .s-menu__action,
+    .s-menu__account > div {
+      display: none;
+    }
+    .s-menu__account {
+      justify-content: center;
+      padding: 12px 8px;
+    }
+
+    :deep(.el-menu-item),
+    :deep(.el-sub-menu__title) {
+      width: 56px;
+      height: 56px;
+      margin: 4px auto;
+      justify-content: center;
+      padding: 0;
+    }
+
+    :deep(.el-menu-item .el-icon),
+    :deep(.el-sub-menu__title .el-icon) {
+      margin: 0;
+    }
+  }
 
   &__header,
   &__footer {
@@ -179,6 +259,11 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
     min-height: 0;
     overflow: auto;
     border-right: 0;
+    transition: width 0.2s ease;
+  }
+
+  :deep(.el-menu) {
+    transition: width 0.2s ease;
   }
 
   &__brand {

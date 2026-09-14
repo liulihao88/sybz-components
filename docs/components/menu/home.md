@@ -72,6 +72,7 @@ menu/sybzTheme
 | 事件名              | 说明                                     | 参数                                     |
 | ------------------- | ---------------------------------------- | ---------------------------------------- |
 | `update:modelValue` | 选择菜单后更新激活值                     | `(index: string)`                        |
+| `update:collapse`   | 点击右侧按钮切换菜单折叠状态             | `(collapse: boolean)`                    |
 | `select`            | 选择菜单时触发，参数与 Element Plus 一致 | `(index, indexPath, item, routerResult)` |
 | `actionClick`       | 点击内置主操作按钮时触发                 | `(event: MouseEvent)`                    |
 

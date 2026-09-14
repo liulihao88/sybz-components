@@ -5,7 +5,7 @@ import type { SMenuFieldNames, SMenuItem } from './types'
 
 defineOptions({ name: 'SMenuNode' })
 
-const props = defineProps<{ item: SMenuItem; fieldNames: Required<SMenuFieldNames> }>()
+const props = defineProps<{ item: SMenuItem; fieldNames: Required<SMenuFieldNames>; collapsed?: boolean }>()
 
 const read = (field: keyof SMenuFieldNames) => props.item[props.fieldNames[field]]
 const children = computed<SMenuItem[]>(() => read('children') || [])
@@ -25,19 +25,21 @@ const suffixIconName = computed(() => (typeof suffixIcon.value === 'string' ? su
       :key="String(child[fieldNames.index] || child[fieldNames.path] || child[fieldNames.title] || childIndex)"
       :item="child"
       :field-names="fieldNames"
+      :collapsed="props.collapsed"
     />
   </template>
   <el-sub-menu v-else-if="children.length" :index="index" :disabled="Boolean(read('disabled'))">
     <template #title>
       <el-icon v-if="icon && isComponentIcon"><component :is="icon" /></el-icon>
       <SIcon v-else-if="icon" :icon="icon" />
-      <span>{{ read('title') }}</span>
+      <span :title="props.collapsed ? String(read('title') || '') : undefined">{{ read('title') }}</span>
     </template>
     <SMenuNode
       v-for="(child, childIndex) in children"
       :key="String(child[fieldNames.index] || child[fieldNames.path] || child[fieldNames.title] || childIndex)"
       :item="child"
       :field-names="fieldNames"
+      :collapsed="props.collapsed"
     />
   </el-sub-menu>
   <el-tooltip v-else :disabled="!item.detail" placement="right" :show-after="300" popper-class="s-menu-detail-popper">
@@ -48,7 +50,12 @@ const suffixIconName = computed(() => (typeof suffixIcon.value === 'string' ? su
         <small v-if="item.detail?.description">{{ item.detail.description }}</small>
       </div>
     </template>
-    <el-menu-item :index="index" :route="read('route') || read('path')" :disabled="Boolean(read('disabled'))">
+    <el-menu-item
+      :index="index"
+      :route="read('route') || read('path')"
+      :disabled="Boolean(read('disabled'))"
+      :title="props.collapsed ? String(read('title') || '') : undefined"
+    >
       <el-icon v-if="icon && isComponentIcon"><component :is="icon" /></el-icon>
       <SIcon v-else-if="icon" :icon="icon" />
       <template #title>
