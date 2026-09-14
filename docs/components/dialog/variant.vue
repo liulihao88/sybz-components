@@ -11,9 +11,9 @@ const target = '4a731a90594a4af544c0c25941171jpeg.jpeg、小米汽车.png'
 
 <template>
   <div class="dialog-variant-demo">
-    <el-button @click="visible.default = true">默认弹框</el-button>
-    <el-button type="danger" @click="visible.delete = true">删除确认</el-button>
-    <el-button type="warning" @click="visible.warning = true">警告弹框</el-button>
+    <s-button @click="visible.default = true">默认弹框</s-button>
+    <s-button type="danger" @click="visible.delete = true">删除确认</s-button>
+    <s-button type="warning" @click="visible.warning = true">警告弹框</s-button>
 
     <s-dialog v-model="visible.default" variant="default" theme="shijingshan">这是默认语义的弹框。</s-dialog>
     <s-dialog v-model="visible.delete" variant="delete" theme="shijingshan" :target="target"></s-dialog>

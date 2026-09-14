@@ -473,8 +473,14 @@ onBeforeUnmount(() => {
     background: var(--el-color-primary-light-9);
   }
   :deep(.el-dialog) {
+    display: flex;
+    flex-direction: column;
     min-height: 240px;
     padding: 0 !important;
+  }
+  :deep(.el-dialog__body) {
+    flex: 1 1 auto;
+    min-height: 0;
   }
   :deep(.s-dialog__maximize-height) {
     box-sizing: border-box;

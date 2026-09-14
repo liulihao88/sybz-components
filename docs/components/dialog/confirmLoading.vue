@@ -27,7 +27,7 @@ const open = (type: string) => {
     <s-dialog v-model="isShow" :confirm="confirm">
       <div>内容</div>
     </s-dialog>
-    <el-button type="primary" @click="open('base')">打开dialog</el-button>
-    <el-button type="primary" @click="open('noClose')">打开dialog并且点击确认不关闭</el-button>
+    <s-button type="primary" @click="open('base')">打开dialog</s-button>
+    <s-button type="primary" @click="open('noClose')">打开dialog并且点击确认不关闭</s-button>
   </div>
 </template>

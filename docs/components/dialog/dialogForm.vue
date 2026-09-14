@@ -72,7 +72,7 @@ const confirm = async () => {
     <s-dialog ref="dialogRef" v-model="isShow" title="弹框form表单" @confirm="confirm">
       <s-form ref="sFormRef" :field-list="fieldList" :model="form" :rules="rules"></s-form>
     </s-dialog>
-    <el-button type="primary" @click="open()">新建</el-button>
-    <el-button type="primary" @click="open(true)">编辑</el-button>
+    <s-button type="primary" @click="open()">新建</s-button>
+    <s-button type="primary" @click="open(true)">编辑</s-button>
   </div>
 </template>
