@@ -319,7 +319,8 @@ const handleIconClick = (event) => {
 
   &__header {
     padding: v-bind(compPadding);
-    border-bottom: v-bind("isCollapsed ? 'none' : '1px solid var(--line)'");
+    border-bottom: none;
+    margin-bottom: v-bind("isCollapsed ? '0' : '16px'");
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -352,10 +353,14 @@ const handleIconClick = (event) => {
   }
   &__body {
     padding: v-bind(compPadding);
+
+    &:has(+ .s-card__footer) {
+      padding-bottom: 0;
+    }
   }
   &__footer {
-    border-top: 1px solid var(--line);
-    padding: v-bind(compPadding);
+    border-top: none;
+    padding: 0 v-bind(compPadding) v-bind(compPadding);
   }
 }
 </style>

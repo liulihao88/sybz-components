@@ -473,6 +473,7 @@ onBeforeUnmount(() => {
     background: var(--el-color-primary-light-9);
   }
   :deep(.el-dialog) {
+    min-height: 240px;
     padding: 0 !important;
   }
   :deep(.s-dialog__maximize-height) {
