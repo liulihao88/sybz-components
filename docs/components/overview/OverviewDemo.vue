@@ -191,7 +191,7 @@ const tableData = [
     </section>
 
     <section>
-      <s-flex gap="16">
+      <s-flex gap="16" height="60">
         <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme" :size="currentSize" width="200"></s-tabs>
         <s-tabs
           v-model="tabsValue"
@@ -200,6 +200,15 @@ const tableData = [
           :size="currentSize"
           height="100%"
           type="capsule"
+        ></s-tabs>
+
+        <s-tabs
+          v-model="tabsValue"
+          :options="navList"
+          :theme="currentTheme"
+          :size="currentSize"
+          height="100%"
+          type="capsule-theme"
         ></s-tabs>
       </s-flex>
       <s-tooltip content="超出字符就隐藏, 鼠标移入显示全部" width="100"></s-tooltip>
