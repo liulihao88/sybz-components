@@ -145,10 +145,10 @@ export interface STableProps<Row extends TableRow = TableRow> {
   showIndex?: boolean
   size?: string
   theme?: SybzComponentTheme
-  /** 表格自身及表体背景色，支持 CSS 颜色值和 transparent */
+  /** 表格自身及表体背景色，支持 CSS 颜色值 */
   background?: string
-  /** 是否去除表格自身背景，融入外层容器 */
-  transparent?: boolean
+  /** 是否使用简洁表格样式，去除单元格左右边框 */
+  simple?: boolean
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]

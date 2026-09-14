@@ -1,3 +1,5 @@
+@import '../shared/table.scss';
+
 .s-table.s-table--chenghua.s-table--chenghua {
   border-radius: var(--s-ch-radius);
   background: var(--s-table-background, var(--s-ch-table-header-bg)) !important;

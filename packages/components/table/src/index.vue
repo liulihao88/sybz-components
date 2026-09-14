@@ -66,10 +66,10 @@ interface TableProps {
   showIndex?: boolean
   size?: string
   theme?: SybzComponentTheme
-  /** 表格自身及表体背景色，支持 CSS 颜色值和 transparent */
+  /** 表格自身及表体背景色，支持 CSS 颜色值 */
   background?: string
-  /** 是否去除表格自身背景，融入外层容器 */
-  transparent?: boolean
+  /** 是否使用简洁表格样式，去除单元格左右边框 */
+  simple?: boolean
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]
@@ -92,7 +92,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   size: '',
   theme: 'default',
   background: undefined,
-  transparent: false,
+  simple: false,
   pageSize: 30,
   pageNumber: 1,
   pageSizes: () => [10, 30, 50],
@@ -895,16 +895,14 @@ const fluidHeight = computed(() => {
 const wrapperStyle = computed(() => {
   return {
     ...(fluidHeight.value ? { height: fluidHeight.value } : {}),
-    ...(mergedProps.value.transparent || mergedProps.value.background
-      ? { '--s-table-background': mergedProps.value.transparent ? 'transparent' : mergedProps.value.background }
-      : {}),
+    ...(mergedProps.value.background ? { '--s-table-background': mergedProps.value.background } : {}),
   }
 })
 
 const tableClass = computed(() => ({
   's-table--fluid-height': !!fluidHeight.value,
-  's-table--custom-background': !!(mergedProps.value.transparent || mergedProps.value.background),
-  's-table--horizontal-border': mergedProps.value.transparent,
+  's-table--custom-background': !!mergedProps.value.background,
+  's-table--simple': mergedProps.value.simple,
   's-table--chenghua': mergedProps.value.theme === 'chenghua',
   's-table--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-table--sybz': mergedProps.value.theme === 'sybz',
@@ -1389,7 +1387,7 @@ defineExpose({
     }
   }
 
-  &.s-table--horizontal-border {
+  &.s-table--simple {
     :deep(.el-table th.el-table__cell),
     :deep(.el-table td.el-table__cell) {
       border-left: 0 !important;

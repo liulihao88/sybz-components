@@ -1,0 +1,31 @@
+// 所有主题共用的简洁表格规则：保留横向分隔线，去除单元格左右边框。
+.s-table.s-table--simple.s-table--simple.s-table--simple.s-table--simple {
+  .el-table th.el-table__cell,
+  .el-table td.el-table__cell {
+    border-left: 0 !important;
+    border-right: 0 !important;
+  }
+
+  .el-table-fixed-column--left.is-last-column,
+  .el-table-fixed-column--right.is-first-column,
+  .el-table-fixed-column--right.is-last-column,
+  .el-table-fixed-column--left.is-first-column {
+    border-left: 0 !important;
+    border-right: 0 !important;
+  }
+
+  .el-table-fixed-column--right.is-first-column::before,
+  .el-table-fixed-column--right.is-last-column::before,
+  .el-table-fixed-column--left.is-last-column::before,
+  .el-table-fixed-column--left.is-first-column::before {
+    display: none !important;
+    box-shadow: none !important;
+  }
+
+  .el-table__fixed-right,
+  .el-table__fixed-left {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    box-shadow: none !important;
+  }
+}
