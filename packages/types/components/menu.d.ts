@@ -43,7 +43,7 @@ export type SMenuComponent = {
       header?: () => any
       footer?: () => any
     }
-    $emit: (event: 'update:modelValue' | 'select' | 'actionClick', ...args: any[]) => void
+    $emit: (event: 'update:modelValue' | 'update:collapse' | 'select' | 'actionClick', ...args: any[]) => void
   }
 }
 
