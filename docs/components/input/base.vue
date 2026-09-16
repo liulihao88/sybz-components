@@ -1,5 +1,5 @@
 <template>
-  <s-input v-model="name" width="300" />
+  <s-input v-model="name" :max-length="20" width="300" />
 </template>
 
 <script lang="ts" setup>

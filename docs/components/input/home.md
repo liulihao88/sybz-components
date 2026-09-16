@@ -109,7 +109,7 @@ input/sybzTheme
 |    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案          | string           | `''`      |
 |           `size`           | 输入框尺寸                                        | string           | `''`      |
 |          `theme`           | 输入框主题                                        | string           | `default` |
-|      `showWordLimit`       | 是否显示字数统计                                  | boolean / string | `''`      |
+|      `showWordLimit`       | 是否显示字数统计                                  | boolean / string | `false`   |
 |          `block`           | 是否按块级宽度展示                                | boolean          | `false`   |
 |      `disPlaceholder`      | 禁用态下显示的占位文案                            | string           | `''`      |
 |         `subAttrs`         | 外层容器额外属性                                  | object           | `{}`      |

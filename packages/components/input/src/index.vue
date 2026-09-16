@@ -141,7 +141,7 @@ const props = withDefaults(defineProps<SInputProps>(), {
   maxLengthErrorText: '',
   size: '',
   theme: 'default',
-  showWordLimit: '',
+  showWordLimit: false,
   block: false,
   // placeholder在disabled的情况下是不显示的. 如果想要在这种情况下显示placeholder, 那么就用这个属性
   disPlaceholder: '',
@@ -168,6 +168,11 @@ const showTextareaClear = computed(
   () => attrs.type === 'textarea' && isClearable.value && Boolean(data.value) && !isDisabled.value,
 )
 
+// `max-length` 未声明为 props 时会保留在 attrs 中；实例显式传入的值应覆盖全局配置。
+const effectiveMaxLength = computed(
+  () => attrs['max-length'] ?? attrs.maxLength ?? mergedProps.value.maxlength ?? mergedProps.value.maxLength,
+)
+
 const inputClass = computed(() => [
   attrs.class,
   {
@@ -179,7 +184,7 @@ const inputClass = computed(() => [
 ])
 
 const normalizedMaxLength = computed(() => {
-  const maxLength = Number(mergedProps.value.maxlength ?? mergedProps.value.maxLength)
+  const maxLength = Number(effectiveMaxLength.value)
   return Number.isFinite(maxLength) && maxLength > 0 ? maxLength : 0
 })
 
@@ -269,10 +274,7 @@ function handleShowWordLimit() {
   if (typeof mergedProps.value.showWordLimit === 'boolean') {
     return mergedProps.value.showWordLimit
   }
-  if (attrs.type === 'textarea') {
-    return true
-  }
-  return false
+  return mergedProps.value.showWordLimit === 'true'
 }
 // 如果是密码输入框, focus直接选中文本
 function focusHandler(evt) {
@@ -361,6 +363,9 @@ const mergedAttrs = computed(() => {
     size: normalizeInputSize(mergedProps.value.size),
     ...mergedProps.value,
   }
+  // Vue 会将未声明的 `max-length` 保留在 attrs 中，传给 Element Plus 前统一转换成
+  // `maxlength`；实例显式传入的值优先于组件及全局配置。
+  baseAttrs.maxlength = effectiveMaxLength.value
   const merged = {
     ...baseAttrs,
     ...Object.entries(attrs).reduce(
