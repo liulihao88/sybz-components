@@ -38,7 +38,13 @@ const suffixIcon = computed(() => props.item.suffixIcon)
       :collapsed="props.collapsed"
     />
   </el-sub-menu>
-  <el-tooltip v-else :disabled="!item.detail" placement="right" :show-after="300" popper-class="s-menu-detail-popper">
+  <el-tooltip
+    v-else
+    :disabled="!props.collapsed"
+    placement="right"
+    :show-after="300"
+    popper-class="s-menu-detail-popper"
+  >
     <template #content>
       <div class="s-menu-node__detail">
         <span v-if="item.detail?.tag">{{ item.detail.tag }}</span>

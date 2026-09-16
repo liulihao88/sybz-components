@@ -10,7 +10,7 @@ import type {
 } from '../component-props'
 
 /**
- * s-icon 图标组件，支持 Element Plus、Iconify、SVG、在线图片等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
+ * s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
  *
  * 先提示 sybz 自身属性。
  */

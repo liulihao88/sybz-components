@@ -221,6 +221,11 @@ const handleSelect = (...args: any[]) => {
     .s-menu__account > div {
       display: none;
     }
+    :deep(.s-menu__brand-content),
+    :deep(.s-menu__account > div),
+    :deep(.s-menu__slot-text) {
+      display: none;
+    }
     .s-menu__account {
       justify-content: center;
       padding: 12px 8px;
@@ -259,7 +264,7 @@ const handleSelect = (...args: any[]) => {
   :deep(.s-menu__list .el-menu) {
     display: block;
     height: auto;
-    min-height: 100%;
+    min-height: 0;
   }
   :deep(.el-menu-item),
   :deep(.el-sub-menu),

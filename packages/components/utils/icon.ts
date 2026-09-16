@@ -21,7 +21,7 @@ export const isElementPlusIconName = (icon: unknown): icon is string => {
 }
 
 export const resolveIconValue = (icon: unknown) => {
-  if (typeof icon !== 'string' || !icon || icon.startsWith('el-icon-')) return icon
+  if (typeof icon !== 'string' || !icon) return icon
   if (isRemoteIconUrl(icon)) {
     return () =>
       h('img', {
@@ -42,6 +42,6 @@ export const resolveIconValue = (icon: unknown) => {
   if (isEmojiIcon(icon)) {
     return () => h('span', { 'aria-hidden': true }, icon)
   }
-  if (isElementPlusIconName(icon)) return `el-icon-${toLine(icon)}`
+  if (isElementPlusIconName(icon)) return `el-icon-${toLine(icon.replace(/^el-icon-/, ''))}`
   return () => h('i', { class: icon, 'aria-hidden': true })
 }
