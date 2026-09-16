@@ -5,7 +5,7 @@ import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import MenuNode from './MenuNode.vue'
 import SIcon from '@/components/icon'
-import type { SMenuFieldNames, SMenuItem, SMenuSelfProps } from './types'
+import type { SMenuFieldNames, SMenuIcon, SMenuItem, SMenuSelfProps } from './types'
 
 defineOptions({ name: 'SMenu', inheritAttrs: false })
 
@@ -35,6 +35,7 @@ const emit = defineEmits<{
 defineSlots<{ header?: () => any; footer?: () => any }>()
 
 const attrs = useAttrs()
+const iconProp = (value: SMenuIcon) => value as any
 const mergedProps = useGlobalComponentConfig('menu', props)
 const isCollapsed = ref(mergedProps.value.collapse)
 watch(
@@ -117,13 +118,13 @@ const handleSelect = (...args: any[]) => {
       :title="isCollapsed ? '展开菜单' : '收缩菜单'"
       @click="toggleCollapse"
     >
-      <SIcon :icon="isCollapsed ? Expand : Fold" />
+      <SIcon :icon="iconProp(isCollapsed ? Expand : Fold)" />
     </button>
     <header v-if="$slots.header || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
       <slot name="header">
         <div v-if="resolvedHeader" class="s-menu__brand">
           <span v-if="resolvedHeader.icon" class="s-menu__brand-icon">
-            <s-icon :icon="resolvedHeader.icon" />
+            <s-icon :icon="iconProp(resolvedHeader.icon)" />
           </span>
           <div class="s-menu__brand-content">
             <strong>{{ resolvedHeader.title }}</strong>
@@ -136,7 +137,7 @@ const handleSelect = (...args: any[]) => {
           type="button"
           @click="emit('actionClick', $event)"
         >
-          <s-icon v-if="mergedProps.actionConfig.icon" :icon="mergedProps.actionConfig.icon" />
+          <s-icon v-if="mergedProps.actionConfig.icon" :icon="iconProp(mergedProps.actionConfig.icon)" />
           {{ mergedProps.actionConfig.text }}
         </button>
       </slot>

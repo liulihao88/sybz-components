@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import SIcon from '@/components/icon'
-import type { SMenuFieldNames, SMenuItem } from './types'
+import type { SMenuFieldNames, SMenuIcon, SMenuItem } from './types'
 
 defineOptions({ name: 'SMenuNode' })
 
@@ -12,6 +12,7 @@ const children = computed<SMenuItem[]>(() => read('children') || [])
 const index = computed(() => String(read('index') || read('path') || ''))
 const icon = computed(() => read('icon'))
 const suffixIcon = computed(() => props.item.suffixIcon)
+const iconProp = (value: SMenuIcon) => value as any
 </script>
 
 <template>
@@ -27,7 +28,7 @@ const suffixIcon = computed(() => props.item.suffixIcon)
   </template>
   <el-sub-menu v-else-if="children.length" :index="index" :disabled="Boolean(read('disabled'))">
     <template #title>
-      <SIcon v-if="icon" :icon="icon" />
+      <SIcon v-if="icon" :icon="iconProp(icon)" />
       <span :title="props.collapsed ? String(read('title') || '') : undefined">{{ read('title') }}</span>
     </template>
     <SMenuNode
@@ -58,10 +59,10 @@ const suffixIcon = computed(() => props.item.suffixIcon)
       :disabled="Boolean(read('disabled'))"
       :title="props.collapsed ? String(read('title') || '') : undefined"
     >
-      <SIcon v-if="icon" :icon="icon" />
+      <SIcon v-if="icon" :icon="iconProp(icon)" />
       <span v-if="item.tag" class="s-menu-node__tag" :style="{ color: item.tagColor }">{{ item.tag }}</span>
       <span class="s-menu-node__title">{{ read('title') }}</span>
-      <SIcon v-if="suffixIcon" class="s-menu-node__suffix" :icon="suffixIcon" />
+      <SIcon v-if="suffixIcon" class="s-menu-node__suffix" :icon="iconProp(suffixIcon)" />
     </el-menu-item>
   </el-tooltip>
 </template>
