@@ -12,7 +12,7 @@ export const isIconifyIconName = (icon: unknown): icon is string =>
 export const isEmojiIcon = (icon: unknown): icon is string =>
   typeof icon === 'string' && /\p{Extended_Pictographic}/u.test(icon)
 
-const elementPlusIconNames = new Set(Object.keys(ElementPlusIconsVue).map(toLine))
+const elementPlusIconNames = new Set(Object.keys(ElementPlusIconsVue).map((name) => toLine(name)))
 
 export const isElementPlusIconName = (icon: unknown): icon is string => {
   if (typeof icon !== 'string') return false
