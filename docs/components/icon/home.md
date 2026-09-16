@@ -18,6 +18,18 @@ icon/base
 
 `icon` 也支持直接传入 Emoji 文本，例如 `<s-icon icon="❌" />`；`source="auto"` 下会按文本字形渲染，不会当作 Element Plus 图标名解析。
 
+### 不同图标来源对比
+
+| 来源           | 示例                                | 解析方式                                             |
+| -------------- | ----------------------------------- | ---------------------------------------------------- |
+| Element Plus   | `<s-icon icon="plus" />`            | `plus` 自动解析为 Element Plus 图标                  |
+| Iconify        | `<s-icon icon="tabler:settings" />` | 按 `集合:名称` 格式解析                              |
+| CSS class      | `<s-icon icon="fas fa-home" />`     | 含空格的 class 自动渲染为 `<i>`                      |
+| 单个 CSS class | `<s-icon icon="fa-home" />`         | 自动识别为 CSS class；也可用 `source="css"` 显式指定 |
+| Vue 组件       | `<s-icon :icon="Plus" />`           | 直接渲染传入的组件                                   |
+
+单个字符串会优先匹配 Element Plus 图标名，匹配不到时自动按 CSS class 处理。若名称存在歧义，可使用 `source="css"` 或 `source="element-plus"` 显式指定来源。
+
 ### 成华主题
 
 :::demo 展示成华主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="chenghua" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。

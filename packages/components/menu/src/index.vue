@@ -102,7 +102,6 @@ const handleSelect = (...args: any[]) => {
   emit('update:modelValue', args[0])
   emit('select', ...args)
 }
-const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'string')
 </script>
 
 <template>
@@ -118,17 +117,13 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
       :title="isCollapsed ? '展开菜单' : '收缩菜单'"
       @click="toggleCollapse"
     >
-      <el-icon>
-        <Expand v-if="isCollapsed" />
-        <Fold v-else />
-      </el-icon>
+      <SIcon :icon="isCollapsed ? Expand : Fold" />
     </button>
     <header v-if="$slots.header || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
       <slot name="header">
         <div v-if="resolvedHeader" class="s-menu__brand">
           <span v-if="resolvedHeader.icon" class="s-menu__brand-icon">
-            <el-icon v-if="isComponentIcon(resolvedHeader.icon)"><component :is="resolvedHeader.icon" /></el-icon>
-            <SIcon v-else :icon="String(resolvedHeader.icon)" />
+            <s-icon :icon="resolvedHeader.icon" />
           </span>
           <div class="s-menu__brand-content">
             <strong>{{ resolvedHeader.title }}</strong>
@@ -141,10 +136,7 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
           type="button"
           @click="emit('actionClick', $event)"
         >
-          <el-icon v-if="isComponentIcon(mergedProps.actionConfig.icon)">
-            <component :is="mergedProps.actionConfig.icon" />
-          </el-icon>
-          <SIcon v-else-if="mergedProps.actionConfig.icon" :icon="String(mergedProps.actionConfig.icon)" />
+          <s-icon v-if="mergedProps.actionConfig.icon" :icon="mergedProps.actionConfig.icon" />
           {{ mergedProps.actionConfig.text }}
         </button>
       </slot>
@@ -260,6 +252,19 @@ const isComponentIcon = (icon: unknown) => Boolean(icon && typeof icon !== 'stri
     overflow: auto;
     border-right: 0;
     transition: width 0.2s ease;
+  }
+
+  // 菜单项应按内容自然排列，不能被外部 flex 布局拉伸分布。
+  :deep(.s-menu__list.el-menu),
+  :deep(.s-menu__list .el-menu) {
+    display: block;
+    height: auto;
+    min-height: 100%;
+  }
+  :deep(.el-menu-item),
+  :deep(.el-sub-menu),
+  :deep(.el-sub-menu__title) {
+    flex: none;
   }
 
   :deep(.el-menu) {

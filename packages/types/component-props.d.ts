@@ -36,7 +36,7 @@ export type SybzRecord = Record<string, any>
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})
 export type SIconValue = SIconName | Component
-export type SIconSource = 'auto' | 'element-plus' | 'iconify' | 'svg' | 'url'
+export type SIconSource = 'auto' | 'element-plus' | 'iconify' | 'css' | 'svg' | 'url'
 export type SIconType = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
 export type SIconVariant = 'plain' | 'light' | 'solid'
 export type SIconCursor =

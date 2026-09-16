@@ -11,10 +11,7 @@ const read = (field: keyof SMenuFieldNames) => props.item[props.fieldNames[field
 const children = computed<SMenuItem[]>(() => read('children') || [])
 const index = computed(() => String(read('index') || read('path') || ''))
 const icon = computed(() => read('icon'))
-const isComponentIcon = computed(() => typeof icon.value !== 'string')
 const suffixIcon = computed(() => props.item.suffixIcon)
-const isComponentSuffixIcon = computed(() => typeof suffixIcon.value !== 'string')
-const suffixIconName = computed(() => (typeof suffixIcon.value === 'string' ? suffixIcon.value : ''))
 </script>
 
 <template>
@@ -30,8 +27,7 @@ const suffixIconName = computed(() => (typeof suffixIcon.value === 'string' ? su
   </template>
   <el-sub-menu v-else-if="children.length" :index="index" :disabled="Boolean(read('disabled'))">
     <template #title>
-      <el-icon v-if="icon && isComponentIcon"><component :is="icon" /></el-icon>
-      <SIcon v-else-if="icon" :icon="icon" />
+      <SIcon v-if="icon" :icon="icon" />
       <span :title="props.collapsed ? String(read('title') || '') : undefined">{{ read('title') }}</span>
     </template>
     <SMenuNode
@@ -56,16 +52,10 @@ const suffixIconName = computed(() => (typeof suffixIcon.value === 'string' ? su
       :disabled="Boolean(read('disabled'))"
       :title="props.collapsed ? String(read('title') || '') : undefined"
     >
-      <el-icon v-if="icon && isComponentIcon"><component :is="icon" /></el-icon>
-      <SIcon v-else-if="icon" :icon="icon" />
-      <template #title>
-        <span v-if="item.tag" class="s-menu-node__tag" :style="{ color: item.tagColor }">{{ item.tag }}</span>
-        <span class="s-menu-node__title">{{ read('title') }}</span>
-        <el-icon v-if="suffixIcon && isComponentSuffixIcon" class="s-menu-node__suffix">
-          <component :is="suffixIcon" />
-        </el-icon>
-        <SIcon v-else-if="suffixIconName" class="s-menu-node__suffix" :icon="suffixIconName" />
-      </template>
+      <SIcon v-if="icon" :icon="icon" />
+      <span v-if="item.tag" class="s-menu-node__tag" :style="{ color: item.tagColor }">{{ item.tag }}</span>
+      <span class="s-menu-node__title">{{ read('title') }}</span>
+      <SIcon v-if="suffixIcon" class="s-menu-node__suffix" :icon="suffixIcon" />
     </el-menu-item>
   </el-tooltip>
 </template>

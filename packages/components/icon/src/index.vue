@@ -1,18 +1,24 @@
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import type { Component, CSSProperties } from 'vue'
+import type { CSSProperties } from 'vue'
 import type { ElTooltipProps } from 'element-plus'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import { processWidth } from '@sybz-components/utils'
 import SSvg from '@/components/svg'
-import { isEmojiIcon, isIconifyIconName, isRemoteIconUrl, resolveIconValue } from '@/components/utils/icon'
+import {
+  isElementPlusIconName,
+  isEmojiIcon,
+  isIconifyIconName,
+  isRemoteIconUrl,
+  resolveIconValue,
+} from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type {
   SIconCursor,
-  SIconName,
   SIconSource,
   SIconType,
   SIconVariant,
+  SIconValue,
   SybzComponentTheme,
 } from '@/types/component-props'
 
@@ -20,7 +26,7 @@ defineOptions({
   name: 'SIcon',
 })
 interface IconProps {
-  icon?: SIconName | Component
+  icon?: SIconValue
   color?: string
   size?: string | number
   width?: string | number
@@ -109,6 +115,13 @@ const isIconify = computed(() => {
   return isIconifyIconName(mergedProps.value.icon)
 })
 
+const isCssClass = computed(
+  () =>
+    typeof mergedProps.value.icon === 'string' &&
+    (mergedProps.value.source === 'css' ||
+      (mergedProps.value.source === 'auto' && !isElementPlusIconName(mergedProps.value.icon))),
+)
+
 const isEmoji = computed(
   () =>
     mergedProps.value.source === 'auto' &&
@@ -188,6 +201,8 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
             :icon="String(mergedProps.icon)"
             aria-hidden="true"
           />
+          <!-- 未匹配到内置图标时，按 CSS 图标类名兜底，兼容 Font Awesome 等图标库。 -->
+          <i v-else-if="isCssClass" :class="String(mergedProps.icon)" aria-hidden="true"></i>
           <component :is="resolvedIcon" v-else></component>
         </template>
       </span>

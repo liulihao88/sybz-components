@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Delete } from '@element-plus/icons-vue'
 function tt() {
   console.log('  </s-tooltip>')
 }
@@ -32,6 +33,17 @@ const iconLists = ref([
 <template>
   <div>
     <s-icon icon="delete"></s-icon>
+    <s-icon icon="el-icon-delete"></s-icon>
+    <s-icon>
+      <Delete></Delete>
+    </s-icon>
+    <s-icon :icon="Delete"></s-icon>
+    <s-icon icon="mdi:ab-testing"></s-icon>
+    <s-button icon="delete"></s-button>
+    <s-button icon="el-icon-delete"></s-button>
+    <s-button :icon="Delete"></s-button>
+    <s-button icon="mdi:ab-testing"></s-button>
+    <s-icon icon="mdi:usb-flash-drive"></s-icon>
     <s-icon icon="warning" content="警告"></s-icon>
     <s-icon icon="info-filled" content="支持 <code>HTML</code> 提示" :dangerouslyUseHTMLString="true"></s-icon>
     <s-icon icon="refresh" content="刷新" color="var(--yellow)" size="50" placement="right" @click="tt"></s-icon>
