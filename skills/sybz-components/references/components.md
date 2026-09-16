@@ -47,6 +47,13 @@
 - `s-card` 无背景传 `transparent`。复杂表单才传 `column`、`align`、`formItemAttrs`。
 - `s-table` 通常只需 `data/columns/total/@page-change`，不要重复 `showPage`、`pageSize`、`width="100%"`。
 
+### s-table 硬性约束
+
+- `s-table` 默认必须使用 `columns`，不得只把它当作 `el-table` 外壳，再通过默认插槽堆叠 `el-table-column`。
+- 普通字段使用 `prop`；格式化或自定义单元格使用列 `render`；操作列使用 `btns`、`handler`、`attrs` 和 `reConfirm`。
+- 只有 `columns`、`render`、`btns` 和具名插槽均无法实现需求时，才允许在默认插槽中声明 `el-table-column`。采用例外写法时，必须在交付说明中记录缺失的组件能力和使用插槽的原因。
+- 修改或评审已有页面时，发现 `s-table` 内直接声明 `el-table-column`，必须优先迁移为 `columns`；只有代码已记录上述例外原因时才可保留。
+
 ## 语义确认
 
 ```vue

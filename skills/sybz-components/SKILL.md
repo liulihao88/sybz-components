@@ -21,6 +21,7 @@ license: MIT
 - 优先 `sybz-components`，不拆回 Element Plus 子组件；优先 `@sybz-components/utils`，不重复实现通用逻辑。
 - 只传业务必要属性；不重复默认宽度、空态、分页、样式、尺寸、`clearable` 等默认值，不加无收益的包装、泛型或中间变量。
 - 表单、表格优先配置化；仅在配置无法表达时使用插槽或 `render`。
+- `s-table` 必须默认使用 `columns`；普通列用 `prop`，定制单元格用列 `render`，操作列用 `btns`。只有确认 `columns`、`render`、`btns` 和具名插槽均无法表达需求时，才允许在默认插槽中声明 `el-table-column`，并须在交付说明中写明原因。
 - 样式以组件库为准；仅业务明确要求时保留旧页面像素样式。主题通过 `theme` 和 token 实现，避免散落硬编码色。
 - API 不确定时检索当前项目源码、类型和文档，不凭示例猜测。
 - 修改后运行已有 typecheck/lint（不主动 build/docsbuild）；交付时简述组件、utils、主题、删减项和校验。
