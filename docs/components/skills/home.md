@@ -10,14 +10,14 @@
 
 同一个项目可以同时保留这些文件；内容保持一致即可。不要把规则写死为只能读取 `.codex` 目录。
 
-如果 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 不存在，请先安装或更新依赖：
+如果项目采用 `backend/`、`frontend/` 等多目录结构，不要只从仓库根目录查找 Skill。由于前端依赖通常安装在 `frontend/` 下，请以实际前端项目目录为基准查找；如果 `./node_modules/sybz-components/skills/sybz-components/SKILL.md` 不存在，再安装或更新依赖：
 
 <div class="skill-rule-code-anchor"></div>
 
 ```md
 ## 当前项目使用 sybz-components 组件库规范
 
-本项目使用 `sybz-components` 组件库。处理文件时，请先判断任务是否涉及 `sybz-components`、`@sybz-components/utils`、Element Plus 组件迁移、主题或组件示例：涉及这些内容时，先阅读并遵循 `./node_modules/sybz-components/skills/sybz-components/SKILL.md`；涉及具体组件、工具函数或主题时，再按需阅读该 skill 的 `references/` 目录下相关规范。普通业务逻辑（例如接口请求、状态计算、数据转换、路由或与组件库无关的 JS/TS 工具代码）不要求读取这份 skill。若普通逻辑文件直接引入或调用 `@sybz-components/utils`，则按工具函数场景处理。修改前先检查当前项目已有实现，保留已有配置，只补充缺失的组件注册、样式导入和 Vite 插件。
+本项目使用 `sybz-components` 组件库。处理文件时，请先判断任务是否涉及 `sybz-components`、`@sybz-components/utils`、Element Plus 组件迁移、主题或组件示例：涉及这些内容时，先在当前目录及其祖先目录中定位前端项目；如果当前目录是仓库根目录，再检查 `frontend/`（优先）以及 `web/`、`client/`、`ui/` 等前端子目录。以实际包含 `package.json` 和 `node_modules` 的前端目录作为工作目录，阅读该目录下的 `node_modules/sybz-components/skills/sybz-components/SKILL.md`；若包内没有该路径，则使用 AI 工具已加载的同名 skill，并按需阅读其 `references/` 目录。普通业务逻辑（例如接口请求、状态计算、数据转换、路由或与组件库无关的 JS/TS 工具代码）不要求读取这份 skill。若普通逻辑文件直接引入或调用 `@sybz-components/utils`，则按工具函数场景处理。修改前先检查当前项目已有实现，保留已有配置，只补充缺失的组件注册、样式导入和 Vite 插件。
 ```
 
 ::: code-group
@@ -42,13 +42,13 @@ npm install sybz-components
 当前包会把 skill 源文件随 npm 包一起发布。业务项目安装依赖后，规范文件位于：
 
 ```sh
-./node_modules/sybz-components/skills/sybz-components/SKILL.md
+<前端项目目录>/node_modules/sybz-components/skills/sybz-components/SKILL.md
 ```
 
 相关参考文件位于：
 
 ```sh
-./node_modules/sybz-components/skills/sybz-components/references/
+<前端项目目录>/node_modules/sybz-components/skills/sybz-components/references/
 ```
 
 这套方式不依赖 `.codex` 目录，也不要求使用者额外执行全局安装命令。AI 工具只要能读取项目规则文件，并能访问 `node_modules`，就可以按规则找到当前组件库的 skill。
