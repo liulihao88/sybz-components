@@ -42,6 +42,6 @@ export const resolveIconValue = (icon: unknown) => {
   if (isEmojiIcon(icon)) {
     return () => h('span', { 'aria-hidden': true }, icon)
   }
-  if (isElementPlusIconName(icon)) return `el-icon-${toLine(icon.replace(/^el-icon-/, ''))}`
+  if (isElementPlusIconName(icon)) return `el-icon-${toLine((icon as string).replace(/^el-icon-/, ''))}`
   return () => h('i', { class: icon, 'aria-hidden': true })
 }
