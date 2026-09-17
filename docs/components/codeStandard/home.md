@@ -1,6 +1,103 @@
-# 前端代码统一规范
+# 前端代码统一规范(为了项目的长期可持续迭代升级,规范统一,提升开发效率,节约开发时间, 建议每个项目都加上前端统一规范)
 
 ## Hidden Title {.md-hidden}
+
+### 一键接入(一键接入, 是对下面的技术说明的操作所做的封装, 本质上还是执行技术说明下面的操作, 仅需在前端项目目录下, 执行下面两行代码就可实现前端代码的格式化, eslint校验等统一规范.)
+
+安装最新的@sybz-components/utils
+
+::: code-group
+
+```sh [pnpm]
+pnpm add -D @sybz-components/utils
+```
+
+```sh [bun]
+bun add -d @sybz-components/utils
+```
+
+```sh [npm]
+npm install -D @sybz-components/utils
+```
+
+:::
+
+执行sybz-code-standard init命令, 来一键生成代码规范所需文件
+
+::: code-group
+
+```sh [pnpm]
+pnpm exec sybz-code-standard init
+```
+
+```sh [bun]
+bunx sybz-code-standard init
+```
+
+```sh [npm]
+npx sybz-code-standard init
+```
+
+:::
+
+::: tip 提示
+**上述两行代码, 即可实现完整的前端代码规范功能.无需再看下面的文档, 下面的文档是对前端代码规范的更详细的解释和说明, 可看可不看**
+:::
+
+### 一键接入说明
+
+初始化会自动完成：
+
+- 创建 `eslint.config.js`、`.prettierrc.js`、`lint-staged.config.js` 和 `.editorconfig`。
+- 补充 `lint`、`lint:check`、`lint:prettier`、`lint:prettier:check` scripts。
+- 初始化 Husky，并让 pre-commit 自动检查暂存文件。
+- 保留已有的自定义配置并给出提示，不静默覆盖。
+
+后续统一规范只需升级 utils：
+
+```sh
+pnpm update @sybz-components/utils --latest
+```
+
+### 使用命令
+
+```sh
+pnpm lint                 # ESLint 检查并修复
+pnpm lint:check           # ESLint 只检查
+pnpm lint:prettier        # Prettier 格式化
+pnpm lint:prettier:check  # Prettier 只检查
+```
+
+提交代码时会自动执行 lint-staged，无需手动运行。
+
+### 默认配置
+
+| 配置项            | 可选值/执行内容                   | 默认值       |
+| ----------------- | --------------------------------- | ------------ |
+| `singleQuote`     | `true` / `false`                  | `true`       |
+| `semi`            | `true` / `false`                  | `false`      |
+| `trailingComma`   | `all` / `es5` / `none`            | `all`        |
+| `printWidth`      | 正整数                            | `120`        |
+| `endOfLine`       | `lf` / `crlf` / `cr` / `auto`     | `lf`         |
+| ESLint Vue 规则   | `flat/recommended` 及统一放宽项   | 统一预设     |
+| pre-commit        | 对暂存代码执行 Prettier 和 ESLint | 自动启用     |
+| EditorConfig 缩进 | `space` / `tab`，以及缩进宽度     | `space`、`2` |
+
+### 项目级 ESLint 扩展
+
+只有项目确实存在特殊规则时才修改 `eslint.config.js`：
+
+```js
+import { createSybzEslintConfig } from '@sybz-components/utils/codeStandard'
+
+export default createSybzEslintConfig({
+  rules: {
+    'no-console': 'warn',
+  },
+})
+```
+
+通用规则应回到 utils 统一修改，避免项目之间再次分叉。CI 推荐执行 `pnpm lint:check` 和 `pnpm lint:prettier:check`。
 
 > 注意：前端项目默认使用 `Prettier` 代码格式化规则，强烈建议将 `Prettier` 设置为编辑器默认格式化工具。
 
