@@ -44,6 +44,26 @@ npx sybz-code-standard init
 **上述两行代码, 即可实现完整的前端代码规范功能.无需再看下面的文档, 下面的文档是对前端代码规范的更详细的解释和说明, 可看可不看**
 :::
 
+如果需要将已有的自定义配置强制替换为公司统一规范，可增加 `--force`：
+
+::: code-group
+
+```sh [pnpm]
+pnpm exec sybz-code-standard init --force
+```
+
+```sh [bun]
+bunx sybz-code-standard init --force
+```
+
+```sh [npm]
+npx sybz-code-standard init --force
+```
+
+:::
+
+强制覆盖前会将原文件备份为同目录下的 `*.sybz-code-standard.bak`。不加 `--force` 时，已有的自定义配置和同名 scripts 会继续保留。
+
 ### 一键接入说明
 
 初始化会自动完成：
@@ -51,7 +71,7 @@ npx sybz-code-standard init
 - 创建 `eslint.config.js`、`.prettierrc.js`、`lint-staged.config.js` 和 `.editorconfig`。
 - 补充 `lint`、`lint:check`、`lint:prettier`、`lint:prettier:check` scripts。
 - 初始化 Husky，并让 pre-commit 自动检查暂存文件。
-- 保留已有的自定义配置并给出提示，不静默覆盖。
+- 默认保留已有的自定义配置并给出提示；使用 `init --force` 时备份并覆盖已有配置和同名 scripts。
 
 后续统一规范只需升级 utils：
 

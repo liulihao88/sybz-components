@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { resolve } from 'node:path'
 import husky from 'husky'
@@ -44,7 +44,13 @@ const runPackageBin = (packageName: string, binPath: string, args: string[]) => 
   execFileSync(process.execPath, [executablePath, ...args], { cwd, stdio: 'inherit' })
 }
 
-const writeIfMissing = (relativePath: string, content: string) => {
+const backupFile = (filePath: string) => {
+  const backupPath = `${filePath}.sybz-code-standard.bak`
+  copyFileSync(filePath, backupPath)
+  return backupPath
+}
+
+const writeConfigFile = (relativePath: string, content: string, force: boolean) => {
   const filePath = resolve(cwd, relativePath)
 
   if (!existsSync(filePath)) {
@@ -53,27 +59,41 @@ const writeIfMissing = (relativePath: string, content: string) => {
     return
   }
 
-  if (readFileSync(filePath, 'utf8') !== content) {
-    console.warn(`跳过 ${relativePath}：已存在自定义内容`)
+  if (readFileSync(filePath, 'utf8') === content) return
+
+  if (!force) {
+    console.warn(`跳过 ${relativePath}：已存在自定义内容，可使用 init --force 强制覆盖`)
+    return
   }
+
+  const backupPath = backupFile(filePath)
+  writeFileSync(filePath, content, 'utf8')
+  console.log(`覆盖 ${relativePath}（原文件已备份为 ${backupPath}）`)
 }
 
-const configurePackageJson = () => {
+const configurePackageJson = (force: boolean) => {
   const packageJsonPath = resolve(cwd, 'package.json')
   if (!existsSync(packageJsonPath)) throw new Error(`当前目录不存在 package.json：${cwd}`)
 
-  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
+  const packageJsonContent = readFileSync(packageJsonPath, 'utf8')
+  const packageJson = JSON.parse(packageJsonContent)
   packageJson.scripts ??= {}
+  let shouldBackup = false
 
   for (const [name, command] of Object.entries(scripts)) {
     const current = packageJson.scripts[name]
-    if (!current || current === command) {
+    if (!current || current === command || force) {
+      if (force && current && current !== command) shouldBackup = true
       packageJson.scripts[name] = command
     } else {
-      console.warn(`保留 scripts.${name}：已存在自定义命令`)
+      console.warn(`保留 scripts.${name}：已存在自定义命令，可使用 init --force 强制覆盖`)
     }
   }
 
+  if (shouldBackup) {
+    const backupPath = backupFile(packageJsonPath)
+    console.log(`备份 package.json 为 ${backupPath}`)
+  }
   writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}\n`, 'utf8')
   console.log('更新 package.json scripts')
 }
@@ -97,18 +117,19 @@ const configurePreCommit = () => {
   console.log('更新 .husky/pre-commit')
 }
 
-const init = () => {
-  configurePackageJson()
-  for (const [filePath, content] of Object.entries(generatedFiles)) writeIfMissing(filePath, content)
+const init = (args: string[]) => {
+  const force = args.includes('--force')
+  configurePackageJson(force)
+  for (const [filePath, content] of Object.entries(generatedFiles)) writeConfigFile(filePath, content, force)
   configurePreCommit()
-  console.log('\n前端代码统一规范已接入。')
+  console.log(`\n前端代码统一规范已${force ? '强制覆盖并' : ''}接入。`)
 }
 
 const [command = 'init', ...args] = process.argv.slice(2)
 
 switch (command) {
   case 'init':
-    init()
+    init(args)
     break
   case 'prepare':
     prepareHusky()
