@@ -156,10 +156,6 @@ export default defineConfig({
                   text: 'ChangeLog',
                   link: '/components/utils/changelog/home.md',
                 },
-                {
-                  text: '前端代码统一规范(new), 对插件和用法做了封装',
-                  link: '/components/codeStandard/new.md',
-                },
               ],
             },
           ],
