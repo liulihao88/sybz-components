@@ -32,7 +32,7 @@ title/shijingshan/base
 
 ### 通常用法
 
-:::demo 展示属性、标题插槽、追加内容和语义化标题。基础写法：`<s-title title="左侧" margin="10px 0" l="10"></s-title>`。属性：`icon` 类型 `string / Component`，默认值 `''`；`extra` 类型 `string`，默认值 `''`；`size` 可选 `small / default / large`，默认值 `default`；`margin` 类型 `string / number`，默认值 `''`；`gap` 类型 `string / number`，默认值 `''`；`tag` 可选 `div / h1 / h2 / h3 / h4 / h5 / h6`，默认值 `div`；`level` 可选 `1 / 2 / 3 / 4 / 5 / 6`，默认值 `3`。
+:::demo 展示属性、标题插槽、追加内容和语义化标题。基础写法：`<s-title title="左侧" width="320" margin="10px 0" l="10"></s-title>`。属性：`icon` 类型 `string / Component`，默认值 `''`；`extra` 类型 `string`，默认值 `''`；`size` 可选 `small / default / large`，默认值 `default`；`width` 类型 `string / number`，默认值 `''`，数字自动按 `px` 处理；`margin` 类型 `string / number`，默认值 `''`；`gap` 类型 `string / number`，默认值 `''`；`tag` 可选 `div / h1 / h2 / h3 / h4 / h5 / h6`，默认值 `div`；`level` 可选 `1 / 2 / 3 / 4 / 5 / 6`，默认值 `3`。
 title/usually
 :::
 
@@ -81,6 +81,7 @@ title/sybzTheme
 |    `inner`     | 是否使用内部缩进                                                               | boolean            | `false`   |
 |    `margin`    | 外边距，支持 CSS margin 简写                                                   | string / number    | `''`      |
 |     `gap`      | 标题内部间距，控制图标、标题、副标题、右侧区域间距；图标尺寸变化时自动重新布局 | string / number    | `''`      |
+|    `width`     | 组件宽度，数字自动按 px 处理                                                   | string / number    | `''`      |
 |      `t`       | 上边距，兼容快捷写法，优先级高于 `margin`                                      | string / number    | `''`      |
 |      `b`       | 下边距，兼容快捷写法，优先级高于 `margin`                                      | string / number    | `''`      |
 |      `l`       | 左边距，兼容快捷写法，优先级高于 `margin`                                      | string / number    | `''`      |

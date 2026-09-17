@@ -417,13 +417,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
      *
-     * s-title 标题组件，支持通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
+     * s-title 标题组件，支持通过 width 设置宽度，通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
      */
     STitle: (typeof import('./types/components/title'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
      *
-     * s-title 标题组件，支持通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
+     * s-title 标题组件，支持通过 width 设置宽度，通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
      */
     's-title': (typeof import('./types/components/title'))['default']
     /**

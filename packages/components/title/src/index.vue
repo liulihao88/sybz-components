@@ -55,6 +55,7 @@
 import { isSybzTheme } from '../../../utils/src/theme'
 import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, type Component, type CSSProperties, useSlots } from 'vue'
+import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import STooltip from '@/components/tooltip/src/index.vue'
 
@@ -82,6 +83,7 @@ interface TitleProps {
   inner?: boolean
   margin?: string | number
   gap?: string | number
+  width?: string | number
   t?: string | number
   b?: string | number
   l?: string | number
@@ -133,6 +135,7 @@ const props = withDefaults(defineProps<TitleProps>(), {
   inner: false,
   margin: '',
   gap: '',
+  width: '',
   t: '',
   b: '',
   l: '',
@@ -146,43 +149,38 @@ const props = withDefaults(defineProps<TitleProps>(), {
 const mergedProps = useGlobalComponentConfig('title', props)
 const slots = useSlots()
 
-const formatCssValue = (value?: string | number) => {
-  if (value === undefined || value === null || value === '') {
-    return ''
-  }
-
-  return typeof value === 'number' || !Number.isNaN(Number(value)) ? `${value}px` : String(value)
-}
-
 const titleStyle = computed(() => {
-  const { size, margin, gap, t, b, l, tb, height } = mergedProps.value
+  const { size, margin, gap, width, t, b, l, tb, height } = mergedProps.value
   const style: CSSProperties = {}
 
   if (margin) {
-    style.margin = formatCssValue(margin)
+    style.margin = String(margin)
+  }
+  if (width) {
+    style.width = processWidth(width, true)
   }
   if (tb) {
-    style.marginTop = formatCssValue(tb)
-    style.marginBottom = formatCssValue(tb)
+    style.marginTop = processWidth(tb, true)
+    style.marginBottom = processWidth(tb, true)
   }
   if (t) {
-    style.marginTop = formatCssValue(t)
+    style.marginTop = processWidth(t, true)
   }
   if (b) {
-    style.marginBottom = formatCssValue(b)
+    style.marginBottom = processWidth(b, true)
   }
   if (l) {
-    style.marginLeft = formatCssValue(l)
+    style.marginLeft = processWidth(l, true)
   }
   if (height) {
-    style.height = formatCssValue(height)
+    style.height = processWidth(height, true)
   }
 
   if (size) {
     Object.assign(style, titleSizeMap[size])
   }
   if (gap) {
-    style['--s-title-gap'] = formatCssValue(gap)
+    style['--s-title-gap'] = processWidth(gap, true)
   }
 
   return style

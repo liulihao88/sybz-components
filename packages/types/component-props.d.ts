@@ -998,6 +998,7 @@ export interface STitleProps {
   inner?: boolean
   margin?: string | number
   gap?: string | number
+  width?: string | number
   t?: string | number
   b?: string | number
   l?: string | number
