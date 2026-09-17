@@ -1,4 +1,4 @@
-# icon图标
+# icon图标(默认支持222个图标集的超过38万个图标, 也就是iconify)
 
 ## Hidden Title {.md-hidden}
 
