@@ -394,7 +394,22 @@ const loginWithoutCaptcha = async () => {
   console.log(`自定义网站“${portalAccount.name}”已填写账号密码并点击登录。`)
 }
 
-const loginFormVisible = Boolean(await visibleLocator(['input[type="password"]', 'input[placeholder*="密码"]']))
+const waitForLoginForm = async () => {
+  for (let index = 0; index < 30; index += 1) {
+    if (
+      await visibleLocator([
+        'input[type="password"]',
+        'input[autocomplete="current-password"]',
+        'input[placeholder*="密码"]',
+      ])
+    )
+      return true
+    await sleep(300)
+  }
+  return false
+}
+
+const loginFormVisible = await waitForLoginForm()
 if (portal === 'custom' && loginFormVisible) await loginWithoutCaptcha()
 else if (page.url().includes('/passport/login/') && loginFormVisible) await login()
 if (!devMode) {

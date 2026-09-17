@@ -93,6 +93,7 @@
     "types:generate": "node ./scripts/generate-component-types.mjs",
     "types:check": "node ./scripts/generate-component-types.mjs --check",
     "skills:install": "node ./scripts/install-sybz-skill.mjs",
+    "portal-dev": "node ./packages/portal-dev/bin/portal-dev.mjs",
     "portal:skill:install": "pnpm --dir packages/portal-dev skill:install",
     "utils:release": "pnpm run -C packages/utils release",
     "portal:release": "pnpm --dir packages/portal-dev release",

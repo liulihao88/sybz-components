@@ -133,6 +133,23 @@ const fillAndSubmit = async (tab, { username, password, captchaText, custom }) =
     ),
   )
 
+const hasVisibleLoginForm = async (tab) =>
+  (await execute(
+    tab,
+    `(() => {
+      const visible = (element) => { const style = getComputedStyle(element); const rect = element.getBoundingClientRect(); return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0; };
+      return Array.from(document.querySelectorAll('input[type="password"], input[autocomplete="current-password"], input[placeholder*="密码"]')).some(visible) ? 'true' : 'false';
+    })()`,
+  )) === 'true'
+
+const waitForLoginForm = async (tab) => {
+  for (let index = 0; index < 30; index += 1) {
+    if (await hasVisibleLoginForm(tab)) return true
+    await sleep(300)
+  }
+  return false
+}
+
 const login = async (tab, config, recognizeCaptcha, custom) => {
   for (let attempt = 1; attempt <= (custom ? 1 : 5); attempt += 1) {
     let captchaText = ''
@@ -184,8 +201,9 @@ export const runInExistingChrome = async ({
   await sleep(800)
   const state = await pageState(tab)
   if (portal === 'custom') {
-    if (state.url === config.loginUrl || state.url.startsWith(`${config.loginUrl}#`))
-      await login(tab, config, recognizeCaptcha, true)
+    // 自定义站点可能在加载后补齐尾斜杠、追加 query，甚至先经过一次重定向；
+    // 不要用原始 URL 的字符串完全相等来决定是否执行登录。
+    if (await waitForLoginForm(tab)) await login(tab, config, recognizeCaptcha, true)
   } else if (state.url.includes('/passport/login/')) await login(tab, config, recognizeCaptcha, false)
 
   if (!devMode) {
