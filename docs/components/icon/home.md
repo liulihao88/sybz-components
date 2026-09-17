@@ -46,6 +46,8 @@ icon/shijingshan
 
 Iconify 汇集了大量开源图标集。使用 `s-icon` 时不需要单独安装 `@iconify/vue`，也不需要导入每一个图标组件，只要提供图标名称即可。
 
+在编辑器中悬浮 `s-icon` 标签时，类型签名顶部的 `Iconify图标查询` 会显示 `https://icon-sets.iconify.design/`。这是类型提示中的查询入口，无需作为组件属性传入。
+
 #### 组件库默认推荐：Tabler Icons
 
 `sybz-components` 默认推荐业务项目使用 [Tabler Icons](https://icon-sets.iconify.design/tabler/)，图标名称统一以 `tabler:` 开头，例如：
