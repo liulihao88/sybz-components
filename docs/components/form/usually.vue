@@ -139,9 +139,7 @@ async function isTest16() {
         <s-input v-model="model.name" placeholder="我是name" width="300" />
       </template>
       <template #age>
-        <div class="h-100">
-          <s-input-number v-model="model.age" width="300" height="100%" />
-        </div>
+        <s-input-number v-model="model.age" width="300" height="100%" />
       </template>
     </s-form>
     <el-button type="primary" @click="isTest16">测试36</el-button>
