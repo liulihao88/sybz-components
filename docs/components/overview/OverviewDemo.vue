@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { docThemeState, setDocTheme } from '../../.vitepress/theme/theme'
 
-type ThemeName = 'default' | 'chenghua' | 'shijingshan' | 'sybz'
+type ThemeName = 'default' | 'chenghua' | 'shijingshan' | 'sybz' | 'gulou'
 type SizeName = 'small' | 'default' | 'large'
 type RadioShowType = 'radio' | 'button'
 type CheckboxShowType = 'check' | 'button'
 
-const currentTheme = ref<ThemeName>('default')
+const currentTheme = computed<ThemeName>({
+  get: () => docThemeState.theme,
+  set: (theme) => setDocTheme(theme),
+})
 const currentSize = ref<SizeName>('default')
 const keyword = ref('文件管理')
 const selectedStatus = ref('running')
@@ -26,6 +30,7 @@ const themes: Array<{ label: string; value: ThemeName }> = [
   { label: 'chenghua', value: 'chenghua' },
   { label: 'shijingshan', value: 'shijingshan' },
   { label: 'sybz', value: 'sybz' },
+  { label: 'gulou', value: 'gulou' },
 ]
 
 const sizes: Array<{ label: string; value: SizeName }> = [
@@ -99,6 +104,10 @@ const navList = [
   {
     label: 'sybz',
     value: 'sybz',
+  },
+  {
+    label: 'gulou',
+    value: 'gulou',
   },
 ]
 

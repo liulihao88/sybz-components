@@ -146,7 +146,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   target: undefined,
   subTitle: '',
   width: '',
-  theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan, sybz
+  theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan, sybz, gulou
   cancel: '',
   cancelText: '取消',
   confirmText: undefined,

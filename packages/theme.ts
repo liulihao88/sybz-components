@@ -4,6 +4,60 @@ import type { SybzComponentTheme, SybzThemeColorConfig, SybzThemeColorsConfig, S
 const THEME_PREFIX = SYBZ_THEME_PREFIX
 const themeNames = Object.keys(THEME_PREFIX) as SybzThemeName[]
 
+/** 只换色、不新增组件结构的内置主题预设。 */
+const THEME_COLOR_PRESETS: Partial<Record<SybzThemeName, SybzThemeColorConfig>> = {
+  gulou: {
+    primary: '#2477f3',
+    primaryHover: '#1661e8',
+    primaryActive: '#0d4fcb',
+    primaryRgb: '36, 119, 243',
+    primaryHoverRgb: '22, 97, 232',
+    accent: '#2fb7e8',
+    accentHover: '#1da5d8',
+    accentActive: '#168dbb',
+    accentRgb: '47, 183, 232',
+    success: '#23b777',
+    successRgb: '35, 183, 119',
+    warning: '#f0a020',
+    warningRgb: '240, 160, 32',
+    danger: '#e65b5b',
+    dangerRgb: '230, 91, 91',
+    info: '#2477f3',
+    infoRgb: '36, 119, 243',
+    background: '#f4f9ff',
+    backgroundSoft: '#f7fbff',
+    backgroundMobile: '#f4f9ff',
+    backgroundWeb: '#f4f9ff',
+    cardBackground: '#ffffff',
+    navigationBackground: '#ffffff',
+    fill: '#f4f9ff',
+    fillMobile: '#f4f9ff',
+    fillWeb: '#f4f9ff',
+    rowAlternate: '#f7fbff',
+    rowHover: '#eaf4ff',
+    disabledBackground: '#f4f9ff',
+    text: '#071949',
+    textRegular: '#1d2b4f',
+    textRegularMobile: '#1d2b4f',
+    textRegularWeb: '#1d2b4f',
+    textMuted: '#667694',
+    textSecondary: '#99a8bf',
+    divider: '#dce8f7',
+    dividerMobile: '#dce8f7',
+    dividerWeb: '#dce8f7',
+    tagBackground: '#eef8ff',
+    tagText: '#2372ad',
+    headerBackground: '#eef6ff',
+    controlBackground: '#ffffff',
+    tableLine: '#dce8f7',
+    tableLineSoft: '#e5eff9',
+    tableHeaderBackground: '#eef6ff',
+    tableRowBackground: '#ffffff',
+    tableRowAlternate: '#f7fbff',
+    tablePaginationBackground: '#f4f9ff',
+  },
+}
+
 const COLOR_TOKEN_MAP: Record<keyof SybzThemeColorConfig, string> = {
   primary: 'primary',
   primaryHover: 'primary-hover',
@@ -171,6 +225,21 @@ export const applySybzThemeColors = (
   theme: SybzComponentTheme | undefined,
   config: SybzThemeColorsConfig | undefined,
 ) => {
+  if (isSybzTheme(theme) && THEME_COLOR_PRESETS[theme]) {
+    const nestedConfig = isRecord(config) ? config[theme] : undefined
+    const presetOverrides = isRecord(nestedConfig) ? nestedConfig : isRecord(config) ? config : {}
+    setSybzThemeColors(theme, {
+      ...THEME_COLOR_PRESETS[theme],
+      ...presetOverrides,
+    })
+    return
+  }
+
+  // 未传主题时属于无主题配置的插件安装，不应清除主插件已经应用的颜色预设。
+  if (theme !== undefined && theme !== 'gulou') {
+    resetSybzThemeColors('gulou')
+  }
+
   if (!config || !isRecord(config)) return
 
   const nestedConfig = config as Partial<Record<SybzThemeName, SybzThemeColorConfig>>

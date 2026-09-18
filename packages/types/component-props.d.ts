@@ -29,7 +29,7 @@ import type {
 } from 'element-plus/es/components/upload'
 import type { SElementPlusIconName } from './element-plus-icon-names'
 
-/** 组件主题：default（默认）、chenghua、shijingshan、sybz（思云博智）。 */
+/** 组件主题：default（默认）、chenghua、shijingshan、sybz（思云博智）、gulou（福州鼓楼）。 */
 export type { SybzComponentTheme } from '@sybz-components/utils'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>

@@ -1,4 +1,5 @@
 import { computed, getCurrentInstance, inject, type ComputedRef } from 'vue'
+import { resolveSybzComponentTheme } from '../utils/src/theme'
 
 export const GLOBAL_COMPONENT_CONFIG_KEY = 'GLOBAL_COMPONENT_CONFIG'
 export const GLOBAL_COMPONENT_COMMON_PROPS_KEY = '__globalProps'
@@ -56,11 +57,18 @@ const useGlobalComponentConfig = <T extends Record<string, any>>(componentKey: s
   const instance = getCurrentInstance()
 
   return computed(() => {
-    return {
+    const mergedProps = {
       ...props,
       ...getComponentConfig(globalConfig, componentKey, props),
       ...getExplicitProps(instance?.vnode.props, props),
     }
+
+    const mergedRecord = mergedProps as Record<string, any>
+    if (typeof mergedRecord.theme === 'string') {
+      mergedRecord.theme = resolveSybzComponentTheme(mergedRecord.theme)
+    }
+
+    return mergedProps
   }) as ComputedRef<T & Record<string, any>>
 }
 

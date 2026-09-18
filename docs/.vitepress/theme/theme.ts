@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 import type { SybzComponentTheme } from '@/types/index.ts'
 
 export const DOC_THEME_KEY = 'sybz-doc-theme'
-export const docThemeOptions: SybzComponentTheme[] = ['default', 'chenghua', 'shijingshan', 'sybz']
+export const docThemeOptions: SybzComponentTheme[] = ['default', 'chenghua', 'shijingshan', 'sybz', 'gulou']
 
 const getStoredTheme = (): SybzComponentTheme => {
   if (typeof window === 'undefined') return 'default'
