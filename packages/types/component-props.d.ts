@@ -427,6 +427,8 @@ export interface SFormFieldItem {
   imgAttrs?: SybzRecord
   isShow?: SFormDynamic<boolean>
   label?: string
+  /** 标签下方的副文本，支持函数动态返回 */
+  subLabel?: SFormDynamic<string>
   /** 自定义标签渲染，可与 tooltip 同时使用。 */
   labelRender?: SFormRender
   labelSlotName?: string

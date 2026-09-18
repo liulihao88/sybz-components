@@ -63,6 +63,7 @@ const internalFieldKeys = new Set([
   'required',
   'rules',
   'slotName',
+  'subLabel',
   'subTitle',
   'title',
   'titleSlotName',
@@ -169,6 +170,8 @@ const resolveRecord = (source: FormDynamic<FormAttrs> | undefined, item: FormFie
 
 const getFieldTooltip = (item: FormField, index: number) =>
   resolveDynamic<string | undefined>(item.tooltip, item, index, undefined)
+const getFieldSubLabel = (item: FormField, index: number) =>
+  resolveDynamic<string | undefined>(item.subLabel, item, index, undefined)
 const getFieldTooltipAttrs = (item: FormField, index: number) => resolveRecord(item.tooltipAttrs, item, index)
 const getFieldTooltipCopy = (item: FormField, index: number, tooltip: string) => {
   const copy = item.copy
@@ -589,7 +592,11 @@ defineExpose({
                 class="s-form__label-icon"
                 v-bind="v.imgAttrs"
               />
-              <s-tooltip :content="v.label" />
+              <span v-if="getFieldSubLabel(v, i)" class="s-form__label-text">
+                <s-tooltip :content="v.label" class="s-form__label-main" />
+                <span class="s-form__label-sub">{{ getFieldSubLabel(v, i) }}</span>
+              </span>
+              <s-tooltip v-else :content="v.label" />
             </slot>
             <s-tooltip
               v-if="getFieldTooltip(v, i)"
@@ -666,6 +673,29 @@ defineExpose({
   max-width: 100%;
   height: 100%;
   vertical-align: middle;
+}
+
+.s-form__label-text {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.s-form__label-main {
+  max-width: 100%;
+}
+
+.s-form__label-sub {
+  max-width: 100%;
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--el-text-color-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .s-form__label-icon {

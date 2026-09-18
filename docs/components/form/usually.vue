@@ -89,7 +89,9 @@ const fieldList = [
   },
   {
     label: '性别单选',
+    subLabel: '这是单选的性别',
     prop: 'sex',
+
     comp: 's-radio',
     attrs: {
       options: [
@@ -106,6 +108,7 @@ const fieldList = [
   {
     label: '年龄',
     prop: 'age',
+    subLabel: '请写入实际年龄',
     comp: 's-input-number',
     useSlot: true,
   },

@@ -28,6 +28,12 @@ form/chenghua
 form/shijingshan
 :::
 
+### 标签主副文本 `subLabel`（默认值为空）
+
+:::demo 展示在有限 label 宽度内区分主文本和副文本。基础写法：`{ label: '发布', subLabel: '设为当前活跃公告', prop: 'published' }`。属性：`subLabel` 类型为 `string / Function`，默认值为空；函数参数为表单上下文。主文本使用 `label`，副文本显示在其下方，原有必填星号、标签提示和标签插槽仍可正常使用。
+form/sub-label
+:::
+
 ### gap 左右间隙，默认值 `16px`
 
 :::demo 展示多列表单项左右间隙配置。基础写法：`<s-form :model="formData" :field-list="fieldList" :column="2" :gap="gap" />`。属性：`gap` 类型 `string / number`，可选值为数字、数字字符串或 CSS 长度值，例如 `0`、`16`、`'16px'`、`'1rem'`、`'5%'`，默认值 `16px`，仅在 `column > 1` 时作为左右间距生效。
@@ -172,6 +178,7 @@ const fieldList: SFormFieldItem[] = [
 |    属性名     | 说明                                                                                | 类型                      | 默认值             |
 | :-----------: | ----------------------------------------------------------------------------------- | ------------------------- | ------------------ |
 |     label     | 左侧显示的 label 值                                                                 | string                    | -                  |
+|   subLabel    | label 下方的副文本，支持函数动态返回                                                | string / Function         | -                  |
 |     prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                                           | string                    | -                  |
 |     comp      | 要渲染的组件名称或组件对象                                                          | string / Component        | `s-input`          |
 |     attrs     | 透传给表单控件；`type="title"` 时透传给 `s-title`，标题文案也写在这里               | object / Function         | -                  |
