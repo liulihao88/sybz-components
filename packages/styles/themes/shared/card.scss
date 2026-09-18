@@ -13,8 +13,8 @@
 
   .s-card__header {
     min-height: 48px;
-    border-bottom: none;
-    margin-bottom: 16px;
+    border-bottom: 1px solid var(--s-theme-card-divider);
+    margin-bottom: 0;
     background: var(--s-card-header-bg);
   }
 
@@ -31,7 +31,7 @@
   }
 
   .s-card__footer {
-    border-top: none;
+    border-top: 1px solid var(--s-theme-card-divider);
     background: var(--s-theme-card-footer-bg);
   }
 
