@@ -265,6 +265,13 @@ export interface SInputSelfProps extends SHtmlStringProps {
   hideTooltip?: boolean
   options?: any[]
   content?: string
+  /** 是否显示快捷搜索按钮；点击按钮或按 Enter 时触发 search 事件，默认 false */
+  search?: boolean
+}
+
+export interface SInputEmits {
+  'update:modelValue': [value: any]
+  search: [value: any, event: MouseEvent | KeyboardEvent]
 }
 
 export type SInputProps = SInputSelfProps & Partial<Omit<InputPropsPublic, keyof SInputSelfProps>>

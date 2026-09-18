@@ -32,6 +32,12 @@ input/chenghua/base
 input/shijingshan/base
 :::
 
+### 快捷搜索 `search`（默认值 `false`）
+
+:::demo 展示输入框快捷搜索按钮。基础写法：`<s-input v-model="keyword" search placeholder="搜索工作小组..." @search="handleSearch" />`。属性：`search` 类型为 `boolean`，可选值为 `true / false`，默认值为 `false`。设置为 `true` 后显示搜索按钮，点击按钮或按 Enter 都会触发 `search` 事件；事件参数依次为当前输入值和原始事件。
+input/search
+:::
+
 ### size 尺寸
 
 :::demo 展示尺寸配置。基础写法：`<s-input v-model="input" width="220" size="large" placeholder="large" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
@@ -118,7 +124,14 @@ input/sybzTheme
 |       `hideTooltip`        | 是否关闭溢出提示                                  | boolean          | `false`   |
 |         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`    | array            | -         |
 |         `content`          | 右侧说明提示文案                                  | string           | `''`      |
+|          `search`          | 是否显示搜索按钮并支持点击或 Enter 搜索           | boolean          | `false`   |
 | `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染 | boolean          | `false`   |
+
+### 事件
+
+| 事件名   | 说明                              | 参数                                         |
+| -------- | --------------------------------- | -------------------------------------------- |
+| `search` | 点击搜索按钮或在输入框按 Enter 时 | `(value, event: MouseEvent / KeyboardEvent)` |
 
 ### 说明
 

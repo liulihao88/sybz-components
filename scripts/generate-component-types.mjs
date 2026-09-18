@@ -461,8 +461,12 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SInputPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'input',
+      description: 's-input 输入框组件，支持一键清空、溢出提示、自动补全和快捷搜索按钮。',
       slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
+      emitsMember:
+        "ElInputInstance['$emit'] & (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)",
       hoverProps: componentHoverProps('SInputSelfProps', [
+        'SInputEmits',
         'SInputSelfProps',
         'SybzComponentSize',
         'SybzComponentTheme',
@@ -1205,7 +1209,7 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
   })
   wrapperLines.push(`    $props: ${propsLines[0]}`)
   wrapperLines.push(...propsLines.slice(1).map((line) => `    ${line}`))
-  wrapperLines.push(`    $emit: ${primaryInstance.name}['$emit']`)
+  wrapperLines.push(`    $emit: ${typedComponent.emitsMember ?? `${primaryInstance.name}['$emit']`}`)
   wrapperLines.push(`    $slots: ${getWrapperSlotsType(`${primaryInstance.name}['$slots']`, typedComponent)}`)
   for (const member of typedComponent.instanceMembers ?? []) {
     wrapperLines.push(`    ${member}`)

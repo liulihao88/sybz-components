@@ -224,10 +224,14 @@ declare module 'vue' {
     's-image': (typeof import('./types/components/image'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/input/home.html
+     *
+     * s-input 输入框组件，支持一键清空、溢出提示、自动补全和快捷搜索按钮。
      */
     SInput: (typeof import('./types/components/input'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/input/home.html
+     *
+     * s-input 输入框组件，支持一键清空、溢出提示、自动补全和快捷搜索按钮。
      */
     's-input': (typeof import('./types/components/input'))['default']
     /**

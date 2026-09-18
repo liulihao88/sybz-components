@@ -17,6 +17,7 @@
           :clearable="$attrs.clearable !== false"
           v-bind="mergedAttrs"
           @clear="hideInputTooltip"
+          @keyup.enter="triggerSearch"
           @mouseover="inputOnMouseOver($event)"
           @update:model-value="handleInputUpdate"
         >
@@ -39,6 +40,7 @@
           :show-word-limit="handleShowWordLimit()"
           @clear="hideInputTooltip"
           @focus="focusHandler($event)"
+          @keyup.enter="triggerSearch"
           @mouseover="inputOnMouseOver($event)"
           @update:model-value="handleInputUpdate"
         >
@@ -66,6 +68,18 @@
             <slot name="append" />
           </template>
         </el-input>
+
+        <el-button
+          v-if="showSearchButton"
+          type="primary"
+          class="s-input__search-button"
+          :disabled="isDisabled"
+          aria-label="搜索"
+          title="搜索"
+          @click="triggerSearch"
+        >
+          <s-icon icon="Search" />
+        </el-button>
       </div>
     </el-tooltip>
     <s-icon
@@ -130,6 +144,7 @@ interface SInputProps {
   options?: any[]
   content?: string
   dangerouslyUseHTMLString?: boolean
+  search?: boolean
 }
 
 const props = withDefaults(defineProps<SInputProps>(), {
@@ -153,7 +168,12 @@ const props = withDefaults(defineProps<SInputProps>(), {
   options: undefined,
   content: '',
   dangerouslyUseHTMLString: false,
+  search: false,
 })
+const emits = defineEmits<{
+  'update:modelValue': [value: any]
+  search: [value: any, event: MouseEvent | KeyboardEvent]
+}>()
 const mergedProps = useGlobalComponentConfig('input', props)
 const restaurants = ref([])
 const inputTooltipContent = ref('')
@@ -167,6 +187,7 @@ const isDisabled = computed(() => attrs.disabled === true || attrs.disabled === 
 const showTextareaClear = computed(
   () => attrs.type === 'textarea' && isClearable.value && Boolean(data.value) && !isDisabled.value,
 )
+const showSearchButton = computed(() => mergedProps.value.search && attrs.type !== 'textarea')
 
 // `max-length` 未声明为 props 时会保留在 attrs 中；实例显式传入的值应覆盖全局配置。
 const effectiveMaxLength = computed(
@@ -180,6 +201,7 @@ const inputClass = computed(() => [
     's-input--chenghua': mergedProps.value.theme === 'chenghua',
     's-input--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-input--sybz': mergedProps.value.theme === 'sybz',
+    's-input--search': showSearchButton.value,
   },
 ])
 
@@ -336,6 +358,11 @@ const clearTextareaValue = () => {
   data.value = ''
 }
 
+const triggerSearch = (event: MouseEvent | KeyboardEvent) => {
+  if (!showSearchButton.value || isDisabled.value) return
+  emits('search', data.value, event)
+}
+
 const showPassword = computed(() => {
   if (attrs.type === 'password' && attrs.showPassword !== false) {
     return true
@@ -381,6 +408,7 @@ const mergedAttrs = computed(() => {
   if (attrs.type === 'textarea') {
     merged.clearable = false
   }
+  delete merged.search
   return merged
 })
 
@@ -403,6 +431,17 @@ const mergedStyle = computed(() => {
   .s-input__main {
     width: 100%;
     height: 100%;
+  }
+
+  &.s-input--search .s-input__main {
+    display: flex;
+    gap: 8px;
+
+    > .el-autocomplete,
+    > .el-input {
+      min-width: 0;
+      flex: 1;
+    }
   }
 
   :deep(.el-autocomplete),
@@ -457,6 +496,16 @@ const mergedStyle = computed(() => {
 
   .s-input__title {
     text-align: center;
+  }
+
+  .s-input__search-button {
+    flex: none;
+    width: var(--s-input-height, var(--el-component-size));
+    min-width: var(--s-input-height, var(--el-component-size));
+    height: 100%;
+    min-height: var(--s-input-height, var(--el-component-size));
+    margin: 0;
+    padding: 0;
   }
 }
 
