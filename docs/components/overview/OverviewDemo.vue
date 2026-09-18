@@ -287,7 +287,7 @@ const tableData = [
         <s-card title="s-descriptions组件" :theme="currentTheme" :size="currentSize" shadow="hover">
           <s-descriptions :options="descOptions" :theme="currentTheme" :column="2" show-all />
         </s-card>
-        <s-card title="容量水位" :theme="currentTheme" :size="currentSize" shadow="hover">
+        <s-card title="容量水位" :theme="currentTheme" :size="currentSize" shadow="hover" merge-sections>
           <s-progress :percentage="quotaValue" />
           <div class="overview-progress-text">当前使用 {{ quotaValue }}%</div>
         </s-card>
@@ -295,6 +295,7 @@ const tableData = [
       <s-table
         class="overview-table"
         :data="tableData"
+        simple
         :columns="tableColumns"
         :theme="currentTheme"
         :size="currentSize"
