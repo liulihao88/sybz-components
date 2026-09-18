@@ -1246,10 +1246,11 @@ export function toLine(text: string, connect = '-'): string {
 }
 
 const _CSS_UNIT_RE = /^[0-9]+(\.[0-9]+)?(px|%|em|rem|vw|vh|ch)$/
+const _CSS_LENGTH_FUNCTION_RE = /^(?:calc|min|max|clamp|var)\(.+\)$/
 /**
  * 将宽度值规范化为可直接用于样式的结果。
  *
- * @param initValue 宽度值，支持数字、数字字符串、CSS 长度字符串和 `ref`。
+ * @param initValue 宽度值，支持数字、数字字符串、CSS 长度、CSS 计算函数和 `ref`。
  * @param isBase 为 `true` 时直接返回宽度字符串；否则返回 `{ width }` 对象。
  * @returns 宽度字符串或宽度样式对象；无效值返回空字符串或空对象。
  *
@@ -1260,6 +1261,10 @@ const _CSS_UNIT_RE = /^[0-9]+(\.[0-9]+)?(px|%|em|rem|vw|vh|ch)$/
  * @example
  * processWidth('50%', true)
  * // => '50%'
+ *
+ * @example
+ * processWidth('calc(100% - 24px)', true)
+ * // => 'calc(100% - 24px)'
  */
 export function processWidth(initValue: WidthInput, isBase: true): string
 export function processWidth(initValue: WidthInput, isBase?: false): WidthStyleResult | {}
@@ -1275,7 +1280,7 @@ export function processWidth(initValue: WidthInput, isBase = false): WidthStyleR
   let res: string
   if (!isNaN(Number(str))) {
     res = str + 'px'
-  } else if (_CSS_UNIT_RE.test(str)) {
+  } else if (_CSS_UNIT_RE.test(str) || _CSS_LENGTH_FUNCTION_RE.test(str)) {
     res = str
   } else {
     return isBase ? '' : {}
