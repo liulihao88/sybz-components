@@ -4,7 +4,13 @@
       <div class="s-title__main" :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }">
         <span v-if="hasIcon" class="s-title__slot-icon-wrapper">
           <slot name="icon">
-            <component :is="mergedProps.icon" v-if="mergedProps.icon" class="s-title__prop-icon" aria-hidden="true" />
+            <s-icon
+              v-if="mergedProps.icon"
+              class="s-title__prop-icon"
+              :icon="mergedProps.icon"
+              size="var(--s-title-icon-size, 14px)"
+              cursor="default"
+            />
             <span v-else-if="isThemeIcon" class="s-title__theme-icon" aria-hidden="true"></span>
             <svg
               v-else-if="mergedProps.type === 'icon'"
@@ -53,10 +59,11 @@
 
 <script setup lang="ts">
 import { isSybzTheme } from '../../../utils/src/theme'
-import type { SybzComponentTheme } from '../../../types/component-props'
-import { computed, type Component, type CSSProperties, useSlots } from 'vue'
+import type { SIconValue, SybzComponentTheme } from '../../../types/component-props'
+import { computed, type CSSProperties, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
 
 defineOptions({
@@ -73,7 +80,7 @@ type TitleType = '' | 'simple' | 'icon' | 'form'
 type TitleTag = 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 interface TitleProps {
   title?: string
-  icon?: string | Component
+  icon?: SIconValue
   extra?: string
   size?: TitleSize
   subTitle?: string
@@ -188,6 +195,9 @@ const titleStyle = computed(() => {
 
 const parseClass = computed(() => {
   let type = mergedProps.value.type
+  if (slots.icon || mergedProps.value.icon) {
+    return 's-title__top-simple-left'
+  }
   if (type === 'simple' || type === 'icon') {
     return 's-title__top-simple-left'
   }

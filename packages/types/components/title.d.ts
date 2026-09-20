@@ -1,5 +1,4 @@
-import type { Component } from 'vue'
-import type { SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
+import type { SIconValue, SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
 
 /**
  * s-title 标题组件，支持通过 width 设置宽度，通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
@@ -10,7 +9,8 @@ export type STitleComponent = {
   new (): {
     $props: {
       title?: string
-      icon?: string | Component
+      /** 左侧图标，写法与 s-icon 的 icon 属性一致；设置后自动隐藏左侧竖条 */
+      icon?: SIconValue
       extra?: string
       size?: SybzComponentSize
       subTitle?: string

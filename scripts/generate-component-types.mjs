@@ -776,11 +776,12 @@ const TYPED_COMPONENT_PROPS = new Map([
       description:
         's-title 标题组件，支持通过 width 设置宽度，通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。',
       slots: ['default', 'title', 'icon', 'extra'],
-      hoverProps: componentHoverProps(
-        'STitleProps',
-        ['SybzComponentTheme', 'SybzComponentSize', 'SybzRecord'],
-        ["import type { Component } from 'vue'"],
-      ),
+      hoverProps: componentHoverProps('STitleProps', [
+        'SIconValue',
+        'SybzComponentTheme',
+        'SybzComponentSize',
+        'SybzRecord',
+      ]),
     },
   ],
   [

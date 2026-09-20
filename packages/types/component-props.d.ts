@@ -999,7 +999,8 @@ export interface STestProps {
 
 export interface STitleProps {
   title?: string
-  icon?: string | Component
+  /** 左侧图标，写法与 s-icon 的 icon 属性一致；设置后自动隐藏左侧竖条 */
+  icon?: SIconValue
   extra?: string
   size?: SybzComponentSize
   subTitle?: string
