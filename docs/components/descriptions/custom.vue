@@ -24,16 +24,14 @@ const customValue = ({ value }) => '你好呀: ' + value
 </script>
 
 <template>
-  <div class="w-300">
-    <s-descriptions
-      :options="records"
-      :column="1"
-      value="content"
-      label="record_time"
-      :custom-label="customLabel"
-      :custom-value="customValue"
-    />
-  </div>
+  <s-descriptions
+    :options="records"
+    :column="1"
+    value="content"
+    label="record_time"
+    :custom-label="customLabel"
+    :custom-value="customValue"
+  />
 </template>
 
 <style scoped>

@@ -66,7 +66,7 @@ descriptions/slot
 descriptions/customStyle
 :::
 
-### 自定义全部标签和内容
+### 自定义全部标签和内容(数据全由后端返回)
 
 :::demo 后端数组可直接传给 `options`，通过根属性统一处理标签和内容。基础写法：`<s-descriptions :options="records" label="record_time" value="user_name" width="100%" :custom-label="customLabel" :custom-value="customValue" />`。`customLabel`、`customValue` 类型均为 `({ option, value, label, index }) => VNode | string`，默认值 `undefined`；`width` 类型 `string / number`，默认值 `undefined`。
 descriptions/custom
