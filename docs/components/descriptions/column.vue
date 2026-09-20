@@ -34,9 +34,10 @@ const DataSource: any = reactive({
       value: '',
     },
     {
-      label: '盘点单状态',
+      label: '盘点单状态(独占2列)',
       fieldName: 'stocktakeJobStatusLabel',
       value: '',
+      column: 2,
     },
     {
       label: '盘点负责人',
@@ -55,7 +56,7 @@ const DataSource: any = reactive({
       value: '',
     },
     {
-      label: '仓库',
+      label: '仓库(独占3列)',
       fieldName: 'warehouseName',
       value: '',
       column: 3,
@@ -69,7 +70,6 @@ const DataSource: any = reactive({
       label: '备注22',
       fieldName: 'createRemark',
       value: '',
-      column: 3,
     },
   ],
 })

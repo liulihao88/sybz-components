@@ -33,6 +33,7 @@ const options = computed(() => {
     },
     {
       key: '是否锁定',
+      column: 2,
       id: () => {
         if (data.value.isLock) {
           return <s-icon icon="lock"></s-icon>
@@ -48,7 +49,11 @@ const options = computed(() => {
         return <div style="color: blue">我是labelRender: {label}</div>
       },
       render: ({ option }) => {
-        return <div style="color: blue">我是render: {option.more}</div>
+        return (
+          <div style="color: blue">
+            我是render(因为使用了render语法, 所以不受showAll的约束, 可以在render里写s-tooltip): {option.more}
+          </div>
+        )
       },
     },
   ]
@@ -84,7 +89,7 @@ init()
     <s-descriptions
       title="这是title"
       :options="options"
-      :column="1"
+      :column="2"
       label="key"
       value="id"
       :size="sizeValue"
