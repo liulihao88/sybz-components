@@ -62,7 +62,7 @@ export interface SMenuSelfProps {
   defaultOpeneds?: string[]
   width?: string | number
   height?: string | number
-  /** 是否自适应菜单项尺寸：空间充足时从顶部正常排列，仅空间不足时压缩，上下 padding 最多各 8px */
+  /** 是否自适应菜单项尺寸：容器四边保持 16px padding，仅空间不足时压缩菜单项 */
   autoHeight?: boolean
   backgroundColor?: string
   textColor?: string

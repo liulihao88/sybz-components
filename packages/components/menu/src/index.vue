@@ -42,7 +42,7 @@ const isCollapsed = ref(mergedProps.value.collapse)
 const menuViewportRef = ref<HTMLElement>()
 const menuRef = ref<any>()
 const menuRowHeight = ref(0)
-const menuVerticalPadding = ref(8)
+const menuVerticalPadding = ref(16)
 const menuDensity = ref(1)
 let resizeObserver: ResizeObserver | undefined
 let mutationObserver: MutationObserver | undefined
@@ -77,8 +77,8 @@ const updateMenuScale = () => {
       }
       return true
     }).length
-    // 正常上下间距最多各 8px；剩余空间留在底部，不用于垂直居中。
-    menuVerticalPadding.value = Math.min(8, viewportHeight / 2)
+    // autoHeight 只压缩菜单项，列表容器四边始终保留 16px 间距。
+    menuVerticalPadding.value = 16
     const availableHeight = Math.max(0, viewportHeight - menuVerticalPadding.value * 2)
     const rowHeight = count ? Math.min(baseRowHeight.value, availableHeight / count) : baseRowHeight.value
     // 向下取整，避免子像素累计让最后一项溢出。
@@ -700,7 +700,7 @@ const handleSelect = (...args: any[]) => {
     width: 100%;
     height: 100%;
     margin: 0;
-    padding: var(--s-menu-fit-padding) 0;
+    padding: var(--s-menu-fit-padding);
     border: 0;
     transition: none;
   }
