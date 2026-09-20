@@ -36,7 +36,7 @@ descriptions/usually
 
 ### 每行展示多少项
 
-:::demo 展示每行展示多少项配置。基础写法：`<s-descriptions :options="DataSource.descData" :column="radioValue"></s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；`column` 类型 `number`，默认值 `3`。
+:::demo 展示每行展示多少项及单项占用列数配置。基础写法：`<s-descriptions :options="DataSource.descData" :column="radioValue"></s-descriptions>`。属性：`options` 类型 `array`，默认值 `[]`；组件 `column` 类型 `number`，默认值 `3`；单项 `column` 类型 `number`，默认值 `1`。单项在当前行放不下时会另起一行，上一项自动补齐当前行剩余宽度。
 descriptions/column
 :::
 
@@ -89,18 +89,19 @@ descriptions/sybzTheme
 
 ### ItemOptions
 
-|    属性名     | 说明                                             | 类型                                                   | 默认值 |
-| :-----------: | ------------------------------------------------ | ------------------------------------------------------ | ------ |
-|    `label`    | 标签文本                                         | string                                                 | -      |
-|    `value`    | 内容值                                           | any                                                    | -      |
-|  `labelSlot`  | 自定义 label 插槽名                              | string                                                 | -      |
-|  `valueSlot`  | 自定义 value 插槽名                              | string                                                 | -      |
-| `labelRender` | 自定义 label 渲染函数，`option` 为当前描述项数据 | `({ option, value, label, index }) => VNode \| string` | -      |
-|   `render`    | 自定义 value 渲染函数，`option` 为当前描述项数据 | `({ option, value, label, index }) => VNode \| string` | -      |
-|   `filter`    | 内容值格式化函数，`option` 为当前描述项数据      | `({ option, value, index, label }) => any`             | -      |
-|    `attrs`    | 透传给 `el-descriptions-item` 的属性             | object                                                 | -      |
-| `labelAttrs`  | 透传给 label 内部 `s-tooltip` 的属性             | object                                                 | -      |
-| `valueAttrs`  | 透传给 value 内部 `s-tooltip` 的属性             | object                                                 | -      |
+|    属性名     | 说明                                                 | 类型                                                   | 默认值 |
+| :-----------: | ---------------------------------------------------- | ------------------------------------------------------ | ------ |
+|    `label`    | 标签文本                                             | string                                                 | -      |
+|    `value`    | 内容值                                               | any                                                    | -      |
+|   `column`    | 当前项占用列数；当前行放不下时换行，上一项补齐剩余列 | number                                                 | `1`    |
+|  `labelSlot`  | 自定义 label 插槽名                                  | string                                                 | -      |
+|  `valueSlot`  | 自定义 value 插槽名                                  | string                                                 | -      |
+| `labelRender` | 自定义 label 渲染函数，`option` 为当前描述项数据     | `({ option, value, label, index }) => VNode \| string` | -      |
+|   `render`    | 自定义 value 渲染函数，`option` 为当前描述项数据     | `({ option, value, label, index }) => VNode \| string` | -      |
+|   `filter`    | 内容值格式化函数，`option` 为当前描述项数据          | `({ option, value, index, label }) => any`             | -      |
+|    `attrs`    | 透传给 `el-descriptions-item` 的属性                 | object                                                 | -      |
+| `labelAttrs`  | 透传给 label 内部 `s-tooltip` 的属性                 | object                                                 | -      |
+| `valueAttrs`  | 透传给 value 内部 `s-tooltip` 的属性                 | object                                                 | -      |
 
 ### 插槽
 

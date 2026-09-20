@@ -286,6 +286,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'descriptions',
       allowAnySlots: true,
+      description: 's-descriptions 描述列表，支持通过每项的 column 设置占用列数，并在空间不足时自动换行补齐。',
       hoverProps: componentHoverProps(
         'SDescriptionsOwnProps',
         [

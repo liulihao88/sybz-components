@@ -120,10 +120,14 @@ declare module 'vue' {
     's-date-picker': (typeof import('./types/components/datePicker'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
+     *
+     * s-descriptions 描述列表，支持通过每项的 column 设置占用列数，并在空间不足时自动换行补齐。
      */
     SDescriptions: (typeof import('./types/components/descriptions'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
+     *
+     * s-descriptions 描述列表，支持通过每项的 column 设置占用列数，并在空间不足时自动换行补齐。
      */
     's-descriptions': (typeof import('./types/components/descriptions'))['default']
     /**

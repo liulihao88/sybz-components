@@ -9,7 +9,11 @@
     :class="descriptionsClass"
   >
     <slot>
-      <el-descriptions-item v-for="(option, index) in mergedProps.options ?? []" :key="index" v-bind="option.attrs">
+      <el-descriptions-item
+        v-for="(option, index) in mergedProps.options ?? []"
+        :key="index"
+        v-bind="getItemAttrs(option, index)"
+      >
         <template #label>
           <template v-if="option.labelRender">
             <descriptions-render :render="option.labelRender" :context="getRenderProps(option, index)" />
@@ -109,6 +113,7 @@ type ItemOptions = {
   [key: string]: any
   label?: string
   value?: any
+  column?: number
   labelSlot?: string
   valueSlot?: string
   labelRender?: (context: RenderContext) => VNodeChild
@@ -315,6 +320,33 @@ const descriptionsStyle = computed(() => {
 })
 
 const descriptionColumn = computed(() => mergedProps.value.column)
+
+const itemColumns = computed(() => {
+  const totalColumns = Math.max(Math.floor(Number(descriptionColumn.value)) || 1, 1)
+  const columns: number[] = []
+  let usedColumns = 0
+
+  for (const option of mergedProps.value.options ?? []) {
+    const configuredColumn = option.column ?? option.attrs?.span ?? 1
+    const itemColumn = Math.min(Math.max(Math.floor(Number(configuredColumn)) || 1, 1), totalColumns)
+    const remainingColumns = totalColumns - usedColumns
+
+    if (usedColumns > 0 && itemColumn > remainingColumns) {
+      columns[columns.length - 1] += remainingColumns
+      usedColumns = 0
+    }
+
+    columns.push(itemColumn)
+    usedColumns = (usedColumns + itemColumn) % totalColumns
+  }
+
+  return columns
+})
+
+const getItemAttrs = (option: ItemOptions, index: number) => ({
+  ...option.attrs,
+  span: itemColumns.value[index],
+})
 
 const parseContent = (value: any) => {
   if (typeof value === 'function') {

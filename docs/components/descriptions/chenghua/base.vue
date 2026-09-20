@@ -9,7 +9,7 @@ const options = [
   {
     label: '服务说明服务说明服务说明服务说明服务说明服务说明',
     value: '用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。',
-    attrs: { span: 3 },
+    column: 3,
   },
 ]
 </script>

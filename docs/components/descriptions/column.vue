@@ -58,6 +58,7 @@ const DataSource: any = reactive({
       label: '仓库',
       fieldName: 'warehouseName',
       value: '',
+      column: 3,
     },
     {
       label: '盘点所有物料',
@@ -68,7 +69,7 @@ const DataSource: any = reactive({
       label: '备注22',
       fieldName: 'createRemark',
       value: '',
-      span: 4,
+      column: 3,
     },
   ],
 })
