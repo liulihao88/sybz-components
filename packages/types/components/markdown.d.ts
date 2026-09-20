@@ -1,24 +1,30 @@
-import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/src/types'
-import type { SMarkdownProps } from '../component-props'
+import { MdEditor } from 'md-editor-v3'
+import type { MarkdownEmits, MarkdownExposed, MarkdownProps } from '../../components/markdown/src/types'
+
+type MdEditorInstance = InstanceType<typeof MdEditor>
 
 /**
- * s-markdown Markdown 与纯 HTML 渲染组件，支持安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
+ * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
  *
- * 先提示 sybz 自身属性。
+ * 先提示 sybz 自身属性，再提示 md-editor-v3 的公开属性。
  */
-export type SMarkdownPublicProps = SMarkdownProps
+export type SMarkdownPublicProps = MarkdownProps & Omit<MdEditorInstance['$props'], keyof MarkdownProps | 'sanitize'>
 
 export type SMarkdownComponent = {
   new (): {
     $props: {
+      /** 通过 v-model 绑定的 Markdown 或 HTML 源文本，优先级高于 source */
+      modelValue?: string
       /** Markdown 或 HTML 源文本，默认值：'' */
       source?: string
+      /** 是否显示编辑区并实时预览，默认值：false */
+      editable?: boolean
       /** 源文本的解析模式，HTML 模式会跳过 Markdown 解析，默认值：'markdown' */
       contentType?: 'markdown' | 'html'
       /** 是否允许渲染 Markdown 源文本中的原始 HTML，默认值：true */
       allowHtml?: boolean
-      /** 是否使用 DOMPurify 过滤渲染后的 HTML，默认值：true */
-      sanitize?: boolean
+      /** 预览模式是否使用 DOMPurify；编辑模式下可传入 md-editor-v3 的 HTML 过滤函数，默认值：true */
+      sanitize?: boolean | ((html: string) => string)
       /** 是否将源文本中的换行转换为 `<br>`，默认值：false */
       breaks?: boolean
       /** 是否自动识别文本中的链接，默认值：true */
@@ -45,12 +51,51 @@ export type SMarkdownComponent = {
       imagePreview?: boolean
       /** Markdown 内容为空时显示的文本，默认值：'' */
       emptyText?: string
-    }
+    } & Omit<
+      MdEditorInstance['$props'],
+      | 'modelValue'
+      | 'source'
+      | 'editable'
+      | 'contentType'
+      | 'allowHtml'
+      | 'sanitize'
+      | 'breaks'
+      | 'linkify'
+      | 'typographer'
+      | 'highlight'
+      | 'copyCode'
+      | 'mermaid'
+      | 'math'
+      | 'headingAnchors'
+      | 'externalLinks'
+      | 'baseUrl'
+      | 'imageLazy'
+      | 'imagePreview'
+      | 'emptyText'
+      | 'sanitize'
+    >
     $emit: <Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void
+    $slots: MdEditorInstance['$slots'] & Record<string, (...args: any[]) => any>
     render: MarkdownExposed['render']
     renderedHtml: MarkdownExposed['renderedHtml']
     headings: MarkdownExposed['headings']
     state: MarkdownExposed['state']
+    on: MarkdownExposed['on']
+    togglePageFullscreen: MarkdownExposed['togglePageFullscreen']
+    toggleFullscreen: MarkdownExposed['toggleFullscreen']
+    togglePreview: MarkdownExposed['togglePreview']
+    togglePreviewOnly: MarkdownExposed['togglePreviewOnly']
+    toggleHtmlPreview: MarkdownExposed['toggleHtmlPreview']
+    toggleCatalog: MarkdownExposed['toggleCatalog']
+    triggerSave: MarkdownExposed['triggerSave']
+    insert: MarkdownExposed['insert']
+    focus: MarkdownExposed['focus']
+    rerender: MarkdownExposed['rerender']
+    getSelectedText: MarkdownExposed['getSelectedText']
+    resetHistory: MarkdownExposed['resetHistory']
+    domEventHandlers: MarkdownExposed['domEventHandlers']
+    execCommand: MarkdownExposed['execCommand']
+    getEditorView: MarkdownExposed['getEditorView']
   }
 }
 

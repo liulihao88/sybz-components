@@ -1,5 +1,6 @@
 import type { SybzComponentTheme } from '@sybz-components/utils'
 import type { Component, CSSProperties, VNodeChild } from 'vue'
+import type { EditorProps } from 'md-editor-v3'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import type { InputNumberPropsPublic } from 'element-plus/es/components/input-number'
 import type { ButtonPropsPublic } from 'element-plus/es/components/button'
@@ -504,15 +505,19 @@ export interface SFunctionSourceCodeProps {
   functionName?: string
 }
 
-export interface SMarkdownProps {
+export interface SMarkdownProps extends Omit<Partial<EditorProps>, 'modelValue' | 'sanitize'> {
+  /** 通过 v-model 绑定的 Markdown 或 HTML 源文本，优先级高于 source */
+  modelValue?: string
   /** Markdown 或 HTML 源文本，默认值：'' */
   source?: string
+  /** 是否显示编辑区并实时预览，默认值：false */
+  editable?: boolean
   /** 源文本的解析模式，HTML 模式会跳过 Markdown 解析，默认值：'markdown' */
   contentType?: 'markdown' | 'html'
   /** 是否允许渲染 Markdown 源文本中的原始 HTML，默认值：true */
   allowHtml?: boolean
-  /** 是否使用 DOMPurify 过滤渲染后的 HTML，默认值：true */
-  sanitize?: boolean
+  /** 预览模式是否使用 DOMPurify；编辑模式下可传入 md-editor-v3 的 HTML 过滤函数，默认值：true */
+  sanitize?: boolean | ((html: string) => string)
   /** 是否将源文本中的换行转换为 `<br>`，默认值：false */
   breaks?: boolean
   /** 是否自动识别文本中的链接，默认值：true */

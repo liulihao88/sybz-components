@@ -398,21 +398,40 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'SMarkdownProps',
       exportedComponentTypeName: 'SMarkdownComponent',
       tagName: 's-markdown',
-      description: 's-markdown Markdown 与纯 HTML 渲染组件，支持安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。',
+      description:
+        's-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。',
       publicPropsTypeName: 'SMarkdownPublicProps',
       useDefaultExportForGlobal: true,
+      propsImportPath: resolve(rootDir, 'packages/components/markdown/src/types.ts'),
+      explicitComponentType: 'markdown',
+      allowAnySlots: true,
+      emitsMember: '<Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void',
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/components/markdown/src/types.ts'),
         interfaceName: 'MarkdownProps',
-        importTypeNames: ['SMarkdownProps'],
-        extraImportLines: ["import type { MarkdownEmits, MarkdownExposed } from '../../components/markdown/src/types'"],
+        importTypeNames: ['MarkdownEmits', 'MarkdownExposed', 'MarkdownProps'],
       },
       instanceMembers: [
-        '$emit: <Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void',
         "render: MarkdownExposed['render']",
         "renderedHtml: MarkdownExposed['renderedHtml']",
         "headings: MarkdownExposed['headings']",
         "state: MarkdownExposed['state']",
+        "on: MarkdownExposed['on']",
+        "togglePageFullscreen: MarkdownExposed['togglePageFullscreen']",
+        "toggleFullscreen: MarkdownExposed['toggleFullscreen']",
+        "togglePreview: MarkdownExposed['togglePreview']",
+        "togglePreviewOnly: MarkdownExposed['togglePreviewOnly']",
+        "toggleHtmlPreview: MarkdownExposed['toggleHtmlPreview']",
+        "toggleCatalog: MarkdownExposed['toggleCatalog']",
+        "triggerSave: MarkdownExposed['triggerSave']",
+        "insert: MarkdownExposed['insert']",
+        "focus: MarkdownExposed['focus']",
+        "rerender: MarkdownExposed['rerender']",
+        "getSelectedText: MarkdownExposed['getSelectedText']",
+        "resetHistory: MarkdownExposed['resetHistory']",
+        "domEventHandlers: MarkdownExposed['domEventHandlers']",
+        "execCommand: MarkdownExposed['execCommand']",
+        "getEditorView: MarkdownExposed['getEditorView']",
       ],
     },
   ],
@@ -1011,6 +1030,13 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
 }
 
 const ELEMENT_WRAPPER_CONFIGS = {
+  markdown: {
+    importSource: 'md-editor-v3',
+    valueImports: ['MdEditor'],
+    instances: [{ name: 'MdEditorInstance', component: 'MdEditor' }],
+    inheritedProps: [{ type: "MdEditorInstance['$props']", extraOmitKeys: ["'sanitize'"] }],
+    description: 'md-editor-v3',
+  },
   button: {
     valueImports: ['ElButton'],
     instances: [{ name: 'ElButtonInstance', component: 'ElButton' }],
@@ -1183,11 +1209,14 @@ const pushPublicPropsTypeLines = (wrapperLines, typedComponent, inheritedProps) 
 }
 
 const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, wrapperConfig }) => {
-  const normalizedPropsImportPath = getNormalizedImportPath(wrapperDir, typedComponent.importPath)
+  const normalizedPropsImportPath = getNormalizedImportPath(
+    wrapperDir,
+    typedComponent.propsImportPath ?? typedComponent.importPath,
+  )
   const propsImportNames = getHoverPropsImportTypeNames(typedComponent).join(', ')
   const primaryInstance = wrapperConfig.instances[0]
   const wrapperLines = [
-    `import { ${wrapperConfig.valueImports.join(', ')} } from 'element-plus'`,
+    `import { ${wrapperConfig.valueImports.join(', ')} } from '${wrapperConfig.importSource ?? 'element-plus'}'`,
     ...(wrapperConfig.typeImports?.length
       ? [`import type { ${wrapperConfig.typeImports.join(', ')} } from 'element-plus'`]
       : []),

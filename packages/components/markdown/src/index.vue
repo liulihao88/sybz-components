@@ -3,6 +3,9 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Download, FullScreen, RefreshLeft, RefreshRight, ZoomIn, ZoomOut } from '@element-plus/icons-vue'
 import DOMPurify from 'dompurify'
 import { ElIcon, ElImageViewer } from 'element-plus'
+import { MdEditor } from 'md-editor-v3'
+import type { ExposeParam } from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
 import MarkdownIt from 'markdown-it'
 import markdownItAnchor from 'markdown-it-anchor'
 import markdownItAttrs from 'markdown-it-attrs'
@@ -34,10 +37,11 @@ import type { MarkdownEmits, MarkdownHeading, MarkdownProps } from './types'
 
 let markdownInstanceSeed = 0
 
-defineOptions({ name: 'SMarkdown' })
+defineOptions({ name: 'SMarkdown', inheritAttrs: false })
 
 const props = withDefaults(defineProps<MarkdownProps>(), {
   source: '',
+  editable: false,
   contentType: 'markdown',
   allowHtml: true,
   sanitize: true,
@@ -59,6 +63,7 @@ const props = withDefaults(defineProps<MarkdownProps>(), {
 const emit = defineEmits<MarkdownEmits>()
 
 const rootRef = ref<HTMLElement | null>(null)
+const editorRef = ref<ExposeParam>()
 const renderedHtml = ref('')
 const headings = ref<MarkdownHeading[]>([])
 const previewVisible = ref(false)
@@ -67,6 +72,8 @@ const previewInitialIndex = ref(0)
 const isClientMounted = ref(false)
 const instanceId = ++markdownInstanceSeed
 let renderVersion = 0
+
+const currentSource = computed(() => props.modelValue ?? props.source)
 
 const slugify = (text: string) =>
   text
@@ -168,7 +175,7 @@ const createMarkdown = () => {
 }
 
 const sanitizeHtml = (html: string) => {
-  if (!props.sanitize || typeof window === 'undefined') return html
+  if (props.sanitize === false || typeof window === 'undefined') return html
   return DOMPurify.sanitize(html, {
     ADD_ATTR: ['target', 'data-copy-code', 'data-mermaid-source'],
   })
@@ -176,7 +183,7 @@ const sanitizeHtml = (html: string) => {
 
 const renderHtmlSource = (source: string) => {
   // 服务端没有 DOMPurify 所需的 DOM，先安全输出文本，挂载后再渲染过滤后的 HTML。
-  if (props.sanitize && typeof window === 'undefined') return escapeHtml(source)
+  if (props.sanitize !== false && typeof window === 'undefined') return escapeHtml(source)
   return sanitizeHtml(source)
 }
 
@@ -211,10 +218,11 @@ const enhanceMermaid = async (version: number) => {
 }
 
 const render = async () => {
+  if (props.editable) return
   const version = ++renderVersion
   previewVisible.value = false
   try {
-    const source = props.source || ''
+    const source = currentSource.value || ''
     const { md, currentHeadings } = createMarkdown()
     const html =
       props.contentType === 'html'
@@ -354,8 +362,49 @@ const handleKeydown = (event: KeyboardEvent) => {
   if (image && openImagePreview(image)) event.preventDefault()
 }
 
+const handleEditorChange = (value: string) => emit('update:modelValue', value)
+
+const on: ExposeParam['on'] = (eventName, callBack) => editorRef.value?.on(eventName, callBack)
+const togglePageFullscreen: ExposeParam['togglePageFullscreen'] = (...args) =>
+  editorRef.value?.togglePageFullscreen(...args)
+const toggleFullscreen: ExposeParam['toggleFullscreen'] = (...args) => editorRef.value?.toggleFullscreen(...args)
+const togglePreview: ExposeParam['togglePreview'] = (...args) => editorRef.value?.togglePreview(...args)
+const togglePreviewOnly: ExposeParam['togglePreviewOnly'] = (...args) => editorRef.value?.togglePreviewOnly(...args)
+const toggleHtmlPreview: ExposeParam['toggleHtmlPreview'] = (...args) => editorRef.value?.toggleHtmlPreview(...args)
+const toggleCatalog: ExposeParam['toggleCatalog'] = (...args) => editorRef.value?.toggleCatalog(...args)
+const triggerSave: ExposeParam['triggerSave'] = () => editorRef.value?.triggerSave()
+const insert: ExposeParam['insert'] = (...args) => editorRef.value?.insert(...args)
+const focus: ExposeParam['focus'] = (...args) => editorRef.value?.focus(...args)
+const rerender: ExposeParam['rerender'] = () => editorRef.value?.rerender()
+const getSelectedText: ExposeParam['getSelectedText'] = () => editorRef.value?.getSelectedText()
+const resetHistory: ExposeParam['resetHistory'] = () => editorRef.value?.resetHistory()
+const domEventHandlers: ExposeParam['domEventHandlers'] = (...args) => editorRef.value?.domEventHandlers(...args)
+const execCommand: ExposeParam['execCommand'] = (...args) => editorRef.value?.execCommand(...args)
+const getEditorView: ExposeParam['getEditorView'] = () => editorRef.value?.getEditorView()
+
 const exposed = computed(() => ({ html: renderedHtml.value, headings: headings.value }))
-defineExpose({ render, renderedHtml, headings, state: exposed })
+defineExpose({
+  render,
+  renderedHtml,
+  headings,
+  state: exposed,
+  on,
+  togglePageFullscreen,
+  toggleFullscreen,
+  togglePreview,
+  togglePreviewOnly,
+  toggleHtmlPreview,
+  toggleCatalog,
+  triggerSave,
+  insert,
+  focus,
+  rerender,
+  getSelectedText,
+  resetHistory,
+  domEventHandlers,
+  execCommand,
+  getEditorView,
+})
 
 watch(() => ({ ...props }), render, { immediate: true, deep: true })
 onMounted(() => {
@@ -369,8 +418,22 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <md-editor
+    v-if="editable"
+    ref="editorRef"
+    v-bind="$attrs"
+    :model-value="currentSource"
+    :sanitize="typeof sanitize === 'function' ? sanitize : undefined"
+    @update:model-value="handleEditorChange"
+  >
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+      <slot :name="name" v-bind="slotProps || {}"></slot>
+    </template>
+  </md-editor>
   <div
+    v-else
     ref="rootRef"
+    v-bind="$attrs"
     class="s-markdown"
     :class="{ 'is-image-preview-enabled': imagePreview }"
     @click="handleClick"
@@ -460,6 +523,7 @@ onBeforeUnmount(() => {
   line-height: 1.75;
   overflow-wrap: anywhere;
 }
+
 .s-markdown :deep(h1),
 .s-markdown :deep(h2),
 .s-markdown :deep(h3),

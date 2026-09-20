@@ -265,25 +265,25 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
      *
-     * s-markdown Markdown 与纯 HTML 渲染组件，支持安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
+     * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
      */
     SMarkdown: (typeof import('./types/components/markdown'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
      *
-     * s-markdown Markdown 与纯 HTML 渲染组件，支持安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
+     * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
      */
     's-markdown': (typeof import('./types/components/markdown'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/menu/home.html
      *
-     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置以及公共组件主题。autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
+     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置以及公共组件主题。autoHeight 保持容器四边 16px padding，从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
      */
     SMenu: (typeof import('./types/components/menu'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/menu/home.html
      *
-     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置以及公共组件主题。autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
+     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置以及公共组件主题。autoHeight 保持容器四边 16px padding，从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
      */
     's-menu': (typeof import('./types/components/menu'))['default']
     /**
