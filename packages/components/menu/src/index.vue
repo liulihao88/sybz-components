@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useAttrs, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { Expand, Fold } from '@element-plus/icons-vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -18,6 +18,7 @@ const props = withDefaults(defineProps<SMenuSelfProps>(), {
   defaultOpeneds: () => [],
   width: 256,
   height: '100%',
+  autoHeight: false,
   backgroundColor: '#1d293b',
   textColor: '#cbd5e1',
   activeTextColor: '#ffffff',
@@ -38,6 +39,88 @@ const attrs = useAttrs()
 const iconProp = (value: SMenuIcon) => value as any
 const mergedProps = useGlobalComponentConfig('menu', props)
 const isCollapsed = ref(mergedProps.value.collapse)
+const menuViewportRef = ref<HTMLElement>()
+const menuRef = ref<any>()
+const menuRowHeight = ref(0)
+const menuVerticalPadding = ref(8)
+const menuDensity = ref(1)
+let resizeObserver: ResizeObserver | undefined
+let mutationObserver: MutationObserver | undefined
+let resizeFrame = 0
+const baseRowHeight = computed(() => {
+  if (isCollapsed.value) return 64
+  if (['shijingshan', 'sybz'].includes(mergedProps.value.theme)) return 44
+  if (mergedProps.value.theme === 'chenghua') return 52
+  return mergedProps.value.variant === 'light' ? 52 : 64
+})
+
+const updateMenuScale = () => {
+  if (resizeFrame || !mergedProps.value.autoHeight) return
+  resizeFrame = requestAnimationFrame(() => {
+    resizeFrame = 0
+    if (!mergedProps.value.autoHeight) return
+    const viewportHeight = menuViewportRef.value?.clientHeight || 0
+    const menuElement = menuRef.value?.$el as HTMLElement | undefined
+    if (!menuElement) return
+    const count = Array.from(
+      menuElement.querySelectorAll<HTMLElement>('.el-menu-item, .el-sub-menu__title, .s-menu-node__group'),
+    ).filter((item) => {
+      if (!item.getClientRects().length) return false
+      // 收起动画期间子节点仍有尺寸，但不应占用展开菜单的配额。
+      for (let parent = item.parentElement; parent && parent !== menuElement; parent = parent.parentElement) {
+        if (
+          parent.classList.contains('el-sub-menu') &&
+          !parent.classList.contains('is-opened') &&
+          !(item.classList.contains('el-sub-menu__title') && parent === item.parentElement)
+        )
+          return false
+      }
+      return true
+    }).length
+    const availableHeight = Math.max(0, viewportHeight - 16)
+    const rowHeight = count ? Math.min(baseRowHeight.value, availableHeight / count) : baseRowHeight.value
+    // 向下取整，避免子像素累计让最后一项溢出。
+    menuRowHeight.value = Math.floor(rowHeight * 64) / 64
+    menuDensity.value = menuRowHeight.value / baseRowHeight.value
+    menuVerticalPadding.value = Math.max(0, (viewportHeight - count * menuRowHeight.value) / 2)
+  })
+}
+const menuListStyle = computed(() =>
+  mergedProps.value.autoHeight
+    ? {
+        '--s-menu-fit-row': `${menuRowHeight.value}px`,
+        '--s-menu-fit-padding': `${menuVerticalPadding.value}px`,
+        '--s-menu-fit-font': `${(mergedProps.value.theme === 'sybz' || mergedProps.value.theme === 'shijingshan' ? 14 : 16) * menuDensity.value}px`,
+        '--s-menu-fit-icon': `${20 * menuDensity.value}px`,
+      }
+    : undefined,
+)
+
+onMounted(() => {
+  resizeObserver = new ResizeObserver(updateMenuScale)
+  if (menuViewportRef.value) resizeObserver.observe(menuViewportRef.value)
+  // 只监听外部可用空间；不能监听自己修改尺寸的 ul。
+  mutationObserver = new MutationObserver((records) => {
+    if (records.some((record) => record.type === 'childList' || record.target !== menuRef.value?.$el)) updateMenuScale()
+  })
+  if (menuRef.value?.$el)
+    mutationObserver.observe(menuRef.value.$el, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class', 'style'],
+    })
+  nextTick(updateMenuScale)
+})
+onBeforeUnmount(() => {
+  cancelAnimationFrame(resizeFrame)
+  resizeObserver?.disconnect()
+  mutationObserver?.disconnect()
+})
+watch(
+  () => [mergedProps.value.autoHeight, baseRowHeight.value],
+  () => nextTick(updateMenuScale),
+)
 watch(
   () => mergedProps.value.collapse,
   (value) => {
@@ -108,7 +191,11 @@ const handleSelect = (...args: any[]) => {
 <template>
   <aside
     class="s-menu"
-    :class="[`s-menu--${mergedProps.variant}`, `s-menu--theme-${mergedProps.theme}`, { 'is-collapse': isCollapsed }]"
+    :class="[
+      `s-menu--${mergedProps.variant}`,
+      `s-menu--theme-${mergedProps.theme}`,
+      { 'is-collapse': isCollapsed, 'is-auto-height': mergedProps.autoHeight },
+    ]"
     :style="rootStyle"
   >
     <button
@@ -142,26 +229,30 @@ const handleSelect = (...args: any[]) => {
         </button>
       </slot>
     </header>
-    <el-menu
-      v-bind="attrs"
-      class="s-menu__list"
-      :default-active="mergedProps.modelValue"
-      :default-openeds="openedMenus"
-      :router="mergedProps.router"
-      :collapse="isCollapsed"
-      :background-color="menuColors.background"
-      :text-color="menuColors.text"
-      :active-text-color="menuColors.activeText"
-      @select="handleSelect"
-    >
-      <MenuNode
-        v-for="(item, index) in mergedProps.options"
-        :key="itemIndex(item) || String(item[fields.title] || index)"
-        :item="item"
-        :field-names="fields"
-        :collapsed="isCollapsed"
-      />
-    </el-menu>
+    <div ref="menuViewportRef" class="s-menu__viewport">
+      <el-menu
+        ref="menuRef"
+        v-bind="attrs"
+        class="s-menu__list"
+        :style="menuListStyle"
+        :default-active="mergedProps.modelValue"
+        :default-openeds="openedMenus"
+        :router="mergedProps.router"
+        :collapse="isCollapsed"
+        :background-color="menuColors.background"
+        :text-color="menuColors.text"
+        :active-text-color="menuColors.activeText"
+        @select="handleSelect"
+      >
+        <MenuNode
+          v-for="(item, index) in mergedProps.options"
+          :key="itemIndex(item) || String(item[fields.title] || index)"
+          :item="item"
+          :field-names="fields"
+          :collapsed="isCollapsed"
+        />
+      </el-menu>
+    </div>
     <footer v-if="$slots.footer || mergedProps.footerConfig" class="s-menu__footer">
       <slot name="footer">
         <div v-if="mergedProps.footerConfig" class="s-menu__account">
@@ -252,12 +343,20 @@ const handleSelect = (...args: any[]) => {
     flex: none;
   }
 
-  &__list {
+  &__viewport {
+    position: relative;
     flex: 1;
     min-height: 0;
     overflow: auto;
+  }
+
+  &__list {
     border-right: 0;
     transition: width 0.2s ease;
+  }
+
+  &.is-auto-height &__viewport {
+    overflow: hidden;
   }
 
   // 菜单项应按内容自然排列，不能被外部 flex 布局拉伸分布。
@@ -582,6 +681,50 @@ const handleSelect = (...args: any[]) => {
     :deep(.el-sub-menu__title:hover) {
       background: var(--s-sybz-blue-700);
     }
+  }
+}
+
+// 覆盖主题及文档页的 ul/li 默认间距；所有高度都参与真实布局。
+.s-menu.is-auto-height {
+  :deep(.s-menu__list.el-menu) {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: var(--s-menu-fit-padding) 0;
+    border: 0;
+    transition: none;
+  }
+  :deep(.s-menu__list .el-menu),
+  :deep(.s-menu__list .el-sub-menu) {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  :deep(.s-menu__list .el-menu-item),
+  :deep(.s-menu__list .el-sub-menu__title),
+  :deep(.s-menu__list .s-menu-node__group) {
+    box-sizing: border-box;
+    height: var(--s-menu-fit-row);
+    min-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: var(--s-menu-fit-font);
+    line-height: var(--s-menu-fit-row);
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  :deep(.s-menu__list .el-icon) {
+    font-size: var(--s-menu-fit-icon);
+  }
+  :deep(.s-menu__list .s-menu-node__tag) {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: inherit;
+    line-height: inherit;
   }
 }
 

@@ -10,6 +10,13 @@ const menus = [
   { path: '/enterprise', title: '企业管理', icon: OfficeBuilding },
   { path: '/policy', title: '政策服务', icon: Document },
   { path: '/settings', title: '系统设置', icon: Setting },
+  { path: '/settings', title: '系统设置', icon: Setting },
+  { path: '/settings', title: '系统设置', icon: Setting },
+  { path: '/settings', title: '系统设置', icon: Setting },
+  { path: '/settings', title: '系统设置', icon: Setting },
+  { path: '/settings', title: '系统设置', icon: Setting },
+  { path: '/settings', title: '系统设置', icon: Setting },
+  { path: '/settings', title: '系统设置3', icon: Setting },
 ]
 </script>
 
@@ -21,6 +28,7 @@ const menus = [
     :footer-config="footerConfig"
     :options="menus"
     :router="false"
+    auto-height
     width="240px"
     height="560px"
   />

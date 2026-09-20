@@ -42,6 +42,14 @@ menu/light
 menu/sybzTheme
 :::
 
+### 全部展示（`autoHeight` 默认值 `false`）
+
+:::demo 开启后会根据可用高度等比压缩菜单项高度、间距、图标和字号，不产生组件内部滚动条，适合需要一次看到所有菜单项的场景。基础写法：`<SMenu auto-height height="420px" :options="menus" />`。属性：`autoHeight` 可选值 `true / false`，默认值 `false`；`height` 类型 `string / number`，默认值 `100%`，用于确定自适应的高度边界。
+menu/autoHeight
+:::
+
+开启后，菜单列表的实际高度与中间可用区域一致，按当前可见菜单行数调整真实行高、字号和图标尺寸，上下剩余空间均分。菜单较少时保持正常字号；菜单较多时会缩小字号。请设置明确的 `height`，或确保父容器具有明确高度；头部与底部仍保留自身高度，需要给菜单内容留出空间。
+
 ### API
 
 | 属性名            | 说明                                         | 类型                | 可选值                                    | 默认值      |
@@ -54,6 +62,7 @@ menu/sybzTheme
 | `defaultOpeneds`  | 额外指定默认展开项                           | string[]            | -                                         | `[]`        |
 | `width`           | 菜单宽度，数字按 px 处理                     | string / number     | -                                         | `256`       |
 | `height`          | 菜单高度，数字按 px 处理                     | string / number     | -                                         | `100%`      |
+| `autoHeight`      | 是否在可用高度内自适应缩放全部菜单项         | boolean             | `true / false`                            | `false`     |
 | `backgroundColor` | 背景色                                       | string              | CSS 颜色                                  | `#1d293b`   |
 | `textColor`       | 文字颜色                                     | string              | CSS 颜色                                  | `#cbd5e1`   |
 | `activeTextColor` | 激活文字颜色                                 | string              | CSS 颜色                                  | `#ffffff`   |

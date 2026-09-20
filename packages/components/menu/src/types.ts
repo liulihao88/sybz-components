@@ -62,6 +62,8 @@ export interface SMenuSelfProps {
   defaultOpeneds?: string[]
   width?: string | number
   height?: string | number
+  /** 是否在可用高度内自适应缩放菜单项，以完整展示全部菜单 */
+  autoHeight?: boolean
   backgroundColor?: string
   textColor?: string
   activeTextColor?: string

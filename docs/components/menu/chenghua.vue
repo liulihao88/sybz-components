@@ -15,15 +15,17 @@ const menus = [
 </script>
 
 <template>
-  <SMenu
-    v-model="active"
-    theme="chenghua"
-    :header="header"
-    :action-config="actionConfig"
-    :footer-config="footerConfig"
-    :options="menus"
-    :router="false"
-    width="320px"
-    height="560px"
-  />
+  <div class="h-400 bg-yellow">
+    <SMenu
+      v-model="active"
+      theme="chenghua"
+      :header="header"
+      :action-config="actionConfig"
+      :footer-config="footerConfig"
+      :options="menus"
+      :router="false"
+      width="320px"
+      auto-height
+    />
+  </div>
 </template>
