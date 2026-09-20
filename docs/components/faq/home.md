@@ -349,3 +349,43 @@ addIconifyIcon('project:rocket', {
 需要一次注册一组图标时，可以使用 `addIconifyCollection`。建议在应用入口统一完成注册，确保页面渲染前图标数据已经可用。
 
 如果图标没有显示，依次检查图标名称是否使用英文冒号、名称是否存在，以及当前网络是否能够访问 Iconify API。更完整的属性和示例可查看 [icon 图标组件文档](/components/icon/home.md)。
+
+## 5. 如何升级前端组件库？
+
+推荐同时升级组件库和工具函数包，避免组件用法与工具能力版本不一致：
+
+::: code-group
+
+```sh [pnpm]
+pnpm add sybz-components@latest @sybz-components/utils@latest
+```
+
+```sh [npm]
+npm install sybz-components@latest @sybz-components/utils@latest
+```
+
+```sh [bun]
+bun add sybz-components@latest @sybz-components/utils@latest
+```
+
+:::
+
+只使用组件库、没有安装 `@sybz-components/utils` 时，可以仅升级 `sybz-components`：
+
+::: code-group
+
+```sh [pnpm]
+pnpm add sybz-components@latest
+```
+
+```sh [npm]
+npm install sybz-components@latest
+```
+
+```sh [bun]
+bun add sybz-components@latest
+```
+
+:::
+
+升级命令会同步更新项目的依赖声明和锁文件。升级完成后请重新启动开发服务，并重点检查组件样式、主题配置、属性类型以及 `@sybz-components/utils` 的调用是否正常；如果项目使用了 `sybzVitePlugins()`，同时确认 Vite 可以正常启动。
