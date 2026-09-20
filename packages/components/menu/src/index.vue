@@ -305,6 +305,11 @@ const handleSelect = (...args: any[]) => {
   }
 
   &.is-collapse {
+    .s-menu__list {
+      padding-right: 4px;
+      padding-left: 4px;
+    }
+
     .s-menu__brand {
       justify-content: center;
       padding: 12px 8px;
@@ -352,6 +357,9 @@ const handleSelect = (...args: any[]) => {
   }
 
   &__list {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 16px;
     border-right: 0;
     transition: width 0.2s ease;
   }
@@ -466,7 +474,7 @@ const handleSelect = (...args: any[]) => {
   :deep(.el-menu-item),
   :deep(.el-sub-menu__title) {
     height: 56px;
-    margin: 4px 8px;
+    margin: 4px 0;
     border-radius: 8px;
     font-size: 16px;
   }
@@ -502,7 +510,7 @@ const handleSelect = (...args: any[]) => {
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
       height: 48px;
-      margin: 2px 10px;
+      margin: 2px 0;
       font-size: 15px;
     }
     :deep(.el-menu-item.is-active) {
@@ -550,7 +558,7 @@ const handleSelect = (...args: any[]) => {
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
       height: 44px;
-      margin: 4px 8px;
+      margin: 4px 0;
       color: #000;
       font-size: 16px;
     }
@@ -609,7 +617,7 @@ const handleSelect = (...args: any[]) => {
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
       height: 40px;
-      margin: 2px 8px;
+      margin: 2px 0;
       border-radius: 4px;
       color: #fff;
       font-size: 14px;
@@ -668,7 +676,7 @@ const handleSelect = (...args: any[]) => {
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
       height: 40px;
-      margin: 2px 8px;
+      margin: 2px 0;
       border-radius: 4px;
       color: #fff;
       font-size: 14px;
