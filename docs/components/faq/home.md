@@ -96,7 +96,7 @@ app.mount('#app')
 
 ## 2. 如何在 Vite 中注册 sybzVitePlugins？
 
-`sybzVitePlugins()` 是组件库项目推荐的 Vite 插件预设，默认同时提供代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，在 `vite.config.ts` 中直接注册即可：
+`sybzVitePlugins()` 是组件库项目推荐的 Vite 插件预设，默认同时提供 Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或注册 `@tailwindcss/vite`，在 `vite.config.ts` 中直接使用预设即可：
 
 ```ts
 import { defineConfig } from 'vite'
@@ -114,9 +114,22 @@ export default defineConfig({
 
 | 配置项          | 功能                                 | 类型                                  | 默认值 |
 | --------------- | ------------------------------------ | ------------------------------------- | ------ |
+| `tailwind`      | 启用 Tailwind CSS v4 Vite 插件       | `boolean \| TailwindPluginOptions`    | `true` |
 | `codeInspector` | 在开发环境中从页面元素定位到对应源码 | `boolean \| SybzCodeInspectorOptions` | `true` |
 | `gitCommitLog`  | 提供项目 Git 提交信息                | `boolean \| GitCommitLogOptions`      | `true` |
 | `buildTime`     | 向页面注入本次构建时间               | `boolean \| { metaName?: string }`    | `true` |
+
+项目还需要在一个全局 CSS 入口中引入 Tailwind CSS：
+
+```css
+@import 'tailwindcss';
+```
+
+项目中只应保留一个 Tailwind Vite 插件和一个上述 CSS 入口。如果已经自行注册了 `@tailwindcss/vite`，请通过 `tailwind: false` 关闭预设中的 Tailwind，避免重复注册：
+
+```ts
+plugins: [tailwindcss(), sybzVitePlugins({ tailwind: false })]
+```
 
 每项功能都可以单独关闭，也可以传入配置对象进行定制：
 
@@ -136,6 +149,9 @@ export default defineConfig({
       buildTime: {
         metaName: 'buildTime',
       },
+      tailwind: {
+        optimize: true,
+      },
     }),
   ],
 })
@@ -145,6 +161,7 @@ export default defineConfig({
 
 ```ts
 sybzVitePlugins({
+  tailwind: false,
   gitCommitLog: false,
   buildTime: false,
 })
