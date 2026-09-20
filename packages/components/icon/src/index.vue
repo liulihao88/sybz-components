@@ -48,7 +48,6 @@ interface IconProps {
 }
 
 const props = withDefaults(defineProps<IconProps>(), {
-  icon: '',
   color: undefined,
   size: '16px', // 1em, 10px 10, 100%,
   width: undefined,
