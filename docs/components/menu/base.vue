@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { ChatDotRound, Collection, EditPen, Link, Setting, Timer } from '@element-plus/icons-vue'
 
 const active = ref('/material')
-const header = { title: '公众号自动化', subtitle: 'WECHAT AUTOMATION', icon: ChatDotRound }
+const header = { title: '公众号自动化', subTitle: 'WECHAT AUTOMATION', icon: ChatDotRound }
 const menus = [
   { path: '/material', title: '素材', icon: Collection },
   { path: '/writing', title: '写作', icon: EditPen },
@@ -34,7 +34,9 @@ const menus = [
 </script>
 
 <template>
-  <SMenu v-model="active" :header="header" :options="menus" :router="false" width="320px" height="680px" />
+  <div class="h-400 bg-yellow">
+    <SMenu v-model="active" :header="header" :options="menus" width="320px" auto-height :default-open-all="false" />
+  </div>
 </template>
 
 <style scoped></style>

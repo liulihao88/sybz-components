@@ -6,7 +6,7 @@ const active = ref('/dashboard')
 const header = { title: '石景山产业服务', subtitle: 'INDUSTRY SERVICE', icon: OfficeBuilding }
 const footer = { title: '平台管理员', subtitle: '石景山产业服务平台', avatar: '石' }
 const menus = [
-  { path: '/dashboard', title: '数据看板', icon: DataBoard },
+  { path: '/dashboard', title: '数据看板', icon: 'mdi:abacus' },
   { path: '/enterprise', title: '企业管理', icon: OfficeBuilding },
   { path: '/policy', title: '政策服务', icon: Document },
   { path: '/settings', title: '系统设置', icon: Setting },

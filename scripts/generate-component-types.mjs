@@ -699,7 +699,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
       typeName: 'SMenuProps',
       description:
-        's-menu 递归菜单组件，支持路由、图标、分组、默认展开、内容高度自适应、header/footer 头尾配置以及公共组件主题。',
+        's-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置以及公共组件主题。autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。',
       slots: ['header', 'footer'],
       instanceMembers: [
         "$emit: (event: 'update:modelValue' | 'update:collapse' | 'select' | 'actionClick', ...args: any[]) => void",

@@ -77,12 +77,13 @@ const updateMenuScale = () => {
       }
       return true
     }).length
-    const availableHeight = Math.max(0, viewportHeight - 16)
+    // 正常上下间距最多各 8px；剩余空间留在底部，不用于垂直居中。
+    menuVerticalPadding.value = Math.min(8, viewportHeight / 2)
+    const availableHeight = Math.max(0, viewportHeight - menuVerticalPadding.value * 2)
     const rowHeight = count ? Math.min(baseRowHeight.value, availableHeight / count) : baseRowHeight.value
     // 向下取整，避免子像素累计让最后一项溢出。
     menuRowHeight.value = Math.floor(rowHeight * 64) / 64
     menuDensity.value = menuRowHeight.value / baseRowHeight.value
-    menuVerticalPadding.value = Math.max(0, (viewportHeight - count * menuRowHeight.value) / 2)
   })
 }
 const menuListStyle = computed(() =>

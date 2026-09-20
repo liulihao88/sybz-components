@@ -4,19 +4,12 @@ import { DataBoard, Document, OfficeBuilding, Setting } from '@element-plus/icon
 
 const active = ref('/dashboard')
 const header = { title: '思云博智产业服务', subtitle: 'INDUSTRY SERVICE', icon: OfficeBuilding }
-const footer = { title: '平台管理员', subtitle: '思云博智产业服务平台', avatar: '石' }
+const footerConfig = { title: '平台管理员', subtitle: '思云博智产业服务平台', avatar: '石' }
 const menus = [
   { path: '/dashboard', title: '数据看板', icon: DataBoard },
   { path: '/enterprise', title: '企业管理', icon: OfficeBuilding },
   { path: '/policy', title: '政策服务', icon: Document },
   { path: '/settings', title: '系统设置', icon: Setting },
-  { path: '/settings', title: '系统设置', icon: Setting },
-  { path: '/settings', title: '系统设置', icon: Setting },
-  { path: '/settings', title: '系统设置', icon: Setting },
-  { path: '/settings', title: '系统设置', icon: Setting },
-  { path: '/settings', title: '系统设置', icon: Setting },
-  { path: '/settings', title: '系统设置', icon: Setting },
-  { path: '/settings', title: '系统设置3', icon: Setting },
 ]
 </script>
 
@@ -25,10 +18,9 @@ const menus = [
     v-model="active"
     theme="sybz"
     :header="header"
-    :footer="footer"
+    :footer-config="footerConfig"
     :options="menus"
     :router="false"
-    auto-height
     width="240px"
     height="560px"
   />

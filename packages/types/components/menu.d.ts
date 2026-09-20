@@ -12,7 +12,7 @@ import type {
 } from '../../components/menu/src/types'
 
 /**
- * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、内容高度自适应、header/footer 头尾配置以及公共组件主题。
+ * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置以及公共组件主题。autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
  *
  * 先提示 sybz 自身属性。
  */
@@ -27,7 +27,7 @@ export type SMenuComponent = {
       defaultOpeneds?: string[]
       width?: string | number
       height?: string | number
-      /** 是否在可用高度内自适应缩放菜单项，以完整展示全部菜单 */
+      /** 是否自适应菜单项尺寸：空间充足时从顶部正常排列，仅空间不足时压缩，上下 padding 最多各 8px */
       autoHeight?: boolean
       backgroundColor?: string
       textColor?: string
