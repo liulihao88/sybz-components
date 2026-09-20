@@ -370,6 +370,24 @@ bun add sybz-components@latest @sybz-components/utils@latest
 
 :::
 
+建议把升级命令统一放到项目 `package.json` 的 `scripts` 中，团队成员可以直接使用同一个命令升级：
+
+```json
+{
+  "scripts": {
+    "update": "pnpm update sybz-components @sybz-components/utils --latest"
+  }
+}
+```
+
+以后在项目根目录执行：
+
+```sh
+pnpm run update
+```
+
+这里需要使用 `pnpm run update` 执行项目脚本；直接执行 `pnpm update` 调用的是 pnpm 自带的依赖更新命令，不会读取上述脚本内容。
+
 只使用组件库、没有安装 `@sybz-components/utils` 时，可以仅升级 `sybz-components`：
 
 ::: code-group
