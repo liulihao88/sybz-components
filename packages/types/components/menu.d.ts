@@ -12,7 +12,7 @@ import type {
 } from '../../components/menu/src/types'
 
 /**
- * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、内容高度自适应、内置头尾区域以及公共组件主题。
+ * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、内容高度自适应、header/footer 头尾配置以及公共组件主题。
  *
  * 先提示 sybz 自身属性。
  */
@@ -39,7 +39,7 @@ export type SMenuComponent = {
       /** @deprecated 请使用 header */
       headerConfig?: SMenuHeaderConfig
       actionConfig?: SMenuActionConfig
-      footerConfig?: SMenuFooterConfig
+      footer?: SMenuFooterConfig
     }
     $slots: {
       header?: () => any

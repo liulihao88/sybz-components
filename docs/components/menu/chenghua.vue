@@ -5,7 +5,7 @@ import { DataAnalysis, Document, OfficeBuilding, Plus, Setting } from '@element-
 const active = ref('/overview')
 const header = { title: '成华区AI产业服务平台', subtitle: 'AI INDUSTRY SERVICE', icon: OfficeBuilding }
 const actionConfig = { text: '新增服务', icon: Plus }
-const footerConfig = { title: '成华管理员', subtitle: '产业服务中心', avatar: '成' }
+const footer = { title: '成华管理员', subtitle: '产业服务中心', avatar: '成' }
 const menus = [
   { path: '/overview', title: '产业概览', icon: DataAnalysis },
   { path: '/enterprise', title: '企业服务', icon: OfficeBuilding },
@@ -21,7 +21,7 @@ const menus = [
       theme="chenghua"
       :header="header"
       :action-config="actionConfig"
-      :footer-config="footerConfig"
+      :footer="footer"
       :options="menus"
       :router="false"
       width="320px"

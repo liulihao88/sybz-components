@@ -253,13 +253,13 @@ const handleSelect = (...args: any[]) => {
         />
       </el-menu>
     </div>
-    <footer v-if="$slots.footer || mergedProps.footerConfig" class="s-menu__footer">
+    <footer v-if="$slots.footer || mergedProps.footer" class="s-menu__footer">
       <slot name="footer">
-        <div v-if="mergedProps.footerConfig" class="s-menu__account">
-          <span>{{ mergedProps.footerConfig.avatar || mergedProps.footerConfig.title.slice(0, 1) }}</span>
+        <div v-if="mergedProps.footer" class="s-menu__account">
+          <span>{{ mergedProps.footer.avatar || mergedProps.footer.title.slice(0, 1) }}</span>
           <div>
-            <strong>{{ mergedProps.footerConfig.title }}</strong>
-            <small v-if="mergedProps.footerConfig.subtitle">{{ mergedProps.footerConfig.subtitle }}</small>
+            <strong>{{ mergedProps.footer.title }}</strong>
+            <small v-if="mergedProps.footer.subtitle">{{ mergedProps.footer.subtitle }}</small>
           </div>
         </div>
       </slot>

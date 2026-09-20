@@ -30,7 +30,7 @@ menu/shijingshan
 
 ### 浅色分组菜单（`variant` 默认值 `dark`）
 
-:::demo 浅色菜单内置品牌区、主操作按钮和账号区样式，业务只需传配置，无需复制 CSS；同时支持功能菜单、历史记录分组、标签、尾部图标和鼠标移入详情卡片。基础写法：`<SMenu variant="light" :options="menus" :header="header" :action-config="actionConfig" :footer-config="footerConfig" />`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`header / actionConfig / footerConfig` 默认值均为 `undefined`；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
+:::demo 浅色菜单内置品牌区、主操作按钮和账号区样式，业务只需传配置，无需复制 CSS；同时支持功能菜单、历史记录分组、标签、尾部图标和鼠标移入详情卡片。基础写法：`<SMenu variant="light" :options="menus" :header="header" :action-config="actionConfig" :footer="footer" />`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`header / actionConfig / footer` 默认值均为 `undefined`；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
 menu/light
 :::
 
@@ -72,7 +72,7 @@ menu/autoHeight
 | `header`          | 内置头部配置，传入标题和图标即应用默认样式   | `SMenuHeaderConfig` | -                                         | `undefined` |
 | `headerConfig`    | `header` 的兼容属性，已废弃                  | `SMenuHeaderConfig` | -                                         | `undefined` |
 | `actionConfig`    | 内置主操作按钮配置，支持文字和图标           | `SMenuActionConfig` | -                                         | `undefined` |
-| `footerConfig`    | 内置底部账号配置，支持标题、副标题和头像文字 | `SMenuFooterConfig` | -                                         | `undefined` |
+| `footer`          | 内置底部账号配置，支持标题、副标题和头像文字 | `SMenuFooterConfig` | -                                         | `undefined` |
 
 `SMenuItem` 默认字段为 `index / path / title / icon / children / disabled / route`。`index` 优先于 `path`；`icon / suffixIcon` 可传 Element Plus 图标名称字符串或 Vue 图标组件。`type="group"` 用于分组标题；`tag / tagColor` 用于菜单标签；`detail` 配置 `tag / title / description` 后，鼠标移入会显示详情卡片。其余 Element Plus Menu 属性和事件会透传。
 

@@ -5,7 +5,7 @@ import { Calendar, ChatDotRound, Document, FolderOpened, Plus, Right } from '@el
 const active = ref('/chat')
 const header = { title: '合同智管', icon: Document }
 const actionConfig = { text: '新建对话', icon: Plus }
-const footerConfig = { title: '管理员用户', subtitle: '系统管理员', avatar: '管' }
+const footer = { title: '管理员用户', subtitle: '系统管理员', avatar: '管' }
 const handleNewChat = () => {
   active.value = '/chat'
 }
@@ -70,7 +70,7 @@ const menus = [
     :router="false"
     :header="header"
     :action-config="actionConfig"
-    :footer-config="footerConfig"
+    :footer="footer"
     width="360px"
     height="760px"
     @action-click="handleNewChat"

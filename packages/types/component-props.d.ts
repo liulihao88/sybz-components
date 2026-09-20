@@ -945,7 +945,7 @@ export interface SMenuSelfProps {
   /** @deprecated 请使用 header */
   headerConfig?: SMenuHeaderConfig
   actionConfig?: SMenuActionConfig
-  footerConfig?: SMenuFooterConfig
+  footer?: SMenuFooterConfig
 }
 export type SMenuProps = SMenuSelfProps & Partial<Omit<MenuProps, keyof SMenuSelfProps>>
 
