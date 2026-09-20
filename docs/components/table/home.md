@@ -138,6 +138,12 @@ table/compare
 table/sybzTheme
 :::
 
+### 自定义空状态
+
+:::demo 展示 `empty` 插槽。基础写法：`<s-table :columns="columns" :data="[]" :show-page="false"><template #empty>暂无符合条件的数据</template></s-table>`。插槽：`empty`，默认内容为 `s-empty`；`data` 类型 `array`，默认值 `[]`；`show-page` 可选 `true / false`，默认值 `true`。
+table/empty
+:::
+
 ### 属性
 
 |      属性名       | 说明                                                           | 类型    | 默认值         |
@@ -315,6 +321,7 @@ const callback = ({ row, scope, value, column, action, index, event }) => {}
 ### 说明
 
 - 组件底层基于 `el-table` 和 `el-pagination` 封装，未在上表列出的表格属性可继续通过 attrs 透传。
+- 支持 `empty` 插槽自定义无数据时的内容；未传入时继续使用默认的 `s-empty`。
 - 当 `asyncUpdate` 为 `true` 时，分页切换只触发 `page-change` 事件，由外部维护 `pageNumber` 和 `pageSize`。
 - 操作栏 `maxBtns` 默认值为 `4`，表示总共最多显示 `4` 个槽位；当按钮数量超出时，会显示 `maxBtns - 1` 个按钮加一个“更多”入口。
 - 单选推荐直接用 `v-model + selection-type="single"`；多选推荐直接用 `v-model + selection-type="multiple"`，如果要跨页保留选中项，记得传 `row-key`。

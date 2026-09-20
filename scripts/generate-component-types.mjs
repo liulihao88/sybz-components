@@ -678,6 +678,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'table',
       allowAnySlots: true,
+      slots: ['empty'],
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/types/table.d.ts'),
         interfaceName: 'STableProps',
@@ -863,7 +864,10 @@ const formatSlotsType = (slots = []) => {
 
 const getSlotsType = (typedComponent) => {
   if (typedComponent?.allowAnySlots) {
-    return 'Record<string, (...args: any[]) => any>'
+    const explicitSlotsType = formatSlotsType(typedComponent?.slots)
+    return explicitSlotsType
+      ? `${explicitSlotsType} & Record<string, (...args: any[]) => any>`
+      : 'Record<string, (...args: any[]) => any>'
   }
 
   return formatSlotsType(typedComponent?.slots)

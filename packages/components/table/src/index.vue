@@ -973,7 +973,9 @@ defineExpose({
       @header-dragend="handleHeaderDragend"
     >
       <template #empty>
-        <SEmpty v-if="!tableLoading && compEmptyText !== ''" :title="compEmptyText" />
+        <slot name="empty">
+          <SEmpty v-if="!tableLoading && compEmptyText !== ''" :title="compEmptyText" />
+        </slot>
       </template>
       <el-table-column v-if="isMultipleSelection" v-bind="multipleSelectionColumnAttrs" />
       <el-table-column v-else-if="isSingleSelection" v-bind="singleSelectionColumnAttrs">

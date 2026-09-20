@@ -61,7 +61,9 @@ export type STableComponent = {
       | 'selectionAttrs'
     >
     $emit: ElTableInstance['$emit']
-    $slots: ElTableInstance['$slots'] & Record<string, (...args: any[]) => any>
+    $slots: ElTableInstance['$slots'] & {
+      empty?: () => any
+    } & Record<string, (...args: any[]) => any>
   }
 }
 
