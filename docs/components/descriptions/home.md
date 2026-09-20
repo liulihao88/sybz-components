@@ -28,6 +28,14 @@ descriptions/chenghua/base
 descriptions/shijingshan/base
 :::
 
+### sybz 主题（theme 默认值：default）
+
+设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
+
+:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
+descriptions/sybzTheme
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra"></s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
@@ -62,14 +70,6 @@ descriptions/customStyle
 
 :::demo 后端数组可直接传给 `options`，通过根属性统一处理标签和内容。基础写法：`<s-descriptions :options="records" label="record_time" value="user_name" width="100%" :custom-label="customLabel" :custom-value="customValue" />`。`customLabel`、`customValue` 类型均为 `({ option, value, label, index }) => VNode | string`，默认值 `undefined`；`width` 类型 `string / number`，默认值 `undefined`。
 descriptions/custom
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-descriptions/sybzTheme
 :::
 
 ### API
