@@ -35,6 +35,26 @@ ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行�
 
 `bundler` 已固定为 `vite`，业务项目无需重复传入。
 
+### 默认使用 VS Code 打开源码
+
+`codeInspector` 默认使用 VS Code 打开定位到的源码，无需额外配置，等同于：
+
+```ts
+plugins: [
+  sybzVitePlugins({
+    codeInspector: {
+      editor: 'code',
+    },
+  }),
+]
+```
+
+| 属性名称 | 可选值                                                            | 默认值 | 说明                 |
+| -------- | ----------------------------------------------------------------- | ------ | -------------------- |
+| `editor` | `atom/code/code_insiders/idea/phpstorm/pycharm/webstorm/hbuilder` | `code` | 打开源码使用的编辑器 |
+
+其他编辑器的配置可查看 [code-inspector IDE 配置列表](https://inspector.fe-dev.cn/guide/ide.html)。
+
 项目只保留一个 Tailwind Vite 插件和一个包含 `@import "tailwindcss"` 的 CSS 入口。若项目已经自行注册 `@tailwindcss/vite`，请关闭预设中的 Tailwind：
 
 ```ts

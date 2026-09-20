@@ -22,9 +22,9 @@ export interface SybzVitePluginsOptions {
   buildTime?: boolean | { metaName?: string }
 }
 
-/** 创建预设为 Vite bundler 的代码定位插件。 */
+/** 创建预设为 Vite bundler、默认使用 VS Code 的代码定位插件。 */
 const createCodeInspector = (options: SybzCodeInspectorOptions = {}): Plugin =>
-  codeInspectorPlugin({ ...options, bundler: 'vite' }) as Plugin
+  codeInspectorPlugin({ editor: 'code', ...options, bundler: 'vite' }) as Plugin
 
 const formatBuildTime = (date: Date) => {
   const pad = (value: number) => String(value).padStart(2, '0')

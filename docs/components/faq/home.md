@@ -157,6 +157,24 @@ export default defineConfig({
 })
 ```
 
+### 默认使用 VS Code 打开源码
+
+`sybzVitePlugins()` 中的 `codeInspector` 默认使用 VS Code 打开定位到的源码，无需额外配置，等同于：
+
+```ts
+sybzVitePlugins({
+  codeInspector: {
+    editor: 'code',
+  },
+})
+```
+
+| 属性名称 | 可选值                                                            | 默认值 | 说明                 |
+| -------- | ----------------------------------------------------------------- | ------ | -------------------- |
+| `editor` | `atom/code/code_insiders/idea/phpstorm/pycharm/webstorm/hbuilder` | `code` | 打开源码使用的编辑器 |
+
+其他编辑器的配置可查看 [code-inspector IDE 配置列表](https://inspector.fe-dev.cn/guide/ide.html)。
+
 例如只需要代码定位功能时，可以关闭另外两项：
 
 ```ts
