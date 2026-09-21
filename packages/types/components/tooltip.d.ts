@@ -14,7 +14,12 @@ export type STooltipComponent = {
       lineClamp?: string | number
       showSlot?: boolean
       effect?: string
-    } & Omit<ElTooltipInstance['$props'], 'dangerouslyUseHTMLString' | 'width' | 'lineClamp' | 'showSlot' | 'effect'>
+      /** 鼠标移入后延迟显示 tooltip 的时间，单位毫秒，默认值：0 */
+      showAfter?: number
+    } & Omit<
+      ElTooltipInstance['$props'],
+      'dangerouslyUseHTMLString' | 'width' | 'lineClamp' | 'showSlot' | 'effect' | 'showAfter'
+    >
     $emit: ElTooltipInstance['$emit']
     $slots: ElTooltipInstance['$slots'] & {
       default?: () => any

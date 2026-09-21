@@ -1032,6 +1032,8 @@ export interface STooltipSelfProps extends SHtmlStringProps {
   lineClamp?: string | number
   showSlot?: boolean
   effect?: string
+  /** 鼠标移入后延迟显示 tooltip 的时间，单位毫秒，默认值：0 */
+  showAfter?: number
 }
 
 export type STooltipProps = STooltipSelfProps & Partial<Omit<ElTooltipPropsPublic, keyof STooltipSelfProps>>

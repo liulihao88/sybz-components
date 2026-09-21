@@ -59,6 +59,8 @@ interface TooltipProps {
   lineClamp?: string | number
   showSlot?: boolean
   effect?: string
+  /** 鼠标移入后延迟显示 tooltip 的时间，单位毫秒，默认值：0 */
+  showAfter?: number
   dangerouslyUseHTMLString?: boolean
 }
 
