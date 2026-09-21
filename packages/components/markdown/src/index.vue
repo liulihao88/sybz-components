@@ -42,6 +42,7 @@ defineOptions({ name: 'SMarkdown', inheritAttrs: false })
 const props = withDefaults(defineProps<MarkdownProps>(), {
   source: '',
   editable: false,
+  disabled: false,
   contentType: 'markdown',
   allowHtml: true,
   sanitize: true,
@@ -364,6 +365,12 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 const handleEditorChange = (value: string) => emit('update:modelValue', value)
 
+const preventDisabledToolbarAction = (event: Event) => {
+  if (!props.disabled || !(event.target as HTMLElement).closest('.md-editor-toolbar-wrapper')) return
+  event.preventDefault()
+  event.stopImmediatePropagation()
+}
+
 const on: ExposeParam['on'] = (eventName, callBack) => editorRef.value?.on(eventName, callBack)
 const togglePageFullscreen: ExposeParam['togglePageFullscreen'] = (...args) =>
   editorRef.value?.togglePageFullscreen(...args)
@@ -422,8 +429,13 @@ onBeforeUnmount(() => {
     v-if="editable"
     ref="editorRef"
     v-bind="$attrs"
+    class="s-markdown-editor"
+    :class="{ 'is-disabled': disabled }"
     :model-value="currentSource"
+    :disabled="disabled"
     :sanitize="typeof sanitize === 'function' ? sanitize : undefined"
+    @click.capture="preventDisabledToolbarAction"
+    @keydown.capture="preventDisabledToolbarAction"
     @update:model-value="handleEditorChange"
   >
     <template v-for="(_, name) in $slots" #[name]="slotProps">
@@ -517,6 +529,12 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped lang="scss">
+.s-markdown-editor.is-disabled :deep(.md-editor-toolbar-wrapper) {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .s-markdown {
   color: var(--el-text-color-primary);
   font-size: 14px;

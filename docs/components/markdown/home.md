@@ -50,11 +50,11 @@ markdown/example
 markdown/html
 :::
 
-### 编辑与实时预览（默认 `editable=false`、`language='zh-CN'`、`theme='light'`）
+### 编辑与实时预览（默认 `editable=false`、`disabled=false`、`language='zh-CN'`、`theme='light'`）
 
 开启 `editable` 后使用内置的 `md-editor-v3`，通过 `v-model` 绑定源文本。工具栏、快捷键、实时预览、全屏、目录、图片上传、代码高亮、Mermaid、KaTeX、自定义工具栏和全部公开方法均由编辑器提供。`md-editor-v3` 已作为 `sybz-components` 的运行时依赖，业务项目不需要单独安装。
 
-`editable` 可选 `true / false`，默认值 `false`；`language` 默认值 `zh-CN`；`theme` 可选 `light / dark`，默认值 `light`；`previewTheme` 可选 `default / github / vuepress / mk-cute / smart-blue / cyanosis`，默认值 `default`；`showCodeRowNumber` 可选 `true / false`，默认值 `false`。其他属性、事件、插槽与暴露方法保持 `md-editor-v3@4.21.3` 的用法。
+`editable` 可选 `true / false`，默认值 `false`；`disabled` 可选 `true / false`，默认值 `false`，开启后文本和工具栏均不可操作；`language` 默认值 `zh-CN`；`theme` 可选 `light / dark`，默认值 `light`；`previewTheme` 可选 `default / github / vuepress / mk-cute / smart-blue / cyanosis`，默认值 `default`；`showCodeRowNumber` 可选 `true / false`，默认值 `false`。其他属性、事件、插槽与暴露方法保持 `md-editor-v3@4.21.3` 的用法。
 
 :::demo 基础写法：`<s-markdown v-model="source" editable />`。示例还展示了 `language="zh-CN"`、`preview-theme="github"`、`:show-code-row-number="true"` 和 `@on-save`。
 markdown/editable
@@ -67,6 +67,7 @@ markdown/editable
 | `modelValue`     | `v-model` 绑定的源文本，优先于 `source`  | `string`             | `undefined` |
 | `source`         | Markdown 或 HTML 源文本                  | `string`             | `''`        |
 | `editable`       | 是否显示编辑区并实时预览                 | `true / false`       | `false`     |
+| `disabled`       | 编辑模式下是否禁用文本和工具栏操作       | `true / false`       | `false`     |
 | `contentType`    | 源文本解析模式，HTML 模式跳过 Markdown   | `markdown / html`    | `markdown`  |
 | `allowHtml`      | 是否解析源文本中的原始 HTML              | `true / false`       | `true`      |
 | `sanitize`       | 预览时是否过滤；编辑时可传 HTML 过滤函数 | `boolean / function` | `true`      |

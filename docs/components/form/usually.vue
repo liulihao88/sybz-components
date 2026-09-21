@@ -25,7 +25,7 @@ const model = ref({
   name: '',
   age: null,
   timeValue: [],
-  markdownValue: '',
+  markdownValue: '### 你好',
   's-json-desc': {
     age: 109,
   },
@@ -151,7 +151,8 @@ const fieldList = [
     comp: 's-markdown',
     column: 1,
     attrs: {
-      editable: true,
+      // editable: true,
+      disabled: true,
     },
   },
 ]

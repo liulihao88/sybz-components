@@ -19,6 +19,8 @@ export type SMarkdownComponent = {
       source?: string
       /** 是否显示编辑区并实时预览，默认值：false */
       editable?: boolean
+      /** 编辑模式下是否禁用文本输入和工具栏操作，默认值：false */
+      disabled?: boolean
       /** 源文本的解析模式，HTML 模式会跳过 Markdown 解析，默认值：'markdown' */
       contentType?: 'markdown' | 'html'
       /** 是否允许渲染 Markdown 源文本中的原始 HTML，默认值：true */
@@ -56,6 +58,7 @@ export type SMarkdownComponent = {
       | 'modelValue'
       | 'source'
       | 'editable'
+      | 'disabled'
       | 'contentType'
       | 'allowHtml'
       | 'sanitize'
