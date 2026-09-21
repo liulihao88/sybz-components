@@ -292,10 +292,12 @@ const tableData = [
           <div class="overview-progress-text">当前使用 {{ quotaValue }}%</div>
         </s-card>
       </div>
+      {{ isDisabled }}
       <s-table
         class="overview-table"
         :data="tableData"
         simple
+        :disabled="isDisabled"
         :columns="tableColumns"
         :theme="currentTheme"
         :size="currentSize"

@@ -254,6 +254,12 @@ const radioClass = computed(() => {
   }
 }
 
+.s-radio-box--button:is(.s-radio-box--sybz, .s-radio-box--shijingshan) {
+  :deep(.el-radio-button.is-active.is-disabled .el-radio-button__inner) {
+    color: var(--el-color-white);
+  }
+}
+
 :deep(.s-radio-group--custom-gap) {
   flex-wrap: wrap;
 
