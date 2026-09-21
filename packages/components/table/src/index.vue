@@ -64,6 +64,8 @@ interface TableProps {
   columns?: TableColumnList
   showPage?: boolean
   showIndex?: boolean
+  /** 禁用分页和操作栏按钮 */
+  disabled?: boolean
   size?: string
   theme?: SybzComponentTheme
   /** 表格自身及表体背景色，支持 CSS 颜色值 */
@@ -89,6 +91,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   columns: () => [],
   showPage: true,
   showIndex: true,
+  disabled: false,
   size: '',
   theme: 'default',
   background: undefined,
@@ -174,6 +177,10 @@ const indexColumnAttrs = computed<Record<string, any>>(() => {
 const paginationAttrs = computed<Record<string, any>>(() => {
   return (mergedProps.value.pageAttrs as unknown as Record<string, any>) ?? {}
 })
+const resolvedPaginationAttrs = computed(() => ({
+  ...paginationAttrs.value,
+  disabled: mergedProps.value.disabled || Boolean(paginationAttrs.value.disabled),
+}))
 
 const invokeAttrsListener = (listenerName: string, ...args: any[]) => {
   const listener = attrs[listenerName]
@@ -565,7 +572,10 @@ const createActionContext = (
 }
 
 const isActionDisabled = (action: STableButton, row: TableRow, scope: TableScope, column: STableColumn) => {
-  return Boolean(parseDisabled(action.disabled, createActionContext(row, scope, column, action)))
+  return (
+    mergedProps.value.disabled ||
+    Boolean(parseDisabled(action.disabled, createActionContext(row, scope, column, action)))
+  )
 }
 
 const parseReConfirm = (isFn: STableButton['reConfirm'], row?: TableRow, scope?: TableScope) => {
@@ -591,7 +601,7 @@ const handleActionClick = (
 
   const context = createActionContext(row, scope, column, btnItem, event)
 
-  if (parseDisabled(btnItem.disabled, context)) {
+  if (mergedProps.value.disabled || parseDisabled(btnItem.disabled, context)) {
     event.preventDefault()
     return
   }
@@ -602,7 +612,7 @@ const handleActionClick = (
 const handleActionConfirm = (btnItem: STableButton, row: TableRow, scope: TableScope, column: STableColumn) => {
   const context = createActionContext(row, scope, column, btnItem)
 
-  if (parseDisabled(btnItem.disabled, context)) {
+  if (mergedProps.value.disabled || parseDisabled(btnItem.disabled, context)) {
     return
   }
 
@@ -624,6 +634,7 @@ const handleEmptyText = (scope: TableScope, v: STableResolvedColumn) => {
 }
 
 function handleSizeChange(val: number) {
+  if (mergedProps.value.disabled) return
   if (mergedProps.value.asyncUpdate) {
     updatePage(1, val)
   } else {
@@ -633,6 +644,7 @@ function handleSizeChange(val: number) {
   }
 }
 function handleCurrentChange(val: number) {
+  if (mergedProps.value.disabled) return
   if (mergedProps.value.asyncUpdate) {
     updatePage(val, sPageSize.value)
   } else {
@@ -1167,7 +1179,7 @@ defineExpose({
                   </template>
 
                   <template v-if="v.hideBtns.length > 0">
-                    <el-dropdown class="" trigger="click">
+                    <el-dropdown class="" trigger="click" :disabled="mergedProps.disabled">
                       <s-icon class="s-table__clickable hide-btns-button" icon="more" @click.stop />
                       <template #dropdown>
                         <el-dropdown-menu :hide-on-click="false">
@@ -1329,7 +1341,7 @@ defineExpose({
             layout="prev, pager, next, jumper, sizes"
             :total="tableTotal"
             :size="paginationSize"
-            v-bind="paginationAttrs"
+            v-bind="resolvedPaginationAttrs"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
           />

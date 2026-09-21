@@ -145,6 +145,8 @@ export type TableModelValue<Row extends TableRow = TableRow> =
 export interface STableProps<Row extends TableRow = TableRow> {
   data?: Row[]
   columns?: TableColumnList<Row>
+  /** 禁用分页和操作栏按钮 */
+  disabled?: boolean
   showPage?: boolean
   showIndex?: boolean
   size?: string

@@ -150,6 +150,7 @@ table/empty
 | :---------------: | -------------------------------------------------------------- | ------- | -------------- |
 |      `data`       | 表格数据源                                                     | array   | `[]`           |
 |     `columns`     | 列配置                                                         | array   | `[]`           |
+|    `disabled`     | 禁用分页和操作栏按钮                                           | boolean | `false`        |
 |    `showPage`     | 是否显示分页                                                   | boolean | `true`         |
 |    `showIndex`    | 是否显示序号列                                                 | boolean | `true`         |
 |      `size`       | 表格和分页尺寸，支持 `small` / `default` / `large`             | string  | `''`           |
