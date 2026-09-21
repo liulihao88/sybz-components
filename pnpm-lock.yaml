@@ -8,6 +8,21 @@ importers:
 
   .:
     dependencies:
+      '@codemirror/lang-json':
+        specifier: ^6.0.2
+        version: 6.0.2
+      '@codemirror/language':
+        specifier: ^6.12.4
+        version: 6.12.4
+      '@codemirror/lint':
+        specifier: ^6.9.7
+        version: 6.9.7
+      '@codemirror/state':
+        specifier: ^6.7.5
+        version: 6.7.5
+      '@codemirror/view':
+        specifier: ^6.43.12
+        version: 6.43.12
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.4.15(typescript@5.3.3))
@@ -17,6 +32,9 @@ importers:
       '@sybz-components/utils':
         specifier: ^1.0.13
         version: 1.0.13(jiti@2.7.0)(typescript@5.3.3)(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))
+      codemirror:
+        specifier: ^6.0.2
+        version: 6.0.2
       docx-preview:
         specifier: ^0.4.0
         version: 0.4.0

@@ -392,6 +392,35 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
   ['SFunctionSourceCode', { importPath: componentPropsPath, typeName: 'SFunctionSourceCodeProps' }],
   [
+    'SJson',
+    {
+      importPath: resolve(rootDir, 'packages/components/json/src/types.ts'),
+      typeName: 'JsonProps',
+      exportedComponentTypeName: 'SJsonComponent',
+      tagName: 's-json',
+      description:
+        's-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。',
+      publicPropsTypeName: 'SJsonPublicProps',
+      useDefaultExportForGlobal: true,
+      allowAnySlots: true,
+      instanceMembers: [
+        '$emit: <Event extends keyof JsonEmits>(event: Event, ...args: JsonEmits[Event]) => void',
+        "format: JsonExposed['format']",
+        "compact: JsonExposed['compact']",
+        "copy: JsonExposed['copy']",
+        "focus: JsonExposed['focus']",
+        "getText: JsonExposed['getText']",
+        "getData: JsonExposed['getData']",
+      ],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/json/src/types.ts'),
+        interfaceName: 'JsonProps',
+        importTypeNames: ['JsonData', 'JsonEmits', 'JsonExposed', 'JsonProps', 'JsonTheme'],
+        extraImportLines: ["import type { CSSProperties } from 'vue'"],
+      },
+    },
+  ],
+  [
     'SMarkdown',
     {
       importPath: componentPropsPath,

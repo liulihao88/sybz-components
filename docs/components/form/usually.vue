@@ -24,6 +24,11 @@ const model = ref({
   lock: '',
   name: '',
   age: null,
+  timeValue: [],
+  markdownValue: '',
+  's-json-desc': {
+    age: 109,
+  },
 })
 const rules = {
   account: [proxy.validate()],
@@ -94,6 +99,7 @@ const fieldList = [
 
     comp: 's-radio',
     attrs: {
+      showType: 'button',
       options: [
         { label: '小月月', value: 'sex1' },
         { label: '小鑫鑫', value: 'sex2' },
@@ -112,13 +118,40 @@ const fieldList = [
     comp: 's-input-number',
     useSlot: true,
   },
-
   {
     label: '描述',
     value: 'desc',
     comp: 's-input',
     attrs: {
       type: 'textarea',
+    },
+  },
+  {
+    label: '开始和结束日期',
+    comp: 's-date-picker',
+    value: 'timeValue',
+    attrs: {
+      type: 'daterange',
+    },
+  },
+  {
+    label: 's-json描述',
+    value: 's-json-desc',
+    comp: 's-json',
+    column: 1,
+    attrs: {
+      lineNumbers: false,
+      editable: false,
+      // showStatus: false,
+    },
+  },
+  {
+    label: 's-markdown描述',
+    value: 'markdownValue',
+    comp: 's-markdown',
+    column: 1,
+    attrs: {
+      editable: true,
     },
   },
 ]
@@ -133,13 +166,13 @@ async function isTest16() {
 
 <template>
   <div>
-    <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules">
-      <template #name-label>这里我是特殊的name的label</template>
+    <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules" :column="2">
+      <template #name-label>自定义label(使用useSlot)</template>
       <template #name>
         <s-input v-model="model.name" placeholder="我是name" width="300" />
       </template>
       <template #age>
-        <s-input-number v-model="model.age" width="300" height="100%" />
+        <s-input-number v-model="model.age" width="100%" height="32" />
       </template>
     </s-form>
     <el-button type="primary" @click="isTest16">测试36</el-button>

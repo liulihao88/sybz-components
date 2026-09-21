@@ -287,6 +287,10 @@ export default defineConfig({
               link: '/components/descriptions/home.md',
             },
             {
+              text: sybzMark('json数据查看组件'),
+              link: '/components/json/home.md',
+            },
+            {
               text: sybzMark('markdown渲染组件'),
               link: '/components/markdown/home.md',
             },

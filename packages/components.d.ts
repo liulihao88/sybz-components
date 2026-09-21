@@ -263,6 +263,18 @@ declare module 'vue' {
      */
     's-item': (typeof import('./types/components/item'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/json/home.html
+     *
+     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
+     */
+    SJson: (typeof import('./types/components/json'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/json/home.html
+     *
+     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
+     */
+    's-json': (typeof import('./types/components/json'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
      *
      * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
@@ -569,6 +581,10 @@ export type SItemComponent = (typeof import('./types/components/item'))['default
 export type SItemInstance = ComponentInstance<SItemComponent>
 export type SItemPublicProps = SItemInstance['$props']
 
+export type SJsonComponent = import('./types/components/json').SJsonComponent
+export type SJsonInstance = ComponentInstance<SJsonComponent>
+export type SJsonPublicProps = import('./types/components/json').SJsonPublicProps
+
 export type SMarkdownComponent = import('./types/components/markdown').SMarkdownComponent
 export type SMarkdownInstance = ComponentInstance<SMarkdownComponent>
 export type SMarkdownPublicProps = import('./types/components/markdown').SMarkdownPublicProps
@@ -683,6 +699,7 @@ declare global {
       's-input-label': JSXComponentProps<SInputLabelPublicProps>
       's-input-number': JSXComponentProps<SInputNumberPublicProps>
       's-item': JSXComponentProps<SItemPublicProps>
+      's-json': JSXComponentProps<SJsonPublicProps>
       's-markdown': JSXComponentProps<SMarkdownPublicProps>
       's-menu': JSXComponentProps<SMenuPublicProps>
       's-pagination': JSXComponentProps<SPaginationPublicProps>
