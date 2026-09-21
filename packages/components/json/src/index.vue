@@ -294,9 +294,8 @@ defineExpose<JsonExposed>({ format, compact, copy, focus, getText, getData })
           />
           <s-button :icon="Minus" :tooltip-attrs="{ showAfter: 1000 }" text content="压缩 JSON" @click="compact" />
         </template>
-        <s-button text content="复制 JSON" :tooltip-attrs="{ showAfter: 1000 }" @click="copy">
+        <s-button text :content="copied ? '已复制' : '复制 JSON'" :tooltip-attrs="{ showAfter: 1000 }" @click="copy">
           <s-icon><DocumentCopy /></s-icon>
-          <span class="s-json__copy-text">{{ copied ? '已复制' : '' }}</span>
         </s-button>
       </div>
     </div>
@@ -366,23 +365,6 @@ defineExpose<JsonExposed>({ format, compact, copy, focus, getText, getData })
   height: 32px;
   margin-left: 0;
   padding: 0;
-}
-
-.s-json__copy-text:empty {
-  display: none;
-}
-
-.s-json__copy-text:not(:empty) {
-  position: absolute;
-  right: 0;
-  bottom: -24px;
-  z-index: 2;
-  width: max-content;
-  padding: 3px 6px;
-  border-radius: 3px;
-  background: var(--el-text-color-primary);
-  color: var(--el-bg-color);
-  font-size: 12px;
 }
 
 .s-json__editor {
