@@ -52,21 +52,23 @@
           <template v-if="$slots.label" #label="arg">
             <slot name="label" v-bind="arg" />
           </template>
+          <template v-if="$slots.header || (multiple && mergedProps.showAll && sOptions.length > 0)" #header>
+            <div v-if="$slots.header" class="s-select__custom-header"><slot name="header" /></div>
+            <div v-if="multiple && mergedProps.showAll && sOptions.length > 0" class="s-select__bulk-actions">
+              <el-checkbox
+                v-model="selectChecked"
+                :indeterminate="indeterminate"
+                class="s-select__all-select"
+                @change="selectAll"
+              >
+                全选
+              </el-checkbox>
+              <el-button type="primary" size="small" class="reverse-select" @click.stop="reverseSelect">反选</el-button>
+            </div>
+          </template>
           <template v-for="(arg, name, index) in noDefaultSlots" #[name]>
             <slot :name="name" v-bind="arg" :index="index" />
           </template>
-
-          <div v-if="multiple && mergedProps.showAll && sOptions.length > 0" class="s-select__bulk-actions">
-            <el-checkbox
-              v-model="selectChecked"
-              :indeterminate="indeterminate"
-              class="s-select__all-select"
-              @change="selectAll"
-            >
-              <div class="s-select__all-select-label">全选</div>
-            </el-checkbox>
-            <el-button type="primary" size="small" class="reverse-select" @click.stop="reverseSelect">反选</el-button>
-          </div>
 
           <slot v-if="sOptions.length === 0" :options="sOptions" :item="{}" />
           <template v-else>
@@ -127,6 +129,7 @@ const noDefaultSlots = computed<Record<string, any>>(() => {
   const copySlots = { ...slots } as Record<string, any>
   delete copySlots.default
   delete copySlots.label
+  delete copySlots.header
   return copySlots
 })
 
@@ -723,11 +726,19 @@ function emitChangeSelect(
 }
 
 .s-select__bulk-actions {
-  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding-right: 16px;
+  background: var(--el-bg-color-overlay);
 }
 
-.s-select__all-select-label {
-  margin-top: 8px;
+:global(.s-select__multiple-checkbox .el-select-dropdown__header) {
+  padding: 0;
+}
+
+.s-select__custom-header {
+  padding: 10px;
 }
 
 .s-select__divider {
@@ -814,9 +825,10 @@ function emitChangeSelect(
   }
 }
 .s-select__all-select {
-  display: flex;
-  padding: 0px 0px 10px 20px;
-  align-items: flex-end;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0;
+  padding-left: 20px;
   &:hover {
     background-color: var(--el-fill-color-light);
   }
@@ -825,9 +837,7 @@ function emitChangeSelect(
   background-color: unset;
 }
 .reverse-select {
-  position: absolute;
-  right: 16px;
-  top: 4px;
+  margin-left: auto;
 }
 .s-select__select-box {
   background: var(--el-fill-color-light);
