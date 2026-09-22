@@ -3,7 +3,6 @@ import { withInstall } from '@/components/utils/withInstall.ts'
 
 const SMenu = withInstall(Menu)
 export type {
-  SMenuActionConfig,
   SMenuFieldNames,
   SMenuFooterConfig,
   SMenuHeaderConfig,

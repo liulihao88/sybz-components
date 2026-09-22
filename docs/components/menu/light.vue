@@ -3,11 +3,12 @@ import { ref } from 'vue'
 import { Calendar, ChatDotRound, Document, FolderOpened, Plus, Right } from '@element-plus/icons-vue'
 
 const active = ref('/chat')
+const created = ref(0)
 const header = { title: '合同智管', icon: Document }
-const actionConfig = { text: '新建对话', icon: Plus }
 const footer = { title: '管理员用户', subtitle: '系统管理员', avatar: '管' }
 const handleNewChat = () => {
   active.value = '/chat'
+  created.value++
 }
 const menus = [
   {
@@ -70,10 +71,14 @@ const menus = [
     :router="false"
     :collapsible="false"
     :header="header"
-    :action-config="actionConfig"
     :footer="footer"
     width="360px"
     height="760px"
-    @action-click="handleNewChat"
-  />
+  >
+    <template #append>
+      <SButton :icon="Plus" type="primary" width="100%" @click="handleNewChat">
+        新建对话{{ created ? ` (${created})` : '' }}
+      </SButton>
+    </template>
+  </SMenu>
 </template>

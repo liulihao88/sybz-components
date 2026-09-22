@@ -900,10 +900,6 @@ export interface SMenuHeaderConfig {
   subtitle?: string
   icon?: SMenuIcon
 }
-export interface SMenuActionConfig {
-  text: string
-  icon?: SMenuIcon
-}
 export interface SMenuFooterConfig {
   title: string
   subtitle?: string
@@ -951,7 +947,6 @@ export interface SMenuSelfProps {
   header?: SMenuHeaderConfig
   /** @deprecated 请使用 header */
   headerConfig?: SMenuHeaderConfig
-  actionConfig?: SMenuActionConfig
   footer?: SMenuFooterConfig
 }
 export type SMenuProps = SMenuSelfProps & Partial<Omit<MenuProps, keyof SMenuSelfProps>>

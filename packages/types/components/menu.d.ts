@@ -1,7 +1,6 @@
 import type { SybzComponentTheme } from '../component-props'
 import type {
   SMenuFieldNames,
-  SMenuActionConfig,
   SMenuFooterConfig,
   SMenuHeaderConfig,
   SMenuIcon,
@@ -46,7 +45,6 @@ export type SMenuComponent = {
       header?: SMenuHeaderConfig
       /** @deprecated 请使用 header */
       headerConfig?: SMenuHeaderConfig
-      actionConfig?: SMenuActionConfig
       footer?: SMenuFooterConfig
     }
     $slots: {
@@ -54,7 +52,7 @@ export type SMenuComponent = {
       append?: () => any
       footer?: () => any
     }
-    $emit: (event: 'update:modelValue' | 'update:collapse' | 'select' | 'actionClick', ...args: any[]) => void
+    $emit: (event: 'update:modelValue' | 'update:collapse' | 'select', ...args: any[]) => void
   }
 }
 

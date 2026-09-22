@@ -18,7 +18,7 @@ menu/base
 
 ### 浅色分组菜单（`variant` 默认值 `dark`）
 
-:::demo `variant="light"` 为白色背景，任意 `theme` 都保持浅色外观。基础写法：`<SMenu variant="light" :options="menus" :header="header" :action-config="actionConfig" :footer="footer" />`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`header / actionConfig / footer` 默认值均为 `undefined`；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
+:::demo `variant="light"` 为白色背景，任意 `theme` 都保持浅色外观。通过 `#append` 在头部添加按钮，直接用 `@click` 绑定处理函数。基础写法：`<SMenu variant="light" :options="menus" :header="header" :footer="footer"><template #append><SButton @click="handleNewChat">新建对话</SButton></template></SMenu>`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`header / footer` 默认值均为 `undefined`；`append` 插槽默认无内容；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
 menu/light
 :::
 
@@ -38,7 +38,7 @@ menu/autoHeight
 
 ### 禁止收缩与头部追加内容（`collapsible` 默认值 `true`）
 
-:::demo 使用 `v-model:collapse` 双向绑定收起状态：点击组件的展开／收缩按钮或上方选项时，`isCollapse` 都会同步变化。设置 `collapsible="false"` 后菜单保持展开，切换按钮不显示；通过 `#append` 在头部内容之后追加元素。基础写法：`<SMenu v-model:collapse="isCollapse" :header="header" :options="menus"><template #append><SButton>新建内容</SButton></template></SMenu>`。属性：`collapsible` 可选值 `true / false`，默认值 `true`；`collapse` 可选值 `true / false`，默认值 `false`；`header` 默认值 `undefined`；`append` 插槽默认无内容。
+:::demo 设置 `collapsible="false"` 后菜单保持展开，切换按钮不显示；通过 `#append` 在头部内容之后追加元素，并在按钮上绑定点击处理函数。基础写法：`<SMenu :collapsible="false" :header="header" :options="menus"><template #append><SButton @click="handleCreate">新建内容</SButton></template></SMenu>`。属性：`collapsible` 可选值 `true / false`，默认值 `true`；`collapse` 可选值 `true / false`，默认值 `false`，需要双向绑定时使用 `v-model:collapse`；`header` 默认值 `undefined`；`append` 插槽默认无内容。
 menu/append
 :::
 
@@ -64,10 +64,9 @@ menu/append
 | `theme`           | 主题强调色，不改变明暗外观                                       | string              | `default / chenghua / shijingshan / sybz / gulou` | `default`   |
 | `header`          | 内置头部配置，可传点击回调、class/style 和折叠悬浮文案           | `SMenuHeaderConfig` | -                                                 | `undefined` |
 | `headerConfig`    | `header` 的兼容属性，已废弃                                      | `SMenuHeaderConfig` | -                                                 | `undefined` |
-| `actionConfig`    | 内置主操作按钮配置，支持文字和图标                               | `SMenuActionConfig` | -                                                 | `undefined` |
 | `footer`          | 内置底部账号配置，可传点击回调和 class/style                     | `SMenuFooterConfig` | -                                                 | `undefined` |
 
-头部和底部区域的四边内边距始终为 `16px`；菜单列表展开时为 `16px`，收起时为 `4px`。自定义头尾插槽同样位于头尾区域的内边距内。`header`、`headerConfig`、`actionConfig`、`footer` 可直接传 Vue `computed`，在模板中会自动解包并随依赖更新。`header` 和 `footer` 配置支持 `handler(event)`、`class`、`style`。折叠后悬浮在内置头部会显示 `title`，可通过 `collapsedTooltip` 自定义。默认值：`handler / class / style / collapsedTooltip` 均为 `undefined`。
+头部和底部区域的四边内边距始终为 `16px`；菜单列表展开时为 `16px`，收起时为 `4px`。自定义头尾插槽同样位于头尾区域的内边距内。`header`、`headerConfig`、`footer` 可直接传 Vue `computed`，在模板中会自动解包并随依赖更新。`header` 和 `footer` 配置支持 `handler(event)`、`class`、`style`。`#append` 中的按钮可直接绑定 `@click` 处理函数。折叠后悬浮在内置头部会显示 `title`，可通过 `collapsedTooltip` 自定义。默认值：`handler / class / style / collapsedTooltip` 均为 `undefined`。
 
 `SMenuItem` 默认字段为 `index / path / title / icon / children / disabled / route`。`index` 优先于 `path`；`icon / suffixIcon` 可传 Element Plus 图标名称字符串或 Vue 图标组件。`type="group"` 用于分组标题；`tag / tagColor` 用于菜单标签；`detail` 配置 `tag / title / description` 后，鼠标移入会显示详情卡片。其余 Element Plus Menu 属性和事件会透传。
 
@@ -80,7 +79,6 @@ menu/append
 | `update:modelValue` | 选择菜单后更新激活值                     | `(index: string)`                        |
 | `update:collapse`   | 点击右侧按钮切换菜单折叠状态             | `(collapse: boolean)`                    |
 | `select`            | 选择菜单时触发，参数与 Element Plus 一致 | `(index, indexPath, item, routerResult)` |
-| `actionClick`       | 点击内置主操作按钮时触发                 | `(event: MouseEvent)`                    |
 
 ### 插槽
 

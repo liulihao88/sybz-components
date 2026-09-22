@@ -32,7 +32,6 @@ const emit = defineEmits<{
   'update:modelValue': [index: string]
   'update:collapse': [collapse: boolean]
   select: [...args: any[]]
-  actionClick: [event: MouseEvent]
 }>()
 defineSlots<{ header?: () => any; append?: () => any; footer?: () => any }>()
 
@@ -205,7 +204,7 @@ const handleSelect = (...args: any[]) => {
     >
       <SIcon :icon="iconProp(isCollapsed ? Expand : Fold)" />
     </button>
-    <header v-if="$slots.header || $slots.append || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
+    <header v-if="$slots.header || $slots.append || resolvedHeader" class="s-menu__header">
       <slot name="header">
         <el-tooltip
           v-if="resolvedHeader"
@@ -228,15 +227,6 @@ const handleSelect = (...args: any[]) => {
             </div>
           </div>
         </el-tooltip>
-        <button
-          v-if="mergedProps.actionConfig"
-          class="s-menu__action"
-          type="button"
-          @click="emit('actionClick', $event)"
-        >
-          <s-icon v-if="mergedProps.actionConfig.icon" :icon="iconProp(mergedProps.actionConfig.icon)" />
-          {{ mergedProps.actionConfig.text }}
-        </button>
       </slot>
       <div v-if="$slots.append" class="s-menu__append"><slot name="append" /></div>
     </header>
@@ -330,7 +320,6 @@ const handleSelect = (...args: any[]) => {
       align-items: center;
     }
     .s-menu__brand-content,
-    .s-menu__action,
     .s-menu__account > div {
       display: none;
     }
@@ -482,27 +471,6 @@ const handleSelect = (...args: any[]) => {
     color: #8da0b8;
     font-size: 12px;
     letter-spacing: 1px;
-  }
-  &__action {
-    display: flex;
-    width: 100%;
-    height: 54px;
-    margin: 16px 0 0;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    border: 0;
-    border-radius: 10px;
-    background: var(--s-menu-accent);
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  &__action:hover {
-    background: var(--s-menu-accent);
-  }
-  &__action > .el-icon {
-    font-size: 22px;
   }
   &__account {
     display: flex;

@@ -21,11 +21,6 @@ export interface SMenuHeaderConfig {
   handler?: (event: MouseEvent) => void
 }
 
-export interface SMenuActionConfig {
-  text: string
-  icon?: SMenuIcon
-}
-
 export interface SMenuFooterConfig {
   title: string
   subtitle?: string
@@ -89,7 +84,6 @@ export interface SMenuSelfProps {
   header?: SMenuHeaderConfig
   /** @deprecated 请使用 header */
   headerConfig?: SMenuHeaderConfig
-  actionConfig?: SMenuActionConfig
   footer?: SMenuFooterConfig
 }
 
