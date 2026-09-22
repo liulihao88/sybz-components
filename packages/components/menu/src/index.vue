@@ -117,16 +117,10 @@ onBeforeUnmount(() => {
   resizeObserver?.disconnect()
   mutationObserver?.disconnect()
 })
-watch(
-  () => [mergedProps.value.autoHeight, baseRowHeight.value],
-  () => nextTick(updateMenuScale),
-)
-watch(
-  () => [mergedProps.value.collapse, mergedProps.value.collapsible],
-  () => {
-    isCollapsed.value = mergedProps.value.collapsible && mergedProps.value.collapse
-  },
-)
+watch([() => mergedProps.value.autoHeight, () => baseRowHeight.value], () => nextTick(updateMenuScale))
+watch([() => mergedProps.value.collapse, () => mergedProps.value.collapsible], ([collapse, collapsible]) => {
+  isCollapsed.value = collapsible && collapse
+})
 const fields = computed<Required<SMenuFieldNames>>(() => ({
   index: 'index',
   path: 'path',

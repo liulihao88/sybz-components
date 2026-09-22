@@ -63,6 +63,7 @@ const menus = [
       :default-open-all="false"
       variant="dark"
     />
+    {{ active }}
   </div>
 </template>
 

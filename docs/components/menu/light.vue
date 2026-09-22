@@ -68,6 +68,7 @@ const menus = [
     variant="light"
     :options="menus"
     :router="false"
+    :collapsible="false"
     :header="header"
     :action-config="actionConfig"
     :footer="footer"
