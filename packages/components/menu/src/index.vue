@@ -161,6 +161,7 @@ const themeAccent = computed(
       chenghua: '#165dff',
       shijingshan: '#2a6df4',
       sybz: 'var(--s-sybz-primary)',
+      gulou: '#2477f3',
     })[mergedProps.value.theme] || '#2f6fed',
 )
 const menuColors = computed(() =>
@@ -554,6 +555,11 @@ const handleSelect = (...args: any[]) => {
   }
 
   &--dark {
+    .s-menu__collapse-trigger {
+      border-color: #475569;
+      background: var(--s-menu-bg);
+      color: #ffffff;
+    }
     .s-menu__header,
     .s-menu__footer {
       border-color: #294057;

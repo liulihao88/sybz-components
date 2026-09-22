@@ -22,9 +22,9 @@ menu/base
 menu/light
 :::
 
-### 主题（`theme` 默认值 `default`）
+### 主题与明暗外观（`theme` 默认值 `default`，`variant` 默认值 `dark`）
 
-:::demo 成华主题使用成华蓝强调色；示例选择 `variant="light"`，因此背景为白色。基础写法：`<SMenu variant="light" theme="chenghua" :header="header" :options="menus" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
+:::demo 用按钮切换 `theme` 和 `variant`，查看两者的全部组合。`variant="light"` 始终为白色背景，`variant="dark"` 始终为深色背景；`theme` 只切换强调色。基础写法：`<SMenu :theme="theme" :variant="variant" :header="header" :options="menus" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`variant` 可选值 `dark / light`，默认值 `dark`。示例初始值为 `theme="default"`、`variant="light"`。
 menu/theme
 :::
 
@@ -38,27 +38,27 @@ menu/autoHeight
 
 ### API
 
-| 属性名            | 说明                                                   | 类型                | 可选值                                    | 默认值      |
-| ----------------- | ------------------------------------------------------ | ------------------- | ----------------------------------------- | ----------- |
-| `modelValue`      | 当前激活菜单的 index/path                              | string              | -                                         | `''`        |
-| `options`         | 菜单配置，children 可循环嵌套                          | `SMenuItem[]`       | -                                         | `[]`        |
-| `fieldNames`      | 自定义数据字段名                                       | `SMenuFieldNames`   | -                                         | `{}`        |
-| `router`          | 点击菜单时启用 Vue Router 跳转                         | boolean             | `true / false`                            | `true`      |
-| `defaultOpenAll`  | 默认展开所有含 children 的菜单                         | boolean             | `true / false`                            | `true`      |
-| `defaultOpeneds`  | 额外指定默认展开项                                     | string[]            | -                                         | `[]`        |
-| `width`           | 菜单宽度，数字按 px 处理                               | string / number     | -                                         | `256`       |
-| `height`          | 菜单高度，数字按 px 处理                               | string / number     | -                                         | `100%`      |
-| `autoHeight`      | 是否保持四边 16px padding 并自适应缩放菜单项           | boolean             | `true / false`                            | `false`     |
-| `backgroundColor` | 深色模式背景色                                         | string              | CSS 颜色                                  | `#1d293b`   |
-| `textColor`       | 深色模式文字颜色                                       | string              | CSS 颜色                                  | `#cbd5e1`   |
-| `activeTextColor` | 深色模式激活文字颜色                                   | string              | CSS 颜色                                  | `#ffffff`   |
-| `collapse`        | 是否折叠菜单                                           | boolean             | `true / false`                            | `false`     |
-| `variant`         | 明暗外观：light 固定白色背景，dark 使用深色背景        | string              | `dark / light`                            | `dark`      |
-| `theme`           | 主题强调色，不改变明暗外观                             | string              | `default / chenghua / shijingshan / sybz` | `default`   |
-| `header`          | 内置头部配置，可传点击回调、class/style 和折叠悬浮文案 | `SMenuHeaderConfig` | -                                         | `undefined` |
-| `headerConfig`    | `header` 的兼容属性，已废弃                            | `SMenuHeaderConfig` | -                                         | `undefined` |
-| `actionConfig`    | 内置主操作按钮配置，支持文字和图标                     | `SMenuActionConfig` | -                                         | `undefined` |
-| `footer`          | 内置底部账号配置，可传点击回调和 class/style           | `SMenuFooterConfig` | -                                         | `undefined` |
+| 属性名            | 说明                                                   | 类型                | 可选值                                            | 默认值      |
+| ----------------- | ------------------------------------------------------ | ------------------- | ------------------------------------------------- | ----------- |
+| `modelValue`      | 当前激活菜单的 index/path                              | string              | -                                                 | `''`        |
+| `options`         | 菜单配置，children 可循环嵌套                          | `SMenuItem[]`       | -                                                 | `[]`        |
+| `fieldNames`      | 自定义数据字段名                                       | `SMenuFieldNames`   | -                                                 | `{}`        |
+| `router`          | 点击菜单时启用 Vue Router 跳转                         | boolean             | `true / false`                                    | `true`      |
+| `defaultOpenAll`  | 默认展开所有含 children 的菜单                         | boolean             | `true / false`                                    | `true`      |
+| `defaultOpeneds`  | 额外指定默认展开项                                     | string[]            | -                                                 | `[]`        |
+| `width`           | 菜单宽度，数字按 px 处理                               | string / number     | -                                                 | `256`       |
+| `height`          | 菜单高度，数字按 px 处理                               | string / number     | -                                                 | `100%`      |
+| `autoHeight`      | 是否保持四边 16px padding 并自适应缩放菜单项           | boolean             | `true / false`                                    | `false`     |
+| `backgroundColor` | 深色模式背景色                                         | string              | CSS 颜色                                          | `#1d293b`   |
+| `textColor`       | 深色模式文字颜色                                       | string              | CSS 颜色                                          | `#cbd5e1`   |
+| `activeTextColor` | 深色模式激活文字颜色                                   | string              | CSS 颜色                                          | `#ffffff`   |
+| `collapse`        | 是否折叠菜单                                           | boolean             | `true / false`                                    | `false`     |
+| `variant`         | 明暗外观：light 固定白色背景，dark 使用深色背景        | string              | `dark / light`                                    | `dark`      |
+| `theme`           | 主题强调色，不改变明暗外观                             | string              | `default / chenghua / shijingshan / sybz / gulou` | `default`   |
+| `header`          | 内置头部配置，可传点击回调、class/style 和折叠悬浮文案 | `SMenuHeaderConfig` | -                                                 | `undefined` |
+| `headerConfig`    | `header` 的兼容属性，已废弃                            | `SMenuHeaderConfig` | -                                                 | `undefined` |
+| `actionConfig`    | 内置主操作按钮配置，支持文字和图标                     | `SMenuActionConfig` | -                                                 | `undefined` |
+| `footer`          | 内置底部账号配置，可传点击回调和 class/style           | `SMenuFooterConfig` | -                                                 | `undefined` |
 
 头部、菜单主体和底部区域的四边内边距统一为 `16px`，折叠状态和各主题也保持一致；自定义头尾插槽同样位于该内边距内。`header`、`headerConfig`、`actionConfig`、`footer` 可直接传 Vue `computed`，在模板中会自动解包并随依赖更新。`header` 和 `footer` 配置支持 `handler(event)`、`class`、`style`。折叠后悬浮在内置头部会显示 `title`，可通过 `collapsedTooltip` 自定义。默认值：`handler / class / style / collapsedTooltip` 均为 `undefined`。
 
