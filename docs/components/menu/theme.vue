@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { DataAnalysis, Document, OfficeBuilding, Plus, Setting } from '@element-plus/icons-vue'
 import { docThemeOptions } from '../../.vitepress/theme/theme'
 
-const active = ref('/overview')
+const active = ref('/settings/general')
 const theme = ref<(typeof docThemeOptions)[number]>('default')
 const variant = ref<'light' | 'dark'>('light')
 const variantOptions = [
@@ -14,23 +14,25 @@ const header = { title: '成华区AI产业服务平台', subtitle: 'AI INDUSTRY 
 const footer = { title: '成华管理员', subtitle: '产业服务中心', avatar: '成' }
 const menus = [
   { path: '/overview', title: '产业概览', icon: DataAnalysis },
-  { path: '/enterprise', title: '企业服务', icon: OfficeBuilding },
+  {
+    path: '/enterprise',
+    title: '企业服务',
+    icon: OfficeBuilding,
+    children: [
+      { path: '/settings/general', title: '通用配置', icon: 'plus' },
+      { path: '/settings/schedule', title: '定时计划', icon: 'delete' },
+    ],
+  },
   { path: '/policy', title: '政策申报', icon: Document },
   { path: '/settings', title: '系统设置', icon: Setting },
 ]
 </script>
 
 <template>
-  <div class="menu-theme-controls">
-    <div class="menu-theme-controls__row">
-      <span>theme</span>
-      <SRadio v-model="theme" :options="docThemeOptions" show-type="button" />
-    </div>
-    <div class="menu-theme-controls__row">
-      <span>variant</span>
-      <SRadio v-model="variant" :options="variantOptions" show-type="button" />
-    </div>
-  </div>
+  <s-flex gap="small" class="p-b-10">
+    <SRadio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" />
+    <SRadio v-model="variant" :options="variantOptions" show-type="button" title="variant" />
+  </s-flex>
   <div class="h-400">
     <SMenu
       v-model="active"
@@ -46,22 +48,4 @@ const menus = [
   </div>
 </template>
 
-<style scoped>
-.menu-theme-controls {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.menu-theme-controls__row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.menu-theme-controls__row > span {
-  width: 52px;
-  flex: none;
-}
-</style>
+<style scoped></style>

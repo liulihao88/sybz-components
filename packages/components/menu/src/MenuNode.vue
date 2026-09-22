@@ -5,7 +5,12 @@ import type { SMenuFieldNames, SMenuIcon, SMenuItem } from './types'
 
 defineOptions({ name: 'SMenuNode' })
 
-const props = defineProps<{ item: SMenuItem; fieldNames: Required<SMenuFieldNames>; collapsed?: boolean }>()
+const props = defineProps<{
+  item: SMenuItem
+  fieldNames: Required<SMenuFieldNames>
+  collapsed?: boolean
+  inSubMenu?: boolean
+}>()
 
 const read = (field: keyof SMenuFieldNames) => props.item[props.fieldNames[field]]
 const children = computed<SMenuItem[]>(() => read('children') || [])
@@ -24,12 +29,13 @@ const iconProp = (value: SMenuIcon) => value as any
       :item="child"
       :field-names="fieldNames"
       :collapsed="props.collapsed"
+      :in-sub-menu="props.inSubMenu"
     />
   </template>
   <el-sub-menu v-else-if="children.length" :index="index" :disabled="Boolean(read('disabled'))">
     <template #title>
       <SIcon v-if="icon" :icon="iconProp(icon)" />
-      <span :title="props.collapsed ? String(read('title') || '') : undefined">{{ read('title') }}</span>
+      <span>{{ read('title') }}</span>
     </template>
     <SMenuNode
       v-for="(child, childIndex) in children"
@@ -37,11 +43,12 @@ const iconProp = (value: SMenuIcon) => value as any
       :item="child"
       :field-names="fieldNames"
       :collapsed="props.collapsed"
+      in-sub-menu
     />
   </el-sub-menu>
   <el-tooltip
     v-else
-    :disabled="!props.collapsed"
+    :disabled="!props.collapsed || props.inSubMenu"
     placement="right"
     :show-after="300"
     popper-class="s-menu-detail-popper"
@@ -53,12 +60,7 @@ const iconProp = (value: SMenuIcon) => value as any
         <small v-if="item.detail?.description">{{ item.detail.description }}</small>
       </div>
     </template>
-    <el-menu-item
-      :index="index"
-      :route="read('route') || read('path')"
-      :disabled="Boolean(read('disabled'))"
-      :title="props.collapsed ? String(read('title') || '') : undefined"
-    >
+    <el-menu-item :index="index" :route="read('route') || read('path')" :disabled="Boolean(read('disabled'))">
       <SIcon v-if="icon" :icon="iconProp(icon)" />
       <span v-if="item.tag" class="s-menu-node__tag" :style="{ color: item.tagColor }">{{ item.tag }}</span>
       <span class="s-menu-node__title">{{ read('title') }}</span>

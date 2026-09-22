@@ -42,7 +42,7 @@ const isCollapsed = ref(mergedProps.value.collapse)
 const menuViewportRef = ref<HTMLElement>()
 const menuRef = ref<any>()
 const menuRowHeight = ref(0)
-const menuVerticalPadding = ref(16)
+const menuVerticalPadding = ref(isCollapsed.value ? 4 : 16)
 const menuDensity = ref(1)
 let resizeObserver: ResizeObserver | undefined
 let mutationObserver: MutationObserver | undefined
@@ -75,8 +75,8 @@ const updateMenuScale = () => {
       }
       return true
     }).length
-    // autoHeight 只压缩菜单项，列表容器四边始终保留 16px 间距。
-    menuVerticalPadding.value = 16
+    // autoHeight 只压缩菜单项；收起时四边留 4px，展开时留 16px。
+    menuVerticalPadding.value = isCollapsed.value ? 4 : 16
     const availableHeight = Math.max(0, viewportHeight - menuVerticalPadding.value * 2)
     const rowHeight = count ? Math.min(baseRowHeight.value, availableHeight / count) : baseRowHeight.value
     // 向下取整，避免子像素累计让最后一项溢出。
@@ -323,6 +323,10 @@ const handleSelect = (...args: any[]) => {
   }
 
   &.is-collapse {
+    .s-menu__list {
+      padding: 4px;
+    }
+
     .s-menu__brand {
       justify-content: center;
       align-items: center;
@@ -365,6 +369,33 @@ const handleSelect = (...args: any[]) => {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+    }
+
+    :deep(.el-sub-menu > .el-sub-menu__title) {
+      position: relative;
+    }
+    :deep(.el-sub-menu > .el-sub-menu__title::before) {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 3px;
+      height: 24px;
+      transform: translateY(-50%);
+      border-radius: 2px;
+      background: color-mix(in srgb, var(--s-menu-text) 40%, transparent);
+      content: '';
+    }
+    :deep(.el-sub-menu__title .el-sub-menu__icon-arrow) {
+      display: none;
+    }
+    :deep(.el-sub-menu.is-active > .el-sub-menu__title) {
+      color: var(--s-menu-accent);
+    }
+    :deep(.el-sub-menu.is-active > .el-sub-menu__title > .s-icon) {
+      color: var(--s-menu-accent);
+    }
+    :deep(.el-sub-menu.is-active > .el-sub-menu__title::before) {
+      background: var(--s-menu-accent);
     }
   }
 
