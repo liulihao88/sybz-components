@@ -155,6 +155,7 @@ const openedMenus = computed(() =>
     : mergedProps.value.defaultOpeneds,
 )
 const resolvedHeader = computed(() => mergedProps.value.header || mergedProps.value.headerConfig)
+const resolvedFooter = computed(() => mergedProps.value.footer)
 const menuColors = computed(() => {
   if (mergedProps.value.theme === 'chenghua') {
     return { background: '#ffffff', text: '#000000', activeText: '#165dff' }
@@ -210,15 +211,27 @@ const handleSelect = (...args: any[]) => {
     </button>
     <header v-if="$slots.header || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
       <slot name="header">
-        <div v-if="resolvedHeader" class="s-menu__brand">
-          <span v-if="resolvedHeader.icon" class="s-menu__brand-icon">
-            <s-icon :icon="iconProp(resolvedHeader.icon)" />
-          </span>
-          <div class="s-menu__brand-content">
-            <strong>{{ resolvedHeader.title }}</strong>
-            <small v-if="resolvedHeader.subtitle">{{ resolvedHeader.subtitle }}</small>
+        <el-tooltip
+          v-if="resolvedHeader"
+          :disabled="!isCollapsed || !(resolvedHeader.collapsedTooltip || resolvedHeader.title)"
+          placement="right"
+          :content="resolvedHeader.collapsedTooltip || resolvedHeader.title"
+        >
+          <div
+            class="s-menu__brand"
+            :class="resolvedHeader.class"
+            :style="resolvedHeader.style"
+            @click="resolvedHeader.handler?.($event)"
+          >
+            <span v-if="resolvedHeader.icon" class="s-menu__brand-icon">
+              <s-icon :icon="iconProp(resolvedHeader.icon)" />
+            </span>
+            <div class="s-menu__brand-content">
+              <strong>{{ resolvedHeader.title }}</strong>
+              <small v-if="resolvedHeader.subtitle">{{ resolvedHeader.subtitle }}</small>
+            </div>
           </div>
-        </div>
+        </el-tooltip>
         <button
           v-if="mergedProps.actionConfig"
           class="s-menu__action"
@@ -256,11 +269,17 @@ const handleSelect = (...args: any[]) => {
     </div>
     <footer v-if="$slots.footer || mergedProps.footer" class="s-menu__footer">
       <slot name="footer">
-        <div v-if="mergedProps.footer" class="s-menu__account">
-          <span>{{ mergedProps.footer.avatar || mergedProps.footer.title.slice(0, 1) }}</span>
+        <div
+          v-if="resolvedFooter"
+          class="s-menu__account"
+          :class="resolvedFooter.class"
+          :style="resolvedFooter.style"
+          @click="resolvedFooter.handler?.($event)"
+        >
+          <span>{{ resolvedFooter.avatar || resolvedFooter.title.slice(0, 1) }}</span>
           <div>
-            <strong>{{ mergedProps.footer.title }}</strong>
-            <small v-if="mergedProps.footer.subtitle">{{ mergedProps.footer.subtitle }}</small>
+            <strong>{{ resolvedFooter.title }}</strong>
+            <small v-if="resolvedFooter.subtitle">{{ resolvedFooter.subtitle }}</small>
           </div>
         </div>
       </slot>
@@ -305,14 +324,9 @@ const handleSelect = (...args: any[]) => {
   }
 
   &.is-collapse {
-    .s-menu__list {
-      padding-right: 4px;
-      padding-left: 4px;
-    }
-
     .s-menu__brand {
       justify-content: center;
-      padding: 12px 8px;
+      align-items: center;
     }
     .s-menu__brand-content,
     .s-menu__action,
@@ -326,14 +340,22 @@ const handleSelect = (...args: any[]) => {
     }
     .s-menu__account {
       justify-content: center;
-      padding: 12px 8px;
+      align-items: center;
+    }
+
+    .s-menu__brand-icon,
+    .s-menu__account > span {
+      width: 32px;
+      height: 32px;
     }
 
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
-      width: 56px;
+      width: 100%;
       height: 56px;
-      margin: 4px auto;
+      margin: 4px 0;
+      display: flex;
+      align-items: center;
       justify-content: center;
       padding: 0;
     }
@@ -341,12 +363,22 @@ const handleSelect = (...args: any[]) => {
     :deep(.el-menu-item .el-icon),
     :deep(.el-sub-menu__title .el-icon) {
       margin: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
   &__header,
   &__footer {
     flex: none;
+    padding: 16px;
+  }
+  &__header {
+    border-bottom: 1px solid #294057;
+  }
+  &__footer {
+    border-top: 1px solid #294057;
   }
 
   &__viewport {
@@ -389,8 +421,6 @@ const handleSelect = (...args: any[]) => {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 22px;
-    border-bottom: 1px solid #294057;
     color: #fff;
   }
   &__brand-icon {
@@ -424,9 +454,9 @@ const handleSelect = (...args: any[]) => {
   }
   &__action {
     display: flex;
-    width: calc(100% - 32px);
+    width: 100%;
     height: 54px;
-    margin: 18px 16px 8px;
+    margin: 16px 0 0;
     align-items: center;
     justify-content: center;
     gap: 12px;
@@ -447,8 +477,6 @@ const handleSelect = (...args: any[]) => {
     display: flex;
     gap: 12px;
     align-items: center;
-    padding: 18px 20px;
-    border-top: 1px solid #294057;
     color: #fff;
   }
   &__account > span {
@@ -489,8 +517,11 @@ const handleSelect = (...args: any[]) => {
   &--light {
     border: 1px solid #dce5ef;
 
-    .s-menu__brand {
+    .s-menu__header,
+    .s-menu__footer {
       border-color: #dce5ef;
+    }
+    .s-menu__brand {
       color: #193957;
     }
     .s-menu__brand-icon {
@@ -500,7 +531,6 @@ const handleSelect = (...args: any[]) => {
       color: #285b8d;
     }
     .s-menu__account {
-      border-color: #dce5ef;
       color: #193957;
     }
     .s-menu__account > span {
@@ -528,8 +558,11 @@ const handleSelect = (...args: any[]) => {
     border: 1px solid #e5e7eb;
     font-family: 'PingFang SC', sans-serif;
 
-    .s-menu__brand {
+    .s-menu__header,
+    .s-menu__footer {
       border-color: #e5e7eb;
+    }
+    .s-menu__brand {
       color: #000;
     }
     .s-menu__brand-icon {
@@ -547,7 +580,6 @@ const handleSelect = (...args: any[]) => {
       background: #0e4ee8;
     }
     .s-menu__account {
-      border-color: #e5e7eb;
       color: #000;
     }
     .s-menu__account > span {
@@ -577,10 +609,12 @@ const handleSelect = (...args: any[]) => {
     border: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
+    .s-menu__header,
+    .s-menu__footer {
+      border-color: #334155;
+    }
     .s-menu__brand {
       min-height: 40px;
-      padding: 12px;
-      border-color: #334155;
       color: #fff;
     }
     .s-menu__brand-icon {
@@ -593,7 +627,7 @@ const handleSelect = (...args: any[]) => {
     }
     .s-menu__action {
       height: 40px;
-      margin: 12px 8px;
+      margin: 16px 0 0;
       border-radius: 8px;
       background: #2a6df4;
       font-size: 16px;
@@ -603,8 +637,6 @@ const handleSelect = (...args: any[]) => {
       background: #1e5fdc;
     }
     .s-menu__account {
-      padding: 12px 8px;
-      border-color: #334155;
       color: #fff;
     }
     .s-menu__account > span {
@@ -636,10 +668,12 @@ const handleSelect = (...args: any[]) => {
     border: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
+    .s-menu__header,
+    .s-menu__footer {
+      border-color: var(--s-sybz-blue-700);
+    }
     .s-menu__brand {
       min-height: 40px;
-      padding: 12px;
-      border-color: var(--s-sybz-blue-700);
       color: #fff;
     }
     .s-menu__brand-icon {
@@ -652,7 +686,7 @@ const handleSelect = (...args: any[]) => {
     }
     .s-menu__action {
       height: 40px;
-      margin: 12px 8px;
+      margin: 16px 0 0;
       border-radius: 8px;
       background: var(--s-sybz-primary);
       font-size: 16px;
@@ -662,8 +696,6 @@ const handleSelect = (...args: any[]) => {
       background: var(--s-sybz-primary-hover);
     }
     .s-menu__account {
-      padding: 12px 8px;
-      border-color: var(--s-sybz-blue-700);
       color: #fff;
     }
     .s-menu__account > span {

@@ -12,7 +12,7 @@
 
 ### 基础用法（`defaultOpenAll` 默认值 `true`）
 
-:::demo 传入 `header` 的 `icon / title / subtitle` 即可显示内置头部样式；同时支持任意层级递归菜单、路由跳转和图标，并默认展开全部父级。基础写法：`<SMenu v-model="active" :header="header" :options="menus" />`。属性：`header` 类型 `SMenuHeaderConfig`，默认值 `undefined`；`options` 类型 `SMenuItem[]`，默认值 `[]`；`router` 可选值 `true / false`，默认值 `true`；`defaultOpenAll` 可选值 `true / false`，默认值 `true`；`width` 类型 `string / number`，默认值 `256`；`height` 类型 `string / number`，默认值 `100%`。
+:::demo 传入 `header` 的 `icon / title / subtitle` 即可显示内置头部样式；示例使用 `computed` 配置头尾点击回调和样式，折叠后悬浮头部可见自定义内容；同时支持任意层级递归菜单、路由跳转和图标，并默认展开全部父级。基础写法：`<SMenu v-model="active" :header="header" :footer="footer" :options="menus" />`。属性：`header` 类型 `SMenuHeaderConfig`，默认值 `undefined`；`options` 类型 `SMenuItem[]`，默认值 `[]`；`router` 可选值 `true / false`，默认值 `true`；`defaultOpenAll` 可选值 `true / false`，默认值 `true`；`width` 类型 `string / number`，默认值 `256`；`height` 类型 `string / number`，默认值 `100%`。
 menu/base
 :::
 
@@ -52,27 +52,29 @@ menu/autoHeight
 
 ### API
 
-| 属性名            | 说明                                         | 类型                | 可选值                                    | 默认值      |
-| ----------------- | -------------------------------------------- | ------------------- | ----------------------------------------- | ----------- |
-| `modelValue`      | 当前激活菜单的 index/path                    | string              | -                                         | `''`        |
-| `options`         | 菜单配置，children 可循环嵌套                | `SMenuItem[]`       | -                                         | `[]`        |
-| `fieldNames`      | 自定义数据字段名                             | `SMenuFieldNames`   | -                                         | `{}`        |
-| `router`          | 点击菜单时启用 Vue Router 跳转               | boolean             | `true / false`                            | `true`      |
-| `defaultOpenAll`  | 默认展开所有含 children 的菜单               | boolean             | `true / false`                            | `true`      |
-| `defaultOpeneds`  | 额外指定默认展开项                           | string[]            | -                                         | `[]`        |
-| `width`           | 菜单宽度，数字按 px 处理                     | string / number     | -                                         | `256`       |
-| `height`          | 菜单高度，数字按 px 处理                     | string / number     | -                                         | `100%`      |
-| `autoHeight`      | 是否保持四边 16px padding 并自适应缩放菜单项 | boolean             | `true / false`                            | `false`     |
-| `backgroundColor` | 背景色                                       | string              | CSS 颜色                                  | `#1d293b`   |
-| `textColor`       | 文字颜色                                     | string              | CSS 颜色                                  | `#cbd5e1`   |
-| `activeTextColor` | 激活文字颜色                                 | string              | CSS 颜色                                  | `#ffffff`   |
-| `collapse`        | 是否折叠菜单                                 | boolean             | `true / false`                            | `false`     |
-| `variant`         | 菜单外观                                     | string              | `dark / light`                            | `dark`      |
-| `theme`           | 主题样式                                     | string              | `default / chenghua / shijingshan / sybz` | `default`   |
-| `header`          | 内置头部配置，传入标题和图标即应用默认样式   | `SMenuHeaderConfig` | -                                         | `undefined` |
-| `headerConfig`    | `header` 的兼容属性，已废弃                  | `SMenuHeaderConfig` | -                                         | `undefined` |
-| `actionConfig`    | 内置主操作按钮配置，支持文字和图标           | `SMenuActionConfig` | -                                         | `undefined` |
-| `footer`          | 内置底部账号配置，支持标题、副标题和头像文字 | `SMenuFooterConfig` | -                                         | `undefined` |
+| 属性名            | 说明                                                   | 类型                | 可选值                                    | 默认值      |
+| ----------------- | ------------------------------------------------------ | ------------------- | ----------------------------------------- | ----------- |
+| `modelValue`      | 当前激活菜单的 index/path                              | string              | -                                         | `''`        |
+| `options`         | 菜单配置，children 可循环嵌套                          | `SMenuItem[]`       | -                                         | `[]`        |
+| `fieldNames`      | 自定义数据字段名                                       | `SMenuFieldNames`   | -                                         | `{}`        |
+| `router`          | 点击菜单时启用 Vue Router 跳转                         | boolean             | `true / false`                            | `true`      |
+| `defaultOpenAll`  | 默认展开所有含 children 的菜单                         | boolean             | `true / false`                            | `true`      |
+| `defaultOpeneds`  | 额外指定默认展开项                                     | string[]            | -                                         | `[]`        |
+| `width`           | 菜单宽度，数字按 px 处理                               | string / number     | -                                         | `256`       |
+| `height`          | 菜单高度，数字按 px 处理                               | string / number     | -                                         | `100%`      |
+| `autoHeight`      | 是否保持四边 16px padding 并自适应缩放菜单项           | boolean             | `true / false`                            | `false`     |
+| `backgroundColor` | 背景色                                                 | string              | CSS 颜色                                  | `#1d293b`   |
+| `textColor`       | 文字颜色                                               | string              | CSS 颜色                                  | `#cbd5e1`   |
+| `activeTextColor` | 激活文字颜色                                           | string              | CSS 颜色                                  | `#ffffff`   |
+| `collapse`        | 是否折叠菜单                                           | boolean             | `true / false`                            | `false`     |
+| `variant`         | 菜单外观                                               | string              | `dark / light`                            | `dark`      |
+| `theme`           | 主题样式                                               | string              | `default / chenghua / shijingshan / sybz` | `default`   |
+| `header`          | 内置头部配置，可传点击回调、class/style 和折叠悬浮文案 | `SMenuHeaderConfig` | -                                         | `undefined` |
+| `headerConfig`    | `header` 的兼容属性，已废弃                            | `SMenuHeaderConfig` | -                                         | `undefined` |
+| `actionConfig`    | 内置主操作按钮配置，支持文字和图标                     | `SMenuActionConfig` | -                                         | `undefined` |
+| `footer`          | 内置底部账号配置，可传点击回调和 class/style           | `SMenuFooterConfig` | -                                         | `undefined` |
+
+头部、菜单主体和底部区域的四边内边距统一为 `16px`，折叠状态和各主题也保持一致；自定义头尾插槽同样位于该内边距内。`header`、`headerConfig`、`actionConfig`、`footer` 可直接传 Vue `computed`，在模板中会自动解包并随依赖更新。`header` 和 `footer` 配置支持 `handler(event)`、`class`、`style`。折叠后悬浮在内置头部会显示 `title`，可通过 `collapsedTooltip` 自定义。默认值：`handler / class / style / collapsedTooltip` 均为 `undefined`。
 
 `SMenuItem` 默认字段为 `index / path / title / icon / children / disabled / route`。`index` 优先于 `path`；`icon / suffixIcon` 可传 Element Plus 图标名称字符串或 Vue 图标组件。`type="group"` 用于分组标题；`tag / tagColor` 用于菜单标签；`detail` 配置 `tag / title / description` 后，鼠标移入会显示详情卡片。其余 Element Plus Menu 属性和事件会透传。
 

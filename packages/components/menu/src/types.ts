@@ -1,5 +1,5 @@
 import type { SybzComponentTheme } from '../../../types/component-props'
-import type { Component } from 'vue'
+import type { Component, CSSProperties } from 'vue'
 import type { MenuProps } from 'element-plus'
 
 export type SMenuIcon = string | Component
@@ -14,6 +14,11 @@ export interface SMenuHeaderConfig {
   title: string
   subtitle?: string
   icon?: SMenuIcon
+  /** 折叠时悬浮显示的内容，默认使用 title */
+  collapsedTooltip?: string
+  class?: string
+  style?: CSSProperties
+  handler?: (event: MouseEvent) => void
 }
 
 export interface SMenuActionConfig {
@@ -25,6 +30,9 @@ export interface SMenuFooterConfig {
   title: string
   subtitle?: string
   avatar?: string
+  class?: string
+  style?: CSSProperties
+  handler?: (event: MouseEvent) => void
 }
 
 export interface SMenuItem {

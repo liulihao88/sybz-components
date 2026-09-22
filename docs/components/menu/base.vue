@@ -1,9 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { ChatDotRound, Collection, EditPen, Link, Setting, Timer } from '@element-plus/icons-vue'
 
 const active = ref('/material')
-const header = { title: '公众号自动化', subTitle: 'WECHAT AUTOMATION', icon: ChatDotRound }
+const brandTitle = ref('公众号自动化')
+const header = computed(() => ({
+  title: brandTitle.value,
+  subtitle: 'WECHAT AUTOMATION',
+  icon: ChatDotRound,
+  collapsedTooltip: `${brandTitle.value} · 工作台`,
+  style: { cursor: 'pointer' },
+  handler: () => {
+    brandTitle.value = '公众号工作台'
+  },
+}))
+const footer = computed(() => ({
+  title: brandTitle.value,
+  avatar: '公',
+  style: { cursor: 'pointer' },
+  handler: () => {
+    brandTitle.value = '公众号自动化'
+  },
+}))
 const menus = [
   { path: '/material', title: '素材', icon: Collection },
   { path: '/writing', title: '写作', icon: EditPen },
@@ -35,7 +53,16 @@ const menus = [
 
 <template>
   <div class="h-400 bg-yellow">
-    <SMenu v-model="active" :header="header" :options="menus" width="320px" auto-height :default-open-all="false" />
+    <SMenu
+      v-model="active"
+      :header="header"
+      :footer="footer"
+      :options="menus"
+      width="320px"
+      auto-height
+      :default-open-all="false"
+      variant="dark"
+    />
   </div>
 </template>
 
