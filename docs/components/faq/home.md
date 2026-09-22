@@ -169,9 +169,9 @@ sybzVitePlugins({
 })
 ```
 
-| 属性名称 | 可选值                                                            | 默认值 | 说明                 |
-| -------- | ----------------------------------------------------------------- | ------ | -------------------- |
-| `editor` | `atom/code/code_insiders/idea/phpstorm/pycharm/webstorm/hbuilder` | `code` | 打开源码使用的编辑器 |
+| 属性名称 | 可选值                                                                                                  | 默认值 | 说明                 |
+| -------- | ------------------------------------------------------------------------------------------------------- | ------ | -------------------- |
+| `editor` | `code`、`cursor`、`webstorm` 等[受支持的编辑器](https://github.com/zh-lx/launch-ide#-supported-editors) | `code` | 打开源码使用的编辑器 |
 
 其他编辑器的配置可查看 [code-inspector IDE 配置列表](https://inspector.fe-dev.cn/guide/ide.html)。
 
