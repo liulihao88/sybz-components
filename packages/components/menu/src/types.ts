@@ -80,6 +80,8 @@ export interface SMenuSelfProps {
   activeTextColor?: string
   /** 是否收起菜单；收起时仅菜单列表 padding 为 4px，头部和底部保持 16px */
   collapse?: boolean
+  /** 是否允许收起；设为 false 时保持展开并隐藏收缩按钮 */
+  collapsible?: boolean
   /** 明暗外观：light 为白色背景，dark 为深色背景 */
   variant?: 'dark' | 'light'
   /** 主题强调色，不改变明暗外观 */

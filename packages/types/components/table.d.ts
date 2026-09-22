@@ -17,6 +17,8 @@ export type STableComponent = {
     $props: {
       data?: TableRow[]
       columns?: TableColumnList<TableRow>
+      /** 禁用分页和操作栏按钮 */
+      disabled?: boolean
       showPage?: boolean
       showIndex?: boolean
       size?: string
@@ -41,6 +43,7 @@ export type STableComponent = {
       ElTableInstance['$props'],
       | 'data'
       | 'columns'
+      | 'disabled'
       | 'showPage'
       | 'showIndex'
       | 'size'

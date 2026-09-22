@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<SMenuSelfProps>(), {
   textColor: '#cbd5e1',
   activeTextColor: '#ffffff',
   collapse: false,
+  collapsible: true,
   variant: 'dark',
   theme: 'default',
 })
@@ -33,12 +34,12 @@ const emit = defineEmits<{
   select: [...args: any[]]
   actionClick: [event: MouseEvent]
 }>()
-defineSlots<{ header?: () => any; footer?: () => any }>()
+defineSlots<{ header?: () => any; append?: () => any; footer?: () => any }>()
 
 const attrs = useAttrs()
 const iconProp = (value: SMenuIcon) => value as any
 const mergedProps = useGlobalComponentConfig('menu', props)
-const isCollapsed = ref(mergedProps.value.collapse)
+const isCollapsed = ref(mergedProps.value.collapsible && mergedProps.value.collapse)
 const menuViewportRef = ref<HTMLElement>()
 const menuRef = ref<any>()
 const menuRowHeight = ref(0)
@@ -121,9 +122,9 @@ watch(
   () => nextTick(updateMenuScale),
 )
 watch(
-  () => mergedProps.value.collapse,
-  (value) => {
-    isCollapsed.value = value
+  () => [mergedProps.value.collapse, mergedProps.value.collapsible],
+  () => {
+    isCollapsed.value = mergedProps.value.collapsible && mergedProps.value.collapse
   },
 )
 const fields = computed<Required<SMenuFieldNames>>(() => ({
@@ -181,6 +182,7 @@ const rootStyle = computed(() => ({
   '--s-menu-accent': themeAccent.value,
 }))
 const toggleCollapse = () => {
+  if (!mergedProps.value.collapsible) return
   isCollapsed.value = !isCollapsed.value
   emit('update:collapse', isCollapsed.value)
 }
@@ -200,6 +202,7 @@ const handleSelect = (...args: any[]) => {
     :style="rootStyle"
   >
     <button
+      v-if="mergedProps.collapsible"
       class="s-menu__collapse-trigger"
       type="button"
       :aria-label="isCollapsed ? '展开菜单' : '收缩菜单'"
@@ -208,7 +211,7 @@ const handleSelect = (...args: any[]) => {
     >
       <SIcon :icon="iconProp(isCollapsed ? Expand : Fold)" />
     </button>
-    <header v-if="$slots.header || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
+    <header v-if="$slots.header || $slots.append || resolvedHeader || mergedProps.actionConfig" class="s-menu__header">
       <slot name="header">
         <el-tooltip
           v-if="resolvedHeader"
@@ -241,6 +244,7 @@ const handleSelect = (...args: any[]) => {
           {{ mergedProps.actionConfig.text }}
         </button>
       </slot>
+      <div v-if="$slots.append" class="s-menu__append"><slot name="append" /></div>
     </header>
     <div ref="menuViewportRef" class="s-menu__viewport">
       <el-menu
@@ -406,6 +410,9 @@ const handleSelect = (...args: any[]) => {
   }
   &__header {
     border-bottom: 1px solid #294057;
+  }
+  &__append:not(:first-child) {
+    margin-top: 16px;
   }
   &__footer {
     border-top: 1px solid #294057;
