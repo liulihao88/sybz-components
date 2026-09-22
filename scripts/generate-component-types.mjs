@@ -748,7 +748,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
       typeName: 'SMenuProps',
       description:
-        's-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案）以及公共组件主题。autoHeight 保持容器四边 16px padding，从顶部排列菜单，仅空间不足时压缩菜单项尺寸。',
+        's-menu 递归菜单组件，支持路由、图标、分组、默认展开、header/footer 头尾配置（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案）以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。autoHeight 保持容器四边 16px padding，从顶部排列菜单，仅空间不足时压缩菜单项尺寸。',
       slots: ['header', 'footer'],
       instanceMembers: [
         "$emit: (event: 'update:modelValue' | 'update:collapse' | 'select' | 'actionClick', ...args: any[]) => void",

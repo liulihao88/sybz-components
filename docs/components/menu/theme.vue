@@ -18,7 +18,7 @@ const menus = [
   <div class="h-400 bg-yellow">
     <SMenu
       v-model="active"
-      theme="chenghua"
+      variant="light"
       :header="header"
       :action-config="actionConfig"
       :footer="footer"

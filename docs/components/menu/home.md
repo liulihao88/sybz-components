@@ -16,30 +16,16 @@
 menu/base
 :::
 
-### 成华主题（`theme` 默认值 `default`）
-
-:::demo 成华主题使用白色背景、成华蓝选中态和蓝青渐变品牌图标。基础写法：`<SMenu theme="chenghua" :header="header" :options="menus" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
-menu/chenghua
-:::
-
-### 石景山主题（`theme` 默认值 `default`）
-
-:::demo 石景山主题使用深蓝灰导航背景、紧凑菜单和石景山蓝选中态。基础写法：`<SMenu theme="shijingshan" :header="header" :options="menus" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
-menu/shijingshan
-:::
-
 ### 浅色分组菜单（`variant` 默认值 `dark`）
 
-:::demo 浅色菜单内置品牌区、主操作按钮和账号区样式，业务只需传配置，无需复制 CSS；同时支持功能菜单、历史记录分组、标签、尾部图标和鼠标移入详情卡片。基础写法：`<SMenu variant="light" :options="menus" :header="header" :action-config="actionConfig" :footer="footer" />`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`header / actionConfig / footer` 默认值均为 `undefined`；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
+:::demo `variant="light"` 为白色背景，任意 `theme` 都保持浅色外观。基础写法：`<SMenu variant="light" :options="menus" :header="header" :action-config="actionConfig" :footer="footer" />`。属性：`variant` 可选值 `dark / light`，默认值 `dark`；`header / actionConfig / footer` 默认值均为 `undefined`；菜单项 `type` 可选值 `item / group`，默认值 `item`；`tag / tagColor / suffixIcon / detail` 默认值均为 `undefined`。
 menu/light
 :::
 
-### sybz 主题（theme 默认值：default）
+### 主题（`theme` 默认值 `default`）
 
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-menu/sybzTheme
+:::demo 成华主题使用成华蓝强调色；示例选择 `variant="light"`，因此背景为白色。基础写法：`<SMenu variant="light" theme="chenghua" :header="header" :options="menus" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
+menu/theme
 :::
 
 ### 全部展示（`autoHeight` 默认值 `false`）
@@ -63,12 +49,12 @@ menu/autoHeight
 | `width`           | 菜单宽度，数字按 px 处理                               | string / number     | -                                         | `256`       |
 | `height`          | 菜单高度，数字按 px 处理                               | string / number     | -                                         | `100%`      |
 | `autoHeight`      | 是否保持四边 16px padding 并自适应缩放菜单项           | boolean             | `true / false`                            | `false`     |
-| `backgroundColor` | 背景色                                                 | string              | CSS 颜色                                  | `#1d293b`   |
-| `textColor`       | 文字颜色                                               | string              | CSS 颜色                                  | `#cbd5e1`   |
-| `activeTextColor` | 激活文字颜色                                           | string              | CSS 颜色                                  | `#ffffff`   |
+| `backgroundColor` | 深色模式背景色                                         | string              | CSS 颜色                                  | `#1d293b`   |
+| `textColor`       | 深色模式文字颜色                                       | string              | CSS 颜色                                  | `#cbd5e1`   |
+| `activeTextColor` | 深色模式激活文字颜色                                   | string              | CSS 颜色                                  | `#ffffff`   |
 | `collapse`        | 是否折叠菜单                                           | boolean             | `true / false`                            | `false`     |
-| `variant`         | 菜单外观                                               | string              | `dark / light`                            | `dark`      |
-| `theme`           | 主题样式                                               | string              | `default / chenghua / shijingshan / sybz` | `default`   |
+| `variant`         | 明暗外观：light 固定白色背景，dark 使用深色背景        | string              | `dark / light`                            | `dark`      |
+| `theme`           | 主题强调色，不改变明暗外观                             | string              | `default / chenghua / shijingshan / sybz` | `default`   |
 | `header`          | 内置头部配置，可传点击回调、class/style 和折叠悬浮文案 | `SMenuHeaderConfig` | -                                         | `undefined` |
 | `headerConfig`    | `header` 的兼容属性，已废弃                            | `SMenuHeaderConfig` | -                                         | `undefined` |
 | `actionConfig`    | 内置主操作按钮配置，支持文字和图标                     | `SMenuActionConfig` | -                                         | `undefined` |

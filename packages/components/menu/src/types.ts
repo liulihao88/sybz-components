@@ -72,11 +72,16 @@ export interface SMenuSelfProps {
   height?: string | number
   /** 是否自适应菜单项尺寸：容器四边保持 16px padding，仅空间不足时压缩菜单项 */
   autoHeight?: boolean
+  /** 深色模式背景色；浅色模式始终为白色 */
   backgroundColor?: string
+  /** 深色模式文字颜色 */
   textColor?: string
+  /** 深色模式激活文字颜色 */
   activeTextColor?: string
   collapse?: boolean
+  /** 明暗外观：light 为白色背景，dark 为深色背景 */
   variant?: 'dark' | 'light'
+  /** 主题强调色，不改变明暗外观 */
   theme?: SybzComponentTheme
   header?: SMenuHeaderConfig
   /** @deprecated 请使用 header */

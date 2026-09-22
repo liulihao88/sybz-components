@@ -49,8 +49,6 @@ let mutationObserver: MutationObserver | undefined
 let resizeFrame = 0
 const baseRowHeight = computed(() => {
   if (isCollapsed.value) return 64
-  if (['shijingshan', 'sybz'].includes(mergedProps.value.theme)) return 44
-  if (mergedProps.value.theme === 'chenghua') return 52
   return mergedProps.value.variant === 'light' ? 52 : 64
 })
 
@@ -91,7 +89,7 @@ const menuListStyle = computed(() =>
     ? {
         '--s-menu-fit-row': `${menuRowHeight.value}px`,
         '--s-menu-fit-padding': `${menuVerticalPadding.value}px`,
-        '--s-menu-fit-font': `${(mergedProps.value.theme === 'sybz' || mergedProps.value.theme === 'shijingshan' ? 14 : 16) * menuDensity.value}px`,
+        '--s-menu-fit-font': `${16 * menuDensity.value}px`,
         '--s-menu-fit-icon': `${20 * menuDensity.value}px`,
       }
     : undefined,
@@ -156,29 +154,30 @@ const openedMenus = computed(() =>
 )
 const resolvedHeader = computed(() => mergedProps.value.header || mergedProps.value.headerConfig)
 const resolvedFooter = computed(() => mergedProps.value.footer)
-const menuColors = computed(() => {
-  if (mergedProps.value.theme === 'chenghua') {
-    return { background: '#ffffff', text: '#000000', activeText: '#165dff' }
-  }
-  if (mergedProps.value.theme === 'shijingshan') {
-    return { background: '#1e293b', text: '#ffffff', activeText: '#ffffff' }
-  }
-  if (mergedProps.value.theme === 'sybz') {
-    return { background: 'var(--s-sybz-nav-bg)', text: '#ffffff', activeText: '#ffffff' }
-  }
-  if (mergedProps.value.variant === 'light') {
-    return { background: '#ffffff', text: '#536f8d', activeText: '#008f83' }
-  }
-  return {
-    background: mergedProps.value.backgroundColor,
-    text: mergedProps.value.textColor,
-    activeText: mergedProps.value.activeTextColor,
-  }
-})
+const themeAccent = computed(
+  () =>
+    ({
+      default: '#2f6fed',
+      chenghua: '#165dff',
+      shijingshan: '#2a6df4',
+      sybz: 'var(--s-sybz-primary)',
+    })[mergedProps.value.theme] || '#2f6fed',
+)
+const menuColors = computed(() =>
+  mergedProps.value.variant === 'light'
+    ? { background: '#ffffff', text: '#334155', activeText: themeAccent.value }
+    : {
+        background: mergedProps.value.backgroundColor,
+        text: mergedProps.value.textColor,
+        activeText: mergedProps.value.activeTextColor,
+      },
+)
 const rootStyle = computed(() => ({
   width: processWidth(isCollapsed.value ? 64 : mergedProps.value.width, true),
   height: processWidth(mergedProps.value.height, true),
   '--s-menu-bg': menuColors.value.background,
+  '--s-menu-text': menuColors.value.text,
+  '--s-menu-accent': themeAccent.value,
 }))
 const toggleCollapse = () => {
   isCollapsed.value = !isCollapsed.value
@@ -195,7 +194,6 @@ const handleSelect = (...args: any[]) => {
     class="s-menu"
     :class="[
       `s-menu--${mergedProps.variant}`,
-      `s-menu--theme-${mergedProps.theme}`,
       { 'is-collapse': isCollapsed, 'is-auto-height': mergedProps.autoHeight },
     ]"
     :style="rootStyle"
@@ -421,7 +419,7 @@ const handleSelect = (...args: any[]) => {
     display: flex;
     align-items: center;
     gap: 14px;
-    color: #fff;
+    color: var(--s-menu-text);
   }
   &__brand-icon {
     display: grid;
@@ -430,7 +428,7 @@ const handleSelect = (...args: any[]) => {
     flex: none;
     place-items: center;
     border-radius: 50%;
-    background: #07c160;
+    background: var(--s-menu-accent);
     color: #fff;
   }
   &__brand-icon > .el-icon {
@@ -462,13 +460,13 @@ const handleSelect = (...args: any[]) => {
     gap: 12px;
     border: 0;
     border-radius: 10px;
-    background: #216bd8;
+    background: var(--s-menu-accent);
     color: #fff;
     font-size: 18px;
     cursor: pointer;
   }
   &__action:hover {
-    background: #175ec8;
+    background: var(--s-menu-accent);
   }
   &__action > .el-icon {
     font-size: 22px;
@@ -477,7 +475,7 @@ const handleSelect = (...args: any[]) => {
     display: flex;
     gap: 12px;
     align-items: center;
-    color: #fff;
+    color: var(--s-menu-text);
   }
   &__account > span {
     display: grid;
@@ -486,7 +484,7 @@ const handleSelect = (...args: any[]) => {
     flex: none;
     place-items: center;
     border-radius: 50%;
-    background: #294057;
+    background: color-mix(in srgb, var(--s-menu-text) 18%, transparent);
     font-size: 20px;
     font-weight: 700;
   }
@@ -508,7 +506,8 @@ const handleSelect = (...args: any[]) => {
   }
 
   :deep(.el-menu-item.is-active) {
-    background: #2f6fed;
+    background: var(--s-menu-accent);
+    color: #fff;
   }
   :deep(.el-icon) {
     font-size: 20px;
@@ -528,13 +527,13 @@ const handleSelect = (...args: any[]) => {
       border: 1px solid #b9cee4;
       border-radius: 10px;
       background: #fff;
-      color: #285b8d;
+      color: var(--s-menu-accent);
     }
     .s-menu__account {
       color: #193957;
     }
     .s-menu__account > span {
-      background: #e8f2ff;
+      background: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
     }
 
     :deep(.el-menu-item),
@@ -544,183 +543,46 @@ const handleSelect = (...args: any[]) => {
       font-size: 15px;
     }
     :deep(.el-menu-item.is-active) {
-      border-left: 4px solid #16b8a6;
-      background: #e8f7f5;
-      color: #008f83;
+      border-left: 4px solid var(--s-menu-accent);
+      background: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
+      color: var(--s-menu-accent);
     }
-    :deep(.el-menu-item:hover),
+    :deep(.el-menu-item:not(.is-active):hover),
     :deep(.el-sub-menu__title:hover) {
-      background: #f1f6fb;
+      background: color-mix(in srgb, var(--s-menu-accent) 5%, #fff);
     }
   }
 
-  &--theme-chenghua {
-    border: 1px solid #e5e7eb;
-    font-family: 'PingFang SC', sans-serif;
-
+  &--dark {
     .s-menu__header,
     .s-menu__footer {
-      border-color: #e5e7eb;
-    }
-    .s-menu__brand {
-      color: #000;
-    }
-    .s-menu__brand-icon {
-      border-radius: 12px;
-      background: linear-gradient(135deg, #1e6efc, #00c5e7);
-    }
-    .s-menu__action {
-      height: 44px;
-      border-radius: 8px;
-      background: #165dff;
-      font-size: 16px;
-      font-weight: 500;
-    }
-    .s-menu__action:hover {
-      background: #0e4ee8;
-    }
-    .s-menu__account {
-      color: #000;
-    }
-    .s-menu__account > span {
-      background: #e8f0ff;
-      color: #165dff;
-    }
-
-    :deep(.el-menu-item),
-    :deep(.el-sub-menu__title) {
-      height: 44px;
-      margin: 4px 0;
-      color: #000;
-      font-size: 16px;
+      border-color: #294057;
     }
     :deep(.el-menu-item.is-active) {
-      background: #e8f0ff;
-      color: #165dff;
-      font-weight: 500;
+      background: var(--s-menu-accent);
+      color: #fff;
     }
-    :deep(.el-menu-item:hover),
+    :deep(.el-menu-item:not(.is-active):hover),
     :deep(.el-sub-menu__title:hover) {
-      background: #f3f7ff;
+      background: color-mix(in srgb, var(--s-menu-accent) 20%, var(--s-menu-bg));
     }
   }
-
-  &--theme-shijingshan {
-    border: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-
-    .s-menu__header,
-    .s-menu__footer {
-      border-color: #334155;
-    }
-    .s-menu__brand {
-      min-height: 40px;
-      color: #fff;
-    }
-    .s-menu__brand-icon {
-      width: 32px;
-      height: 32px;
-      background: #2a6df4;
-    }
-    .s-menu__brand strong {
-      font-size: 18px;
-    }
-    .s-menu__action {
-      height: 40px;
-      margin: 16px 0 0;
-      border-radius: 8px;
-      background: #2a6df4;
-      font-size: 16px;
-      font-weight: 500;
-    }
-    .s-menu__action:hover {
-      background: #1e5fdc;
-    }
+  &--light {
+    .s-menu__brand,
     .s-menu__account {
-      color: #fff;
+      color: var(--s-menu-text);
     }
-    .s-menu__account > span {
-      width: 32px;
-      height: 32px;
-      background: #334155;
-      font-size: 16px;
-    }
-
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
-      height: 40px;
-      margin: 2px 0;
-      border-radius: 4px;
-      color: #fff;
-      font-size: 14px;
+      color: var(--s-menu-text);
     }
     :deep(.el-menu-item.is-active) {
-      background: #2a6df4;
-      color: #fff;
-      font-weight: 600;
+      background: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
+      color: var(--s-menu-accent);
     }
-    :deep(.el-menu-item:hover),
+    :deep(.el-menu-item:not(.is-active):hover),
     :deep(.el-sub-menu__title:hover) {
-      background: #334155;
-    }
-  }
-  &--theme-sybz {
-    border: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-
-    .s-menu__header,
-    .s-menu__footer {
-      border-color: var(--s-sybz-blue-700);
-    }
-    .s-menu__brand {
-      min-height: 40px;
-      color: #fff;
-    }
-    .s-menu__brand-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--s-sybz-primary);
-    }
-    .s-menu__brand strong {
-      font-size: 18px;
-    }
-    .s-menu__action {
-      height: 40px;
-      margin: 16px 0 0;
-      border-radius: 8px;
-      background: var(--s-sybz-primary);
-      font-size: 16px;
-      font-weight: 500;
-    }
-    .s-menu__action:hover {
-      background: var(--s-sybz-primary-hover);
-    }
-    .s-menu__account {
-      color: #fff;
-    }
-    .s-menu__account > span {
-      width: 32px;
-      height: 32px;
-      background: var(--s-sybz-blue-700);
-      font-size: 16px;
-    }
-
-    :deep(.el-menu-item),
-    :deep(.el-sub-menu__title) {
-      height: 40px;
-      margin: 2px 0;
-      border-radius: 4px;
-      color: #fff;
-      font-size: 14px;
-    }
-    :deep(.el-menu-item.is-active) {
-      background: var(--s-sybz-primary);
-      color: #fff;
-      font-weight: 600;
-    }
-    :deep(.el-menu-item:hover),
-    :deep(.el-sub-menu__title:hover) {
-      background: var(--s-sybz-blue-700);
+      background: color-mix(in srgb, var(--s-menu-accent) 5%, #fff);
     }
   }
 }
