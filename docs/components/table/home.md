@@ -12,12 +12,6 @@
 
 <ApiIntro />
 
-### all
-
-:::demo 展示all配置。基础写法：`<el-card shadow="never"></el-card>`。
-table/all
-:::
-
 ### 基础用法
 
 :::demo 展示基础用法。基础写法：`<s-table :columns="columns" :data="data" :loading="loading"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`；`loading` 可选 `true / false`，默认值 `false`。
@@ -28,6 +22,14 @@ table/base
 
 :::demo 展示表头配置和表格数据均由后端返回，前端补充列样式、状态插槽和容器样式。基础写法：`<s-table :columns="columns" :data="data" :loading="loading" :show-page="false"></s-table>`。属性：`columns` 类型 `array`，默认值 `[]`；`data` 类型 `array`，默认值 `[]`；`loading` 可选 `true / false`，默认值 `false`；`show-page` 可选 `true / false`，默认值 `true`；列样式使用 `className` 和 `labelClassName`，默认值未设置。
 table/backend
+:::
+
+### 外层边框（border 默认值：true）
+
+设置 `:border="false"` 可去掉表格和分页区域的外层边框。基础写法：`<s-table :columns="columns" :data="data" :border="false" />`。
+
+:::demo 属性：`border` 类型 `boolean`，可选值 `true / false`，默认值 `true`。
+table/base/border
 :::
 
 ### 成华主题
@@ -130,12 +132,10 @@ table/operator
 table/compare
 :::
 
-### sybz 主题（theme 默认值：default）
+### all
 
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-table/sybzTheme
+:::demo 展示all配置。基础写法：`<el-card shadow="never"></el-card>`。
+table/all
 :::
 
 ### 自定义空状态
@@ -157,6 +157,7 @@ table/empty
 |      `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string  | `default`      |
 |   `background`    | 表格自身及表体背景色，支持 CSS 颜色值                          | string  | -              |
 |     `simple`      | 是否使用简洁表格样式，去除单元格左右边框                       | boolean | `false`        |
+|     `border`      | 是否显示表格外层边框                                           | boolean | `true`         |
 |    `pageSize`     | 每页条数                                                       | number  | `30`           |
 |   `pageNumber`    | 当前页码                                                       | number  | `1`            |
 |    `pageSizes`    | 分页器可选每页条数                                             | array   | `[10, 30, 50]` |

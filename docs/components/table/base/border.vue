@@ -18,5 +18,5 @@ const columns: TableColumnList = [
 </script>
 
 <template>
-  <s-table :data="tableData" :columns="columns" border />
+  <s-table :data="tableData" :columns="columns" :border="false" simple />
 </template>

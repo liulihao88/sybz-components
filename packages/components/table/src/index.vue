@@ -72,6 +72,8 @@ interface TableProps {
   background?: string
   /** 是否使用简洁表格样式，去除单元格左右边框 */
   simple?: boolean
+  /** 是否显示表格外层边框 */
+  border?: boolean
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]
@@ -96,6 +98,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   theme: 'default',
   background: undefined,
   simple: false,
+  border: true,
   pageSize: 30,
   pageNumber: 1,
   pageSizes: () => [10, 30, 50],
@@ -915,6 +918,7 @@ const tableClass = computed(() => ({
   's-table--fluid-height': !!fluidHeight.value,
   's-table--custom-background': !!mergedProps.value.background,
   's-table--simple': mergedProps.value.simple,
+  's-table--no-border': !mergedProps.value.border,
   's-table--chenghua': mergedProps.value.theme === 'chenghua',
   's-table--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-table--sybz': mergedProps.value.theme === 'sybz',
@@ -976,7 +980,7 @@ defineExpose({
       :header-cell-style="tableHeaderCellStyle"
       v-bind="{
         stripe: true,
-        border: true,
+        border: mergedProps.border,
         ...tableAttrs,
       }"
       @selection-change="handleTableSelectionChange"
@@ -1387,6 +1391,14 @@ defineExpose({
 
 .s-table {
   box-shadow: none !important;
+
+  &.s-table--no-border {
+    border: 0 !important;
+
+    .page-wrap {
+      border: 0 !important;
+    }
+  }
 
   &.s-table--custom-background {
     :deep(.el-table),

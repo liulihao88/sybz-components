@@ -151,6 +151,8 @@ export interface STableProps<Row extends TableRow = TableRow> {
   background?: string
   /** 是否使用简洁表格样式，去除单元格左右边框 */
   simple?: boolean
+  /** 是否显示表格外层边框 */
+  border?: boolean
   pageSize?: number
   pageNumber?: number
   pageSizes?: number[]

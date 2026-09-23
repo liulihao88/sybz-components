@@ -1203,7 +1203,7 @@ const ELEMENT_WRAPPER_CONFIGS = {
     instances: [{ name: 'ElTableInstance', component: 'ElTable' }],
     inheritedProps: [{ type: "ElTableInstance['$props']" }],
     description:
-      'Element Plus Table；s-table 自有属性包括主题、背景色、disabled（禁用分页和操作按钮）、分页、选择和列配置。',
+      'Element Plus Table；s-table 自有属性包括主题、背景色、border（外层边框）、disabled（禁用分页和操作按钮）、分页、选择和列配置。',
   },
   tooltip: {
     valueImports: ['ElTooltip'],

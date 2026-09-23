@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { $toast } from '@sybz-components/utils'
 
 const data = ref([
   { name: '张三', address: '北京市朝阳区', status: 0 },
   { name: '李四', address: '上海市浦东新区', status: 1 },
   {
     name: '王五',
-    address:
-      '河南省项城市河南省项城市河南省项城市河南省项城市河南省项城市河南省项城市河南省项城市河南省项城市河南省项城市',
+    address: '河南省郑州市',
     status: 0,
   },
 ])
