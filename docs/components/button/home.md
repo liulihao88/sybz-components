@@ -20,7 +20,7 @@ button/base
 
 #### chenghua主题示例
 
-:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。`variant` 可选 `'' / outline / gradient`，默认值 `''`；`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。`size` 可选 `small / default / large`，默认值 `default`，对应高度为 `32px / 40px / 48px`；`variant` 可选 `'' / outline / gradient`，默认值 `''`；`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
 button/chenghua/base
 :::
 
@@ -28,7 +28,7 @@ button/chenghua/base
 
 #### shijingshan主题示例
 
-:::demo 展示石景山主题按钮。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
+:::demo 展示石景山主题按钮（`gulou` 使用同一套尺寸规则）。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。`size` 可选 `small / default / large`，默认值 `default`，对应高度为 `32px / 40px / 48px`；`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
 button/shijingshan/base
 :::
 
@@ -117,7 +117,7 @@ button/sybzTheme
 | `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                    | `false`   |
 |          `theme`           | 主题样式                            | `'default' \| 'chenghua' \| 'shijingshan'` | `default` |
 |         `variant`          | 主题样式变体                        | `'' \| 'outline' \| 'gradient'`            | `default` |
-|           `size`           | 按钮尺寸                            | `'small' \| 'default' \| 'large'`          | `''`      |
+|           `size`           | 按钮尺寸（高度 32px / 40px / 48px） | `'small' \| 'default' \| 'large'`          | `default` |
 |          `width`           | 按钮宽度，支持 `processWidth` 写法  | string / number                            | `''`      |
 |          `height`          | 按钮高度，支持 `processWidth` 写法  | string / number                            | `''`      |
 |      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                    | `false`   |

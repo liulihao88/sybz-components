@@ -31,6 +31,7 @@
 // All themed buttons share this contract. A theme only needs to provide the
 // --s-theme-* tokens; component-specific theme files can add visual variants.
 .s-button--theme.s-button--theme.s-button--theme {
+  --el-button-size: 40px;
   --el-button-font-weight: var(--s-theme-button-font-weight, 500);
   --el-button-border-radius: var(--s-theme-radius, 8px);
   border-radius: var(--s-theme-radius, 8px);
@@ -43,10 +44,27 @@
     transform 0.28s ease;
 
   min-height: 40px;
+  height: 40px;
   padding: 8px 16px;
   font-size: 16px;
   font-weight: 500;
   line-height: 1;
+
+  &.el-button--small {
+    --el-button-size: 32px;
+    min-height: 32px;
+    height: 32px;
+    padding: 5px 12px;
+    font-size: 14px;
+  }
+
+  &.el-button--large {
+    --el-button-size: 48px;
+    min-height: 48px;
+    height: 48px;
+    padding: 12px 20px;
+    font-size: 16px;
+  }
 
   &.is-link,
   &.is-text {
@@ -63,6 +81,7 @@
     --el-button-disabled-bg-color: transparent;
     --el-button-disabled-border-color: transparent;
     --el-button-disabled-text-color: var(--s-theme-text-muted, #9ca3af);
+    height: auto;
     min-height: auto;
     padding: 0 8px;
     border-radius: 0;
