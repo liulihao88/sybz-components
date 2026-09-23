@@ -13,5 +13,5 @@ const data = ref({
 </script>
 
 <template>
-  <s-json v-model:data="data" height="360" />
+  <s-json v-model="data" height="360" />
 </template>

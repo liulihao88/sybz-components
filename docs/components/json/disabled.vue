@@ -9,5 +9,5 @@ const data = ref({
 </script>
 
 <template>
-  <s-json v-model:data="data" disabled />
+  <s-json v-model="data" disabled />
 </template>
