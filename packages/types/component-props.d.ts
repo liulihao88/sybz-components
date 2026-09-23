@@ -229,6 +229,8 @@ export interface SDialogSelfProps {
   title?: string
   subTitle?: string
   width?: string | number
+  /** 整个弹窗或抽屉的高度，数字按 px 处理 */
+  height?: string | number
   theme?: SDialogTheme
   cancel?: SDialogHandler
   cancelText?: string

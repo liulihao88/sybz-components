@@ -159,6 +159,14 @@ app.use(SybzComponents, {
 dialog/contentLoading
 :::
 
+### 自定义高度（height 默认值：未设置）
+
+`height` 控制整个弹窗或抽屉的高度，包含标题、内容和底部按钮；内容超出时在正文区域滚动。基础写法：`<s-dialog v-model="isShow" :height="420">内容</s-dialog>`。数字及数字字符串按 px 处理，也支持 `vh`、`%` 和 `calc()` 等 CSS 长度。设置高度的弹窗会垂直居中，最高为 `calc(100dvh - 10px)`；抽屉最高为 `100dvh`。与 `maximizeHeight` 同时设置时以 `height` 为准，`fullscreen` 时忽略 `height`。
+
+:::demo 属性：`height` 类型 `string | number`，默认值未设置；`mode` 可选 `dialog / drawer`，默认值 `dialog`。
+dialog/height
+:::
+
 ### 属性
 
 |      属性名       | 说明                                                                                          | 类型                                          | 默认值    |
@@ -166,6 +174,7 @@ dialog/contentLoading
 |       title       | 顶部title                                                                                     | string                                        | 提示      |
 |     subTitle      | 顶部二级标题，显示在 title 下方，颜色稍淡                                                     | string                                        | ''        |
 |       width       | 弹框宽度；当 `mode="drawer"` 时用于控制抽屉宽度                                               | string / number                               | ''        |
+|      height       | 整个弹窗或抽屉的高度，数字按 px 处理，内容超出时正文滚动                                      | string / number                               | -         |
 |       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |
 |       mode        | 展示形态，可选 `dialog` / `drawer`                                                            | string                                        | `dialog`  |
 |      loading      | 是否在内容区域显示加载状态                                                                    | boolean                                       | `false`   |

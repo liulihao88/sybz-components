@@ -13,7 +13,7 @@ type ElDialogInstance = InstanceType<typeof ElDialog>
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
 
 /**
- * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及内容区 loading、maximizeHeight 等 sybz 扩展属性。
+ * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 height、内容区 loading、maximizeHeight 等 sybz 扩展属性。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Dialog/Drawer 的公开属性。
  */
@@ -30,6 +30,8 @@ export type SDialogComponent = {
       title?: string
       subTitle?: string
       width?: string | number
+      /** 整个弹窗或抽屉的高度，数字按 px 处理 */
+      height?: string | number
       theme?: SDialogTheme
       cancel?: SDialogHandler
       cancelText?: string
@@ -54,6 +56,7 @@ export type SDialogComponent = {
       | 'title'
       | 'subTitle'
       | 'width'
+      | 'height'
       | 'theme'
       | 'cancel'
       | 'cancelText'
@@ -78,6 +81,7 @@ export type SDialogComponent = {
         | 'title'
         | 'subTitle'
         | 'width'
+        | 'height'
         | 'theme'
         | 'cancel'
         | 'cancelText'

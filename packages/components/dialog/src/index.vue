@@ -11,6 +11,7 @@
         draggable: true,
         ...$attrs,
         class: panelClass,
+        style: [attrs.style, panelHeightStyle],
       }"
       @close="handleClose"
     >
@@ -123,6 +124,8 @@ interface DialogProps {
   title?: string
   subTitle?: string
   width?: string | number
+  /** 整个弹窗或抽屉的高度，数字按 px 处理 */
+  height?: string | number
   theme?: SDialogTheme
   cancel?: DialogAction
   cancelText?: string
@@ -148,6 +151,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   target: undefined,
   subTitle: '',
   width: '',
+  height: undefined,
   theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan, sybz, gulou
   cancel: '',
   cancelText: '取消',
@@ -198,6 +202,16 @@ const dialogTitle = computed(() => confirmSemantic.value.title)
 const dialogConfirmText = computed(() => confirmSemantic.value.confirmButtonText)
 const isFullscreen = computed(() => attrs.fullscreen === true || attrs.fullscreen === '')
 const panelWidth = computed(() => processWidth(mergedProps.value.width, true))
+const panelHeight = computed(() => processWidth(mergedProps.value.height, true))
+const hasPanelHeight = computed(() => !!panelHeight.value && !isFullscreen.value)
+const panelHeightStyle = computed(() =>
+  hasPanelHeight.value
+    ? {
+        height: panelHeight.value,
+        maxHeight: isDrawer.value ? '100dvh' : 'calc(100dvh - 10px)',
+      }
+    : {},
+)
 
 const defaultPanelAttrs = computed(() => {
   return isDrawer.value
@@ -206,6 +220,7 @@ const defaultPanelAttrs = computed(() => {
       }
     : {
         width: panelWidth.value || '640px',
+        ...(hasPanelHeight.value ? { alignCenter: true } : {}),
       }
 })
 
@@ -213,8 +228,11 @@ const panelClass = computed(() => {
   return [
     attrs.class,
     mergedProps.value.loading ? 's-dialog__content-loading' : '',
+    hasPanelHeight.value ? 's-dialog__fixed-height' : '',
     isDrawer.value ? 's-dialog__drawer' : '',
-    !isDrawer.value && !isFullscreen.value && mergedProps.value.maximizeHeight ? 's-dialog__maximize-height' : '',
+    !isDrawer.value && !isFullscreen.value && !hasPanelHeight.value && mergedProps.value.maximizeHeight
+      ? 's-dialog__maximize-height'
+      : '',
     isDrawer.value && mergedProps.value.theme === 'chenghua' ? 's-dialog__drawer--chenghua' : '',
     isDrawer.value && mergedProps.value.theme === 'shijingshan' ? 's-dialog__drawer--shijingshan' : '',
     isDrawer.value && mergedProps.value.theme === 'sybz' ? 's-dialog__drawer--sybz' : '',
@@ -374,6 +392,34 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
+:global(.s-dialog__fixed-height) {
+  display: flex;
+  flex-direction: column;
+  min-height: 0 !important;
+  overflow: hidden;
+}
+
+:global(.s-dialog__fixed-height .el-dialog__body),
+:global(.s-dialog__fixed-height .el-drawer__body) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+:global(.s-dialog__fixed-height .dialog_slot_box) {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+}
+
+:global(.s-dialog__fixed-height .dialog_slot_box--fill) {
+  height: auto;
+  overflow: hidden;
+}
+
 :global(.s-dialog__content-loading .el-dialog__body),
 :global(.s-dialog__content-loading .el-drawer__body) {
   display: flex;
@@ -534,7 +580,6 @@ onBeforeUnmount(() => {
     padding: 16px;
     .dialog_slot_box {
       min-height: 20px;
-      max-height: calc(100vh - 30vh - 92px);
       overflow-y: auto;
     }
     .dialog_slot_box--fill {
