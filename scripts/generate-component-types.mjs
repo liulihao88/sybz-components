@@ -428,7 +428,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       exportedComponentTypeName: 'SMarkdownComponent',
       tagName: 's-markdown',
       description:
-        's-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。',
+        's-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。',
       publicPropsTypeName: 'SMarkdownPublicProps',
       useDefaultExportForGlobal: true,
       propsImportPath: resolve(rootDir, 'packages/components/markdown/src/types.ts'),

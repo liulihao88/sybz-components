@@ -50,40 +50,42 @@ markdown/example
 markdown/html
 :::
 
-### 编辑与实时预览（默认 `editable=false`、`disabled=false`、`language='zh-CN'`、`theme='light'`）
+### 编辑与实时预览（默认 `editable=false`、`disabled=false`、`width='100%'`、`language='zh-CN'`、`theme='light'`）
 
 开启 `editable` 后使用内置的 `md-editor-v3`，通过 `v-model` 绑定源文本。工具栏、快捷键、实时预览、全屏、目录、图片上传、代码高亮、Mermaid、KaTeX、自定义工具栏和全部公开方法均由编辑器提供。`md-editor-v3` 已作为 `sybz-components` 的运行时依赖，业务项目不需要单独安装。
 
-`editable` 可选 `true / false`，默认值 `false`；`disabled` 可选 `true / false`，默认值 `false`，开启后文本和工具栏均不可操作；`language` 默认值 `zh-CN`；`theme` 可选 `light / dark`，默认值 `light`；`previewTheme` 可选 `default / github / vuepress / mk-cute / smart-blue / cyanosis`，默认值 `default`；`showCodeRowNumber` 可选 `true / false`，默认值 `false`。其他属性、事件、插槽与暴露方法保持 `md-editor-v3@4.21.3` 的用法。
+`editable` 可选 `true / false`，默认值 `false`；`disabled` 可选 `true / false`，默认值 `false`，开启后文本和左侧编辑工具不可操作，右侧预览、分栏和全屏工具仍可使用；`width`、`height` 支持 CSS 尺寸字符串或数字，数字按 `px` 处理，`width` 默认值 `100%`，编辑模式未设置 `height` 时沿用编辑器默认高度；`language` 默认值 `zh-CN`；`theme` 可选 `light / dark`，默认值 `light`；`previewTheme` 可选 `default / github / vuepress / mk-cute / smart-blue / cyanosis`，默认值 `default`；`showCodeRowNumber` 可选 `true / false`，默认值 `false`。其他属性、事件、插槽与暴露方法保持 `md-editor-v3@4.21.3` 的用法。
 
-:::demo 基础写法：`<s-markdown v-model="source" editable />`。示例还展示了 `language="zh-CN"`、`preview-theme="github"`、`:show-code-row-number="true"` 和 `@on-save`。
+:::demo 基础写法：`<s-markdown v-model="source" editable />`。属性：`editable`、`disabled` 可选 `true / false`，默认值均为 `false`；`width` 默认值 `100%`，`height` 默认值为编辑器的 `500px`，示例设置 `width="100%"`、`:height="420"`；还展示了 `language="zh-CN"`、`:show-code-row-number="true"` 和 `@on-save`。
 markdown/editable
 :::
 
 ### API
 
-| 属性名           | 说明                                     | 类型 / 可选值        | 默认值      |
-| ---------------- | ---------------------------------------- | -------------------- | ----------- |
-| `modelValue`     | `v-model` 绑定的源文本，优先于 `source`  | `string`             | `undefined` |
-| `source`         | Markdown 或 HTML 源文本                  | `string`             | `''`        |
-| `editable`       | 是否显示编辑区并实时预览                 | `true / false`       | `false`     |
-| `disabled`       | 编辑模式下是否禁用文本和工具栏操作       | `true / false`       | `false`     |
-| `contentType`    | 源文本解析模式，HTML 模式跳过 Markdown   | `markdown / html`    | `markdown`  |
-| `allowHtml`      | 是否解析源文本中的原始 HTML              | `true / false`       | `true`      |
-| `sanitize`       | 预览时是否过滤；编辑时可传 HTML 过滤函数 | `boolean / function` | `true`      |
-| `breaks`         | 是否把普通换行转换为 `<br>`              | `true / false`       | `false`     |
-| `linkify`        | 是否自动识别 URL                         | `true / false`       | `true`      |
-| `typographer`    | 是否启用排版替换                         | `true / false`       | `true`      |
-| `highlight`      | 是否使用 Prism 高亮常用语言              | `true / false`       | `true`      |
-| `copyCode`       | 是否显示代码复制按钮                     | `true / false`       | `true`      |
-| `mermaid`        | 是否渲染 `mermaid` 代码块                | `true / false`       | `true`      |
-| `math`           | 是否通过 KaTeX 渲染 `$...$` 与 `$$...$$` | `true / false`       | `true`      |
-| `headingAnchors` | 是否为标题生成稳定 ID                    | `true / false`       | `true`      |
-| `externalLinks`  | 是否让 HTTP(S) 链接在新窗口安全打开      | `true / false`       | `true`      |
-| `baseUrl`        | 相对链接和图片的解析基准地址             | `string`             | `''`        |
-| `imageLazy`      | 是否为图片启用懒加载和异步解码           | `true / false`       | `true`      |
-| `imagePreview`   | 是否允许点击图片打开全视口操作预览       | `true / false`       | `true`      |
-| `emptyText`      | 无内容时显示的文字                       | `string`             | `''`        |
+| 属性名           | 说明                                     | 类型 / 可选值        | 默认值       |
+| ---------------- | ---------------------------------------- | -------------------- | ------------ |
+| `modelValue`     | `v-model` 绑定的源文本，优先于 `source`  | `string`             | `undefined`  |
+| `source`         | Markdown 或 HTML 源文本                  | `string`             | `''`         |
+| `editable`       | 是否显示编辑区并实时预览                 | `true / false`       | `false`      |
+| `disabled`       | 编辑模式下是否禁用文本和工具栏操作       | `true / false`       | `false`      |
+| `width`          | 组件宽度，数字按 px 处理                 | `string / number`    | `100%`       |
+| `height`         | 组件高度，数字按 px 处理                 | `string / number`    | 编辑时 500px |
+| `contentType`    | 源文本解析模式，HTML 模式跳过 Markdown   | `markdown / html`    | `markdown`   |
+| `allowHtml`      | 是否解析源文本中的原始 HTML              | `true / false`       | `true`       |
+| `sanitize`       | 预览时是否过滤；编辑时可传 HTML 过滤函数 | `boolean / function` | `true`       |
+| `breaks`         | 是否把普通换行转换为 `<br>`              | `true / false`       | `false`      |
+| `linkify`        | 是否自动识别 URL                         | `true / false`       | `true`       |
+| `typographer`    | 是否启用排版替换                         | `true / false`       | `true`       |
+| `highlight`      | 是否使用 Prism 高亮常用语言              | `true / false`       | `true`       |
+| `copyCode`       | 是否显示代码复制按钮                     | `true / false`       | `true`       |
+| `mermaid`        | 是否渲染 `mermaid` 代码块                | `true / false`       | `true`       |
+| `math`           | 是否通过 KaTeX 渲染 `$...$` 与 `$$...$$` | `true / false`       | `true`       |
+| `headingAnchors` | 是否为标题生成稳定 ID                    | `true / false`       | `true`       |
+| `externalLinks`  | 是否让 HTTP(S) 链接在新窗口安全打开      | `true / false`       | `true`       |
+| `baseUrl`        | 相对链接和图片的解析基准地址             | `string`             | `''`         |
+| `imageLazy`      | 是否为图片启用懒加载和异步解码           | `true / false`       | `true`       |
+| `imagePreview`   | 是否允许点击图片打开全视口操作预览       | `true / false`       | `true`       |
+| `emptyText`      | 无内容时显示的文字                       | `string`             | `''`         |
 
 开启 `editable` 后还支持 `md-editor-v3` 的全部属性，包括 `theme`、`language`、`previewTheme`、`codeTheme`、`toolbars`、`toolbarsExclude`、`footers`、`placeholder`、`preview`、`htmlPreview`、`pageFullscreen`、`showCodeRowNumber`、`noMermaid`、`noKatex`、`onSave` 和 `onUploadImg` 等，属性名称、可选值和默认值均与 `md-editor-v3@4.21.3` 一致。
 

@@ -12,8 +12,19 @@ const source = ref(`# 可编辑 Markdown
 const handleSave = (value: string) => {
   console.log('保存 Markdown：', value)
 }
+const disabled = ref(false)
 </script>
 
 <template>
-  <s-markdown v-model="source" editable language="zh-CN" :show-code-row-number="true" @on-save="handleSave" />
+  <s-radio v-model="disabled" type="boolean"></s-radio>
+  <s-markdown
+    v-model="source"
+    editable
+    language="zh-CN"
+    :show-code-row-number="true"
+    :disabled="disabled"
+    width="100%"
+    :height="420"
+    @on-save="handleSave"
+  />
 </template>

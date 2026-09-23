@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Download, FullScreen, RefreshLeft, RefreshRight, ZoomIn, ZoomOut } from '@element-plus/icons-vue'
+import { processWidth } from '@sybz-components/utils'
 import DOMPurify from 'dompurify'
 import { ElIcon, ElImageViewer } from 'element-plus'
 import { MdEditor } from 'md-editor-v3'
@@ -43,6 +44,7 @@ const props = withDefaults(defineProps<MarkdownProps>(), {
   source: '',
   editable: false,
   disabled: false,
+  width: '100%',
   contentType: 'markdown',
   allowHtml: true,
   sanitize: true,
@@ -75,6 +77,10 @@ const instanceId = ++markdownInstanceSeed
 let renderVersion = 0
 
 const currentSource = computed(() => props.modelValue ?? props.source)
+const componentStyle = computed(() => ({
+  width: processWidth(props.width, true),
+  height: processWidth(props.height, true),
+}))
 
 const slugify = (text: string) =>
   text
@@ -366,7 +372,7 @@ const handleKeydown = (event: KeyboardEvent) => {
 const handleEditorChange = (value: string) => emit('update:modelValue', value)
 
 const preventDisabledToolbarAction = (event: Event) => {
-  if (!props.disabled || !(event.target as HTMLElement).closest('.md-editor-toolbar-wrapper')) return
+  if (!props.disabled || !(event.target as HTMLElement).closest('.md-editor-toolbar-left')) return
   event.preventDefault()
   event.stopImmediatePropagation()
 }
@@ -430,7 +436,8 @@ onBeforeUnmount(() => {
     ref="editorRef"
     v-bind="$attrs"
     class="s-markdown-editor"
-    :class="{ 'is-disabled': disabled }"
+    :class="disabled ? 'is-disabled' : ''"
+    :style="componentStyle"
     :model-value="currentSource"
     :disabled="disabled"
     :sanitize="typeof sanitize === 'function' ? sanitize : undefined"
@@ -448,6 +455,7 @@ onBeforeUnmount(() => {
     v-bind="$attrs"
     class="s-markdown"
     :class="{ 'is-image-preview-enabled': imagePreview }"
+    :style="componentStyle"
     @click="handleClick"
     @keydown="handleKeydown"
     @load.capture="handleImageLoadState"
@@ -529,10 +537,33 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped lang="scss">
-.s-markdown-editor.is-disabled :deep(.md-editor-toolbar-wrapper) {
+.s-markdown-editor.is-disabled :deep(.md-editor-toolbar-left) {
   pointer-events: none;
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.s-markdown-editor.is-disabled :deep(.cm-scroller .cm-content) {
+  margin: 10px;
+  min-height: calc(100% - 20px);
+}
+
+.s-markdown-editor.is-disabled :deep(.cm-scroller .cm-gutters + .cm-content) {
+  margin: 0;
+  min-height: 100%;
+}
+
+.s-markdown-editor.is-disabled :deep(.md-editor-input-wrapper) {
+  position: relative;
+}
+
+.s-markdown-editor.is-disabled :deep(.md-editor-input-wrapper::after) {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  background-color: color-mix(in srgb, var(--el-disabled-bg-color) 72%, transparent);
+  cursor: not-allowed;
+  content: '';
 }
 
 .s-markdown {
