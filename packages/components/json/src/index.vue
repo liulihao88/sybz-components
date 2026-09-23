@@ -7,6 +7,7 @@ import { indentUnit } from '@codemirror/language'
 import { linter } from '@codemirror/lint'
 import { EditorState } from '@codemirror/state'
 import { EditorView, placeholder as editorPlaceholder } from '@codemirror/view'
+import { processWidth } from '@sybz-components/utils'
 import type { JsonChangePayload, JsonData, JsonEmits, JsonExposed, JsonProps } from './types'
 
 defineOptions({ name: 'SJson', inheritAttrs: false })
@@ -19,8 +20,9 @@ const props = withDefaults(defineProps<JsonProps>(), {
   toolbar: true,
   showStatus: true,
   placeholder: '请输入 JSON',
+  width: '100%',
   height: '',
-  minHeight: 240,
+  minHeight: 200,
   theme: 'light',
 })
 
@@ -36,14 +38,12 @@ let suppressEditorChange = false
 let suppressNextModelWatch = false
 let suppressNextDataWatch = false
 
-const toCssSize = (value: string | number) => {
-  if (typeof value === 'number') return `${value}px`
-  if (/^\d+(?:\.\d+)?$/.test(value)) return `${value}px`
-  return value || undefined
-}
-
 const rootStyle = computed(() => [
-  { height: toCssSize(props.height), minHeight: toCssSize(props.minHeight) },
+  {
+    width: processWidth(props.width, true),
+    height: processWidth(props.height, true),
+    minHeight: processWidth(props.minHeight, true),
+  },
   props.style,
 ])
 const statusText = computed(() => `${props.disabled ? '已禁用 · ' : ''}${errorMessage.value || 'JSON 格式正确'}`)

@@ -10,15 +10,15 @@
 
 <ApiIntro />
 
-### 基础用法（默认 `disabled=false`、`lineNumbers=true`、`toolbar=true`、`showStatus=true`）
+### 基础用法（默认 `width='100%'`、`disabled=false`、`lineNumbers=true`、`toolbar=true`、`showStatus=true`）
 
-:::demo 通过 `v-model:data` 绑定对象；键名和值均可编辑，JSON 合法时自动同步结构化数据。基础写法：`<s-json v-model:data="data" />`。属性：`disabled` 可选 `true / false`，默认值 `false`；`lineNumbers`、`toolbar`、`showStatus` 可选 `true / false`，默认值均为 `true`；`indent` 默认值 `2`；`minHeight` 默认值 `240`。
+:::demo 通过 `v-model:data` 绑定对象；键名和值均可编辑，JSON 合法时自动同步结构化数据。基础写法：`<s-json v-model:data="data" />`。属性：`width` 类型 `string / number` 并支持 `processWidth` 写法，默认值 `100%`；`disabled` 可选 `true / false`，默认值 `false`；`lineNumbers`、`toolbar`、`showStatus` 可选 `true / false`，默认值均为 `true`；`indent` 默认值 `2`；`minHeight` 默认值 `240`。
 json/base
 :::
 
 ### 完整编辑（默认 `height=''`、`theme='light'`）
 
-:::demo 展示带固定高度的完整 JSON 编辑器。编辑过程中允许暂时不合法的文本，错误会显示在工具栏中，修正后再通过 `update:data` 同步对象。基础写法：`<s-json v-model:data="data" height="360" />`。属性：`height` 类型 `string / number`，默认值为空；`theme` 可选 `light / dark`，默认值 `light`。
+:::demo 展示带固定高度的完整 JSON 编辑器。编辑过程中允许暂时不合法的文本，错误会显示在工具栏中，修正后再通过 `update:data` 同步对象。基础写法：`<s-json v-model:data="data" height="360" />`。属性：`height` 类型 `string / number` 并支持 `processWidth` 写法，默认值为空；`theme` 可选 `light / dark`，默认值 `light`。
 json/interactive
 :::
 
@@ -40,8 +40,9 @@ json/disabled
 | `toolbar`     | 是否显示格式化、压缩和复制工具栏               | `true / false`                                      | `true`        |
 | `showStatus`  | 是否显示 JSON 校验状态                         | `true / false`                                      | `true`        |
 | `placeholder` | 空内容占位文字                                 | `string`                                            | `请输入 JSON` |
-| `height`      | 编辑器高度，数字按 px 处理                     | `string / number`                                   | `''`          |
-| `minHeight`   | 编辑器最小高度，数字按 px 处理                 | `string / number`                                   | `240`         |
+| `width`       | 编辑器宽度，支持 `processWidth` 写法           | `string / number`                                   | `100%`        |
+| `height`      | 编辑器高度，支持 `processWidth` 写法           | `string / number`                                   | `''`          |
+| `minHeight`   | 编辑器最小高度，支持 `processWidth` 写法       | `string / number`                                   | `240`         |
 | `theme`       | 编辑器主题                                     | `light / dark`                                      | `light`       |
 | `style`       | 根节点额外样式                                 | `CSSProperties`                                     | -             |
 

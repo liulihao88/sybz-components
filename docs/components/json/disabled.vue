@@ -2,12 +2,12 @@
 import { ref } from 'vue'
 
 const data = ref({
-  project: 'sybz-components',
-  status: 'disabled',
-  locked: true,
+  service: 'knowledge-base',
 })
 </script>
 
 <template>
-  <s-json v-model="data" disabled />
+  <div class="h-200">
+    <s-json v-model="data" disabled />
+  </div>
 </template>

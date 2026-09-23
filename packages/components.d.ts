@@ -265,13 +265,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/json/home.html
      *
-     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
+     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
      */
     SJson: (typeof import('./types/components/json'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/json/home.html
      *
-     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
+     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
      */
     's-json': (typeof import('./types/components/json'))['default']
     /**
