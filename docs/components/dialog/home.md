@@ -151,6 +151,14 @@ app.use(SybzComponents, {
 })
 ```
 
+### 内容区加载（loading 默认值：false）
+
+直接设置 `loading` 可在内容区域显示加载状态，标题和底部按钮保持可见；`mode="drawer"` 时也适用。基础写法：`<s-dialog v-model="isShow" :loading="loading">内容</s-dialog>`。确认按钮的加载状态仍由 `confirmAttrs.loading` 或 `confirm` 属性控制。
+
+:::demo 属性：`loading` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`mode` 可选 `dialog / drawer`，默认值 `dialog`。
+dialog/contentLoading
+:::
+
 ### 属性
 
 |      属性名       | 说明                                                                                          | 类型                                          | 默认值    |
@@ -160,6 +168,7 @@ app.use(SybzComponents, {
 |       width       | 弹框宽度；当 `mode="drawer"` 时用于控制抽屉宽度                                               | string / number                               | ''        |
 |       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |
 |       mode        | 展示形态，可选 `dialog` / `drawer`                                                            | string                                        | `dialog`  |
+|      loading      | 是否在内容区域显示加载状态                                                                    | boolean                                       | `false`   |
 |      variant      | 语义样式，可选 `default` / `delete` / `warning`                                               | string                                        | `default` |
 |      target       | 删除场景中要操作的目标名称                                                                    | string                                        | -         |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                          | boolean                                       | false     |

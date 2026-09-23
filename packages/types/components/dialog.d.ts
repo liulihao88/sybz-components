@@ -13,7 +13,7 @@ type ElDialogInstance = InstanceType<typeof ElDialog>
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
 
 /**
- * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 maximizeHeight 等 sybz 扩展属性。
+ * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及内容区 loading、maximizeHeight 等 sybz 扩展属性。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Dialog/Drawer 的公开属性。
  */
@@ -41,6 +41,8 @@ export type SDialogComponent = {
       cancelAttrs?: SybzRecord
       enableConfirm?: boolean
       confirm?: (...args: any[]) => any
+      /** 是否在内容区域显示加载状态 */
+      loading?: boolean
       fillSlot?: boolean
       maximizeHeight?: boolean
       hideHeaderIcon?: boolean
@@ -63,6 +65,7 @@ export type SDialogComponent = {
       | 'cancelAttrs'
       | 'enableConfirm'
       | 'confirm'
+      | 'loading'
       | 'fillSlot'
       | 'maximizeHeight'
       | 'hideHeaderIcon'
@@ -86,6 +89,7 @@ export type SDialogComponent = {
         | 'cancelAttrs'
         | 'enableConfirm'
         | 'confirm'
+        | 'loading'
         | 'fillSlot'
         | 'maximizeHeight'
         | 'hideHeaderIcon'

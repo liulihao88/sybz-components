@@ -240,6 +240,8 @@ export interface SDialogSelfProps {
   cancelAttrs?: SybzRecord
   enableConfirm?: boolean
   confirm?: (...args: any[]) => any
+  /** 是否在内容区域显示加载状态 */
+  loading?: boolean
   fillSlot?: boolean
   maximizeHeight?: boolean
   hideHeaderIcon?: boolean

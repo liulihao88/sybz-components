@@ -53,7 +53,7 @@
           </span>
         </div>
       </template>
-      <div :class="slotBoxClass">
+      <div v-loading="mergedProps.loading" :class="slotBoxClass">
         <template v-if="confirmSemantic.variant === 'delete' && !$slots.default">
           <template v-if="confirmSemantic.hasTarget">
             确认要删除
@@ -134,6 +134,8 @@ interface DialogProps {
   cancelAttrs?: DialogButtonAttrs
   enableConfirm?: boolean
   confirm?: (...args: any[]) => any
+  /** 是否在内容区域显示加载状态 */
+  loading?: boolean
   fillSlot?: boolean
   maximizeHeight?: boolean
   hideHeaderIcon?: boolean
@@ -158,6 +160,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   cancelAttrs: () => ({}),
   enableConfirm: true,
   confirm: undefined,
+  loading: false,
   fillSlot: false,
   maximizeHeight: false,
   hideHeaderIcon: false,
@@ -209,6 +212,7 @@ const defaultPanelAttrs = computed(() => {
 const panelClass = computed(() => {
   return [
     attrs.class,
+    mergedProps.value.loading ? 's-dialog__content-loading' : '',
     isDrawer.value ? 's-dialog__drawer' : '',
     !isDrawer.value && !isFullscreen.value && mergedProps.value.maximizeHeight ? 's-dialog__maximize-height' : '',
     isDrawer.value && mergedProps.value.theme === 'chenghua' ? 's-dialog__drawer--chenghua' : '',
@@ -370,6 +374,18 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
+:global(.s-dialog__content-loading .el-dialog__body),
+:global(.s-dialog__content-loading .el-drawer__body) {
+  display: flex;
+  flex-direction: column;
+}
+
+:global(.s-dialog__content-loading .el-dialog__body > .dialog_slot_box),
+:global(.s-dialog__content-loading .el-drawer__body > .dialog_slot_box) {
+  flex: 1 1 auto;
+  min-height: 20px;
+}
+
 .s-dialog {
   &.s-shijingshan-dialog.s-dialog--warning {
     :deep(.s-dialog__confirm-button) {
