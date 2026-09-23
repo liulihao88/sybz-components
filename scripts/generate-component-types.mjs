@@ -511,7 +511,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SInputPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'input',
-      description: 's-input 输入框组件，支持一键清空、溢出提示、自动补全和快捷搜索按钮。',
+      description: 's-input 输入框组件，支持一键清空、溢出提示、自动补全和位于清空图标右侧的快捷搜索按钮。',
       slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
       emitsMember:
         "ElInputInstance['$emit'] & (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)",

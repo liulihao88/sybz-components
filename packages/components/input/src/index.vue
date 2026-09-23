@@ -27,6 +27,20 @@
               {{ $attrs.title }}
             </div>
           </template>
+          <template v-if="$slots.suffix || showSearchButton" #suffix>
+            <slot name="suffix" />
+            <button
+              v-if="showSearchButton"
+              type="button"
+              class="s-input__search-button"
+              :disabled="isDisabled"
+              aria-label="搜索"
+              title="搜索"
+              @click.stop="triggerSearch"
+            >
+              <s-icon icon="Search" />
+            </button>
+          </template>
         </el-autocomplete>
 
         <el-input
@@ -59,8 +73,18 @@
           </template>
 
           <!-- 后缀插槽 -->
-          <template v-if="$slots.suffix" #suffix>
+          <template v-if="$slots.suffix || showSearchButton" #suffix>
             <slot name="suffix" />
+            <s-icon
+              v-if="showSearchButton"
+              class="s-input__search-button"
+              :disabled="isDisabled"
+              aria-label="搜索"
+              title="搜索"
+              height="100%"
+              icon="search"
+              @click.stop="triggerSearch"
+            />
           </template>
 
           <!-- 后置插槽 -->
@@ -68,18 +92,6 @@
             <slot name="append" />
           </template>
         </el-input>
-
-        <el-button
-          v-if="showSearchButton"
-          type="primary"
-          class="s-input__search-button"
-          :disabled="isDisabled"
-          aria-label="搜索"
-          title="搜索"
-          @click="triggerSearch"
-        >
-          <s-icon icon="Search" />
-        </el-button>
       </div>
     </el-tooltip>
     <s-icon
@@ -144,6 +156,7 @@ interface SInputProps {
   options?: any[]
   content?: string
   dangerouslyUseHTMLString?: boolean
+  /** 在清空图标右侧显示搜索按钮，支持点击和 Enter 搜索 */
   search?: boolean
 }
 
@@ -360,6 +373,11 @@ const clearTextareaValue = () => {
 
 const triggerSearch = (event: MouseEvent | KeyboardEvent) => {
   if (!showSearchButton.value || isDisabled.value) return
+  if (
+    event.type === 'keyup' &&
+    ((event.target as HTMLElement)?.tagName !== 'INPUT' || (event as KeyboardEvent).isComposing)
+  )
+    return
   emits('search', data.value, event)
 }
 
@@ -433,17 +451,6 @@ const mergedStyle = computed(() => {
     height: 100%;
   }
 
-  &.s-input--search .s-input__main {
-    display: flex;
-    gap: 8px;
-
-    > .el-autocomplete,
-    > .el-input {
-      min-width: 0;
-      flex: 1;
-    }
-  }
-
   :deep(.el-autocomplete),
   :deep(.el-input),
   :deep(.el-textarea) {
@@ -473,6 +480,31 @@ const mergedStyle = computed(() => {
     margin-right: 22px;
   }
 
+  &.s-input--search {
+    :deep(.el-input__wrapper) {
+      padding: 4px 4px 4px 11px;
+    }
+
+    :deep(.el-input__suffix) {
+      margin-left: 0;
+    }
+
+    :deep(.el-input__inner) {
+      margin-right: 0;
+    }
+
+    :deep(.el-input__suffix-inner) {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    :deep(.el-input__clear) {
+      order: 1;
+      margin: 0;
+    }
+  }
+
   :deep(.el-textarea__inner) {
     padding-bottom: 20px;
   }
@@ -499,13 +531,39 @@ const mergedStyle = computed(() => {
   }
 
   .s-input__search-button {
+    order: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex: none;
-    width: var(--s-input-height, var(--el-component-size));
-    min-width: var(--s-input-height, var(--el-component-size));
-    height: 100%;
-    min-height: var(--s-input-height, var(--el-component-size));
+    width: auto;
+    height: calc(var(--s-input-height, var(--el-component-size)) - 8px);
+    aspect-ratio: 1;
     margin: 0;
     padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: var(--el-color-primary);
+    color: #fff;
+    cursor: pointer;
+    transition:
+      background-color 0.2s,
+      box-shadow 0.2s;
+
+    &:hover:not(:disabled) {
+      background: var(--el-color-primary-dark-2);
+      box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--el-color-primary-light-3);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }
 

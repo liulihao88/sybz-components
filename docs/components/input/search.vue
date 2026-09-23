@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const keyword = ref('')
+const keyword = ref('工作小组')
 const result = ref('')
 
 const handleSearch = (value: string) => {
@@ -11,14 +11,7 @@ const handleSearch = (value: string) => {
 
 <template>
   <div class="search-demo">
-    <s-input
-      v-model="keyword"
-      search
-      width="360"
-      height="calc(100%)"
-      placeholder="搜索工作小组..."
-      @search="handleSearch"
-    />
+    <s-input v-model="keyword" search width="360" placeholder="搜索工作小组..." @search="handleSearch" />
     <span class="search-demo__result">{{ result }}</span>
   </div>
 </template>

@@ -272,7 +272,7 @@ export interface SInputSelfProps extends SHtmlStringProps {
   hideTooltip?: boolean
   options?: any[]
   content?: string
-  /** 是否显示快捷搜索按钮；点击按钮或按 Enter 时触发 search 事件，默认 false */
+  /** 是否在清空图标右侧显示搜索按钮；点击或按 Enter 时触发 search 事件，默认 false */
   search?: boolean
 }
 

@@ -10,7 +10,7 @@ import type {
 type ElInputInstance = InstanceType<typeof ElInput>
 
 /**
- * s-input 输入框组件，支持一键清空、溢出提示、自动补全和快捷搜索按钮。
+ * s-input 输入框组件，支持一键清空、溢出提示、自动补全和位于清空图标右侧的快捷搜索按钮。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Input 的公开属性。
  */
@@ -39,7 +39,7 @@ export type SInputComponent = {
       hideTooltip?: boolean
       options?: any[]
       content?: string
-      /** 是否显示快捷搜索按钮；点击按钮或按 Enter 时触发 search 事件，默认 false */
+      /** 是否在清空图标右侧显示搜索按钮；点击或按 Enter 时触发 search 事件，默认 false */
       search?: boolean
     } & Omit<
       ElInputInstance['$props'],

@@ -32,12 +32,6 @@ input/chenghua/base
 input/shijingshan/base
 :::
 
-### 快捷搜索 `search`（默认值 `false`）
-
-:::demo 展示输入框快捷搜索按钮。基础写法：`<s-input v-model="keyword" search placeholder="搜索工作小组..." @search="handleSearch" />`。属性：`search` 类型为 `boolean`，可选值为 `true / false`，默认值为 `false`。设置为 `true` 后显示搜索按钮，点击按钮或按 Enter 都会触发 `search` 事件；事件参数依次为当前输入值和原始事件。
-input/search
-:::
-
 ### size 尺寸
 
 :::demo 展示尺寸配置。基础写法：`<s-input v-model="input" width="220" size="large" placeholder="large" />`。属性：`size` 可选 `'' / small / default / large`，默认值 `''`。
@@ -102,30 +96,38 @@ input/autocomplete
 input/sybzTheme
 :::
 
+### 快捷搜索 `search`（默认值 `false`）
+
+设置 `search` 后，搜索按钮显示在输入框内、清空图标右侧。点击搜索按钮或在输入框按 Enter 都会触发 `search` 事件，参数依次为当前输入值和原始事件。基础写法：`<s-input v-model="keyword" search placeholder="搜索工作小组..." @search="handleSearch" />`。
+
+:::demo 属性：`search` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clearable` 类型 `boolean`，可选值 `true / false`，默认值 `true`。事件：`search(value, event)`。
+input/search
+:::
+
 ### 属性
 
-|           属性名           | 说明                                              | 类型             | 默认值    |
-| :------------------------: | ------------------------------------------------- | ---------------- | --------- |
-|        `modelValue`        | 绑定值                                            | any              | -         |
-|      `compTitleStyle`      | 标题前缀组件样式                                  | object           | `{}`      |
-|          `width`           | 输入框宽度                                        | string / number  | `100%`    |
-|          `height`          | 输入框高度                                        | string / number  | `''`      |
-|        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示  | string / number  | `10`      |
-|    `hideMaxLengthError`    | 是否隐藏超出最大长度时的 `$toast` 提示            | boolean          | `false`   |
-|    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案          | string           | `''`      |
-|           `size`           | 输入框尺寸                                        | string           | `''`      |
-|          `theme`           | 输入框主题                                        | string           | `default` |
-|      `showWordLimit`       | 是否显示字数统计                                  | boolean / string | `false`   |
-|          `block`           | 是否按块级宽度展示                                | boolean          | `false`   |
-|      `disPlaceholder`      | 禁用态下显示的占位文案                            | string           | `''`      |
-|         `subAttrs`         | 外层容器额外属性                                  | object           | `{}`      |
-|       `tooltipAttrs`       | tooltip 额外属性                                  | object           | `{}`      |
-|        `iconAttrs`         | 右侧提示图标属性                                  | object           | `{}`      |
-|       `hideTooltip`        | 是否关闭溢出提示                                  | boolean          | `false`   |
-|         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`    | array            | -         |
-|         `content`          | 右侧说明提示文案                                  | string           | `''`      |
-|          `search`          | 是否显示搜索按钮并支持点击或 Enter 搜索           | boolean          | `false`   |
-| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染 | boolean          | `false`   |
+|           属性名           | 说明                                                  | 类型             | 默认值    |
+| :------------------------: | ----------------------------------------------------- | ---------------- | --------- |
+|        `modelValue`        | 绑定值                                                | any              | -         |
+|      `compTitleStyle`      | 标题前缀组件样式                                      | object           | `{}`      |
+|          `width`           | 输入框宽度                                            | string / number  | `100%`    |
+|          `height`          | 输入框高度                                            | string / number  | `''`      |
+|        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示      | string / number  | `10`      |
+|    `hideMaxLengthError`    | 是否隐藏超出最大长度时的 `$toast` 提示                | boolean          | `false`   |
+|    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案              | string           | `''`      |
+|           `size`           | 输入框尺寸                                            | string           | `''`      |
+|          `theme`           | 输入框主题                                            | string           | `default` |
+|      `showWordLimit`       | 是否显示字数统计                                      | boolean / string | `false`   |
+|          `block`           | 是否按块级宽度展示                                    | boolean          | `false`   |
+|      `disPlaceholder`      | 禁用态下显示的占位文案                                | string           | `''`      |
+|         `subAttrs`         | 外层容器额外属性                                      | object           | `{}`      |
+|       `tooltipAttrs`       | tooltip 额外属性                                      | object           | `{}`      |
+|        `iconAttrs`         | 右侧提示图标属性                                      | object           | `{}`      |
+|       `hideTooltip`        | 是否关闭溢出提示                                      | boolean          | `false`   |
+|         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`        | array            | -         |
+|         `content`          | 右侧说明提示文案                                      | string           | `''`      |
+|          `search`          | 是否在清空图标右侧显示搜索按钮，支持点击或 Enter 搜索 | boolean          | `false`   |
+| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染     | boolean          | `false`   |
 
 ### 事件
 
