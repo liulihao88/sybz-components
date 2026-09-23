@@ -303,6 +303,10 @@ export interface SCheckboxOptionContext<Option = SybzRecord> {
 }
 
 export interface SCheckboxSelfProps<Option = SybzRecord> {
+  /** 左侧标题；button 模式显示为紧凑文字标签 */
+  title?: string
+  /** 标题样式 */
+  compTitleStyle?: SybzRecord
   type?: '' | 'simple'
   options?: any[]
   showType?: 'check' | 'button'

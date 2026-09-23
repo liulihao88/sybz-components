@@ -3,12 +3,21 @@ import type { SCheckboxOptionContext, SCheckboxSelfProps, SybzComponentTheme, Sy
 
 type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 
+/**
+ * s-checkbox 多选组件，支持左侧 title、全选和 check/button 展示方式。
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus CheckboxGroup 的公开属性。
+ */
 export type SCheckboxPublicProps = SCheckboxSelfProps &
   Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxSelfProps>
 
 export type SCheckboxComponent = {
   new (): {
     $props: {
+      /** 左侧标题；button 模式显示为紧凑文字标签 */
+      title?: string
+      /** 标题样式 */
+      compTitleStyle?: SybzRecord
       type?: '' | 'simple'
       options?: any[]
       showType?: 'check' | 'button'
@@ -23,6 +32,8 @@ export type SCheckboxComponent = {
       theme?: SybzComponentTheme
     } & Omit<
       ElCheckboxGroupInstance['$props'],
+      | 'title'
+      | 'compTitleStyle'
       | 'type'
       | 'options'
       | 'showType'

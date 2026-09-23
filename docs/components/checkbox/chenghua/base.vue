@@ -21,7 +21,13 @@ const modeOptions = [
   <div class="checkbox-chenghua-demo">
     <div class="checkbox-chenghua-demo__list">
       <s-checkbox v-model="checkedServices" theme="chenghua" :options="options" gap="18"></s-checkbox>
-      <s-checkbox v-model="checkedModes" theme="chenghua" :options="modeOptions" show-type="button"></s-checkbox>
+      <s-checkbox
+        v-model="checkedModes"
+        theme="chenghua"
+        :options="modeOptions"
+        show-type="button"
+        title="无敌"
+      ></s-checkbox>
     </div>
   </div>
 </template>

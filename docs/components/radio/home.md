@@ -82,8 +82,8 @@ radio/sybzTheme
 
 |      属性名      | 说明                                                           | 类型                                          | 默认值    |
 | :--------------: | -------------------------------------------------------------- | --------------------------------------------- | --------- |
-|     `title`      | 左侧标题文案                                                   | string                                        | -         |
-| `compTitleStyle` | 左侧标题组件样式                                               | object                                        | `{}`      |
+|     `title`      | 左侧标题文案；button 模式显示为紧凑文字标签                    | string                                        | -         |
+| `compTitleStyle` | 标题组件样式                                                   | object                                        | `{}`      |
 |      `type`      | 数据类型，支持 `''` / `simple` / `boolean`                     | string                                        | `''`      |
 |     `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |
 |    `showType`    | 展示形式，支持 `radio` / `button`                              | string                                        | `radio`   |

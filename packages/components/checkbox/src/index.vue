@@ -25,6 +25,8 @@ interface CheckboxOptionContext<Option = Record<string, any>> {
   value: unknown
 }
 interface CheckboxProps {
+  title?: string
+  compTitleStyle?: Record<string, any>
   type?: string
   options?: any[]
   showType?: 'check' | 'button'
@@ -41,6 +43,8 @@ interface CheckboxProps {
 }
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
+  title: undefined,
+  compTitleStyle: undefined,
   type: '',
   options: () => [],
   showType: 'check', // button
@@ -56,6 +60,16 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 })
 
 const mergedProps = useGlobalComponentConfig('checkbox', props)
+const compTitleProps = computed(() => ({
+  title: mergedProps.value.title,
+  theme: mergedProps.value.theme,
+  size: mergedProps.value.size,
+  compTitleStyle: mergedProps.value.compTitleStyle,
+}))
+const buttonTitleStyle = computed(() => {
+  const style = mergedProps.value.compTitleStyle
+  return style?.width ? { ...style, width: processWidth(style.width, true) } : style
+})
 const checkAll = ref(false)
 const isIndeterminate = ref(false)
 const allCheckList = ref([])
@@ -167,6 +181,14 @@ const checkboxClass = computed(() => ({
 
 <template>
   <div class="s-checkbox" :class="checkboxClass">
+    <span
+      v-if="mergedProps.title && mergedProps.showType === 'button'"
+      class="s-checkbox__title s-checkbox__title--button"
+      :style="buttonTitleStyle"
+    >
+      {{ mergedProps.title }}
+    </span>
+    <s-comp-title v-else-if="mergedProps.title" v-bind="compTitleProps" class="s-checkbox__title" />
     <component
       :is="checkType"
       v-if="mergedProps.showAll"
@@ -214,6 +236,11 @@ const checkboxClass = computed(() => ({
 .s-checkbox {
   display: flex;
   align-items: flex-start;
+
+  .s-checkbox__title {
+    margin-right: 8px;
+  }
+
   .s-checkbox__all {
     font-weight: bold;
     margin-bottom: 0;
@@ -225,6 +252,24 @@ const checkboxClass = computed(() => ({
 .s-checkbox--button {
   --s-checkbox-button-primary: var(--el-color-primary);
   --s-checkbox-button-soft: var(--el-color-primary-light-9);
+  --s-checkbox-button-radius: var(--el-border-radius-base);
+  align-items: center;
+
+  .s-checkbox__title--button {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    flex: none;
+    height: auto;
+    margin-right: 12px;
+    padding: 0;
+    color: var(--el-text-color-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
 
   .s-checkbox__all {
     display: inline-flex;
@@ -242,6 +287,8 @@ const checkboxClass = computed(() => ({
   :deep(.s-checkbox__all .el-checkbox-button__inner) {
     display: inline-flex;
     align-items: center;
+    border-top-left-radius: var(--s-checkbox-button-radius);
+    border-bottom-left-radius: var(--s-checkbox-button-radius);
   }
 
   :deep(.s-checkbox__all--indeterminate .el-checkbox-button__inner) {
@@ -284,16 +331,19 @@ const checkboxClass = computed(() => ({
 .s-checkbox--button.s-checkbox--chenghua {
   --s-checkbox-button-primary: var(--s-ch-primary);
   --s-checkbox-button-soft: var(--s-ch-primary-soft);
+  --s-checkbox-button-radius: var(--s-ch-radius);
 }
 
 .s-checkbox--button.s-checkbox--shijingshan {
   --s-checkbox-button-primary: var(--s-sjs-primary);
   --s-checkbox-button-soft: var(--s-sjs-primary-soft);
+  --s-checkbox-button-radius: var(--s-sjs-radius);
 }
 
 .s-checkbox--button.s-checkbox--sybz {
   --s-checkbox-button-primary: var(--s-sybz-primary);
   --s-checkbox-button-soft: var(--s-sybz-primary-soft);
+  --s-checkbox-button-radius: var(--s-sybz-radius);
 }
 
 .s-checkbox--button.s-checkbox--show-all {

@@ -1,6 +1,13 @@
 <template>
   <div class="s-radio-box" :class="radioClass">
-    <s-comp-title v-if="mergedProps.title" v-bind="compTitleProps" class="s-radio-box__title"></s-comp-title>
+    <span
+      v-if="mergedProps.title && mergedProps.showType === 'button'"
+      class="s-radio-box__title s-radio-box__title--button"
+      :style="buttonTitleStyle"
+    >
+      {{ mergedProps.title }}
+    </span>
+    <s-comp-title v-else-if="mergedProps.title" v-bind="compTitleProps" class="s-radio-box__title"></s-comp-title>
     <el-radio-group v-bind="groupAttrs" :class="{ 's-radio-group--custom-gap': hasCustomGap }" :style="groupStyle">
       <slot>
         <component
@@ -93,6 +100,10 @@ const compTitleProps = computed(() => {
   }
 
   return titleProps
+})
+const buttonTitleStyle = computed(() => {
+  const style = mergedProps.value.compTitleStyle
+  return style?.width ? { ...style, width: processWidth(style.width, true) } : style
 })
 const groupAttrs = computed(() => ({
   ...attrs,
@@ -239,6 +250,25 @@ const radioClass = computed(() => {
 }
 
 .s-radio-box--button {
+  align-items: center;
+  gap: 12px;
+
+  .s-radio-box__title--button {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    flex: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    color: var(--el-text-color-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
   :deep(.el-radio-button:not(.is-disabled, .is-active) .el-radio-button__inner:hover) {
     border-color: var(--s-radio-button-hover-border, var(--el-color-primary-light-5));
     outline-color: var(--s-radio-button-hover-border, var(--el-color-primary-light-5));

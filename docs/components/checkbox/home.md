@@ -24,7 +24,7 @@ checkbox/chenghua/base
 
 ### 石景山主题
 
-:::demo 展示石景山主题样式。基础写法：`<s-checkbox v-model="checkedServices" theme="shijingshan" :options="options" gap="18"></s-checkbox>`。
+:::demo 展示石景山主题下两种模式的左侧标题。基础写法：`<s-checkbox v-model="checkedServices" theme="shijingshan" title="theme" :options="options" />`。属性：`title` 类型 `string`，默认值未设置；`compTitleStyle` 类型 `object`，默认值未设置；`showType` 可选 `check / button`，默认值 `check`；`theme` 可选 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`。
 checkbox/shijingshan/base
 :::
 
@@ -71,6 +71,8 @@ checkbox/sybzTheme
 |     属性名     | 说明                                               | 类型                                            | 默认值    |
 | :------------: | -------------------------------------------------- | ----------------------------------------------- | --------- |
 |      type      | options参数的类型, 可以设置为simple                | string                                          | -         |
+|     title      | 左侧标题；button 模式显示为紧凑文字标签            | string                                          | -         |
+| compTitleStyle | 标题样式                                           | object                                          | -         |
 |    options     | checkbox的选项                                     | object                                          | {}        |
 |    showType    | 显示样式，可选 `check` / `button`                  | string                                          | check     |
 |     label      | 显示的文本对应的字段                               | string                                          | label     |
