@@ -16,20 +16,12 @@
 input/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-#### chenghua主题示例
+用示例顶部的选项切换主题，查看普通输入框、带标题输入框、搜索框和多行输入框的外观。基础写法：`<s-input v-model="input" :theme="theme" width="320" placeholder="请输入服务名称" />`。
 
-:::demo 展示成华主题样式。基础写法：`<s-input v-model="input" width="320" theme="chenghua" size="large" placeholder="请输入服务名称" />`。
-input/chenghua/base
-:::
-
-### 石景山主题
-
-#### shijingshan主题示例
-
-:::demo 展示石景山主题样式。基础写法：`<s-input v-model="input" width="320" theme="shijingshan" size="large" placeholder="请输入服务名称" />`。
-input/shijingshan/base
+:::demo 属性：`theme` 可选 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`width` 类型 `string / number`，默认值 `100%`；`size` 可选 `'' / small / default / large`，默认值 `''`；`title` 类型 `string`，默认值未设置；`search` 可选 `true / false`，默认值 `false`；`type` 可选 `text / textarea` 等，默认值 `text`；`rows` 类型 `number`，默认值 `2`。
+input/theme
 :::
 
 ### size 尺寸
@@ -86,14 +78,6 @@ input/slot
 
 :::demo 展示封装el-autocomplete的用法配置。基础写法：`<s-input v-model="cc" :options="options" width="300"></s-input>`。属性：`options` 类型 `array`，默认值 `[]`；`width` 类型 `string / number`，默认值 `''`。
 input/autocomplete
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-input/sybzTheme
 :::
 
 ### 快捷搜索 `search`（默认值 `false`）

@@ -16,20 +16,12 @@
 button/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-#### chenghua主题示例
+用示例顶部的选项切换主题，查看同一组按钮在不同主题下的外观。基础写法：`<s-button :theme="theme" type="primary">主要按钮</s-button>`。
 
-:::demo 展示成华主题按钮。基础写法：`<s-button theme="chenghua" variant="gradient" icon="set-up" width="288" size="large">审核规则管理</s-button>`。`size` 可选 `small / default / large`，默认值 `default`，对应高度为 `32px / 40px / 48px`；`variant` 可选 `'' / outline / gradient`，默认值 `''`；`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
-button/chenghua/base
-:::
-
-### 石景山主题
-
-#### shijingshan主题示例
-
-:::demo 展示石景山主题按钮（`gulou` 使用同一套尺寸规则）。基础写法：`<s-button theme="shijingshan" type="primary" icon="plus">新增项目</s-button>`。`size` 可选 `small / default / large`，默认值 `default`，对应高度为 `32px / 40px / 48px`；`ghost` 可选 `true / false`，默认值 `false`；`width`、`height` 类型 `string / number`，默认值 `''`。
-button/shijingshan/base
+:::demo 属性：`theme` 可选 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值 `default`；`variant` 可选 `'' / outline / gradient`，默认值 `''`；`ghost`、`disabled` 可选 `true / false`，默认值均为 `false`；`size` 可选 `small / default / large`，默认值 `default`；`icon` 类型 `string / Component`，默认值未设置。
+button/theme
 :::
 
 ### Hover 动效（hoverAnimation 默认值：false）
@@ -101,28 +93,20 @@ button/href
 
 :::
 
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-button/sybzTheme
-:::
-
-|           属性名           | 说明                                | 类型                                       | 默认值    |
-| :------------------------: | ----------------------------------- | ------------------------------------------ | --------- |
-|         `content`          | tooltip 的提示文字                  | string                                     | `''`      |
-|           `time`           | 防抖时长                            | number(毫秒)                               | `0`       |
-|       `tooltipAttrs`       | s-tooltip 组件的属性                | Object [去tooltip组件](../tooltip/home)    | `{}`      |
-| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                    | `false`   |
-|          `theme`           | 主题样式                            | `'default' \| 'chenghua' \| 'shijingshan'` | `default` |
-|         `variant`          | 主题样式变体                        | `'' \| 'outline' \| 'gradient'`            | `default` |
-|           `size`           | 按钮尺寸（高度 32px / 40px / 48px） | `'small' \| 'default' \| 'large'`          | `default` |
-|          `width`           | 按钮宽度，支持 `processWidth` 写法  | string / number                            | `''`      |
-|          `height`          | 按钮高度，支持 `processWidth` 写法  | string / number                            | `''`      |
-|      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                    | `false`   |
-|          `ghost`           | 幽灵按钮，使背景透明                | boolean                                    | `false`   |
-|      `iconPlacement`       | 按钮图标的位置                      | `'start' \| 'end'`                         | `start`   |
+|           属性名           | 说明                                | 类型                                                            | 默认值    |
+| :------------------------: | ----------------------------------- | --------------------------------------------------------------- | --------- |
+|         `content`          | tooltip 的提示文字                  | string                                                          | `''`      |
+|           `time`           | 防抖时长                            | number(毫秒)                                                    | `0`       |
+|       `tooltipAttrs`       | s-tooltip 组件的属性                | Object [去tooltip组件](../tooltip/home)                         | `{}`      |
+| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                                         | `false`   |
+|          `theme`           | 主题样式                            | `'default' \| 'chenghua' \| 'shijingshan' \| 'sybz' \| 'gulou'` | `default` |
+|         `variant`          | 主题样式变体                        | `'' \| 'outline' \| 'gradient'`                                 | `default` |
+|           `size`           | 按钮尺寸（高度 32px / 40px / 48px） | `'small' \| 'default' \| 'large'`                               | `default` |
+|          `width`           | 按钮宽度，支持 `processWidth` 写法  | string / number                                                 | `''`      |
+|          `height`          | 按钮高度，支持 `processWidth` 写法  | string / number                                                 | `''`      |
+|      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                                         | `false`   |
+|          `ghost`           | 幽灵按钮，使背景透明                | boolean                                                         | `false`   |
+|      `iconPlacement`       | 按钮图标的位置                      | `'start' \| 'end'`                                              | `start`   |
 
 | `href` | 链接地址，设置后渲染为链接 | string | `''` |
 | `target` | 链接打开目标 | `'_blank' \| '_parent' \| '_self' \| '_top'` | `_self` |
