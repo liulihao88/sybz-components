@@ -1,6 +1,5 @@
 import Base from './base.vue'
 import Stripe from './stripe.vue'
-import Border from './border.vue'
 import Status from './status.vue'
 import FixHeader from './fixHeader.vue'
 import FixColumn from './fixColumn.vue'
@@ -36,12 +35,7 @@ export const list = [
     title: '带斑马纹表格',
     component: Stripe,
   },
-  {
-    key: 'border',
-    content: rendContent('border'),
-    title: '带边框表格',
-    component: Border,
-  },
+
   {
     key: 'status',
     content: rendContent('status'),

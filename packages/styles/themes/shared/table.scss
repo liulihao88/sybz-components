@@ -169,7 +169,7 @@
     }
 
     .el-table th.el-table__cell {
-      height: if($chenghua, 44px, 40px);
+      height: var(--s-table-header-height);
       overflow: hidden;
       border-bottom: 1px solid var(--s-#{$token-prefix}-table-line) !important;
       background: var(--s-#{$token-prefix}-table-header-bg) !important;

@@ -31,7 +31,6 @@ import type {
 
 const attrs = useAttrs()
 const instance = getCurrentInstance()
-const PAGE_WRAP_HEIGHT = 50
 const HEADER_MIN_WIDTH_PADDING = 32
 const HEADER_SORTABLE_RESERVE_WIDTH = 28
 const hasOwn = (target, key) => Object.prototype.hasOwnProperty.call(target, key)
@@ -919,6 +918,8 @@ const tableClass = computed(() => ({
   's-table--custom-background': !!mergedProps.value.background,
   's-table--simple': mergedProps.value.simple,
   's-table--no-border': !mergedProps.value.border,
+  's-table--small': mergedProps.value.size === 'small',
+  's-table--large': mergedProps.value.size === 'large',
   's-table--chenghua': mergedProps.value.theme === 'chenghua',
   's-table--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-table--sybz': mergedProps.value.theme === 'sybz',
@@ -954,7 +955,7 @@ const tableAttrs = computed(() => {
 
   return {
     ...nextAttrs,
-    height: mergedProps.value.showPage ? `calc(100% - ${PAGE_WRAP_HEIGHT}px)` : '100%',
+    height: '100%',
   }
 })
 
@@ -1390,7 +1391,22 @@ defineExpose({
 }
 
 .s-table {
+  --s-table-component-size: var(--el-component-size);
+  --s-table-header-height: calc(var(--s-table-component-size) + 8px);
+
   box-shadow: none !important;
+
+  &.s-table--small {
+    --s-table-component-size: var(--el-component-size-small);
+  }
+
+  &.s-table--large {
+    --s-table-component-size: var(--el-component-size-large);
+  }
+
+  &.s-table--chenghua {
+    --s-table-header-height: calc(var(--s-table-component-size) + 12px);
+  }
 
   &.s-table--no-border {
     border: 0 !important;
@@ -1452,6 +1468,10 @@ defineExpose({
     display: flex;
     flex-direction: column;
     min-height: 0;
+
+    .page-wrap {
+      flex: none;
+    }
   }
 
   .page-wrap {
@@ -1460,8 +1480,8 @@ defineExpose({
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 4px 24px;
-    height: 50px;
+    height: var(--s-table-header-height);
+    padding: 0 24px;
     background: var(--el-bg-color);
     border: 1px solid var(--el-border-color-light);
     border-top: 1px solid var(--el-border-color-light);
@@ -1486,21 +1506,34 @@ defineExpose({
   }
 
   .page-wrap .page-right :deep(.el-pagination) {
+    --el-pagination-button-height: 28px;
+    --el-pagination-button-width: 28px;
+
     display: inline-flex;
     flex: none;
     flex-wrap: nowrap;
     white-space: nowrap;
   }
 
-  .page-wrap :deep(.el-pagination--small .el-pagination__editor.el-input) {
-    --el-input-height: var(--el-pagination-button-height-small);
+  .page-wrap :deep(.el-pagination--small) {
+    --s-table-pagination-control-height: var(--el-pagination-button-height-small);
   }
 
-  .page-wrap :deep(.el-pagination--small .el-pagination__jump .el-input__wrapper),
-  .page-wrap :deep(.el-pagination--small .el-pagination__sizes .el-select__wrapper) {
+  .page-wrap :deep(.el-pagination--large) {
+    --el-pagination-button-height-large: 32px;
+    --el-pagination-button-width-large: 32px;
+    --s-table-pagination-control-height: var(--el-pagination-button-height-large);
+  }
+
+  .page-wrap :deep(.el-pagination__editor.el-input) {
+    --el-input-height: var(--s-table-pagination-control-height, var(--el-pagination-button-height));
+  }
+
+  .page-wrap :deep(.el-pagination__jump .el-input__wrapper),
+  .page-wrap :deep(.el-pagination__sizes .el-select__wrapper) {
     box-sizing: border-box;
-    height: var(--el-pagination-button-height-small);
-    min-height: var(--el-pagination-button-height-small);
+    height: var(--s-table-pagination-control-height, var(--el-pagination-button-height));
+    min-height: var(--s-table-pagination-control-height, var(--el-pagination-button-height));
   }
 
   :deep(.el-table) {
@@ -1522,6 +1555,10 @@ defineExpose({
 
   :deep(.el-table th) {
     box-sizing: border-box;
+  }
+
+  :deep(.el-table th.el-table__cell) {
+    height: var(--s-table-header-height);
   }
 
   :deep(.el-table th .cell) {

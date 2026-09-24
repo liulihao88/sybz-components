@@ -11,6 +11,8 @@ const otherParams = ref({
   fixed: false,
   border: true,
   size: 'default',
+  disabled: false,
+  simple: false,
 })
 const columns = computed(() => {
   return [
@@ -106,14 +108,9 @@ const columns = computed(() => {
       <s-radio v-model="otherParams.showPage" :options="[true, false]" type="simple" title="showPage"></s-radio>
       <s-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></s-radio>
       <s-radio v-model="otherParams.border" :options="[true, false]" type="simple" title="border"></s-radio>
+      <s-radio v-model="otherParams.disabled" :options="[true, false]" type="simple" title="disabled"></s-radio>
+      <s-radio v-model="otherParams.simple" :options="[true, false]" type="simple" title="siple"></s-radio>
     </s-flex>
-    <s-table
-      :columns="columns"
-      :data="data"
-      v-bind="otherParams"
-      :page-attrs="{
-        layout: 'prev, pager, next, jumper',
-      }"
-    ></s-table>
+    <s-table :columns="columns" :data="data" v-bind="otherParams"></s-table>
   </div>
 </template>
