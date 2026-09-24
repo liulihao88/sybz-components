@@ -58,6 +58,7 @@ const printHelp = () => {
 配置文件
   macOS / Linux   ~/.config/sybz-components/portal-dev.json
   Windows         %APPDATA%\\sybz-components\\portal-dev.json
+  custom.code     是否识别图形验证码：true 或 false（默认）
 
 示例
   portal-dev config --portal sjs

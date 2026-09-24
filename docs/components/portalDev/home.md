@@ -64,6 +64,26 @@ portal-dev login
 portal-dev sjs
 ```
 
+#### 配置属性说明
+
+```javascript
+{
+  "version": 11,
+  "profiles": {
+    "custom": [ // 自定义
+      {
+        "name": "石景山政府", // 名字
+        "username": "testuser_gov", // 用户名
+        "password": "xxx", // 密码
+        "loginUrl": "https://helix-ai-op.comlan.com/portal/wechat-auto", // 登录页url
+        "code": true, // 是否处理验证码, 默认不处理验证码.
+        "alias": "sjs", // 别名
+      },
+    ]
+  }
+}
+```
+
 下面是一个完整配置示例：
 
 ```json
@@ -111,6 +131,13 @@ portal-dev sjs
         "username": "llh",
         "password": "xxx",
         "loginUrl": "https://helix-ai-minio.comlan.com/zentao/"
+      },
+      {
+        "name": "石景山政府custom",
+        "username": "xxx",
+        "password": "xxx",
+        "loginUrl": "http://115.190.54.111:1880/passport/login/userLogin",
+        "code": true
       }
     ]
   }
