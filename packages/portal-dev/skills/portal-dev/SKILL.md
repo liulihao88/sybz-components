@@ -45,7 +45,7 @@ portal-dev --portal sjs
 portal-dev --portal chenghua
 ```
 
-登录已配置的普通网站（不走验证码和 Token 等特殊流程）：
+登录已配置的普通网站（账号配置 `code: true` 时自动识别图形验证码；不走 Token 跳转）：
 
 ```bash
 portal-dev --portal custom <账号名称>
@@ -57,4 +57,4 @@ portal-dev --portal custom <账号名称>
 
 ## 配置
 
-账号密码只从当前用户的专属配置文件读取，每个门户可保存多个账号。安装 npm 包或执行 `portal-dev skill install` 后，默认配置文件会自动创建，已有文件不会被覆盖，用户可以直接编辑；`portal-dev config` 也可新增账号或按账号名称更新已有账号，并在 profile 中直接配置别名和模式。登录命令不写账号名称时使用数组第一个账号，在命令末尾追加账号名称时使用指定账号。普通网站使用 `portal-dev config --portal custom` 配置登录 URL、账号名称、用户名和密码。缺少凭据时，引导用户直接编辑配置文件或在本机终端运行 `portal-dev config`，不索要或展示具体密码。
+账号密码只从当前用户的专属配置文件读取，每个门户可保存多个账号。安装 npm 包或执行 `portal-dev skill install` 后，默认配置文件会自动创建，已有文件不会被覆盖，用户可以直接编辑；`portal-dev config` 也可新增账号或按账号名称更新已有账号，并在 profile 中直接配置别名和模式。登录命令不写账号名称时使用数组第一个账号，在命令末尾追加账号名称时使用指定账号。普通网站使用 `portal-dev config --portal custom` 配置登录 URL、账号名称、用户名和密码；需要图形验证码时在配置交互中启用，或在对应 profile 设置 `"code": true`。缺少凭据时，引导用户直接编辑配置文件或在本机终端运行 `portal-dev config`，不索要或展示具体密码。

@@ -119,11 +119,11 @@ const fillAndSubmit = async (tab, { username, password, captchaText, custom }) =
         const setValue = (element, value) => { const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set; setter.call(element, value); element.dispatchEvent(new Event('input', {bubbles:true})); element.dispatchEvent(new Event('change', {bubbles:true})); };
         const attribute = (input, name) => input.getAttribute(name) || '';
         const passwordInput = inputs.find((input) => attribute(input, 'autocomplete') === 'current-password' || /^password$/i.test(attribute(input, 'name')) || input.type === 'password' || /密码/.test(attribute(input, 'placeholder')));
-        const captchaInput = inputs.find((input) => /验证码/.test(attribute(input, 'placeholder')) || /captcha|code/i.test(attribute(input, 'name')));
+        const captchaInput = inputs.find((input) => /验证码/.test(attribute(input, 'placeholder') + attribute(input, 'aria-label')) || /captcha|verify|code/i.test(attribute(input, 'name') + attribute(input, 'id')));
         const usernameInput = inputs.find((input) => attribute(input, 'autocomplete') === 'username' || /^(username|account|login|user|email|phone)$/i.test(attribute(input, 'name')) || /用户名|账号|邮箱|手机/.test(attribute(input, 'placeholder'))) || inputs.find((input) => input !== passwordInput && input !== captchaInput && /^(text|email|tel|number)$/.test(input.type));
         const missing = [!usernameInput && '账号输入框', !passwordInput && '密码输入框', !${custom} && !captchaInput && '验证码输入框'].filter(Boolean);
         if (missing.length) return JSON.stringify({submitted:false, reason:'未找到' + missing.join('、')});
-        setValue(usernameInput, values.username); setValue(passwordInput, values.password); if (captchaInput) setValue(captchaInput, values.captchaText);
+        setValue(usernameInput, values.username); setValue(passwordInput, values.password); if (!${custom} && captchaInput) setValue(captchaInput, values.captchaText);
         const button = Array.from(document.querySelectorAll('button, input[type="submit"], [role="button"], .btn-box .btn')).filter(visible).find((element) => {
           const label = (element.textContent || element.value || '').replace(/\\s+/g, '');
           return element.type === 'submit' || /登录|login|signin/i.test(label);
@@ -152,34 +152,38 @@ const waitForLoginForm = async (tab) => {
 
 const login = async (tab, config, recognizeCaptcha, custom) => {
   for (let attempt = 1; attempt <= (custom ? 1 : 5); attempt += 1) {
-    let captchaText = ''
-    if (!custom) {
-      const captchaUrl = await execute(
-        tab,
-        `(() => { const image = document.querySelector('img.code-img, img[class*="captcha" i], img[alt*="验证码"], img[title*="验证码"]'); return image ? (image.currentSrc || image.src || '') : ''; })()`,
-      )
-      if (!captchaUrl) {
-        const state = await pageState(tab)
-        if (!state.url.includes('/passport/login/')) return
-        throw new Error('未找到图形验证码')
+    try {
+      let captchaText = ''
+      if (!custom) {
+        const captchaUrl = await execute(
+          tab,
+          `(() => {
+            const images = Array.from(document.querySelectorAll('img.code-img, img[class*="captcha" i], img[id*="captcha" i], img[class*="verify" i], img[id*="verify" i], img[alt*="验证码"], img[title*="验证码"], img[src*="captcha" i], img[src*="verify" i], img[src*="code" i]'));
+            const image = images.find((item) => { const rect = item.getBoundingClientRect(); const style = getComputedStyle(item); return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden'; });
+            if (!image) return '';
+            try { const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight; canvas.getContext('2d').drawImage(image, 0, 0); return canvas.toDataURL('image/png'); } catch { return image.currentSrc || image.src || ''; }
+          })()`,
+        )
+        if (!captchaUrl) throw new Error('未找到图形验证码')
+        captchaText = await recognizeCaptcha(captchaUrl, { flexibleLength: config.code === true })
+        console.log(`已识别图形验证码（第 ${attempt}/5 次）`)
       }
-      captchaText = await recognizeCaptcha(captchaUrl)
-      console.log(`已识别图形验证码（第 ${attempt}/5 次）`)
-    }
-    const result = await fillAndSubmit(tab, { ...config, captchaText, custom })
-    if (!result.submitted) {
+      const result = await fillAndSubmit(tab, { ...config, captchaText, custom })
+      if (!result.submitted) throw new Error(result.reason || '登录表单字段不完整或未找到登录按钮')
+      await sleep(1800)
       const state = await pageState(tab)
-      if (custom || !state.url.includes('/passport/login/')) return
-      throw new Error(result.reason || '登录表单字段不完整或未找到登录按钮')
-    }
-    await sleep(1800)
-    const state = await pageState(tab)
-    if (custom || !state.url.includes('/passport/login/')) return
-    if (attempt < 5)
+      if (custom || (!(await hasVisibleLoginForm(tab)) && (config.code || !state.url.includes('/passport/login/'))))
+        return
+      throw new Error('登录未成功')
+    } catch (error) {
+      if (custom || attempt === 5) throw error
+      console.error(`第 ${attempt} 次登录失败：${error instanceof Error ? error.message : error}`)
       await execute(
         tab,
-        `(() => { const image = document.querySelector('img.code-img, img[class*="captcha" i]'); if (image) image.click(); return ''; })()`,
-      )
+        `(() => { const image = document.querySelector('img.code-img, img[class*="captcha" i], img[id*="captcha" i], img[class*="verify" i], img[id*="verify" i], img[alt*="验证码"], img[title*="验证码"], img[src*="captcha" i], img[src*="verify" i], img[src*="code" i]'); if (image) image.click(); return ''; })()`,
+      ).catch(() => undefined)
+      await sleep(800)
+    }
   }
   throw new Error('自动登录失败，已达到最多重试次数')
 }
@@ -203,7 +207,7 @@ export const runInExistingChrome = async ({
   if (portal === 'custom') {
     // 自定义站点可能在加载后补齐尾斜杠、追加 query，甚至先经过一次重定向；
     // 不要用原始 URL 的字符串完全相等来决定是否执行登录。
-    if (await waitForLoginForm(tab)) await login(tab, config, recognizeCaptcha, true)
+    if (await waitForLoginForm(tab)) await login(tab, config, recognizeCaptcha, !config.code)
   } else if (state.url.includes('/passport/login/')) await login(tab, config, recognizeCaptcha, false)
 
   if (!devMode) {

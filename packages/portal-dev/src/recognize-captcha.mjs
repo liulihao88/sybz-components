@@ -3,7 +3,7 @@ import { createWorker, PSM } from 'tesseract.js'
 
 const CAPTCHA_PATTERN = /^[A-Z0-9]{4}$/
 
-export async function recognizeCaptcha(source) {
+export async function recognizeCaptcha(source, { flexibleLength = false } = {}) {
   const image = await loadImage(source)
   const { width, height } = image
   const input = createCanvas(width, height)
@@ -38,7 +38,8 @@ export async function recognizeCaptcha(source) {
     })
     const { data } = await worker.recognize(output.toBuffer('image/png'))
     const result = data.text.toUpperCase().replace(/[^A-Z0-9]/g, '')
-    if (!CAPTCHA_PATTERN.test(result)) throw new Error(`验证码识别结果无效：${JSON.stringify(data.text)}`)
+    if (!(flexibleLength ? /^[A-Z0-9]{3,8}$/.test(result) : CAPTCHA_PATTERN.test(result)))
+      throw new Error(`验证码识别结果无效：${JSON.stringify(data.text)}`)
     return result
   } finally {
     await worker.terminate()

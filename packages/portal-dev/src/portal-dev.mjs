@@ -93,6 +93,7 @@ const selectAccount = () => {
 }
 
 const portalAccount = selectAccount()
+const customCode = portal === 'custom' && portalAccount.code === true
 
 const configs = {
   sjs: {
@@ -109,6 +110,7 @@ const configs = {
     loginUrl: portalAccount.loginUrl,
     username: portalAccount.username,
     password: portalAccount.password,
+    code: customCode,
   },
 }
 const config = configs[portal]
@@ -307,25 +309,42 @@ const login = async () => {
       captcha = await visibleLocator([
         'img.code-img',
         'img[class*="captcha" i]',
+        'img[id*="captcha" i]',
+        'img[class*="verify" i]',
+        'img[id*="verify" i]',
         'img[alt*="验证码"]',
         'img[title*="验证码"]',
+        'img[src*="captcha" i]',
+        'img[src*="verify" i]',
+        'img[src*="code" i]',
       ])
       if (!captcha) throw new Error('未找到图形验证码')
       const captchaUrl = await captcha.evaluate((image) => image.currentSrc || image.src || '')
       const captchaText = await recognizeCaptcha(
-        captchaUrl && !captchaUrl.startsWith('blob:') ? captchaUrl : await captcha.screenshot(),
+        !customCode && captchaUrl && !captchaUrl.startsWith('blob:') ? captchaUrl : await captcha.screenshot(),
+        { flexibleLength: customCode },
       )
       console.log(`已识别图形验证码（第 ${attempt}/5 次）`)
       const usernameInput = await visibleLocator([
         'input[autocomplete="username"]',
         'input[name="username"]',
+        'input[id*="username" i]',
+        'input[name="account"]',
+        'input[name="login"]',
+        'input[name="user"]',
+        'input[name="email"]',
+        'input[type="email"]',
+        'input[type="tel"]',
         'input[placeholder*="用户名"]',
         'input[placeholder*="账号"]',
-        'input[autocomplete="off"]:not([type="password"]):not([placeholder*="验证码"])',
+        'input[placeholder*="邮箱"]',
+        'input[placeholder*="手机"]',
+        'input[autocomplete="off"]:not([type="password"]):not([placeholder*="验证码"]):not([name*="captcha" i]):not([name*="code" i]):not([id*="captcha" i]):not([id*="code" i])',
       ])
       const passwordInput = await visibleLocator([
         'input[autocomplete="current-password"]',
         'input[name="password"]',
+        'input[id*="password" i]',
         'input[type="password"]',
         'input[placeholder*="密码"]',
       ])
@@ -334,21 +353,20 @@ const login = async () => {
         'input[placeholder*="验证码"]',
         'input[name*="captcha" i]',
         'input[name*="code" i]',
+        'input[id*="captcha" i]',
+        'input[id*="verify" i]',
+        'input[aria-label*="验证码"]',
       ])
       if (!usernameInput || !passwordInput || !captchaInput) throw new Error('登录表单字段不完整')
       await usernameInput.fill(config.username)
       await passwordInput.fill(config.password)
       await captchaInput.fill(captchaText)
-      const button = await visibleLocator([
-        '.btn-box .btn',
-        'button:has-text("登录")',
-        '[role="button"]:has-text("登录")',
-      ])
+      const button = await findLoginButton()
       if (!button) throw new Error('未找到登录按钮')
       await button.click()
       await sleep(1800)
-      const stillLoginForm = Boolean(await visibleLocator(['input[type="password"]', 'input[placeholder*="验证码"]']))
-      if (!page.url().includes('/passport/login/') && !stillLoginForm) return
+      const stillLoginForm = Boolean(await visibleLocator(['input[type="password"]', 'input[placeholder*="密码"]']))
+      if (customCode ? !stillLoginForm : !page.url().includes('/passport/login/') && !stillLoginForm) return
       throw new Error('登录未成功')
     } catch (error) {
       console.error(`第 ${attempt} 次登录失败：${error instanceof Error ? error.message : error}`)
@@ -410,8 +428,10 @@ const waitForLoginForm = async () => {
 }
 
 const loginFormVisible = await waitForLoginForm()
-if (portal === 'custom' && loginFormVisible) await loginWithoutCaptcha()
-else if (page.url().includes('/passport/login/') && loginFormVisible) await login()
+if (portal === 'custom' && loginFormVisible) {
+  if (customCode) await login()
+  else await loginWithoutCaptcha()
+} else if (page.url().includes('/passport/login/') && loginFormVisible) await login()
 if (!devMode) {
   if (portal === 'chenghua')
     await page.goto('https://www.chenghua-ai.com/chat/pages/application', { waitUntil: 'domcontentloaded' })

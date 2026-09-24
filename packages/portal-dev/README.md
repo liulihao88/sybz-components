@@ -1,6 +1,6 @@
 # @sybz-components/portal-dev
 
-成华、石景山门户自动登录 CLI，也可登录只需用户名和密码的自定义网站，并按需启动石景山门户本地联调。
+成华、石景山门户自动登录 CLI，也可登录自定义网站，并按需启动石景山门户本地联调。
 
 ## 环境要求
 
@@ -137,7 +137,7 @@ portal-dev config --portal custom
 portal-dev --portal custom 我的账号
 ```
 
-配置时依次输入登录页 URL、用户名和密码。登录时会自动查找常见的用户名、邮箱、密码输入框，以及“登录”、“Login”或“Sign in”按钮；按钮文字中包含用于排版的空格时（例如“登 录”）也能识别。该模式不会执行验证码识别、样板间搜索或 Token 跳转。
+配置时输入登录页 URL、是否需要图形验证码、用户名和密码。默认只查找常见的用户名、邮箱、密码输入框，以及“登录”、“Login”或“Sign in”按钮；按钮文字中包含用于排版的空格时（例如“登 录”）也能识别。需要图形验证码时，将该账号的 `code` 设为 `true`（配置交互中回答 `y`）。此时会寻找可见的验证码图片和输入框，识别后填写三个字段并提交，失败时最多重试 5 次。支持常见的 `captcha`、`verify`、`code` 命名及“验证码”标签；OCR 支持 3–8 位英数字图形码。自定义网站不会执行样板间搜索或 Token 跳转。
 
 执行 `portal-dev config` 时，可以直接为账号设置快捷别名。石景山账号还可选择“只登录”或“本地联调”模式。例如将某个账号的别名配置为 `sjs-dev`：
 
@@ -186,6 +186,7 @@ portal-dev sjs-dev
         "loginUrl": "https://example.com/login",
         "username": "user3",
         "password": "******",
+        "code": true,
         "alias": "internal",
         "mode": "login"
       }

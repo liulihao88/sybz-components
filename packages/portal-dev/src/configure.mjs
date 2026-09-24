@@ -98,6 +98,7 @@ if (portal === 'custom') {
     rl.close()
     throw new Error('登录页 URL 必须是有效的 http 或 https 地址')
   }
+  profileOptions.code = /^(y|yes|1|是)$/i.test((await rl.question('登录时是否需要图形验证码？（y/N）：')).trim())
 }
 const username = (await rl.question(`请输入${portalName}账号：`)).trim()
 rl.close()
