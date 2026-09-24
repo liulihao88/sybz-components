@@ -72,7 +72,7 @@ interface TableProps {
   background?: string
   /** 是否使用简洁表格样式，去除单元格左右边框 */
   simple?: boolean
-  /** 是否显示表格外层边框 */
+  /** 是否显示表格及单元格边框 */
   border?: boolean
   pageSize?: number
   pageNumber?: number
@@ -1464,7 +1464,7 @@ defineExpose({
     height: 50px;
     background: var(--el-bg-color);
     border: 1px solid var(--el-border-color-light);
-    border-top-style: none;
+    border-top: 2px solid var(--el-border-color-light);
   }
 
   .page-wrap .page-left {
@@ -1492,7 +1492,20 @@ defineExpose({
     white-space: nowrap;
   }
 
+  .page-wrap :deep(.el-pagination--small .el-pagination__editor.el-input) {
+    --el-input-height: var(--el-pagination-button-height-small);
+  }
+
+  .page-wrap :deep(.el-pagination--small .el-pagination__jump .el-input__wrapper),
+  .page-wrap :deep(.el-pagination--small .el-pagination__sizes .el-select__wrapper) {
+    box-sizing: border-box;
+    height: var(--el-pagination-button-height-small);
+    min-height: var(--el-pagination-button-height-small);
+  }
+
   :deep(.el-table) {
+    --el-table-row-hover-bg-color: var(--el-color-primary-light-9);
+
     box-shadow: none !important;
   }
 

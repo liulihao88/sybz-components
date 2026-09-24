@@ -159,7 +159,9 @@
   .el-table__body tr:hover > td.el-table__cell,
   .el-table__body tr.hover-row,
   .el-table__body tr.hover-row > td.el-table__cell,
-  .el-table__body tr.hover-row.current-row > td.el-table__cell {
+  .el-table__body tr.hover-row.current-row > td.el-table__cell,
+  .el-table--striped .el-table__body tr.el-table__row--striped:hover > td.el-table__cell,
+  .el-table--striped .el-table__body tr.el-table__row--striped.hover-row > td.el-table__cell {
     --el-table-tr-bg-color: var(--s-sjs-row-hover);
 
     background: var(--s-sjs-row-hover) !important;
@@ -225,7 +227,7 @@
   }
 
   .page-wrap {
-    border-top: 1px solid var(--s-sjs-table-line);
+    border-top: 2px solid var(--s-sjs-table-line);
     border-right: 0;
     border-bottom: 0;
     border-left: 0;

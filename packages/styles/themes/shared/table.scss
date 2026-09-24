@@ -29,3 +29,30 @@
     box-shadow: none !important;
   }
 }
+
+// 作用域止于嵌套的 s-table，让子表的 border 独立生效。
+@scope (.s-table.s-table--no-border) to (.s-table) {
+  :scope:scope:scope:scope:scope > .el-table,
+  :scope:scope:scope:scope:scope > .page-wrap {
+    border: 0 !important;
+  }
+
+  :scope:scope:scope:scope:scope > .el-table th.el-table__cell,
+  :scope:scope:scope:scope:scope > .el-table td.el-table__cell,
+  :scope:scope:scope:scope:scope > .el-table .el-table-fixed-column--left,
+  :scope:scope:scope:scope:scope > .el-table .el-table-fixed-column--right {
+    border: 0 !important;
+  }
+
+  :scope:scope:scope:scope:scope > .el-table .el-table__inner-wrapper::before,
+  :scope:scope:scope:scope:scope > .el-table .el-table--border::before,
+  :scope:scope:scope:scope:scope > .el-table .el-table--border::after,
+  :scope:scope:scope:scope:scope > .el-table .el-table__border-left-patch,
+  :scope:scope:scope:scope:scope > .el-table .el-table__border-right-patch,
+  :scope:scope:scope:scope:scope > .el-table .el-table__border-bottom-patch,
+  :scope:scope:scope:scope:scope > .el-table .el-table-fixed-column--left::before,
+  :scope:scope:scope:scope:scope > .el-table .el-table-fixed-column--right::before {
+    display: none !important;
+    box-shadow: none !important;
+  }
+}

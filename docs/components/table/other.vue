@@ -9,6 +9,8 @@ const data = ref([
 const otherParams = ref({
   showPage: true,
   fixed: false,
+  border: true,
+  size: 'default',
 })
 const columns = computed(() => {
   return [
@@ -103,6 +105,7 @@ const columns = computed(() => {
       <s-radio v-model="otherParams.size" :options="['small', 'default', 'large']" type="simple" title="size"></s-radio>
       <s-radio v-model="otherParams.showPage" :options="[true, false]" type="simple" title="showPage"></s-radio>
       <s-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></s-radio>
+      <s-radio v-model="otherParams.border" :options="[true, false]" type="simple" title="border"></s-radio>
     </s-flex>
     <s-table
       :columns="columns"

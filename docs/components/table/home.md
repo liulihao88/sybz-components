@@ -24,14 +24,6 @@ table/base
 table/backend
 :::
 
-### 外层边框（border 默认值：true）
-
-设置 `:border="false"` 可去掉表格和分页区域的外层边框。基础写法：`<s-table :columns="columns" :data="data" :border="false" />`。
-
-:::demo 属性：`border` 类型 `boolean`，可选值 `true / false`，默认值 `true`。
-table/base/border
-:::
-
 ### 成华主题
 
 #### chenghua主题示例
@@ -157,7 +149,7 @@ table/empty
 |      `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string  | `default`      |
 |   `background`    | 表格自身及表体背景色，支持 CSS 颜色值                          | string  | -              |
 |     `simple`      | 是否使用简洁表格样式，去除单元格左右边框                       | boolean | `false`        |
-|     `border`      | 是否显示表格外层边框                                           | boolean | `true`         |
+|     `border`      | 是否显示表格及单元格边框                                       | boolean | `true`         |
 |    `pageSize`     | 每页条数                                                       | number  | `30`           |
 |   `pageNumber`    | 当前页码                                                       | number  | `1`            |
 |    `pageSizes`    | 分页器可选每页条数                                             | array   | `[10, 30, 50]` |
