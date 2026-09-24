@@ -22,6 +22,16 @@ markdown/base
 markdown/chenghua
 :::
 
+### 编辑与实时预览（默认 `editable=false`、`disabled=false`、`width='100%'`、`language='zh-CN'`、`theme='light'`）
+
+开启 `editable` 后使用内置的 `md-editor-v3`，通过 `v-model` 绑定源文本。工具栏、快捷键、实时预览、全屏、目录、图片上传、代码高亮、Mermaid、KaTeX、自定义工具栏和全部公开方法均由编辑器提供。`md-editor-v3` 已作为 `sybz-components` 的运行时依赖，业务项目不需要单独安装。
+
+`editable` 可选 `true / false`，默认值 `false`；`disabled` 可选 `true / false`，默认值 `false`，开启后文本和左侧编辑工具不可操作，左侧源码仍可滚动，右侧预览、分栏和全屏工具仍可使用；其他属性、事件、插槽与暴露方法保持 `md-editor-v3@4.21.3` 的用法。
+
+:::demo 基础写法：`<s-markdown v-model="source" editable />`。属性：`editable`、`disabled` 可选 `true / false`，默认值均为 `false`；`width` 默认值 `100%`，`height` 默认值为编辑器的 `500px`，示例设置 `width="100%"`、`:height="420"`；还展示了 `language="zh-CN"`、`:show-code-row-number="true"` 和 `@on-save`。
+markdown/editable
+:::
+
 ### 完整语法
 
 :::demo 同一个组件可以渲染 KaTeX 数学公式、Mermaid 图表、脚注和定义列表。属性：`source` 默认值 `''`；`math`、`mermaid` 默认值均为 `true`。
@@ -48,16 +58,6 @@ markdown/example
 
 :::demo 基础写法：`<s-markdown :source="source" content-type="html" />`。属性：`source` 默认值 `''`；`contentType` 可选 `markdown / html`，默认值 `markdown`；`sanitize` 可选 `true / false`，默认值 `true`。
 markdown/html
-:::
-
-### 编辑与实时预览（默认 `editable=false`、`disabled=false`、`width='100%'`、`language='zh-CN'`、`theme='light'`）
-
-开启 `editable` 后使用内置的 `md-editor-v3`，通过 `v-model` 绑定源文本。工具栏、快捷键、实时预览、全屏、目录、图片上传、代码高亮、Mermaid、KaTeX、自定义工具栏和全部公开方法均由编辑器提供。`md-editor-v3` 已作为 `sybz-components` 的运行时依赖，业务项目不需要单独安装。
-
-`editable` 可选 `true / false`，默认值 `false`；`disabled` 可选 `true / false`，默认值 `false`，开启后文本和左侧编辑工具不可操作，右侧预览、分栏和全屏工具仍可使用；`width`、`height` 支持 CSS 尺寸字符串或数字，数字按 `px` 处理，`width` 默认值 `100%`，编辑模式未设置 `height` 时沿用编辑器默认高度；`language` 默认值 `zh-CN`；`theme` 可选 `light / dark`，默认值 `light`；`previewTheme` 可选 `default / github / vuepress / mk-cute / smart-blue / cyanosis`，默认值 `default`；`showCodeRowNumber` 可选 `true / false`，默认值 `false`。其他属性、事件、插槽与暴露方法保持 `md-editor-v3@4.21.3` 的用法。
-
-:::demo 基础写法：`<s-markdown v-model="source" editable />`。属性：`editable`、`disabled` 可选 `true / false`，默认值均为 `false`；`width` 默认值 `100%`，`height` 默认值为编辑器的 `500px`，示例设置 `width="100%"`、`:height="420"`；还展示了 `language="zh-CN"`、`:show-code-row-number="true"` 和 `@on-save`。
-markdown/editable
 :::
 
 ### API

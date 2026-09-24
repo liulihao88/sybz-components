@@ -799,6 +799,7 @@ defineExpose({
 }
 :deep(.el-form-item) {
   align-items: v-bind('formAlign');
+  min-width: 0;
 
   .el-form-item__content {
     display: flex;

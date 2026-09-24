@@ -64,6 +64,30 @@ const fieldList = [
     },
   },
   {
+    label: 's-json描述',
+    value: 's-json-desc',
+    comp: 's-json',
+    column: 1,
+    attrs: {
+      lineNumbers: false,
+      editable: false,
+      // showStatus: false,
+      width: '100%',
+    },
+  },
+  {
+    label: 's-markdown描述',
+    value: 'markdownValue',
+    comp: 's-markdown',
+    column: 1,
+    width: '100%',
+    attrs: {
+      editable: true,
+      height: 200,
+      disabled: false,
+    },
+  },
+  {
     label: '昵称',
     prop: 'name',
     useSlot: true,
@@ -109,7 +133,7 @@ const fieldList = [
   {
     label: '是否开启开关',
     prop: 'lock',
-    comp: 'el-switch',
+    comp: 's-switch',
   },
   {
     label: '年龄',
@@ -134,27 +158,6 @@ const fieldList = [
       type: 'daterange',
     },
   },
-  {
-    label: 's-json描述',
-    value: 's-json-desc',
-    comp: 's-json',
-    column: 1,
-    attrs: {
-      lineNumbers: false,
-      editable: false,
-      // showStatus: false,
-    },
-  },
-  {
-    label: 's-markdown描述',
-    value: 'markdownValue',
-    comp: 's-markdown',
-    column: 1,
-    attrs: {
-      // editable: true,
-      disabled: true,
-    },
-  },
 ]
 
 const gFormRef = ref()
@@ -166,18 +169,16 @@ async function isTest16() {
 </script>
 
 <template>
-  <div>
-    <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules" :column="2">
-      <template #name-label>自定义label(使用useSlot)</template>
-      <template #name>
-        <s-input v-model="model.name" placeholder="我是name" width="300" />
-      </template>
-      <template #age>
-        <s-input-number v-model="model.age" width="100%" height="32" />
-      </template>
-    </s-form>
-    <el-button type="primary" @click="isTest16">测试36</el-button>
-  </div>
+  <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules" :column="2" style="background: yellow">
+    <template #name-label>自定义label(使用useSlot)</template>
+    <template #name>
+      <s-input v-model="model.name" placeholder="我是name" width="300" />
+    </template>
+    <template #age>
+      <s-input-number v-model="model.age" width="100%" height="32" />
+    </template>
+  </s-form>
+  <el-button type="primary" @click="isTest16">测试36</el-button>
 </template>
 
 <style scoped lang="scss"></style>

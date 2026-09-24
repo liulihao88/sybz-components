@@ -537,6 +537,10 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped lang="scss">
+.s-markdown-editor :deep(.md-editor-footer) {
+  line-height: 1;
+}
+
 .s-markdown-editor.is-disabled :deep(.md-editor-toolbar-left) {
   pointer-events: none;
   opacity: 0.6;
@@ -562,7 +566,7 @@ onBeforeUnmount(() => {
   z-index: 10;
   inset: 0;
   background-color: color-mix(in srgb, var(--el-disabled-bg-color) 72%, transparent);
-  cursor: not-allowed;
+  pointer-events: none;
   content: '';
 }
 
