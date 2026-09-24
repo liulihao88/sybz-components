@@ -63,3 +63,358 @@
     border-bottom: 0 !important;
   }
 }
+
+// 三个主题共用表格结构和交互规则，成华的独立尺寸与边框在分支中保留。
+@mixin s-table-theme($theme, $token-prefix, $chenghua: false) {
+  $radius-token: 'radius-card';
+  $table-bg-token: 'card-bg';
+  $body-bg-token: 'card-bg';
+  $cell-line-token: 'table-line-soft';
+  $fixed-line-token: 'table-line';
+
+  @if $chenghua {
+    $radius-token: 'radius';
+    $table-bg-token: 'table-header-bg';
+    $body-bg-token: 'bg';
+    $cell-line-token: 'divider';
+    $fixed-line-token: 'table-line-soft';
+  }
+
+  .s-table.s-table--#{$theme}.s-table--#{$theme} {
+    border-radius: var(--s-#{$token-prefix}-#{$radius-token});
+    background: var(--s-table-background, var(--s-#{$token-prefix}-#{$table-bg-token})) !important;
+    color: var(--s-#{$token-prefix}-text);
+
+    @if not $chenghua {
+      border: 1px solid var(--s-#{$token-prefix}-table-line);
+      font-family: var(--s-#{$token-prefix}-font-family);
+      box-shadow: var(--s-#{$token-prefix}-shadow-soft);
+      overflow: hidden;
+    }
+
+    .el-table {
+      --el-table-border-color: var(--s-#{$token-prefix}-table-line-soft);
+      --el-table-border: 1px solid var(--s-#{$token-prefix}-table-line-soft);
+      --el-table-header-text-color: var(--s-#{$token-prefix}-#{if($chenghua, 'text', 'text-regular')});
+      --el-table-text-color: var(--s-#{$token-prefix}-#{if($chenghua, 'text', 'text-regular')});
+      --el-table-row-hover-bg-color: var(--s-#{$token-prefix}-row-hover);
+      --el-table-current-row-bg-color: var(--s-#{$token-prefix}-fill);
+
+      @if not $chenghua {
+        --el-table-header-bg-color: var(--s-#{$token-prefix}-table-header-bg);
+
+        border-radius: var(--s-#{$token-prefix}-radius-card) var(--s-#{$token-prefix}-radius-card) 0 0;
+        box-shadow: none !important;
+      } @else {
+        border-top-left-radius: var(--s-ch-radius);
+        border-top-right-radius: var(--s-ch-radius);
+        box-shadow: 0 8px 24px rgba(var(--s-ch-primary-rgb), 0.08) !important;
+      }
+
+      border-color: transparent;
+      overflow: hidden;
+      background: var(--s-table-background, var(--s-#{$token-prefix}-#{$table-bg-token})) !important;
+    }
+
+    .el-table__inner-wrapper {
+      overflow: hidden;
+
+      @if $chenghua {
+        border-top-left-radius: var(--s-ch-radius);
+        border-top-right-radius: var(--s-ch-radius);
+      } @else {
+        border-radius: var(--s-#{$token-prefix}-radius-card) var(--s-#{$token-prefix}-radius-card) 0 0;
+      }
+
+      background: var(--s-table-background, var(--s-#{$token-prefix}-#{$table-bg-token})) !important;
+    }
+
+    .el-table__header-wrapper,
+    .el-table__fixed-header-wrapper,
+    .el-table__fixed-right .el-table__fixed-header-wrapper,
+    .el-table__header,
+    .el-table__header thead,
+    .el-table__header tr {
+      background: var(--s-#{$token-prefix}-table-header-bg) !important;
+    }
+
+    .el-table__header,
+    .el-table__body,
+    .el-table__footer {
+      margin: 0 !important;
+      border-spacing: 0 !important;
+      border-collapse: separate !important;
+    }
+
+    .el-table tr {
+      border-top: 0 !important;
+    }
+
+    .el-table__body-wrapper,
+    .el-table__fixed-body-wrapper,
+    .el-table__fixed-right .el-table__fixed-body-wrapper,
+    .el-table__body,
+    .el-table__body tbody {
+      background: var(--s-table-background, var(--s-#{$token-prefix}-#{$body-bg-token}));
+    }
+
+    .el-table__inner-wrapper::before,
+    .el-table--border::before,
+    .el-table--border::after,
+    .el-table--border .el-table__inner-wrapper::after,
+    .el-table__border-left-patch,
+    .el-table__border-right-patch,
+    .el-table__border-bottom-patch {
+      background-color: transparent !important;
+    }
+
+    .el-table th.el-table__cell {
+      height: if($chenghua, 44px, 40px);
+      overflow: hidden;
+      border-bottom: 1px solid var(--s-#{$token-prefix}-table-line) !important;
+      background: var(--s-#{$token-prefix}-table-header-bg) !important;
+      background-clip: padding-box;
+
+      @if not $chenghua {
+        color: var(--s-#{$token-prefix}-text);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      letter-spacing: 0;
+    }
+
+    .el-table__header tr:first-child th.el-table__cell:first-child {
+      border-top-left-radius: var(--s-#{$token-prefix}-#{$radius-token});
+    }
+
+    .el-table__header tr:first-child th.el-table__cell:last-child,
+    .el-table__header tr:first-child th.el-table__cell.gutter {
+      border-top-right-radius: var(--s-#{$token-prefix}-#{$radius-token});
+    }
+
+    .el-table__fixed-header-wrapper .el-table__header tr:first-child th.el-table__cell:first-child,
+    .el-table__fixed-left .el-table__header tr:first-child th.el-table__cell:first-child {
+      border-top-left-radius: var(--s-#{$token-prefix}-#{$radius-token});
+    }
+
+    .el-table__fixed-right .el-table__header tr:first-child th.el-table__cell:last-child {
+      border-top-right-radius: var(--s-#{$token-prefix}-#{$radius-token});
+    }
+
+    .el-table th.el-table__cell,
+    .el-table td.el-table__cell {
+      border-top: 0 !important;
+      border-left: 0 !important;
+      border-right: 1px solid var(--s-#{$token-prefix}-#{$cell-line-token}) !important;
+
+      @if not $chenghua {
+        color: var(--s-#{$token-prefix}-text-regular);
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
+    .el-table th.el-table__cell:last-child,
+    .el-table td.el-table__cell:last-child,
+    .el-table th.el-table__cell.gutter,
+    .el-table td.el-table__cell.gutter {
+      border-right: 0 !important;
+    }
+
+    .el-table th.el-table__cell.is-sortable:hover {
+      background: var(--s-#{$token-prefix}-primary-soft-2) !important;
+    }
+
+    .el-table tr:not(:last-child) td.el-table__cell,
+    .el-table td.el-table__cell {
+      border-bottom: 1px solid var(--s-#{$token-prefix}-table-line-soft) !important;
+    }
+
+    .el-table__body tr.el-table__row,
+    .el-table__body tr.el-table__row > td.el-table__cell {
+      --el-table-tr-bg-color: var(--s-#{$token-prefix}-table-row-bg);
+
+      background: var(--s-#{$token-prefix}-table-row-bg) !important;
+      transition: background-color 0.18s ease;
+    }
+
+    .el-table__body tr.el-table__row {
+      background: var(--s-#{$token-prefix}-table-row-bg) !important;
+    }
+
+    .el-table__body tr.el-table__row > td.el-table__cell .cell {
+      background-color: transparent;
+      transition: background-color 0.18s ease;
+    }
+
+    .el-table--striped .el-table__body tr.el-table__row--striped {
+      background: var(--s-#{$token-prefix}-table-row-alt) !important;
+    }
+
+    .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+      --el-table-tr-bg-color: var(--s-#{$token-prefix}-table-row-alt);
+
+      background: var(--s-#{$token-prefix}-table-row-alt) !important;
+    }
+
+    .el-table__body tr.el-table__row.current-row,
+    .el-table__body tr.el-table__row.current-row > td.el-table__cell,
+    .el-table__body tr.el-table__row:hover,
+    .el-table__body tr:hover > td.el-table__cell,
+    .el-table__body tr.hover-row,
+    .el-table__body tr.hover-row > td.el-table__cell,
+    .el-table__body tr.hover-row.current-row > td.el-table__cell,
+    .el-table--striped .el-table__body tr.el-table__row--striped:hover > td.el-table__cell,
+    .el-table--striped .el-table__body tr.el-table__row--striped.hover-row > td.el-table__cell {
+      --el-table-tr-bg-color: var(--s-#{$token-prefix}-row-hover);
+
+      background: var(--s-#{$token-prefix}-row-hover) !important;
+    }
+
+    .el-table__body tr.el-table__row.current-row > td.el-table__cell .cell,
+    .el-table__body tr:hover > td.el-table__cell .cell,
+    .el-table__body tr.hover-row > td.el-table__cell .cell,
+    .el-table__body tr.hover-row.current-row > td.el-table__cell .cell {
+      background: transparent !important;
+    }
+
+    .el-table__body tr:hover > td.el-table__cell .cell > :not([class*='el-']),
+    .el-table__body tr.hover-row > td.el-table__cell .cell > :not([class*='el-']),
+    .el-table__body tr:hover > td.el-table__cell .cell > :not([class*='el-']) > :not([class*='el-']),
+    .el-table__body tr.hover-row > td.el-table__cell .cell > :not([class*='el-']) > :not([class*='el-']) {
+      background-color: transparent !important;
+    }
+
+    .el-table-fixed-column--right,
+    .el-table-fixed-column--left {
+      background: inherit;
+    }
+
+    .el-table-fixed-column--right.is-last-column::before,
+    .el-table-fixed-column--right.is-first-column::before,
+    .el-table-fixed-column--left.is-last-column::before,
+    .el-table-fixed-column--left.is-first-column::before {
+      box-shadow: none;
+    }
+
+    .el-table-fixed-column--left.is-last-column {
+      border-right: 1px solid var(--s-#{$token-prefix}-#{$fixed-line-token}) !important;
+    }
+
+    .el-table-fixed-column--right.is-first-column,
+    .el-table-fixed-column--right.is-last-column {
+      border-left: 1px solid var(--s-#{$token-prefix}-#{$fixed-line-token}) !important;
+    }
+
+    .hide-btns-button:not(.is-disabled) {
+      color: var(--s-#{$token-prefix}-primary);
+    }
+
+    .el-button.is-link:not(.is-disabled) {
+      color: var(--s-#{$token-prefix}-primary);
+      font-weight: 500;
+    }
+
+    .el-button.is-link:not(.is-disabled):hover {
+      color: var(--s-#{$token-prefix}-primary-active);
+    }
+
+    .el-checkbox__input.is-checked .el-checkbox__inner,
+    .el-checkbox__input.is-indeterminate .el-checkbox__inner,
+    .el-radio__input.is-checked .el-radio__inner {
+      border-color: var(--s-#{$token-prefix}-primary);
+      background-color: var(--s-#{$token-prefix}-primary);
+    }
+
+    .el-radio__input.is-checked + .el-radio__label {
+      color: var(--s-#{$token-prefix}-primary);
+    }
+
+    .page-wrap {
+      @if $chenghua {
+        border-color: transparent;
+      }
+
+      border-top: 1px solid var(--s-#{$token-prefix}-table-line);
+
+      @if not $chenghua {
+        border-right: 0;
+        border-bottom: 0;
+        border-left: 0;
+      }
+
+      border-bottom-right-radius: var(--s-#{$token-prefix}-radius);
+      border-bottom-left-radius: var(--s-#{$token-prefix}-radius);
+      background: var(--s-#{$token-prefix}-table-page-bg);
+      color: var(--s-#{$token-prefix}-text-muted);
+      box-shadow: if($chenghua, 0 6px 18px rgba(var(--s-ch-primary-rgb), 0.04), none);
+    }
+
+    .page-wrap .page-left {
+      color: var(--s-#{$token-prefix}-text-muted);
+    }
+
+    .s-table__total {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 24px;
+      margin: 0 8px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: var(--s-#{$token-prefix}-primary-soft-2);
+      color: var(--s-#{$token-prefix}-primary);
+      font-weight: 700;
+    }
+
+    .el-pagination.is-background .btn-prev,
+    .el-pagination.is-background .btn-next,
+    .el-pagination.is-background .el-pager li {
+      border: 1px solid transparent;
+      background: var(--s-#{$token-prefix}-fill);
+      color: var(--s-#{$token-prefix}-text-regular);
+    }
+
+    .el-pagination.is-background .btn-prev:hover,
+    .el-pagination.is-background .btn-next:hover,
+    .el-pagination.is-background .el-pager li:hover {
+      border-color: transparent;
+      color: var(--s-#{$token-prefix}-primary);
+    }
+
+    .el-pagination.is-background .el-pager li.is-active {
+      border-color: transparent;
+      background: var(--s-#{$token-prefix}-primary);
+      color: #ffffff;
+      box-shadow: 0 6px 14px rgba(var(--s-#{$token-prefix}-primary-rgb), 0.22);
+    }
+
+    .el-pagination .el-input__wrapper,
+    .el-pagination .el-select__wrapper {
+      border-radius: var(--s-#{$token-prefix}-radius-small);
+
+      @if $chenghua {
+        box-shadow: none;
+      } @else {
+        border: 1px solid var(--s-#{$token-prefix}-table-line-soft);
+        background: var(--s-#{$token-prefix}-control-bg);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      }
+    }
+
+    @if not $chenghua {
+      .el-pagination .el-input__wrapper:hover,
+      .el-pagination .el-select__wrapper:hover {
+        border-color: var(--s-#{$token-prefix}-primary-border);
+      }
+
+      .el-pagination .el-input__wrapper.is-focus,
+      .el-pagination .el-select__wrapper.is-focused {
+        border-color: var(--s-#{$token-prefix}-primary);
+        box-shadow: 0 0 0 2px var(--s-#{$token-prefix}-primary-soft);
+      }
+    }
+  }
+}
