@@ -169,7 +169,7 @@ async function isTest16() {
 </script>
 
 <template>
-  <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules" :column="2" style="background: yellow">
+  <s-form ref="gFormRef" :model="model" :field-list="fieldList" :rules="rules" :column="2">
     <template #name-label>自定义label(使用useSlot)</template>
     <template #name>
       <s-input v-model="model.name" placeholder="我是name" width="300" />

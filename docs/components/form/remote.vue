@@ -53,6 +53,7 @@ const fieldList = [
     label: '爱好',
     prop: 'hobby',
     comp: 's-select',
+
     rules: [
       {
         required: true,
@@ -64,6 +65,7 @@ const fieldList = [
       multiple: true,
       style: { width: '100%' },
       value: 'id',
+      size: 'small',
       options: [
         { name: '唱', id: '11' },
         { name: '跳', id: '22' },

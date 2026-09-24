@@ -78,7 +78,7 @@ select/size
 
 ### 多选--隐藏多余标签的多选
 
-:::demo 展示多选交互。基础写法：`<s-select title="你好" v-model="optionsId" multiple label="name" value="id" showPrefix @changeSelect="changeSelect" @change="change" :options="stepList"></s-select>`。属性：`multiple` 可选 `true / false`，默认值 `false`。
+:::demo 展示多选交互。基础写法：`<s-select title="你好" v-model="optionsId" multiple label="name" value="id" showPrefix @changeSelect="changeSelect" @change="change" :options="stepList"></s-select>`。属性：`multiple` 可选 `true / false`，默认值 `false`；`showAll` 可选 `true / false`，默认值 `true`。点击全选栏中除反选按钮外的任意位置可切换全选状态。
 select/multiple
 :::
 
@@ -221,5 +221,5 @@ function changeSelect({ value, label, option, index }: SSelectChangeContext) {
 ### 说明
 
 - 组件基于 `el-select` 封装，绝大多数原生属性都可以直接透传。
-- 多选模式下支持全选、反选和上下快速切换。
+- 多选模式下支持全选、反选和上下快速切换；全选栏中除反选按钮外的任意位置均可切换全选状态。在 `s-form` 中，多选框与快速切换按钮会随标签换行一起增高。
 - 默认推荐使用 `options` 配置；未传 `options` 时，也支持在默认插槽中直接书写 `el-option`。

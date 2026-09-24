@@ -805,16 +805,20 @@ defineExpose({
     display: flex;
     align-items: stretch;
 
-    .el-input,
-    .el-select,
-    .el-date-editor,
-    .el-input-number,
-    .el-textarea,
-    .s-input,
-    .s-select,
-    .s-date-picker {
+    > .el-input,
+    > .el-select,
+    > .el-date-editor,
+    > .el-input-number,
+    > .el-textarea,
+    > .s-input,
+    > .s-select,
+    > .s-date-picker {
       width: 100%;
       height: 100%;
+    }
+
+    > .s-select.is-multiple:not(.has-custom-height) {
+      height: auto;
     }
   }
 }

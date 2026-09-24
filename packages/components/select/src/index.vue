@@ -54,11 +54,16 @@
           </template>
           <template v-if="$slots.header || (multiple && mergedProps.showAll && sOptions.length > 0)" #header>
             <div v-if="$slots.header" class="s-select__custom-header"><slot name="header" /></div>
-            <div v-if="multiple && mergedProps.showAll && sOptions.length > 0" class="s-select__bulk-actions">
+            <div
+              v-if="multiple && mergedProps.showAll && sOptions.length > 0"
+              class="s-select__bulk-actions"
+              @click="selectAll(!selectChecked)"
+            >
               <el-checkbox
                 v-model="selectChecked"
                 :indeterminate="indeterminate"
                 class="s-select__all-select"
+                @click.stop
                 @change="selectAll"
               >
                 全选
@@ -703,8 +708,7 @@ function emitChangeSelect(
     height: auto;
 
     .s-select__tooltip-trigger,
-    :deep(.el-select),
-    :deep(.el-select__wrapper) {
+    :deep(.el-select) {
       height: auto;
     }
 
@@ -731,6 +735,7 @@ function emitChangeSelect(
   min-height: 40px;
   padding-right: 16px;
   background: var(--el-bg-color-overlay);
+  cursor: pointer;
 }
 
 :global(.s-select__multiple-checkbox .el-select-dropdown__header) {
