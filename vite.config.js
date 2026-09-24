@@ -5,7 +5,6 @@ import fg from 'fast-glob'
 import vue from '@vitejs/plugin-vue'
 import { sybzVitePlugins } from '@sybz-components/utils/vite'
 import pkg from './package.json'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 import terser from '@rollup/plugin-terser'
 import { customVitePluginFilePath } from './packages/utils/local/customVitePluginFilePath.ts'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
@@ -115,7 +114,6 @@ export default defineConfig({
     vue({
       include: [/\.vue$/],
     }),
-    vueJsx(),
     sybzVitePlugins(),
     customVitePluginFilePath(),
     createSvgIconsPlugin({

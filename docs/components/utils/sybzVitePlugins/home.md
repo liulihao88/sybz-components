@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-`sybzVitePlugins()` 默认同时启用 Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
+`sybzVitePlugins()` 默认同时启用 Vue JSX/TSX、Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@vitejs/plugin-vue-jsx`、`@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
 
 ```ts
 import { defineConfig } from 'vite'
@@ -20,20 +20,25 @@ export default defineConfig({
 
 `sybzVitePlugins()` 内部包含多个插件。Vite 的 `PluginOption` 原生支持插件数组并会自动扁平化，因此直接放入 `plugins`，无需使用展开运算符。
 
+预设当前支持 Vite 5 和 6。项目仍需自行安装并注册 `@vitejs/plugin-vue`。
+
 :::tip 代码统一规范为什么不放进 Vite 插件？
 ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行、Git 提交和 CI 阶段，不属于 Vite 生命周期。把它们放进 `sybzVitePlugins()` 会导致只有启动或构建 Vite 时才生效。统一规则已由同一工具包的 `@sybz-components/utils/codeStandard` 集中提供，业务项目只需导入预设，升级工具包即可同步规则。
 :::
 
 ### 配置项
 
-| 属性名称        | 类型                                  | 可选值                | 默认值 | 说明                                |
-| --------------- | ------------------------------------- | --------------------- | ------ | ----------------------------------- |
-| `tailwind`      | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true` | 是否启用 Tailwind CSS v4。          |
-| `codeInspector` | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true` | 是否启用代码定位，或传入插件配置。  |
-| `gitCommitLog`  | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true` | 是否启用 Git 信息，或传入插件配置。 |
-| `buildTime`     | `boolean \| object`                   | `false/true/配置对象` | `true` | 是否注入打包时间及其 meta 配置。    |
+| 属性名称        | 类型                                  | 可选值                | 默认值 | 说明                                   |
+| --------------- | ------------------------------------- | --------------------- | ------ | -------------------------------------- |
+| `vueJsx`        | `boolean \| VueJsxOptions`            | `false/true/配置对象` | `true` | 是否启用 Vue JSX/TSX，或传入插件配置。 |
+| `tailwind`      | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true` | 是否启用 Tailwind CSS v4。             |
+| `codeInspector` | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true` | 是否启用代码定位，或传入插件配置。     |
+| `gitCommitLog`  | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true` | 是否启用 Git 信息，或传入插件配置。    |
+| `buildTime`     | `boolean \| object`                   | `false/true/配置对象` | `true` | 是否注入打包时间及其 meta 配置。       |
 
 `bundler` 已固定为 `vite`，业务项目无需重复传入。
+
+如果项目已自行注册 `vueJsx()`，请使用 `sybzVitePlugins({ vueJsx: false })`，避免重复注册。TSX 项目还需在 `tsconfig.json` 中设置 `"jsx": "preserve"` 和 `"jsxImportSource": "vue"`。
 
 ### 默认使用 VS Code 打开源码
 
@@ -42,6 +47,9 @@ ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行�
 ```ts
 plugins: [
   sybzVitePlugins({
+    vueJsx: {
+      defineComponentName: ['defineComponent'],
+    },
     codeInspector: {
       editor: 'code',
     },
@@ -110,6 +118,9 @@ plugins: [
 ```ts
 // 只启用代码定位
 plugins: [sybzVitePlugins({ gitCommitLog: false })]
+
+// 使用项目自行注册的 Vue JSX 插件
+plugins: [vueJsx(), sybzVitePlugins({ vueJsx: false })]
 
 // 只启用 Git 提交信息
 plugins: [sybzVitePlugins({ codeInspector: false })]

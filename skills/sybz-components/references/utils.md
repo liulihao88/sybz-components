@@ -25,6 +25,6 @@ $toast('删除成功')
 - `variant`: `default|delete|warning`；删除/警告自动生成标题、正文、按钮和主题状态，显式值优先。`resolveConfirmSemantic` 供自定义确认 UI 复用，勿重组语义。
 - `theme:'default'` 可关闭该次全局主题。
 - `import { sybzVitePlugins } from '@sybz-components/utils/vite'`。
-- `sybzVitePlugins()` 管理 Tailwind v4、代码定位、Git 记录、构建时间；已有 Tailwind 插件传 `{ tailwind:false }`，插件数组无需展开。
+- `sybzVitePlugins()` 默认管理 Vue JSX/TSX、Tailwind v4、代码定位、Git 记录、构建时间；已有 JSX 插件传 `{ vueJsx:false }`，已有 Tailwind 插件传 `{ tailwind:false }`，插件数组无需展开。
 - 代码规范从 `@sybz-components/utils/codeStandard` 导入，不放入 Vite 插件；项目通过一行配置分别复用 ESLint、Prettier 和 lint-staged 预设。
 - 新项目优先执行 `pnpm exec sybz-code-standard init`，自动生成规范入口、scripts 和 Husky hook。

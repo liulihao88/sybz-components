@@ -96,7 +96,7 @@ app.mount('#app')
 
 ## 2. 如何在 Vite 中注册 sybzVitePlugins？
 
-`sybzVitePlugins()` 是组件库项目推荐的 Vite 插件预设，默认同时提供 Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或注册 `@tailwindcss/vite`，在 `vite.config.ts` 中直接使用预设即可：
+`sybzVitePlugins()` 是组件库项目推荐的 Vite 插件预设，默认同时提供 Vue JSX/TSX、Tailwind CSS v4、代码定位、Git 提交信息和打包时间。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或注册 `@vitejs/plugin-vue-jsx` 和 `@tailwindcss/vite`，在 `vite.config.ts` 中直接使用预设即可：
 
 ```ts
 import { defineConfig } from 'vite'
@@ -114,6 +114,7 @@ export default defineConfig({
 
 | 配置项          | 功能                                 | 类型                                  | 默认值 |
 | --------------- | ------------------------------------ | ------------------------------------- | ------ |
+| `vueJsx`        | 启用 Vue JSX/TSX                     | `boolean \| VueJsxOptions`            | `true` |
 | `tailwind`      | 启用 Tailwind CSS v4 Vite 插件       | `boolean \| TailwindPluginOptions`    | `true` |
 | `codeInspector` | 在开发环境中从页面元素定位到对应源码 | `boolean \| SybzCodeInspectorOptions` | `true` |
 | `gitCommitLog`  | 提供项目 Git 提交信息                | `boolean \| GitCommitLogOptions`      | `true` |

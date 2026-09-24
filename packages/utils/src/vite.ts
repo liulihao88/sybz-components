@@ -1,5 +1,6 @@
 import { codeInspectorPlugin, type CodeInspectorPluginOptions } from 'code-inspector-plugin'
 import tailwindcss, { type PluginOptions as TailwindPluginOptions } from '@tailwindcss/vite'
+import vueJsx, { type Options as VueJsxOptions } from '@vitejs/plugin-vue-jsx'
 import type { Plugin, PluginOption } from 'vite'
 import { gitCommitLog, type GitCommitLogOptions } from './gitCommitLog'
 
@@ -12,6 +13,8 @@ declare global {
 export type SybzCodeInspectorOptions = Omit<CodeInspectorPluginOptions, 'bundler'>
 
 export interface SybzVitePluginsOptions {
+  /** Vue JSX/TSX 插件配置；默认启用，设为 false 时关闭。 */
+  vueJsx?: boolean | VueJsxOptions
   /** Tailwind CSS v4 Vite 插件配置；默认启用，设为 false 时关闭。 */
   tailwind?: boolean | TailwindPluginOptions
   /** 代码定位插件配置；默认启用，设为 false 时关闭。 */
@@ -60,11 +63,15 @@ const createBuildTime = (metaName = 'buildTime'): Plugin => {
 }
 
 /**
- * 创建 sybz 项目的 Vite 插件预设，默认包含 Tailwind CSS v4、代码定位、Git 提交信息和打包时间。
+ * 创建 sybz 项目的 Vite 插件预设，默认包含 Vue JSX/TSX、Tailwind CSS v4、代码定位、Git 提交信息和打包时间。
  * Vite 会自动扁平化插件数组，推荐直接写入 plugins，无需展开运算符。
  */
 export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): PluginOption => {
   const plugins: Plugin[] = []
+
+  if (options.vueJsx !== false) {
+    plugins.push(vueJsx(typeof options.vueJsx === 'object' ? options.vueJsx : {}))
+  }
 
   if (options.tailwind !== false) {
     plugins.push(...tailwindcss(typeof options.tailwind === 'object' ? options.tailwind : {}))
