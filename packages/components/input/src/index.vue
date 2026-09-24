@@ -75,15 +75,17 @@
           <!-- 后缀插槽 -->
           <template v-if="$slots.suffix || showSearchButton" #suffix>
             <slot name="suffix" />
-            <s-icon
+            <button
               v-if="showSearchButton"
-              icon="search"
+              type="button"
               class="s-input__search-button"
               :disabled="isDisabled"
               aria-label="搜索"
               title="搜索"
               @click.stop="triggerSearch"
-            ></s-icon>
+            >
+              <s-icon icon="Search" />
+            </button>
           </template>
 
           <!-- 后置插槽 -->
@@ -482,7 +484,7 @@ const mergedStyle = computed(() => {
 
   &.s-input--search {
     :deep(.el-input__wrapper) {
-      padding: 4px 4px 4px 11px;
+      padding: 0 4px 0 11px;
     }
 
     :deep(.el-input__suffix) {
@@ -537,9 +539,9 @@ const mergedStyle = computed(() => {
     justify-content: center;
     flex: none;
     width: auto;
-    height: var(--s-input-search-button-height, var(--el-input-height, var(--el-component-size)));
+    height: var(--s-input-search-button-height, calc(var(--el-input-height, var(--el-component-size, 32px)) - 8px));
     aspect-ratio: 1;
-    margin: 0;
+    margin: 4px 0;
     padding: 0;
     border: 0;
     border-radius: 8px;

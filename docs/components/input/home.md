@@ -82,7 +82,7 @@ input/autocomplete
 
 ### 快捷搜索 `search`（默认值 `false`）
 
-设置 `search` 后，搜索按钮显示在输入框内、清空图标右侧。点击搜索按钮或在输入框按 Enter 都会触发 `search` 事件，参数依次为当前输入值和原始事件。基础写法：`<s-input v-model="keyword" search placeholder="搜索工作小组..." @search="handleSearch" />`。
+设置 `search` 后，搜索按钮显示在输入框内、清空图标右侧。按钮会随输入框的 `size` 或 `height` 调整，默认输入框高度仍为 32px。点击搜索按钮或在输入框按 Enter 都会触发 `search` 事件，参数依次为当前输入值和原始事件。基础写法：`<s-input v-model="keyword" search placeholder="搜索工作小组..." @search="handleSearch" />`。
 
 :::demo 属性：`search` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`clearable` 类型 `boolean`，可选值 `true / false`，默认值 `true`。事件：`search(value, event)`。
 input/search
