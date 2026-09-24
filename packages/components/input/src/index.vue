@@ -77,14 +77,13 @@
             <slot name="suffix" />
             <s-icon
               v-if="showSearchButton"
+              icon="search"
               class="s-input__search-button"
               :disabled="isDisabled"
               aria-label="搜索"
               title="搜索"
-              height="100%"
-              icon="search"
               @click.stop="triggerSearch"
-            />
+            ></s-icon>
           </template>
 
           <!-- 后置插槽 -->
@@ -362,6 +361,7 @@ const handleSize = () => {
     sizeStyle.height = inputHeight
     sizeStyle['--s-input-height'] = inputHeight
     sizeStyle['--el-input-height'] = inputHeight
+    sizeStyle['--s-input-search-button-height'] = `calc(${inputHeight} - 8px)`
   }
 
   return sizeStyle
@@ -537,7 +537,7 @@ const mergedStyle = computed(() => {
     justify-content: center;
     flex: none;
     width: auto;
-    height: calc(var(--s-input-height, var(--el-component-size)) - 8px);
+    height: var(--s-input-search-button-height, var(--el-input-height, var(--el-component-size)));
     aspect-ratio: 1;
     margin: 0;
     padding: 0;

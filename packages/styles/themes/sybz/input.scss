@@ -65,6 +65,14 @@
     font-weight: 500;
   }
 
+  .s-input__search-button {
+    background: var(--s-sybz-primary);
+
+    &:hover:not(:disabled) {
+      background: var(--s-sybz-primary-hover);
+    }
+  }
+
   .s-input__title {
     color: var(--s-sybz-text);
     font-weight: 500;
