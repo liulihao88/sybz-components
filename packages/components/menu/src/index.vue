@@ -276,13 +276,16 @@ const handleSelect = (...args: any[]) => {
 
 <style scoped lang="scss">
 .s-menu {
+  --s-menu-motion-duration: 280ms;
+  --s-menu-motion-easing: cubic-bezier(0.22, 1, 0.36, 1);
+
   display: flex;
   flex-direction: column;
   overflow: visible;
   box-sizing: border-box;
   background: var(--s-menu-bg);
   position: relative;
-  transition: width 0.2s ease;
+  transition: width var(--s-menu-motion-duration) var(--s-menu-motion-easing);
 
   &__collapse-trigger {
     position: absolute;
@@ -303,7 +306,14 @@ const handleSelect = (...args: any[]) => {
     cursor: pointer;
     pointer-events: auto;
     opacity: 0;
-    transition: opacity 0.15s ease;
+    transition:
+      opacity 0.15s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+  &__collapse-trigger:hover {
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 4px 12px rgb(15 23 42 / 22%);
   }
   &:hover &__collapse-trigger,
   &__collapse-trigger:focus-visible {
@@ -319,14 +329,13 @@ const handleSelect = (...args: any[]) => {
       justify-content: center;
       align-items: center;
     }
-    .s-menu__brand-content,
-    .s-menu__account > div {
-      display: none;
-    }
     :deep(.s-menu__brand-content),
     :deep(.s-menu__account > div),
     :deep(.s-menu__slot-text) {
-      display: none;
+      max-width: 0;
+      opacity: 0;
+      transform: translateX(-6px);
+      visibility: hidden;
     }
     .s-menu__account {
       justify-content: center;
@@ -346,8 +355,8 @@ const handleSelect = (...args: any[]) => {
       margin: 4px 0;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 0;
+      justify-content: flex-start;
+      padding: 0 0 0 18px;
     }
 
     :deep(.el-menu-item .el-icon),
@@ -413,7 +422,9 @@ const handleSelect = (...args: any[]) => {
     margin: 0;
     padding: 16px;
     border-right: 0;
-    transition: width 0.2s ease;
+    transition:
+      width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      padding var(--s-menu-motion-duration) var(--s-menu-motion-easing);
   }
 
   &.is-auto-height &__viewport {
@@ -434,7 +445,40 @@ const handleSelect = (...args: any[]) => {
   }
 
   :deep(.el-menu) {
-    transition: width 0.2s ease;
+    transition: width var(--s-menu-motion-duration) var(--s-menu-motion-easing);
+  }
+
+  :deep(.el-menu-item),
+  :deep(.el-sub-menu__title) {
+    transition:
+      background-color 220ms ease,
+      color 220ms ease,
+      padding var(--s-menu-motion-duration) var(--s-menu-motion-easing);
+  }
+  // 覆盖 Element Plus 折叠时对文字设置的零尺寸与隐藏状态，让文字随侧栏平滑淡出。
+  :deep(.s-menu__list > .el-menu-item > span),
+  :deep(.s-menu__list > .el-sub-menu > .el-sub-menu__title > span) {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      max-width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      opacity 160ms ease,
+      visibility 0s;
+  }
+  &.is-collapse :deep(.s-menu__list > .el-menu-item > span),
+  &.is-collapse :deep(.s-menu__list > .el-sub-menu > .el-sub-menu__title > span) {
+    max-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      opacity 130ms ease,
+      visibility 0s var(--s-menu-motion-duration);
   }
 
   &__brand {
@@ -452,6 +496,9 @@ const handleSelect = (...args: any[]) => {
     border-radius: 50%;
     background: var(--s-menu-accent);
     color: #fff;
+    transition:
+      width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      height var(--s-menu-motion-duration) var(--s-menu-motion-easing);
   }
   &__brand-icon > .el-icon {
     width: 26px;
@@ -460,6 +507,20 @@ const handleSelect = (...args: any[]) => {
   }
   &__brand-content {
     min-width: 0;
+  }
+  :deep(.s-menu__brand-content),
+  :deep(.s-menu__account > div),
+  :deep(.s-menu__slot-text) {
+    max-width: 100%;
+    overflow: hidden;
+    opacity: 1;
+    white-space: nowrap;
+    visibility: visible;
+    transition:
+      max-width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      opacity 160ms ease,
+      transform var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      visibility 0s;
   }
   &__brand strong {
     display: block;
@@ -488,6 +549,9 @@ const handleSelect = (...args: any[]) => {
     background: color-mix(in srgb, var(--s-menu-text) 18%, transparent);
     font-size: 20px;
     font-weight: 700;
+    transition:
+      width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      height var(--s-menu-motion-duration) var(--s-menu-motion-easing);
   }
   &__account strong,
   &__account small {
@@ -507,7 +571,7 @@ const handleSelect = (...args: any[]) => {
   }
 
   :deep(.el-menu-item.is-active) {
-    background: var(--s-menu-accent);
+    background-color: var(--s-menu-accent);
     color: #fff;
   }
   :deep(.el-icon) {
@@ -544,13 +608,27 @@ const handleSelect = (...args: any[]) => {
       font-size: 15px;
     }
     :deep(.el-menu-item.is-active) {
-      border-left: 4px solid var(--s-menu-accent);
-      background: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
+      background-color: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
       color: var(--s-menu-accent);
+    }
+    :deep(.el-menu-item::before) {
+      position: absolute;
+      top: 25%;
+      bottom: 25%;
+      left: 0;
+      width: 4px;
+      border-radius: 0 4px 4px 0;
+      background-color: var(--s-menu-accent);
+      content: '';
+      transform: scaleY(0);
+      transition: transform 220ms var(--s-menu-motion-easing);
+    }
+    :deep(.el-menu-item.is-active::before) {
+      transform: scaleY(1);
     }
     :deep(.el-menu-item:not(.is-active):hover),
     :deep(.el-sub-menu__title:hover) {
-      background: color-mix(in srgb, var(--s-menu-accent) 5%, #fff);
+      background-color: color-mix(in srgb, var(--s-menu-accent) 5%, #fff);
     }
   }
 
@@ -565,12 +643,12 @@ const handleSelect = (...args: any[]) => {
       border-color: #294057;
     }
     :deep(.el-menu-item.is-active) {
-      background: var(--s-menu-accent);
+      background-color: var(--s-menu-accent);
       color: #fff;
     }
     :deep(.el-menu-item:not(.is-active):hover),
     :deep(.el-sub-menu__title:hover) {
-      background: color-mix(in srgb, var(--s-menu-accent) 20%, var(--s-menu-bg));
+      background-color: color-mix(in srgb, var(--s-menu-accent) 20%, var(--s-menu-bg));
     }
   }
   &--light {
@@ -583,12 +661,12 @@ const handleSelect = (...args: any[]) => {
       color: var(--s-menu-text);
     }
     :deep(.el-menu-item.is-active) {
-      background: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
+      background-color: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
       color: var(--s-menu-accent);
     }
     :deep(.el-menu-item:not(.is-active):hover),
     :deep(.el-sub-menu__title:hover) {
-      background: color-mix(in srgb, var(--s-menu-accent) 5%, #fff);
+      background-color: color-mix(in srgb, var(--s-menu-accent) 5%, #fff);
     }
   }
 }
@@ -602,7 +680,7 @@ const handleSelect = (...args: any[]) => {
     margin: 0;
     padding: var(--s-menu-fit-padding);
     border: 0;
-    transition: none;
+    transition: padding var(--s-menu-motion-duration) var(--s-menu-motion-easing);
   }
   :deep(.s-menu__list .el-menu),
   :deep(.s-menu__list .el-sub-menu) {
@@ -623,8 +701,9 @@ const handleSelect = (...args: any[]) => {
     font-size: var(--s-menu-fit-font);
     line-height: var(--s-menu-fit-row);
     transition:
-      background-color 0.2s,
-      color 0.2s;
+      background-color 220ms ease,
+      color 220ms ease,
+      padding var(--s-menu-motion-duration) var(--s-menu-motion-easing);
   }
   :deep(.s-menu__list .el-icon) {
     font-size: var(--s-menu-fit-icon);
@@ -634,6 +713,15 @@ const handleSelect = (...args: any[]) => {
     padding-bottom: 0;
     font-size: inherit;
     line-height: inherit;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s-menu,
+  .s-menu *,
+  .s-menu :deep(*) {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
 
