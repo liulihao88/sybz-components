@@ -82,6 +82,14 @@ card/mergeSections
 card/sybzTheme
 :::
 
+### 副标题与右侧文字（subTitle / extra 默认值：空字符串）
+
+在默认头部直接传入字符串。基础写法：`<SCard title="服务概览" sub-title="实时数据" extra="查看详情">卡片内容</SCard>`。
+
+:::demo 属性：`title`、`subTitle`、`extra` 类型均为 `string`，默认值均为 `''`。
+card/titleExtra
+:::
+
 ### API
 
 |          属性名          | 说明                                                          | 类型                                            | 默认值    |
@@ -90,6 +98,8 @@ card/sybzTheme
 |          `size`          | 内边距尺寸，支持预设值或可被 `processWidth` 处理的 padding 值 | `small` / `default` / `large` / string / number | `default` |
 |         `height`         | 卡片外层高度；设置后内容区在固定高度内滚动                    | string / number                                 | `''`      |
 |         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染                     | string                                          | `''`      |
+|        `subTitle`        | 默认头部副标题，传给 `s-title`                                | string                                          | `''`      |
+|         `extra`          | 默认头部右侧文字，传给 `s-title`                              | string                                          | `''`      |
 |     `hoverAnimation`     | 鼠标移入容器时是否启用轻微上浮动画                            | boolean                                         | `false`   |
 |         `shadow`         | 阴影显示时机，语义同 Element Plus Card                        | `always` / `never` / `hover`                    | `never`   |
 |        `boxStyle`        | 最外层容器样式                                                | object                                          | `{}`      |
@@ -113,12 +123,12 @@ card/sybzTheme
 
 ### 插槽
 
-|  插槽名   | 说明                           |
-| :-------: | ------------------------------ |
-| `default` | 内容区域                       |
-| `header`  | 自定义头部，会覆盖默认 `title` |
-|  `icon`   | 自定义折叠图标                 |
-| `footer`  | 底部区域                       |
+|  插槽名   | 说明                                                    |
+| :-------: | ------------------------------------------------------- |
+| `default` | 内容区域                                                |
+| `header`  | 自定义头部，会覆盖默认的 `title`、`subTitle` 和 `extra` |
+|  `icon`   | 自定义折叠图标                                          |
+| `footer`  | 底部区域                                                |
 
 ### 说明
 

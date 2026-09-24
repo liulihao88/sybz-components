@@ -338,6 +338,8 @@ export interface SCardProps {
   size?: SybzComponentSize | string | number
   height?: string | number
   title?: string
+  subTitle?: string
+  extra?: string
   hoverAnimation?: boolean
   shadow?: 'always' | 'never' | 'hover'
   boxStyle?: SybzRecord

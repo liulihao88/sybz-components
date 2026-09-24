@@ -12,6 +12,8 @@ interface CardProps {
   size?: 'default' | 'small' | 'large' | string | number
   height?: string | number
   title?: string
+  subTitle?: string
+  extra?: string
   hoverAnimation?: boolean
   shadow?: 'always' | 'never' | 'hover'
   boxStyle?: Record<string, any>
@@ -33,6 +35,8 @@ const props = withDefaults(defineProps<CardProps>(), {
   size: 'default', // small large
   height: undefined,
   title: '',
+  subTitle: '',
+  extra: '',
   hoverAnimation: false,
   shadow: 'never',
   boxStyle: () => ({}),
@@ -57,7 +61,9 @@ defineSlots<{
 }>()
 const mergedProps = useGlobalComponentConfig('card', props)
 
-const hasHeader = computed(() => Boolean(slots.header || mergedProps.value.title))
+const hasHeader = computed(() =>
+  Boolean(slots.header || mergedProps.value.title || mergedProps.value.subTitle || mergedProps.value.extra),
+)
 const hasBody = computed(() => Boolean(slots.default))
 const hasFooter = computed(() => Boolean(slots.footer))
 
@@ -256,7 +262,7 @@ const handleIconClick = (event) => {
 <template>
   <div ref="boxRef" class="s-card" :class="cardClass" :style="boxMergedStyle">
     <div
-      v-if="$slots.header || mergedProps.title"
+      v-if="hasHeader"
       ref="headerRef"
       class="s-card__header"
       :style="headerMergedStyle"
@@ -267,6 +273,8 @@ const handleIconClick = (event) => {
         <slot name="header">
           <s-title
             :title="mergedProps.title"
+            :sub-title="mergedProps.subTitle"
+            :extra="mergedProps.extra"
             :theme="mergedProps.theme"
             :style="{ ...mergedProps.headerStyle }"
           ></s-title>
