@@ -56,3 +56,10 @@
     box-shadow: none !important;
   }
 }
+
+// 分页上边框承担表格与分页之间的唯一分隔线。
+@scope (.s-table:has(> .page-wrap)) to (.s-table) {
+  :scope:scope:scope:scope:scope > .el-table .el-table__body > tbody > tr:last-child > td.el-table__cell {
+    border-bottom: 0 !important;
+  }
+}

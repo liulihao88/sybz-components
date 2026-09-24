@@ -1464,7 +1464,7 @@ defineExpose({
     height: 50px;
     background: var(--el-bg-color);
     border: 1px solid var(--el-border-color-light);
-    border-top: 2px solid var(--el-border-color-light);
+    border-top: 1px solid var(--el-border-color-light);
   }
 
   .page-wrap .page-left {
