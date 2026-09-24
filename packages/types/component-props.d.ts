@@ -679,7 +679,7 @@ export interface SWrapperProps {
   /** 容器高度，支持数字、px、百分比等；百分比需要父容器具有明确高度，默认空字符串 */
   height?: string | number
   gap?: string | number
-  columns?: number | null
+  column?: number | null
   minWidth?: string | number
 }
 

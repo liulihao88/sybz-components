@@ -6,7 +6,7 @@ const strictCount = ref(2)
 
 <template>
   <div>
-    <sWrapper :columns="2">
+    <sWrapper :column="2">
       <s-input v-model="smallCount"></s-input>
       <s-input-number v-model="smallCount" title="宽度" width="200" />
       <s-input-number v-model="smallCount" title="最大1, 最小5" :min="1" :max="5" />

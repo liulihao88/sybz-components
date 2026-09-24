@@ -1,5 +1,5 @@
 <template>
-  <s-wrapper :columns="1">
+  <s-wrapper :column="1">
     <s-select width="100%" :options="[]" title="emptyPlaceholder=暂无数据（默认值）" />
     <s-select width="100%" :options="[]" empty-placeholder="暂无可选服务" title="emptyPlaceholder=暂无可选服务" />
     <s-select width="100%" :options="[]" empty-placeholder="" title="emptyPlaceholder=空字符串" />

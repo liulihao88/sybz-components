@@ -23,7 +23,7 @@ const lists = [
 
 <template>
   <div>
-    <sWrapper :columns="3">
+    <sWrapper :column="3">
       <div v-for="(v, i) in lists" :key="i">
         <div class="f-st-ct">
           <div class="m-r-8">{{ v.label }} ({{ v.value }}) -></div>

@@ -20,10 +20,12 @@ wrapper/base
 wrapper/gap
 :::
 
-### 一行显示几个 [columns]
+### 一行显示几个 [column]（默认值：null）
 
-:::demo 展示一行显示几个 [columns]配置。基础写法：`<sWrapper gap="20px" :columns="3"></sWrapper>`。属性：`columnsCount` 类型 `number`，默认值 `null`。
-wrapper/columns
+设置 `column` 后，每行按指定列数等分；不设置时为横向滚动布局。基础写法：`<sWrapper gap="20px" :column="3"></sWrapper>`。
+
+:::demo 属性：`column` 类型 `number / null`，可设置正整数列数，默认值 `null`；`gap` 类型 `string / number`，默认值 `16px`。
+wrapper/column
 :::
 
 ### 显示在一行, 超出滚动
@@ -47,7 +49,7 @@ wrapper/size
 |  `width`   | 容器宽度，数字自动补 px，支持百分比等长度      | string / number | `''`   |
 |  `height`  | 容器高度，百分比需要父容器具有明确高度         | string / number | `''`   |
 |   `gap`    | 子项之间的间距，内部会经过 `processWidth` 处理 | string / number | `16px` |
-| `columns`  | 每行展示的列数；不传时保持横向 flex 布局       | number          | `null` |
+|  `column`  | 每行展示的列数；不传时保持横向 flex 布局       | number / null   | `null` |
 | `minWidth` | 子项最小宽度，内部会经过 `processWidth` 处理   | string / number | `0`    |
 
 ### 插槽
@@ -59,6 +61,6 @@ wrapper/size
 ### 说明
 
 - 用于统一包裹多个 `item` 组件，支持设置间距、列数和滚动布局。
-- 设置 `columns` 后会切换为 grid 等分布局；不设置时使用横向 flex，内容超出后可横向滚动。
+- 设置 `column` 后会切换为 grid 等分布局；不设置时使用横向 flex，内容超出后可横向滚动。
 - `gap` 支持 `16`、`'16'`、`'16px'`、`'5%'` 这类常见写法；纯数字或数字字符串会自动补成 `px`。
 - `minWidth` 也支持 `200`、`'200'`、`'200px'`、`'30%'` 这类写法。

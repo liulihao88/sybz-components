@@ -1,5 +1,5 @@
 <template>
-  <div class="s-wrapper" :class="{ 'with-columns': props.columns }">
+  <div class="s-wrapper" :class="{ 'with-column': props.column }">
     <component :is="item" v-for="(item, index) in validSlots" :key="index" class="col" />
   </div>
 </template>
@@ -18,7 +18,7 @@ interface WrapperProps {
   /** 容器高度，支持数字、px、百分比等；百分比需要父容器具有明确高度，默认空字符串 */
   height?: string | number
   gap?: string | number
-  columns?: number | null
+  column?: number | null
   minWidth?: string | number
 }
 
@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<WrapperProps>(), {
   width: '',
   height: '',
   gap: '16px',
-  columns: null, // null 表示不分组，保持原样
+  column: null, // null 表示不分组，保持原样
   minWidth: 0,
 })
 
@@ -72,7 +72,7 @@ const validSlots = computed(() => {
 
     > :deep(.col),
     > .col {
-      // width: calc(100% / v-bind('props.columns || 1'));
+      // width: calc(100% / v-bind('props.column || 1'));
       flex: 1;
       min-width: 0; // 防止内容溢出
     }
@@ -89,16 +89,16 @@ const validSlots = computed(() => {
   width: v-bind(widthValue);
   height: v-bind(heightValue);
 
-  /* 默认 flex 布局（无 columns） */
+  /* 默认 flex 布局（无 column） */
   display: flex;
   flex-wrap: nowrap;
   gap: v-bind(gapValue);
   overflow: auto;
 
-  /* 设置了 columns 时切换为 grid 布局 */
-  &.with-columns {
+  /* 设置了 column 时切换为 grid 布局 */
+  &.with-column {
     display: grid;
-    grid-template-columns: repeat(v-bind('props.columns'), minmax(0, 1fr)); /* 关键点1：强制等宽 */
+    grid-template-columns: repeat(v-bind('props.column'), minmax(0, 1fr)); /* 关键点1：强制等宽 */
   }
 
   /* 所有子项的通用约束 */

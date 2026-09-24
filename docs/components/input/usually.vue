@@ -9,7 +9,7 @@ const iptValue = ref('')
 
 <template>
   <div>
-    <sWrapper :columns="1">
+    <sWrapper :column="1">
       <s-input v-model="iptValue" content="这里主要是为了让其鼠标移入显示文本">
         <template #prepend>prepend前置插槽</template>
         <template #prefix>prefix前缀插槽</template>
