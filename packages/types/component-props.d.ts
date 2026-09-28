@@ -632,6 +632,7 @@ export type SItemStyleKey =
   | 'extra'
   | 'actions'
 export type SItemStyles = Partial<Record<SItemStyleKey, CSSProperties>>
+export type SItemTooltipAttrs = STooltipProps & SybzRecord
 
 export interface SItemProps extends SCommonProps {
   /** 主标题 */
@@ -659,10 +660,10 @@ export interface SItemProps extends SCommonProps {
   borderRadius?: string | number
   /** 是否显示底部分割线 */
   divider?: boolean
-  /** 标题最大行数，0 表示不限制 */
-  titleLines?: number
-  /** 副标题最大行数，0 表示不限制 */
-  subTitleLines?: number
+  /** 标题的 s-tooltip 属性；lineClamp 默认 1，0 表示自然展开；标题插槽仅使用 lineClamp */
+  titleAttrs?: SItemTooltipAttrs
+  /** 副标题的 s-tooltip 属性；lineClamp 默认 1，0 表示自然展开；副标题插槽仅使用 lineClamp */
+  subTitleAttrs?: SItemTooltipAttrs
   /** extra/actions 区域的位置 */
   extraPlacement?: SItemExtraPlacement
   /** side 模式下 extra/actions 的垂直对齐方式 */

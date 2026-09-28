@@ -557,6 +557,8 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SItemProps',
+      description:
+        '信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。',
       slots: ['prefix', 'img', 'title', 'subTitle', 'extra', 'actions', 'default'],
       hoverProps: componentHoverProps('SItemProps', [
         'SCommonProps',
@@ -565,6 +567,7 @@ const TYPED_COMPONENT_PROPS = new Map([
         'SItemProps',
         'SItemStyleKey',
         'SItemStyles',
+        'SItemTooltipAttrs',
         'SybzComponentSize',
         'SybzComponentTheme',
         'SybzRecord',

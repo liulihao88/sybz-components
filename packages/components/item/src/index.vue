@@ -3,7 +3,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useSlots } from 'vue'
 import type { CSSProperties } from 'vue'
 import useCommonProps from '@/hooks/useCommonProps'
-import type { SCommonProps } from '@/types/component-props'
+import type { SCommonProps, SItemTooltipAttrs } from '@/types/component-props'
 
 defineOptions({ name: 'SItem' })
 
@@ -36,8 +36,8 @@ interface ItemProps extends SCommonProps {
   border?: boolean | string
   borderRadius?: string | number
   divider?: boolean
-  titleLines?: number
-  subTitleLines?: number
+  titleAttrs?: SItemTooltipAttrs
+  subTitleAttrs?: SItemTooltipAttrs
   extraPlacement?: ItemExtraPlacement
   extraAlign?: ItemAlign
   styles?: Partial<Record<ItemStyleKey, CSSProperties>>
@@ -62,8 +62,8 @@ const props = withDefaults(defineProps<ItemProps>(), {
   border: true,
   borderRadius: '',
   divider: false,
-  titleLines: 1,
-  subTitleLines: 1,
+  titleAttrs: undefined,
+  subTitleAttrs: undefined,
   extraPlacement: 'header',
   extraAlign: 'center',
   styles: undefined,
@@ -88,7 +88,7 @@ defineSlots<{
 }>()
 
 const hasValue = (value: unknown) => value !== undefined && value !== null && value !== ''
-const normalizeLines = (value: number) => {
+const normalizeLines = (value: string | number) => {
   const lines = Number(value)
   if (!Number.isFinite(lines)) return 1
   return Math.max(0, Math.floor(lines))
@@ -106,8 +106,8 @@ const alignValue = (value: ItemAlign) => {
 
 const title = computed(() => props.title ?? '')
 const subTitle = computed(() => props.subTitle ?? '')
-const normalizedTitleLines = computed(() => normalizeLines(props.titleLines))
-const normalizedSubTitleLines = computed(() => normalizeLines(props.subTitleLines))
+const normalizedTitleLines = computed(() => normalizeLines(props.titleAttrs?.lineClamp ?? 1))
+const normalizedSubTitleLines = computed(() => normalizeLines(props.subTitleAttrs?.lineClamp ?? 1))
 const hasPrefix = computed(() => !!(slots.prefix || slots.img || props.src))
 const hasTitle = computed(() => !!slots.title || hasValue(props.title))
 const hasSubTitle = computed(() => !!slots.subTitle || hasValue(props.subTitle))
@@ -199,9 +199,10 @@ const handleKeydown = (event: KeyboardEvent) => {
               class="s-item__title"
               :style="styles?.title"
               :content="String(title)"
-              :line-clamp="normalizedTitleLines"
               width="100%"
               placement="top-start"
+              v-bind="titleAttrs"
+              :line-clamp="normalizedTitleLines"
             />
             <div
               v-else-if="$slots.title || hasValue(title)"
@@ -229,9 +230,10 @@ const handleKeydown = (event: KeyboardEvent) => {
             class="s-item__subtitle"
             :style="styles?.subTitle"
             :content="String(subTitle)"
-            :line-clamp="normalizedSubTitleLines"
             width="100%"
             placement="top-start"
+            v-bind="subTitleAttrs"
+            :line-clamp="normalizedSubTitleLines"
           />
           <div
             v-else-if="$slots.subTitle || hasValue(subTitle)"

@@ -260,10 +260,14 @@ declare module 'vue' {
     's-input-number': (typeof import('./types/components/inputNumber'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/item/home.html
+     *
+     * 信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。
      */
     SItem: (typeof import('./types/components/item'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/item/home.html
+     *
+     * 信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。
      */
     's-item': (typeof import('./types/components/item'))['default']
     /**

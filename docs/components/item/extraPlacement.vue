@@ -17,7 +17,7 @@ const sideStyles = {
       sub-title="extra-placement=side 时，右侧区域与信息项等高；可以独立设置背景、分割线、宽度和内容对齐。"
       extra-placement="side"
       extra-align="center"
-      :sub-title-lines="2"
+      :sub-title-attrs="{ lineClamp: 2 }"
       :styles="sideStyles"
       height="132"
       border-radius="12"
