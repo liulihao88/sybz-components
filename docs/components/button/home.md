@@ -20,7 +20,7 @@ button/base
 
 用示例顶部的选项切换主题，查看同一组按钮在不同主题下的外观。基础写法：`<s-button :theme="theme" type="primary">主要按钮</s-button>`。
 
-:::demo 属性：`theme` 可选 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值 `default`；`variant` 可选 `'' / outline / gradient`，默认值 `''`；`ghost`、`disabled` 可选 `true / false`，默认值均为 `false`；`size` 可选 `small / default / large`，默认值 `default`；`icon` 类型 `string / Component`，默认值未设置。
+:::demo
 button/theme
 :::
 
