@@ -99,7 +99,7 @@ const mergedTooltipAttrs = computed(() => {
     ...forwardedAttrs,
     ...tooltipAttrs,
     rawContent: Boolean(rawContent),
-    ...(useContentReference.value ? { referenceEl: positionRef.value } : {}),
+    ...(useContentReference.value ? { referenceEl: contentReference.value } : {}),
   }
 })
 
@@ -111,6 +111,37 @@ const useContentReference = computed(
     !('referenceEl' in attrs) &&
     !('reference-el' in attrs),
 )
+
+// 外层承接 class/style；定位取内部文本与外层内容区的交集，
+// 排除 margin/padding，也排除被省略但仍占据布局宽度的文本。
+const contentReference = computed(() => {
+  const trigger = textRef.value
+  const content = positionRef.value
+  if (!trigger || !content) return undefined
+  // Element Plus 运行时支持 Popper 虚拟参照，但 referenceEl 的声明仅接受 HTMLElement。
+  return {
+    contextElement: trigger,
+    getBoundingClientRect: () => {
+      const outer = trigger.getBoundingClientRect()
+      const inner = content.getBoundingClientRect()
+      const style = getComputedStyle(trigger)
+      const scaleX = trigger.offsetWidth ? outer.width / trigger.offsetWidth : 1
+      const scaleY = trigger.offsetHeight ? outer.height / trigger.offsetHeight : 1
+      const inset = (property: string, scale: number) => (parseFloat(style.getPropertyValue(property)) || 0) * scale
+      const left = Math.max(inner.left, outer.left + inset('border-left-width', scaleX) + inset('padding-left', scaleX))
+      const top = Math.max(inner.top, outer.top + inset('border-top-width', scaleY) + inset('padding-top', scaleY))
+      const right = Math.min(
+        inner.right,
+        outer.right - inset('border-right-width', scaleX) - inset('padding-right', scaleX),
+      )
+      const bottom = Math.min(
+        inner.bottom,
+        outer.bottom - inset('border-bottom-width', scaleY) - inset('padding-bottom', scaleY),
+      )
+      return new DOMRect(left, top, Math.max(0, right - left), Math.max(0, bottom - top))
+    },
+  } as unknown as HTMLElement
+})
 
 const triggerAttrs = computed(() => {
   const triggerAttrs = { ...attrs }

@@ -3,6 +3,11 @@ import type { STooltipSelfProps } from '../component-props'
 
 type ElTooltipInstance = InstanceType<typeof ElTooltip>
 
+/**
+ * s-tooltip 文字提示组件，支持文本溢出提示与多行省略；class/style 应用在外层，设置外层样式时按内部内容的可见范围定位，排除外层 margin/padding。
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus Tooltip 的公开属性。
+ */
 export type STooltipPublicProps = STooltipSelfProps & Omit<ElTooltipInstance['$props'], keyof STooltipSelfProps>
 
 export type STooltipComponent = {

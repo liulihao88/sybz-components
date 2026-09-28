@@ -126,6 +126,7 @@ tooltip/visible
 ### 说明
 
 - 未传默认插槽时，组件会把 `content` 作为展示文本，并在文本超出可视区域后才显示 tooltip。
+- `class/style` 应用在外层触发节点，内部内容不会重复应用这些样式。设置外层样式时，弹层按内部内容的可见范围定位，排除外层 margin、padding 和被省略的文本部分；居中 placement 的箭头对齐可见内容中心，边界避让时由 Element Plus 调整。
 - 传入默认插槽后，tooltip 会按正常交互触发，不再做文本溢出判断。
 - 设置 `showSlot=false` 并使用 `trigger` 插槽时，触发节点会直接作为 tooltip 定位元素，不添加文本包裹层。
 - 设置 `lineClamp` 大于 `1` 后，会按最大行数进行多行省略；超出可视高度时同样会显示 tooltip。

@@ -452,10 +452,14 @@ declare module 'vue' {
     's-title': (typeof import('./types/components/title'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tooltip/home.html
+     *
+     * s-tooltip 文字提示组件，支持文本溢出提示与多行省略；class/style 应用在外层，设置外层样式时按内部内容的可见范围定位，排除外层 margin/padding。
      */
     STooltip: (typeof import('./types/components/tooltip'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/tooltip/home.html
+     *
+     * s-tooltip 文字提示组件，支持文本溢出提示与多行省略；class/style 应用在外层，设置外层样式时按内部内容的可见范围定位，排除外层 margin/padding。
      */
     's-tooltip': (typeof import('./types/components/tooltip'))['default']
     /**
