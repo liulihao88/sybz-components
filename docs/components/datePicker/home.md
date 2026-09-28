@@ -16,16 +16,10 @@
 datePicker/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-date-picker v-model="rangeValue" theme="chenghua" type="daterange" title="审核周期" width="520" height="40" :compTitleStyle="{ width: 84 }"></s-date-picker>`。
-datePicker/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-date-picker v-model="rangeValue" theme="shijingshan" type="daterange" title="审核周期" width="520" height="40" :compTitleStyle="{ width: 84 }"></s-date-picker>`。
-datePicker/shijingshan/base
+:::demo
+datePicker/theme
 :::
 
 ### 日期时间
@@ -104,14 +98,6 @@ datePicker/limitRange
 
 :::demo 开启后仅可选择当前日期或时刻以后的值，并默认提供明天、后天、一周后、一个月后快捷项。基础写法：`<s-date-picker v-model="dateValue" future-only></s-date-picker>`。属性：`futureOnly` 类型 `boolean`，可选值 `true / false`，默认值 `false`；`datetime` 类型会同时禁用今天已经过去的时、分、秒；显式传入 `shortcuts` 会覆盖未来快捷项，传 `false` 可关闭快捷项。
 datePicker/futureOnly
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-datePicker/sybzTheme
 :::
 
 ### 属性

@@ -26,16 +26,10 @@ card/shadow
 card/transparent
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-card v-model="collapsed" theme="chenghua" title="审核规则管理"></s-card>`。
-card/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-card v-model="collapsed" theme="shijingshan" title="审核规则管理"></s-card>`。
-card/shijingshan/base
+:::demo
+card/theme
 :::
 
 ### 展开和收缩
@@ -72,14 +66,6 @@ card/square
 
 :::demo 去掉头部下边框和底部上边框，并将相邻区块重复的上下间距合并为一份。基础写法：`<SCard title="已合并区块" merge-sections></SCard>`。属性：`mergeSections` 可选 `true / false`，默认值 `false`。
 card/mergeSections
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-card/sybzTheme
 :::
 
 ### 副标题与右侧文字（subTitle / extra 默认值：空字符串）

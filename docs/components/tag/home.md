@@ -18,32 +18,10 @@
 tag/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-#### chenghua基础用法
-
-:::demo 展示chenghua基础用法。基础写法：`<s-tag theme="chenghua" type="primary">运行中</s-tag>`。
-tag/chenghua/chenghuaBase
-:::
-
-#### chenghua映射状态
-
-:::demo 展示成华主题样式。基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="chenghua" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。
-tag/chenghua/chenghuaMap
-:::
-
-### 石景山主题
-
-#### shijingshan基础用法
-
-:::demo 展示石景山基础用法。基础写法：`<s-tag theme="shijingshan" type="primary">运行中</s-tag>`。
-tag/shijingshan/shijingshanBase
-:::
-
-#### shijingshan映射状态
-
-:::demo 展示石景山主题样式。基础写法：`<s-tag v-for="status in serviceStatus" :key="status" theme="shijingshan" :value="status" :options="statusOptions" :config="{ label: 'label', value: 'value' }" :primary="['running']" :warning="['pending']" :danger="['error']" :info="['unknown']" />`。
-tag/shijingshan/shijingshanMap
+:::demo
+tag/theme
 :::
 
 ### 值匹配着色
@@ -86,14 +64,6 @@ tag/overflow
 
 :::demo `width / height / color / background / hoverAnimation` 由公共 Hook 统一处理，`background` 同时支持普通颜色和渐变。基础写法：`<s-tag width="160" height="36" color="#4c1d95" background="linear-gradient(135deg, #ede9fe, #ddd6fe)" hover-animation>公共属性标签</s-tag>`。属性：`width / height` 类型 `string / number`，默认值 `''`；`color / background` 类型 `string`，默认值 `''`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。
 tag/commonProps
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-tag/sybzTheme
 :::
 
 ### 属性

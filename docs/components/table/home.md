@@ -24,20 +24,10 @@ table/base
 table/backend
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-#### chenghua主题示例
-
-:::demo 展示成华主题样式。基础写法：`<s-table theme="chenghua" size="small" :columns="columns" :data="data" :total="36" />`。
-table/chenghua/base
-:::
-
-### 石景山主题
-
-#### shijingshan主题示例
-
-:::demo 展示石景山主题样式。基础写法：`<s-table theme="shijingshan" size="small" :columns="columns" :data="data" :total="36" />`。
-table/shijingshan/base
+:::demo
+table/theme
 :::
 
 ### other

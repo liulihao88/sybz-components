@@ -16,16 +16,10 @@
 radio/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-radio v-model="service" title="服务类型" theme="chenghua" :options="serviceOptions" />`。
-radio/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-radio v-model="service" title="服务类型" theme="shijingshan" :options="serviceOptions" />`。
-radio/shijingshan/base
+:::demo
+radio/theme
 :::
 
 ### disabled
@@ -68,14 +62,6 @@ radio/slot
 
 :::demo 使用 `gap` 设置单选项之间的间距，内容较多时会自动换行。基础写法：`<s-radio v-model="value" :options="options" :gap="16" />`。属性：`gap` 类型 `string / number`，数字按 `px` 处理，默认值 `undefined`（沿用 Element Plus 样式）。
 radio/gap
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-radio/sybzTheme
 :::
 
 ### 属性

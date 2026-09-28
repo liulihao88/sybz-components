@@ -2,9 +2,9 @@
 import { ref } from 'vue'
 import { DataAnalysis, Document, OfficeBuilding, Plus, Setting } from '@element-plus/icons-vue'
 import { docThemeOptions } from '../../.vitepress/theme/theme'
+const theme = ref<(typeof docThemeOptions)[number]>('default')
 
 const active = ref('/settings/general')
-const theme = ref<(typeof docThemeOptions)[number]>('default')
 const variant = ref<'light' | 'dark'>('light')
 const variantOptions = [
   { label: '浅色', value: 'light' },

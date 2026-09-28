@@ -16,16 +16,12 @@
 form/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="chenghua" />`。主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
-form/chenghua
-:::
+切换主题查看表单及其 schema 控件的联动样式，单项 `attrs.theme` 可覆盖表单主题。基础用法：通过顶部选项切换主题。`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`。
 
-### 石景山主题
-
-:::demo 展示石景山主题表单。基础写法：`<s-form :model="model" :field-list="fieldList" theme="shijingshan" />`。主题会传递给 schema 中的 `s-*` 控件和分组标题，单项 `attrs.theme` 可以覆盖。
-form/shijingshan
+:::demo
+form/theme
 :::
 
 ### 标签主副文本 `subLabel`（默认值为空）
@@ -134,14 +130,6 @@ form/trim
 
 :::demo 展示默认标签右侧的提示图标，以及 tooltip 弹层文字后面的复制图标。复制图标仅在 tooltip 弹层中展示，不占用表单标签空间，点击后复制文本。`labelRender` 类型为 `Function`，默认值为空，可与 `tooltip`、`tooltipAttrs` 同时使用；标签插槽同样支持提示图标。基础写法：`{ label: '日期组件', prop: 'date', tooltip: '请选择业务发生日期' }`。属性：`tooltip` 类型为 `string / Function`，默认值为空；`tooltipAttrs` 类型为 `object / Function`，默认值为空；`copy` 类型为 `boolean / string`，可选值为 `true / false / 自定义字符串`，默认值为 `true`；设置 `copy: false` 隐藏复制图标，设置字符串复制指定文本。设置 `tooltipAttrs: { dangerouslyUseHTMLString: true }` 后支持 HTML 内容。HTML 字符串必须来自可信内容，禁止直接渲染未经处理的用户输入。
 form/tooltip
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-form/sybzTheme
 :::
 
 ## 属性

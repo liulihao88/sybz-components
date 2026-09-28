@@ -18,7 +18,9 @@ pagination/base
 
 ### 主题（theme 默认值：default）
 
-:::demo 展示成华和石景山主题分页。基础写法：`<s-pagination theme="chenghua" :total="80" :page-size="10" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`；`total` 类型 `number`，默认值 `0`；`pageSize` 类型 `number`，默认值 `10`；`currentPage` 类型 `number`，默认值 `1`。
+切换主题查看分页组件样式。基础用法：通过顶部选项切换主题。`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`。
+
+:::demo
 pagination/theme
 :::
 
@@ -50,14 +52,6 @@ pagination/pageSize
 
 :::demo 总页数只有一页时，可以通过 `hideOnSinglePage` 控制是否隐藏整个分页器。勾选示例中的复选框即可观察隐藏效果。基础写法：`<s-pagination :total="8" :page-size="10" hide-on-single-page />`。属性：`hideOnSinglePage` 可选值 `true / false`，默认值 `false`；不传时单页分页器正常显示。
 pagination/hideOnSinglePage
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-pagination/sybzTheme
 :::
 
 ### 属性

@@ -16,11 +16,11 @@
 tableSearch/base
 :::
 
-### 主题（`theme` 默认 `default`）
+### 主题（theme 默认值：default）
 
-只需要在 `s-table-search` 上设置一次 `theme`，配置生成的字段组件、`render` 字段组件以及内置搜索和重置按钮都会自动使用相同主题。字段通过 `attrs.theme` 设置时可单独覆盖容器主题。基础写法：`<s-table-search theme="chenghua" :options="fields" />`。
+切换主题查看搜索项、生成字段组件和内置按钮的联动样式。基础用法：通过顶部选项切换主题。`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`。
 
-:::demo 属性：`theme` 类型 `STableSearchTheme`，可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`；`options` 类型 `STableSearchField[]`，默认值 `[]`；`column` 类型 `number`，默认值 `3`；`showReset` 类型 `boolean`，可选值 `true / false`，默认值 `true`。
+:::demo
 tableSearch/theme
 :::
 
@@ -38,14 +38,6 @@ tableSearch/autoSearch
 
 :::demo 属性：`useSlot` 类型 `boolean | string`，可选值 `true / false / 自定义插槽名`，默认值 `false`；`initialValue` 类型 `object`，默认值 `{}`；字段插槽参数包含 `item / model / value / update / theme`；`actions` 和默认插槽参数包含 `theme`。
 tableSearch/custom
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-tableSearch/sybzTheme
 :::
 
 ### 属性

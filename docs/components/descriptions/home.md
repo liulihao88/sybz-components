@@ -16,24 +16,10 @@
 descriptions/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-descriptions theme="chenghua" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" label-width="110" show-all />`。
-descriptions/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-descriptions theme="shijingshan" title="服务基础信息" extra="更新时间 10:24" :options="options" :column="3" show-all />`。
-descriptions/shijingshan/base
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-descriptions/sybzTheme
+:::demo
+descriptions/theme
 :::
 
 ### 通常用法

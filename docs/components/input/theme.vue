@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { docThemeOptions } from '../../.vitepress/theme/theme'
-
 const theme = ref<(typeof docThemeOptions)[number]>('default')
+
 const name = ref('')
 const owner = ref('')
 const keyword = ref('工作小组')

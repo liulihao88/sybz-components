@@ -32,24 +32,12 @@ item/extraPlacement
 item/hover
 :::
 
-### 成华主题（theme 默认值 `default`）
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题信息项。基础写法：`<SItem theme="chenghua" title="成华企业服务" sub-title="查看企业政策与服务进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
-item/chenghua
-:::
+切换主题查看同一信息项的样式。基础用法：通过顶部选项切换主题。`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`。
 
-### 石景山主题（theme 默认值 `default`）
-
-:::demo 展示石景山主题信息项。基础写法：`<SItem theme="shijingshan" title="石景山产业服务" sub-title="查看产业服务与申报进度" clickable />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz`，默认值 `default`。
-item/shijingshan
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-item/sybzTheme
+:::demo
+item/theme
 :::
 
 ### 标题与副标题 Tooltip（titleAttrs / subTitleAttrs 默认值 `undefined`，lineClamp 默认值 `1`）

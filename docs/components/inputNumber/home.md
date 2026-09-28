@@ -27,16 +27,10 @@
 inputNumber/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-input-number v-model="count" theme="chenghua" title="审核数量" width="240" height="40" :min="0" />`。
-inputNumber/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-input-number v-model="count" theme="shijingshan" title="审核数量" width="240" height="40" :min="0" />`。
-inputNumber/shijingshan/base
+:::demo
+inputNumber/theme
 :::
 
 ### 高度和宽度
@@ -55,14 +49,6 @@ inputNumber/size
 
 :::demo 展示usually常用配置。基础写法：`<s-input-number v-model="smallCount" title="宽度" width="200" />`。属性：`title` 类型 `string`，默认值 `''`；`width` 类型 `string / number`，默认值 `''`。
 inputNumber/usually
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-inputNumber/sybzTheme
 :::
 
 ### 属性

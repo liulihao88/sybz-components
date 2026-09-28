@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { docThemeOptions } from '../../.vitepress/theme/theme'
-
 const theme = ref<(typeof docThemeOptions)[number]>('default')
 </script>
 

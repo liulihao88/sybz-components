@@ -16,16 +16,10 @@
 empty/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-empty theme="chenghua" title="暂无服务申请" sub-title="创建申请后将在这里展示" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`title` 默认值 `暂无数据`；`sub-title` 默认值为空。
-empty/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-empty theme="shijingshan" title="暂无服务申请" sub-title="创建申请后将在这里展示" width="72"></s-empty>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`title` 默认值 `暂无数据`；`sub-title` 默认值为空。
-empty/shijingshan/base
+:::demo
+empty/theme
 :::
 
 ### 通常用法
@@ -38,14 +32,6 @@ empty/usually
 
 :::demo 展示插槽内容定制。基础写法：`<s-empty><template #title>标题</template><template #sub-title>副标题</template>操作内容</s-empty>`。插槽：`title`、`sub-title`、`image` 和 `default`。
 empty/slot
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-empty/sybzTheme
 :::
 
 ### 属性

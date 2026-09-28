@@ -14,16 +14,10 @@
 warning/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-warning theme="chenghua" title="服务提示" content="已启用成华主题的信息提示，可用于展示普通说明。" />`。
-warning/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-warning theme="shijingshan" title="服务提示" content="已启用石景山主题的信息提示，可用于展示普通说明。" />`。
-warning/shijingshan/base
+:::demo
+warning/theme
 :::
 
 ### 通常用法
@@ -42,14 +36,6 @@ warning/slot
 
 :::demo 设置 `height` 后，提示内容会在指定高度内垂直居中。基础写法：`<s-warning content="固定高度提示" height="80px" />`。属性：`height` 类型 `string / number`，支持 CSS 长度值，默认不设置。
 warning/height
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-warning/sybzTheme
 :::
 
 ### 属性

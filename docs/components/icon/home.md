@@ -30,16 +30,12 @@ icon/base
 
 单个字符串会优先匹配 Element Plus 图标名，匹配不到时自动按 CSS class 处理。若名称存在歧义，可使用 `source="css"` 或 `source="element-plus"` 显式指定来源。
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="chenghua" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。
-icon/chenghua
-:::
+切换主题查看不同类型和变体图标的颜色。基础用法：通过顶部选项切换主题。`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`。
 
-### 石景山主题
-
-:::demo 展示石景山主题下的默认、主题、成功、警告、危险和信息类型。基础写法：`<s-icon icon="warning" theme="shijingshan" type="warning" variant="light"></s-icon>`。属性：`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值 `default`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`。
-icon/shijingshan
+:::demo
+icon/theme
 :::
 
 ### Iconify 图标（ https://icon-sets.iconify.design/ ）
@@ -247,14 +243,6 @@ icon/hoverShadow
 
 :::demo `icon` 支持传入 `http://`、`https://` 和 `//` 开头的在线图片地址，`source="auto"` 会优先识别 URL，不会因为地址中包含 `:` 而误判为 Iconify 名称。基础写法：`<s-icon icon="https://api.iconify.design/mdi/home.svg" size="32"></s-icon>`。属性：`source` 可选值 `auto / element-plus / iconify / svg / url`，默认值 `auto`；`imageAttrs` 类型 `object`，默认值 `{}`，用于向内部 `img` 透传 `alt / crossorigin / referrerpolicy` 等属性；也可以通过 `source="url"` 显式指定图片来源。
 icon/url
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-icon/sybzTheme
 :::
 
 ### 容器宽高（width / height 默认值：未设置，size 默认值：16px）

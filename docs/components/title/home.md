@@ -14,20 +14,10 @@
 title/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-#### chenghua主题示例
-
-:::demo 展示成华主题样式。基础写法：`<s-title title="成华 AI 服务申请" theme="chenghua" sub-title="审批中 12 个，待处理 4 个"></s-title>`。
-title/chenghua/base
-:::
-
-### 石景山主题
-
-#### shijingshan主题示例
-
-:::demo 展示石景山主题样式。基础写法：`<s-title title="石景山 AI 服务申请" theme="shijingshan" sub-title="审批中 12 个，待处理 4 个"></s-title>`。
-title/shijingshan/base
+:::demo
+title/theme
 :::
 
 ### 通常用法
@@ -41,16 +31,6 @@ title/usually
 :::demo 标题文字超出可用宽度时，鼠标移入自动显示完整内容；未超出时不显示。基础写法：`<s-title title="这是一段很长的标题文字" style="width: 220px" />`。属性：`showTooltip` 可选 `true / false`，默认值 `true`；`tooltipAttrs` 类型 `object`，默认值 `{}`。
 title/tooltip
 :::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-title/sybzTheme
-:::
-
-`compTitle` 也可以作为独立组件使用，完整文档见 [CompTitle 组件标题前缀](/components/compTitle/home.md)。
 
 ### 标题和后置内容
 

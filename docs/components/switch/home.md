@@ -16,24 +16,10 @@
 switch/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-switch v-model="enabled" theme="chenghua" active-text="启用" inactive-text="停用" />`。
-switch/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-switch v-model="enabled" theme="shijingshan" active-text="启用" inactive-text="停用" />`。
-switch/shijingshan/base
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-switch/sybzTheme
+:::demo
+switch/theme
 :::
 
 ### 属性

@@ -16,20 +16,10 @@
 popconfirm/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-#### chenghua主题示例
-
-:::demo 展示成华主题样式和语义确认框。基础写法：`<s-popconfirm theme="chenghua" variant="delete" target="智慧档案检索" @confirm="confirm"></s-popconfirm>`。属性：`variant` 可选 `default / delete / warning`，默认值 `default`；`target` 类型 `string / number`，默认值未设置。
-popconfirm/chenghua/base
-:::
-
-### 石景山主题
-
-#### shijingshan主题示例
-
-:::demo 展示石景山主题样式和语义确认框。基础写法：`<s-popconfirm theme="shijingshan" variant="delete" target="智慧档案检索" @confirm="confirm"></s-popconfirm>`。属性：`variant` 可选 `default / delete / warning`，默认值 `default`；`target` 类型 `string / number`，默认值未设置。
-popconfirm/shijingshan/base
+:::demo
+popconfirm/theme
 :::
 
 ### 通常用法
@@ -42,14 +32,6 @@ popconfirm/usually
 
 :::demo 展示插槽内容定制。基础写法：`<s-popconfirm trigger="click" @confirm="confirm" title="" ref="popoverRef"></s-popconfirm>`。插槽：按示例中的插槽名定制内容。
 popconfirm/slot
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-popconfirm/sybzTheme
 :::
 
 ### 属性

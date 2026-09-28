@@ -16,24 +16,10 @@
 compTitle/base
 :::
 
-### 成华主题
+### 主题（theme 默认值：default）
 
-:::demo 展示成华主题样式。基础写法：`<s-comp-title title="审核周期" theme="chenghua" :comp-title-style="{ width: 96 }" />`。
-compTitle/chenghua/base
-:::
-
-### 石景山主题
-
-:::demo 展示石景山主题样式。基础写法：`<s-comp-title title="审核周期" theme="shijingshan" :comp-title-style="{ width: 96 }" />`。
-compTitle/shijingshan/base
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-compTitle/sybzTheme
+:::demo
+compTitle/theme
 :::
 
 ### API

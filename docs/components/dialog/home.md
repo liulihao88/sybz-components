@@ -32,40 +32,10 @@ dialog/drawer
 dialog/drawerFillSlot
 :::
 
-### 成华样式
+### 主题（theme 默认值：default）
 
-设置 `theme="chenghua"` 可以切换到成华样式。成华主题默认展示底部按钮，和普通 dialog 行为一致。
-
-#### chenghua主题示例
-
-:::demo 展示成华主题样式。基础写法：`<s-dialog title="默认成华弹框" theme="chenghua" width="512px" v-model="visible.base"></s-dialog>`。
-dialog/chenghua/base
-:::
-
-#### chenghua 抽屉式用法
-
-设置 `theme="chenghua"` 和 `mode="drawer"` 时，`s-dialog` 会按成华主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`mode` 的可选值是 `dialog` 和 `drawer`，默认值是 `dialog`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
-
-:::demo 展示成华主题样式。基础写法：`<s-dialog v-model="visible" title="成华抽屉式 dialog" theme="chenghua" mode="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
-dialog/chenghua/drawer
-:::
-
-### 石景山样式
-
-设置 `theme="shijingshan"` 可以切换到石景山样式。石景山主题默认展示底部按钮，和普通 dialog 行为一致。
-
-#### shijingshan主题示例
-
-:::demo 展示石景山主题样式。基础写法：`<s-dialog title="默认石景山弹框" theme="shijingshan" width="512px" v-model="visible.base"></s-dialog>`。
-dialog/shijingshan/base
-:::
-
-#### shijingshan 抽屉式用法
-
-设置 `theme="shijingshan"` 和 `mode="drawer"` 时，`s-dialog` 会按石景山主题的抽屉式弹层展示。`theme` 的可选值是 `default`、`norm`、`norm16`、`simple`、`chenghua` 和 `shijingshan`，默认值是 `default`；`mode` 的可选值是 `dialog` 和 `drawer`，默认值是 `dialog`；`width` 支持 `string` 和 `number`，默认值是 `''`，可用于控制抽屉宽度。
-
-:::demo 展示石景山主题样式。基础写法：`<s-dialog v-model="visible" title="石景山抽屉式 dialog" theme="shijingshan" mode="drawer" width="1000" confirm-text="保存" cancel-text="关闭"></s-dialog>`。
-dialog/shijingshan/drawer
+:::demo
+dialog/theme
 :::
 
 ### 通常用法
@@ -120,14 +90,6 @@ dialog/fillSlot
 
 :::demo 展示 `default`、`delete` 和 `warning` 三种语义样式。属性：`variant` 可选 `default / delete / warning`，默认值 `default`；`target` 类型 `string`，默认值未设置；`title` 类型 `string`，默认值由 `variant` 决定；`confirmText` 类型 `string`，默认值由 `variant` 决定。
 dialog/variant
-:::
-
-### sybz 主题（theme 默认值：default）
-
-设置 `theme="sybz"` 使用思云博智配色。`theme` 可选 `default / norm / norm16 / simple / chenghua / shijingshan / sybz`，默认值为 `default`。品牌蓝 `#4876EF`，AI 辅助绿 `#00D3AB`。
-
-:::demo 展示 sybz 主题，组件其余属性与上方对应示例一致。
-dialog/sybzTheme
 :::
 
 ### 标题追加内容（append 默认无内容）
