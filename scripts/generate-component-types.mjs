@@ -288,7 +288,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'descriptions',
       allowAnySlots: true,
-      description: 's-descriptions 描述列表，支持每项配置 column 和 tooltipAttrs，单项 tooltipAttrs 优先于组件级配置。',
+      description:
+        's-descriptions 描述列表，支持每项配置 column、showAll 和 tooltipAttrs，单项 showAll/tooltipAttrs 优先于组件级配置。',
       hoverProps: componentHoverProps(
         'SDescriptionsOwnProps',
         [

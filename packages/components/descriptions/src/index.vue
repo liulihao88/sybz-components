@@ -30,7 +30,7 @@
           <template v-else-if="mergedProps.customLabel">
             <descriptions-render :render="mergedProps.customLabel" :context="getRenderProps(option, index)" />
           </template>
-          <template v-else-if="!mergedProps.showAll">
+          <template v-else-if="!isShowAll(option)">
             <s-tooltip :content="parseLabel(option)" v-bind="getTooltipAttrs(option)"></s-tooltip>
           </template>
           <template v-else>
@@ -54,7 +54,7 @@
           <descriptions-render :render="mergedProps.customValue" :context="getRenderProps(option, index)" />
         </template>
         <template v-else>
-          <template v-if="mergedProps.showAll">
+          <template v-if="isShowAll(option)">
             <descriptions-render
               v-if="isRenderableContent(getValueContent(option, index))"
               :render="() => getValueContent(option, index)"
@@ -115,6 +115,7 @@ type ItemOptions = {
   label?: string
   value?: any
   column?: number
+  showAll?: boolean
   labelSlot?: string
   valueSlot?: string
   labelRender?: (context: RenderContext) => VNodeChild
@@ -164,6 +165,8 @@ const getTooltipAttrs = (option: ItemOptions) => ({
   ...(mergedProps.value.tooltipAttrs ?? {}),
   ...(option.tooltipAttrs ?? {}),
 })
+
+const isShowAll = (option: ItemOptions) => option.showAll ?? mergedProps.value.showAll
 
 const getOptionField = (option: ItemOptions, key: string, fallbackKey: string) => {
   if (Object.prototype.hasOwnProperty.call(option, key)) {

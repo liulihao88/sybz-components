@@ -185,6 +185,8 @@ export interface SDescriptionsItemOption {
   value?: any
   /** 当前描述项占用的列数；放不下当前行时会换行，并由上一项补齐剩余列 */
   column?: number
+  /** 当前项是否完整显示文本；未设置时继承组件级 showAll */
+  showAll?: boolean
   labelSlot?: string
   valueSlot?: string
   labelRender?: (context: SDescriptionsRenderContext) => VNodeChild

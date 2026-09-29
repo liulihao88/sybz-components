@@ -12,7 +12,7 @@ import type {
 type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>
 
 /**
- * s-descriptions 描述列表，支持每项配置 column 和 tooltipAttrs，单项 tooltipAttrs 优先于组件级配置。
+ * s-descriptions 描述列表，支持每项配置 column、showAll 和 tooltipAttrs，单项 showAll/tooltipAttrs 优先于组件级配置。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Descriptions, supports custom width 的公开属性。
  */

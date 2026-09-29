@@ -30,6 +30,14 @@ descriptions/theme
 descriptions/tooltipAttrs
 :::
 
+### 单项控制 showAll（默认值：继承组件属性）
+
+单项 `showAll` 优先于根属性；未设置时继承根级 `showAll`。基础写法：`{ label: '内容', value: '长文本', showAll: false }`。属性：根级和单项 `showAll` 类型均为 `boolean`，根级默认值 `false`，单项默认值为继承根级设置。
+
+:::demo 根级开启 `showAll`，第二项单独关闭并显示溢出 Tooltip。
+descriptions/showAll
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra"></s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
@@ -75,7 +83,7 @@ descriptions/custom
 |   `column`    | 一行展示的描述项数量                                           | number          | `3`       |
 |    `width`    | 描述列表容器宽度                                               | string / number | -         |
 | `labelWidth`  | label 宽度，传 `auto` 时会按最长 label 自动计算                | string / number | `auto`    |
-|   `showAll`   | 是否完整展示文本；为 `false` 时通过 `s-tooltip` 省略展示       | boolean         | `false`   |
+|   `showAll`   | 是否完整展示文本；单项 `showAll` 可覆盖此设置                  | boolean         | `false`   |
 |    `label`    | options 中作为标签文本的字段名                                 | string          | `label`   |
 |    `value`    | options 中作为内容值的字段名                                   | string          | `value`   |
 | `customLabel` | 统一自定义标签内容，单项 `labelRender`、`labelSlot` 优先       | function        | -         |
@@ -88,6 +96,7 @@ descriptions/custom
 |    `label`     | 标签文本                                                                | string                                                 | -           |
 |    `value`     | 内容值                                                                  | any                                                    | -           |
 |    `column`    | 当前项占用列数；当前行放不下时换行，上一项补齐剩余列                    | number                                                 | `1`         |
+|   `showAll`    | 是否完整显示当前项文本；未设置时继承根级 `showAll`                      | boolean                                                | 继承根级    |
 |  `labelSlot`   | 自定义 label 插槽名                                                     | string                                                 | -           |
 |  `valueSlot`   | 自定义 value 插槽名                                                     | string                                                 | -           |
 | `labelRender`  | 自定义 label 渲染函数，`option` 为当前描述项数据                        | `({ option, value, label, index }) => VNode \| string` | -           |

@@ -125,13 +125,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
      *
-     * s-descriptions 描述列表，支持每项配置 column 和 tooltipAttrs，单项 tooltipAttrs 优先于组件级配置。
+     * s-descriptions 描述列表，支持每项配置 column、showAll 和 tooltipAttrs，单项 showAll/tooltipAttrs 优先于组件级配置。
      */
     SDescriptions: (typeof import('./types/components/descriptions'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
      *
-     * s-descriptions 描述列表，支持每项配置 column 和 tooltipAttrs，单项 tooltipAttrs 优先于组件级配置。
+     * s-descriptions 描述列表，支持每项配置 column、showAll 和 tooltipAttrs，单项 showAll/tooltipAttrs 优先于组件级配置。
      */
     's-descriptions': (typeof import('./types/components/descriptions'))['default']
     /**
