@@ -22,6 +22,14 @@ descriptions/base
 descriptions/theme
 :::
 
+### Tooltip 属性控制（tooltipAttrs 默认值：undefined）
+
+组件级 `tooltipAttrs` 会应用到自动生成的 label 和 value `s-tooltip`；单项 `options[].tooltipAttrs` 与组件级配置合并，同名属性以单项配置为准。基础写法：`<s-descriptions :options="options" :tooltip-attrs="{ width: '180px', lineClamp: 1 }" />`。属性：组件级和单项 `tooltipAttrs` 类型均为 `object`，默认值 `undefined`；支持 `s-tooltip` 属性，例如 `width` 默认值 `100%`、`lineClamp` 默认值 `1`、`placement` 默认值 `bottom`、`showAfter` 默认值 `0`。
+
+:::demo 示例通过组件级 `tooltipAttrs` 设置提示区域宽度、行数、位置和延迟；第二项覆盖 `lineClamp / placement / effect`。
+descriptions/tooltipAttrs
+:::
+
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-descriptions title="这是title" :options="options" class="w-block" :column="1" label-width="300" :size="sizeValue" :showAll="showAll" :border="borderValue" extra="这是extra"></s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`。
@@ -75,19 +83,18 @@ descriptions/custom
 
 ### ItemOptions
 
-|    属性名     | 说明                                                 | 类型                                                   | 默认值 |
-| :-----------: | ---------------------------------------------------- | ------------------------------------------------------ | ------ |
-|    `label`    | 标签文本                                             | string                                                 | -      |
-|    `value`    | 内容值                                               | any                                                    | -      |
-|   `column`    | 当前项占用列数；当前行放不下时换行，上一项补齐剩余列 | number                                                 | `1`    |
-|  `labelSlot`  | 自定义 label 插槽名                                  | string                                                 | -      |
-|  `valueSlot`  | 自定义 value 插槽名                                  | string                                                 | -      |
-| `labelRender` | 自定义 label 渲染函数，`option` 为当前描述项数据     | `({ option, value, label, index }) => VNode \| string` | -      |
-|   `render`    | 自定义 value 渲染函数，`option` 为当前描述项数据     | `({ option, value, label, index }) => VNode \| string` | -      |
-|   `filter`    | 内容值格式化函数，`option` 为当前描述项数据          | `({ option, value, index, label }) => any`             | -      |
-|    `attrs`    | 透传给 `el-descriptions-item` 的属性                 | object                                                 | -      |
-| `labelAttrs`  | 透传给 label 内部 `s-tooltip` 的属性                 | object                                                 | -      |
-| `valueAttrs`  | 透传给 value 内部 `s-tooltip` 的属性                 | object                                                 | -      |
+|     属性名     | 说明                                                                    | 类型                                                   | 默认值      |
+| :------------: | ----------------------------------------------------------------------- | ------------------------------------------------------ | ----------- |
+|    `label`     | 标签文本                                                                | string                                                 | -           |
+|    `value`     | 内容值                                                                  | any                                                    | -           |
+|    `column`    | 当前项占用列数；当前行放不下时换行，上一项补齐剩余列                    | number                                                 | `1`         |
+|  `labelSlot`   | 自定义 label 插槽名                                                     | string                                                 | -           |
+|  `valueSlot`   | 自定义 value 插槽名                                                     | string                                                 | -           |
+| `labelRender`  | 自定义 label 渲染函数，`option` 为当前描述项数据                        | `({ option, value, label, index }) => VNode \| string` | -           |
+|    `render`    | 自定义 value 渲染函数，`option` 为当前描述项数据                        | `({ option, value, label, index }) => VNode \| string` | -           |
+|    `filter`    | 内容值格式化函数，`option` 为当前描述项数据                             | `({ option, value, index, label }) => any`             | -           |
+|    `attrs`     | 透传给 `el-descriptions-item` 的属性                                    | object                                                 | -           |
+| `tooltipAttrs` | 当前项 label 和 value 的 `s-tooltip` 属性；与组件级配置合并时当前项优先 | object                                                 | `undefined` |
 
 ### 插槽
 

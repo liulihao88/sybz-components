@@ -191,8 +191,8 @@ export interface SDescriptionsItemOption {
   render?: (context: SDescriptionsRenderContext) => VNodeChild
   filter?: (context: SDescriptionsFilterContext) => any
   attrs?: SybzRecord
-  labelAttrs?: SybzRecord
-  valueAttrs?: SybzRecord
+  /** 单项 s-tooltip 属性；与组件级 tooltipAttrs 合并时单项配置优先 */
+  tooltipAttrs?: SybzRecord
 }
 
 export interface SDescriptionsFilterContext {
@@ -215,6 +215,8 @@ export interface SDescriptionsOwnProps {
   value?: string
   customLabel?: (context: SDescriptionsRenderContext) => VNodeChild
   customValue?: (context: SDescriptionsRenderContext) => VNodeChild
+  /** 所有标签和值的 s-tooltip 默认属性，可由单项 tooltipAttrs 覆盖 */
+  tooltipAttrs?: SybzRecord
 }
 
 export type SDialogMode = 'dialog' | 'drawer'

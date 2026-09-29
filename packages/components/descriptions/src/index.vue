@@ -31,7 +31,7 @@
             <descriptions-render :render="mergedProps.customLabel" :context="getRenderProps(option, index)" />
           </template>
           <template v-else-if="!mergedProps.showAll">
-            <s-tooltip :content="parseLabel(option)" v-bind="option.labelAttrs"></s-tooltip>
+            <s-tooltip :content="parseLabel(option)" v-bind="getTooltipAttrs(option)"></s-tooltip>
           </template>
           <template v-else>
             {{ parseLabel(option) }}
@@ -73,7 +73,7 @@
             v-else
             class="s-descriptions__tooltip"
             :content="getTooltipContent(option, index)"
-            v-bind="option.valueAttrs"
+            v-bind="getTooltipAttrs(option)"
           ></s-tooltip>
         </template>
       </el-descriptions-item>
@@ -107,6 +107,7 @@ type DescriptionsProps = {
   value?: string
   customLabel?: (context: RenderContext) => VNodeChild
   customValue?: (context: RenderContext) => VNodeChild
+  tooltipAttrs?: Record<string, any>
 }
 
 type ItemOptions = {
@@ -120,8 +121,7 @@ type ItemOptions = {
   render?: (context: RenderContext) => VNodeChild
   filter?: (context: FilterContext) => any
   attrs?: Record<string, any>
-  labelAttrs?: Record<string, any>
-  valueAttrs?: Record<string, any>
+  tooltipAttrs?: Record<string, any>
 }
 
 type FilterContext = {
@@ -159,6 +159,11 @@ const props = withDefaults(defineProps<DescriptionsProps>(), {
   value: 'value',
 })
 const mergedProps = useGlobalComponentConfig('descriptions', props)
+
+const getTooltipAttrs = (option: ItemOptions) => ({
+  ...(mergedProps.value.tooltipAttrs ?? {}),
+  ...(option.tooltipAttrs ?? {}),
+})
 
 const getOptionField = (option: ItemOptions, key: string, fallbackKey: string) => {
   if (Object.prototype.hasOwnProperty.call(option, key)) {

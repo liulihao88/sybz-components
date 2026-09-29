@@ -288,7 +288,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'descriptions',
       allowAnySlots: true,
-      description: 's-descriptions 描述列表，支持通过每项的 column 设置占用列数，并在空间不足时自动换行补齐。',
+      description: 's-descriptions 描述列表，支持每项配置 column 和 tooltipAttrs，单项 tooltipAttrs 优先于组件级配置。',
       hoverProps: componentHoverProps(
         'SDescriptionsOwnProps',
         [
@@ -297,6 +297,7 @@ const TYPED_COMPONENT_PROPS = new Map([
           'SDescriptionsFilterContext',
           'SDescriptionsRenderContext',
           'SybzComponentTheme',
+          'SybzRecord',
         ],
         ["import type { VNodeChild } from 'vue'"],
       ),
