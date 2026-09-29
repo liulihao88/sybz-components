@@ -7,6 +7,6 @@
     <div class="w-100% h-100">
       <s-warning content="content内容" title="title内容" height="100%" />
     </div>
-    <s-warning height="20" content="高度20"></s-warning>
+    <s-warning height="30" content="高度30"></s-warning>
   </s-flex>
 </template>

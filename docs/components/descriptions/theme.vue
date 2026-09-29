@@ -12,7 +12,8 @@ const options = [
   { label: '创建时间', value: '2026-06-18 09:30:00' },
   {
     label: '服务说明服务说明服务说明服务说明服务说明服务说明',
-    value: '用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。',
+    value:
+      '用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。用于成华区企业服务申请材料的智能审核、风险提示和人工复核辅助。',
     column: 3,
   },
 ]
@@ -21,7 +22,16 @@ const options = [
 <template>
   <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
   <div class="descriptions-chenghua-demo">
-    <s-descriptions :theme="theme" title="服务基础信息" extra="更新时间 10:24" :options="options" label-width="100" />
+    <s-descriptions
+      :theme="theme"
+      title="服务基础信息"
+      extra="更新时间 10:24"
+      :options="options"
+      label-width="100"
+      :value-attrs="{
+        popperStyle: { width: '200px', maxWidth: '200px', whiteSpace: 'normal' },
+      }"
+    />
   </div>
 </template>
 

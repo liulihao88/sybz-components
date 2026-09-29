@@ -18,6 +18,14 @@
 tooltip/base
 :::
 
+### 控制弹出层内容宽度（popperStyle 默认值：Element Plus 默认样式）
+
+`s-tooltip` 的 `width` 用于控制触发文本区域的宽度；要调整弹出层内容宽度，可通过透传属性 `popperStyle` 设置。拖动滑块查看内容区域宽度和自动换行效果。
+
+:::demo 基础写法：`<s-tooltip :popper-style="{ width: '240px', maxWidth: '240px', whiteSpace: 'normal' }" />`。属性：`width` 类型 `string`，默认值 `100%`，控制触发文本区域；`popperStyle` 类型 `object`，默认值未设置，用于设置弹出层样式；示例滑块 `contentWidth` 范围 `120–480`，步长 `20`，默认值 `240`。
+tooltip/width
+:::
+
 ### 自定义文本样式
 
 :::demo `class` 会应用到 `s-tooltip` 的文本触发节点，可直接设置默认插槽文本的颜色、字号和字重，也支持调用方的 scoped 样式。基础写法：`<s-tooltip class="tooltip-custom-text" content="这是自定义文本样式">这是自定义文本样式</s-tooltip>`。属性：`class` 支持 Vue 标准的 `string / array / object`，默认值为空。
@@ -91,7 +99,7 @@ tooltip/visible
 
 |           属性名           | 说明                                       | 类型            | 默认值  |
 | :------------------------: | ------------------------------------------ | --------------- | ------- |
-|          `width`           | 默认文本触发区域最大宽度                   | string          | `100%`  |
+|          `width`           | 默认文本触发区域最大宽度；不控制弹出层宽度 | string          | `100%`  |
 |        `lineClamp`         | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`     |
 |         `showSlot`         | 是否渲染默认触发内容区域                   | boolean         | `true`  |
 |          `effect`          | tooltip 主题，会透传给 `el-tooltip`        | `dark/light`    | `dark`  |
@@ -99,15 +107,16 @@ tooltip/visible
 
 ### 常用透传属性
 
-|    属性名     | 说明                                           | 类型                                                                                                                              | 默认值              |
-| :-----------: | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-|   `content`   | 提示内容；未传默认插槽时，也会作为默认展示文本 | string / VNode                                                                                                                    | -                   |
-|  `placement`  | tooltip 弹出位置                               | `top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end` | bottom              |
-|   `trigger`   | 触发方式，支持单个值或数组                     | string / string[]                                                                                                                 | Element Plus 默认值 |
-| `show-after`  | 延迟显示时间，单位毫秒                         | number                                                                                                                            | `0`                 |
-|   `visible`   | 受控显示状态                                   | boolean                                                                                                                           | -                   |
-|  `disabled`   | 是否禁用 tooltip                               | boolean                                                                                                                           | `false`             |
-| `raw-content` | Element Plus 原生 HTML 解析属性，仍支持透传    | boolean                                                                                                                           | `false`             |
+|     属性名     | 说明                                                                | 类型                                                                                                                              | 默认值              |
+| :------------: | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+|   `content`    | 提示内容；未传默认插槽时，也会作为默认展示文本                      | string / VNode                                                                                                                    | -                   |
+|  `placement`   | tooltip 弹出位置                                                    | `top / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end` | bottom              |
+|   `trigger`    | 触发方式，支持单个值或数组                                          | string / string[]                                                                                                                 | Element Plus 默认值 |
+|  `show-after`  | 延迟显示时间，单位毫秒                                              | number                                                                                                                            | `0`                 |
+|   `visible`    | 受控显示状态                                                        | boolean                                                                                                                           | -                   |
+|   `disabled`   | 是否禁用 tooltip                                                    | boolean                                                                                                                           | `false`             |
+| `popper-style` | 弹出层样式；可用 `width / maxWidth / whiteSpace` 控制内容宽度和换行 | object / string                                                                                                                   | Element Plus 默认值 |
+| `raw-content`  | Element Plus 原生 HTML 解析属性，仍支持透传                         | boolean                                                                                                                           | `false`             |
 
 ### 事件
 
