@@ -5,6 +5,7 @@ const data = ref([
   { name: '张三', address: '北京市朝阳区', status: 0 },
   { name: '李四', address: '上海市浦东新区', status: 1 },
   { name: '王五', address: '河南省项城市', status: 0 },
+  { name: '王五', address: '河南省项城市', status: 0 },
 ])
 const otherParams = ref({
   showPage: true,
@@ -109,7 +110,7 @@ const columns = computed(() => {
       <s-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></s-radio>
       <s-radio v-model="otherParams.border" :options="[true, false]" type="simple" title="border"></s-radio>
       <s-radio v-model="otherParams.disabled" :options="[true, false]" type="simple" title="disabled"></s-radio>
-      <s-radio v-model="otherParams.simple" :options="[true, false]" type="simple" title="siple"></s-radio>
+      <s-radio v-model="otherParams.simple" :options="[true, false]" type="simple" title="simple"></s-radio>
     </s-flex>
     <s-table :columns="columns" :data="data" v-bind="otherParams"></s-table>
   </div>
