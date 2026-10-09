@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { computed, type Component } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import useSizeAliases from '@/hooks/useSizeAliases'
 
 defineOptions({
   name: 'SFlex',
@@ -20,7 +21,9 @@ interface FlexProps {
   flex?: string
   gap?: string | number
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   component?: string | Component
 }
 
@@ -34,6 +37,7 @@ const props = withDefaults(defineProps<FlexProps>(), {
   gap: '0px', // small default large
   component: 'div',
 })
+const sizeProps = useSizeAliases(props)
 
 const gapValue = computed(() => parseGapValue())
 const hasGap = computed(() => !/^0(?:[a-z%]+)?$/i.test(String(gapValue.value).trim()))
@@ -52,8 +56,8 @@ const flexStyles = computed(() => {
     'align-items': props.align === 'normal' ? undefined : props.align,
     flex: props.flex && props.flex !== 'normal' ? props.flex : undefined,
     gap: gapValue.value,
-    width: props.width === undefined ? undefined : processWidth(props.width, true),
-    height: props.height === undefined ? undefined : processWidth(props.height, true),
+    width: sizeProps.value.width === undefined ? undefined : processWidth(sizeProps.value.width, true),
+    height: sizeProps.value.height === undefined ? undefined : processWidth(sizeProps.value.height, true),
   }
 })
 

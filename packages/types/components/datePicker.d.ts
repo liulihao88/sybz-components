@@ -17,7 +17,9 @@ export type SDatePickerComponent = {
     $props: {
       title?: string
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       /** 是否仅允许选择当前日期或当前周期之后的值，并启用未来时间快捷项 */
       futureOnly?: boolean
       theme?: SybzComponentTheme
@@ -25,7 +27,7 @@ export type SDatePickerComponent = {
       compTitleStyle?: SybzRecord
     } & Omit<
       ElDatePickerInstance['$props'],
-      'title' | 'width' | 'height' | 'futureOnly' | 'theme' | 'shortcuts' | 'compTitleStyle'
+      'title' | 'width' | 'w' | 'height' | 'h' | 'futureOnly' | 'theme' | 'shortcuts' | 'compTitleStyle'
     >
     $emit: ElDatePickerInstance['$emit']
     $slots: ElDatePickerInstance['$slots'] & Record<string, (...args: any[]) => any>

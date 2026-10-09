@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, shallowRef, watch, markRaw, onMounted, onBeforeUnmount, computed } from 'vue'
 import { debounce, processWidth } from '@sybz-components/utils'
+import useSizeAliases from '@/hooks/useSizeAliases'
 import { registerShijingshanChartTheme } from './shijingshanTheme.ts'
 import { registerSybzChartTheme } from './sybzTheme.ts'
 
@@ -18,7 +19,9 @@ let resizeObserver: ResizeObserver | undefined
 const props = withDefaults(
   defineProps<{
     width?: string
+    w?: string
     height?: string
+    h?: string
     id?: string
     option: Record<string, any>
     theme?: string
@@ -34,6 +37,7 @@ const props = withDefaults(
     id: () => Math.random().toString(36).substring(2, 8),
   },
 )
+const sizeProps = useSizeAliases(props)
 
 const initChart = async () => {
   if (!echartDivRef.value) return
@@ -71,7 +75,7 @@ const resizeChart = debounce(
 )
 
 watch(
-  [() => props.width, () => props.height],
+  [() => sizeProps.value.width, () => sizeProps.value.height],
   () => {
     resizeChart()
   },
@@ -134,7 +138,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="s-chart" :style="{ height: processWidth(height, true), width: processWidth(width, true) }">
+  <div
+    class="s-chart"
+    :style="{ height: processWidth(sizeProps.height, true), width: processWidth(sizeProps.width, true) }"
+  >
     <div v-show="!formatEmpty" :id="id" ref="echartDivRef" class="s-chart-container" />
     <slot v-if="formatEmpty" name="empty">
       <el-empty v-bind="$attrs" :description="description" />

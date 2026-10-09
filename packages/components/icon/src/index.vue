@@ -30,7 +30,9 @@ interface IconProps {
   color?: string
   size?: string | number
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   borderRadius?: string | number
   cursor?: SIconCursor
   hoverAnimation?: boolean

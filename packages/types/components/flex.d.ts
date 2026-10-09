@@ -24,7 +24,9 @@ export type SFlexComponent = {
       flex?: string
       gap?: SybzComponentSize | string | number
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       component?: string | Component
     }
     $slots: {

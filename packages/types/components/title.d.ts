@@ -21,11 +21,13 @@ export type STitleComponent = {
       margin?: string | number
       gap?: string | number
       width?: string | number
+      w?: string | number
       t?: string | number
       b?: string | number
       l?: string | number
       tb?: string | number
       height?: string | number
+      h?: string | number
       type?: '' | 'simple' | 'icon' | 'form'
       theme?: SybzComponentTheme
       tag?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'

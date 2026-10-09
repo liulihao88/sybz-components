@@ -11,7 +11,8 @@ export type SSwitchComponent = {
       theme?: SybzComponentTheme
       beforeChange?: (...args: any[]) => any
       width?: string | number
-    } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width'>
+      w?: string | number
+    } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width' | 'w'>
     $emit: ElSwitchInstance['$emit']
     $slots: ElSwitchInstance['$slots']
   }

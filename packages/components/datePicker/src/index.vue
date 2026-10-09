@@ -14,7 +14,9 @@ const datePickerRef = ref()
 interface DatePickerProps {
   title?: string
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   futureOnly?: boolean
   compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme

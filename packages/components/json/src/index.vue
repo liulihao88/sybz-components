@@ -8,6 +8,7 @@ import { linter } from '@codemirror/lint'
 import { EditorState } from '@codemirror/state'
 import { EditorView, placeholder as editorPlaceholder } from '@codemirror/view'
 import { processWidth } from '@sybz-components/utils'
+import useSizeAliases from '@/hooks/useSizeAliases'
 import type { JsonChangePayload, JsonData, JsonEmits, JsonExposed, JsonProps } from './types'
 
 defineOptions({ name: 'SJson', inheritAttrs: false })
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<JsonProps>(), {
   minHeight: 200,
   theme: 'light',
 })
+const sizeProps = useSizeAliases(props)
 
 const emit = defineEmits<JsonEmits>()
 const editorElement = ref<HTMLElement>()
@@ -40,8 +42,8 @@ let suppressNextDataWatch = false
 
 const rootStyle = computed(() => [
   {
-    width: processWidth(props.width, true),
-    height: processWidth(props.height, true),
+    width: processWidth(sizeProps.value.width, true),
+    height: processWidth(sizeProps.value.height, true),
     minHeight: processWidth(props.minHeight, true),
   },
   props.style,

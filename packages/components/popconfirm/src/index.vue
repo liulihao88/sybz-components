@@ -67,6 +67,7 @@ function cancel() {
 interface PopconfirmProps {
   title?: string
   width?: string | number
+  w?: string | number
   content?: string
   reConfirm?: boolean
   dangerouslyUseHTMLString?: boolean

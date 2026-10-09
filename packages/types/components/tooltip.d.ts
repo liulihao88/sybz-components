@@ -16,6 +16,7 @@ export type STooltipComponent = {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       width?: string
+      w?: string
       lineClamp?: string | number
       showSlot?: boolean
       effect?: string
@@ -23,7 +24,7 @@ export type STooltipComponent = {
       showAfter?: number
     } & Omit<
       ElTooltipInstance['$props'],
-      'dangerouslyUseHTMLString' | 'width' | 'lineClamp' | 'showSlot' | 'effect' | 'showAfter'
+      'dangerouslyUseHTMLString' | 'width' | 'w' | 'lineClamp' | 'showSlot' | 'effect' | 'showAfter'
     >
     $emit: ElTooltipInstance['$emit']
     $slots: ElTooltipInstance['$slots'] & {

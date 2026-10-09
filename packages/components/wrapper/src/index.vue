@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { useSlots, computed, type VNode } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import useSizeAliases from '@/hooks/useSizeAliases'
 
 defineOptions({
   name: 'SWrapper',
@@ -15,8 +16,10 @@ defineOptions({
 interface WrapperProps {
   /** 容器宽度，支持数字、px、百分比等，默认空字符串 */
   width?: string | number
+  w?: string | number
   /** 容器高度，支持数字、px、百分比等；百分比需要父容器具有明确高度，默认空字符串 */
   height?: string | number
+  h?: string | number
   gap?: string | number
   column?: number | null
   minWidth?: string | number
@@ -29,9 +32,10 @@ const props = withDefaults(defineProps<WrapperProps>(), {
   column: null, // null 表示不分组，保持原样
   minWidth: 0,
 })
+const sizeProps = useSizeAliases(props)
 
-const widthValue = computed(() => processWidth(props.width, true))
-const heightValue = computed(() => processWidth(props.height, true))
+const widthValue = computed(() => processWidth(sizeProps.value.width, true))
+const heightValue = computed(() => processWidth(sizeProps.value.height, true))
 const gapValue = computed(() => processWidth(props.gap, true))
 const minWidthValue = computed(() => processWidth(props.minWidth, true))
 

@@ -56,6 +56,7 @@ const hasDefaultSlot = computed(() => Boolean(slots.default))
 
 interface TooltipProps {
   width?: string
+  w?: string
   lineClamp?: string | number
   showSlot?: boolean
   effect?: string

@@ -15,7 +15,9 @@ export type STagComponent = {
   new (): {
     $props: {
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       color?: string
       /** CSS background，支持纯色、渐变及其他合法背景值 */
       background?: string
@@ -34,7 +36,9 @@ export type STagComponent = {
     } & Omit<
       ElTagInstance['$props'],
       | 'width'
+      | 'w'
       | 'height'
+      | 'h'
       | 'color'
       | 'background'
       | 'hoverAnimation'

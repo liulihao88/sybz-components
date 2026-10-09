@@ -13,7 +13,9 @@ export type SDocumentPreviewComponent = {
       src: string
       type?: 'auto' | 'pdf' | 'word' | 'excel'
       height?: string | number
+      h?: string | number
       width?: string | number
+      w?: string | number
       download?: boolean
     }
   }

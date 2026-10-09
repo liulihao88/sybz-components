@@ -23,8 +23,10 @@ export type SMarkdownComponent = {
       disabled?: boolean
       /** 组件宽度，数字按 px 处理，默认值：'100%' */
       width?: string | number
+      w?: string | number
       /** 组件高度，数字按 px 处理；编辑模式默认沿用 md-editor-v3 的 500px，只读模式默认由内容撑开 */
       height?: string | number
+      h?: string | number
       /** 源文本的解析模式，HTML 模式会跳过 Markdown 解析，默认值：'markdown' */
       contentType?: 'markdown' | 'html'
       /** 是否允许渲染 Markdown 源文本中的原始 HTML，默认值：true */
@@ -64,7 +66,9 @@ export type SMarkdownComponent = {
       | 'editable'
       | 'disabled'
       | 'width'
+      | 'w'
       | 'height'
+      | 'h'
       | 'contentType'
       | 'allowHtml'
       | 'sanitize'

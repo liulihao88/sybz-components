@@ -33,8 +33,10 @@ export type SButtonComponent = {
       size?: 'small' | 'default' | 'large'
       /** 按钮宽度，数字会按工具方法补单位 */
       width?: string | number
+      w?: string | number
       /** 按钮高度，数字会按工具方法补单位 */
       height?: string | number
+      h?: string | number
       /** 是否开启 hover 动效 */
       hoverAnimation?: boolean
       /** 幽灵按钮，使背景透明并反转文字和边框颜色 */
@@ -53,7 +55,9 @@ export type SButtonComponent = {
       | 'variant'
       | 'size'
       | 'width'
+      | 'w'
       | 'height'
+      | 'h'
       | 'hoverAnimation'
       | 'ghost'
       | 'iconPlacement'

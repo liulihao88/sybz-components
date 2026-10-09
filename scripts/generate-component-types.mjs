@@ -870,6 +870,36 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
 ])
 
+// 声明了尺寸属性的组件同步公开 w/h；生成时检查对应属性接口，避免实现与 .d.ts 脱节。
+const SIZE_ALIAS_COMPONENTS = new Map([
+  ['SButton', 'wh'],
+  ['SCard', 'h'],
+  ['SChart', 'wh'],
+  ['SDatePicker', 'wh'],
+  ['SDescriptions', 'w'],
+  ['SDialog', 'wh'],
+  ['SDocumentPreview', 'wh'],
+  ['SEmpty', 'wh'],
+  ['SFlex', 'wh'],
+  ['SIcon', 'wh'],
+  ['SImage', 'wh'],
+  ['SInput', 'wh'],
+  ['SInputNumber', 'wh'],
+  ['SItem', 'wh'],
+  ['SJson', 'wh'],
+  ['SMarkdown', 'wh'],
+  ['SMenu', 'wh'],
+  ['SPopconfirm', 'w'],
+  ['SSelect', 'wh'],
+  ['SSwitch', 'w'],
+  ['STabs', 'wh'],
+  ['STag', 'wh'],
+  ['STitle', 'wh'],
+  ['STooltip', 'w'],
+  ['SWarning', 'wh'],
+  ['SWrapper', 'wh'],
+])
+
 const toPosixPath = (value) => value.replaceAll('\\', '/')
 
 const toPascalCase = (value) =>
@@ -1032,6 +1062,18 @@ const collectInterfaceProps = ({ sourcePath, interfaceName }, seen = new Set()) 
   }))
 
   return [...inheritedProps, ...ownProps]
+}
+
+for (const [componentName, aliases] of SIZE_ALIAS_COMPONENTS) {
+  const hoverProps = TYPED_COMPONENT_PROPS.get(componentName)?.hoverProps
+  if (!hoverProps) throw new Error(`${componentName} 缺少尺寸别名的类型生成配置`)
+  const propNames = new Set(collectInterfaceProps(hoverProps).map(({ omitKey }) => omitKey))
+  for (const alias of aliases) {
+    const original = alias === 'w' ? 'width' : 'height'
+    if (!propNames.has(original) || !propNames.has(alias)) {
+      throw new Error(`${componentName} 必须同时声明 ${original} 和 ${alias}`)
+    }
+  }
 }
 
 const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {

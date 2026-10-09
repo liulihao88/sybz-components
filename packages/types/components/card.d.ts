@@ -11,6 +11,7 @@ export type SCardComponent = {
       modelValue?: boolean
       size?: SybzComponentSize | string | number
       height?: string | number
+      h?: string | number
       title?: string
       subTitle?: string
       extra?: string

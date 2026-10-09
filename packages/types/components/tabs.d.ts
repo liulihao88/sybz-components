@@ -24,7 +24,9 @@ export type STabsComponent = {
       theme?: SybzComponentTheme
       size?: 'small' | 'default' | 'large'
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       headerMargin?: string | number
     } & Omit<
       ElTabsInstance['$props'],
@@ -38,7 +40,9 @@ export type STabsComponent = {
       | 'theme'
       | 'size'
       | 'width'
+      | 'w'
       | 'height'
+      | 'h'
       | 'headerMargin'
     >
     $emit: ElTabsInstance['$emit']

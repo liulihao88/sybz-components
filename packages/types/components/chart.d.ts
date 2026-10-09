@@ -4,7 +4,9 @@ export type SChartComponent = {
   new (): {
     $props: {
       width?: string
+      w?: string
       height?: string
+      h?: string
       id?: string
       option: SybzRecord
       theme?: string

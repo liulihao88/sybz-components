@@ -18,6 +18,7 @@ export type SPopconfirmComponent = {
       dangerouslyUseHTMLString?: boolean
       title?: string
       width?: string | number
+      w?: string | number
       content?: string
       reConfirm?: boolean
       theme?: SybzComponentTheme
@@ -39,6 +40,7 @@ export type SPopconfirmComponent = {
       | 'dangerouslyUseHTMLString'
       | 'title'
       | 'width'
+      | 'w'
       | 'content'
       | 'reConfirm'
       | 'theme'

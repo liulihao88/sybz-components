@@ -17,8 +17,10 @@ export type SImageComponent = {
       src?: string
       /** 图片宽度，数字自动补 px */
       width?: string | number
+      w?: string | number
       /** 图片高度，数字自动补 px */
       height?: string | number
+      h?: string | number
       /** 相对图片的公共基础路径 */
       basePath?: string
       /** 源码资源解析函数，通常由 createImageResolver 创建 */
@@ -29,7 +31,7 @@ export type SImageComponent = {
       previewSrcList?: string[]
     } & Omit<
       ElImageInstance['$props'],
-      'src' | 'width' | 'height' | 'basePath' | 'resolver' | 'preview' | 'previewSrcList'
+      'src' | 'width' | 'w' | 'height' | 'h' | 'basePath' | 'resolver' | 'preview' | 'previewSrcList'
     >
     $emit: ElImageInstance['$emit']
     $slots: ElImageInstance['$slots'] & Record<string, (...args: any[]) => any>

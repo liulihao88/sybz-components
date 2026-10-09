@@ -91,11 +91,13 @@ interface TitleProps {
   margin?: string | number
   gap?: string | number
   width?: string | number
+  w?: string | number
   t?: string | number
   b?: string | number
   l?: string | number
   tb?: string | number
   height?: string | number
+  h?: string | number
   type?: TitleType
   theme?: SybzComponentTheme
   tag?: TitleTag

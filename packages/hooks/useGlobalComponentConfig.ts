@@ -1,5 +1,6 @@
 import { computed, getCurrentInstance, inject, type ComputedRef } from 'vue'
 import { resolveSybzComponentTheme } from '../utils/src/theme'
+import { resolveSizeAliases } from './useSizeAliases'
 
 export const GLOBAL_COMPONENT_CONFIG_KEY = 'GLOBAL_COMPONENT_CONFIG'
 export const GLOBAL_COMPONENT_COMMON_PROPS_KEY = '__globalProps'
@@ -57,18 +58,22 @@ const useGlobalComponentConfig = <T extends Record<string, any>>(componentKey: s
   const instance = getCurrentInstance()
 
   return computed(() => {
+    const configured = getComponentConfig(globalConfig, componentKey, props)
     const mergedProps = {
       ...props,
-      ...getComponentConfig(globalConfig, componentKey, props),
+      ...configured,
       ...getExplicitProps(instance?.vnode.props, props),
     }
 
-    const mergedRecord = mergedProps as Record<string, any>
+    const mergedRecord = resolveSizeAliases(mergedProps, props, configured, instance?.vnode.props) as Record<
+      string,
+      any
+    >
     if (typeof mergedRecord.theme === 'string') {
       mergedRecord.theme = resolveSybzComponentTheme(mergedRecord.theme)
     }
 
-    return mergedProps
+    return mergedRecord
   }) as ComputedRef<T & Record<string, any>>
 }
 

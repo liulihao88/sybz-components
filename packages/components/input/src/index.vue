@@ -142,7 +142,9 @@ interface SInputProps {
   modelValue: any
   compTitleStyle?: Record<string, any>
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   maxlength?: string | number
   hideMaxLengthError?: boolean
   maxLengthErrorText?: string
@@ -283,7 +285,7 @@ watch(
 )
 
 const computedBoxStyle = computed(() => {
-  const compTitleStyle = {
+  const compTitleStyle: Record<string, any> = {
     padding: '0 8px',
     ...(mergedProps.value.compTitleStyle ?? {}),
   }

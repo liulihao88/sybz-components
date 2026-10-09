@@ -13,7 +13,9 @@ defineOptions({
 interface SImageSelfProps {
   src?: string
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   basePath?: string
   resolver?: SImageSrcResolver
   preview?: boolean

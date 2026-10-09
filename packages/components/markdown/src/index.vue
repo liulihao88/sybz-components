@@ -2,6 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Download, FullScreen, RefreshLeft, RefreshRight, ZoomIn, ZoomOut } from '@element-plus/icons-vue'
 import { processWidth } from '@sybz-components/utils'
+import useSizeAliases from '@/hooks/useSizeAliases'
 import DOMPurify from 'dompurify'
 import { ElIcon, ElImageViewer } from 'element-plus'
 import { MdEditor } from 'md-editor-v3'
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<MarkdownProps>(), {
   imagePreview: true,
   emptyText: '',
 })
+const sizeProps = useSizeAliases(props)
 
 const emit = defineEmits<MarkdownEmits>()
 
@@ -78,8 +80,8 @@ let renderVersion = 0
 
 const currentSource = computed(() => props.modelValue ?? props.source)
 const componentStyle = computed(() => ({
-  width: processWidth(props.width, true),
-  height: processWidth(props.height, true),
+  width: processWidth(sizeProps.value.width, true),
+  height: processWidth(sizeProps.value.height, true),
 }))
 
 const slugify = (text: string) =>

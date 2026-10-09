@@ -15,7 +15,9 @@ const props = withDefaults(
     subTitle?: string
     theme?: SybzComponentTheme
     width?: string | number
+    w?: string | number
     height?: string | number
+    h?: string | number
     imgAttrs?: Record<string, any>
     src?: string
   }>(),

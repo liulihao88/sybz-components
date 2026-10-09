@@ -31,7 +31,9 @@ interface InputNumberProps {
   title?: string
   compTitleStyle?: Record<string, any>
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   theme?: SybzComponentTheme
   size?: '' | 'large' | 'default' | 'small'
   subAttrs?: Record<string, any>

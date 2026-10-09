@@ -17,7 +17,9 @@ interface Props {
   theme?: SybzComponentTheme
   type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   dangerouslyUseHTMLString?: boolean
   icon?: boolean
   size?: 'small' | 'default'

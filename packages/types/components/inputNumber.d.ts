@@ -12,13 +12,15 @@ export type SInputNumberComponent = {
       title?: string
       compTitleStyle?: SybzRecord
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       theme?: SybzComponentTheme
       size?: SybzComponentSize
       subAttrs?: SybzRecord
     } & Omit<
       ElInputNumberInstance['$props'],
-      'title' | 'compTitleStyle' | 'width' | 'height' | 'theme' | 'size' | 'subAttrs'
+      'title' | 'compTitleStyle' | 'width' | 'w' | 'height' | 'h' | 'theme' | 'size' | 'subAttrs'
     >
     $emit: ElInputNumberInstance['$emit']
     $slots: ElInputNumberInstance['$slots'] & Record<string, (...args: any[]) => any>

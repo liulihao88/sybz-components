@@ -44,7 +44,9 @@ interface SButtonSelfProps {
   variant?: '' | 'outline' | 'gradient'
   size?: 'small' | 'default' | 'large'
   width?: string | number
+  w?: string | number
   height?: string | number
+  h?: string | number
   hoverAnimation?: boolean
   ghost?: boolean
   iconPlacement?: 'start' | 'end'

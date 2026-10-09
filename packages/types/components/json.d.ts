@@ -29,8 +29,10 @@ export type SJsonComponent = {
       placeholder?: string
       /** 编辑器宽度，支持 processWidth 写法，默认值：100% */
       width?: string | number
+      w?: string | number
       /** 编辑器高度，支持 processWidth 写法；默认由容器或最小高度决定 */
       height?: string | number
+      h?: string | number
       /** 编辑器最小高度，支持 processWidth 写法，默认值：240 */
       minHeight?: string | number
       /** 显示主题，默认值：light */

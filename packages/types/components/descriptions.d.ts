@@ -26,6 +26,7 @@ export type SDescriptionsComponent = {
       theme?: SybzComponentTheme
       column?: number
       width?: string | number
+      w?: string | number
       labelWidth?: string | number
       showAll?: boolean
       label?: string
@@ -40,6 +41,7 @@ export type SDescriptionsComponent = {
       | 'theme'
       | 'column'
       | 'width'
+      | 'w'
       | 'labelWidth'
       | 'showAll'
       | 'label'

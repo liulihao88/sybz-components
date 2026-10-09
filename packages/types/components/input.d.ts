@@ -24,7 +24,9 @@ export type SInputComponent = {
       modelValue: any
       compTitleStyle?: SybzRecord
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       maxlength?: string | number
       hideMaxLengthError?: boolean
       maxLengthErrorText?: string
@@ -47,7 +49,9 @@ export type SInputComponent = {
       | 'modelValue'
       | 'compTitleStyle'
       | 'width'
+      | 'w'
       | 'height'
+      | 'h'
       | 'maxlength'
       | 'hideMaxLengthError'
       | 'maxLengthErrorText'

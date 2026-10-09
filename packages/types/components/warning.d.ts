@@ -15,7 +15,9 @@ export type SWarningComponent = {
       theme?: SybzComponentTheme
       type?: SWarningType
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       icon?: boolean
       size?: SWarningSize
       dotted?: boolean

@@ -25,7 +25,9 @@ export type SMenuComponent = {
       defaultOpenAll?: boolean
       defaultOpeneds?: string[]
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       /** 是否自适应菜单项尺寸：展开时四边保持 16px padding，收起时为 4px，仅空间不足时压缩菜单项 */
       autoHeight?: boolean
       /** 深色模式背景色；浅色模式始终为白色 */

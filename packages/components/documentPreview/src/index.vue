@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { renderAsync } from 'docx-preview'
+import useSizeAliases from '@/hooks/useSizeAliases'
 
 defineOptions({ name: 'SDocumentPreview' })
 
@@ -11,11 +12,14 @@ const props = withDefaults(
     src: string
     type?: DocumentPreviewType
     height?: string | number
+    h?: string | number
     width?: string | number
+    w?: string | number
     download?: boolean
   }>(),
   { type: 'pdf', height: '600px', width: '100%', download: true },
 )
+const sizeProps = useSizeAliases(props)
 
 const failed = ref(false)
 const detectedType = ref<DocumentPreviewType>()
@@ -182,8 +186,8 @@ watch(
   },
 )
 const frameStyle = computed(() => ({
-  width: typeof props.width === 'number' ? `${props.width}px` : props.width,
-  height: typeof props.height === 'number' ? `${props.height}px` : props.height,
+  width: typeof sizeProps.value.width === 'number' ? `${sizeProps.value.width}px` : sizeProps.value.width,
+  height: typeof sizeProps.value.height === 'number' ? `${sizeProps.value.height}px` : sizeProps.value.height,
 }))
 </script>
 

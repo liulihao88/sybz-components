@@ -12,12 +12,14 @@ export type SEmptyComponent = {
       subTitle?: string
       theme?: SybzComponentTheme
       width?: string | number
+      w?: string | number
       height?: string | number
+      h?: string | number
       imgAttrs?: SybzRecord
       src?: string
     } & Omit<
       ElEmptyInstance['$props'],
-      'title' | 'subTitle' | 'theme' | 'width' | 'height' | 'imgAttrs' | 'src' | 'description'
+      'title' | 'subTitle' | 'theme' | 'width' | 'w' | 'height' | 'h' | 'imgAttrs' | 'src' | 'description'
     >
     $emit: ElEmptyInstance['$emit']
     $slots: ElEmptyInstance['$slots'] & {
