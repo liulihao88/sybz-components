@@ -142,7 +142,7 @@ select/emptyPlaceholder
 |           `size`           | 选择器尺寸，支持 `small` / `default` / `large`                     | string                  | `''`       |
 |          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` / `sybz`   | string                  | `default`  |
 |          `title`           | 左侧标题文案                                                       | string                  | `''`       |
-|      `compTitleStyle`      | 左侧标题组件样式                                                   | object                  | `{}`       |
+|      `compTitleStyle`      | 左侧标题组件样式；默认内边距为 `0 8px`                             | object                  | `{}`       |
 |         `connect`          | 多字段 label 拼接符                                                | string                  | `/`        |
 |       `customLabel`        | 自定义 label，参数为 `{ option, index, value }`                    | function                | -          |
 |          `width`           | 组件宽度                                                           | string / number         | `''`       |

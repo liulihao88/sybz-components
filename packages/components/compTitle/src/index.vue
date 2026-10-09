@@ -68,7 +68,7 @@ const compTitleClass = computed(() => [
   border: 1px solid var(--el-border-color);
   box-sizing: border-box !important;
   border-right: 0 none;
-  padding: 0 4px;
+  padding: 0 8px;
   white-space: nowrap;
   border-radius: 2px 0 0 2px;
   display: inline-flex;

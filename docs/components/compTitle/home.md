@@ -41,5 +41,6 @@ compTitle/theme
 ### 说明
 
 - `s-comp-title` 默认用于输入类组件的左侧标题区域。
+- 默认内边距为 `0 8px`，可通过 `compTitleStyle.padding` 覆盖。
 - 默认高度为 `var(--el-component-size, 32px)`，`small` 为 `24px`，`large` 为 `40px`。
 - 和输入框拼接时，通常需要把后面的输入框左侧圆角置为 `0`。

@@ -43,7 +43,9 @@
 
   <s-title title="flex 控制组件自身伸缩"></s-title>
   <div class="parent-flex">
-    <s-flex flex="1" justify="center" align="center" class="grow-box">flex="1"</s-flex>
+    <s-flex flex="1" justify="center" align="center" class="grow-box">
+      <div>flex="1"</div>
+    </s-flex>
     <s-flex flex="0 0 180px" justify="center" align="center" class="fixed-box">flex="0 0 180px"</s-flex>
   </div>
 </template>

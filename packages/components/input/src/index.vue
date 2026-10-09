@@ -114,13 +114,14 @@
 
 <script setup lang="ts">
 import type { SybzComponentTheme } from '../../../types/component-props'
-import { ref, computed, useAttrs, watch, nextTick } from 'vue'
+import { ref, computed, useAttrs, useSlots, watch, nextTick } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
 import { inputProps } from 'element-plus/es/components/input/src/input'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 const attrs = useAttrs()
+const slots = useSlots()
 
 defineOptions({
   name: 'SInput',
@@ -212,6 +213,7 @@ const inputClass = computed(() => [
   attrs.class,
   {
     'has-content': mergedProps.value.content,
+    's-input--has-title': Boolean(attrs.title) && !slots.prepend,
     's-input--chenghua': mergedProps.value.theme === 'chenghua',
     's-input--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-input--sybz': mergedProps.value.theme === 'sybz',
@@ -281,17 +283,15 @@ watch(
 )
 
 const computedBoxStyle = computed(() => {
-  const themeTitleStyle: Record<string, any> = mergedProps.value.theme !== 'default' ? { padding: '0 16px' } : {}
   const compTitleStyle = {
-    ...themeTitleStyle,
+    padding: '0 8px',
     ...(mergedProps.value.compTitleStyle ?? {}),
   }
 
   if (compTitleStyle.width) {
-    let minusWidth = parseInt(compTitleStyle.width) - 8 + 'px'
     return {
       ...compTitleStyle,
-      width: processWidth(minusWidth, true),
+      width: processWidth(compTitleStyle.width, true),
     }
   } else {
     return compTitleStyle
@@ -514,6 +514,10 @@ const mergedStyle = computed(() => {
   :deep(.el-input-group__prepend),
   :deep(.el-input-group__append) {
     padding: 0 4px;
+  }
+
+  &.s-input--has-title :deep(.el-input-group__prepend) {
+    padding: 0;
   }
 
   .s-input__icon {
