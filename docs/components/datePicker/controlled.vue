@@ -20,7 +20,7 @@ const openPicker = () => {
           </div>
         </template>
       </s-date-picker>
-      <s-button :icon="Calendar" @click="openPicker">打开日期面板</s-button>
+      <s-button :icon="Calendar" size="small" @click="openPicker">打开日期面板</s-button>
     </div>
 
     <div class="demo-value">{{ dateValue }}</div>
