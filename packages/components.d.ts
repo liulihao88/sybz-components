@@ -363,6 +363,18 @@ declare module 'vue' {
      */
     's-schedule-calendar': (typeof import('./types/components/company/scheduleCalendar'))['default']
     /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/scroll/home.html
+     *
+     * s-scroll 自定义滚动区域，支持滚动条策略、方向、位置、初始坐标、边界事件及自动高度；scrollbarSize 为 0 时隐藏滚动条。
+     */
+    SScroll: (typeof import('./types/components/scroll'))['default']
+    /**
+     * 在线文档：https://liulihao88.github.io/sybz-components/components/scroll/home.html
+     *
+     * s-scroll 自定义滚动区域，支持滚动条策略、方向、位置、初始坐标、边界事件及自动高度；scrollbarSize 为 0 时隐藏滚动条。
+     */
+    's-scroll': (typeof import('./types/components/scroll'))['default']
+    /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/select/home.html
      *
      * s-select 下拉选择组件，空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
@@ -633,6 +645,10 @@ export type SScheduleCalendarComponent = (typeof import('./types/components/comp
 export type SScheduleCalendarInstance = ComponentInstance<SScheduleCalendarComponent>
 export type SScheduleCalendarPublicProps = SScheduleCalendarInstance['$props']
 
+export type SScrollComponent = (typeof import('./types/components/scroll'))['default']
+export type SScrollInstance = ComponentInstance<SScrollComponent>
+export type SScrollPublicProps = SScrollInstance['$props']
+
 export type SSelectComponent = import('./types/components/select').SSelectComponent
 export type SSelectInstance = ComponentInstance<SSelectComponent>
 export type SSelectPublicProps = import('./types/components/select').SSelectPublicProps
@@ -724,6 +740,7 @@ declare global {
       's-radio': JSXComponentProps<SRadioPublicProps>
       's-row': JSXComponentProps<SRowPublicProps>
       's-schedule-calendar': JSXComponentProps<SScheduleCalendarPublicProps>
+      's-scroll': JSXComponentProps<SScrollPublicProps>
       's-select': JSXComponentProps<SSelectPublicProps>
       's-split-pane': JSXComponentProps<SSplitPanePublicProps>
       's-svg': JSXComponentProps<SSvgPublicProps>

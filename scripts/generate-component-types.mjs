@@ -372,6 +372,33 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
+    'SScroll',
+    {
+      importPath: resolve(rootDir, 'packages/components/scroll/src/types.ts'),
+      typeName: 'SScrollProps',
+      description:
+        's-scroll 自定义滚动区域，支持滚动条策略、方向、位置、初始坐标、边界事件及自动高度；scrollbarSize 为 0 时隐藏滚动条。',
+      slots: ['default'],
+      instanceMembers: [
+        'viewport: HTMLElement | undefined',
+        'scrollTo: (options: ScrollToOptions) => void',
+        '$emit: SScrollEmits',
+      ],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/scroll/src/types.ts'),
+        interfaceName: 'SScrollProps',
+        importTypeNames: [
+          'SScrollAxis',
+          'SScrollEmits',
+          'SScrollOffset',
+          'SScrollPosition',
+          'SScrollProps',
+          'SScrollType',
+        ],
+      },
+    },
+  ],
+  [
     'SForm',
     {
       importPath: componentPropsPath,
@@ -892,6 +919,7 @@ const SIZE_ALIAS_COMPONENTS = new Map([
   ['SMenu', 'wh'],
   ['SPopconfirm', 'w'],
   ['SSelect', 'wh'],
+  ['SScroll', 'wh'],
   ['SSwitch', 'w'],
   ['STabs', 'wh'],
   ['STag', 'wh'],
