@@ -1,3 +1,7 @@
 @import '../shared/input.scss';
 
 @include s-input-theme('sybz', 'sybz');
+
+.s-input.s-input--sybz.s-input--has-title .el-input-group--prepend .el-input-group__prepend {
+  background: var(--s-sybz-blue-25);
+}
