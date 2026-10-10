@@ -1,7 +1,7 @@
 <template>
   <div class="s-radio-box" :class="radioClass">
     <span
-      v-if="mergedProps.title && mergedProps.showType === 'button'"
+      v-if="mergedProps.title && mergedProps.variant === 'button'"
       class="s-radio-box__title s-radio-box__title--button"
       :style="buttonTitleStyle"
     >
@@ -50,7 +50,7 @@ interface RadioProps {
   theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
   type?: 'boolean' | 'simple' | ''
-  showType?: 'radio' | 'button'
+  variant?: 'radio' | 'button'
   options?: RadioOption[]
   border?: boolean
   gap?: string | number
@@ -80,7 +80,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
   theme: 'default',
   size: 'default',
   type: '',
-  showType: 'radio',
+  variant: 'radio',
   options: () => [],
   border: false,
   value: 'value',
@@ -119,7 +119,7 @@ const radioType = computed(() => {
     radio: 'el-radio',
     button: 'el-radio-button',
   }
-  return obj[mergedProps.value.showType] ?? 'el-radio'
+  return obj[mergedProps.value.variant] ?? 'el-radio'
 })
 const isBaseOption = (option: RadioOption): option is RadioOptionValue => {
   return ['string', 'number', 'boolean'].includes(typeof option)
@@ -209,7 +209,7 @@ const getTypeColors = (type: keyof typeof radioTypeColors) => {
   }
 }
 const getOptionStyle = (option: RadioItem): CSSProperties | undefined => {
-  if (mergedProps.value.showType !== 'button') return option.style
+  if (mergedProps.value.variant !== 'button') return option.style
 
   const type = option.type && radioTypeColors[option.type]
 
@@ -232,7 +232,7 @@ const radioClass = computed(() => {
     's-radio-box--chenghua': mergedProps.value.theme === 'chenghua',
     's-radio-box--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-radio-box--sybz': mergedProps.value.theme === 'sybz',
-    's-radio-box--button': mergedProps.value.showType === 'button',
+    's-radio-box--button': mergedProps.value.variant === 'button',
     's-radio-box--border': Boolean(attrs.border ?? mergedProps.value.border),
   }
 })

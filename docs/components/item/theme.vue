@@ -5,7 +5,7 @@ const theme = ref<(typeof docThemeOptions)[number]>('default')
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <SItem :theme="theme" title="企业服务" sub-title="查看企业政策与服务进度" extra="立即查看" clickable>
     <template #prefix><span class="item-icon">企</span></template>
   </SItem>

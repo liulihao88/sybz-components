@@ -4,8 +4,8 @@ import { docThemeState, setDocTheme } from '../../.vitepress/theme/theme'
 
 type ThemeName = 'default' | 'chenghua' | 'shijingshan' | 'sybz' | 'gulou'
 type SizeName = 'small' | 'default' | 'large'
-type RadioShowType = 'radio' | 'button'
-type CheckboxShowType = 'check' | 'button'
+type RadioVariant = 'radio' | 'button'
+type CheckboxVariant = 'checkbox' | 'button'
 
 const currentTheme = computed<ThemeName>({
   get: () => docThemeState.theme,
@@ -21,8 +21,8 @@ const enabled = ref(true)
 const agreeItems = ref(['log'])
 const radioValue = ref('private')
 const showDialog = ref(false)
-const radioShowType = ref<RadioShowType>('radio')
-const checkboxShowType = ref<CheckboxShowType>('check')
+const radioVariant = ref<RadioVariant>('radio')
+const checkboxVariant = ref<CheckboxVariant>('checkbox')
 const currentPage = ref(1)
 
 const themes: Array<{ label: string; value: ThemeName }> = [
@@ -63,13 +63,13 @@ const radioOptions = [
   { label: '公开', value: 'public' },
 ]
 
-const radioShowTypeOptions = [
+const radioVariantOptions = [
   { label: 'radio', value: 'radio' },
   { label: 'button', value: 'button' },
 ]
 
-const checkboxShowTypeOptions = [
-  { label: 'check', value: 'check' },
+const checkboxVariantOptions = [
+  { label: 'checkbox', value: 'checkbox' },
   { label: 'button', value: 'button' },
 ]
 
@@ -125,11 +125,11 @@ const tableData = [
     <div class="overview-toolbar">
       <div class="overview-toolbar__item">
         <span>主题</span>
-        <s-radio v-model="currentTheme" :options="themes" show-type="button" />
+        <s-radio v-model="currentTheme" :options="themes" variant="button" />
       </div>
       <div class="overview-toolbar__item">
         <span>尺寸</span>
-        <s-radio v-model="currentSize" :options="sizes" show-type="button" />
+        <s-radio v-model="currentSize" :options="sizes" variant="button" />
       </div>
       <div class="overview-toolbar__item">
         <span>是否禁用</span>
@@ -228,9 +228,9 @@ const tableData = [
       <s-title title="选择和状态" :theme="currentTheme" />
       <s-flex gap="small" class="m-b-16">
         <s-select
-          v-model="radioShowType"
-          title="单选 showType（默认值：radio）"
-          :options="radioShowTypeOptions"
+          v-model="radioVariant"
+          title="单选 variant（默认值：radio）"
+          :options="radioVariantOptions"
           :theme="currentTheme"
           :size="currentSize"
           width="400"
@@ -241,14 +241,14 @@ const tableData = [
           :theme="currentTheme"
           :size="currentSize"
           :disabled="isDisabled"
-          :show-type="radioShowType"
+          :variant="radioVariant"
         />
       </s-flex>
       <s-flex gap="small">
         <s-select
-          v-model="checkboxShowType"
-          title="多选 showType（默认值：check）"
-          :options="checkboxShowTypeOptions"
+          v-model="checkboxVariant"
+          title="多选 variant（默认值：checkbox）"
+          :options="checkboxVariantOptions"
           width="400"
           :theme="currentTheme"
           :size="currentSize"
@@ -260,7 +260,7 @@ const tableData = [
           :theme="currentTheme"
           :size="currentSize"
           :disabled="isDisabled"
-          :show-type="checkboxShowType"
+          :variant="checkboxVariant"
         />
       </s-flex>
       <div class="overview-stack">

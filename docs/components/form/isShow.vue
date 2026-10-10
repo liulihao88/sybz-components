@@ -6,7 +6,7 @@
         { label: '显示密码', value: true },
         { label: '隐藏密码', value: false },
       ]"
-      show-type="button"
+      variant="button"
     ></s-radio>
   </s-flex>
 

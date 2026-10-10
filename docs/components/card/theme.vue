@@ -8,7 +8,7 @@ const collapsed = ref(false)
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="card-chenghua-demo">
     <s-card v-model="collapsed" :theme="theme" title="我是header">
       <div class="card-chenghua-demo__content">

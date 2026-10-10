@@ -30,8 +30,8 @@ const menus = [
 
 <template>
   <s-flex gap="small" class="p-b-10">
-    <SRadio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" />
-    <SRadio v-model="variant" :options="variantOptions" show-type="button" title="variant" />
+    <SRadio v-model="theme" :options="docThemeOptions" variant="button" title="theme" />
+    <SRadio v-model="variant" :options="variantOptions" variant="button" title="variant" />
   </s-flex>
   <div class="h-400">
     <SMenu

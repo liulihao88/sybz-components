@@ -1,7 +1,7 @@
 <template>
   <s-flex gap="16" class="m-b-16">
-    <s-radio v-model="size" :options="['large', 'default', 'small']" type="simple" show-type="button"></s-radio>
-    <s-radio v-model="labelPosition" :options="['left', 'right', 'top']" type="simple" show-type="button"></s-radio>
+    <s-radio v-model="size" :options="['large', 'default', 'small']" type="simple" variant="button"></s-radio>
+    <s-radio v-model="labelPosition" :options="['left', 'right', 'top']" type="simple" variant="button"></s-radio>
     <s-switch v-model="isDisabled" active-text="禁用" :inline-prompt="false"></s-switch>
   </s-flex>
   <s-form

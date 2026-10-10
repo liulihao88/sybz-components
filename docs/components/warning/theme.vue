@@ -6,7 +6,7 @@ const theme = ref<(typeof docThemeOptions)[number]>('default')
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="warning-chenghua-demo">
     <div class="warning-chenghua-demo__list">
       <s-warning :theme="theme" title="服务提示" content="已启用成华主题的信息提示，可用于展示普通说明。" />

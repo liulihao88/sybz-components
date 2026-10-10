@@ -27,7 +27,7 @@
 <s-input-number v-model="count" :min="0" :max="10" />
 <s-select v-model="status" :options="statusOptions" />
 <s-checkbox v-model="checked" :options="options" />
-<s-radio v-model="value" :options="options" show-type="button" />
+<s-radio v-model="value" :options="options" variant="button" />
 <s-switch v-model="enabled" active-text="启用" inactive-text="停用" />
 <s-date-picker v-model="date" />
 <s-descriptions :options="infoOptions" />

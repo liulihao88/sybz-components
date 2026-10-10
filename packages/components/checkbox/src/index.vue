@@ -29,7 +29,7 @@ interface CheckboxProps {
   compTitleStyle?: Record<string, any>
   type?: string
   options?: any[]
-  showType?: 'check' | 'button'
+  variant?: 'checkbox' | 'button'
   modelValue?: any[]
   label?: string
   value?: string
@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   compTitleStyle: undefined,
   type: '',
   options: () => [],
-  showType: 'check', // button
+  variant: 'checkbox',
   modelValue: () => [],
   label: 'label',
   value: 'value',
@@ -120,10 +120,10 @@ function checkAllChange() {
 }
 const checkType = computed(() => {
   const obj = {
-    check: 'el-checkbox',
+    checkbox: 'el-checkbox',
     button: 'el-checkbox-button',
   }
-  return obj[mergedProps.value.showType] ?? 'el-checkbox'
+  return obj[mergedProps.value.variant] ?? 'el-checkbox'
 })
 const getOptionValue = (option: any) => (props.type === 'simple' ? option : option[props.value!])
 const isDisabled = computed(() => rootAttrs.disabled === '' || Boolean(rootAttrs.disabled))
@@ -139,7 +139,7 @@ const checkAllClass = computed(() => ({
   's-checkbox__all--indeterminate': isIndeterminate.value,
   's-checkbox__all--checked': checkAll.value && !isIndeterminate.value,
   [`el-checkbox-button--${mergedProps.value.size}`]:
-    mergedProps.value.showType === 'button' && ['small', 'large'].includes(mergedProps.value.size),
+    mergedProps.value.variant === 'button' && ['small', 'large'].includes(mergedProps.value.size),
 }))
 function emitValue(item) {
   allCheckList.value = item
@@ -174,7 +174,7 @@ const checkboxClass = computed(() => ({
   's-checkbox--chenghua': mergedProps.value.theme === 'chenghua',
   's-checkbox--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-checkbox--sybz': mergedProps.value.theme === 'sybz',
-  's-checkbox--button': mergedProps.value.showType === 'button',
+  's-checkbox--button': mergedProps.value.variant === 'button',
   's-checkbox--show-all': mergedProps.value.showAll,
 }))
 </script>
@@ -182,7 +182,7 @@ const checkboxClass = computed(() => ({
 <template>
   <div class="s-checkbox" :class="checkboxClass">
     <span
-      v-if="mergedProps.title && mergedProps.showType === 'button'"
+      v-if="mergedProps.title && mergedProps.variant === 'button'"
       class="s-checkbox__title s-checkbox__title--button"
       :style="buttonTitleStyle"
     >
@@ -200,7 +200,7 @@ const checkboxClass = computed(() => ({
       v-bind="$attrs"
       @change="checkAllChange"
     >
-      <span v-if="mergedProps.showType === 'button'" class="s-checkbox__all-icon" aria-hidden="true">
+      <span v-if="mergedProps.variant === 'button'" class="s-checkbox__all-icon" aria-hidden="true">
         <el-icon v-if="isIndeterminate"><Minus /></el-icon>
         <el-icon v-else-if="checkAll"><Check /></el-icon>
       </span>

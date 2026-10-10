@@ -40,15 +40,15 @@ radio/usually
 radio/type
 :::
 
-### 多个属性的用法
+### 多个属性的用法（variant 默认值：radio）
 
-:::demo 展示多个属性的用法配置。基础写法：`<s-radio v-model="value" :options="options" value="id" label="name" showType="button" size="small" @change="change" :subAttrs="{ disabled: 'isDis' }" />`。属性：`options` 类型 `array`，默认值 `[]`；`value` 类型 `string / number / boolean`，默认值按组件配置。
+:::demo 展示多个属性的用法配置。基础写法：`<s-radio v-model="value" :options="options" value="id" label="name" variant="button" size="small" @change="change" :subAttrs="{ disabled: 'isDis' }" />`。属性：`variant` 可选 `radio / button`，默认值 `radio`；`options` 类型 `array`，默认值 `[]`；`value` 类型 `string / number / boolean`，默认值按组件配置。
 radio/multyAttrs
 :::
 
-### 高级写法：动态 label 和选项样式
+### 高级写法：动态 label 和选项样式（variant 默认值：radio）
 
-:::demo 展示 button 模式下使用独立语义色，通过 `computed` 动态生成 label，并为每项设置 class。基础写法：`<s-radio v-model="status" showType="button" :options="statusOptions" />`。属性：`showType` 可选 `radio / button`，默认值 `radio`；option 的 `type` 可选 `primary / success / warning / danger / info`，默认值 `undefined`；`color` 类型 `string`，默认值为 type 或主题主色；`class` 类型 `string / string[] / object`，默认值 `undefined`；`style` 类型 `object`，默认值 `undefined`。
+:::demo 展示 button 模式下使用独立语义色，通过 `computed` 动态生成 label，并为每项设置 class。基础写法：`<s-radio v-model="status" variant="button" :options="statusOptions" />`。属性：`variant` 可选 `radio / button`，默认值 `radio`；option 的 `type` 可选 `primary / success / warning / danger / info`，默认值 `undefined`；`color` 类型 `string`，默认值为 type 或主题主色；`class` 类型 `string / string[] / object`，默认值 `undefined`；`style` 类型 `object`，默认值 `undefined`。
 radio/advanced
 :::
 
@@ -72,7 +72,7 @@ radio/gap
 | `compTitleStyle` | 标题组件样式                                                   | object                                        | `{}`      |
 |      `type`      | 数据类型，支持 `''` / `simple` / `boolean`                     | string                                        | `''`      |
 |     `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |
-|    `showType`    | 展示形式，支持 `radio` / `button`                              | string                                        | `radio`   |
+|    `variant`     | 展示形式，支持 `radio` / `button`                              | string                                        | `radio`   |
 |    `options`     | 单选项列表，支持对象数组或基础值数组                           | RadioItem[] / string[] / number[] / boolean[] | `[]`      |
 |     `border`     | 是否显示边框                                                   | boolean                                       | `false`   |
 |      `gap`       | 单选项间距，数字按 `px` 处理                                   | string / number                               | -         |
@@ -87,7 +87,7 @@ radio/gap
 - 组件底层基于 `el-radio-group` 封装，支持透传原生属性和事件。
 - `options` 可以传 `{ label, value }` 对象数组，也可以直接传 string / number / boolean 基础值数组，基础值会自动转换为 `{ label, value }`。
 - `type="boolean"` 时会自动生成 `true / false` 两个选项。
-- `showType="button"` 时，option 的 `color` 可以覆盖当前项的选中背景色，其余样式保持 button 模式不变。
+- `variant="button"` 时，option 的 `color` 可以覆盖当前项的选中背景色，其余样式保持 button 模式不变。
 - 显式设置 `gap` 后，组件会清除选项的默认外边距并允许自动换行；未设置时保留 Element Plus 的默认间距。
 - option 的 `type` 会同时设置选中、hover、边框和文字颜色，并使用当前 `theme` 对应的语义色；同时传入 `color` 时，`color` 优先覆盖选中主色。
 - `options` 支持直接传入 computed；模板会自动解包，computed 内可以读取外部 `ref` 动态生成 label。

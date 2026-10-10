@@ -107,7 +107,7 @@ function downloadRow(row) {
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <s-table :theme="theme" :columns="columns as any" :data="data" :total="data.length">
     <template #status="{ row }">
       <s-tag v-if="row.status === 'Loading'" type="info">进行中</s-tag>

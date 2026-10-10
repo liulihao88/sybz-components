@@ -10,7 +10,7 @@ const priority = ref(1)
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="switch-chenghua-demo">
     <div class="switch-chenghua-demo__list">
       <s-switch v-model="enabled" :theme="theme" active-text="启用" inactive-text="停用" />

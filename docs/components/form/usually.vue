@@ -123,7 +123,7 @@ const fieldList = [
 
     comp: 's-radio',
     attrs: {
-      showType: 'button',
+      variant: 'button',
       options: [
         { label: '小月月', value: 'sex1' },
         { label: '小鑫鑫', value: 'sex2' },

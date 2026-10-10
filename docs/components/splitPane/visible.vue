@@ -34,7 +34,7 @@ watch(
 <template>
   <div>
     <div class="toolbar">
-      <s-checkbox v-model="visiblePanels" :options="panelOptions" :show-all="false" show-type="button" />
+      <s-checkbox v-model="visiblePanels" :options="panelOptions" :show-all="false" variant="button" />
     </div>
 
     <div class="split-demo">

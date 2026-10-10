@@ -28,12 +28,12 @@ const modeOptions = [
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="radio-chenghua-demo">
     <div class="radio-chenghua-demo__list">
       <s-radio v-model="service" title="服务类型" :theme="theme" :options="serviceOptions" />
       <s-radio v-model="priority" :theme="theme" :options="priorityOptions" border />
-      <s-radio v-model="mode" :theme="theme" :options="modeOptions" show-type="button" />
+      <s-radio v-model="mode" :theme="theme" :options="modeOptions" variant="button" />
     </div>
   </div>
 </template>

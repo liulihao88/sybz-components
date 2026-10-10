@@ -5,7 +5,7 @@ const theme = ref<(typeof docThemeOptions)[number]>('default')
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <s-flex gap="small" wrap>
     <div>
       <s-button :theme="theme" type="primary" icon="plus">主要按钮</s-button>

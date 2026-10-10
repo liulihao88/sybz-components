@@ -228,7 +228,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SCheckboxProps',
-      description: 's-checkbox 多选组件，支持左侧 title、全选和 check/button 展示方式。',
+      description: 's-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。',
       exportedComponentTypeName: 'SCheckboxComponent',
       publicPropsTypeName: 'SCheckboxPublicProps',
       useDefaultExportForGlobal: true,
@@ -642,6 +642,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SRadioProps',
+      description: 's-radio 单选组件，支持 variant="radio|button" 展示方式。',
       exportedComponentTypeName: 'SRadioComponent',
       publicPropsTypeName: 'SRadioPublicProps',
       useDefaultExportForGlobal: true,

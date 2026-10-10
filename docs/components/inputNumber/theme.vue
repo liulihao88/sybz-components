@@ -10,7 +10,7 @@ const disabledValue = ref(8)
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <s-flex gap="small">
     <s-input-number v-model="count" :theme="theme" title="审核数量" width="240" height="40" :min="0" />
     <s-input-number v-model="quota" :theme="theme" title="容量配额" height="40" />

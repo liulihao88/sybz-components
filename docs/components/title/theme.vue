@@ -5,7 +5,7 @@ const theme = ref<(typeof docThemeOptions)[number]>('default')
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="chenghua-title-demo">
     <s-title title="成华 AI 服务申请" :theme="theme" sub-title="审批中 12 个，待处理 4 个">
       <template #extra>

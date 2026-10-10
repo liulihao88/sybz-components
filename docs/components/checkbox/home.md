@@ -28,15 +28,15 @@ checkbox/theme
 checkbox/usually
 :::
 
-### disabled
+### disabled（variant 默认值：checkbox）
 
-:::demo 展示按钮模式和自定义禁用。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button" :customDisabled="customDisabled"></s-checkbox>`
+:::demo 展示按钮形式与自定义禁用。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" variant="button" :customDisabled="customDisabled"></s-checkbox>`。属性：`variant` 可选 `checkbox / button`，默认值 `checkbox`；`customDisabled` 类型 `({ option, index, value }) => boolean`，默认值 `undefined`。
 checkbox/disabled
 :::
 
-### 多属性用法
+### 多属性用法（variant 默认值：checkbox）
 
-:::demo 展示按钮模式和自定义禁用。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" showType="button" :customDisabled="customDisabled"></s-checkbox>`
+:::demo 展示按钮形式与其他属性组合。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" variant="button" />`。属性：`variant` 可选 `checkbox / button`，默认值 `checkbox`。
 checkbox/usually
 :::
 
@@ -60,7 +60,7 @@ checkbox/customGap
 |     title      | 左侧标题；button 模式显示为紧凑文字标签            | string                                          | -         |
 | compTitleStyle | 标题样式                                           | object                                          | -         |
 |    options     | checkbox的选项                                     | object                                          | {}        |
-|    showType    | 显示样式，可选 `check` / `button`                  | string                                          | check     |
+|    variant     | 展示形式，可选 `checkbox` / `button`               | string                                          | checkbox  |
 |     label      | 显示的文本对应的字段                               | string                                          | label     |
 |     value      | 后台的值需要的字段                                 | string                                          | value     |
 |    showAll     | 是否显示全选                                       | boolean                                         | true      |

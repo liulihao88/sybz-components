@@ -12,7 +12,7 @@ function confirm() {
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <s-popconfirm :theme="theme" variant="delete" target="智慧档案检索" @confirm="confirm">
     <s-button :theme="theme" type="danger">删除</s-button>
   </s-popconfirm>

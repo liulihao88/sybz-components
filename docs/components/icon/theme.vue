@@ -1,5 +1,5 @@
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="theme-icons">
     <div v-for="variant in variants" :key="variant" class="theme-icons__row">
       <span>{{ variant }}</span>

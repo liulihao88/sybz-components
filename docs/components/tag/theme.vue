@@ -12,7 +12,7 @@ const serviceStatus = ['running', 'pending', 'error', 'unknown']
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="tag-chenghua-demo">
     <s-flex gap="small">
       <s-tag :theme="theme" type="primary">运行中</s-tag>

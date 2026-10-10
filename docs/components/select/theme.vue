@@ -20,7 +20,7 @@ const options = [
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="select-chenghua-demo">
     <s-select v-model="value" width="320" :theme="theme" title="服务名称" :options="options" />
     <s-select v-model="disabledValue" width="320" :theme="theme" title="禁用服务" :options="options" disabled />

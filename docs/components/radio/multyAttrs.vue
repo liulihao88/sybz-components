@@ -5,7 +5,7 @@
       :options="options"
       value="id"
       label="name"
-      show-type="button"
+      variant="button"
       size="small"
       :sub-attrs="{ disabled: 'isDis' }"
       @change="change"

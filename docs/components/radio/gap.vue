@@ -11,7 +11,7 @@ const gap = ref(16)
   <div class="radio-gap-demo">
     <el-slider v-model="gap"></el-slider>
     <s-radio v-model="value" :options="options" :gap="gap" />
-    <s-radio v-model="buttonValue" :options="options" show-type="button" :gap="gap" />
+    <s-radio v-model="buttonValue" :options="options" variant="button" :gap="gap" />
   </div>
 </template>
 

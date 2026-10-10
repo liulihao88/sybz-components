@@ -326,7 +326,7 @@ export interface SCheckboxSelfProps<Option = SybzRecord> {
   compTitleStyle?: SybzRecord
   type?: '' | 'simple'
   options?: any[]
-  showType?: 'check' | 'button'
+  variant?: 'checkbox' | 'button'
   modelValue?: any[]
   label?: string
   value?: string
@@ -753,7 +753,7 @@ export interface SRadioSelfProps<Option = SRadioItem> {
   compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme
   type?: '' | 'boolean' | 'simple'
-  showType?: 'radio' | 'button'
+  variant?: 'radio' | 'button'
   options?: SRadioOption[]
   border?: boolean
   /** 单选项之间的间距，数字按 px 处理 */

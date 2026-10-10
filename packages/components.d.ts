@@ -85,13 +85,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/checkbox/home.html
      *
-     * s-checkbox 多选组件，支持左侧 title、全选和 check/button 展示方式。
+     * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
      */
     SCheckbox: (typeof import('./types/components/checkbox'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/checkbox/home.html
      *
-     * s-checkbox 多选组件，支持左侧 title、全选和 check/button 展示方式。
+     * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
      */
     's-checkbox': (typeof import('./types/components/checkbox'))['default']
     /**
@@ -336,10 +336,14 @@ declare module 'vue' {
     's-progress': (typeof import('./types/components/progress'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/radio/home.html
+     *
+     * s-radio 单选组件，支持 variant="radio|button" 展示方式。
      */
     SRadio: (typeof import('./types/components/radio'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/radio/home.html
+     *
+     * s-radio 单选组件，支持 variant="radio|button" 展示方式。
      */
     's-radio': (typeof import('./types/components/radio'))['default']
     /**

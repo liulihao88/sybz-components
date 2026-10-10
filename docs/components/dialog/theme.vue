@@ -15,7 +15,7 @@ const visible = reactive({
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="chenghua-dialog-demo">
     <s-button :theme="theme" type="danger" @click="visible.delete = true">删除确认</s-button>
     <s-button :theme="theme" @click="visible.base = true">默认底部按钮</s-button>

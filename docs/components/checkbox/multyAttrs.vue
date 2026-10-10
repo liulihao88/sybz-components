@@ -22,7 +22,7 @@ function customDisabled({ option, index, value }) {
     :options="options"
     label="name"
     size="small"
-    show-type="button"
+    variant="button"
     theme="chenghua"
     value="id"
     :custom-disabled="customDisabled"

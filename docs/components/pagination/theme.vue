@@ -1,5 +1,5 @@
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <s-pagination v-model:current-page="page" :theme="theme" :total="80" :page-size="10" />
 </template>
 

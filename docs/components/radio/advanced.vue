@@ -28,7 +28,7 @@ const statusOptions = computed(() => {
 </script>
 
 <template>
-  <s-radio v-model="status" show-type="button" :options="statusOptions" theme="shijingshan" />
+  <s-radio v-model="status" variant="button" :options="statusOptions" theme="shijingshan" />
 </template>
 
 <style scoped lang="scss">

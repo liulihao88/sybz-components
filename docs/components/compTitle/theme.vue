@@ -16,7 +16,7 @@ const options = [
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="comp-title-chenghua-demo">
     <div class="comp-title-chenghua-demo__list">
       <s-comp-title title="审核周期" :theme="theme" :comp-title-style="{ width: 96 }" />

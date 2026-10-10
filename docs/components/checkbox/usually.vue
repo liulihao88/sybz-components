@@ -21,7 +21,7 @@ const size = ref('default')
       label="name"
       value="id"
       :size="size"
-      show-type="button"
+      variant="button"
     ></s-checkbox>
     <s-checkbox v-model="simpleValue" :options="simpleOptions" type="simple" :size="size"></s-checkbox>
   </div>

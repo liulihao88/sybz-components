@@ -8,7 +8,7 @@ const isMerge = ref(false)
 <template>
   <div class="card-size-demo">
     <s-radio v-model="size" :options="sizeOptions" type="simple"></s-radio>
-    <s-radio v-model="isMerge" type="boolean" title="是否合并" show-type="button"></s-radio>
+    <s-radio v-model="isMerge" type="boolean" title="是否合并" variant="button"></s-radio>
     <SCard :size="size" :merge-sections="isMerge">
       size 会控制 header、body、footer 的 padding。预设值之外的数字或 CSS 长度会通过 processWidth 转成可用样式。
       <template #header>

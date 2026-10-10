@@ -1,5 +1,5 @@
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <s-tabs v-model="activeTab" :options="navList" width="300" :theme="theme" />
   <div>当前主题：{{ theme }}</div>
 </template>

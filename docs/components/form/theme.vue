@@ -38,6 +38,6 @@ const fieldList = [
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <s-form :model="model" :field-list="fieldList" :show-footer="false" :column="2" label-width="88" :theme="theme" />
 </template>

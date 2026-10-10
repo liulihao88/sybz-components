@@ -4,7 +4,7 @@ import type { SCheckboxOptionContext, SCheckboxSelfProps, SybzComponentTheme, Sy
 type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 
 /**
- * s-checkbox 多选组件，支持左侧 title、全选和 check/button 展示方式。
+ * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus CheckboxGroup 的公开属性。
  */
@@ -20,7 +20,7 @@ export type SCheckboxComponent = {
       compTitleStyle?: SybzRecord
       type?: '' | 'simple'
       options?: any[]
-      showType?: 'check' | 'button'
+      variant?: 'checkbox' | 'button'
       modelValue?: any[]
       label?: string
       value?: string
@@ -36,7 +36,7 @@ export type SCheckboxComponent = {
       | 'compTitleStyle'
       | 'type'
       | 'options'
-      | 'showType'
+      | 'variant'
       | 'modelValue'
       | 'label'
       | 'value'

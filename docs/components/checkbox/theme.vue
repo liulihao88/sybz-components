@@ -21,7 +21,7 @@ const modeOptions = [
 </script>
 
 <template>
-  <s-radio v-model="theme" :options="docThemeOptions" show-type="button" title="theme" class="p-b-10" />
+  <s-radio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
   <div class="checkbox-chenghua-demo">
     <div class="checkbox-chenghua-demo__list">
       <s-checkbox v-model="checkedServices" :theme="theme" :options="options" gap="18"></s-checkbox>
@@ -29,7 +29,7 @@ const modeOptions = [
         v-model="checkedModes"
         :theme="theme"
         :options="modeOptions"
-        show-type="button"
+        variant="button"
         title="无敌"
       ></s-checkbox>
     </div>
