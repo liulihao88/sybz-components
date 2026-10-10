@@ -49,7 +49,7 @@ const toggleLoading = async () => {
 
 <template>
   <div>
-    <el-button type="primary" @click="toggleLoading">请求loading</el-button>
+    <s-button type="primary" class="m-b-8" @click="toggleLoading">请求loading</s-button>
     <s-table :columns="columns" :data="data" :loading="loading"></s-table>
   </div>
 </template>
