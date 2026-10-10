@@ -627,6 +627,7 @@ function emitChangeSelect(
   --s-select-min-height: var(--el-component-size, 32px);
   --s-select-title-font-size: 14px;
   --s-select-quick-icon-size: 14px;
+  --s-select-quick-width: 24px;
   display: inline-flex;
   width: 316px;
   height: 100%;
@@ -853,7 +854,8 @@ function emitChangeSelect(
   border: 1px solid var(--el-border-color);
   border-left: none;
   white-space: nowrap;
-  width: 14px;
+  width: var(--s-select-quick-width);
+  flex: 0 0 var(--s-select-quick-width);
   min-height: var(--s-select-min-height);
   align-self: stretch;
   box-sizing: border-box;
@@ -867,8 +869,8 @@ function emitChangeSelect(
   color: var(--el-color-info);
   .s-select__select-box__inner {
     display: flex;
-    height: 100%;
-    min-height: 100%;
+    align-self: stretch;
+    min-height: 0;
     width: 100%;
     flex-direction: column;
     align-items: center;
@@ -897,9 +899,11 @@ function emitChangeSelect(
 
 .s-select--small {
   --s-select-min-height: var(--el-component-size-small, 24px);
+  --s-select-quick-width: 20px;
 }
 
 .s-select--large {
   --s-select-min-height: var(--el-component-size-large, 40px);
+  --s-select-quick-width: 28px;
 }
 </style>

@@ -30,13 +30,13 @@ watch(
 </script>
 
 <template>
-  <div>
+  <s-flex wrap gap="small">
     <div v-for="(v, i) in options" :key="i">
       <s-select :ref="(el) => getSelectRef(el, i)" v-model="v.cc" :options="options"></s-select>
     </div>
 
     <s-select v-model="setValue" :options="options"></s-select>
-  </div>
+  </s-flex>
 </template>
 
 <style scoped lang="scss"></style>
