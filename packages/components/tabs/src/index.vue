@@ -19,8 +19,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { SybzComponentTheme } from '../../../types/component-props'
-import { computed, useAttrs, type PropType } from 'vue'
+import type { STabsSelfProps } from '../../../types/component-props'
+import { computed, useAttrs } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { TabsPropsPublic } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
@@ -30,60 +30,19 @@ defineOptions({
   inheritAttrs: false,
 })
 
-type TabsType = '' | 'capsule' | 'capsule-theme' | TabsPropsPublic['type']
-type TabsTheme = SybzComponentTheme
-type TabsValue = string | number | boolean | null | undefined
-
 const attrs = useAttrs()
-const props = defineProps({
-  modelValue: {
-    type: [String, Number, Boolean] as PropType<TabsValue>,
-    default: '',
-  },
-  options: {
-    type: Array as PropType<Record<string, any>[]>,
-    default: () => [],
-  },
-  label: {
-    type: String,
-    default: 'label',
-  },
-  value: {
-    type: String,
-    default: 'value',
-  },
-  subAttrs: {
-    type: Object as PropType<Record<string, any>>,
-    default: () => ({}),
-  },
-  trigger: {
-    type: String as PropType<'click' | 'hover'>,
-    default: 'click',
-  },
-  type: {
-    type: String as PropType<TabsType>,
-    default: '',
-  },
-  theme: {
-    type: String as PropType<TabsTheme>,
-    default: 'default',
-  },
-  size: {
-    type: String as PropType<'small' | 'default' | 'large'>,
-    default: 'default',
-  },
-  width: {
-    type: [String, Number] as PropType<string | number>,
-    default: '',
-  },
-  height: {
-    type: [String, Number] as PropType<string | number>,
-    default: '',
-  },
-  headerMargin: {
-    type: [String, Number] as PropType<string | number>,
-    default: undefined,
-  },
+const props = withDefaults(defineProps<STabsSelfProps>(), {
+  modelValue: '',
+  options: () => [],
+  label: 'label',
+  value: 'value',
+  subAttrs: () => ({}),
+  trigger: 'click',
+  type: '',
+  theme: 'default',
+  size: 'default',
+  width: '',
+  height: '',
 })
 const emits = defineEmits(['update:modelValue'])
 const mergedProps = useGlobalComponentConfig('tabs', props)

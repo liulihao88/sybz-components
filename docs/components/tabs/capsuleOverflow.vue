@@ -2,15 +2,6 @@
 import { ref } from 'vue'
 
 const active = ref()
-// const options = [
-//   { label: '全部内容1', value: 'all2' },
-//   { label: '对话与任务', value: 'conversation' },
-//   { label: '知识与内容', value: 'knowledge' },
-//   { label: '智能体构建', value: 'agent' },
-//   { label: '系统管理', value: 'system' },
-//   { label: '运营数据', value: 'operation' },
-//   { label: '使用帮助', value: 'help' },
-// ]
 
 const options = [
   'GIS部',
@@ -58,9 +49,7 @@ function toggleCategoryTab(tab) {
     v-model="active"
     :options="options"
     type="capsule"
-    width="100%"
     theme="shijingshan"
-    height="30"
     header-margin="0"
     @tab-click="toggleCategoryTab"
   />
