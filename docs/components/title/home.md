@@ -46,6 +46,12 @@ title/tooltip
 </s-title>
 ```
 
+### 字号（fs 默认值：undefined）
+
+:::demo 使用 `fs` 设置标题字号，左侧竖线高度也会同步变化；图标和间距仍由 `size` 控制。基础写法：`<s-title title="自定义标题" fs="40px" />`。属性：`fs` 可选 `small / default / large`、数字或 px 字符串，默认值 `undefined`；三个档位分别为 `14px / 16px / 18px`，数字按 px 处理。`size` 可选 `small / default / large`，默认值 `default`；同时设置时，`fs` 决定标题字号和竖线高度，`size` 决定其余尺寸。
+title/fs
+:::
+
 ### 属性
 
 |     属性名     | 说明                                                                                                                                                          | 类型            | 默认值    |
@@ -54,6 +60,7 @@ title/tooltip
 |     `icon`     | 左侧图标，写法与 `s-icon` 的 `icon` 属性一致，支持 Element Plus、Iconify、CSS class、在线图片、Emoji 和 Vue 图标组件；设置后自动隐藏左侧竖条；`icon` 插槽优先 | SIconValue      | `''`      |
 |    `extra`     | 右侧操作区文本，`extra` 插槽优先于该属性                                                                                                                      | string          | `''`      |
 |     `size`     | 尺寸，支持 `small` / `default` / `large`                                                                                                                      | string          | `default` |
+|      `fs`      | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |
 |   `subTitle`   | 副标题文案                                                                                                                                                    | string          | `''`      |
 |   `subAttrs`   | 副标题额外属性                                                                                                                                                | object          | `{}`      |
 | `showTooltip`  | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |

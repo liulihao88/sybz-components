@@ -1054,6 +1054,7 @@ export interface STitleProps {
   icon?: SIconValue
   extra?: string
   size?: SybzComponentSize
+  fs?: number | SybzComponentSize | `${number}px`
   subTitle?: string
   subAttrs?: SybzRecord
   showTooltip?: boolean

@@ -83,6 +83,7 @@ interface TitleProps {
   icon?: SIconValue
   extra?: string
   size?: TitleSize
+  fs?: string | number
   subTitle?: string
   subAttrs?: Record<string, any>
   showTooltip?: boolean
@@ -159,7 +160,7 @@ const mergedProps = useGlobalComponentConfig('title', props)
 const slots = useSlots()
 
 const titleStyle = computed(() => {
-  const { size, margin, gap, width, t, b, l, tb, height } = mergedProps.value
+  const { size, fs, margin, gap, width, t, b, l, tb, height } = mergedProps.value
   const style: CSSProperties = {}
 
   if (margin) {
@@ -187,6 +188,16 @@ const titleStyle = computed(() => {
 
   if (size) {
     Object.assign(style, titleSizeMap[size])
+  }
+  if (fs !== undefined) {
+    const fontSize =
+      typeof fs === 'string' && fs in titleSizeMap
+        ? titleSizeMap[fs as TitleSize]['--s-title-font-size']
+        : processWidth(fs, true)
+    if (fontSize) {
+      style['--s-title-font-size'] = fontSize
+      style['--s-title-bar-height'] = fontSize
+    }
   }
   if (gap) {
     style['--s-title-gap'] = processWidth(gap, true)

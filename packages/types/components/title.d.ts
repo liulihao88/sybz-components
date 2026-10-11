@@ -1,7 +1,7 @@
 import type { SIconValue, SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
 
 /**
- * s-title 标题组件，支持通过 width 设置宽度，通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
+ * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 width 设置宽度，通过 icon 属性或插槽设置图标，标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
  *
  * 先提示 sybz 自身属性。
  */
@@ -13,6 +13,7 @@ export type STitleComponent = {
       icon?: SIconValue
       extra?: string
       size?: SybzComponentSize
+      fs?: number | SybzComponentSize | `${number}px`
       subTitle?: string
       subAttrs?: SybzRecord
       showTooltip?: boolean
