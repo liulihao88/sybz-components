@@ -36,7 +36,7 @@ tabs/capsule
 
 ### 胶囊类型内容过多
 
-:::demo 当胶囊页签内容超过容器宽度时，会自动显示左右箭头；箭头支持 hover 状态，并保留激活项的平滑滑动效果。基础写法：`<s-tabs type="capsule" :options="options" header-margin="0" />`。属性：`type` 可选值 `capsule`；`options` 类型 `array`，默认值 `[]`；`headerMargin` 类型 `string / number`，默认值 `undefined`，数字按 px 处理。
+:::demo 当页签内容超过容器宽度时，左右箭头覆盖在标签栏两端。小图标没有底色，周围有轻微阴影；对应箭头隐藏时，标签文字会重新显示到边缘。胶囊类型保留激活项的平滑滑动效果。基础写法：`<s-tabs type="capsule" :options="options" header-margin="0" />`。属性：`type` 可选值 `capsule`，默认值 `''`；`options` 类型 `array`，默认值 `[]`；`headerMargin` 类型 `string / number`，默认值 `undefined`，数字按 px 处理。
 tabs/capsuleOverflow
 :::
 

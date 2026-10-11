@@ -169,6 +169,10 @@ const handleMouseEnter = (tabVal: string) => {
   --s-tabs-font-size: 16px;
   --s-tabs-icon-size: 18px;
   --s-tabs-label-gap: 6px;
+  --s-tabs-arrow-color: var(--el-text-color-primary);
+  --s-tabs-arrow-hover-color: var(--el-color-primary);
+  --s-tabs-arrow-inset: 0px;
+  --s-tabs-arrow-clearance: 24px;
 
   &.s-tabs-box--custom-header-margin :deep(.el-tabs__header) {
     margin: var(--s-tabs-header-margin);
@@ -217,6 +221,64 @@ const handleMouseEnter = (tabVal: string) => {
     height: 1px;
   }
 
+  :deep(.el-tabs__nav-wrap.is-scrollable:not(.is-left):not(.is-right)) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  :deep(.el-tabs__nav-scroll) {
+    clip-path: inset(0 var(--s-tabs-arrow-clip-right, 0px) 0 var(--s-tabs-arrow-clip-left, 0px));
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-prev:not(.is-disabled) ~ .el-tabs__nav-scroll) {
+    --s-tabs-arrow-clip-left: var(--s-tabs-arrow-clearance);
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-next:not(.is-disabled) ~ .el-tabs__nav-scroll) {
+    --s-tabs-arrow-clip-right: var(--s-tabs-arrow-clearance);
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-prev),
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-next) {
+    z-index: 5;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: var(--s-tabs-arrow-color);
+    background: transparent;
+    font-size: 16px;
+    line-height: 1;
+    transform: translateY(-50%);
+    transition: color 0.2s ease;
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-prev .el-icon),
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-next .el-icon) {
+    filter: drop-shadow(0 1px 2px rgba(16, 24, 40, 0.35));
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-prev) {
+    left: var(--s-tabs-arrow-inset);
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-next) {
+    right: var(--s-tabs-arrow-inset);
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-prev:hover),
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-next:hover) {
+    color: var(--s-tabs-arrow-hover-color);
+  }
+
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-prev.is-disabled),
+  :deep(.el-tabs__nav-wrap:not(.is-left):not(.is-right) > .el-tabs__nav-next.is-disabled) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   :deep(.s-tabs__label) {
     display: inline-flex;
     align-items: center;
@@ -263,6 +325,10 @@ const handleMouseEnter = (tabVal: string) => {
   --s-tabs-capsule-outer-gap: 4px;
   --s-tabs-capsule-border-width: 1px;
   --s-tabs-capsule-radius: 999px;
+  --s-tabs-arrow-color: var(--s-tabs-capsule-active-color);
+  --s-tabs-arrow-hover-color: var(--s-tabs-capsule-active-color);
+  --s-tabs-arrow-inset: var(--s-tabs-capsule-outer-gap);
+  --s-tabs-arrow-clearance: 28px;
 
   &.s-tabs-box--capsule-theme {
     --s-tabs-capsule-radius: var(--s-theme-radius, 8px);
@@ -418,45 +484,13 @@ const handleMouseEnter = (tabVal: string) => {
 
   :deep(.el-tabs__nav-prev),
   :deep(.el-tabs__nav-next) {
-    z-index: 5;
-    top: 50%;
-    width: 24px;
-    height: 28px;
     border: 0;
-    border-radius: 50%;
-    color: var(--s-tabs-capsule-active-color);
-    background: transparent;
-    line-height: 28px;
-    transform: translateY(-50%);
-    transition:
-      color 0.2s ease,
-      background-color 0.2s ease,
-      transform 0.24s ease;
+    border-radius: var(--s-tabs-capsule-radius);
   }
 
-  :deep(.el-tabs__nav-prev) {
-    left: 6px;
-  }
-  :deep(.el-tabs__nav-next) {
-    right: 6px;
-  }
-
-  :deep(.el-tabs__nav-prev:hover),
-  :deep(.el-tabs__nav-next:hover) {
-    color: var(--s-tabs-capsule-active-color);
-    background: var(--s-tabs-capsule-hover-bg);
-    transform: translateY(-50%);
-  }
-
-  :deep(.el-tabs__nav-prev.is-disabled),
-  :deep(.el-tabs__nav-next.is-disabled) {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  :deep(.el-tabs__nav-wrap.is-scrollable) {
-    padding-left: 32px;
-    padding-right: 32px;
+  :deep(.el-tabs__nav-wrap.is-scrollable:not(.is-left):not(.is-right)) {
+    padding-right: var(--s-tabs-capsule-outer-gap);
+    padding-left: var(--s-tabs-capsule-outer-gap);
   }
 
   :deep(.el-tabs__item) {

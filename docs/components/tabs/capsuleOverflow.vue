@@ -60,6 +60,7 @@ function toggleCategoryTab(tab) {
     type="capsule"
     width="100%"
     theme="shijingshan"
+    height="30"
     header-margin="0"
     @tab-click="toggleCategoryTab"
   />
