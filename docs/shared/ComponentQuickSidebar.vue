@@ -139,7 +139,6 @@ const getComponentSidebar = (sidebar: SidebarConfig | undefined) => {
 
 const getShortText = (text: string) =>
   text
-    .replace(/utils 方法总览（A-Z）/g, 'utils')
     .replace(/Basic基础组件/g, 'Basic')
     .replace(/Complex复杂组件/g, 'Complex')
     .replace(/\s*组件\s*/g, '')
@@ -176,6 +175,7 @@ const groups = computed<QuickGroup[]>(() => {
   const componentSidebar = getComponentSidebar(theme.value.sidebar as SidebarConfig | undefined)
 
   return componentSidebar
+    .filter((group) => !['说明文档', '函数方法'].includes(cleanText(group.text)))
     .map((group: SidebarItem) => {
       const text = cleanText(group.text)
 
@@ -408,7 +408,7 @@ const handleSidebarTab = (event: KeyboardEvent) => {
 
 const handleWindowKeydown = (event: KeyboardEvent) => {
   const isSearchShortcut =
-    event.metaKey && !event.ctrlKey && !event.altKey && !event.shiftKey && event.key.toLowerCase() === 'd'
+    event.metaKey && !event.ctrlKey && !event.altKey && !event.shiftKey && event.key.toLowerCase() === 'g'
 
   if (shouldShow.value && isSearchShortcut) {
     event.preventDefault()
@@ -530,7 +530,7 @@ onUnmounted(() => {
           type="search"
           placeholder="搜索"
           aria-label="搜索组件"
-          title="搜索组件（快捷键 Cmd+D聚焦, Esc直接跳转）"
+          title="搜索组件（快捷键 Cmd+G 聚焦，Enter 跳转）"
           @keydown.enter="handleSearchEnter"
         />
         <button
