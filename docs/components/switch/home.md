@@ -22,6 +22,12 @@ switch/base
 switch/theme
 :::
 
+### 常用
+
+:::demo
+switch/usually
+:::
+
 ### 属性
 
 |    属性名     | 说明                                                                             | 类型               | 默认值    |
