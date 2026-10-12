@@ -8,6 +8,7 @@ import { runInExistingChrome } from './macos-chrome.mjs'
 import { connectWindowsChrome } from './windows-chrome.mjs'
 
 const sleep = (milliseconds) => new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds))
+const loginPageTimeout = 120_000
 const args = process.argv.slice(2)
 const portalConfig = readPortalConfig()
 const commandAlias = args[0] && args[0] !== 'dev' && !args[0].startsWith('-') ? args[0] : undefined
@@ -224,7 +225,7 @@ const shutdown = async () => {
 }
 process.on('SIGINT', shutdown)
 process.on('SIGTERM', shutdown)
-await page.goto(config.loginUrl, { waitUntil: 'domcontentloaded' })
+await page.goto(config.loginUrl, { waitUntil: 'commit', timeout: loginPageTimeout })
 
 const visibleLocator = async (selectors) => {
   for (const frame of page.frames()) {
@@ -420,8 +421,19 @@ const loginWithoutCaptcha = async () => {
   console.log(`自定义网站“${portalAccount.name}”已填写账号密码并点击登录。`)
 }
 
+const isLoginPageUrl = (url) => {
+  if (portal !== 'custom') return url.includes('/passport/login/')
+  const pathname = new URL(url).pathname.replace(/\/$/, '')
+  return (
+    pathname === new URL(config.loginUrl).pathname.replace(/\/$/, '') ||
+    /(?:^|\/)(?:login|signin|sign-in)(?:\/|\.|$)/i.test(pathname)
+  )
+}
+
 const waitForLoginForm = async () => {
-  for (let index = 0; index < 30; index += 1) {
+  const deadline = Date.now() + loginPageTimeout
+  let redirectedAt = 0
+  while (Date.now() < deadline) {
     if (
       await visibleLocator([
         'input[type="password"]',
@@ -430,12 +442,21 @@ const waitForLoginForm = async () => {
       ])
     )
       return true
-    await sleep(300)
+    const currentUrl = page.url()
+    const redirected = currentUrl !== 'about:blank' && !isLoginPageUrl(currentUrl)
+    if (redirected && (await page.evaluate(() => document.readyState === 'complete').catch(() => false))) {
+      redirectedAt ||= Date.now()
+      if (Date.now() - redirectedAt >= 1500) return false
+    } else redirectedAt = 0
+    await sleep(500)
   }
   return false
 }
 
+console.log('正在等待登录表单加载。')
 const loginFormVisible = await waitForLoginForm()
+if (!loginFormVisible && isLoginPageUrl(page.url()))
+  throw new Error(`登录页面加载超时，${loginPageTimeout / 1000} 秒内未找到密码输入框`)
 if (portal === 'custom' && loginFormVisible) {
   if (customCode) await login()
   else await loginWithoutCaptcha()

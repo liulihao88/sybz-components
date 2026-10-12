@@ -204,6 +204,8 @@ portal-dev sjs-dev
 
 运行 `portal-dev config --portal custom` 时，回答“是否需要图形验证码”为 `y` 会保存 `"code": true`，直接回车则保存 `false`。验证码识别支持常见的 `captcha`、`verify`、`code` 命名及“验证码”标签，可读取图片、canvas 和验证码按钮中的图形；OCR 支持 3–8 位英数字图形码，并兼容浅色背景上的蓝色文字与干扰线。
 
+打开登录页后会等待密码输入框出现，最长 120 秒；已登录并跳转到其他页面时会提前结束等待。如果仍停留在登录页且表单未出现，会报出加载超时错误。
+
 首次读取旧版 `version: 4` 配置时，CLI 会自动将 `commands` 合并到对应 profile 并升级为 `version: 5`。
 
 查看命令帮助：

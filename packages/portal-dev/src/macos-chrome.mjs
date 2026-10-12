@@ -2,6 +2,7 @@ import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 
 const execFileAsync = promisify(execFile)
+const loginPageTimeout = 120_000
 const captchaSelector =
   'img.code-img, img[class*="captcha" i], img[id*="captcha" i], img[class*="verify" i], img[id*="verify" i], img[alt*="验证码"], img[title*="验证码"], img[src*="captcha" i], img[src*="verify" i], img[src*="code" i], canvas[class*="captcha" i], canvas[class*="verify" i], canvas[class*="code" i], button[aria-label*="验证码"], button[title*="验证码"], button[class*="captcha" i], button[class*="verify" i], button[class*="code" i]'
 const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds))
@@ -51,7 +52,7 @@ const pageState = async (tab) =>
   JSON.parse(
     await execute(
       tab,
-      `(() => JSON.stringify({url: location.href, frameUrls: Array.from(document.querySelectorAll('iframe')).map((frame) => frame.src).filter(Boolean)}))()`,
+      `(() => JSON.stringify({url: location.href, readyState: document.readyState, frameUrls: Array.from(document.querySelectorAll('iframe')).map((frame) => frame.src).filter(Boolean)}))()`,
     ),
   )
 
@@ -144,10 +145,27 @@ const hasVisibleLoginForm = async (tab) =>
     })()`,
   )) === 'true'
 
-const waitForLoginForm = async (tab) => {
-  for (let index = 0; index < 30; index += 1) {
-    if (await hasVisibleLoginForm(tab)) return true
-    await sleep(300)
+const isLoginPageUrl = (url, config, portal) => {
+  if (portal !== 'custom') return url.includes('/passport/login/')
+  const pathname = new URL(url).pathname.replace(/\/$/, '')
+  return (
+    pathname === new URL(config.loginUrl).pathname.replace(/\/$/, '') ||
+    /(?:^|\/)(?:login|signin|sign-in)(?:\/|\.|$)/i.test(pathname)
+  )
+}
+
+const waitForLoginForm = async (tab, config, portal) => {
+  const deadline = Date.now() + loginPageTimeout
+  let redirectedAt = 0
+  while (Date.now() < deadline) {
+    if (await hasVisibleLoginForm(tab).catch(() => false)) return true
+    const state = await pageState(tab).catch(() => undefined)
+    const redirected = state?.url && state.url !== 'about:blank' && !isLoginPageUrl(state.url, config, portal)
+    if (redirected && state.readyState === 'complete') {
+      redirectedAt ||= Date.now()
+      if (Date.now() - redirectedAt >= 1500) return false
+    } else redirectedAt = 0
+    await sleep(500)
   }
   return false
 }
@@ -213,13 +231,13 @@ export const runInExistingChrome = async ({
 }) => {
   console.log('正在使用当前打开的 Google Chrome 登录门户。')
   const tab = await openTab(config.loginUrl)
-  await sleep(800)
-  const state = await pageState(tab)
-  if (portal === 'custom') {
-    // 自定义站点可能在加载后补齐尾斜杠、追加 query，甚至先经过一次重定向；
-    // 不要用原始 URL 的字符串完全相等来决定是否执行登录。
-    if (await waitForLoginForm(tab)) await login(tab, config, recognizeCaptcha, !config.code)
-  } else if (state.url.includes('/passport/login/')) await login(tab, config, recognizeCaptcha, false)
+  console.log('正在等待登录表单加载。')
+  const loginFormVisible = await waitForLoginForm(tab, config, portal)
+  if (!loginFormVisible) {
+    const state = await pageState(tab).catch(() => undefined)
+    if (!state || isLoginPageUrl(state.url, config, portal))
+      throw new Error(`登录页面加载超时，${loginPageTimeout / 1000} 秒内未找到密码输入框`)
+  } else await login(tab, config, recognizeCaptcha, portal === 'custom' && !config.code)
 
   if (!devMode) {
     if (portal === 'chenghua') {
