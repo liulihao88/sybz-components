@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url'
 const packageDir = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const packageJsonPath = resolve(packageDir, 'package.json')
 const registry = 'https://registry.npmjs.org/'
+const verifyTimeout = 5 * 60_000
 const originalPackageJson = readFileSync(packageJsonPath, 'utf8')
+const resume = process.argv.slice(2).includes('--resume')
 let published = false
 
 function run(command, args, options = {}) {
@@ -28,6 +30,23 @@ function ensureCleanWorktree() {
   }
 }
 
+function ensureResumableWorktree() {
+  const status = run('git', ['status', '--porcelain'], { capture: true }).trim()
+  if (status !== 'M packages/portal-dev/package.json') {
+    throw new Error('恢复发布前，请先提交其他改动，只保留 packages/portal-dev/package.json 的版本号变更')
+  }
+
+  const previous = JSON.parse(run('git', ['show', 'HEAD:packages/portal-dev/package.json'], { capture: true }))
+  const current = packageInfo()
+  if (
+    JSON.stringify({ ...current, version: previous.version }) !== JSON.stringify(previous) ||
+    !/^\d+\.\d+\.\d+$/.test(previous.version) ||
+    current.version !== previous.version.replace(/\d+$/, (patch) => String(Number(patch) + 1))
+  ) {
+    throw new Error('恢复发布仅支持当前 package.json 相对上次提交只增加一个 patch 版本')
+  }
+}
+
 function publishedVersion(name, version) {
   try {
     return (
@@ -43,12 +62,17 @@ function publishedVersion(name, version) {
 async function verifyPublishedVersion(name, version) {
   const expected = version.trim()
   let lastError
+  const deadline = Date.now() + verifyTimeout
+  let attempt = 0
 
-  for (let attempt = 1; attempt <= 6; attempt += 1) {
+  while (Date.now() < deadline) {
+    attempt += 1
     try {
-      const actual = run('npm', ['view', `${name}@${version}`, 'version', `--registry=${registry}`], {
-        capture: true,
-      }).trim()
+      const actual = run(
+        'npm',
+        ['view', `${name}@${version}`, 'version', `--registry=${registry}`, '--prefer-online'],
+        { capture: true },
+      ).trim()
 
       if (actual === expected) return
       lastError = new Error(`npm 返回了意外版本：${actual || '(空)'}`)
@@ -56,24 +80,30 @@ async function verifyPublishedVersion(name, version) {
       lastError = error
     }
 
-    await new Promise((resolvePromise) => setTimeout(resolvePromise, 2000))
+    if (attempt % 6 === 0) console.log(`npm 正在处理 ${name}@${version}，继续等待。`)
+    await new Promise((resolvePromise) => setTimeout(resolvePromise, Math.min(5000, deadline - Date.now())))
   }
 
-  throw new Error(`发布后仍无法从 npm 查询 ${name}@${version}`, { cause: lastError })
+  throw new Error(`5 分钟内仍无法从 npm 查询 ${name}@${version}；稍后运行 pnpm portal:release:resume 恢复`, {
+    cause: lastError,
+  })
 }
 
 try {
-  ensureCleanWorktree()
+  if (resume) ensureResumableWorktree()
+  else ensureCleanWorktree()
   run('pnpm', ['check'])
-  run('npm', ['version', 'patch', '--no-git-tag-version'])
+  if (!resume) run('npm', ['version', 'patch', '--no-git-tag-version'])
 
   const { name, version } = packageInfo()
-  try {
-    run('npm', ['publish', '--access=public', `--registry=${registry}`])
-  } catch (error) {
-    // 网络在 npm 已接收包之后断开时，publish 可能以失败状态退出；先查 registry，
-    // 避免错误地恢复到一个事实上已经发布的版本。
-    if (!publishedVersion(name, version)) throw error
+  if (!resume) {
+    try {
+      run('npm', ['publish', '--access=public', `--registry=${registry}`])
+    } catch (error) {
+      // 网络在 npm 已接收包之后断开时，publish 可能以失败状态退出；先查 registry，
+      // 避免错误地恢复到一个事实上已经发布的版本。
+      if (!publishedVersion(name, version)) throw error
+    }
   }
   published = true
 
@@ -92,7 +122,7 @@ try {
   }
 
   if (published) {
-    console.error('\n包已发布到 npm，但 Git 提交、tag 或推送未完成；请勿再次递增版本。')
+    console.error('\nnpm 已接受发布请求或正在恢复已有版本；请勿再次递增版本。')
   }
 
   throw error

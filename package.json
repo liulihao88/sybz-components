@@ -97,6 +97,7 @@
     "portal:skill:install": "pnpm --dir packages/portal-dev skill:install",
     "utils:release": "pnpm run -C packages/utils release",
     "portal:release": "pnpm --dir packages/portal-dev release",
+    "portal:release:resume": "pnpm --dir packages/portal-dev run release --resume",
     "release:check": "pnpm types:check && pnpm typecheck && pnpm typecheck:sfc && pnpm exec tsc --noEmit -p packages/utils/tsconfig.json && pnpm build:bundle && pnpm run -C packages/utils build",
     "prepublishOnly": "pnpm release:check",
     "release": "pnpm release:check && npm version patch && npm publish --ignore-scripts",

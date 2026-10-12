@@ -254,4 +254,6 @@ pnpm portal:skill:install
 pnpm portal:release
 ```
 
-`portal:release` 会检查工作区和 npm 登录状态、升级 patch 版本并公开发布到 npm。只有确认新版本能从 npm registry 查询到之后，才会创建版本提交和 `portal-dev-v<版本号>` Git tag，并将当前分支及 tags 推送到 Git 远端。发布失败时会恢复本地版本号，避免留下无法安装的空版本。执行前请先提交当前改动，并确认当前分支和远端正确。
+`portal:release` 会检查工作区、升级 patch 版本并公开发布到 npm。npm 接收发布请求后可能还要处理几分钟；脚本最多等待 5 分钟，确认新版本能从 registry 查询到后，才创建版本提交和 `portal-dev-v<版本号>` Git tag，并推送当前分支及 tags。执行前请先提交当前改动，并确认当前分支和远端正确。
+
+如果发布请求已被 npm 接收，但等待超时，脚本会保留已增加的版本号。此时不要再次运行 `pnpm portal:release`。先提交除 `packages/portal-dev/package.json` 外的其他改动，待 npm 上能查到该版本后运行 `pnpm portal:release:resume`；它只验证当前版本并补齐 Git 提交、tag 和推送，不会再次发布或增加版本号。若 npm 明确拒绝了发布，脚本仍会恢复原版本号。
