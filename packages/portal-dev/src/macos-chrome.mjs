@@ -2,6 +2,8 @@ import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
 
 const execFileAsync = promisify(execFile)
+const captchaSelector =
+  'img.code-img, img[class*="captcha" i], img[id*="captcha" i], img[class*="verify" i], img[id*="verify" i], img[alt*="验证码"], img[title*="验证码"], img[src*="captcha" i], img[src*="verify" i], img[src*="code" i], canvas[class*="captcha" i], canvas[class*="verify" i], canvas[class*="code" i], button[aria-label*="验证码"], button[title*="验证码"], button[class*="captcha" i], button[class*="verify" i], button[class*="code" i]'
 const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds))
 const waitForExitSignal = () =>
   new Promise((resolve) => {
@@ -158,10 +160,19 @@ const login = async (tab, config, recognizeCaptcha, custom) => {
         const captchaUrl = await execute(
           tab,
           `(() => {
-            const images = Array.from(document.querySelectorAll('img.code-img, img[class*="captcha" i], img[id*="captcha" i], img[class*="verify" i], img[id*="verify" i], img[alt*="验证码"], img[title*="验证码"], img[src*="captcha" i], img[src*="verify" i], img[src*="code" i]'));
-            const image = images.find((item) => { const rect = item.getBoundingClientRect(); const style = getComputedStyle(item); return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden'; });
-            if (!image) return '';
-            try { const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight; canvas.getContext('2d').drawImage(image, 0, 0); return canvas.toDataURL('image/png'); } catch { return image.currentSrc || image.src || ''; }
+            const elements = Array.from(document.querySelectorAll(${JSON.stringify(captchaSelector)}));
+            const element = elements.find((item) => { const rect = item.getBoundingClientRect(); const style = getComputedStyle(item); return rect.width > 0 && rect.height > 0 && style.display !== 'none' && style.visibility !== 'hidden'; });
+            if (!element) return '';
+            const image = element instanceof HTMLImageElement ? element : element.querySelector('img');
+            if (image) {
+              try { const canvas = document.createElement('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight; canvas.getContext('2d').drawImage(image, 0, 0); return canvas.toDataURL('image/png'); } catch { return image.currentSrc || image.src || ''; }
+            }
+            const canvas = element instanceof HTMLCanvasElement ? element : element.querySelector('canvas');
+            if (canvas) return canvas.toDataURL('image/png');
+            const svg = element instanceof SVGElement ? element : element.querySelector('svg');
+            if (svg) return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(new XMLSerializer().serializeToString(svg))));
+            const background = getComputedStyle(element).backgroundImage;
+            return background.startsWith('url(') ? new URL(background.slice(4, -1).replace(/^['"]|['"]$/g, ''), location.href).href : '';
           })()`,
         )
         if (!captchaUrl) throw new Error('未找到图形验证码')
@@ -180,7 +191,7 @@ const login = async (tab, config, recognizeCaptcha, custom) => {
       console.error(`第 ${attempt} 次登录失败：${error instanceof Error ? error.message : error}`)
       await execute(
         tab,
-        `(() => { const image = document.querySelector('img.code-img, img[class*="captcha" i], img[id*="captcha" i], img[class*="verify" i], img[id*="verify" i], img[alt*="验证码"], img[title*="验证码"], img[src*="captcha" i], img[src*="verify" i], img[src*="code" i]'); if (image) image.click(); return ''; })()`,
+        `(() => { const image = document.querySelector(${JSON.stringify(captchaSelector)}); if (image) image.click(); return ''; })()`,
       ).catch(() => undefined)
       await sleep(800)
     }

@@ -317,6 +317,14 @@ const login = async () => {
         'img[src*="captcha" i]',
         'img[src*="verify" i]',
         'img[src*="code" i]',
+        'canvas[class*="captcha" i]',
+        'canvas[class*="verify" i]',
+        'canvas[class*="code" i]',
+        'button[aria-label*="验证码"]',
+        'button[title*="验证码"]',
+        'button[class*="captcha" i]',
+        'button[class*="verify" i]',
+        'button[class*="code" i]',
       ])
       if (!captcha) throw new Error('未找到图形验证码')
       const captchaUrl = await captcha.evaluate((image) => image.currentSrc || image.src || '')
