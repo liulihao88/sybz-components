@@ -5,11 +5,12 @@
         <span v-if="hasIcon" class="s-title__slot-icon-wrapper">
           <slot name="icon">
             <s-icon
-              v-if="mergedProps.icon"
+              v-if="mergedProps.icon || mergedProps.iconAttrs.icon"
               class="s-title__prop-icon"
               :icon="mergedProps.icon"
               size="var(--s-title-icon-size, 14px)"
               cursor="default"
+              v-bind="mergedProps.iconAttrs"
             />
             <span v-else-if="isThemeIcon" class="s-title__theme-icon" aria-hidden="true"></span>
             <svg
@@ -59,7 +60,7 @@
 
 <script setup lang="ts">
 import { isSybzTheme } from '../../../utils/src/theme'
-import type { SIconValue, SybzComponentTheme } from '../../../types/component-props'
+import type { SIconProps, SIconValue, SybzComponentTheme } from '../../../types/component-props'
 import { computed, type CSSProperties, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -81,6 +82,7 @@ type TitleTag = 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 interface TitleProps {
   title?: string
   icon?: SIconValue
+  iconAttrs?: SIconProps & Record<string, any>
   extra?: string
   size?: TitleSize
   fs?: string | number
@@ -135,6 +137,7 @@ const titleSizeMap: Record<TitleSize, Record<string, string>> = {
 const props = withDefaults(defineProps<TitleProps>(), {
   title: '',
   icon: '',
+  iconAttrs: () => ({}),
   extra: '',
   size: 'default',
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
@@ -208,7 +211,7 @@ const titleStyle = computed(() => {
 
 const parseClass = computed(() => {
   let type = mergedProps.value.type
-  if (slots.icon || mergedProps.value.icon) {
+  if (slots.icon || mergedProps.value.icon || mergedProps.value.iconAttrs.icon) {
     return 's-title__top-simple-left'
   }
   if (type === 'simple' || type === 'icon') {
@@ -238,7 +241,9 @@ const isThemeIcon = computed(() => {
   return isSybzTheme(mergedProps.value.theme) && mergedProps.value.type === 'icon'
 })
 const hasIcon = computed(() => {
-  return !!slots.icon || !!mergedProps.value.icon || mergedProps.value.type === 'icon'
+  return (
+    !!slots.icon || !!mergedProps.value.icon || !!mergedProps.value.iconAttrs.icon || mergedProps.value.type === 'icon'
+  )
 })
 </script>
 
@@ -280,8 +285,7 @@ const hasIcon = computed(() => {
       align-items: center;
       color: currentColor;
     }
-    .s-title__default-icon,
-    .s-title__prop-icon {
+    .s-title__default-icon {
       width: var(--s-title-icon-size, 14px);
       height: var(--s-title-icon-size, 14px);
       display: block;

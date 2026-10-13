@@ -48,8 +48,14 @@ title/tooltip
 
 ### 字号（fs 默认值：undefined）
 
-:::demo 使用 `fs` 设置标题字号，左侧竖线高度也会同步变化；图标和间距仍由 `size` 控制。基础写法：`<s-title title="自定义标题" fs="40px" />`。属性：`fs` 可选 `small / default / large`、数字或 px 字符串，默认值 `undefined`；三个档位分别为 `14px / 16px / 18px`，数字按 px 处理。`size` 可选 `small / default / large`，默认值 `default`；同时设置时，`fs` 决定标题字号和竖线高度，`size` 决定其余尺寸。
+:::demo 使用 `fs` 设置标题字号，左侧竖线高度也会同步变化；图标和间距默认由 `size` 控制，`iconAttrs.size` 可单独覆盖图标尺寸。基础写法：`<s-title title="自定义标题" fs="40px" />`。属性：`fs` 可选 `small / default / large`、数字或 px 字符串，默认值 `undefined`；三个档位分别为 `14px / 16px / 18px`，数字按 px 处理。`size` 可选 `small / default / large`，默认值 `default`；同时设置时，`fs` 决定标题字号和竖线高度，`size` 决定其余尺寸。
 title/fs
+:::
+
+### 图标属性（iconAttrs 默认值：{}）
+
+:::demo 通过 `iconAttrs` 直接传递 `s-icon` 属性。基础写法：`<s-title title="自定义图标" icon="mdi:ab-testing" :icon-attrs="{ size: 32, color: '#409eff' }" />`。属性：`iconAttrs` 类型为 `s-icon` 属性对象，默认值 `{}`；示例设置 `icon`、`size`、`color`、`rotate` 和 `cursor`。只传 `iconAttrs.icon` 也会显示图标；它与 `icon` 同时存在时，以 `iconAttrs.icon` 为准。未传入时，图标尺寸沿用标题的 `size`，鼠标指针为 `default`；`icon` 插槽优先于 `iconAttrs`。
+title/iconAttrs
 :::
 
 ### 属性
@@ -58,6 +64,7 @@ title/fs
 | :------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------- |
 |    `title`     | 主标题文案                                                                                                                                                    | string          | `''`      |
 |     `icon`     | 左侧图标，写法与 `s-icon` 的 `icon` 属性一致，支持 Element Plus、Iconify、CSS class、在线图片、Emoji 和 Vue 图标组件；设置后自动隐藏左侧竖条；`icon` 插槽优先 | SIconValue      | `''`      |
+|  `iconAttrs`   | 透传给左侧 `s-icon` 的属性，可设置 `icon`、`size`、`color`、`rotate`、`cursor` 等；插槽图标不受影响                                                           | object          | `{}`      |
 |    `extra`     | 右侧操作区文本，`extra` 插槽优先于该属性                                                                                                                      | string          | `''`      |
 |     `size`     | 尺寸，支持 `small` / `default` / `large`                                                                                                                      | string          | `default` |
 |      `fs`      | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |

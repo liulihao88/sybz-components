@@ -1052,6 +1052,8 @@ export interface STitleProps {
   title?: string
   /** 左侧图标，写法与 s-icon 的 icon 属性一致；设置后自动隐藏左侧竖条 */
   icon?: SIconValue
+  /** 透传给左侧 s-icon 的属性，可覆盖 icon、默认 size 和 cursor */
+  iconAttrs?: SIconProps & SybzRecord
   extra?: string
   size?: SybzComponentSize
   fs?: number | SybzComponentSize | `${number}px`
