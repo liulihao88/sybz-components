@@ -11,6 +11,7 @@ type ElTooltipInstance = InstanceType<typeof ElTooltip>
 export type STooltipPublicProps = STooltipSelfProps & Omit<ElTooltipInstance['$props'], keyof STooltipSelfProps>
 
 export type STooltipComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */

@@ -11,6 +11,7 @@ type MdEditorInstance = InstanceType<typeof MdEditor>
 export type SMarkdownPublicProps = MarkdownProps & Omit<MdEditorInstance['$props'], keyof MarkdownProps | 'sanitize'>
 
 export type SMarkdownComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 通过 v-model 绑定的 Markdown 或 HTML 源文本，优先级高于 source */

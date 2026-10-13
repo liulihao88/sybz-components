@@ -1,6 +1,7 @@
 import type { SClickOutsideProps, SybzRecord } from '../component-props'
 
 export type SClickOutsideComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       options?: SybzRecord

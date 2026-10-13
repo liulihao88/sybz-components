@@ -173,6 +173,28 @@ app.mount('#app')
 </template>
 ```
 
+### 按需引入组件
+
+如果只使用少量组件，可以从独立入口导入并注册。路径与组件文档目录一致；业务组件也支持 `components/company/baseHeader` 这样的路径。
+
+```ts
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import SButton from 'sybz-components/components/button'
+import STitle from 'sybz-components/components/title'
+import 'element-plus/dist/index.css'
+import 'sybz-components/style.css'
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(ElementPlus)
+app.use(SButton)
+app.use(STitle)
+app.mount('#app')
+```
+
+独立入口会按组件拆分 JavaScript，并提供对应的组件属性类型。当前样式仍使用公共的 `style.css`；图表组件继续使用 `sybz-components/charts/*` 和 `sybz-components/charts/style.css`。
+
 ## 全局默认配置
 
 安装组件库时可以传入默认配置，减少业务页面中的重复属性：

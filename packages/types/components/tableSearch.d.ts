@@ -9,6 +9,7 @@ import type {
 } from '../../components/tableSearch/src/types'
 
 export type STableSearchComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 统一应用于内部字段组件和操作按钮的主题 */

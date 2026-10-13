@@ -1,6 +1,7 @@
 import type { SChartProps, SybzRecord } from '../component-props'
 
 export type SChartComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       width?: string

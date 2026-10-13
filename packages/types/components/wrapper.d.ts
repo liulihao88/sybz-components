@@ -6,6 +6,7 @@ import type { SWrapperProps } from '../component-props'
  * 先提示 sybz 自身属性。
  */
 export type SWrapperComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 容器宽度，支持数字、px、百分比等，默认空字符串 */

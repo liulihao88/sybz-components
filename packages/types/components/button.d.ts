@@ -11,6 +11,7 @@ type ElButtonInstance = InstanceType<typeof ElButton>
 export type SButtonPublicProps = SButtonSelfProps & Omit<ElButtonInstance['$props'], keyof SButtonSelfProps>
 
 export type SButtonComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 链接地址，设置后按钮会渲染为可直接打开 URL 的链接 */

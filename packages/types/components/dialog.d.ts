@@ -22,6 +22,7 @@ export type SDialogPublicProps = SDialogSelfProps &
   Omit<ElDrawerInstance['$props'], keyof SDialogSelfProps | keyof ElDialogInstance['$props']>
 
 export type SDialogComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       mode?: SDialogMode

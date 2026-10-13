@@ -14,6 +14,7 @@ import type {
 export type SPaginationPublicProps = SPaginationProps
 
 export type SPaginationComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 当前页码；默认值：1 */

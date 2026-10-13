@@ -6,6 +6,7 @@ import type { SIconValue, SIconProps, SybzComponentTheme, SybzComponentSize, Syb
  * 先提示 sybz 自身属性。
  */
 export type STitleComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       title?: string

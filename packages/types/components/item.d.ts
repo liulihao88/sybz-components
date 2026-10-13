@@ -17,6 +17,7 @@ import type {
  * 先提示 sybz 自身属性。
  */
 export type SItemComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       width?: string | number

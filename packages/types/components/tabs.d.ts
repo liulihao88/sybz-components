@@ -12,6 +12,7 @@ type ElTabsInstance = InstanceType<typeof ElTabs>
 export type STabsPublicProps = STabsSelfProps & Omit<ElTabsInstance['$props'], keyof STabsSelfProps>
 
 export type STabsComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       modelValue?: string | number | boolean | null

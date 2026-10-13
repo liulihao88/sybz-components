@@ -15,6 +15,7 @@ import type {
  * 先提示 sybz 自身属性。
  */
 declare const SIcon: {
+  install: (app: import('vue').App) => void
   new <Iconify图标查询 = 'https://icon-sets.iconify.design/'>(): {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */

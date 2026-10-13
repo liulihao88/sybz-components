@@ -20,6 +20,7 @@ type ElFormInstance = InstanceType<typeof ElForm>
 export type SFormPublicProps = SFormProps & Omit<ElFormInstance['$props'], keyof SFormProps>
 
 export type SFormComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       fieldList: SFormFieldList

@@ -12,6 +12,7 @@ type ElTagInstance = InstanceType<typeof ElTag>
 export type STagPublicProps = STagSelfProps & Omit<ElTagInstance['$props'], keyof STagSelfProps>
 
 export type STagComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       width?: string | number

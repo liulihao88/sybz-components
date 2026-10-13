@@ -14,6 +14,7 @@ export type SUploadPublicProps = SUploadSelfProps &
   Omit<ElUploadInstance['$props'], keyof SUploadSelfProps | 'fileList' | 'httpRequest' | 'beforeUpload'>
 
 export type SUploadComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 双向绑定的文件列表 */

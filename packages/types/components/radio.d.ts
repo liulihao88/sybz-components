@@ -18,6 +18,7 @@ type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 export type SRadioPublicProps = SRadioSelfProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioSelfProps>
 
 export type SRadioComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       title?: string

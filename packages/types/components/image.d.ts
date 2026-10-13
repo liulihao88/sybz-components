@@ -11,6 +11,7 @@ type ElImageInstance = InstanceType<typeof ElImage>
 export type SImagePublicProps = SImageSelfProps & Omit<ElImageInstance['$props'], keyof SImageSelfProps>
 
 export type SImageComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 图片地址；相对路径会通过 resolver 或 basePath 解析 */

@@ -6,6 +6,7 @@ type ElSwitchInstance = InstanceType<typeof ElSwitch>
 export type SSwitchPublicProps = SSwitchSelfProps & Omit<ElSwitchInstance['$props'], keyof SSwitchSelfProps>
 
 export type SSwitchComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       theme?: SybzComponentTheme

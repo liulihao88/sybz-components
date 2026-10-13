@@ -12,6 +12,7 @@ export type SCheckboxPublicProps = SCheckboxSelfProps &
   Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxSelfProps>
 
 export type SCheckboxComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 左侧标题；button 模式显示为紧凑文字标签 */

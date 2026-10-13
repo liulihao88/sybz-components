@@ -87,6 +87,28 @@ app.mount('#app')
 
 这一步完成后，`s-button`、`s-input`、`s-select`、`s-dialog` 等组件就可以在任意 `.vue` 文件里直接使用。
 
+### 只注册需要的组件
+
+项目只用到少量组件时，可以从单组件入口导入。入口路径与文档中的组件目录一致：
+
+```ts
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import SButton from 'sybz-components/components/button'
+import STitle from 'sybz-components/components/title'
+import 'element-plus/dist/index.css'
+import 'sybz-components/style.css'
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(ElementPlus)
+app.use(SButton)
+app.use(STitle)
+app.mount('#app')
+```
+
+此方式只引入所选组件及其代码依赖；样式仍从公共 `style.css` 引入。`sybz-components/components/company/baseHeader` 等业务组件也使用相同规则。图表组件使用现有的 `sybz-components/charts/*` 入口。
+
 ## 4. 写第一个页面
 
 把 `src/App.vue` 改成下面这样，先确认组件能正常显示和交互。

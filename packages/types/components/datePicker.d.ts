@@ -13,6 +13,7 @@ export type SDatePickerPublicProps = SDatePickerSelfProps &
   Omit<ElDatePickerInstance['$props'], keyof SDatePickerSelfProps>
 
 export type SDatePickerComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       title?: string

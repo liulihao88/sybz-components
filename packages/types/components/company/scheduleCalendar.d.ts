@@ -7,6 +7,7 @@ import type {
 } from '../../../components/company/scheduleCalendar/src/types'
 
 export type SScheduleCalendarComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       modelValue?: string | number | Date

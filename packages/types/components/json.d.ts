@@ -9,6 +9,7 @@ import type { JsonData, JsonEmits, JsonExposed, JsonProps, JsonTheme } from '../
 export type SJsonPublicProps = JsonProps
 
 export type SJsonComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 结构化 JSON 数据；传入后优先于 data，通过默认 v-model 同步合法的编辑结果 */

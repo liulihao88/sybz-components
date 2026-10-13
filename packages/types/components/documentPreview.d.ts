@@ -8,6 +8,7 @@ import type { SDocumentPreviewSelfProps } from '../component-props'
 export type SDocumentPreviewPublicProps = SDocumentPreviewProps
 
 export type SDocumentPreviewComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       src: string

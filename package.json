@@ -16,6 +16,11 @@
       "import": "./dist/sybz-components-es.js",
       "default": "./dist/sybz-components-es.js"
     },
+    "./components/*": {
+      "types": "./dist/types/components/*.d.ts",
+      "import": "./dist/components/*.js",
+      "default": "./dist/components/*.js"
+    },
     "./charts": {
       "types": "./dist/types/components/company/chart/index.d.ts",
       "import": "./dist/charts.js",
@@ -73,7 +78,7 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "pnpm types:generate && pnpm build:bundle",
-    "build:bundle": "vite build && vite build --config packages/components/company/chart/vite.config.js",
+    "build:bundle": "vite build && vite build --config vite.components.config.js && vite build --config packages/components/company/chart/vite.config.js",
     "docsbuild": "vitepress build docs",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",

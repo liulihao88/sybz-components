@@ -13,6 +13,7 @@ import type {
  * 先提示 sybz 自身属性。
  */
 export type SScrollComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       /** 容器宽度；默认由父元素决定 */

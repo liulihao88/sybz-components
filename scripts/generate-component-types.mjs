@@ -1347,6 +1347,7 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
   pushPublicPropsTypeLines(wrapperLines, typedComponent, wrapperConfig.inheritedProps)
   wrapperLines.push('')
   wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = {`)
+  wrapperLines.push("  install: (app: import('vue').App) => void")
   wrapperLines.push('  new (): {')
   const propsLines = getExpandedPropsLines({
     hoverProps: typedComponent.hoverProps,
@@ -1397,6 +1398,7 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
       ? `declare const ${componentName}: {`
       : `export type ${componentTypeName} = {`,
   )
+  wrapperLines.push("  install: (app: import('vue').App) => void")
   wrapperLines.push(`  new ${typedComponent.hoverConstructorTypeParameters ?? ''}(): {`)
   const propsLines = getExpandedPropsLines({
     hoverProps: typedComponent.hoverProps,
@@ -1473,6 +1475,13 @@ const allComponentEntries = collectComponentEntries()
 const mainComponentEntries = allComponentEntries.filter(
   ({ componentPath }) => !CHART_COMPONENT_PATHS.has(componentPath),
 )
+// package.json 的 ./components/* 子路径与独立构建都依赖每个组件的 index.ts。
+for (const { componentPath } of mainComponentEntries) {
+  const entryPath = resolve(componentsDir, componentPath, 'index.ts')
+  if (!existsSync(entryPath)) {
+    throw new Error(`单组件导出缺少入口：${relative(rootDir, entryPath)}`)
+  }
+}
 const chartComponentEntries = allComponentEntries.filter(({ componentPath }) =>
   CHART_COMPONENT_PATHS.has(componentPath),
 )

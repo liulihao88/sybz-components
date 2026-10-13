@@ -1,6 +1,7 @@
 import type { SInputLabelProps, SybzRecord } from '../component-props'
 
 export type SInputLabelComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       modelValue?: any[]

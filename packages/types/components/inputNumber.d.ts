@@ -7,6 +7,7 @@ export type SInputNumberPublicProps = SInputNumberSelfProps &
   Omit<ElInputNumberInstance['$props'], keyof SInputNumberSelfProps>
 
 export type SInputNumberComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       title?: string

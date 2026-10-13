@@ -20,6 +20,7 @@ export type SDescriptionsPublicProps = SDescriptionsOwnProps &
   Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsOwnProps>
 
 export type SDescriptionsComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       options: SDescriptionsItemOption[]

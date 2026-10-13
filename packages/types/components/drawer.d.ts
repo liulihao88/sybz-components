@@ -6,6 +6,7 @@ type ElDrawerInstance = InstanceType<typeof ElDrawer>
 export type SDrawerPublicProps = SDrawerSelfProps & Omit<ElDrawerInstance['$props'], keyof SDrawerSelfProps>
 
 export type SDrawerComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       confirmText?: string

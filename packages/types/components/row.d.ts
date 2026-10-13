@@ -7,6 +7,7 @@ type ElRowInstance = InstanceType<typeof ElRow>
 export type SRowPublicProps = SRowSelfProps & Omit<ElRowInstance['$props'], keyof SRowSelfProps>
 
 export type SRowComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       col?: number | number[]

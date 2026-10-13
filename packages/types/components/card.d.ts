@@ -6,6 +6,7 @@ import type { SCardProps, SybzComponentSize, SybzComponentTheme, SybzRecord } fr
  * 先提示 sybz 自身属性。
  */
 export type SCardComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       modelValue?: boolean

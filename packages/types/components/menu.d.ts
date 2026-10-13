@@ -16,6 +16,7 @@ import type {
  * 先提示 sybz 自身属性。
  */
 export type SMenuComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       modelValue?: string

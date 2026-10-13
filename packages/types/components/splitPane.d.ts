@@ -1,6 +1,7 @@
 import type { SplitPaneDirection, SplitPaneSetting, SSplitPaneProps } from '../component-props'
 
 export type SSplitPaneComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       splitSet?: SplitPaneSetting

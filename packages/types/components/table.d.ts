@@ -13,6 +13,7 @@ type ElTableInstance = InstanceType<typeof ElTable>
 export type STablePublicProps = STableProps & Omit<ElTableInstance['$props'], keyof STableProps>
 
 export type STableComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       data?: TableRow[]

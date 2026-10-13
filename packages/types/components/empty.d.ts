@@ -6,6 +6,7 @@ type ElEmptyInstance = InstanceType<typeof ElEmpty>
 export type SEmptyPublicProps = SEmptySelfProps & Omit<ElEmptyInstance['$props'], keyof SEmptySelfProps | 'description'>
 
 export type SEmptyComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       title?: string

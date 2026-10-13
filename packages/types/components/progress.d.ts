@@ -6,6 +6,7 @@ type ElProgressInstance = InstanceType<typeof ElProgress>
 export type SProgressPublicProps = SProgressSelfProps & Omit<ElProgressInstance['$props'], keyof SProgressSelfProps>
 
 export type SProgressComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       percentage: number

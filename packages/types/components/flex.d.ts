@@ -14,6 +14,7 @@ import type {
  * 先提示 sybz 自身属性。
  */
 export type SFlexComponent = {
+  install: (app: import('vue').App) => void
   new (): {
     $props: {
       direction?: SFlexDirection

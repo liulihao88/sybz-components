@@ -5,7 +5,7 @@ export type InstallableComponent<
   Emits extends EmitsOptions = {},
   Slots extends Record<string, any> = {},
 > = {
-  install?: (app: App) => any
+  install: (app: App) => void
   new (...args: any[]): {
     $props: Props
     $emit: Emits extends Record<string, any> ? any : any
