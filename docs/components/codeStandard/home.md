@@ -70,7 +70,8 @@ npx sybz-code-standard init --force
 
 - 创建 `eslint.config.js`、`.prettierrc.js`、`lint-staged.config.js` 和 `.editorconfig`。
 - 补充 `lint`、`lint:check`、`lint:prettier`、`lint:prettier:check` scripts。
-- 初始化 Husky，并让 pre-commit 自动检查暂存文件。
+- 在 Git 仓库根目录初始化 Husky；当前端项目位于子目录时，提交钩子会进入该前端目录检查暂存文件。
+- `init` 只接入规则，不会立即改写已有代码；提交时自动处理已 `git add` 的文件。需要立即格式化存量代码时运行 `pnpm lint:prettier` 和 `pnpm lint`。
 - 默认保留已有的自定义配置并给出提示；使用 `init --force` 时备份并覆盖已有配置和同名 scripts。
 
 后续统一规范只需升级 utils：

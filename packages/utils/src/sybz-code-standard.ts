@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process'
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmdirSync, unlinkSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
-import { resolve } from 'node:path'
+import { relative, resolve } from 'node:path'
 import husky from 'husky'
 
 const cwd = process.cwd()
@@ -98,26 +98,65 @@ const configurePackageJson = (force: boolean) => {
   console.log('更新 package.json scripts')
 }
 
-const prepareHusky = () => {
-  const result = husky()
-  if (result) console.warn(result)
+const gitRoot = () => {
+  try {
+    return execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd, encoding: 'utf8' }).trim()
+  } catch {
+    throw new Error(`当前目录不在 Git 仓库中，无法安装 Husky：${cwd}`)
+  }
 }
 
+const prepareHusky = () => {
+  const root = gitRoot()
+  const original = process.cwd()
+  try {
+    process.chdir(root)
+    const result = husky()
+    if (result && result !== 'HUSKY=0 skip install') throw new Error(`Husky 安装失败：${result}`)
+    if (result) console.warn(result)
+  } finally {
+    process.chdir(original)
+  }
+  return root
+}
+
+const shellQuote = (value: string) => `'${value.replaceAll("'", "'\\''")}'`
+
 const configurePreCommit = () => {
-  prepareHusky()
-  const huskyDir = resolve(cwd, '.husky')
+  const root = prepareHusky()
+  const projectPath = relative(root, cwd)
+  const huskyDir = resolve(root, '.husky')
   const hookPath = resolve(huskyDir, 'pre-commit')
-  const command = 'pnpm exec sybz-code-standard staged'
+  const oldCommand = 'pnpm exec sybz-code-standard staged'
+  const command = projectPath ? `pnpm --dir ${shellQuote(projectPath)} exec sybz-code-standard staged` : oldCommand
   mkdirSync(huskyDir, { recursive: true })
 
   const current = existsSync(hookPath) ? readFileSync(hookPath, 'utf8').trimEnd() : ''
-  if (current.includes('sybz-code-standard staged')) return
+  const lines = current ? current.split('\n') : []
+  if (!lines.some((line) => line.trim() === command)) {
+    const oldIndex = lines.findIndex((line) => line.trim() === oldCommand)
+    if (oldIndex >= 0) lines[oldIndex] = command
+    else lines.push(command)
+    writeFileSync(hookPath, `${lines.join('\n')}\n`, { encoding: 'utf8', mode: 0o755 })
+    console.log(`更新 ${relative(root, hookPath)}`)
+  }
 
-  writeFileSync(hookPath, `${current ? `${current}\n` : ''}${command}\n`, { encoding: 'utf8', mode: 0o755 })
-  console.log('更新 .husky/pre-commit')
+  if (projectPath) {
+    const obsoleteDir = resolve(cwd, '.husky')
+    const obsoleteHook = resolve(obsoleteDir, 'pre-commit')
+    if (existsSync(obsoleteHook) && readFileSync(obsoleteHook, 'utf8').trim() === oldCommand) {
+      unlinkSync(obsoleteHook)
+      try {
+        rmdirSync(obsoleteDir)
+      } catch {
+        /* 保留目录中的其他用户文件 */
+      }
+    }
+  }
 }
 
 const init = (args: string[]) => {
+  gitRoot()
   const force = args.includes('--force')
   configurePackageJson(force)
   for (const [filePath, content] of Object.entries(generatedFiles)) writeConfigFile(filePath, content, force)
