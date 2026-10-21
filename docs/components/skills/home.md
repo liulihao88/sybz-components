@@ -15,7 +15,7 @@
 <div class="skill-rule-code-anchor"></div>
 
 ```md
-## 当前项目使用 sybz-components 组件库规范
+# 当前项目使用 sybz-components 组件库规范
 
 本项目使用 `sybz-components` 组件库。处理文件时，请先判断任务是否涉及 `sybz-components`、`@sybz-components/utils`、Element Plus 组件迁移、主题或组件示例：涉及这些内容时，先在当前目录及其祖先目录中定位前端项目；如果当前目录是仓库根目录，再检查 `frontend/`（优先）以及 `web/`、`client/`、`ui/` 等前端子目录。以实际包含 `package.json` 和 `node_modules` 的前端目录作为工作目录，阅读该目录下的 `node_modules/sybz-components/skills/sybz-components/SKILL.md`；若包内没有该路径，则使用 AI 工具已加载的同名 skill，并按需阅读其 `references/` 目录。普通业务逻辑（例如接口请求、状态计算、数据转换、路由或与组件库无关的 JS/TS 工具代码）不要求读取这份 skill。若普通逻辑文件直接引入或调用 `@sybz-components/utils`，则按工具函数场景处理。修改前先检查当前项目已有实现，保留已有配置，只补充缺失的组件注册、样式导入和 Vite 插件。
 ```
