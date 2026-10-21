@@ -88,12 +88,21 @@ input/autocomplete
 input/search
 :::
 
+### 上边框标题 `top-title`（默认值：空字符串）
+
+使用 `top-title` 将标题嵌入输入框上边框，由边框为文字留出缺口，无须额外背景色；原有 `title` 仍显示在左侧前缀。基础写法：`<s-input v-model="maxValue" top-title="X 最大值" width="300" />`。
+
+:::demo 属性：`top-title` 类型 `string`，默认值 `''`；`width` 类型 `string / number`，默认值 `100%`。
+input/top-title
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                  | 类型             | 默认值    |
 | :------------------------: | ----------------------------------------------------- | ---------------- | --------- |
 |        `modelValue`        | 绑定值                                                | any              | -         |
 |      `compTitleStyle`      | 标题前缀组件样式；默认内边距为 `0 8px`，可覆盖        | object           | `{}`      |
+|         `topTitle`         | 嵌在输入框上边框的标题，模板中写作 `top-title`        | string           | `''`      |
 |          `width`           | 输入框宽度                                            | string / number  | `100%`    |
 |          `height`          | 输入框高度                                            | string / number  | `''`      |
 |        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示      | string / number  | `10`      |

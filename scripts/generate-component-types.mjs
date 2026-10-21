@@ -542,7 +542,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SInputPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'input',
-      description: 's-input 输入框组件，支持一键清空、溢出提示、自动补全和位于清空图标右侧的快捷搜索按钮。',
+      description: 's-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮。',
       slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
       emitsMember:
         "ElInputInstance['$emit'] & (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)",
@@ -713,7 +713,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'select',
       allowAnySlots: true,
       description:
-        's-select 下拉选择组件，空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。',
+        's-select 下拉选择组件，支持上边框嵌入标题；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。',
       hoverProps: componentHoverProps('SSelectSelfProps', [
         'SSelectChangeContext',
         'SSelectOptionContext',

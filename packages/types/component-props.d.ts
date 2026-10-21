@@ -269,6 +269,8 @@ export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 export interface SInputSelfProps extends SHtmlStringProps {
   modelValue: any
   compTitleStyle?: SybzRecord
+  /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
+  topTitle?: string
   width?: string | number
   w?: string | number
   height?: string | number
@@ -793,6 +795,8 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
   size?: SybzComponentSize
   theme?: SybzComponentTheme
   title?: string
+  /** 嵌在选择框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
+  topTitle?: string
   compTitleStyle?: SybzRecord
   connect?: string
   customLabel?: (context: SSelectOptionContext<Option>) => any

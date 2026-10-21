@@ -9,6 +9,12 @@
       v-bind="mergedProps.tooltipAttrs"
     >
       <div class="s-input__main" @mouseleave="hideInputTooltip">
+        <TopTitleOutline
+          v-if="mergedProps.topTitle"
+          :title="mergedProps.topTitle"
+          :square-left="Boolean(attrs.title || slots.prepend)"
+          :square-right="Boolean(slots.append)"
+        />
         <el-autocomplete
           v-if="mergedProps.options"
           :model-value="data"
@@ -120,6 +126,7 @@ import { processWidth, getType, $toast } from '@sybz-components/utils'
 import { inputProps } from 'element-plus/es/components/input/src/input'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import TopTitleOutline from '../../common/TopTitleOutline.vue'
 const attrs = useAttrs()
 const slots = useSlots()
 
@@ -141,6 +148,8 @@ const normalizeInputSize = (size: unknown): InputSize | undefined => {
 interface SInputProps {
   modelValue: any
   compTitleStyle?: Record<string, any>
+  /** 嵌在输入框上边框的标题，与左侧前缀 title 区分 */
+  topTitle?: string
   width?: string | number
   w?: string | number
   height?: string | number
@@ -166,6 +175,7 @@ interface SInputProps {
 
 const props = withDefaults(defineProps<SInputProps>(), {
   compTitleStyle: undefined,
+  topTitle: '',
   width: '100%',
   height: '',
   maxlength: undefined,
@@ -216,6 +226,7 @@ const inputClass = computed(() => [
   {
     'has-content': mergedProps.value.content,
     's-input--has-title': Boolean(attrs.title) && !slots.prepend,
+    's-input--top-title': Boolean(mergedProps.value.topTitle),
     's-input--chenghua': mergedProps.value.theme === 'chenghua',
     's-input--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-input--sybz': mergedProps.value.theme === 'sybz',
@@ -431,6 +442,10 @@ const mergedAttrs = computed(() => {
     merged.clearable = false
   }
   delete merged.search
+  delete merged.topTitle
+  if (mergedProps.value.topTitle && !merged['aria-label']) {
+    merged['aria-label'] = mergedProps.value.topTitle
+  }
   return merged
 })
 
@@ -451,8 +466,17 @@ const mergedStyle = computed(() => {
   width: 100%;
 
   .s-input__main {
+    position: relative;
     width: 100%;
     height: 100%;
+  }
+
+  &.s-input--top-title:hover {
+    --s-top-title-border-color: var(--el-border-color-hover);
+  }
+
+  &.s-input--top-title:focus-within {
+    --s-top-title-border-color: var(--el-color-primary);
   }
 
   :deep(.el-autocomplete),
@@ -463,6 +487,14 @@ const mergedStyle = computed(() => {
 
   :deep(.el-input__wrapper) {
     min-height: var(--s-input-height, var(--el-input-height));
+  }
+
+  &.s-input--top-title :deep(.el-input__wrapper) {
+    box-shadow: none;
+  }
+
+  &.s-input--top-title :deep(.el-textarea__inner) {
+    box-shadow: none;
   }
 
   :deep(.el-textarea__inner) {

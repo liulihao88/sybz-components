@@ -27,6 +27,35 @@
 
     font-family: var(--s-#{$token-prefix}-font-family);
 
+    &.s-select--top-title {
+      --s-top-title-border-color: var(--s-#{$token-prefix}-primary-border);
+      --s-top-title-radius: var(--s-#{$token-prefix}-radius);
+      --s-top-title-text-color: var(--s-#{$token-prefix}-text-muted);
+
+      .el-select__wrapper,
+      .el-select__wrapper:hover,
+      .el-select__wrapper.is-focused,
+      .el-select__wrapper.is-hovering:not(.is-focused) {
+        box-shadow: none;
+      }
+
+      &:hover {
+        --s-top-title-border-color: var(--s-#{$token-prefix}-primary-border-hover);
+      }
+
+      &:focus-within {
+        --s-top-title-border-color: var(--s-#{$token-prefix}-primary);
+      }
+
+      &.is-disabled {
+        --s-top-title-border-color: rgba(15, 23, 42, 0.08);
+      }
+
+      &.s-select--empty-highlighted {
+        --s-top-title-border-color: var(--el-color-danger);
+      }
+    }
+
     .el-select {
       --el-select-border-color-hover: var(--s-#{$token-prefix}-primary-border-hover);
       --el-select-input-focus-border-color: var(--s-#{$token-prefix}-primary);

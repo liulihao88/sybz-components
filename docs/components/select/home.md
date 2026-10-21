@@ -126,6 +126,14 @@ select/quick
 select/emptyPlaceholder
 :::
 
+### 上边框标题 `top-title`（默认值：空字符串）
+
+使用 `top-title` 将标题嵌入选择框上边框；原有 `title` 仍显示在左侧前缀。基础写法：`<s-select v-model="value" :options="options" top-title="显示" :show-quick="false" width="300" />`。
+
+:::demo 属性：`top-title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`；`show-quick` 可选 `true / false`，默认值 `true`；`width` 类型 `string / number`，默认值 `''`。
+select/top-title
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                               | 类型                    | 默认值     |
@@ -142,6 +150,7 @@ select/emptyPlaceholder
 |           `size`           | 选择器尺寸，支持 `small` / `default` / `large`                     | string                  | `''`       |
 |          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` / `sybz`   | string                  | `default`  |
 |          `title`           | 左侧标题文案                                                       | string                  | `''`       |
+|         `topTitle`         | 嵌在选择框上边框的标题，模板中写作 `top-title`                     | string                  | `''`       |
 |      `compTitleStyle`      | 左侧标题组件样式；默认内边距为 `0 8px`                             | object                  | `{}`       |
 |         `connect`          | 多字段 label 拼接符                                                | string                  | `/`        |
 |       `customLabel`        | 自定义 label，参数为 `{ option, index, value }`                    | function                | -          |

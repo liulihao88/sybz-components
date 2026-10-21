@@ -10,7 +10,7 @@ import type {
 type ElInputInstance = InstanceType<typeof ElInput>
 
 /**
- * s-input 输入框组件，支持一键清空、溢出提示、自动补全和位于清空图标右侧的快捷搜索按钮。
+ * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Input 的公开属性。
  */
@@ -24,6 +24,8 @@ export type SInputComponent = {
       dangerouslyUseHTMLString?: boolean
       modelValue: any
       compTitleStyle?: SybzRecord
+      /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
+      topTitle?: string
       width?: string | number
       w?: string | number
       height?: string | number
@@ -49,6 +51,7 @@ export type SInputComponent = {
       | 'dangerouslyUseHTMLString'
       | 'modelValue'
       | 'compTitleStyle'
+      | 'topTitle'
       | 'width'
       | 'w'
       | 'height'

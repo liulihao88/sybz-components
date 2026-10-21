@@ -12,6 +12,8 @@
         'is-disabled': parseDisabled,
         'is-multiple': multiple,
         'has-custom-height': mergedProps.height,
+        's-select--top-title': !!mergedProps.topTitle,
+        's-select--empty-highlighted': isEmpty(sOptions, true) && mergedProps.emptyColor,
       },
     ]"
   >
@@ -25,6 +27,12 @@
       transition="s-select-tooltip-no-transition"
     >
       <div class="s-select__tooltip-trigger" @mouseleave="hideSelectTooltip" @mouseover="updateSelectTooltip">
+        <TopTitleOutline
+          v-if="mergedProps.topTitle"
+          :title="mergedProps.topTitle"
+          :square-left="Boolean(mergedProps.title)"
+          :square-right="mergedProps.showQuick"
+        />
         <el-select
           ref="selectRef"
           v-model="childSelectedValue"
@@ -106,6 +114,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import TopTitleOutline from '../../common/TopTitleOutline.vue'
 
 defineOptions({
   name: 'SSelect',
@@ -152,6 +161,8 @@ interface SelectProps {
   size?: string
   theme?: SybzComponentTheme
   title?: string
+  /** 嵌在选择框上边框的标题，与左侧前缀 title 区分 */
+  topTitle?: string
   compTitleStyle?: Record<string, any>
   connect?: string
   customLabel?: (context: SSelectOptionContext) => string
@@ -188,6 +199,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: '',
   theme: 'default',
   title: '',
+  topTitle: '',
   compTitleStyle: undefined,
 
   // 如果label显示多个参数的连接符
@@ -279,6 +291,7 @@ const selectAttrs = computed<Record<string, any>>(() => {
     filterable: true,
     size: mergedProps.value.size || undefined,
     ...nextAttrs,
+    ...(mergedProps.value.topTitle && !nextAttrs['aria-label'] ? { 'aria-label': mergedProps.value.topTitle } : {}),
   }
 })
 
@@ -663,6 +676,7 @@ function emitChangeSelect(
   }
 
   .s-select__tooltip-trigger {
+    position: relative;
     display: flex;
     flex: 1;
     height: 100%;
@@ -679,6 +693,30 @@ function emitChangeSelect(
     min-height: var(--s-select-min-height);
     padding-top: 0;
     padding-bottom: 0;
+  }
+
+  &.s-select--top-title {
+    --s-top-title-radius: var(--el-border-radius-base);
+
+    &.is-disabled {
+      --s-top-title-border-color: var(--el-disabled-border-color);
+    }
+
+    &.s-select--empty-highlighted {
+      --s-top-title-border-color: var(--el-color-danger);
+    }
+
+    &:hover {
+      --s-top-title-border-color: var(--el-border-color-hover);
+    }
+
+    &:focus-within {
+      --s-top-title-border-color: var(--el-color-primary);
+    }
+
+    :deep(.el-select__wrapper) {
+      box-shadow: none;
+    }
   }
 
   :deep(.el-select__selection),
