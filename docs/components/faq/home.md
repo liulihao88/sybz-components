@@ -13,7 +13,6 @@ outline: 2
 ```ts
 import type { App } from 'vue'
 import SybzComponents from 'sybz-components'
-import SybzChartComponents from 'sybz-components/charts'
 import * as sybzUtils from '@sybz-components/utils'
 import 'sybz-components/style.css'
 import 'sybz-components/charts/style.css'
@@ -43,7 +42,6 @@ export default function installSybz(app: App): void {
       showWordLimit: false,
     },
   })
-  app.use(SybzChartComponents)
 
   Object.entries(sybzUtils).forEach(([key, value]) => {
     app.config.globalProperties[key] = value
