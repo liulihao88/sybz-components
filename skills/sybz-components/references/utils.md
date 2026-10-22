@@ -17,7 +17,7 @@
 
 ```ts
 configureUtils({ theme: 'shijingshan' }) // default|chenghua|shijingshan；单次 theme 优先
-await confirm({ variant: 'delete', target: row.name, theme: 'shijingshan' })
+await confirm({ variant: 'delete', target: row.name })
 $toast('删除成功')
 ```
 

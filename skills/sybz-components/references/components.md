@@ -17,7 +17,7 @@
 | 标题/卡片/布局                                        | `s-title`、`s-comp-title`、`s-card`、`s-flex`、`s-row` |
 | form                                                  | `s-form :field-list`                                   |
 
-星标组件见仓库 `skills/star-skill.md`。主题场景传 `theme="chenghua|shijingshan"`。
+星标组件见仓库 `skills/star-skill.md`。主题场景先检查全局配置：已有全局主题时，组件省略 `theme`；仅单组件覆盖全局主题，或无全局主题而需要指定主题时传 `theme="chenghua|shijingshan"`。
 
 ## 最小用法
 
@@ -58,7 +58,7 @@
 
 ```vue
 <s-dialog v-model="visible" title="详情" mode="drawer">内容</s-dialog>
-<s-dialog v-model="visible" variant="delete" target="该数据" theme="shijingshan" />
+<s-dialog v-model="visible" variant="delete" target="该数据" />
 <s-popconfirm variant="delete" target="该数据" @confirm="remove"><s-button type="danger">删除</s-button></s-popconfirm>
 ```
 
