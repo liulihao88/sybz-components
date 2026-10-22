@@ -11,7 +11,7 @@
     --el-input-hover-border-color: var(--s-sybz-primary-border-hover);
     --el-input-focus-border-color: var(--s-sybz-primary);
     --el-input-text-color: var(--s-sybz-text);
-    --el-input-placeholder-color: var(--s-sybz-text-muted);
+    --el-input-placeholder-color: var(--s-sybz-text-placeholder);
     --el-input-bg-color: var(--s-sybz-bg);
   }
 
@@ -68,7 +68,7 @@
   }
 
   .el-input__inner::placeholder {
-    color: var(--s-sybz-text-muted);
+    color: var(--s-sybz-text-placeholder);
   }
 
   .el-input-number__decrease,

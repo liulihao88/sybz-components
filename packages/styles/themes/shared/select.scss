@@ -86,7 +86,7 @@
     }
 
     .el-select__placeholder.is-transparent {
-      color: var(--s-#{$token-prefix}-text-muted);
+      color: var(--s-#{$token-prefix}-text-placeholder, var(--s-#{$token-prefix}-text-muted));
     }
 
     .el-select__caret,
