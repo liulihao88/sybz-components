@@ -32,20 +32,6 @@ title/usually
 title/tooltip
 :::
 
-### 标题和后置内容
-
-普通标题使用 `title` 属性，复杂标题使用 `title` 插槽。默认插槽用于在标题和副标题后追加状态、标签或其他内容：
-
-```vue
-<s-title title="属性标题" />
-<s-title>
-  <template #title>命名插槽标题</template>
-</s-title>
-<s-title title="服务状态">
-  <s-tag type="success">运行中</s-tag>
-</s-title>
-```
-
 ### 字号（fs 默认值：undefined）
 
 :::demo 使用 `fs` 设置标题字号，左侧竖线高度也会同步变化；图标和间距默认由 `size` 控制，`iconAttrs.size` 可单独覆盖图标尺寸。基础写法：`<s-title title="自定义标题" fs="40px" />`。属性：`fs` 可选 `small / default / large`、数字或 px 字符串，默认值 `undefined`；三个档位分别为 `14px / 16px / 18px`，数字按 px 处理。`size` 可选 `small / default / large`，默认值 `default`；同时设置时，`fs` 决定标题字号和竖线高度，`size` 决定其余尺寸。
