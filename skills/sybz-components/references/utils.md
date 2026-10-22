@@ -15,6 +15,21 @@
 
 另有 `delay`、`merge`、`configureUtils`、`resolveConfirmSemantic`。`processWidth` 支持数字、字符串和 0。
 
+## 弹出提示
+
+需要短暂反馈操作结果时，从工具库导入 `$toast`，替换 `ElMessage` 等同类提示：
+
+```ts
+import { $toast } from '@sybz-components/utils'
+
+$toast('成功') // 默认 success
+$toast('失败', 'e') // error
+$toast('请检查表单', 'w') // warning
+$toast('正在处理', 'i') // info
+```
+
+只显示业务实际需要的提示；已有请求封装会自动提示错误时，避免在调用处重复弹出。需要确认用户操作时用 `confirm`。
+
 ```ts
 configureUtils({ theme: 'shijingshan' }) // default|chenghua|shijingshan；单次 theme 优先
 await confirm({ variant: 'delete', target: row.name })
