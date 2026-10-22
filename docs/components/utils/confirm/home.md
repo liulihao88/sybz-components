@@ -10,12 +10,12 @@
 utils/confirm/base
 :::
 
-### 成华主题
+### sybz主题
 
-#### chenghua主题示例
+#### sybz主题示例
 
 :::demo
-utils/confirm/chenghua/base
+utils/confirm/sybz/base
 :::
 
 ### 石景山主题

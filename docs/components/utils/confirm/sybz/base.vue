@@ -4,16 +4,17 @@ import { confirm } from '@/utils/src/index'
 const deleteConfirm = () => {
   confirm({
     variant: 'delete',
-    target:
-      '4a731a90594a4af544c0c25941171jpeg.jpeg、小米汽车.png、蓝紫渐变闪粉艺术玻璃花瓶产品参数.xlsx、戴珍珠耳环的少女.png、雕像.png Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga a eveniet corporis, maiores ab laboriosam eligendi quia ex atque aspernatur odit sint numquam assumenda impedit voluptas reiciendis inventore eos veniam!',
-    theme: 'chenghua',
+    // target:
+    //   '4a731a90594a4af544c0c25941171jpeg.jpeg、小米汽车.png、蓝紫渐变闪粉艺术玻璃花瓶产品参数.xlsx、戴珍珠耳环的少女.png、雕像.png Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga a eveniet corporis, maiores ab laboriosam eligendi quia ex atque aspernatur odit sint numquam assumenda impedit voluptas reiciendis inventore eos veniam!',
+    theme: 'sybz',
+    message: '确定删除文件夹<code type="danger">123</code>吗?',
   })
 }
 
 const noCancel = () => {
   confirm('当前申请已提交，请等待平台审核。', {
     title: '提交成功',
-    theme: 'chenghua',
+    theme: 'sybz',
     showCancelButton: false,
     confirmButtonText: '知道了',
   })
@@ -22,7 +23,7 @@ const noCancel = () => {
 const noConfirm = () => {
   confirm('当前内容存在未保存修改，建议返回检查后再离开。', {
     title: '离开提醒',
-    theme: 'chenghua',
+    theme: 'sybz',
     showConfirmButton: false,
     cancelButtonText: '返回检查',
   })
@@ -31,7 +32,7 @@ const noConfirm = () => {
 const customText = () => {
   confirm('确定提交当前服务申请吗？', {
     title: '成华 AI 服务申请',
-    theme: 'chenghua',
+    theme: 'sybz',
     confirmButtonText: '立即提交',
     cancelButtonText: '再想想',
   })
@@ -40,7 +41,7 @@ const customText = () => {
 const noClose = () => {
   confirm('该操作需要通过底部按钮明确选择，右上角关闭按钮已隐藏。', {
     title: '隐藏关闭按钮',
-    theme: 'chenghua',
+    theme: 'sybz',
     showClose: false,
     closeOnClickModal: false,
     closeOnPressEscape: false,
@@ -52,7 +53,7 @@ const noClose = () => {
 const differentColorButtons = () => {
   confirm('请选择当前审批结果，同意和驳回使用不同的按钮颜色。', {
     title: '审批处理',
-    theme: 'chenghua',
+    theme: 'sybz',
     confirmButtonText: '同意',
     cancelButtonText: '驳回',
     confirmButtonClass: 's-confirm-success-button',
@@ -63,25 +64,25 @@ const differentColorButtons = () => {
 const warningConfirm = () => {
   confirm('该操作可能影响现有数据，请确认后继续。', {
     variant: 'warning',
-    theme: 'chenghua',
+    theme: 'sybz',
   })
 }
 </script>
 
 <template>
-  <div class="chenghua-confirm-demo">
-    <s-button theme="chenghua" type="danger" @click="deleteConfirm">删除确认</s-button>
-    <s-button theme="chenghua" type="primary" @click="noCancel">无取消按钮</s-button>
-    <s-button theme="chenghua" @click="noConfirm">无确定按钮</s-button>
-    <s-button theme="chenghua" type="success" @click="customText">自定义文案</s-button>
-    <s-button theme="chenghua" type="primary" @click="noClose">不显示 X 按钮</s-button>
-    <s-button theme="chenghua" type="success" @click="differentColorButtons">不同颜色按钮</s-button>
-    <s-button theme="chenghua" type="warning" @click="warningConfirm">警告确认</s-button>
+  <div class="sybz-confirm-demo">
+    <s-button theme="sybz" type="danger" @click="deleteConfirm">删除确认</s-button>
+    <s-button theme="sybz" type="primary" @click="noCancel">无取消按钮</s-button>
+    <s-button theme="sybz" @click="noConfirm">无确定按钮</s-button>
+    <s-button theme="sybz" type="success" @click="customText">自定义文案</s-button>
+    <s-button theme="sybz" type="primary" @click="noClose">不显示 X 按钮</s-button>
+    <s-button theme="sybz" type="success" @click="differentColorButtons">不同颜色按钮</s-button>
+    <s-button theme="sybz" type="warning" @click="warningConfirm">警告确认</s-button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.chenghua-confirm-demo {
+.sybz-confirm-demo {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;

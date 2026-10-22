@@ -24,6 +24,19 @@ $toast('删除成功')
 - `confirm` 新代码优先对象式；兼容 `confirm(message, options, appContext)`。
 - `variant`: `default|delete|warning`；删除/警告自动生成标题、正文、按钮和主题状态，显式值优先。`resolveConfirmSemantic` 供自定义确认 UI 复用，勿重组语义。
 - `theme:'default'` 可关闭该次全局主题。
+
+删除确认通常显式写 `message`，用 `<code type="danger">` 标出删除对象：
+
+```ts
+await confirm({
+  variant: 'delete',
+  theme: 'sybz', // 全局主题已经是 sybz 时省略
+  message: '确定删除文件夹<code type="danger">123</code>吗?',
+})
+```
+
+删除对象来自动态数据时，优先传 `target` 并省略 `message`，由 `confirm` 生成文案并转义 HTML。自定义 `message` 若插入动态文本，须先转义 HTML。
+
 - `import { sybzVitePlugins } from '@sybz-components/utils/vite'`。
 - `sybzVitePlugins()` 默认管理 Vue JSX/TSX、Tailwind v4（自动注入 CSS 入口）、代码定位、Git 记录、构建时间；已有 JSX 插件传 `{ vueJsx:false }`，已有 Tailwind 插件传 `{ tailwind:false }`，已有手动 Tailwind CSS 入口传 `{ tailwindCss:false }`，插件数组无需展开。
 - 代码规范从 `@sybz-components/utils/codeStandard` 导入，不放入 Vite 插件；项目通过一行配置分别复用 ESLint、Prettier 和 lint-staged 预设。
