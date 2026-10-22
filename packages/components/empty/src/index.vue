@@ -125,7 +125,7 @@ const emptyClass = computed(() => ({
   line-height: 1.5;
 }
 .s-empty__sub-title {
-  color: var(--65);
+  color: var(--45);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
