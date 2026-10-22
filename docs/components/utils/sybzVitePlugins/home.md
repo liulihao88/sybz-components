@@ -18,7 +18,7 @@ export default defineConfig({
 })
 ```
 
-`sybzVitePlugins()` 内部包含多个插件。Vite 的 `PluginOption` 原生支持插件数组并会自动扁平化，因此直接放入 `plugins`，无需使用展开运算符。
+`sybzVitePlugins()` 内部包含多个插件，并自动向 HTML 注入 Tailwind CSS 样式入口。业务项目无需单独安装 `tailwindcss` 或在 CSS 中写 `@import 'tailwindcss'`。Vite 的 `PluginOption` 原生支持插件数组并会自动扁平化，因此直接放入 `plugins`，无需使用展开运算符。
 
 预设当前支持 Vite 5 和 6。项目仍需自行安装并注册 `@vitejs/plugin-vue`。
 
@@ -31,7 +31,8 @@ ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行�
 | 属性名称        | 类型                                  | 可选值                | 默认值 | 说明                                   |
 | --------------- | ------------------------------------- | --------------------- | ------ | -------------------------------------- |
 | `vueJsx`        | `boolean \| VueJsxOptions`            | `false/true/配置对象` | `true` | 是否启用 Vue JSX/TSX，或传入插件配置。 |
-| `tailwind`      | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true` | 是否启用 Tailwind CSS v4。             |
+| `tailwind`      | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true` | 是否启用 Tailwind CSS v4 插件。        |
+| `tailwindCss`   | `boolean`                             | `false/true`          | `true` | 是否自动注入 Tailwind CSS 样式。       |
 | `codeInspector` | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true` | 是否启用代码定位，或传入插件配置。     |
 | `gitCommitLog`  | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true` | 是否启用 Git 信息，或传入插件配置。    |
 | `buildTime`     | `boolean \| object`                   | `false/true/配置对象` | `true` | 是否注入打包时间及其 meta 配置。       |
@@ -63,7 +64,7 @@ plugins: [
 
 其他编辑器的配置可查看 [code-inspector IDE 配置列表](https://inspector.fe-dev.cn/guide/ide.html)。
 
-项目只保留一个 Tailwind Vite 插件和一个包含 `@import "tailwindcss"` 的 CSS 入口。若项目已经自行注册 `@tailwindcss/vite`，请关闭预设中的 Tailwind：
+项目只保留一个 Tailwind Vite 插件和一个 Tailwind CSS 入口。若项目已有手动的 `@import 'tailwindcss'`，请设置 `tailwindCss: false`，避免重复注入；若已自行注册 `@tailwindcss/vite`，请关闭预设中的 Tailwind：
 
 ```ts
 plugins: [tailwindcss(), sybzVitePlugins({ tailwind: false })]

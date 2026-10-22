@@ -64,7 +64,7 @@ import { sybzVitePlugins } from '@sybz-components/utils/vite'
 export default defineConfig({ plugins: [vue(), sybzVitePlugins()] })
 ```
 
-首次接入总是补 `sybzVitePlugins()`；已有则不重复。它默认提供 Vue JSX/TSX、Tailwind v4、代码定位、Git 信息、构建时间；已有 `@tailwindcss/vite` 时传 `{ tailwind:false }`，已有自行注册的 `vueJsx()` 时传 `{ vueJsx:false }`，确保插件不重复。TSX 项目在 tsconfig 设置 `"jsx":"preserve","jsxImportSource":"vue"`；无 JSX/TSX 的项目可传 `{ vueJsx:false }`。已有 vue 只检查、不重复。
+首次接入总是补 `sybzVitePlugins()`；已有则不重复。它默认提供 Vue JSX/TSX、Tailwind v4（自动注入 CSS 入口，无需业务项目单独安装 `tailwindcss`）、代码定位、Git 信息、构建时间；已有 `@tailwindcss/vite` 时传 `{ tailwind:false }`，已有手动 Tailwind CSS 入口时传 `{ tailwindCss:false }`，已有自行注册的 `vueJsx()` 时传 `{ vueJsx:false }`，确保插件不重复。TSX 项目在 tsconfig 设置 `"jsx":"preserve","jsxImportSource":"vue"`；无 JSX/TSX 的项目可传 `{ vueJsx:false }`。已有 vue 只检查、不重复。
 当前预设支持 Vite 5 和 6。
 
 完成后运行项目已有 typecheck/lint，不主动 build。

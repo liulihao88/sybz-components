@@ -114,17 +114,12 @@ export default defineConfig({
 | --------------- | ------------------------------------ | ------------------------------------- | ------ |
 | `vueJsx`        | 启用 Vue JSX/TSX                     | `boolean \| VueJsxOptions`            | `true` |
 | `tailwind`      | 启用 Tailwind CSS v4 Vite 插件       | `boolean \| TailwindPluginOptions`    | `true` |
+| `tailwindCss`   | 自动注入 Tailwind CSS 样式入口       | `boolean`                             | `true` |
 | `codeInspector` | 在开发环境中从页面元素定位到对应源码 | `boolean \| SybzCodeInspectorOptions` | `true` |
 | `gitCommitLog`  | 提供项目 Git 提交信息                | `boolean \| GitCommitLogOptions`      | `true` |
 | `buildTime`     | 向页面注入本次构建时间               | `boolean \| { metaName?: string }`    | `true` |
 
-项目还需要在一个全局 CSS 入口中引入 Tailwind CSS：
-
-```css
-@import 'tailwindcss';
-```
-
-项目中只应保留一个 Tailwind Vite 插件和一个上述 CSS 入口。如果已经自行注册了 `@tailwindcss/vite`，请通过 `tailwind: false` 关闭预设中的 Tailwind，避免重复注册：
+预设会自动注入 Tailwind CSS 样式，业务项目无需单独安装 `tailwindcss` 或添加 CSS 入口。如果项目已有手动的 `@import 'tailwindcss'`，可设置 `tailwindCss: false`；如果已自行注册 `@tailwindcss/vite`，请通过 `tailwind: false` 关闭预设中的 Tailwind，避免重复注册：
 
 ```ts
 plugins: [tailwindcss(), sybzVitePlugins({ tailwind: false })]

@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module'
 import { codeInspectorPlugin, type CodeInspectorPluginOptions } from 'code-inspector-plugin'
 import tailwindcss, { type PluginOptions as TailwindPluginOptions } from '@tailwindcss/vite'
 import vueJsx, { type Options as VueJsxOptions } from '@vitejs/plugin-vue-jsx'
@@ -10,6 +11,10 @@ declare global {
   }
 }
 
+const require = createRequire(import.meta.url)
+const virtualTailwindId = 'virtual:sybz-tailwind'
+const resolvedVirtualTailwindId = `\0${virtualTailwindId}`
+
 export type SybzCodeInspectorOptions = Omit<CodeInspectorPluginOptions, 'bundler'>
 
 export interface SybzVitePluginsOptions {
@@ -17,12 +22,42 @@ export interface SybzVitePluginsOptions {
   vueJsx?: boolean | VueJsxOptions
   /** Tailwind CSS v4 Vite 插件配置；默认启用，设为 false 时关闭。 */
   tailwind?: boolean | TailwindPluginOptions
+  /** 自动向 HTML 注入 Tailwind CSS；默认启用，已有手动 CSS 入口时可设为 false。 */
+  tailwindCss?: boolean
   /** 代码定位插件配置；默认启用，设为 false 时关闭。 */
   codeInspector?: boolean | SybzCodeInspectorOptions
   /** Git 提交信息插件配置；默认启用，设为 false 时关闭。 */
   gitCommitLog?: boolean | GitCommitLogOptions
   /** 打包时间注入配置；默认启用，设为 false 时关闭。 */
   buildTime?: boolean | { metaName?: string }
+}
+
+/** 将工具包依赖的 Tailwind 样式作为页面入口，业务项目无需单独安装或导入。 */
+const createTailwindEntry = (): Plugin => {
+  const tailwindCssPath = require.resolve('tailwindcss/index.css')
+
+  return {
+    name: 'sybz-tailwind-entry',
+    resolveId(id) {
+      if (id === virtualTailwindId) return resolvedVirtualTailwindId
+    },
+    load(id) {
+      if (id === resolvedVirtualTailwindId) return `import ${JSON.stringify(tailwindCssPath)}`
+    },
+    transformIndexHtml: {
+      order: 'pre',
+      handler() {
+        return [
+          {
+            tag: 'script',
+            attrs: { type: 'module' },
+            children: `import '${virtualTailwindId}'`,
+            injectTo: 'head-prepend',
+          },
+        ]
+      },
+    },
+  }
 }
 
 /** 创建预设为 Vite bundler、默认使用 VS Code 的代码定位插件。 */
@@ -75,6 +110,7 @@ export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): PluginOpt
 
   if (options.tailwind !== false) {
     plugins.push(...tailwindcss(typeof options.tailwind === 'object' ? options.tailwind : {}))
+    if (options.tailwindCss !== false) plugins.push(createTailwindEntry())
   }
 
   if (options.codeInspector !== false) {
