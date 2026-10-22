@@ -2239,8 +2239,8 @@ packages:
   '@vue/reactivity@3.5.26':
     resolution: {integrity: sha512-9EnYB1/DIiUYYnzlnUBgwU32NNvLp/nhxLXeWRhHUEeWNTn1ECxX8aGO7RTXeX6PPcxe3LLuNBFoJbV4QZ+CFQ==}
 
-  '@vue/reactivity@3.5.43':
-    resolution: {integrity: sha512-G/c9GyOZNI2jVaaS6OX1EF1SSFSv7H0ERqNTl4+DTFMlZmB5eVAB53aLQNam/7NL2NPtaDD7RdVrzf8uJzMuOA==}
+  '@vue/reactivity@3.5.44':
+    resolution: {integrity: sha512-u+QJdKeBBEADkPdevsL+6E12QlYVfBD8Zcw5qjDQKtamI6l14KyqazJMobhCKelhWN5zpyKUiEDoTyHE93cqWw==}
 
   '@vue/runtime-core@3.4.15':
     resolution: {integrity: sha512-6E3by5m6v1AkW0McCeAyhHTw+3y17YCOKG0U0HDKDscV4Hs0kgNT5G+GCHak16jKgcCDHpI9xe5NKb8sdLCLdw==}
@@ -2271,8 +2271,8 @@ packages:
   '@vue/shared@3.5.42':
     resolution: {integrity: sha512-2rPxex1jQf4jvl9MOHl6YaXCPcrNqz/FstMOEh3QWY+/OME9nQTvl9WYeCwhW7AFjaR0SnngZGlp/wkR6rkI6g==}
 
-  '@vue/shared@3.5.43':
-    resolution: {integrity: sha512-uksS7YGMR5NZyr4JNq0Rp+QyLns0ueaz20KwzIPW9R0LH1Vnt4E+XUM29PNseEbf1www2gOuhuDi5AKOIXag9Q==}
+  '@vue/shared@3.5.44':
+    resolution: {integrity: sha512-H82XLH0DjmSOdbEwO15x3QTo1f5PWEtv237eLpYKc0mqLu+B8hnq16lFWmuBmNurkeiG3wr+oM1FhOll/YVFRg==}
 
   '@vueuse/core@10.11.1':
     resolution: {integrity: sha512-guoy26JQktXPcz+0n3GukWIy/JDNKti9v6VEMu6kV2sYBsWuGiTU8OWdg+ADfUbHg3/3DlqySDe7JmdHrktiww==}
@@ -7286,8 +7286,8 @@ snapshots:
       '@typescript-eslint/eslint-plugin': 8.62.0(@typescript-eslint/parser@8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.3.3))(eslint@9.39.4(jiti@2.7.0))(typescript@5.3.3)
       '@typescript-eslint/parser': 8.62.0(eslint@9.39.4(jiti@2.7.0))(typescript@5.3.3)
       '@vitejs/plugin-vue-jsx': 4.2.0(vite@5.2.11(@types/node@20.11.16)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1))(vue@3.4.15(typescript@5.3.3))
-      '@vue/reactivity': 3.5.43
-      '@vue/shared': 3.5.43
+      '@vue/reactivity': 3.5.44
+      '@vue/shared': 3.5.44
       axios: 1.20.0
       code-inspector-plugin: 2.0.9
       consola: 3.4.2
@@ -7756,7 +7756,7 @@ snapshots:
       '@babel/types': 7.29.8
       '@vue/babel-helper-vue-transform-on': 1.5.0
       '@vue/babel-plugin-resolve-type': 1.5.0(@babel/core@7.29.7)
-      '@vue/shared': 3.5.43
+      '@vue/shared': 3.5.26
     optionalDependencies:
       '@babel/core': 7.29.7
     transitivePeerDependencies:
@@ -7902,7 +7902,7 @@ snapshots:
     dependencies:
       '@volar/language-core': 2.4.23
       '@vue/compiler-dom': 3.5.25
-      '@vue/shared': 3.5.43
+      '@vue/shared': 3.5.44
       alien-signals: 3.1.1
       muggle-string: 0.4.1
       path-browserify: 1.0.1
@@ -7918,9 +7918,9 @@ snapshots:
     dependencies:
       '@vue/shared': 3.5.26
 
-  '@vue/reactivity@3.5.43':
+  '@vue/reactivity@3.5.44':
     dependencies:
-      '@vue/shared': 3.5.43
+      '@vue/shared': 3.5.44
 
   '@vue/runtime-core@3.4.15':
     dependencies:
@@ -7951,7 +7951,7 @@ snapshots:
 
   '@vue/shared@3.5.42': {}
 
-  '@vue/shared@3.5.43': {}
+  '@vue/shared@3.5.44': {}
 
   '@vueuse/core@10.11.1(vue@3.4.15(typescript@5.3.3))':
     dependencies:
@@ -8299,7 +8299,7 @@ snapshots:
     dependencies:
       bumpp: 8.2.1
       callsites: 4.1.0
-      inferred-types: 0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
+      inferred-types: 0.37.6(happy-dom@12.10.3)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
       vitest: 0.25.8(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -9729,23 +9729,6 @@ snapshots:
       - supports-color
       - terser
 
-  inferred-types@0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1):
-    dependencies:
-      brilliant-errors: 0.7.3(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
-    transitivePeerDependencies:
-      - '@edge-runtime/vm'
-      - '@vitest/browser'
-      - '@vitest/ui'
-      - happy-dom
-      - jsdom
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-
   inherits@2.0.4: {}
 
   internal-slot@1.0.7:
@@ -10387,7 +10370,7 @@ snapshots:
   native-dash@1.25.0(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1):
     dependencies:
       brilliant-errors: 0.7.3(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
-      inferred-types: 0.37.6(happy-dom@8.9.0)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
+      inferred-types: 0.37.6(happy-dom@12.10.3)(lightningcss@1.32.0)(sass@1.70.0)(terser@5.31.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
