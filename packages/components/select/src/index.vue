@@ -643,7 +643,6 @@ function emitChangeSelect(
   --s-select-quick-width: 24px;
   display: inline-flex;
   width: 316px;
-  height: 100%;
   min-height: var(--s-select-min-height);
   align-items: stretch;
   vertical-align: bottom;
