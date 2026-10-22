@@ -1,7 +1,14 @@
 <template>
   <div class="s-title" :class="titleClass" :style="titleStyle" v-bind="$attrs">
-    <div class="s-title__top" :class="parseClass">
-      <div class="s-title__main" :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }">
+    <div
+      class="s-title__top"
+      :class="[parseClass, { 's-title__top--sub-bottom': mergedProps.subTitlePosition === 'bottom' }]"
+    >
+      <div
+        class="s-title__main"
+        :class="{ 's-title__main--sub-bottom': mergedProps.subTitlePosition === 'bottom' }"
+        :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }"
+      >
         <span v-if="hasIcon" class="s-title__slot-icon-wrapper">
           <slot name="icon">
             <s-icon
@@ -44,7 +51,7 @@
             />
           </slot>
         </component>
-        <span v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subAttrs">
+        <span v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subTitleAttrs">
           {{ mergedProps.subTitle }}
         </span>
         <span v-if="$slots.default" class="s-title__content">
@@ -87,7 +94,8 @@ interface TitleProps {
   size?: TitleSize
   fs?: string | number
   subTitle?: string
-  subAttrs?: Record<string, any>
+  subTitlePosition?: 'inline' | 'bottom'
+  subTitleAttrs?: Record<string, any>
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
   inner?: boolean
@@ -142,7 +150,8 @@ const props = withDefaults(defineProps<TitleProps>(), {
   size: 'default',
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
   subTitle: '',
-  subAttrs: () => ({}),
+  subTitlePosition: 'inline',
+  subTitleAttrs: () => ({}),
   showTooltip: true,
   tooltipAttrs: () => ({}),
   inner: false,
@@ -300,6 +309,10 @@ const hasIcon = computed(() => {
     }
   }
 
+  .s-title__top--sub-bottom {
+    align-items: flex-start;
+  }
+
   .s-title__form-left {
     padding: 0 0 8px;
     margin: 0 0 16px;
@@ -353,6 +366,20 @@ const hasIcon = computed(() => {
     letter-spacing: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  .s-title__main--sub-bottom {
+    flex-wrap: wrap;
+    column-gap: var(--s-title-gap, 8px);
+    row-gap: 6px;
+
+    .s-title__content {
+      order: 1;
+    }
+
+    .s-title__subTitle {
+      order: 2;
+      flex: 0 0 100%;
+    }
   }
 }
 </style>

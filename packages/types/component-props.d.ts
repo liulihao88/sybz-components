@@ -1062,7 +1062,9 @@ export interface STitleProps {
   size?: SybzComponentSize
   fs?: number | SybzComponentSize | `${number}px`
   subTitle?: string
-  subAttrs?: SybzRecord
+  /** 副标题位置：inline 与标题同行，bottom 在标题下方独占一行 */
+  subTitlePosition?: 'inline' | 'bottom'
+  subTitleAttrs?: SybzRecord
   showTooltip?: boolean
   tooltipAttrs?: SybzRecord
   inner?: boolean

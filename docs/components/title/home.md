@@ -58,33 +58,40 @@ title/fs
 title/iconAttrs
 :::
 
+### 副标题位置（subTitlePosition 默认值：inline）
+
+:::demo `sub-title-position="bottom"` 将副标题放在主标题下方，适合任务编号、状态摘要等说明文字；默认 `inline` 与主标题同行。基础写法：`<s-title title="任务标题" sub-title="任务摘要" sub-title-position="bottom" />`。属性：`subTitle` 类型 `string`，默认值 `''`；`subTitlePosition` 可选 `inline / bottom`，默认值 `inline`；`subTitleAttrs` 类型 `object`，默认值 `{}`；示例还使用 `type="simple"`（`type` 默认值 `''`，可选 `'' / simple / icon / form`）和 `fs="24"`（`fs` 默认值 `undefined`，可选数字、px 字符串或 `small / default / large`）。
+title/subTitlePosition
+:::
+
 ### 属性
 
-|     属性名     | 说明                                                                                                                                                          | 类型            | 默认值    |
-| :------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------- |
-|    `title`     | 主标题文案                                                                                                                                                    | string          | `''`      |
-|     `icon`     | 左侧图标，写法与 `s-icon` 的 `icon` 属性一致，支持 Element Plus、Iconify、CSS class、在线图片、Emoji 和 Vue 图标组件；设置后自动隐藏左侧竖条；`icon` 插槽优先 | SIconValue      | `''`      |
-|  `iconAttrs`   | 透传给左侧 `s-icon` 的属性，可设置 `icon`、`size`、`color`、`rotate`、`cursor` 等；插槽图标不受影响                                                           | object          | `{}`      |
-|    `extra`     | 右侧操作区文本，`extra` 插槽优先于该属性                                                                                                                      | string          | `''`      |
-|     `size`     | 尺寸，支持 `small` / `default` / `large`                                                                                                                      | string          | `default` |
-|      `fs`      | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |
-|   `subTitle`   | 副标题文案                                                                                                                                                    | string          | `''`      |
-|   `subAttrs`   | 副标题额外属性                                                                                                                                                | object          | `{}`      |
-| `showTooltip`  | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
-| `tooltipAttrs` | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |
-|    `inner`     | 是否使用内部缩进                                                                                                                                              | boolean         | `false`   |
-|    `margin`    | 外边距，支持 CSS margin 简写                                                                                                                                  | string / number | `''`      |
-|     `gap`      | 标题内部间距，控制图标、标题、副标题、右侧区域间距；图标尺寸变化时自动重新布局                                                                                | string / number | `''`      |
-|    `width`     | 组件宽度，数字自动按 px 处理                                                                                                                                  | string / number | `''`      |
-|      `t`       | 上边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
-|      `b`       | 下边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
-|      `l`       | 左边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
-|      `tb`      | 同时设置上下边距，兼容快捷写法，优先级高于 `margin`                                                                                                           | string / number | -         |
-|    `height`    | 组件高度                                                                                                                                                      | string / number | `''`      |
-|     `type`     | 标题样式类型，支持 `''` / `icon` / `simple` / `form`                                                                                                          | string          | `''`      |
-|    `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                                                                                                | string          | `default` |
-|     `tag`      | 标题标签，支持 `div` / `h1` / `h2` / `h3` / `h4` / `h5` / `h6`                                                                                                | string          | `div`     |
-|    `level`     | 非原生标题标签的无障碍标题层级，支持 `1` 到 `6`                                                                                                               | number          | `3`       |
+|       属性名       | 说明                                                                                                                                                          | 类型            | 默认值    |
+| :----------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------- |
+|      `title`       | 主标题文案                                                                                                                                                    | string          | `''`      |
+|       `icon`       | 左侧图标，写法与 `s-icon` 的 `icon` 属性一致，支持 Element Plus、Iconify、CSS class、在线图片、Emoji 和 Vue 图标组件；设置后自动隐藏左侧竖条；`icon` 插槽优先 | SIconValue      | `''`      |
+|    `iconAttrs`     | 透传给左侧 `s-icon` 的属性，可设置 `icon`、`size`、`color`、`rotate`、`cursor` 等；插槽图标不受影响                                                           | object          | `{}`      |
+|      `extra`       | 右侧操作区文本，`extra` 插槽优先于该属性                                                                                                                      | string          | `''`      |
+|       `size`       | 尺寸，支持 `small` / `default` / `large`                                                                                                                      | string          | `default` |
+|        `fs`        | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |
+|     `subTitle`     | 副标题文案                                                                                                                                                    | string          | `''`      |
+| `subTitlePosition` | 副标题位置，`inline` 与标题同行，`bottom` 在标题下方独占一行                                                                                                  | string          | `inline`  |
+|  `subTitleAttrs`   | 副标题额外属性                                                                                                                                                | object          | `{}`      |
+|   `showTooltip`    | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
+|   `tooltipAttrs`   | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |
+|      `inner`       | 是否使用内部缩进                                                                                                                                              | boolean         | `false`   |
+|      `margin`      | 外边距，支持 CSS margin 简写                                                                                                                                  | string / number | `''`      |
+|       `gap`        | 标题内部间距，控制图标、标题、副标题、右侧区域间距；图标尺寸变化时自动重新布局                                                                                | string / number | `''`      |
+|      `width`       | 组件宽度，数字自动按 px 处理                                                                                                                                  | string / number | `''`      |
+|        `t`         | 上边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
+|        `b`         | 下边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
+|        `l`         | 左边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
+|        `tb`        | 同时设置上下边距，兼容快捷写法，优先级高于 `margin`                                                                                                           | string / number | -         |
+|      `height`      | 组件高度                                                                                                                                                      | string / number | `''`      |
+|       `type`       | 标题样式类型，支持 `''` / `icon` / `simple` / `form`                                                                                                          | string          | `''`      |
+|      `theme`       | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                                                                                                | string          | `default` |
+|       `tag`        | 标题标签，支持 `div` / `h1` / `h2` / `h3` / `h4` / `h5` / `h6`                                                                                                | string          | `div`     |
+|      `level`       | 非原生标题标签的无障碍标题层级，支持 `1` 到 `6`                                                                                                               | number          | `3`       |
 
 ### 插槽
 
