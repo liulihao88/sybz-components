@@ -36,6 +36,7 @@ interface IconProps {
   borderRadius?: string | number
   cursor?: SIconCursor
   hoverAnimation?: boolean
+  highlight?: boolean
   shadow?: 'always' | 'never' | 'hover'
   disabled?: boolean
   theme?: SybzComponentTheme
@@ -57,6 +58,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   borderRadius: '',
   cursor: 'pointer',
   hoverAnimation: false,
+  highlight: false,
   shadow: 'never',
   disabled: false,
   theme: 'default',
@@ -132,11 +134,22 @@ const isEmoji = computed(
 
 const resolvedIcon = computed(() => resolveIconValue(mergedProps.value.icon))
 
+/**
+ * 高亮只在“默认色 + 矢量图标”时改成主题色；
+ * 语义色图标要保留自己的颜色（warning 还是 warning、danger 还是 danger），
+ * 图片和 Emoji 靠 color 改不动，同样走同色系加深。
+ */
+const isHighlightColorMode = computed(
+  () => (!mergedProps.value.type || mergedProps.value.type === 'default') && !isRemoteImage.value && !isEmoji.value,
+)
+
 const iconClasses = computed(() => [
   mergedProps.value.theme !== 'default' && `s-icon--${mergedProps.value.theme}`,
   mergedProps.value.type && `s-icon--${mergedProps.value.type}`,
   mergedProps.value.type && `s-icon--${mergedProps.value.variant}`,
   mergedProps.value.hoverAnimation && 's-icon--hover-animation',
+  mergedProps.value.highlight && 's-icon--highlight',
+  mergedProps.value.highlight && isHighlightColorMode.value && 's-icon--highlight-color',
   mergedProps.value.shadow === 'always' && 's-icon--shadow-always',
   mergedProps.value.shadow === 'hover' && 's-icon--shadow-hover',
   mergedProps.value.disabled && 's-icon__not-allowed',
@@ -218,6 +231,27 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
   transition:
     top 0.2s ease,
     box-shadow 0.2s ease;
+
+  // 鼠标移入高亮：只改线条，不动背景、圆角和尺寸。
+  &--highlight:not(.s-icon__not-allowed) {
+    transition:
+      top 0.2s ease,
+      color 0.2s ease,
+      filter 0.2s ease,
+      box-shadow 0.2s ease;
+
+    // 语义色图标和图片 / Emoji：保持自己的颜色，同色系加深一档。
+    &:hover {
+      filter: var(--s-icon-hover-filter, brightness(0.85));
+    }
+
+    // 默认色矢量图标：线条变成主题色，类似把 type 从 default 换成 primary。
+    &.s-icon--highlight-color:hover {
+      --s-icon-color: var(--s-icon-hover-color, var(--s-gl-primary, var(--el-color-primary)));
+      color: var(--s-icon-hover-color, var(--s-gl-primary, var(--el-color-primary)));
+      filter: none;
+    }
+  }
 
   &--shadow-always {
     box-shadow: var(--s-icon-shadow, var(--el-box-shadow-light));

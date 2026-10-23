@@ -599,6 +599,8 @@ export interface SIconProps extends SHtmlStringProps {
   cursor?: SIconCursor
   /** 鼠标移入时是否启用轻微上浮动画；默认值：false */
   hoverAnimation?: boolean
+  /** 鼠标移入高亮：默认色矢量图标线条变主题主色，语义色图标和图片 / Emoji 同色系加深；默认值：false */
+  highlight?: boolean
   /** 阴影显示时机，语义同 s-card；默认值：never */
   shadow?: 'always' | 'never' | 'hover'
   /** 图标旋转角度，数字及数字字符串按 deg 处理 */

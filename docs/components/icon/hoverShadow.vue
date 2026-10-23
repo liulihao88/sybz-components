@@ -13,6 +13,7 @@ const shadowOptions = ['always', 'never', 'hover']
       <s-switch v-model="hoverAnimation" active-text="开启动画" inactive-text="关闭动画" />
     </div>
 
+    <s-icon icon="delete" :shadow="shadow" :hover-animation="hoverAnimation" size="28"></s-icon>
     <s-icon
       icon="tabler:trash"
       type="primary"

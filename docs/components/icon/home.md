@@ -255,6 +255,29 @@ icon/dimensions
 
 `height="100%"` 相对直接父容器计算，需要父容器有可解析的高度。示例让表单字段容器具有 `40px` 高度，输入框和图标都设置 `height="100%"`，图标自动成为 `40 × 40` 的正方形。父容器仅由内容撑高时，不能仅凭 `100%` 自动跟随整个表单高度。显式宽高包含背景内边距和边框。
 
+### 鼠标移入高亮（highlight 默认值：false）
+
+:::demo 展示鼠标移入时的高亮效果。基础写法：`<s-icon icon="tabler:trash" highlight></s-icon>`。属性：`highlight` 可选值 `true / false`，默认值 `false`；开启后鼠标移入时图标线条高亮，默认色图标的线条变成主题主色，语义色图标保持自己的颜色并加深一档，背景色、圆角和尺寸都不变；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`variant` 可选 `plain / light / solid`，默认值 `plain`；`disabled` 可选值 `true / false`，默认值 `false`，禁用状态下不会高亮。
+icon/highlight
+:::
+
+`highlight` 有两种高亮方式，保证警告色、错误色不会被换成主题色：
+
+| 图标情况                                                      | 高亮表现                                                                  | 可覆盖的变量            |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------- |
+| 默认色矢量图标（未设置 `type` 或 `type="default"`）           | 线条变成主题主色，类似把 `type` 从 `default` 换成 `primary`               | `--s-icon-hover-color`  |
+| 已设置语义色（`primary / success / warning / danger / info`） | 保持自己的颜色，只做同色系加深，`warning` 还是警告色、`danger` 还是错误色 | `--s-icon-hover-filter` |
+| 在线图片、Emoji（`color` 对它们无效）                         | 同色系加深                                                                | `--s-icon-hover-filter` |
+
+`--s-icon-hover-color` 默认取主题主色：Element Plus 下是 `--el-color-primary`，成华、石景山、sybz 会替换为各自的品牌主色，鼓楼主题取 `--s-gl-primary`。`--s-icon-hover-filter` 默认是 `brightness(0.85)`，觉得加深不够明显可以改成 `brightness(0.75)` 或 `saturate(1.3) brightness(0.9)`：
+
+```vue
+<s-icon icon="tabler:trash" highlight style="--s-icon-hover-color: var(--el-color-danger)" />
+<s-icon icon="tabler:bell" type="warning" highlight style="--s-icon-hover-filter: saturate(1.3) brightness(0.9)" />
+```
+
+两种方式都只改线条，所以 `highlight` 可以和 `hoverAnimation`、`shadow="hover"` 随意组合，三个 Hover 效果互不覆盖；禁用状态（`disabled`）下不会触发。
+
 ### 属性
 
 |           属性名           | 说明                                                                      | 类型            | 默认值    |
@@ -267,6 +290,7 @@ icon/dimensions
 |       `borderRadius`       | 背景圆角，数字自动补 `px`，显式设置时覆盖主题圆角                         | string / number | `8px`     |
 |          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                              | SIconCursor     | `pointer` |
 |      `hoverAnimation`      | 鼠标移入时是否启用轻微上浮动画                                            | boolean         | `false`   |
+|        `highlight`         | 鼠标移入高亮：默认色图标线条变主题色，语义色图标同色系加深                | boolean         | `false`   |
 |          `shadow`          | 阴影显示时机，可选 `always / never / hover`                               | string          | `never`   |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                               | string / number | `''`      |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                              | boolean         | `false`   |

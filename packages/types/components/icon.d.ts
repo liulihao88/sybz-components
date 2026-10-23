@@ -10,7 +10,7 @@ import type {
 } from '../component-props'
 
 /**
- * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
+ * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标移入高亮、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
  *
  * 先提示 sybz 自身属性。
  */
@@ -36,6 +36,8 @@ declare const SIcon: {
       cursor?: SIconCursor
       /** 鼠标移入时是否启用轻微上浮动画；默认值：false */
       hoverAnimation?: boolean
+      /** 鼠标移入高亮：默认色矢量图标线条变主题主色，语义色图标和图片 / Emoji 同色系加深；默认值：false */
+      highlight?: boolean
       /** 阴影显示时机，语义同 s-card；默认值：never */
       shadow?: 'always' | 'never' | 'hover'
       /** 图标旋转角度，数字及数字字符串按 deg 处理 */
