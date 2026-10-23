@@ -159,6 +159,8 @@ dialog/height
 |      confirm      | 绑定确认按钮的方法, 与方法的区别是, 可以使用属性绑定异步事件而直接让确认按钮加载loading       | Function                                      | -         |
 |     fillSlot      | 是否让默认slot内容区撑满dialog body高度, 并由slot内部自行处理滚动                             | boolean                                       | false     |
 
+回车确认（`enableConfirm` 默认 `true`）在以下场景不会触发，避免误确认：输入法组词中的回车；`textarea`、`contenteditable` 中用于换行的回车；按钮、链接等自身有回车行为的元素上按下回车；`s-select`、日期面板等弹层展开时的回车。业务代码在回车事件上调用 `preventDefault()` 后同样不会触发确认。
+
 ### 方法
 
 | 属性名  | 说明           | 类型     |

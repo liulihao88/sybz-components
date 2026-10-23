@@ -102,6 +102,8 @@ form/render
 form/event
 :::
 
+`s-form` 的根节点是 Element Plus 的 `el-form`（原生 `<form>`），组件内部已默认阻止原生 `submit` 的页面跳转，避免表单内输入框回车触发整页刷新（例如在 `s-dialog` 中新建数据时弹窗被刷新关闭）。内部只调用 `event.preventDefault()`，不阻止事件冒泡，通过 `@submit` 传入的监听仍会正常触发。
+
 ### 通常用法
 
 :::demo 展示事件监听。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`。

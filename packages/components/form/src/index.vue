@@ -556,6 +556,7 @@ defineExpose({
 </script>
 
 <template>
+  <!-- 受控表单：默认阻止原生 submit 跳转，$attrs 中的 @submit 监听仍会触发 -->
   <el-form
     ref="sFormRef"
     :model="formModel"
@@ -563,6 +564,7 @@ defineExpose({
     class="s-form"
     :class="formClass"
     :style="formStyle"
+    @submit.prevent
   >
     <template v-for="(v, i) in formItems" :key="getFieldProp(v) || i">
       <div v-if="parseIsShow(v, i) && isTitleItem(v)" class="s-form__title-item">

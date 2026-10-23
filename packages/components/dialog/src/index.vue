@@ -370,26 +370,47 @@ function handleClose() {
   emits('update:modelValue', false)
 }
 
-// 只有当弹框的时候, 且按的是回车键, 才走confirm
-function onkeypress({ code }: KeyboardEvent) {
-  if (
-    mergedProps.value.modelValue === true &&
-    code === 'Enter' &&
-    mergedProps.value.enableConfirm &&
-    !confirmButtonLoading.value
-  ) {
-    confirmHandler()
+// 这些元素自身有回车行为(换行、按钮/链接激活), 回车时不再触发确认
+const ENTER_SELF_HANDLED_SELECTOR = 'textarea, button, a[href], input[type="submit"], input[type="button"]'
+
+// 下拉框、日期面板、自动补全等弹层展开时, 回车用于选中选项, 不再触发确认
+function hasOpenPopper() {
+  return Array.from(document.querySelectorAll<HTMLElement>('.el-popper')).some(
+    (el) => el.style.display !== 'none' && el.getClientRects().length > 0,
+  )
+}
+
+// 只有当弹框打开时, 且按的是回车键, 且回车没有被输入框、按钮、展开的弹层等占用时, 才走confirm
+// 用 keydown 而不是 keypress: 输入法组词状态(isComposing)在 keydown 上更可靠, 且能识别业务代码的 preventDefault
+function onkeydown(event: KeyboardEvent) {
+  if (mergedProps.value.modelValue !== true || event.code !== 'Enter') {
+    return
   }
+  if (!mergedProps.value.enableConfirm || confirmButtonLoading.value) {
+    return
+  }
+  // 输入法组词中的回车、已被业务代码阻止默认行为的回车不触发确认
+  if (event.defaultPrevented || event.isComposing || event.keyCode === 229) {
+    return
+  }
+  const target = event.target instanceof HTMLElement ? event.target : null
+  if (target && (target.isContentEditable || target.closest(ENTER_SELF_HANDLED_SELECTOR))) {
+    return
+  }
+  if (hasOpenPopper()) {
+    return
+  }
+  confirmHandler()
 }
 
 const panelComponent = computed(() => (isDrawer.value ? 'el-drawer' : 'el-dialog'))
 
 onMounted(() => {
-  document.addEventListener('keypress', onkeypress)
+  document.addEventListener('keydown', onkeydown)
 })
 
 onBeforeUnmount(() => {
-  document.removeEventListener('keypress', onkeypress)
+  document.removeEventListener('keydown', onkeydown)
 })
 </script>
 
