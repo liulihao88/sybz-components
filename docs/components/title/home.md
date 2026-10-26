@@ -22,7 +22,7 @@ title/theme
 
 ### 通常用法
 
-:::demo 展示属性、标题插槽、追加内容和语义化标题。基础写法：`<s-title title="左侧" width="320" margin="10px 0" l="10"></s-title>`。属性：`icon` 类型 `SIconValue`，默认值 `''`，写法与 `s-icon` 的 `icon` 属性一致，设置后自动隐藏左侧竖条；`extra` 类型 `string`，默认值 `''`；`size` 可选 `small / default / large`，默认值 `default`；`width` 类型 `string / number`，默认值 `''`，数字自动按 `px` 处理；`margin` 类型 `string / number`，默认值 `''`；`gap` 类型 `string / number`，默认值 `''`；`tag` 可选 `div / h1 / h2 / h3 / h4 / h5 / h6`，默认值 `div`；`level` 可选 `1 / 2 / 3 / 4 / 5 / 6`，默认值 `3`。
+:::demo 展示属性、标题插槽、追加内容和语义化标题。基础写法：`<s-title title="左侧" width="320" my="10" ml="10"></s-title>`。属性：`icon` 类型 `SIconValue`，默认值 `''`，写法与 `s-icon` 的 `icon` 属性一致，设置后自动隐藏左侧竖条；`extra` 类型 `string`，默认值 `''`；`size` 可选 `small / default / large`，默认值 `default`；`width` 类型 `string / number`，默认值 `''`，数字自动按 `px` 处理；`my`、`ml` 类型 `string / number`，默认值未设置，数字自动按 `px` 处理；`gap` 类型 `string / number`，默认值 `''`；`tag` 可选 `div / h1 / h2 / h3 / h4 / h5 / h6`，默认值 `div`；`level` 可选 `1 / 2 / 3 / 4 / 5 / 6`，默认值 `3`。
 title/usually
 :::
 
@@ -66,18 +66,15 @@ title/subTitlePosition
 |   `showTooltip`    | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
 |   `tooltipAttrs`   | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |
 |      `inner`       | 是否使用内部缩进                                                                                                                                              | boolean         | `false`   |
-|      `margin`      | 外边距，支持 CSS margin 简写                                                                                                                                  | string / number | `''`      |
 |       `gap`        | 标题内部间距，控制图标、标题、副标题、右侧区域间距；图标尺寸变化时自动重新布局                                                                                | string / number | `''`      |
 |      `width`       | 组件宽度，数字自动按 px 处理                                                                                                                                  | string / number | `''`      |
-|        `t`         | 上边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
-|        `b`         | 下边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
-|        `l`         | 左边距，兼容快捷写法，优先级高于 `margin`                                                                                                                     | string / number | `''`      |
-|        `tb`        | 同时设置上下边距，兼容快捷写法，优先级高于 `margin`                                                                                                           | string / number | -         |
 |      `height`      | 组件高度                                                                                                                                                      | string / number | `''`      |
 |       `type`       | 标题样式类型，支持 `''` / `icon` / `simple` / `form`                                                                                                          | string          | `''`      |
 |      `theme`       | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                                                                                                | string          | `default` |
 |       `tag`        | 标题标签，支持 `div` / `h1` / `h2` / `h3` / `h4` / `h5` / `h6`                                                                                                | string          | `div`     |
 |      `level`       | 非原生标题标签的无障碍标题层级，支持 `1` 到 `6`                                                                                                               | number          | `3`       |
+
+外边距使用通用样式属性 `m / mt / mb / ml / mr / mx / my`，内边距使用 `p / pt / pb / pl / pr / px / py`。
 
 ### 插槽
 

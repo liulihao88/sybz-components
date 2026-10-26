@@ -81,8 +81,8 @@ watch(value, (val) => {
     <s-select v-model="selectVal" title="有禁用状态" :options="baseOptions" show-prefix></s-select>
     <s-select v-model="selectVal" title="快速切换2" width="200" :options="baseOptions" show-prefix />
 
-    <s-title title="禁用状态, 可清空" sub-title="disabled, clearable" t="10"></s-title>
-    <s-title title="自定义下拉框菜单的头部和底部" sub-title="slot 中的header 和 footer" t="10"></s-title>
+    <s-title title="禁用状态, 可清空" sub-title="disabled, clearable" mt="10"></s-title>
+    <s-title title="自定义下拉框菜单的头部和底部" sub-title="slot 中的header 和 footer" mt="10"></s-title>
     <s-select
       v-model="selectVal"
       :options="baseOptions"

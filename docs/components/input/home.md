@@ -90,7 +90,7 @@ input/search
 
 ### 上边框标题 `top-title`（默认值：空字符串）
 
-使用 `top-title` 将标题嵌入输入框上边框，由边框为文字留出缺口，无须额外背景色；原有 `title` 仍显示在左侧前缀。基础写法：`<s-input v-model="maxValue" top-title="X 最大值" width="300" />`。
+使用 `top-title` 将标题嵌入输入框上边框，由边框为文字留出缺口，禁用时也会保留缺口；原有 `title` 仍显示在左侧前缀。基础写法：`<s-input v-model="maxValue" top-title="X 最大值" width="300" />`。
 
 :::demo 属性：`top-title` 类型 `string`，默认值 `''`；`width` 类型 `string / number`，默认值 `100%`。
 input/top-title

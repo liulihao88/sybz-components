@@ -1136,14 +1136,9 @@ export interface STitleProps {
   showTooltip?: boolean
   tooltipAttrs?: SybzRecord
   inner?: boolean
-  margin?: string | number
   gap?: string | number
   width?: string | number
   w?: string | number
-  t?: string | number
-  b?: string | number
-  l?: string | number
-  tb?: string | number
   height?: string | number
   h?: string | number
   type?: '' | 'simple' | 'icon' | 'form'

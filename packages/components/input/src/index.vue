@@ -502,7 +502,15 @@ const mergedStyle = computed(() => {
     box-shadow: none;
   }
 
+  &.s-input--top-title :deep(.el-input.is-disabled .el-input__wrapper) {
+    box-shadow: none;
+  }
+
   &.s-input--top-title :deep(.el-textarea__inner) {
+    box-shadow: none;
+  }
+
+  &.s-input--top-title :deep(.el-textarea.is-disabled .el-textarea__inner) {
     box-shadow: none;
   }
 

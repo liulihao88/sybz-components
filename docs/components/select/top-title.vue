@@ -10,4 +10,5 @@ const options = [
 
 <template>
   <s-select v-model="value" :options="options" top-title="显示" :show-quick="false" width="300" />
+  <s-select v-model="value" :options="options" top-title="显示" disabled width="300" />
 </template>

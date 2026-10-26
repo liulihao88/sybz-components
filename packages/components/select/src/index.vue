@@ -701,6 +701,10 @@ function emitChangeSelect(
 
     &.is-disabled {
       --s-top-title-border-color: var(--el-disabled-border-color);
+
+      :deep(.el-select__wrapper) {
+        box-shadow: none;
+      }
     }
 
     &.s-select--empty-highlighted {

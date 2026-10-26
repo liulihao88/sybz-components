@@ -100,14 +100,9 @@ interface TitleProps {
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
   inner?: boolean
-  margin?: string | number
   gap?: string | number
   width?: string | number
   w?: string | number
-  t?: string | number
-  b?: string | number
-  l?: string | number
-  tb?: string | number
   height?: string | number
   h?: string | number
   type?: TitleType
@@ -156,13 +151,8 @@ const props = withDefaults(defineProps<TitleProps>(), {
   showTooltip: true,
   tooltipAttrs: () => ({}),
   inner: false,
-  margin: '',
   gap: '',
   width: '',
-  t: '',
-  b: '',
-  l: '',
-  tb: undefined,
   height: '',
   type: '',
   theme: 'default',
@@ -174,27 +164,11 @@ const slots = useSlots()
 const { style } = useStyleProps()
 
 const titleStyle = computed(() => {
-  const { size, fs, margin, gap, width, t, b, l, tb, height } = mergedProps.value
+  const { size, fs, gap, width, height } = mergedProps.value
   const style: CSSProperties = {}
 
-  if (margin) {
-    style.margin = String(margin)
-  }
   if (width) {
     style.width = processWidth(width, true)
-  }
-  if (tb) {
-    style.marginTop = processWidth(tb, true)
-    style.marginBottom = processWidth(tb, true)
-  }
-  if (t) {
-    style.marginTop = processWidth(t, true)
-  }
-  if (b) {
-    style.marginBottom = processWidth(b, true)
-  }
-  if (l) {
-    style.marginLeft = processWidth(l, true)
   }
   if (height) {
     style.height = processWidth(height, true)

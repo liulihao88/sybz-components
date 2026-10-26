@@ -461,13 +461,13 @@ declare module 'vue' {
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
      *
-     * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
+     * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
      */
     STitle: (typeof import('./types/components/title'))['default']
     /**
      * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
      *
-     * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
+     * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
      */
     's-title': (typeof import('./types/components/title'))['default']
     /**

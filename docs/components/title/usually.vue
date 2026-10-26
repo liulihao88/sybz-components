@@ -4,7 +4,7 @@
     <s-title title="显示左侧树杠" sub-title="我不好"></s-title>
     <s-title title="无左侧树杠" type="simple"></s-title>
     <s-title title="form表单的类型" type="form"></s-title>
-    <s-title title="小尺寸标题" size="small" margin="12px 0 0"></s-title>
+    <s-title title="小尺寸标题" size="small" mt="12"></s-title>
     <s-title title="大尺寸标题" size="large" sub-title="统一控制标题和副标题字号" gap="12"></s-title>
     <s-title sub-title="我不服啊" type="simple">
       <template #title>title的slot</template>
@@ -23,7 +23,7 @@
     <s-title title="原生二级标题" tag="h1"></s-title>
 
     <s-title title="修改竖条颜色" type="icon" :style="{ '--lc': 'red' }"></s-title>
-    <s-title title="左侧" margin="10px 0" l="10">
+    <s-title title="左侧" my="10" ml="10">
       <span class="m-l-16">标题后内容</span>
       <template #extra>
         <el-button type="primary">右侧的button</el-button>

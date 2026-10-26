@@ -143,5 +143,12 @@
       background: var(--s-#{$token-prefix}-disabled-bg);
       box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.08) inset;
     }
+
+    &.s-input--top-title {
+      .el-input.is-disabled .el-input__wrapper,
+      .el-textarea.is-disabled .el-textarea__inner {
+        box-shadow: none;
+      }
+    }
   }
 }

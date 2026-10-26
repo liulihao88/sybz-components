@@ -128,7 +128,7 @@ select/emptyPlaceholder
 
 ### 上边框标题 `top-title`（默认值：空字符串）
 
-使用 `top-title` 将标题嵌入选择框上边框；原有 `title` 仍显示在左侧前缀。基础写法：`<s-select v-model="value" :options="options" top-title="显示" :show-quick="false" width="300" />`。
+使用 `top-title` 将标题嵌入选择框上边框，禁用时也会保留文字缺口；原有 `title` 仍显示在左侧前缀。基础写法：`<s-select v-model="value" :options="options" top-title="显示" :show-quick="false" width="300" />`。
 
 :::demo 属性：`top-title` 类型 `string`，默认值 `''`；`options` 类型 `array`，默认值 `[]`；`show-quick` 可选 `true / false`，默认值 `true`；`width` 类型 `string / number`，默认值 `''`。
 select/top-title

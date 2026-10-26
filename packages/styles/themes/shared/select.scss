@@ -136,6 +136,10 @@
         cursor: not-allowed;
       }
 
+      &.s-select--top-title .el-select__wrapper {
+        box-shadow: none;
+      }
+
       .el-select__placeholder,
       .el-select__selected-item,
       .el-select__caret,

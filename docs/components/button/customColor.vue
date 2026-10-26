@@ -5,7 +5,7 @@ const isDark = ref(false)
 </script>
 
 <template>
-  <s-title title="是否使用深色模式" b="24">
+  <s-title title="是否使用深色模式" mb="24">
     <s-radio v-model="isDark" :options="[true, false]" />
   </s-title>
   <el-space wrap>
