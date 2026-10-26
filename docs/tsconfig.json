@@ -14,7 +14,8 @@
     "skipLibCheck": true,
     "jsx": "preserve",
     "paths": {
-      "@/*": ["../packages/*"]
+      "@/*": ["../packages/*"],
+      "@docs/*": ["./*"]
     },
     "types": [
       "vite/client",

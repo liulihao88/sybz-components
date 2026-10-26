@@ -557,6 +557,11 @@ export default defineConfig({
     },
   },
   vite: {
+    resolve: {
+      alias: {
+        '@docs': fileURLToPath(new URL('..', import.meta.url)),
+      },
+    },
     plugins: [
       sybzVitePlugins({
         codeInspector: true,
