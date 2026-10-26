@@ -20,7 +20,7 @@
 ## 取值规则
 
 - 长度类（`m`/`p`/`w`/`h`/`fs`/`br` 等）：
-  - T-shirt token：`xs`(8px) `sm`(12px) `md`(16px) `lg`(20px) `xl`(24px)，如 `pl="sm"` → `padding-left:12px`。
+  - 尺寸 token：`small`(8px) `default`(16px) `large`(24px)，如 `pl="small"` → `padding-left:8px`。
   - 数字自动补 `px`；字符串交给 `processWidth`（`"10"`→`10px`，`"1rem"` 原样，`"50%"` 原样）。
 - `lh`：数字保持无单位（`1.5` 就是 `1.5`）；字符串原样。
 - `inset`：支持 token 和数字（补 `px`），多值字符串原样。

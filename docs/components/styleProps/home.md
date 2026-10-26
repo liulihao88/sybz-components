@@ -72,21 +72,20 @@
 |   `bdr`   | `border-right`  | —                  |
 |   `br`    | `border-radius` | 数字补 `px`        |
 
-## T-shirt 尺寸 token
+## 尺寸 token
 
-长度类属性（`m` / `p` / `w` / `h` / `fs` / `br` / `inset` 等）除了数字和 CSS 长度，还支持 T-shirt 尺寸 token，语义化表达间距（8 ~ 24px 均匀递进）：
+长度类属性（`m` / `p` / `w` / `h` / `fs` / `br` / `inset` 等）除了数字和 CSS 长度，还支持组件库统一的尺寸 token（与 `gap` / `size` 一致）：
 
-| token | 对应值 | token | 对应值 |
-| :---: | :----- | :---: | :----- |
-| `xs`  | `8px`  | `lg`  | `20px` |
-| `sm`  | `12px` | `xl`  | `24px` |
-| `md`  | `16px` |   —   | —      |
+|   token   | 对应值 |  token  | 对应值 |
+| :-------: | :----- | :-----: | :----- |
+|  `small`  | `8px`  | `large` | `24px` |
+| `default` | `16px` |    —    | —      |
 
-例如 `pl="sm"` → `padding-left: 12px`，`m="md"` → `margin: 16px`，`br="lg"` → `border-radius: 20px`。
+例如 `pl="small"` → `padding-left: 8px`，`m="default"` → `margin: 16px`，`br="large"` → `border-radius: 24px`。
 
 ## 取值规则
 
-1. **长度类属性**（`m` / `p` / `w` / `h` / `fs` / `br` 等）：支持 T-shirt token（`xs` / `sm` / `md` / `lg` / `xl`）、数字（自动补 `px`）或 CSS 长度字符串——`"10"` → `10px`、`"1rem"` 原样、`"50%"` 原样。
+1. **长度类属性**（`m` / `p` / `w` / `h` / `fs` / `br` 等）：支持尺寸 token（`small` / `default` / `large`）、数字（自动补 `px`）或 CSS 长度字符串——`"10"` → `10px`、`"1rem"` 原样、`"50%"` 原样。
 2. **关键词类属性**（`fw` / `ta` / `tt` / `td` / `ff` / `pos` / `bg` / `c` / `bd` 等）：原样透传。
 3. **`lh`**（行高）：数字保持无单位（`1.5` 就是 `1.5`，不会变 `1.5px`），字符串原样。
 4. **`inset`**：支持 token 和数字（补 `px`，四边同值），多值字符串（如 `"10px 20px"`）原样透传。

@@ -35,17 +35,15 @@ export type { SybzComponentTheme } from '@sybz-components/utils'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 
-/** T-shirt 尺寸 token，用于长度类样式简写（如 `m` / `p` / `fs` / `br`），对应 Mantine 默认 spacing 值。 */
-export type SybzSizeToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-/** 长度类样式值：T-shirt 尺寸 token、数字（自动补 `px`）或任意 CSS 长度字符串。 */
-export type SybzLength = SybzSizeToken | number | (string & {})
+/** 长度类样式值：尺寸 token（`small` / `default` / `large`）、数字（自动补 `px`）或任意 CSS 长度字符串。 */
+export type SybzLength = SybzComponentSize | number | (string & {})
 
 /**
  * Mantine 风格的样式简写属性（Style Props）。
  *
  * 所有 sybz 组件都通过全局 mixin 自动接受这些属性，直接以简写作为 prop 传入，
- * 例如 `<s-flex gap="small" m="10px" fs="14px">`。长度类属性支持 T-shirt 尺寸
- * token（`xs` / `sm` / `md` / `lg` / `xl`），数值会自动补全为 `px`。
+ * 例如 `<s-flex gap="small" m="10px" fs="14px">`。长度类属性支持尺寸 token
+ * （`small` / `default` / `large`，分别对应 8 / 16 / 24px），数值会自动补全为 `px`。
  */
 export interface SybzStyleProps {
   // 内边距与外边距
