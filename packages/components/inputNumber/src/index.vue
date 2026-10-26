@@ -2,7 +2,7 @@
   <div
     class="s-input-number"
     v-bind="mergedProps.subAttrs"
-    :style="[inputNumberStyle, attrs.style as any]"
+    :style="[inputNumberStyle, attrs.style as any, style]"
     :class="inputNumberClass"
   >
     <s-comp-title v-if="mergedProps.title" v-bind="compTitleProps" />
@@ -19,6 +19,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SInputNumber',
@@ -49,6 +50,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   subAttrs: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('inputNumber', props)
+const { style } = useStyleProps()
 
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {

@@ -7,6 +7,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, onUpdated, ref } from '
 import { getType, isEmpty } from '@sybz-components/utils'
 import useCommonProps from '@/hooks/useCommonProps'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { SCommonProps, SybzComponentSize, SybzComponentTheme } from '@/types/component-props'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
 type TagRule = string | number | boolean | any[]
@@ -45,6 +46,7 @@ const props = withDefaults(defineProps<TagProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('tag', props)
 const { commonClass, commonStyle } = useCommonProps(mergedProps)
+const { style } = useStyleProps()
 
 const hasValue = computed(() => !isEmpty(mergedProps.value.value, true))
 const hasOptions = computed(() => mergedProps.value.options.length > 0)
@@ -176,7 +178,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     :type="parseType"
     :size="mergedProps.size || undefined"
     :class="[tagClass, commonClass]"
-    :style="commonStyle"
+    :style="[commonStyle, style]"
   >
     <s-tooltip :content="tooltipContent" :disabled="!isOverflow" :show-slot="false" placement="top">
       <template #trigger>

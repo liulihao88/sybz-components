@@ -13,6 +13,7 @@ import {
   resolveIconValue,
 } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type {
   SIconCursor,
   SIconSource,
@@ -73,6 +74,7 @@ const props = withDefaults(defineProps<IconProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('icon', props)
 const attrs = useAttrs()
+const { style } = useStyleProps()
 const dimensionStyle = computed<CSSProperties>(() => {
   const { width, height } = mergedProps.value
   const hasWidth = width !== undefined && width !== null && width !== ''
@@ -181,12 +183,15 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
     :color="parseColor"
     props.disabled
     :size="mergedProps.size"
-    :style="{
-      ...dimensionStyle,
-      cursor: mergedProps.disabled ? 'not-allowed' : mergedProps.cursor,
-      borderRadius: mergedProps.borderRadius ? processWidth(mergedProps.borderRadius, true) : undefined,
-      transform: parseRotate ? `rotate(${parseRotate})` : undefined,
-    }"
+    :style="[
+      {
+        ...dimensionStyle,
+        cursor: mergedProps.disabled ? 'not-allowed' : mergedProps.cursor,
+        borderRadius: mergedProps.borderRadius ? processWidth(mergedProps.borderRadius, true) : undefined,
+        transform: parseRotate ? `rotate(${parseRotate})` : undefined,
+      },
+      style,
+    ]"
     class="s-icon"
     :class="iconClasses"
     @click="handleClick"

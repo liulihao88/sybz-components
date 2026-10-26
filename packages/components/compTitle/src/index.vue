@@ -3,6 +3,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { useAttrs, computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SCompTitle',
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<CompTitleProps>(), {
   theme: 'default',
 })
 const mergedProps = useGlobalComponentConfig('compTitle', props)
+const { style } = useStyleProps()
 
 const resolvedCompTitleStyle = computed(() => mergedProps.value.compTitleStyle ?? {})
 
@@ -53,7 +55,7 @@ const compTitleClass = computed(() => [
     v-if="mergedProps.title"
     class="s-comp-title"
     :class="compTitleClass"
-    :style="{ ...computedBoxStyle }"
+    :style="[{ ...computedBoxStyle }, style]"
     v-bind="$attrs"
   >
     {{ mergedProps.title }}

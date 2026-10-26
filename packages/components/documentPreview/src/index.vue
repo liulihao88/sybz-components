@@ -2,6 +2,7 @@
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { renderAsync } from 'docx-preview'
 import useSizeAliases from '@/hooks/useSizeAliases'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({ name: 'SDocumentPreview' })
 
@@ -20,6 +21,7 @@ const props = withDefaults(
   { type: 'pdf', height: '600px', width: '100%', download: true },
 )
 const sizeProps = useSizeAliases(props)
+const { style } = useStyleProps()
 
 const failed = ref(false)
 const detectedType = ref<DocumentPreviewType>()
@@ -192,7 +194,7 @@ const frameStyle = computed(() => ({
 </script>
 
 <template>
-  <div class="s-document-preview" :style="frameStyle">
+  <div class="s-document-preview" :style="[frameStyle, style]">
     <div v-if="isPdf && !failed" class="s-document-preview__canvas">
       <iframe :src="src" title="PDF 预览" frameborder="0" @error="activeType = 'word'" />
     </div>

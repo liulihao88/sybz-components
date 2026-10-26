@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import * as sybzUtils from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SBuildTime',
@@ -26,6 +27,8 @@ const props = withDefaults(defineProps<BuildTimeProps>(), {
   emptyText: '未注入',
   inline: false,
 })
+
+const { style } = useStyleProps()
 
 const normalizeBuildTime = (value: unknown) => {
   if (typeof value === 'string' && value) {
@@ -70,7 +73,7 @@ const buildTimes = computed(() => [
 </script>
 
 <template>
-  <div class="s-build-time" :class="{ 'is-inline': inline }">
+  <div class="s-build-time" :class="{ 'is-inline': inline }" :style="style">
     <div v-for="item in buildTimes" :key="item.label" class="s-build-time__item">
       <span class="s-build-time__label">{{ item.label }}</span>
       <span class="s-build-time__value">{{ item.value }}</span>

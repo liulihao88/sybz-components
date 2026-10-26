@@ -1,5 +1,5 @@
 <template>
-  <div class="s-tabs-box" :class="boxClass" :style="boxStyle">
+  <div class="s-tabs-box" :class="boxClass" :style="[boxStyle, style]">
     <el-tabs v-bind="forwardedAttrs" v-model="tabsValue">
       <slot>
         <template v-for="tab in mergedProps.options" :key="tab[mergedProps.value]">
@@ -22,6 +22,7 @@
 import type { STabsSelfProps } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { TabsPropsPublic } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 
@@ -46,6 +47,7 @@ const props = withDefaults(defineProps<STabsSelfProps>(), {
 })
 const emits = defineEmits(['update:modelValue'])
 const mergedProps = useGlobalComponentConfig('tabs', props)
+const { style } = useStyleProps()
 
 const isCapsuleType = computed(() => ['capsule', 'capsule-theme'].includes(mergedProps.value.type as string))
 const isThemeRadiusCapsule = computed(() => mergedProps.value.type === 'capsule-theme')

@@ -2,7 +2,7 @@
   <div
     class="s-table-search"
     :class="[`s-table-search--${mergedProps.theme}`, { 's-table-search--with-actions': hasExtraActions }]"
-    :style="{ '--s-table-search-columns': mergedProps.column }"
+    :style="[{ '--s-table-search-columns': mergedProps.column }, style]"
   >
     <div class="s-table-search__layout">
       <el-form
@@ -75,6 +75,7 @@
 <script setup lang="ts">
 import { computed, ref, useSlots, watch } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type {
   STableSearchEmits,
   STableSearchEvent,
@@ -99,6 +100,7 @@ const props = withDefaults(defineProps<STableSearchProps>(), {
 const emit = defineEmits<STableSearchEmits>()
 const slots = useSlots()
 const mergedProps = useGlobalComponentConfig('tableSearch', props)
+const { style } = useStyleProps()
 
 const form = ref<STableSearchModel>({ ...props.initialValue, ...props.modelValue })
 const fields = computed(() => mergedProps.value.items ?? mergedProps.value.options ?? [])

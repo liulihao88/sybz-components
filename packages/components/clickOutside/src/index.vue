@@ -1,5 +1,5 @@
 <template>
-  <div ref="wrapRef" v-bind="$attrs" class="s-click-outside-box">
+  <div ref="wrapRef" v-bind="$attrs" class="s-click-outside-box" :style="style">
     <slot></slot>
   </div>
 </template>
@@ -8,6 +8,7 @@
 // https://vueuse.org/core/onClickOutside/
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SClickOutside',
@@ -22,6 +23,8 @@ interface ClickOutsideProps {
 const props = withDefaults(defineProps<ClickOutsideProps>(), {
   options: () => ({}),
 })
+
+const { style } = useStyleProps()
 
 const wrapRef = ref(null)
 

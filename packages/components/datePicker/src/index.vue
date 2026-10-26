@@ -4,6 +4,7 @@ import { computed, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import SCompTitle from '@/components/compTitle'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SDatePicker',
@@ -33,6 +34,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   size: '',
 })
 const mergedProps = useGlobalComponentConfig('datePicker', props)
+const { style } = useStyleProps()
 
 const pickerType = computed(() => String(attrs.type || 'date'))
 const isRangeType = computed(() => ['daterange', 'datetimerange', 'monthrange', 'yearrange'].includes(pickerType.value))
@@ -565,7 +567,7 @@ defineExpose({
 </script>
 
 <template>
-  <span class="s-date-picker" :class="rootClass" :style="rootStyle">
+  <span class="s-date-picker" :class="rootClass" :style="[rootStyle, style]">
     <s-comp-title v-bind="compTitleProps"></s-comp-title>
     <el-date-picker ref="datePickerRef" v-bind="mergedAttrs" class="s-date-picker__picker">
       <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">

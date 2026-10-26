@@ -8,6 +8,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { delay, formatBytes, getType } from '@sybz-components/utils'
 import useCommonProps from '@/hooks/useCommonProps'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { SCommonProps } from '@/types/component-props'
 
 defineOptions({
@@ -51,6 +52,7 @@ const props = withDefaults(defineProps<CapacityProgressProps>(), {
   customColor: false,
 })
 const { commonClass, commonStyle } = useCommonProps(props)
+const { style } = useStyleProps()
 function format() {
   if (percentage.value < 0) {
     return '?%'
@@ -186,7 +188,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="s-capacity-progress" :class="commonClass" :style="commonStyle">
+  <div class="s-capacity-progress" :class="commonClass" :style="[commonStyle, style]">
     <s-progress
       ref="progressBoxRef"
       class="progress-box"

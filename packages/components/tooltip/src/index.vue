@@ -1,5 +1,11 @@
 <template>
-  <el-tooltip class="s-tooltip-box" v-bind="mergedTooltipAttrs" :disabled="handleDisabled" :effect="mergedProps.effect">
+  <el-tooltip
+    class="s-tooltip-box"
+    v-bind="mergedTooltipAttrs"
+    :style="style"
+    :disabled="handleDisabled"
+    :effect="mergedProps.effect"
+  >
     <span
       v-if="mergedProps.showSlot"
       ref="textRef"
@@ -44,6 +50,7 @@ import {
 import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'STooltip',
@@ -73,6 +80,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   dangerouslyUseHTMLString: false,
 })
 const mergedProps = useGlobalComponentConfig('tooltip', props)
+const { style } = useStyleProps()
 const ownPropKeys = ['width', 'lineClamp', 'showSlot', 'effect', 'dangerouslyUseHTMLString']
 
 const mergedTooltipAttrs = computed(() => {

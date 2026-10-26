@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import SInput from '@/components/input'
 import SIcon from '@/components/icon'
 import { isEmpty, $toast } from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SInputLabel',
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<InputLabelProps>(), {
   message: '输入有误',
   inputAttrs: () => ({}),
 })
+const { style } = useStyleProps()
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -115,7 +117,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="s-input-box">
+  <div class="s-input-box" :style="style">
     <div class="s-input-box__content">
       <div v-for="(item, index) in labelarr" :key="index" :class="item.isDelete === 0 ? 'disbox' : 'spanbox'">
         <span>{{ item.name || item }}</span>

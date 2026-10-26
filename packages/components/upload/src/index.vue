@@ -2,6 +2,7 @@
   <el-upload
     ref="uploadRef"
     v-bind="uploadAttrs"
+    :style="style"
     :file-list="modelValue"
     :http-request="requestHandler"
     :before-upload="handleBeforeUpload"
@@ -34,6 +35,7 @@ import type {
   UploadUserFile,
 } from 'element-plus'
 import type { SUploadCancel, SUploadRequest, SUploadValidationError } from './type'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SUpload',
@@ -68,6 +70,7 @@ const emit = defineEmits<{
 
 const attrs = useAttrs()
 const slots = useSlots()
+const { style } = useStyleProps()
 const uploadRef = ref<UploadInstance>()
 
 const forwardedSlots = computed(() => Object.fromEntries(Object.entries(slots).filter(([name]) => name !== 'default')))

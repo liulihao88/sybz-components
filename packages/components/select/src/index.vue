@@ -1,7 +1,7 @@
 <template>
   <div
     class="s-select"
-    :style="selectStyle"
+    :style="[selectStyle, style]"
     :class="[
       sizeClass,
       themeClass,
@@ -114,6 +114,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
 
 defineOptions({
@@ -219,6 +220,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   dangerouslyUseHTMLString: false,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
+const { style } = useStyleProps()
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
     title: mergedProps.value.title,

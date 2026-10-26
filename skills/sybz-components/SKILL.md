@@ -14,6 +14,7 @@ license: MIT
 - 组件选择、迁移、示例：[references/components.md](references/components.md)
 - `s-icon`：[references/icon.md](references/icon.md)
 - 工具函数：[references/utils.md](references/utils.md)
+- 样式简写属性（Style Props）：[references/style-props.md](references/style-props.md)
 - 主题：读 [references/themes.md](references/themes.md) 后只读一个目标主题文件。
 
 ## 通用规则
@@ -21,6 +22,7 @@ license: MIT
 - 优先 `sybz-components`，不拆回 Element Plus 子组件；优先 `@sybz-components/utils`，不重复实现通用逻辑。
 - 业务代码需要弹出短暂的成功、失败、警告或信息提示时，统一从 `@sybz-components/utils` 导入并使用 `$toast`；成功用 `$toast('成功')`（默认成功类型），失败用 `$toast('失败', 'e')`。替换已有 `ElMessage` 等同类提示时清理旧 import；确认对话框仍使用 `confirm`。详见 [references/utils.md](references/utils.md)。
 - 只传业务必要属性；不重复默认宽度、空态、分页、样式、尺寸、`clearable` 等默认值，不加无收益的包装、泛型或中间变量。
+- 组件间的间距、字号、颜色、宽高等样式优先用样式简写属性（Style Props）表达，如 `m` / `p` / `fs` / `fw` / `bg` / `c` / `w` / `h` / `bd` 等，避免散落 `:style` 或硬编码 class；用法见 [references/style-props.md](references/style-props.md)。
 - 表单、表格优先配置化；仅在配置无法表达时使用插槽或 `render`。
 - `s-table` 必须默认使用 `columns`；普通列用 `prop`，定制单元格用列 `render`，操作列用 `btns`。只有确认 `columns`、`render`、`btns` 和具名插槽均无法表达需求时，才允许在默认插槽中声明 `el-table-column`，并须在交付说明中写明原因。
 - 样式以组件库为准；仅业务明确要求时保留旧页面像素样式。先检查应用入口是否已通过 `app.use(SybzComponents, { theme: '...' })` 设置全局主题；已设置时，生成的业务组件代码省略重复的 `theme` 属性。只有单个组件需要覆盖全局主题时才显式传 `theme`。主题色使用 token，避免散落硬编码色。

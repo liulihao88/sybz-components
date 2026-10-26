@@ -1,5 +1,5 @@
 <template>
-  <div class="s-radio-box" :class="radioClass">
+  <div class="s-radio-box" :class="radioClass" :style="style">
     <span v-if="mergedProps.title" class="s-radio-box__title" :style="titleStyle">
       {{ mergedProps.title }}
     </span>
@@ -34,6 +34,7 @@ import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import type { RadioItem, RadioOption, RadioOptionValue } from './radio'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SRadio',
@@ -83,6 +84,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('radio', props)
 const attrs = useAttrs()
+const { style } = useStyleProps()
 const titleStyle = computed(() => {
   const style = mergedProps.value.compTitleStyle
   return style?.width ? { ...style, width: processWidth(style.width, true) } : style

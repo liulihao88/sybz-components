@@ -1,5 +1,5 @@
 <template>
-  <div class="s-dialog" :class="componentClass">
+  <div class="s-dialog" :class="componentClass" :style="style">
     <component
       :is="panelComponent"
       v-bind="{
@@ -104,6 +104,7 @@ import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
 import { getType, processWidth } from '@sybz-components/utils'
 import { resolveConfirmSemantic } from '@/utils/src/confirmSemantic'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import SButton from '@/components/button/src/index.vue'
 import STag from '@/components/tag/src/index.vue'
 
@@ -172,6 +173,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   hideHeaderIcon: false,
 })
 const mergedProps = useGlobalComponentConfig('dialog', props)
+const { style } = useStyleProps()
 const isBusinessTheme = computed(() => isSybzTheme(mergedProps.value.theme))
 
 const getThemeClass = computed(() => {

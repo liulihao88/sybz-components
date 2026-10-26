@@ -3,6 +3,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, computed, watch, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SCard',
@@ -61,6 +62,7 @@ defineSlots<{
   icon?: () => any
 }>()
 const mergedProps = useGlobalComponentConfig('card', props)
+const { style } = useStyleProps()
 
 const hasHeader = computed(() =>
   Boolean(slots.header || mergedProps.value.title || mergedProps.value.subTitle || mergedProps.value.extra),
@@ -261,7 +263,7 @@ const handleIconClick = (event) => {
 </script>
 
 <template>
-  <div ref="boxRef" class="s-card" :class="cardClass" :style="boxMergedStyle">
+  <div ref="boxRef" class="s-card" :class="cardClass" :style="[boxMergedStyle, style]">
     <div
       v-if="hasHeader"
       ref="headerRef"

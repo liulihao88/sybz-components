@@ -4,6 +4,7 @@ import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import group_null from '@/assets/images/group_null.png'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SEmpty',
@@ -33,6 +34,7 @@ const props = withDefaults(
 )
 const attrs = useAttrs()
 const mergedProps = useGlobalComponentConfig('empty', props)
+const { style } = useStyleProps()
 const emptyBindProps = computed(() => {
   const {
     description: _description,
@@ -60,7 +62,7 @@ const emptyClass = computed(() => ({
 </script>
 
 <template>
-  <el-empty v-bind="emptyBindProps" class="s-empty" :class="emptyClass">
+  <el-empty v-bind="emptyBindProps" class="s-empty" :style="style" :class="emptyClass">
     <template #image>
       <slot name="image">
         <img

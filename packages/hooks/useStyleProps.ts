@@ -6,8 +6,9 @@ import { processWidth } from '@sybz-components/utils'
  * Mantine 风格的「样式简写属性」(Style Props)。
  *
  * 所有 sybz 组件都通过全局 mixin（见 packages/index.ts）自动接受这些属性，
- * 组件无需逐个声明；在组件内部通过 `useStyleProps()` 或模板中的 `$styleProps`
- * 得到解析后的 CSS 样式对象，绑定到根元素即可。
+ * 并在挂载/更新时自动应用到组件根元素上，组件无需逐个声明、也无需手动接入。
+ * 需要声明式控制时，仍可通过 `useStyleProps()` 或模板中的 `$styleProps` 获取
+ * 解析后的 CSS 样式对象。
  *
  * 数值会自动补全为 `px`（长度类属性），例如 `m={10}` → `margin: 10px`；
  * 关键词类属性（如 `ta`、`pos`、`bg`、`c`）原样透传。
@@ -170,7 +171,13 @@ export const styleProps = Object.fromEntries(
 ) as Record<SybzStylePropKey, { type: unknown }>
 
 /**
- * 全局 mixin：让所有 sybz 组件自动接受样式简写属性，并暴露 `$styleProps` 计算属性。
+ * 全局 mixin：让所有 sybz 组件自动「接受」样式简写属性（无需逐个声明），
+ * 并暴露 `$styleProps` 计算属性（Options API 组件可直接 `:style="$styleProps"`）。
+ *
+ * 注意：mixin 只负责「声明 prop + 计算样式」，无法知道每个组件该把样式挂到哪个
+ * 根元素上（有的组件根是 div，有的是 el-button/tooltip 等包装组件），所以仍需要
+ * 组件在正确的根元素上绑定 `:style`（`<script setup>` 组件用 `useStyleProps()`）。
+ *
  * 在 packages/index.ts 的 install 中通过 app.mixin(stylePropsMixin) 注册。
  */
 export const stylePropsMixin = {

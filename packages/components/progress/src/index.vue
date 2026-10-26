@@ -1,5 +1,5 @@
 <template>
-  <div class="s-progress">
+  <div class="s-progress" :style="style">
     <el-progress :percentage="percentageVal" v-bind="{ ...originAttrs, ...$attrs }" :color="progressColor">
       <slot :percentage="percentageVal"></slot>
     </el-progress>
@@ -9,6 +9,7 @@
 <script lang="ts" setup>
 import { computed, ref, useAttrs, watch } from 'vue'
 import type { ProgressProps as ElProgressProps } from 'element-plus'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SProgress',
@@ -31,6 +32,7 @@ const originAttrs = {
   'stroke-width': 16,
 }
 const attrs = useAttrs()
+const { style } = useStyleProps()
 
 const percentageVal = ref<number>(0)
 const animation = () => {

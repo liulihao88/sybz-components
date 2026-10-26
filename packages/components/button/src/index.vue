@@ -27,6 +27,7 @@ import { computed, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import { resolveIconValue } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SButton',
@@ -73,6 +74,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
 
 const attrs = useAttrs()
 const mergedProps = useGlobalComponentConfig('button', props)
+const { style } = useStyleProps()
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
 
 const emits = defineEmits<{
@@ -114,6 +116,7 @@ const buttonAttrs = computed(() => {
         minHeight: buttonHeight,
       },
       normalizedAttrs.style,
+      style.value,
     ],
   }
 })

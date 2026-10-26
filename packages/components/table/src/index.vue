@@ -14,6 +14,7 @@ import SIcon from '@/components/icon/src/index.vue'
 import SEmpty from '@/components/empty/src/index.vue'
 import { getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import { createRenderContext } from '@/components/common/render'
 
 import type {
@@ -112,6 +113,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   selectionAttrs: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('table', props)
+const { style } = useStyleProps()
 const tableRef = ref<TableInstance | null>(null)
 const tableTotal = computed(() => {
   return mergedProps.value.total ?? mergedProps.value.data.length
@@ -974,7 +976,7 @@ defineExpose({
 </script>
 
 <template>
-  <div v-loading="tableLoading" class="s-table" :class="tableClass" :style="wrapperStyle">
+  <div v-loading="tableLoading" class="s-table" :class="tableClass" :style="[wrapperStyle, style]">
     <el-table
       ref="tableRef"
       :data="mergedProps.data"

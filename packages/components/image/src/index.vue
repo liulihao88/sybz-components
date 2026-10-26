@@ -3,6 +3,7 @@ import { computed, ref, useAttrs } from 'vue'
 import type { ImageInstance } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { SImageSrcResolver } from '@/types/component-props'
 
 defineOptions({
@@ -35,6 +36,7 @@ const props = withDefaults(defineProps<SImageSelfProps>(), {
 const attrs = useAttrs()
 const imageRef = ref<ImageInstance>()
 const mergedProps = useGlobalComponentConfig('image', props)
+const { style } = useStyleProps()
 const isAbsoluteSource = (src: string) => /^(?:[a-z][a-z\d+.-]*:|\/\/|\/|#)/i.test(src)
 
 const resolveSource = (src: string) => {
@@ -78,7 +80,7 @@ defineExpose({
 </script>
 
 <template>
-  <el-image ref="imageRef" v-bind="imageAttrs" class="s-image">
+  <el-image ref="imageRef" v-bind="imageAttrs" class="s-image" :style="style">
     <template v-for="(slot, name) in $slots" #[name]="scope">
       <slot :name="name" v-bind="scope ?? {}" />
     </template>

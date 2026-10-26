@@ -2,6 +2,7 @@
 import { ref, shallowRef, watch, markRaw, onMounted, onBeforeUnmount, computed } from 'vue'
 import { debounce, processWidth } from '@sybz-components/utils'
 import useSizeAliases from '@/hooks/useSizeAliases'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import { registerShijingshanChartTheme } from './shijingshanTheme.ts'
 import { registerSybzChartTheme } from './sybzTheme.ts'
 
@@ -38,6 +39,7 @@ const props = withDefaults(
   },
 )
 const sizeProps = useSizeAliases(props)
+const { style } = useStyleProps()
 
 const initChart = async () => {
   if (!echartDivRef.value) return
@@ -140,7 +142,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     class="s-chart"
-    :style="{ height: processWidth(sizeProps.height, true), width: processWidth(sizeProps.width, true) }"
+    :style="[{ height: processWidth(sizeProps.height, true), width: processWidth(sizeProps.width, true) }, style]"
   >
     <div v-show="!formatEmpty" :id="id" ref="echartDivRef" class="s-chart-container" />
     <slot v-if="formatEmpty" name="empty">

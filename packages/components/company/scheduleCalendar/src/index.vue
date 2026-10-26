@@ -8,6 +8,7 @@ import type {
   ScheduleCalendarView,
 } from './types'
 import type { STableColumn } from '@/components/table/src/types'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({ name: 'SScheduleCalendar' })
 
@@ -28,6 +29,8 @@ defineSlots<{
   scheduleAction(props: { task: ScheduleCalendarTask; day: ScheduleCalendarDay }): any
   empty(): any
 }>()
+
+const { style } = useStyleProps()
 
 const weekNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
@@ -177,7 +180,7 @@ const taskStyle = (task: ScheduleCalendarTask) => ({
 </script>
 
 <template>
-  <section class="s-schedule-calendar" @click="expandedDayKey = ''">
+  <section class="s-schedule-calendar" :style="style" @click="expandedDayKey = ''">
     <div class="s-schedule-calendar__toolbar">
       <div class="s-schedule-calendar__navigation">
         <button class="s-schedule-calendar__icon-button" type="button" aria-label="上个月" @click="changeMonth(-1)">

@@ -2,6 +2,7 @@
 import { computed, ref, useAttrs, watch } from 'vue'
 import type { StyleValue } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { SPaginationEmits, SPaginationSelfProps } from '@/types/component-props'
 
 defineOptions({
@@ -30,6 +31,7 @@ const props = withDefaults(defineProps<SPaginationSelfProps>(), {
 const emit = defineEmits<SPaginationEmits>()
 const attrs = useAttrs()
 const mergedProps = useGlobalComponentConfig('pagination', props)
+const { style } = useStyleProps()
 const rootStyle = computed(() => attrs.style as StyleValue)
 
 const normalizePageSize = (value: unknown) => {
@@ -121,7 +123,7 @@ const handleNextClick = (page: number) => emit('next-click', page)
     v-if="visible"
     class="s-pagination"
     :class="[$attrs.class, `s-pagination--${mergedProps.theme}`]"
-    :style="rootStyle"
+    :style="[rootStyle, style]"
   >
     <div class="s-pagination__scroll">
       <div class="s-pagination__content">

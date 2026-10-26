@@ -9,6 +9,7 @@
 */
 import { computed, useAttrs } from 'vue'
 import type { ButtonProps } from 'element-plus'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SDrawer',
@@ -43,6 +44,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
 })
 
 const attrs = useAttrs()
+const { style } = useStyleProps()
 const mergeAttrs = computed<{
   size: string | number
   confirmText: string
@@ -108,7 +110,7 @@ function _handleClose() {
 </script>
 
 <template>
-  <div class="s-drawer">
+  <div class="s-drawer" :style="style">
     <el-drawer
       :wrapper-closable="mergeAttrs.wrapperClosable"
       :destroy-on-close="mergeAttrs.wrapperClosable !== false"

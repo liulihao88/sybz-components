@@ -14,6 +14,7 @@ import { ref, watch, computed, useAttrs } from 'vue'
 import { Check, Minus } from '@element-plus/icons-vue'
 import { isEmpty, processWidth, getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SCheckbox',
@@ -60,6 +61,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 })
 
 const mergedProps = useGlobalComponentConfig('checkbox', props)
+const { style } = useStyleProps()
 const titleStyle = computed(() => {
   const style = mergedProps.value.compTitleStyle
   return style?.width ? { ...style, width: processWidth(style.width, true) } : style
@@ -174,7 +176,7 @@ const checkboxClass = computed(() => ({
 </script>
 
 <template>
-  <div class="s-checkbox" :class="checkboxClass">
+  <div class="s-checkbox" :class="checkboxClass" :style="style">
     <span v-if="mergedProps.title" class="s-checkbox__title" :style="titleStyle">
       {{ mergedProps.title }}
     </span>

@@ -3,7 +3,7 @@
     ref="rootRef"
     class="s-scroll"
     :class="{ 's-scroll--autosize': autosize, 's-scroll--left': verticalOnLeft }"
-    :style="rootStyle"
+    :style="[rootStyle, style]"
     @pointerenter="onPointerEnter"
     @pointerleave="onPointerLeave"
   >
@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch, type CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { SScrollEmits, SScrollProps } from './types'
 
 defineOptions({ name: 'SScroll' })
@@ -50,6 +51,7 @@ const props = withDefaults(defineProps<SScrollProps>(), {
   overscrollBehavior: 'auto',
 })
 const emit = defineEmits<SScrollEmits>()
+const { style } = useStyleProps()
 const rootRef = ref<HTMLElement>()
 const viewport = ref<HTMLElement>()
 const contentRef = ref<HTMLElement>()

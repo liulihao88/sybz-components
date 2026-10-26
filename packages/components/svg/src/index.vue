@@ -1,5 +1,5 @@
 <template>
-  <svg aria-hidden="true" v-bind="$attrs" class="s-svg-box" :style="parseStyle">
+  <svg aria-hidden="true" v-bind="$attrs" class="s-svg-box" :style="[parseStyle, style]">
     <use :href="symbolId" :fill="color" />
   </svg>
 </template>
@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SSvg',
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<SvgProps>(), {
   customStyle: () => ({}),
   size: '16px',
 })
+const { style } = useStyleProps()
 const symbolId = computed(() => `#${props.prefix}-${props.icon}`)
 const parseStyle = computed(() => {
   return {

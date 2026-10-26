@@ -3,6 +3,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { Download, FullScreen, RefreshLeft, RefreshRight, ZoomIn, ZoomOut } from '@element-plus/icons-vue'
 import { processWidth } from '@sybz-components/utils'
 import useSizeAliases from '@/hooks/useSizeAliases'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import DOMPurify from 'dompurify'
 import { ElIcon, ElImageViewer } from 'element-plus'
 import { MdEditor } from 'md-editor-v3'
@@ -64,6 +65,7 @@ const props = withDefaults(defineProps<MarkdownProps>(), {
   emptyText: '',
 })
 const sizeProps = useSizeAliases(props)
+const { style } = useStyleProps()
 
 const emit = defineEmits<MarkdownEmits>()
 
@@ -83,6 +85,8 @@ const componentStyle = computed(() => ({
   width: processWidth(sizeProps.value.width, true),
   height: processWidth(sizeProps.value.height, true),
 }))
+// md-editor 的 style 为具名 prop（string | CSSProperties），不能传数组，合并为对象
+const markdownStyle = computed(() => ({ ...componentStyle.value, ...style.value }))
 
 const slugify = (text: string) =>
   text
@@ -439,7 +443,7 @@ onBeforeUnmount(() => {
     v-bind="$attrs"
     class="s-markdown-editor"
     :class="disabled ? 'is-disabled' : ''"
-    :style="componentStyle"
+    :style="markdownStyle"
     :model-value="currentSource"
     :disabled="disabled"
     :sanitize="typeof sanitize === 'function' ? sanitize : undefined"
@@ -457,7 +461,7 @@ onBeforeUnmount(() => {
     v-bind="$attrs"
     class="s-markdown"
     :class="{ 'is-image-preview-enabled': imagePreview }"
-    :style="componentStyle"
+    :style="markdownStyle"
     @click="handleClick"
     @keydown="handleKeydown"
     @load.capture="handleImageLoadState"

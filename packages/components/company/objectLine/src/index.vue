@@ -11,6 +11,7 @@ import {
   formatBytesConvert,
   getVariable,
 } from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SObjectLine',
@@ -29,6 +30,7 @@ const props = withDefaults(defineProps<ObjectLineProps>(), {
   objectCount: () => [],
   objectSize: () => [],
 })
+const { style } = useStyleProps()
 
 const getObjectLineColors = () => {
   return {
@@ -294,7 +296,7 @@ defineExpose({
 </script>
 
 <template>
-  <s-card class="s-object-line" :body-style="{ padding: 0 }" v-bind="$attrs">
+  <s-card class="s-object-line" :body-style="{ padding: 0 }" :style="style" v-bind="$attrs">
     <template #header>
       <s-title title="对象数量/大小历史">
         <!-- <template #extra>

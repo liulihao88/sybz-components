@@ -1,5 +1,5 @@
 <template>
-  <div class="s-input" v-bind="mergedProps.subAttrs" :style="mergedStyle" :class="inputClass">
+  <div class="s-input" v-bind="mergedProps.subAttrs" :style="[mergedStyle, style]" :class="inputClass">
     <el-tooltip
       :content="inputTooltipContent"
       :disabled="inputTooltipDisabled"
@@ -126,6 +126,7 @@ import { processWidth, getType, $toast } from '@sybz-components/utils'
 import { inputProps } from 'element-plus/es/components/input/src/input'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
 const attrs = useAttrs()
 const slots = useSlots()
@@ -202,6 +203,7 @@ const emits = defineEmits<{
   search: [value: any, event: MouseEvent | KeyboardEvent]
 }>()
 const mergedProps = useGlobalComponentConfig('input', props)
+const { style } = useStyleProps()
 const restaurants = ref([])
 const inputTooltipContent = ref('')
 const inputTooltipDisabled = ref(true)

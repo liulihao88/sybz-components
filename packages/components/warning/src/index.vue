@@ -6,6 +6,7 @@ import SIcon from '@/components/icon/src/index.vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SWarning',
@@ -46,6 +47,7 @@ const mergedProps = useGlobalComponentConfig('warning', props)
 
 const attrs = useAttrs()
 const slots = useSlots()
+const { style } = useStyleProps()
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
 const hasContent = computed(() => Boolean(slots.content || String(mergedProps.value.content ?? '').trim()))
 const hasHeight = computed(() => mergedProps.value.height !== undefined)
@@ -98,7 +100,7 @@ function parseClass(): string {
   <div
     :class="[parseClass(), { 'is-fixed-height': hasHeight }]"
     class="s-warning-box"
-    :style="{ ...processWidth(mergedProps.width), ...mergedStyle }"
+    :style="[{ ...processWidth(mergedProps.width), ...mergedStyle }, style]"
     v-bind="attrs"
   >
     <div class="s-warning-box__body">

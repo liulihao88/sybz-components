@@ -3,7 +3,7 @@
     ref="containerRef"
     class="s-split-pane"
     :class="[`is-${mergedSplit}`, { 'is-dragging': active }]"
-    :style="containerStyle"
+    :style="[containerStyle, style]"
   >
     <div class="s-split-pane__pane s-split-pane__pane-left" :style="leftPaneStyle">
       <slot name="paneL">
@@ -36,6 +36,7 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import type { SplitPaneDirection, SplitPaneSetting } from './types'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SSplitPane',
@@ -62,6 +63,8 @@ const props = withDefaults(defineProps<SplitPaneProps>(), {
 })
 
 const emits = defineEmits(['resize', 'update:modelValue'])
+
+const { style } = useStyleProps()
 
 const containerRef = ref<HTMLElement | null>(null)
 const active = ref(false)

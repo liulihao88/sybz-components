@@ -7,6 +7,7 @@ import STooltip from '@/components/tooltip/src/index.vue'
 import STitle from '@/components/title/src/index.vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import {
   callEventHandler,
   cloneDefaultValue,
@@ -94,6 +95,7 @@ const props = withDefaults(defineProps<SFormProps>(), {
   trim: true,
 })
 const mergedProps = useGlobalComponentConfig('form', props)
+const { style } = useStyleProps()
 
 const sFormRef = ref<FormInstance>()
 const formModel = computed<FormModel>(() => (unref(mergedProps.value.model as FormModel) || {}) as FormModel)
@@ -563,7 +565,7 @@ defineExpose({
     v-bind="{ 'label-width': 'auto', ...$attrs }"
     class="s-form"
     :class="formClass"
-    :style="formStyle"
+    :style="[formStyle, style]"
     @submit.prevent
   >
     <template v-for="(v, i) in formItems" :key="getFieldProp(v) || i">

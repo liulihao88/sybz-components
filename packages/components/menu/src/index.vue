@@ -3,6 +3,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } 
 import { Expand, Fold } from '@element-plus/icons-vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import MenuNode from './MenuNode.vue'
 import SIcon from '@/components/icon'
 import type { SMenuFieldNames, SMenuIcon, SMenuItem, SMenuSelfProps } from './types'
@@ -38,6 +39,7 @@ defineSlots<{ header?: () => any; append?: () => any; footer?: () => any }>()
 const attrs = useAttrs()
 const iconProp = (value: SMenuIcon) => value as any
 const mergedProps = useGlobalComponentConfig('menu', props)
+const { style } = useStyleProps()
 const isCollapsed = ref(mergedProps.value.collapsible && mergedProps.value.collapse)
 const menuViewportRef = ref<HTMLElement>()
 const menuRef = ref<any>()
@@ -192,7 +194,7 @@ const handleSelect = (...args: any[]) => {
       `s-menu--${mergedProps.variant}`,
       { 'is-collapse': isCollapsed, 'is-auto-height': mergedProps.autoHeight },
     ]"
-    :style="rootStyle"
+    :style="[rootStyle, style]"
   >
     <button
       v-if="mergedProps.collapsible"

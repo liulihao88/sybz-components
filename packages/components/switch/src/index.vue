@@ -3,6 +3,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, ref } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SSwitch',
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   width: '',
 })
 const mergedProps = useGlobalComponentConfig('switch', props)
+const { style } = useStyleProps()
 
 const loading = ref(false) // 内部管理 loading 状态
 //✅ 封装 beforeChange，自动管理 loadingconst
@@ -59,7 +61,7 @@ const switchClass = computed(() => ({
     :class="switchClass"
     :loading="loading"
     :before-change="beforeChangeHandler"
-    :style="{ '--switch-width': handleWidth }"
+    :style="[{ '--switch-width': handleWidth }, style]"
   />
 </template>
 

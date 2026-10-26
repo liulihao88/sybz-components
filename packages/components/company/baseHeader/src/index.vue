@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { useStyleProps } from '@/hooks/useStyleProps'
 defineOptions({
   name: 'SBaseHeader',
 })
+
+const { style } = useStyleProps()
 </script>
 
 <template>
-  <div class="base-header-box">
+  <div class="base-header-box" :style="style">
     <div class="base-header-box__left">
       <slot />
     </div>

@@ -3,7 +3,7 @@
     v-bind="$attrs"
     class="s-row"
     :class="{ 's-row--custom-gutter': useCustomGutter }"
-    :style="rowStyle"
+    :style="[rowStyle, style]"
     :gutter="nativeGutter"
     :justify="justify"
     :align="align"
@@ -25,6 +25,7 @@ defineOptions({
 })
 import { computed, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 interface RowProps {
   col?: number | number[]
@@ -45,6 +46,7 @@ const props = withDefaults(defineProps<RowProps>(), {
 })
 
 const slots = useSlots()
+const { style } = useStyleProps()
 
 const mergedGap = computed(() => {
   if (props.gap !== '' && props.gap !== null && props.gap !== undefined) {

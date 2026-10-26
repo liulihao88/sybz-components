@@ -9,6 +9,7 @@ import { EditorState } from '@codemirror/state'
 import { EditorView, placeholder as editorPlaceholder } from '@codemirror/view'
 import { processWidth } from '@sybz-components/utils'
 import useSizeAliases from '@/hooks/useSizeAliases'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { JsonChangePayload, JsonData, JsonEmits, JsonExposed, JsonProps } from './types'
 
 defineOptions({ name: 'SJson', inheritAttrs: false })
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<JsonProps>(), {
   theme: 'light',
 })
 const sizeProps = useSizeAliases(props)
+const { style } = useStyleProps()
 
 const emit = defineEmits<JsonEmits>()
 const editorElement = ref<HTMLElement>()
@@ -276,7 +278,7 @@ defineExpose<JsonExposed>({ format, compact, copy, focus, getText, getData })
     v-bind="$attrs"
     class="s-json"
     :class="[`is-${theme}`, { 'is-disabled': disabled, 'is-line-numbers': lineNumbers }]"
-    :style="rootStyle"
+    :style="[rootStyle, style]"
     :aria-disabled="disabled"
   >
     <div v-if="toolbar" class="s-json__toolbar">

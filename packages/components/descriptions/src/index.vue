@@ -2,7 +2,7 @@
   <el-descriptions
     ref="descriptionsRef"
     v-bind="{ border: true, ...$attrs }"
-    :style="descriptionsStyle"
+    :style="[descriptionsStyle, style]"
     :column="descriptionColumn"
     :label-width="labelWidth2"
     class="s-descriptions"
@@ -88,6 +88,7 @@ import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
 import STooltip from '@/components/tooltip/src/index.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { ComponentPublicInstance, PropType, VNodeChild } from 'vue'
 
 defineOptions({
@@ -161,6 +162,7 @@ const props = withDefaults(defineProps<DescriptionsProps>(), {
   value: 'value',
 })
 const mergedProps = useGlobalComponentConfig('descriptions', props)
+const { style } = useStyleProps()
 
 const getTooltipAttrs = (option: ItemOptions) => ({
   ...(mergedProps.value.tooltipAttrs ?? {}),

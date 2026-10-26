@@ -10,6 +10,7 @@ defineOptions({
 })
 import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import SButton from '@/components/button/src/index.vue'
 import STag from '@/components/tag/src/index.vue'
 import SafeHtml from '@/components/utils/SafeHtml.vue'
@@ -98,6 +99,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
 })
 
 const mergedProps = useGlobalComponentConfig('popconfirm', props)
+const { style } = useStyleProps()
 
 const normalizeClassValue = (value: unknown) => {
   if (Array.isArray(value)) return value.filter(Boolean).join(' ')
@@ -174,6 +176,7 @@ defineExpose({
     v-bind="$attrs"
     v-model:visible="isPopoverVisible"
     class="s-popconfirm__box"
+    :style="style"
     :width="popconfirmWidth"
     :disabled="isDisabled"
     :popper-class="popperClass"
@@ -235,6 +238,7 @@ defineExpose({
   <span
     v-else
     class="s-popconfirm__simple_box"
+    :style="style"
     :class="{
       's-popconfirm__simple_box--chenghua': mergedProps.theme === 'chenghua',
       's-popconfirm__simple_box--shijingshan': mergedProps.theme === 'shijingshan',

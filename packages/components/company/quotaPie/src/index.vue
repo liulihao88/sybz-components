@@ -3,6 +3,7 @@ import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue'
 import SChart from '@/components/chart/index.ts'
 import { getPieColorByDataIndex } from '@/utils/local/packageUtils'
 import { formatBytes, formatBytesConvert, clone, getVariable } from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 defineOptions({
   name: 'SQuotaPie',
 })
@@ -17,6 +18,7 @@ const props = withDefaults(defineProps<QuotaPieProps>(), {
   type: 'used',
   text: '总使用量 / 总可用量',
 })
+const { style } = useStyleProps()
 // 添加容器尺寸的响应式引用
 const containerRef = ref(null)
 const containerSize = ref({ width: 0, height: 0 })
@@ -217,7 +219,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="s-quota-pie">
+  <div class="s-quota-pie" :style="style">
     <s-empty v-if="isEmpty" class="s-quota-pie__empty" />
     <div v-else ref="containerRef" class="s-quota-pie__chart-box">
       <SChart class="s-quota-pie__chart" :option="options" width="100%" height="100%" />

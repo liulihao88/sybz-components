@@ -26,6 +26,7 @@
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import SChart from '@/components/chart/index.ts'
 import { clone, formatBytes, formatThousands, getVariable } from '@sybz-components/utils'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SCountBarOld',
@@ -37,6 +38,7 @@ interface CountBarOldProps {
 const props = withDefaults(defineProps<CountBarOldProps>(), {
   data: () => [], // [{name: '<1024kb', value: 22}]
 })
+const { style } = useStyleProps()
 const option = ref()
 const isEmpty = ref(false)
 const themeVersion = ref(0)
@@ -228,7 +230,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="s-count-bar-old">
+  <div class="s-count-bar-old" :style="style">
     <s-empty v-if="isEmpty" class="s-count-bar-old__empty" />
     <SChart v-else class="s-count-bar-old__chart" :option="option" width="100%" height="100%" />
   </div>

@@ -113,6 +113,10 @@ export default defineConfig({
               link: '/components/usageGuide/home.md',
             },
             {
+              text: '样式简写属性（Style Props）',
+              link: '/components/styleProps/home.md',
+            },
+            {
               text: '项目使用组件常见问题',
               link: '/components/faq/home.md',
             },

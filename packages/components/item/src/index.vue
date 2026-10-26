@@ -3,6 +3,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useSlots } from 'vue'
 import type { CSSProperties } from 'vue'
 import useCommonProps from '@/hooks/useCommonProps'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { SCommonProps, SItemTooltipAttrs } from '@/types/component-props'
 
 defineOptions({ name: 'SItem' })
@@ -76,6 +77,7 @@ const props = withDefaults(defineProps<ItemProps>(), {
 
 const slots = useSlots()
 const { commonClass, commonStyle } = useCommonProps(props)
+const { style } = useStyleProps()
 defineEmits<{ click: [event: MouseEvent] }>()
 defineSlots<{
   prefix?: () => any
@@ -176,7 +178,7 @@ const handleKeydown = (event: KeyboardEvent) => {
       },
       commonClass,
     ]"
-    :style="rootStyle"
+    :style="[rootStyle, style]"
     :role="clickable ? 'button' : undefined"
     :tabindex="clickable && !disabled ? 0 : undefined"
     :aria-disabled="disabled || undefined"

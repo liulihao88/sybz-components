@@ -1,5 +1,5 @@
 <template>
-  <div class="function-source-container">
+  <div class="function-source-container" :style="style">
     <details>
       <summary class="function-source-summary">函数源码: {{ functionName }}</summary>
       <div class="language-js">
@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import * as utilsModule from '@sybz-components/utils'
 import { ref, watch } from 'vue'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SFunctionSourceCode',
@@ -25,6 +26,7 @@ interface FunctionSourceCodeProps {
 const props = withDefaults(defineProps<FunctionSourceCodeProps>(), {
   functionName: 'mockValue',
 })
+const { style } = useStyleProps()
 
 const sourceCode = ref<string>('')
 const utilsRecord = utilsModule as Record<string, unknown>

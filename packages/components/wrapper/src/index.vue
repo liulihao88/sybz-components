@@ -1,5 +1,5 @@
 <template>
-  <div class="s-wrapper" :class="{ 'with-column': props.column }">
+  <div class="s-wrapper" :class="{ 'with-column': props.column }" :style="style">
     <component :is="item" v-for="(item, index) in validSlots" :key="index" class="col" />
   </div>
 </template>
@@ -8,6 +8,7 @@
 import { useSlots, computed, type VNode } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useSizeAliases from '@/hooks/useSizeAliases'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SWrapper',
@@ -40,6 +41,7 @@ const gapValue = computed(() => processWidth(props.gap, true))
 const minWidthValue = computed(() => processWidth(props.minWidth, true))
 
 const slots = useSlots()
+const { style } = useStyleProps()
 
 // 只保留元素节点 (过滤掉注释和文本节点)
 const validSlots = computed(() => {
