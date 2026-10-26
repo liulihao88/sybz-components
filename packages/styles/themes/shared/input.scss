@@ -101,12 +101,27 @@
         box-shadow: none;
       }
 
+      // 禁用态也不能画内描边：输入框上沿正好落在嵌入式标题的文字中线上，
+      // 一旦保留 1px 内描边，边框线就会从标题中间贯穿过去。
+      .el-input.is-disabled .el-input__wrapper,
+      .el-input.is-disabled .el-input__wrapper:hover,
+      .el-textarea.is-disabled .el-textarea__inner,
+      .el-textarea.is-disabled .el-textarea__inner:hover {
+        box-shadow: none;
+      }
+
       &:hover {
         --s-top-title-border-color: var(--s-#{$token-prefix}-primary-border-hover);
       }
 
       &:focus-within {
         --s-top-title-border-color: var(--s-#{$token-prefix}-primary);
+      }
+
+      // 禁用态的上边框标题降级为分隔线色，与禁用底色、禁用态描边保持一致
+      &.is-disabled,
+      &.is-disabled:hover {
+        --s-top-title-border-color: var(--s-#{$token-prefix}-divider);
       }
     }
 

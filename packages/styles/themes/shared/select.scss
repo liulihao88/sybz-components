@@ -49,6 +49,14 @@
 
       &.is-disabled {
         --s-top-title-border-color: rgba(15, 23, 42, 0.08);
+
+        // 与输入框一致：禁用态不再画内描边，避免 1px 边框线贯穿嵌入式标题
+        .el-select__wrapper,
+        .el-select__wrapper:hover,
+        .el-select__wrapper.is-focused,
+        .el-select__wrapper.is-hovering:not(.is-focused) {
+          box-shadow: none;
+        }
       }
 
       &.s-select--empty-highlighted {

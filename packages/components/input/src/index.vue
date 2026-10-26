@@ -227,6 +227,7 @@ const inputClass = computed(() => [
     'has-content': mergedProps.value.content,
     's-input--has-title': Boolean(attrs.title) && !slots.prepend,
     's-input--top-title': Boolean(mergedProps.value.topTitle),
+    'is-disabled': isDisabled.value,
     's-input--chenghua': mergedProps.value.theme === 'chenghua',
     's-input--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-input--sybz': mergedProps.value.theme === 'sybz',
@@ -479,6 +480,12 @@ const mergedStyle = computed(() => {
     --s-top-title-border-color: var(--el-color-primary);
   }
 
+  // 禁用态：上边框标题降级为禁用描边色，hover 也不再高亮
+  &.s-input--top-title.is-disabled,
+  &.s-input--top-title.is-disabled:hover {
+    --s-top-title-border-color: var(--el-disabled-border-color);
+  }
+
   :deep(.el-autocomplete),
   :deep(.el-input),
   :deep(.el-textarea) {
@@ -494,6 +501,13 @@ const mergedStyle = computed(() => {
   }
 
   &.s-input--top-title :deep(.el-textarea__inner) {
+    box-shadow: none;
+  }
+
+  // 禁用态同样不画内描边：输入框上沿正好落在嵌入式标题的文字中线上，
+  // 保留内描边会让 1px 边框线从标题中间贯穿过去。
+  &.s-input--top-title.is-disabled :deep(.el-input__wrapper),
+  &.s-input--top-title.is-disabled :deep(.el-textarea__inner) {
     box-shadow: none;
   }
 
