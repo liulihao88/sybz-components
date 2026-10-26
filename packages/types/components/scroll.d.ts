@@ -9,13 +9,15 @@ import type {
 import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/scroll/home.html | 查看文档}
+ *
  * s-scroll 自定义滚动区域，支持滚动条策略、方向、位置、初始坐标、边界事件及自动高度；scrollbarSize 为 0 时隐藏滚动条。
  *
  * 先提示 sybz 自身属性。
  */
 export type SScrollComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SScroll文档 = 'https://liulihao88.github.io/sybz-components/components/scroll/home.html'>(): {
     $props: {
       /** 最大高度，配合 autosize 使用 */
       maxHeight?: string | number
@@ -48,5 +50,8 @@ export type SScrollComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/scroll/home.html | 查看文档}
+ */
 declare const SScroll: SScrollComponent
 export default SScroll

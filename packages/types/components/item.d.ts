@@ -13,13 +13,15 @@ import type {
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/item/home.html | 查看文档}
+ *
  * 信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。
  *
  * 先提示 sybz 自身属性。
  */
 export type SItemComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SItem文档 = 'https://liulihao88.github.io/sybz-components/components/item/home.html'>(): {
     $props: {
       color?: string
       /** CSS background，支持纯色、渐变及其他合法背景值 */
@@ -78,5 +80,8 @@ export type SItemComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/item/home.html | 查看文档}
+ */
 declare const SItem: SItemComponent
 export default SItem

@@ -5,6 +5,8 @@ import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
+ *
  * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus CheckboxGroup 的公开属性。
@@ -12,9 +14,12 @@ type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 export type SCheckboxPublicProps = SCheckboxSelfProps &
   Omit<ElCheckboxGroupInstance['$props'], keyof SCheckboxSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
+ */
 export type SCheckboxComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SCheckbox文档 = 'https://liulihao88.github.io/sybz-components/components/checkbox/home.html'>(): {
     $props: {
       /** 左侧标题；button 模式显示为紧凑文字标签 */
       title?: string
@@ -55,5 +60,8 @@ export type SCheckboxComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
+ */
 declare const SCheckbox: SCheckboxComponent
 export default SCheckbox

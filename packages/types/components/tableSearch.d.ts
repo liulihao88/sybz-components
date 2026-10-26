@@ -9,9 +9,14 @@ import type {
 } from '../../components/tableSearch/src/types'
 import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/tableSearch/home.html | 查看文档}
+ *
+ * 先提示 sybz 自身属性。
+ */
 export type STableSearchComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <STableSearch文档 = 'https://liulihao88.github.io/sybz-components/components/tableSearch/home.html'>(): {
     $props: {
       /** 搜索字段配置 */
       options?: STableSearchField[]
@@ -34,5 +39,8 @@ export type STableSearchComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/tableSearch/home.html | 查看文档}
+ */
 declare const STableSearch: STableSearchComponent
 export default STableSearch

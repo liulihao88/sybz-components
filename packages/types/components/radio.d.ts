@@ -12,15 +12,20 @@ import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
+ *
  * s-radio 单选组件，支持 variant="radio|button" 展示方式。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus RadioGroup 的公开属性。
  */
 export type SRadioPublicProps = SRadioSelfProps & Omit<ElRadioGroupInstance['$props'], keyof SRadioSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
+ */
 export type SRadioComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SRadio文档 = 'https://liulihao88.github.io/sybz-components/components/radio/home.html'>(): {
     $props: {
       title?: string
       compTitleStyle?: SybzRecord
@@ -56,5 +61,8 @@ export type SRadioComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
+ */
 declare const SRadio: SRadioComponent
 export default SRadio

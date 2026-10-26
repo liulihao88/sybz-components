@@ -11,13 +11,18 @@ import type {
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
+ *
  * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标移入高亮、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
  *
  * 先提示 sybz 自身属性。
  */
 declare const SIcon: {
   install: (app: import('vue').App) => void
-  new <Iconify图标查询 = 'https://icon-sets.iconify.design/'>(): {
+  new <
+    SIcon文档 = 'https://liulihao88.github.io/sybz-components/components/icon/home.html',
+    Iconify图标查询 = 'https://icon-sets.iconify.design/',
+  >(): {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
@@ -58,5 +63,8 @@ declare const SIcon: {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
+ */
 export type SIconComponent = typeof SIcon
 export default SIcon

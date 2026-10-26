@@ -35,481 +35,481 @@ declare global {
 declare module 'vue' {
   export interface GlobalComponents {
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html | 查看文档}
      */
     SBaseHeader: (typeof import('./types/components/company/baseHeader'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html | 查看文档}
      */
     's-base-header': (typeof import('./types/components/company/baseHeader'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/buildTime/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/buildTime/home.html | 查看文档}
      */
     SBuildTime: (typeof import('./types/components/buildTime'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/buildTime/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/buildTime/home.html | 查看文档}
      */
     's-build-time': (typeof import('./types/components/buildTime'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/button/home.html | 查看文档}
      *
      * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称、Iconify 名称和 HTTP 图片，并支持链接、主题、图标位置、round 圆角与 ghost 幽灵按钮。
      */
     SButton: (typeof import('./types/components/button'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/button/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/button/home.html | 查看文档}
      *
      * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称、Iconify 名称和 HTTP 图片，并支持链接、主题、图标位置、round 圆角与 ghost 幽灵按钮。
      */
     's-button': (typeof import('./types/components/button'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/capacityProgress/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/capacityProgress/home.html | 查看文档}
      */
     SCapacityProgress: (typeof import('./types/components/company/capacityProgress'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/capacityProgress/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/capacityProgress/home.html | 查看文档}
      */
     's-capacity-progress': (typeof import('./types/components/company/capacityProgress'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/card/home.html | 查看文档}
      *
      * s-card 卡片组件，title、subTitle 和 extra 支持直接传入字符串，并支持区块合并、展开收起、阴影、透明背景和主题样式。
      */
     SCard: (typeof import('./types/components/card'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/card/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/card/home.html | 查看文档}
      *
      * s-card 卡片组件，title、subTitle 和 extra 支持直接传入字符串，并支持区块合并、展开收起、阴影、透明背景和主题样式。
      */
     's-card': (typeof import('./types/components/card'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/checkbox/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
      *
      * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
      */
     SCheckbox: (typeof import('./types/components/checkbox'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/checkbox/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
      *
      * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
      */
     's-checkbox': (typeof import('./types/components/checkbox'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/clickOutside/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/clickOutside/home.html | 查看文档}
      */
     SClickOutside: (typeof import('./types/components/clickOutside'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/clickOutside/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/clickOutside/home.html | 查看文档}
      */
     's-click-outside': (typeof import('./types/components/clickOutside'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/compTitle/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/compTitle/home.html | 查看文档}
      */
     SCompTitle: (typeof import('./types/components/compTitle'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/compTitle/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/compTitle/home.html | 查看文档}
      */
     's-comp-title': (typeof import('./types/components/compTitle'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/datePicker/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/datePicker/home.html | 查看文档}
      *
      * s-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
      */
     SDatePicker: (typeof import('./types/components/datePicker'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/datePicker/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/datePicker/home.html | 查看文档}
      *
      * s-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
      */
     's-date-picker': (typeof import('./types/components/datePicker'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/descriptions/home.html | 查看文档}
      *
      * s-descriptions 描述列表，支持每项配置 column、showAll 和 tooltipAttrs，单项 showAll/tooltipAttrs 优先于组件级配置。
      */
     SDescriptions: (typeof import('./types/components/descriptions'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/descriptions/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/descriptions/home.html | 查看文档}
      *
      * s-descriptions 描述列表，支持每项配置 column、showAll 和 tooltipAttrs，单项 showAll/tooltipAttrs 优先于组件级配置。
      */
     's-descriptions': (typeof import('./types/components/descriptions'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/dialog/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/dialog/home.html | 查看文档}
      *
      * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 height、内容区 loading、maximizeHeight 等 sybz 扩展属性。
      */
     SDialog: (typeof import('./types/components/dialog'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/dialog/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/dialog/home.html | 查看文档}
      *
      * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 height、内容区 loading、maximizeHeight 等 sybz 扩展属性。
      */
     's-dialog': (typeof import('./types/components/dialog'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/documentPreview/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/documentPreview/home.html | 查看文档}
      *
      * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。
      */
     SDocumentPreview: (typeof import('./types/components/documentPreview'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/documentPreview/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/documentPreview/home.html | 查看文档}
      *
      * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。
      */
     's-document-preview': (typeof import('./types/components/documentPreview'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/drawer/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/drawer/home.html | 查看文档}
      */
     SDrawer: (typeof import('./types/components/drawer'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/drawer/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/drawer/home.html | 查看文档}
      */
     's-drawer': (typeof import('./types/components/drawer'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/empty/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/empty/home.html | 查看文档}
      */
     SEmpty: (typeof import('./types/components/empty'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/empty/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/empty/home.html | 查看文档}
      */
     's-empty': (typeof import('./types/components/empty'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/flex/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
      *
      * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
      */
     SFlex: (typeof import('./types/components/flex'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/flex/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
      *
      * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
      */
     's-flex': (typeof import('./types/components/flex'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/form/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/form/home.html | 查看文档}
      *
      * s-form 表单组件，支持 schema 字段编排、动态配置、标签主副文本、字段标签 tooltip 提示、tooltip 文本复制及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
      */
     SForm: (typeof import('./types/components/form'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/form/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/form/home.html | 查看文档}
      *
      * s-form 表单组件，支持 schema 字段编排、动态配置、标签主副文本、字段标签 tooltip 提示、tooltip 文本复制及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
      */
     's-form': (typeof import('./types/components/form'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/functionSourceCode/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/functionSourceCode/home.html | 查看文档}
      */
     SFunctionSourceCode: (typeof import('./types/components/functionSourceCode'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/functionSourceCode/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/functionSourceCode/home.html | 查看文档}
      */
     's-function-source-code': (typeof import('./types/components/functionSourceCode'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
      *
      * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标移入高亮、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
      */
     SIcon: (typeof import('./types/components/icon'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/icon/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
      *
      * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标移入高亮、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
      */
     's-icon': (typeof import('./types/components/icon'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/image/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
      *
      * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径和源码资源解析。
      */
     SImage: (typeof import('./types/components/image'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/image/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
      *
      * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径和源码资源解析。
      */
     's-image': (typeof import('./types/components/image'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/input/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
      * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮。
      */
     SInput: (typeof import('./types/components/input'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/input/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
      * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮。
      */
     's-input': (typeof import('./types/components/input'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputLabel/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/inputLabel/home.html | 查看文档}
      */
     SInputLabel: (typeof import('./types/components/inputLabel'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputLabel/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/inputLabel/home.html | 查看文档}
      */
     's-input-label': (typeof import('./types/components/inputLabel'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputNumber/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
      */
     SInputNumber: (typeof import('./types/components/inputNumber'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/inputNumber/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
      */
     's-input-number': (typeof import('./types/components/inputNumber'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/item/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/item/home.html | 查看文档}
      *
      * 信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。
      */
     SItem: (typeof import('./types/components/item'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/item/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/item/home.html | 查看文档}
      *
      * 信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。
      */
     's-item': (typeof import('./types/components/item'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/json/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/json/home.html | 查看文档}
      *
      * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
      */
     SJson: (typeof import('./types/components/json'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/json/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/json/home.html | 查看文档}
      *
      * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
      */
     's-json': (typeof import('./types/components/json'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/markdown/home.html | 查看文档}
      *
      * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
      */
     SMarkdown: (typeof import('./types/components/markdown'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/markdown/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/markdown/home.html | 查看文档}
      *
      * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
      */
     's-markdown': (typeof import('./types/components/markdown'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/menu/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/menu/home.html | 查看文档}
      *
      * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。头部和底部 padding 保持 16px，列表展开时为 16px、收起时为 4px；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
      */
     SMenu: (typeof import('./types/components/menu'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/menu/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/menu/home.html | 查看文档}
      *
      * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。头部和底部 padding 保持 16px，列表展开时为 16px、收起时为 4px；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
      */
     's-menu': (typeof import('./types/components/menu'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/pagination/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/pagination/home.html | 查看文档}
      *
      * s-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。
      */
     SPagination: (typeof import('./types/components/pagination'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/pagination/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/pagination/home.html | 查看文档}
      *
      * s-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。
      */
     's-pagination': (typeof import('./types/components/pagination'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/popconfirm/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
      */
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/popconfirm/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
      */
     's-popconfirm': (typeof import('./types/components/popconfirm'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/progress/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/progress/home.html | 查看文档}
      */
     SProgress: (typeof import('./types/components/progress'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/progress/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/progress/home.html | 查看文档}
      */
     's-progress': (typeof import('./types/components/progress'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/radio/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
      *
      * s-radio 单选组件，支持 variant="radio|button" 展示方式。
      */
     SRadio: (typeof import('./types/components/radio'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/radio/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
      *
      * s-radio 单选组件，支持 variant="radio|button" 展示方式。
      */
     's-radio': (typeof import('./types/components/radio'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/row/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/row/home.html | 查看文档}
      */
     SRow: (typeof import('./types/components/row'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/row/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/row/home.html | 查看文档}
      */
     's-row': (typeof import('./types/components/row'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/scheduleCalendar/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/scheduleCalendar/home.html | 查看文档}
      */
     SScheduleCalendar: (typeof import('./types/components/company/scheduleCalendar'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/scheduleCalendar/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/scheduleCalendar/home.html | 查看文档}
      */
     's-schedule-calendar': (typeof import('./types/components/company/scheduleCalendar'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/scroll/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/scroll/home.html | 查看文档}
      *
      * s-scroll 自定义滚动区域，支持滚动条策略、方向、位置、初始坐标、边界事件及自动高度；scrollbarSize 为 0 时隐藏滚动条。
      */
     SScroll: (typeof import('./types/components/scroll'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/scroll/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/scroll/home.html | 查看文档}
      *
      * s-scroll 自定义滚动区域，支持滚动条策略、方向、位置、初始坐标、边界事件及自动高度；scrollbarSize 为 0 时隐藏滚动条。
      */
     's-scroll': (typeof import('./types/components/scroll'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/select/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/select/home.html | 查看文档}
      *
      * s-select 下拉选择组件，支持上边框嵌入标题；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
      */
     SSelect: (typeof import('./types/components/select'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/select/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/select/home.html | 查看文档}
      *
      * s-select 下拉选择组件，支持上边框嵌入标题；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
      */
     's-select': (typeof import('./types/components/select'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/splitPane/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/splitPane/home.html | 查看文档}
      */
     SSplitPane: (typeof import('./types/components/splitPane'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/splitPane/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/splitPane/home.html | 查看文档}
      */
     's-split-pane': (typeof import('./types/components/splitPane'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/svg/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/svg/home.html | 查看文档}
      */
     SSvg: (typeof import('./types/components/svg'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/svg/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/svg/home.html | 查看文档}
      */
     's-svg': (typeof import('./types/components/svg'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/switch/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
      */
     SSwitch: (typeof import('./types/components/switch'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/switch/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
      */
     's-switch': (typeof import('./types/components/switch'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/table/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
      */
     STable: (typeof import('./types/components/table'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/table/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
      */
     's-table': (typeof import('./types/components/table'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tableSearch/home.html | 查看文档}
      */
     STableSearch: (typeof import('./types/components/tableSearch'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tableSearch/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tableSearch/home.html | 查看文档}
      */
     's-table-search': (typeof import('./types/components/tableSearch'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tabs/home.html | 查看文档}
      *
      * s-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule、capsule-theme 类型、主题、尺寸、width/height 及其 w/h 缩写，以及通过 headerMargin 自定义头部外边距。
      */
     STabs: (typeof import('./types/components/tabs'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tabs/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tabs/home.html | 查看文档}
      *
      * s-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule、capsule-theme 类型、主题、尺寸、width/height 及其 w/h 缩写，以及通过 headerMargin 自定义头部外边距。
      */
     's-tabs': (typeof import('./types/components/tabs'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tag/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
      *
      * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
      */
     STag: (typeof import('./types/components/tag'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tag/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
      *
      * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
      */
     's-tag': (typeof import('./types/components/tag'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/test/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/test/home.html | 查看文档}
      */
     STest: (typeof import('./types/components/test'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/test/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/test/home.html | 查看文档}
      */
     's-test': (typeof import('./types/components/test'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
      *
      * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
      */
     STitle: (typeof import('./types/components/title'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/title/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
      *
      * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
      */
     's-title': (typeof import('./types/components/title'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tooltip/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tooltip/home.html | 查看文档}
      *
      * s-tooltip 文字提示组件，支持文本溢出提示与多行省略；class/style 应用在外层，设置外层样式时按内部内容的可见范围定位，排除外层 margin/padding。
      */
     STooltip: (typeof import('./types/components/tooltip'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/tooltip/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/tooltip/home.html | 查看文档}
      *
      * s-tooltip 文字提示组件，支持文本溢出提示与多行省略；class/style 应用在外层，设置外层样式时按内部内容的可见范围定位，排除外层 margin/padding。
      */
     's-tooltip': (typeof import('./types/components/tooltip'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/upload/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/upload/home.html | 查看文档}
      */
     SUpload: (typeof import('./types/components/upload'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/upload/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/upload/home.html | 查看文档}
      */
     's-upload': (typeof import('./types/components/upload'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/warning/home.html | 查看文档}
      *
      * s-warning 警告组件，支持设置 width 和 height；设置 height 后内容会垂直居中。
      */
     SWarning: (typeof import('./types/components/warning'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/warning/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/warning/home.html | 查看文档}
      *
      * s-warning 警告组件，支持设置 width 和 height；设置 height 后内容会垂直居中。
      */
     's-warning': (typeof import('./types/components/warning'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/wrapper/home.html | 查看文档}
      *
      * s-wrapper 布局容器，column 设置每行列数；width 和 height 支持数字、px、百分比等，默认不设置宽高；百分比高度需要父容器具有明确高度。
      */
     SWrapper: (typeof import('./types/components/wrapper'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/wrapper/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/wrapper/home.html | 查看文档}
      *
      * s-wrapper 布局容器，column 设置每行列数；width 和 height 支持数字、px、百分比等，默认不设置宽高；百分比高度需要父容器具有明确高度。
      */

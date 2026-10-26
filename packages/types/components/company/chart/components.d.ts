@@ -6,43 +6,43 @@ type JSXComponentProps<Props> = Props & VNodeProps & AllowedComponentProps & Com
 declare module 'vue' {
   export interface GlobalComponents {
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/chart/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/chart/home.html | 查看文档}
      */
     SChart: (typeof import('../../chart'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/chart/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/chart/home.html | 查看文档}
      */
     's-chart': (typeof import('../../chart'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBar/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/countBar/home.html | 查看文档}
      */
     SCountBar: (typeof import('../countBar'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBar/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/countBar/home.html | 查看文档}
      */
     's-count-bar': (typeof import('../countBar'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html | 查看文档}
      */
     SCountBarOld: (typeof import('../countBarOld'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/countBarOld/home.html | 查看文档}
      */
     's-count-bar-old': (typeof import('../countBarOld'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html | 查看文档}
      */
     SObjectLine: (typeof import('../objectLine'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/objectLine/home.html | 查看文档}
      */
     's-object-line': (typeof import('../objectLine'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html | 查看文档}
      */
     SQuotaPie: (typeof import('../quotaPie'))['default']
     /**
-     * 在线文档：https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html
+     * {@link https://liulihao88.github.io/sybz-components/components/company/quotaPie/home.html | 查看文档}
      */
     's-quota-pie': (typeof import('../quotaPie'))['default']
   }

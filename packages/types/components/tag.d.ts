@@ -6,15 +6,20 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 type ElTagInstance = InstanceType<typeof ElTag>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
+ *
  * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Tag 的公开属性。
  */
 export type STagPublicProps = STagSelfProps & Omit<ElTagInstance['$props'], keyof STagSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
+ */
 export type STagComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <STag文档 = 'https://liulihao88.github.io/sybz-components/components/tag/home.html'>(): {
     $props: {
       color?: string
       /** CSS background，支持纯色、渐变及其他合法背景值 */
@@ -61,5 +66,8 @@ export type STagComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
+ */
 declare const STag: STagComponent
 export default STag

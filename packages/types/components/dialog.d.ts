@@ -14,6 +14,8 @@ type ElDialogInstance = InstanceType<typeof ElDialog>
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/dialog/home.html | 查看文档}
+ *
  * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 height、内容区 loading、maximizeHeight 等 sybz 扩展属性。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Dialog/Drawer 的公开属性。
@@ -22,9 +24,12 @@ export type SDialogPublicProps = SDialogSelfProps &
   Omit<ElDialogInstance['$props'], keyof SDialogSelfProps> &
   Omit<ElDrawerInstance['$props'], keyof SDialogSelfProps | keyof ElDialogInstance['$props']>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/dialog/home.html | 查看文档}
+ */
 export type SDialogComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SDialog文档 = 'https://liulihao88.github.io/sybz-components/components/dialog/home.html'>(): {
     $props: {
       mode?: SDialogMode
       variant?: SDialogVariant
@@ -116,5 +121,8 @@ export type SDialogComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/dialog/home.html | 查看文档}
+ */
 declare const SDialog: SDialogComponent
 export default SDialog

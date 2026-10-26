@@ -11,12 +11,20 @@ import type { SybzStyleProps } from '../component-props'
 
 type ElUploadInstance = InstanceType<typeof ElUpload>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/upload/home.html | 查看文档}
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus Upload 的公开属性。
+ */
 export type SUploadPublicProps = SUploadSelfProps &
   Omit<ElUploadInstance['$props'], keyof SUploadSelfProps | 'fileList' | 'httpRequest' | 'beforeUpload'>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/upload/home.html | 查看文档}
+ */
 export type SUploadComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SUpload文档 = 'https://liulihao88.github.io/sybz-components/components/upload/home.html'>(): {
     $props: {
       /** 双向绑定的文件列表 */
       modelValue?: UploadUserFile[]
@@ -51,5 +59,8 @@ export type SUploadComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/upload/home.html | 查看文档}
+ */
 declare const SUpload: SUploadComponent
 export default SUpload

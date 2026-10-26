@@ -11,11 +11,19 @@ import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElTableInstance = InstanceType<typeof ElTable>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus Table；s-table 自有属性包括主题、背景色、border（表格及单元格边框）、disabled（禁用分页和操作按钮）、分页、选择和列配置。 的公开属性。
+ */
 export type STablePublicProps = STableProps & Omit<ElTableInstance['$props'], keyof STableProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
+ */
 export type STableComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <STable文档 = 'https://liulihao88.github.io/sybz-components/components/table/home.html'>(): {
     $props: {
       data?: TableRow[]
       columns?: TableColumnList<TableRow>
@@ -76,5 +84,8 @@ export type STableComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
+ */
 declare const STable: STableComponent
 export default STable

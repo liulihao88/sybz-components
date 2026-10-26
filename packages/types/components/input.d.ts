@@ -11,15 +11,20 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 type ElInputInstance = InstanceType<typeof ElInput>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
+ *
  * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Input 的公开属性。
  */
 export type SInputPublicProps = SInputSelfProps & Omit<ElInputInstance['$props'], keyof SInputSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
+ */
 export type SInputComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SInput文档 = 'https://liulihao88.github.io/sybz-components/components/input/home.html'>(): {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
@@ -83,5 +88,8 @@ export type SInputComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
+ */
 declare const SInput: SInputComponent
 export default SInput

@@ -4,12 +4,20 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 
 type ElInputNumberInstance = InstanceType<typeof ElInputNumber>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus InputNumber 的公开属性。
+ */
 export type SInputNumberPublicProps = SInputNumberSelfProps &
   Omit<ElInputNumberInstance['$props'], keyof SInputNumberSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
+ */
 export type SInputNumberComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SInputNumber文档 = 'https://liulihao88.github.io/sybz-components/components/inputNumber/home.html'>(): {
     $props: {
       title?: string
       compTitleStyle?: SybzRecord
@@ -27,5 +35,8 @@ export type SInputNumberComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
+ */
 declare const SInputNumber: SInputNumberComponent
 export default SInputNumber

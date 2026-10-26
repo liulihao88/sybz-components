@@ -4,11 +4,19 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 
 type ElSwitchInstance = InstanceType<typeof ElSwitch>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus Switch 的公开属性。
+ */
 export type SSwitchPublicProps = SSwitchSelfProps & Omit<ElSwitchInstance['$props'], keyof SSwitchSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
+ */
 export type SSwitchComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SSwitch文档 = 'https://liulihao88.github.io/sybz-components/components/switch/home.html'>(): {
     $props: {
       beforeChange?: (...args: any[]) => any
     } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width' | 'w'> &
@@ -20,5 +28,8 @@ export type SSwitchComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
+ */
 declare const SSwitch: SSwitchComponent
 export default SSwitch

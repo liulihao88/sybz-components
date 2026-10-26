@@ -5,15 +5,20 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 type ElButtonInstance = InstanceType<typeof ElButton>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/button/home.html | 查看文档}
+ *
  * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称、Iconify 名称和 HTTP 图片，并支持链接、主题、图标位置、round 圆角与 ghost 幽灵按钮。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Button 的公开属性。
  */
 export type SButtonPublicProps = SButtonSelfProps & Omit<ElButtonInstance['$props'], keyof SButtonSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/button/home.html | 查看文档}
+ */
 export type SButtonComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SButton文档 = 'https://liulihao88.github.io/sybz-components/components/button/home.html'>(): {
     $props: {
       /** 链接地址，设置后按钮会渲染为可直接打开 URL 的链接 */
       href?: string
@@ -67,5 +72,8 @@ export type SButtonComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/button/home.html | 查看文档}
+ */
 declare const SButton: SButtonComponent
 export default SButton

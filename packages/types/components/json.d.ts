@@ -3,6 +3,8 @@ import type { JsonData, JsonEmits, JsonExposed, JsonProps, JsonTheme } from '../
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/json/home.html | 查看文档}
+ *
  * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
  *
  * 先提示 sybz 自身属性。
@@ -11,7 +13,7 @@ export type SJsonPublicProps = JsonProps
 
 export type SJsonComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SJson文档 = 'https://liulihao88.github.io/sybz-components/components/json/home.html'>(): {
     $props: {
       /** 结构化 JSON 数据；传入后优先于 data，通过默认 v-model 同步合法的编辑结果 */
       modelValue?: JsonData
@@ -47,5 +49,8 @@ export type SJsonComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/json/home.html | 查看文档}
+ */
 declare const SJson: SJsonComponent
 export default SJson

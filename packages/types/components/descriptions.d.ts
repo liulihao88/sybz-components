@@ -13,6 +13,8 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/descriptions/home.html | 查看文档}
+ *
  * s-descriptions 描述列表，支持每项配置 column、showAll 和 tooltipAttrs，单项 showAll/tooltipAttrs 优先于组件级配置。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Descriptions, supports custom width 的公开属性。
@@ -20,9 +22,12 @@ type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>
 export type SDescriptionsPublicProps = SDescriptionsOwnProps &
   Omit<ElDescriptionsInstance['$props'], keyof SDescriptionsOwnProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/descriptions/home.html | 查看文档}
+ */
 export type SDescriptionsComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SDescriptions文档 = 'https://liulihao88.github.io/sybz-components/components/descriptions/home.html'>(): {
     $props: {
       options: SDescriptionsItemOption[]
       /** 尺寸，控制描述项单元格内边距与字体大小 */
@@ -60,5 +65,8 @@ export type SDescriptionsComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/descriptions/home.html | 查看文档}
+ */
 declare const SDescriptions: SDescriptionsComponent
 export default SDescriptions

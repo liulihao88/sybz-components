@@ -8,6 +8,8 @@ import type {
 import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/pagination/home.html | 查看文档}
+ *
  * s-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。
  *
  * 先提示 sybz 自身属性。
@@ -16,7 +18,7 @@ export type SPaginationPublicProps = SPaginationProps
 
 export type SPaginationComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SPagination文档 = 'https://liulihao88.github.io/sybz-components/components/pagination/home.html'>(): {
     $props: {
       /** 当前页码；默认值：1 */
       currentPage?: number
@@ -54,5 +56,8 @@ export type SPaginationComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/pagination/home.html | 查看文档}
+ */
 declare const SPagination: SPaginationComponent
 export default SPagination

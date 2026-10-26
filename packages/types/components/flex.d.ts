@@ -10,13 +10,15 @@ import type {
 import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
+ *
  * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
  *
  * 先提示 sybz 自身属性。
  */
 export type SFlexComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SFlex文档 = 'https://liulihao88.github.io/sybz-components/components/flex/home.html'>(): {
     $props: {
       direction?: SFlexDirection
       /** 是否换行；true 等价于 wrap，false 等价于 nowrap */
@@ -35,5 +37,8 @@ export type SFlexComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
+ */
 declare const SFlex: SFlexComponent
 export default SFlex

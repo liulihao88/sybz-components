@@ -5,15 +5,20 @@ import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 type MdEditorInstance = InstanceType<typeof MdEditor>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/markdown/home.html | 查看文档}
+ *
  * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
  *
  * 先提示 sybz 自身属性，再提示 md-editor-v3 的公开属性。
  */
 export type SMarkdownPublicProps = MarkdownProps & Omit<MdEditorInstance['$props'], keyof MarkdownProps | 'sanitize'>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/markdown/home.html | 查看文档}
+ */
 export type SMarkdownComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SMarkdown文档 = 'https://liulihao88.github.io/sybz-components/components/markdown/home.html'>(): {
     $props: {
       /** 通过 v-model 绑定的 Markdown 或 HTML 源文本，优先级高于 source */
       modelValue?: string
@@ -110,5 +115,8 @@ export type SMarkdownComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/markdown/home.html | 查看文档}
+ */
 declare const SMarkdown: SMarkdownComponent
 export default SMarkdown

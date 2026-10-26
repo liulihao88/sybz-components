@@ -951,20 +951,33 @@ const getDocsUrlFromWrapperPath = (wrapperPath) => {
   return existsSync(docsFilePath) ? toOnlineDocsUrl(docsPath) : ''
 }
 
-const getComponentDocCommentLines = ({ docsUrl, description }) => {
-  if (!docsUrl && !description) return []
+const getComponentDocCommentLines = ({ docsUrl, description, details = [] }) => {
+  if (!docsUrl && !description && !details.length) return []
 
   const lines = ['/**']
   if (docsUrl) {
-    lines.push(` * 在线文档：${docsUrl}`)
+    lines.push(` * {@link ${docsUrl} | 查看文档}`)
   }
   if (description) {
     if (docsUrl) lines.push(' *')
     lines.push(` * ${description}`)
   }
+  if (details.length) {
+    if (docsUrl || description) lines.push(' *')
+    details.forEach((detail) => lines.push(` * ${detail}`))
+  }
   lines.push(' */')
 
   return lines
+}
+
+const getHoverConstructorTypeParameters = ({ componentName, docsUrl, extraParameters = '' }) => {
+  const parameters = [
+    ...(docsUrl ? [`${componentName}文档 = '${docsUrl}'`] : []),
+    ...(extraParameters ? [extraParameters.slice(1, -1)] : []),
+  ]
+
+  return parameters.length ? `<${parameters.join(', ')}>` : ''
 }
 
 const formatSlotsType = (slots = []) => {
@@ -1005,6 +1018,13 @@ const getInstallableComponentTypeParams = (typedComponent) => {
 
   return params.join(',\n  ')
 }
+
+const getDocumentedInstallableTypeLines = ({ componentName, docsUrl, baseTypeName, declaration }) => [
+  `${declaration} {`,
+  `  install: ${baseTypeName}['install']`,
+  `  new ${getHoverConstructorTypeParameters({ componentName, docsUrl })}(...args: any[]): InstanceType<${baseTypeName}>`,
+  '}',
+]
 
 const getWrapperSlotsType = (baseSlotsType, typedComponent) => {
   const ownSlotsType = getSlotsType(typedComponent)
@@ -1338,7 +1358,7 @@ const pushPublicPropsTypeLines = (wrapperLines, typedComponent, inheritedProps) 
   })
 }
 
-const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, wrapperConfig }) => {
+const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, wrapperConfig, docsUrl }) => {
   const normalizedPropsImportPath = getNormalizedImportPath(
     wrapperDir,
     typedComponent.propsImportPath ?? typedComponent.importPath,
@@ -1358,19 +1378,20 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
     '',
   ]
 
-  if (typedComponent.description) {
-    wrapperLines.push('/**')
-    wrapperLines.push(` * ${typedComponent.description}`)
-    wrapperLines.push(' *')
-    wrapperLines.push(` * 先提示 sybz 自身属性，再提示 ${wrapperConfig.description} 的公开属性。`)
-    wrapperLines.push(' */')
-  }
+  wrapperLines.push(
+    ...getComponentDocCommentLines({
+      docsUrl,
+      description: typedComponent.description,
+      details: [`先提示 sybz 自身属性，再提示 ${wrapperConfig.description} 的公开属性。`],
+    }),
+  )
 
   pushPublicPropsTypeLines(wrapperLines, typedComponent, wrapperConfig.inheritedProps)
   wrapperLines.push('')
+  wrapperLines.push(...getComponentDocCommentLines({ docsUrl }))
   wrapperLines.push(`export type ${typedComponent.exportedComponentTypeName} = {`)
   wrapperLines.push("  install: (app: import('vue').App) => void")
-  wrapperLines.push('  new (): {')
+  wrapperLines.push(`  new ${getHoverConstructorTypeParameters({ componentName, docsUrl })}(): {`)
   const propsLines = getExpandedPropsLines({
     hoverProps: typedComponent.hoverProps,
     inheritedProps: wrapperConfig.inheritedProps,
@@ -1385,6 +1406,7 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
   wrapperLines.push('  }')
   wrapperLines.push('}')
   wrapperLines.push('')
+  wrapperLines.push(...getComponentDocCommentLines({ docsUrl }))
   wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)
   wrapperLines.push(`export default ${componentName}`)
   wrapperLines.push('')
@@ -1392,7 +1414,7 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
   return wrapperLines
 }
 
-const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => {
+const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir, docsUrl }) => {
   const normalizedPropsImportPath = getNormalizedImportPath(wrapperDir, typedComponent.importPath)
   const propsImportNames = getHoverPropsImportTypeNames(typedComponent).join(', ')
   const componentTypeName = typedComponent.exportedComponentTypeName ?? `${componentName}Component`
@@ -1403,13 +1425,13 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
     '',
   ]
 
-  if (typedComponent.description) {
-    wrapperLines.push('/**')
-    wrapperLines.push(` * ${typedComponent.description}`)
-    wrapperLines.push(' *')
-    wrapperLines.push(' * 先提示 sybz 自身属性。')
-    wrapperLines.push(' */')
-  }
+  wrapperLines.push(
+    ...getComponentDocCommentLines({
+      docsUrl,
+      description: typedComponent.description,
+      details: ['先提示 sybz 自身属性。'],
+    }),
+  )
 
   if (typedComponent.publicPropsTypeName) {
     wrapperLines.push(`export type ${typedComponent.publicPropsTypeName} = ${typedComponent.typeName}`)
@@ -1422,7 +1444,9 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
       : `export type ${componentTypeName} = {`,
   )
   wrapperLines.push("  install: (app: import('vue').App) => void")
-  wrapperLines.push(`  new ${typedComponent.hoverConstructorTypeParameters ?? ''}(): {`)
+  wrapperLines.push(
+    `  new ${getHoverConstructorTypeParameters({ componentName, docsUrl, extraParameters: typedComponent.hoverConstructorTypeParameters })}(): {`,
+  )
   const propsLines = getExpandedPropsLines({
     hoverProps: typedComponent.hoverProps,
     inheritedProps: [],
@@ -1439,6 +1463,7 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
   wrapperLines.push('  }')
   wrapperLines.push('}')
   wrapperLines.push('')
+  wrapperLines.push(...getComponentDocCommentLines({ docsUrl }))
   wrapperLines.push(
     typedComponent.hoverConstructorTypeParameters
       ? `export type ${componentTypeName} = typeof ${componentName}`
@@ -1642,7 +1667,7 @@ await writeDeclarationFile(
   ),
 )
 
-for (const { componentName, wrapperFilePath } of allComponentEntries) {
+for (const { componentName, wrapperFilePath, docsUrl } of allComponentEntries) {
   const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
   const wrapperDir = dirname(wrapperFilePath)
   const elementWrapperConfig = ELEMENT_WRAPPER_CONFIGS[typedComponent?.explicitComponentType]
@@ -1655,6 +1680,7 @@ for (const { componentName, wrapperFilePath } of allComponentEntries) {
         typedComponent,
         wrapperDir,
         wrapperConfig: elementWrapperConfig,
+        docsUrl,
       }).join('\n'),
     )
     continue
@@ -1667,6 +1693,7 @@ for (const { componentName, wrapperFilePath } of allComponentEntries) {
         componentName,
         typedComponent,
         wrapperDir,
+        docsUrl,
       }).join('\n'),
     )
     continue
@@ -1704,26 +1731,73 @@ for (const { componentName, wrapperFilePath } of allComponentEntries) {
       wrapperLines.push('')
     }
 
-    if (typedComponent.description) {
-      wrapperLines.push('/**')
-      wrapperLines.push(` * ${typedComponent.description}`)
-      wrapperLines.push(' *')
-      wrapperLines.push(' * 支持组件公开属性，并扩展 sybz 自身属性。')
-      wrapperLines.push(' */')
-    }
-
     if (typedComponent.exportedComponentTypeName) {
       wrapperLines.push(
-        `export interface ${typedComponent.exportedComponentTypeName} extends InstallableComponent<${componentTypeParams}> {}`,
+        ...getComponentDocCommentLines({
+          docsUrl,
+          description: typedComponent.description,
+          details: ['支持组件公开属性，并扩展 sybz 自身属性。'],
+        }),
       )
+      if (docsUrl) {
+        const baseTypeName = `${componentName}Installable`
+        wrapperLines.push(`type ${baseTypeName} = InstallableComponent<${componentTypeParams}>`)
+        wrapperLines.push(
+          ...getDocumentedInstallableTypeLines({
+            componentName,
+            docsUrl,
+            baseTypeName,
+            declaration: `export type ${typedComponent.exportedComponentTypeName} =`,
+          }),
+        )
+      } else {
+        wrapperLines.push(
+          `export interface ${typedComponent.exportedComponentTypeName} extends InstallableComponent<${componentTypeParams}> {}`,
+        )
+      }
       wrapperLines.push('')
+      wrapperLines.push(...getComponentDocCommentLines({ docsUrl }))
       wrapperLines.push(`declare const ${componentName}: ${typedComponent.exportedComponentTypeName}`)
     } else {
-      wrapperLines.push(`declare const ${componentName}: InstallableComponent<${componentTypeParams}>`)
+      wrapperLines.push(
+        ...getComponentDocCommentLines({
+          docsUrl,
+          description: typedComponent.description,
+          details: ['支持组件公开属性，并扩展 sybz 自身属性。'],
+        }),
+      )
+      if (docsUrl) {
+        const baseTypeName = `${componentName}Installable`
+        wrapperLines.push(`type ${baseTypeName} = InstallableComponent<${componentTypeParams}>`)
+        wrapperLines.push(
+          ...getDocumentedInstallableTypeLines({
+            componentName,
+            docsUrl,
+            baseTypeName,
+            declaration: `declare const ${componentName}:`,
+          }),
+        )
+      } else {
+        wrapperLines.push(`declare const ${componentName}: InstallableComponent<${componentTypeParams}>`)
+      }
     }
   } else {
     wrapperLines.push('')
-    wrapperLines.push(`declare const ${componentName}: InstallableComponent`)
+    wrapperLines.push(...getComponentDocCommentLines({ docsUrl }))
+    if (docsUrl) {
+      const baseTypeName = `${componentName}Installable`
+      wrapperLines.push(`type ${baseTypeName} = InstallableComponent`)
+      wrapperLines.push(
+        ...getDocumentedInstallableTypeLines({
+          componentName,
+          docsUrl,
+          baseTypeName,
+          declaration: `declare const ${componentName}:`,
+        }),
+      )
+    } else {
+      wrapperLines.push(`declare const ${componentName}: InstallableComponent`)
+    }
   }
 
   wrapperLines.push(`export default ${componentName}`)

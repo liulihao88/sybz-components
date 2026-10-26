@@ -2,13 +2,15 @@ import type { SIconValue, SIconProps, SybzComponentTheme, SybzComponentSize, Syb
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
+ *
  * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
  *
  * 先提示 sybz 自身属性。
  */
 export type STitleComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <STitle文档 = 'https://liulihao88.github.io/sybz-components/components/title/home.html'>(): {
     $props: {
       title?: string
       /** 左侧图标，写法与 s-icon 的 icon 属性一致；设置后自动隐藏左侧竖条 */
@@ -41,5 +43,8 @@ export type STitleComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
+ */
 declare const STitle: STitleComponent
 export default STitle

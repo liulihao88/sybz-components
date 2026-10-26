@@ -5,15 +5,20 @@ import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 type ElImageInstance = InstanceType<typeof ElImage>
 
 /**
+ * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
+ *
  * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径和源码资源解析。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Image 的公开属性。
  */
 export type SImagePublicProps = SImageSelfProps & Omit<ElImageInstance['$props'], keyof SImageSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
+ */
 export type SImageComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SImage文档 = 'https://liulihao88.github.io/sybz-components/components/image/home.html'>(): {
     $props: {
       /** 图片地址；相对路径会通过 resolver 或 basePath 解析 */
       src?: string
@@ -37,5 +42,8 @@ export type SImageComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
+ */
 declare const SImage: SImageComponent
 export default SImage

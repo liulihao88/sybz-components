@@ -4,11 +4,19 @@ import type { SybzStyleProps } from '../component-props'
 
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/drawer/home.html | 查看文档}
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus Drawer 的公开属性。
+ */
 export type SDrawerPublicProps = SDrawerSelfProps & Omit<ElDrawerInstance['$props'], keyof SDrawerSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/drawer/home.html | 查看文档}
+ */
 export type SDrawerComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SDrawer文档 = 'https://liulihao88.github.io/sybz-components/components/drawer/home.html'>(): {
     $props: {
       confirmText?: string
       cancelText?: string
@@ -43,5 +51,8 @@ export type SDrawerComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/drawer/home.html | 查看文档}
+ */
 declare const SDrawer: SDrawerComponent
 export default SDrawer

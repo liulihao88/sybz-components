@@ -9,12 +9,20 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 
 type ElPopoverInstance = InstanceType<typeof ElPopover>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
+ *
+ * 先提示 sybz 自身属性，再提示 Element Plus Popover 的公开属性。
+ */
 export type SPopconfirmPublicProps = SPopoverConfirmSelfProps &
   Omit<ElPopoverInstance['$props'], keyof SPopoverConfirmSelfProps>
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
+ */
 export type SPopconfirmComponent = {
   install: (app: import('vue').App) => void
-  new (): {
+  new <SPopconfirm文档 = 'https://liulihao88.github.io/sybz-components/components/popconfirm/home.html'>(): {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
@@ -64,5 +72,8 @@ export type SPopconfirmComponent = {
   }
 }
 
+/**
+ * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
+ */
 declare const SPopconfirm: SPopconfirmComponent
 export default SPopconfirm
