@@ -68,7 +68,7 @@ descriptions/customStyle
 descriptions/custom
 :::
 
-### 尺寸（size 默认值：default）
+### other
 
 :::demo 展示通过 `size` 控制描述列表单元格内边距（宽高）与字体大小。基础写法：`<s-descriptions :options="options" :size="size" :column="2" />`。属性：`size` 可选 `small / default / large`，默认值 `default`；`small` 内边距更紧凑、字体 12px，`default` 内边距 12px 14px、字体 14px，`large` 内边距更宽松、字体 16px。
 descriptions/other
