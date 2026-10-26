@@ -25,7 +25,8 @@ license: MIT
 - 组件间的间距、字号、颜色、宽高等样式优先用样式简写属性（Style Props）表达，如 `m` / `p` / `fs` / `fw` / `bg` / `c` / `w` / `h` / `bd` 等，避免散落 `:style` 或硬编码 class；用法见 [references/style-props.md](references/style-props.md)。
 - 表单、表格优先配置化；仅在配置无法表达时使用插槽或 `render`。
 - `s-table` 必须默认使用 `columns`；普通列用 `prop`，定制单元格用列 `render`，操作列用 `btns`。只有确认 `columns`、`render`、`btns` 和具名插槽均无法表达需求时，才允许在默认插槽中声明 `el-table-column`，并须在交付说明中写明原因。
-- 样式以组件库为准；仅业务明确要求时保留旧页面像素样式。先检查应用入口是否已通过 `app.use(SybzComponents, { theme: '...' })` 设置全局主题；已设置时，生成的业务组件代码省略重复的 `theme` 属性。只有单个组件需要覆盖全局主题时才显式传 `theme`。主题色使用 token，避免散落硬编码色。
+- 样式一律以组件库为准。当收到原型图、UI 图或设计稿（图片、标注、切图）时，若其中某处样式与组件库组件的内置样式冲突（如间距、字号、颜色、圆角、边框、宽高、投影等），以组件库样式为准：禁止修改组件内部样式、禁止覆盖组件库既定视觉规范去贴合原型/UI；只通过组件对外暴露的能力（Style Props、props、主题 token）做业务层表达，组件能力覆盖不到的还原诉求直接不实现，并在交付说明中注明以组件库为准。仅业务明确要求时才保留旧页面像素样式。
+- 先检查应用入口是否已通过 `app.use(SybzComponents, { theme: '...' })` 设置全局主题；已设置时，生成的业务组件代码省略重复的 `theme` 属性。只有单个组件需要覆盖全局主题时才显式传 `theme`。主题色使用 token，避免散落硬编码色。
 - 删除确认通常使用对象式 `confirm({ variant: 'delete', message: '确定删除文件夹<code type="danger">123</code>吗?' })`，用 `<code type="danger">` 标出删除对象；具体用法见 [references/utils.md](references/utils.md)。删除对象来自动态数据时优先用 `target` 自动生成并转义文案。仅需覆盖全局主题时显式传 `theme`，例如 `theme: 'sybz'`。
 - API 不确定时检索当前项目源码、类型和文档，不凭示例猜测。
 - 修改后运行已有 typecheck/lint（不主动 build/docsbuild）；交付时简述组件、utils、主题、删减项和校验。
