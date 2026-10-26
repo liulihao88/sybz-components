@@ -84,6 +84,14 @@ button/customColor
 button/other
 :::
 
+### 圆角按钮（round 默认值：false）
+
+基础写法：`<s-button round type="primary">圆角按钮</s-button>`。设置 `round` 后按钮使用圆角样式，也适用于主题按钮和带提示文字的按钮。
+
+:::demo 展示 `round` 的默认样式和开启后的圆角样式。属性：`round` 可选 `true / false`，默认值 `false`；`theme` 可选 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`content` 类型 `string`，默认值 `''`。
+button/round
+:::
+
 ### 属性
 
 其他属性默认继承 `el-button`
@@ -102,6 +110,7 @@ button/href
 |          `theme`           | 主题样式                            | `'default' \| 'chenghua' \| 'shijingshan' \| 'sybz' \| 'gulou'` | `default` |
 |         `variant`          | 主题样式变体                        | `'' \| 'outline' \| 'gradient'`                                 | `default` |
 |           `size`           | 按钮尺寸（高度 32px / 40px / 48px） | `'small' \| 'default' \| 'large'`                               | `default` |
+|          `round`           | 是否显示为圆角按钮                  | boolean                                                         | `false`   |
 |          `width`           | 按钮宽度，支持 `processWidth` 写法  | string / number                                                 | `''`      |
 |          `height`          | 按钮高度，支持 `processWidth` 写法  | string / number                                                 | `''`      |
 |      `hoverAnimation`      | 鼠标移入时上移并轻微放大的动效      | boolean                                                         | `false`   |

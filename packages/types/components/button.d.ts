@@ -4,7 +4,7 @@ import type { SButtonSelfProps } from '../component-props'
 type ElButtonInstance = InstanceType<typeof ElButton>
 
 /**
- * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称、Iconify 名称和 HTTP 图片，并支持链接、主题、图标位置与 ghost 幽灵按钮。
+ * s-button 按钮组件，icon 支持 Element Plus 图标组件、图标名称、Iconify 名称和 HTTP 图片，并支持链接、主题、图标位置、round 圆角与 ghost 幽灵按钮。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Button 的公开属性。
  */
@@ -32,6 +32,8 @@ export type SButtonComponent = {
       variant?: '' | 'outline' | 'gradient'
       /** 按钮尺寸 */
       size?: 'small' | 'default' | 'large'
+      /** 是否显示为圆角按钮 */
+      round?: boolean
       /** 按钮宽度，数字会按工具方法补单位 */
       width?: string | number
       w?: string | number
@@ -55,6 +57,7 @@ export type SButtonComponent = {
       | 'theme'
       | 'variant'
       | 'size'
+      | 'round'
       | 'width'
       | 'w'
       | 'height'

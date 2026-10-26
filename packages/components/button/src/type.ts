@@ -20,6 +20,8 @@ export interface SButtonSelfProps {
   variant?: '' | 'outline' | 'gradient'
   /** 按钮尺寸 */
   size?: 'small' | 'default' | 'large'
+  /** 是否显示为圆角按钮 */
+  round?: boolean
   /** 按钮宽度，数字会按工具方法补单位 */
   width?: string | number
   w?: string | number

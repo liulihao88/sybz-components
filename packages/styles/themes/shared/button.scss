@@ -66,6 +66,10 @@
     font-size: 16px;
   }
 
+  &.is-round {
+    border-radius: var(--el-border-radius-round, 20px);
+  }
+
   &.is-link,
   &.is-text {
     --el-button-bg-color: transparent;

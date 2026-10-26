@@ -43,6 +43,7 @@ interface SButtonSelfProps {
   theme?: SybzComponentTheme
   variant?: '' | 'outline' | 'gradient'
   size?: 'small' | 'default' | 'large'
+  round?: boolean
   width?: string | number
   w?: string | number
   height?: string | number
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   theme: 'default',
   variant: '',
   size: 'default',
+  round: false,
   width: '',
   height: '',
   hoverAnimation: false,
@@ -100,6 +102,7 @@ const buttonAttrs = computed(() => {
   return {
     loading: loading.value,
     size: mergedProps.value.size || undefined,
+    round: mergedProps.value.round,
     ...normalizedAttrs,
     tag: mergedProps.value.href ? 'a' : normalizedAttrs.tag,
     href: mergedProps.value.href || normalizedAttrs.href,
