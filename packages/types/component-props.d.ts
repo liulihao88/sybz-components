@@ -91,6 +91,7 @@ export interface SybzStyleProps {
   bdl?: string
   bdt?: string
   bdb?: string
+  br?: string | number
 }
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})

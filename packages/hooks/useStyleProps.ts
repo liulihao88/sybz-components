@@ -64,6 +64,7 @@ export const STYLE_PROP_MAP = {
   bdl: 'border-left',
   bdt: 'border-top',
   bdb: 'border-bottom',
+  br: 'border-radius',
 } as const
 
 export type SybzStylePropKey = keyof typeof STYLE_PROP_MAP
@@ -96,6 +97,7 @@ const LENGTH_PROP_KEYS = new Set<SybzStylePropKey>([
   'bottom',
   'left',
   'right',
+  'br',
 ])
 
 const toStyleValue = (key: SybzStylePropKey, value: unknown): unknown => {
