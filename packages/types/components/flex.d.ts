@@ -23,7 +23,8 @@ export type SFlexComponent = {
       justify?: SFlexJustify
       align?: SFlexAlign
       flex?: string
-      gap?: SybzComponentSize | string | number
+      /** 子元素间距；裸写 gap 或传 true 等价于 small，传 false 等价于不设间距 */
+      gap?: boolean | SybzComponentSize | string | number
       width?: string | number
       w?: string | number
       height?: string | number

@@ -20,7 +20,7 @@ flex/base
 
 ### 按钮间距（`gap` 默认值：`0px`）
 
-:::demo 设置非零 `gap` 后，按钮间距统一由 `s-flex` 管理，Element Plus 按钮默认的 `margin-left` 不再生效；裸写 `wrap` 等价于 `wrap="wrap"`。基础写法：`<s-flex wrap gap="small"><s-button>按钮</s-button></s-flex>`。属性：`gap` 可选 `small / default / large / 自定义宽度`，默认值 `0px`；`wrap` 可选 `true / false / nowrap / wrap / wrap-reverse`，默认值 `nowrap`，其中 `true` 等价于 `wrap`，`false` 等价于 `nowrap`。
+:::demo 设置非零 `gap` 后，按钮间距统一由 `s-flex` 管理，Element Plus 按钮默认的 `margin-left` 不再生效；裸写 `wrap` 等价于 `wrap="wrap"`，裸写 `gap` 等价于 `gap="small"`。基础写法：`<s-flex wrap gap><s-button>按钮</s-button></s-flex>`。属性：`gap` 可选 `true / false / small / default / large / 自定义宽度`，默认值 `0px`，其中裸写或 `true` 等价于 `small`，`false` 等价于 `0px`；`wrap` 可选 `true / false / nowrap / wrap / wrap-reverse`，默认值 `nowrap`，其中 `true` 等价于 `wrap`，`false` 等价于 `nowrap`。
 flex/buttonGap
 :::
 
@@ -38,7 +38,7 @@ flex/size
 
 ### 图标间距（gap 默认值：0px）
 
-基础写法：`<s-flex gap="12"><s-icon icon="Edit" /><s-icon icon="Delete" /></s-flex>`。`gap` 支持 `small / default / large`（8 / 16 / 24px）、数字和带单位的长度，默认值为 `0px`。
+基础写法：`<s-flex gap="12"><s-icon icon="Edit" /><s-icon icon="Delete" /></s-flex>`。`gap` 支持 `small / default / large`（8 / 16 / 24px）、数字和带单位的长度，默认值为 `0px`；裸写 `gap` 等价于 `gap="small"`。
 
 :::demo 设置非零 gap 后，直接子级 s-icon 的默认相邻间距会被清除，横向和纵向间距统一由 gap 控制。未设置 gap 时保留图标默认的 8px 相邻间距。
 flex/iconGap
@@ -46,27 +46,29 @@ flex/iconGap
 
 ### API
 
-|   属性名    | 说明                                                                 | 类型               | 可选值                                                                                    | 默认值   |
-| :---------: | -------------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------- | -------- |
-| `direction` | 主轴方向，对应 `flex-direction`                                      | string             | `row` / `row-reverse` / `column` / `column-reverse`                                       | `row`    |
-|   `wrap`    | 是否换行；裸写或传 `true` 等价于 `wrap`，传 `false` 等价于 `nowrap`  | boolean / string   | `true` / `false` / `nowrap` / `wrap` / `wrap-reverse`                                     | `nowrap` |
-|  `justify`  | 主轴对齐方式，对应 `justify-content`                                 | string             | `start` / `end` / `center` / `space-between` / `space-around` / `space-evenly` / `normal` | `normal` |
-|   `align`   | 交叉轴对齐方式，对应 `align-items`                                   | string             | `start` / `end` / `center` / `baseline` / `stretch` / `normal`                            | `normal` |
-|    `gap`    | 子元素间距，对应 `gap`                                               | string / number    | `small` / `default` / `large` / 任意可被 `processWidth` 处理的宽度                        | `0px`    |
-|   `flex`    | 当前 `s-flex` 自身在父级 flex 容器中的伸缩规则，对应 CSS `flex` 简写 | string             | 任意合法 CSS `flex` 值，如 `1`、`0 0 180px`                                               | `''`     |
-|   `width`   | 容器宽度                                                             | string / number    | 任意可被 `processWidth` 处理的 CSS 长度                                                   | -        |
-|  `height`   | 容器高度                                                             | string / number    | 任意可被 `processWidth` 处理的 CSS 长度                                                   | -        |
-| `component` | 自定义根节点标签或组件                                               | string / Component | 原生标签名或 Vue 组件                                                                     | `div`    |
+|   属性名    | 说明                                                                       | 类型                      | 可选值                                                                                    | 默认值   |
+| :---------: | -------------------------------------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------- | -------- |
+| `direction` | 主轴方向，对应 `flex-direction`                                            | string                    | `row` / `row-reverse` / `column` / `column-reverse`                                       | `row`    |
+|   `wrap`    | 是否换行；裸写或传 `true` 等价于 `wrap`，传 `false` 等价于 `nowrap`        | boolean / string          | `true` / `false` / `nowrap` / `wrap` / `wrap-reverse`                                     | `nowrap` |
+|  `justify`  | 主轴对齐方式，对应 `justify-content`                                       | string                    | `start` / `end` / `center` / `space-between` / `space-around` / `space-evenly` / `normal` | `normal` |
+|   `align`   | 交叉轴对齐方式，对应 `align-items`                                         | string                    | `start` / `end` / `center` / `baseline` / `stretch` / `normal`                            | `normal` |
+|    `gap`    | 子元素间距，对应 `gap`；裸写或 `true` 等价于 `small`，`false` 等价于 `0px` | boolean / string / number | `true` / `false` / `small` / `default` / `large` / 任意可被 `processWidth` 处理的宽度     | `0px`    |
+|   `flex`    | 当前 `s-flex` 自身在父级 flex 容器中的伸缩规则，对应 CSS `flex` 简写       | string                    | 任意合法 CSS `flex` 值，如 `1`、`0 0 180px`                                               | `''`     |
+|   `width`   | 容器宽度                                                                   | string / number           | 任意可被 `processWidth` 处理的 CSS 长度                                                   | -        |
+|  `height`   | 容器高度                                                                   | string / number           | 任意可被 `processWidth` 处理的 CSS 长度                                                   | -        |
+| `component` | 自定义根节点标签或组件                                                     | string / Component        | 原生标签名或 Vue 组件                                                                     | `div`    |
 
 ### Gap 预设
 
-|    值     | 转换结果                                             |
-| :-------: | ---------------------------------------------------- |
-|  `small`  | `8px`                                                |
-| `default` | `16px`                                               |
-|  `large`  | `24px`                                               |
-|  number   | 交给 `processWidth` 处理，通常转成 `px`              |
-|  string   | 交给 `processWidth` 处理，例如 `12px`、`1rem`、`50%` |
+|     值      | 转换结果                                             |
+| :---------: | ---------------------------------------------------- |
+| 裸写/`true` | `8px`（等价于 `small`）                              |
+|   `false`   | `0px`（等价于不设间距）                              |
+|   `small`   | `8px`                                                |
+|  `default`  | `16px`                                               |
+|   `large`   | `24px`                                               |
+|   number    | 交给 `processWidth` 处理，通常转成 `px`              |
+|   string    | 交给 `processWidth` 处理，例如 `12px`、`1rem`、`50%` |
 
 ### 插槽
 

@@ -19,7 +19,7 @@ interface FlexProps {
   justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'normal'
   align?: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal'
   flex?: string
-  gap?: string | number
+  gap?: boolean | string | number
   width?: string | number
   w?: string | number
   height?: string | number
@@ -62,8 +62,13 @@ const flexStyles = computed(() => {
 })
 
 function parseGapValue() {
-  let gap = props.gap
-  if (gap === 'small') {
+  const gap = props.gap
+  // boolean 形式：裸写 gap（或 :gap="true"）等价于 gap="small"；:gap="false" 等价于不设间距
+  if (gap === true || gap === '') {
+    return '8px'
+  } else if (gap === false) {
+    return '0px'
+  } else if (gap === 'small') {
     return '8px'
   } else if (gap === 'default') {
     return '16px'

@@ -6,6 +6,12 @@
     </s-flex>
 
     <hr />
+    <s-title title='裸写 gap（等价于 gap="small"，间距 8px）' />
+    <s-flex wrap gap>
+      <s-button v-for="button in buttons" :key="button">{{ button }}</s-button>
+    </s-flex>
+
+    <hr />
     <s-title title='设置 gap="12"' />
     <s-flex wrap="wrap" gap="12">
       <s-button v-for="button in buttons" :key="button">{{ button }}</s-button>
