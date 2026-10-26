@@ -6,11 +6,18 @@
     :class="inputNumberClass"
   >
     <s-comp-title v-if="mergedProps.title" v-bind="compTitleProps" />
-    <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
-      <template v-for="(_, name) in $slots" #[name]="slotProps">
-        <slot :name="name" v-bind="slotProps || {}" />
-      </template>
-    </el-input-number>
+    <div class="s-input-number__main">
+      <TopTitleOutline
+        v-if="mergedProps.topTitle"
+        :title="mergedProps.topTitle"
+        :square-left="Boolean(mergedProps.title)"
+      />
+      <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
+        <template v-for="(_, name) in $slots" #[name]="slotProps">
+          <slot :name="name" v-bind="slotProps || {}" />
+        </template>
+      </el-input-number>
+    </div>
   </div>
 </template>
 
@@ -20,6 +27,7 @@ import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
+import TopTitleOutline from '../../common/TopTitleOutline.vue'
 
 defineOptions({
   name: 'SInputNumber',
@@ -30,6 +38,8 @@ const attrs = useAttrs()
 
 interface InputNumberProps {
   title?: string
+  /** 嵌在输入框上边框的标题，与左侧前缀 title 区分 */
+  topTitle?: string
   compTitleStyle?: Record<string, any>
   width?: string | number
   w?: string | number
@@ -42,6 +52,7 @@ interface InputNumberProps {
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
   title: '',
+  topTitle: '',
   compTitleStyle: undefined,
   width: '',
   height: '',
@@ -51,6 +62,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('inputNumber', props)
 const { style } = useStyleProps()
+const isDisabled = computed(() => attrs.disabled === true || attrs.disabled === '')
 
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
@@ -72,7 +84,9 @@ const inputNumberClass = computed(() => [
     's-input-number--chenghua': mergedProps.value.theme === 'chenghua',
     's-input-number--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-input-number--sybz': mergedProps.value.theme === 'sybz',
+    's-input-number--top-title': Boolean(mergedProps.value.topTitle),
     'has-title': !!mergedProps.value.title,
+    'is-disabled': isDisabled.value,
   },
 ])
 
@@ -82,12 +96,18 @@ const mergedAttrs = computed(() => {
     size: mergedProps.value.size || undefined,
   }
 
-  return Object.entries(attrs).reduce((obj, [key, value]) => {
+  const merged = Object.entries(attrs).reduce((obj, [key, value]) => {
     if (key !== 'class' && key !== 'style') {
       obj[key] = value
     }
     return obj
   }, baseAttrs)
+
+  if (mergedProps.value.topTitle && !merged['aria-label']) {
+    merged['aria-label'] = mergedProps.value.topTitle
+  }
+
+  return merged
 })
 
 const inputNumberStyle = computed(() => {
@@ -114,6 +134,14 @@ const inputNumberStyle = computed(() => {
   align-items: stretch;
   vertical-align: middle;
 
+  .s-input-number__main {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+  }
+
   .s-input-number__inner {
     flex: 1 1 auto;
     min-width: 0;
@@ -133,10 +161,34 @@ const inputNumberStyle = computed(() => {
     line-height: normal;
   }
 
-  .s-comp-title + :deep(.el-input-number .el-input__wrapper),
-  .s-comp-title + :deep(.el-input-number .el-input-number__decrease) {
+  &.has-title :deep(.el-input-number .el-input__wrapper),
+  &.has-title :deep(.el-input-number .el-input-number__decrease) {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
+  }
+
+  &.s-input-number--top-title {
+    &:hover {
+      --s-top-title-border-color: var(--el-border-color-hover);
+    }
+
+    &:focus-within {
+      --s-top-title-border-color: var(--el-color-primary);
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover {
+      --s-top-title-border-color: var(--el-disabled-border-color);
+    }
+
+    // 边框由 TopTitleOutline 绘制，内层输入框不再重复描边，避免 1px 线穿过标题。
+    .s-input-number__main :deep(.el-input-number .el-input__wrapper),
+    .s-input-number__main :deep(.el-input-number .el-input__wrapper:hover),
+    .s-input-number__main :deep(.el-input-number .el-input__wrapper.is-focus),
+    .s-input-number__main :deep(.el-input-number .el-input-number__decrease:hover ~ .el-input .el-input__wrapper),
+    .s-input-number__main :deep(.el-input-number .el-input-number__increase:hover ~ .el-input .el-input__wrapper) {
+      box-shadow: none;
+    }
   }
 }
 </style>

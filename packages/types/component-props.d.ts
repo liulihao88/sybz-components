@@ -372,6 +372,8 @@ export type SInputProps = SInputSelfProps & Partial<Omit<InputPropsPublic, keyof
 
 export interface SInputNumberSelfProps {
   title?: string
+  /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
+  topTitle?: string
   compTitleStyle?: SybzRecord
   width?: string | number
   w?: string | number

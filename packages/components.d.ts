@@ -252,10 +252,14 @@ declare module 'vue' {
     's-input-label': (typeof import('./types/components/inputLabel'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
+     *
+     * s-input-number 数字输入框组件，支持上边框嵌入标题。
      */
     SInputNumber: (typeof import('./types/components/inputNumber'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
+     *
+     * s-input-number 数字输入框组件，支持上边框嵌入标题。
      */
     's-input-number': (typeof import('./types/components/inputNumber'))['default']
     /**

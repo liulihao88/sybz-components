@@ -573,6 +573,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'inputNumber',
       allowAnySlots: true,
+      description: 's-input-number 数字输入框组件，支持上边框嵌入标题。',
       hoverProps: componentHoverProps('SInputNumberSelfProps', [
         'SInputNumberSelfProps',
         'SybzComponentSize',

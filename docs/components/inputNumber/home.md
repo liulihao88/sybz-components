@@ -51,19 +51,28 @@ inputNumber/size
 inputNumber/usually
 :::
 
+### 上边框标题 `top-title`（默认值：空字符串）
+
+使用 `top-title` 将标题嵌入输入框上边框，边框会为文字留出缺口，禁用、悬停和聚焦状态同步变化；原有 `title` 仍显示在左侧前缀。基础写法：`<s-input-number v-model="value" top-title="数量" width="260" :min="0" />`。
+
+:::demo 属性：`top-title` 类型 `string`，默认值 `''`；`title` 类型 `string`，默认值 `''`；`disabled` 类型 `boolean`，默认值 `false`；`width` 类型 `string / number`，默认值 `''`。
+inputNumber/other
+:::
+
 ### 属性
 
-|       属性名        | 说明             | 类型                                            | 默认值    |
-| :-----------------: | ---------------- | ----------------------------------------------- | --------- |
-|    `modelValue`     | 绑定值           | any                                             | -         |
-|       `title`       | 左侧标题前缀文案 | string                                          | `''`      |
-|  `compTitleStyle`   | 标题前缀组件样式 | object                                          | `{}`      |
-|       `width`       | 组件总宽度       | string / number                                 | `''`      |
-|      `height`       | 组件总高度       | string / number                                 | `''`      |
-|       `theme`       | 主题样式         | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
-|       `size`        | 输入框尺寸       | `''` / `large` / `default` / `small`            | `''`      |
-| `controls-position` | 控制按钮位置     | `''` / `right`                                  | `right`   |
-|     `subAttrs`      | 外层容器额外属性 | object                                          | `{}`      |
+|       属性名        | 说明                                           | 类型                                            | 默认值    |
+| :-----------------: | ---------------------------------------------- | ----------------------------------------------- | --------- |
+|    `modelValue`     | 绑定值                                         | any                                             | -         |
+|       `title`       | 左侧标题前缀文案                               | string                                          | `''`      |
+|     `topTitle`      | 嵌在输入框上边框的标题，模板中写作 `top-title` | string                                          | `''`      |
+|  `compTitleStyle`   | 标题前缀组件样式                               | object                                          | `{}`      |
+|       `width`       | 组件总宽度                                     | string / number                                 | `''`      |
+|      `height`       | 组件总高度                                     | string / number                                 | `''`      |
+|       `theme`       | 主题样式                                       | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
+|       `size`        | 输入框尺寸                                     | `''` / `large` / `default` / `small`            | `''`      |
+| `controls-position` | 控制按钮位置                                   | `''` / `right`                                  | `right`   |
+|     `subAttrs`      | 外层容器额外属性                               | object                                          | `{}`      |
 
 ### 插槽
 
@@ -78,4 +87,5 @@ inputNumber/usually
 
 - 默认基于 `el-input-number` 二次封装，并透传绝大多数 `el-input-number` 属性。
 - 传入 `title` 后会在左侧渲染 `s-comp-title`，用于和其他表单组件保持一致。
+- 传入 `top-title` 后标题会嵌入输入框上边框，可与左侧 `title` 同时使用。
 - 支持透传 `el-input-number` 的命名插槽。

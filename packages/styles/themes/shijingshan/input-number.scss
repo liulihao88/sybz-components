@@ -113,4 +113,23 @@
     border-left-color: var(--s-sjs-primary-border);
     border-bottom-right-radius: var(--s-sjs-radius);
   }
+
+  &.s-input-number--top-title {
+    --s-top-title-border-color: var(--s-sjs-primary-border);
+    --s-top-title-radius: var(--s-sjs-radius);
+    --s-top-title-text-color: var(--s-sjs-text-muted);
+
+    &:hover {
+      --s-top-title-border-color: var(--s-sjs-primary-border-hover);
+    }
+
+    &:focus-within {
+      --s-top-title-border-color: var(--s-sjs-primary);
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover {
+      --s-top-title-border-color: var(--s-sjs-divider);
+    }
+  }
 }
