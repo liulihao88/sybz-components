@@ -1,98 +1,23 @@
+@import '../shared/descriptions.scss';
+
 .s-descriptions.s-descriptions--shijingshan.s-descriptions--shijingshan {
-  --el-descriptions-table-border: 1px solid var(--s-sjs-divider);
-  --el-descriptions-item-bordered-label-background: var(--s-sjs-primary-soft);
+  --s-descriptions-divider: var(--s-sjs-divider);
+  --s-descriptions-label-bg: var(--s-sjs-primary-soft);
+  --s-descriptions-text: var(--s-sjs-text);
+  --s-descriptions-text-regular: var(--s-sjs-text-regular);
+  --s-descriptions-primary: var(--s-sjs-primary);
+  --s-descriptions-font-family: var(--s-sjs-font-family);
+  --s-descriptions-radius: var(--s-sjs-radius-card);
+  --s-descriptions-corner-radius: var(--s-sjs-radius-card);
+  --s-descriptions-body-bg: var(--s-sjs-card-bg);
+  --s-descriptions-table-bg: var(--s-sjs-card-bg);
+  --s-descriptions-row-bg: var(--s-sjs-card-bg);
+  --s-descriptions-content-bg: var(--s-sjs-card-bg);
+  --s-descriptions-shadow: var(--s-sjs-shadow-soft);
+  --s-descriptions-title-font-size: 18px;
+  --s-descriptions-title-line-height: 1.4;
+  --s-descriptions-cell-line-height: 1.5;
+  --s-descriptions-label-color: var(--s-sjs-text-muted);
 
-  color: var(--s-sjs-text);
-  font-family: var(--s-sjs-font-family);
-
-  .el-descriptions__header {
-    margin-bottom: 12px;
-  }
-
-  .el-descriptions__title {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .el-descriptions__extra {
-    font-size: 14px;
-  }
-
-  .el-descriptions__body {
-    overflow: hidden;
-    border-radius: var(--s-sjs-radius-card);
-    background: var(--s-sjs-card-bg);
-    box-shadow: var(--s-sjs-shadow-soft);
-  }
-
-  .el-descriptions__table {
-    width: 100%;
-    overflow: hidden;
-    border-collapse: separate;
-    border-radius: inherit;
-    border-spacing: 0;
-    background: var(--s-sjs-card-bg);
-  }
-
-  .el-descriptions__table.is-bordered tr {
-    background: var(--s-sjs-card-bg);
-  }
-
-  .el-descriptions__cell {
-    background-clip: padding-box;
-    border-color: var(--s-sjs-divider) !important;
-    color: var(--s-sjs-text-regular);
-    font-size: var(--s-descriptions-cell-font-size, 14px);
-    line-height: 1.5;
-  }
-
-  .el-descriptions__label {
-    background: var(--s-sjs-primary-soft) !important;
-    color: var(--s-sjs-text);
-    font-weight: 600;
-  }
-
-  .el-descriptions__content {
-    background: var(--s-sjs-card-bg);
-    color: var(--s-sjs-text-regular);
-    font-weight: 400;
-  }
-
-  .el-descriptions__table:not(.is-bordered) .el-descriptions__label {
-    background: transparent !important;
-    color: var(--s-sjs-text-muted);
-  }
-
-  .el-descriptions__table:not(.is-bordered) .el-descriptions__content {
-    color: var(--s-sjs-text);
-  }
-
-  .el-descriptions__table.is-bordered .el-descriptions__cell {
-    padding: var(--s-descriptions-cell-padding, 12px 14px);
-  }
-
-  .el-descriptions__table.is-bordered .el-descriptions__label {
-    box-shadow: inset 3px 0 0 var(--s-sjs-primary);
-  }
-
-  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:first-child {
-    border-top-left-radius: var(--s-sjs-radius-card);
-  }
-
-  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:last-child {
-    border-top-right-radius: var(--s-sjs-radius-card);
-  }
-
-  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:first-child {
-    border-bottom-left-radius: var(--s-sjs-radius-card);
-  }
-
-  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:last-child {
-    border-bottom-right-radius: var(--s-sjs-radius-card);
-  }
-
-  .s-descriptions__tooltip {
-    color: var(--s-sjs-text-regular);
-  }
+  @include s-themed-descriptions;
 }

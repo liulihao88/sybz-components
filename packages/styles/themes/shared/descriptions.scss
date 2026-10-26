@@ -1,0 +1,101 @@
+// 描述列表三套主题共用的结构与状态样式。
+// 主题只需通过 --s-descriptions-* 变量提供分割线、label 背景、圆角、阴影、文字色等 token，
+// 无需重复编写结构规则。
+@mixin s-themed-descriptions {
+  --el-descriptions-table-border: 1px solid var(--s-descriptions-divider);
+  --el-descriptions-item-bordered-label-background: var(--s-descriptions-label-bg);
+
+  color: var(--s-descriptions-text);
+  font-family: var(--s-descriptions-font-family);
+
+  .el-descriptions__header {
+    margin-bottom: 12px;
+  }
+
+  .el-descriptions__title {
+    font-size: var(--s-descriptions-title-font-size, 16px);
+    font-weight: 600;
+    line-height: var(--s-descriptions-title-line-height, 1.5);
+  }
+
+  .el-descriptions__extra {
+    font-size: 14px;
+  }
+
+  .el-descriptions__body {
+    overflow: hidden;
+    border-radius: var(--s-descriptions-radius);
+    background: var(--s-descriptions-body-bg);
+    box-shadow: var(--s-descriptions-shadow, none);
+  }
+
+  .el-descriptions__table {
+    width: 100%;
+    overflow: hidden;
+    border-collapse: separate;
+    border-radius: inherit;
+    border-spacing: 0;
+    background: var(--s-descriptions-table-bg, transparent);
+  }
+
+  .el-descriptions__table.is-bordered tr {
+    background: var(--s-descriptions-row-bg, transparent);
+  }
+
+  .el-descriptions__cell {
+    background-clip: padding-box;
+    border-color: var(--s-descriptions-divider) !important;
+    color: var(--s-descriptions-text-regular);
+    font-size: var(--s-descriptions-cell-font-size, 14px);
+    line-height: var(--s-descriptions-cell-line-height, 1.5);
+  }
+
+  .el-descriptions__label {
+    background: var(--s-descriptions-label-bg) !important;
+    color: var(--s-descriptions-text);
+    font-weight: 600;
+  }
+
+  .el-descriptions__content {
+    background: var(--s-descriptions-content-bg, transparent);
+    color: var(--s-descriptions-text-regular);
+    font-weight: 400;
+  }
+
+  .el-descriptions__table:not(.is-bordered) .el-descriptions__label {
+    background: transparent !important;
+    color: var(--s-descriptions-label-color);
+  }
+
+  .el-descriptions__table:not(.is-bordered) .el-descriptions__content {
+    color: var(--s-descriptions-text);
+  }
+
+  .el-descriptions__table.is-bordered .el-descriptions__cell {
+    padding: var(--s-descriptions-cell-padding, 12px 14px);
+  }
+
+  .el-descriptions__table.is-bordered .el-descriptions__label {
+    box-shadow: inset 3px 0 0 var(--s-descriptions-primary);
+  }
+
+  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:first-child {
+    border-top-left-radius: var(--s-descriptions-corner-radius, 0);
+  }
+
+  .el-descriptions__table.is-bordered tr:first-child .el-descriptions__cell:last-child {
+    border-top-right-radius: var(--s-descriptions-corner-radius, 0);
+  }
+
+  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:first-child {
+    border-bottom-left-radius: var(--s-descriptions-corner-radius, 0);
+  }
+
+  .el-descriptions__table.is-bordered tr:last-child .el-descriptions__cell:last-child {
+    border-bottom-right-radius: var(--s-descriptions-corner-radius, 0);
+  }
+
+  .s-descriptions__tooltip {
+    color: var(--s-descriptions-text-regular);
+  }
+}

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const size = ref<'small' | 'default' | 'large'>('default')
+const direction = ref<'horizontal' | 'vertical'>('horizontal')
 
 const options = [
   { label: '名字', value: 'andy' },
@@ -15,7 +16,14 @@ const options = [
   <div>
     <s-flex gap="small" direction="column">
       <s-radio v-model="size" :options="['small', 'default', 'large']" type="simple" title="size"></s-radio>
+      <s-radio v-model="direction" :options="['horizontal', 'vertical']" type="simple" title="direction"></s-radio>
     </s-flex>
-    <s-descriptions title="尺寸示例" :options="options" :size="size" :column="2"></s-descriptions>
+    <s-descriptions
+      title="尺寸示例"
+      :options="options"
+      :size="size"
+      :column="2"
+      :direction="direction"
+    ></s-descriptions>
   </div>
 </template>

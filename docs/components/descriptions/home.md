@@ -50,12 +50,6 @@ descriptions/usually
 descriptions/column
 :::
 
-### 垂直列表
-
-:::demo 展示垂直列表配置。基础写法：`<s-descriptions title="Vertical list with border" direction="vertical" :column="4" :size="size" border></s-descriptions>`。属性：`title` 类型 `string`，默认值 `''`；`direction` 可选 `row / row-reverse / column / column-reverse`，默认值 `row`。
-descriptions/vertical
-:::
-
 ### slot插槽 和 render
 
 :::demo 展示插槽内容定制。基础写法：`<s-descriptions :options="options" class="w-block" :column="1" label-width="200px"></s-descriptions>`。插槽：按示例中的插槽名定制内容。

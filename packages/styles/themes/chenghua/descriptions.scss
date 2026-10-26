@@ -1,73 +1,20 @@
+@import '../shared/descriptions.scss';
+
 .s-descriptions.s-descriptions--chenghua.s-descriptions--chenghua {
-  --el-descriptions-table-border: 1px solid var(--s-ch-divider);
-  --el-descriptions-item-bordered-label-background: var(--s-ch-primary-soft);
+  --s-descriptions-divider: var(--s-ch-divider);
+  --s-descriptions-label-bg: var(--s-ch-primary-soft);
+  --s-descriptions-text: var(--s-ch-text);
+  --s-descriptions-text-regular: var(--s-ch-text-regular);
+  --s-descriptions-primary: var(--s-ch-primary);
+  --s-descriptions-font-family: var(--s-ch-font-family);
+  --s-descriptions-radius: var(--s-ch-radius);
+  --s-descriptions-body-bg: var(--s-ch-bg);
+  --s-descriptions-content-bg: var(--s-ch-bg);
+  --s-descriptions-shadow: 0 8px 24px rgba(var(--s-ch-primary-rgb), 0.06);
+  --s-descriptions-title-font-size: 16px;
+  --s-descriptions-title-line-height: 1.5;
+  --s-descriptions-cell-line-height: 1.6;
+  --s-descriptions-label-color: var(--s-ch-primary);
 
-  color: var(--s-ch-text);
-  font-family: var(--s-ch-font-family);
-
-  .el-descriptions__header {
-    margin-bottom: 12px;
-  }
-
-  .el-descriptions__title {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.5;
-  }
-
-  .el-descriptions__extra {
-    font-size: 14px;
-  }
-
-  .el-descriptions__body {
-    overflow: hidden;
-    border-radius: var(--s-ch-radius);
-    background: var(--s-ch-bg);
-    box-shadow: 0 8px 24px rgba(var(--s-ch-primary-rgb), 0.06);
-  }
-
-  .el-descriptions__table {
-    border-collapse: separate;
-    border-spacing: 0;
-  }
-
-  .el-descriptions__cell {
-    border-color: var(--s-ch-divider) !important;
-    color: var(--s-ch-text-regular);
-    font-size: var(--s-descriptions-cell-font-size, 14px);
-    line-height: 1.6;
-  }
-
-  .el-descriptions__label {
-    background: var(--s-ch-primary-soft) !important;
-    color: var(--s-ch-text);
-    font-weight: 600;
-  }
-
-  .el-descriptions__content {
-    background: var(--s-ch-bg);
-    color: var(--s-ch-text-regular);
-    font-weight: 400;
-  }
-
-  .el-descriptions__table:not(.is-bordered) .el-descriptions__label {
-    background: transparent !important;
-    color: var(--s-ch-primary);
-  }
-
-  .el-descriptions__table:not(.is-bordered) .el-descriptions__content {
-    color: var(--s-ch-text);
-  }
-
-  .el-descriptions__table.is-bordered .el-descriptions__cell {
-    padding: var(--s-descriptions-cell-padding, 12px 14px);
-  }
-
-  .el-descriptions__table.is-bordered .el-descriptions__label {
-    box-shadow: inset 3px 0 0 var(--s-ch-primary);
-  }
-
-  .s-descriptions__tooltip {
-    color: var(--s-ch-text-regular);
-  }
+  @include s-themed-descriptions;
 }
