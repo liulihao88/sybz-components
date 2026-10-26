@@ -7,6 +7,7 @@ import type {
   SUploadValidationReason,
   SUploadSelfProps,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElUploadInstance = InstanceType<typeof ElUpload>
 
@@ -43,7 +44,8 @@ export type SUploadComponent = {
       | 'fileList'
       | 'httpRequest'
       | 'beforeUpload'
-    >
+    > &
+      SybzStyleProps
     $emit: ElUploadInstance['$emit']
     $slots: ElUploadInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

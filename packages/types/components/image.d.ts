@@ -1,5 +1,6 @@
 import { ElImage } from 'element-plus'
 import type { SImageProps, SImageSelfProps, SImageSrcResolver } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElImageInstance = InstanceType<typeof ElImage>
 
@@ -33,7 +34,8 @@ export type SImageComponent = {
     } & Omit<
       ElImageInstance['$props'],
       'src' | 'width' | 'w' | 'height' | 'h' | 'basePath' | 'resolver' | 'preview' | 'previewSrcList'
-    >
+    > &
+      SybzStyleProps
     $emit: ElImageInstance['$emit']
     $slots: ElImageInstance['$slots'] & Record<string, (...args: any[]) => any>
     showPreview: () => void

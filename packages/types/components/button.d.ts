@@ -1,5 +1,6 @@
 import { ElButton } from 'element-plus'
 import type { SButtonSelfProps } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElButtonInstance = InstanceType<typeof ElButton>
 
@@ -65,7 +66,8 @@ export type SButtonComponent = {
       | 'hoverAnimation'
       | 'ghost'
       | 'iconPlacement'
-    >
+    > &
+      SybzStyleProps
     $emit: ElButtonInstance['$emit']
     $slots: ElButtonInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

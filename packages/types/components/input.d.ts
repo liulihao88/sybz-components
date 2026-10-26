@@ -6,6 +6,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElInputInstance = InstanceType<typeof ElInput>
 
@@ -71,7 +72,8 @@ export type SInputComponent = {
       | 'options'
       | 'content'
       | 'search'
-    >
+    > &
+      SybzStyleProps
     $emit: ElInputInstance['$emit'] &
       (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)
     $slots: ElInputInstance['$slots'] & {

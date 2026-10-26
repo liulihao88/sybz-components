@@ -1118,7 +1118,7 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   })
 
   if (!inheritedProps.length) {
-    lines.push('}')
+    lines.push('} & SybzStyleProps')
     return lines
   }
 
@@ -1133,6 +1133,9 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
     })
     lines.push('>')
   })
+
+  // 追加全局样式简写属性
+  lines[lines.length - 1] = `${lines[lines.length - 1]} & SybzStyleProps`
 
   return lines
 }
@@ -1331,6 +1334,7 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
       : []),
     ...(typedComponent.hoverProps.extraImportLines ?? []),
     `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
+    `import type { SybzStyleProps } from '${getNormalizedImportPath(wrapperDir, componentPropsPath)}'`,
     '',
     ...wrapperConfig.instances.map(({ name, component }) => `type ${name} = InstanceType<typeof ${component}>`),
     '',
@@ -1377,6 +1381,7 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
   const wrapperLines = [
     ...(typedComponent.hoverProps.extraImportLines ?? []),
     `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
+    `import type { SybzStyleProps } from '${getNormalizedImportPath(wrapperDir, componentPropsPath)}'`,
     '',
   ]
 

@@ -5,6 +5,7 @@ import type {
   ScheduleCalendarTask,
   ScheduleCalendarView,
 } from '../../../components/company/scheduleCalendar/src/types'
+import type { SybzStyleProps } from '../../component-props'
 
 export type SScheduleCalendarComponent = {
   install: (app: import('vue').App) => void
@@ -15,7 +16,7 @@ export type SScheduleCalendarComponent = {
       tasks?: ScheduleCalendarTask[]
       maxTasksPerDay?: number
       emptyText?: string
-    }
+    } & SybzStyleProps
     $slots: {
       filters?: () => any
       day?: () => any

@@ -1,4 +1,5 @@
 import type { SplitPaneDirection, SplitPaneSetting, SSplitPaneProps } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 export type SSplitPaneComponent = {
   install: (app: import('vue').App) => void
@@ -11,7 +12,7 @@ export type SSplitPaneComponent = {
       resizerSize?: string | number
       resetOnClick?: boolean
       modelValue?: number
-    }
+    } & SybzStyleProps
     $slots: {
       paneL?: () => any
       left?: () => any

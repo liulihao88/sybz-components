@@ -11,6 +11,7 @@ export { createImageResolver } from './components/image'
 export { addIcon as addIconifyIcon, addCollection as addIconifyCollection } from '@iconify/vue'
 export type { IconifyIcon } from '@iconify/vue'
 import { GLOBAL_COMPONENT_COMMON_PROPS_KEY, GLOBAL_COMPONENT_CONFIG_KEY } from './hooks/useGlobalComponentConfig'
+import { stylePropsMixin } from './hooks/useStyleProps'
 import { applySybzThemeColors } from './theme.ts'
 
 export { resetSybzThemeColors, setSybzThemeColors } from './theme.ts'
@@ -125,6 +126,9 @@ const install = (app: App, options: SybzComponentsInstallOptions = {}) => {
   if (Object.keys(componentDefaults).length) {
     app.provide(GLOBAL_COMPONENT_CONFIG_KEY, componentDefaults)
   }
+
+  // 全局注册样式简写属性（m / p / fs / bg / w / h 等），所有组件自动接受，无需逐个声明
+  app.mixin(stylePropsMixin)
 
   if (isReactive(options)) {
     watch(

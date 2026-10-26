@@ -1,4 +1,5 @@
 import type { SWrapperProps } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * s-wrapper 布局容器，column 设置每行列数；width 和 height 支持数字、px、百分比等，默认不设置宽高；百分比高度需要父容器具有明确高度。
@@ -18,7 +19,7 @@ export type SWrapperComponent = {
       gap?: string | number
       column?: number | null
       minWidth?: string | number
-    }
+    } & SybzStyleProps
     $slots: {
       default?: () => any
     }

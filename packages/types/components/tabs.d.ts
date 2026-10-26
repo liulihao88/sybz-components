@@ -1,6 +1,7 @@
 import { ElTabs } from 'element-plus'
 import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
 import type { STabsSelfProps, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElTabsInstance = InstanceType<typeof ElTabs>
 
@@ -45,7 +46,8 @@ export type STabsComponent = {
       | 'height'
       | 'h'
       | 'headerMargin'
-    >
+    > &
+      SybzStyleProps
     $emit: ElTabsInstance['$emit']
     $slots: ElTabsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

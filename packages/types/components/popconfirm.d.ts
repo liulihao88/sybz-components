@@ -5,6 +5,7 @@ import type {
   SPopoverConfirmSelfProps,
   SybzComponentTheme,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElPopoverInstance = InstanceType<typeof ElPopover>
 
@@ -52,7 +53,8 @@ export type SPopconfirmComponent = {
       | 'cancelButtonText'
       | 'confirmButtonType'
       | 'cancelButtonType'
-    >
+    > &
+      SybzStyleProps
     $emit: ElPopoverInstance['$emit']
     $slots: ElPopoverInstance['$slots'] & {
       default?: () => any

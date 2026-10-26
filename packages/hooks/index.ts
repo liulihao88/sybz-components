@@ -25,3 +25,6 @@ export type { UsePaginationOptions, UsePaginationReturn } from './usePagination'
 
 export { default as useRefresh } from './useRefresh'
 export type { UseRefreshReturn } from './useRefresh'
+
+export { useStyleProps, resolveStyleProps, styleProps, stylePropsMixin, STYLE_PROP_MAP } from './useStyleProps'
+export type { SybzStylePropKey } from './useStyleProps'

@@ -5,6 +5,7 @@ import type {
   SybzComponentSize,
   SybzComponentTheme,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * s-pagination 分页组件，支持主题、页码切换、每页条数选择、单页隐藏、回车跳页、总数展示以及内容超宽时横向滚动。
@@ -49,7 +50,7 @@ export type SPaginationComponent = {
       pageText?: string
       /** 分页尺寸；默认值：default */
       size?: SybzComponentSize
-    }
+    } & SybzStyleProps
     $emit: <Event extends keyof SPaginationEmits>(event: Event, ...args: SPaginationEmits[Event]) => void
   }
 }

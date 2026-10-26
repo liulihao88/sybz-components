@@ -7,6 +7,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
@@ -48,7 +49,8 @@ export type SRadioComponent = {
       | 'label'
       | 'customLabel'
       | 'customDisabled'
-    >
+    > &
+      SybzStyleProps
     $emit: ElRadioGroupInstance['$emit']
     $slots: ElRadioGroupInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

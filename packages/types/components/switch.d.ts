@@ -1,5 +1,6 @@
 import { ElSwitch } from 'element-plus'
 import type { SSwitchSelfProps, SybzComponentTheme } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElSwitchInstance = InstanceType<typeof ElSwitch>
 
@@ -13,7 +14,8 @@ export type SSwitchComponent = {
       beforeChange?: (...args: any[]) => any
       width?: string | number
       w?: string | number
-    } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width' | 'w'>
+    } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width' | 'w'> &
+      SybzStyleProps
     $emit: ElSwitchInstance['$emit']
     $slots: ElSwitchInstance['$slots']
   }

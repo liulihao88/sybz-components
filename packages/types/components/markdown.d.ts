@@ -1,5 +1,6 @@
 import { MdEditor } from 'md-editor-v3'
 import type { MarkdownEmits, MarkdownExposed, MarkdownProps } from '../../components/markdown/src/types'
+import type { SybzStyleProps } from '../component-props'
 
 type MdEditorInstance = InstanceType<typeof MdEditor>
 
@@ -87,7 +88,8 @@ export type SMarkdownComponent = {
       | 'imagePreview'
       | 'emptyText'
       | 'sanitize'
-    >
+    > &
+      SybzStyleProps
     $emit: <Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void
     $slots: MdEditorInstance['$slots'] & Record<string, (...args: any[]) => any>
     render: MarkdownExposed['render']

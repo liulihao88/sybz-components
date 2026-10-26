@@ -1,6 +1,7 @@
 import { ElTag } from 'element-plus'
 import type { TagPropsPublic } from 'element-plus/es/components/tag'
 import type { SCommonProps, STagSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElTagInstance = InstanceType<typeof ElTag>
 
@@ -54,7 +55,8 @@ export type STagComponent = {
       | 'theme'
       | 'size'
       | 'config'
-    >
+    > &
+      SybzStyleProps
     $emit: ElTagInstance['$emit']
     $slots: ElTagInstance['$slots'] & {
       default?: () => any

@@ -1,5 +1,6 @@
 import { ElCheckboxGroup } from 'element-plus'
 import type { SCheckboxOptionContext, SCheckboxSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 
@@ -47,7 +48,8 @@ export type SCheckboxComponent = {
       | 'customLabel'
       | 'gap'
       | 'theme'
-    >
+    > &
+      SybzStyleProps
     $emit: ElCheckboxGroupInstance['$emit']
     $slots: ElCheckboxGroupInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

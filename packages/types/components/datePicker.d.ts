@@ -1,6 +1,7 @@
 import { ElDatePicker } from 'element-plus'
 import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'
 import type { SDatePickerSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElDatePickerInstance = InstanceType<typeof ElDatePicker>
 
@@ -29,7 +30,8 @@ export type SDatePickerComponent = {
     } & Omit<
       ElDatePickerInstance['$props'],
       'title' | 'width' | 'w' | 'height' | 'h' | 'futureOnly' | 'theme' | 'shortcuts' | 'compTitleStyle'
-    >
+    > &
+      SybzStyleProps
     $emit: ElDatePickerInstance['$emit']
     $slots: ElDatePickerInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

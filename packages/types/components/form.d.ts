@@ -9,6 +9,7 @@ import type {
   SFormTitleItem,
   SybzRecord,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElFormInstance = InstanceType<typeof ElForm>
 
@@ -52,7 +53,8 @@ export type SFormComponent = {
       | 'autoSetDefaultValue'
       | 'trim'
       | 'componentDefaults'
-    >
+    > &
+      SybzStyleProps
     $emit: ElFormInstance['$emit']
     $slots: ElFormInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

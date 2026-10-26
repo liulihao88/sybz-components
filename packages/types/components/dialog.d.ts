@@ -8,6 +8,7 @@ import type {
   SDialogVariant,
   SybzRecord,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElDialogInstance = InstanceType<typeof ElDialog>
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
@@ -105,7 +106,8 @@ export type SDialogComponent = {
         | 'maximizeHeight'
         | 'hideHeaderIcon'
         | keyof ElDialogInstance['$props']
-      >
+      > &
+      SybzStyleProps
     $emit: ElDialogInstance['$emit']
     $slots: ElDialogInstance['$slots'] & {
       default?: () => any

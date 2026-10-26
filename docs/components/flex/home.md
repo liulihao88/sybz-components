@@ -44,6 +44,14 @@ flex/size
 flex/iconGap
 :::
 
+### 样式简写属性（Style Props）
+
+所有 sybz 组件都通过全局 mixin 自动接受 Mantine 风格的样式简写属性，无需逐个声明，直接以简写作为 prop 传入即可，例如 `m`（margin）、`p`（padding）、`fs`（font-size）、`bg`（background）、`c`（color）、`w` / `h`（宽高）、`bd`（border）等；长度类属性的数字会自动补全为 `px`。基础写法：`<s-flex gap="small" m="12px" p="16px" bg="#f0f6ff"></s-flex>`。
+
+:::demo 属性：`m / mt / mb / ml / mr / mx / my / p / pt / pb / pl / pr / px / py`（内外边距）、`fs / fw / lh / ta / tt / td / ff / lts`（文字）、`w / h / miw / maw / mih / mah / pos / top / bottom / left / right / inset / z / flex`（尺寸定位与弹性）、`bg / c / opacity / bd / bdr / bdl / bdt / bdb`（背景边框）。长度类属性可选 `数字（自动补 px）/ 带单位长度`。
+flex/styleProps
+:::
+
 ### API
 
 |   属性名    | 说明                                                                       | 类型                      | 可选值                                                                                    | 默认值   |

@@ -1,5 +1,5 @@
 <template>
-  <component :is="component" :style="flexStyles" class="s-flex" :class="{ 's-flex--gap': hasGap }">
+  <component :is="component" :style="[flexStyles, style]" class="s-flex" :class="{ 's-flex--gap': hasGap }">
     <slot />
   </component>
 </template>
@@ -8,6 +8,7 @@
 import { computed, type Component } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useSizeAliases from '@/hooks/useSizeAliases'
+import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SFlex',
@@ -38,6 +39,7 @@ const props = withDefaults(defineProps<FlexProps>(), {
   component: 'div',
 })
 const sizeProps = useSizeAliases(props)
+const { style } = useStyleProps()
 
 const gapValue = computed(() => parseGapValue())
 const hasGap = computed(() => !/^0(?:[a-z%]+)?$/i.test(String(gapValue.value).trim()))

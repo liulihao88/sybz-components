@@ -7,6 +7,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElSelectInstance = InstanceType<typeof ElSelect>
 
@@ -88,7 +89,8 @@ export type SSelectComponent = {
       | 'emptyColor'
       | 'showTooltip'
       | 'tooltipAttrs'
-    >
+    > &
+      SybzStyleProps
     $emit: ElSelectInstance['$emit']
     $slots: ElSelectInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

@@ -1,5 +1,6 @@
 import { ElDrawer } from 'element-plus'
 import type { SDrawerSelfProps, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
 
@@ -31,7 +32,8 @@ export type SDrawerComponent = {
       | 'cancelAttrs'
       | 'detailAttrs'
       | 'type'
-    >
+    > &
+      SybzStyleProps
     $emit: ElDrawerInstance['$emit']
     $slots: ElDrawerInstance['$slots'] & {
       default?: () => any

@@ -7,6 +7,7 @@ import type {
   SFlexWrap,
   SybzComponentSize,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
@@ -30,7 +31,7 @@ export type SFlexComponent = {
       height?: string | number
       h?: string | number
       component?: string | Component
-    }
+    } & SybzStyleProps
     $slots: {
       default?: () => any
     }

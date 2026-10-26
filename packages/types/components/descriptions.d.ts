@@ -8,6 +8,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>
 
@@ -50,7 +51,8 @@ export type SDescriptionsComponent = {
       | 'customLabel'
       | 'customValue'
       | 'tooltipAttrs'
-    >
+    > &
+      SybzStyleProps
     $emit: ElDescriptionsInstance['$emit']
     $slots: ElDescriptionsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

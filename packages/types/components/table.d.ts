@@ -7,6 +7,7 @@ import type {
   TableRow,
   TableSelectionType,
 } from '../table'
+import type { SybzStyleProps } from '../component-props'
 
 type ElTableInstance = InstanceType<typeof ElTable>
 
@@ -66,7 +67,8 @@ export type STableComponent = {
       | 'modelValue'
       | 'selectionType'
       | 'selectionAttrs'
-    >
+    > &
+      SybzStyleProps
     $emit: ElTableInstance['$emit']
     $slots: ElTableInstance['$slots'] & {
       empty?: () => any

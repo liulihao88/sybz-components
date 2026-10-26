@@ -1,6 +1,7 @@
 import { ElRow } from 'element-plus'
 import type { RowPropsPublic } from 'element-plus/es/components/row'
 import type { SRowSelfProps, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElRowInstance = InstanceType<typeof ElRow>
 
@@ -16,7 +17,8 @@ export type SRowComponent = {
       justify?: RowPropsPublic['justify']
       align?: RowPropsPublic['align']
       colAttrs?: SybzRecord
-    } & Omit<ElRowInstance['$props'], 'col' | 'gap' | 'gutter' | 'justify' | 'align' | 'colAttrs'>
+    } & Omit<ElRowInstance['$props'], 'col' | 'gap' | 'gutter' | 'justify' | 'align' | 'colAttrs'> &
+      SybzStyleProps
     $emit: ElRowInstance['$emit']
     $slots: ElRowInstance['$slots'] & {
       default?: () => any

@@ -34,6 +34,64 @@ import type { SElementPlusIconName } from './element-plus-icon-names'
 export type { SybzComponentTheme } from '@sybz-components/utils'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
+
+/**
+ * Mantine 风格的样式简写属性（Style Props）。
+ *
+ * 所有 sybz 组件都通过全局 mixin 自动接受这些属性，直接以简写作为 prop 传入，
+ * 例如 `<s-flex gap="small" m="10px" fs="14px">`。数值会自动补全为 `px`。
+ */
+export interface SybzStyleProps {
+  // 内边距与外边距
+  m?: string | number
+  mt?: string | number
+  mb?: string | number
+  ml?: string | number
+  mr?: string | number
+  mx?: string | number
+  my?: string | number
+  p?: string | number
+  pt?: string | number
+  pb?: string | number
+  pl?: string | number
+  pr?: string | number
+  px?: string | number
+  py?: string | number
+  // 字体与文本
+  fs?: string | number
+  fw?: string | number
+  lh?: string | number
+  ta?: string
+  tt?: string
+  td?: string
+  ff?: string
+  lts?: string | number
+  // 尺寸与定位
+  w?: string | number
+  h?: string | number
+  miw?: string | number
+  maw?: string | number
+  mih?: string | number
+  mah?: string | number
+  pos?: string
+  top?: string | number
+  bottom?: string | number
+  left?: string | number
+  right?: string | number
+  inset?: string | number
+  z?: string | number
+  // 弹性盒子
+  flex?: string | number
+  // 背景与边框
+  bg?: string
+  c?: string
+  opacity?: string | number
+  bd?: string
+  bdr?: string
+  bdl?: string
+  bdt?: string
+  bdb?: string
+}
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})
 export type SIconValue = SIconName | Component

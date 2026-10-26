@@ -9,6 +9,7 @@ import type {
   SMenuProps,
   SMenuSelfProps,
 } from '../../components/menu/src/types'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。头部和底部 padding 保持 16px，列表展开时为 16px、收起时为 4px；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
@@ -49,7 +50,7 @@ export type SMenuComponent = {
       /** @deprecated 请使用 header */
       headerConfig?: SMenuHeaderConfig
       footer?: SMenuFooterConfig
-    }
+    } & SybzStyleProps
     $slots: {
       header?: () => any
       append?: () => any

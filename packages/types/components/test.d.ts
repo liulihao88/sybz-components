@@ -1,4 +1,5 @@
 import type { STestProps } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 export type STestComponent = {
   install: (app: import('vue').App) => void
@@ -6,7 +7,7 @@ export type STestComponent = {
     $props: {
       label?: string
       prefix?: string
-    }
+    } & SybzStyleProps
   }
 }
 

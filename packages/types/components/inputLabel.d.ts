@@ -1,4 +1,5 @@
 import type { SInputLabelProps, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 export type SInputLabelComponent = {
   install: (app: import('vue').App) => void
@@ -9,7 +10,7 @@ export type SInputLabelComponent = {
       regexp?: RegExp
       message?: string
       inputAttrs?: SybzRecord
-    }
+    } & SybzStyleProps
   }
 }
 

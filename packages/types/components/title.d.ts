@@ -1,4 +1,5 @@
 import type { SIconValue, SIconProps, SybzComponentTheme, SybzComponentSize, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
@@ -38,7 +39,7 @@ export type STitleComponent = {
       theme?: SybzComponentTheme
       tag?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
       level?: 1 | 2 | 3 | 4 | 5 | 6
-    }
+    } & SybzStyleProps
     $slots: {
       default?: () => any
       title?: () => any

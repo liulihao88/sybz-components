@@ -1,4 +1,5 @@
 import type { SCardProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * s-card 卡片组件，title、subTitle 和 extra 支持直接传入字符串，并支持区块合并、展开收起、阴影、透明背景和主题样式。
@@ -30,7 +31,7 @@ export type SCardComponent = {
       collapsible?: boolean
       collapseTrigger?: 'icon' | 'header'
       theme?: SybzComponentTheme
-    }
+    } & SybzStyleProps
     $slots: {
       default?: () => any
       header?: () => any

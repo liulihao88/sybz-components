@@ -1,4 +1,5 @@
 import type { SSvgProps, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 export type SSvgComponent = {
   install: (app: import('vue').App) => void
@@ -9,7 +10,7 @@ export type SSvgComponent = {
       color?: string
       customStyle?: SybzRecord
       size?: string | number
-    }
+    } & SybzStyleProps
   }
 }
 

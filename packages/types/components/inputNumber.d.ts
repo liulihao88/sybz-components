@@ -1,5 +1,6 @@
 import { ElInputNumber } from 'element-plus'
 import type { SInputNumberSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElInputNumberInstance = InstanceType<typeof ElInputNumber>
 
@@ -22,7 +23,8 @@ export type SInputNumberComponent = {
     } & Omit<
       ElInputNumberInstance['$props'],
       'title' | 'compTitleStyle' | 'width' | 'w' | 'height' | 'h' | 'theme' | 'size' | 'subAttrs'
-    >
+    > &
+      SybzStyleProps
     $emit: ElInputNumberInstance['$emit']
     $slots: ElInputNumberInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

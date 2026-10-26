@@ -10,6 +10,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * 信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。
@@ -67,7 +68,7 @@ export type SItemComponent = {
       disabled?: boolean
       theme?: SybzComponentTheme
       shadow?: 'always' | 'never' | 'hover'
-    }
+    } & SybzStyleProps
     $slots: {
       prefix?: () => any
       img?: () => any

@@ -1,5 +1,6 @@
 import { ElTooltip } from 'element-plus'
 import type { STooltipSelfProps } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 type ElTooltipInstance = InstanceType<typeof ElTooltip>
 
@@ -26,7 +27,8 @@ export type STooltipComponent = {
     } & Omit<
       ElTooltipInstance['$props'],
       'dangerouslyUseHTMLString' | 'width' | 'w' | 'lineClamp' | 'showSlot' | 'effect' | 'showAfter'
-    >
+    > &
+      SybzStyleProps
     $emit: ElTooltipInstance['$emit']
     $slots: ElTooltipInstance['$slots'] & {
       default?: () => any
