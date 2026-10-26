@@ -24,7 +24,7 @@ menu/light
 
 ### 主题与明暗外观（`theme` 默认值 `default`，`variant` 默认值 `dark`）
 
-:::demo 用按钮切换 `theme` 和 `variant`，查看两者的全部组合。`variant="light"` 始终为白色背景，`variant="dark"` 始终为深色背景；`theme` 只切换强调色。收起后，含子菜单的项目隐藏展开箭头并在左侧显示竖杠；选中子菜单时，竖杠与父级图标使用主题强调色。基础写法：`<SMenu :theme="theme" :variant="variant" :header="header" :options="menus" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`variant` 可选值 `dark / light`，默认值 `dark`。示例初始值为 `theme="default"`、`variant="light"`，并选中一个子菜单。
+:::demo 用按钮切换 `theme` 和 `variant`，查看两者的全部组合。`variant="light"` 始终为白色背景，`variant="dark"` 始终为深色背景；`theme` 只切换强调色。收起后，含子菜单的项目隐藏展开箭头并在左侧显示竖杠；选中子菜单时，竖杠与父级图标使用主题强调色。基础写法：`<SMenu :theme="theme" :variant="variant" :header="header" :options="menus" />`。属性：`theme` 可选值 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`variant` 可选值 `dark / light`，默认值 `dark`。示例进入页面时的 `theme` 跟随右上角主题，`variant` 初始值为 `light`，并选中一个子菜单；在示例内切换主题不会改变右上角。
 menu/theme
 :::
 

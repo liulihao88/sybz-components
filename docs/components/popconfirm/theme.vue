@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import { docThemeOptions } from '../../.vitepress/theme/theme'
+import { docThemeOptions, docThemeState } from '@docs/.vitepress/theme/theme'
 
-import { getCurrentInstance, ref } from 'vue'
-const theme = ref<(typeof docThemeOptions)[number]>('default')
+import { getCurrentInstance, ref, watch } from 'vue'
+const theme = ref<(typeof docThemeOptions)[number]>(docThemeState.theme)
+
+watch(
+  () => docThemeState.theme,
+  (value) => {
+    theme.value = value
+  },
+)
 
 const proxy = getCurrentInstance()?.proxy as { $toast?: (message: string) => void } | null
 

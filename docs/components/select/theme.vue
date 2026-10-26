@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import { docThemeOptions } from '../../.vitepress/theme/theme'
+import { docThemeOptions, docThemeState } from '@docs/.vitepress/theme/theme'
 
-import { ref } from 'vue'
-const theme = ref<(typeof docThemeOptions)[number]>('default')
+import { ref, watch } from 'vue'
+const theme = ref<(typeof docThemeOptions)[number]>(docThemeState.theme)
+
+watch(
+  () => docThemeState.theme,
+  (value) => {
+    theme.value = value
+  },
+)
 
 const value = ref('archive')
 const disabledValue = ref('storage')

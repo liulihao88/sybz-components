@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { DataAnalysis, Document, OfficeBuilding, Plus, Setting } from '@element-plus/icons-vue'
-import { docThemeOptions } from '../../.vitepress/theme/theme'
-const theme = ref<(typeof docThemeOptions)[number]>('default')
+import { docThemeOptions, docThemeState } from '@docs/.vitepress/theme/theme'
+const theme = ref<(typeof docThemeOptions)[number]>(docThemeState.theme)
+
+watch(
+  () => docThemeState.theme,
+  (value) => {
+    theme.value = value
+  },
+)
 
 const active = ref('/settings/general')
 const variant = ref<'light' | 'dark'>('light')

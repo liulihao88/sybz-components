@@ -1,8 +1,15 @@
 <script setup lang="tsx">
-import { docThemeOptions } from '../../.vitepress/theme/theme'
+import { docThemeOptions, docThemeState } from '@docs/.vitepress/theme/theme'
 
-import { ref } from 'vue'
-const theme = ref<(typeof docThemeOptions)[number]>('default')
+import { ref, watch } from 'vue'
+const theme = ref<(typeof docThemeOptions)[number]>(docThemeState.theme)
+
+watch(
+  () => docThemeState.theme,
+  (value) => {
+    theme.value = value
+  },
+)
 
 const data = ref([
   { name: '智慧档案检索', owner: '张三', department: '数据服务部', status: 'Loading', progress: '82' },

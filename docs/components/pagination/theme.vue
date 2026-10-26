@@ -4,8 +4,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { docThemeOptions } from '../../.vitepress/theme/theme'
-const theme = ref<(typeof docThemeOptions)[number]>('default')
+import { ref, watch } from 'vue'
+import { docThemeOptions, docThemeState } from '@docs/.vitepress/theme/theme'
+const theme = ref<(typeof docThemeOptions)[number]>(docThemeState.theme)
+
+watch(
+  () => docThemeState.theme,
+  (value) => {
+    theme.value = value
+  },
+)
 const page = ref(2)
 </script>
