@@ -8,7 +8,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElDescriptionsInstance = InstanceType<typeof ElDescriptions>
 
@@ -25,12 +25,9 @@ export type SDescriptionsComponent = {
   new (): {
     $props: {
       options: SDescriptionsItemOption[]
-      theme?: SybzComponentTheme
       /** 尺寸，控制描述项单元格内边距与字体大小 */
       size?: SybzComponentSize
       column?: number
-      width?: string | number
-      w?: string | number
       labelWidth?: string | number
       showAll?: boolean
       label?: string
@@ -55,7 +52,9 @@ export type SDescriptionsComponent = {
       | 'customValue'
       | 'tooltipAttrs'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SDescriptionsOwnProps> &
+      SybzThemeProps<SDescriptionsOwnProps>
     $emit: ElDescriptionsInstance['$emit']
     $slots: ElDescriptionsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

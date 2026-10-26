@@ -6,7 +6,7 @@ import type {
   SScrollProps,
   SScrollType,
 } from '../../components/scroll/src/types'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 /**
  * s-scroll 自定义滚动区域，支持滚动条策略、方向、位置、初始坐标、边界事件及自动高度；scrollbarSize 为 0 时隐藏滚动条。
@@ -17,14 +17,6 @@ export type SScrollComponent = {
   install: (app: import('vue').App) => void
   new (): {
     $props: {
-      /** 容器宽度；默认由父元素决定 */
-      width?: string | number
-      /** width 的别名 */
-      w?: string | number
-      /** 容器高度；默认由内容决定 */
-      height?: string | number
-      /** height 的别名 */
-      h?: string | number
       /** 最大高度，配合 autosize 使用 */
       maxHeight?: string | number
       /** 内容撑开高度，达到 maxHeight 后开始滚动；默认 false */
@@ -45,7 +37,8 @@ export type SScrollComponent = {
       verticalScrollbarPosition?: 'left' | 'right'
       /** 初始滚动坐标；默认 { x: 0, y: 0 } */
       startScrollPosition?: Partial<SScrollPosition>
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<SScrollProps>
     $slots: {
       default?: () => any
     }

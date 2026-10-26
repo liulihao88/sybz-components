@@ -1,5 +1,5 @@
 import type { SWrapperProps } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 /**
  * s-wrapper 布局容器，column 设置每行列数；width 和 height 支持数字、px、百分比等，默认不设置宽高；百分比高度需要父容器具有明确高度。
@@ -10,16 +10,11 @@ export type SWrapperComponent = {
   install: (app: import('vue').App) => void
   new (): {
     $props: {
-      /** 容器宽度，支持数字、px、百分比等，默认空字符串 */
-      width?: string | number
-      w?: string | number
-      /** 容器高度，支持数字、px、百分比等；百分比需要父容器具有明确高度，默认空字符串 */
-      height?: string | number
-      h?: string | number
       gap?: string | number
       column?: number | null
       minWidth?: string | number
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<SWrapperProps>
     $slots: {
       default?: () => any
     }

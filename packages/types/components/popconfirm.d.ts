@@ -5,7 +5,7 @@ import type {
   SPopoverConfirmSelfProps,
   SybzComponentTheme,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElPopoverInstance = InstanceType<typeof ElPopover>
 
@@ -19,11 +19,8 @@ export type SPopconfirmComponent = {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       title?: string
-      width?: string | number
-      w?: string | number
       content?: string
       reConfirm?: boolean
-      theme?: SybzComponentTheme
       disabled?: boolean
       /** 语义样式；默认值：default */
       variant?: SDialogVariant
@@ -54,7 +51,9 @@ export type SPopconfirmComponent = {
       | 'confirmButtonType'
       | 'cancelButtonType'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SPopoverConfirmSelfProps> &
+      SybzThemeProps<SPopoverConfirmSelfProps>
     $emit: ElPopoverInstance['$emit']
     $slots: ElPopoverInstance['$slots'] & {
       default?: () => any

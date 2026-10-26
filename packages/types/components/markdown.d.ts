@@ -1,6 +1,6 @@
 import { MdEditor } from 'md-editor-v3'
 import type { MarkdownEmits, MarkdownExposed, MarkdownProps } from '../../components/markdown/src/types'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 type MdEditorInstance = InstanceType<typeof MdEditor>
 
@@ -23,12 +23,6 @@ export type SMarkdownComponent = {
       editable?: boolean
       /** 编辑模式下是否禁用文本输入和工具栏操作，默认值：false */
       disabled?: boolean
-      /** 组件宽度，数字按 px 处理，默认值：'100%' */
-      width?: string | number
-      w?: string | number
-      /** 组件高度，数字按 px 处理；编辑模式默认沿用 md-editor-v3 的 500px，只读模式默认由内容撑开 */
-      height?: string | number
-      h?: string | number
       /** 源文本的解析模式，HTML 模式会跳过 Markdown 解析，默认值：'markdown' */
       contentType?: 'markdown' | 'html'
       /** 是否允许渲染 Markdown 源文本中的原始 HTML，默认值：true */
@@ -89,7 +83,8 @@ export type SMarkdownComponent = {
       | 'emptyText'
       | 'sanitize'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<MarkdownProps>
     $emit: <Event extends keyof MarkdownEmits>(event: Event, ...args: MarkdownEmits[Event]) => void
     $slots: MdEditorInstance['$slots'] & Record<string, (...args: any[]) => any>
     render: MarkdownExposed['render']

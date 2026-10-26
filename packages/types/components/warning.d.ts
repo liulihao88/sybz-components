@@ -1,5 +1,5 @@
 import type { SWarningProps, SWarningSize, SWarningType, SybzComponentTheme, SybzRecord } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
  * s-warning 警告组件，支持设置 width 和 height；设置 height 后内容会垂直居中。
@@ -14,19 +14,16 @@ export type SWarningComponent = {
       dangerouslyUseHTMLString?: boolean
       content: string
       title?: string
-      theme?: SybzComponentTheme
       type?: SWarningType
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       icon?: boolean
       size?: SWarningSize
       dotted?: boolean
       customStyle?: SybzRecord
       iconAttrs?: SybzRecord
       left?: boolean | string | number
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<SWarningProps> &
+      SybzThemeProps<SWarningProps>
     $slots: {
       title?: () => any
       content?: () => any

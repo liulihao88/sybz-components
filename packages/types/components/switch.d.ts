@@ -1,6 +1,6 @@
 import { ElSwitch } from 'element-plus'
 import type { SSwitchSelfProps, SybzComponentTheme } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElSwitchInstance = InstanceType<typeof ElSwitch>
 
@@ -10,12 +10,11 @@ export type SSwitchComponent = {
   install: (app: import('vue').App) => void
   new (): {
     $props: {
-      theme?: SybzComponentTheme
       beforeChange?: (...args: any[]) => any
-      width?: string | number
-      w?: string | number
     } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width' | 'w'> &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SSwitchSelfProps> &
+      SybzThemeProps<SSwitchSelfProps>
     $emit: ElSwitchInstance['$emit']
     $slots: ElSwitchInstance['$slots']
   }

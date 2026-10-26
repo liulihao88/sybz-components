@@ -97,6 +97,11 @@ export interface SybzStyleProps {
   bdb?: string
   br?: SybzLength
 }
+
+/** 组件自身的宽高属性保留精确类型，在组件悬浮概览中折叠显示。 */
+export type SybzDimensionProps<Props> = Pick<Props, Extract<keyof Props, 'w' | 'width' | 'h' | 'height'>>
+/** 保留每个组件自己的 theme 可选值，在组件悬浮概览中折叠显示。 */
+export type SybzThemeProps<Props> = Pick<Props, Extract<keyof Props, 'theme'>>
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})
 export type SIconValue = SIconName | Component

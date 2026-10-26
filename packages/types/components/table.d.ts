@@ -7,7 +7,7 @@ import type {
   TableRow,
   TableSelectionType,
 } from '../table'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElTableInstance = InstanceType<typeof ElTable>
 
@@ -24,7 +24,6 @@ export type STableComponent = {
       showPage?: boolean
       showIndex?: boolean
       size?: string
-      theme?: SybzComponentTheme
       /** 表格自身及表体背景色，支持 CSS 颜色值 */
       background?: string
       /** 是否使用简洁表格样式，去除单元格左右边框 */
@@ -68,7 +67,8 @@ export type STableComponent = {
       | 'selectionType'
       | 'selectionAttrs'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzThemeProps<STableProps>
     $emit: ElTableInstance['$emit']
     $slots: ElTableInstance['$slots'] & {
       empty?: () => any

@@ -7,14 +7,12 @@ import type {
   STableSearchProps,
   STableSearchTheme,
 } from '../../components/tableSearch/src/types'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 export type STableSearchComponent = {
   install: (app: import('vue').App) => void
   new (): {
     $props: {
-      /** 统一应用于内部字段组件和操作按钮的主题 */
-      theme?: STableSearchTheme
       /** 搜索字段配置 */
       options?: STableSearchField[]
       /** 搜索字段配置，优先级高于 options */
@@ -29,7 +27,8 @@ export type STableSearchComponent = {
       searchOn?: STableSearchEvent[] | false
       /** 是否显示重置按钮 */
       showReset?: boolean
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzThemeProps<STableSearchProps>
     $slots: Record<string, (...args: any[]) => any>
     $emit: <Event extends keyof STableSearchEmits>(event: Event, ...args: STableSearchEmits[Event]) => void
   }

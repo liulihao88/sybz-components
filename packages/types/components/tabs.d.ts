@@ -1,7 +1,7 @@
 import { ElTabs } from 'element-plus'
 import type { TabsPropsPublic } from 'element-plus/es/components/tabs'
 import type { STabsSelfProps, SybzRecord } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElTabsInstance = InstanceType<typeof ElTabs>
 
@@ -23,12 +23,7 @@ export type STabsComponent = {
       subAttrs?: SybzRecord
       trigger?: 'click' | 'hover'
       type?: '' | 'capsule' | 'capsule-theme' | TabsPropsPublic['type']
-      theme?: SybzComponentTheme
       size?: 'small' | 'default' | 'large'
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       headerMargin?: string | number
     } & Omit<
       ElTabsInstance['$props'],
@@ -47,7 +42,9 @@ export type STabsComponent = {
       | 'h'
       | 'headerMargin'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<STabsSelfProps> &
+      SybzThemeProps<STabsSelfProps>
     $emit: ElTabsInstance['$emit']
     $slots: ElTabsInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

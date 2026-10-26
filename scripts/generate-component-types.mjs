@@ -1106,11 +1106,29 @@ for (const [componentName, aliases] of SIZE_ALIAS_COMPONENTS) {
   }
 }
 
+const dimensionPropKeys = new Set(['w', 'width', 'h', 'height'])
+const hasDimensionProps = (hoverProps) =>
+  collectInterfaceProps(hoverProps).some((prop) => dimensionPropKeys.has(prop.omitKey))
+const hasThemeProps = (hoverProps) => collectInterfaceProps(hoverProps).some((prop) => prop.omitKey === 'theme')
+const getCompactPropsImportNames = (hoverProps) => [
+  ...(hasDimensionProps(hoverProps) ? ['SybzDimensionProps'] : []),
+  ...(hasThemeProps(hoverProps) ? ['SybzThemeProps'] : []),
+  'SybzStyleProps',
+]
+
 const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   const props = collectInterfaceProps(hoverProps)
+  const visibleProps = props.filter((prop) => !dimensionPropKeys.has(prop.omitKey) && prop.omitKey !== 'theme')
+  const compactProps = [
+    ...(props.some((prop) => dimensionPropKeys.has(prop.omitKey))
+      ? [`SybzDimensionProps<${hoverProps.interfaceName}>`]
+      : []),
+    ...(props.some((prop) => prop.omitKey === 'theme') ? [`SybzThemeProps<${hoverProps.interfaceName}>`] : []),
+  ]
+  const compactPropsSuffix = compactProps.length ? ` & ${compactProps.join(' & ')}` : ''
   const lines = ['{']
 
-  props.forEach((prop) => {
+  visibleProps.forEach((prop) => {
     prop.jsDoc.forEach((comment) => {
       lines.push(...comment.split('\n').map((line) => `  ${line}`))
     })
@@ -1118,7 +1136,7 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   })
 
   if (!inheritedProps.length) {
-    lines.push('} & SybzStyleProps')
+    lines.push(`} & SybzStyleProps${compactPropsSuffix}`)
     return lines
   }
 
@@ -1135,7 +1153,7 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   })
 
   // 追加全局样式简写属性
-  lines[lines.length - 1] = `${lines[lines.length - 1]} & SybzStyleProps`
+  lines[lines.length - 1] = `${lines[lines.length - 1]} & SybzStyleProps${compactPropsSuffix}`
 
   return lines
 }
@@ -1334,7 +1352,7 @@ const buildElementWrapperLines = ({ componentName, typedComponent, wrapperDir, w
       : []),
     ...(typedComponent.hoverProps.extraImportLines ?? []),
     `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
-    `import type { SybzStyleProps } from '${getNormalizedImportPath(wrapperDir, componentPropsPath)}'`,
+    `import type { ${getCompactPropsImportNames(typedComponent.hoverProps).join(', ')} } from '${getNormalizedImportPath(wrapperDir, componentPropsPath)}'`,
     '',
     ...wrapperConfig.instances.map(({ name, component }) => `type ${name} = InstanceType<typeof ${component}>`),
     '',
@@ -1381,7 +1399,7 @@ const buildOwnWrapperLines = ({ componentName, typedComponent, wrapperDir }) => 
   const wrapperLines = [
     ...(typedComponent.hoverProps.extraImportLines ?? []),
     `import type { ${propsImportNames} } from '${normalizedPropsImportPath}'`,
-    `import type { SybzStyleProps } from '${getNormalizedImportPath(wrapperDir, componentPropsPath)}'`,
+    `import type { ${getCompactPropsImportNames(typedComponent.hoverProps).join(', ')} } from '${getNormalizedImportPath(wrapperDir, componentPropsPath)}'`,
     '',
   ]
 

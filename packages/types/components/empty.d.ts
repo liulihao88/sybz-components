@@ -1,6 +1,6 @@
 import { ElEmpty } from 'element-plus'
 import type { SEmptySelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElEmptyInstance = InstanceType<typeof ElEmpty>
 
@@ -12,18 +12,15 @@ export type SEmptyComponent = {
     $props: {
       title?: string
       subTitle?: string
-      theme?: SybzComponentTheme
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       imgAttrs?: SybzRecord
       src?: string
     } & Omit<
       ElEmptyInstance['$props'],
       'title' | 'subTitle' | 'theme' | 'width' | 'w' | 'height' | 'h' | 'imgAttrs' | 'src' | 'description'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SEmptySelfProps> &
+      SybzThemeProps<SEmptySelfProps>
     $emit: ElEmptyInstance['$emit']
     $slots: ElEmptyInstance['$slots'] & {
       default?: () => any

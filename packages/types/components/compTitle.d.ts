@@ -1,5 +1,5 @@
 import type { SCompTitleProps, SybzComponentTheme, SybzRecord } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 export type SCompTitleComponent = {
   install: (app: import('vue').App) => void
@@ -7,8 +7,8 @@ export type SCompTitleComponent = {
     $props: {
       title?: string
       compTitleStyle?: SybzRecord
-      theme?: SybzComponentTheme
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzThemeProps<SCompTitleProps>
   }
 }
 

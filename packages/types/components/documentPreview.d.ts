@@ -1,5 +1,5 @@
 import type { SDocumentPreviewSelfProps } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 /**
  * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。
@@ -14,12 +14,9 @@ export type SDocumentPreviewComponent = {
     $props: {
       src: string
       type?: 'auto' | 'pdf' | 'word' | 'excel'
-      height?: string | number
-      h?: string | number
-      width?: string | number
-      w?: string | number
       download?: boolean
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<SDocumentPreviewSelfProps>
   }
 }
 

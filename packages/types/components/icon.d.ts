@@ -8,7 +8,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
  * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标移入高亮、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
@@ -25,12 +25,6 @@ declare const SIcon: {
       icon?: SIconValue
       color?: string
       size?: string | number
-      /** 容器宽度，数字自动补 px；默认未设置，仅设置宽度时高度与宽度一致 */
-      width?: string | number
-      w?: string | number
-      /** 容器高度，数字自动补 px；默认未设置，仅设置高度时宽度与高度一致；100% 需要父容器具有可解析的高度 */
-      height?: string | number
-      h?: string | number
       /** 背景圆角，数字自动补 px；默认由 variant 和 theme 决定 */
       borderRadius?: string | number
       /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */
@@ -44,7 +38,6 @@ declare const SIcon: {
       /** 图标旋转角度，数字及数字字符串按 deg 处理 */
       rotate?: string | number
       disabled?: boolean
-      theme?: SybzComponentTheme
       /** 图标来源；默认值：auto，可自动识别在线图片 URL 和 Iconify 名称 */
       source?: SIconSource
       /** 图标语义类型；默认值：undefined */
@@ -56,7 +49,9 @@ declare const SIcon: {
       iconifyAttrs?: SybzRecord
       /** 透传给在线图片 img 元素的属性，如 alt、crossorigin、referrerpolicy */
       imageAttrs?: SybzRecord
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<SIconProps> &
+      SybzThemeProps<SIconProps>
     $slots: {
       default?: () => any
     }

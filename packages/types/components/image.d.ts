@@ -1,6 +1,6 @@
 import { ElImage } from 'element-plus'
 import type { SImageProps, SImageSelfProps, SImageSrcResolver } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 type ElImageInstance = InstanceType<typeof ElImage>
 
@@ -17,12 +17,6 @@ export type SImageComponent = {
     $props: {
       /** 图片地址；相对路径会通过 resolver 或 basePath 解析 */
       src?: string
-      /** 图片宽度，数字自动补 px */
-      width?: string | number
-      w?: string | number
-      /** 图片高度，数字自动补 px */
-      height?: string | number
-      h?: string | number
       /** 相对图片的公共基础路径 */
       basePath?: string
       /** 源码资源解析函数，通常由 createImageResolver 创建 */
@@ -35,7 +29,8 @@ export type SImageComponent = {
       ElImageInstance['$props'],
       'src' | 'width' | 'w' | 'height' | 'h' | 'basePath' | 'resolver' | 'preview' | 'previewSrcList'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SImageSelfProps>
     $emit: ElImageInstance['$emit']
     $slots: ElImageInstance['$slots'] & Record<string, (...args: any[]) => any>
     showPreview: () => void

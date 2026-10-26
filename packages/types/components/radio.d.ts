@@ -7,7 +7,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 
@@ -24,7 +24,6 @@ export type SRadioComponent = {
     $props: {
       title?: string
       compTitleStyle?: SybzRecord
-      theme?: SybzComponentTheme
       type?: '' | 'boolean' | 'simple'
       variant?: 'radio' | 'button'
       options?: SRadioOption[]
@@ -50,7 +49,8 @@ export type SRadioComponent = {
       | 'customLabel'
       | 'customDisabled'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzThemeProps<SRadioSelfProps>
     $emit: ElRadioGroupInstance['$emit']
     $slots: ElRadioGroupInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

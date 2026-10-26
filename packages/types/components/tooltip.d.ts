@@ -1,6 +1,6 @@
 import { ElTooltip } from 'element-plus'
 import type { STooltipSelfProps } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 type ElTooltipInstance = InstanceType<typeof ElTooltip>
 
@@ -17,8 +17,6 @@ export type STooltipComponent = {
     $props: {
       /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
-      width?: string
-      w?: string
       lineClamp?: string | number
       showSlot?: boolean
       effect?: string
@@ -28,7 +26,8 @@ export type STooltipComponent = {
       ElTooltipInstance['$props'],
       'dangerouslyUseHTMLString' | 'width' | 'w' | 'lineClamp' | 'showSlot' | 'effect' | 'showAfter'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<STooltipSelfProps>
     $emit: ElTooltipInstance['$emit']
     $slots: ElTooltipInstance['$slots'] & {
       default?: () => any

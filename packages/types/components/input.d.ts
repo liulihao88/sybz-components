@@ -6,7 +6,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElInputInstance = InstanceType<typeof ElInput>
 
@@ -27,15 +27,10 @@ export type SInputComponent = {
       compTitleStyle?: SybzRecord
       /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
       topTitle?: string
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       maxlength?: string | number
       hideMaxLengthError?: boolean
       maxLengthErrorText?: string
       size?: SybzComponentSize
-      theme?: SybzComponentTheme
       showWordLimit?: boolean | string
       block?: boolean
       disPlaceholder?: string
@@ -73,7 +68,9 @@ export type SInputComponent = {
       | 'content'
       | 'search'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SInputSelfProps> &
+      SybzThemeProps<SInputSelfProps>
     $emit: ElInputInstance['$emit'] &
       (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)
     $slots: ElInputInstance['$slots'] & {

@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'vue'
 import type { JsonData, JsonEmits, JsonExposed, JsonProps, JsonTheme } from '../../components/json/src/types'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
  * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
@@ -29,19 +29,13 @@ export type SJsonComponent = {
       showStatus?: boolean
       /** 编辑器为空时的占位文字，默认值：请输入 JSON */
       placeholder?: string
-      /** 编辑器宽度，支持 processWidth 写法，默认值：100% */
-      width?: string | number
-      w?: string | number
-      /** 编辑器高度，支持 processWidth 写法；默认由容器或最小高度决定 */
-      height?: string | number
-      h?: string | number
       /** 编辑器最小高度，支持 processWidth 写法，默认值：240 */
       minHeight?: string | number
-      /** 显示主题，默认值：light */
-      theme?: JsonTheme
       /** 根节点额外样式 */
       style?: CSSProperties
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<JsonProps> &
+      SybzThemeProps<JsonProps>
     $slots: Record<string, (...args: any[]) => any>
     $emit: <Event extends keyof JsonEmits>(event: Event, ...args: JsonEmits[Event]) => void
     format: JsonExposed['format']

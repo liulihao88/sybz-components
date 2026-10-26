@@ -8,7 +8,7 @@ import type {
   SDialogVariant,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElDialogInstance = InstanceType<typeof ElDialog>
 type ElDrawerInstance = InstanceType<typeof ElDrawer>
@@ -31,12 +31,6 @@ export type SDialogComponent = {
       target?: string
       title?: string
       subTitle?: string
-      width?: string | number
-      w?: string | number
-      /** 整个弹窗或抽屉的高度，数字按 px 处理 */
-      height?: string | number
-      h?: string | number
-      theme?: SDialogTheme
       cancel?: SDialogHandler
       cancelText?: string
       confirmText?: string
@@ -107,7 +101,9 @@ export type SDialogComponent = {
         | 'hideHeaderIcon'
         | keyof ElDialogInstance['$props']
       > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SDialogSelfProps> &
+      SybzThemeProps<SDialogSelfProps>
     $emit: ElDialogInstance['$emit']
     $slots: ElDialogInstance['$slots'] & {
       default?: () => any

@@ -1,7 +1,7 @@
 import { ElTag } from 'element-plus'
 import type { TagPropsPublic } from 'element-plus/es/components/tag'
 import type { SCommonProps, STagSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElTagInstance = InstanceType<typeof ElTag>
 
@@ -16,10 +16,6 @@ export type STagComponent = {
   install: (app: import('vue').App) => void
   new (): {
     $props: {
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       color?: string
       /** CSS background，支持纯色、渐变及其他合法背景值 */
       background?: string
@@ -32,7 +28,6 @@ export type STagComponent = {
       info?: string | number | boolean | any[]
       other?: string
       type?: TagPropsPublic['type']
-      theme?: SybzComponentTheme
       size?: SybzComponentSize
       config?: SybzRecord
     } & Omit<
@@ -56,7 +51,9 @@ export type STagComponent = {
       | 'size'
       | 'config'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<STagSelfProps> &
+      SybzThemeProps<STagSelfProps>
     $emit: ElTagInstance['$emit']
     $slots: ElTagInstance['$slots'] & {
       default?: () => any

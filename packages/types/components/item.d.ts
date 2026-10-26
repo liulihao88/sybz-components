@@ -10,7 +10,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
  * 信息项，标题与副标题默认显示 1 行，通过 titleAttrs/subTitleAttrs 的 lineClamp 配置行数及 Tooltip 属性。
@@ -21,10 +21,6 @@ export type SItemComponent = {
   install: (app: import('vue').App) => void
   new (): {
     $props: {
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       color?: string
       /** CSS background，支持纯色、渐变及其他合法背景值 */
       background?: string
@@ -66,9 +62,10 @@ export type SItemComponent = {
       styles?: SItemStyles
       clickable?: boolean
       disabled?: boolean
-      theme?: SybzComponentTheme
       shadow?: 'always' | 'never' | 'hover'
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<SItemProps> &
+      SybzThemeProps<SItemProps>
     $slots: {
       prefix?: () => any
       img?: () => any

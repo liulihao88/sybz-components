@@ -9,7 +9,7 @@ import type {
   SMenuProps,
   SMenuSelfProps,
 } from '../../components/menu/src/types'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
  * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。头部和底部 padding 保持 16px，列表展开时为 16px、收起时为 4px；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
@@ -26,10 +26,6 @@ export type SMenuComponent = {
       router?: boolean
       defaultOpenAll?: boolean
       defaultOpeneds?: string[]
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       /** 是否自适应菜单项尺寸：展开时四边保持 16px padding，收起时为 4px，仅空间不足时压缩菜单项 */
       autoHeight?: boolean
       /** 深色模式背景色；浅色模式始终为白色 */
@@ -44,13 +40,13 @@ export type SMenuComponent = {
       collapsible?: boolean
       /** 明暗外观：light 为白色背景，dark 为深色背景 */
       variant?: 'dark' | 'light'
-      /** 主题强调色，不改变明暗外观 */
-      theme?: SybzComponentTheme
       header?: SMenuHeaderConfig
       /** @deprecated 请使用 header */
       headerConfig?: SMenuHeaderConfig
       footer?: SMenuFooterConfig
-    } & SybzStyleProps
+    } & SybzStyleProps &
+      SybzDimensionProps<SMenuSelfProps> &
+      SybzThemeProps<SMenuSelfProps>
     $slots: {
       header?: () => any
       append?: () => any

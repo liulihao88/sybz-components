@@ -7,7 +7,7 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElSelectInstance = InstanceType<typeof ElSelect>
 
@@ -35,18 +35,12 @@ export type SSelectComponent = {
       /** 是否显示上下快速切换按钮，默认 true；空选项时仍显示 */
       showQuick?: boolean
       size?: SybzComponentSize
-      theme?: SybzComponentTheme
       title?: string
       /** 嵌在选择框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
       topTitle?: string
       compTitleStyle?: SybzRecord
       connect?: string
       customLabel?: (context: SSelectOptionContext<SybzRecord>) => any
-      width?: string | number
-      w?: string | number
-      /** 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度，默认空字符串 */
-      height?: string | number
-      h?: string | number
       /** 选项为空时的占位文案，默认 暂无数据 */
       emptyPlaceholder?: string
       disPlaceholder?: string
@@ -90,7 +84,9 @@ export type SSelectComponent = {
       | 'showTooltip'
       | 'tooltipAttrs'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SSelectSelfProps> &
+      SybzThemeProps<SSelectSelfProps>
     $emit: ElSelectInstance['$emit']
     $slots: ElSelectInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

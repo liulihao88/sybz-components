@@ -9,7 +9,7 @@ import type {
   SFormTitleItem,
   SybzRecord,
 } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElFormInstance = InstanceType<typeof ElForm>
 
@@ -26,7 +26,6 @@ export type SFormComponent = {
     $props: {
       fieldList: SFormFieldList
       model: SybzRecord
-      theme?: SybzComponentTheme
       /** showFooter 的别名，设置后优先级更高 */
       footer?: boolean
       showFooter?: boolean
@@ -54,7 +53,8 @@ export type SFormComponent = {
       | 'trim'
       | 'componentDefaults'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzThemeProps<SFormProps>
     $emit: ElFormInstance['$emit']
     $slots: ElFormInstance['$slots'] & Record<string, (...args: any[]) => any>
   }

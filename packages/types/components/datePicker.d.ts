@@ -1,7 +1,7 @@
 import { ElDatePicker } from 'element-plus'
 import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'
 import type { SDatePickerSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
-import type { SybzStyleProps } from '../component-props'
+import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElDatePickerInstance = InstanceType<typeof ElDatePicker>
 
@@ -18,20 +18,17 @@ export type SDatePickerComponent = {
   new (): {
     $props: {
       title?: string
-      width?: string | number
-      w?: string | number
-      height?: string | number
-      h?: string | number
       /** 是否仅允许选择当前日期或当前周期之后的值，并启用未来时间快捷项 */
       futureOnly?: boolean
-      theme?: SybzComponentTheme
       shortcuts?: DatePickerPropsPublic['shortcuts'] | false
       compTitleStyle?: SybzRecord
     } & Omit<
       ElDatePickerInstance['$props'],
       'title' | 'width' | 'w' | 'height' | 'h' | 'futureOnly' | 'theme' | 'shortcuts' | 'compTitleStyle'
     > &
-      SybzStyleProps
+      SybzStyleProps &
+      SybzDimensionProps<SDatePickerSelfProps> &
+      SybzThemeProps<SDatePickerSelfProps>
     $emit: ElDatePickerInstance['$emit']
     $slots: ElDatePickerInstance['$slots'] & Record<string, (...args: any[]) => any>
   }
