@@ -74,20 +74,27 @@ descriptions/customStyle
 descriptions/custom
 :::
 
+### 尺寸（size 默认值：default）
+
+:::demo 展示通过 `size` 控制描述列表单元格内边距（宽高）与字体大小。基础写法：`<s-descriptions :options="options" :size="size" :column="2" />`。属性：`size` 可选 `small / default / large`，默认值 `default`；`small` 内边距更紧凑、字体 12px，`default` 内边距 12px 14px、字体 14px，`large` 内边距更宽松、字体 16px。
+descriptions/other
+:::
+
 ### API
 
-|    属性名     | 说明                                                           | 类型            | 默认值    |
-| :-----------: | -------------------------------------------------------------- | --------------- | --------- |
-|   `options`   | 描述项配置列表                                                 | `ItemOptions[]` | -         |
-|    `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string          | `default` |
-|   `column`    | 一行展示的描述项数量                                           | number          | `3`       |
-|    `width`    | 描述列表容器宽度                                               | string / number | -         |
-| `labelWidth`  | label 宽度，传 `auto` 时会按最长 label 自动计算                | string / number | `auto`    |
-|   `showAll`   | 是否完整展示文本；单项 `showAll` 可覆盖此设置                  | boolean         | `false`   |
-|    `label`    | options 中作为标签文本的字段名                                 | string          | `label`   |
-|    `value`    | options 中作为内容值的字段名                                   | string          | `value`   |
-| `customLabel` | 统一自定义标签内容，单项 `labelRender`、`labelSlot` 优先       | function        | -         |
-| `customValue` | 统一自定义值内容，单项 `render`、`valueSlot` 优先              | function        | -         |
+|    属性名     | 说明                                                                 | 类型            | 默认值    |
+| :-----------: | -------------------------------------------------------------------- | --------------- | --------- |
+|   `options`   | 描述项配置列表                                                       | `ItemOptions[]` | -         |
+|    `theme`    | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`       | string          | `default` |
+|    `size`     | 尺寸，控制单元格内边距与字体大小，可选 `small` / `default` / `large` | string          | `default` |
+|   `column`    | 一行展示的描述项数量                                                 | number          | `3`       |
+|    `width`    | 描述列表容器宽度                                                     | string / number | -         |
+| `labelWidth`  | label 宽度，传 `auto` 时会按最长 label 自动计算                      | string / number | `auto`    |
+|   `showAll`   | 是否完整展示文本；单项 `showAll` 可覆盖此设置                        | boolean         | `false`   |
+|    `label`    | options 中作为标签文本的字段名                                       | string          | `label`   |
+|    `value`    | options 中作为内容值的字段名                                         | string          | `value`   |
+| `customLabel` | 统一自定义标签内容，单项 `labelRender`、`labelSlot` 优先             | function        | -         |
+| `customValue` | 统一自定义值内容，单项 `render`、`valueSlot` 优先                    | function        | -         |
 
 ### ItemOptions
 

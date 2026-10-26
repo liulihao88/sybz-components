@@ -43,7 +43,7 @@
     background-clip: padding-box;
     border-color: var(--s-sybz-divider) !important;
     color: var(--s-sybz-text-regular);
-    font-size: 14px;
+    font-size: var(--s-descriptions-cell-font-size, 14px);
     line-height: 1.5;
   }
 
@@ -69,7 +69,7 @@
   }
 
   .el-descriptions__table.is-bordered .el-descriptions__cell {
-    padding: 12px 14px;
+    padding: var(--s-descriptions-cell-padding, 12px 14px);
   }
 
   .el-descriptions__table.is-bordered .el-descriptions__label {

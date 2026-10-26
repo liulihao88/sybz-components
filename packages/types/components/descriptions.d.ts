@@ -26,6 +26,8 @@ export type SDescriptionsComponent = {
     $props: {
       options: SDescriptionsItemOption[]
       theme?: SybzComponentTheme
+      /** 尺寸，控制描述项单元格内边距与字体大小 */
+      size?: SybzComponentSize
       column?: number
       width?: string | number
       w?: string | number
@@ -41,6 +43,7 @@ export type SDescriptionsComponent = {
       ElDescriptionsInstance['$props'],
       | 'options'
       | 'theme'
+      | 'size'
       | 'column'
       | 'width'
       | 'w'

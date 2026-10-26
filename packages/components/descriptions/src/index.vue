@@ -4,6 +4,7 @@
     v-bind="{ border: true, ...$attrs }"
     :style="[descriptionsStyle, style]"
     :column="descriptionColumn"
+    :size="mergedProps.size"
     :label-width="labelWidth2"
     class="s-descriptions"
     :class="descriptionsClass"
@@ -82,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SybzComponentTheme } from '../../../types/component-props'
+import type { SybzComponentSize, SybzComponentTheme } from '../../../types/component-props'
 import { computed, defineComponent, isVNode, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, watch } from 'vue'
 import { ElDescriptions, ElDescriptionsItem } from 'element-plus'
 import { processWidth } from '@sybz-components/utils'
@@ -100,6 +101,7 @@ const attrs = useAttrs()
 type DescriptionsProps = {
   options: ItemOptions[]
   theme?: SybzComponentTheme
+  size?: SybzComponentSize
   column?: number
   width?: string | number
   w?: string | number
@@ -155,6 +157,7 @@ const DescriptionsRender = defineComponent({
 
 const props = withDefaults(defineProps<DescriptionsProps>(), {
   theme: 'default',
+  size: 'default',
   column: 3,
   labelWidth: 'auto',
   showAll: false,
@@ -325,9 +328,27 @@ const labelWidth2 = computed(() => {
   return 'auto'
 })
 
+const descriptionsSizeMap: Record<SybzComponentSize, Record<string, string>> = {
+  small: {
+    '--s-descriptions-cell-padding': '8px 10px',
+    '--s-descriptions-cell-font-size': '12px',
+  },
+  default: {
+    '--s-descriptions-cell-padding': '12px 14px',
+    '--s-descriptions-cell-font-size': '14px',
+  },
+  large: {
+    '--s-descriptions-cell-padding': '16px 18px',
+    '--s-descriptions-cell-font-size': '16px',
+  },
+}
+
 const descriptionsStyle = computed(() => {
   const width = processWidth(mergedProps.value.width, true)
-  return width ? { width } : undefined
+  return {
+    ...(descriptionsSizeMap[mergedProps.value.size ?? 'default'] ?? descriptionsSizeMap.default),
+    ...(width ? { width } : undefined),
+  }
 })
 
 const descriptionColumn = computed(() => mergedProps.value.column)
@@ -386,6 +407,7 @@ const descriptionsClass = computed(() => ({
   's-descriptions--chenghua': mergedProps.value.theme === 'chenghua',
   's-descriptions--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-descriptions--sybz': mergedProps.value.theme === 'sybz',
+  [`s-descriptions--size-${mergedProps.value.size}`]: !!mergedProps.value.size,
 }))
 
 watch(
@@ -430,6 +452,14 @@ onBeforeUnmount(() => descriptionsResizeObserver?.disconnect())
 
   :deep(.el-descriptions__table) tr:has(td.is-bordered) {
     display: flex;
+  }
+
+  :deep(.el-descriptions__body .el-descriptions__table .el-descriptions__cell) {
+    font-size: var(--s-descriptions-cell-font-size, 14px);
+  }
+
+  :deep(.el-descriptions__body .el-descriptions__table.is-bordered .el-descriptions__cell) {
+    padding: var(--s-descriptions-cell-padding, 12px 14px);
   }
 
   :deep(.el-descriptions__label) {
