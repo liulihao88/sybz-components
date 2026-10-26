@@ -78,18 +78,12 @@ button/link
 button/customColor
 :::
 
-### other
+### 其他属性（round 默认值：false）
 
-:::demo
+基础写法：`<s-button round type="primary">圆角按钮</s-button>`。切换 `round` 可直接比较普通按钮和圆角按钮，也可切换尺寸、禁用及其他按钮形态。
+
+:::demo 展示按钮常用属性。`round` 可选 `true / false`，默认值 `false`；`size` 可选 `small / default / large`，默认值 `default`；`disabled`、`plain`、`circle`、`link`、`text`、`bg` 可选 `true / false`，默认值均为 `false`。
 button/other
-:::
-
-### 圆角按钮（round 默认值：false）
-
-基础写法：`<s-button round type="primary">圆角按钮</s-button>`。设置 `round` 后按钮使用圆角样式，也适用于主题按钮和带提示文字的按钮。
-
-:::demo 展示 `round` 的默认样式和开启后的圆角样式。属性：`round` 可选 `true / false`，默认值 `false`；`theme` 可选 `default / chenghua / shijingshan / sybz / gulou`，默认值 `default`；`content` 类型 `string`，默认值 `''`。
-button/round
 :::
 
 ### 属性

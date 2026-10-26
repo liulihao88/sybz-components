@@ -9,6 +9,7 @@ const size = ref('default')
 const dynamicSize = ref()
 
 const baseRadio = ref('default')
+const round = ref(false)
 const buttonList = [
   {
     type: '',
@@ -64,13 +65,13 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
     <el-radio-group v-model="baseRadio" class="m-b-12">
       <el-radio label="default" value="default" />
       <el-radio label="plain" value="plain" />
-      <el-radio label="round" value="round" />
       <el-radio label="circle" value="circle" />
       <el-radio label="link" value="link" />
       <el-radio label="text" value="text" />
       <el-radio label="text-bg" value="text-bg" />
     </el-radio-group>
     <br />
+    <s-radio v-model="round" :options="[true, false]" type="simple" title="round 圆角" class="m-b-12" />
     <el-space wrap>
       <s-button
         v-for="(button, index) in buttonList"
@@ -79,7 +80,7 @@ watch(size, (val) => (val === 'disabled' ? (dynamicSize.value = 'default') : (dy
         :size="dynamicSize"
         :disabled="size === 'disabled'"
         :plain="baseRadio === 'plain'"
-        :round="baseRadio === 'round'"
+        :round="round"
         :circle="baseRadio === 'circle'"
         :link="baseRadio === 'link'"
         :text="baseRadio === 'text' || baseRadio === 'text-bg'"
