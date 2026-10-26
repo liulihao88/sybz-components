@@ -1,5 +1,5 @@
 <template>
-  <div class="s-title" :class="titleClass" :style="titleStyle" v-bind="$attrs">
+  <div class="s-title" :class="titleClass" :style="[titleStyle, style]" v-bind="$attrs">
     <div
       class="s-title__top"
       :class="[parseClass, { 's-title__top--sub-bottom': mergedProps.subTitlePosition === 'bottom' }]"
@@ -71,6 +71,7 @@ import type { SIconProps, SIconValue, SybzComponentTheme } from '../../../types/
 import { computed, type CSSProperties, useSlots } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
 
@@ -170,6 +171,7 @@ const props = withDefaults(defineProps<TitleProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('title', props)
 const slots = useSlots()
+const { style } = useStyleProps()
 
 const titleStyle = computed(() => {
   const { size, fs, margin, gap, width, t, b, l, tb, height } = mergedProps.value
@@ -260,6 +262,7 @@ const hasIcon = computed(() => {
 .s-title {
   position: relative;
   box-sizing: border-box;
+  font-weight: 600;
   .s-title__main {
     display: flex;
     flex: 1 1 auto;
@@ -275,7 +278,6 @@ const hasIcon = computed(() => {
     overflow: hidden;
     color: inherit;
     font: inherit;
-    font-weight: 600;
     letter-spacing: 0;
     line-height: inherit;
     text-overflow: ellipsis;
@@ -353,6 +355,7 @@ const hasIcon = computed(() => {
     flex: 0 1 auto;
     align-items: center;
     min-width: 0;
+    font-weight: 400;
   }
   .s-title__subTitle {
     display: inline-flex;
