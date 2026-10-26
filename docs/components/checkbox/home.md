@@ -57,8 +57,8 @@ checkbox/customGap
 |     属性名     | 说明                                               | 类型                                            | 默认值    |
 | :------------: | -------------------------------------------------- | ----------------------------------------------- | --------- |
 |      type      | options参数的类型, 可以设置为simple                | string                                          | -         |
-|     title      | 左侧标题；button 模式显示为紧凑文字标签            | string                                          | -         |
-| compTitleStyle | 标题样式                                           | object                                          | -         |
+|     title      | 左侧文字标题，普通和 button 模式样式一致           | string                                          | -         |
+| compTitleStyle | 标题文字的自定义样式                               | object                                          | -         |
 |    options     | checkbox的选项                                     | object                                          | {}        |
 |    variant     | 展示形式，可选 `checkbox` / `button`               | string                                          | checkbox  |
 |     label      | 显示的文本对应的字段                               | string                                          | label     |

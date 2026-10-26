@@ -60,13 +60,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 })
 
 const mergedProps = useGlobalComponentConfig('checkbox', props)
-const compTitleProps = computed(() => ({
-  title: mergedProps.value.title,
-  theme: mergedProps.value.theme,
-  size: mergedProps.value.size,
-  compTitleStyle: mergedProps.value.compTitleStyle,
-}))
-const buttonTitleStyle = computed(() => {
+const titleStyle = computed(() => {
   const style = mergedProps.value.compTitleStyle
   return style?.width ? { ...style, width: processWidth(style.width, true) } : style
 })
@@ -181,14 +175,9 @@ const checkboxClass = computed(() => ({
 
 <template>
   <div class="s-checkbox" :class="checkboxClass">
-    <span
-      v-if="mergedProps.title && mergedProps.variant === 'button'"
-      class="s-checkbox__title s-checkbox__title--button"
-      :style="buttonTitleStyle"
-    >
+    <span v-if="mergedProps.title" class="s-checkbox__title" :style="titleStyle">
       {{ mergedProps.title }}
     </span>
-    <s-comp-title v-else-if="mergedProps.title" v-bind="compTitleProps" class="s-checkbox__title" />
     <component
       :is="checkType"
       v-if="mergedProps.showAll"
@@ -238,7 +227,16 @@ const checkboxClass = computed(() => ({
   align-items: flex-start;
 
   .s-checkbox__title {
-    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    flex: none;
+    margin-right: 12px;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
   }
 
   .s-checkbox__all {
@@ -254,22 +252,6 @@ const checkboxClass = computed(() => ({
   --s-checkbox-button-soft: var(--el-color-primary-light-9);
   --s-checkbox-button-radius: var(--el-border-radius-base);
   align-items: center;
-
-  .s-checkbox__title--button {
-    display: inline-flex;
-    align-items: center;
-    align-self: center;
-    flex: none;
-    height: auto;
-    margin-right: 12px;
-    padding: 0;
-    color: var(--el-text-color-secondary);
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-  }
 
   .s-checkbox__all {
     display: inline-flex;
