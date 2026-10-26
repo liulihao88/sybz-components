@@ -35,50 +35,56 @@ export type { SybzComponentTheme } from '@sybz-components/utils'
 export type SybzComponentSize = 'small' | 'default' | 'large'
 export type SybzRecord = Record<string, any>
 
+/** T-shirt 尺寸 token，用于长度类样式简写（如 `m` / `p` / `fs` / `br`），对应 Mantine 默认 spacing 值。 */
+export type SybzSizeToken = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+/** 长度类样式值：T-shirt 尺寸 token、数字（自动补 `px`）或任意 CSS 长度字符串。 */
+export type SybzLength = SybzSizeToken | number | (string & {})
+
 /**
  * Mantine 风格的样式简写属性（Style Props）。
  *
  * 所有 sybz 组件都通过全局 mixin 自动接受这些属性，直接以简写作为 prop 传入，
- * 例如 `<s-flex gap="small" m="10px" fs="14px">`。数值会自动补全为 `px`。
+ * 例如 `<s-flex gap="small" m="10px" fs="14px">`。长度类属性支持 T-shirt 尺寸
+ * token（`xs` / `sm` / `md` / `lg` / `xl`），数值会自动补全为 `px`。
  */
 export interface SybzStyleProps {
   // 内边距与外边距
-  m?: string | number
-  mt?: string | number
-  mb?: string | number
-  ml?: string | number
-  mr?: string | number
-  mx?: string | number
-  my?: string | number
-  p?: string | number
-  pt?: string | number
-  pb?: string | number
-  pl?: string | number
-  pr?: string | number
-  px?: string | number
-  py?: string | number
+  m?: SybzLength
+  mt?: SybzLength
+  mb?: SybzLength
+  ml?: SybzLength
+  mr?: SybzLength
+  mx?: SybzLength
+  my?: SybzLength
+  p?: SybzLength
+  pt?: SybzLength
+  pb?: SybzLength
+  pl?: SybzLength
+  pr?: SybzLength
+  px?: SybzLength
+  py?: SybzLength
   // 字体与文本
-  fs?: string | number
+  fs?: SybzLength
   fw?: string | number
   lh?: string | number
   ta?: string
   tt?: string
   td?: string
   ff?: string
-  lts?: string | number
+  lts?: SybzLength
   // 尺寸与定位
-  w?: string | number
-  h?: string | number
-  miw?: string | number
-  maw?: string | number
-  mih?: string | number
-  mah?: string | number
+  w?: SybzLength
+  h?: SybzLength
+  miw?: SybzLength
+  maw?: SybzLength
+  mih?: SybzLength
+  mah?: SybzLength
   pos?: string
-  top?: string | number
-  bottom?: string | number
-  left?: string | number
-  right?: string | number
-  inset?: string | number
+  top?: SybzLength
+  bottom?: SybzLength
+  left?: SybzLength
+  right?: SybzLength
+  inset?: SybzLength
   z?: string | number
   // 弹性盒子
   flex?: string | number
@@ -91,7 +97,7 @@ export interface SybzStyleProps {
   bdl?: string
   bdt?: string
   bdb?: string
-  br?: string | number
+  br?: SybzLength
 }
 export type { SElementPlusIconName } from './element-plus-icon-names'
 export type SIconName = SElementPlusIconName | (string & {})

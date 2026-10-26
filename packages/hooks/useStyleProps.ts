@@ -1,6 +1,7 @@
 import { computed, getCurrentInstance } from 'vue'
 import type { CSSProperties, ComputedRef } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import type { SybzSizeToken } from '@/types/component-props'
 
 /**
  * Mantine 风格的「样式简写属性」(Style Props)。
@@ -70,6 +71,15 @@ export const STYLE_PROP_MAP = {
 
 export type SybzStylePropKey = keyof typeof STYLE_PROP_MAP
 
+/** T-shirt 尺寸 token → 像素值（8 ~ 24px 均匀递进，步长 4px） */
+export const SIZE_PRESETS: Record<SybzSizeToken, string> = {
+  xs: '8px',
+  sm: '12px',
+  md: '16px',
+  lg: '20px',
+  xl: '24px',
+}
+
 /** 数值需要自动补全为 `px` 的长度类属性（字符串走 processWidth：`'14'` → `'14px'`，`'1rem'` 原样保留） */
 const LENGTH_PROP_KEYS = new Set<SybzStylePropKey>([
   'm',
@@ -103,12 +113,19 @@ const LENGTH_PROP_KEYS = new Set<SybzStylePropKey>([
 
 const toStyleValue = (key: SybzStylePropKey, value: unknown): unknown => {
   if (typeof value === 'number') {
-    // inset 也按四边长度处理：数字补全为 px，多值字符串原样透传
+    // inset 也按四边长度处理：数字补全为 px
     return LENGTH_PROP_KEYS.has(key) || key === 'inset' ? `${value}px` : value
   }
 
-  if (typeof value === 'string' && LENGTH_PROP_KEYS.has(key)) {
-    return processWidth(value, true)
+  if (typeof value === 'string') {
+    // T-shirt 尺寸 token 优先（xs/sm/md/lg/xl）
+    if (value in SIZE_PRESETS) {
+      return SIZE_PRESETS[value as SybzSizeToken]
+    }
+
+    if (LENGTH_PROP_KEYS.has(key)) {
+      return processWidth(value, true)
+    }
   }
 
   return value
