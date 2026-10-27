@@ -35,6 +35,18 @@ declare global {
 declare module 'vue' {
   export interface GlobalComponents {
     /**
+     * {@link https://liulihao88.github.io/sybz-components/components/backtop/home.html | 查看文档}
+     *
+     * s-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置和滚动时长。
+     */
+    SBacktop: (typeof import('./types/components/backtop'))['default']
+    /**
+     * {@link https://liulihao88.github.io/sybz-components/components/backtop/home.html | 查看文档}
+     *
+     * s-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置和滚动时长。
+     */
+    's-backtop': (typeof import('./types/components/backtop'))['default']
+    /**
      * {@link https://liulihao88.github.io/sybz-components/components/company/baseHeader/home.html | 查看文档}
      */
     SBaseHeader: (typeof import('./types/components/company/baseHeader'))['default']
@@ -521,6 +533,10 @@ declare module 'vue' {
   }
 }
 
+export type SBacktopComponent = (typeof import('./types/components/backtop'))['default']
+export type SBacktopInstance = ComponentInstance<SBacktopComponent>
+export type SBacktopPublicProps = SBacktopInstance['$props']
+
 export type SBaseHeaderComponent = (typeof import('./types/components/company/baseHeader'))['default']
 export type SBaseHeaderInstance = ComponentInstance<SBaseHeaderComponent>
 export type SBaseHeaderPublicProps = SBaseHeaderInstance['$props']
@@ -712,6 +728,7 @@ export type SWrapperPublicProps = SWrapperInstance['$props']
 declare global {
   namespace JSX {
     export interface IntrinsicElements {
+      's-backtop': JSXComponentProps<SBacktopPublicProps>
       's-base-header': JSXComponentProps<SBaseHeaderPublicProps>
       's-build-time': JSXComponentProps<SBuildTimePublicProps>
       's-button': JSXComponentProps<SButtonPublicProps>

@@ -79,6 +79,22 @@ const toOnlineDocsUrl = (docsPath) => `${onlineDocsBaseUrl}${docsPath.replace(/\
 
 const TYPED_COMPONENT_PROPS = new Map([
   [
+    'SBacktop',
+    {
+      importPath: resolve(rootDir, 'packages/components/backtop/src/types.ts'),
+      typeName: 'SBacktopProps',
+      tagName: 's-backtop',
+      description: 's-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置和滚动时长。',
+      slots: ['default'],
+      instanceMembers: ['$emit: SBacktopEmits'],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/backtop/src/types.ts'),
+        interfaceName: 'SBacktopProps',
+        importTypeNames: ['SBacktopEmits', 'SBacktopProps'],
+      },
+    },
+  ],
+  [
     'SDocumentPreview',
     {
       importPath: componentPropsPath,

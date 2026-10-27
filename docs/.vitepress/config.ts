@@ -409,6 +409,10 @@ export default defineConfig({
               link: '/components/scroll/home.md',
             },
             {
+              text: sybzMark('backtop回到顶部组件'),
+              link: '/components/backtop/home.md',
+            },
+            {
               text: 'splitPane切割面板',
               link: '/components/splitPane/home.md',
             },
