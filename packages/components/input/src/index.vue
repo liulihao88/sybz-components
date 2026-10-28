@@ -211,8 +211,8 @@ const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
-const isClearable = computed(() => mergedProps.value.clearable !== false)
-const isDisabled = computed(() => attrs.disabled === true || attrs.disabled === '')
+const isClearable = computed(() => (attrs.clearable ?? mergedProps.value.clearable) !== false)
+const isDisabled = computed(() => (attrs.disabled ?? mergedProps.value.disabled) === true || attrs.disabled === '')
 const showTextareaClear = computed(
   () => attrs.type === 'textarea' && isClearable.value && Boolean(data.value) && !isDisabled.value,
 )
@@ -315,7 +315,7 @@ const computedBoxStyle = computed(() => {
 })
 
 function handlePlaceholder(): string {
-  if (attrs.disabled === '' || attrs.disabled === true) {
+  if (isDisabled.value) {
     return mergedProps.value.disPlaceholder
   }
 

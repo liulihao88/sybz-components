@@ -405,6 +405,10 @@ export default defineConfig({
               link: '/components/flex/home.md',
             },
             {
+              text: sybzMark('configProvider配置组件'),
+              link: '/components/configProvider/home.md',
+            },
+            {
               text: sybzMark('scroll滚动区域组件'),
               link: '/components/scroll/home.md',
             },

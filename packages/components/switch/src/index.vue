@@ -56,7 +56,7 @@ const switchClass = computed(() => ({
 
 <template>
   <el-switch
-    v-bind="{ 'inline-prompt': true, ...$attrs }"
+    v-bind="{ 'inline-prompt': true, disabled: mergedProps.disabled, ...$attrs }"
     class="s-custom-switch"
     :class="switchClass"
     :loading="loading"

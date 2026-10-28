@@ -501,6 +501,8 @@ const mergedAttrs = computed(() => {
     'end-placeholder': '结束日期',
     'range-separator': '-',
     size: mergedProps.value.size || undefined,
+    clearable: mergedProps.value.clearable,
+    disabled: mergedProps.value.disabled,
   }
   const merged = {
     ...baseAttrs,

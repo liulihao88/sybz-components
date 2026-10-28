@@ -105,6 +105,7 @@ const buttonAttrs = computed(() => {
     loading: loading.value,
     size: mergedProps.value.size || undefined,
     round: mergedProps.value.round,
+    disabled: mergedProps.value.disabled,
     ...normalizedAttrs,
     tag: mergedProps.value.href ? 'a' : normalizedAttrs.tag,
     href: mergedProps.value.href || normalizedAttrs.href,

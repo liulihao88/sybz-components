@@ -122,7 +122,9 @@ const checkType = computed(() => {
   return obj[mergedProps.value.variant] ?? 'el-checkbox'
 })
 const getOptionValue = (option: any) => (props.type === 'simple' ? option : option[props.value!])
-const isDisabled = computed(() => rootAttrs.disabled === '' || Boolean(rootAttrs.disabled))
+const isDisabled = computed(
+  () => rootAttrs.disabled === '' || Boolean(rootAttrs.disabled ?? mergedProps.value.disabled),
+)
 const getOptionDisabled = (option: any, index: number) => {
   if (isDisabled.value) return true
   if (getType(props.customDisabled) !== 'function') {
@@ -189,6 +191,7 @@ const checkboxClass = computed(() => ({
       :size="mergedProps.size || undefined"
       :indeterminate="isIndeterminate"
       v-bind="$attrs"
+      :disabled="isDisabled"
       @change="checkAllChange"
     >
       <span v-if="mergedProps.variant === 'button'" class="s-checkbox__all-icon" aria-hidden="true">
@@ -199,7 +202,7 @@ const checkboxClass = computed(() => ({
     </component>
     <el-checkbox-group
       v-model="checkboxModel"
-      v-bind="{ ...filteredAttrs, size: mergedProps.size || undefined }"
+      v-bind="{ disabled: mergedProps.disabled, ...filteredAttrs, size: mergedProps.size || undefined }"
       class="s-checkbox__wrapper"
     >
       <slot>

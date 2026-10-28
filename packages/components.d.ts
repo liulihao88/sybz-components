@@ -123,6 +123,18 @@ declare module 'vue' {
      */
     's-comp-title': (typeof import('./types/components/compTitle'))['default']
     /**
+     * {@link https://liulihao88.github.io/sybz-components/components/configProvider/home.html | 查看文档}
+     *
+     * s-config-provider 为子树提供 Element Plus 配置及 sybz 组件默认值，并支持在自身容器使用样式简写属性。
+     */
+    SConfigProvider: import('./types/components/configProvider').SConfigProviderComponent
+    /**
+     * {@link https://liulihao88.github.io/sybz-components/components/configProvider/home.html | 查看文档}
+     *
+     * s-config-provider 为子树提供 Element Plus 配置及 sybz 组件默认值，并支持在自身容器使用样式简写属性。
+     */
+    's-config-provider': import('./types/components/configProvider').SConfigProviderComponent
+    /**
      * {@link https://liulihao88.github.io/sybz-components/components/datePicker/home.html | 查看文档}
      *
      * s-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
@@ -569,6 +581,10 @@ export type SCompTitleComponent = (typeof import('./types/components/compTitle')
 export type SCompTitleInstance = ComponentInstance<SCompTitleComponent>
 export type SCompTitlePublicProps = SCompTitleInstance['$props']
 
+export type SConfigProviderComponent = import('./types/components/configProvider').SConfigProviderComponent
+export type SConfigProviderInstance = ComponentInstance<SConfigProviderComponent>
+export type SConfigProviderPublicProps = import('./types/components/configProvider').SConfigProviderPublicProps
+
 export type SDatePickerComponent = import('./types/components/datePicker').SDatePickerComponent
 export type SDatePickerInstance = ComponentInstance<SDatePickerComponent>
 export type SDatePickerPublicProps = import('./types/components/datePicker').SDatePickerPublicProps
@@ -737,6 +753,7 @@ declare global {
       's-checkbox': JSXComponentProps<SCheckboxPublicProps>
       's-click-outside': JSXComponentProps<SClickOutsidePublicProps>
       's-comp-title': JSXComponentProps<SCompTitlePublicProps>
+      's-config-provider': JSXComponentProps<SConfigProviderPublicProps>
       's-date-picker': JSXComponentProps<SDatePickerPublicProps>
       's-descriptions': JSXComponentProps<SDescriptionsPublicProps>
       's-dialog': JSXComponentProps<SDialogPublicProps>

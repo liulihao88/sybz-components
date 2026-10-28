@@ -90,6 +90,7 @@ const titleStyle = computed(() => {
   return style?.width ? { ...style, width: processWidth(style.width, true) } : style
 })
 const groupAttrs = computed(() => ({
+  disabled: mergedProps.value.disabled,
   ...attrs,
   size: mergedProps.value.size || undefined,
 }))
@@ -145,7 +146,7 @@ const getOptionAttrs = (option: RadioItem) => {
   } = option
   return attrs
 }
-const isDisabled = computed(() => attrs.disabled === '' || Boolean(attrs.disabled))
+const isDisabled = computed(() => attrs.disabled === '' || Boolean(attrs.disabled ?? mergedProps.value.disabled))
 const getOptionDisabled = (option: RadioItem, index: number) => {
   if (isDisabled.value || option.disabled) return true
   if (typeof mergedProps.value.customDisabled !== 'function') return false

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import en from 'element-plus/es/locale/lang/en'
 
@@ -22,7 +21,7 @@ const dateValue = ref([])
     <el-button type="primary" @click="changeLanguage">切换语言 => {{ locale.name }}</el-button>
   </div>
 
-  <el-config-provider :locale="locale">
+  <s-config-provider :locale="locale">
     <s-flex gap="8">
       <el-time-picker v-model="timeValue" is-range :teleported="false" />
       <s-date-picker
@@ -34,7 +33,7 @@ const dateValue = ref([])
         :teleported="false"
       ></s-date-picker>
     </s-flex>
-  </el-config-provider>
+  </s-config-provider>
 </template>
 
 <style scoped lang="scss"></style>

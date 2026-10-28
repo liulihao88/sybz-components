@@ -15,6 +15,7 @@ import { stylePropsMixin } from './hooks/useStyleProps'
 import { applySybzThemeColors } from './theme.ts'
 
 export { resetSybzThemeColors, setSybzThemeColors } from './theme.ts'
+export type { SConfigProviderProps } from './components/configProvider/src/types'
 
 type InstallableComponent = Component & {
   name?: string

@@ -4,18 +4,19 @@
 
 ## 映射
 
-| 原写法                                                | 使用                                                   |
-| ----------------------------------------------------- | ------------------------------------------------------ |
-| `button/el-button`                                    | `s-button`                                             |
-| `input/el-input`、`el-input-number`                   | `s-input`、`s-input-number`                            |
-| `el-select` + `el-option`                             | `s-select :options`                                    |
-| checkbox/radio/switch/date-picker                     | `s-checkbox`/`s-radio`/`s-switch`/`s-date-picker`      |
-| table + column + pagination                           | `s-table :columns`                                     |
-| descriptions + item                                   | `s-descriptions :options`                              |
-| dialog/drawer                                         | `s-dialog`                                             |
-| empty/image/icon/tooltip/popconfirm/progress/tabs/tag | 对应 `s-*`                                             |
-| 标题/卡片/布局                                        | `s-title`、`s-comp-title`、`s-card`、`s-flex`、`s-row` |
-| form                                                  | `s-form :field-list`                                   |
+| 原写法                                                | 使用                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| `button/el-button`                                    | `s-button`                                                   |
+| `input/el-input`、`el-input-number`                   | `s-input`、`s-input-number`                                  |
+| `el-select` + `el-option`                             | `s-select :options`                                          |
+| checkbox/radio/switch/date-picker                     | `s-checkbox`/`s-radio`/`s-switch`/`s-date-picker`            |
+| table + column + pagination                           | `s-table :columns`                                           |
+| descriptions + item                                   | `s-descriptions :options`                                    |
+| dialog/drawer                                         | `s-dialog`                                                   |
+| empty/image/icon/tooltip/popconfirm/progress/tabs/tag | 对应 `s-*`                                                   |
+| 标题/卡片/布局                                        | `s-title`、`s-comp-title`、`s-card`、`s-flex`、`s-row`       |
+| 局部默认配置                                          | `s-config-provider`（Element Plus 配置与 sybz 子组件默认值） |
+| form                                                  | `s-form :field-list`                                         |
 
 星标组件见仓库 `skills/star-skill.md`。主题场景先检查全局配置：已有全局主题时，组件省略 `theme`；仅单组件覆盖全局主题，或无全局主题而需要指定主题时传 `theme="chenghua|shijingshan"`。
 

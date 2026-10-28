@@ -289,7 +289,8 @@ const selectAttrs = computed<Record<string, any>>(() => {
   }, {})
 
   return {
-    clearable: true,
+    clearable: mergedProps.value.clearable ?? true,
+    disabled: mergedProps.value.disabled,
     filterable: true,
     size: mergedProps.value.size || undefined,
     ...nextAttrs,
@@ -373,14 +374,14 @@ const getOptionKey = (item: SelectOption, index: number) => {
 
 const parseDisabled = computed(() => {
   // 检查直接传入的disabled属性
-  const directDisabled = attrs.disabled === '' || !!attrs.disabled
+  const directDisabled = attrs.disabled === '' || !!(attrs.disabled ?? mergedProps.value.disabled)
 
   // 查找祖先组件是否有disabled状态
   let ancestorDisabled = false
   let parent = getCurrentInstance()?.parent
   while (parent && !ancestorDisabled) {
     // 检查父组件实例是否有disabled属性
-    if (parent.props?.disabled !== undefined && parent.type?.name) {
+    if (parent.type?.name !== 'SConfigProvider' && parent.props?.disabled !== undefined && parent.type?.name) {
       ancestorDisabled = parent.props.disabled === '' || !!parent.props.disabled
     }
     // 检查父组件类型是否为禁用状态的容器（如form）
@@ -499,7 +500,7 @@ const selectPlaceholder = computed(() => {
   if (sOptions.value.length === 0 && inlineOptions.value.length === 0) {
     return mergedProps.value.emptyPlaceholder
   }
-  let res = attrs.disabled ? mergedProps.value.disPlaceholder : attrs.placeholder || '请选择'
+  let res = parseDisabled.value ? mergedProps.value.disPlaceholder : attrs.placeholder || '请选择'
   return typeof res === 'string' ? res : String(res ?? '')
 })
 

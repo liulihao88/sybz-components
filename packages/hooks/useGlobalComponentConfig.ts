@@ -1,4 +1,4 @@
-import { computed, getCurrentInstance, inject, type ComputedRef } from 'vue'
+import { computed, getCurrentInstance, inject, unref, type ComputedRef } from 'vue'
 import { resolveSybzComponentTheme } from '../utils/src/theme'
 import { resolveSizeAliases } from './useSizeAliases'
 
@@ -20,6 +20,11 @@ const getCommonProps = <T extends Record<string, any>>(globalConfig: GlobalCompo
     }
     return matchedProps
   }, {})
+
+  // Element Plus props forwarded through $attrs are not declared by many s-* wrappers.
+  for (const key of ['clearable', 'disabled']) {
+    if (hasOwn(commonProps, key)) matchedProps[key] = commonProps[key]
+  }
 
   return matchedProps
 }
@@ -54,11 +59,14 @@ const getExplicitProps = <T extends Record<string, any>>(
 }
 
 const useGlobalComponentConfig = <T extends Record<string, any>>(componentKey: string, props: T) => {
-  const globalConfig = inject<GlobalComponentConfig>(GLOBAL_COMPONENT_CONFIG_KEY, {})
+  const globalConfig = inject<GlobalComponentConfig | ComputedRef<GlobalComponentConfig>>(
+    GLOBAL_COMPONENT_CONFIG_KEY,
+    {},
+  )
   const instance = getCurrentInstance()
 
   return computed(() => {
-    const configured = getComponentConfig(globalConfig, componentKey, props)
+    const configured = getComponentConfig(unref(globalConfig), componentKey, props)
     const mergedProps = {
       ...props,
       ...configured,

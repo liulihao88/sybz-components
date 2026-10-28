@@ -62,7 +62,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('inputNumber', props)
 const { style } = useStyleProps()
-const isDisabled = computed(() => attrs.disabled === true || attrs.disabled === '')
+const isDisabled = computed(() => (attrs.disabled ?? mergedProps.value.disabled) === true || attrs.disabled === '')
 
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
@@ -94,6 +94,7 @@ const mergedAttrs = computed(() => {
   const baseAttrs = {
     'controls-position': 'right',
     size: mergedProps.value.size || undefined,
+    disabled: mergedProps.value.disabled,
   }
 
   const merged = Object.entries(attrs).reduce((obj, [key, value]) => {

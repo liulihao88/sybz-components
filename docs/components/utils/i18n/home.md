@@ -2,11 +2,11 @@
 
 ## Hidden Title {.md-hidden}
 
-<DocBasicUsage code='<el-config-provider :locale="locale"></el-config-provider>' />
+<DocBasicUsage code='<s-config-provider :locale="locale"></s-config-provider>' />
 
 ### 基础用法
 
-:::demo 展示中文、英文语言包切换。基础写法：`<el-config-provider :locale="locale"></el-config-provider>`。
+:::demo 展示中文、英文语言包切换。基础写法：`<s-config-provider :locale="locale"></s-config-provider>`。
 utils/i18n/base
 :::
 

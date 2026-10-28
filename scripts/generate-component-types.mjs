@@ -165,6 +165,25 @@ const TYPED_COMPONENT_PROPS = new Map([
   ],
   ['SBuildTime', { importPath: componentPropsPath, typeName: 'SBuildTimeProps' }],
   [
+    'SConfigProvider',
+    {
+      importPath: resolve(rootDir, 'packages/components/configProvider/src/types.ts'),
+      typeName: 'SConfigProviderProps',
+      exportedComponentTypeName: 'SConfigProviderComponent',
+      publicPropsTypeName: 'SConfigProviderPublicProps',
+      explicitComponentType: 'configProvider',
+      description:
+        's-config-provider 为子树提供 Element Plus 配置及 sybz 组件默认值，并支持在自身容器使用样式简写属性。',
+      slots: ['default'],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/configProvider/src/types.ts'),
+        interfaceName: 'SConfigProviderSelfProps',
+        importTypeNames: ['SConfigProviderSelfProps', 'SConfigProviderProps', 'SConfigProviderComponentDefaults'],
+        extraImportLines: ["import type { SybzComponentTheme } from '../component-props'"],
+      },
+    },
+  ],
+  [
     'SCard',
     {
       importPath: componentPropsPath,
@@ -1206,6 +1225,12 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
 }
 
 const ELEMENT_WRAPPER_CONFIGS = {
+  configProvider: {
+    valueImports: ['ElConfigProvider'],
+    instances: [{ name: 'ElConfigProviderInstance', component: 'ElConfigProvider' }],
+    inheritedProps: [{ type: "ElConfigProviderInstance['$props']" }],
+    description: 'Element Plus ConfigProvider',
+  },
   markdown: {
     importSource: 'md-editor-v3',
     valueImports: ['MdEditor'],
