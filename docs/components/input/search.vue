@@ -3,9 +3,15 @@ import { ref } from 'vue'
 
 const keyword = ref('工作小组')
 const result = ref('')
+const customKeyword = ref('自定义清空')
+const customResult = ref('')
 
 const handleSearch = (value: string) => {
   result.value = value ? `正在搜索：${value}` : '请输入搜索内容'
+}
+
+const handleCustomClear = () => {
+  customResult.value = '已执行自定义清空，未触发搜索'
 }
 </script>
 
@@ -13,6 +19,15 @@ const handleSearch = (value: string) => {
   <div class="search-demo">
     <s-input v-model="keyword" search width="360" placeholder="搜索工作小组..." @search="handleSearch" />
     <span class="search-demo__result">{{ result }}</span>
+    <s-input
+      v-model="customKeyword"
+      search
+      width="360"
+      placeholder="自定义清空处理"
+      @search="(value) => (customResult = `正在搜索：${value}`)"
+      @clear="handleCustomClear"
+    />
+    <span class="search-demo__result">{{ customResult }}</span>
   </div>
 </template>
 
@@ -22,7 +37,6 @@ const handleSearch = (value: string) => {
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  height: 100px;
 }
 
 .search-demo__result {

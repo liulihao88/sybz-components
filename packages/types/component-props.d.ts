@@ -367,7 +367,10 @@ export interface SInputSelfProps extends SHtmlStringProps {
 
 export interface SInputEmits {
   'update:modelValue': [value: any]
-  search: [value: any, event: MouseEvent | KeyboardEvent]
+  /** 点击搜索按钮或按 Enter 时传入原始事件；清空时不传入事件 */
+  search: [value: any, event?: MouseEvent | KeyboardEvent]
+  /** Element Plus 清空事件；设置后覆盖默认的空值搜索 */
+  clear: []
 }
 
 export type SInputProps = SInputSelfProps & Partial<Omit<InputPropsPublic, keyof SInputSelfProps>>

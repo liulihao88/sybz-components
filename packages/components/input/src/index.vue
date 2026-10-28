@@ -22,7 +22,7 @@
           :placeholder="handlePlaceholder()"
           :clearable="$attrs.clearable !== false"
           v-bind="mergedAttrs"
-          @clear="hideInputTooltip"
+          @clear="handleClear"
           @keyup.enter="triggerSearch"
           @mouseover="inputOnMouseOver($event)"
           @update:model-value="handleInputUpdate"
@@ -58,7 +58,7 @@
           :class="{ 'kd-textarea': $attrs.type === 'textarea' }"
           v-bind="mergedAttrs"
           :show-word-limit="handleShowWordLimit()"
-          @clear="hideInputTooltip"
+          @clear="handleClear"
           @focus="focusHandler($event)"
           @keyup.enter="triggerSearch"
           @mouseover="inputOnMouseOver($event)"
@@ -120,7 +120,7 @@
 
 <script setup lang="ts">
 import type { SybzComponentTheme } from '../../../types/component-props'
-import { ref, computed, useAttrs, useSlots, watch, nextTick } from 'vue'
+import { ref, computed, useAttrs, useSlots, watch, nextTick, getCurrentInstance } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
 import { inputProps } from 'element-plus/es/components/input/src/input'
@@ -130,6 +130,7 @@ import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
 const attrs = useAttrs()
 const slots = useSlots()
+const instance = getCurrentInstance()
 
 defineOptions({
   name: 'SInput',
@@ -200,7 +201,8 @@ const props = withDefaults(defineProps<SInputProps>(), {
 })
 const emits = defineEmits<{
   'update:modelValue': [value: any]
-  search: [value: any, event: MouseEvent | KeyboardEvent]
+  search: [value: any, event?: MouseEvent | KeyboardEvent]
+  clear: []
 }>()
 const mergedProps = useGlobalComponentConfig('input', props)
 const { style } = useStyleProps()
@@ -385,8 +387,18 @@ const handleSize = () => {
   return sizeStyle
 }
 const clearTextareaValue = () => {
-  hideInputTooltip()
   data.value = ''
+  handleClear()
+}
+
+const handleClear = () => {
+  hideInputTooltip()
+  const listeners = instance?.vnode.props
+  if (listeners?.onClear) {
+    emits('clear')
+  } else if (showSearchButton.value) {
+    emits('search', '')
+  }
 }
 
 const triggerSearch = (event: MouseEvent | KeyboardEvent) => {
