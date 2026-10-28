@@ -97,13 +97,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
      *
-     * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
+     * s-checkbox 多选组件，支持左侧 title、全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
      */
     SCheckbox: (typeof import('./types/components/checkbox'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
      *
-     * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
+     * s-checkbox 多选组件，支持左侧 title、全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
      */
     's-checkbox': (typeof import('./types/components/checkbox'))['default']
     /**
@@ -257,13 +257,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
-     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮。
+     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮；开启 search 后清空默认触发空值搜索，@clear 可覆盖。
      */
     SInput: (typeof import('./types/components/input'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
-     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮。
+     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮；开启 search 后清空默认触发空值搜索，@clear 可覆盖。
      */
     's-input': (typeof import('./types/components/input'))['default']
     /**
@@ -365,13 +365,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
      *
-     * s-radio 单选组件，支持 variant="radio|button" 展示方式。
+     * s-radio 单选组件，普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
      */
     SRadio: (typeof import('./types/components/radio'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
      *
-     * s-radio 单选组件，支持 variant="radio|button" 展示方式。
+     * s-radio 单选组件，普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
      */
     's-radio': (typeof import('./types/components/radio'))['default']
     /**

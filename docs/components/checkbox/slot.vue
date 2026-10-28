@@ -25,7 +25,7 @@
       <el-checkbox label="深圳" value="深圳" />
     </s-checkbox>
     <br />
-    <s-checkbox v-model="value2" size="large" :show-all="false">
+    <s-checkbox v-model="value2" size="large" :show-all="false" gap="0">
       <el-checkbox-button label="上海" value="上海" />
       <el-checkbox-button label="北京" value="北京" />
       <el-checkbox-button label="广州" value="广州" />

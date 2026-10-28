@@ -1,5 +1,12 @@
 import { ElCheckboxGroup } from 'element-plus'
-import type { SCheckboxOptionContext, SCheckboxSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
+import type {
+  SCheckboxOptionContext,
+  SCheckboxSelfProps,
+  SFlexGap,
+  SFlexGapValue,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
 import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
@@ -7,7 +14,7 @@ type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
  *
- * s-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。
+ * s-checkbox 多选组件，支持左侧 title、全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus CheckboxGroup 的公开属性。
  */
@@ -35,7 +42,8 @@ export type SCheckboxComponent = {
       attrs?: SybzRecord
       customDisabled?: (context: SCheckboxOptionContext<SybzRecord>) => boolean
       customLabel?: (context: SCheckboxOptionContext<SybzRecord>) => any
-      gap?: string | number
+      /** 单值设置水平间距（垂直间距为 8px）；数组按 [水平, 垂直] 设置 */
+      gap?: SFlexGap
     } & Omit<
       ElCheckboxGroupInstance['$props'],
       | 'title'

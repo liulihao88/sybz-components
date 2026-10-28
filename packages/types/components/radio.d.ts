@@ -4,6 +4,7 @@ import type {
   SRadioOption,
   SRadioOptionContext,
   SRadioSelfProps,
+  SFlexGapValue,
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
@@ -14,7 +15,7 @@ type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
  *
- * s-radio 单选组件，支持 variant="radio|button" 展示方式。
+ * s-radio 单选组件，普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus RadioGroup 的公开属性。
  */
@@ -33,8 +34,8 @@ export type SRadioComponent = {
       variant?: 'radio' | 'button'
       options?: SRadioOption[]
       border?: boolean
-      /** 单选项之间的间距，数字按 px 处理 */
-      gap?: string | number
+      /** 普通 radio 单值设置双向间距、数组按 [水平, 垂直] 设置，默认 16px；button 忽略 gap 并横向滚动 */
+      gap?: string | number | [SFlexGapValue, SFlexGapValue]
       value?: string | number | boolean
       label?: string | number | boolean
       customLabel?: (context: SRadioOptionContext<SRadioItem>) => any

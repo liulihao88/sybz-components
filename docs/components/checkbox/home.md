@@ -46,30 +46,30 @@ checkbox/usually
 checkbox/slot
 :::
 
-### 自定义间距 gap
+### 自定义间距 gap（默认未设置）
 
-:::demo 展示自定义配置。基础写法：`<s-checkbox v-model="value" :options="options" :gap="horizontalGap"></s-checkbox>`。属性：`gap` 类型 `string / number`，默认值按组件配置。
+:::demo 展示自定义配置。基础写法：`<s-checkbox v-model="value" :options="options" :gap="horizontalGap"></s-checkbox>`。属性：`gap` 支持单值或 `[水平, 垂直]` 数组，数组项支持 `true / false / small / default / large / 数字 / 带单位长度`；单值只控制水平间距，垂直间距保持 `8px`，默认值为空字符串（沿用原样式）。`variant="button"` 时按钮水平相连，`gap` 不生效；超出宽度可横向滚动，滚动条隐藏。
 checkbox/customGap
 :::
 
 ### 属性
 
-|     属性名     | 说明                                               | 类型                                            | 默认值    |
-| :------------: | -------------------------------------------------- | ----------------------------------------------- | --------- |
-|      type      | options参数的类型, 可以设置为simple                | string                                          | -         |
-|     title      | 左侧文字标题，普通和 button 模式样式一致           | string                                          | -         |
-| compTitleStyle | 标题文字的自定义样式                               | object                                          | -         |
-|    options     | checkbox的选项                                     | object                                          | {}        |
-|    variant     | 展示形式，可选 `checkbox` / `button`               | string                                          | checkbox  |
-|     label      | 显示的文本对应的字段                               | string                                          | label     |
-|     value      | 后台的值需要的字段                                 | string                                          | value     |
-|    showAll     | 是否显示全选                                       | boolean                                         | true      |
-|     attrs      | 控制el-checkbox组件的参数                          | object                                          | {}        |
-| customDisabled | 自定义禁用，参数为 `{ option, index, value }`      | `(context) => boolean`                          | -         |
-|  customLabel   | 自定义 label，参数为 `{ option, index, value }`    | function                                        | -         |
-|      gap       | 多个复选框之间的水平间距，支持 `processWidth` 写法 | number/string                                   | -         |
-|     theme      | 主题样式                                           | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
-|      size      | 多选尺寸，支持顶层传入和全局默认配置               | `''` / `large` / `default` / `small`            | `''`      |
+|     属性名     | 说明                                                 | 类型                                            | 默认值    |
+| :------------: | ---------------------------------------------------- | ----------------------------------------------- | --------- |
+|      type      | options参数的类型, 可以设置为simple                  | string                                          | -         |
+|     title      | 左侧文字标题，普通和 button 模式样式一致             | string                                          | -         |
+| compTitleStyle | 标题文字的自定义样式                                 | object                                          | -         |
+|    options     | checkbox的选项                                       | object                                          | {}        |
+|    variant     | 展示形式，可选 `checkbox` / `button`                 | string                                          | checkbox  |
+|     label      | 显示的文本对应的字段                                 | string                                          | label     |
+|     value      | 后台的值需要的字段                                   | string                                          | value     |
+|    showAll     | 是否显示全选                                         | boolean                                         | true      |
+|     attrs      | 控制el-checkbox组件的参数                            | object                                          | {}        |
+| customDisabled | 自定义禁用，参数为 `{ option, index, value }`        | `(context) => boolean`                          | -         |
+|  customLabel   | 自定义 label，参数为 `{ option, index, value }`      | function                                        | -         |
+|      gap       | 单值控制水平间距；数组按 `[x, y]` 控制水平和垂直间距 | boolean / string / number / 二元数组            | -         |
+|     theme      | 主题样式                                             | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
+|      size      | 多选尺寸，支持顶层传入和全局默认配置                 | `''` / `large` / `default` / `small`            | `''`      |
 
 ### 方法
 
@@ -85,5 +85,5 @@ checkbox/customGap
 
 ### 说明
 
-- `gap` 支持 `16`、`'16'`、`'16px'`、`'1rem'`、`'5%'` 这类常见写法；纯数字或数字字符串会自动补成 `px`。
+- `gap` 数组第一个值为水平 x，第二个值为垂直 y；单值时垂直间距为 8px。`small / default / large` 对应 8 / 16 / 24px，`true` 对应 8px，`false` 对应 0px；也支持 `16`、`'16'`、`'16px'`、`'1rem'`、`'5%'` 这类常见写法；纯数字或数字字符串会自动补成 `px`。
 - `customDisabled` 中的 `option` 是当前选项，`index` 是选项下标，`value` 是按 `type` 和 `value` 属性解析后的实际值。

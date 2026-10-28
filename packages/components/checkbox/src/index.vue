@@ -15,6 +15,7 @@ import { Check, Minus } from '@element-plus/icons-vue'
 import { isEmpty, processWidth, getType } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
+import { parseGap, type Gap } from '@/hooks/parseGap'
 
 defineOptions({
   name: 'SCheckbox',
@@ -38,7 +39,7 @@ interface CheckboxProps {
   attrs?: Record<string, any>
   customDisabled?: (context: CheckboxOptionContext) => boolean | null
   customLabel?: (context: CheckboxOptionContext) => any
-  gap?: number | string
+  gap?: Gap
   theme?: SybzComponentTheme
   size?: 'large' | 'default' | 'small'
 }
@@ -165,8 +166,8 @@ const checkboxModel = computed({
   },
 })
 
-const getGapValue = computed(() => processWidth(props.gap, true))
-const hasGap = computed(() => !isEmpty(getGapValue.value, true))
+const gapValues = computed(() => parseGap(props.gap, 8))
+const hasGap = computed(() => mergedProps.value.variant !== 'button' && props.gap !== '' && props.gap !== undefined)
 const checkboxClass = computed(() => ({
   's-gap-checkbox': hasGap.value,
   's-checkbox--chenghua': mergedProps.value.theme === 'chenghua',
@@ -178,51 +179,57 @@ const checkboxClass = computed(() => ({
 </script>
 
 <template>
-  <div class="s-checkbox" :class="checkboxClass" :style="style">
+  <div
+    class="s-checkbox"
+    :class="checkboxClass"
+    :style="[style, hasGap ? { '--s-checkbox-gap-x': gapValues.x, '--s-checkbox-gap-y': gapValues.y } : undefined]"
+  >
     <span v-if="mergedProps.title" class="s-checkbox__title" :style="titleStyle">
       {{ mergedProps.title }}
     </span>
-    <component
-      :is="checkType"
-      v-if="mergedProps.showAll"
-      v-model="checkAll"
-      class="s-checkbox__all"
-      :class="checkAllClass"
-      :size="mergedProps.size || undefined"
-      :indeterminate="isIndeterminate"
-      v-bind="$attrs"
-      :disabled="isDisabled"
-      @change="checkAllChange"
-    >
-      <span v-if="mergedProps.variant === 'button'" class="s-checkbox__all-icon" aria-hidden="true">
-        <el-icon v-if="isIndeterminate"><Minus /></el-icon>
-        <el-icon v-else-if="checkAll"><Check /></el-icon>
-      </span>
-      全选
-    </component>
-    <el-checkbox-group
-      v-model="checkboxModel"
-      v-bind="{ disabled: mergedProps.disabled, ...filteredAttrs, size: mergedProps.size || undefined }"
-      class="s-checkbox__wrapper"
-    >
-      <slot>
-        <component
-          :is="checkType"
-          v-bind="rootAttrs"
-          v-for="(item, index) in props.options"
-          :key="index"
-          :size="mergedProps.size || undefined"
-          :value="getOptionValue(item)"
-          :label="props.type === 'simple' ? item : item[props.label!]"
-          :disabled="getOptionDisabled(item, index)"
-          class="s-checkbox__item"
-        >
-          <slot :name="props.type === 'simple' ? item : item.slot" v-bind="props.type === 'simple' ? {} : item">
-            {{ handleLabel(item, index) }}
-          </slot>
-        </component>
-      </slot>
-    </el-checkbox-group>
+    <div class="s-checkbox__content">
+      <component
+        :is="checkType"
+        v-if="mergedProps.showAll"
+        v-model="checkAll"
+        class="s-checkbox__all"
+        :class="checkAllClass"
+        :size="mergedProps.size || undefined"
+        :indeterminate="isIndeterminate"
+        v-bind="$attrs"
+        :disabled="isDisabled"
+        @change="checkAllChange"
+      >
+        <span v-if="mergedProps.variant === 'button'" class="s-checkbox__all-icon" aria-hidden="true">
+          <el-icon v-if="isIndeterminate"><Minus /></el-icon>
+          <el-icon v-else-if="checkAll"><Check /></el-icon>
+        </span>
+        全选
+      </component>
+      <el-checkbox-group
+        v-model="checkboxModel"
+        v-bind="{ disabled: mergedProps.disabled, ...filteredAttrs, size: mergedProps.size || undefined }"
+        class="s-checkbox__wrapper"
+      >
+        <slot>
+          <component
+            :is="checkType"
+            v-bind="rootAttrs"
+            v-for="(item, index) in props.options"
+            :key="index"
+            :size="mergedProps.size || undefined"
+            :value="getOptionValue(item)"
+            :label="props.type === 'simple' ? item : item[props.label!]"
+            :disabled="getOptionDisabled(item, index)"
+            class="s-checkbox__item"
+          >
+            <slot :name="props.type === 'simple' ? item : item.slot" v-bind="props.type === 'simple' ? {} : item">
+              {{ handleLabel(item, index) }}
+            </slot>
+          </component>
+        </slot>
+      </el-checkbox-group>
+    </div>
   </div>
 </template>
 
@@ -230,6 +237,10 @@ const checkboxClass = computed(() => ({
 .s-checkbox {
   display: flex;
   align-items: flex-start;
+
+  .s-checkbox__content {
+    display: contents;
+  }
 
   .s-checkbox__title {
     display: inline-flex;
@@ -257,6 +268,24 @@ const checkboxClass = computed(() => ({
   --s-checkbox-button-soft: var(--el-color-primary-light-9);
   --s-checkbox-button-radius: var(--el-border-radius-base);
   align-items: center;
+  min-width: 0;
+
+  .s-checkbox__content {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    max-width: 100%;
+    padding: 1px;
+    border-radius: var(--s-checkbox-button-radius);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .s-checkbox__content::-webkit-scrollbar {
+    display: none;
+  }
 
   .s-checkbox__all {
     display: inline-flex;
@@ -269,6 +298,12 @@ const checkboxClass = computed(() => ({
   .s-checkbox__wrapper {
     display: flex;
     align-items: flex-start;
+    flex: none;
+    flex-wrap: nowrap;
+  }
+
+  :deep(.el-checkbox-button) {
+    flex: none;
   }
 
   :deep(.s-checkbox__all .el-checkbox-button__inner) {
@@ -345,14 +380,14 @@ const checkboxClass = computed(() => ({
     font-weight: bold;
     margin-bottom: 0;
     white-space: nowrap;
-    margin-right: v-bind('getGapValue') !important;
+    margin-right: var(--s-checkbox-gap-x) !important;
   }
 
   .s-checkbox__wrapper {
     display: flex;
     flex-wrap: wrap;
-    column-gap: v-bind('getGapValue'); // 只设置列间距
-    row-gap: 8px; // 固定行间距或根据需要设置
+    column-gap: var(--s-checkbox-gap-x);
+    row-gap: var(--s-checkbox-gap-y);
 
     .s-checkbox__item {
       display: inline-flex;

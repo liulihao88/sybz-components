@@ -12,6 +12,7 @@
 <script setup lang="ts">
 import { computed, type Component } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import { parseGap, type Gap } from '@/hooks/parseGap'
 import useSizeAliases from '@/hooks/useSizeAliases'
 import { useStyleProps } from '@/hooks/useStyleProps'
 
@@ -27,15 +28,13 @@ interface FlexProps {
   alignContent?: 'start' | 'end' | 'center' | 'stretch' | 'space-between' | 'space-around' | 'space-evenly' | 'normal'
   inline?: boolean
   flex?: string
-  gap?: FlexGapValue | [FlexGapValue, FlexGapValue]
+  gap?: Gap
   width?: string | number
   w?: string | number
   height?: string | number
   h?: string | number
   component?: string | Component
 }
-
-type FlexGapValue = boolean | string | number
 
 // --- Props 定义 ---
 const props = withDefaults(defineProps<FlexProps>(), {
@@ -52,10 +51,7 @@ const props = withDefaults(defineProps<FlexProps>(), {
 const sizeProps = useSizeAliases(props)
 const { style } = useStyleProps()
 
-const gapValues = computed(() => {
-  const [x, y] = Array.isArray(props.gap) ? props.gap : [props.gap, props.gap]
-  return { x: parseGapValue(x), y: parseGapValue(y) }
-})
+const gapValues = computed(() => parseGap(props.gap))
 const hasGap = computed(() =>
   [gapValues.value.x, gapValues.value.y].some((value) => !/^0(?:[a-z%]+)?$/i.test(String(value).trim())),
 )
@@ -80,23 +76,6 @@ const flexStyles = computed(() => {
     height: sizeProps.value.height === undefined ? undefined : processWidth(sizeProps.value.height, true),
   }
 })
-
-function parseGapValue(gap: boolean | string | number) {
-  // boolean 形式：裸写 gap（或 :gap="true"）等价于 gap="small"；:gap="false" 等价于不设间距
-  if (gap === true || gap === '') {
-    return '8px'
-  } else if (gap === false) {
-    return '0px'
-  } else if (gap === 'small') {
-    return '8px'
-  } else if (gap === 'default') {
-    return '16px'
-  } else if (gap === 'large') {
-    return '24px'
-  } else {
-    return processWidth(gap, true)
-  }
-}
 </script>
 
 <style scoped lang="scss">

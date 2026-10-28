@@ -32,6 +32,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import { parseGap, type GapValue } from '@/hooks/parseGap'
 import type { RadioItem, RadioOption, RadioOptionValue } from './radio'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
@@ -49,7 +50,7 @@ interface RadioProps {
   variant?: 'radio' | 'button'
   options?: RadioOption[]
   border?: boolean
-  gap?: string | number
+  gap?: string | number | [GapValue, GapValue]
   value?: any
   label?: any
   customLabel?: (context: RadioOptionContext) => any
@@ -94,10 +95,20 @@ const groupAttrs = computed(() => ({
   ...attrs,
   size: mergedProps.value.size || undefined,
 }))
-const hasCustomGap = computed(() => mergedProps.value.gap !== undefined && mergedProps.value.gap !== '')
+const defaultRadioGap = 16
+const gapValue = computed(() => {
+  if (mergedProps.value.variant === 'button') return undefined
+  const gap = mergedProps.value.gap
+  if (gap !== undefined && gap !== '') return gap
+  return defaultRadioGap
+})
+const hasCustomGap = computed(() => gapValue.value !== undefined && gapValue.value !== '')
 const groupStyle = computed<CSSProperties | undefined>(() => {
   if (!hasCustomGap.value) return undefined
-  return { gap: processWidth(mergedProps.value.gap, true) }
+  const { x, y } = Array.isArray(gapValue.value)
+    ? parseGap(gapValue.value)
+    : { x: processWidth(gapValue.value, true), y: processWidth(gapValue.value, true) }
+  return { rowGap: y, '--s-radio-gap-x': x } as CSSProperties
 })
 const radioType = computed(() => {
   const obj = {
@@ -243,6 +254,27 @@ const radioClass = computed(() => {
 
 .s-radio-box--button {
   align-items: center;
+  min-width: 0;
+
+  :deep(.el-radio-group) {
+    min-width: 0;
+    max-width: 100%;
+    padding: 1px;
+    border-radius: var(--s-radio-scroll-radius, var(--el-border-radius-base));
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  :deep(.el-radio-group::-webkit-scrollbar) {
+    display: none;
+  }
+
+  :deep(.el-radio-button) {
+    flex: none;
+  }
 
   :deep(.el-radio-button:not(.is-disabled, .is-active) .el-radio-button__inner:hover) {
     border-color: var(--s-radio-button-hover-border, var(--el-color-primary-light-5));
@@ -259,6 +291,18 @@ const radioClass = computed(() => {
   }
 }
 
+.s-radio-box--button.s-radio-box--chenghua {
+  --s-radio-scroll-radius: var(--s-ch-radius);
+}
+
+.s-radio-box--button.s-radio-box--shijingshan {
+  --s-radio-scroll-radius: var(--s-sjs-radius);
+}
+
+.s-radio-box--button.s-radio-box--sybz {
+  --s-radio-scroll-radius: var(--s-sybz-radius);
+}
+
 .s-radio-box--button:is(.s-radio-box--sybz, .s-radio-box--shijingshan) {
   :deep(.el-radio-button.is-active.is-disabled .el-radio-button__inner) {
     color: var(--el-color-white);
@@ -268,16 +312,8 @@ const radioClass = computed(() => {
 :deep(.s-radio-group--custom-gap) {
   flex-wrap: wrap;
 
-  > .el-radio {
-    margin-right: 0;
-  }
-
-  > .el-radio-button .el-radio-button__inner {
-    border-radius: var(--el-border-radius-base);
-  }
-
-  > .el-radio-button.is-active .el-radio-button__inner {
-    box-shadow: none;
+  > .el-radio:not(:last-child) {
+    margin-right: var(--s-radio-gap-x);
   }
 }
 </style>

@@ -263,7 +263,8 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SCheckboxProps',
-      description: 's-checkbox 多选组件，支持左侧 title、全选和 variant="checkbox|button" 展示方式。',
+      description:
+        's-checkbox 多选组件，支持左侧 title、全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。',
       exportedComponentTypeName: 'SCheckboxComponent',
       publicPropsTypeName: 'SCheckboxPublicProps',
       useDefaultExportForGlobal: true,
@@ -272,6 +273,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       hoverProps: componentHoverProps('SCheckboxSelfProps', [
         'SCheckboxOptionContext',
         'SCheckboxSelfProps',
+        'SFlexGap',
+        'SFlexGapValue',
         'SybzComponentTheme',
         'SybzRecord',
       ]),
@@ -716,7 +719,8 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SRadioProps',
-      description: 's-radio 单选组件，支持 variant="radio|button" 展示方式。',
+      description:
+        's-radio 单选组件，普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。',
       exportedComponentTypeName: 'SRadioComponent',
       publicPropsTypeName: 'SRadioPublicProps',
       useDefaultExportForGlobal: true,
@@ -727,6 +731,7 @@ const TYPED_COMPONENT_PROPS = new Map([
         'SRadioOption',
         'SRadioOptionContext',
         'SRadioSelfProps',
+        'SFlexGapValue',
         'SybzComponentTheme',
         'SybzRecord',
       ]),

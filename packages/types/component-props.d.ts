@@ -413,7 +413,8 @@ export interface SCheckboxSelfProps<Option = SybzRecord> {
   attrs?: SybzRecord
   customDisabled?: (context: SCheckboxOptionContext<Option>) => boolean
   customLabel?: (context: SCheckboxOptionContext<Option>) => any
-  gap?: string | number
+  /** 单值设置水平间距（垂直间距为 8px）；数组按 [水平, 垂直] 设置 */
+  gap?: SFlexGap
   theme?: SybzComponentTheme
 }
 
@@ -851,8 +852,8 @@ export interface SRadioSelfProps<Option = SRadioItem> {
   variant?: 'radio' | 'button'
   options?: SRadioOption[]
   border?: boolean
-  /** 单选项之间的间距，数字按 px 处理 */
-  gap?: string | number
+  /** 普通 radio 单值设置双向间距、数组按 [水平, 垂直] 设置，默认 16px；button 忽略 gap 并横向滚动 */
+  gap?: string | number | [SFlexGapValue, SFlexGapValue]
   value?: string | number | boolean
   label?: string | number | boolean
   customLabel?: (context: SRadioOptionContext<Option>) => any
