@@ -37,6 +37,8 @@ export type SybzRecord = Record<string, any>
 
 /** 长度类样式值：尺寸 token（`small` / `default` / `large`）、数字（自动补 `px`）或任意 CSS 长度字符串。 */
 export type SybzLength = SybzComponentSize | number | (string & {})
+/** 内外边距允许裸写；`true` 等价于 `small`（8px），`false` 不设置。 */
+export type SybzSpacing = SybzLength | boolean
 
 /**
  * Mantine 风格的样式简写属性（Style Props）。
@@ -47,20 +49,20 @@ export type SybzLength = SybzComponentSize | number | (string & {})
  */
 export interface SybzStyleProps {
   // 内边距与外边距
-  m?: SybzLength
-  mt?: SybzLength
-  mb?: SybzLength
-  ml?: SybzLength
-  mr?: SybzLength
-  mx?: SybzLength
-  my?: SybzLength
-  p?: SybzLength
-  pt?: SybzLength
-  pb?: SybzLength
-  pl?: SybzLength
-  pr?: SybzLength
-  px?: SybzLength
-  py?: SybzLength
+  m?: SybzSpacing
+  mt?: SybzSpacing
+  mb?: SybzSpacing
+  ml?: SybzSpacing
+  mr?: SybzSpacing
+  mx?: SybzSpacing
+  my?: SybzSpacing
+  p?: SybzSpacing
+  pt?: SybzSpacing
+  pb?: SybzSpacing
+  pl?: SybzSpacing
+  pr?: SybzSpacing
+  px?: SybzSpacing
+  py?: SybzSpacing
   // 字体与文本
   fs?: SybzLength
   fw?: string | number

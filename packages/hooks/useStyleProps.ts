@@ -80,6 +80,24 @@ export const SIZE_PRESETS: Record<SybzComponentSize, string> = {
   large: '24px',
 }
 
+/** 裸写时采用 small 的内外边距简写。 */
+const SPACING_PROP_KEYS = new Set<SybzStylePropKey>([
+  'm',
+  'mt',
+  'mb',
+  'ml',
+  'mr',
+  'mx',
+  'my',
+  'p',
+  'pt',
+  'pb',
+  'pl',
+  'pr',
+  'px',
+  'py',
+])
+
 /** 数值需要自动补全为 `px` 的长度类属性（字符串走 processWidth：`'14'` → `'14px'`，`'1rem'` 原样保留） */
 const LENGTH_PROP_KEYS = new Set<SybzStylePropKey>([
   'm',
@@ -154,7 +172,7 @@ export const resolveStyleProps = (
     const css = STYLE_PROP_MAP[key]
     const targets: string[] = typeof css === 'string' ? [css] : [...css]
     for (const target of targets) {
-      style[target] = toStyleValue(key, value)
+      style[target] = toStyleValue(key, value === true && SPACING_PROP_KEYS.has(key) ? 'small' : value)
     }
   }
 
@@ -184,7 +202,10 @@ export function useStyleProps(): { style: ComputedRef<CSSProperties> } {
 
 /** 供 app.mixin 使用的全局样式属性声明 */
 export const styleProps = Object.fromEntries(
-  (Object.keys(STYLE_PROP_MAP) as SybzStylePropKey[]).map((key) => [key, { type: [String, Number] }]),
+  (Object.keys(STYLE_PROP_MAP) as SybzStylePropKey[]).map((key) => [
+    key,
+    { type: SPACING_PROP_KEYS.has(key) ? [Boolean, String, Number] : [String, Number] },
+  ]),
 ) as Record<SybzStylePropKey, { type: unknown }>
 
 /**

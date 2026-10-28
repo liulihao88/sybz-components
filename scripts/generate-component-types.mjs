@@ -1179,13 +1179,15 @@ for (const [componentName, aliases] of SIZE_ALIAS_COMPONENTS) {
 }
 
 const dimensionPropKeys = new Set(['w', 'width', 'h', 'height'])
+// 全局样式属性由 component-props.d.ts 提供；内外边距的裸写布尔类型也由此进入各组件声明。
+const sharedStylePropsType = 'SybzStyleProps'
 const hasDimensionProps = (hoverProps) =>
   collectInterfaceProps(hoverProps).some((prop) => dimensionPropKeys.has(prop.omitKey))
 const hasThemeProps = (hoverProps) => collectInterfaceProps(hoverProps).some((prop) => prop.omitKey === 'theme')
 const getCompactPropsImportNames = (hoverProps) => [
   ...(hasDimensionProps(hoverProps) ? ['SybzDimensionProps'] : []),
   ...(hasThemeProps(hoverProps) ? ['SybzThemeProps'] : []),
-  'SybzStyleProps',
+  sharedStylePropsType,
 ]
 
 const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
@@ -1208,7 +1210,7 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   })
 
   if (!inheritedProps.length) {
-    lines.push(`} & SybzStyleProps${compactPropsSuffix}`)
+    lines.push(`} & ${sharedStylePropsType}${compactPropsSuffix}`)
     return lines
   }
 
@@ -1225,7 +1227,7 @@ const getExpandedPropsLines = ({ hoverProps, inheritedProps }) => {
   })
 
   // 追加全局样式简写属性
-  lines[lines.length - 1] = `${lines[lines.length - 1]} & SybzStyleProps${compactPropsSuffix}`
+  lines[lines.length - 1] = `${lines[lines.length - 1]} & ${sharedStylePropsType}${compactPropsSuffix}`
 
   return lines
 }
