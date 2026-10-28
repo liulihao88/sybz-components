@@ -42,12 +42,12 @@
   </s-flex>
 
   <s-title title="flex 控制组件自身伸缩"></s-title>
-  <div class="parent-flex">
+  <s-flex gap="12" class="parent-flex">
     <s-flex flex="1" justify="center" align="center" class="grow-box">
       <div>flex="1"</div>
     </s-flex>
     <s-flex flex="0 0 180px" justify="center" align="center" class="fixed-box">flex="0 0 180px"</s-flex>
-  </div>
+  </s-flex>
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue'
@@ -97,9 +97,7 @@ watch(gapProgressValue, (val) => {
 }
 
 .parent-flex {
-  display: flex;
   width: 100%;
-  gap: 12px;
 }
 
 .grow-box {

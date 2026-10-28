@@ -1,7 +1,7 @@
 <template>
   <div class="flex-button-gap-demo">
-    <s-title title="未设置 gap（默认值：0px）" />
-    <s-flex wrap>
+    <s-title title='数组 gap：水平 24px、垂直 1px（:gap="[24, 1]"）' />
+    <s-flex wrap :gap="[24, 1]">
       <s-button v-for="button in buttons" :key="button">{{ button }}</s-button>
     </s-flex>
 

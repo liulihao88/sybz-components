@@ -189,13 +189,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
      *
-     * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
+     * s-flex 弹性布局组件，支持方向、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。
      */
     SFlex: (typeof import('./types/components/flex'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
      *
-     * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
+     * s-flex 弹性布局组件，支持方向、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。
      */
     's-flex': (typeof import('./types/components/flex'))['default']
     /**

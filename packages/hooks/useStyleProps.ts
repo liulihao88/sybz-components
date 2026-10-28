@@ -57,6 +57,8 @@ export const STYLE_PROP_MAP = {
   z: 'z-index',
   // 弹性盒子
   flex: 'flex',
+  alignSelf: 'align-self',
+  order: 'order',
   // 背景与边框
   bg: 'background',
   c: 'color',

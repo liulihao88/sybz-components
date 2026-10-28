@@ -1,18 +1,20 @@
 import type { Component } from 'vue'
 import type {
   SFlexAlign,
+  SFlexAlignContent,
   SFlexDirection,
+  SFlexGap,
+  SFlexGapValue,
   SFlexJustify,
   SFlexProps,
   SFlexWrap,
-  SybzComponentSize,
 } from '../component-props'
 import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
  *
- * s-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。
+ * s-flex 弹性布局组件，支持方向、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。
  *
  * 先提示 sybz 自身属性。
  */
@@ -25,9 +27,11 @@ export type SFlexComponent = {
       wrap?: boolean | SFlexWrap
       justify?: SFlexJustify
       align?: SFlexAlign
+      alignContent?: SFlexAlignContent
+      inline?: boolean
       flex?: string
-      /** 子元素间距；裸写 gap 或传 true 等价于 small，传 false 等价于不设间距 */
-      gap?: boolean | SybzComponentSize | string | number
+      /** 子元素间距；单值同时控制 x/y，数组 [x, y] 分别控制水平/垂直间距；裸写或 true 等价于 small */
+      gap?: SFlexGap
       component?: string | Component
     } & SybzStyleProps &
       SybzDimensionProps<SFlexProps>

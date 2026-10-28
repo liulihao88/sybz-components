@@ -21,6 +21,8 @@
 
 布局容器需要 flex 时直接使用 `s-flex`，横向排列可写 `<s-flex gap="12" align="center">...</s-flex>`，纵向排列可写 `<s-flex direction="column" gap="small">...</s-flex>`；需要 `section` 等语义标签时传 `component="section"`。`direction` 默认为 `row`，`gap` 默认为 `0px`，不需要显式重复。不要生成 `<div class="flex">` 加 `display: flex` 的同类写法。完整属性见 `docs/components/flex/home.md`。
 
+多行布局可用 `align-content`，行内布局可加 `inline`。间距统一用 `gap`：单值同时控制水平和垂直间距，`:gap="[12, 8]"` 分别设置水平 12px、垂直 8px。单个子项需要覆盖对齐或视觉顺序时，在子组件上用通用 Style Props `align-self`、`:order`；这些属性不属于父容器。
+
 ## 最小用法
 
 ```vue

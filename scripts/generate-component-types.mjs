@@ -378,11 +378,21 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SFlexProps',
-      description: 's-flex 弹性布局组件，支持方向、对齐、间距、伸缩规则以及容器 width 和 height。',
+      description:
+        's-flex 弹性布局组件，支持方向、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。',
       slots: ['default'],
       hoverProps: componentHoverProps(
         'SFlexProps',
-        ['SFlexAlign', 'SFlexDirection', 'SFlexJustify', 'SFlexProps', 'SFlexWrap', 'SybzComponentSize'],
+        [
+          'SFlexAlign',
+          'SFlexAlignContent',
+          'SFlexDirection',
+          'SFlexGap',
+          'SFlexGapValue',
+          'SFlexJustify',
+          'SFlexProps',
+          'SFlexWrap',
+        ],
         ["import type { Component } from 'vue'"],
       ),
     },

@@ -86,6 +86,8 @@ export interface SybzStyleProps {
   z?: string | number
   // 弹性盒子
   flex?: string | number
+  alignSelf?: 'auto' | 'normal' | 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'flex-start' | 'flex-end'
+  order?: number
   // 背景与边框
   bg?: string
   c?: string
@@ -464,6 +466,17 @@ export type SFlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse'
 export type SFlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
 export type SFlexJustify = 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'normal'
 export type SFlexAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal'
+export type SFlexAlignContent =
+  | 'start'
+  | 'end'
+  | 'center'
+  | 'stretch'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | 'normal'
+export type SFlexGapValue = boolean | SybzComponentSize | string | number
+export type SFlexGap = SFlexGapValue | [SFlexGapValue, SFlexGapValue]
 
 export interface SFlexProps {
   direction?: SFlexDirection
@@ -471,9 +484,11 @@ export interface SFlexProps {
   wrap?: boolean | SFlexWrap
   justify?: SFlexJustify
   align?: SFlexAlign
+  alignContent?: SFlexAlignContent
+  inline?: boolean
   flex?: string
-  /** 子元素间距；裸写 gap 或传 true 等价于 small，传 false 等价于不设间距 */
-  gap?: boolean | SybzComponentSize | string | number
+  /** 子元素间距；单值同时控制 x/y，数组 [x, y] 分别控制水平/垂直间距；裸写或 true 等价于 small */
+  gap?: SFlexGap
   width?: string | number
   w?: string | number
   height?: string | number
