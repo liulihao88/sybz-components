@@ -4,7 +4,7 @@ import type { SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/backtop/home.html | 查看文档}
  *
- * s-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置和滚动时长。
+ * s-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置、滚动时长和 useStyleProps 样式简写。
  *
  * 先提示 sybz 自身属性。
  */

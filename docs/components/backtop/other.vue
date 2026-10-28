@@ -8,6 +8,7 @@ const bottom = ref(80)
 const duration = ref(500)
 const custom = ref(false)
 const clicks = ref(0)
+const background = ref('')
 </script>
 
 <template>
@@ -59,6 +60,14 @@ const clicks = ref(0)
           <option :value="true">文字“顶部”</option>
         </select>
       </label>
+      <label>
+        bg（默认：不设置；可选：主题色、浅色）
+        <select v-model="background">
+          <option value="">不设置（默认）</option>
+          <option value="var(--el-color-primary)">主题色</option>
+          <option value="var(--el-fill-color-light)">浅色</option>
+        </select>
+      </label>
     </div>
     <p>点击次数：{{ clicks }}。选择容器后，请先滚动下面的区域；选择页面后，请滚动当前页面。</p>
     <div class="backtop-demo-scroll">
@@ -71,6 +80,7 @@ const clicks = ref(0)
       :right="right"
       :bottom="bottom"
       :duration="duration"
+      :bg="background || undefined"
       @click="clicks++"
     >
       <span>顶部</span>
@@ -82,6 +92,7 @@ const clicks = ref(0)
       :right="right"
       :bottom="bottom"
       :duration="duration"
+      :bg="background || undefined"
       @click="clicks++"
     />
   </div>

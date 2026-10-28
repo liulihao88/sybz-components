@@ -3,7 +3,7 @@
     <div
       v-if="visible"
       class="s-backtop"
-      :style="{ right: `${right}px`, bottom: `${bottom}px` }"
+      :style="[{ right: `${right}px`, bottom: `${bottom}px` }, style]"
       role="button"
       tabindex="0"
       aria-label="回到顶部"
@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useStyleProps } from '@/hooks/useStyleProps'
 import type { SBacktopEmits, SBacktopProps } from './types'
 
 defineOptions({ name: 'SBacktop' })
@@ -40,6 +41,7 @@ const props = withDefaults(defineProps<SBacktopProps>(), {
   duration: 500,
 })
 const emit = defineEmits<SBacktopEmits>()
+const { style } = useStyleProps()
 const visible = ref(false)
 let container: HTMLElement | Window | undefined
 let frame = 0

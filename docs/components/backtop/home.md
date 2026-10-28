@@ -24,7 +24,7 @@ backtop/hover
 
 ### 属性与自定义内容
 
-:::demo 基础写法：`<s-backtop target=".demo-scroll" :visibility-height="100" :duration="500">顶部</s-backtop>`。在同一个示例中切换 `target`（默认页面，也可传 CSS 选择器）、`visibilityHeight`（非负数字，默认 `200`）、`right`（数字像素，默认 `40`）、`bottom`（数字像素，默认 `40`）、`duration`（非负毫秒数，默认 `500`，`0` 立即跳转）；默认插槽可自定义按钮内容，`click` 事件返回 `MouseEvent`。
+:::demo 基础写法：`<s-backtop target=".demo-scroll" :visibility-height="100" :duration="500" bg="var(--el-color-primary)">顶部</s-backtop>`。在同一个示例中切换 `target`（默认页面，也可传 CSS 选择器）、`visibilityHeight`（非负数字，默认 `200`）、`right`（数字像素，默认 `40`）、`bottom`（数字像素，默认 `40`）、`duration`（非负毫秒数，默认 `500`，`0` 立即跳转）、`bg`（默认不设置，可选主题色或浅色）；默认插槽可自定义按钮内容，`click` 事件返回 `MouseEvent`。
 backtop/other
 :::
 
@@ -37,6 +37,7 @@ backtop/other
 | `right`            | 距离视口右侧的距离               | number，像素      | `40`   |
 | `bottom`           | 距离视口底部的距离               | number，像素      | `40`   |
 | `duration`         | 回到顶部的动画时间，`0` 立即跳转 | 非负 number，毫秒 | `500`  |
+| `bg` 等样式简写    | `useStyleProps` 样式，作用于按钮 | string / number   | 不设置 |
 
 ### 事件
 
