@@ -20,6 +20,7 @@ license: MIT
 ## 通用规则
 
 - 优先 `sybz-components`，不拆回 Element Plus 子组件；优先 `@sybz-components/utils`，不重复实现通用逻辑。
+- 生成或修改 Vue 布局时，凡是需要 flex 排列的容器，优先使用 `<s-flex>`，用 `direction`、`justify`、`align`、`wrap`、`gap` 表达布局；不要为 flex 布局新建仅带 `display: flex` 的 `<div>` 或相应 CSS class。需要语义化标签时使用 `component` 属性；已有容器承担特殊 DOM 行为且无法用 `s-flex` 表达时保留原写法。用法见 [references/components.md](references/components.md)。
 - 业务代码需要弹出短暂的成功、失败、警告或信息提示时，统一从 `@sybz-components/utils` 导入并使用 `$toast`；成功用 `$toast('成功')`（默认成功类型），失败用 `$toast('失败', 'e')`。替换已有 `ElMessage` 等同类提示时清理旧 import；确认对话框仍使用 `confirm`。详见 [references/utils.md](references/utils.md)。
 - 只传业务必要属性；不重复默认宽度、空态、分页、样式、尺寸、`clearable` 等默认值，不加无收益的包装、泛型或中间变量。
 - 组件间的间距、字号、颜色、宽高等样式优先用样式简写属性（Style Props）表达，如 `m` / `p` / `fs` / `fw` / `bg` / `c` / `w` / `h` / `bd` 等，避免散落 `:style` 或硬编码 class；用法见 [references/style-props.md](references/style-props.md)。

@@ -19,6 +19,8 @@
 
 星标组件见仓库 `skills/star-skill.md`。主题场景先检查全局配置：已有全局主题时，组件省略 `theme`；仅单组件覆盖全局主题，或无全局主题而需要指定主题时传 `theme="chenghua|shijingshan"`。
 
+布局容器需要 flex 时直接使用 `s-flex`，横向排列可写 `<s-flex gap="12" align="center">...</s-flex>`，纵向排列可写 `<s-flex direction="column" gap="small">...</s-flex>`；需要 `section` 等语义标签时传 `component="section"`。`direction` 默认为 `row`，`gap` 默认为 `0px`，不需要显式重复。不要生成 `<div class="flex">` 加 `display: flex` 的同类写法。完整属性见 `docs/components/flex/home.md`。
+
 ## 最小用法
 
 ```vue
