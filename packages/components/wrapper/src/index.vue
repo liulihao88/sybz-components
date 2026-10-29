@@ -16,11 +16,11 @@ defineOptions({
 
 interface WrapperProps {
   /** 容器宽度，支持数字、px、百分比等，默认空字符串 */
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 容器高度，支持数字、px、百分比等；百分比需要父容器具有明确高度，默认空字符串 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   gap?: string | number
   column?: number | null
   minWidth?: string | number

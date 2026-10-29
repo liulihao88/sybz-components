@@ -19,10 +19,10 @@ let resizeObserver: ResizeObserver | undefined
 
 const props = withDefaults(
   defineProps<{
-    width?: string
-    w?: string
-    height?: string
-    h?: string
+    width?: string | boolean
+    w?: string | boolean
+    height?: string | boolean
+    h?: string | boolean
     id?: string
     option: Record<string, any>
     theme?: string

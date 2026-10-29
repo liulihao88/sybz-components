@@ -124,11 +124,11 @@ interface DialogProps {
   target?: string | number
   title?: string
   subTitle?: string
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 整个弹窗或抽屉的高度，数字按 px 处理 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   theme?: SDialogTheme
   cancel?: DialogAction
   cancelText?: string

@@ -148,7 +148,7 @@ interface CopyOptions extends ToastOptions {
   hideToast?: boolean
 }
 
-type WidthInput = string | number | Ref<string | number>
+type WidthInput = string | number | boolean | Ref<string | number | boolean>
 export type ConfirmMessage = string | VNode | (() => VNode)
 export type ConfirmTheme = UtilsTheme
 type ConfirmAppendTarget = NonNullable<ElMessageBoxOptions['appendTo']>
@@ -1271,11 +1271,11 @@ export function processWidth(initValue: WidthInput, isBase?: false): WidthStyleR
 export function processWidth(initValue: WidthInput, isBase = false): WidthStyleResult | {} | string {
   const raw = unref(initValue)
 
-  if (raw === undefined || raw === null || raw === '') {
+  if (raw === undefined || raw === null || raw === '' || raw === false) {
     return isBase ? '' : {}
   }
 
-  const str = typeof raw === 'number' ? `${raw}` : raw
+  const str = raw === true ? '100%' : typeof raw === 'number' ? `${raw}` : raw
 
   let res: string
   if (!isNaN(Number(str))) {

@@ -167,11 +167,10 @@ interface SelectProps {
   compTitleStyle?: Record<string, any>
   connect?: string
   customLabel?: (context: SSelectOptionContext) => string
-  width?: string | number
-  w?: string | number
-  /** 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度，默认空字符串 */
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 选项为空时的占位文案，默认 暂无数据 */
   emptyPlaceholder?: string
   disPlaceholder?: string

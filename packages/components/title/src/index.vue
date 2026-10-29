@@ -101,10 +101,10 @@ interface TitleProps {
   tooltipAttrs?: Record<string, any>
   inner?: boolean
   gap?: string | number
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   type?: TitleType
   theme?: SybzComponentTheme
   tag?: TitleTag

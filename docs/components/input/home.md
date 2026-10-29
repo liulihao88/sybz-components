@@ -133,3 +133,7 @@ input/top-title
 
 - 默认基于 `el-input` 二次封装，并透传绝大多数 `el-input` 属性。
 - 当传入 `options` 时会切换为 `el-autocomplete` 模式。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

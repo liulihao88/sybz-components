@@ -45,10 +45,10 @@ interface SButtonSelfProps {
   variant?: '' | 'outline' | 'gradient'
   size?: 'small' | 'default' | 'large'
   round?: boolean
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   hoverAnimation?: boolean
   ghost?: boolean
   iconPlacement?: 'start' | 'end'

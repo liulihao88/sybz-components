@@ -171,9 +171,13 @@ export const resolveStyleProps = (
 
     const css = STYLE_PROP_MAP[key]
     const targets: string[] = typeof css === 'string' ? [css] : [...css]
-    for (const target of targets) {
-      style[target] = toStyleValue(key, value === true && SPACING_PROP_KEYS.has(key) ? 'small' : value)
-    }
+    const resolvedValue =
+      value === true && SPACING_PROP_KEYS.has(key)
+        ? 'small'
+        : value === true && (key === 'w' || key === 'h')
+          ? '100%'
+          : value
+    for (const target of targets) style[target] = toStyleValue(key, resolvedValue)
   }
 
   return style as CSSProperties
@@ -204,7 +208,7 @@ export function useStyleProps(): { style: ComputedRef<CSSProperties> } {
 export const styleProps = Object.fromEntries(
   (Object.keys(STYLE_PROP_MAP) as SybzStylePropKey[]).map((key) => [
     key,
-    { type: SPACING_PROP_KEYS.has(key) ? [Boolean, String, Number] : [String, Number] },
+    { type: SPACING_PROP_KEYS.has(key) || key === 'w' || key === 'h' ? [Boolean, String, Number] : [String, Number] },
   ]),
 ) as Record<SybzStylePropKey, { type: unknown }>
 

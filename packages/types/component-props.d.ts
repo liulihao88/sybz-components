@@ -39,6 +39,8 @@ export type SybzRecord = Record<string, any>
 export type SybzLength = SybzComponentSize | number | (string & {})
 /** 内外边距允许裸写；`true` 等价于 `small`（8px），`false` 不设置。 */
 export type SybzSpacing = SybzLength | boolean
+/** 宽高支持裸写或 `true` 表示 100%，`false` 表示不设置。 */
+export type SybzDimension = SybzLength | boolean
 
 /**
  * Mantine 风格的样式简写属性（Style Props）。
@@ -73,8 +75,8 @@ export interface SybzStyleProps {
   ff?: string
   lts?: SybzLength
   // 尺寸与定位
-  w?: SybzLength
-  h?: SybzLength
+  w?: SybzDimension
+  h?: SybzDimension
   miw?: SybzLength
   maw?: SybzLength
   mih?: SybzLength
@@ -185,10 +187,10 @@ export interface SHtmlStringProps {
 
 /** 组件通用宽高属性，数字及数字字符串按 px 处理 */
 export interface SWidthHeightProps {
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
 }
 
 /** 组件通用外观属性，由 useCommonProps 统一转换为样式和交互类名 */
@@ -222,11 +224,11 @@ export interface SButtonSelfProps extends SHtmlStringProps {
   /** 按钮尺寸 */
   size?: SybzComponentSize
   /** 按钮宽度，数字会按工具方法补单位 */
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 按钮高度，数字会按工具方法补单位 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 是否开启 hover 动效 */
   hoverAnimation?: boolean
   /** 幽灵按钮，使背景透明并反转文字和边框颜色 */
@@ -243,10 +245,10 @@ export type SButtonEmits = {
 
 export interface SDatePickerSelfProps {
   title?: string
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 是否仅允许选择当前日期或当前周期之后的值，并启用未来时间快捷项 */
   futureOnly?: boolean
   theme?: SybzComponentTheme
@@ -290,8 +292,8 @@ export interface SDescriptionsOwnProps {
   /** 尺寸，控制描述项单元格内边距与字体大小 */
   size?: SybzComponentSize
   column?: number
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   labelWidth?: string | number
   showAll?: boolean
   label?: string
@@ -313,11 +315,11 @@ export interface SDialogSelfProps {
   target?: string
   title?: string
   subTitle?: string
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 整个弹窗或抽屉的高度，数字按 px 处理 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   theme?: SDialogTheme
   cancel?: SDialogHandler
   cancelText?: string
@@ -345,10 +347,10 @@ export interface SInputSelfProps extends SHtmlStringProps {
   compTitleStyle?: SybzRecord
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
   topTitle?: string
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   maxlength?: string | number
   hideMaxLengthError?: boolean
   maxLengthErrorText?: string
@@ -382,10 +384,10 @@ export interface SInputNumberSelfProps {
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
   topTitle?: string
   compTitleStyle?: SybzRecord
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   theme?: SybzComponentTheme
   size?: SybzComponentSize
   subAttrs?: SybzRecord
@@ -435,8 +437,8 @@ export interface SCompTitleProps {
 export interface SCardProps {
   modelValue?: boolean
   size?: SybzComponentSize | string | number
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   title?: string
   subTitle?: string
   extra?: string
@@ -457,10 +459,10 @@ export interface SCardProps {
 }
 
 export interface SChartProps {
-  width?: string
-  w?: string
-  height?: string
-  h?: string
+  width?: string | boolean
+  w?: string | boolean
+  height?: string | boolean
+  h?: string | boolean
   id?: string
   option: SybzRecord
   theme?: string
@@ -495,10 +497,10 @@ export interface SFlexProps {
   flex?: string
   /** 子元素间距；单值同时控制 x/y，数组 [x, y] 分别控制水平/垂直间距；裸写或 true 等价于 small */
   gap?: SFlexGap
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   component?: string | Component
 }
 
@@ -506,10 +508,10 @@ export interface SEmptySelfProps {
   title?: string
   subTitle?: string
   theme?: SybzComponentTheme
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   imgAttrs?: SybzRecord
   src?: string
 }
@@ -682,11 +684,11 @@ export interface SIconProps extends SHtmlStringProps {
   color?: string
   size?: string | number
   /** 容器宽度，数字自动补 px；默认未设置，仅设置宽度时高度与宽度一致 */
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 容器高度，数字自动补 px；默认未设置，仅设置高度时宽度与高度一致；100% 需要父容器具有可解析的高度 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 背景圆角，数字自动补 px；默认由 variant 和 theme 决定 */
   borderRadius?: string | number
   /** 鼠标指针样式，支持任意 CSS cursor 值；默认值：pointer */
@@ -718,11 +720,11 @@ export interface SImageSelfProps {
   /** 图片地址；相对路径会通过 resolver 或 basePath 解析 */
   src?: string
   /** 图片宽度，数字自动补 px */
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 图片高度，数字自动补 px */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 相对图片的公共基础路径 */
   basePath?: string
   /** 源码资源解析函数，通常由 createImageResolver 创建 */
@@ -804,11 +806,11 @@ export interface SItemProps extends SCommonProps {
 
 export interface SWrapperProps {
   /** 容器宽度，支持数字、px、百分比等，默认空字符串 */
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 容器高度，支持数字、px、百分比等；百分比需要父容器具有明确高度，默认空字符串 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   gap?: string | number
   column?: number | null
   minWidth?: string | number
@@ -896,11 +898,11 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
   compTitleStyle?: SybzRecord
   connect?: string
   customLabel?: (context: SSelectOptionContext<Option>) => any
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度，默认空字符串 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 选项为空时的占位文案，默认 暂无数据 */
   emptyPlaceholder?: string
   disPlaceholder?: string
@@ -918,8 +920,8 @@ export type SSelectProps = SSelectSelfProps & Partial<Omit<SelectPropsPublic, ke
 export interface SSwitchSelfProps {
   theme?: SybzComponentTheme
   beforeChange?: (...args: any[]) => any
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
 }
 
 export type SSwitchProps = SSwitchSelfProps & Partial<Omit<SwitchPropsPublic, keyof SSwitchSelfProps>>
@@ -985,8 +987,8 @@ export type SPopconfirmButtonType = NonNullable<ButtonPropsPublic['type']>
 
 export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   title?: string
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   content?: string
   reConfirm?: boolean
   theme?: SybzComponentTheme
@@ -1081,10 +1083,10 @@ export interface SMenuSelfProps {
   router?: boolean
   defaultOpenAll?: boolean
   defaultOpeneds?: string[]
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   backgroundColor?: string
   textColor?: string
   activeTextColor?: string
@@ -1101,10 +1103,10 @@ export type SMenuProps = SMenuSelfProps & Partial<Omit<MenuProps, keyof SMenuSel
 export interface SDocumentPreviewSelfProps {
   src: string
   type?: 'auto' | 'pdf' | 'word' | 'excel'
-  height?: string | number
-  h?: string | number
-  width?: string | number
-  w?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
+  width?: string | number | boolean
+  w?: string | number | boolean
   download?: boolean
 }
 
@@ -1118,10 +1120,10 @@ export interface STabsSelfProps {
   type?: '' | 'capsule' | 'capsule-theme' | TabsPropsPublic['type']
   theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   headerMargin?: string | number
 }
 
@@ -1165,10 +1167,10 @@ export interface STitleProps {
   tooltipAttrs?: SybzRecord
   inner?: boolean
   gap?: string | number
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   type?: '' | 'simple' | 'icon' | 'form'
   theme?: SybzComponentTheme
   tag?: 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -1176,8 +1178,8 @@ export interface STitleProps {
 }
 
 export interface STooltipSelfProps extends SHtmlStringProps {
-  width?: string
-  w?: string
+  width?: string | boolean
+  w?: string | boolean
   lineClamp?: string | number
   showSlot?: boolean
   effect?: string
@@ -1224,10 +1226,10 @@ export interface SWarningProps extends SHtmlStringProps {
   title?: string
   theme?: SybzComponentTheme
   type?: SWarningType
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   icon?: boolean
   size?: SWarningSize
   dotted?: boolean

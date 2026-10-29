@@ -117,3 +117,7 @@ descriptions/other
 ### 透传属性
 
 - 组件默认开启 `border`，其他属性会继续透传给 Element Plus `el-descriptions`。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

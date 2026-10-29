@@ -142,3 +142,7 @@ tooltip/visible
 - `lineClamp` 只作用于组件默认渲染的文本区域，不影响自定义触发插槽的布局。
 - `content` 支持字符串、HTML 字符串、VNode，以及 `content` 插槽形式的动态内容。
 - 更多配置请参考 Element Plus Tooltip 文档。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

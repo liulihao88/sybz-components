@@ -28,11 +28,11 @@ export interface JsonProps {
   /** 编辑器为空时的占位文字，默认值：请输入 JSON */
   placeholder?: string
   /** 编辑器宽度，支持 processWidth 写法，默认值：100% */
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 编辑器高度，支持 processWidth 写法；默认由容器或最小高度决定 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 编辑器最小高度，支持 processWidth 写法，默认值：240 */
   minHeight?: string | number
   /** 显示主题，默认值：light */

@@ -30,10 +30,10 @@ interface IconProps {
   icon?: SIconValue
   color?: string
   size?: string | number
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   borderRadius?: string | number
   cursor?: SIconCursor
   hoverAnimation?: boolean

@@ -103,8 +103,8 @@ type DescriptionsProps = {
   theme?: SybzComponentTheme
   size?: SybzComponentSize
   column?: number
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   labelWidth?: any
   showAll?: boolean
   label?: string

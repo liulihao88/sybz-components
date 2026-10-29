@@ -12,8 +12,8 @@ defineOptions({
 interface SwitchProps {
   theme?: SybzComponentTheme
   beforeChange?: (...args: any[]) => any
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
 }
 
 const props = withDefaults(defineProps<SwitchProps>(), {

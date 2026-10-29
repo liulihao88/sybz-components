@@ -116,3 +116,7 @@ markdown/html
 - 服务端渲染且 `sanitize=true` 时，原始 HTML 会先按普通文字安全输出，自定义 HTML 属性暂不生效；客户端挂载后再通过 DOMPurify 过滤并渲染，避免未过滤内容进入服务端页面。
 - 仅在内容完全可信且业务确实需要脚本级 HTML 能力时关闭 `sanitize`。
 - Mermaid 使用严格安全级别，外部链接自动增加 `noopener noreferrer`。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

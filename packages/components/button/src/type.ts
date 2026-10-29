@@ -23,11 +23,11 @@ export interface SButtonSelfProps {
   /** 是否显示为圆角按钮 */
   round?: boolean
   /** 按钮宽度，数字会按工具方法补单位 */
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   /** 按钮高度，数字会按工具方法补单位 */
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   /** 是否开启 hover 动效 */
   hoverAnimation?: boolean
   /** 幽灵按钮，使背景透明并反转文字和边框颜色 */

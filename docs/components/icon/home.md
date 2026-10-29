@@ -314,3 +314,7 @@ icon/highlight
 - 组件底层使用 `el-icon`，tooltip 相关属性如 `content`、`placement`、`effect` 可直接透传。
 - 在支持 Vue 模板类型提示的编辑器中，输入 `icon` 会提示 Element Plus 图标名；同时仍可传入 Vue 图标组件、小写、短横线、自定义 SVG 或 Iconify 名称。
 - `source="auto"` 会先识别在线图片 URL，再按 `图标集前缀:图标名称` 格式识别 Iconify；完整用法见上方“Iconify 图标”和“在线图片”章节。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

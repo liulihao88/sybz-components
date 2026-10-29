@@ -62,8 +62,8 @@ const callerScopeId = getCurrentInstance()?.vnode.scopeId
 const hasDefaultSlot = computed(() => Boolean(slots.default))
 
 interface TooltipProps {
-  width?: string
-  w?: string
+  width?: string | boolean
+  w?: string | boolean
   lineClamp?: string | number
   showSlot?: boolean
   effect?: string

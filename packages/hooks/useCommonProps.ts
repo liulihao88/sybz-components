@@ -9,7 +9,8 @@ export interface UseCommonPropsReturn {
   commonClass: ComputedRef<Record<string, boolean>>
 }
 
-const hasSizeValue = (value: string | number | undefined) => value !== undefined && value !== ''
+const hasSizeValue = (value: unknown): value is string | number =>
+  (typeof value === 'string' && value !== '') || typeof value === 'number'
 
 const useCommonProps = (source: MaybeRefOrGetter<SCommonProps>): UseCommonPropsReturn => {
   const sizeProps = useSizeAliases(source)

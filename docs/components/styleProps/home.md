@@ -14,6 +14,9 @@
   <!-- 按钮：水平内边距 100px、水平外边距 100px -->
   <s-button px="100" mx="100">按钮</s-button>
 
+  <!-- 宽度 100% -->
+  <s-button w>铺满父容器</s-button>
+
   <!-- 裸写内外边距时使用 small（8px） -->
   <s-button m px>四周外边距和左右内边距均为 8px</s-button>
 
@@ -85,6 +88,10 @@
 | `default` | `16px` |    —    | —      |
 
 例如 `pl="small"` → `padding-left: 8px`，`m="default"` → `margin: 16px`，`br="large"` → `border-radius: 24px`。
+
+## 裸写宽高
+
+`w` / `width` 裸写表示 `width="100%"`，`h` / `height` 裸写表示 `height="100%"`；默认不设置。`:w="true"` 和 `:h="true"` 同样表示 100%，传入 `false` 表示不设置。显式长度仍可写成 `w="240"` 或 `height="50vh"`。百分比高度需要父容器具有明确高度。
 
 内外边距属性 `m / mt / mb / ml / mr / mx / my / p / pt / pb / pl / pr / px / py` 可以裸写，等价于传入 `"small"`，默认不设置。例如 `<s-button m mx>` 会设置四周外边距 8px；`mx` 单独表示左右外边距，左侧单独设置用 `ml`。`:m="true"` 同样表示 8px，`:m="false"` 则不设置。可选值：裸写 / `true`（`small`，8px）、`false`（不设置）、`small`（8px）、`default`（16px）、`large`（24px）、数字或 CSS 长度。
 

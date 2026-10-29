@@ -117,3 +117,7 @@ scroll/popover
 ### 插槽和实例
 
 默认插槽放滚动内容。组件实例提供 `viewport` 原生元素与 `scrollTo(options)` 方法；`viewport` 可以使用原生 `scrollIntoView`、`scrollTo` 等 API。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

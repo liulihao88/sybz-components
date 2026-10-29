@@ -87,3 +87,7 @@ flex/other
 - `alignSelf` 和 `order` 是子项的通用样式属性，应写在父容器内部的子组件上；`order` 只改变视觉顺序，不改变 DOM 顺序。
 - `flex` 控制的是 `s-flex` 自身在父级 flex 容器里的伸缩，不是控制子项。
 - `component` 可以传原生标签，例如 `component="section"`，也可以传 Vue 组件对象。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

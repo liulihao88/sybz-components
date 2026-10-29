@@ -14,10 +14,10 @@ const attrs = useAttrs()
 const datePickerRef = ref()
 interface DatePickerProps {
   title?: string
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   futureOnly?: boolean
   compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme

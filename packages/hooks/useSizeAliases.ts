@@ -33,6 +33,19 @@ export const resolveSizeAliases = <T extends SizeAliases>(
     else if (hasOwn(configured, alias)) result[name] = configured[alias] as T[typeof name]
   }
 
+  for (const name of ['width', 'height'] as const) {
+    if (!hasOwn(defaults as Record<string, unknown>, name)) continue
+    if (
+      result[name] === true ||
+      (result[name] === '' && hasOwn(explicit, name)) ||
+      (result[name] === '' && hasOwn(explicit, name === 'width' ? 'w' : 'h'))
+    ) {
+      result[name] = '100%' as T[typeof name]
+    } else if (result[name] === false) {
+      result[name] = undefined as T[typeof name]
+    }
+  }
+
   return result
 }
 

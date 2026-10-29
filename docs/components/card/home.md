@@ -122,3 +122,7 @@ card/titleExtra
 - 只有设置 `collapsible` 后才允许展开 / 收起；默认点击右侧图标触发，如需整块头部可点击，可设置 `collapseTrigger="header"`。
 - `header` 插槽默认会自动占满头部剩余宽度；开启 `collapsible` 后，右侧会为折叠图标预留空间，不需要额外手写 `width: 100%`。
 - `scroll` 为 `true` 时内容区会设置 `flex: 1` 和 `overflow: auto`，适合放在固定高度容器中。
+
+### 宽高布尔写法
+
+`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

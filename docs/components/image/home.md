@@ -85,3 +85,7 @@ app.use(SybzComponents, {
 | `previewSrcList` | 图片预览列表，其中的相对路径也会被解析             | string[]                  | `[]`    |
 
 其他属性、事件和方法与 Element Plus Image 保持一致，包括 `fit`、`lazy`、`loading`、`preview-src-list`、`load`、`error`、`switch`、`close`、`show` 和 `showPreview()`。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

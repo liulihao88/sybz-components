@@ -175,3 +175,7 @@ datePicker/futureOnly
 - `monthrange` 内置快捷项：本月、上月、最近3个月、最近6个月、最近12个月、今年至今、去年。
 - `yearrange` 内置快捷项：今年、去年、最近3年、最近5年、最近10年。
 - 组件继承 `el-date-picker` 的属性、事件、插槽，并额外支持 `title`、`width`、`height`、`futureOnly`、`theme`。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

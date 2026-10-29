@@ -9,6 +9,7 @@ defineOptions({
   name: 'SPopconfirm',
 })
 import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
+import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import SButton from '@/components/button/src/index.vue'
@@ -67,8 +68,8 @@ function cancel() {
 }
 interface PopconfirmProps {
   title?: string
-  width?: string | number
-  w?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
   content?: string
   reConfirm?: boolean
   dangerouslyUseHTMLString?: boolean
@@ -157,7 +158,9 @@ const resolvedConfirmButtonType = computed(() =>
   confirmButtonIsText.value ? '' : confirmSemantic.value.confirmButtonType,
 )
 const popconfirmWidth = computed(() => {
-  if (mergedProps.value.width !== undefined && mergedProps.value.width !== '') return mergedProps.value.width
+  if (mergedProps.value.width !== undefined && mergedProps.value.width !== '') {
+    return processWidth(mergedProps.value.width, true)
+  }
   return confirmSemantic.value.variant === 'default' ? 200 : 320
 })
 

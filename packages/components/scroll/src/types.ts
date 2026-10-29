@@ -6,13 +6,13 @@ export type SScrollPosition = { x: number; y: number }
 /** s-scroll 自有属性。视口可通过组件实例的 viewport 获取。 */
 export interface SScrollProps {
   /** 容器宽度；默认由父元素决定 */
-  width?: string | number
+  width?: string | number | boolean
   /** width 的别名 */
-  w?: string | number
+  w?: string | number | boolean
   /** 容器高度；默认由内容决定 */
-  height?: string | number
+  height?: string | number | boolean
   /** height 的别名 */
-  h?: string | number
+  h?: string | number | boolean
   /** 最大高度，配合 autosize 使用 */
   maxHeight?: string | number
   /** 内容撑开高度，达到 maxHeight 后开始滚动；默认 false */

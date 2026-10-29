@@ -17,10 +17,10 @@ interface Props {
   title?: string
   theme?: SybzComponentTheme
   type?: 'info' | 'simple' | 'warning' | 'error' | 'icon'
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   dangerouslyUseHTMLString?: boolean
   icon?: boolean
   size?: 'small' | 'default'

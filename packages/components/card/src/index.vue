@@ -11,8 +11,8 @@ defineOptions({
 interface CardProps {
   modelValue?: boolean
   size?: 'default' | 'small' | 'large' | string | number
-  height?: string | number
-  h?: string | number
+  height?: string | number | boolean
+  h?: string | number | boolean
   title?: string
   subTitle?: string
   extra?: string

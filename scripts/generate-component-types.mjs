@@ -1169,11 +1169,16 @@ const collectInterfaceProps = ({ sourcePath, interfaceName }, seen = new Set()) 
 for (const [componentName, aliases] of SIZE_ALIAS_COMPONENTS) {
   const hoverProps = TYPED_COMPONENT_PROPS.get(componentName)?.hoverProps
   if (!hoverProps) throw new Error(`${componentName} 缺少尺寸别名的类型生成配置`)
-  const propNames = new Set(collectInterfaceProps(hoverProps).map(({ omitKey }) => omitKey))
+  const dimensionProps = new Map(collectInterfaceProps(hoverProps).map((prop) => [prop.omitKey, prop]))
   for (const alias of aliases) {
     const original = alias === 'w' ? 'width' : 'height'
-    if (!propNames.has(original) || !propNames.has(alias)) {
+    if (!dimensionProps.has(original) || !dimensionProps.has(alias)) {
       throw new Error(`${componentName} 必须同时声明 ${original} 和 ${alias}`)
+    }
+    for (const name of [original, alias]) {
+      if (!dimensionProps.get(name)?.type.includes('boolean')) {
+        throw new Error(`${componentName} 的 ${name} 必须支持裸写布尔值`)
+      }
     }
   }
 }

@@ -110,3 +110,7 @@ item/multiline
 
 - 标题和副标题默认显示 `1` 行，通过 `titleAttrs.lineClamp / subTitleAttrs.lineClamp` 调整行数，`0` 表示自然展开。
 - `titleAttrs / subTitleAttrs` 可覆盖内置 Tooltip 的 `content / placement / width` 等配置；使用标题或副标题插槽、或设置 `lineClamp: 0` 时，仅应用行数配置，其余 Tooltip 属性不生效。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

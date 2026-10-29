@@ -190,3 +190,7 @@ function changeSelect({ value, label, option, index }: SSelectChangeContext) {
 - 组件基于 `el-select` 封装，绝大多数原生属性都可以直接透传。
 - 多选模式下支持全选、反选和上下快速切换；全选栏中除反选按钮外的任意位置均可切换全选状态。在 `s-form` 中，多选框与快速切换按钮会随标签换行一起增高。
 - 默认推荐使用 `options` 配置；未传 `options` 时，也支持在默认插槽中直接书写 `el-option`。
+
+### 宽高布尔写法
+
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。

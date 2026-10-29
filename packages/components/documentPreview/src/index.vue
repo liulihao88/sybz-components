@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { renderAsync } from 'docx-preview'
+import { processWidth } from '@sybz-components/utils'
 import useSizeAliases from '@/hooks/useSizeAliases'
 import { useStyleProps } from '@/hooks/useStyleProps'
 
@@ -12,10 +13,10 @@ const props = withDefaults(
   defineProps<{
     src: string
     type?: DocumentPreviewType
-    height?: string | number
-    h?: string | number
-    width?: string | number
-    w?: string | number
+    height?: string | number | boolean
+    h?: string | number | boolean
+    width?: string | number | boolean
+    w?: string | number | boolean
     download?: boolean
   }>(),
   { type: 'pdf', height: '600px', width: '100%', download: true },
@@ -188,8 +189,8 @@ watch(
   },
 )
 const frameStyle = computed(() => ({
-  width: typeof sizeProps.value.width === 'number' ? `${sizeProps.value.width}px` : sizeProps.value.width,
-  height: typeof sizeProps.value.height === 'number' ? `${sizeProps.value.height}px` : sizeProps.value.height,
+  width: processWidth(sizeProps.value.width, true),
+  height: processWidth(sizeProps.value.height, true),
 }))
 </script>
 

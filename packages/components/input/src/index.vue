@@ -152,10 +152,10 @@ interface SInputProps {
   compTitleStyle?: Record<string, any>
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分 */
   topTitle?: string
-  width?: string | number
-  w?: string | number
-  height?: string | number
-  h?: string | number
+  width?: string | number | boolean
+  w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   maxlength?: string | number
   hideMaxLengthError?: boolean
   maxLengthErrorText?: string
