@@ -113,6 +113,7 @@
 import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
+import { useFormSize } from 'element-plus'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
@@ -223,7 +224,7 @@ const { style } = useStyleProps()
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
     title: mergedProps.value.title,
-    size: mergedProps.value.size || undefined,
+    size: effectiveSize.value || undefined,
     theme: mergedProps.value.theme,
   }
 
@@ -436,7 +437,13 @@ const reverseSelect = () => {
   changeMulty(noSelectedValue)
 }
 
-const mergedSize = computed(() => mergedProps.value.size || 'default')
+const effectiveSize = useFormSize(
+  computed(() => {
+    const size = mergedProps.value.size
+    return size === 'large' || size === 'small' || size === 'default' ? size : undefined
+  }),
+)
+const mergedSize = computed(() => effectiveSize.value || 'default')
 const sizeClass = computed(() => {
   return `s-select--${mergedSize.value}`
 })

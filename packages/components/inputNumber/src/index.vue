@@ -25,6 +25,7 @@
 import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import { useFormSize } from 'element-plus'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
@@ -62,12 +63,13 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 })
 const mergedProps = useGlobalComponentConfig('inputNumber', props)
 const { style } = useStyleProps()
+const effectiveSize = useFormSize(computed(() => mergedProps.value.size || undefined))
 const isDisabled = computed(() => (attrs.disabled ?? mergedProps.value.disabled) === true || attrs.disabled === '')
 
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
     title: mergedProps.value.title,
-    size: mergedProps.value.size,
+    size: effectiveSize.value || undefined,
     theme: mergedProps.value.theme,
   }
 
@@ -112,7 +114,9 @@ const mergedAttrs = computed(() => {
 })
 
 const inputNumberStyle = computed(() => {
-  const style: Record<string, any> = {}
+  const style: Record<string, any> = {
+    '--s-input-number-height': `var(--el-component-size${effectiveSize.value && effectiveSize.value !== 'default' ? `-${effectiveSize.value}` : ''}, 32px)`,
+  }
 
   if (mergedProps.value.width) {
     style.width = processWidth(mergedProps.value.width, true)
