@@ -173,13 +173,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/documentPreview/home.html | 查看文档}
      *
-     * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。
+     * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。默认插件在首次渲染时加载此组件。
      */
     SDocumentPreview: (typeof import('./types/components/documentPreview'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/documentPreview/home.html | 查看文档}
      *
-     * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。
+     * 文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。默认插件在首次渲染时加载此组件。
      */
     's-document-preview': (typeof import('./types/components/documentPreview'))['default']
     /**
@@ -301,25 +301,25 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/json/home.html | 查看文档}
      *
-     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
+     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。默认插件在首次渲染时加载此组件。
      */
     SJson: (typeof import('./types/components/json'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/json/home.html | 查看文档}
      *
-     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。
+     * s-json JSON 编辑组件，默认 v-model 与 v-model:data 均使用 JsonData，支持 processWidth 宽高、disabled 禁用、键名和值编辑、语法高亮、中文校验提示、格式化、压缩和复制。默认插件在首次渲染时加载此组件。
      */
     's-json': (typeof import('./types/components/json'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/markdown/home.html | 查看文档}
      *
-     * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
+     * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。默认插件在首次渲染时加载此组件。
      */
     SMarkdown: (typeof import('./types/components/markdown'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/markdown/home.html | 查看文档}
      *
-     * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。
+     * s-markdown Markdown 与纯 HTML 编辑、实时预览组件，支持 v-model、宽高设置、安全过滤、图片全屏预览、缩放、旋转、多图切换和下载。默认插件在首次渲染时加载此组件。
      */
     's-markdown': (typeof import('./types/components/markdown'))['default']
     /**

@@ -1,6 +1,6 @@
 import './styles/index.scss'
 
-import { isReactive, reactive, watch, type App, type Component } from 'vue'
+import { defineAsyncComponent, isReactive, reactive, watch, type App, type Component } from 'vue'
 
 import registerDirectives from './directives/gDirectives.js'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
@@ -32,6 +32,9 @@ const componentsWithoutCharts = import.meta.glob<InstallableComponent>(
     '!./components/company/countBarOld/index.ts',
     '!./components/company/objectLine/index.ts',
     '!./components/company/quotaPie/index.ts',
+    '!./components/markdown/index.ts',
+    '!./components/json/index.ts',
+    '!./components/documentPreview/index.ts',
   ],
   {
     eager: true,
@@ -39,8 +42,34 @@ const componentsWithoutCharts = import.meta.glob<InstallableComponent>(
   },
 )
 
+// 重功能组件仍由默认插件注册，但只在首次渲染时加载其实现。
+const asyncComponentLoaders = import.meta.glob<{ default: InstallableComponent }>([
+  './components/markdown/index.ts',
+  './components/json/index.ts',
+  './components/documentPreview/index.ts',
+])
+
+const asyncComponents = Object.fromEntries(
+  [
+    ['./components/markdown/index.ts', 'SMarkdown'],
+    ['./components/json/index.ts', 'SJson'],
+    ['./components/documentPreview/index.ts', 'SDocumentPreview'],
+  ].map(([path, name]) => {
+    const loader = asyncComponentLoaders[path]
+    if (!loader) throw new Error(`Missing async component: ${path}`)
+    return [
+      path,
+      Object.assign(
+        defineAsyncComponent(() => loader().then((module) => module.default)),
+        { name },
+      ),
+    ]
+  }),
+)
+
 const allComponents = {
   ...componentsWithoutCharts,
+  ...asyncComponents,
 }
 
 // 1. 批量导出所有组件（作为命名导出）

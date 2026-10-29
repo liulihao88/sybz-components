@@ -52,6 +52,8 @@ import 'sybz-components/style.css'
 app.use(ElementPlus).use(SybzComponents).mount('#app')
 ```
 
+默认插件会注册 Markdown、JSON 编辑器和文档预览组件；它们的实现会在首次渲染时加载。需要单独使用时，也可以从 `sybz-components/components/markdown`、`sybz-components/components/json` 或 `sybz-components/components/documentPreview` 导入。
+
 ### 安装函数库方法
 
 首先安装`@sybz-components/utils`

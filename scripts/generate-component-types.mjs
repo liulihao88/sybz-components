@@ -67,6 +67,8 @@ const CHART_COMPONENT_PATHS = new Set([
   'company/objectLine',
   'company/quotaPie',
 ])
+// 默认插件异步注册的重功能组件，需与 packages/index.ts 的 loader 保持一致。
+const ASYNC_DEFAULT_COMPONENT_PATHS = new Set(['markdown', 'json', 'documentPreview'])
 
 const componentHoverProps = (interfaceName, importTypeNames = [interfaceName], extraImportLines = []) => ({
   sourcePath: componentPropsPath,
@@ -1650,7 +1652,7 @@ const buildComponentDeclarationLines = (componentEntries, { declarationDir, incl
 
   lines.push("declare module 'vue' {")
   lines.push('  export interface GlobalComponents {')
-  componentEntries.forEach(({ componentName, tagName, wrapperFilePath, docsUrl }) => {
+  componentEntries.forEach(({ componentName, componentPath, tagName, wrapperFilePath, docsUrl }) => {
     const typedComponent = TYPED_COMPONENT_PROPS.get(componentName)
     const wrapperImportPath = getNormalizedImportPath(declarationDir, wrapperFilePath)
     const componentType = typedComponent?.exportedComponentTypeName
@@ -1660,14 +1662,17 @@ const buildComponentDeclarationLines = (componentEntries, { declarationDir, incl
       ? `(typeof import('${wrapperImportPath}'))['default']`
       : componentType
 
-    getComponentDocCommentLines({ docsUrl, description: typedComponent?.description }).forEach((line) => {
+    const description = ASYNC_DEFAULT_COMPONENT_PATHS.has(componentPath)
+      ? `${typedComponent?.description || ''}默认插件在首次渲染时加载此组件。`
+      : typedComponent?.description
+    getComponentDocCommentLines({ docsUrl, description }).forEach((line) => {
       lines.push(`    ${line}`)
     })
     lines.push(`    ${componentName}: ${globalComponentType}`)
 
     const templateTagName = typedComponent?.tagName || tagName
     if (templateTagName) {
-      getComponentDocCommentLines({ docsUrl, description: typedComponent?.description }).forEach((line) => {
+      getComponentDocCommentLines({ docsUrl, description }).forEach((line) => {
         lines.push(`    ${line}`)
       })
       lines.push(`    '${templateTagName}': ${globalComponentType}`)
