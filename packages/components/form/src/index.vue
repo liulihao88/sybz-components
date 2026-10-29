@@ -175,9 +175,9 @@ const getFieldTooltip = (item: FormField, index: number) =>
 const getFieldSubLabel = (item: FormField, index: number) =>
   resolveDynamic<string | undefined>(item.subLabel, item, index, undefined)
 const getFieldTooltipAttrs = (item: FormField, index: number) => resolveRecord(item.tooltipAttrs, item, index)
-const getFieldTooltipCopy = (item: FormField, index: number, tooltip: string) => {
+const getFieldTooltipCopy = (item: FormField, tooltip: string) => {
   const copy = item.copy
-  return copy === false ? undefined : typeof copy === 'string' ? copy : tooltip
+  return copy === true ? tooltip : typeof copy === 'string' ? copy : undefined
 }
 
 const getPlaceholderPrefix = (item: FormField) => {
@@ -618,8 +618,8 @@ defineExpose({
                   />
                   <span v-else class="s-form__label-tooltip-text">{{ getFieldTooltip(v, i) }}</span>
                   <s-icon
-                    v-if="getFieldTooltipCopy(v, i, getFieldTooltip(v, i)!)"
-                    v-copy:click="getFieldTooltipCopy(v, i, getFieldTooltip(v, i)!)"
+                    v-if="getFieldTooltipCopy(v, getFieldTooltip(v, i)!)"
+                    v-copy:click="getFieldTooltipCopy(v, getFieldTooltip(v, i)!)"
                     icon="CopyDocument"
                     class="s-form__label-tooltip-copy"
                     aria-label="复制字段说明"

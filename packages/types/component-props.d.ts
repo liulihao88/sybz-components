@@ -552,7 +552,7 @@ export interface SFormFieldItem {
   /** attrs 的语义化别名，优先级介于 bind 和 attrs 之间 */
   componentProps?: SFormDynamic<SybzRecord>
   column?: SFormProps['column']
-  /** 是否显示 tooltip 复制图标；传字符串时复制指定文本，默认复制 tooltip 内容 */
+  /** 是否显示 tooltip 复制图标；默认 false，传字符串时复制指定文本。 */
   copy?: boolean | string
   comp?: string | Component
   /** 默认值别名，只有 model 对应路径不存在时才写入 */

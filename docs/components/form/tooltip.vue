@@ -34,10 +34,9 @@ const fieldList: SFormFieldItem[] = [
     copy: true,
   },
   {
-    label: '禁用复制',
+    label: '默认不复制',
     prop: 'noCopy',
-    tooltip: '设置 copy: false 可隐藏复制图标',
-    copy: false,
+    tooltip: '未设置 copy 时，默认不显示复制图标',
   },
 ]
 </script>
