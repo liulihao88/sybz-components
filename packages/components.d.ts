@@ -213,13 +213,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/form/home.html | 查看文档}
      *
-     * s-form 表单组件，支持 schema 字段编排、动态配置、标签主副文本、字段标签 tooltip 提示、可选的 tooltip 文本复制（copy 默认 false）及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
+     * s-form 表单组件，支持 schema 字段编排、字段控件 slots 配置、动态配置、标签主副文本、字段标签 tooltip 提示、可选的 tooltip 文本复制（copy 默认 false）及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
      */
     SForm: (typeof import('./types/components/form'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/form/home.html | 查看文档}
      *
-     * s-form 表单组件，支持 schema 字段编排、动态配置、标签主副文本、字段标签 tooltip 提示、可选的 tooltip 文本复制（copy 默认 false）及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
+     * s-form 表单组件，支持 schema 字段编排、字段控件 slots 配置、动态配置、标签主副文本、字段标签 tooltip 提示、可选的 tooltip 文本复制（copy 默认 false）及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
      */
     's-form': (typeof import('./types/components/form'))['default']
     /**
