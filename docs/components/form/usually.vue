@@ -41,7 +41,6 @@ const fieldList = [
   {
     label: '账号',
     prop: 'account',
-    comp: 'el-input',
     placeholder: '我是特殊的placeholder',
     labelRender: () => {
       return <div style="color: blue">好了好了好了好了好了好了</div>
@@ -50,10 +49,12 @@ const fieldList = [
   {
     label: '密码1',
     prop: 'pwd',
-    comp: 'el-input',
+    comp: 's-input',
     imgAttrs: {
       src: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png',
-      class: ['m-r-8'],
+      style: {
+        marginRight: '8px',
+      },
     },
     attrs: {
       style: {
@@ -64,32 +65,8 @@ const fieldList = [
       clearable: false,
     },
   },
+
   {
-    label: 's-json描述',
-    value: 's-json-desc',
-    comp: 's-json',
-    column: 1,
-    attrs: {
-      lineNumbers: false,
-      editable: false,
-      // showStatus: false,
-      width: '100%',
-    },
-  },
-  {
-    label: 's-markdown描述',
-    value: 'markdownValue',
-    comp: 's-markdown',
-    column: 1,
-    width: '100%',
-    attrs: {
-      editable: true,
-      height: 200,
-      disabled: false,
-    },
-  },
-  {
-    label: '昵称',
     prop: 'name',
     useSlot: true,
   },
@@ -134,6 +111,7 @@ const fieldList = [
   {
     label: '是否开启开关',
     prop: 'lock',
+    tooltip: '显示开关',
     comp: 's-switch',
   },
   {
@@ -141,7 +119,8 @@ const fieldList = [
     prop: 'age',
     subLabel: '请写入实际年龄',
     comp: 's-input-number',
-    attrs: { width: '100%', height: 32 },
+    tooltip: '显示实际年龄',
+    copy: true,
     slots: { suffix: '岁' },
   },
   {
@@ -156,7 +135,7 @@ const fieldList = [
         step={10}
         precision={0}
         valueOnClear={5}
-        v-slots={{ suffix: () => '分' }}
+        v-slots={{ suffix: () => '分数' }}
       />
     ),
   },
@@ -175,6 +154,30 @@ const fieldList = [
     value: 'timeValue',
     attrs: {
       type: 'daterange',
+    },
+  },
+  {
+    label: 's-json描述',
+    value: 's-json-desc',
+    comp: 's-json',
+    column: 1,
+    attrs: {
+      lineNumbers: false,
+      editable: false,
+      // showStatus: false,
+      width: '100%',
+    },
+  },
+  {
+    label: 's-markdown描述',
+    value: 'markdownValue',
+    comp: 's-markdown',
+    column: 1,
+    width: '100%',
+    attrs: {
+      editable: true,
+      height: 200,
+      disabled: false,
     },
   },
 ]

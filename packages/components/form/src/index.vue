@@ -294,16 +294,6 @@ const getTitleSlotName = (item: FormField) => item.titleSlotName || item.slotNam
 
 const getFieldSlotName = (item: FormField) => item.slotName || getFieldProp(item)
 
-const getComponentSlots = (item: FormField, index: number) => {
-  if (!item.slots) return {}
-  return Object.fromEntries(
-    Object.entries(item.slots).map(([name, content]) => [
-      name,
-      () => (typeof content === 'function' ? content(getRenderProps(item, index)) : content),
-    ]),
-  )
-}
-
 const getLabelSlotName = (item: FormField) => item.labelSlotName || `${getFieldProp(item)}-label`
 
 const getTitleAttrs = (item: FormField, index: number): FormAttrs => {
@@ -648,12 +638,12 @@ defineExpose({
           <render-comp :render="v.render" :context="getRenderProps(v, i)" />
         </template>
         <template v-else>
-          <component
-            :is="v.comp || 's-input'"
-            v-directives="v.directives"
-            v-slots="getComponentSlots(v, i)"
-            v-bind="getComponentAttrs(v, i)"
-          ></component>
+          <component :is="v.comp || 's-input'" v-directives="v.directives" v-bind="getComponentAttrs(v, i)">
+            <template v-for="(content, name) in v.slots || {}" :key="name" #[name]>
+              <render-comp v-if="typeof content === 'function'" :render="content" :context="getRenderProps(v, i)" />
+              <template v-else>{{ content }}</template>
+            </template>
+          </component>
         </template>
       </el-form-item>
     </template>
