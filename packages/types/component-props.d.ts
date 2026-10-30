@@ -591,6 +591,8 @@ export interface SFormFieldItem {
   /** 自定义事件，key 可以是 change / blur / update:modelValue / onChange */
   events?: Record<string, SFormEventHandler>
   render?: SFormRender
+  /** 传给当前控件的具名插槽；值可为静态文本或返回插槽内容的函数 */
+  slots?: Record<string, string | number | ((context: SFormContext) => VNodeChild)>
   required?: boolean | string
   rules?: SFormDynamic<SFormRule | SFormRule[]>
   slotName?: string

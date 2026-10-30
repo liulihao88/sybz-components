@@ -24,6 +24,7 @@ const model = ref({
   lock: '',
   name: '',
   age: null,
+  duration: 5,
   timeValue: [],
   markdownValue: '### 你好',
   's-json-desc': {
@@ -140,12 +141,30 @@ const fieldList = [
     prop: 'age',
     subLabel: '请写入实际年龄',
     comp: 's-input-number',
-    useSlot: true,
+    attrs: { width: '100%', height: 32 },
+    slots: { suffix: '岁' },
+  },
+  {
+    label: '预计用时',
+    prop: 'duration',
+    render: ({ value, setFieldValue }) => (
+      <s-input-number
+        modelValue={value}
+        onUpdate:modelValue={setFieldValue}
+        min={5}
+        max={120}
+        step={10}
+        precision={0}
+        valueOnClear={5}
+        v-slots={{ suffix: () => '分' }}
+      />
+    ),
   },
   {
     label: '描述',
     value: 'desc',
     comp: 's-input',
+    column: 1,
     attrs: {
       type: 'textarea',
     },
@@ -173,9 +192,6 @@ async function isTest16() {
     <template #name-label>自定义label(使用useSlot)</template>
     <template #name>
       <s-input v-model="model.name" placeholder="我是name" width="300" />
-    </template>
-    <template #age>
-      <s-input-number v-model="model.age" width="100%" height="32" />
     </template>
   </s-form>
   <el-button type="primary" @click="isTest16">测试36</el-button>

@@ -106,7 +106,7 @@ form/event
 
 ### 通常用法
 
-:::demo 展示事件监听。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`。
+:::demo 展示常用字段配置。基础写法：`<s-form :model="model" :fieldList="fieldList" :rules="rules" ref="gFormRef"></s-form>`；年龄字段通过 `slots: { suffix: '岁' }` 为 `s-input-number` 加单位。
 form/usually
 :::
 
@@ -172,6 +172,7 @@ const fieldList: SFormFieldItem[] = [
 |     prop      | 值对应路径，支持 `a.b`、`a.0.b`、`a[0].b`                                           | string                    | -                  |
 |     comp      | 要渲染的组件名称或组件对象                                                          | string / Component        | `s-input`          |
 |     attrs     | 透传给表单控件；`type="title"` 时透传给 `s-title`，标题文案也写在这里               | object / Function         | -                  |
+|     slots     | 传给表单控件的具名插槽；值为静态文本、数字或返回内容的函数，例如 `{ suffix: '岁' }` | object                    | `{}`               |
 | formItemAttrs | 透传给 `el-form-item`                                                               | object / Function         | -                  |
 |     rules     | 当前项校验规则，函数参数为表单上下文                                                | object / array / Function | -                  |
 |   required    | 快速生成必填规则；传字符串时作为错误提示                                            | boolean / string          | -                  |
@@ -190,7 +191,7 @@ const fieldList: SFormFieldItem[] = [
 
 ## 表单上下文
 
-`attrs`、`formItemAttrs`、`rules`、`isShow`、`render` 和插槽都会拿到同一份上下文：`{ option, model, value, prop, index, formRef, getValue, setValue, setFieldValue }`。其中 `option` 是当前 `fieldList` 配置项，`model` 是完整表单数据。
+`attrs`、`formItemAttrs`、`rules`、`isShow`、`render` 和 `slots` 中的函数都会拿到同一份上下文：`{ option, model, value, prop, index, formRef, getValue, setValue, setFieldValue }`。其中 `option` 是当前 `fieldList` 配置项，`model` 是完整表单数据。
 
 ## Form Exposes
 
