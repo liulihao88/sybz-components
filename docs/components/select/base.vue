@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const selectVal = ref()
+const elementSelectVal = ref()
 const options = ref([
   { label: '小月月小月月小月月小月月小月月小月月小月月小月月小月月小月月', value: 'xyy' },
   { label: '小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫小鑫鑫', value: 'xxx' },
@@ -10,11 +11,22 @@ const options = ref([
     value: 1,
   },
 ])
+
+watch(
+  selectVal,
+  (val) => {
+    console.log(`72 14行 docs/components/select/base.vue val`, val)
+  },
+  {
+    deep: true,
+    immediate: true,
+  },
+)
 </script>
 
 <template>
   <div>
-    <s-select v-model="selectVal" :options="options" title="哈哈"></s-select>
+    <s-select v-model="selectVal" :options="options" title="哈哈" value-on-clear=""></s-select>
   </div>
 </template>
 

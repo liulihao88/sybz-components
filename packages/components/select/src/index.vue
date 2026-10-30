@@ -113,7 +113,7 @@
 import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
-import { useFormSize } from 'element-plus'
+import { ElSelect, useFormSize } from 'element-plus'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
@@ -287,6 +287,14 @@ const selectAttrs = computed<Record<string, any>>(() => {
     }
     return obj
   }, {})
+
+  // 包装组件自行处理的属性不重复透传，其余 Element Plus 属性可从全局 select 配置进入。
+  const controlledProps = new Set(['modelValue', 'options', 'multiple', 'size', 'placeholder', 'popperClass'])
+  Object.keys(ElSelect.props).forEach((key) => {
+    const kebabKey = key.replace(/\B([A-Z])/g, '-$1').toLowerCase()
+    if (controlledProps.has(key) || key in nextAttrs || kebabKey in nextAttrs) return
+    if (mergedProps.value[key] !== undefined) nextAttrs[key] = mergedProps.value[key]
+  })
 
   return {
     clearable: mergedProps.value.clearable ?? true,

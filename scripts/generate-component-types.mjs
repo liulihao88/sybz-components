@@ -767,7 +767,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'select',
       allowAnySlots: true,
       description:
-        's-select 下拉选择组件，支持上边框嵌入标题；透传 Element Plus 的 value-on-clear，清空时保留该属性指定的值；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。',
+        's-select 下拉选择组件，支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。',
       hoverProps: componentHoverProps('SSelectSelfProps', [
         'SSelectChangeContext',
         'SSelectOptionContext',
