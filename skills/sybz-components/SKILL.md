@@ -8,6 +8,10 @@ license: MIT
 
 用中文交付。先检查项目现状，只改用户范围内的代码；复用组件库能力和默认值，删除迁移后无用的 import、模板、样式与辅助逻辑，不主动 build。
 
+## 自动接入
+
+用户要求在 Vue 项目中使用本 skill 开发、替换或新增组件时，把接入作为任务的一部分：检查依赖和应用入口，缺少 `sybz-components`、`@sybz-components/utils` 或 `element-plus` 就用项目现有包管理器安装缺少的包，并完成 Element Plus、Sybz Components 和样式的入口注册。工具函数在实际使用处从 `@sybz-components/utils` 导入。已有依赖和注册不要重复；仅咨询用法、没有可修改的 Vue 项目时不执行安装。具体步骤见 [references/setup.md](references/setup.md)。
+
 ## 按需读取（只读当前任务需要的文件）
 
 - 首次接入/全局配置：[references/setup.md](references/setup.md)

@@ -33,6 +33,8 @@ pnpm skills:install
 使用 $sybz-components 把这个页面改成 sybz-components 组件库写法
 ```
 
+在 Vue 3 项目中使用该 skill 开发或迁移页面时，Codex 会检查项目依赖，自动安装缺少的 `sybz-components`、`@sybz-components/utils` 和 `element-plus`，并补齐应用入口的组件注册与样式引入。无需先手动执行下方的组件库安装命令。
+
 ## 在线文档
 
 - 文档地址：[https://liulihao88.github.io/sybz-components/](https://liulihao88.github.io/sybz-components/)

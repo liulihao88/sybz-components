@@ -1,28 +1,24 @@
 # 项目接入
 
-用户明确要求接入时直接修改项目；仅咨询时给模板，不擅自安装。先检查 package、入口、Vite/TS 配置，保留已有插件顺序与业务配置。
+用户要求在 Vue 项目中使用本 skill 开发、替换或新增组件时，自动完成接入，不要求用户先手动安装。仅咨询用法或没有可修改的目标项目时给出说明。先确认目标项目是 Vue 3，定位实际应用包的 `package.json`、锁文件、应用入口和现有注册方式；在 monorepo 中只修改目标应用包。保留已有插件顺序与业务配置。
 
-```bash
-pnpm add sybz-components @sybz-components/utils vue element-plus
-pnpm add -D @vitejs/plugin-vue typescript vue-tsc
-```
+检查 `dependencies`、`devDependencies`、工作区依赖和实际解析结果。对缺少的 `sybz-components`、`@sybz-components/utils`、`element-plus`，使用项目已有包管理器（pnpm/npm/yarn/bun）执行一次安装，写入目标应用的 `dependencies`；已有依赖不升级、不重复安装。不为这一步额外安装 Vue、Vite、TypeScript 等项目基础依赖。安装失败时说明具体原因，继续完成能做的入口修改，不把安装命令留给用户作为默认完成方式。
 
 ## 入口
 
 ```ts
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import SybzComponents from 'sybz-components'
-import * as sybzUtils from '@sybz-components/utils'
 import 'sybz-components/style.css'
 
-sybzUtils.configureUtils({ theme: 'shijingshan' })
 app.use(ElementPlus)
-app.use(SybzComponents, { theme: 'shijingshan', card: { shadow: 'hover' } })
-Object.entries(sybzUtils).forEach(([key, value]) => {
-  app.config.globalProperties[key] = value
+app.use(SybzComponents, {
+  theme: 'sybz',
 })
 ```
 
-图表按需加入 `SybzChartComponents from 'sybz-components/charts'`、`sybz-components/charts/style.css` 和 `app.use(SybzChartComponents)`。样式仅入口导入一次；Element Plus 在 Sybz 前注册；`configureUtils` 在创建应用前调用。
+合并进现有入口，不替换应用创建、路由或其他插件代码。样式仅入口导入一次；Element Plus 在 Sybz 前注册。业务代码用到工具函数时按需 `import { $toast } from '@sybz-components/utils'`，无需把整个 utils 包挂到全局属性。已有全局主题时保留；用户要求主题时才传对应主题配置。图表按需加入 `SybzChartComponents from 'sybz-components/charts'`、`sybz-components/charts/style.css` 和 `app.use(SybzChartComponents)`。
 
 ## 自定义主题色
 
@@ -64,7 +60,7 @@ import { sybzVitePlugins } from '@sybz-components/utils/vite'
 export default defineConfig({ plugins: [vue(), sybzVitePlugins()] })
 ```
 
-首次接入总是补 `sybzVitePlugins()`；已有则不重复。它默认提供 Vue JSX/TSX、Tailwind v4（自动注入 CSS 入口，无需业务项目单独安装 `tailwindcss`）、代码定位、Git 信息、构建时间；已有 `@tailwindcss/vite` 时传 `{ tailwind:false }`，已有手动 Tailwind CSS 入口时传 `{ tailwindCss:false }`，已有自行注册的 `vueJsx()` 时传 `{ vueJsx:false }`，确保插件不重复。TSX 项目在 tsconfig 设置 `"jsx":"preserve","jsxImportSource":"vue"`；无 JSX/TSX 的项目可传 `{ vueJsx:false }`。已有 vue 只检查、不重复。
+仅在任务确实需要这些 Vite 扩展时补 `sybzVitePlugins()`；已有则不重复。它默认提供 Vue JSX/TSX、Tailwind v4、代码定位、Git 信息、构建时间；已有同类插件或样式入口时按需关闭重复功能。TSX 项目在 tsconfig 设置 `"jsx":"preserve","jsxImportSource":"vue"`。已有 vue 只检查、不重复。
 当前预设支持 Vite 5 和 6。
 
 完成后运行项目已有 typecheck/lint，不主动 build。
