@@ -149,6 +149,8 @@ export interface STableProps<Row extends TableRow = TableRow> {
   disabled?: boolean
   showPage?: boolean
   showIndex?: boolean
+  /** 所有列默认是否在内容溢出时截断并显示 tooltip；单列配置优先，默认 true */
+  showOverflowTooltip?: boolean
   size?: string
   theme?: SybzComponentTheme
   pageSize?: number

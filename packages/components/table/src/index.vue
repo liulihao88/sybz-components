@@ -64,6 +64,8 @@ interface TableProps {
   columns?: TableColumnList
   showPage?: boolean
   showIndex?: boolean
+  /** 所有列默认是否在内容溢出时截断并显示 tooltip；单列配置优先 */
+  showOverflowTooltip?: boolean
   /** 禁用分页和操作栏按钮 */
   disabled?: boolean
   size?: string
@@ -93,6 +95,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   columns: () => [],
   showPage: true,
   showIndex: true,
+  showOverflowTooltip: true,
   disabled: false,
   size: '',
   theme: 'default',
@@ -447,7 +450,7 @@ const updateTable = () => {
     const { btns, baseBtns, hideBtns } = normalizeColumnBtns(item.btns ?? [], maxBtns)
 
     const defaultItems = {
-      showOverflowTooltip: true,
+      showOverflowTooltip: mergedProps.value.showOverflowTooltip,
       btns,
       baseBtns, // 显示的按钮
       hideBtns, // 隐藏在...中的按钮
@@ -835,7 +838,7 @@ const handleHeaderDragend = (
 }
 
 watch(
-  () => mergedProps.value.columns,
+  () => [mergedProps.value.columns, mergedProps.value.showOverflowTooltip],
   () => {
     updateTable()
   },
@@ -930,6 +933,7 @@ const tableClass = computed(() => ({
 const tableAttrs = computed(() => {
   const nextAttrs = {
     ...attrs,
+    showOverflowTooltip: mergedProps.value.showOverflowTooltip,
   } as Record<string, any>
 
   if (mergedProps.value.size) {

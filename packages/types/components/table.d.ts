@@ -14,7 +14,7 @@ type ElTableInstance = InstanceType<typeof ElTable>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
  *
- * 先提示 sybz 自身属性，再提示 Element Plus Table；s-table 自有属性包括主题、背景色、border（表格及单元格边框）、disabled（禁用分页和操作按钮）、分页、选择和列配置。 的公开属性。
+ * 先提示 sybz 自身属性，再提示 Element Plus Table；s-table 自有属性包括主题、背景色、border（表格及单元格边框）、disabled（禁用分页和操作按钮）、showOverflowTooltip（所有列的默认值，单列配置优先）、分页、选择和列配置。 的公开属性。
  */
 export type STablePublicProps = STableProps & Omit<ElTableInstance['$props'], keyof STableProps>
 
@@ -31,6 +31,8 @@ export type STableComponent = {
       disabled?: boolean
       showPage?: boolean
       showIndex?: boolean
+      /** 所有列默认是否在内容溢出时截断并显示 tooltip；单列配置优先，默认 true */
+      showOverflowTooltip?: boolean
       size?: string
       /** 表格自身及表体背景色，支持 CSS 颜色值 */
       background?: string
@@ -57,6 +59,7 @@ export type STableComponent = {
       | 'disabled'
       | 'showPage'
       | 'showIndex'
+      | 'showOverflowTooltip'
       | 'size'
       | 'theme'
       | 'background'
