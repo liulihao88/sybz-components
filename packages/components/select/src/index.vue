@@ -618,7 +618,7 @@ function changeHandler(value: any) {
     return
   }
   if (isEmpty(value, true)) {
-    emitChangeSelect(undefined, undefined, undefined, undefined)
+    emitChangeSelect(value, undefined, undefined, undefined)
     return
   }
   const index = sOptions.value.findIndex((option) => {
