@@ -733,6 +733,8 @@ export interface SImageSelfProps {
   resolver?: SImageSrcResolver
   /** 是否直接使用当前 src 开启单图预览 */
   preview?: boolean
+  /** 是否在图片预览工具栏显示下载按钮 */
+  download?: boolean
   /** 图片预览地址列表，相对路径同样会被解析 */
   previewSrcList?: string[]
 }

@@ -34,6 +34,12 @@ image/preview
 image/slots
 :::
 
+### 更多属性（download 默认值：true）
+
+:::demo 预览时默认显示下载按钮。基础写法：`<s-image src="图片地址" preview />`。属性：`download` 可选 `true / false`，默认值 `true`；点击按钮下载当前预览图片。跨域图片需要服务端允许 CORS，下载失败时会提示并尝试打开原图。自定义 `toolbar` 插槽时由插槽内容控制按钮。
+image/other
+:::
+
 ### 全局路径配置
 
 如果图片位于 `public/images`，可以统一配置基础路径：
@@ -82,6 +88,7 @@ app.use(SybzComponents, {
 | `basePath`       | 相对图片的公共基础路径                             | string                    | `''`    |
 | `resolver`       | 自定义图片路径解析函数                             | `(src) => string \| void` | -       |
 | `preview`        | 是否直接使用当前 `src` 开启单图预览                | boolean                   | `false` |
+| `download`       | 是否在预览工具栏显示当前图片的下载按钮             | boolean                   | `true`  |
 | `previewSrcList` | 图片预览列表，其中的相对路径也会被解析             | string[]                  | `[]`    |
 
 其他属性、事件和方法与 Element Plus Image 保持一致，包括 `fit`、`lazy`、`loading`、`preview-src-list`、`load`、`error`、`switch`、`close`、`show` 和 `showPreview()`。
