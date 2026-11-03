@@ -675,7 +675,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SPopconfirmPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'popover',
-      slots: ['default', 'content', 'footer', 'target'],
+      slots: ['default', 'title', 'content', 'footer', 'target'],
       hoverProps: componentHoverProps('SPopoverConfirmSelfProps', [
         'SDialogVariant',
         'SPopconfirmButtonType',
@@ -972,7 +972,7 @@ const SIZE_ALIAS_COMPONENTS = new Map([
   ['SJson', 'wh'],
   ['SMarkdown', 'wh'],
   ['SMenu', 'wh'],
-  ['SPopconfirm', 'w'],
+  ['SPopconfirm', 'wh'],
   ['SSelect', 'wh'],
   ['SScroll', 'wh'],
   ['SSwitch', 'w'],

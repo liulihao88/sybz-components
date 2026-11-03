@@ -8,7 +8,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 defineOptions({
   name: 'SPopconfirm',
 })
-import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
+import { computed, normalizeStyle, onBeforeUnmount, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
@@ -70,6 +70,8 @@ interface PopconfirmProps {
   title?: string
   width?: string | number | boolean
   w?: string | number | boolean
+  height?: string | number | boolean
+  h?: string | number | boolean
   content?: string
   reConfirm?: boolean
   dangerouslyUseHTMLString?: boolean
@@ -86,6 +88,7 @@ interface PopconfirmProps {
 const props = withDefaults(defineProps<PopconfirmProps>(), {
   title: undefined,
   width: undefined,
+  height: undefined,
   content: '',
   reConfirm: true,
   dangerouslyUseHTMLString: true,
@@ -96,7 +99,7 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   confirmButtonText: undefined,
   cancelButtonText: '取消',
   confirmButtonType: undefined,
-  cancelButtonType: 'info',
+  cancelButtonType: undefined,
 })
 
 const mergedProps = useGlobalComponentConfig('popconfirm', props)
@@ -163,6 +166,16 @@ const popconfirmWidth = computed(() => {
   }
   return confirmSemantic.value.variant === 'default' ? 200 : 320
 })
+const popperStyle = computed(() => {
+  const original = attrs['popper-style'] ?? attrs.popperStyle
+  const height = mergedProps.value.height
+  return normalizeStyle([
+    original,
+    {
+      height: height === undefined || height === '' ? undefined : processWidth(height, true),
+    },
+  ])
+})
 
 onBeforeUnmount(() => {
   removeDocumentListeners()
@@ -181,6 +194,7 @@ defineExpose({
     class="s-popconfirm__box"
     :style="style"
     :width="popconfirmWidth"
+    :popper-style="popperStyle"
     :disabled="isDisabled"
     :popper-class="popperClass"
     @show="handleShow"
@@ -213,7 +227,6 @@ defineExpose({
         <SButton
           class="s-popconfirm__cancel-button"
           size="small"
-          height="36"
           :type="resolvedCancelButtonType"
           :text="cancelButtonIsText"
           :theme="popconfirmButtonTheme"
@@ -224,7 +237,6 @@ defineExpose({
         <SButton
           class="s-popconfirm__confirm-button"
           size="small"
-          height="36"
           :type="resolvedConfirmButtonType"
           :text="confirmButtonIsText"
           :theme="popconfirmButtonTheme"

@@ -48,6 +48,8 @@ export type SPopconfirmComponent = {
       | 'title'
       | 'width'
       | 'w'
+      | 'height'
+      | 'h'
       | 'content'
       | 'reConfirm'
       | 'theme'
@@ -65,6 +67,7 @@ export type SPopconfirmComponent = {
     $emit: ElPopoverInstance['$emit']
     $slots: ElPopoverInstance['$slots'] & {
       default?: () => any
+      title?: () => any
       content?: () => any
       footer?: () => any
       target?: () => any

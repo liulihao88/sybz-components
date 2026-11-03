@@ -34,12 +34,20 @@ popconfirm/usually
 popconfirm/slot
 :::
 
+### 设置宽高（width / w 默认值：普通态 200、语义态 320；height / h 默认值：未设置）
+
+:::demo 切换宽高属性及取值，观察弹层尺寸。基础写法：`<s-popconfirm width="240" height="180"><s-button>打开确认弹框</s-button></s-popconfirm>`；`w`、`h` 分别是简写。属性：`width / w`、`height / h` 均可传数字、CSS 长度或布尔值；数字自动补 `px`，裸写或 `true` 表示 `100%`，`false` 表示不设置。宽度默认值为普通态 `200`、语义态 `320`，高度默认不设置。
+popconfirm/other
+:::
+
 ### 属性
 
 |           属性名           | 说明                                                                            | 类型                                                           | 默认值                     |
 | :------------------------: | ------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------- |
 |          `title`           | 标题文案；未设置时由 `variant` 生成                                             | string                                                         | 由 `variant` 决定          |
 |          `width`           | 弹层宽度；语义态默认使用更适合确认内容的宽度                                    | string / number                                                | 普通态 `200`，语义态 `320` |
+|          `height`          | 弹层高度，数字自动补 `px`                                                       | string / number / boolean                                      | -                          |
+|            `h`             | `height` 的简写                                                                 | string / number / boolean                                      | -                          |
 |         `content`          | 正文内容，默认按安全白名单 HTML 渲染                                            | string                                                         | `''`                       |
 |        `reConfirm`         | 是否启用二次确认，关闭后点击即直接确认                                          | boolean                                                        | `true`                     |
 | `dangerouslyUseHTMLString` | 是否将 `title` / `content` 按安全白名单 HTML 字符串渲染，可用 `<mark>` 高亮文本 | boolean                                                        | `true`                     |
@@ -76,4 +84,4 @@ popconfirm/slot
 
 ### 宽高布尔写法
 
-`w` / `width` 裸写或传入 `true` 表示宽度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。
+`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。弹层百分比高度需要其定位容器有明确高度。

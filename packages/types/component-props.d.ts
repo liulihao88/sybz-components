@@ -993,6 +993,10 @@ export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   title?: string
   width?: string | number | boolean
   w?: string | number | boolean
+  /** 弹层高度，数字自动补 px */
+  height?: string | number | boolean
+  /** height 的简写 */
+  h?: string | number | boolean
   content?: string
   reConfirm?: boolean
   theme?: SybzComponentTheme
