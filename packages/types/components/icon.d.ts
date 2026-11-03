@@ -13,7 +13,7 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
  *
- * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源，以及语义类型、背景样式、尺寸、颜色、圆角、阴影、Hover 动画、鼠标移入高亮、鼠标指针、旋转角度和 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
+ * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
  *
  * 先提示 sybz 自身属性。
  */
@@ -49,11 +49,8 @@ declare const SIcon: {
       type?: SIconType
       /** 图标视觉样式；默认值：plain */
       variant?: SIconVariant
-      svgAttrs?: SybzRecord
-      /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
-      iconifyAttrs?: SybzRecord
-      /** 透传给在线图片 img 元素的属性，如 alt、crossorigin、referrerpolicy */
-      imageAttrs?: SybzRecord
+      /** 透传给当前图标来源对应的内部节点；默认插槽内容由调用方自行设置属性 */
+      attrs?: SybzRecord
     } & SybzStyleProps &
       SybzDimensionProps<SIconProps> &
       SybzThemeProps<SIconProps>

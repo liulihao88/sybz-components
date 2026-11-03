@@ -310,10 +310,10 @@ Iconify 名称的格式是 `图标集前缀:图标名称`。例如 `tabler:home`
 <s-icon icon="tabler:search" source="iconify" />
 ```
 
-Iconify 图标支持与其他 `s-icon` 相同的大小、颜色、语义类型、背景样式和 tooltip 属性。还可以通过 `iconifyAttrs` 将属性透传给底层 Iconify Icon；`iconifyAttrs` 类型是 `object`，默认值是 `{}`：
+Iconify 图标支持与其他 `s-icon` 相同的大小、颜色、语义类型、背景样式和 tooltip 属性。还可以通过 `attrs` 将属性透传给底层 Iconify Icon；`attrs` 类型是 `object`，默认值是 `{}`：
 
 ```vue
-<s-icon icon="tabler:login" size="24" color="#165dff" content="登录" :iconify-attrs="{ flip: 'horizontal' }" />
+<s-icon icon="tabler:login" size="24" color="#165dff" content="登录" :attrs="{ flip: 'horizontal' }" />
 ```
 
 大部分线性单色图标使用 `currentColor`，可以通过 `color` 或 `type` 改色；`logos:vue` 这类自带多种颜色的品牌图标通常不会跟随 `color` 改变。

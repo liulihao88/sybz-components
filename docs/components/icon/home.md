@@ -91,7 +91,7 @@ tabler:home
 
 第一次显示某个在线图标时，浏览器会从 Iconify API 获取图标数据并缓存。组件库只加载页面实际使用的图标，不会把整个图标库打包进项目。
 
-:::demo 展示默认推荐的 Tabler 图标、显式指定来源、语义颜色、属性透传、品牌图标和离线注册。基础写法：`<s-icon icon="tabler:home"></s-icon>`。属性：`icon` 类型 `SIconValue`，默认值 `''`，Iconify 字符串格式为 `图标集前缀:图标名称`；`source` 可选 `auto / element-plus / iconify / svg / url`，默认值 `auto`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`color` 类型 `string`，默认值未设置；`size` 类型 `string / number`，默认值 `16px`；`iconifyAttrs` 类型 `object`，默认值 `{}`。
+:::demo 展示默认推荐的 Tabler 图标、显式指定来源、语义颜色、属性透传、品牌图标和离线注册。基础写法：`<s-icon icon="tabler:home"></s-icon>`。属性：`icon` 类型 `SIconValue`，默认值 `''`，Iconify 字符串格式为 `图标集前缀:图标名称`；`source` 可选 `auto / element-plus / iconify / svg / url`，默认值 `auto`；`type` 可选 `default / primary / success / warning / danger / info`，默认值未设置；`color` 类型 `string`，默认值未设置；`size` 类型 `string / number`，默认值 `16px`；`attrs` 类型 `object`，默认值 `{}`。
 icon/iconify
 :::
 
@@ -120,7 +120,7 @@ Iconify 图标与普通 `s-icon` 使用相同的 `size`、`color`、`type`、`va
 
 #### 透传 Iconify 专属属性
 
-通过 `iconifyAttrs` 可以把属性直接传给底层 Iconify Icon，例如翻转图标或监听加载完成：
+通过 `attrs` 可以把属性直接传给当前图标节点。例如 Iconify 图标可以翻转或监听加载完成：
 
 ```vue
 <script setup lang="ts">
@@ -132,7 +132,7 @@ const handleLoad = () => {
 <template>
   <s-icon
     icon="tabler:login"
-    :iconify-attrs="{
+    :attrs="{
       flip: 'horizontal',
       onLoad: handleLoad,
     }"
@@ -241,7 +241,7 @@ icon/hoverShadow
 
 ### 在线图片（source 默认值：auto）
 
-:::demo `icon` 支持传入 `http://`、`https://` 和 `//` 开头的在线图片地址，`source="auto"` 会优先识别 URL，不会因为地址中包含 `:` 而误判为 Iconify 名称。基础写法：`<s-icon icon="https://api.iconify.design/mdi/home.svg" size="32"></s-icon>`。属性：`source` 可选值 `auto / element-plus / iconify / svg / url`，默认值 `auto`；`imageAttrs` 类型 `object`，默认值 `{}`，用于向内部 `img` 透传 `alt / crossorigin / referrerpolicy` 等属性；也可以通过 `source="url"` 显式指定图片来源。
+:::demo `icon` 支持传入 `http://`、`https://` 和 `//` 开头的在线图片地址，`source="auto"` 会优先识别 URL，不会因为地址中包含 `:` 而误判为 Iconify 名称。基础写法：`<s-icon icon="https://api.iconify.design/mdi/home.svg" size="32"></s-icon>`。属性：`source` 可选值 `auto / element-plus / iconify / svg / url`，默认值 `auto`；`attrs` 类型 `object`，默认值 `{}`，用于向当前图标节点透传属性，图片可传 `alt / crossorigin / referrerpolicy`；也可以通过 `source="url"` 显式指定图片来源。
 icon/url
 :::
 
@@ -298,9 +298,7 @@ icon/highlight
 |          `source`          | 图标来源，可选 `auto / element-plus / iconify / svg / url`                | string          | `auto`    |
 |           `type`           | 语义类型，可选 `default / primary / success / warning / danger / info`    | string          | -         |
 |         `variant`          | 视觉样式，可选 `plain / light / solid`                                    | string          | `plain`   |
-|         `svgAttrs`         | 透传给 `s-svg` 的属性                                                     | object          | `{}`      |
-|       `iconifyAttrs`       | 透传给 Iconify 的属性，如 `flip`、`onLoad`                                | object          | `{}`      |
-|        `imageAttrs`        | 透传给在线图片 `img` 的属性，如 `alt`、`crossorigin`                      | object          | `{}`      |
+|          `attrs`           | 透传给当前图标来源的内部节点，如图片的 `alt` 或 Iconify 的 `flip`         | object          | `{}`      |
 | `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                            | boolean         | `false`   |
 
 ### 事件

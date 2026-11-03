@@ -5,7 +5,7 @@
       icon="https://api.iconify.design/tabler/trash.svg?color=%232a6df4"
       source="url"
       size="32"
-      :image-attrs="{ alt: '删除' }"
+      :attrs="{ alt: '删除' }"
     />
   </div>
 </template>

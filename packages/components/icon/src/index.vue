@@ -44,9 +44,7 @@ interface IconProps {
   source?: SIconSource
   type?: SIconType
   variant?: SIconVariant
-  svgAttrs?: Record<string, any>
-  iconifyAttrs?: Record<string, any>
-  imageAttrs?: Record<string, any>
+  attrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
   rotate?: string | number
 }
@@ -66,14 +64,12 @@ const props = withDefaults(defineProps<IconProps>(), {
   source: 'auto',
   type: 'default',
   variant: 'plain',
-  svgAttrs: () => ({}),
-  iconifyAttrs: () => ({}),
-  imageAttrs: () => ({}),
+  attrs: () => ({}),
   dangerouslyUseHTMLString: false,
   rotate: '',
 })
 const mergedProps = useGlobalComponentConfig('icon', props)
-const attrs = useAttrs()
+const tooltipRawAttrs = useAttrs()
 const { style } = useStyleProps()
 const dimensionStyle = computed<CSSProperties>(() => {
   const { width, height } = mergedProps.value
@@ -167,7 +163,7 @@ const parseRotate = computed(() => {
 })
 
 const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() => {
-  const restAttrs = { ...attrs }
+  const restAttrs = { ...tooltipRawAttrs }
   delete restAttrs.dangerouslyUseHTMLString
   const htmlStringEnabled = mergedProps.value.dangerouslyUseHTMLString
 
@@ -203,26 +199,33 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
         <template v-else>
           <img
             v-if="isRemoteImage"
-            v-bind="mergedProps.imageAttrs"
+            v-bind="mergedProps.attrs"
             class="s-icon__image"
             :src="String(mergedProps.icon)"
-            :alt="String(mergedProps.imageAttrs.alt || '')"
+            :alt="String(mergedProps.attrs.alt || '')"
           />
-          <span v-else-if="isEmoji" class="s-icon__emoji" aria-hidden="true">{{ mergedProps.icon }}</span>
+          <span v-else-if="isEmoji" v-bind="mergedProps.attrs" class="s-icon__emoji" aria-hidden="true">
+            {{ mergedProps.icon }}
+          </span>
           <s-svg
             v-else-if="mergedProps.source === 'svg' && typeof mergedProps.icon === 'string'"
-            v-bind="mergedProps.svgAttrs"
+            v-bind="mergedProps.attrs"
             :icon="mergedProps.icon"
           ></s-svg>
           <iconify-icon
             v-else-if="isIconify"
-            v-bind="mergedProps.iconifyAttrs"
+            v-bind="mergedProps.attrs"
             :icon="String(mergedProps.icon)"
             aria-hidden="true"
           />
           <!-- 未匹配到内置图标时，按 CSS 图标类名兜底，兼容 Font Awesome 等图标库。 -->
-          <i v-else-if="isCssClass" :class="String(mergedProps.icon)" aria-hidden="true"></i>
-          <component :is="resolvedIcon" v-else></component>
+          <i
+            v-else-if="isCssClass"
+            v-bind="mergedProps.attrs"
+            :class="[String(mergedProps.icon), mergedProps.attrs.class]"
+            aria-hidden="true"
+          ></i>
+          <component :is="resolvedIcon" v-else v-bind="mergedProps.attrs"></component>
         </template>
       </span>
     </el-tooltip>

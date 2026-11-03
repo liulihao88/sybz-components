@@ -15,24 +15,24 @@
 
 ## 属性
 
-| 属性                                  | 类型/值                                     | 默认    |
-| ------------------------------------- | ------------------------------------------- | ------- |
-| `icon`                                | string/Component                            | `''`    |
-| `source`                              | auto/element-plus/iconify/svg/url           | auto    |
-| `size`                                | string/number（数字补 px）                  | 16px    |
-| `color`                               | string；高于 type，禁用态除外               | —       |
-| `type`                                | default/primary/success/warning/danger/info | default |
-| `variant`                             | plain/light/solid                           | plain   |
-| `border-radius`                       | string/number；light/solid 通常 8px         | —       |
-| `rotate`                              | number（deg）或角度字符串                   | `''`    |
-| `cursor`                              | CSS cursor                                  | pointer |
-| `disabled`                            | boolean                                     | false   |
-| `shadow`                              | always/never/hover                          | never   |
-| `hover-animation`                     | boolean                                     | false   |
-| `theme`                               | default/chenghua/shijingshan                | default |
-| `content`                             | tooltip 文本                                | `''`    |
-| `dangerously-use-html-string`         | 仅可信 tooltip HTML                         | false   |
-| `iconify-attrs/svg-attrs/image-attrs` | 对应底层 attrs                              | `{}`    |
+| 属性                          | 类型/值                                     | 默认    |
+| ----------------------------- | ------------------------------------------- | ------- |
+| `icon`                        | string/Component                            | `''`    |
+| `source`                      | auto/element-plus/iconify/svg/url           | auto    |
+| `size`                        | string/number（数字补 px）                  | 16px    |
+| `color`                       | string；高于 type，禁用态除外               | —       |
+| `type`                        | default/primary/success/warning/danger/info | default |
+| `variant`                     | plain/light/solid                           | plain   |
+| `border-radius`               | string/number；light/solid 通常 8px         | —       |
+| `rotate`                      | number（deg）或角度字符串                   | `''`    |
+| `cursor`                      | CSS cursor                                  | pointer |
+| `disabled`                    | boolean                                     | false   |
+| `shadow`                      | always/never/hover                          | never   |
+| `hover-animation`             | boolean                                     | false   |
+| `theme`                       | default/chenghua/shijingshan                | default |
+| `content`                     | tooltip 文本                                | `''`    |
+| `dangerously-use-html-string` | 仅可信 tooltip HTML                         | false   |
+| `attrs`                       | 透传给当前图标来源的内部节点                | `{}`    |
 
 Tooltip 的 placement/effect/show-after 等属性可直接透传。事件为 `click(event)`；disabled 时不触发。状态色用 `type`，品牌特例才用 `color`；solid 默认白色前景（显式 color 可覆盖）；多色 `logos:*` 通常不跟随 color。
 

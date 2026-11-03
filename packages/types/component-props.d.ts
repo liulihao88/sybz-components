@@ -711,11 +711,8 @@ export interface SIconProps extends SHtmlStringProps {
   type?: SIconType
   /** 图标视觉样式；默认值：plain */
   variant?: SIconVariant
-  svgAttrs?: SybzRecord
-  /** 透传给 Iconify Icon 的属性，如 flip、onLoad */
-  iconifyAttrs?: SybzRecord
-  /** 透传给在线图片 img 元素的属性，如 alt、crossorigin、referrerpolicy */
-  imageAttrs?: SybzRecord
+  /** 透传给当前图标来源对应的内部节点；默认插槽内容由调用方自行设置属性 */
+  attrs?: SybzRecord
 }
 
 export interface SImageSelfProps {

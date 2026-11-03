@@ -30,8 +30,8 @@ addIconifyIcon('project:rocket', {
     </div>
 
     <div class="iconify-demo__item">
-      <!-- iconifyAttrs 会直接传给 Iconify Icon。 -->
-      <s-icon icon="tabler:login" size="28" :iconify-attrs="{ flip: 'horizontal' }" />
+      <!-- attrs 会传给当前使用的 Iconify Icon。 -->
+      <s-icon icon="tabler:login" size="28" :attrs="{ flip: 'horizontal' }" />
       <span>水平翻转</span>
     </div>
 
