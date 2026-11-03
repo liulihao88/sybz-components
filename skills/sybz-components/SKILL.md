@@ -27,7 +27,7 @@ license: MIT
 - 生成或修改 Vue 布局时，凡是需要 flex 排列的容器，优先使用 `<s-flex>`，用 `direction`、`justify`、`align`、`wrap`、`gap` 表达布局；不要为 flex 布局新建仅带 `display: flex` 的 `<div>` 或相应 CSS class。需要语义化标签时使用 `component` 属性；已有容器承担特殊 DOM 行为且无法用 `s-flex` 表达时保留原写法。用法见 [references/components.md](references/components.md)。
 - 业务代码需要弹出短暂的成功、失败、警告或信息提示时，统一从 `@sybz-components/utils` 导入并使用 `$toast`；成功用 `$toast('成功')`（默认成功类型），失败用 `$toast('失败', 'e')`。替换已有 `ElMessage` 等同类提示时清理旧 import；确认对话框仍使用 `confirm`。详见 [references/utils.md](references/utils.md)。
 - 只传业务必要属性；不重复默认宽度、空态、分页、样式、尺寸、`clearable` 等默认值，不加无收益的包装、泛型或中间变量。
-- 组件间的间距、字号、颜色、宽高等样式优先用样式简写属性（Style Props）表达，如 `m` / `p` / `fs` / `fw` / `bg` / `c` / `w` / `h` / `bd` 等，避免散落 `:style` 或硬编码 class；用法见 [references/style-props.md](references/style-props.md)。
+- AI 生成或修改组件代码时，优先使用组件库支持的简写属性，如 `w` / `h` 表达宽高、`m` / `p` 表达间距，以及 `fs` / `fw` / `bg` / `c` / `bd` 等 Style Props；列配置等支持 `w` 的对象也优先用简写。这样代码更短、易读，也减少 token。先核对组件自己的属性语义；简写不支持或会改变含义时使用完整属性名。避免散落 `:style` 或硬编码 class；用法见 [references/style-props.md](references/style-props.md)。
 - 表单、表格优先配置化；仅在配置无法表达时使用插槽或 `render`。
 - `s-table` 必须默认使用 `columns`；普通列用 `prop`，定制单元格用列 `render`，操作列用 `btns`。只有确认 `columns`、`render`、`btns` 和具名插槽均无法表达需求时，才允许在默认插槽中声明 `el-table-column`，并须在交付说明中写明原因。
 - 样式一律以组件库为准。当收到原型图、UI 图或设计稿（图片、标注、切图）时，若其中某处样式与组件库组件的内置样式冲突（如间距、字号、颜色、圆角、边框、宽高、投影等），以组件库样式为准：禁止修改组件内部样式、禁止覆盖组件库既定视觉规范去贴合原型/UI；只通过组件对外暴露的能力（Style Props、props、主题 token）做业务层表达，组件能力覆盖不到的还原诉求直接不实现，并在交付说明中注明以组件库为准。仅业务明确要求时才保留旧页面像素样式。
