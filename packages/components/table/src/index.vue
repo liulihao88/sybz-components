@@ -463,6 +463,9 @@ const updateTable = () => {
       maxBtns,
     })
 
+    if (res.width === undefined && res.w !== undefined) res.width = res.w
+    delete res.w
+
     const labelMinWidth = getLabelMinWidth(res)
     if (res.width === undefined && labelMinWidth !== undefined) {
       if (res.minWidth === undefined) {

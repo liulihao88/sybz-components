@@ -219,6 +219,7 @@ const templateTableColumns = computed<TableColumnList<TemplateRow>>(() => [
 |      `className`      | 当前列单元格 class                                                     | string                       | -                                   |
 |   `labelClassName`    | 当前列表头 class                                                       | string                       | -                                   |
 |        `width`        | 列宽                                                                   | string / number              | -                                   |
+|          `w`          | `width` 的简写；同时设置时 `width` 优先                                | string / number              | -                                   |
 |      `minWidth`       | 最小列宽；未设置 `width` 时，`s-table` 会根据标题自动补一个最小宽度    | string / number              | -                                   |
 |        `fixed`        | 固定列，`true` 表示固定在左侧，也可传 `left` / `right`                 | string / boolean             | -                                   |
 |        `align`        | 单元格对齐方式，支持 `left` / `center` / `right`                       | string                       | -                                   |

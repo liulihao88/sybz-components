@@ -90,6 +90,8 @@ export interface STableColumn<Row extends TableRow = TableRow> extends Record<st
   className?: string
   labelClassName?: string
   width?: number | string
+  /** width 的简写；同时设置时 width 优先 */
+  w?: number | string
   minWidth?: number | string
   fixed?: string | boolean
   align?: string
