@@ -7,6 +7,7 @@ const gradient = ref('')
 const shorthandColor = ref('')
 const component = ref('span')
 const lineClamp = ref(0)
+const cursor = ref<string | boolean>(false)
 const fontSize = ref<number | ''>('')
 const fontWeight = ref('')
 const decoration = ref('none')
@@ -64,6 +65,20 @@ const text =
     />
     <s-radio v-model="lineClamp" title="lineClamp（默认 0）" :options="[0, 1, 2, 3]" type="simple" />
     <s-radio
+      v-model="cursor"
+      title="cursor（默认不设置；true 为 pointer，false 不设置）"
+      :options="[
+        { label: 'false（不设置）', value: false },
+        { label: 'true（pointer）', value: true },
+        'auto',
+        'pointer',
+        'default',
+        'help',
+        'not-allowed',
+      ]"
+      type="simple"
+    />
+    <s-radio
       v-model="decoration"
       title="装饰（默认 none）"
       :options="['none', 'italic', 'underline', 'delete', 'mark']"
@@ -76,6 +91,7 @@ const text =
       :gradient="gradient || undefined"
       :component="component"
       :line-clamp="lineClamp"
+      :cursor="cursor"
       :italic="decoration === 'italic'"
       :td="decoration === 'underline' ? 'underline' : decoration === 'delete' ? 'line-through' : undefined"
       :mark="decoration === 'mark'"

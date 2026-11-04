@@ -56,6 +56,7 @@ export const STYLE_PROP_MAP = {
   right: 'right',
   inset: 'inset',
   z: 'z-index',
+  cursor: 'cursor',
   // 弹性盒子
   flex: 'flex',
   alignSelf: 'align-self',
@@ -237,7 +238,9 @@ export const resolveStyleProps = (
         ? 'small'
         : value === true && (key === 'w' || key === 'h')
           ? '100%'
-          : value
+          : value === true && key === 'cursor'
+            ? 'pointer'
+            : value
     for (const target of targets)
       style[target] =
         (key === 'color' || key === 'c') && typeof resolvedValue === 'string'
@@ -277,7 +280,14 @@ export function useStyleProps(): { style: ComputedRef<CSSProperties> } {
 export const styleProps = Object.fromEntries(
   (Object.keys(STYLE_PROP_MAP) as SybzStylePropKey[]).map((key) => [
     key,
-    { type: SPACING_PROP_KEYS.has(key) || key === 'w' || key === 'h' ? [Boolean, String, Number] : [String, Number] },
+    {
+      type:
+        SPACING_PROP_KEYS.has(key) || key === 'w' || key === 'h'
+          ? [Boolean, String, Number]
+          : key === 'cursor'
+            ? [Boolean, String]
+            : [String, Number],
+    },
   ]),
 ) as Record<SybzStylePropKey, { type: unknown }>
 

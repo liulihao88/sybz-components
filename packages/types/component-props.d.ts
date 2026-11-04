@@ -89,6 +89,7 @@ export interface SybzStyleProps {
   right?: SybzLength
   inset?: SybzLength
   z?: string | number
+  cursor?: CSSProperties['cursor'] | boolean
   // 弹性盒子
   flex?: string | number
   alignSelf?: 'auto' | 'normal' | 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'flex-start' | 'flex-end'

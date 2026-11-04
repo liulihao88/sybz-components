@@ -7,7 +7,7 @@ import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
  *
- * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版。
+ * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer。
  *
  * 先提示 sybz 自身属性。
  */
