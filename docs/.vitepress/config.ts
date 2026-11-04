@@ -383,6 +383,10 @@ export default defineConfig({
               link: '/components/tag/home.md',
             },
             {
+              text: sybzMark('text文字组件'),
+              link: '/components/text/home.md',
+            },
+            {
               text: sybzMark('title组件'),
               link: '/components/title/home.md',
             },

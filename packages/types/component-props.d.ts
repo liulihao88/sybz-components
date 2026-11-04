@@ -1,4 +1,5 @@
 import type { SybzComponentTheme } from '@sybz-components/utils'
+import type { SybzTextColor } from '../hooks/useStyleProps'
 import type { Component, CSSProperties, VNodeChild } from 'vue'
 import type { EditorProps } from 'md-editor-v3'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
@@ -94,7 +95,7 @@ export interface SybzStyleProps {
   order?: number
   // 背景与边框
   bg?: string
-  c?: string
+  c?: SybzTextColor
   opacity?: string | number
   bd?: string
   bdr?: string

@@ -1,7 +1,8 @@
-import { computed, getCurrentInstance } from 'vue'
+import { computed, getCurrentInstance, inject, unref } from 'vue'
 import type { CSSProperties, ComputedRef } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import type { SybzComponentSize } from '@/types/component-props'
+import { GLOBAL_COMPONENT_COMMON_PROPS_KEY, GLOBAL_COMPONENT_CONFIG_KEY } from './useGlobalComponentConfig'
 
 /**
  * Mantine 风格的「样式简写属性」(Style Props)。
@@ -61,6 +62,7 @@ export const STYLE_PROP_MAP = {
   order: 'order',
   // 背景与边框
   bg: 'background',
+  color: 'color',
   c: 'color',
   opacity: 'opacity',
   bd: 'border',
@@ -129,6 +131,65 @@ const LENGTH_PROP_KEYS = new Set<SybzStylePropKey>([
   'br',
 ])
 
+/** 公共文字色名称映射到各主题 token；default 对应常用正文色。 */
+const TEXT_COLOR_TOKENS = {
+  sybz: {
+    main: 'text',
+    default: 'text-regular',
+    regular: 'text-regular',
+    secondary: 'text-secondary',
+    disabled: 'text-placeholder',
+    placeholder: 'text-placeholder',
+  },
+  ch: {
+    main: 'text',
+    default: 'text-regular',
+    regular: 'text-regular',
+    secondary: 'text-muted',
+    disabled: 'text-secondary',
+    placeholder: 'text-muted',
+  },
+  sjs: {
+    main: 'text',
+    default: 'text-regular',
+    regular: 'text-regular',
+    secondary: 'text-secondary',
+    disabled: 'text-muted',
+    placeholder: 'text-muted',
+  },
+} as const
+
+export type SybzTextColor =
+  | keyof typeof TEXT_COLOR_TOKENS.sybz
+  | 'blue'
+  | 'red'
+  | 'green'
+  | 'yellow'
+  | 'white'
+  | 'black'
+  | (string & {})
+
+const getThemePrefix = (theme: unknown): keyof typeof TEXT_COLOR_TOKENS =>
+  theme === 'chenghua' ? 'ch' : theme === 'shijingshan' || theme === 'gulou' ? 'sjs' : 'sybz'
+
+export const resolveStyleColor = (value: string, theme?: unknown): string => {
+  const prefix = getThemePrefix(theme)
+  const token = TEXT_COLOR_TOKENS[prefix][value as keyof typeof TEXT_COLOR_TOKENS.sybz]
+  return token ? `var(--s-${prefix}-${token})` : value
+}
+
+/** 状态色仅供 type 等语义属性使用，避免与 CSS 标准颜色名混淆。 */
+export const resolveThemeColor = (type: string, theme?: unknown): string => {
+  const name = type === 'error' ? 'danger' : type
+  if (!['primary', 'success', 'warning', 'danger', 'info'].includes(name)) return resolveStyleColor(type, theme)
+  return `var(--s-${getThemePrefix(theme)}-${name})`
+}
+
+const getConfiguredTheme = (source: Record<string, unknown>, config: Record<string, any> | undefined) => {
+  if (source.theme && source.theme !== 'default') return source.theme
+  return config?.[GLOBAL_COMPONENT_COMMON_PROPS_KEY]?.theme ?? source.theme
+}
+
 const toStyleValue = (key: SybzStylePropKey, value: unknown): unknown => {
   if (typeof value === 'number') {
     // inset 也按四边长度处理：数字补全为 px
@@ -159,7 +220,7 @@ const getOwnPropKeys = (type: any): string[] => {
 
 export const resolveStyleProps = (
   source: Record<string, unknown>,
-  options: { exclude?: Iterable<string> } = {},
+  options: { exclude?: Iterable<string>; theme?: unknown } = {},
 ): CSSProperties => {
   const exclude = new Set(options.exclude ?? [])
   const style: Record<string, unknown> = {}
@@ -177,7 +238,11 @@ export const resolveStyleProps = (
         : value === true && (key === 'w' || key === 'h')
           ? '100%'
           : value
-    for (const target of targets) style[target] = toStyleValue(key, resolvedValue)
+    for (const target of targets)
+      style[target] =
+        (key === 'color' || key === 'c') && typeof resolvedValue === 'string'
+          ? resolveStyleColor(resolvedValue, options.theme)
+          : toStyleValue(key, resolvedValue)
   }
 
   return style as CSSProperties
@@ -191,6 +256,7 @@ export const resolveStyleProps = (
  */
 export function useStyleProps(): { style: ComputedRef<CSSProperties> } {
   const instance = getCurrentInstance()
+  const config = inject<Record<string, any>>(GLOBAL_COMPONENT_CONFIG_KEY, {})
 
   const style = computed<CSSProperties>(() => {
     // 优先取 props（全局 mixin 会把样式简写声明为 prop），attrs 作为兜底
@@ -198,7 +264,10 @@ export function useStyleProps(): { style: ComputedRef<CSSProperties> } {
       ...(instance?.attrs ?? {}),
       ...(instance?.props ?? {}),
     }
-    return resolveStyleProps(source, { exclude: getOwnPropKeys(instance?.type) })
+    return resolveStyleProps(source, {
+      exclude: getOwnPropKeys(instance?.type),
+      theme: getConfiguredTheme(source, unref(config)),
+    })
   })
 
   return { style }
@@ -227,7 +296,12 @@ export const stylePropsMixin = {
   computed: {
     $styleProps(): CSSProperties {
       const instance = (this as any).$
-      return resolveStyleProps(this.$props, { exclude: getOwnPropKeys(instance?.type) })
+      const source = this.$props as Record<string, unknown>
+      const config = instance?.provides?.[GLOBAL_COMPONENT_CONFIG_KEY] as Record<string, any> | undefined
+      return resolveStyleProps(source, {
+        exclude: getOwnPropKeys(instance?.type),
+        theme: getConfiguredTheme(source, unref(config)),
+      })
     },
   },
 }

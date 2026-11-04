@@ -897,6 +897,27 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
+    'SText',
+    {
+      importPath: resolve(rootDir, 'packages/components/text/src/types.ts'),
+      typeName: 'STextProps',
+      tagName: 's-text',
+      description:
+        's-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版。',
+      slots: ['default'],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/text/src/types.ts'),
+        interfaceName: 'STextProps',
+        importTypeNames: ['STextProps', 'STextType'],
+        extraImportLines: [
+          "import type { Component } from 'vue'",
+          "import type { SybzComponentTheme } from '../component-props'",
+          "import type { SybzTextColor } from '../../hooks/useStyleProps'",
+        ],
+      },
+    },
+  ],
+  [
     'STest',
     {
       importPath: componentPropsPath,

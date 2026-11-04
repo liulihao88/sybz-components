@@ -66,17 +66,17 @@
 
 ### 背景与边框
 
-|   简写    | 对应 CSS        | 说明               |
-| :-------: | :-------------- | :----------------- |
-|   `bg`    | `background`    | 颜色或完整背景值   |
-|    `c`    | `color`         | 文字颜色           |
-| `opacity` | `opacity`       | 如 `0.5`           |
-|   `bd`    | `border`        | 如 `1px solid red` |
-|   `bdt`   | `border-top`    | —                  |
-|   `bdb`   | `border-bottom` | —                  |
-|   `bdl`   | `border-left`   | —                  |
-|   `bdr`   | `border-right`  | —                  |
-|   `br`    | `border-radius` | 数字补 `px`        |
+|     简写      | 对应 CSS        | 说明                                                                                                                                |
+| :-----------: | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+|     `bg`      | `background`    | 颜色或完整背景值                                                                                                                    |
+| `color` / `c` | `color`         | `main / default / secondary / regular / disabled / placeholder / white / black / blue / red / green / yellow` 或 CSS 颜色；`c` 优先 |
+|   `opacity`   | `opacity`       | 如 `0.5`                                                                                                                            |
+|     `bd`      | `border`        | 如 `1px solid red`                                                                                                                  |
+|     `bdt`     | `border-top`    | —                                                                                                                                   |
+|     `bdb`     | `border-bottom` | —                                                                                                                                   |
+|     `bdl`     | `border-left`   | —                                                                                                                                   |
+|     `bdr`     | `border-right`  | —                                                                                                                                   |
+|     `br`      | `border-radius` | 数字补 `px`                                                                                                                         |
 
 ## 尺寸 token
 
@@ -98,7 +98,7 @@
 ## 取值规则
 
 1. **长度类属性**（`m` / `p` / `w` / `h` / `fs` / `br` 等）：支持尺寸 token（`small` / `default` / `large`）、数字（自动补 `px`）或 CSS 长度字符串——`"10"` → `10px`、`"1rem"` 原样、`"50%"` 原样。
-2. **关键词类属性**（`fw` / `ta` / `tt` / `td` / `ff` / `pos` / `bg` / `c` / `bd` 等）：原样透传。
+2. **关键词类属性**（`fw` / `ta` / `tt` / `td` / `ff` / `pos` / `bg` / `bd` 等）：原样透传。`color` / `c` 的文字层级名称（如 `main / default / secondary / disabled`）解析为当前 sybz 主题 token；CSS 标准颜色名（如 `blue / red`）和其他 CSS 颜色原样透传。
 3. **`lh`**（行高）：数字保持无单位（`1.5` 就是 `1.5`，不会变 `1.5px`），字符串原样。
 4. **`inset`**：支持 token 和数字（补 `px`，四边同值），多值字符串（如 `"10px 20px"`）原样透传。
 

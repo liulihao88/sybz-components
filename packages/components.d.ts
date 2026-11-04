@@ -491,6 +491,18 @@ declare module 'vue' {
      */
     's-test': (typeof import('./types/components/test'))['default']
     /**
+     * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
+     *
+     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版。
+     */
+    SText: (typeof import('./types/components/text'))['default']
+    /**
+     * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
+     *
+     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版。
+     */
+    's-text': (typeof import('./types/components/text'))['default']
+    /**
      * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
      *
      * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
@@ -725,6 +737,10 @@ export type STestComponent = (typeof import('./types/components/test'))['default
 export type STestInstance = ComponentInstance<STestComponent>
 export type STestPublicProps = STestInstance['$props']
 
+export type STextComponent = (typeof import('./types/components/text'))['default']
+export type STextInstance = ComponentInstance<STextComponent>
+export type STextPublicProps = STextInstance['$props']
+
 export type STitleComponent = (typeof import('./types/components/title'))['default']
 export type STitleInstance = ComponentInstance<STitleComponent>
 export type STitlePublicProps = STitleInstance['$props']
@@ -792,6 +808,7 @@ declare global {
       's-tabs': JSXComponentProps<STabsPublicProps>
       's-tag': JSXComponentProps<STagPublicProps>
       's-test': JSXComponentProps<STestPublicProps>
+      's-text': JSXComponentProps<STextPublicProps>
       's-title': JSXComponentProps<STitlePublicProps>
       's-tooltip': JSXComponentProps<STooltipPublicProps>
       's-upload': JSXComponentProps<SUploadPublicProps>

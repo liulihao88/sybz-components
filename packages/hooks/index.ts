@@ -29,9 +29,11 @@ export type { UseRefreshReturn } from './useRefresh'
 export {
   useStyleProps,
   resolveStyleProps,
+  resolveStyleColor,
+  resolveThemeColor,
   styleProps,
   stylePropsMixin,
   STYLE_PROP_MAP,
   SIZE_PRESETS,
 } from './useStyleProps'
-export type { SybzStylePropKey } from './useStyleProps'
+export type { SybzStylePropKey, SybzTextColor } from './useStyleProps'
