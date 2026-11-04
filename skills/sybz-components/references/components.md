@@ -28,7 +28,7 @@
 
 ```vue
 <s-button type="primary" icon="plus">新增</s-button>
-<s-input v-model="name" width="300" />
+<s-input v-model="name" w="300" />
 <s-input-number v-model="count" :min="0" :max="10" />
 <s-select v-model="status" :options="statusOptions" />
 <s-checkbox v-model="checked" :options="options" />
@@ -37,11 +37,11 @@
 <s-date-picker v-model="date" />
 <s-descriptions :options="infoOptions" />
 <s-empty title="暂无数据" />
-<s-image src="tenant/a.png" width="240" height="150" fit="cover" />
-<s-tooltip width="120" content="完整提示" />
+<s-image src="tenant/a.png" w="240" height="150" fit="cover" />
+<s-tooltip w="120" content="完整提示" />
 <s-title title="企业经营数据" />
 <s-card title="基础信息"><s-descriptions :options="infoOptions" /></s-card>
-<s-flex gap="12" align="center"><s-button>取消</s-button><s-button type="primary">保存</s-button></s-flex>
+<s-flex gap align="center"><s-button>取消</s-button><s-button type="primary">保存</s-button></s-flex>
 <s-row :col="6" :gutter="16"><div v-for="item in 4" :key="item" /></s-row>
 <s-tabs v-model="tab" :options="tabs" />
 ```

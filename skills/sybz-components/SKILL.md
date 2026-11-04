@@ -26,7 +26,7 @@ license: MIT
 - 优先 `sybz-components`，不拆回 Element Plus 子组件；优先 `@sybz-components/utils`，不重复实现通用逻辑。
 - 生成或修改 Vue 布局时，凡是需要 flex 排列的容器，优先使用 `<s-flex>`，用 `direction`、`justify`、`align`、`wrap`、`gap` 表达布局；不要为 flex 布局新建仅带 `display: flex` 的 `<div>` 或相应 CSS class。需要语义化标签时使用 `component` 属性；已有容器承担特殊 DOM 行为且无法用 `s-flex` 表达时保留原写法。用法见 [references/components.md](references/components.md)。
 - 业务代码需要弹出短暂的成功、失败、警告或信息提示时，统一从 `@sybz-components/utils` 导入并使用 `$toast`；成功用 `$toast('成功')`（默认成功类型），失败用 `$toast('失败', 'e')`。替换已有 `ElMessage` 等同类提示时清理旧 import；确认对话框仍使用 `confirm`。详见 [references/utils.md](references/utils.md)。
-- 只传业务必要属性；不重复默认宽度、空态、分页、样式、尺寸、`clearable` 等默认值，不加无收益的包装、泛型或中间变量。
+- 所有组件调用和配置对象遵循最少代码原则：先核对组件实现、类型或文档中的默认值，只写与默认行为不同且业务需要的属性；默认属性、默认插槽配置和默认字段控件均省略，不把默认值显式写一遍。例如 `s-form` 字段默认使用 `s-input`，普通输入字段只写 `{ label: '姓名', prop: 'name' }`，不写 `comp: 's-input'`。修改现有代码时顺手删掉范围内的同类冗余配置，以及不再使用的 import、包装和辅助变量；只有显式值确实用于覆盖上层配置或表达必要业务语义时保留。
 - AI 生成或修改组件代码时，优先使用组件库支持的简写属性，如 `w` / `h` 表达宽高、`m` / `p` 表达间距，以及 `fs` / `fw` / `bg` / `c` / `bd` 等 Style Props；列配置等支持 `w` 的对象也优先用简写。这样代码更短、易读，也减少 token。先核对组件自己的属性语义；简写不支持或会改变含义时使用完整属性名。避免散落 `:style` 或硬编码 class；用法见 [references/style-props.md](references/style-props.md)。
 - 表单、表格优先配置化；仅在配置无法表达时使用插槽或 `render`。
 - `s-table` 必须默认使用 `columns`；普通列用 `prop`，定制单元格用列 `render`，操作列用 `btns`。只有确认 `columns`、`render`、`btns` 和具名插槽均无法表达需求时，才允许在默认插槽中声明 `el-table-column`，并须在交付说明中写明原因。
