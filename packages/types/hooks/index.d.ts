@@ -82,12 +82,17 @@ export interface UsePaginationReturn {
 
 export declare function usePagination(options?: UsePaginationOptions): UsePaginationReturn
 
+export interface UseRefreshOptions {
+  enableShortcut?: MaybeRefOrGetter<boolean>
+  shortcut?: MaybeRefOrGetter<string>
+}
+
 export interface UseRefreshReturn {
   refreshKey: Ref<number>
   refresh: () => void
 }
 
-export declare function useRefresh(): UseRefreshReturn
+export declare function useRefresh(options?: UseRefreshOptions): UseRefreshReturn
 
 export interface UseCommonPropsReturn {
   commonStyle: ComputedRef<CSSProperties>
