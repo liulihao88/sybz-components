@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import type { SybzComponentTheme } from '../../../types/component-props'
-import { computed, ref, useAttrs } from 'vue'
+import { computed, getCurrentInstance, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import { resolveIconValue } from '@/components/utils/icon'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -73,6 +73,8 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
 })
 
 const attrs = useAttrs()
+// Tooltip 的触发按钮位于插槽内，需要显式继承调用方的 scoped CSS 标记。
+const callerScopeId = getCurrentInstance()?.vnode.scopeId
 const mergedProps = useGlobalComponentConfig('button', props)
 const { style } = useStyleProps()
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
@@ -87,6 +89,7 @@ const loading = ref(false)
 
 const buttonAttrs = computed(() => {
   const normalizedAttrs = { ...attrs }
+  if (callerScopeId) normalizedAttrs[callerScopeId] = ''
   const buttonHeight = processWidth(mergedProps.value.height, true)
 
   if ('icon' in normalizedAttrs) {
