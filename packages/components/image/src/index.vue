@@ -22,6 +22,7 @@ interface SImageSelfProps {
   resolver?: SImageSrcResolver
   preview?: boolean
   download?: boolean
+  downloadFileName?: string
   previewSrcList?: string[]
 }
 
@@ -33,6 +34,7 @@ const props = withDefaults(defineProps<SImageSelfProps>(), {
   resolver: undefined,
   preview: false,
   download: true,
+  downloadFileName: '',
   previewSrcList: () => [],
 })
 
@@ -86,13 +88,17 @@ const downloadPreviewImage = async (index: number) => {
     return
   }
 
-  let fileName = `image-${index + 1}`
-  try {
-    const name = decodeURIComponent(new URL(url, window.location.href).pathname.split('/').pop() || '')
-    if (name) fileName = name.replace(/[\\/:*?"<>|]/g, '-')
-  } catch {
-    // 无法解析地址时使用默认文件名。
+  let fileName = mergedProps.value.downloadFileName.trim()
+  if (!fileName) {
+    fileName = `image-${index + 1}`
+    try {
+      const name = decodeURIComponent(new URL(url, window.location.href).pathname.split('/').pop() || '')
+      if (name) fileName = name
+    } catch {
+      // 无法解析地址时使用默认文件名。
+    }
   }
+  fileName = fileName.replace(/[\\/:*?"<>|]/g, '-')
 
   const save = (href: string, openInNewTab = false) => {
     const link = document.createElement('a')

@@ -34,9 +34,9 @@ image/preview
 image/slots
 :::
 
-### 更多属性（download 默认值：true）
+### 更多属性（download 默认值：true；downloadFileName 默认值：''）
 
-:::demo 预览时默认显示下载按钮。基础写法：`<s-image src="图片地址" preview />`。属性：`download` 可选 `true / false`，默认值 `true`；点击按钮下载当前预览图片。跨域图片需要服务端允许 CORS，下载失败时会提示并尝试打开原图。自定义 `toolbar` 插槽时由插槽内容控制按钮。
+:::demo 预览时默认显示下载按钮，可通过 `download-file-name` 指定保存名称。基础写法：`<s-image src="图片地址" preview download-file-name="题目插图.jpg" />`。属性：`download` 可选 `true / false`，默认值 `true`；`downloadFileName` 为文件名字符串，默认值 `''`，此时从预览地址推断。点击按钮下载当前预览图片。跨域图片需要服务端允许 CORS，下载失败时会提示并尝试打开原图。自定义 `toolbar` 插槽时由插槽内容控制按钮。
 image/other
 :::
 
@@ -80,16 +80,17 @@ app.use(SybzComponents, {
 
 ### 属性
 
-| 属性名           | 说明                                               | 类型                      | 默认值  |
-| ---------------- | -------------------------------------------------- | ------------------------- | ------- |
-| `src`            | 图片地址，相对路径会通过 resolver 或 basePath 解析 | string                    | `''`    |
-| `width`          | 图片宽度，数字自动补 `px`                          | string / number           | -       |
-| `height`         | 图片高度，数字自动补 `px`                          | string / number           | -       |
-| `basePath`       | 相对图片的公共基础路径                             | string                    | `''`    |
-| `resolver`       | 自定义图片路径解析函数                             | `(src) => string \| void` | -       |
-| `preview`        | 是否直接使用当前 `src` 开启单图预览                | boolean                   | `false` |
-| `download`       | 是否在预览工具栏显示当前图片的下载按钮             | boolean                   | `true`  |
-| `previewSrcList` | 图片预览列表，其中的相对路径也会被解析             | string[]                  | `[]`    |
+| 属性名             | 说明                                               | 类型                      | 默认值  |
+| ------------------ | -------------------------------------------------- | ------------------------- | ------- |
+| `src`              | 图片地址，相对路径会通过 resolver 或 basePath 解析 | string                    | `''`    |
+| `width`            | 图片宽度，数字自动补 `px`                          | string / number           | -       |
+| `height`           | 图片高度，数字自动补 `px`                          | string / number           | -       |
+| `basePath`         | 相对图片的公共基础路径                             | string                    | `''`    |
+| `resolver`         | 自定义图片路径解析函数                             | `(src) => string \| void` | -       |
+| `preview`          | 是否直接使用当前 `src` 开启单图预览                | boolean                   | `false` |
+| `download`         | 是否在预览工具栏显示当前图片的下载按钮             | boolean                   | `true`  |
+| `downloadFileName` | 下载时使用的文件名；为空时从预览地址推断           | string                    | `''`    |
+| `previewSrcList`   | 图片预览列表，其中的相对路径也会被解析             | string[]                  | `[]`    |
 
 其他属性、事件和方法与 Element Plus Image 保持一致，包括 `fit`、`lazy`、`loading`、`preview-src-list`、`load`、`error`、`switch`、`close`、`show` 和 `showPreview()`。
 

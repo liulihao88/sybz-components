@@ -245,13 +245,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
      *
-     * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径、源码资源解析和预览下载。
+     * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径、源码资源解析、预览下载和自定义下载文件名。
      */
     SImage: (typeof import('./types/components/image'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
      *
-     * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径、源码资源解析和预览下载。
+     * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径、源码资源解析、预览下载和自定义下载文件名。
      */
     's-image': (typeof import('./types/components/image'))['default']
     /**

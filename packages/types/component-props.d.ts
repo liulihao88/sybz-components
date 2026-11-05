@@ -734,6 +734,8 @@ export interface SImageSelfProps {
   preview?: boolean
   /** 是否在图片预览工具栏显示下载按钮 */
   download?: boolean
+  /** 下载文件名；默认从预览图片地址推断 */
+  downloadFileName?: string
   /** 图片预览地址列表，相对路径同样会被解析 */
   previewSrcList?: string[]
 }

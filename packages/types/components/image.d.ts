@@ -7,7 +7,7 @@ type ElImageInstance = InstanceType<typeof ElImage>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/image/home.html | 查看文档}
  *
- * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径、源码资源解析和预览下载。
+ * s-image 图片组件，完整兼容 Element Plus Image，并支持宽高、公共基础路径、源码资源解析、预览下载和自定义下载文件名。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Image 的公开属性。
  */
@@ -30,11 +30,23 @@ export type SImageComponent = {
       preview?: boolean
       /** 是否在图片预览工具栏显示下载按钮 */
       download?: boolean
+      /** 下载文件名；默认从预览图片地址推断 */
+      downloadFileName?: string
       /** 图片预览地址列表，相对路径同样会被解析 */
       previewSrcList?: string[]
     } & Omit<
       ElImageInstance['$props'],
-      'src' | 'width' | 'w' | 'height' | 'h' | 'basePath' | 'resolver' | 'preview' | 'download' | 'previewSrcList'
+      | 'src'
+      | 'width'
+      | 'w'
+      | 'height'
+      | 'h'
+      | 'basePath'
+      | 'resolver'
+      | 'preview'
+      | 'download'
+      | 'downloadFileName'
+      | 'previewSrcList'
     > &
       SybzStyleProps &
       SybzDimensionProps<SImageSelfProps>
