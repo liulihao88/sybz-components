@@ -134,6 +134,14 @@ form/trim
 form/tooltip
 :::
 
+### 多个表单一起校验
+
+列表里每条数据各用一个 `s-form` 时，用 ref 数组收集实例，配合 `validateForm` 一起校验；跨表单的业务规则（例如课时名不能和别的单元重名）写在字段 `rules` 的 `validator` 里，提示同样由 `s-form` 渲染。基础写法：`:ref="(el: any) => (formRefs[unitIndex] = el)"` 收集实例，`Promise.allSettled(formRefs.value.map((form) => validateForm(form, { showMessage: false })))` 统一校验。属性：`showMessage` 类型 `boolean`，默认值 `true`，设为 `false` 时不自动弹提示。
+
+:::demo
+form/multi
+:::
+
 ## 属性
 
 |       属性名        | 说明                                                                          | 类型                                      | 默认值                                                 |

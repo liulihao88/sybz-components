@@ -150,5 +150,30 @@
         box-shadow: none;
       }
     }
+
+    // 表单错误态作用在实际绘制描边的节点上，并覆盖 hover / focus 的主题色。
+    .el-form-item.is-error & {
+      .el-input__wrapper,
+      .el-input__wrapper:hover,
+      .el-input__wrapper.is-focus,
+      .el-textarea__inner,
+      .el-textarea__inner:hover,
+      .el-textarea__inner:focus {
+        box-shadow: 0 0 0 1px var(--s-#{$token-prefix}-danger) inset;
+      }
+
+      &.s-input--top-title {
+        --s-top-title-border-color: var(--s-#{$token-prefix}-danger);
+
+        .el-input__wrapper,
+        .el-input__wrapper:hover,
+        .el-input__wrapper.is-focus,
+        .el-textarea__inner,
+        .el-textarea__inner:hover,
+        .el-textarea__inner:focus {
+          box-shadow: none;
+        }
+      }
+    }
   }
 }
