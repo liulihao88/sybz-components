@@ -126,6 +126,12 @@ table/all
 table/empty
 :::
 
+### 紧凑表格（size 默认值：空字符串）
+
+:::demo 在窄侧栏展示题型统计。基础写法：`<s-table :columns="columns" :data="data" :show-index="false" :show-page="false" height="100%" size="small" />`，外层容器指定宽高并裁剪横向溢出。属性：`size` 可选 `small / default / large`，默认值 `''`；`show-index`、`show-page` 可选 `true / false`，默认值均为 `true`；`height` 为透传的表格高度，默认值未设置。示例保留纵向滚动和固定表头，并隐藏滚动条及其预留区域。
+table/compact
+:::
+
 ### 属性
 
 |        属性名         | 说明                                                           | 类型    | 默认值         |
