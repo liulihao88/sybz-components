@@ -9,7 +9,7 @@ type SizeAliases = {
 }
 
 const hasOwn = (value: Record<string, unknown> | null | undefined, key: string) =>
-  Object.prototype.hasOwnProperty.call(value, key)
+  value != null && Object.prototype.hasOwnProperty.call(value, key)
 
 export const resolveSizeAliases = <T extends SizeAliases>(
   merged: T,
