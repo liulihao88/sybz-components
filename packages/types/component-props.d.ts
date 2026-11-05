@@ -1171,7 +1171,8 @@ export interface STitleProps {
   subTitle?: string
   /** 副标题位置：inline 与标题同行，bottom 在标题下方独占一行 */
   subTitlePosition?: 'inline' | 'bottom'
-  subTitleAttrs?: SybzRecord
+  /** 副标题 DOM 属性；fontSize 可直接传数字或 CSS 长度，亦支持 style */
+  subTitleAttrs?: SybzRecord & { fontSize?: string | number }
   showTooltip?: boolean
   tooltipAttrs?: SybzRecord
   inner?: boolean

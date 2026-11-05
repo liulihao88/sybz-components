@@ -4,7 +4,7 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
  *
- * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs 可设置副标题属性；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
+ * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitlePosition 可将副标题放在标题下方，subTitleAttrs.fontSize 可直接设置副标题字号；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置右侧内容。
  *
  * 先提示 sybz 自身属性。
  */
@@ -23,7 +23,8 @@ export type STitleComponent = {
       subTitle?: string
       /** 副标题位置：inline 与标题同行，bottom 在标题下方独占一行 */
       subTitlePosition?: 'inline' | 'bottom'
-      subTitleAttrs?: SybzRecord
+      /** 副标题 DOM 属性；fontSize 可直接传数字或 CSS 长度，亦支持 style */
+      subTitleAttrs?: SybzRecord & { fontSize?: string | number }
       showTooltip?: boolean
       tooltipAttrs?: SybzRecord
       inner?: boolean

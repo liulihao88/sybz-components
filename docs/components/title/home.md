@@ -50,6 +50,12 @@ title/iconAttrs
 title/subTitlePosition
 :::
 
+### 更多属性（subTitleAttrs.fontSize 默认值：未设置）
+
+:::demo 直接在 `subTitleAttrs` 中设置副标题字号。基础写法：`<s-title title="双向细目表" sub-title="统计说明" :sub-title-attrs="{ fontSize: '30px' }" />`。`fontSize` 支持数字（按 px 处理）或 CSS 长度字符串，默认值未设置，使用组件默认字号；示例可在默认值、`14px`、`20px`、`30px` 之间切换。其他 HTML 属性照常透传，已有的 `style` 写法也可继续使用。
+title/other
+:::
+
 ### 属性
 
 |       属性名       | 说明                                                                                                                                                          | 类型            | 默认值    |
@@ -62,7 +68,7 @@ title/subTitlePosition
 |        `fs`        | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |
 |     `subTitle`     | 副标题文案                                                                                                                                                    | string          | `''`      |
 | `subTitlePosition` | 副标题位置，`inline` 与标题同行，`bottom` 在标题下方独占一行                                                                                                  | string          | `inline`  |
-|  `subTitleAttrs`   | 副标题额外属性                                                                                                                                                | object          | `{}`      |
+|  `subTitleAttrs`   | 副标题额外属性；`fontSize` 可直接设置字号，支持数字或 CSS 长度，默认未设置                                                                                    | object          | `{}`      |
 |   `showTooltip`    | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
 |   `tooltipAttrs`   | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |
 |      `inner`       | 是否使用内部缩进                                                                                                                                              | boolean         | `false`   |

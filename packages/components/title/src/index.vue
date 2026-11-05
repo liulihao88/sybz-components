@@ -51,7 +51,12 @@
             />
           </slot>
         </component>
-        <span v-if="mergedProps.subTitle" class="s-title__subTitle" v-bind="mergedProps.subTitleAttrs">
+        <span
+          v-if="mergedProps.subTitle"
+          class="s-title__subTitle"
+          v-bind="normalizedSubTitleAttrs"
+          :style="subTitleStyle"
+        >
           {{ mergedProps.subTitle }}
         </span>
         <span v-if="$slots.default" class="s-title__content">
@@ -162,6 +167,16 @@ const props = withDefaults(defineProps<TitleProps>(), {
 const mergedProps = useGlobalComponentConfig('title', props)
 const slots = useSlots()
 const { style } = useStyleProps()
+const normalizedSubTitleAttrs = computed(() => {
+  const { fontSize: _fontSize, style: _style, ...attrs } = mergedProps.value.subTitleAttrs
+  return attrs
+})
+const subTitleStyle = computed(() => [
+  mergedProps.value.subTitleAttrs.style,
+  mergedProps.value.subTitleAttrs.fontSize == null
+    ? undefined
+    : { fontSize: processWidth(mergedProps.value.subTitleAttrs.fontSize, true) },
+])
 
 const titleStyle = computed(() => {
   const { size, fs, gap, width, height } = mergedProps.value
