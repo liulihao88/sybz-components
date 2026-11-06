@@ -1613,6 +1613,30 @@ const allComponentEntries = collectComponentEntries()
 const mainComponentEntries = allComponentEntries.filter(
   ({ componentPath }) => !CHART_COMPONENT_PATHS.has(componentPath),
 )
+const rootDeclarationPath = resolve(rootDir, 'packages/index.d.ts')
+const rootDeclaration = readFileSync(rootDeclarationPath, 'utf-8')
+const namedExportsStart = '// @generated named-component-exports:start'
+const namedExportsEnd = '// @generated named-component-exports:end'
+const namedExportsPattern = new RegExp(`${namedExportsStart}[\\s\\S]*?${namedExportsEnd}`)
+if (!namedExportsPattern.test(rootDeclaration)) {
+  throw new Error('packages/index.d.ts 缺少具名组件导出标记')
+}
+await writeDeclarationFile(
+  rootDeclarationPath,
+  rootDeclaration.replace(
+    namedExportsPattern,
+    [
+      namedExportsStart,
+      ...mainComponentEntries
+        .filter(({ componentName }) => componentName !== 'SSvg')
+        .map(
+          ({ componentName, componentPath }) =>
+            `export { default as ${componentName} } from './types/components/${componentPath}'`,
+        ),
+      namedExportsEnd,
+    ].join('\n'),
+  ),
+)
 // package.json 的 ./components/* 子路径与独立构建都依赖每个组件的 index.ts。
 for (const { componentPath } of mainComponentEntries) {
   const entryPath = resolve(componentsDir, componentPath, 'index.ts')

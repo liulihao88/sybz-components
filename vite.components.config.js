@@ -4,6 +4,7 @@ import fg from 'fast-glob'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Icons from 'unplugin-icons/vite'
+import { componentStylePlugin } from './scripts/component-style-plugin.mjs'
 
 const componentEntries = Object.fromEntries(
   fg
@@ -47,7 +48,12 @@ export default defineConfig({
       },
     },
   },
-  plugins: [vue(), vueJsx(), Icons({ compiler: 'vue3', scale: 1 })],
+  plugins: [
+    vue(),
+    vueJsx(),
+    Icons({ compiler: 'vue3', scale: 1 }),
+    componentStylePlugin(Object.keys(componentEntries)),
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'packages'),

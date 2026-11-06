@@ -89,15 +89,13 @@ app.mount('#app')
 
 ### 只注册需要的组件
 
-项目只用到少量组件时，可以从单组件入口导入。入口路径与文档中的组件目录一致：
+项目只用到少量组件时，可以从包入口按名称导入：
 
 ```ts
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import SButton from 'sybz-components/components/button'
-import STitle from 'sybz-components/components/title'
+import { SButton, STitle } from 'sybz-components'
 import 'element-plus/dist/index.css'
-import 'sybz-components/style.css'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -107,7 +105,7 @@ app.use(STitle)
 app.mount('#app')
 ```
 
-此方式只引入所选组件及其代码依赖；样式仍从公共 `style.css` 引入。`sybz-components/components/company/baseHeader` 等业务组件也使用相同规则。图表组件使用现有的 `sybz-components/charts/*` 入口。
+具名导出指向组件独立入口，只引入所选组件及其代码、样式依赖；不需要引入 `sybz-components/style.css`，也不要和全量插件混用。也可通过 `sybz-components/components/button` 或 `sybz-components/components/company/baseHeader` 等子路径导入。图表组件使用现有的 `sybz-components/charts/*` 入口及图表样式。
 
 ## 4. 写第一个页面
 

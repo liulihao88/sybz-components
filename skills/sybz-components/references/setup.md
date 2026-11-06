@@ -20,6 +20,8 @@ app.use(SybzComponents, {
 
 合并进现有入口，不替换应用创建、路由或其他插件代码。样式仅入口导入一次；Element Plus 在 Sybz 前注册。业务代码用到工具函数时按需 `import { $toast } from '@sybz-components/utils'`，无需把整个 utils 包挂到全局属性。已有全局主题时保留；用户要求主题时才传对应主题配置。图表按需加入 `SybzChartComponents from 'sybz-components/charts'`、`sybz-components/charts/style.css` 和 `app.use(SybzChartComponents)`。
 
+项目只使用少量组件且明确要求按需引入时，优先 `import { SButton, STable } from 'sybz-components'` 并逐个 `app.use`。具名导出指向独立组件入口，自动引入组件样式和共用基础样式；不导入 `sybz-components/style.css`，也不注册全量插件。Element Plus 样式仍按项目现有方式引入。业务组件也可按名称导入；需要直达路径时支持 `sybz-components/components/company/baseHeader` 等子路径。
+
 ## 自定义主题色
 
 ```ts

@@ -177,15 +177,13 @@ app.mount('#app')
 
 ### 按需引入组件
 
-如果只使用少量组件，可以从独立入口导入并注册。路径与组件文档目录一致；业务组件也支持 `components/company/baseHeader` 这样的路径。
+如果只使用少量组件，可以从包入口按名称导入并注册：
 
 ```ts
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import SButton from 'sybz-components/components/button'
-import STitle from 'sybz-components/components/title'
+import { SButton, STitle } from 'sybz-components'
 import 'element-plus/dist/index.css'
-import 'sybz-components/style.css'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -195,7 +193,7 @@ app.use(STitle)
 app.mount('#app')
 ```
 
-独立入口会按组件拆分 JavaScript，并提供对应的组件属性类型。当前样式仍使用公共的 `style.css`；图表组件继续使用 `sybz-components/charts/*` 和 `sybz-components/charts/style.css`。
+具名导出指向各组件独立入口，按需引入组件代码、组件样式和共用基础样式，无需再引入 `sybz-components/style.css`。也可使用 `sybz-components/components/button` 等子路径，业务组件支持 `components/company/baseHeader`。不要同时注册全量插件和按需组件。图表组件继续使用 `sybz-components/charts/*` 和 `sybz-components/charts/style.css`。
 
 ## 全局默认配置
 

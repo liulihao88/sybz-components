@@ -4,17 +4,17 @@
   "description": "Vue3 中基于Element-plus二次封装基础组件文档",
   "private": false,
   "type": "module",
-  "main": "dist/sybz-components-es.js",
+  "main": "dist/index.js",
   "unpkg": "dist/sybz-components-umd.js",
-  "module": "dist/sybz-components-es.js",
+  "module": "dist/index.js",
   "packageManager": "pnpm@10.12.1",
   "types": "dist/index.d.ts",
   "style": "dist/style.css",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/sybz-components-es.js",
-      "default": "./dist/sybz-components-es.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./components/*": {
       "types": "./dist/types/components/*.d.ts",
@@ -68,8 +68,7 @@
     "scripts/install-sybz-skill.mjs"
   ],
   "sideEffects": [
-    "*.css",
-    "dist/*.css",
+    "**/*.css",
     "dist/*.scss"
   ],
   "workspaces": [
@@ -78,7 +77,7 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "pnpm types:generate && pnpm build:bundle",
-    "build:bundle": "vite build && vite build --config vite.components.config.js && vite build --config packages/components/company/chart/vite.config.js",
+    "build:bundle": "vite build && vite build --config vite.components.config.js && vite build --config packages/components/company/chart/vite.config.js && node scripts/generate-package-entry.mjs",
     "docsbuild": "vitepress build docs",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
