@@ -62,7 +62,7 @@ form/isShow
 
 ### 多个属性
 
-:::demo 展示多个属性配置。基础写法：`<s-form ref="TFormDemo" :model="formData" :fieldList="fieldList" :size="size" :labelPosition="labelPosition" :disabled="isDisabled" />`。
+:::demo 展示多个属性配置和 `grow` 填充剩余高度。基础写法：给有确定高度的 `s-form` 最后一个可见字段设置 `grow: true`，textarea 即可占据剩余空间。字段 `grow` 类型为 `boolean`，可选值 `true / false`，默认值 `false`。
 form/other
 :::
 
@@ -195,6 +195,7 @@ const fieldList: SFormFieldItem[] = [
 | tooltipAttrs  | 提示图标及 Tooltip 属性，支持 `dangerouslyUseHTMLString`                            | object / Function         | -                  |
 |     copy      | 是否显示 tooltip 复制图标；传字符串时复制指定文本                                   | boolean / string          | `false`            |
 |     type      | 项类型；设置为 `title` 时渲染分组标题，`attrs` 会透传给 `s-title`                   | string                    | -                  |
+|     grow      | 最后一个可见字段占据表单剩余高度；表单需有确定高度，textarea 会同步伸展             | boolean                   | `false`            |
 |     trim      | 提交/校验前是否对当前字段去除前后空格，可覆盖表单级配置                             | boolean                   | 跟随 `s-form.trim` |
 
 ## 表单上下文

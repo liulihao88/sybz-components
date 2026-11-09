@@ -55,16 +55,14 @@ export interface CreateHttpOptions<D = unknown> extends CreateAxiosDefaults<D> {
 
 export type HttpClient = Omit<AxiosInstance, 'get' | 'post' | 'put' | 'patch' | 'delete'> & {
   <T = unknown, D = unknown>(url: string, config?: HttpRequestConfig<D>): Promise<T>
-  <T = unknown, D = unknown>(url: string, params?: unknown, config?: HttpRequestConfig<D>): Promise<T>
   send<T = unknown, D = unknown>(config: HttpRequestConfig<D> & { rawResponse: true }): Promise<AxiosResponse<T>>
   send<T = unknown, D = unknown>(config: HttpRequestConfig<D> & { rawResponse?: false }): Promise<T>
   get<T = unknown>(url: string, config?: HttpRequestConfig): Promise<T>
-  get<T = unknown>(url: string, params?: unknown, config?: HttpRequestConfig): Promise<T>
-  post<T = unknown, D = unknown>(url: string, data?: D, config?: HttpRequestConfig<D>): Promise<T>
-  put<T = unknown, D = unknown>(url: string, data?: D, config?: HttpRequestConfig<D>): Promise<T>
-  patch<T = unknown, D = unknown>(url: string, data?: D, config?: HttpRequestConfig<D>): Promise<T>
+  post<T = unknown, D = unknown>(url: string, config?: HttpRequestConfig<D>): Promise<T>
+  put<T = unknown, D = unknown>(url: string, config?: HttpRequestConfig<D>): Promise<T>
+  patch<T = unknown, D = unknown>(url: string, config?: HttpRequestConfig<D>): Promise<T>
   delete<T = unknown>(url: string, config?: HttpRequestConfig): Promise<T>
-  download(url: string, params?: unknown, config?: HttpRequestConfig): Promise<Blob>
+  download(url: string, config?: HttpRequestConfig): Promise<Blob>
 }
 
 const record = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null
@@ -152,29 +150,21 @@ export function createHttp<D = unknown>(options: CreateHttpOptions<D> = {}): Htt
     const response = await instance.request<T, AxiosResponse<T>, B>(config)
     return config.rawResponse ? response : response.data
   }
-  const isRequestConfig = (value: unknown): value is HttpRequestConfig =>
-    record(value) &&
-    ['url', 'method', 'headers', 'timeout', 'rawResponse', 'skipAuth', 'showErrorToast', 'message'].some(
-      (key) => key in value,
-    )
-  const request = (url: string, paramsOrConfig?: unknown, config: HttpRequestConfig = {}) => {
-    const params = isRequestConfig(paramsOrConfig) ? undefined : paramsOrConfig
-    const requestConfig = isRequestConfig(paramsOrConfig) ? paramsOrConfig : config
-    return send({ ...requestConfig, method: 'GET', url, params, rawResponse: false }) as Promise<unknown>
-  }
+  const request = (url: string, config: HttpRequestConfig = {}) =>
+    send({ ...config, method: 'GET', url, rawResponse: false }) as Promise<unknown>
   const client = Object.assign(request, instance, {
     send,
-    get: (url: string, paramsOrConfig?: unknown, config?: HttpRequestConfig) => request(url, paramsOrConfig, config),
-    post: (url: string, data?: unknown, config?: HttpRequestConfig) =>
-      send({ ...config, method: 'POST' as Method, url, data, rawResponse: false }),
-    put: (url: string, data?: unknown, config?: HttpRequestConfig) =>
-      send({ ...config, method: 'PUT' as Method, url, data, rawResponse: false }),
-    patch: (url: string, data?: unknown, config?: HttpRequestConfig) =>
-      send({ ...config, method: 'PATCH' as Method, url, data, rawResponse: false }),
+    get: (url: string, config?: HttpRequestConfig) => request(url, config),
+    post: (url: string, config?: HttpRequestConfig) =>
+      send({ ...config, method: 'POST' as Method, url, rawResponse: false }),
+    put: (url: string, config?: HttpRequestConfig) =>
+      send({ ...config, method: 'PUT' as Method, url, rawResponse: false }),
+    patch: (url: string, config?: HttpRequestConfig) =>
+      send({ ...config, method: 'PATCH' as Method, url, rawResponse: false }),
     delete: (url: string, config?: HttpRequestConfig) =>
       send({ ...config, method: 'DELETE' as Method, url, rawResponse: false }),
-    download: (url: string, params?: unknown, config?: HttpRequestConfig) =>
-      send<Blob, unknown>({ ...config, method: 'GET', url, params, responseType: 'blob', rawResponse: false }),
+    download: (url: string, config?: HttpRequestConfig) =>
+      send<Blob, unknown>({ ...config, method: 'GET', url, responseType: 'blob', rawResponse: false }),
   }) as HttpClient
   return client
 }

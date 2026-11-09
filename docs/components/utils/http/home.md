@@ -17,26 +17,26 @@ utils/http/base
 ### 调用形式
 
 ```ts
-http(url, params?, config?)
+http(url, config?)
 http.send(config)
-http.get(url, params?, config?)
-http.post(url, data?, config?)
-http.put(url, data?, config?)
-http.patch(url, data?, config?)
+http.get(url, config?)
+http.post(url, config?)
+http.put(url, config?)
+http.patch(url, config?)
 http.delete(url, config?)
-http.download(url, params?, config?)
+http.download(url, config?)
 createHttp(options?)
 ```
 
 ### 常用参数
 
-| 参数      | 类型                | 默认值 | 说明                                                 |
-| --------- | ------------------- | ------ | ---------------------------------------------------- |
-| `url`     | `string`            | -      | 请求地址。                                           |
-| `params`  | `unknown`           | -      | GET、下载请求的查询参数。                            |
-| `data`    | `unknown`           | -      | POST、PUT、PATCH 请求体。                            |
-| `config`  | `HttpRequestConfig` | `{}`   | Axios 请求配置；`rawResponse: true` 时返回完整响应。 |
-| `options` | `CreateHttpOptions` | `{}`   | `createHttp` 的 Axios 默认配置及业务处理配置。       |
+| 参数            | 类型                | 默认值 | 说明                                                                    |
+| --------------- | ------------------- | ------ | ----------------------------------------------------------------------- |
+| `url`           | `string`            | -      | 请求地址。                                                              |
+| `config.params` | `unknown`           | 未设置 | 查询参数。                                                              |
+| `config.data`   | `unknown`           | 未设置 | POST、PUT、PATCH 请求体。                                               |
+| `config`        | `HttpRequestConfig` | `{}`   | Axios 请求配置；需要完整响应时使用 `http.send({ rawResponse: true })`。 |
+| `options`       | `CreateHttpOptions` | `{}`   | `createHttp` 的 Axios 默认配置及业务处理配置。                          |
 
 ### createHttp 配置
 
@@ -67,8 +67,8 @@ import { configureUtils, http, type HttpError } from '@sybz-components/utils'
 // 应用入口配置一次
 configureUtils({ http: { baseURL: '/api' } })
 
-const users = await http.get<User[]>('/api/users', { page: 1 })
-await http.post('/api/users', { name: '张三' })
+const users = await http.get<User[]>('/api/users', { params: { page: 1 } })
+await http.post('/api/users', { data: { name: '张三' } })
 
 const response = await http.send<{ id: number }>({
   url: '/api/users/1',
@@ -84,7 +84,7 @@ try {
   console.log(requestError.status, requestError.message)
 }
 
-const file = await http.download('/api/export', { type: 'xlsx' })
+const file = await http.download('/api/export', { params: { type: 'xlsx' } })
 ```
 
 ### 返回值

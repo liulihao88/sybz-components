@@ -547,6 +547,8 @@ export interface SFormRule {
 
 export interface SFormFieldItem {
   [key: string]: any
+  /** 表单有固定高度时，让最后一个可见字段占满剩余高度；默认 false */
+  grow?: boolean
   /** 透传给表单控件的属性，支持函数动态返回 */
   attrs?: SFormDynamic<SybzRecord>
   /** attrs 的兼容别名，优先级低于 attrs */

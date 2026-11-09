@@ -48,6 +48,7 @@ const internalFieldKeys = new Set([
   'formAttrs',
   'formItemAttrs',
   'formatValue',
+  'grow',
   'imgAttrs',
   'isShow',
   'label',
@@ -110,9 +111,36 @@ const hasMultipleColumns = computed(
   () => Number(mergedProps.value.column) > 1 || formItems.value.some((item) => Number(item.column) > 1),
 )
 const useGap = computed(() => Boolean(formGap.value) && hasMultipleColumns.value)
-const formStyle = computed(() => [attrs.style, useGap.value ? { '--s-form-gap': formGap.value } : undefined])
+const visibleItems = computed(() => formItems.value.filter((item, index) => parseIsShow(item, index)))
+const hasGrowField = computed(() => {
+  const lastItem = visibleItems.value.at(-1)
+  return Boolean(lastItem && !isTitleItem(lastItem) && lastItem.grow)
+})
+const fixedRowCount = computed(() => {
+  let rows = 0
+  let used = 0
+  for (const item of visibleItems.value.slice(0, -1)) {
+    const span = 60 / Number(isTitleItem(item) ? 1 : item.column || mergedProps.value.column)
+    if (used + span > 60) {
+      rows += 1
+      used = 0
+    }
+    used += span
+    if (used === 60) {
+      rows += 1
+      used = 0
+    }
+  }
+  return rows + (used > 0 ? 1 : 0)
+})
+const formStyle = computed(() => [
+  attrs.style,
+  useGap.value ? { '--s-form-gap': formGap.value } : undefined,
+  hasGrowField.value ? { '--s-form-fixed-rows': fixedRowCount.value } : undefined,
+])
 const formClass = computed(() => ({
   's-form--gap': useGap.value,
+  's-form--grow': hasGrowField.value,
   's-form--chenghua': mergedProps.value.theme === 'chenghua',
   's-form--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-form--sybz': mergedProps.value.theme === 'sybz',
@@ -267,6 +295,13 @@ const mergeRules = (item: FormField, index: number) => {
 const getChildStyle = (item: FormField) => {
   const column = item.column || mergedProps.value.column
 
+  if (hasGrowField.value) {
+    return {
+      gridColumn: `span ${60 / Number(column)}`,
+      ...(Number(column) > 1 && useGap.value ? { paddingInline: 'calc(var(--s-form-gap) / 2)' } : {}),
+    }
+  }
+
   return {
     flex: `0 1 ${getFormItemBasis(column, useGap.value ? mergedProps.value.gap : undefined)}`,
   }
@@ -280,6 +315,10 @@ const getFormItemBind = (item: FormField, index: number) => {
     prop: getFieldProp(item),
     label: item.label,
     rules: mergeRules(item, index),
+    class: [
+      formItemAttrs.class,
+      hasGrowField.value && item === visibleItems.value.at(-1) ? 's-form__grow-item' : undefined,
+    ],
     style: [getChildStyle(item), formItemAttrs.style],
   }
 }
@@ -346,6 +385,9 @@ const getComponentAttrs = (item: FormField, index: number) => {
     filterable: true,
     width: '100%',
     placeholder: getPlaceholder(item),
+    ...(hasGrowField.value && item === visibleItems.value.at(-1) && componentName === 's-input'
+      ? { height: '100%' }
+      : {}),
     ...componentDefaults,
     ...getDirectFieldAttrs(item),
     ...resolveRecord(item.componentProps, item, index),
@@ -662,6 +704,44 @@ defineExpose({
 .s-form {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.s-form--grow {
+  display: grid;
+  align-content: stretch;
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  grid-template-rows: repeat(var(--s-form-fixed-rows), max-content) minmax(0, 1fr);
+  column-gap: 0;
+  min-height: 0;
+}
+
+.s-form--grow.s-form--gap {
+  column-gap: 0;
+}
+
+.s-form--grow .s-form__grow-item {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin-bottom: 0;
+}
+
+.s-form--grow .s-form__grow-item :deep(.el-form-item__content) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.s-form--grow .s-form__grow-item :deep(.el-textarea),
+.s-form--grow .s-form__grow-item :deep(.el-textarea__inner) {
+  height: 100%;
+  min-height: 0;
+}
+
+.s-form--grow .s-form__title-item {
+  grid-column: 1 / -1;
 }
 
 .s-form--gap {

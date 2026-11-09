@@ -13,15 +13,34 @@
     :label-position="labelPosition"
     :disabled="isDisabled"
   />
+  <p>grow（默认 false）：表单有确定高度时，最后一个可见字段可填满剩余高度。</p>
+  <s-radio
+    v-model="grow"
+    :options="[
+      { label: 'false（默认）', value: false },
+      { label: 'true', value: true },
+    ]"
+    type="simple"
+    variant="button"
+  />
+  <div class="grow-example">
+    <s-form :model="growForm" :field-list="growFields" label-position="top" h="100%" :footer="false" />
+  </div>
 </template>
 
 <script setup lang="tsx">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { Ref } from 'vue'
 
 const size = ref('default')
 const labelPosition = ref('right')
 const isDisabled = ref(false)
+const grow = ref(true)
+const growForm = ref({ name: '', instruction: '' })
+const growFields = computed(() => [
+  { label: '名称', prop: 'name' },
+  { label: '指令', prop: 'instruction', grow: grow.value, attrs: { type: 'textarea' } },
+])
 
 const formData = ref({
   account: 'wocwin', // *用户账号
@@ -137,3 +156,12 @@ const fieldList = [
   },
 ]
 </script>
+
+<style scoped>
+.grow-example {
+  height: 360px;
+  margin-top: 12px;
+  border: 1px solid var(--el-border-color);
+  padding: 16px;
+}
+</style>

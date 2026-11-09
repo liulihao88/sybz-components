@@ -6,13 +6,13 @@ const result = ref('点击按钮查看请求结果')
 
 const parameterOptions = [
   { label: 'url', value: "'/api/users'，默认值：必填" },
-  { label: 'params', value: '{ page: 1 }，默认值：未设置' },
-  { label: 'config', value: '{}，默认值：{}' },
+  { label: 'config.params', value: '{ page: 1 }，默认值：未设置' },
+  { label: 'config', value: '{ params?: unknown, signal?: AbortSignal, ... }，默认值：{}' },
 ]
 
 const request = async () => {
   try {
-    const data = await http.get('/api/users', { page: 1 })
+    const data = await http.get('/api/users', { params: { page: 1 } })
     result.value = JSON.stringify(data)
   } catch (error) {
     result.value = error instanceof Error ? error.message : String(error)
