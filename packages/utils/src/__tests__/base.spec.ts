@@ -335,21 +335,32 @@ describe('base utils', () => {
       type: 'success',
       closeAll: true,
       duration: 1000,
-      customClass: 's-antd-message',
+      showClose: true,
+      customClass: 's-toast s-antd-message',
     })
 
     $toast({ message: '原生样式', type: 'warning', customClass: 'el' })
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '原生样式',
       type: 'warning',
-      customClass: '',
+      showClose: true,
+      customClass: 's-toast',
     })
 
     $toast.error('失败')
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '失败',
       type: 'error',
-      customClass: 's-antd-message',
+      showClose: true,
+      customClass: 's-toast s-antd-message',
+    })
+
+    $toast('不显示关闭按钮', { showClose: false })
+    expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
+      message: '不显示关闭按钮',
+      type: 'success',
+      showClose: false,
+      customClass: 's-toast s-antd-message',
     })
   })
 
@@ -365,7 +376,8 @@ describe('base utils', () => {
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '复制内容复制成功',
       type: 'success',
-      customClass: 's-antd-message',
+      showClose: true,
+      customClass: 's-toast s-antd-message',
     })
 
     elementPlusMocks.message.mockClear()
@@ -412,13 +424,15 @@ describe('base utils', () => {
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '全局主题',
       type: 'success',
-      customClass: 's-antd-message s-antd-message--shijingshan',
+      showClose: true,
+      customClass: 's-toast s-antd-message s-antd-message--shijingshan',
     })
 
     $toast({ message: '单次覆盖', theme: 'chenghua' })
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '单次覆盖',
-      customClass: 's-antd-message s-antd-message--chenghua',
+      showClose: true,
+      customClass: 's-toast s-antd-message s-antd-message--chenghua',
     })
 
     await confirm('使用全局主题')
