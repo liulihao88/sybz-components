@@ -36,9 +36,11 @@ input/size
 input/maxlength
 :::
 
-### other
+### 其他属性（debounce 默认值：0）
 
-:::demo 展示 Element Plus Input 属性透传。基础写法：`<s-input title="密码框" v-model="input" style="width: 240px" type="password" placeholder="Please input password" show-password />`。属性：`type`、`show-password` 等继承 `el-input`。
+基础写法：`<s-input v-model="keyword" debounce @debounced-input="loadDocuments" />`。`debounce` 为 `true` 时使用 500 毫秒防抖，也可写 `:debounce="300"` 指定毫秒数。`v-model` 每次输入都立即更新；停止输入后触发一次 `debounced-input(value)`，可在事件处理函数中请求接口。清空时立即触发。若请求可能交错返回，业务层仍需取消旧请求或忽略过期响应。
+
+:::demo 展示输入防抖及 Element Plus Input 属性透传。属性：`debounce` 类型 `boolean / number`，可选 `false / true / 毫秒数`，`true` 对应 500ms，`false` 和 `0` 表示立即触发，默认值 `0`；`type`、`show-password` 等继承 `el-input`。
 input/other
 :::
 
@@ -120,14 +122,16 @@ input/top-title
 |         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`        | array            | -         |
 |         `content`          | 右侧说明提示文案                                      | string           | `''`      |
 |          `search`          | 是否在清空图标右侧显示搜索按钮，支持点击或 Enter 搜索 | boolean          | `false`   |
+|         `debounce`         | `debounced-input` 事件的防抖时间；`true` 为 500ms     | boolean / number | `0`       |
 | `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染     | boolean          | `false`   |
 
 ### 事件
 
-| 事件名   | 说明                                            | 参数                                          |
-| -------- | ----------------------------------------------- | --------------------------------------------- |
-| `search` | 点击搜索按钮、按 Enter 或在启用搜索时清空输入框 | `(value, event?: MouseEvent / KeyboardEvent)` |
-| `clear`  | Element Plus 清空事件，覆盖默认空值搜索         | `()`                                          |
+| 事件名            | 说明                                            | 参数                                          |
+| ----------------- | ----------------------------------------------- | --------------------------------------------- |
+| `search`          | 点击搜索按钮、按 Enter 或在启用搜索时清空输入框 | `(value, event?: MouseEvent / KeyboardEvent)` |
+| `debounced-input` | 停止输入后触发，清空时立即触发                  | `(value: any)`                                |
+| `clear`           | Element Plus 清空事件，覆盖默认空值搜索         | `()`                                          |
 
 ### 说明
 

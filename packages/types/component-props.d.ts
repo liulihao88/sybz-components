@@ -369,10 +369,14 @@ export interface SInputSelfProps extends SHtmlStringProps {
   content?: string
   /** 是否在清空图标右侧显示搜索按钮；点击或按 Enter 时触发 search 事件，默认 false */
   search?: boolean
+  /** debounced-input 事件的防抖时间；true 为 500ms，false 或 0 为立即触发；v-model 始终立即更新 */
+  debounce?: boolean | number
 }
 
 export interface SInputEmits {
   'update:modelValue': [value: any]
+  /** 停止输入后触发；清空时立即触发 */
+  'debounced-input': [value: any]
   /** 点击搜索按钮或按 Enter 时传入原始事件；清空时不传入事件 */
   search: [value: any, event?: MouseEvent | KeyboardEvent]
   /** Element Plus 清空事件；设置后覆盖默认的空值搜索 */

@@ -120,7 +120,7 @@
 
 <script setup lang="ts">
 import type { SybzComponentTheme } from '../../../types/component-props'
-import { ref, computed, useAttrs, useSlots, watch, nextTick, getCurrentInstance } from 'vue'
+import { ref, computed, useAttrs, useSlots, watch, nextTick, getCurrentInstance, onBeforeUnmount } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
 import { inputProps } from 'element-plus/es/components/input/src/input'
@@ -173,6 +173,8 @@ interface SInputProps {
   dangerouslyUseHTMLString?: boolean
   /** 在清空图标右侧显示搜索按钮，支持点击和 Enter 搜索 */
   search?: boolean
+  /** debounced-input 事件的防抖时间；true 为 500ms，false 或 0 为立即触发 */
+  debounce?: boolean | number
 }
 
 const props = withDefaults(defineProps<SInputProps>(), {
@@ -198,9 +200,11 @@ const props = withDefaults(defineProps<SInputProps>(), {
   content: '',
   dangerouslyUseHTMLString: false,
   search: false,
+  debounce: 0,
 })
 const emits = defineEmits<{
   'update:modelValue': [value: any]
+  'debounced-input': [value: any]
   search: [value: any, event?: MouseEvent | KeyboardEvent]
   clear: []
 }>()
@@ -212,6 +216,17 @@ const inputTooltipDisabled = ref(true)
 const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
+let debounceTimer: ReturnType<typeof setTimeout> | undefined
+onBeforeUnmount(() => clearTimeout(debounceTimer))
+const emitDebouncedInput = (value: unknown, immediate = false) => {
+  clearTimeout(debounceTimer)
+  const delay = mergedProps.value.debounce === true ? 500 : Number(mergedProps.value.debounce)
+  if (immediate || !Number.isFinite(delay) || delay <= 0) {
+    emits('debounced-input', value)
+  } else {
+    debounceTimer = setTimeout(() => emits('debounced-input', value), delay)
+  }
+}
 const htmlStringEnabled = computed(() => Boolean(mergedProps.value.dangerouslyUseHTMLString))
 const isClearable = computed(() => (attrs.clearable ?? mergedProps.value.clearable) !== false)
 const isDisabled = computed(() => (attrs.disabled ?? mergedProps.value.disabled) === true || attrs.disabled === '')
@@ -272,6 +287,7 @@ const resolveMaxLengthValue = (value: unknown) => {
 const handleInputUpdate = (value: unknown) => {
   const nextValue = resolveMaxLengthValue(value)
   data.value = nextValue
+  emitDebouncedInput(nextValue, nextValue === '' || nextValue === null || nextValue === undefined)
 
   if (nextValue === '' || nextValue === null || nextValue === undefined) {
     hideInputTooltip()
@@ -388,6 +404,7 @@ const handleSize = () => {
 }
 const clearTextareaValue = () => {
   data.value = ''
+  emitDebouncedInput('', true)
   handleClear()
 }
 
@@ -457,6 +474,7 @@ const mergedAttrs = computed(() => {
     merged.clearable = false
   }
   delete merged.search
+  delete merged.debounce
   delete merged.topTitle
   if (mergedProps.value.topTitle && !merged['aria-label']) {
     merged['aria-label'] = mergedProps.value.topTitle
