@@ -49,6 +49,8 @@ export interface SybzUtilsConfig {
 }
 
 export interface ToastOptions extends Partial<MessageOptions> {
+  /** 是否启用仅在悬停关闭区域时出现的关闭按钮，默认 `true`。 */
+  showClose?: boolean
   /**
    * 调用前是否先关闭全部消息提示。
    */
@@ -317,13 +319,16 @@ export function $toast(
       ElMessage.closeAll()
     }
 
-    const resolvedCustomClass =
-      customClass === 'el'
-        ? ''
-        : _mergeClassNames('s-antd-message', theme !== 'default' && `s-antd-message--${theme}`, customClass)
+    const resolvedCustomClass = _mergeClassNames(
+      's-toast',
+      customClass !== 'el' && 's-antd-message',
+      customClass !== 'el' && theme !== 'default' && `s-antd-message--${theme}`,
+      customClass !== 'el' && customClass,
+    )
 
     ElMessage({
       ...messageOptions,
+      showClose: options.showClose ?? true,
       customClass: resolvedCustomClass,
     })
   }

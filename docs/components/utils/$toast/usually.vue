@@ -156,7 +156,8 @@ const showBigObject = () => {
       <el-button type="primary" @click="elBase">element-plus风格</el-button>
       <el-button type="primary" @click="duration5000">持续5秒</el-button>
       <el-button type="primary" @click="noClose">永不关闭</el-button>
-      <el-button type="primary" @click="$toast('可关闭', { showClose: true })">可关闭</el-button>
+      <el-button type="primary" @click="$toast('悬停可关闭')">悬停可关闭（默认）</el-button>
+      <el-button type="primary" @click="$toast('无关闭按钮', { showClose: false })">无关闭按钮</el-button>
       <el-button type="primary" @click="$toast('分组消息合并', { grouping: true })">分组消息合并</el-button>
       <el-button
         :icon="hot"

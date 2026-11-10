@@ -18,7 +18,7 @@ utils/$toast/usually
 
 ### 说明
 
-`$toast` 用于触发 Element Plus 的全局消息提示，适合保存成功、接口失败、普通反馈等场景。它在 `ElMessage` 的基础上增加了类型简写、默认样式和可选的关闭全部旧消息能力。
+`$toast` 用于触发 Element Plus 的全局消息提示，适合保存成功、接口失败、普通反馈等场景。它在 `ElMessage` 的基础上增加了类型简写、默认样式和可选的关闭全部旧消息能力。鼠标停在右上角关闭区域时，才会出现不占布局空间的圆形关闭按钮。
 
 应用入口可通过 `configureUtils({ theme: 'shijingshan' })` 设置全局默认主题。单次调用的 `theme` 会覆盖全局配置。
 
@@ -45,11 +45,12 @@ $toast.warning(message, options)
 
 `ToastOptions` 在 Element Plus `MessageOptions` 基础上额外支持：
 
-| 字段          | 类型                                       | 默认值               | 说明                                                                     |
-| ------------- | ------------------------------------------ | -------------------- | ------------------------------------------------------------------------ |
-| `theme`       | `'default' \| 'chenghua' \| 'shijingshan'` | 全局主题或 `default` | 消息主题；单次设置会覆盖 `configureUtils` 的全局主题。                   |
-| `closeAll`    | `boolean`                                  | `false`              | 显示当前消息前是否先关闭页面上已有的全部消息。                           |
-| `customClass` | `string`                                   | `'s-antd-message'`   | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生样式，不追加默认类名。 |
+| 字段          | 类型                                       | 默认值               | 说明                                                              |
+| ------------- | ------------------------------------------ | -------------------- | ----------------------------------------------------------------- |
+| `theme`       | `'default' \| 'chenghua' \| 'shijingshan'` | 全局主题或 `default` | 消息主题；单次设置会覆盖 `configureUtils` 的全局主题。            |
+| `closeAll`    | `boolean`                                  | `false`              | 显示当前消息前是否先关闭页面上已有的全部消息。                    |
+| `showClose`   | `boolean`                                  | `true`               | 鼠标停在右上角关闭区域或键盘聚焦按钮时显示；传 `false` 则不渲染。 |
+| `customClass` | `string`                                   | `'s-antd-message'`   | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生外观。          |
 
 ### 返回值
 
