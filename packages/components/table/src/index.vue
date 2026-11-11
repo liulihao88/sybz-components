@@ -66,6 +66,8 @@ interface TableProps {
   showIndex?: boolean
   /** 所有列默认是否在内容溢出时截断并显示 tooltip；单列配置优先 */
   showOverflowTooltip?: boolean
+  /** 为有 prop 的数据列默认开启排序；单列 sortable 配置优先 */
+  sortable?: boolean
   /** 禁用分页和操作栏按钮 */
   disabled?: boolean
   size?: string
@@ -96,6 +98,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   showPage: true,
   showIndex: true,
   showOverflowTooltip: true,
+  sortable: false,
   disabled: false,
   size: '',
   theme: 'default',
@@ -451,6 +454,7 @@ const updateTable = () => {
 
     const defaultItems = {
       showOverflowTooltip: mergedProps.value.showOverflowTooltip,
+      sortable: Boolean(item.prop && !item.type && !item.btns?.length && mergedProps.value.sortable),
       btns,
       baseBtns, // 显示的按钮
       hideBtns, // 隐藏在...中的按钮
@@ -841,7 +845,7 @@ const handleHeaderDragend = (
 }
 
 watch(
-  () => [mergedProps.value.columns, mergedProps.value.showOverflowTooltip],
+  () => [mergedProps.value.columns, mergedProps.value.showOverflowTooltip, mergedProps.value.sortable],
   () => {
     updateTable()
   },
@@ -990,7 +994,8 @@ defineExpose({
       :header-cell-style="tableHeaderCellStyle"
       v-bind="{
         stripe: true,
-        border: mergedProps.border,
+        // Element Plus 仅在 border=true 时允许拖动表头调整列宽；无边框外观由 s-table--no-border 控制。
+        border: true,
         ...tableAttrs,
       }"
       @selection-change="handleTableSelectionChange"

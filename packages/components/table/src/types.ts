@@ -153,6 +153,8 @@ export interface STableProps<Row extends TableRow = TableRow> {
   showIndex?: boolean
   /** 所有列默认是否在内容溢出时截断并显示 tooltip；单列配置优先，默认 true */
   showOverflowTooltip?: boolean
+  /** 为有 prop 的数据列默认开启排序；单列 sortable 配置优先，默认 false */
+  sortable?: boolean
   size?: string
   theme?: SybzComponentTheme
   pageSize?: number

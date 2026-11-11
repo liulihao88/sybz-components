@@ -18,10 +18,12 @@ const columns = [
   {
     label: '名字',
     prop: 'name',
+    sortable: true,
   },
   {
     label: '地址',
     prop: 'address',
+    sortable: true,
     // showOverflowTooltip: false,
   },
   {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { formatTime } from '@sybz-components/utils'
 
 const columns = ref([])
 const data = ref([])
@@ -15,7 +16,13 @@ const fetchTableData = () =>
           { label: '负责人', prop: 'owner', minWidth: 120 },
           { label: '预算金额', prop: 'amount', minWidth: 120 },
           { label: '状态', prop: 'status', minWidth: 100 },
-          { label: '最近更新', prop: 'updatedAt', minWidth: 180 },
+          {
+            label: '最近更新',
+            prop: 'updatedAt',
+            minWidth: 180,
+            sortable: true,
+            filter: ({ row, value }) => formatTime(value),
+          },
         ],
         data: [
           {
@@ -24,7 +31,7 @@ const fetchTableData = () =>
             owner: '张三',
             amount: '¥128,000',
             status: '进行中',
-            updatedAt: '2026-09-02 10:20',
+            updatedAt: new Date('2026-09-02 10:20'),
           },
           {
             id: 2,
@@ -32,7 +39,7 @@ const fetchTableData = () =>
             owner: '李四',
             amount: '¥86,500',
             status: '已完成',
-            updatedAt: '2026-09-01 16:45',
+            updatedAt: new Date('2026-09-01 16:45'),
           },
           {
             id: 3,
@@ -40,7 +47,7 @@ const fetchTableData = () =>
             owner: '王五',
             amount: '¥42,800',
             status: '已暂停',
-            updatedAt: '2026-08-30 09:10',
+            updatedAt: new Date('2026-08-30 09:10'),
           },
         ],
       })
@@ -74,7 +81,7 @@ onMounted(loadTableData)
       <s-button size="small" type="primary" :loading="loading" @click="loadTableData">刷新数据</s-button>
     </div>
 
-    <s-table :columns="columns" :data="data" :loading="loading" :show-page="false" height="200">
+    <s-table :columns="columns" :data="data" :loading="loading" :show-page="false" height="200" :sortable="true">
       <template #status="{ row }">
         <s-tag
           :type="row.status === '进行中' ? 'primary' : row.status === '已完成' ? 'success' : 'info'"

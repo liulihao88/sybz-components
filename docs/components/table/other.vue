@@ -16,6 +16,7 @@ const otherParams = ref({
   disabled: false,
   simple: false,
   showOverflowTooltip: true,
+  sortable: false,
 })
 const columns = computed(() => {
   return [
@@ -28,6 +29,7 @@ const columns = computed(() => {
       label: '地址',
       prop: 'address',
       width: 200,
+      sortable: false,
       fixed: otherParams.value.fixed ? 'left' : false,
     },
     {
@@ -121,6 +123,12 @@ const columns = computed(() => {
       <s-radio v-model="otherParams.border" :options="[true, false]" type="simple" title="border"></s-radio>
       <s-radio v-model="otherParams.disabled" :options="[true, false]" type="simple" title="disabled"></s-radio>
       <s-radio v-model="otherParams.simple" :options="[true, false]" type="simple" title="simple"></s-radio>
+      <s-radio
+        v-model="otherParams.sortable"
+        :options="[true, false]"
+        type="simple"
+        title="sortable（默认 false：有 prop 的列统一排序；地址列单独关闭）"
+      ></s-radio>
       <s-radio
         v-model="otherParams.showOverflowTooltip"
         :options="[true, false]"
