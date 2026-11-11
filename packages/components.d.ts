@@ -257,13 +257,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
-     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮；开启 search 后清空默认触发空值搜索，@clear 可覆盖。
+     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
      */
     SInput: (typeof import('./types/components/input'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
-     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全和快捷搜索按钮；开启 search 后清空默认触发空值搜索，@clear 可覆盖。
+     * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
      */
     's-input': (typeof import('./types/components/input'))['default']
     /**
@@ -441,13 +441,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
      *
-     * s-table 表格组件，columns 列配置支持用 w 简写 width；同时设置时 w 优先。
+     * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，单列配置优先；columns 列配置支持用 w 简写 width，同时设置时 w 优先。
      */
     STable: (typeof import('./types/components/table'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
      *
-     * s-table 表格组件，columns 列配置支持用 w 简写 width；同时设置时 w 优先。
+     * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，单列配置优先；columns 列配置支持用 w 简写 width，同时设置时 w 优先。
      */
     's-table': (typeof import('./types/components/table'))['default']
     /**
