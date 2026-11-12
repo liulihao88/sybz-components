@@ -17,7 +17,6 @@ const subTitleAttrs = computed(() => (fontSize.value === '默认' ? {} : { fontS
       title="双向细目表"
       type="simple"
       sub-title="按当前题目的知识点、题型和难度统计。"
-      sub-title-position="bottom"
       :sub-title-attrs="subTitleAttrs"
     />
   </s-flex>

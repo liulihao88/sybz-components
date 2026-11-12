@@ -1178,11 +1178,13 @@ export interface STitleProps {
   /** 透传给左侧 s-icon 的属性，可覆盖 icon、默认 size 和 cursor */
   iconAttrs?: SIconProps & SybzRecord
   extra?: string
+  /** 主标题右侧追加文本；append 插槽优先，默认空字符串 */
+  append?: string
+  /** 追加内容的 DOM 属性；fontSize 支持数字或 CSS 长度，也支持 style */
+  appendAttrs?: SybzRecord & { fontSize?: string | number }
   size?: SybzComponentSize
   fs?: number | SybzComponentSize | `${number}px`
   subTitle?: string
-  /** 副标题位置：inline 与标题同行，bottom 在标题下方独占一行 */
-  subTitlePosition?: 'inline' | 'bottom'
   /** 副标题 DOM 属性；fontSize 可直接传数字或 CSS 长度，亦支持 style */
   subTitleAttrs?: SybzRecord & { fontSize?: string | number }
   showTooltip?: boolean

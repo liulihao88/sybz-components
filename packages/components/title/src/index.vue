@@ -1,12 +1,9 @@
 <template>
   <div class="s-title" :class="titleClass" :style="[titleStyle, style]" v-bind="$attrs">
-    <div
-      class="s-title__top"
-      :class="[parseClass, { 's-title__top--sub-bottom': mergedProps.subTitlePosition === 'bottom' }]"
-    >
+    <div class="s-title__top" :class="parseClass">
       <div
         class="s-title__main"
-        :class="{ 's-title__main--sub-bottom': mergedProps.subTitlePosition === 'bottom' }"
+        :class="{ 's-title__main--has-sub-title': !!mergedProps.subTitle }"
         :style="{ marginLeft: mergedProps.inner ? '8px' : 0 }"
       >
         <span v-if="hasIcon" class="s-title__slot-icon-wrapper">
@@ -42,26 +39,38 @@
             </svg>
           </slot>
         </span>
-        <component :is="mergedProps.tag" class="s-title__text" v-bind="titleA11yAttrs">
-          <slot name="title">
-            <s-tooltip
-              :content="mergedProps.title"
-              :disabled="!mergedProps.showTooltip"
-              v-bind="mergedProps.tooltipAttrs"
-            />
-          </slot>
-        </component>
-        <span
-          v-if="mergedProps.subTitle"
-          class="s-title__subTitle"
-          v-bind="normalizedSubTitleAttrs"
-          :style="subTitleStyle"
-        >
-          {{ mergedProps.subTitle }}
-        </span>
-        <span v-if="$slots.default" class="s-title__content">
-          <slot></slot>
-        </span>
+        <div class="s-title__body">
+          <div class="s-title__title-row">
+            <component :is="mergedProps.tag" class="s-title__text" v-bind="titleA11yAttrs">
+              <slot name="title">
+                <s-tooltip
+                  :content="mergedProps.title"
+                  :disabled="!mergedProps.showTooltip"
+                  v-bind="mergedProps.tooltipAttrs"
+                />
+              </slot>
+            </component>
+            <span
+              v-if="$slots.append || mergedProps.append"
+              class="s-title__append"
+              v-bind="normalizedAppendAttrs"
+              :style="appendStyle"
+            >
+              <slot name="append">{{ mergedProps.append }}</slot>
+            </span>
+            <span v-if="$slots.default" class="s-title__content">
+              <slot></slot>
+            </span>
+          </div>
+          <span
+            v-if="mergedProps.subTitle"
+            class="s-title__subTitle"
+            v-bind="normalizedSubTitleAttrs"
+            :style="subTitleStyle"
+          >
+            {{ mergedProps.subTitle }}
+          </span>
+        </div>
       </div>
       <div v-if="$slots.extra || mergedProps.extra" class="s-title__slot-extra-wrapper">
         <slot name="extra">{{ mergedProps.extra }}</slot>
@@ -87,6 +96,7 @@ defineSlots<{
   default?: () => any
   title?: () => any
   icon?: () => any
+  append?: () => any
   extra?: () => any
 }>()
 type TitleSize = 'small' | 'default' | 'large'
@@ -97,10 +107,11 @@ interface TitleProps {
   icon?: SIconValue
   iconAttrs?: SIconProps & Record<string, any>
   extra?: string
+  append?: string
+  appendAttrs?: Record<string, any>
   size?: TitleSize
   fs?: string | number
   subTitle?: string
-  subTitlePosition?: 'inline' | 'bottom'
   subTitleAttrs?: Record<string, any>
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
@@ -148,10 +159,11 @@ const props = withDefaults(defineProps<TitleProps>(), {
   icon: '',
   iconAttrs: () => ({}),
   extra: '',
+  append: '',
+  appendAttrs: () => ({}),
   size: 'default',
   // 本地开发. 用来对文件命名. 可以快速定位到文件的名字
   subTitle: '',
-  subTitlePosition: 'inline',
   subTitleAttrs: () => ({}),
   showTooltip: true,
   tooltipAttrs: () => ({}),
@@ -171,11 +183,21 @@ const normalizedSubTitleAttrs = computed(() => {
   const { fontSize: _fontSize, style: _style, ...attrs } = mergedProps.value.subTitleAttrs
   return attrs
 })
+const normalizedAppendAttrs = computed(() => {
+  const { fontSize: _fontSize, style: _style, ...attrs } = mergedProps.value.appendAttrs
+  return attrs
+})
 const subTitleStyle = computed(() => [
   mergedProps.value.subTitleAttrs.style,
   mergedProps.value.subTitleAttrs.fontSize == null
     ? undefined
     : { fontSize: processWidth(mergedProps.value.subTitleAttrs.fontSize, true) },
+])
+const appendStyle = computed(() => [
+  mergedProps.value.appendAttrs.style,
+  mergedProps.value.appendAttrs.fontSize == null
+    ? undefined
+    : { fontSize: processWidth(mergedProps.value.appendAttrs.fontSize, true) },
 ])
 
 const titleStyle = computed(() => {
@@ -259,6 +281,22 @@ const hasIcon = computed(() => {
     gap: var(--s-title-gap, 8px);
     min-width: 0;
   }
+  .s-title__main--has-sub-title {
+    align-items: flex-start;
+  }
+  .s-title__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .s-title__title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-title-gap, 8px);
+    min-width: 0;
+  }
   .s-title__text {
     flex: 0 1 auto;
     min-width: 0;
@@ -298,10 +336,6 @@ const hasIcon = computed(() => {
       min-width: 0;
       text-align: right;
     }
-  }
-
-  .s-title__top--sub-bottom {
-    align-items: flex-start;
   }
 
   .s-title__form-left {
@@ -346,7 +380,8 @@ const hasIcon = computed(() => {
     min-width: 0;
     font-weight: 400;
   }
-  .s-title__subTitle {
+  .s-title__subTitle,
+  .s-title__append {
     display: inline-flex;
     align-items: center;
     min-width: 0;
@@ -358,20 +393,6 @@ const hasIcon = computed(() => {
     letter-spacing: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-  .s-title__main--sub-bottom {
-    flex-wrap: wrap;
-    column-gap: var(--s-title-gap, 8px);
-    row-gap: 6px;
-
-    .s-title__content {
-      order: 1;
-    }
-
-    .s-title__subTitle {
-      order: 2;
-      flex: 0 0 100%;
-    }
   }
 }
 </style>

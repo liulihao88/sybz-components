@@ -95,7 +95,8 @@
     min-width: 0;
   }
 
-  .s-title__subTitle {
+  .s-title__subTitle,
+  .s-title__append {
     color: var(--s-title-theme-text-muted);
     font-size: var(--s-title-sub-title-font-size, 13px);
     line-height: var(--s-title-theme-sub-title-line-height, 1);

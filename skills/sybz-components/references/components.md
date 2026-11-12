@@ -46,6 +46,8 @@
 <s-tabs v-model="tab" :options="tabs" />
 ```
 
+- `s-title` 的 `sub-title` 固定显示在主标题下方；标题同行的简短说明用 `append="..."`，复杂内容用 `#append` 插槽，字号和其他属性可用 `appendAttrs` 调整；最右侧操作区用 `extra` 或 `#extra`。
+
 - `s-select` 自定义字段：`<s-select v-model="ids" multiple value="id" label="name" :options="users" />`。
 - `s-select` 基础类型选项直接传数组：`<s-select v-model="city" simple :options="['北京', '上海']" />`；多选用 `<s-select v-model="cities" simple multiple :options="['北京', '上海']" />`，`cities` 初始值为数组。裸写 `simple` 等价于 `type="simple"`；不要为了选择字符串或数字数组先用 `map` 转成 `{ label, value }`。
 - `s-image`：public 路径配置 `image.basePath`；assets 路径配置 `createImageResolver(import.meta.glob(...))` 的 `image.resolver`。
