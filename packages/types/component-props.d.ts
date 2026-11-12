@@ -317,6 +317,8 @@ export interface SDialogSelfProps {
   target?: string
   title?: string
   subTitle?: string
+  /** 主标题后的纯文本，默认空字符串；append 插槽优先 */
+  append?: string
   width?: string | number | boolean
   w?: string | number | boolean
   /** 整个弹窗或抽屉的高度，数字按 px 处理 */

@@ -43,8 +43,8 @@
                 <span class="s-dialog__header-title">
                   {{ dialogTitle }}
                 </span>
-                <span v-if="$slots.append" class="s-dialog__header-append">
-                  <slot name="append" />
+                <span v-if="$slots.append || mergedProps.append" class="s-dialog__header-append">
+                  <slot name="append">{{ mergedProps.append }}</slot>
                 </span>
               </span>
               <span v-if="mergedProps.subTitle" class="s-dialog__header-sub-title">
@@ -124,6 +124,8 @@ interface DialogProps {
   target?: string | number
   title?: string
   subTitle?: string
+  /** 主标题后的纯文本；append 插槽优先 */
+  append?: string
   width?: string | number | boolean
   w?: string | number | boolean
   /** 整个弹窗或抽屉的高度，数字按 px 处理 */
@@ -153,6 +155,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
   variant: 'default',
   target: undefined,
   subTitle: '',
+  append: '',
   width: '',
   height: undefined,
   theme: 'default', // 弹框样式: default, norm, norm16, simple, chenghua, shijingshan, sybz, gulou
@@ -489,6 +492,7 @@ onBeforeUnmount(() => {
   &.s-dialog--warning {
     .s-dialog__header,
     .s-dialog__header-sub-title,
+    .s-dialog__header-append,
     :deep(.el-dialog__close),
     :deep(.el-drawer__close-btn) {
       color: #fff !important;
@@ -714,6 +718,7 @@ onBeforeUnmount(() => {
     flex: 0 0 auto;
   }
 
+  .s-dialog__header-append,
   .s-dialog__header-sub-title {
     color: var(--el-text-color-secondary);
     font-size: 13px;

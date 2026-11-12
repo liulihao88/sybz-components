@@ -38,10 +38,10 @@ dialog/drawerFillSlot
 dialog/theme
 :::
 
-### 通常用法
+### other
 
-:::demo 展示通常用法配置。基础写法：`<s-dialog ref="dialogRef" title="常用的dialog" @confirm="cusConfirm" width="100%" :closeOnClickModal="false" :confirmAttrs="{ loading: confirmLoading, }" confirmText="保存" v-model="isShow" @cancel="proxy.$toast('哈哈')" cancelText="高级配置" :cancelAttrs="{ type: 'primary', icon: 'el-icon-edit', }"></s-dialog>`。属性：`title` 类型 `string`，默认值 `'提示'`；`width` 类型 `string / number`，默认值 `''`。
-dialog/usually
+:::demo
+dialog/other
 :::
 
 ### 插槽
@@ -94,10 +94,18 @@ dialog/variant
 
 ### 标题追加内容（append 默认无内容）
 
-使用 `<template #append>` 在主标题后追加按钮或标签，副标题仍显示在下一行。`title` 类型为 `string`，默认值为 `'提示'`；`subTitle` 类型为 `string`，默认值为 `''`。`append` 无插槽参数；使用 `header` 自定义整个标题内容区时，`append` 不生效。
+简单文本可直接用 `append="草稿"` 显示在主标题后，样式与 `sub-title` 一致；按钮或标签仍使用 `<template #append>`。同时传入属性和插槽时，插槽优先。副标题仍显示在下一行。`title` 类型为 `string`，默认值为 `'提示'`；`subTitle` 和 `append` 均为字符串，默认值为 `''`。`append` 插槽无参数；使用 `header` 自定义整个标题内容区时，属性和插槽都不生效。
 
 :::demo 点击标题后的添加按钮更新正文计数，副标题保持显示。
 dialog/append
+:::
+
+### 简单标题追加文本（append 默认值：''）
+
+基础写法：`<s-dialog v-model="visible" title="编辑文章" append="草稿">内容</s-dialog>`。`append` 类型为 `string`，默认值为 `''`；传空字符串时不显示追加文本。
+
+:::demo 用选项切换标题后追加的文本。
+dialog/other
 :::
 
 ### 全局默认配置
@@ -135,6 +143,7 @@ dialog/height
 | :---------------: | --------------------------------------------------------------------------------------------- | --------------------------------------------- | --------- |
 |       title       | 顶部title                                                                                     | string                                        | 提示      |
 |     subTitle      | 顶部二级标题，显示在 title 下方，颜色稍淡                                                     | string                                        | ''        |
+|      append       | 主标题后的纯文本，样式与 `subTitle` 一致；同名插槽优先                                        | string                                        | ''        |
 |       width       | 弹框宽度；当 `mode="drawer"` 时用于控制抽屉宽度                                               | string / number                               | ''        |
 |      height       | 整个弹窗或抽屉的高度，数字按 px 处理，内容超出时正文滚动                                      | string / number                               | -         |
 |       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |

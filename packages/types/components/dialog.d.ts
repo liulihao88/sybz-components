@@ -16,7 +16,7 @@ type ElDrawerInstance = InstanceType<typeof ElDrawer>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/dialog/home.html | 查看文档}
  *
- * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 height、内容区 loading、maximizeHeight 等 sybz 扩展属性。
+ * s-dialog 弹框组件，支持 Element Plus Dialog/Drawer 属性，以及 title 后的 append 文本（append 插槽优先）、height、内容区 loading、maximizeHeight 等 sybz 扩展属性。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Dialog/Drawer 的公开属性。
  */
@@ -36,6 +36,8 @@ export type SDialogComponent = {
       target?: string
       title?: string
       subTitle?: string
+      /** 主标题后的纯文本，默认空字符串；append 插槽优先 */
+      append?: string
       cancel?: SDialogHandler
       cancelText?: string
       confirmText?: string
@@ -58,6 +60,7 @@ export type SDialogComponent = {
       | 'target'
       | 'title'
       | 'subTitle'
+      | 'append'
       | 'width'
       | 'w'
       | 'height'
@@ -85,6 +88,7 @@ export type SDialogComponent = {
         | 'target'
         | 'title'
         | 'subTitle'
+        | 'append'
         | 'width'
         | 'w'
         | 'height'

@@ -31,8 +31,10 @@ function delay(delay = 0, fn = () => {}) {
   <s-dialog
     ref="dialogRef"
     v-model="isShow"
+    append="append: 我是右侧append"
+    sub-title="subTitle: 我是底部subTitle"
     title="常用的dialog"
-    width="100%"
+    width="80%"
     :close-on-click-modal="false"
     :confirm-attrs="{
       loading: confirmLoading,
