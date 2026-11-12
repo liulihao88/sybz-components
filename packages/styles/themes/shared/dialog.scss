@@ -1,0 +1,195 @@
+// 三套业务主题共用 Dialog / Drawer 结构；主题视觉差异集中在这里配置。
+@mixin s-dialog-theme($theme, $prefix, $chenghua: false) {
+  $dialog-radius: var(--s-#{$prefix}-radius-card);
+  $dialog-shadow: var(--s-#{$prefix}-shadow-soft);
+  $drawer-border: var(--s-#{$prefix}-divider);
+  $drawer-bg: var(--s-#{$prefix}-card-bg);
+  $drawer-radius: var(--s-#{$prefix}-radius-card);
+  $drawer-shadow: var(--s-#{$prefix}-shadow-soft);
+  $drawer-header-bg: var(--s-#{$prefix}-card-bg);
+  $drawer-body-bg: var(--s-#{$prefix}-card-bg);
+  $drawer-footer-bg: var(--s-#{$prefix}-card-bg);
+  $drawer-body-line-height: 1.5;
+
+  @if $chenghua {
+    $dialog-radius: 24px;
+    $dialog-shadow: 0 20px 56px rgba(15, 23, 42, 0.18);
+    $drawer-border: rgba(var(--s-ch-primary-rgb), 0.12);
+    $drawer-bg: var(--s-ch-bg);
+    $drawer-radius: 18px;
+    $drawer-shadow: -18px 0 48px rgba(15, 23, 42, 0.18);
+    $drawer-header-bg: linear-gradient(180deg, #ffffff 0%, var(--s-ch-bg-soft) 100%);
+    $drawer-body-bg: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    $drawer-footer-bg: rgba(248, 251, 255, 0.92);
+    $drawer-body-line-height: 1.7;
+  }
+
+  .s-dialog.s-#{$theme}-dialog.s-#{$theme}-dialog {
+    .el-dialog {
+      overflow: hidden;
+      border-radius: $dialog-radius;
+      @if not $chenghua {
+        background: var(--s-#{$prefix}-card-bg);
+      }
+      box-shadow: $dialog-shadow;
+    }
+
+    .el-dialog__header {
+      position: relative;
+      padding: 14px 56px 14px 16px;
+      border-bottom: 0;
+      background: linear-gradient(90deg, var(--s-#{$prefix}-primary) 0%, var(--s-#{$prefix}-primary-hover) 100%);
+      font-weight: 700;
+    }
+
+    .s-dialog__header {
+      align-items: center;
+      min-height: 28px;
+    }
+
+    .s-dialog__header-icon-box:empty {
+      display: none;
+    }
+
+    .s-dialog__header-content {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: #ffffff;
+    }
+
+    .s-dialog__header-sub-title,
+    .s-dialog__header-append {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .el-dialog__headerbtn {
+      top: 50%;
+      right: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 1;
+      box-sizing: border-box;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--s-#{$prefix}-radius);
+      transform: translateY(-50%);
+
+      .el-dialog__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 22px;
+      }
+
+      &:hover,
+      &:focus {
+        background: rgba(255, 255, 255, 0.14);
+
+        .el-dialog__close {
+          color: #ffffff;
+        }
+      }
+    }
+
+    .el-drawer__header {
+      padding: 10px 16px;
+      border-bottom: 0px solid var(--line);
+      font-weight: 700;
+    }
+
+    .el-dialog__footer {
+      border-top: 0px solid var(--line);
+    }
+
+    .s-dialog__drawer--#{$theme} {
+      border-left: 1px solid $drawer-border;
+      border-top-left-radius: $drawer-radius;
+      border-bottom-left-radius: $drawer-radius;
+      background: $drawer-bg;
+      box-shadow: $drawer-shadow;
+
+      .el-drawer__header {
+        display: flex;
+        align-items: center;
+        min-height: 60px;
+        padding: 14px 20px;
+        border-bottom: 1px solid var(--s-#{$prefix}-divider);
+        margin: 0;
+        background: $drawer-header-bg;
+      }
+
+      .s-dialog__header {
+        min-width: 0;
+        gap: 8px;
+      }
+
+      .s-dialog__header-content {
+        overflow: hidden;
+        color: var(--s-#{$prefix}-text);
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .el-drawer__close-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        line-height: 1;
+        box-sizing: border-box;
+        width: 34px;
+        height: 34px;
+        border-radius: var(--s-#{$prefix}-radius-small);
+        color: var(--s-#{$prefix}-text-muted);
+
+        .el-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 1;
+        }
+
+        &:hover,
+        &:focus {
+          background: var(--s-#{$prefix}-primary-soft);
+          color: var(--s-#{$prefix}-primary);
+        }
+      }
+
+      .el-drawer__body {
+        padding: 20px;
+        background: $drawer-body-bg;
+        color: var(--s-#{$prefix}-text-regular);
+        font-size: 14px;
+        line-height: $drawer-body-line-height;
+      }
+
+      .dialog_slot_box {
+        min-height: 0;
+      }
+
+      .el-drawer__footer {
+        min-height: 60px;
+        padding: 12px 20px;
+        border-top: 1px solid var(--s-#{$prefix}-divider);
+        background: $drawer-footer-bg;
+        @if $chenghua {
+          backdrop-filter: blur(10px);
+        }
+      }
+
+      .s-dialog__confirm-button,
+      .s-dialog__cancel-button {
+        min-width: 88px;
+      }
+    }
+  }
+}
