@@ -44,6 +44,11 @@
     border: 0 !important;
   }
 
+  // 保留可见的表头列间线，让无边框表格的列宽拖拽位置易于辨认。
+  :scope:scope:scope:scope:scope > .el-table .el-table__header-wrapper th.el-table__cell:not(:last-child) {
+    box-shadow: inset -1px 0 0 var(--el-border-color);
+  }
+
   :scope:scope:scope:scope:scope > .el-table .el-table__inner-wrapper::before,
   :scope:scope:scope:scope:scope > .el-table .el-table--border::before,
   :scope:scope:scope:scope:scope > .el-table .el-table--border::after,

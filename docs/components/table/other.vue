@@ -11,12 +11,12 @@ const data = ref([
 const otherParams = ref({
   showPage: true,
   fixed: false,
-  border: true,
+  border: false,
   size: 'default',
   disabled: false,
   simple: false,
   showOverflowTooltip: true,
-  sortable: false,
+  sortable: true,
 })
 const columns = computed(() => {
   return [
@@ -116,7 +116,7 @@ const columns = computed(() => {
 
 <template>
   <div>
-    <s-flex gap="small" direction="column">
+    <s-flex :gap="[0, 0]" direction="column">
       <s-radio v-model="otherParams.size" :options="['small', 'default', 'large']" type="simple" title="size"></s-radio>
       <s-radio v-model="otherParams.showPage" :options="[true, false]" type="simple" title="showPage"></s-radio>
       <s-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></s-radio>

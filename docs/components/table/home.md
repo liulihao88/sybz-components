@@ -32,7 +32,7 @@ table/theme
 
 ### other
 
-:::demo 展示表格常用属性切换。基础写法：`<s-table :columns="columns" :data="data" :sortable="true" />` 可让有 `prop` 的数据列默认排序。`sortable` 可选 `true / false`，默认 `false`，单列配置优先；示例中的地址列设置 `sortable: false`。`showOverflowTooltip` 可选 `true / false`，默认 `true`；设为 `false` 后所有列默认显示完整内容，单列设置仍优先。
+:::demo 展示表格常用属性切换。基础写法：`<s-table :columns="columns" :data="data" :sortable="true" />` 可让有 `prop` 的数据列默认排序。`sortable` 可选 `true / false`，默认 `false`，单列配置优先；示例中的地址列设置 `sortable: false`。`showOverflowTooltip` 可选 `true / false`，默认 `true`；设为 `false` 后所有列默认显示完整内容，单列设置仍优先。`border` 可选 `true / false`，默认 `false`；无边框时表头仍保留列间分隔线以便拖拽。
 table/other
 :::
 
@@ -134,32 +134,32 @@ table/compact
 
 ### 属性
 
-|        属性名         | 说明                                                           | 类型    | 默认值         |
-| :-------------------: | -------------------------------------------------------------- | ------- | -------------- |
-|        `data`         | 表格数据源                                                     | array   | `[]`           |
-|       `columns`       | 列配置                                                         | array   | `[]`           |
-|      `disabled`       | 禁用分页和操作栏按钮                                           | boolean | `false`        |
-|      `showPage`       | 是否显示分页                                                   | boolean | `true`         |
-|      `showIndex`      | 是否显示序号列                                                 | boolean | `true`         |
-| `showOverflowTooltip` | 所有列默认是否截断溢出内容并显示 tooltip；单列配置优先         | boolean | `true`         |
-|      `sortable`       | 有 `prop` 的数据列默认开启排序；单列 `sortable` 配置优先       | boolean | `false`        |
-|        `size`         | 表格和分页尺寸，支持 `small` / `default` / `large`             | string  | `''`           |
-|        `theme`        | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz` | string  | `default`      |
-|     `background`      | 表格自身及表体背景色，支持 CSS 颜色值                          | string  | -              |
-|       `simple`        | 是否使用简洁表格样式，去除单元格左右边框                       | boolean | `false`        |
-|       `border`        | 是否显示表格及单元格边框；设为 `false` 后表头仍可拖动调整列宽  | boolean | `true`         |
-|      `pageSize`       | 每页条数                                                       | number  | `30`           |
-|     `pageNumber`      | 当前页码                                                       | number  | `1`            |
-|      `pageSizes`      | 分页器可选每页条数                                             | array   | `[10, 30, 50]` |
-|        `total`        | 总条数，不传时默认取 `data.length`                             | number  | -              |
-|   `columnEmptyText`   | 单元格空值占位文案                                             | string  | `-`            |
-|       `loading`       | 表格加载状态                                                   | boolean | `false`        |
-|     `indexAttrs`      | 序号列透传给 `el-table-column` 的配置                          | object  | `{}`           |
-|     `modelValue`      | 选中值；单选时为当前行，多选时为选中行数组                     | any     | -              |
-|    `selectionType`    | 内置选中模式，支持 `single` / `multiple`                       | string  | `''`           |
-|   `selectionAttrs`    | 内置单选列/多选列透传配置                                      | object  | `{}`           |
-|     `asyncUpdate`     | 是否由外部异步控制分页状态                                     | boolean | `false`        |
-|      `pageAttrs`      | 分页组件透传配置                                               | object  | `{}`           |
+|        属性名         | 说明                                                                     | 类型    | 默认值         |
+| :-------------------: | ------------------------------------------------------------------------ | ------- | -------------- |
+|        `data`         | 表格数据源                                                               | array   | `[]`           |
+|       `columns`       | 列配置                                                                   | array   | `[]`           |
+|      `disabled`       | 禁用分页和操作栏按钮                                                     | boolean | `false`        |
+|      `showPage`       | 是否显示分页                                                             | boolean | `true`         |
+|      `showIndex`      | 是否显示序号列                                                           | boolean | `true`         |
+| `showOverflowTooltip` | 所有列默认是否截断溢出内容并显示 tooltip；单列配置优先                   | boolean | `true`         |
+|      `sortable`       | 有 `prop` 的数据列默认开启排序；单列 `sortable` 配置优先                 | boolean | `false`        |
+|        `size`         | 表格和分页尺寸，支持 `small` / `default` / `large`                       | string  | `''`           |
+|        `theme`        | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`           | string  | `default`      |
+|     `background`      | 表格自身及表体背景色，支持 CSS 颜色值                                    | string  | -              |
+|       `simple`        | 是否使用简洁表格样式，去除单元格左右边框                                 | boolean | `false`        |
+|       `border`        | 是否显示表格及单元格边框；默认无边框，表头保留列间分隔线并可拖动调整列宽 | boolean | `false`        |
+|      `pageSize`       | 每页条数                                                                 | number  | `30`           |
+|     `pageNumber`      | 当前页码                                                                 | number  | `1`            |
+|      `pageSizes`      | 分页器可选每页条数                                                       | array   | `[10, 30, 50]` |
+|        `total`        | 总条数，不传时默认取 `data.length`                                       | number  | -              |
+|   `columnEmptyText`   | 单元格空值占位文案                                                       | string  | `-`            |
+|       `loading`       | 表格加载状态                                                             | boolean | `false`        |
+|     `indexAttrs`      | 序号列透传给 `el-table-column` 的配置                                    | object  | `{}`           |
+|     `modelValue`      | 选中值；单选时为当前行，多选时为选中行数组                               | any     | -              |
+|    `selectionType`    | 内置选中模式，支持 `single` / `multiple`                                 | string  | `''`           |
+|   `selectionAttrs`    | 内置单选列/多选列透传配置                                                | object  | `{}`           |
+|     `asyncUpdate`     | 是否由外部异步控制分页状态                                               | boolean | `false`        |
+|      `pageAttrs`      | 分页组件透传配置                                                         | object  | `{}`           |
 
 ### pageAttrs 内部属性
 
@@ -235,7 +235,7 @@ const templateTableColumns = computed<TableColumnList<TemplateRow>>(() => [
 |     `sortMethod`      | 自定义排序方法，`sortable` 为 `true` 时生效                            | function                     | -                                   |
 |       `sortBy`        | 指定排序字段或排序取值函数                                             | string / string[] / function | -                                   |
 |     `sortOrders`      | 点击表头时排序顺序                                                     | array                        | `['ascending', 'descending', null]` |
-|      `resizable`      | 是否可拖拽调整列宽，表格 `border` 为 `true` 时生效                     | boolean                      | `true`                              |
+|      `resizable`      | 是否可拖拽调整列宽，设置 `border="false"` 时也生效                     | boolean                      | `true`                              |
 |      `columnKey`      | 列 key，使用筛选事件时用于标识列                                       | string                       | -                                   |
 |    `renderHeader`     | Element Plus 表头渲染函数                                              | function                     | -                                   |
 | `showOverflowTooltip` | 内容溢出时是否截断并显示 tooltip                                       | boolean / object             | 跟随表格级属性，默认 `true`         |
