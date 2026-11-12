@@ -461,6 +461,35 @@ onBeforeUnmount(() => {
 }
 
 .s-dialog {
+  :deep(.el-dialog:not(.is-fullscreen)) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  :deep(.el-dialog:not(.is-fullscreen, .s-dialog__fixed-height, .s-dialog__maximize-height)) {
+    max-height: calc(100dvh - var(--el-dialog-margin-top, 15vh) - 50px);
+    overflow: hidden;
+  }
+
+  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__header),
+  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__footer) {
+    flex: 0 0 auto;
+  }
+
+  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__body) {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__body > .dialog_slot_box:not(.dialog_slot_box--fill)) {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
   &.s-shijingshan-dialog.s-dialog--warning {
     :deep(.s-dialog__confirm-button) {
       --s-sjs-button-type-color: #f59e0b;
@@ -584,10 +613,6 @@ onBeforeUnmount(() => {
     margin-top: 16px;
     margin-bottom: 16px;
     overflow: hidden;
-  }
-  :deep(.el-dialog__body) {
-    max-height: calc(100vh - 30vh - 92px);
-    overflow-y: auto;
   }
   :deep(.s-dialog__maximize-height .el-dialog__header),
   :deep(.s-dialog__maximize-height .el-dialog__footer) {
