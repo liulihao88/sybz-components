@@ -283,6 +283,10 @@ const hasIcon = computed(() => {
   }
   .s-title__main--has-sub-title {
     align-items: flex-start;
+    // 有副标题时整块变高，图标要和主标题同一水平线：按主标题行高居中
+    .s-title__slot-icon-wrapper {
+      height: 1lh;
+    }
   }
   .s-title__body {
     display: flex;

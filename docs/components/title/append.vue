@@ -16,7 +16,7 @@ const appendAttrs = computed(() => (appendFontSize.value === '默认' ? {} : { f
       title="appendAttrs.fontSize（可选：默认 / 12px / 16px / 20px；默认未设置）"
     />
     <s-title
-      title="教材自动打标任务"
+      title="教材自动打标任务11"
       :append="append"
       :append-attrs="appendAttrs"
       sub-title="312 个节点已自动生成 · 3 条异常提示"
