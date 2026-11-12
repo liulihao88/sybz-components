@@ -155,6 +155,8 @@ interface SelectProps {
   label?: string | string[]
   options?: any[]
   type?: string
+  /** 基础类型选项简写，等价于 type="simple" */
+  simple?: boolean
   multiple?: boolean
   showAll?: boolean
   showPrefix?: boolean
@@ -192,6 +194,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
   // 是简单的options 还是复杂options。默认复杂
   type: '', // 简单选项'simple',
+  simple: false,
   // 是否多选
   multiple: false,
   showAll: true,
@@ -220,6 +223,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   dangerouslyUseHTMLString: false,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
+const isSimple = computed(() => props.simple || props.type === 'simple')
 const { style } = useStyleProps()
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
@@ -340,7 +344,7 @@ const getOptionProp = (item: SelectOption, prop: string | undefined) => {
 }
 
 const handleDifValue = (item: SelectOption) => {
-  return props.type === 'simple' ? item : getOptionProp(item, props.value)
+  return isSimple.value ? item : getOptionProp(item, props.value)
 }
 
 const getOptionValue = (item: SelectOption) => handleDifValue(item)
@@ -371,7 +375,7 @@ const quickOptionValues = computed(() => {
 })
 
 const getOptionLabel = (option: SelectOption, index: number): string | number => {
-  const label = props.type === 'simple' ? option : handleLabel(option, index)
+  const label = isSimple.value ? option : handleLabel(option, index)
   return typeof label === 'number' || typeof label === 'string' ? label : String(label ?? '')
 }
 
@@ -608,7 +612,7 @@ function changeMulty(value: any[]) {
   const indices: number[] = []
   const options = sOptions.value.filter((option, index) => {
     if (value.includes(handleDifValue(option))) {
-      labels.push(props.type === 'simple' ? option : handleLabel(option, index))
+      labels.push(isSimple.value ? option : handleLabel(option, index))
       indices.push(index)
       return true
     } else {
@@ -630,14 +634,14 @@ function changeHandler(value: any) {
     return
   }
   const index = sOptions.value.findIndex((option) => {
-    if (props.type === 'simple') {
+    if (isSimple.value) {
       return option === value
     } else {
       return getOptionProp(option, props.value) === value
     }
   })
   const option = index >= 0 ? sOptions.value[index] : undefined
-  const label = option === undefined ? undefined : props.type === 'simple' ? option : handleLabel(option, index)
+  const label = option === undefined ? undefined : isSimple.value ? option : handleLabel(option, index)
   emitChangeSelect(value, label, option, index >= 0 ? index : undefined)
 }
 function emitChangeSelect(

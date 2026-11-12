@@ -16,7 +16,7 @@ type ElSelectInstance = InstanceType<typeof ElSelect>
  *
  * s-select 下拉选择组件，支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
  *
- * 先提示 sybz 自身属性，再提示 Element Plus Select 的公开属性。
+ * 先提示 sybz 自身属性，再提示 Element Plus Select，支持 simple 布尔简写与 multiple 组合，直接使用基础类型选项数组。 的公开属性。
  */
 export type SSelectPublicProps = SSelectSelfProps & Omit<ElSelectInstance['$props'], keyof SSelectSelfProps>
 
@@ -34,6 +34,8 @@ export type SSelectComponent = {
       label?: string | string[]
       options?: any[]
       type?: '' | 'simple'
+      /** 基础类型选项简写，等价于 type="simple"；可与 multiple 同时使用 */
+      simple?: boolean
       multiple?: boolean
       showAll?: boolean
       showPrefix?: boolean
@@ -64,6 +66,7 @@ export type SSelectComponent = {
       | 'label'
       | 'options'
       | 'type'
+      | 'simple'
       | 'multiple'
       | 'showAll'
       | 'showPrefix'

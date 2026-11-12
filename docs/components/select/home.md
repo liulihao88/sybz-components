@@ -134,6 +134,14 @@ select/emptyPlaceholder
 select/top-title
 :::
 
+### 基础类型选项（simple 默认值：false；multiple 默认值：false）
+
+基础写法：`<s-select v-model="value" simple :options="['北京', '上海']" />`；多选时使用 `ref<string[]>([])` 作为初始值，并添加 `multiple`。`simple` 可选 `true / false`，默认 `false`，裸写等价于 `:simple="true"`，也等价于 `type="simple"`。选项直接传字符串或数字数组，不需要转换成 `{ label, value }`。`multiple` 可选 `true / false`，默认 `false`；多选返回基础类型数组，单选返回一个基础类型值。
+
+:::demo 切换 `multiple`，观察同一基础类型选项数组的单选和多选效果。
+select/other
+:::
+
 ### 属性
 
 全局 `select` 配置中的 Element Plus 属性会自动透传给内部选择器，局部同名属性优先。`modelValue`、`options`、`multiple`、`size`、`placeholder`、`popperClass` 仍由 `s-select` 自行处理；自定义 `valueOnClear` 时，应将该值加入 `emptyValues`。
@@ -147,6 +155,7 @@ select/top-title
 |          `label`           | 选项显示字段名，支持字符串或多字段数组                                    | string / array                       | `label`                 |
 |         `options`          | 选项数据                                                                  | array                                | `[]`                    |
 |           `type`           | 数据类型，传 `simple` 时按基础类型数组处理                                | string                               | `''`                    |
+|          `simple`          | 基础类型选项简写，裸写等价于 `type="simple"`，可与 `multiple` 同时使用    | boolean                              | `false`                 |
 |         `multiple`         | 是否多选                                                                  | boolean                              | `false`                 |
 |         `showAll`          | 多选时是否显示全选/反选                                                   | boolean                              | `true`                  |
 |        `showPrefix`        | 是否显示前缀数量信息                                                      | boolean                              | `false`                 |

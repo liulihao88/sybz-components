@@ -1401,7 +1401,7 @@ const ELEMENT_WRAPPER_CONFIGS = {
     valueImports: ['ElSelect'],
     instances: [{ name: 'ElSelectInstance', component: 'ElSelect' }],
     inheritedProps: [{ type: "ElSelectInstance['$props']" }],
-    description: 'Element Plus Select',
+    description: 'Element Plus Select，支持 simple 布尔简写与 multiple 组合，直接使用基础类型选项数组。',
   },
   switch: {
     valueImports: ['ElSwitch'],

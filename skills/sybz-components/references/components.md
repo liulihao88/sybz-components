@@ -47,6 +47,7 @@
 ```
 
 - `s-select` 自定义字段：`<s-select v-model="ids" multiple value="id" label="name" :options="users" />`。
+- `s-select` 基础类型选项直接传数组：`<s-select v-model="city" simple :options="['北京', '上海']" />`；多选用 `<s-select v-model="cities" simple multiple :options="['北京', '上海']" />`，`cities` 初始值为数组。裸写 `simple` 等价于 `type="simple"`；不要为了选择字符串或数字数组先用 `map` 转成 `{ label, value }`。
 - `s-image`：public 路径配置 `image.basePath`；assets 路径配置 `createImageResolver(import.meta.glob(...))` 的 `image.resolver`。
 - `s-item` 默认有边框；无边框传 `:border="false"`；`border` 接受 CSS 边框，`background` 接受纯色/渐变。
 - `s-card` 无背景传 `transparent`。复杂表单才传 `column`、`align`、`formItemAttrs`。

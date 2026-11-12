@@ -896,6 +896,8 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
   label?: string | string[]
   options?: any[]
   type?: '' | 'simple'
+  /** 基础类型选项简写，等价于 type="simple"；可与 multiple 同时使用 */
+  simple?: boolean
   multiple?: boolean
   showAll?: boolean
   showPrefix?: boolean
