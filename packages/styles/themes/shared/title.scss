@@ -71,13 +71,21 @@
     }
   }
 
-  .s-title__top-left::before {
-    position: static;
-    flex: 0 0 4px;
-    width: 4px;
-    height: var(--s-title-bar-height, 18px);
-    border-radius: 4px;
-    background: var(--s-title-theme-bar-background);
+  .s-title__top-left {
+    .s-title__main::before {
+      position: static;
+      flex: 0 0 4px;
+      width: 4px;
+      height: var(--s-title-bar-height, 18px);
+      border-radius: 4px;
+      background: var(--s-title-theme-bar-background);
+    }
+
+    // 有副标题时竖条随副标题一起撑满整个标题块
+    .s-title__main--has-sub-title::before {
+      align-self: stretch;
+      height: auto;
+    }
   }
 
   .s-title__form-left {

@@ -360,17 +360,20 @@ const hasIcon = computed(() => {
     box-sizing: border-box;
     display: flex;
     gap: 0;
-    &::before {
+    // 竖条挂在主内容上，有副标题时随副标题一起撑满整个标题块
+    .s-title__main::before {
       position: static;
       display: block;
       flex: 0 0 3px;
       content: '';
       width: 3px;
-      top: 50%;
-      margin-right: 8px;
       height: var(--s-title-bar-height, 16px);
       letter-spacing: 0;
       background-color: var(--lc, var(--blue)); // 左侧的竖条颜色
+    }
+    .s-title__main--has-sub-title::before {
+      align-self: stretch;
+      height: auto;
     }
   }
   .s-title__content {

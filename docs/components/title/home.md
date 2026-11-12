@@ -52,7 +52,7 @@ title/other
 
 ### 标题右侧追加内容（append 默认值：''）
 
-基础写法：`<s-title title="任务标题" append="草稿" sub-title="任务摘要" />`。`subTitle` 类型为字符串，默认 `''`，固定显示在主标题下方；`append` 类型为字符串，默认 `''`，显示在主标题右侧，颜色和字号与副标题一致。`appendAttrs` 类型为对象，默认 `{}`，可透传追加内容的 DOM 属性；其中 `fontSize` 接受数字或 CSS 长度，默认未设置，`style` 也可直接传入。复杂内容使用 `#append` 插槽，插槽优先于 `append` 属性，`appendAttrs` 同样作用于插槽容器；`extra` 仍是最右侧操作区。
+基础写法：`<s-title title="任务标题" append="草稿" sub-title="任务摘要" />`。`subTitle` 类型为字符串，默认 `''`，固定显示在主标题下方，左侧竖条会随副标题一起撑满整个标题块；`append` 类型为字符串，默认 `''`，显示在主标题右侧，颜色和字号与副标题一致。`appendAttrs` 类型为对象，默认 `{}`，可透传追加内容的 DOM 属性；其中 `fontSize` 接受数字或 CSS 长度，默认未设置，`style` 也可直接传入。复杂内容使用 `#append` 插槽，插槽优先于 `append` 属性，`appendAttrs` 同样作用于插槽容器；`extra` 仍是最右侧操作区。
 
 :::demo 切换追加文本和 `appendAttrs.fontSize`，并对比 `append` 插槽和最右侧 `extra` 插槽。
 title/append
@@ -70,7 +70,7 @@ title/append
 |  `appendAttrs`  | 追加内容的 DOM 属性；`fontSize` 支持数字或 CSS 长度，也支持 `style`                                                                                           | object          | `{}`      |
 |     `size`      | 尺寸，支持 `small` / `default` / `large`                                                                                                                      | string          | `default` |
 |      `fs`       | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |
-|   `subTitle`    | 副标题文案，固定显示在主标题下方                                                                                                                              | string          | `''`      |
+|   `subTitle`    | 副标题文案，固定显示在主标题下方；设置后左侧竖条随副标题一起撑满整个标题块                                                                                    | string          | `''`      |
 | `subTitleAttrs` | 副标题额外属性；`fontSize` 可直接设置字号，支持数字或 CSS 长度，默认未设置                                                                                    | object          | `{}`      |
 |  `showTooltip`  | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
 | `tooltipAttrs`  | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |

@@ -6,7 +6,7 @@
     <s-title title="form表单的类型" type="form"></s-title>
     <s-title title="小尺寸标题" size="small" mt="12"></s-title>
     <s-title title="大尺寸标题" size="large" sub-title="统一控制标题和副标题字号" gap="12"></s-title>
-    <s-title sub-title="我不服啊" type="simple">
+    <s-title sub-title="我不服啊" type="simple" append="这是append文本">
       <template #title>title的slot</template>
       <template #icon>
         <s-icon icon="delete"></s-icon>
