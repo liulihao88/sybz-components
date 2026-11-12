@@ -18,11 +18,11 @@
 
     <hr />
 
-    <s-title title="尺寸与定位 w / h / miw / maw / pos / top / z" />
+    <s-title title="尺寸与定位 w / h / minw / maxw / pos / top / z" />
     <div class="box-wrap pos-wrap">
       <s-flex w="160px" h="80px" bg="#e0f2fe" align="center" justify="center">w=160px h=80px</s-flex>
-      <s-flex miw="160px" maw="260px" h="80px" p="12" bg="#fef3c7" align="center" justify="center">
-        miw=160px maw=260px
+      <s-flex minw="160px" maxw="260px" h="80px" p="12" bg="#fef3c7" align="center" justify="center">
+        minw=160px maxw=260px
       </s-flex>
     </div>
 

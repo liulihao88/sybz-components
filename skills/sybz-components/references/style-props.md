@@ -14,7 +14,7 @@
 
 - 内边距/外边距：`m` `mt` `mb` `ml` `mr` `mx` `my`、`p` `pt` `pb` `pl` `pr` `px` `py`
 - 字体文本：`fs`(font-size) `fw`(font-weight) `lh`(line-height) `ta`(text-align) `tt`(text-transform) `td`(text-decoration) `ff`(font-family) `lts`(letter-spacing)
-- 尺寸定位：`w` `h` `miw` `maw` `mih` `mah` `pos` `top` `bottom` `left` `right` `inset` `z` `flex`
+- 尺寸定位：`w` `h` `minw` `maxw` `minh` `maxh` `pos` `top` `bottom` `left` `right` `inset` `z` `flex`
 - flex 子项：`alignSelf`（模板中写 `align-self`）控制单个子项的交叉轴对齐，`order` 控制视觉顺序；例如 `<s-button align-self="start" :order="-1">操作</s-button>`。
 - 交互：`cursor`（`true` 表示 `pointer`，`false` 表示不设置；也可传 `pointer` / `default` / `help` 等 CSS 值；默认不设置）
 - 背景边框：`bg` `c`(color) `opacity` `bd` `bdt` `bdb` `bdl` `bdr` `br`(border-radius)

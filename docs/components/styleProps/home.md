@@ -57,8 +57,8 @@
 |  简写   | 对应 CSS    |   简写   | 对应 CSS     |
 | :-----: | :---------- | :------: | :----------- |
 |   `w`   | `width`     |   `h`    | `height`     |
-|  `miw`  | `min-width` |  `mih`   | `min-height` |
-|  `maw`  | `max-width` |  `mah`   | `max-height` |
+| `minw`  | `min-width` |  `minh`  | `min-height` |
+| `maxw`  | `max-width` |  `maxh`  | `max-height` |
 |  `pos`  | `position`  |   `z`    | `z-index`    |
 |  `top`  | `top`       | `bottom` | `bottom`     |
 | `left`  | `left`      | `right`  | `right`      |

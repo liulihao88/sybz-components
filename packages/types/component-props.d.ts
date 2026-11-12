@@ -78,10 +78,10 @@ export interface SybzStyleProps {
   // 尺寸与定位
   w?: SybzDimension
   h?: SybzDimension
-  miw?: SybzLength
-  maw?: SybzLength
-  mih?: SybzLength
-  mah?: SybzLength
+  minw?: SybzLength
+  maxw?: SybzLength
+  minh?: SybzLength
+  maxh?: SybzLength
   pos?: string
   top?: SybzLength
   bottom?: SybzLength

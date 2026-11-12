@@ -9,6 +9,15 @@ const outputPath = resolve(rootDir, 'packages/components.d.ts')
 const componentTypeDir = resolve(rootDir, 'packages/types/components')
 const chartComponentsOutputPath = resolve(componentTypeDir, 'company/chart/components.d.ts')
 const componentPropsPath = resolve(rootDir, 'packages/types/component-props.d.ts')
+// Style Props 的尺寸简写必须与 useStyleProps.ts 及共享类型声明一致。
+const styleDimensionPropNames = ['minw', 'maxw', 'minh', 'maxh']
+const stylePropsSource = readFileSync(resolve(rootDir, 'packages/hooks/useStyleProps.ts'), 'utf-8')
+const sharedPropsSource = readFileSync(componentPropsPath, 'utf-8')
+for (const name of styleDimensionPropNames) {
+  if (!new RegExp(`\\b${name}:`).test(stylePropsSource) || !new RegExp(`\\b${name}\\?:`).test(sharedPropsSource)) {
+    throw new Error(`Style Prop ${name} 必须同时存在于实现和共享类型声明中`)
+  }
+}
 const elementPlusIconNamesOutputPath = resolve(rootDir, 'packages/types/element-plus-icon-names.d.ts')
 const elementPlusIconComponentsPath = resolve(
   rootDir,
