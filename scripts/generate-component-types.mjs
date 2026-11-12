@@ -1427,7 +1427,7 @@ const ELEMENT_WRAPPER_CONFIGS = {
     instances: [{ name: 'ElTableInstance', component: 'ElTable' }],
     inheritedProps: [{ type: "ElTableInstance['$props']" }],
     description:
-      'Element Plus Table；s-table 自有属性包括主题、背景色、border（默认 false；无边框时保留可拖拽的表头列间线）、disabled（禁用分页和操作按钮）、showOverflowTooltip（所有列的默认值，单列配置优先）、分页、选择和列配置。',
+      'Element Plus Table；s-table 自有属性包括主题、背景色、border（默认 false；无边框时保留可拖拽的表头列间线）、simple（默认 true）、disabled（禁用分页和操作按钮）、showOverflowTooltip（所有列的默认值，单列配置优先）、分页、选择和列配置。',
   },
   tooltip: {
     valueImports: ['ElTooltip'],

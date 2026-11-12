@@ -32,7 +32,7 @@ table/theme
 
 ### other
 
-:::demo 展示表格常用属性切换。基础写法：`<s-table :columns="columns" :data="data" :sortable="true" />` 可让有 `prop` 的数据列默认排序。`sortable` 可选 `true / false`，默认 `false`，单列配置优先；示例中的地址列设置 `sortable: false`。`showOverflowTooltip` 可选 `true / false`，默认 `true`；设为 `false` 后所有列默认显示完整内容，单列设置仍优先。`border` 可选 `true / false`，默认 `false`；无边框时表头仍保留列间分隔线以便拖拽。
+:::demo 展示表格常用属性切换。基础写法：`<s-table :columns="columns" :data="data" :sortable="true" />` 可让有 `prop` 的数据列默认排序。`sortable` 可选 `true / false`，默认 `false`，单列配置优先；示例中的地址列设置 `sortable: false`。`showOverflowTooltip` 可选 `true / false`，默认 `true`；设为 `false` 后所有列默认显示完整内容，单列设置仍优先。`border` 可选 `true / false`，默认 `false`；`simple` 可选 `true / false`，默认 `true`。无边框时表头仍保留列间分隔线以便拖拽。
 table/other
 :::
 
@@ -146,7 +146,7 @@ table/compact
 |        `size`         | 表格和分页尺寸，支持 `small` / `default` / `large`                       | string  | `''`           |
 |        `theme`        | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`           | string  | `default`      |
 |     `background`      | 表格自身及表体背景色，支持 CSS 颜色值                                    | string  | -              |
-|       `simple`        | 是否使用简洁表格样式，去除单元格左右边框                                 | boolean | `false`        |
+|       `simple`        | 是否使用简洁表格样式，去除单元格左右边框                                 | boolean | `true`         |
 |       `border`        | 是否显示表格及单元格边框；默认无边框，表头保留列间分隔线并可拖动调整列宽 | boolean | `false`        |
 |      `pageSize`       | 每页条数                                                                 | number  | `30`           |
 |     `pageNumber`      | 当前页码                                                                 | number  | `1`            |

@@ -14,7 +14,7 @@ const otherParams = ref({
   border: false,
   size: 'default',
   disabled: false,
-  simple: false,
+  simple: true,
   showOverflowTooltip: true,
   sortable: true,
 })
@@ -120,9 +120,19 @@ const columns = computed(() => {
       <s-radio v-model="otherParams.size" :options="['small', 'default', 'large']" type="simple" title="size"></s-radio>
       <s-radio v-model="otherParams.showPage" :options="[true, false]" type="simple" title="showPage"></s-radio>
       <s-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></s-radio>
-      <s-radio v-model="otherParams.border" :options="[true, false]" type="simple" title="border"></s-radio>
+      <s-radio
+        v-model="otherParams.border"
+        :options="[true, false]"
+        type="simple"
+        title="border（默认 false）"
+      ></s-radio>
       <s-radio v-model="otherParams.disabled" :options="[true, false]" type="simple" title="disabled"></s-radio>
-      <s-radio v-model="otherParams.simple" :options="[true, false]" type="simple" title="simple"></s-radio>
+      <s-radio
+        v-model="otherParams.simple"
+        :options="[true, false]"
+        type="simple"
+        title="simple（默认 true）"
+      ></s-radio>
       <s-radio
         v-model="otherParams.sortable"
         :options="[true, false]"

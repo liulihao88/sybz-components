@@ -155,7 +155,7 @@ export interface STableProps<Row extends TableRow = TableRow> {
   theme?: SybzComponentTheme
   /** 表格自身及表体背景色，支持 CSS 颜色值 */
   background?: string
-  /** 是否使用简洁表格样式，去除单元格左右边框 */
+  /** 是否使用简洁表格样式，去除单元格左右边框，默认 true */
   simple?: boolean
   /** 是否显示表格及单元格边框，默认 false；无边框时保留表头列间分隔线以便拖拽 */
   border?: boolean
