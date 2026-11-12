@@ -12,7 +12,7 @@ utils/validateForm/base
 
 ### 说明
 
-`validateForm` 用于把 Element Plus 表单实例的回调式 `validate` 封装成 Promise。校验通过时 resolve，校验失败时 reject，并可自动弹出统一错误提示。
+`validateForm` 用于把 Element Plus 表单实例的回调式 `validate` 封装成 Promise。校验通过时 resolve，校验失败时 reject。默认情况下，只有必填错误时提示“存在必填项未填写，请补充完整”；出现格式、长度、重复等错误时提示第一条具体错误消息。无法取得字段错误消息时提示“表单校验未通过，请检查输入”。
 
 ### 调用形式
 
@@ -30,11 +30,11 @@ await validateForm(formRef, options)
 
 `ValidateFormOptions` 字段：
 
-| 字段          | 类型      | 默认值                           | 说明                             |
-| ------------- | --------- | -------------------------------- | -------------------------------- |
-| `message`     | `string`  | `'存在必填项未填写，请补充完整'` | 校验失败时的提示文案。           |
-| `detail`      | `boolean` | `false`                          | 是否在提示文案后拼接失败字段名。 |
-| `showMessage` | `boolean` | `true`                           | 是否通过 `$toast` 显示错误提示。 |
+| 字段          | 类型      | 默认值   | 说明                                     |
+| ------------- | --------- | -------- | ---------------------------------------- |
+| `message`     | `string`  | 自动判断 | 自定义提示文案；传空字符串可关闭该提示。 |
+| `detail`      | `boolean` | `false`  | 是否在提示文案后拼接失败字段名。         |
+| `showMessage` | `boolean` | `true`   | 是否通过 `$toast` 显示错误提示。         |
 
 ### 返回值
 

@@ -72,7 +72,7 @@ type ClearStorageInput = string | string[] | ClearStorageExcludeOptions
 
 interface ValidateFormOptions {
   /**
-   * 校验失败时的提示文案。
+   * 校验失败时的自定义提示文案；不传时根据字段错误自动选择。
    */
   message?: string
   /**
@@ -514,20 +514,35 @@ function _isObjectWithExclude(obj: ClearStorageInput): obj is ClearStorageExclud
  */
 export function validateForm(
   ref: MaybeRef<FormValidateTarget>,
-  { message = '存在必填项未填写，请补充完整', detail = false, showMessage = true }: ValidateFormOptions = {},
+  { message, detail = false, showMessage = true }: ValidateFormOptions = {},
 ): Promise<StorageMap> {
   return new Promise((resolve, reject) => {
     unref(ref).validate((valid, status) => {
       if (valid) {
         resolve(status)
       } else {
-        if (message && showMessage) {
-          let errorText = Object.keys(status)
-          let toastMessage = message
-          if (detail) {
-            toastMessage = message + errorText.join(',')
-          }
-          $toast(toastMessage, 'e')
+        if (showMessage) {
+          const fieldNames = Object.keys(status ?? {})
+          const errors = fieldNames.flatMap((field) => {
+            const fieldErrors = status[field]
+            return Array.isArray(fieldErrors) ? fieldErrors : [fieldErrors]
+          })
+          const errorMessages = errors
+            .map((error) => error?.message)
+            .filter((errorMessage): errorMessage is string => typeof errorMessage === 'string' && !!errorMessage.trim())
+          const nonRequiredMessage = errors.find((error) => {
+            const errorMessage = error?.message
+            if (typeof errorMessage !== 'string' || !errorMessage.trim()) return false
+            if ('fieldValue' in Object(error) && !isEmpty(error.fieldValue)) return true
+            return (
+              !/^(请输入|请选择|请填写|请上传|请勾选|不能为空)/.test(errorMessage) ||
+              /^请输入(?:正确|非负|正|整数|数字|\d|至少|最多|不超过)/.test(errorMessage)
+            )
+          })?.message
+          const defaultMessage =
+            nonRequiredMessage ?? (errorMessages.length ? '存在必填项未填写，请补充完整' : '表单校验未通过，请检查输入')
+          const toastMessage = message === undefined ? defaultMessage : message
+          if (toastMessage) $toast(detail ? toastMessage + fieldNames.join(',') : toastMessage, 'e')
         }
         reject(status)
       }

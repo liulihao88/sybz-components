@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
-import { validate, validateForm } from '@sybz-components/utils'
+import { validate, validateForm } from '../../../../packages/utils/src/index'
 import type { FormInstance } from 'element-plus'
 const formRef = ref<FormInstance | null>(null)
-const form = ref({})
+const form = ref({ name: '', number: '', code: '' })
 
 const rules = computed(() => {
   return {
     name: [validate()],
     number: [validate('number')],
+    code: [
+      { required: true, message: '请输入编号', trigger: 'blur' },
+      { max: 6, message: '编号最多输入 6 个字符', trigger: 'blur' },
+      {
+        validator: (_rule, value, callback) => callback(value === '123456' ? new Error('编号已存在') : undefined),
+        trigger: 'blur',
+      },
+    ],
   }
 })
 const submit = async () => {
@@ -33,6 +41,9 @@ const submit4 = async () => {
       </el-form-item>
       <el-form-item label="只能输入正整数" prop="number">
         <s-input v-model="form.number" />
+      </el-form-item>
+      <el-form-item label="编号（最多 6 位，123456 已存在）" prop="code">
+        <s-input v-model="form.code" />
       </el-form-item>
     </el-form>
 
