@@ -179,6 +179,7 @@ describe('base utils', () => {
   })
 
   it('wraps form validation as a promise', async () => {
+    elementPlusMocks.message.mockClear()
     const successForm = {
       validate(callback: (valid: boolean, status: Record<string, unknown>) => void) {
         callback(true, { name: 'ok' })
@@ -186,6 +187,7 @@ describe('base utils', () => {
     }
 
     await expect(validateForm(ref(successForm))).resolves.toEqual({ name: 'ok' })
+    expect(elementPlusMocks.message).not.toHaveBeenCalled()
 
     const errorStatus = { name: [{ message: '请输入名称' }] }
     const failForm = {
@@ -195,6 +197,44 @@ describe('base utils', () => {
     }
 
     await expect(validateForm(failForm, { showMessage: false })).rejects.toBe(errorStatus)
+    expect(elementPlusMocks.message).not.toHaveBeenCalled()
+  })
+
+  it('selects a form error message and preserves explicit overrides', async () => {
+    elementPlusMocks.message.mockClear()
+    const validateWithStatus = (status: Record<string, unknown>) => ({
+      validate(callback: (valid: boolean, errors: Record<string, unknown>) => void) {
+        callback(false, status)
+      },
+    })
+    const expectToast = (message: string) =>
+      expect(elementPlusMocks.message).toHaveBeenLastCalledWith(expect.objectContaining({ message, type: 'error' }))
+
+    const required = { name: [{ message: '请输入名称' }] }
+    await expect(validateForm(validateWithStatus(required))).rejects.toBe(required)
+    expectToast('存在必填项未填写，请补充完整')
+
+    const mixed = {
+      name: [{ message: '请输入名称' }],
+      code: [{ message: '编号最多输入 6 个字符' }],
+    }
+    await expect(validateForm(validateWithStatus(mixed))).rejects.toBe(mixed)
+    expectToast('编号最多输入 6 个字符')
+
+    const duplicate = { code: [{ message: '编号已存在', fieldValue: '123456' }] }
+    await expect(validateForm(validateWithStatus(duplicate))).rejects.toBe(duplicate)
+    expectToast('编号已存在')
+
+    const invalid = { phone: [{ message: '请输入正确的手机号' }] }
+    await expect(validateForm(validateWithStatus(invalid))).rejects.toBe(invalid)
+    expectToast('请输入正确的手机号')
+
+    await expect(validateForm(validateWithStatus(mixed), { message: '请检查表单', detail: true })).rejects.toBe(mixed)
+    expectToast('请检查表单name,code')
+
+    const callCount = elementPlusMocks.message.mock.calls.length
+    await expect(validateForm(validateWithStatus(mixed), { message: '' })).rejects.toBe(mixed)
+    expect(elementPlusMocks.message).toHaveBeenCalledTimes(callCount)
   })
 
   it('delays and invokes optional callback', async () => {
