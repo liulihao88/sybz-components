@@ -10,6 +10,12 @@
 utils/validateForm/base
 :::
 
+### 通常用法
+
+:::demo
+utils/validateForm/other
+:::
+
 ### 说明
 
 `validateForm` 用于把 Element Plus 表单实例的回调式 `validate` 封装成 Promise。校验通过时 resolve，校验失败时 reject。默认情况下，只有必填错误时提示“存在必填项未填写，请补充完整”；出现格式、长度、重复等错误时提示第一条具体错误消息。无法取得字段错误消息时提示“表单校验未通过，请检查输入”。
