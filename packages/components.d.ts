@@ -473,13 +473,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
      *
-     * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
+     * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示；tooltipAttrs 可透传并覆盖内部 s-tooltip 属性。
      */
     STag: (typeof import('./types/components/tag'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
      *
-     * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
+     * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示；tooltipAttrs 可透传并覆盖内部 s-tooltip 属性。
      */
     's-tag': (typeof import('./types/components/tag'))['default']
     /**

@@ -1158,6 +1158,8 @@ export interface STagSelfProps extends SCommonProps {
   theme?: SybzComponentTheme
   size?: SybzComponentSize
   config?: SybzRecord
+  /** 透传给内部 s-tooltip 的属性，优先于溢出提示默认配置 */
+  tooltipAttrs?: STooltipProps & SybzRecord
 }
 
 export type STagProps = STagSelfProps & Partial<Omit<TagPropsPublic, keyof STagSelfProps>>

@@ -66,6 +66,14 @@ tag/overflow
 tag/commonProps
 :::
 
+### other
+
+基础写法：`<s-tag width="120" :tooltip-attrs="{ placement: 'bottom', showAfter: 500 }">较长的标签文本</s-tag>`。`tooltipAttrs` 接受 `s-tooltip` 的属性对象，默认 `{}`；例如 `placement` 默认 `top`，`showAfter` 默认 `0` 毫秒。传入的属性优先于内部默认值；未设置时仍只在标签文本溢出时显示提示。
+
+:::demo 切换 Tooltip 的位置和显示延迟，悬停在标签文本上观察效果。
+tag/other
+:::
+
 ### 属性
 
 |      属性名      | 说明                                                           | 类型                                                  | 默认值    |
@@ -86,6 +94,7 @@ tag/commonProps
 |     `color`      | 标签文字颜色                                                   | string                                                | `''`      |
 |   `background`   | 标签背景，支持普通颜色、渐变及其他合法 CSS background          | string                                                | `''`      |
 | `hoverAnimation` | 是否启用公共悬停上移动画                                       | boolean                                               | `false`   |
+|  `tooltipAttrs`  | 透传给内部 `s-tooltip` 的属性，可覆盖默认 Tooltip 设置         | object                                                | `{}`      |
 
 文本超出标签可用宽度时会自动显示省略号，并仅在鼠标移入溢出文本时显示完整内容。`closable` 标签的关闭图标不会被文本挤压。
 

@@ -899,10 +899,11 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tag',
       slots: ['default'],
-      description: 's-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。',
+      description:
+        's-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示；tooltipAttrs 可透传并覆盖内部 s-tooltip 属性。',
       hoverProps: componentHoverProps(
         'STagSelfProps',
-        ['SCommonProps', 'STagSelfProps', 'SybzComponentSize', 'SybzComponentTheme', 'SybzRecord'],
+        ['SCommonProps', 'STagSelfProps', 'STooltipProps', 'SybzComponentSize', 'SybzComponentTheme', 'SybzRecord'],
         ["import type { TagPropsPublic } from 'element-plus/es/components/tag'"],
       ),
     },

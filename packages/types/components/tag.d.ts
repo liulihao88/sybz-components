@@ -1,6 +1,13 @@
 import { ElTag } from 'element-plus'
 import type { TagPropsPublic } from 'element-plus/es/components/tag'
-import type { SCommonProps, STagSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type {
+  SCommonProps,
+  STagSelfProps,
+  STooltipProps,
+  SybzComponentSize,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElTagInstance = InstanceType<typeof ElTag>
@@ -8,7 +15,7 @@ type ElTagInstance = InstanceType<typeof ElTag>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/tag/home.html | 查看文档}
  *
- * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示。
+ * s-tag 标签组件，支持状态映射、主题、尺寸，并在文本溢出时自动省略和显示完整提示；tooltipAttrs 可透传并覆盖内部 s-tooltip 属性。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Tag 的公开属性。
  */
@@ -35,6 +42,8 @@ export type STagComponent = {
       type?: TagPropsPublic['type']
       size?: SybzComponentSize
       config?: SybzRecord
+      /** 透传给内部 s-tooltip 的属性，优先于溢出提示默认配置 */
+      tooltipAttrs?: STooltipProps & SybzRecord
     } & Omit<
       ElTagInstance['$props'],
       | 'width'
@@ -55,6 +64,7 @@ export type STagComponent = {
       | 'theme'
       | 'size'
       | 'config'
+      | 'tooltipAttrs'
     > &
       SybzStyleProps &
       SybzDimensionProps<STagSelfProps> &

@@ -8,7 +8,7 @@ import { getType, isEmpty } from '@sybz-components/utils'
 import useCommonProps from '@/hooks/useCommonProps'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
-import type { SCommonProps, SybzComponentSize, SybzComponentTheme } from '@/types/component-props'
+import type { SCommonProps, STooltipProps, SybzComponentSize, SybzComponentTheme } from '@/types/component-props'
 type TagType = '' | 'primary' | 'success' | 'info' | 'warning' | 'danger'
 type TagRule = string | number | boolean | any[]
 
@@ -24,6 +24,8 @@ interface TagProps extends SCommonProps {
   theme?: SybzComponentTheme
   size?: SybzComponentSize
   config?: Record<string, any>
+  /** 透传给内部 s-tooltip 的属性，优先于溢出提示默认配置 */
+  tooltipAttrs?: STooltipProps & Record<string, any>
 }
 
 const props = withDefaults(defineProps<TagProps>(), {
@@ -43,6 +45,7 @@ const props = withDefaults(defineProps<TagProps>(), {
   theme: 'default',
   size: 'default',
   config: () => ({}),
+  tooltipAttrs: () => ({}),
 })
 const mergedProps = useGlobalComponentConfig('tag', props)
 const { commonClass, commonStyle } = useCommonProps(mergedProps)
@@ -180,7 +183,13 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
     :class="[tagClass, commonClass]"
     :style="[commonStyle, style]"
   >
-    <s-tooltip :content="tooltipContent" :disabled="!isOverflow" :show-slot="false" placement="top">
+    <s-tooltip
+      :content="tooltipContent"
+      :disabled="!isOverflow"
+      :show-slot="false"
+      placement="top"
+      v-bind="mergedProps.tooltipAttrs"
+    >
       <template #trigger>
         <span ref="textRef" class="s-tag__text" @mouseenter="updateOverflow">
           <slot>
