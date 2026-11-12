@@ -585,6 +585,10 @@ onBeforeUnmount(() => {
     margin-bottom: 16px;
     overflow: hidden;
   }
+  :deep(.el-dialog__body) {
+    max-height: calc(100vh - 30vh - 92px);
+    overflow-y: auto;
+  }
   :deep(.s-dialog__maximize-height .el-dialog__header),
   :deep(.s-dialog__maximize-height .el-dialog__footer) {
     flex: 0 0 auto;
