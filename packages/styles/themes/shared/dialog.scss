@@ -25,6 +25,7 @@
   }
 
   .s-dialog.s-#{$theme}-dialog.s-#{$theme}-dialog {
+    &.el-dialog,
     .el-dialog {
       overflow: hidden;
       border-radius: $dialog-radius;
@@ -106,6 +107,7 @@
       border-top: 0px solid var(--line);
     }
 
+    &.s-dialog__drawer--#{$theme},
     .s-dialog__drawer--#{$theme} {
       border-left: 1px solid $drawer-border;
       border-top-left-radius: $drawer-radius;

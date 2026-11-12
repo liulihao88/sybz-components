@@ -233,6 +233,8 @@ const defaultPanelAttrs = computed(() => {
 
 const panelClass = computed(() => {
   return [
+    's-dialog',
+    componentClass.value,
     attrs.class,
     mergedProps.value.loading ? 's-dialog__content-loading' : '',
     hasPanelHeight.value ? 's-dialog__fixed-height' : '',
@@ -461,35 +463,6 @@ onBeforeUnmount(() => {
 }
 
 .s-dialog {
-  :deep(.el-dialog:not(.is-fullscreen)) {
-    display: flex;
-    flex-direction: column;
-  }
-
-  :deep(.el-dialog:not(.is-fullscreen, .s-dialog__fixed-height, .s-dialog__maximize-height)) {
-    max-height: calc(100dvh - var(--el-dialog-margin-top, 15vh) - 50px);
-    overflow: hidden;
-  }
-
-  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__header),
-  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__footer) {
-    flex: 0 0 auto;
-  }
-
-  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__body) {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  :deep(.el-dialog:not(.is-fullscreen) > .el-dialog__body > .dialog_slot_box:not(.dialog_slot_box--fill)) {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
-  }
-
   &.s-shijingshan-dialog.s-dialog--warning {
     :deep(.s-dialog__confirm-button) {
       --s-sjs-button-type-color: #f59e0b;
@@ -695,6 +668,37 @@ onBeforeUnmount(() => {
     width: 45px;
     height: 45px;
   }
+  .s-dialog__target {
+    display: inline-flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    max-width: calc(100% - 8px);
+    height: auto;
+    min-height: 24px;
+    padding: 0 8px;
+    margin: 0 4px;
+    font-family: 'Roboto Mono', 'PingFang SC', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    vertical-align: middle;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  :deep(.s-dialog__target .el-tag__content) {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+</style>
+
+<!-- ElDialog 可挂载到 body；面板布局按实际节点类名匹配，避免依赖外层 .s-dialog。 -->
+<style lang="scss">
+.s-dialog__panel {
   .s-dialog__header {
     display: flex;
     align-items: flex-start;
@@ -754,31 +758,68 @@ onBeforeUnmount(() => {
     font-weight: 400;
     line-height: 20px;
   }
+}
 
-  .s-dialog__target {
-    display: inline-flex;
-    align-items: flex-start;
-    box-sizing: border-box;
-    max-width: calc(100% - 8px);
-    height: auto;
-    min-height: 24px;
-    padding: 0 8px;
-    margin: 0 4px;
-    font-family: 'Roboto Mono', 'PingFang SC', monospace;
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 20px;
-    vertical-align: middle;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+.s-dialog__panel.el-dialog {
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  padding: 0 !important;
+
+  &:not(.is-fullscreen, .s-dialog__fixed-height, .s-dialog__maximize-height) {
+    max-height: calc(100dvh - var(--el-dialog-margin-top, 15vh) - 50px);
+    overflow: hidden;
   }
 
-  :deep(.s-dialog__target .el-tag__content) {
-    min-width: 0;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+  &.s-dialog__maximize-height {
+    height: calc(100dvh - 32px);
+    max-height: calc(100dvh - 32px);
+    margin-top: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  > .el-dialog__header,
+  > .el-dialog__footer {
+    flex: 0 0 auto;
+  }
+
+  > .el-dialog__header {
+    padding: 10px 40px 10px 16px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+  }
+
+  > .el-dialog__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 10px 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  > .el-dialog__body {
+    padding: 16px;
+  }
+
+  .el-dialog__headerbtn {
+    width: 45px;
+    height: 45px;
+  }
+
+  &:not(.is-fullscreen) > .el-dialog__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+
+    > .dialog_slot_box:not(.dialog_slot_box--fill) {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+    }
   }
 }
 </style>
