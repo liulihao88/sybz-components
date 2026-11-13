@@ -15,6 +15,7 @@ interface CardProps {
   h?: string | number | boolean
   title?: string
   subTitle?: string
+  append?: string
   extra?: string
   hoverAnimation?: boolean
   shadow?: 'always' | 'never' | 'hover'
@@ -38,6 +39,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   height: undefined,
   title: '',
   subTitle: '',
+  append: '',
   extra: '',
   hoverAnimation: false,
   shadow: 'never',
@@ -65,7 +67,13 @@ const mergedProps = useGlobalComponentConfig('card', props)
 const { style } = useStyleProps()
 
 const hasHeader = computed(() =>
-  Boolean(slots.header || mergedProps.value.title || mergedProps.value.subTitle || mergedProps.value.extra),
+  Boolean(
+    slots.header ||
+    mergedProps.value.title ||
+    mergedProps.value.subTitle ||
+    mergedProps.value.append ||
+    mergedProps.value.extra,
+  ),
 )
 const hasBody = computed(() => Boolean(slots.default))
 const hasFooter = computed(() => Boolean(slots.footer))
@@ -277,6 +285,7 @@ const handleIconClick = (event) => {
           <s-title
             :title="mergedProps.title"
             :sub-title="mergedProps.subTitle"
+            :append="mergedProps.append"
             :extra="mergedProps.extra"
             :theme="mergedProps.theme"
             :style="{ ...mergedProps.headerStyle }"

@@ -4,7 +4,7 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/card/home.html | 查看文档}
  *
- * s-card 卡片组件，title、subTitle 和 extra 支持直接传入字符串，并支持区块合并、展开收起、阴影、透明背景和主题样式。
+ * s-card 卡片组件，title、subTitle、append 和 extra 支持直接传入字符串；append 显示在主标题右侧，并支持区块合并、展开收起、阴影、透明背景和主题样式。
  *
  * 先提示 sybz 自身属性。
  */
@@ -16,6 +16,8 @@ export type SCardComponent = {
       size?: SybzComponentSize | string | number
       title?: string
       subTitle?: string
+      /** 主标题右侧的纯文本，样式与副标题一致 */
+      append?: string
       extra?: string
       hoverAnimation?: boolean
       shadow?: 'always' | 'never' | 'hover'

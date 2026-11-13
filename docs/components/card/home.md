@@ -38,12 +38,6 @@ card/theme
 card/callapse
 :::
 
-### size 内边距（默认值 `default`）
-
-:::demo 展示 size 控制内边距。基础写法：`<SCard :size="20"></SCard>`。属性：`size` 可选 `small / default / large / string / number`，默认值 `default`；传入预设值之外的数字或 CSS 长度时，会通过 `processWidth` 转成 padding 值。
-card/other
-:::
-
 ### 自适应高度
 
 :::demo 展示固定高度配置。基础写法：`<SCard title="固定高度并滚动内容" height="280"></SCard>`。属性：`height` 类型 `string / number`，默认值 `''`；设置后卡片保持固定高度，默认由 body 区域滚动内容。
@@ -76,6 +70,14 @@ card/mergeSections
 card/titleExtra
 :::
 
+### 其他属性：size 与 append（默认值分别为 `default`、`''`）
+
+`size` 控制内边距，基础写法：`<SCard :size="20"></SCard>`。可选 `small / default / large`，也支持数字和 CSS 长度，默认 `default`。`append` 显示在主标题右侧，样式与 `s-title` 的追加内容一致；基础写法：`<SCard title="服务概览" append="草稿">卡片内容</SCard>`，类型为字符串，默认 `''`。设置了 `append` 时，即使没有 `title` 也会显示默认头部。
+
+:::demo 在同一示例中切换 `size` 与 `append` 文本。`append` 可传任意字符串，默认 `''`；示例可选空字符串、`草稿`、`已发布`。
+card/other
+:::
+
 ### API
 
 |          属性名          | 说明                                                          | 类型                                            | 默认值    |
@@ -85,6 +87,7 @@ card/titleExtra
 |         `height`         | 卡片外层高度；设置后内容区在固定高度内滚动                    | string / number                                 | `''`      |
 |         `title`          | 默认头部标题，传入后会使用 `s-title` 渲染                     | string                                          | `''`      |
 |        `subTitle`        | 默认头部副标题，传给 `s-title`                                | string                                          | `''`      |
+|         `append`         | 主标题右侧的追加文本，样式与副标题一致                        | string                                          | `''`      |
 |         `extra`          | 默认头部右侧文字，传给 `s-title`                              | string                                          | `''`      |
 |     `hoverAnimation`     | 鼠标移入容器时是否启用轻微上浮动画                            | boolean                                         | `false`   |
 |         `shadow`         | 阴影显示时机，语义同 Element Plus Card                        | `always` / `never` / `hover`                    | `never`   |
@@ -109,12 +112,12 @@ card/titleExtra
 
 ### 插槽
 
-|  插槽名   | 说明                                                    |
-| :-------: | ------------------------------------------------------- |
-| `default` | 内容区域                                                |
-| `header`  | 自定义头部，会覆盖默认的 `title`、`subTitle` 和 `extra` |
-|  `icon`   | 自定义折叠图标                                          |
-| `footer`  | 底部区域                                                |
+|  插槽名   | 说明                                                              |
+| :-------: | ----------------------------------------------------------------- |
+| `default` | 内容区域                                                          |
+| `header`  | 自定义头部，会覆盖默认的 `title`、`subTitle`、`append` 和 `extra` |
+|  `icon`   | 自定义折叠图标                                                    |
+| `footer`  | 底部区域                                                          |
 
 ### 说明
 

@@ -449,6 +449,8 @@ export interface SCardProps {
   h?: string | number | boolean
   title?: string
   subTitle?: string
+  /** 主标题右侧的纯文本，样式与副标题一致 */
+  append?: string
   extra?: string
   hoverAnimation?: boolean
   shadow?: 'always' | 'never' | 'hover'

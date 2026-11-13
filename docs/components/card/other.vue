@@ -3,6 +3,7 @@ import { ref } from 'vue'
 const size = ref<string | number>('default')
 const sizeOptions = ['large', 'default', 'small', 20, '2rem', 0]
 const isMerge = ref(false)
+const append = ref('')
 </script>
 
 <template>
@@ -18,6 +19,13 @@ const isMerge = ref(false)
         <el-button type="primary">确认</el-button>
       </template>
     </SCard>
+    <s-radio
+      v-model="append"
+      :options="['', '草稿', '已发布']"
+      type="simple"
+      title="append（默认空字符串；可传任意字符串）"
+    ></s-radio>
+    <SCard title="服务概览" sub-title="实时数据" :append="append" extra="查看详情">卡片内容</SCard>
   </div>
 </template>
 

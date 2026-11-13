@@ -85,13 +85,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/card/home.html | 查看文档}
      *
-     * s-card 卡片组件，title、subTitle 和 extra 支持直接传入字符串，并支持区块合并、展开收起、阴影、透明背景和主题样式。
+     * s-card 卡片组件，title、subTitle、append 和 extra 支持直接传入字符串；append 显示在主标题右侧，并支持区块合并、展开收起、阴影、透明背景和主题样式。
      */
     SCard: (typeof import('./types/components/card'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/card/home.html | 查看文档}
      *
-     * s-card 卡片组件，title、subTitle 和 extra 支持直接传入字符串，并支持区块合并、展开收起、阴影、透明背景和主题样式。
+     * s-card 卡片组件，title、subTitle、append 和 extra 支持直接传入字符串；append 显示在主标题右侧，并支持区块合并、展开收起、阴影、透明背景和主题样式。
      */
     's-card': (typeof import('./types/components/card'))['default']
     /**
