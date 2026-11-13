@@ -4,6 +4,11 @@ import * as utils from '@/utils/src/index'
 import hot from '../../../.vitepress/theme/assets/svg/hot.svg?component'
 import { ElMessage } from 'element-plus'
 const { $toast, delay } = utils
+const showComponent = () => {
+  $toast('文件<s-tag>你好</s-tag> 上传 <s-button type="danger" h="20">无敌</s-button>成功', {
+    dangerouslyUseHTMLString: true,
+  })
+}
 const base = () => {
   $toast('基础成功')
   $toast('基础警告', 'w')
@@ -19,6 +24,14 @@ const elBase = () => {
 const duration5000 = () => {
   utils.$toast('持续5秒', {
     duration: 5000,
+  })
+}
+const customIcon = () => {
+  $toast('自定义消息图标', {
+    icon: hot,
+  })
+  $toast('自定义图标2', {
+    icon: 'mdi:ab-testing',
   })
 }
 const noClose = () => {
@@ -152,24 +165,16 @@ const showBigObject = () => {
 <template>
   <div>
     <s-flex wrap="wrap" gap="small">
-      <el-button type="primary" @click="base">基础</el-button>
-      <el-button type="primary" @click="elBase">element-plus风格</el-button>
-      <el-button type="primary" @click="duration5000">持续5秒</el-button>
-      <el-button type="primary" @click="noClose">永不关闭</el-button>
-      <el-button type="primary" @click="$toast('悬停可关闭')">悬停可关闭（默认）</el-button>
-      <el-button type="primary" @click="$toast('无关闭按钮', { showClose: false })">无关闭按钮</el-button>
-      <el-button type="primary" @click="$toast('分组消息合并', { grouping: true })">分组消息合并</el-button>
-      <el-button
-        :icon="hot"
-        @click="
-          $toast('自定义消息图标', {
-            icon: hot,
-          })
-        "
-      >
-        自定义图标
-      </el-button>
-      <!-- <el-button
+      <s-button type="primary" @click="base">基础</s-button>
+      <s-button type="primary" content="dangerouslyUseHTMLString" @click="showComponent">内置组件</s-button>
+      <s-button type="primary" @click="elBase">element-plus风格</s-button>
+      <s-button type="primary" @click="duration5000">持续5秒</s-button>
+      <s-button type="primary" @click="noClose">永不关闭</s-button>
+      <s-button type="primary" @click="$toast('悬停可关闭')">悬停可关闭（默认）</s-button>
+      <s-button type="primary" @click="$toast('无关闭按钮', { showClose: false })">无关闭按钮</s-button>
+      <s-button type="primary" @click="$toast('分组消息合并', { grouping: true })">分组消息合并</s-button>
+      <s-button :icon="hot" @click="customIcon">自定义图标</s-button>
+      <!-- <s-button
         @click="
           ElMessage({
             message: '哈哈',
@@ -178,9 +183,9 @@ const showBigObject = () => {
         "
       >
         自定义图标
-      </el-button> -->
-      <el-button type="primary" @click="closeOther">关闭其他, 只保留一个</el-button>
-      <el-button
+      </s-button> -->
+      <s-button type="primary" @click="closeOther">关闭其他, 只保留一个</s-button>
+      <s-button
         @click="
           $toast('3秒后关闭', {
             duration: 3000,
@@ -189,8 +194,8 @@ const showBigObject = () => {
         "
       >
         自定义延时关闭时间并设置关闭后其他操作
-      </el-button>
-      <el-button
+      </s-button>
+      <s-button
         @click="
           $toast(h('p', null, [h('span', null, 'Message can be '), h('i', { style: 'color: teal' }, 'VNode')]), {
             customClass: 'el',
@@ -198,9 +203,9 @@ const showBigObject = () => {
         "
       >
         自定义内容, 使用h函数
-      </el-button>
-      <el-button type="primary" @click="showObject">HTML 片段作为正文内容</el-button>
-      <el-button type="primary" @click="showBigObject">显示大对象</el-button>
+      </s-button>
+      <s-button type="primary" @click="showObject">HTML 片段作为正文内容</s-button>
+      <s-button type="primary" @click="showBigObject">显示大对象</s-button>
     </s-flex>
   </div>
 </template>

@@ -10,10 +10,20 @@
 utils/$toast/base
 :::
 
-### 通常用法
+### other
+
+已在 Vue 应用中全局注册的组件可以直接写进字符串：
+
+```ts
+import { $toast } from '@sybz-components/utils'
+
+$toast('<s-tag type="danger">你好</s-tag>', { dangerouslyUseHTMLString: true })
+```
+
+`dangerouslyUseHTMLString: true` 会从当前 Vue 应用的全局组件表查找 `s-tag` 并渲染。第二个参数需要使用对象语法 `{ dangerouslyUseHTMLString: true }`。
 
 :::demo
-utils/$toast/usually
+utils/$toast/other
 :::
 
 ### 说明
@@ -69,7 +79,7 @@ $toast({ message: '单次使用成华主题', theme: 'chenghua' })
 
 ### 注意事项
 
-`$toast` 依赖 Element Plus 的 `ElMessage`，需要在浏览器端且项目已正确引入 Element Plus 样式。需要渲染 HTML 字符串时，可通过配置项传 `dangerouslyUseHTMLString: true`。
+`$toast` 依赖 Element Plus 的 `ElMessage`，需要在浏览器端且项目已正确引入 Element Plus 样式。`dangerouslyUseHTMLString: true` 会解析字符串并渲染已全局注册的 Vue 组件；仅传可信内容。也可直接传 Vue VNode 或返回 VNode 的函数。
 
 :::utils-source $toast
 :::

@@ -404,6 +404,24 @@ describe('base utils', () => {
     })
   })
 
+  it('resolves global Vue components from an HTML toast string', () => {
+    const Tag = { name: 'STag', render: () => null }
+    const appRoot = document.createElement('div') as HTMLDivElement & { _vue_app?: unknown }
+    appRoot.id = 'app'
+    appRoot._vue_app = { _context: { components: { STag: Tag } } }
+    document.body.append(appRoot)
+
+    try {
+      $toast('<s-tag type="danger">你好</s-tag>', { dangerouslyUseHTMLString: true })
+      const options = elementPlusMocks.message.mock.lastCall?.[0]
+      expect(options.dangerouslyUseHTMLString).toBe(false)
+      expect(options.message.children[0].type).toBe(Tag)
+      expect(options.message.children[0].props.type).toBe('danger')
+    } finally {
+      appRoot.remove()
+    }
+  })
+
   it('copies text and optionally hides toast', () => {
     const execCommand = vi.fn()
     Object.defineProperty(document, 'execCommand', {

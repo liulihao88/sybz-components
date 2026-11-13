@@ -1,6 +1,6 @@
 import type { SybzComponentTheme } from './theme'
-import { unref, isRef, isVNode, toRaw } from 'vue'
-import type { AppContext, VNode } from 'vue'
+import { unref, isRef, isVNode, toRaw, h, Fragment } from 'vue'
+import type { AppContext, Component, VNode } from 'vue'
 import type { Ref } from 'vue'
 import { consola } from 'consola'
 import { cloneDeep } from 'es-toolkit' // 这里不要lodash-es的原因是, 体积太大, 超过500kb无法打包
@@ -262,6 +262,33 @@ type MessageType = 'success' | 'info' | 'error' | 'warning'
 type ShortType = 's' | 'i' | 'e' | 'w'
 type ToastType = MessageType | ShortType
 
+function renderToastComponents(message: string, components: Record<string, Component>): VNode {
+  const template = document.createElement('template')
+  template.innerHTML = message
+
+  const renderNode = (node: Node): VNode | string | null => {
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent ?? ''
+    if (node.nodeType !== Node.ELEMENT_NODE) return null
+
+    const element = node as Element
+    const tag = element.tagName.toLowerCase()
+    const pascalTag = tag.replace(/(^|-)([a-z])/g, (_, _separator, letter: string) => letter.toUpperCase())
+    const component = components[tag] ?? components[pascalTag]
+    const attrs = Object.fromEntries(
+      Array.from(element.attributes, ({ name, value }) => [name, value === '' ? true : value]),
+    )
+    const children = Array.from(element.childNodes, renderNode).filter((child) => child !== null)
+
+    return component ? h(component, attrs, { default: () => children }) : h(tag, attrs, children)
+  }
+
+  return h(
+    Fragment,
+    null,
+    Array.from(template.content.childNodes, renderNode).filter((child) => child !== null),
+  )
+}
+
 /**
  * @description 显示消息提示。默认展示成功状态，并支持类型简写、完整配置和快捷调用。
  *
@@ -309,11 +336,19 @@ export function $toast(
   }
 
   function isToastOptions(obj: any): obj is ToastOptions {
-    return typeof obj === 'object' && obj !== null
+    return typeof obj === 'object' && obj !== null && !isVNode(obj)
   }
 
   function showToast(options: ToastOptions) {
     const { theme = utilsConfig.theme, customClass, ...messageOptions } = options
+
+    if (typeof messageOptions.message === 'string' && messageOptions.dangerouslyUseHTMLString) {
+      const registeredComponents = _resolveAppContext(null)?.components ?? {}
+      if (Object.keys(registeredComponents).length > 0) {
+        messageOptions.message = renderToastComponents(messageOptions.message, registeredComponents)
+        messageOptions.dangerouslyUseHTMLString = false
+      }
+    }
 
     if (options.closeAll) {
       ElMessage.closeAll()
