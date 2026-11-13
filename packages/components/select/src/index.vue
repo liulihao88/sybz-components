@@ -99,7 +99,7 @@
       </div>
     </el-tooltip>
 
-    <span v-if="mergedProps.showQuick" class="s-select__select-box">
+    <span v-if="mergedProps.showQuick" class="s-select__select-box" @mousedown.prevent>
       <span class="s-select__select-box__inner">
         <s-icon icon="ArrowUp" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(false)" />
         <div class="s-select__divider" />
@@ -910,6 +910,7 @@ function emitChangeSelect(
   margin-left: auto;
 }
 .s-select__select-box {
+  user-select: none;
   background: var(--el-fill-color-light);
   vertical-align: middle;
   position: relative;
