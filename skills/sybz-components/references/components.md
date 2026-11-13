@@ -54,7 +54,7 @@
 - `s-item` 默认有边框；无边框传 `:border="false"`；`border` 接受 CSS 边框，`background` 接受纯色/渐变。
 - `s-card` 无背景传 `transparent`。复杂表单才传 `column`、`align`、`formItemAttrs`。
 - `s-table` 通常只需 `data/columns/total/@page-change`，不要重复 `showPage`、`pageSize`、`width="100%"`。
-- `s-table` 的 `border` 默认 `false`、`simple` 默认 `true`，表头仍保留可见的列间分隔线并支持拖拽列宽；需要完整单元格边框时才传 `border`。
+- `s-table` 的 `border` 默认 `true`、`simple` 默认 `true`；`simple: true` 或 `border: false` 时，表头列间线平时融入背景，鼠标移入对应表头项才显示 1px 分隔线，仍支持拖拽列宽。需要完整单元格边框时设置 `:simple="false"`。
 - 配置 `s-table` 的 `columns` 时，尺寸固定的列用`w`；需要随表格宽度伸缩的列不设固定宽度。仅在内容确实需要下限时设置适度的 `minWidth`，避免给每列都设较大的 `minWidth`，使窄页面产生不必要的横向滚动。固定列宽之和超过容器宽度时同样会溢出，生成或调整列配置时要核对窄屏空间。
 
 ### s-table 硬性约束

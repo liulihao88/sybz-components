@@ -76,7 +76,7 @@ interface TableProps {
   background?: string
   /** 是否使用简洁表格样式，去除单元格左右边框，默认 true */
   simple?: boolean
-  /** 是否显示表格及单元格边框，默认 false；无边框时保留表头列间分隔线以便拖拽 */
+  /** 是否显示表格及单元格边框，默认 true；简洁或无边框时鼠标移入表头才显示列间分隔线 */
   border?: boolean
   pageSize?: number
   pageNumber?: number
@@ -104,7 +104,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   theme: 'default',
   background: undefined,
   simple: true,
-  border: false,
+  border: true,
   pageSize: 30,
   pageNumber: 1,
   pageSizes: () => [10, 30, 50],

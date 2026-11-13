@@ -11,7 +11,7 @@ const data = ref([
 const otherParams = ref({
   showPage: true,
   fixed: false,
-  border: false,
+  border: true,
   size: 'default',
   disabled: false,
   simple: true,
@@ -116,31 +116,59 @@ const columns = computed(() => {
 
 <template>
   <div>
-    <s-flex :gap="[0, 0]" direction="column">
-      <s-radio v-model="otherParams.size" :options="['small', 'default', 'large']" type="simple" title="size"></s-radio>
-      <s-radio v-model="otherParams.showPage" :options="[true, false]" type="simple" title="showPage"></s-radio>
-      <s-radio v-model="otherParams.fixed" :options="[true, false]" type="simple" title="地址固定: fixed"></s-radio>
+    <s-flex :gap="[20, 8]" wrap bg="white" p br="small" mb>
       <s-radio
-        v-model="otherParams.border"
+        v-model="otherParams.size"
+        variant="button"
+        :options="['small', 'default', 'large']"
+        type="simple"
+        title="size"
+      ></s-radio>
+      <s-radio
+        v-model="otherParams.showPage"
+        variant="button"
         :options="[true, false]"
         type="simple"
-        title="border（默认 false）"
+        title="showPage"
       ></s-radio>
-      <s-radio v-model="otherParams.disabled" :options="[true, false]" type="simple" title="disabled"></s-radio>
+      <s-radio
+        v-model="otherParams.fixed"
+        variant="button"
+        :options="[true, false]"
+        type="simple"
+        title="地址固定: fixed"
+      ></s-radio>
+      <s-radio
+        v-model="otherParams.border"
+        variant="button"
+        :options="[true, false]"
+        type="simple"
+        title="border（默认 true）"
+      ></s-radio>
+      <s-radio
+        v-model="otherParams.disabled"
+        variant="button"
+        :options="[true, false]"
+        type="simple"
+        title="disabled"
+      ></s-radio>
       <s-radio
         v-model="otherParams.simple"
+        variant="button"
         :options="[true, false]"
         type="simple"
         title="simple（默认 true）"
       ></s-radio>
       <s-radio
         v-model="otherParams.sortable"
+        variant="button"
         :options="[true, false]"
         type="simple"
         title="sortable（默认 false：有 prop 的列统一排序；地址列单独关闭）"
       ></s-radio>
       <s-radio
         v-model="otherParams.showOverflowTooltip"
+        variant="button"
         :options="[true, false]"
         type="simple"
         title="showOverflowTooltip（默认 true：截断并显示提示；false：显示完整内容）"

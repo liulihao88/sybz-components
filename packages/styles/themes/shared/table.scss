@@ -44,11 +44,6 @@
     border: 0 !important;
   }
 
-  // 保留可见的表头列间线，让无边框表格的列宽拖拽位置易于辨认。
-  :scope:scope:scope:scope:scope > .el-table .el-table__header-wrapper th.el-table__cell:not(:last-child) {
-    box-shadow: inset -1px 0 0 var(--el-border-color);
-  }
-
   :scope:scope:scope:scope:scope > .el-table .el-table__inner-wrapper::before,
   :scope:scope:scope:scope:scope > .el-table .el-table--border::before,
   :scope:scope:scope:scope:scope > .el-table .el-table--border::after,
@@ -59,6 +54,13 @@
   :scope:scope:scope:scope:scope > .el-table .el-table-fixed-column--right::before {
     display: none !important;
     box-shadow: none !important;
+  }
+}
+
+// 简洁或无边框模式下，列间线平时融入表头背景，移入当前表头项时才显示。
+@scope (.s-table:is(.s-table--simple, .s-table--no-border)) to (.s-table) {
+  :scope:scope:scope:scope:scope > .el-table .el-table__header-wrapper th.el-table__cell:not(:last-child):hover {
+    box-shadow: inset -1px 0 0 var(--el-border-color);
   }
 }
 
