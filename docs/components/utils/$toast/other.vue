@@ -5,7 +5,7 @@ import hot from '../../../.vitepress/theme/assets/svg/hot.svg?component'
 import { ElMessage } from 'element-plus'
 const { $toast, delay } = utils
 const showComponent = () => {
-  $toast('文件<s-tag>你好</s-tag> 上传 <s-button type="danger" h="20">无敌</s-button>成功', {
+  $toast('文件<s-tag>你好</s-tag> 上传 <s-button type="danger" h="20" >无敌</s-button>成功', {
     dangerouslyUseHTMLString: true,
   })
 }
@@ -30,9 +30,12 @@ const customIcon = () => {
   $toast('自定义消息图标', {
     icon: hot,
   })
-  $toast('自定义图标2', {
+  $toast('操作成功', { icon: 'Plus' })
+  $toast('正在处理', {
     icon: 'mdi:ab-testing',
+    iconAttrs: { size: 22, color: '#409eff', style: { marginRight: '4px' } },
   })
+  $toast('操作失败', { icon: '❌' })
 }
 const noClose = () => {
   $toast('永不关闭', {
@@ -174,6 +177,8 @@ const showBigObject = () => {
       <s-button type="primary" @click="$toast('无关闭按钮', { showClose: false })">无关闭按钮</s-button>
       <s-button type="primary" @click="$toast('分组消息合并', { grouping: true })">分组消息合并</s-button>
       <s-button :icon="hot" @click="customIcon">自定义图标</s-button>
+      <s-button @click="$toast('Element Plus 图标', { icon: 'Plus' })">Element Plus 图标</s-button>
+      <s-button @click="$toast('Emoji 图标', { icon: '❌' })">Emoji 图标</s-button>
       <!-- <s-button
         @click="
           ElMessage({

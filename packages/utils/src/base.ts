@@ -1,6 +1,6 @@
 import type { SybzComponentTheme } from './theme'
 import { unref, isRef, isVNode, toRaw, h, Fragment } from 'vue'
-import type { AppContext, Component, VNode } from 'vue'
+import type { AppContext, Component, StyleValue, VNode } from 'vue'
 import type { Ref } from 'vue'
 import { consola } from 'consola'
 import { cloneDeep } from 'es-toolkit' // 这里不要lodash-es的原因是, 体积太大, 超过500kb无法打包
@@ -48,7 +48,20 @@ export interface SybzUtilsConfig {
   http?: CreateHttpOptions
 }
 
-export interface ToastOptions extends Partial<MessageOptions> {
+export interface ToastOptions extends Omit<Partial<MessageOptions>, 'icon'> {
+  /** 图标组件，或由全局 SIcon 自动解析的图标名称。 */
+  icon?: string | Component
+  /** 传给 s-icon 或自定义图标组件的属性。 */
+  iconAttrs?: {
+    size?: string | number
+    color?: string
+    source?: 'auto' | 'element-plus' | 'iconify' | 'css' | 'svg' | 'url'
+    type?: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
+    variant?: 'plain' | 'light' | 'solid'
+    class?: string
+    style?: StyleValue
+    [key: string]: unknown
+  }
   /** 是否启用仅在悬停关闭区域时出现的关闭按钮，默认 `true`。 */
   showClose?: boolean
   /**
@@ -340,10 +353,22 @@ export function $toast(
   }
 
   function showToast(options: ToastOptions) {
-    const { theme = utilsConfig.theme, customClass, ...messageOptions } = options
+    const { theme = utilsConfig.theme, customClass, iconAttrs, ...messageOptions } = options
+    const appComponents = _resolveAppContext(null)?.components
+
+    if (typeof messageOptions.icon === 'string') {
+      const icon = appComponents?.SIcon ?? appComponents?.['s-icon']
+      if (icon) {
+        const iconName = messageOptions.icon
+        messageOptions.icon = () => h(icon, { cursor: 'default', ...iconAttrs, icon: iconName })
+      }
+    } else if (messageOptions.icon && iconAttrs) {
+      const icon = messageOptions.icon
+      messageOptions.icon = () => h(icon, iconAttrs)
+    }
 
     if (typeof messageOptions.message === 'string' && messageOptions.dangerouslyUseHTMLString) {
-      const registeredComponents = _resolveAppContext(null)?.components ?? {}
+      const registeredComponents = appComponents ?? {}
       if (Object.keys(registeredComponents).length > 0) {
         messageOptions.message = renderToastComponents(messageOptions.message, registeredComponents)
         messageOptions.dangerouslyUseHTMLString = false
@@ -365,7 +390,7 @@ export function $toast(
       ...messageOptions,
       showClose: options.showClose ?? true,
       customClass: resolvedCustomClass,
-    })
+    } as MessageOptions)
   }
 
   // Case 1: message is options object

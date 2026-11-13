@@ -22,6 +22,19 @@ $toast('<s-tag type="danger">你好</s-tag>', { dangerouslyUseHTMLString: true }
 
 `dangerouslyUseHTMLString: true` 会从当前 Vue 应用的全局组件表查找 `s-tag` 并渲染。第二个参数需要使用对象语法 `{ dangerouslyUseHTMLString: true }`。
 
+`icon` 可直接传 `s-icon` 支持的图标名称。应用已全局注册 `SIcon` 时，`$toast` 会用它渲染字符串图标；原有的 Vue 图标组件传法也继续支持：
+
+```ts
+$toast('操作成功', { icon: 'Plus' })
+$toast('正在处理', {
+  icon: 'mdi:ab-testing',
+  iconAttrs: { size: 22, color: '#409eff', style: { marginRight: '4px' } },
+})
+$toast('操作失败', { icon: '❌' })
+```
+
+字符串图标沿用 `s-icon` 的自动识别规则，包括 Element Plus 名称、Iconify 名称、Emoji、CSS 图标类名和图片 URL。通过 `iconAttrs` 可设置 `size`、`color`、`source`、`type`、`variant`、`class` 和 `style` 等属性；自定义 SVG 名称可写 `iconAttrs: { source: 'svg' }`。
+
 :::demo
 utils/$toast/other
 :::
@@ -61,6 +74,8 @@ $toast.warning(message, options)
 | `closeAll`    | `boolean`                                  | `false`              | 显示当前消息前是否先关闭页面上已有的全部消息。                    |
 | `showClose`   | `boolean`                                  | `true`               | 鼠标停在右上角关闭区域或键盘聚焦按钮时显示；传 `false` 则不渲染。 |
 | `customClass` | `string`                                   | `'s-antd-message'`   | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生外观。          |
+| `icon`        | `string \| Component`                      | 按消息类型           | 字符串按全局 `SIcon` 的自动识别规则渲染，也可传 Vue 图标组件。    |
+| `iconAttrs`   | `object`                                   | -                    | 传给 `SIcon` 或自定义图标组件的属性和样式。                       |
 
 ### 返回值
 

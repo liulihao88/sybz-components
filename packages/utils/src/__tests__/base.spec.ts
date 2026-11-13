@@ -422,6 +422,35 @@ describe('base utils', () => {
     }
   })
 
+  it('renders string icons through the globally registered SIcon', () => {
+    const SIcon = { name: 'SIcon', render: () => null }
+    const appRoot = document.createElement('div') as HTMLDivElement & { _vue_app?: unknown }
+    appRoot.id = 'app'
+    appRoot._vue_app = { _context: { components: { SIcon } } }
+    document.body.append(appRoot)
+
+    try {
+      $toast('图标提示', {
+        icon: 'mdi:ab-testing',
+        iconAttrs: { size: 24, color: '#f00', source: 'iconify', style: { marginRight: '4px' } },
+      })
+      const options = elementPlusMocks.message.mock.lastCall?.[0]
+      expect(options).not.toHaveProperty('iconAttrs')
+      const icon = options.icon()
+      expect(icon.type).toBe(SIcon)
+      expect(icon.props).toMatchObject({
+        icon: 'mdi:ab-testing',
+        cursor: 'default',
+        size: 24,
+        color: '#f00',
+        source: 'iconify',
+        style: { marginRight: '4px' },
+      })
+    } finally {
+      appRoot.remove()
+    }
+  })
+
   it('copies text and optionally hides toast', () => {
     const execCommand = vi.fn()
     Object.defineProperty(document, 'execCommand', {
