@@ -7,6 +7,8 @@ function btnClick() {
 const a = ref(33)
 const isShow = ref(false)
 const confirmLoading = ref(false)
+const appendText = ref('')
+const bodyPadding = ref('默认')
 async function cusConfirm() {
   console.log(`***** 点我作甚  10行 docs/examples/SDialog/usually.vue  15:06:26`)
   confirmLoading.value = true
@@ -27,11 +29,19 @@ function delay(delay = 0, fn = () => {}) {
 </script>
 
 <template>
+  <s-radio v-model="appendText" :options="['', '草稿', '已发布']" type="simple" title="append（默认空字符串）" />
+  <s-radio
+    v-model="bodyPadding"
+    :options="['默认', '0', '24px']"
+    type="simple"
+    title="bodyStyle.padding（默认主题间距）"
+  />
   <el-button type="danger" @click="btnClick">打开dialog</el-button>
   <s-dialog
     ref="dialogRef"
     v-model="isShow"
-    append="append: 我是右侧append"
+    :append="appendText"
+    :body-style="bodyPadding === '默认' ? {} : { padding: bodyPadding }"
     sub-title="subTitle: 我是底部subTitle"
     title="常用的dialog"
     append-to-body

@@ -337,6 +337,8 @@ export interface SDialogSelfProps {
   confirm?: (...args: any[]) => any
   /** 是否在内容区域显示加载状态 */
   loading?: boolean
+  /** 弹窗或抽屉内容区样式；例如 { padding: 0 } */
+  bodyStyle?: import('vue').CSSProperties
   fillSlot?: boolean
   maximizeHeight?: boolean
   hideHeaderIcon?: boolean

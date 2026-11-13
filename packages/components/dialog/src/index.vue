@@ -54,7 +54,7 @@
           </span>
         </div>
       </template>
-      <div v-loading="mergedProps.loading" :class="slotBoxClass">
+      <div v-loading="mergedProps.loading" v-body-style="mergedProps.bodyStyle" :class="slotBoxClass">
         <template v-if="confirmSemantic.variant === 'delete' && !$slots.default">
           <template v-if="confirmSemantic.hasTarget">
             确认要删除
@@ -101,6 +101,7 @@
 import { isSybzTheme } from '../../../utils/src/theme'
 import type { SDialogTheme, SybzComponentTheme } from '../../../types/component-props'
 import { ref, computed, useAttrs, watch, onBeforeUnmount, onMounted } from 'vue'
+import type { CSSProperties, Directive } from 'vue'
 import { getType, processWidth } from '@sybz-components/utils'
 import { resolveConfirmSemantic } from '@/utils/src/confirmSemantic'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -144,6 +145,8 @@ interface DialogProps {
   confirm?: (...args: any[]) => any
   /** 是否在内容区域显示加载状态 */
   loading?: boolean
+  /** 弹窗或抽屉内容区样式；例如 { padding: 0 } */
+  bodyStyle?: CSSProperties
   fillSlot?: boolean
   maximizeHeight?: boolean
   hideHeaderIcon?: boolean
@@ -171,12 +174,34 @@ const props = withDefaults(defineProps<DialogProps>(), {
   enableConfirm: true,
   confirm: undefined,
   loading: false,
+  bodyStyle: () => ({}),
   fillSlot: false,
   maximizeHeight: false,
   hideHeaderIcon: false,
 })
 const mergedProps = useGlobalComponentConfig('dialog', props)
 const { style } = useStyleProps()
+// 默认插槽紧贴 Element Plus 的 body，内联样式可覆盖各主题的默认 padding。
+const bodyStyleKeys = new WeakMap<HTMLElement, string[]>()
+const applyBodyStyle = (content: HTMLElement, value: CSSProperties) => {
+  const body = content.parentElement
+  if (!body?.matches('.el-dialog__body, .el-drawer__body')) return
+
+  for (const key of bodyStyleKeys.get(content) ?? []) body.style.removeProperty(key)
+  const keys: string[] = []
+  for (const [key, styleValue] of Object.entries(value ?? {})) {
+    if (styleValue == null) continue
+    const property = key.startsWith('--') ? key : key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)
+    body.style.setProperty(property, String(styleValue))
+    keys.push(property)
+  }
+  bodyStyleKeys.set(content, keys)
+}
+const vBodyStyle: Directive<HTMLElement, CSSProperties> = {
+  mounted: (el, binding) => applyBodyStyle(el, binding.value),
+  updated: (el, binding) => applyBodyStyle(el, binding.value),
+  beforeUnmount: (el) => applyBodyStyle(el, {}),
+}
 const isBusinessTheme = computed(() => isSybzTheme(mergedProps.value.theme))
 
 const getThemeClass = computed(() => {

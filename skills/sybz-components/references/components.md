@@ -74,6 +74,7 @@
 ```
 
 - `s-dialog` 抽屉用 `mode="drawer"`，不用旧 `type="drawer"`。
+- `s-dialog` 内容区样式用 `bodyStyle`；取消默认内边距传 `:body-style="{ padding: 0 }"`，弹窗和抽屉都适用。
 - `variant`: `default|delete|warning`（默认 `default`）；`target` 生成标准删除正文。三种确认组件语义应一致。
 - 显式标题、正文、按钮文案/类型/attrs 覆盖语义默认值；默认插槽优先于自动正文。
 

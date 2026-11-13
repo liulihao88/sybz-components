@@ -16,6 +16,12 @@
 dialog/base
 :::
 
+### other
+
+:::demo
+dialog/other
+:::
+
 ### 抽屉式(drawer)用法
 
 设置 `mode="drawer"` 时，`s-dialog` 会按抽屉方式展示。`mode` 的可选值是 `dialog` 和 `drawer`，默认值是 `dialog`。设置 `width` 可以控制抽屉宽度，`width` 支持 `string` 和 `number`，默认值是 `''`。
@@ -36,12 +42,6 @@ dialog/drawerFillSlot
 
 :::demo
 dialog/theme
-:::
-
-### other
-
-:::demo
-dialog/other
 :::
 
 ### 插槽
@@ -100,14 +100,6 @@ dialog/variant
 dialog/append
 :::
 
-### 简单标题追加文本（append 默认值：''）
-
-基础写法：`<s-dialog v-model="visible" title="编辑文章" append="草稿">内容</s-dialog>`。`append` 类型为 `string`，默认值为 `''`；传空字符串时不显示追加文本。
-
-:::demo 用选项切换标题后追加的文本。
-dialog/other
-:::
-
 ### 全局默认配置
 
 dialog 支持在 `app.use` 的第二个参数里配置全局默认值，写法和 Element Plus 的全局配置保持一致。
@@ -149,6 +141,7 @@ dialog/height
 |       theme       | 弹框样式，可选 `default` / `norm` / `norm16` / `simple` / `chenghua` / `shijingshan` / `sybz` | string                                        | `default` |
 |       mode        | 展示形态，可选 `dialog` / `drawer`                                                            | string                                        | `dialog`  |
 |      loading      | 是否在内容区域显示加载状态                                                                    | boolean                                       | `false`   |
+|     bodyStyle     | 内容区样式，可用 `{ padding: 0 }` 取消默认内边距                                              | object                                        | `{}`      |
 |      variant      | 语义样式，可选 `default` / `delete` / `warning`                                               | string                                        | `default` |
 |      target       | 删除场景中要操作的目标名称                                                                    | string                                        | -         |
 |  hideHeaderIcon   | 是否隐藏顶部默认icon                                                                          | boolean                                       | false     |
