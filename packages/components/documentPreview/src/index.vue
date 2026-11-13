@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { renderAsync } from 'docx-preview'
+import { Download } from '@element-plus/icons-vue'
 import { processWidth } from '@sybz-components/utils'
 import useSizeAliases from '@/hooks/useSizeAliases'
 import { useStyleProps } from '@/hooks/useStyleProps'
@@ -202,8 +203,18 @@ const frameStyle = computed(() => ({
     <div v-else-if="isWord && !failed" ref="wordRef" class="s-document-preview__word" />
     <div v-else-if="isExcel && !failed" ref="excelRef" class="s-document-preview__excel" />
     <div v-else class="s-document-preview__fallback">
-      <slot name="fallback">当前环境无法在线预览，请下载文件后查看。</slot>
-      <a v-if="download" :href="src" target="_blank" rel="noopener noreferrer" download>下载文件</a>
+      <div><slot name="fallback">当前环境无法在线预览，请下载文件后查看。</slot></div>
+      <a
+        v-if="download"
+        class="s-document-preview__download"
+        :href="src"
+        target="_blank"
+        rel="noopener noreferrer"
+        download
+      >
+        <el-icon><Download /></el-icon>
+        下载文件
+      </a>
     </div>
   </div>
 </template>
@@ -262,9 +273,33 @@ const frameStyle = computed(() => ({
 .s-document-preview__fallback {
   display: flex;
   height: 100%;
+  min-height: 120px;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
+  text-align: center;
   color: var(--el-text-color-secondary);
+}
+.s-document-preview__download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border: 1px solid var(--el-color-primary);
+  border-radius: var(--el-border-radius-base);
+  background: var(--el-color-primary);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.s-document-preview__download:hover,
+.s-document-preview__download:focus-visible {
+  border-color: var(--el-color-primary-light-3);
+  background: var(--el-color-primary-light-3);
+  color: #fff;
 }
 </style>
