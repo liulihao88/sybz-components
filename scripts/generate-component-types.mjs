@@ -915,7 +915,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'STextProps',
       tagName: 's-text',
       description:
-        's-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer。',
+        's-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。',
       slots: ['default'],
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/components/text/src/types.ts'),

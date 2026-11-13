@@ -2,6 +2,8 @@
 
 `s-text` 用于三档常用文字色、状态色和文字排版。默认渲染 `span`，继承父元素字号；可以通过 `component` 改为语义标签。文字层级和 `type` 使用 sybz 主题 token，CSS 标准颜色名按原色显示；全局设置主题时自动继承，也可用 `theme` 单独覆盖。
 
+默认的 `span` 是行内元素，`mt / mb / pt / pb / p / w / h` 等只在块级元素上生效的样式简写会被浏览器忽略；`s-text` 检测到这类属性时会自动补 `display: inline-block` 让它们生效，不需要再额外传 `component="div"`。
+
 ## Hidden Title {.md-hidden}
 
 <DocBasicUsage code='<s-text>文字内容</s-text>' />
@@ -39,3 +41,5 @@ text/other
 | `unselectable` | boolean                                                                                                                        | `false`   | 禁止选择                                           |
 
 原生 HTML 属性和事件透传到根元素；默认插槽为文字内容。`fs / fw / td` 等公共属性见 [样式简写属性](../styleProps/home.md)。
+
+默认的 `span` 是行内元素，纵向 `margin` / `padding` 和宽高会被浏览器忽略；当检测到 `m / my / mt / mb / p / py / pt / pb / w / h / minw / maxw / minh / maxh` 时，会自动把根元素显示方式切换为 `inline-block`（`lineClamp > 0` 时除外），因此无需再传 `component="div"`。如需保持行内显示，可用 `style="display: inline"` 或自定义 class 覆盖。

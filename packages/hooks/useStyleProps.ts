@@ -83,6 +83,44 @@ export const SIZE_PRESETS: Record<SybzComponentSize, string> = {
   large: '24px',
 }
 
+/**
+ * 只在块级 / 行内块元素上生效的简写属性。
+ *
+ * `span` 等行内元素会忽略纵向 margin / padding 和宽高（横向 margin / padding 正常生效），
+ * 组件可据此把根元素自动切换为 `display: inline-block`，无需用户额外传 `component="div"`。
+ */
+export const BLOCK_ONLY_STYLE_PROP_KEYS = new Set<SybzStylePropKey>([
+  'm',
+  'my',
+  'mt',
+  'mb',
+  'p',
+  'py',
+  'pt',
+  'pb',
+  'w',
+  'h',
+  'minw',
+  'maxw',
+  'minh',
+  'maxh',
+])
+
+/**
+ * 判断是否使用了仅在块级 / 行内块元素上生效的简写属性。
+ * 取值规则与 `resolveStyleProps` 保持一致：跳过 `undefined / null / false / ''`。
+ */
+export const usesBlockOnlyStyleProps = (source: Record<string, unknown>, exclude: Iterable<string> = []): boolean => {
+  const excluded = new Set(exclude)
+  for (const key of BLOCK_ONLY_STYLE_PROP_KEYS) {
+    if (excluded.has(key)) continue
+    const value = source[key]
+    if (value === undefined || value === null || value === false || value === '') continue
+    return true
+  }
+  return false
+}
+
 /** 裸写时采用 small 的内外边距简写。 */
 const SPACING_PROP_KEYS = new Set<SybzStylePropKey>([
   'm',
@@ -257,23 +295,30 @@ export const resolveStyleProps = (
  * 返回的 `style` 直接绑定到根元素：`:style="[ownStyle, style]"`。
  * 已自动跳过组件自身声明的同名 prop（如 s-flex 的 w/h/flex/gap），避免重复应用。
  */
-export function useStyleProps(): { style: ComputedRef<CSSProperties> } {
+export function useStyleProps(): {
+  style: ComputedRef<CSSProperties>
+  /** 是否使用了仅在块级 / 行内块元素上生效的简写属性（纵向内外边距、宽高等） */
+  hasBlockOnlyStyleProps: ComputedRef<boolean>
+} {
   const instance = getCurrentInstance()
   const config = inject<Record<string, any>>(GLOBAL_COMPONENT_CONFIG_KEY, {})
 
-  const style = computed<CSSProperties>(() => {
-    // 优先取 props（全局 mixin 会把样式简写声明为 prop），attrs 作为兜底
-    const source = {
-      ...(instance?.attrs ?? {}),
-      ...(instance?.props ?? {}),
-    }
-    return resolveStyleProps(source, {
-      exclude: getOwnPropKeys(instance?.type),
-      theme: getConfiguredTheme(source, unref(config)),
-    })
-  })
+  // 优先取 props（全局 mixin 会把样式简写声明为 prop），attrs 作为兜底
+  const source = computed<Record<string, unknown>>(() => ({
+    ...(instance?.attrs ?? {}),
+    ...(instance?.props ?? {}),
+  }))
 
-  return { style }
+  const style = computed<CSSProperties>(() =>
+    resolveStyleProps(source.value, {
+      exclude: getOwnPropKeys(instance?.type),
+      theme: getConfiguredTheme(source.value, unref(config)),
+    }),
+  )
+
+  const hasBlockOnlyStyleProps = computed(() => usesBlockOnlyStyleProps(source.value, getOwnPropKeys(instance?.type)))
+
+  return { style, hasBlockOnlyStyleProps }
 }
 
 /** 供 app.mixin 使用的全局样式属性声明 */
