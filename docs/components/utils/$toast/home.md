@@ -12,6 +12,16 @@ utils/$toast/base
 
 ### other
 
+:::demo
+utils/$toast/other
+:::
+
+### 说明
+
+`$toast` 用于触发 Element Plus 的全局消息提示，适合保存成功、接口失败、普通反馈等场景。它在 `ElMessage` 的基础上增加了类型简写、默认样式和可选的关闭全部旧消息能力。鼠标停在右上角关闭区域时，才会出现不占布局空间的圆形关闭按钮。
+
+应用入口可通过 `configureUtils({ theme: 'shijingshan' })` 设置全局默认主题。单次调用的 `theme` 会覆盖全局配置。
+
 已在 Vue 应用中全局注册的组件可以直接写进字符串：
 
 ```ts
@@ -21,6 +31,17 @@ $toast('<s-tag type="danger">你好</s-tag>', { dangerouslyUseHTMLString: true }
 ```
 
 `dangerouslyUseHTMLString: true` 会从当前 Vue 应用的全局组件表查找 `s-tag` 并渲染。第二个参数需要使用对象语法 `{ dangerouslyUseHTMLString: true }`。
+
+字符串中的组件要响应点击，可在标签上写 `@click="处理函数名"`，再用 `handlers` 传入函数：
+
+```ts
+$toast('<s-button @click="showButtonTip">无敌</s-button>', {
+  dangerouslyUseHTMLString: true,
+  handlers: { showButtonTip: () => $toast('点击了按钮') },
+})
+```
+
+字符串不会编译 JavaScript 表达式，因此 `@click` 只填写 `handlers` 中的函数名。
 
 `icon` 可直接传 `s-icon` 支持的图标名称。应用已全局注册 `SIcon` 时，`$toast` 会用它渲染字符串图标；原有的 Vue 图标组件传法也继续支持：
 
@@ -34,16 +55,6 @@ $toast('操作失败', { icon: '❌' })
 ```
 
 字符串图标沿用 `s-icon` 的自动识别规则，包括 Element Plus 名称、Iconify 名称、Emoji、CSS 图标类名和图片 URL。通过 `iconAttrs` 可设置 `size`、`color`、`source`、`type`、`variant`、`class` 和 `style` 等属性；自定义 SVG 名称可写 `iconAttrs: { source: 'svg' }`。
-
-:::demo
-utils/$toast/other
-:::
-
-### 说明
-
-`$toast` 用于触发 Element Plus 的全局消息提示，适合保存成功、接口失败、普通反馈等场景。它在 `ElMessage` 的基础上增加了类型简写、默认样式和可选的关闭全部旧消息能力。鼠标停在右上角关闭区域时，才会出现不占布局空间的圆形关闭按钮。
-
-应用入口可通过 `configureUtils({ theme: 'shijingshan' })` 设置全局默认主题。单次调用的 `theme` 会覆盖全局配置。
 
 ### 调用形式
 
@@ -66,16 +77,18 @@ $toast.warning(message, options)
 | `type`        | `'success' \| 'info' \| 'error' \| 'warning' \| 's' \| 'i' \| 'e' \| 'w' \| ToastOptions` | 否   | `'success'` | 提示类型。`s/i/e/w` 分别是 `success/info/error/warning` 的简写；传对象时表示第二参数直接作为配置项。 |
 | `otherParams` | `ToastOptions`                                                                            | 否   | `{}`        | 额外配置，会透传给 `ElMessage`。                                                                     |
 
-`ToastOptions` 在 Element Plus `MessageOptions` 基础上额外支持：
+`ToastOptions` 的常用属性（其余属性沿用 Element Plus `MessageOptions`）：
 
-| 字段          | 类型                                       | 默认值               | 说明                                                              |
-| ------------- | ------------------------------------------ | -------------------- | ----------------------------------------------------------------- |
-| `theme`       | `'default' \| 'chenghua' \| 'shijingshan'` | 全局主题或 `default` | 消息主题；单次设置会覆盖 `configureUtils` 的全局主题。            |
-| `closeAll`    | `boolean`                                  | `false`              | 显示当前消息前是否先关闭页面上已有的全部消息。                    |
-| `showClose`   | `boolean`                                  | `true`               | 鼠标停在右上角关闭区域或键盘聚焦按钮时显示；传 `false` 则不渲染。 |
-| `customClass` | `string`                                   | `'s-antd-message'`   | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生外观。          |
-| `icon`        | `string \| Component`                      | 按消息类型           | 字符串按全局 `SIcon` 的自动识别规则渲染，也可传 Vue 图标组件。    |
-| `iconAttrs`   | `object`                                   | -                    | 传给 `SIcon` 或自定义图标组件的属性和样式。                       |
+| 字段                       | 类型                                       | 默认值               | 说明                                                              |
+| -------------------------- | ------------------------------------------ | -------------------- | ----------------------------------------------------------------- |
+| `theme`                    | `'default' \| 'chenghua' \| 'shijingshan'` | 全局主题或 `default` | 消息主题；单次设置会覆盖 `configureUtils` 的全局主题。            |
+| `dangerouslyUseHTMLString` | `boolean`                                  | `false`              | 解析 HTML 字符串，并渲染已全局注册的组件标签；仅传可信内容。      |
+| `closeAll`                 | `boolean`                                  | `false`              | 显示当前消息前是否先关闭页面上已有的全部消息。                    |
+| `showClose`                | `boolean`                                  | `true`               | 鼠标停在右上角关闭区域或键盘聚焦按钮时显示；传 `false` 则不渲染。 |
+| `customClass`              | `string`                                   | `'s-antd-message'`   | 自定义消息类名。传 `'el'` 时使用 Element Plus 原生外观。          |
+| `icon`                     | `string \| Component`                      | 按消息类型           | 字符串按全局 `SIcon` 的自动识别规则渲染，也可传 Vue 图标组件。    |
+| `iconAttrs`                | `object`                                   | -                    | 传给 `SIcon` 或自定义图标组件的属性和样式。                       |
+| `handlers`                 | `Record<string, Function>`                 | -                    | 字符串组件标签中 `@click` 等事件对应的处理函数。                  |
 
 ### 返回值
 

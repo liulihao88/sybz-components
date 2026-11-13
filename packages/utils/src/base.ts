@@ -49,6 +49,8 @@ export interface SybzUtilsConfig {
 }
 
 export interface ToastOptions extends Omit<Partial<MessageOptions>, 'icon'> {
+  /** 是否解析 HTML 字符串，并将已全局注册的组件标签渲染为 Vue 组件；默认 false。仅传可信内容。 */
+  dangerouslyUseHTMLString?: boolean
   /** 图标组件，或由全局 SIcon 自动解析的图标名称。 */
   icon?: string | Component
   /** 传给 s-icon 或自定义图标组件的属性。 */
@@ -62,6 +64,8 @@ export interface ToastOptions extends Omit<Partial<MessageOptions>, 'icon'> {
     style?: StyleValue
     [key: string]: unknown
   }
+  /** 字符串组件标签中 @click="方法名" 等事件对应的处理函数。 */
+  handlers?: Record<string, (...args: any[]) => void>
   /** 是否启用仅在悬停关闭区域时出现的关闭按钮，默认 `true`。 */
   showClose?: boolean
   /**
@@ -275,7 +279,11 @@ type MessageType = 'success' | 'info' | 'error' | 'warning'
 type ShortType = 's' | 'i' | 'e' | 'w'
 type ToastType = MessageType | ShortType
 
-function renderToastComponents(message: string, components: Record<string, Component>): VNode {
+function renderToastComponents(
+  message: string,
+  components: Record<string, Component>,
+  handlers: ToastOptions['handlers'],
+): VNode {
   const template = document.createElement('template')
   template.innerHTML = message
 
@@ -287,9 +295,20 @@ function renderToastComponents(message: string, components: Record<string, Compo
     const tag = element.tagName.toLowerCase()
     const pascalTag = tag.replace(/(^|-)([a-z])/g, (_, _separator, letter: string) => letter.toUpperCase())
     const component = components[tag] ?? components[pascalTag]
-    const attrs = Object.fromEntries(
-      Array.from(element.attributes, ({ name, value }) => [name, value === '' ? true : value]),
-    )
+    const attrs: Record<string, unknown> = {}
+    for (const { name, value } of Array.from(element.attributes)) {
+      if (name.startsWith('@')) {
+        const handler = handlers?.[value]
+        if (handler) {
+          const eventName = name
+            .slice(1)
+            .replace(/(^|-)([a-z])/g, (_, _separator, letter: string) => letter.toUpperCase())
+          attrs[`on${eventName}`] = handler
+        }
+      } else {
+        attrs[name] = value === '' ? true : value
+      }
+    }
     const children = Array.from(element.childNodes, renderNode).filter((child) => child !== null)
 
     return component ? h(component, attrs, { default: () => children }) : h(tag, attrs, children)
@@ -353,7 +372,7 @@ export function $toast(
   }
 
   function showToast(options: ToastOptions) {
-    const { theme = utilsConfig.theme, customClass, iconAttrs, ...messageOptions } = options
+    const { theme = utilsConfig.theme, customClass, iconAttrs, handlers, ...messageOptions } = options
     const appComponents = _resolveAppContext(null)?.components
 
     if (typeof messageOptions.icon === 'string') {
@@ -370,7 +389,7 @@ export function $toast(
     if (typeof messageOptions.message === 'string' && messageOptions.dangerouslyUseHTMLString) {
       const registeredComponents = appComponents ?? {}
       if (Object.keys(registeredComponents).length > 0) {
-        messageOptions.message = renderToastComponents(messageOptions.message, registeredComponents)
+        messageOptions.message = renderToastComponents(messageOptions.message, registeredComponents, handlers)
         messageOptions.dangerouslyUseHTMLString = false
       }
     }

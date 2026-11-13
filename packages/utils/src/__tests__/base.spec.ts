@@ -406,17 +406,26 @@ describe('base utils', () => {
 
   it('resolves global Vue components from an HTML toast string', () => {
     const Tag = { name: 'STag', render: () => null }
+    const Button = { name: 'SButton', render: () => null }
+    const handleClick = vi.fn()
     const appRoot = document.createElement('div') as HTMLDivElement & { _vue_app?: unknown }
     appRoot.id = 'app'
-    appRoot._vue_app = { _context: { components: { STag: Tag } } }
+    appRoot._vue_app = { _context: { components: { STag: Tag, SButton: Button } } }
     document.body.append(appRoot)
 
     try {
-      $toast('<s-tag type="danger">你好</s-tag>', { dangerouslyUseHTMLString: true })
+      $toast('<s-tag type="danger">你好</s-tag><s-button @click="showTip">按钮</s-button>', {
+        dangerouslyUseHTMLString: true,
+        handlers: { showTip: handleClick },
+      })
       const options = elementPlusMocks.message.mock.lastCall?.[0]
+      expect(options).not.toHaveProperty('handlers')
       expect(options.dangerouslyUseHTMLString).toBe(false)
       expect(options.message.children[0].type).toBe(Tag)
       expect(options.message.children[0].props.type).toBe('danger')
+      expect(options.message.children[1].type).toBe(Button)
+      options.message.children[1].props.onClick()
+      expect(handleClick).toHaveBeenCalledOnce()
     } finally {
       appRoot.remove()
     }

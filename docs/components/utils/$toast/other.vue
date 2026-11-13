@@ -5,8 +5,9 @@ import hot from '../../../.vitepress/theme/assets/svg/hot.svg?component'
 import { ElMessage } from 'element-plus'
 const { $toast, delay } = utils
 const showComponent = () => {
-  $toast('文件<s-tag>你好</s-tag> 上传 <s-button type="danger" h="20" >无敌</s-button>成功', {
+  $toast('文件<s-tag>你好</s-tag> 上传 <s-button type="danger" h="20" @click="showButtonTip">点我试试</s-button>成功', {
     dangerouslyUseHTMLString: true,
+    handlers: { showButtonTip: () => $toast('点击了提示中的按钮') },
   })
 }
 const base = () => {
@@ -177,18 +178,6 @@ const showBigObject = () => {
       <s-button type="primary" @click="$toast('无关闭按钮', { showClose: false })">无关闭按钮</s-button>
       <s-button type="primary" @click="$toast('分组消息合并', { grouping: true })">分组消息合并</s-button>
       <s-button :icon="hot" @click="customIcon">自定义图标</s-button>
-      <s-button @click="$toast('Element Plus 图标', { icon: 'Plus' })">Element Plus 图标</s-button>
-      <s-button @click="$toast('Emoji 图标', { icon: '❌' })">Emoji 图标</s-button>
-      <!-- <s-button
-        @click="
-          ElMessage({
-            message: '哈哈',
-            icon: hot,
-          })
-        "
-      >
-        自定义图标
-      </s-button> -->
       <s-button type="primary" @click="closeOther">关闭其他, 只保留一个</s-button>
       <s-button
         @click="
