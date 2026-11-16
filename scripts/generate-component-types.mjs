@@ -77,7 +77,7 @@ const CHART_COMPONENT_PATHS = new Set([
   'company/quotaPie',
 ])
 // 默认插件异步注册的重功能组件，需与 packages/index.ts 的 loader 保持一致。
-const ASYNC_DEFAULT_COMPONENT_PATHS = new Set(['markdown', 'json', 'documentPreview'])
+const ASYNC_DEFAULT_COMPONENT_PATHS = new Set(['markdown', 'json', 'documentPreview', 'preview'])
 
 const componentHoverProps = (interfaceName, importTypeNames = [interfaceName], extraImportLines = []) => ({
   sourcePath: componentPropsPath,
@@ -116,6 +116,22 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'documentPreview',
       description: '文档预览组件，支持 PDF 原生预览和浏览器端 Word 预览，并提供下载兜底。',
       hoverProps: componentHoverProps('SDocumentPreviewSelfProps', ['SDocumentPreviewSelfProps']),
+    },
+  ],
+  [
+    'SPreview',
+    {
+      importPath: resolve(rootDir, 'packages/components/preview/src/types.ts'),
+      typeName: 'PreviewProps',
+      tagName: 's-preview',
+      description:
+        's-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel，以及弹窗或容器内预览和下载。',
+      slots: ['trigger', 'fallback'],
+      hoverProps: {
+        sourcePath: resolve(rootDir, 'packages/components/preview/src/types.ts'),
+        interfaceName: 'PreviewProps',
+        importTypeNames: ['PreviewProps', 'PreviewType'],
+      },
     },
   ],
   [
@@ -996,6 +1012,7 @@ const SIZE_ALIAS_COMPONENTS = new Map([
   ['SDescriptions', 'w'],
   ['SDialog', 'wh'],
   ['SDocumentPreview', 'wh'],
+  ['SPreview', 'wh'],
   ['SEmpty', 'wh'],
   ['SFlex', 'wh'],
   ['SIcon', 'wh'],

@@ -355,6 +355,18 @@ declare module 'vue' {
      */
     's-popconfirm': (typeof import('./types/components/popconfirm'))['default']
     /**
+     * {@link https://liulihao88.github.io/sybz-components/components/preview/home.html | 查看文档}
+     *
+     * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel，以及弹窗或容器内预览和下载。默认插件在首次渲染时加载此组件。
+     */
+    SPreview: (typeof import('./types/components/preview'))['default']
+    /**
+     * {@link https://liulihao88.github.io/sybz-components/components/preview/home.html | 查看文档}
+     *
+     * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel，以及弹窗或容器内预览和下载。默认插件在首次渲染时加载此组件。
+     */
+    's-preview': (typeof import('./types/components/preview'))['default']
+    /**
      * {@link https://liulihao88.github.io/sybz-components/components/progress/home.html | 查看文档}
      */
     SProgress: (typeof import('./types/components/progress'))['default']
@@ -681,6 +693,10 @@ export type SPopconfirmComponent = import('./types/components/popconfirm').SPopc
 export type SPopconfirmInstance = ComponentInstance<SPopconfirmComponent>
 export type SPopconfirmPublicProps = import('./types/components/popconfirm').SPopconfirmPublicProps
 
+export type SPreviewComponent = (typeof import('./types/components/preview'))['default']
+export type SPreviewInstance = ComponentInstance<SPreviewComponent>
+export type SPreviewPublicProps = SPreviewInstance['$props']
+
 export type SProgressComponent = import('./types/components/progress').SProgressComponent
 export type SProgressInstance = ComponentInstance<SProgressComponent>
 export type SProgressPublicProps = import('./types/components/progress').SProgressPublicProps
@@ -794,6 +810,7 @@ declare global {
       's-menu': JSXComponentProps<SMenuPublicProps>
       's-pagination': JSXComponentProps<SPaginationPublicProps>
       's-popconfirm': JSXComponentProps<SPopconfirmPublicProps>
+      's-preview': JSXComponentProps<SPreviewPublicProps>
       's-progress': JSXComponentProps<SProgressPublicProps>
       's-radio': JSXComponentProps<SRadioPublicProps>
       's-row': JSXComponentProps<SRowPublicProps>

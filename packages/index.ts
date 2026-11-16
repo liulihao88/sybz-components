@@ -35,6 +35,7 @@ const componentsWithoutCharts = import.meta.glob<InstallableComponent>(
     '!./components/markdown/index.ts',
     '!./components/json/index.ts',
     '!./components/documentPreview/index.ts',
+    '!./components/preview/index.ts',
   ],
   {
     eager: true,
@@ -47,6 +48,7 @@ const asyncComponentLoaders = import.meta.glob<{ default: InstallableComponent }
   './components/markdown/index.ts',
   './components/json/index.ts',
   './components/documentPreview/index.ts',
+  './components/preview/index.ts',
 ])
 
 const asyncComponents = Object.fromEntries(
@@ -54,6 +56,7 @@ const asyncComponents = Object.fromEntries(
     ['./components/markdown/index.ts', 'SMarkdown'],
     ['./components/json/index.ts', 'SJson'],
     ['./components/documentPreview/index.ts', 'SDocumentPreview'],
+    ['./components/preview/index.ts', 'SPreview'],
   ].map(([path, name]) => {
     const loader = asyncComponentLoaders[path]
     if (!loader) throw new Error(`Missing async component: ${path}`)

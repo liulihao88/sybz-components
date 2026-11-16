@@ -455,6 +455,10 @@ export default defineConfig({
               link: '/components/tableSearch/home.md',
             },
             {
+              text: 'preview文件预览组件',
+              link: '/components/preview/home.md',
+            },
+            {
               text: sybzMark('documentPreview文档预览组件'),
               link: '/components/documentPreview/home.md',
             },
