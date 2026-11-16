@@ -3,7 +3,8 @@ import { ref, h } from 'vue'
 import * as utils from '@/utils/src/index'
 import hot from '../../../.vitepress/theme/assets/svg/hot.svg?component'
 import { ElMessage } from 'element-plus'
-const { $toast, delay } = utils
+// const { $toast, delay } = utils
+import { $toast, delay } from '@sybz-components/utils'
 const showComponent = () => {
   $toast('文件<s-tag>你好</s-tag> 上传 <s-button type="danger" h="20" @click="showButtonTip">点我试试</s-button>成功', {
     dangerouslyUseHTMLString: true,
