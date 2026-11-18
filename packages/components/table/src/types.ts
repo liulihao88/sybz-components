@@ -96,6 +96,7 @@ export interface STableColumn<Row extends TableRow = TableRow> extends Record<st
   fixed?: string | boolean
   align?: string
   headerAlign?: string
+  /** 单列排序设置优先于表格的 sortable；不设置时继承表格默认值，远程排序可传 custom */
   sortable?: string | boolean
   sortMethod?: TableColumnCtx<Row>['sortMethod']
   sortBy?: TableColumnCtx<Row>['sortBy']

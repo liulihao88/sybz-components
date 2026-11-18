@@ -453,13 +453,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
      *
-     * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，单列配置优先；columns 列配置支持用 w 简写 width，同时设置时 w 优先。
+     * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，columns 中单列 sortable（包括 false 和 custom）优先；列配置支持用 w 简写 width，同时设置时 w 优先。
      */
     STable: (typeof import('./types/components/table'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
      *
-     * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，单列配置优先；columns 列配置支持用 w 简写 width，同时设置时 w 优先。
+     * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，columns 中单列 sortable（包括 false 和 custom）优先；列配置支持用 w 简写 width，同时设置时 w 优先。
      */
     's-table': (typeof import('./types/components/table'))['default']
     /**

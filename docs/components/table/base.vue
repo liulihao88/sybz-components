@@ -18,12 +18,10 @@ const columns = [
   {
     label: '名字',
     prop: 'name',
-    sortable: true,
   },
   {
     label: '地址',
     prop: 'address',
-    sortable: true,
     // showOverflowTooltip: false,
   },
   {
@@ -58,6 +56,6 @@ const toggleLoading = async () => {
   <div>
     <s-button type="primary" class="m-b-8" @click="toggleLoading">请求loading</s-button>
 
-    <s-table :columns="columns" :data="data" :loading="loading"></s-table>
+    <s-table :columns="columns" :data="data" :loading="loading" :sortable="true"></s-table>
   </div>
 </template>

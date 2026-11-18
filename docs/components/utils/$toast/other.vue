@@ -30,7 +30,7 @@ const duration5000 = () => {
 }
 const customIcon = () => {
   $toast('自定义消息图标', {
-    icon: hot,
+    // icon: hot,
   })
   $toast('操作成功', { icon: 'Plus' })
   $toast('正在处理', {

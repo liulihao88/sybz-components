@@ -14,7 +14,7 @@ type ElTableInstance = InstanceType<typeof ElTable>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/table/home.html | 查看文档}
  *
- * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，单列配置优先；columns 列配置支持用 w 简写 width，同时设置时 w 优先。
+ * s-table 表格组件，sortable 可为有 prop 的数据列默认开启排序，columns 中单列 sortable（包括 false 和 custom）优先；列配置支持用 w 简写 width，同时设置时 w 优先。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Table；s-table 自有属性包括主题、背景色、border（默认 true）、simple（默认 true；简洁或无边框模式下鼠标移入表头才显示列间线）、disabled（禁用分页和操作按钮）、showOverflowTooltip（所有列的默认值，单列配置优先）、分页、选择和列配置。 的公开属性。
  */

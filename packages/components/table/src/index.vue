@@ -454,7 +454,7 @@ const updateTable = () => {
 
     const defaultItems = {
       showOverflowTooltip: mergedProps.value.showOverflowTooltip,
-      sortable: Boolean(item.prop && !item.type && !item.btns?.length && mergedProps.value.sortable),
+      sortable: item.sortable ?? Boolean(item.prop && !item.type && !item.btns?.length && mergedProps.value.sortable),
       btns,
       baseBtns, // 显示的按钮
       hideBtns, // 隐藏在...中的按钮

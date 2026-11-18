@@ -217,47 +217,47 @@ const templateTableColumns = computed<TableColumnList<TemplateRow>>(() => [
 ])
 ```
 
-|        字段名         | 说明                                                                   | 类型                         | 默认值                              |
-| :-------------------: | ---------------------------------------------------------------------- | ---------------------------- | ----------------------------------- |
-|        `label`        | 列标题                                                                 | string / number              | -                                   |
-|        `prop`         | 对应字段名，也是 `useSlot: true` 时的默认插槽名                        | string                       | -                                   |
-|      `property`       | `prop` 的别名，透传给 `el-table-column`                                | string                       | -                                   |
-|        `type`         | 特殊列类型，支持 `selection` / `index` / `expand` 等 Element Plus 类型 | string                       | -                                   |
-|      `className`      | 当前列单元格 class                                                     | string                       | -                                   |
-|   `labelClassName`    | 当前列表头 class                                                       | string                       | -                                   |
-|        `width`        | 列宽                                                                   | string / number              | -                                   |
-|          `w`          | `width` 的简写；同时设置时 `width` 优先                                | string / number              | -                                   |
-|      `minWidth`       | 最小列宽；未设置 `width` 时，`s-table` 会根据标题自动补一个最小宽度    | string / number              | -                                   |
-|        `fixed`        | 固定列，`true` 表示固定在左侧，也可传 `left` / `right`                 | string / boolean             | -                                   |
-|        `align`        | 单元格对齐方式，支持 `left` / `center` / `right`                       | string                       | -                                   |
-|     `headerAlign`     | 表头对齐方式，未设置时跟随 `align`                                     | string                       | -                                   |
-|      `sortable`       | 是否可排序；远程排序传 `custom`                                        | boolean / string             | `false`                             |
-|     `sortMethod`      | 自定义排序方法，`sortable` 为 `true` 时生效                            | function                     | -                                   |
-|       `sortBy`        | 指定排序字段或排序取值函数                                             | string / string[] / function | -                                   |
-|     `sortOrders`      | 点击表头时排序顺序                                                     | array                        | `['ascending', 'descending', null]` |
-|      `resizable`      | 是否可拖拽调整列宽，设置 `border="false"` 时也生效                     | boolean                      | `true`                              |
-|      `columnKey`      | 列 key，使用筛选事件时用于标识列                                       | string                       | -                                   |
-|    `renderHeader`     | Element Plus 表头渲染函数                                              | function                     | -                                   |
-| `showOverflowTooltip` | 内容溢出时是否截断并显示 tooltip                                       | boolean / object             | 跟随表格级属性，默认 `true`         |
-|  `tooltipFormatter`   | 溢出 tooltip 内容格式化函数                                            | function                     | -                                   |
-|      `formatter`      | Element Plus 单元格格式化函数                                          | function                     | -                                   |
-|     `selectable`      | `type="selection"` 时判断某行是否可选                                  | function                     | -                                   |
-|  `reserveSelection`   | `type="selection"` 时是否保留选中状态，需要配合 `row-key`              | boolean                      | `false`                             |
-|    `filterMethod`     | Element Plus 筛选方法                                                  | function                     | -                                   |
-|    `filteredValue`    | 已选中的筛选值                                                         | array                        | -                                   |
-|       `filters`       | 筛选选项，每项通常包含 `text` 和 `value`                               | array                        | -                                   |
-|   `filterPlacement`   | 筛选下拉框位置                                                         | string                       | -                                   |
-|   `filterMultiple`    | 筛选是否支持多选                                                       | boolean                      | `true`                              |
-|   `filterClassName`   | 筛选下拉框 class                                                       | string                       | -                                   |
-|        `index`        | `type="index"` 时自定义序号                                            | number / function            | -                                   |
-|       `useSlot`       | 使用插槽渲染；传 `true` 时插槽名为 `prop`，传字符串时插槽名为该字符串  | boolean / string             | `false`                             |
-|       `render`        | `s-table` 自定义渲染函数，接收对象参数                                 | function                     | -                                   |
-|       `filter`        | `s-table` 自定义文本处理，支持方法名字符串或对象参数函数               | string / function            | -                                   |
-|       `handler`       | 单元格点击事件；存在时单元格内容会带点击样式                           | function                     | -                                   |
-|       `isShow`        | 控制列是否显示，支持布尔值或函数                                       | boolean / function           | `true`                              |
-|   `columnEmptyText`   | 当前列的空值占位文案，会覆盖全局 `columnEmptyText`                     | string                       | -                                   |
-|        `btns`         | 操作栏按钮配置，存在且不为空时该列作为操作列渲染                       | array                        | `[]`                                |
-|       `maxBtns`       | 操作栏最多显示的总数量，包含“更多”入口                                 | number / string              | `4`                                 |
+|        字段名         | 说明                                                                                    | 类型                         | 默认值                              |
+| :-------------------: | --------------------------------------------------------------------------------------- | ---------------------------- | ----------------------------------- |
+|        `label`        | 列标题                                                                                  | string / number              | -                                   |
+|        `prop`         | 对应字段名，也是 `useSlot: true` 时的默认插槽名                                         | string                       | -                                   |
+|      `property`       | `prop` 的别名，透传给 `el-table-column`                                                 | string                       | -                                   |
+|        `type`         | 特殊列类型，支持 `selection` / `index` / `expand` 等 Element Plus 类型                  | string                       | -                                   |
+|      `className`      | 当前列单元格 class                                                                      | string                       | -                                   |
+|   `labelClassName`    | 当前列表头 class                                                                        | string                       | -                                   |
+|        `width`        | 列宽                                                                                    | string / number              | -                                   |
+|          `w`          | `width` 的简写；同时设置时 `width` 优先                                                 | string / number              | -                                   |
+|      `minWidth`       | 最小列宽；未设置 `width` 时，`s-table` 会根据标题自动补一个最小宽度                     | string / number              | -                                   |
+|        `fixed`        | 固定列，`true` 表示固定在左侧，也可传 `left` / `right`                                  | string / boolean             | -                                   |
+|        `align`        | 单元格对齐方式，支持 `left` / `center` / `right`                                        | string                       | -                                   |
+|     `headerAlign`     | 表头对齐方式，未设置时跟随 `align`                                                      | string                       | -                                   |
+|      `sortable`       | 单列排序设置优先于表格的 `sortable`；设为 `false` 可关闭当前列排序，远程排序传 `custom` | boolean / string             | 继承表格设置                        |
+|     `sortMethod`      | 自定义排序方法，`sortable` 为 `true` 时生效                                             | function                     | -                                   |
+|       `sortBy`        | 指定排序字段或排序取值函数                                                              | string / string[] / function | -                                   |
+|     `sortOrders`      | 点击表头时排序顺序                                                                      | array                        | `['ascending', 'descending', null]` |
+|      `resizable`      | 是否可拖拽调整列宽，设置 `border="false"` 时也生效                                      | boolean                      | `true`                              |
+|      `columnKey`      | 列 key，使用筛选事件时用于标识列                                                        | string                       | -                                   |
+|    `renderHeader`     | Element Plus 表头渲染函数                                                               | function                     | -                                   |
+| `showOverflowTooltip` | 内容溢出时是否截断并显示 tooltip                                                        | boolean / object             | 跟随表格级属性，默认 `true`         |
+|  `tooltipFormatter`   | 溢出 tooltip 内容格式化函数                                                             | function                     | -                                   |
+|      `formatter`      | Element Plus 单元格格式化函数                                                           | function                     | -                                   |
+|     `selectable`      | `type="selection"` 时判断某行是否可选                                                   | function                     | -                                   |
+|  `reserveSelection`   | `type="selection"` 时是否保留选中状态，需要配合 `row-key`                               | boolean                      | `false`                             |
+|    `filterMethod`     | Element Plus 筛选方法                                                                   | function                     | -                                   |
+|    `filteredValue`    | 已选中的筛选值                                                                          | array                        | -                                   |
+|       `filters`       | 筛选选项，每项通常包含 `text` 和 `value`                                                | array                        | -                                   |
+|   `filterPlacement`   | 筛选下拉框位置                                                                          | string                       | -                                   |
+|   `filterMultiple`    | 筛选是否支持多选                                                                        | boolean                      | `true`                              |
+|   `filterClassName`   | 筛选下拉框 class                                                                        | string                       | -                                   |
+|        `index`        | `type="index"` 时自定义序号                                                             | number / function            | -                                   |
+|       `useSlot`       | 使用插槽渲染；传 `true` 时插槽名为 `prop`，传字符串时插槽名为该字符串                   | boolean / string             | `false`                             |
+|       `render`        | `s-table` 自定义渲染函数，接收对象参数                                                  | function                     | -                                   |
+|       `filter`        | `s-table` 自定义文本处理，支持方法名字符串或对象参数函数                                | string / function            | -                                   |
+|       `handler`       | 单元格点击事件；存在时单元格内容会带点击样式                                            | function                     | -                                   |
+|       `isShow`        | 控制列是否显示，支持布尔值或函数                                                        | boolean / function           | `true`                              |
+|   `columnEmptyText`   | 当前列的空值占位文案，会覆盖全局 `columnEmptyText`                                      | string                       | -                                   |
+|        `btns`         | 操作栏按钮配置，存在且不为空时该列作为操作列渲染                                        | array                        | `[]`                                |
+|       `maxBtns`       | 操作栏最多显示的总数量，包含“更多”入口                                                  | number / string              | `4`                                 |
 
 ### columns.btns 内部属性
 
