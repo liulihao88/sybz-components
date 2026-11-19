@@ -4,7 +4,7 @@ import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/preview/home.html | 查看文档}
  *
- * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel；弹窗模式可设置 title 并转发额外属性给 s-dialog。
+ * s-preview 文件预览组件，支持 TXT、CSV、TSV、PDF、Word、Excel，以及基于 s-markdown 的 Markdown 预览；弹窗模式可设置 title、fullscreen 并转发额外属性给 s-dialog。
  *
  * 先提示 sybz 自身属性。
  */
@@ -24,6 +24,8 @@ export type SPreviewComponent = {
       mode?: 'inline' | 'dialog'
       /** 在弹窗标题栏显示下载按钮，默认 true；inline 模式不显示 */
       download?: boolean
+      /** 在弹窗标题栏显示全屏按钮，默认 true；inline 模式不显示 */
+      fullscreen?: boolean
       /** 禁用弹窗触发按钮，默认 false */
       disabled?: boolean
     } & SybzStyleProps &

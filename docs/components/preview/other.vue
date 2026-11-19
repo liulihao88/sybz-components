@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 const format = ref('pdf')
 const mode = ref('inline')
 const download = ref(true)
+const fullscreen = ref(true)
 const files: Record<string, string> = {
   pdf: '/sybz-components/img/发票 (1).pdf',
   word: '/sybz-components/img/物业管理服务项目招标文件（[350105]FJCC[GK]202500220260104004）.docx',
@@ -30,7 +31,11 @@ const src = computed(() => files[format.value])
       <span>download：true / false；默认 true</span>
       <s-radio v-model="download" :options="[true, false]" />
     </s-flex>
-    <s-preview :src="src" :type="format" :mode="mode" :download="download" h="420">
+    <s-flex align="center" gap="16">
+      <span>fullscreen：true / false；默认 true</span>
+      <s-radio v-model="fullscreen" :options="[true, false]" />
+    </s-flex>
+    <s-preview :src="src" :type="format" :mode="mode" :download="download" :fullscreen="fullscreen" h="420">
       <s-button>打开预览</s-button>
     </s-preview>
   </s-flex>

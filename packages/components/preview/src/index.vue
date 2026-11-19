@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import MarkdownIt from 'markdown-it'
 import { Download } from '@element-plus/icons-vue'
 import { processWidth } from '@sybz-components/utils'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import useSizeAliases from '@/hooks/useSizeAliases'
 import SDialog from '@/components/dialog/src/index.vue'
 import SDocumentPreview from '@/components/documentPreview/src/index.vue'
-import SafeHtml from '@/components/utils/SafeHtml.vue'
+import SMarkdown from '@/components/markdown/src/index.vue'
 import type { PreviewProps, PreviewType } from './types'
 
 const props = withDefaults(defineProps<PreviewProps>(), {
   type: 'auto',
   mode: 'inline',
   download: true,
+  fullscreen: true,
   disabled: false,
   width: '100%',
   height: '600',
@@ -22,13 +22,13 @@ defineOptions({ name: 'SPreview', inheritAttrs: false })
 const { style } = useStyleProps()
 const sizeProps = useSizeAliases(props)
 const visible = ref(false)
+const fullscreenActive = ref(false)
 const loading = ref(false)
 const error = ref('')
 const content = ref('')
 const contentType = ref('')
 let controller: AbortController | undefined
 const textLimit = 2 * 1024 * 1024
-const markdown = new MarkdownIt({ html: false, linkify: true, breaks: true })
 const tableRowLimit = 1000
 function parseDelimited(text: string, separator: string) {
   const rows: string[][] = []
@@ -121,7 +121,6 @@ const frameStyle = computed(() => ({
   height: processWidth(sizeProps.value.height, true),
 }))
 const dialogFrameStyle = computed(() => ({ width: '100%', height: '100%', minHeight: '0' }))
-const renderedMarkdown = computed(() => markdown.render(content.value))
 
 async function load() {
   controller?.abort()
@@ -162,6 +161,12 @@ function open() {
 function close() {
   visible.value = false
 }
+function onFullscreenEscape(event: KeyboardEvent) {
+  if (event.key !== 'Escape' || !visible.value || !fullscreenActive.value) return
+  event.preventDefault()
+  event.stopImmediatePropagation()
+  fullscreenActive.value = false
+}
 defineExpose({ open, close })
 watch([() => props.src, () => props.name, () => props.type], () => {
   if (props.mode === 'inline' || visible.value) load()
@@ -174,12 +179,19 @@ watch(
   },
 )
 watch(visible, (value) => {
-  if (!value) controller?.abort()
+  if (!value) {
+    controller?.abort()
+    fullscreenActive.value = false
+  }
 })
 onMounted(() => {
+  document.addEventListener('keydown', onFullscreenEscape, true)
   if (props.mode === 'inline' && props.src) load()
 })
-onBeforeUnmount(() => controller?.abort())
+onBeforeUnmount(() => {
+  document.removeEventListener('keydown', onFullscreenEscape, true)
+  controller?.abort()
+})
 </script>
 
 <template>
@@ -199,9 +211,17 @@ onBeforeUnmount(() => controller?.abort())
     append-to-body
     fill-slot
     v-bind="$attrs"
+    :class="{ 's-preview-dialog--fullscreen': fullscreenActive }"
+    :fullscreen="fullscreenActive"
+    :close-on-press-escape="!fullscreenActive"
   >
-    <template v-if="download" #append>
-      <s-button icon="download" :href="src" download type="primary" size="small">下载文件</s-button>
+    <template v-if="download || fullscreen" #append>
+      <s-flex align="center" gap="8">
+        <s-button v-if="download" :href="src" download type="primary" size="small">下载文件</s-button>
+        <s-button v-if="fullscreen" size="small" type="primary" @click="fullscreenActive = !fullscreenActive">
+          {{ fullscreenActive ? '退出全屏' : '全屏显示' }}
+        </s-button>
+      </s-flex>
     </template>
     <div class="s-preview s-preview--dialog" :style="[dialogFrameStyle, style]">
       <div v-if="loading" class="s-preview__status">正在加载预览…</div>
@@ -222,7 +242,16 @@ onBeforeUnmount(() => controller?.abort())
             仅显示前 {{ tableRowLimit }} 行，请下载查看完整文件。
           </p>
         </div>
-        <SafeHtml v-else-if="resolvedType === 'md'" tag="div" class="s-preview__markdown" :html="renderedMarkdown" />
+        <s-markdown
+          v-else-if="resolvedType === 'md'"
+          class="s-preview__markdown"
+          :source="content"
+          :editable="true"
+          :disabled="true"
+          :allow-html="false"
+          h
+          breaks
+        />
         <s-document-preview v-else :src="src" :type="resolvedType" h="100%" :download="false">
           <template v-if="resolvedType !== 'word'" #fallback>当前环境无法在线预览，请下载文件后查看。</template>
         </s-document-preview>
@@ -248,7 +277,15 @@ onBeforeUnmount(() => controller?.abort())
           仅显示前 {{ tableRowLimit }} 行，请下载查看完整文件。
         </p>
       </div>
-      <SafeHtml v-else-if="resolvedType === 'md'" tag="div" class="s-preview__markdown" :html="renderedMarkdown" />
+      <s-markdown
+        v-else-if="resolvedType === 'md'"
+        class="s-preview__markdown"
+        :source="content"
+        :editable="false"
+        :disabled="false"
+        :allow-html="false"
+        breaks
+      />
       <s-document-preview v-else :src="src" :type="resolvedType" h="100%" :download="false">
         <template v-if="resolvedType !== 'word'" #fallback>当前环境无法在线预览，请下载文件后查看。</template>
       </s-document-preview>
@@ -264,6 +301,16 @@ onBeforeUnmount(() => controller?.abort())
 }
 .s-preview--dialog {
   min-height: 0;
+}
+:global(.s-preview-dialog--fullscreen > .el-dialog__header) {
+  display: none;
+}
+:global(.s-preview-dialog--fullscreen > .el-dialog__body) {
+  height: 100dvh;
+  padding: 0;
+}
+:global(.s-preview-dialog--fullscreen > .el-dialog__body > .dialog_fullscreen) {
+  height: 100dvh;
 }
 .s-preview__trigger {
   display: inline-block;
@@ -306,9 +353,6 @@ onBeforeUnmount(() => controller?.abort())
 .s-preview__markdown {
   padding: 16px;
   overflow-wrap: anywhere;
-}
-.s-preview__markdown :deep(img) {
-  max-width: 100%;
 }
 .s-preview__download {
   display: inline-flex;

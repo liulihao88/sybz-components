@@ -125,7 +125,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'PreviewProps',
       tagName: 's-preview',
       description:
-        's-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel；弹窗模式可设置 title 并转发额外属性给 s-dialog。',
+        's-preview 文件预览组件，支持 TXT、CSV、TSV、PDF、Word、Excel，以及基于 s-markdown 的 Markdown 预览；弹窗模式可设置 title、fullscreen 并转发额外属性给 s-dialog。',
       slots: ['default', 'fallback'],
       instanceMembers: ['open: () => void', 'close: () => void'],
       hoverProps: {

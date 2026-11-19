@@ -4,7 +4,7 @@
 
 ## 使用说明
 
-`s-preview` 支持 TXT、CSV、TSV、Markdown、PDF、Word（DOCX）及 Excel（XLSX/XLSM）的容器内预览，也可用 `mode="dialog"` 在 `s-dialog` 中预览。CSV、TSV 按表格展示，支持带引号的字段和换行；最多显示前 1000 行。PDF 使用浏览器原生预览；Word 和 Excel 复用 `s-document-preview`。旧版 DOC、XLS 文件的浏览器端渲染结果取决于现有解析器。PPTX 暂不支持。文本、CSV、TSV 和 Markdown 最多加载 2 MB；Markdown 禁用原始 HTML 渲染。下载按钮仅在弹窗模式的标题栏显示。
+`s-preview` 支持 TXT、CSV、TSV、Markdown、PDF、Word（DOCX）及 Excel（XLSX/XLSM）的容器内预览，也可用 `mode="dialog"` 在 `s-dialog` 中预览。CSV、TSV 按表格展示，支持带引号的字段和换行；最多显示前 1000 行。PDF 使用浏览器原生预览；Word 和 Excel 复用 `s-document-preview`。Markdown 使用 `s-markdown` 的只读渲染（`editable=false`、`disabled=false`），并禁用原始 HTML。旧版 DOC、XLS 文件的浏览器端渲染结果取决于现有解析器。PPTX 暂不支持。文本、CSV、TSV 和 Markdown 最多加载 2 MB。弹窗标题栏提供全屏切换；全屏时隐藏标题栏，按 Esc 返回普通弹窗。下载按钮只在弹窗模式显示。
 
 Word 文件为空或内容损坏、无法解析时，提示“文档为空或已损坏，无法预览。”；文件加载失败时会显示加载错误。
 
@@ -28,7 +28,7 @@ preview/dialog
 
 ### 其他属性（type 默认 auto）
 
-:::demo 切换预览格式、展示方式及下载按钮。属性 `type` 可选 `auto / txt / csv / tsv / pdf / md / word / excel`，默认 `auto`；`mode` 可选 `inline / dialog`，默认 `inline`；`download` 可选 `true / false`，默认 `true`。
+:::demo 切换预览格式、展示方式、下载及全屏按钮。属性 `type` 可选 `auto / txt / csv / tsv / pdf / md / word / excel`，默认 `auto`；`mode` 可选 `inline / dialog`，默认 `inline`；`download`、`fullscreen` 可选 `true / false`，默认均为 `true`。
 preview/other
 :::
 
@@ -42,6 +42,7 @@ preview/other
 | `type`         | 预览格式                                   | `auto / txt / csv / tsv / pdf / md / word / excel` | `auto`   |
 | `mode`         | 展示方式                                   | `inline / dialog`                                  | `inline` |
 | `download`     | 在弹窗标题栏显示下载按钮；容器内模式不显示 | `true / false`                                     | `true`   |
+| `fullscreen`   | 在弹窗标题栏显示全屏按钮；容器内模式不显示 | `true / false`                                     | `true`   |
 | `disabled`     | 禁用弹窗的 `open()` 方法                   | `true / false`                                     | `false`  |
 | `width` / `w`  | 预览区宽度                                 | CSS 长度 / 数字 / 布尔值                           | `100%`   |
 | `height` / `h` | 预览区高度                                 | CSS 长度 / 数字 / 布尔值                           | `600px`  |

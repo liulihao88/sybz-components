@@ -13,6 +13,8 @@ export interface PreviewProps {
   mode?: 'inline' | 'dialog'
   /** 在弹窗标题栏显示下载按钮，默认 true；inline 模式不显示 */
   download?: boolean
+  /** 在弹窗标题栏显示全屏按钮，默认 true；inline 模式不显示 */
+  fullscreen?: boolean
   /** 禁用弹窗触发按钮，默认 false */
   disabled?: boolean
   width?: string | number | boolean

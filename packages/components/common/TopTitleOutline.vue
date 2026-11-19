@@ -27,6 +27,7 @@ defineProps<{
   min-width: 0;
   margin: 0;
   padding: 0;
+  text-align: left;
   border: 1px solid var(--s-top-title-border-color, var(--el-border-color));
   border-radius: var(--s-top-title-radius, var(--el-border-radius-base));
   pointer-events: none;
