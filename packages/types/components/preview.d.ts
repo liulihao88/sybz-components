@@ -30,6 +30,8 @@ export type SPreviewComponent = {
       trigger?: () => any
       fallback?: () => any
     }
+    open: () => void
+    close: () => void
   }
 }
 

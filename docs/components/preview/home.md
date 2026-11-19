@@ -20,7 +20,7 @@ preview/base
 
 ### 弹窗预览（mode 默认 inline）
 
-基础写法：`<s-preview src="文件地址" mode="dialog" />`。可用 `trigger` 插槽自定义触发器，插槽提供 `open` 和 `disabled`。
+基础写法：`<s-preview ref="previewRef" src="文件地址" mode="dialog" />`，通过 `previewRef.open()` 从外部打开弹框。可用 `trigger` 插槽自定义触发器，插槽提供 `open` 和 `disabled`。
 
 :::demo 属性 `mode` 可选 `inline / dialog`，默认 `inline`。
 preview/dialog
@@ -51,3 +51,10 @@ preview/other
 | ---------- | ------------------------------------------- |
 | `trigger`  | 弹窗模式的触发内容，提供 `open`、`disabled` |
 | `fallback` | 不支持预览或加载失败时的提示，提供 `error`  |
+
+### Exposes
+
+| 方法      | 说明                               |
+| --------- | ---------------------------------- |
+| `open()`  | 打开弹框并加载文件，仅弹窗模式生效 |
+| `close()` | 关闭弹框，仅弹窗模式生效           |

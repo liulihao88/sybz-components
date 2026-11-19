@@ -155,10 +155,14 @@ async function load() {
   }
 }
 function open() {
-  if (!props.src || props.disabled) return
+  if (props.mode !== 'dialog' || !props.src || props.disabled) return
   visible.value = true
   load()
 }
+function close() {
+  visible.value = false
+}
+defineExpose({ open, close })
 watch([() => props.src, () => props.name, () => props.type], () => {
   if (props.mode === 'inline' || visible.value) load()
 })
