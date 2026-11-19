@@ -5,6 +5,7 @@ import { processWidth } from '@sybz-components/utils'
 import SCompTitle from '@/components/compTitle'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
+import TopTitleOutline from '../../common/TopTitleOutline.vue'
 
 defineOptions({
   name: 'SDatePicker',
@@ -14,6 +15,8 @@ const attrs = useAttrs()
 const datePickerRef = ref()
 interface DatePickerProps {
   title?: string
+  /** 嵌在日期选择框上边框的标题，与左侧标题 title 区分 */
+  topTitle?: string
   width?: string | number | boolean
   w?: string | number | boolean
   height?: string | number | boolean
@@ -26,6 +29,7 @@ interface DatePickerProps {
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   title: '',
+  topTitle: '',
   width: '300px',
   height: '',
   futureOnly: false,
@@ -420,11 +424,18 @@ const datePickerStyle = computed(() => {
 
   return style
 })
+const isDisabled = computed(() => {
+  const disabled = attrs.disabled !== undefined ? attrs.disabled : mergedProps.value.disabled
+  // 裸写 disabled 时属性值为空字符串，同样视为禁用。
+  return disabled === '' || Boolean(disabled)
+})
 const datePickerClass = computed(() => ({
   's-date-picker--chenghua': mergedProps.value.theme === 'chenghua',
   's-date-picker--shijingshan': mergedProps.value.theme === 'shijingshan',
   's-date-picker--sybz': mergedProps.value.theme === 'sybz',
+  's-date-picker--top-title': Boolean(mergedProps.value.topTitle),
   'has-title': !!mergedProps.value.title,
+  'is-disabled': isDisabled.value,
 }))
 const rootClass = computed<any>(() => [datePickerClass.value, attrs.class])
 const rootStyle = computed<any>(() => [datePickerStyle.value, attrs.style])
@@ -557,6 +568,10 @@ const mergedAttrs = computed(() => {
     merged['popper-class'] = datePickerPopperClass.value
   }
 
+  if (mergedProps.value.topTitle && !merged['aria-label']) {
+    merged['aria-label'] = mergedProps.value.topTitle
+  }
+
   return merged
 })
 
@@ -571,11 +586,18 @@ defineExpose({
 <template>
   <span class="s-date-picker" :class="rootClass" :style="[rootStyle, style]">
     <s-comp-title v-bind="compTitleProps"></s-comp-title>
-    <el-date-picker ref="datePickerRef" v-bind="mergedAttrs" class="s-date-picker__picker">
-      <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
-        <slot :name="slotName" v-bind="slotProps"></slot>
-      </template>
-    </el-date-picker>
+    <div class="s-date-picker__main">
+      <TopTitleOutline
+        v-if="mergedProps.topTitle"
+        :title="mergedProps.topTitle"
+        :square-left="Boolean(mergedProps.title)"
+      />
+      <el-date-picker ref="datePickerRef" v-bind="mergedAttrs" class="s-date-picker__picker">
+        <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
+          <slot :name="slotName" v-bind="slotProps"></slot>
+        </template>
+      </el-date-picker>
+    </div>
   </span>
 </template>
 
@@ -584,6 +606,14 @@ defineExpose({
   display: inline-flex;
   align-items: stretch;
   vertical-align: middle;
+
+  .s-date-picker__main {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+  }
 
   :deep(.el-date-editor) {
     flex: 1;
@@ -596,6 +626,34 @@ defineExpose({
     :deep(.el-input__wrapper) {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+    }
+  }
+
+  &.s-date-picker--top-title {
+    --s-top-title-radius: var(--el-border-radius-base);
+
+    &:hover {
+      --s-top-title-border-color: var(--el-border-color-hover);
+    }
+
+    &:focus-within {
+      --s-top-title-border-color: var(--el-color-primary);
+    }
+
+    &.is-disabled,
+    &.is-disabled:hover {
+      --s-top-title-border-color: var(--el-disabled-border-color);
+    }
+
+    // 边框由 TopTitleOutline 绘制，内层选择框不再重复描边，避免 1px 线穿过标题。
+    :deep(.el-date-editor),
+    :deep(.el-date-editor:hover),
+    :deep(.el-date-editor.is-active),
+    :deep(.el-date-editor.is-focus),
+    :deep(.el-input__wrapper),
+    :deep(.el-input__wrapper:hover),
+    :deep(.el-input__wrapper.is-focus) {
+      box-shadow: none;
     }
   }
 }

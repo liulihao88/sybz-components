@@ -247,6 +247,8 @@ export type SButtonEmits = {
 
 export interface SDatePickerSelfProps {
   title?: string
+  /** 嵌在日期选择框上边框的标题，与左侧标题 title 区分；默认空字符串 */
+  topTitle?: string
   width?: string | number | boolean
   w?: string | number | boolean
   height?: string | number | boolean

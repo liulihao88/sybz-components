@@ -23,13 +23,15 @@ export type SDatePickerComponent = {
   new <SDatePicker文档 = 'https://liulihao88.github.io/sybz-components/components/datePicker/home.html'>(): {
     $props: {
       title?: string
+      /** 嵌在日期选择框上边框的标题，与左侧标题 title 区分；默认空字符串 */
+      topTitle?: string
       /** 是否仅允许选择当前日期或当前周期之后的值，并启用未来时间快捷项 */
       futureOnly?: boolean
       shortcuts?: DatePickerPropsPublic['shortcuts'] | false
       compTitleStyle?: SybzRecord
     } & Omit<
       ElDatePickerInstance['$props'],
-      'title' | 'width' | 'w' | 'height' | 'h' | 'futureOnly' | 'theme' | 'shortcuts' | 'compTitleStyle'
+      'title' | 'topTitle' | 'width' | 'w' | 'height' | 'h' | 'futureOnly' | 'theme' | 'shortcuts' | 'compTitleStyle'
     > &
       SybzStyleProps &
       SybzDimensionProps<SDatePickerSelfProps> &

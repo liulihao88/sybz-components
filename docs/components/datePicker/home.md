@@ -16,6 +16,12 @@
 datePicker/base
 :::
 
+### other
+
+:::demo 使用 `top-title` 将标题嵌入日期选择框上边框，禁用时也会保留文字缺口；原有 `title` 仍显示在左侧。基础写法：`<s-date-picker v-model="dateValue" top-title="发布时间" type="date" width="300" />`。属性：`top-title` 类型 `string`，默认值 `''`；`title` 类型 `string`，默认值 `''`；`compTitleStyle` 类型 `object`，默认值 `{}`；`disabled` 可选 `true / false`，默认值 `false`。
+datePicker/other
+:::
+
 ### 主题（theme 默认值：default）
 
 :::demo
@@ -76,12 +82,6 @@ datePicker/defaultValue
 datePicker/height
 :::
 
-### 标题和组合属性
-
-:::demo 展示标题和组合属性配置。基础写法：`<s-date-picker v-model="rangeValue" title="选择日期" type="daterange" width="560" start-placeholder="开始" end-placeholder="结束" range-separator="///" :compTitleStyle="{ width: 84 }"></s-date-picker>`。属性：`title` 类型 `string`，默认值 `''`；`compTitleStyle` 类型 `object`，默认值 `{}`。
-datePicker/usually
-:::
-
 ### 控制面板和插槽
 
 :::demo 展示插槽内容定制。基础写法：`<s-date-picker ref="datePickerRef" v-model="dateValue" :prefix-icon="Clock"></s-date-picker>`。插槽：按示例中的插槽名定制内容。
@@ -107,6 +107,7 @@ datePicker/futureOnly
 |    `modelValue`     | 绑定值，支持 `v-model`                                       | string / number / Date / array | -                                                                                                                                           | `''`               |
 |       `type`        | 选择器类型                                                   | string                         | `year` / `years` / `month` / `months` / `date` / `dates` / `week` / `datetime` / `daterange` / `datetimerange` / `monthrange` / `yearrange` | `date`             |
 |       `title`       | 左侧标题文案                                                 | string                         | -                                                                                                                                           | `''`               |
+|     `topTitle`      | 嵌在日期选择框上边框的标题，模板中写作 `top-title`           | string                         | -                                                                                                                                           | `''`               |
 |       `width`       | 组件整体宽度                                                 | string / number                | -                                                                                                                                           | `300px`            |
 |      `height`       | 组件整体高度                                                 | string / number                | -                                                                                                                                           | `''`               |
 |    `futureOnly`     | 仅允许选择当前日期、时刻或周期之后的值，并启用未来快捷项     | boolean                        | `true` / `false`                                                                                                                            | `false`            |
@@ -174,7 +175,7 @@ datePicker/futureOnly
 - `daterange` / `datetimerange` 内置快捷项：今天、昨天、最近7天、最近30天、最近90天、最近1年、本周至今、本月至今、本季度至今、今年至今、上周、上月、上季度、去年。
 - `monthrange` 内置快捷项：本月、上月、最近3个月、最近6个月、最近12个月、今年至今、去年。
 - `yearrange` 内置快捷项：今年、去年、最近3年、最近5年、最近10年。
-- 组件继承 `el-date-picker` 的属性、事件、插槽，并额外支持 `title`、`width`、`height`、`futureOnly`、`theme`。
+- 组件继承 `el-date-picker` 的属性、事件、插槽，并额外支持 `title`、`top-title`、`width`、`height`、`futureOnly`、`theme`。
 
 ### 宽高布尔写法
 
