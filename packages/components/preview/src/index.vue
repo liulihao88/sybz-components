@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<PreviewProps>(), {
   width: '100%',
   height: '600',
 })
-defineOptions({ name: 'SPreview' })
+defineOptions({ name: 'SPreview', inheritAttrs: false })
 const { style } = useStyleProps()
 const sizeProps = useSizeAliases(props)
 const visible = ref(false)
@@ -183,15 +183,13 @@ onBeforeUnmount(() => controller?.abort())
 </script>
 
 <template>
-  <span v-if="mode === 'dialog'" class="s-preview__trigger">
-    <slot name="trigger" :open="open" :disabled="disabled || !src">
-      <s-button link :disabled="disabled || !src" @click="open">{{ name || '查看文件' }}</s-button>
-    </slot>
+  <span v-if="mode === 'dialog' && $slots.default" class="s-preview__trigger" @click="open">
+    <slot />
   </span>
   <s-dialog
     v-if="mode === 'dialog'"
     v-model="visible"
-    :title="displayName"
+    :title="title ?? displayName"
     w="1200"
     h="min(800px, calc(100dvh - 32px))"
     :show-footer="false"
@@ -200,6 +198,7 @@ onBeforeUnmount(() => controller?.abort())
     }"
     append-to-body
     fill-slot
+    v-bind="$attrs"
   >
     <template v-if="download" #append>
       <s-button icon="download" :href="src" download type="primary" size="small">下载文件</s-button>

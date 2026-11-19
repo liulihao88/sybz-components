@@ -357,13 +357,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/preview/home.html | 查看文档}
      *
-     * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel，以及弹窗或容器内预览和下载。默认插件在首次渲染时加载此组件。
+     * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel；弹窗模式可设置 title 并转发额外属性给 s-dialog。默认插件在首次渲染时加载此组件。
      */
     SPreview: (typeof import('./types/components/preview'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/preview/home.html | 查看文档}
      *
-     * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel，以及弹窗或容器内预览和下载。默认插件在首次渲染时加载此组件。
+     * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel；弹窗模式可设置 title 并转发额外属性给 s-dialog。默认插件在首次渲染时加载此组件。
      */
     's-preview': (typeof import('./types/components/preview'))['default']
     /**

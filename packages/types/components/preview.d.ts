@@ -4,7 +4,7 @@ import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/preview/home.html | 查看文档}
  *
- * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel，以及弹窗或容器内预览和下载。
+ * s-preview 文件预览组件，支持 TXT、CSV、TSV、Markdown、PDF、Word、Excel；弹窗模式可设置 title 并转发额外属性给 s-dialog。
  *
  * 先提示 sybz 自身属性。
  */
@@ -16,6 +16,8 @@ export type SPreviewComponent = {
       src: string
       /** 文件名，也用于无扩展名地址的格式识别 */
       name?: string
+      /** 弹窗标题，默认使用文件名 */
+      title?: string
       /** 预览格式，默认 auto */
       type?: PreviewType
       /** 容器内或弹窗预览，默认 inline */
@@ -27,7 +29,7 @@ export type SPreviewComponent = {
     } & SybzStyleProps &
       SybzDimensionProps<PreviewProps>
     $slots: {
-      trigger?: () => any
+      default?: () => any
       fallback?: () => any
     }
     open: () => void

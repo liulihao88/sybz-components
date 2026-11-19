@@ -30,6 +30,8 @@ const src = computed(() => files[format.value])
       <span>download：true / false；默认 true</span>
       <s-radio v-model="download" :options="[true, false]" />
     </s-flex>
-    <s-preview :src="src" :type="format" :mode="mode" :download="download" h="420" />
+    <s-preview :src="src" :type="format" :mode="mode" :download="download" h="420">
+      <s-button>打开预览</s-button>
+    </s-preview>
   </s-flex>
 </template>

@@ -20,7 +20,7 @@ preview/base
 
 ### 弹窗预览（mode 默认 inline）
 
-基础写法：`<s-preview ref="previewRef" src="文件地址" mode="dialog" />`，通过 `previewRef.open()` 从外部打开弹框。可用 `trigger` 插槽自定义触发器，插槽提供 `open` 和 `disabled`。
+基础写法：`<s-preview src="文件地址" mode="dialog" title="123"><s-button>预览文件</s-button></s-preview>`，点击默认插槽内容打开弹框。`title` 默认使用文件名；弹窗模式下，其他额外属性也会转发给内部 `s-dialog`。也可通过组件 ref 调用 `open()`，由外部方法打开。
 
 :::demo 属性 `mode` 可选 `inline / dialog`，默认 `inline`。
 preview/dialog
@@ -38,19 +38,20 @@ preview/other
 | -------------- | ------------------------------------------ | -------------------------------------------------- | -------- |
 | `src`          | 文件地址                                   | string                                             | 必填     |
 | `name`         | 文件名，亦用于识别格式                     | string                                             | 未设置   |
+| `title`        | 弹窗标题                                   | string                                             | 文件名   |
 | `type`         | 预览格式                                   | `auto / txt / csv / tsv / pdf / md / word / excel` | `auto`   |
 | `mode`         | 展示方式                                   | `inline / dialog`                                  | `inline` |
 | `download`     | 在弹窗标题栏显示下载按钮；容器内模式不显示 | `true / false`                                     | `true`   |
-| `disabled`     | 禁用弹窗触发器                             | `true / false`                                     | `false`  |
+| `disabled`     | 禁用弹窗的 `open()` 方法                   | `true / false`                                     | `false`  |
 | `width` / `w`  | 预览区宽度                                 | CSS 长度 / 数字 / 布尔值                           | `100%`   |
 | `height` / `h` | 预览区高度                                 | CSS 长度 / 数字 / 布尔值                           | `600px`  |
 
 ### 插槽
 
-| 插槽       | 说明                                        |
-| ---------- | ------------------------------------------- |
-| `trigger`  | 弹窗模式的触发内容，提供 `open`、`disabled` |
-| `fallback` | 不支持预览或加载失败时的提示，提供 `error`  |
+| 插槽       | 说明                                       |
+| ---------- | ------------------------------------------ |
+| `default`  | 弹窗模式的触发内容，点击后打开预览         |
+| `fallback` | 不支持预览或加载失败时的提示，提供 `error` |
 
 ### Exposes
 

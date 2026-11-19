@@ -5,6 +5,8 @@ export interface PreviewProps {
   src: string
   /** 文件名，也用于无扩展名地址的格式识别 */
   name?: string
+  /** 弹窗标题，默认使用文件名 */
+  title?: string
   /** 预览格式，默认 auto */
   type?: PreviewType
   /** 容器内或弹窗预览，默认 inline */
