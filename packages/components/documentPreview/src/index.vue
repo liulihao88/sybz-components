@@ -26,6 +26,7 @@ const sizeProps = useSizeAliases(props)
 const { style } = useStyleProps()
 
 const failed = ref(false)
+const failureMessage = ref('当前环境无法在线预览，请下载文件后查看。')
 const detectedType = ref<DocumentPreviewType>()
 const wordRef = ref<HTMLElement>()
 const excelRef = ref<HTMLElement>()
@@ -85,8 +86,15 @@ const renderWord = async () => {
     wordRef.value.replaceChildren()
     const response = await fetch(props.src)
     if (!response.ok) throw new Error('Word 文件加载失败')
-    await renderAsync(await response.arrayBuffer(), wordRef.value)
+    const data = await response.arrayBuffer()
+    try {
+      await renderAsync(data, wordRef.value)
+    } catch {
+      failureMessage.value = '文档为空或已损坏，无法预览。'
+      failed.value = true
+    }
   } catch {
+    failureMessage.value = '文件加载失败，请检查文件地址或网络连接。'
     failed.value = true
   }
 }
@@ -203,7 +211,9 @@ const frameStyle = computed(() => ({
     <div v-else-if="isWord && !failed" ref="wordRef" class="s-document-preview__word" />
     <div v-else-if="isExcel && !failed" ref="excelRef" class="s-document-preview__excel" />
     <div v-else class="s-document-preview__fallback">
-      <div><slot name="fallback">当前环境无法在线预览，请下载文件后查看。</slot></div>
+      <div>
+        <slot name="fallback">{{ failed ? failureMessage : '当前环境无法在线预览，请下载文件后查看。' }}</slot>
+      </div>
       <a
         v-if="download"
         class="s-document-preview__download"

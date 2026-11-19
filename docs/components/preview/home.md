@@ -6,6 +6,8 @@
 
 `s-preview` 支持 TXT、CSV、TSV、Markdown、PDF、Word（DOCX）及 Excel（XLSX/XLSM）的容器内预览，也可用 `mode="dialog"` 在 `s-dialog` 中预览。CSV、TSV 按表格展示，支持带引号的字段和换行；最多显示前 1000 行。PDF 使用浏览器原生预览；Word 和 Excel 复用 `s-document-preview`。旧版 DOC、XLS 文件的浏览器端渲染结果取决于现有解析器。PPTX 暂不支持。文本、CSV、TSV 和 Markdown 最多加载 2 MB；Markdown 禁用原始 HTML 渲染。下载按钮仅在弹窗模式的标题栏显示。
 
+Word 文件为空或内容损坏、无法解析时，提示“文档为空或已损坏，无法预览。”；文件加载失败时会显示加载错误。
+
 文件地址可通过 `src` 传入，`name` 可指定文件名并帮助识别无扩展名的地址。无法从扩展名判断格式时，组件尝试读取响应头；跨域文件服务需允许当前页面访问。下载是否成功还取决于文件服务的响应头和跨域设置。
 
 ### 基础用法（mode 默认 inline，download 默认 true）

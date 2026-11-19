@@ -221,7 +221,7 @@ onBeforeUnmount(() => controller?.abort())
         </div>
         <SafeHtml v-else-if="resolvedType === 'md'" tag="div" class="s-preview__markdown" :html="renderedMarkdown" />
         <s-document-preview v-else :src="src" :type="resolvedType" h="100%" :download="false">
-          <template #fallback>当前环境无法在线预览，请下载文件后查看。</template>
+          <template v-if="resolvedType !== 'word'" #fallback>当前环境无法在线预览，请下载文件后查看。</template>
         </s-document-preview>
       </template>
     </div>
@@ -247,7 +247,7 @@ onBeforeUnmount(() => controller?.abort())
       </div>
       <SafeHtml v-else-if="resolvedType === 'md'" tag="div" class="s-preview__markdown" :html="renderedMarkdown" />
       <s-document-preview v-else :src="src" :type="resolvedType" h="100%" :download="false">
-        <template #fallback>当前环境无法在线预览，请下载文件后查看。</template>
+        <template v-if="resolvedType !== 'word'" #fallback>当前环境无法在线预览，请下载文件后查看。</template>
       </s-document-preview>
     </template>
   </div>
