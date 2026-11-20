@@ -217,5 +217,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect())
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  // el-tag 默认 line-height: 1，配合 overflow: hidden 会裁掉 g/y 等下伸笔画
+  line-height: 1.5;
 }
 </style>
