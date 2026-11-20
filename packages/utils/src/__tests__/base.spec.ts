@@ -433,9 +433,10 @@ describe('base utils', () => {
 
   it('renders string icons through the globally registered SIcon', () => {
     const SIcon = { name: 'SIcon', render: () => null }
+    const appContext = { components: { SIcon } }
     const appRoot = document.createElement('div') as HTMLDivElement & { _vue_app?: unknown }
     appRoot.id = 'app'
-    appRoot._vue_app = { _context: { components: { SIcon } } }
+    appRoot._vue_app = { _context: appContext }
     document.body.append(appRoot)
 
     try {
@@ -445,6 +446,7 @@ describe('base utils', () => {
       })
       const options = elementPlusMocks.message.mock.lastCall?.[0]
       expect(options).not.toHaveProperty('iconAttrs')
+      expect(elementPlusMocks.message.mock.lastCall?.[1]).toBe(appContext)
       const icon = options.icon()
       expect(icon.type).toBe(SIcon)
       expect(icon.props).toMatchObject({

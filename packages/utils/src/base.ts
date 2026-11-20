@@ -373,7 +373,8 @@ export function $toast(
 
   function showToast(options: ToastOptions) {
     const { theme = utilsConfig.theme, customClass, iconAttrs, handlers, ...messageOptions } = options
-    const appComponents = _resolveAppContext(null)?.components
+    const appContext = _resolveAppContext(null)
+    const appComponents = appContext?.components
 
     if (typeof messageOptions.icon === 'string') {
       const icon = appComponents?.SIcon ?? appComponents?.['s-icon']
@@ -405,11 +406,13 @@ export function $toast(
       customClass !== 'el' && customClass,
     )
 
-    ElMessage({
+    const resolvedMessageOptions = {
       ...messageOptions,
       showClose: options.showClose ?? true,
       customClass: resolvedCustomClass,
-    } as MessageOptions)
+    } as MessageOptions
+    if (appContext) ElMessage(resolvedMessageOptions, appContext)
+    else ElMessage(resolvedMessageOptions)
   }
 
   // Case 1: message is options object
