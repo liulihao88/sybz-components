@@ -34,13 +34,14 @@
   --s-sybz-danger-700: #af191e;
   --s-sybz-danger-900: #5c0d0f;
   --s-sybz-danger-950: #310708;
-  --s-sybz-warning-25: #fefaf5;
-  --s-sybz-warning-100: #fdead7;
-  --s-sybz-warning-300: #f7b27a;
-  --s-sybz-warning-500: #ef6820;
-  --s-sybz-warning-700: #b93815;
-  --s-sybz-warning-900: #772917;
-  --s-sybz-warning-950: #511c10;
+  // warning 与 shijingshan 主题的警告色保持一致，用琥珀色
+  --s-sybz-warning-25: #fffbeb;
+  --s-sybz-warning-100: #fef3c7;
+  --s-sybz-warning-300: #f8b64a;
+  --s-sybz-warning-500: #f59e0b;
+  --s-sybz-warning-700: #d98b13;
+  --s-sybz-warning-900: #92400e;
+  --s-sybz-warning-950: #451a03;
   --s-sybz-sky-25: #f5fbff;
   --s-sybz-sky-100: #e0f2fe;
   --s-sybz-sky-300: #7cd4fd;
@@ -103,8 +104,8 @@
 
   --s-sybz-success: #17b26a;
   --s-sybz-success-rgb: 23, 178, 106;
-  --s-sybz-warning: #ef6820;
-  --s-sybz-warning-rgb: 239, 104, 32;
+  --s-sybz-warning: #f59e0b;
+  --s-sybz-warning-rgb: 245, 158, 11;
   --s-sybz-danger: #e5484d;
   --s-sybz-danger-rgb: 229, 72, 77;
   --s-sybz-info: #717680;

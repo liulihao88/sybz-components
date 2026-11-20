@@ -5,7 +5,7 @@ const placement = ref<'top' | 'bottom'>('top')
 const showAfter = ref(0)
 const tooltipAttrs = computed(() => ({ placement: placement.value, showAfter: showAfter.value }))
 const type = ref<any>('')
-const effect = ref<any>('dark')
+const effect = ref<any>('light')
 </script>
 
 <template>
@@ -28,7 +28,7 @@ const effect = ref<any>('dark')
       type="simple"
       title="类型:type"
     />
-    <s-radio v-model="effect" :options="['dark', 'light', 'plain']" type="simple" title="主题:effect" />
+    <s-radio v-model="effect" :options="['dark', 'light', 'plain']" type="simple" title="主题:effect(默认light)" />
     <s-tag width="120" :tooltip-attrs="tooltipAttrs" :type="type" :effect="effect">
       这是一段需要悬停查看完整内容的标签文本
     </s-tag>
