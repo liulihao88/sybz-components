@@ -897,8 +897,9 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'tabs',
       allowAnySlots: true,
+      slots: ['extra'],
       description:
-        's-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule、capsule-theme 类型、主题、尺寸、width/height 及其 w/h 缩写，以及通过 headerMargin 自定义头部外边距。',
+        's-tabs 标签页组件，modelValue 支持 string / number / boolean / null / undefined，并支持 capsule、capsule-theme 类型、主题、尺寸、width/height 及其 w/h 缩写、headerMargin，以及头部右侧的 extra 属性和插槽。',
       hoverProps: componentHoverProps(
         'STabsSelfProps',
         ['STabsSelfProps', 'SybzRecord'],

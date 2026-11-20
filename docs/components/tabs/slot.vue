@@ -19,6 +19,7 @@ const navList = [
 <template>
   <div>
     <s-tabs :options="navList">
+      <template #extra><s-button size="small">右侧操作</s-button></template>
       <template #sys-label>
         <s-icon icon="plus"></s-icon>
         系统服务

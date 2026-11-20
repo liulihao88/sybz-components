@@ -16,6 +16,12 @@
 tabs/base
 :::
 
+### other
+
+:::demo 展示 Element Plus Tabs 属性透传及右侧文字。基础写法：`<s-tabs :options="navList" :type="type" :stretch="stretch" extra="右侧说明"></s-tabs>`。`extra` 类型为 `string / number`，默认无内容；`type`、`stretch` 等继承 `el-tabs`。
+tabs/other
+:::
+
 ### 主题（theme 默认值：default）
 
 :::demo
@@ -54,7 +60,7 @@ tabs/usually
 
 ### Slots
 
-:::demo 展示插槽内容定制。基础写法：`<s-tabs :options="navList"></s-tabs>`。插槽：按示例中的插槽名定制内容。
+:::demo 展示插槽内容定制。基础写法：`<s-tabs :options="navList"><template #extra><s-button>操作</s-button></template></s-tabs>`。`extra` 插槽在页签头部右侧显示自定义元素，优先于同名属性；不传 `extra` 属性时默认无内容。
 tabs/slot
 :::
 
@@ -68,12 +74,6 @@ tabs/trigger
 
 :::demo 展示children `支持嵌套 el-tab-pane`配置。基础写法：`<s-tabs v-model="activeName" class="demo-tabs" default-value="third" @tab-click="handleClick" :options="tabs"></s-tabs>`。属性：`options` 类型 `array`，默认值 `[]`。
 tabs/children
-:::
-
-### other
-
-:::demo 展示 Element Plus Tabs 属性透传。基础写法：`<s-tabs :options="navList" :type="type" :stretch="stretch"></s-tabs>`。属性：`type`、`stretch` 等继承 `el-tabs`。
-tabs/other
 :::
 
 ### addRemove
@@ -114,6 +114,7 @@ tabs/height
 |    `width`     | 组件宽度，数字按 px 处理                                                    | string / number                                 | `''`                               |
 |    `height`    | 组件高度，数字按 px 处理，也支持 `100%` 等 CSS 高度                         | string / number                                 | `''`                               |
 | `headerMargin` | 页签头部外边距，数字按 px 处理，也支持完整 CSS margin                       | string / number                                 | `undefined`                        |
+|    `extra`     | 页签头部右侧内容，`extra` 插槽优先                                          | string / number                                 | 未设置                             |
 
 ### 事件
 
@@ -128,3 +129,4 @@ tabs/height
 |    `default`     | 自定义整个 tabs 内容                   |
 |    `${value}`    | 自定义每个 tab-pane 内容，名称为选项值 |
 | `${value}-label` | 自定义每个 tab 标题区域                |
+|     `extra`      | 页签头部右侧的自定义元素               |

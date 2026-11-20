@@ -1150,6 +1150,8 @@ export interface STabsSelfProps {
   height?: string | number | boolean
   h?: string | number | boolean
   headerMargin?: string | number
+  /** 页签头部右侧内容；extra 插槽优先 */
+  extra?: string | number
 }
 
 export type STabsProps = STabsSelfProps & Partial<Omit<TabsPropsPublic, keyof STabsSelfProps>>

@@ -1,5 +1,8 @@
 <template>
   <div class="s-tabs-box" :class="boxClass" :style="[boxStyle, style]">
+    <div v-if="hasExtra" ref="extraRef" class="s-tabs__extra">
+      <slot name="extra">{{ mergedProps.extra }}</slot>
+    </div>
     <el-tabs v-bind="forwardedAttrs" v-model="tabsValue">
       <slot>
         <template v-for="tab in mergedProps.options" :key="tab[mergedProps.value]">
@@ -20,7 +23,7 @@
 </template>
 <script setup lang="ts">
 import type { STabsSelfProps } from '../../../types/component-props'
-import { computed, useAttrs } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, useSlots, watch } from 'vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import type { TabsPropsPublic } from 'element-plus'
@@ -32,6 +35,7 @@ defineOptions({
 })
 
 const attrs = useAttrs()
+const slots = useSlots()
 const props = withDefaults(defineProps<STabsSelfProps>(), {
   modelValue: '',
   options: () => [],
@@ -48,6 +52,27 @@ const props = withDefaults(defineProps<STabsSelfProps>(), {
 const emits = defineEmits(['update:modelValue'])
 const mergedProps = useGlobalComponentConfig('tabs', props)
 const { style } = useStyleProps()
+const extraRef = ref<HTMLElement>()
+const extraWidth = ref(0)
+const hasExtra = computed(() =>
+  Boolean(slots.extra || (mergedProps.value.extra !== undefined && mergedProps.value.extra !== '')),
+)
+let extraObserver: ResizeObserver | undefined
+
+function observeExtra() {
+  extraObserver?.disconnect()
+  if (!extraRef.value) {
+    extraWidth.value = 0
+    return
+  }
+  extraObserver = new ResizeObserver(([entry]) => {
+    extraWidth.value = entry?.borderBoxSize?.[0]?.inlineSize ?? extraRef.value?.offsetWidth ?? 0
+  })
+  extraObserver.observe(extraRef.value)
+}
+onMounted(observeExtra)
+watch(hasExtra, () => nextTick(observeExtra))
+onBeforeUnmount(() => extraObserver?.disconnect())
 
 const isCapsuleType = computed(() => ['capsule', 'capsule-theme'].includes(mergedProps.value.type as string))
 const isThemeRadiusCapsule = computed(() => mergedProps.value.type === 'capsule-theme')
@@ -96,10 +121,12 @@ const boxClass = computed(() => [
     's-tabs-box--chenghua': isChenghuaTheme.value,
     's-tabs-box--shijingshan': isShijingshanTheme.value,
     's-tabs-box--sybz': isSybzTheme.value,
+    's-tabs-box--has-extra': hasExtra.value,
   },
   `s-tabs-box--size-${mergedProps.value.size || 'default'}`,
 ])
 const boxStyle = computed(() => ({
+  ...(hasExtra.value ? { '--s-tabs-extra-space': `${extraWidth.value + 12}px` } : {}),
   ...(mergedProps.value.width ? { width: processWidth(mergedProps.value.width, true) } : {}),
   ...(mergedProps.value.height
     ? {
@@ -125,6 +152,7 @@ const handleMouseEnter = (tabVal: string) => {
 </script>
 <style lang="scss" scoped>
 .s-tabs-box {
+  position: relative;
   --s-tabs-item-height: 40px;
   --s-tabs-item-padding-x: 20px;
   --s-tabs-font-size: 16px;
@@ -134,6 +162,22 @@ const handleMouseEnter = (tabVal: string) => {
   --s-tabs-arrow-hover-color: var(--el-color-primary);
   --s-tabs-arrow-inset: 0px;
   --s-tabs-arrow-clearance: 24px;
+
+  &.s-tabs-box--has-extra:not(.s-tabs-box--capsule) :deep(.el-tabs__header) {
+    box-sizing: border-box;
+    padding-right: var(--s-tabs-extra-space);
+  }
+
+  .s-tabs__extra {
+    position: absolute;
+    z-index: 6;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    height: var(--s-tabs-item-height);
+    white-space: nowrap;
+  }
 
   &.s-tabs-box--custom-header-margin :deep(.el-tabs__header) {
     margin: var(--s-tabs-header-margin);
@@ -266,6 +310,20 @@ const handleMouseEnter = (tabVal: string) => {
   flex-direction: column;
   width: auto;
   max-width: 100%;
+
+  &.s-tabs-box--has-extra {
+    width: 100%;
+
+    :deep(.el-tabs) {
+      max-width: calc(100% - var(--s-tabs-extra-space));
+    }
+
+    .s-tabs__extra {
+      height: calc(
+        var(--s-tabs-capsule-height) + (var(--s-tabs-capsule-outer-gap) * 2) + (var(--s-tabs-capsule-border-width) * 2)
+      );
+    }
+  }
 
   --s-tabs-capsule-bg: #f3f5fb;
   --s-tabs-capsule-border-color: rgba(16, 24, 40, 0.08);
