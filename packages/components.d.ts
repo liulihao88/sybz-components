@@ -505,25 +505,25 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
      *
-     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
+     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；code 默认根元素为 code，复用 code 的等宽字体与 type 语义配色。可通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
      */
     SText: (typeof import('./types/components/text'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
      *
-     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
+     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；code 默认根元素为 code，复用 code 的等宽字体与 type 语义配色。可通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
      */
     's-text': (typeof import('./types/components/text'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
      *
-     * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitle 固定显示在主标题下方，append 属性或插槽显示在主标题右侧且插槽优先，appendAttrs 可配置追加内容属性和字号；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置最右侧内容。
+     * s-title 标题组件，title、append 和 subTitle 支持以字符串形式书写 s-text、s-tag 组件标签，也兼容简单 HTML（如 code、mark）；字符串会渲染成真实组件，属性按组件 prop 解析，c、bg、fs、fw、p、br 等样式简写同样生效，可用 dangerouslyUseHTMLString=false 改为纯文本。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。
      */
     STitle: (typeof import('./types/components/title'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
      *
-     * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitle 固定显示在主标题下方，append 属性或插槽显示在主标题右侧且插槽优先，appendAttrs 可配置追加内容属性和字号；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置最右侧内容。
+     * s-title 标题组件，title、append 和 subTitle 支持以字符串形式书写 s-text、s-tag 组件标签，也兼容简单 HTML（如 code、mark）；字符串会渲染成真实组件，属性按组件 prop 解析，c、bg、fs、fw、p、br 等样式简写同样生效，可用 dangerouslyUseHTMLString=false 改为纯文本。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。
      */
     's-title': (typeof import('./types/components/title'))['default']
     /**

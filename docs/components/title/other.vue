@@ -1,23 +1,22 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
-const fontSize = ref('默认')
-const subTitleAttrs = computed(() => (fontSize.value === '默认' ? {} : { fontSize: fontSize.value }))
+const titleContent = ref('<s-text type="danger">你好</s-text>')
+const appendContent = ref('<s-tag type="danger">你好</s-tag>')
+const subTitleContent = ref('版本 <s-text c="blue">v1.0</s-text>')
+
+const titleOptions = [
+  '<s-text type="danger">你好</s-text>',
+  '<s-text type="primary" c="blue" fs="20">重点</s-text>',
+  '<s-text c="blue">高亮</s-text>',
+]
+const appendOptions = ['<s-tag type="danger">你好</s-tag>', '<s-tag type="success" size="small" >已发布</s-tag>']
+const subTitleOptions = ['版本 <s-text c="blue">v1.0</s-text>', '状态 <s-tag type="warning">待审核</s-tag>']
 </script>
 
 <template>
-  <s-flex direction="column" gap="16px">
-    <s-radio
-      v-model="fontSize"
-      :options="['默认', '14px', '20px', '30px']"
-      type="simple"
-      title="subTitleAttrs.fontSize（可选：默认 / 14px / 20px / 30px；默认值：未设置）"
-    />
-    <s-title
-      title="双向细目表"
-      type="simple"
-      sub-title="按当前题目的知识点、题型和难度统计。"
-      :sub-title-attrs="subTitleAttrs"
-    />
-  </s-flex>
+  <s-radio v-model="titleContent" :options="titleOptions" type="simple" title="title" />
+  <s-radio v-model="appendContent" :options="appendOptions" type="simple" title="append" />
+  <s-radio v-model="subTitleContent" :options="subTitleOptions" type="simple" title="sub-title" />
+  <s-title :title="titleContent" :append="appendContent" :sub-title="subTitleContent" />
 </template>

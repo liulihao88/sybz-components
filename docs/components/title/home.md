@@ -44,15 +44,15 @@ title/fs
 title/iconAttrs
 :::
 
-### 更多属性（subTitleAttrs.fontSize 默认值：未设置）
+### 更多属性（dangerouslyUseHTMLString 默认值：true）
 
-:::demo 直接在 `subTitleAttrs` 中设置副标题字号。基础写法：`<s-title title="双向细目表" sub-title="统计说明" :sub-title-attrs="{ fontSize: '30px' }" />`。`fontSize` 支持数字（按 px 处理）或 CSS 长度字符串，默认值未设置，使用组件默认字号；示例可在默认值、`14px`、`20px`、`30px` 之间切换。其他 HTML 属性照常透传，已有的 `style` 写法也可继续使用。
+:::demo 直接在 `title`、`append` 和 `subTitle` 中书写 `<s-text>`、`<s-tag>` 组件标签（字符串形式），同时兼容原生 `<code>`、`<mark>`。字符串会渲染成真实组件：属性按组件 prop 解析，布尔属性可裸写（如 `mark`），数字属性自动转换（如 `line-clamp="2"`），`c / bg / fs / fw / p / px / br` 等样式简写同样生效。基础写法：`<s-title title="标题 <s-text type='danger'>你好</s-text>" append="<s-tag type='danger'>你好</s-tag>" sub-title="版本 <s-text c='blue'>v1.0</s-text>" />`；三项默认均为 `''`。对象 / 数组属性（如 `options`、`config`、`tooltipAttrs`）不支持字符串写法，复杂内容请使用 `#title`、`#append` 插槽。`dangerouslyUseHTMLString` 可选 `true / false`，默认 `true`；设为 `false` 后三项都按纯文本输出，可手动关闭自动 HTML 识别。示例可分别切换 `title`、`append`、`subTitle` 的内容，观察组件标签、原生标签和普通文本的渲染差异。字符串里只支持静态属性，不支持 `:` 动态绑定和事件，需要响应式交互时请使用 `#title`、`#append` 插槽。
 title/other
 :::
 
 ### 标题右侧追加内容（append 默认值：''）
 
-基础写法：`<s-title title="任务标题" append="草稿" sub-title="任务摘要" />`。`subTitle` 类型为字符串，默认 `''`，固定显示在主标题下方，左侧竖条会随副标题一起撑满整个标题块；`append` 类型为字符串，默认 `''`，显示在主标题右侧，颜色和字号与副标题一致。`appendAttrs` 类型为对象，默认 `{}`，可透传追加内容的 DOM 属性；其中 `fontSize` 接受数字或 CSS 长度，默认未设置，`style` 也可直接传入。复杂内容使用 `#append` 插槽，插槽优先于 `append` 属性，`appendAttrs` 同样作用于插槽容器；`extra` 仍是最右侧操作区。
+基础写法：`<s-title title="任务标题" append="<s-tag type='success'>草稿</s-tag>" sub-title="任务摘要" />`。`subTitle` 类型为字符串，默认 `''`，固定显示在主标题下方，左侧竖条会随副标题一起撑满整个标题块；`append` 类型为字符串，默认 `''`，显示在主标题右侧，颜色和字号与副标题一致。两者默认按富文本渲染，支持 `<s-text>`、`<s-tag>` 组件标签和简单 HTML，设置 `:dangerously-use-html-string="false"` 后按纯文本输出。`appendAttrs` 类型为对象，默认 `{}`，可透传追加内容的 DOM 属性；其中 `fontSize` 接受数字或 CSS 长度，默认未设置，`style` 也可直接传入。复杂内容使用 `#append` 插槽，插槽优先于 `append` 属性，`appendAttrs` 同样作用于插槽容器；`extra` 仍是最右侧操作区。
 
 :::demo 切换追加文本和 `appendAttrs.fontSize`，并对比 `append` 插槽和最右侧 `extra` 插槽。
 title/append
@@ -60,28 +60,29 @@ title/append
 
 ### 属性
 
-|     属性名      | 说明                                                                                                                                                          | 类型            | 默认值    |
-| :-------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------- |
-|     `title`     | 主标题文案                                                                                                                                                    | string          | `''`      |
-|     `icon`      | 左侧图标，写法与 `s-icon` 的 `icon` 属性一致，支持 Element Plus、Iconify、CSS class、在线图片、Emoji 和 Vue 图标组件；设置后自动隐藏左侧竖条；`icon` 插槽优先 | SIconValue      | `''`      |
-|   `iconAttrs`   | 透传给左侧 `s-icon` 的属性，可设置 `icon`、`size`、`color`、`rotate`、`cursor` 等；插槽图标不受影响                                                           | object          | `{}`      |
-|     `extra`     | 右侧操作区文本，`extra` 插槽优先于该属性                                                                                                                      | string          | `''`      |
-|    `append`     | 主标题右侧追加文本，样式与副标题一致；同名插槽优先                                                                                                            | string          | `''`      |
-|  `appendAttrs`  | 追加内容的 DOM 属性；`fontSize` 支持数字或 CSS 长度，也支持 `style`                                                                                           | object          | `{}`      |
-|     `size`      | 尺寸，支持 `small` / `default` / `large`                                                                                                                      | string          | `default` |
-|      `fs`       | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |
-|   `subTitle`    | 副标题文案，固定显示在主标题下方；设置后左侧竖条随副标题一起撑满整个标题块                                                                                    | string          | `''`      |
-| `subTitleAttrs` | 副标题额外属性；`fontSize` 可直接设置字号，支持数字或 CSS 长度，默认未设置                                                                                    | object          | `{}`      |
-|  `showTooltip`  | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
-| `tooltipAttrs`  | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |
-|     `inner`     | 是否使用内部缩进                                                                                                                                              | boolean         | `false`   |
-|      `gap`      | 标题内部间距，控制图标、标题、追加内容、右侧区域间距；图标尺寸变化时自动重新布局                                                                              | string / number | `''`      |
-|     `width`     | 组件宽度，数字自动按 px 处理                                                                                                                                  | string / number | `''`      |
-|    `height`     | 组件高度                                                                                                                                                      | string / number | `''`      |
-|     `type`      | 标题样式类型，支持 `''` / `icon` / `simple` / `form`                                                                                                          | string          | `''`      |
-|     `theme`     | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                                                                                                | string          | `default` |
-|      `tag`      | 标题标签，支持 `div` / `h1` / `h2` / `h3` / `h4` / `h5` / `h6`                                                                                                | string          | `div`     |
-|     `level`     | 非原生标题标签的无障碍标题层级，支持 `1` 到 `6`                                                                                                               | number          | `3`       |
+|           属性名           | 说明                                                                                                                                                          | 类型            | 默认值    |
+| :------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | --------- |
+|          `title`           | 主标题文案，支持 `<s-text>`、`<s-tag>` 组件标签及简单 HTML；复杂 Vue 内容请使用 `title` 插槽                                                                  | string          | `''`      |
+|           `icon`           | 左侧图标，写法与 `s-icon` 的 `icon` 属性一致，支持 Element Plus、Iconify、CSS class、在线图片、Emoji 和 Vue 图标组件；设置后自动隐藏左侧竖条；`icon` 插槽优先 | SIconValue      | `''`      |
+|        `iconAttrs`         | 透传给左侧 `s-icon` 的属性，可设置 `icon`、`size`、`color`、`rotate`、`cursor` 等；插槽图标不受影响                                                           | object          | `{}`      |
+|          `extra`           | 右侧操作区文本，`extra` 插槽优先于该属性                                                                                                                      | string          | `''`      |
+|          `append`          | 主标题右侧追加内容，支持 `<s-text>`、`<s-tag>` 组件标签及简单 HTML；同名插槽优先                                                                              | string          | `''`      |
+|       `appendAttrs`        | 追加内容的 DOM 属性；`fontSize` 支持数字或 CSS 长度，也支持 `style`                                                                                           | object          | `{}`      |
+|           `size`           | 尺寸，支持 `small` / `default` / `large`                                                                                                                      | string          | `default` |
+|            `fs`            | 标题字号及左侧竖线高度，支持 `small` / `default` / `large`（14 / 16 / 18px）、数字（按 px 处理）或 px 字符串；覆盖 `size` 对两者的设置                        | string / number | -         |
+|         `subTitle`         | 副标题内容，支持 `<s-text>`、`<s-tag>` 组件标签及简单 HTML；固定显示在主标题下方                                                                              | string          | `''`      |
+|      `subTitleAttrs`       | 副标题额外属性；`fontSize` 可直接设置字号，支持数字或 CSS 长度，默认未设置                                                                                    | object          | `{}`      |
+|       `showTooltip`        | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
+|       `tooltipAttrs`       | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |
+| `dangerouslyUseHTMLString` | 是否把 `title` / `append` / `subTitle` 中的字符串作为富文本渲染（支持 `<s-text>`、`<s-tag>` 组件标签）；`false` 时全部按纯文本输出                            | boolean         | `true`    |
+|          `inner`           | 是否使用内部缩进                                                                                                                                              | boolean         | `false`   |
+|           `gap`            | 标题内部间距，控制图标、标题、追加内容、右侧区域间距；图标尺寸变化时自动重新布局                                                                              | string / number | `''`      |
+|          `width`           | 组件宽度，数字自动按 px 处理                                                                                                                                  | string / number | `''`      |
+|          `height`          | 组件高度                                                                                                                                                      | string / number | `''`      |
+|           `type`           | 标题样式类型，支持 `''` / `icon` / `simple` / `form`                                                                                                          | string          | `''`      |
+|          `theme`           | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                                                                                                | string          | `default` |
+|           `tag`            | 标题标签，支持 `div` / `h1` / `h2` / `h3` / `h4` / `h5` / `h6`                                                                                                | string          | `div`     |
+|          `level`           | 非原生标题标签的无障碍标题层级，支持 `1` 到 `6`                                                                                                               | number          | `3`       |
 
 外边距使用通用样式属性 `m / mt / mb / ml / mr / mx / my`，内边距使用 `p / pt / pb / pl / pr / px / py`。
 

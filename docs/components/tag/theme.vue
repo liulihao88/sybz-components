@@ -24,7 +24,7 @@ const serviceStatus = ['running', 'pending', 'error', 'unknown']
     <s-flex gap="small">
       <s-tag :theme="theme" type="primary">运行中</s-tag>
       <s-tag :theme="theme" type="success">已完成</s-tag>
-      <s-tag :theme="theme" type="warning">待处理</s-tag>
+      <s-tag :theme="theme" type="warning">警告</s-tag>
       <s-tag :theme="theme" type="danger">异常</s-tag>
       <s-tag :theme="theme" type="info">未知</s-tag>
     </s-flex>

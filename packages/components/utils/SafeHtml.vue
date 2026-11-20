@@ -1,27 +1,20 @@
-<!-- eslint-disable vue/no-v-html -->
-<template>
-  <div v-if="tag === 'div'" v-bind="$attrs" v-html="sanitizedHtml"></div>
-  <span v-else v-bind="$attrs" v-html="sanitizedHtml"></span>
-</template>
-<!-- eslint-enable vue/no-v-html -->
+<script lang="ts">
+import { computed, defineComponent, h, type PropType } from 'vue'
+import { createRichTextNodes } from './safeHtml'
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { sanitizeHtml } from './safeHtml'
-
-defineOptions({
+export default defineComponent({
   name: 'SafeHtml',
+  inheritAttrs: false,
+  props: {
+    html: { type: [String, Number], default: '' },
+    tag: { type: String as PropType<'span' | 'div'>, default: 'span' },
+    /** 主题：组件标签和 code / mark 的颜色 token 都按该主题解析 */
+    theme: { type: String, default: 'default' },
+  },
+  setup(props, { attrs }) {
+    const nodes = computed(() => createRichTextNodes(String(props.html ?? ''), { theme: props.theme }))
+
+    return () => h(props.tag, attrs, nodes.value)
+  },
 })
-
-interface Props {
-  html?: string | number
-  tag?: 'span' | 'div'
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  html: '',
-  tag: 'span',
-})
-
-const sanitizedHtml = computed(() => sanitizeHtml(String(props.html ?? '')))
 </script>

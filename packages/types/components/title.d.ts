@@ -4,7 +4,7 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
  *
- * s-title 标题组件，支持通过 fs 使用数字、px 字符串或 small/default/large 设置标题字号和左侧竖线高度，通过 mt/mb/ml/my 等样式属性设置外边距，通过 width 设置宽度，通过 icon 属性或插槽设置图标，并用 iconAttrs 透传 s-icon 属性；subTitle 固定显示在主标题下方，append 属性或插槽显示在主标题右侧且插槽优先，appendAttrs 可配置追加内容属性和字号；标题溢出时自动显示 tooltip，并支持通过 extra 属性或插槽设置最右侧内容。
+ * s-title 标题组件，title、append 和 subTitle 支持以字符串形式书写 s-text、s-tag 组件标签，也兼容简单 HTML（如 code、mark）；字符串会渲染成真实组件，属性按组件 prop 解析，c、bg、fs、fw、p、br 等样式简写同样生效，可用 dangerouslyUseHTMLString=false 改为纯文本。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。
  *
  * 先提示 sybz 自身属性。
  */
@@ -12,23 +12,27 @@ export type STitleComponent = {
   install: (app: import('vue').App) => void
   new <STitle文档 = 'https://liulihao88.github.io/sybz-components/components/title/home.html'>(): {
     $props: {
+      /** 主标题文本；默认按富文本渲染经安全过滤的简单 HTML（如 <code>、<mark>），title 插槽优先 */
       title?: string
       /** 左侧图标，写法与 s-icon 的 icon 属性一致；设置后自动隐藏左侧竖条 */
       icon?: SIconValue
       /** 透传给左侧 s-icon 的属性，可覆盖 icon、默认 size 和 cursor */
       iconAttrs?: SIconProps & SybzRecord
       extra?: string
-      /** 主标题右侧追加文本；append 插槽优先，默认空字符串 */
+      /** 主标题右侧追加内容，默认按富文本渲染经安全过滤的简单 HTML；append 插槽优先，默认空字符串 */
       append?: string
       /** 追加内容的 DOM 属性；fontSize 支持数字或 CSS 长度，也支持 style */
       appendAttrs?: SybzRecord & { fontSize?: string | number }
       size?: SybzComponentSize
       fs?: number | SybzComponentSize | `${number}px`
+      /** 副标题内容，默认按富文本渲染经安全过滤的简单 HTML */
       subTitle?: string
       /** 副标题 DOM 属性；fontSize 可直接传数字或 CSS 长度，亦支持 style */
       subTitleAttrs?: SybzRecord & { fontSize?: string | number }
       showTooltip?: boolean
       tooltipAttrs?: SybzRecord
+      /** 是否把 title / append / subTitle 中的 HTML 字符串作为富文本渲染；false 时全部按纯文本输出，默认值：true */
+      dangerouslyUseHTMLString?: boolean
       inner?: boolean
       gap?: string | number
       type?: '' | 'simple' | 'icon' | 'form'

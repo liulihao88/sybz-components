@@ -116,6 +116,19 @@
 - **同名 prop 优先组件自身**：少数组件自身已声明同名 prop（如 `s-flex` 的 `w` / `h` / `flex` / `gap`、`s-title` 的 `fs` 等），此时以组件自身语义为准，不会重复应用。
 - **数字写法**：模板中直接写 `m="10"`（字符串）或 `:m="10"`（数字）都会得到 `10px`。
 
+## 在 s-title 字符串里使用
+
+`s-title` 的 `title` / `append` / `subTitle` 字符串可以直接写 `<s-text>`、`<s-tag>`，样式简写同样生效：
+
+```vue
+<s-text type="danger" c="yellow" fs="12">v1.0</s-text>
+<s-tag type="danger" bg="#fee2e2">已发布</s-tag>
+
+<s-title title="版本 <s-text c='blue'>v1.0</s-text>" append="<s-tag type='danger'>已发布</s-tag>" />
+```
+
+SafeHtml 会把字符串里的 `<s-text>`、`<s-tag>` 渲染成真实组件，属性按组件 prop 解析，`c / bg / fs / p / br` 等简写照常生效；原生 `<code>` / `<mark>` 也支持。手写的 `style` 会被丢弃，布尔属性可裸写，数字属性会自动转换。
+
 ## 类型支持
 
 所有组件的 `.d.ts` 类型都已带上 `SybzStyleProps`，在 IDE 里写 `<s-flex m="10" fs="14px" bg="#fff" />` 会有完整的属性提示与类型校验。

@@ -7,7 +7,7 @@ import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
  *
- * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，并通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
+ * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；code 默认根元素为 code，复用 code 的等宽字体与 type 语义配色。可通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
  *
  * 先提示 sybz 自身属性。
  */
@@ -21,14 +21,16 @@ export type STextComponent = {
       color?: SybzTextColor
       /** CSS 渐变值，如 linear-gradient(...) 或 var(--gradient)；默认不设置，优先于 type / color / c */
       gradient?: string
-      /** 根元素标签或 Vue 组件；默认 span */
+      /** 根元素标签或 Vue 组件；默认 span，code 开启且未指定时默认 code */
       component?: string | Component
       /** 最大显示行数，0 表示不限制；默认 0 */
       lineClamp?: number
       /** 斜体；默认 false */
       italic?: boolean
-      /** 标记高亮；默认 false */
+      /** 高亮标记；默认 false，开启后使用高亮底色并继承文字颜色 */
       mark?: boolean
+      /** 代码片段；默认 false，开启后默认根元素为 code，并使用 code 的等宽字体与语义配色 */
+      code?: boolean
       /** 禁止选择文字；默认 false */
       unselectable?: boolean
     } & SybzStyleProps &

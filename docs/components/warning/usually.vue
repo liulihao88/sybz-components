@@ -28,10 +28,34 @@ const ulContent = `
     <s-warning :content="ulContent" :dangerouslyUseHTMLString="true" :icon="false" :style="{ paddingLeft: '20px' }" />
     <br />
     <s-flex>
-      <s-warning title="我是title" content="默认类型, <code>这是code包裹内容</code>" class="m-r-8" />
-      <s-warning title="我是title" content="type=warning <code>这是code包裹内容</code>" type="warning" class="m-r-8" />
-      <s-warning title="我是title" content="type=simple <code>这是code包裹内容</code>" type="simple" class="m-r-8" />
-      <s-warning title="我是title" content="type=error <code>这是code包裹内容</code>" type="error" class="m-r-8" />
+      <s-warning
+        title="我是title"
+        content="默认类型, <code>这是code包裹内容</code> <mark>我是mark</mark>"
+        class="m-r-8"
+      />
+      <s-warning
+        title="我是title"
+        content="type=warning <code>这是code包裹内容</code> <mark>我是mark</mark>"
+        type="warning"
+        class="m-r-8"
+      />
+      <s-warning
+        title="我是title"
+        content="type=simple <code>这是code包裹内容</code> <mark>我是mark</mark>"
+        type="simple"
+        class="m-r-8"
+      />
+      <s-warning
+        title="我是title"
+        content="type=error <code>这是code包裹内容</code> <mark>我是mark</mark>"
+        type="error"
+        class="m-r-8"
+      />
+      <s-warning
+        title="我是title"
+        content="默认类型, <code type='danger' c='yellow'>这是code包裹内容</code> <mark c='blue'>我是mark</mark>"
+        class="m-r-8"
+      />
     </s-flex>
 
     <br />

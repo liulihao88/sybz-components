@@ -6,6 +6,8 @@ const color = ref('')
 const gradient = ref('')
 const shorthandColor = ref('')
 const component = ref('span')
+const code = ref(false)
+const codeType = ref('')
 const lineClamp = ref(0)
 const cursor = ref<string | boolean>(false)
 const fontSize = ref<number | ''>('')
@@ -59,8 +61,15 @@ const text =
     /> -->
     <s-radio
       v-model="component"
-      title="component（默认 span）"
+      title="component（默认 span；code 开启时默认 code，此处选择不生效）"
       :options="['span', 'p', 'div', 'strong', 'small']"
+      type="simple"
+    />
+    <s-radio v-model="code" title="code（默认 false；开启后使用代码片段样式）" type="boolean" />
+    <s-radio
+      v-model="codeType"
+      title="type（code 开启时生效；默认不设置，可选 primary / success / warning / danger / error / info）"
+      :options="[{ label: '不设置', value: '' }, 'primary', 'success', 'warning', 'danger', 'error', 'info']"
       type="simple"
     />
     <s-radio v-model="lineClamp" title="lineClamp（默认 0）" :options="[0, 1, 2, 3]" type="simple" />
@@ -86,10 +95,11 @@ const text =
     />
     <s-radio v-model="unselectable" title="unselectable（默认 false）" type="boolean" />
     <s-text
-      :type="type"
+      :type="code ? codeType || 'default' : type"
       :c="color || undefined"
       :gradient="gradient || undefined"
-      :component="component"
+      :component="code ? undefined : component"
+      :code="code"
       :line-clamp="lineClamp"
       :cursor="cursor"
       :italic="decoration === 'italic'"

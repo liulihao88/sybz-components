@@ -102,3 +102,55 @@
 :where(mark[type='info'], mark[data-type='info']) {
   --s-mark-color: var(--s-code-info-color);
 }
+
+/**
+ * s-text 的 mark 模式与富文本里的 <mark> 共用这一套高亮样式：
+ * 默认黄色高亮底、继承文字色；type 只切换文字语义色，高亮底色用 bg 覆盖。
+ */
+.s-mark {
+  --s-mark-bg: var(--el-color-warning-light-9);
+  --s-mark-color: inherit;
+
+  padding: 0 4px;
+  margin: 0 2px;
+  border-radius: 2px;
+  background-color: var(--s-mark-bg);
+  color: var(--s-mark-color);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.s-mark--sybz {
+  --s-mark-bg: var(--s-sybz-yellow-100);
+}
+
+.s-mark--chenghua {
+  --s-mark-bg: var(--s-ch-primary-soft);
+}
+
+.s-mark--shijingshan,
+.s-mark--gulou {
+  --s-mark-bg: var(--s-sjs-primary-soft);
+}
+
+// mark 的 type 与 s-text 保持一致：只切换文字语义色，高亮底色用 bg 覆盖
+mark.s-mark[type='primary'] {
+  --s-mark-color: var(--s-code-primary-color);
+}
+
+mark.s-mark[type='success'] {
+  --s-mark-color: var(--s-code-success-color);
+}
+
+mark.s-mark[type='warning'] {
+  --s-mark-color: var(--s-code-warning-color);
+}
+
+mark.s-mark[type='danger'],
+mark.s-mark[type='error'] {
+  --s-mark-color: var(--s-code-danger-color);
+}
+
+mark.s-mark[type='info'] {
+  --s-mark-color: var(--s-code-info-color);
+}

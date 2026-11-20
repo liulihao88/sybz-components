@@ -44,6 +44,15 @@
             <component :is="mergedProps.tag" class="s-title__text" v-bind="titleA11yAttrs">
               <slot name="title">
                 <s-tooltip
+                  v-if="hasRichTitle"
+                  :content="plainTitle"
+                  :disabled="!mergedProps.showTooltip"
+                  v-bind="mergedProps.tooltipAttrs"
+                >
+                  <SafeHtml :html="mergedProps.title" :theme="mergedProps.theme" />
+                </s-tooltip>
+                <s-tooltip
+                  v-else
                   :content="mergedProps.title"
                   :disabled="!mergedProps.showTooltip"
                   v-bind="mergedProps.tooltipAttrs"
@@ -56,7 +65,14 @@
               v-bind="normalizedAppendAttrs"
               :style="appendStyle"
             >
-              <slot name="append">{{ mergedProps.append }}</slot>
+              <slot name="append">
+                <SafeHtml
+                  v-if="mergedProps.dangerouslyUseHTMLString"
+                  :html="mergedProps.append"
+                  :theme="mergedProps.theme"
+                />
+                <template v-else>{{ mergedProps.append }}</template>
+              </slot>
             </span>
             <span v-if="$slots.default" class="s-title__content">
               <slot></slot>
@@ -68,7 +84,12 @@
             v-bind="normalizedSubTitleAttrs"
             :style="subTitleStyle"
           >
-            {{ mergedProps.subTitle }}
+            <SafeHtml
+              v-if="mergedProps.dangerouslyUseHTMLString"
+              :html="mergedProps.subTitle"
+              :theme="mergedProps.theme"
+            />
+            <template v-else>{{ mergedProps.subTitle }}</template>
           </span>
         </div>
       </div>
@@ -88,6 +109,7 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import SIcon from '@/components/icon/src/index.vue'
 import STooltip from '@/components/tooltip/src/index.vue'
+import SafeHtml from '@/components/utils/SafeHtml.vue'
 
 defineOptions({
   name: 'STitle',
@@ -115,6 +137,7 @@ interface TitleProps {
   subTitleAttrs?: Record<string, any>
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
+  dangerouslyUseHTMLString?: boolean
   inner?: boolean
   gap?: string | number
   width?: string | number | boolean
@@ -167,6 +190,7 @@ const props = withDefaults(defineProps<TitleProps>(), {
   subTitleAttrs: () => ({}),
   showTooltip: true,
   tooltipAttrs: () => ({}),
+  dangerouslyUseHTMLString: true,
   inner: false,
   gap: '',
   width: '',
@@ -177,6 +201,10 @@ const props = withDefaults(defineProps<TitleProps>(), {
   level: 3,
 })
 const mergedProps = useGlobalComponentConfig('title', props)
+const hasRichTitle = computed(
+  () => mergedProps.value.dangerouslyUseHTMLString && /<\/?[a-z][^>]*>/i.test(mergedProps.value.title),
+)
+const plainTitle = computed(() => mergedProps.value.title.replace(/<[^>]*>/g, ''))
 const slots = useSlots()
 const { style } = useStyleProps()
 const normalizedSubTitleAttrs = computed(() => {

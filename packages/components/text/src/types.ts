@@ -13,14 +13,16 @@ export interface STextProps {
   color?: SybzTextColor
   /** CSS 渐变值，如 linear-gradient(...) 或 var(--gradient)；默认不设置，优先于 type / color / c */
   gradient?: string
-  /** 根元素标签或 Vue 组件；默认 span */
+  /** 根元素标签或 Vue 组件；默认 span，code 开启且未指定时默认 code */
   component?: string | Component
   /** 最大显示行数，0 表示不限制；默认 0 */
   lineClamp?: number
   /** 斜体；默认 false */
   italic?: boolean
-  /** 标记高亮；默认 false */
+  /** 高亮标记；默认 false，开启后使用高亮底色并继承文字颜色 */
   mark?: boolean
+  /** 代码片段；默认 false，开启后默认根元素为 code，并使用 code 的等宽字体与语义配色 */
+  code?: boolean
   /** 禁止选择文字；默认 false */
   unselectable?: boolean
 }

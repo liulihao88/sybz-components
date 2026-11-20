@@ -121,6 +121,16 @@ tag/other
 | :-------: | ------------------------------------------------------- |
 | `default` | 自定义标签内容；传入后会覆盖默认的 `value`/映射文案展示 |
 
+### 在 s-title 字符串中使用
+
+`s-tag` 可以直接写在 `s-title` 的 `title` / `append` / `subTitle` 字符串里，字符串会渲染成真实组件，`type`、`size`、`theme`、`c`、`bg` 等属性与模板写法一致：
+
+```vue
+<s-title title="任务" append="<s-tag type='success'>已发布</s-tag>" />
+```
+
+对象 / 数组属性（如 `options`、`config`、`tooltipAttrs`）不支持字符串写法，复杂标签请使用 `#title`、`#append` 插槽。
+
 ### options 数据格式
 
 #### 1. 基础值数组

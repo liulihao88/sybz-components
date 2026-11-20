@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="mergedProps.component"
+    :is="rootComponent"
     class="s-text"
     :class="[
       's-text--' + mergedProps.theme,
@@ -9,8 +9,12 @@
         's-text--clamp': clamped,
         's-text--gradient': hasGradient,
         's-text--unselectable': mergedProps.unselectable,
+        's-text--code': isCode,
+        's-mark': mergedProps.mark,
+        [`s-mark--${mergedProps.theme}`]: mergedProps.mark && !!markTheme,
       },
     ]"
+    :type="codeTypeAttr"
     :style="[textStyle, style, gradientStyle]"
   >
     <slot />
@@ -28,10 +32,10 @@ defineOptions({ name: 'SText' })
 const props = withDefaults(defineProps<STextProps>(), {
   theme: 'default',
   type: 'default',
-  component: 'span',
   lineClamp: 0,
   italic: false,
   mark: false,
+  code: false,
   unselectable: false,
 })
 const mergedProps = useGlobalComponentConfig('text', props)
@@ -69,8 +73,22 @@ const INLINE_TAGS = new Set([
   'var',
 ])
 
-const rootTag = computed(() =>
-  typeof mergedProps.value.component === 'string' ? mergedProps.value.component.toLowerCase() : '',
+/** code 模式未显式指定根元素时默认使用原生 code，其余保持 span。 */
+const rootComponent = computed(() => mergedProps.value.component || (mergedProps.value.code ? 'code' : 'span'))
+
+const rootTag = computed(() => (typeof rootComponent.value === 'string' ? rootComponent.value.toLowerCase() : ''))
+
+/** 根元素是 code（显式传 component="code" 也算）时统一使用 code 的等宽字体和语义配色。 */
+const isCode = computed(() => mergedProps.value.code === true || rootTag.value === 'code')
+
+/** code 根元素保留 type 属性，语义配色由 code.css 的 type 选择器提供。 */
+const codeTypeAttr = computed(() =>
+  rootTag.value === 'code' && mergedProps.value.type !== 'default' ? mergedProps.value.type : undefined,
+)
+
+/** mark 的主题 class：让 .s-mark 使用对应主题的高亮底色。 */
+const markTheme = computed(() =>
+  mergedProps.value.mark && mergedProps.value.theme !== 'default' ? mergedProps.value.theme : '',
 )
 
 /**
@@ -88,34 +106,29 @@ const gradientStyle = computed(() =>
     : undefined,
 )
 
-const textStyle = computed(() => ({
-  color: mergedProps.value.color
-    ? resolveStyleColor(mergedProps.value.color, mergedProps.value.theme)
-    : mergedProps.value.type === 'default'
-      ? resolveStyleColor('default', mergedProps.value.theme)
-      : resolveThemeColor(mergedProps.value.type, mergedProps.value.theme),
-  fontStyle: mergedProps.value.italic ? 'italic' : undefined,
-  backgroundColor: mergedProps.value.mark ? 'var(--s-text-mark)' : undefined,
-  WebkitLineClamp: clamped.value ? mergedProps.value.lineClamp : undefined,
-}))
+const textStyle = computed(() => {
+  const { color, type, theme, mark, italic, lineClamp } = mergedProps.value
+  const resolveColor = () => {
+    if (color) return resolveStyleColor(color, theme)
+    // code 的文字色交给 code 的 CSS（type 属性 + 主题变量），避免内联色覆盖语义配色
+    if (isCode.value) return undefined
+    // mark 只加高亮底色；未显式设置颜色时继承外层文字色
+    if (mark && type === 'default') return 'inherit'
+    if (type !== 'default') return resolveThemeColor(type, theme)
+    return resolveStyleColor('default', theme)
+  }
+
+  return {
+    color: resolveColor(),
+    fontStyle: italic ? 'italic' : undefined,
+    WebkitLineClamp: clamped.value ? lineClamp : undefined,
+  }
+})
 </script>
 
 <style scoped lang="scss">
 .s-text {
   box-sizing: border-box;
-}
-
-.s-text--default,
-.s-text--sybz {
-  --s-text-mark: var(--s-sybz-yellow-100);
-}
-
-.s-text--chenghua {
-  --s-text-mark: var(--s-ch-primary-soft);
-}
-
-.s-text--shijingshan {
-  --s-text-mark: var(--s-sjs-primary-soft);
 }
 
 .s-text--gradient {
