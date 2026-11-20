@@ -18,6 +18,14 @@
 tag/base
 :::
 
+### other
+
+基础写法：`<s-tag width="120" :tooltip-attrs="{ placement: 'bottom', showAfter: 500 }">较长的标签文本</s-tag>`。`tooltipAttrs` 接受 `s-tooltip` 的属性对象，默认 `{}`；例如 `placement` 默认 `top`，`showAfter` 默认 `0` 毫秒。传入的属性优先于内部默认值；未设置时仍只在标签文本溢出时显示提示。
+
+:::demo 切换 Tooltip 的位置和显示延迟，悬停在标签文本上观察效果。
+tag/other
+:::
+
 ### 主题（theme 默认值：default）
 
 :::demo
@@ -64,14 +72,6 @@ tag/overflow
 
 :::demo `width / height / color / background / hoverAnimation` 由公共 Hook 统一处理，`background` 同时支持普通颜色和渐变。基础写法：`<s-tag width="160" height="36" color="#4c1d95" background="linear-gradient(135deg, #ede9fe, #ddd6fe)" hover-animation>公共属性标签</s-tag>`。属性：`width / height` 类型 `string / number`，默认值 `''`；`color / background` 类型 `string`，默认值 `''`；`hoverAnimation` 可选值 `true / false`，默认值 `false`。
 tag/commonProps
-:::
-
-### other
-
-基础写法：`<s-tag width="120" :tooltip-attrs="{ placement: 'bottom', showAfter: 500 }">较长的标签文本</s-tag>`。`tooltipAttrs` 接受 `s-tooltip` 的属性对象，默认 `{}`；例如 `placement` 默认 `top`，`showAfter` 默认 `0` 毫秒。传入的属性优先于内部默认值；未设置时仍只在标签文本溢出时显示提示。
-
-:::demo 切换 Tooltip 的位置和显示延迟，悬停在标签文本上观察效果。
-tag/other
 :::
 
 ### 属性

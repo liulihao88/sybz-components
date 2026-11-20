@@ -46,7 +46,7 @@ const serviceStatus = ['running', 'pending', 'error', 'unknown']
 
     <s-flex gap="small">
       <s-tag :theme="theme" type="primary" effect="dark">深色主状态</s-tag>
-      <s-tag :theme="theme" type="warning" effect="plain">描边提醒</s-tag>
+      <s-tag :theme="theme" type="info" effect="plain">描边提醒</s-tag>
       <s-tag :theme="theme" type="danger" closable>可关闭异常</s-tag>
     </s-flex>
   </div>
