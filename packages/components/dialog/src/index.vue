@@ -724,16 +724,6 @@ onBeforeUnmount(() => {
 <!-- ElDialog 可挂载到 body；面板布局按实际节点类名匹配，避免依赖外层 .s-dialog。 -->
 <style lang="scss">
 .s-dialog__panel {
-  // s-input / s-select 等组件的 top-title 会向上溢出输入框 8px。
-  // 内容区自身是滚动容器，顶部没有余量时标题会被裁掉；这里给滚动容器留出
-  // 8px 顶部空间，再用负 margin 抵消位置，配合 content-box 保证高度不变。
-  .dialog_slot_box,
-  .dialog_fullscreen {
-    box-sizing: content-box;
-    padding-top: 8px;
-    margin-top: -8px;
-  }
-
   .s-dialog__header {
     display: flex;
     align-items: flex-start;
