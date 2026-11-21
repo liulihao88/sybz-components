@@ -218,7 +218,13 @@ onBeforeUnmount(() => {
     <template v-if="download || fullscreen" #append>
       <s-flex align="center" gap="8">
         <s-button v-if="download" :href="src" download type="primary" size="small">下载文件</s-button>
-        <s-button v-if="fullscreen" size="small" type="primary" @click="fullscreenActive = !fullscreenActive">
+        <s-button
+          v-if="fullscreen"
+          size="small"
+          type="primary"
+          content="ESC 退出全屏"
+          @click="fullscreenActive = !fullscreenActive"
+        >
           {{ fullscreenActive ? '退出全屏' : '全屏显示' }}
         </s-button>
       </s-flex>
@@ -351,7 +357,6 @@ onBeforeUnmount(() => {
   font-size: 12px;
 }
 .s-preview__markdown {
-  padding: 16px;
   overflow-wrap: anywhere;
 }
 .s-preview__download {
