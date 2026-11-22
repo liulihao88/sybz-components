@@ -17,15 +17,16 @@ importers:
       consola:
         specifier: ^3.4.2
         version: 3.4.2
-      element-plus:
-        specifier: ^2.11.5
-        version: 2.13.0(vue@3.4.15)
       es-toolkit:
         specifier: ^1.39.10
         version: 1.39.10
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+    devDependencies:
+      element-plus:
+        specifier: ^2.11.5
+        version: 2.13.0(vue@3.4.15)
       vue:
         specifier: 3.4.15
         version: 3.4.15

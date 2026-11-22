@@ -171,10 +171,14 @@ type WidthInput = string | number | boolean | Ref<string | number | boolean>
 export type ConfirmMessage = string | VNode | (() => VNode)
 export type ConfirmTheme = UtilsTheme
 type ConfirmAppendTarget = NonNullable<ElMessageBoxOptions['appendTo']>
+type VueAppHost = {
+  _context?: AppContext | null
+}
 type AppRootElement = Element & {
-  _vue_app?: {
-    _context?: AppContext | null
-  }
+  /** Vue 3 挂载应用后写在容器上的实例，属性名是两个下划线。 */
+  __vue_app__?: VueAppHost
+  /** 兼容旧实现里误写的单下划线属性。 */
+  _vue_app?: VueAppHost
 }
 
 export interface ConfirmCustomOptions {
@@ -1840,8 +1844,24 @@ function _resolveAppContext(appContext: AppContext | null | undefined) {
     return elementPlusContext
   }
 
-  const appRoot = document.querySelector('#app') as AppRootElement | null
-  return elementPlusContext || appRoot?._vue_app?._context || null
+  return elementPlusContext || _mountedAppContext()
+}
+
+/**
+ * 从 Vue 的挂载容器上取 appContext。
+ * Vue 把实例写在 `__vue_app__`（两个下划线），并给容器加 `data-v-app`；
+ * 应用不一定挂在 `#app` 上，所以两个入口都要找。
+ */
+function _mountedAppContext() {
+  const roots = [document.querySelector('#app'), document.querySelector('[data-v-app]')]
+  for (const root of roots) {
+    const element = root as AppRootElement | null
+    const context = element?.__vue_app__?._context ?? element?._vue_app?._context
+    if (context) {
+      return context
+    }
+  }
+  return null
 }
 
 /**

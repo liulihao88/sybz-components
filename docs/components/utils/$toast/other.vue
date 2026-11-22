@@ -6,10 +6,19 @@ import { ElMessage } from 'element-plus'
 // const { $toast, delay } = utils
 import { $toast, delay } from '@sybz-components/utils'
 const showComponent = () => {
-  $toast('文件<s-tag>你好</s-tag> 上传 <s-button type="danger" h="20" @click="showButtonTip">点我试试</s-button>成功', {
-    dangerouslyUseHTMLString: true,
-    handlers: { showButtonTip: () => $toast('点击了提示中的按钮') },
-  })
+  $toast(
+    '文件<s-tag>你好</s-tag> 上传 <s-button type="danger" size="small" @click="showButtonTip">点我试试</s-button>成功',
+    {
+      dangerouslyUseHTMLString: true,
+      handlers: {
+        showButtonTip: () =>
+          $toast('点击了提示中的按钮 <s-button size="small" @click="showButtonTip2">我再点</s-button>', {
+            dangerouslyUseHTMLString: true,
+            handlers: { showButtonTip2: () => $toast('123') },
+          }),
+      },
+    },
+  )
 }
 const base = () => {
   $toast('基础成功')

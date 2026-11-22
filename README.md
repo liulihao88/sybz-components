@@ -87,7 +87,7 @@ npm install echarts
 yarn add echarts
 ```
 
-如需使用工具函数包：
+如需使用工具函数包（和组件库一致，`vue`、`element-plus` 作为 peer 依赖，由宿主项目提供）：
 
 ```sh
 pnpm add @sybz-components/utils
@@ -243,7 +243,7 @@ app.use(SybzComponents, {
 
 ## Peer 依赖说明
 
-组件库的 peer 依赖只保留宿主项目必须提供的基础运行时：`vue` 和 `element-plus`。`@element-plus/icons-vue`、`@vueuse/core` 由组件库依赖自动安装；`echarts` 属于功能型依赖，仅在使用图表能力时由宿主项目按需安装。
+组件库和 `@sybz-components/utils` 的 peer 依赖只保留宿主项目必须提供的基础运行时：`vue` 和 `element-plus`。`@element-plus/icons-vue`、`@vueuse/core` 由组件库依赖自动安装；`echarts` 属于功能型依赖，仅在使用图表能力时由宿主项目按需安装。
 
 ## 常用组件
 

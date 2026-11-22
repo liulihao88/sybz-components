@@ -408,9 +408,9 @@ describe('base utils', () => {
     const Tag = { name: 'STag', render: () => null }
     const Button = { name: 'SButton', render: () => null }
     const handleClick = vi.fn()
-    const appRoot = document.createElement('div') as HTMLDivElement & { _vue_app?: unknown }
+    const appRoot = document.createElement('div') as HTMLDivElement & { __vue_app__?: unknown }
     appRoot.id = 'app'
-    appRoot._vue_app = { _context: { components: { STag: Tag, SButton: Button } } }
+    appRoot.__vue_app__ = { _context: { components: { STag: Tag, SButton: Button } } }
     document.body.append(appRoot)
 
     try {
@@ -434,9 +434,9 @@ describe('base utils', () => {
   it('renders string icons through the globally registered SIcon', () => {
     const SIcon = { name: 'SIcon', render: () => null }
     const appContext = { components: { SIcon } }
-    const appRoot = document.createElement('div') as HTMLDivElement & { _vue_app?: unknown }
+    const appRoot = document.createElement('div') as HTMLDivElement & { __vue_app__?: unknown }
     appRoot.id = 'app'
-    appRoot._vue_app = { _context: appContext }
+    appRoot.__vue_app__ = { _context: appContext }
     document.body.append(appRoot)
 
     try {
@@ -457,6 +457,24 @@ describe('base utils', () => {
         source: 'iconify',
         style: { marginRight: '4px' },
       })
+    } finally {
+      appRoot.remove()
+    }
+  })
+
+  it('finds the app context from a mount container that is not #app', () => {
+    const SIcon = { name: 'SIcon', render: () => null }
+    const appContext = { components: { SIcon } }
+    const appRoot = document.createElement('div') as HTMLDivElement & { __vue_app__?: unknown }
+    appRoot.setAttribute('data-v-app', '')
+    appRoot.__vue_app__ = { _context: appContext }
+    document.body.append(appRoot)
+
+    try {
+      $toast('图标提示', { icon: 'Plus' })
+      const options = elementPlusMocks.message.mock.lastCall?.[0]
+      expect(options.icon().type).toBe(SIcon)
+      expect(elementPlusMocks.message.mock.lastCall?.[1]).toBe(appContext)
     } finally {
       appRoot.remove()
     }

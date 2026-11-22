@@ -1,5 +1,6 @@
 # Changelog
 
+- 2026-11-21 23:47:00 @sybz-components/utils 修复 `$toast` 字符串图标在 Element Plus 多实例下取不到 SIcon（Vue 挂载实例属性应为 `__vue_app__`，并兼容 `data-v-app` 挂载点）；`vue`、`element-plus` 改为 peerDependencies
 - 2026-11-12 14:03:53 1. 'miw maw mih mah' 改为 'minw maxw minh maxh' 2. http的写法统一改为 http('url', config);
 - 2026-10-23 14:06:04 s-icon 新增 highlight 属性, 鼠标移入时默认色图标线条变主题主色、语义色图标(含警告色/错误色)同色系加深, 默认 false
 - 2026-10-23 10:35:00 s-dialog 回车确认排除输入法组词、textarea/contenteditable 换行、按钮和链接回车、展开的弹层

@@ -285,9 +285,6 @@ importers:
       consola:
         specifier: ^3.4.2
         version: 3.4.2
-      element-plus:
-        specifier: ^2.11.5
-        version: 2.13.0(vue@3.4.15(typescript@5.3.3))
       es-toolkit:
         specifier: ^1.39.10
         version: 1.43.0
@@ -321,12 +318,16 @@ importers:
       vite:
         specifier: '>=5 <7'
         version: 5.2.11(@types/node@20.11.16)(lightningcss@1.33.0)(sass@1.70.0)(terser@5.31.1)
-      vue:
-        specifier: 3.4.15
-        version: 3.4.15(typescript@5.3.3)
       vue-eslint-parser:
         specifier: 10.4.1
         version: 10.4.1(eslint@9.39.4(jiti@2.7.0))
+    devDependencies:
+      element-plus:
+        specifier: ^2.11.5
+        version: 2.13.0(vue@3.4.15(typescript@5.3.3))
+      vue:
+        specifier: 3.4.15
+        version: 3.4.15(typescript@5.3.3)
 
 packages:
 
@@ -8574,7 +8575,7 @@ snapshots:
     dependencies:
       bumpp: 8.2.1
       callsites: 4.1.0
-      inferred-types: 0.37.6(happy-dom@8.9.0)(lightningcss@1.33.0)(sass@1.70.0)(terser@5.31.1)
+      inferred-types: 0.37.6(happy-dom@12.10.3)(lightningcss@1.33.0)(sass@1.70.0)(terser@5.31.1)
       vitest: 0.25.8(happy-dom@8.9.0)(lightningcss@1.33.0)(sass@1.70.0)(terser@5.31.1)
     transitivePeerDependencies:
       - '@edge-runtime/vm'

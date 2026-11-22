@@ -64,7 +64,6 @@
     "axios": "^1.19.0",
     "code-inspector-plugin": "^2.0.9",
     "consola": "^3.4.2",
-    "element-plus": "^2.11.5",
     "es-toolkit": "^1.39.10",
     "eslint": "9.39.4",
     "eslint-config-prettier": "9.1.2",
@@ -75,10 +74,15 @@
     "lodash-es": "^4.17.21",
     "prettier": "3.8.4",
     "tailwindcss": "^4.3.3",
-    "vue": "3.4.15",
     "vue-eslint-parser": "10.4.1"
   },
+  "devDependencies": {
+    "element-plus": "^2.11.5",
+    "vue": "3.4.15"
+  },
   "peerDependencies": {
-    "vite": ">=5 <7"
+    "element-plus": ">=2.3.0 <3",
+    "vite": ">=5 <7",
+    "vue": ">=3.4.0 <4"
   }
 }
