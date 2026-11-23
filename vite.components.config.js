@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Icons from 'unplugin-icons/vite'
 import { componentStylePlugin } from './scripts/component-style-plugin.mjs'
+import { COMPAT_TARGET, babelCompatPlugin, polyfillEntryPlugin } from './scripts/build-compat.mjs'
 
 const componentEntries = Object.fromEntries(
   fg
@@ -19,9 +20,7 @@ const componentEntries = Object.fromEntries(
 )
 
 const isExternalPackage = (id) =>
-  /^(vue|element-plus|echarts)(\/|$)/.test(id) ||
-  /^@element-plus\/icons-vue(\/|$)/.test(id) ||
-  /^@sybz-components\/utils(\/|$)/.test(id)
+  /^(vue|element-plus|echarts)(\/|$)/.test(id) || /^@element-plus\/icons-vue(\/|$)/.test(id)
 
 const buildDate = new Date()
 const pad = (value) => String(value).padStart(2, '0')
@@ -34,6 +33,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: false,
+    target: COMPAT_TARGET,
+    cssTarget: COMPAT_TARGET,
     cssCodeSplit: true,
     lib: {
       entry: componentEntries,
@@ -53,10 +54,13 @@ export default defineConfig({
     vueJsx(),
     Icons({ compiler: 'vue3', scale: 1 }),
     componentStylePlugin(Object.keys(componentEntries)),
+    babelCompatPlugin(),
+    polyfillEntryPlugin(),
   ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'packages'),
+      '@sybz-components/utils': resolve(__dirname, './packages/utils/src/index.ts'),
     },
   },
 })

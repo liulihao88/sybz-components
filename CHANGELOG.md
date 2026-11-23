@@ -1,5 +1,7 @@
 # Changelog
 
+- 2026-11-23 18:15:00 `sybzVitePlugins({ compat: true })` 新增应用级 Chrome 60+ 兼容：统一 build target、注入 `@vitejs/plugin-legacy` 生成 nomodule/SystemJS 产物、自动注入 PostCSS 兼容插件；已有 postcss.config 时提示手动合并 `createSybzCompatPostcssPlugins()`
+- 2026-11-23 17:10:00 组件库按 Chrome 60+ 构建：Babel/esbuild 语法降级、core-js + ResizeObserver/AbortController polyfill、PostCSS 前缀与可降级 CSS 处理（含 `:focus-visible`/`:where`/`:has` 选择器列表拆分）、按需入口自动带 polyfill，并新增 `pnpm check:compat` 产物校验
 - 2026-11-23 12:33:09 dangerouslyUseHTMLString全局都默认改为true, 可以直接适配编辑组件和<br>等html元素
 - 2026-11-21 23:47:00 @sybz-components/utils 修复 `$toast` 字符串图标在 Element Plus 多实例下取不到 SIcon（Vue 挂载实例属性应为 `__vue_app__`，并兼容 `data-v-app` 挂载点）；`vue`、`element-plus` 改为 peerDependencies
 - 2026-11-12 14:03:53 1. 'miw maw mih mah' 改为 'minw maxw minh maxh' 2. http的写法统一改为 http('url', config);

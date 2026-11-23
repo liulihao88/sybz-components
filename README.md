@@ -107,6 +107,69 @@ npm install @sybz-components/utils
 yarn add @sybz-components/utils
 ```
 
+## 浏览器兼容
+
+组件库产物默认按 **Chrome 60+** 构建，同时兼顾 Safari 12+、Firefox 60+、Edge 79+。组件库已内置以下兼容处理，业务项目引用后无需再为组件库单独配置 Babel、PostCSS 或 `core-js`：
+
+- **JS 语法降级**：Vite/esbuild 按 `chrome60` 编译 `?.`、`??`、class fields、私有字段、逻辑赋值等语法；`.vue` 编译产物还会经过 Babel `preset-env` 二次兜底，避免高版本语法漏进最终包。
+- **运行时 API**：主入口会自动引入 `core-js/stable`，并补齐 `ResizeObserver`、`AbortController` 等 Chrome 60 缺失的 API，不会再出现 `AbortController is not defined`、`ResizeObserver is not defined` 一类报错。
+- **按需/子路径引入**：`dist/components/*.js`、`dist/charts/*.js` 会自动带上 `dist/polyfill.js`；也可以显式引入：
+
+  ```js
+  import 'sybz-components/polyfill'
+  ```
+
+- **CSS 兼容**：PostCSS（`postcss-preset-env` + Autoprefixer）会处理厂商前缀、`:is()`、`inset`、静态 `color-mix()`、`dvh`/`dvw` 回退等；含 `:focus-visible`/`:where()`/`:has()` 的选择器列表会拆成独立规则，避免 Chrome 60 因一个不支持的选择器把同组 `:hover`/`:focus` 规则一起丢掉；`@layer` 存在时会由 `postcss-cascade-layers` 转成兼容写法。
+- **工具函数包**：`@sybz-components/utils` 源码也已按 `chrome60` 构建；如果项目单独使用它，请确保升级到包含该构建的版本。
+
+发布前会执行产物校验：
+
+```sh
+pnpm check:compat
+```
+
+该命令会扫描 `dist` 的核心产物，发现 `?.`、`??`、class fields、私有字段、`import.meta`、高版本正则等 Chrome 60 无法解析的语法时直接失败，避免兼容性回归。`markdown`/`mermaid` 等可选重组件的懒加载 chunk 和 UMD 单文件会自动跳过，并在输出中提示。
+
+### 让整个项目兼容（Vite）
+
+组件库只能保证自己的代码；业务项目自己的 `.ts/.vue/.css` 仍然由宿主构建处理。Vite 项目请在 `sybzVitePlugins` 中开启 `compat`：
+
+```sh
+pnpm add -D @vitejs/plugin-legacy
+```
+
+如果项目未安装 `terser`，同时安装 `terser`（`plugin-legacy` 的 peer 依赖）。
+
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { sybzVitePlugins } from '@sybz-components/utils/vite'
+
+export default defineConfig({
+  plugins: [vue(), sybzVitePlugins({ compat: true })],
+})
+```
+
+开启后会统一处理：
+
+- `build.target` / `build.cssTarget` / `optimizeDeps` 目标改为 Chrome 60。
+- 自动注入 `@vitejs/plugin-legacy`，生成 `nomodule` / SystemJS 的 legacy 产物。Chrome 60 不支持原生 ESM，这一步是必需的，只改 `build.target` 不够。
+- 自动注入 PostCSS 兼容插件，处理业务 CSS 的前缀、`:is()`、`:focus-visible` 选择器列表、`dvh`、`inset` 等。
+
+`@vitejs/plugin-legacy` 需要与 Vite 大版本匹配：Vite 5 用 `^5`，Vite 6 用 `^6`，Vite 7 用 `^7`（`rolldown-vite` 需在实际项目验证）。
+
+如果项目已有 `postcss.config`，预设会跳过自动注入并给出提示，此时手动合并：
+
+```js
+const { createSybzCompatPostcssPlugins } = require('@sybz-components/utils/postcss')
+
+module.exports = {
+  plugins: [...createSybzCompatPostcssPlugins(), ...otherPlugins],
+}
+```
+
+> 说明：`color-mix()` 使用 CSS 变量、`:where()`、`:has()`、`:focus-visible` 本身、`@scope`、`@property`、`@container`、flex `gap`、`aspect-ratio`、`clamp()` 等能力无法在不改变语义的前提下降级，Chrome 60 中会按浏览器默认行为忽略或降级展示；`markdown`（mermaid/katex）、`json`（codemirror）、`documentPreview`/`preview` 等可选重组件依赖现代浏览器能力，建议在现代浏览器使用。Chrome 60 不支持原生 ESM，请通过构建工具打包引用；UMD 单文件会包含全部可选重组件，不建议在 Chrome 60 直接加载。`echarts` 为外部依赖，使用图表组件时需宿主项目同时按 Chrome 60 目标构建 `echarts`。
+
 ## 更新组件库
 
 更新 `sybz-components`：

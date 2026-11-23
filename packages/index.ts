@@ -1,3 +1,5 @@
+// 兼容入口必须最先执行：语法降级后仍缺失的运行时 API 在这里一次性补齐。
+import './compat/polyfills'
 import './styles/index.scss'
 
 import { defineAsyncComponent, isReactive, reactive, watch, type App, type Component } from 'vue'

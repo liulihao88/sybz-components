@@ -10,6 +10,7 @@ import { customVitePluginFilePath } from './packages/utils/local/customVitePlugi
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import Icons from 'unplugin-icons/vite'
 import { compile } from 'sass'
+import { COMPAT_TARGET, babelCompatPlugin } from './scripts/build-compat.mjs'
 
 const formatBuildTime = (date) => {
   const pad = (value) => String(value).padStart(2, '0')
@@ -19,17 +20,18 @@ const formatBuildTime = (date) => {
 }
 
 const buildTime = formatBuildTime(new Date())
-const externalPackages = ['vue', 'element-plus', '@element-plus/icons-vue', '@sybz-components/utils', 'echarts']
+const externalPackages = ['vue', 'element-plus', '@element-plus/icons-vue', 'echarts']
 const isExternalPackage = (id) =>
   externalPackages.includes(id) ||
   /^element-plus(\/|$)/.test(id) ||
   /^@element-plus\/icons-vue(\/|$)/.test(id) ||
-  /^echarts(\/|$)/.test(id) ||
-  /^@sybz-components\/utils(\/|$)/.test(id)
+  /^echarts(\/|$)/.test(id)
 
 export default defineConfig({
   build: {
     outDir: 'dist',
+    target: COMPAT_TARGET,
+    cssTarget: COMPAT_TARGET,
     lib: {
       entry: resolve(__dirname, './packages/index.ts'),
       name: pkg.name,
@@ -43,7 +45,6 @@ export default defineConfig({
           vue: 'Vue',
           'element-plus': 'ElementPlus',
           '@element-plus/icons-vue': 'ElementPlusIconsVue',
-          '@sybz-components/utils': 'SybzComponentsUtils',
           echarts: 'echarts',
           'echarts/core': 'echarts',
           'echarts/charts': 'echarts',
@@ -124,11 +125,14 @@ export default defineConfig({
       compiler: 'vue3',
       scale: 1,
     }),
+    babelCompatPlugin(),
   ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'packages'),
       '~dist': resolve(__dirname, 'dist'),
+      // 直接编译 utils 源码，避免外部 utils 产物中的 ?? / ?. 等语法漏进低版本浏览器
+      '@sybz-components/utils': resolve(__dirname, './packages/utils/src/index.ts'),
     },
   },
   server: {

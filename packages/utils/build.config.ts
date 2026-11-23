@@ -27,8 +27,12 @@ export default defineBuildConfig({
     },
     esbuild: {
       // 强制转换 CJS 模块
-      target: 'esnext',
+      // 浏览器侧产物需在 Chrome 60+ 直接运行；Node/Vite 工具链文件仍保留 import.meta.url
+      target: 'chrome60',
       format: 'esm',
+      supported: {
+        'import-meta': true,
+      },
       define: {
         __SYBZ_UTILS_BUILD_TIME__: JSON.stringify(buildTime),
       },

@@ -20,7 +20,7 @@ export default defineConfig({
 
 `sybzVitePlugins()` 内部包含多个插件，并自动向 HTML 注入 Tailwind CSS 样式入口。业务项目无需单独安装 `tailwindcss` 或在 CSS 中写 `@import 'tailwindcss'`。Vite 的 `PluginOption` 原生支持插件数组并会自动扁平化，因此直接放入 `plugins`，无需使用展开运算符。
 
-预设当前支持 Vite 5 和 6。项目仍需自行安装并注册 `@vitejs/plugin-vue`。
+预设当前支持 Vite 5 和 6（Vite 7 / `rolldown-vite` 需在实际项目验证）。项目仍需自行安装并注册 `@vitejs/plugin-vue`。
 
 :::tip 代码统一规范为什么不放进 Vite 插件？
 ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行、Git 提交和 CI 阶段，不属于 Vite 生命周期。把它们放进 `sybzVitePlugins()` 会导致只有启动或构建 Vite 时才生效。统一规则已由同一工具包的 `@sybz-components/utils/codeStandard` 集中提供，业务项目只需导入预设，升级工具包即可同步规则。
@@ -28,18 +28,44 @@ ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行�
 
 ### 配置项
 
-| 属性名称        | 类型                                  | 可选值                | 默认值 | 说明                                   |
-| --------------- | ------------------------------------- | --------------------- | ------ | -------------------------------------- |
-| `vueJsx`        | `boolean \| VueJsxOptions`            | `false/true/配置对象` | `true` | 是否启用 Vue JSX/TSX，或传入插件配置。 |
-| `tailwind`      | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true` | 是否启用 Tailwind CSS v4 插件。        |
-| `tailwindCss`   | `boolean`                             | `false/true`          | `true` | 是否自动注入 Tailwind CSS 样式。       |
-| `codeInspector` | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true` | 是否启用代码定位，或传入插件配置。     |
-| `gitCommitLog`  | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true` | 是否启用 Git 信息，或传入插件配置。    |
-| `buildTime`     | `boolean \| object`                   | `false/true/配置对象` | `true` | 是否注入打包时间及其 meta 配置。       |
+| 属性名称        | 类型                                  | 可选值                | 默认值  | 说明                                                |
+| --------------- | ------------------------------------- | --------------------- | ------- | --------------------------------------------------- |
+| `vueJsx`        | `boolean \| VueJsxOptions`            | `false/true/配置对象` | `true`  | 是否启用 Vue JSX/TSX，或传入插件配置。              |
+| `tailwind`      | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true`  | 是否启用 Tailwind CSS v4 插件。                     |
+| `tailwindCss`   | `boolean`                             | `false/true`          | `true`  | 是否自动注入 Tailwind CSS 样式。                    |
+| `codeInspector` | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true`  | 是否启用代码定位，或传入插件配置。                  |
+| `gitCommitLog`  | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true`  | 是否启用 Git 信息，或传入插件配置。                 |
+| `buildTime`     | `boolean \| object`                   | `false/true/配置对象` | `true`  | 是否注入打包时间及其 meta 配置。                    |
+| `compat`        | `boolean \| SybzCompatOptions`        | `false/true/配置对象` | `false` | 应用级 Chrome 60+ 兼容：target + legacy + PostCSS。 |
 
 `bundler` 已固定为 `vite`，业务项目无需重复传入。
 
 如果项目已自行注册 `vueJsx()`，请使用 `sybzVitePlugins({ vueJsx: false })`，避免重复注册。TSX 项目还需在 `tsconfig.json` 中设置 `"jsx": "preserve"` 和 `"jsxImportSource": "vue"`。
+
+### 应用级低版本兼容（Chrome 60+）
+
+`compat: true` 用于业务应用构建，会统一设置 Chrome 60 构建目标、生成 legacy 产物并注入 PostCSS 兼容插件。Chrome 60 不支持原生 ESM，必须生成 `nomodule` / SystemJS 产物，只设置 `build.target` 不够：
+
+```sh
+pnpm add -D @vitejs/plugin-legacy
+```
+
+如果项目未安装 `terser`，同时安装 `terser`（`plugin-legacy` 的 peer 依赖）。
+
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { sybzVitePlugins } from '@sybz-components/utils/vite'
+
+export default defineConfig({
+  plugins: [vue(), sybzVitePlugins({ compat: true })],
+})
+```
+
+- `@vitejs/plugin-legacy` 需要与 Vite 大版本匹配：Vite 5 用 `^5`、Vite 6 用 `^6`、Vite 7 用 `^7`。
+- 该选项只用于应用构建，不要用于组件库的 lib 构建。
+- 项目已有 `postcss.config` 时，预设会跳过自动注入，请合并 `createSybzCompatPostcssPlugins()`。
+- `compat` 也可传对象调整 `targets`、`buildTarget`、`legacy`、`postcss`、`browsers`。
 
 ### 默认使用 VS Code 打开源码
 
