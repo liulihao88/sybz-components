@@ -22,6 +22,8 @@ defineOptions({
 
 interface FlexProps {
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
+  /** 简写：等价于 direction="column"，未显式设置 direction 时生效 */
+  column?: boolean
   wrap?: boolean | 'nowrap' | 'wrap' | 'wrap-reverse'
   justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'normal'
   align?: 'start' | 'end' | 'center' | 'baseline' | 'stretch' | 'normal'
@@ -38,7 +40,7 @@ interface FlexProps {
 
 // --- Props 定义 ---
 const props = withDefaults(defineProps<FlexProps>(), {
-  direction: 'row', // column row-reverse column-reverse
+  column: false,
   wrap: 'nowrap',
   justify: 'normal',
   align: 'normal',
@@ -51,6 +53,7 @@ const props = withDefaults(defineProps<FlexProps>(), {
 const sizeProps = useSizeAliases(props)
 const { style } = useStyleProps()
 
+const resolvedDirection = computed(() => props.direction ?? (props.column ? 'column' : 'row'))
 const gapValues = computed(() => parseGap(props.gap))
 const hasGap = computed(() =>
   [gapValues.value.x, gapValues.value.y].some((value) => !/^0(?:[a-z%]+)?$/i.test(String(value).trim())),
@@ -64,7 +67,7 @@ const wrapValue = computed(() => {
 // --- 计算 Style ---
 const flexStyles = computed(() => {
   return {
-    'flex-direction': props.direction,
+    'flex-direction': resolvedDirection.value,
     'flex-wrap': wrapValue.value,
     'justify-content': props.justify === 'normal' ? undefined : props.justify,
     'align-items': props.align === 'normal' ? undefined : props.align,

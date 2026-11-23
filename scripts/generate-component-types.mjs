@@ -429,7 +429,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SFlexProps',
       description:
-        's-flex 弹性布局组件，支持方向、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。',
+        's-flex 弹性布局组件，支持方向及 column 垂直排列简写、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。',
       slots: ['default'],
       hoverProps: componentHoverProps(
         'SFlexProps',

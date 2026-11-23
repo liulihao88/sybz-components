@@ -16,11 +16,19 @@ const alignContent = ref<AlignContent>('normal')
 const horizontalGap = ref('small')
 const verticalGap = ref('small')
 const inline = ref(false)
+const column = ref(false)
 const alignSelf = ref<AlignSelf>('auto')
 const order = ref(0)
 </script>
 
 <template>
+  <s-title title="column：垂直排列简写，等价于 direction='column'（默认 false）" />
+  <s-switch v-model="column" />
+  <s-flex :column="column" gap="small" bg="#f8fafc" class="demo-preview">
+    <s-button>按钮 1</s-button>
+    <s-button>按钮 2</s-button>
+  </s-flex>
+
   <s-title title="alignContent：多行对齐（默认 normal）" />
   <s-radio
     v-model="alignContent"

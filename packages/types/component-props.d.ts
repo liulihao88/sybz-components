@@ -502,6 +502,8 @@ export type SFlexGap = SFlexGapValue | [SFlexGapValue, SFlexGapValue]
 
 export interface SFlexProps {
   direction?: SFlexDirection
+  /** 简写：true 等价于 direction="column"；未显式设置 direction 时生效 */
+  column?: boolean
   /** 是否换行；true 等价于 wrap，false 等价于 nowrap */
   wrap?: boolean | SFlexWrap
   justify?: SFlexJustify

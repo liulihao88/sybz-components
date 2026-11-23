@@ -14,7 +14,7 @@ import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
  *
- * s-flex 弹性布局组件，支持方向、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。
+ * s-flex 弹性布局组件，支持方向及 column 垂直排列简写、换行、多行对齐、gap 单值或 [水平, 垂直] 数组、inline-flex 及容器伸缩和尺寸。
  *
  * 先提示 sybz 自身属性。
  */
@@ -23,6 +23,8 @@ export type SFlexComponent = {
   new <SFlex文档 = 'https://liulihao88.github.io/sybz-components/components/flex/home.html'>(): {
     $props: {
       direction?: SFlexDirection
+      /** 简写：true 等价于 direction="column"；未显式设置 direction 时生效 */
+      column?: boolean
       /** 是否换行；true 等价于 wrap，false 等价于 nowrap */
       wrap?: boolean | SFlexWrap
       justify?: SFlexJustify
