@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   theme: 'default',
   type: 'info',
   width: '100%',
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHTMLString: true,
   icon: true,
   size: 'default',
   dotted: false,

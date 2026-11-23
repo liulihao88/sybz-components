@@ -198,7 +198,7 @@ const props = withDefaults(defineProps<SInputProps>(), {
   // 适用于el-autocomplete
   options: undefined,
   content: '',
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHTMLString: true,
   search: false,
   debounce: 0,
 })

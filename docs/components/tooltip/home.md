@@ -70,7 +70,7 @@ tooltip/other
 
 ### 显示 HTML / VNode 内容
 
-:::demo 展示显示 HTML / VNode 内容配置。基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
+:::demo 展示显示 HTML / VNode 内容配置。基础写法：`<s-tooltip width="220px" :dangerouslyUseHTMLString="true" :content="rawHtml">HTML 字符串内容</s-tooltip>`。`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `true`；设为 `false` 时按纯文本渲染。
 tooltip/html
 :::
 
@@ -93,17 +93,17 @@ tooltip/visible
 | `tooltip.effect`                   | string          | `dark`              | tooltip 主题                        |
 | `tooltip.placement`                | string          | Element Plus 默认值 | tooltip 弹出位置                    |
 | `tooltip.showAfter`                | number          | `0`                 | 延迟显示时间，单位毫秒              |
-| `tooltip.dangerouslyUseHTMLString` | boolean         | `false`             | 是否将 `content` 按 HTML 字符串渲染 |
+| `tooltip.dangerouslyUseHTMLString` | boolean         | `true`              | 是否将 `content` 按 HTML 字符串渲染 |
 
 ### 组件属性
 
-|           属性名           | 说明                                       | 类型            | 默认值  |
-| :------------------------: | ------------------------------------------ | --------------- | ------- |
-|          `width`           | 默认文本触发区域最大宽度；不控制弹出层宽度 | string          | `100%`  |
-|        `lineClamp`         | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`     |
-|         `showSlot`         | 是否渲染默认触发内容区域                   | boolean         | `true`  |
-|          `effect`          | tooltip 主题，会透传给 `el-tooltip`        | `dark/light`    | `dark`  |
-| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染        | boolean         | `false` |
+|           属性名           | 说明                                       | 类型            | 默认值 |
+| :------------------------: | ------------------------------------------ | --------------- | ------ |
+|          `width`           | 默认文本触发区域最大宽度；不控制弹出层宽度 | string          | `100%` |
+|        `lineClamp`         | 默认文本区域最大展示行数，`1` 表示单行省略 | string / number | `1`    |
+|         `showSlot`         | 是否渲染默认触发内容区域                   | boolean         | `true` |
+|          `effect`          | tooltip 主题，会透传给 `el-tooltip`        | `dark/light`    | `dark` |
+| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染        | boolean         | `true` |
 
 ### 常用透传属性
 

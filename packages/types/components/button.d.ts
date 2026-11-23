@@ -30,7 +30,7 @@ export type SButtonComponent = {
       content?: string
       /** 透传给 s-tooltip 的属性 */
       tooltipAttrs?: Record<string, any>
-      /** 是否允许 tooltip 内容作为 HTML 片段渲染，推荐使用 Element Plus 同名写法 */
+      /** 是否允许 tooltip 内容作为 HTML 片段渲染，默认 true，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       /** 主题按钮变体 */
       variant?: '' | 'outline' | 'gradient'

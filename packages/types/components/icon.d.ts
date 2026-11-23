@@ -24,7 +24,7 @@ declare const SIcon: {
     Iconify图标查询 = 'https://icon-sets.iconify.design/',
   >(): {
     $props: {
-      /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
+      /** 是否按 HTML 字符串渲染，默认 true，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       /** 图标；支持 Vue 组件、Element Plus 图标名、Iconify 名称和在线图片 URL，业务图标推荐使用 Tabler，例如 `tabler:home` */
       icon?: SIconValue

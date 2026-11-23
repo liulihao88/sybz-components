@@ -14,8 +14,10 @@ const fontSize = ref<number | ''>('')
 const fontWeight = ref('')
 const decoration = ref('none')
 const unselectable = ref(false)
+const dangerouslyUseHTMLString = ref(true)
 const text =
   '这是一段用于展示 s-text 的较长文字。可以切换语义色、常用颜色、根元素、字号、字重和显示行数，观察文本在有限宽度内的换行与省略效果。'
+const richText = '普通文字<br><s-tag type="danger">危险标签</s-tag><br><strong>加粗文字</strong>'
 </script>
 
 <template>
@@ -94,6 +96,11 @@ const text =
       type="simple"
     />
     <s-radio v-model="unselectable" title="unselectable（默认 false）" type="boolean" />
+    <s-radio
+      v-model="dangerouslyUseHTMLString"
+      title="dangerouslyUseHTMLString（true / false，默认 true）"
+      type="boolean"
+    />
     <s-text
       :type="code ? codeType || 'default' : type"
       :c="color || undefined"
@@ -106,10 +113,11 @@ const text =
       :td="decoration === 'underline' ? 'underline' : decoration === 'delete' ? 'line-through' : undefined"
       :mark="decoration === 'mark'"
       :unselectable="unselectable"
+      :dangerouslyUseHTMLString="dangerouslyUseHTMLString"
       w="280px"
       :title="text"
     >
-      {{ text }}
+      {{ richText }}
     </s-text>
   </s-flex>
 </template>

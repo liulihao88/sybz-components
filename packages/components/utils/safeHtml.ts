@@ -9,9 +9,9 @@ import SText from '@/components/text/src/index.vue'
  * 写成 `<s-text type="danger">你好</s-text>` 时会渲染真实的 s-text 组件，
  * 属性按组件 prop 解析，`c / bg / fs / p` 等样式简写继续由 useStyleProps 生效。
  */
-const RICH_TEXT_COMPONENTS: Record<string, Component> = {
-  's-text': SText,
-  's-tag': STag,
+const getRichTextComponent = (tagName: string): Component | undefined => {
+  if (tagName === 's-text') return SText
+  if (tagName === 's-tag') return STag
 }
 
 const ALLOWED_HTML_TAGS = new Set([
@@ -262,7 +262,7 @@ const convertChildren = (parent: Node, theme?: string): (VNode | string)[] => {
 
     const element = child as HTMLElement
     const tagName = element.tagName.toLowerCase()
-    const component = RICH_TEXT_COMPONENTS[tagName]
+    const component = getRichTextComponent(tagName)
 
     if (component) {
       const children = convertChildren(element, theme)

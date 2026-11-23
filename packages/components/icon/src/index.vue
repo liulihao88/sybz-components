@@ -65,7 +65,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   type: 'default',
   variant: 'plain',
   attrs: () => ({}),
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHTMLString: true,
   rotate: '',
 })
 const mergedProps = useGlobalComponentConfig('icon', props)

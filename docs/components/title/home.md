@@ -46,13 +46,13 @@ title/iconAttrs
 
 ### 更多属性（dangerouslyUseHTMLString 默认值：true）
 
-:::demo 直接在 `title`、`append` 和 `subTitle` 中书写 `<s-text>`、`<s-tag>` 组件标签（字符串形式），同时兼容原生 `<code>`、`<mark>`。字符串会渲染成真实组件：属性按组件 prop 解析，布尔属性可裸写（如 `mark`），数字属性自动转换（如 `line-clamp="2"`），`c / bg / fs / fw / p / px / br` 等样式简写同样生效。基础写法：`<s-title title="标题 <s-text type='danger'>你好</s-text>" append="<s-tag type='danger'>你好</s-tag>" sub-title="版本 <s-text c='blue'>v1.0</s-text>" />`；三项默认均为 `''`。对象 / 数组属性（如 `options`、`config`、`tooltipAttrs`）不支持字符串写法，复杂内容请使用 `#title`、`#append` 插槽。`dangerouslyUseHTMLString` 可选 `true / false`，默认 `true`；设为 `false` 后三项都按纯文本输出，可手动关闭自动 HTML 识别。示例可分别切换 `title`、`append`、`subTitle` 的内容，观察组件标签、原生标签和普通文本的渲染差异。字符串里只支持静态属性，不支持 `:` 动态绑定和事件，需要响应式交互时请使用 `#title`、`#append` 插槽。
+:::demo 直接在 `title`、`append` 和 `subTitle` 中书写 `<s-text>`、`<s-tag>` 组件标签（字符串形式），同时兼容原生 `<code>`、`<mark>`。默认会把字符串渲染成真实组件：属性按组件 prop 解析，布尔属性可裸写（如 `mark`），数字属性自动转换（如 `line-clamp="2"`），`c / bg / fs / fw / p / px / br` 等样式简写同样生效。基础写法：`<s-title title="标题 <s-text type='danger'>你好</s-text>" append="<s-tag type='danger'>你好</s-tag>" sub-title="版本 <s-text c='blue'>v1.0</s-text>" />`；三项默认均为 `''`。对象 / 数组属性（如 `options`、`config`、`tooltipAttrs`）不支持字符串写法，复杂内容请使用 `#title`、`#append` 插槽。`dangerouslyUseHTMLString` 可选 `true / false`，默认 `true`，三项默认按白名单富文本渲染；设为 `false` 后按纯文本输出。示例可分别切换 `title`、`append`、`subTitle` 的内容和解析开关，观察渲染差异。字符串里只支持静态属性，不支持 `:` 动态绑定和事件，需要响应式交互时请使用 `#title`、`#append` 插槽。
 title/other
 :::
 
 ### 标题右侧追加内容（append 默认值：''）
 
-基础写法：`<s-title title="任务标题" append="<s-tag type='success'>草稿</s-tag>" sub-title="任务摘要" />`。`subTitle` 类型为字符串，默认 `''`，固定显示在主标题下方，左侧竖条会随副标题一起撑满整个标题块；`append` 类型为字符串，默认 `''`，显示在主标题右侧，颜色和字号与副标题一致。两者默认按富文本渲染，支持 `<s-text>`、`<s-tag>` 组件标签和简单 HTML，设置 `:dangerously-use-html-string="false"` 后按纯文本输出。`appendAttrs` 类型为对象，默认 `{}`，可透传追加内容的 DOM 属性；其中 `fontSize` 接受数字或 CSS 长度，默认未设置，`style` 也可直接传入。复杂内容使用 `#append` 插槽，插槽优先于 `append` 属性，`appendAttrs` 同样作用于插槽容器；`extra` 仍是最右侧操作区。
+基础写法：`<s-title title="任务标题" append="草稿" sub-title="任务摘要" />`。`subTitle` 类型为字符串，默认 `''`，固定显示在主标题下方，左侧竖条会随副标题一起撑满整个标题块；`append` 类型为字符串，默认 `''`，显示在主标题右侧，颜色和字号与副标题一致。两者默认按白名单富文本渲染，可直接写 `<s-text>`、`<s-tag>` 组件标签或简单 HTML；需要纯文本时设置 `:dangerouslyUseHTMLString="false"`。`appendAttrs` 类型为对象，默认 `{}`，可透传追加内容的 DOM 属性；其中 `fontSize` 接受数字或 CSS 长度，默认未设置，`style` 也可直接传入。复杂内容使用 `#append` 插槽，插槽优先于 `append` 属性，`appendAttrs` 同样作用于插槽容器；`extra` 仍是最右侧操作区。
 
 :::demo 切换追加文本和 `appendAttrs.fontSize`，并对比 `append` 插槽和最右侧 `extra` 插槽。
 title/append
@@ -74,7 +74,7 @@ title/append
 |      `subTitleAttrs`       | 副标题额外属性；`fontSize` 可直接设置字号，支持数字或 CSS 长度，默认未设置                                                                                    | object          | `{}`      |
 |       `showTooltip`        | 标题溢出时是否显示完整内容提示                                                                                                                                | boolean         | `true`    |
 |       `tooltipAttrs`       | `s-tooltip` 额外属性                                                                                                                                          | object          | `{}`      |
-| `dangerouslyUseHTMLString` | 是否把 `title` / `append` / `subTitle` 中的字符串作为富文本渲染（支持 `<s-text>`、`<s-tag>` 组件标签）；`false` 时全部按纯文本输出                            | boolean         | `true`    |
+| `dangerouslyUseHTMLString` | 是否把 `title` / `append` / `subTitle` 中的字符串作为富文本渲染（支持 `<s-text>`、`<s-tag>` 组件标签）；默认 `true`，设为 `false` 时全部按纯文本输出          | boolean         | `true`    |
 |          `inner`           | 是否使用内部缩进                                                                                                                                              | boolean         | `false`   |
 |           `gap`            | 标题内部间距，控制图标、标题、追加内容、右侧区域间距；图标尺寸变化时自动重新布局                                                                              | string / number | `''`      |
 |          `width`           | 组件宽度，数字自动按 px 处理                                                                                                                                  | string / number | `''`      |

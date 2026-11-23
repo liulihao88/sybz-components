@@ -48,7 +48,7 @@ warning/height
 |         content          | 显示的正文内容                                                 | string                    | -         |
 |          width           | 宽度                                                           | string / number           | `100%`    |
 |          height          | 高度，设置后内容垂直居中                                       | string / number           | -         |
-| dangerouslyUseHTMLString | 是否将 `content` 作为 HTML 片段处理                            | boolean                   | `false`   |
+| dangerouslyUseHTMLString | 是否将 `content` 作为 HTML 片段处理                            | boolean                   | `true`    |
 |           icon           | 是否显示图标                                                   | boolean                   | `true`    |
 |           size           | 组件尺寸，支持 `small/default`                                 | string                    | `default` |
 |          dotted          | 是否使用虚线边框                                               | boolean                   | `false`   |

@@ -70,6 +70,7 @@ export interface STableButton<Row extends TableRow = TableRow> extends Record<st
   prop?: string
   content?: string | number | TableContextHandler<string | number, Row> | TableLegacyHandler<string | number>
   title?: string | number | TableContextHandler<string | number, Row> | TableLegacyHandler<string | number>
+  /** 是否把确认提示里的字符串按 HTML 渲染，默认 true；仅传可信内容 */
   dangerouslyUseHTMLString?: boolean
   handler?: TableContextHandler<any, Row> | TableLegacyHandler<any>
   isShow?: TableMaybeFn<boolean, Row>

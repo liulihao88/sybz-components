@@ -7,7 +7,7 @@ import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
  *
- * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；code 默认根元素为 code，复用 code 的等宽字体与 type 语义配色。可通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
+ * s-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；dangerouslyUseHTMLString 可将插槽字符串中的 s-tag、s-text 和白名单 HTML 渲染为真实节点，默认 true。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。
  *
  * 先提示 sybz 自身属性。
  */
@@ -33,6 +33,8 @@ export type STextComponent = {
       code?: boolean
       /** 禁止选择文字；默认 false */
       unselectable?: boolean
+      /** 将默认插槽中的 HTML 字符串按白名单解析，支持 s-text、s-tag 等组件；默认 true */
+      dangerouslyUseHTMLString?: boolean
     } & SybzStyleProps &
       SybzThemeProps<STextProps>
     $slots: {

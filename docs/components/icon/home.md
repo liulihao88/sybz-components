@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法。基础写法：`<s-icon icon="delete"></s-icon>`。`icon="plus"` 与 `icon="el-icon-plus"` 都会解析为同一个 Element Plus 图标，与 `s-button` 的 `icon` 规则一致。属性：`icon` 类型 `SIconValue`，默认值未设置，编辑器会提示 Element Plus 图标名，同时支持 Vue 图标组件和任意自定义名称；`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`。
+:::demo 展示基础用法。基础写法：`<s-icon icon="delete"></s-icon>`。`icon="plus"` 与 `icon="el-icon-plus"` 都会解析为同一个 Element Plus 图标，与 `s-button` 的 `icon` 规则一致。属性：`icon` 类型 `SIconValue`，默认值未设置，编辑器会提示 Element Plus 图标名，同时支持 Vue 图标组件和任意自定义名称；`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `true`。
 icon/base
 :::
 
@@ -299,7 +299,7 @@ icon/highlight
 |           `type`           | 语义类型，可选 `default / primary / success / warning / danger / info`    | string          | -         |
 |         `variant`          | 视觉样式，可选 `plain / light / solid`                                    | string          | `plain`   |
 |          `attrs`           | 透传给当前图标来源的内部节点，如图片的 `alt` 或 Iconify 的 `flip`         | object          | `{}`      |
-| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                            | boolean         | `false`   |
+| `dangerouslyUseHTMLString` | 是否将 tooltip 的 `content` 按 HTML 字符串渲染                            | boolean         | `true`    |
 
 ### 事件
 

@@ -12,7 +12,7 @@ export type SWarningComponent = {
   install: (app: import('vue').App) => void
   new <SWarning文档 = 'https://liulihao88.github.io/sybz-components/components/warning/home.html'>(): {
     $props: {
-      /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
+      /** 是否按 HTML 字符串渲染，默认 true，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       content: string
       title?: string

@@ -25,4 +25,6 @@ export interface STextProps {
   code?: boolean
   /** 禁止选择文字；默认 false */
   unselectable?: boolean
+  /** 将默认插槽中的 HTML 字符串按白名单解析，支持 s-text、s-tag 等组件；默认 true */
+  dangerouslyUseHTMLString?: boolean
 }

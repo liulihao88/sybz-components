@@ -220,7 +220,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   emptyColor: false,
   showTooltip: true,
   tooltipAttrs: () => ({}),
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHTMLString: true,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
 const isSimple = computed(() => props.simple || props.type === 'simple')

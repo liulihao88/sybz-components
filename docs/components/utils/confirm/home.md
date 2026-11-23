@@ -66,23 +66,23 @@ confirm(options, appContext)
 
 `ConfirmOptions` 常用字段：
 
-| 字段                       | 类型                                       | 默认值               | 说明                                                                    |
-| -------------------------- | ------------------------------------------ | -------------------- | ----------------------------------------------------------------------- |
-| `title`                    | `string`                                   | `'提示'`             | 确认框标题。                                                            |
-| `theme`                    | `'default' \| 'chenghua' \| 'shijingshan'` | 全局主题或 `default` | 确认框主题，设置为 `'chenghua'` 或 `'shijingshan'` 时使用对应主题样式。 |
-| `variant`                  | `'default' \| 'delete' \| 'warning'`       | `default`            | 语义样式；无须设置主题，也会同步容器、标题栏、正文和操作按钮样式。      |
-| `target`                   | `string \| number`                         | -                    | `delete` 场景的操作目标；message 为空时自动生成标准删除提示。           |
-| `showCancelButton`         | `boolean`                                  | `true`               | 是否显示取消按钮。                                                      |
-| `showClose`                | `boolean`                                  | Element Plus 默认值  | 是否显示右上角关闭按钮。                                                |
-| `closeOnClickModal`        | `boolean`                                  | Element Plus 默认值  | 是否允许点击遮罩关闭。                                                  |
-| `closeOnPressEscape`       | `boolean`                                  | Element Plus 默认值  | 是否允许按 `Esc` 关闭。                                                 |
-| `cancelButtonText`         | `string`                                   | `'取消'`             | 取消按钮文案。                                                          |
-| `confirmButtonText`        | `string`                                   | `'确定'`             | 确认按钮文案。                                                          |
-| `confirmButtonClass`       | `string`                                   | -                    | 确认按钮 class，可配合成华主题颜色类使用。                              |
-| `cancelButtonClass`        | `string`                                   | -                    | 取消按钮 class，可配合成华主题颜色类使用。                              |
-| `dangerouslyUseHTMLString` | `boolean`                                  | `true`               | 是否把字符串内容按 HTML 渲染。                                          |
-| `appendTo`                 | `string \| HTMLElement \| null`            | 自动识别当前弹窗     | 指定 MessageBox 挂载节点。传普通字符串时会优先按 `id` 查询。            |
-| `appContext`               | `AppContext \| null`                       | 自动解析             | 手动指定 Vue 应用上下文。优先级高于第三个参数。                         |
+| 字段                       | 类型                                       | 默认值               | 说明                                                                                                    |
+| -------------------------- | ------------------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------- |
+| `title`                    | `string`                                   | `'提示'`             | 确认框标题。                                                                                            |
+| `theme`                    | `'default' \| 'chenghua' \| 'shijingshan'` | 全局主题或 `default` | 确认框主题，设置为 `'chenghua'` 或 `'shijingshan'` 时使用对应主题样式。                                 |
+| `variant`                  | `'default' \| 'delete' \| 'warning'`       | `default`            | 语义样式；无须设置主题，也会同步容器、标题栏、正文和操作按钮样式。                                      |
+| `target`                   | `string \| number`                         | -                    | `delete` 场景的操作目标；message 为空时自动生成标准删除提示。                                           |
+| `showCancelButton`         | `boolean`                                  | `true`               | 是否显示取消按钮。                                                                                      |
+| `showClose`                | `boolean`                                  | Element Plus 默认值  | 是否显示右上角关闭按钮。                                                                                |
+| `closeOnClickModal`        | `boolean`                                  | Element Plus 默认值  | 是否允许点击遮罩关闭。                                                                                  |
+| `closeOnPressEscape`       | `boolean`                                  | Element Plus 默认值  | 是否允许按 `Esc` 关闭。                                                                                 |
+| `cancelButtonText`         | `string`                                   | `'取消'`             | 取消按钮文案。                                                                                          |
+| `confirmButtonText`        | `string`                                   | `'确定'`             | 确认按钮文案。                                                                                          |
+| `confirmButtonClass`       | `string`                                   | -                    | 确认按钮 class，可配合成华主题颜色类使用。                                                              |
+| `cancelButtonClass`        | `string`                                   | -                    | 取消按钮 class，可配合成华主题颜色类使用。                                                              |
+| `dangerouslyUseHTMLString` | `boolean`                                  | `true`               | 是否把传入的字符串内容按 HTML 渲染；设为 `false` 时按纯文本输出。自动生成的删除目标提示会保留内部标记。 |
+| `appendTo`                 | `string \| HTMLElement \| null`            | 自动识别当前弹窗     | 指定 MessageBox 挂载节点。传普通字符串时会优先按 `id` 查询。                                            |
+| `appContext`               | `AppContext \| null`                       | 自动解析             | 手动指定 Vue 应用上下文。优先级高于第三个参数。                                                         |
 
 ### 返回值
 
@@ -172,14 +172,12 @@ await confirm('请选择当前审批结果。', {
   cancelButtonClass: 's-confirm-warning-button',
 })
 
-await confirm('第一行<br><span class="cl-blue">重点内容</span>', {
-  dangerouslyUseHTMLString: true,
-})
+await confirm('第一行<br><span class="cl-blue">重点内容</span>')
 ```
 
 ### 注意事项
 
-`confirm` 依赖 Element Plus 的 `ElMessageBox`，需要在浏览器端使用。默认开启 `dangerouslyUseHTMLString`，传入来自用户输入的 HTML 前要先做好可信处理，避免注入风险。嵌套 `s-dialog` 或 `el-dialog` 中使用时，如果默认挂载位置不符合预期，可以显式传 `appendTo`。
+`confirm` 依赖 Element Plus 的 `ElMessageBox`，需要在浏览器端使用。传入的消息默认按 HTML 渲染（`dangerouslyUseHTMLString` 默认 `true`）；需要纯文本时显式设置 `dangerouslyUseHTMLString: false`。请只传可信内容。由 `variant: 'delete'` 与 `target` 自动生成的提示保留内部标记。嵌套 `s-dialog` 或 `el-dialog` 中使用时，如果默认挂载位置不符合预期，可以显式传 `appendTo`。
 
 :::utils-source confirm
 :::

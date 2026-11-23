@@ -375,6 +375,7 @@ describe('base utils', () => {
       type: 'success',
       closeAll: true,
       duration: 1000,
+      dangerouslyUseHTMLString: true,
       showClose: true,
       customClass: 's-toast s-antd-message',
     })
@@ -383,6 +384,7 @@ describe('base utils', () => {
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '原生样式',
       type: 'warning',
+      dangerouslyUseHTMLString: true,
       showClose: true,
       customClass: 's-toast',
     })
@@ -391,6 +393,7 @@ describe('base utils', () => {
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '失败',
       type: 'error',
+      dangerouslyUseHTMLString: true,
       showClose: true,
       customClass: 's-toast s-antd-message',
     })
@@ -399,6 +402,7 @@ describe('base utils', () => {
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '不显示关闭按钮',
       type: 'success',
+      dangerouslyUseHTMLString: true,
       showClose: false,
       customClass: 's-toast s-antd-message',
     })
@@ -492,6 +496,7 @@ describe('base utils', () => {
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '复制内容复制成功',
       type: 'success',
+      dangerouslyUseHTMLString: true,
       showClose: true,
       customClass: 's-toast s-antd-message',
     })
@@ -526,7 +531,7 @@ describe('base utils', () => {
         confirmButtonText: '确定',
         dangerouslyUseHTMLString: true,
         appendTo: appendTarget,
-        customClass: 's-message-box--chenghua',
+        customClass: 's-message-box--selectable-title s-message-box--chenghua',
         confirmButtonClass: 's-message-box__confirm-btn s-message-box__confirm-btn--chenghua',
         cancelButtonClass: 's-message-box__cancel-btn s-message-box__cancel-btn--chenghua',
       }),
@@ -540,6 +545,7 @@ describe('base utils', () => {
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '全局主题',
       type: 'success',
+      dangerouslyUseHTMLString: true,
       showClose: true,
       customClass: 's-toast s-antd-message s-antd-message--shijingshan',
     })
@@ -547,6 +553,7 @@ describe('base utils', () => {
     $toast({ message: '单次覆盖', theme: 'chenghua' })
     expect(elementPlusMocks.message).toHaveBeenLastCalledWith({
       message: '单次覆盖',
+      dangerouslyUseHTMLString: true,
       showClose: true,
       customClass: 's-toast s-antd-message s-antd-message--chenghua',
     })
@@ -555,7 +562,7 @@ describe('base utils', () => {
     expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
       '使用全局主题',
       expect.objectContaining({
-        customClass: 's-message-box--shijingshan',
+        customClass: 's-message-box--selectable-title s-message-box--shijingshan',
         confirmButtonClass: 's-message-box__confirm-btn s-message-box__confirm-btn--shijingshan',
       }),
     )
@@ -564,7 +571,7 @@ describe('base utils', () => {
     expect(elementPlusMocks.confirm).toHaveBeenLastCalledWith(
       '关闭全局主题',
       expect.objectContaining({
-        customClass: '',
+        customClass: 's-message-box--selectable-title',
         confirmButtonClass: 's-message-box__confirm-btn',
       }),
     )
@@ -584,7 +591,7 @@ describe('base utils', () => {
       expect.objectContaining({
         title: '删除确认',
         confirmButtonText: '删除',
-        customClass: 's-message-box--shijingshan s-message-box--delete',
+        customClass: 's-message-box--selectable-title s-message-box--shijingshan s-message-box--delete',
       }),
     )
   })

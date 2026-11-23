@@ -123,7 +123,7 @@ input/top-title
 |         `content`          | 右侧说明提示文案                                      | string           | `''`      |
 |          `search`          | 是否在清空图标右侧显示搜索按钮，支持点击或 Enter 搜索 | boolean          | `false`   |
 |         `debounce`         | `debounced-input` 事件的防抖时间；`true` 为 500ms     | boolean / number | `0`       |
-| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染     | boolean          | `false`   |
+| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染     | boolean          | `true`    |
 
 ### 事件
 

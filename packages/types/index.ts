@@ -62,6 +62,7 @@ export interface SybzComponentsInstallOptions {
   theme?: SybzComponentTheme
   themeColors?: SybzThemeColorsConfig
   size?: string
+  /** 全局透传给组件的 HTML 字符串解析开关，默认 true */
   dangerouslyUseHTMLString?: boolean
   button?: SybzComponentInstallConfig
   datePicker?: SybzComponentInstallConfig

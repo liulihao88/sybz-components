@@ -655,7 +655,7 @@ defineExpose({
               <template #content>
                 <span class="s-form__label-tooltip-content">
                   <SafeHtml
-                    v-if="getFieldTooltipAttrs(v, i).dangerouslyUseHTMLString"
+                    v-if="getFieldTooltipAttrs(v, i).dangerouslyUseHTMLString !== false"
                     class="s-form__label-tooltip-text"
                     :html="getFieldTooltip(v, i)"
                   />

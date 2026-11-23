@@ -12,7 +12,7 @@
 
 ### 基础用法
 
-:::demo 展示基础用法，弹层打开后可按 `Esc` 快速关闭。基础写法：`<s-popconfirm @confirm="confirm"></s-popconfirm>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `true`；`re-confirm` 可选 `true / false`，默认值 `true`。
+:::demo 展示基础用法，弹层打开后可按 `Esc` 快速关闭。基础写法：`<s-popconfirm @confirm="confirm"></s-popconfirm>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `true`，默认解析白名单 HTML，设为 `false` 时按纯文本输出；`re-confirm` 可选 `true / false`，默认值 `true`。
 popconfirm/base
 :::
 
@@ -48,7 +48,7 @@ popconfirm/other
 |          `width`           | 弹层宽度；语义态默认使用更适合确认内容的宽度                                    | string / number                                                | 普通态 `200`，语义态 `320` |
 |          `height`          | 弹层高度，数字自动补 `px`                                                       | string / number / boolean                                      | -                          |
 |            `h`             | `height` 的简写                                                                 | string / number / boolean                                      | -                          |
-|         `content`          | 正文内容，默认按安全白名单 HTML 渲染                                            | string                                                         | `''`                       |
+|         `content`          | 正文内容，默认解析白名单 HTML                                                   | string                                                         | `''`                       |
 |        `reConfirm`         | 是否启用二次确认，关闭后点击即直接确认                                          | boolean                                                        | `true`                     |
 | `dangerouslyUseHTMLString` | 是否将 `title` / `content` 按安全白名单 HTML 字符串渲染，可用 `<mark>` 高亮文本 | boolean                                                        | `true`                     |
 |          `theme`           | 主题                                                                            | `default` / `chenghua` / `shijingshan` / `sybz`                | `default`                  |

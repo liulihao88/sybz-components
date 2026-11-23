@@ -44,7 +44,7 @@ button/iconPlacement
 
 ### 提示文字
 
-:::demo 展示提示文字。基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `false`；`tooltipAttrs` 类型 `object`，默认值 `{}`。
+:::demo 展示提示文字。基础写法：`<s-button content="我是提示文字" icon="plus" @click="handleClick">有提示且有icon</s-button>`。属性：`content` 类型 `string`，默认值 `''`；`dangerouslyUseHTMLString` 可选 `true / false`，默认值 `true`；`tooltipAttrs` 类型 `object`，默认值 `{}`。
 button/content
 :::
 
@@ -100,7 +100,7 @@ button/href
 |         `content`          | tooltip 的提示文字                  | string                                                          | `''`      |
 |           `time`           | 防抖时长                            | number(毫秒)                                                    | `0`       |
 |       `tooltipAttrs`       | s-tooltip 组件的属性                | Object [去tooltip组件](../tooltip/home)                         | `{}`      |
-| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                                         | `false`   |
+| `dangerouslyUseHTMLString` | 是否将 `content` 按 HTML 字符串渲染 | boolean                                                         | `true`    |
 |          `theme`           | 主题样式                            | `'default' \| 'chenghua' \| 'shijingshan' \| 'sybz' \| 'gulou'` | `default` |
 |         `variant`          | 主题样式变体                        | `'' \| 'outline' \| 'gradient'`                                 | `default` |
 |           `size`           | 按钮尺寸（高度 32px / 40px / 48px） | `'small' \| 'default' \| 'large'`                               | `default` |

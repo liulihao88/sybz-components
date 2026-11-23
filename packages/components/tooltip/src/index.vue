@@ -77,7 +77,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   lineClamp: 1,
   showSlot: true,
   effect: 'dark',
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHTMLString: true,
 })
 const mergedProps = useGlobalComponentConfig('tooltip', props)
 const { style } = useStyleProps()

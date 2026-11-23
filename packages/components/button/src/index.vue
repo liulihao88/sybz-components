@@ -60,7 +60,7 @@ const props = withDefaults(defineProps<SButtonSelfProps>(), {
   time: 0,
   content: '',
   tooltipAttrs: () => ({}),
-  dangerouslyUseHTMLString: false,
+  dangerouslyUseHTMLString: true,
   theme: 'default',
   variant: '',
   size: 'default',

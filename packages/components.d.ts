@@ -213,13 +213,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/form/home.html | 查看文档}
      *
-     * s-form 表单组件，支持 schema 字段编排、最后一个字段 grow 填充剩余高度、字段控件 slots 配置、动态配置、标签主副文本、字段标签 tooltip 提示、可选的 tooltip 文本复制（copy 默认 false）及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
+     * s-form 表单组件，支持 schema 字段编排、最后一个字段 grow 填充剩余高度、字段控件 slots 配置、动态配置、标签主副文本、字段标签 tooltip 提示（dangerouslyUseHTMLString 默认 true）、可选的 tooltip 文本复制（copy 默认 false），tooltip 可与 labelRender 或标签插槽同时使用。
      */
     SForm: (typeof import('./types/components/form'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/form/home.html | 查看文档}
      *
-     * s-form 表单组件，支持 schema 字段编排、最后一个字段 grow 填充剩余高度、字段控件 slots 配置、动态配置、标签主副文本、字段标签 tooltip 提示、可选的 tooltip 文本复制（copy 默认 false）及 dangerouslyUseHTMLString，tooltip 可与 labelRender 或标签插槽同时使用。
+     * s-form 表单组件，支持 schema 字段编排、最后一个字段 grow 填充剩余高度、字段控件 slots 配置、动态配置、标签主副文本、字段标签 tooltip 提示（dangerouslyUseHTMLString 默认 true）、可选的 tooltip 文本复制（copy 默认 false），tooltip 可与 labelRender 或标签插槽同时使用。
      */
     's-form': (typeof import('./types/components/form'))['default']
     /**
@@ -348,10 +348,14 @@ declare module 'vue' {
     's-pagination': (typeof import('./types/components/pagination'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
+     *
+     * s-popconfirm 确认弹层，title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
      */
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
+     *
+     * s-popconfirm 确认弹层，title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
      */
     's-popconfirm': (typeof import('./types/components/popconfirm'))['default']
     /**
@@ -505,25 +509,25 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
      *
-     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；code 默认根元素为 code，复用 code 的等宽字体与 type 语义配色。可通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
+     * s-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；dangerouslyUseHTMLString 可将插槽字符串中的 s-tag、s-text 和白名单 HTML 渲染为真实节点，默认 true。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。
      */
     SText: (typeof import('./types/components/text'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
      *
-     * s-text 文字组件，支持语义色、常用颜色、最高优先级的文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；code 默认根元素为 code，复用 code 的等宽字体与 type 语义配色。可通过 fs/fw/td 等样式简写设置排版；cursor 可传 CSS 值，true 表示 pointer；span 等行内标签在使用纵向间距或宽高简写（m/mt/mb/p/pt/pb/w/h 等）时会自动切换为 inline-block 显示。
+     * s-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；dangerouslyUseHTMLString 可将插槽字符串中的 s-tag、s-text 和白名单 HTML 渲染为真实节点，默认 true。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。
      */
     's-text': (typeof import('./types/components/text'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
      *
-     * s-title 标题组件，title、append 和 subTitle 支持以字符串形式书写 s-text、s-tag 组件标签，也兼容简单 HTML（如 code、mark）；字符串会渲染成真实组件，属性按组件 prop 解析，c、bg、fs、fw、p、br 等样式简写同样生效，可用 dangerouslyUseHTMLString=false 改为纯文本。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。
+     * s-title 标题组件，title、append 和 subTitle 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true），支持 s-text、s-tag 组件标签和白名单 HTML（如 code、mark）；设为 false 时按纯文本渲染。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。
      */
     STitle: (typeof import('./types/components/title'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/title/home.html | 查看文档}
      *
-     * s-title 标题组件，title、append 和 subTitle 支持以字符串形式书写 s-text、s-tag 组件标签，也兼容简单 HTML（如 code、mark）；字符串会渲染成真实组件，属性按组件 prop 解析，c、bg、fs、fw、p、br 等样式简写同样生效，可用 dangerouslyUseHTMLString=false 改为纯文本。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。
+     * s-title 标题组件，title、append 和 subTitle 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true），支持 s-text、s-tag 组件标签和白名单 HTML（如 code、mark）；设为 false 时按纯文本渲染。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。
      */
     's-title': (typeof import('./types/components/title'))['default']
     /**

@@ -49,7 +49,7 @@ export interface SybzUtilsConfig {
 }
 
 export interface ToastOptions extends Omit<Partial<MessageOptions>, 'icon'> {
-  /** 是否解析 HTML 字符串，并将已全局注册的组件标签渲染为 Vue 组件；默认 false。仅传可信内容。 */
+  /** 是否解析 HTML 字符串，并将已全局注册的组件标签渲染为 Vue 组件；默认 true。仅传可信内容。 */
   dangerouslyUseHTMLString?: boolean
   /** 图标组件，或由全局 SIcon 自动解析的图标名称。 */
   icon?: string | Component
@@ -376,7 +376,15 @@ export function $toast(
   }
 
   function showToast(options: ToastOptions) {
-    const { theme = utilsConfig.theme, customClass, iconAttrs, handlers, ...messageOptions } = options
+    const {
+      theme = utilsConfig.theme,
+      customClass,
+      iconAttrs,
+      handlers,
+      dangerouslyUseHTMLString = true,
+      ...messageOptions
+    } = options
+    let htmlStringEnabled = dangerouslyUseHTMLString
     const appContext = _resolveAppContext(null)
     const appComponents = appContext?.components
 
@@ -391,11 +399,11 @@ export function $toast(
       messageOptions.icon = () => h(icon, iconAttrs)
     }
 
-    if (typeof messageOptions.message === 'string' && messageOptions.dangerouslyUseHTMLString) {
+    if (typeof messageOptions.message === 'string' && htmlStringEnabled) {
       const registeredComponents = appComponents ?? {}
       if (Object.keys(registeredComponents).length > 0) {
         messageOptions.message = renderToastComponents(messageOptions.message, registeredComponents, handlers)
-        messageOptions.dangerouslyUseHTMLString = false
+        htmlStringEnabled = false
       }
     }
 
@@ -412,6 +420,7 @@ export function $toast(
 
     const resolvedMessageOptions = {
       ...messageOptions,
+      dangerouslyUseHTMLString: htmlStringEnabled,
       showClose: options.showClose ?? true,
       customClass: resolvedCustomClass,
     } as MessageOptions

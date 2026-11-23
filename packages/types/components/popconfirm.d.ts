@@ -12,6 +12,8 @@ type ElPopoverInstance = InstanceType<typeof ElPopover>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
  *
+ * s-popconfirm 确认弹层，title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
+ *
  * 先提示 sybz 自身属性，再提示 Element Plus Popover 的公开属性。
  */
 export type SPopconfirmPublicProps = SPopoverConfirmSelfProps &
@@ -24,7 +26,7 @@ export type SPopconfirmComponent = {
   install: (app: import('vue').App) => void
   new <SPopconfirm文档 = 'https://liulihao88.github.io/sybz-components/components/popconfirm/home.html'>(): {
     $props: {
-      /** 是否按 HTML 字符串渲染，推荐使用 Element Plus 同名写法 */
+      /** 是否按 HTML 字符串渲染，默认 true，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       title?: string
       content?: string
