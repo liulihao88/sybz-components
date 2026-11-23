@@ -1,17 +1,72 @@
-import { h, type Component, type VNode } from 'vue'
+import { getCurrentInstance, h, type Component, type VNode } from 'vue'
 import { STYLE_PROP_MAP, resolveStyleProps } from '@/hooks/useStyleProps'
 import STag from '@/components/tag/src/index.vue'
 import SText from '@/components/text/src/index.vue'
 
 /**
- * 富文本里允许直接书写的 sybz 组件标签。
+ * 富文本里始终可用的 sybz 组件标签。
  *
- * 写成 `<s-text type="danger">你好</s-text>` 时会渲染真实的 s-text 组件，
- * 属性按组件 prop 解析，`c / bg / fs / p` 等样式简写继续由 useStyleProps 生效。
+ * 其他组件会从当前实例的局部组件表和应用的全局组件表中按标签名解析，
+ * 因此 `<s-button>`、`<el-button>` 等已注册组件也可以直接写在字符串里。
+ *
+ * 这里使用函数而不是对象常量，避免 s-text / safeHtml 循环依赖时在模块初始化阶段读取组件。
  */
-const getRichTextComponent = (tagName: string): Component | undefined => {
+const getBuiltInRichTextComponent = (tagName: string): Component | undefined => {
   if (tagName === 's-text') return SText
   if (tagName === 's-tag') return STag
+}
+
+const toPascalCase = (name: string) =>
+  name.replace(/(^|[-_])([a-z])/g, (_match, _separator, letter: string) => letter.toUpperCase())
+
+const toCamelCase = (name: string) => {
+  const pascalName = toPascalCase(name)
+  return pascalName.charAt(0).toLowerCase() + pascalName.slice(1)
+}
+
+const toKebabCase = (name: string) =>
+  name
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/_/g, '-')
+    .toLowerCase()
+
+/** 同时尝试 kebab-case、PascalCase 和 camelCase，兼容 s-button / SButton 等不同注册写法 */
+const getComponentCandidates = (tagName: string) => [
+  ...new Set([tagName, toPascalCase(tagName), toCamelCase(tagName), toKebabCase(tagName)]),
+]
+
+const normalizeComponentTagName = (name: string) => name.replace(/[-_]/g, '').toLowerCase()
+
+const findComponentInRegistry = (registry: Record<string, Component>, tagName: string) => {
+  for (const candidate of getComponentCandidates(tagName)) {
+    const component = registry[candidate]
+    if (component) return component
+  }
+
+  // HTML 解析会把 <ElButton> 转成 <elbutton>，再用去掉连字符的名称兜底匹配 ElButton
+  const normalizedTagName = normalizeComponentTagName(tagName)
+  for (const [name, component] of Object.entries(registry)) {
+    if (normalizeComponentTagName(name) === normalizedTagName) return component
+  }
+
+  return undefined
+}
+
+const resolveRichTextComponent = (tagName: string): Component | undefined => {
+  const builtInComponent = getBuiltInRichTextComponent(tagName)
+  if (builtInComponent) return builtInComponent
+
+  const instance = getCurrentInstance()
+  const localComponents = (instance?.type as { components?: Record<string, Component> } | undefined)?.components
+  const registries = [localComponents, instance?.appContext.components]
+
+  for (const registry of registries) {
+    if (!registry) continue
+    const component = findComponentInRegistry(registry, tagName)
+    if (component) return component
+  }
+
+  return undefined
 }
 
 const ALLOWED_HTML_TAGS = new Set([
@@ -45,6 +100,17 @@ const ALLOWED_HTML_TAGS = new Set([
 ])
 
 const ALLOWED_GLOBAL_ATTRIBUTES = new Set(['class', 'title'])
+const COMPONENT_URL_ATTRIBUTES = new Set([
+  'action',
+  'background',
+  'cite',
+  'data',
+  'formaction',
+  'href',
+  'poster',
+  'src',
+  'xlink:href',
+])
 const ALLOWED_ATTRIBUTES_BY_TAG: Record<string, Set<string>> = {
   button: new Set(['type']),
   code: new Set(['type', 'v-pre']),
@@ -210,7 +276,7 @@ const buildNativeProps = (element: HTMLElement, tagName: string, theme?: string)
   return props
 }
 
-/** 组件标签：只把组件认识的 prop、样式简写和 class / title 传下去 */
+/** 组件标签：已声明的 prop 按类型转换，未声明的属性作为透传属性保留 */
 const buildComponentProps = (element: HTMLElement, component: Component, theme?: string) => {
   const propMap = getComponentPropMap(component)
   const props: Record<string, any> = {}
@@ -219,8 +285,18 @@ const buildComponentProps = (element: HTMLElement, component: Component, theme?:
     const name = attribute.name.toLowerCase()
     const value = attribute.value
 
-    // 事件、原生 style、v-pre 不允许从字符串注入
-    if (name.startsWith('on') || name === 'style' || name === 'v-pre') return
+    // 事件、原生 style、Vue 指令和 ref 不允许从字符串注入
+    if (
+      name.startsWith('on') ||
+      name.startsWith('@') ||
+      name.startsWith(':') ||
+      name.startsWith('v-') ||
+      name === 'style' ||
+      name === 'ref' ||
+      name === 'is'
+    ) {
+      return
+    }
 
     if (name === 'class' || name === 'title') {
       props[name] = value
@@ -228,14 +304,21 @@ const buildComponentProps = (element: HTMLElement, component: Component, theme?:
     }
 
     const entry = propMap.get(normalizeName(name))
-    if (!entry) return
 
-    // s-text 的根元素不允许被字符串改成 script / iframe 等
-    if (entry.key === 'component' && !SAFE_TEXT_COMPONENT_TAGS.has(value.toLowerCase())) return
+    if (entry) {
+      // s-text 的根元素不允许被字符串改成 script / iframe 等
+      if (entry.key === 'component' && !SAFE_TEXT_COMPONENT_TAGS.has(value.toLowerCase())) return
 
-    const coercedValue = coerceComponentProp(entry.key, value, entry.def)
-    if (coercedValue === undefined) return
-    props[entry.key] = coercedValue
+      const coercedValue = coerceComponentProp(entry.key, value, entry.def)
+      if (coercedValue === undefined) return
+      props[entry.key] = coercedValue
+      return
+    }
+
+    // 未声明的属性继续透传，兼容把 Element Plus 属性放在 $attrs 里的组件（如 s-button 的 type）
+    if (name === 'srcdoc') return
+    if (COMPONENT_URL_ATTRIBUTES.has(name) && !isSafeUrl(value)) return
+    props[name] = value
   })
 
   // 未显式写 theme 时跟随标题主题，保证字符串里的组件和标题同一套颜色
@@ -262,7 +345,14 @@ const convertChildren = (parent: Node, theme?: string): (VNode | string)[] => {
 
     const element = child as HTMLElement
     const tagName = element.tagName.toLowerCase()
-    const component = getRichTextComponent(tagName)
+
+    // 原生白名单标签优先，避免全局注册的 Button / Code 等组件抢占原生标签
+    if (ALLOWED_HTML_TAGS.has(tagName)) {
+      nodes.push(h(tagName, buildNativeProps(element, tagName, theme), convertChildren(element, theme)))
+      return
+    }
+
+    const component = resolveRichTextComponent(tagName)
 
     if (component) {
       const children = convertChildren(element, theme)
@@ -276,13 +366,8 @@ const convertChildren = (parent: Node, theme?: string): (VNode | string)[] => {
       return
     }
 
-    if (!ALLOWED_HTML_TAGS.has(tagName)) {
-      const text = element.textContent ?? ''
-      if (text) nodes.push(text)
-      return
-    }
-
-    nodes.push(h(tagName, buildNativeProps(element, tagName, theme), convertChildren(element, theme)))
+    const text = element.textContent ?? ''
+    if (text) nodes.push(text)
   })
 
   return nodes
@@ -291,8 +376,9 @@ const convertChildren = (parent: Node, theme?: string): (VNode | string)[] => {
 /**
  * 把受信任的白名单 HTML 字符串转换成 VNode。
  *
- * 与直接 v-html 的区别：`<s-text>` / `<s-tag>` 会渲染成真实组件，
- * 因此组件属性（含样式简写）在 title / append / subTitle 字符串里同样生效。
+ * 原生标签按白名单保留；`<s-text>`、`<s-tag>` 内置可用，
+ * `<s-button>`、`<el-button>` 等已注册组件会从当前实例和应用的组件表中解析成真实组件，
+ * 组件属性（含样式简写）在 title / append / subTitle 字符串里同样生效。
  */
 export const createRichTextNodes = (content: string, options: { theme?: string } = {}): (VNode | string)[] | string => {
   if (!content) return []

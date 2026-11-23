@@ -1180,26 +1180,26 @@ export interface STestProps {
 }
 
 export interface STitleProps {
-  /** 主标题文本；默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true），title 插槽优先 */
+  /** 主标题文本；默认解析白名单 HTML 和任意已全局注册的组件（dangerouslyUseHTMLString 默认 true），title 插槽优先 */
   title?: string
   /** 左侧图标，写法与 s-icon 的 icon 属性一致；设置后自动隐藏左侧竖条 */
   icon?: SIconValue
   /** 透传给左侧 s-icon 的属性，可覆盖 icon、默认 size 和 cursor */
   iconAttrs?: SIconProps & SybzRecord
   extra?: string
-  /** 主标题右侧追加内容，默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；append 插槽优先，默认空字符串 */
+  /** 主标题右侧追加内容，默认解析白名单 HTML 和任意已全局注册的组件（dangerouslyUseHTMLString 默认 true）；append 插槽优先，默认空字符串 */
   append?: string
   /** 追加内容的 DOM 属性；fontSize 支持数字或 CSS 长度，也支持 style */
   appendAttrs?: SybzRecord & { fontSize?: string | number }
   size?: SybzComponentSize
   fs?: number | SybzComponentSize | `${number}px`
-  /** 副标题内容；默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true） */
+  /** 副标题内容；默认解析白名单 HTML 和任意已全局注册的组件（dangerouslyUseHTMLString 默认 true） */
   subTitle?: string
   /** 副标题 DOM 属性；fontSize 可直接传数字或 CSS 长度，亦支持 style */
   subTitleAttrs?: SybzRecord & { fontSize?: string | number }
   showTooltip?: boolean
   tooltipAttrs?: SybzRecord
-  /** 是否把 title / append / subTitle 中的 HTML 字符串作为富文本渲染；默认 true，设为 false 时按纯文本输出 */
+  /** 是否把 title / append / subTitle 中的字符串作为富文本渲染（含白名单 HTML 和任意已全局注册的组件）；默认 true，设为 false 时按纯文本输出 */
   dangerouslyUseHTMLString?: boolean
   inner?: boolean
   gap?: string | number

@@ -17,17 +17,19 @@
     :type="codeTypeAttr"
     :style="[textStyle, style, gradientStyle]"
   >
-    <RichTextContent v-if="mergedProps.dangerouslyUseHTMLString" />
+    <RichTextContent v-if="mergedProps.dangerouslyUseHTMLString" :theme="mergedProps.theme">
+      <slot />
+    </RichTextContent>
     <slot v-else />
   </component>
 </template>
 
 <script setup lang="ts">
-import { computed, Fragment, h, isVNode, Text, useSlots, type VNode } from 'vue'
+import { computed } from 'vue'
 import { resolveStyleColor, resolveThemeColor, useStyleProps } from '@/hooks/useStyleProps'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import type { STextProps } from './types'
-import { createRichTextNodes } from '@/components/utils/safeHtml'
+import RichTextContent from '@/components/utils/RichTextContent.vue'
 
 defineOptions({ name: 'SText' })
 
@@ -42,20 +44,6 @@ const props = withDefaults(defineProps<STextProps>(), {
   dangerouslyUseHTMLString: true,
 })
 const mergedProps = useGlobalComponentConfig('text', props)
-const slots = useSlots()
-function renderRichNode(node: VNode | string): (VNode | string)[] {
-  if (typeof node === 'string' || node.type === Text) {
-    const result = createRichTextNodes(typeof node === 'string' ? node : String(node.children ?? ''), {
-      theme: mergedProps.value.theme,
-    })
-    return typeof result === 'string' ? [result] : result
-  }
-  if (node.type === Fragment && Array.isArray(node.children)) {
-    return node.children.flatMap((child) => (typeof child === 'string' || isVNode(child) ? renderRichNode(child) : []))
-  }
-  return [node]
-}
-const RichTextContent = () => h(Fragment, null, (slots.default?.() ?? []).flatMap(renderRichNode))
 const { style, hasBlockOnlyStyleProps } = useStyleProps()
 const clamped = computed(() => Number.isInteger(mergedProps.value.lineClamp) && mergedProps.value.lineClamp > 0)
 

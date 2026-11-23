@@ -935,7 +935,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'STextProps',
       tagName: 's-text',
       description:
-        's-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；dangerouslyUseHTMLString 可将插槽字符串中的 s-tag、s-text 和白名单 HTML 渲染为真实节点，默认 true。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。',
+        's-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；dangerouslyUseHTMLString 可将插槽字符串中的白名单 HTML 和任意已全局注册的组件（如 s-text、s-tag、s-button、el-button）渲染为真实节点，默认 true。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。',
       slots: ['default'],
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/components/text/src/types.ts'),
@@ -963,7 +963,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'STitleProps',
       description:
-        's-title 标题组件，title、append 和 subTitle 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true），支持 s-text、s-tag 组件标签和白名单 HTML（如 code、mark）；设为 false 时按纯文本渲染。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。',
+        's-title 标题组件，title、append 和 subTitle 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true），支持任意已全局注册的组件标签（如 s-text、s-tag、s-button、el-button）和白名单 HTML（如 code、mark）；设为 false 时按纯文本渲染。支持通过 fs 设置标题字号和左侧竖线高度，icon 属性或插槽设置图标；标题可显示纯文本 tooltip。',
       slots: ['default', 'title', 'icon', 'append', 'extra'],
       hoverProps: componentHoverProps('STitleProps', [
         'SIconValue',

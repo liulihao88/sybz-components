@@ -17,7 +17,8 @@ const unselectable = ref(false)
 const dangerouslyUseHTMLString = ref(true)
 const text =
   '这是一段用于展示 s-text 的较长文字。可以切换语义色、常用颜色、根元素、字号、字重和显示行数，观察文本在有限宽度内的换行与省略效果。'
-const richText = '普通文字<br><s-tag type="danger">危险标签</s-tag><br><strong>加粗文字</strong>'
+const richText =
+  '普通文字<br><s-tag type="danger">危险标签</s-tag><br><strong>加粗文字</strong> <s-button type="primary">我是按钮</s-button> <el-button type="primary">我是按钮</el-button> '
 </script>
 
 <template>
@@ -70,7 +71,7 @@ const richText = '普通文字<br><s-tag type="danger">危险标签</s-tag><br><
     <s-radio v-model="code" title="code（默认 false；开启后使用代码片段样式）" type="boolean" />
     <s-radio
       v-model="codeType"
-      title="type（code 开启时生效；默认不设置，可选 primary / success / warning / danger / error / info）"
+      title="type（code 开启时生效；默认不设置)"
       :options="[{ label: '不设置', value: '' }, 'primary', 'success', 'warning', 'danger', 'error', 'info']"
       type="simple"
     />
