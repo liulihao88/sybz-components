@@ -18,6 +18,12 @@
 flex/base
 :::
 
+### other
+
+:::demo
+flex/other
+:::
+
 ### 按钮间距（`gap` 默认值：`0px`）
 
 :::demo 设置非零 `gap` 后，按钮间距统一由 `s-flex` 管理，Element Plus 按钮默认的 `margin-left` 不再生效；裸写 `wrap` 等价于 `wrap="wrap"`，裸写 `gap` 等价于 `gap="small"`。基础写法：`<s-flex wrap gap><s-button>按钮</s-button></s-flex>`；水平、垂直间距不同时写 `:gap="[24, 8]"`。属性：`gap` 可选 `true / false / small / default / large / 自定义宽度 / [水平间距, 垂直间距]`，默认值 `0px`，其中裸写或 `true` 等价于 `small`，`false` 等价于 `0px`；`wrap` 可选 `true / false / nowrap / wrap / wrap-reverse`，默认值 `nowrap`，其中 `true` 等价于 `wrap`，`false` 等价于 `nowrap`。
@@ -50,12 +56,6 @@ flex/iconGap
 
 :::demo 属性：`m / mt / mb / ml / mr / mx / my / p / pt / pb / pl / pr / px / py`（内外边距）、`fs / fw / lh / ta / tt / td / ff / lts`（文字）、`w / h / minw / maxw / minh / maxh / pos / top / bottom / left / right / inset / z / flex`（尺寸定位与弹性）、`bg / c / opacity / bd / bdr / bdl / bdt / bdb`（背景边框）。长度类属性可选 `数字（自动补 px）/ 带单位长度`。
 flex/styleProps
-:::
-
-### 其他布局属性（`alignContent=normal`、`inline=false`、`alignSelf=auto`、`order=0`）
-
-:::demo 基础写法：`<s-flex wrap :gap="[12, 8]" align-content="center" inline>内容</s-flex>`。数组中第一个值是水平间距（x），第二个值是垂直间距（y），两项都支持 `true / false / small / default / large / 自定义宽度`；`alignContent` 可选 `normal / start / end / center / stretch / space-between / space-around / space-evenly`，默认 `normal`；`inline` 可选 `true / false`，默认 `false`。子项上可写 `align-self="start"` 与 `:order="-1"`；`alignSelf` 可选 `auto / normal / start / end / center / baseline / stretch / flex-start / flex-end`，默认 `auto`；`order` 为数字，默认 `0`。
-flex/other
 :::
 
 ### API
