@@ -8,7 +8,7 @@ const isShow = ref(false)
     <s-button type="primary" @click="isShow = true">显示dialog</s-button>
     <s-dialog v-model="isShow" title="基础dialog" theme="shijingshan" sub-title="子">
       <template #headerIcon>
-        <s-icon icon="plus"></s-icon>
+        <s-icon icon="plus" c="white"></s-icon>
       </template>
       <template #header>
         <s-flex gap align="center">

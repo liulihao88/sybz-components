@@ -94,7 +94,7 @@ dialog/variant
 
 ### 标题追加内容（append 默认无内容）
 
-简单文本可直接用 `append="草稿"` 显示在主标题后，样式与 `sub-title` 一致；按钮或标签仍使用 `<template #append>`。同时传入属性和插槽时，插槽优先。副标题仍显示在下一行。`title` 类型为 `string`，默认值为 `'提示'`；`subTitle` 和 `append` 均为字符串，默认值为 `''`。`append` 插槽无参数；使用 `header` 自定义整个标题内容区时，属性和插槽都不生效。
+简单文本可直接用 `append="草稿"` 显示在主标题后，样式与 `sub-title` 一致；按钮或标签仍使用 `<template #append>`。同时传入属性和插槽时，插槽优先。副标题仍显示在下一行。主标题、副标题、`append` 及 `header` 插槽中的文字可按浏览器原生方式选中复制，标题栏空白处仍可拖动。`title` 类型为 `string`，默认值为 `'提示'`；`subTitle` 和 `append` 均为字符串，默认值为 `''`。`append` 插槽无参数；使用 `header` 自定义整个标题内容区时，属性和插槽都不生效。
 
 :::demo 点击标题后的添加按钮更新正文计数，副标题保持显示。
 dialog/append

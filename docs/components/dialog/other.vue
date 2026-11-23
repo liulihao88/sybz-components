@@ -40,7 +40,7 @@ function delay(delay = 0, fn = () => {}) {
   <s-dialog
     ref="dialogRef"
     v-model="isShow"
-    :append="appendText"
+    append="appendText"
     :body-style="bodyPadding === '默认' ? {} : { padding: bodyPadding }"
     sub-title="subTitle: 我是底部subTitle"
     title="常用的dialog"

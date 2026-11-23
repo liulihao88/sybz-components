@@ -37,7 +37,7 @@
               </svg>
             </slot>
           </span>
-          <span class="s-dialog__header-content">
+          <span class="s-dialog__header-content" @mousedown="handleHeaderTextMouseDown">
             <slot name="header">
               <span class="s-dialog__header-title-row">
                 <span class="s-dialog__header-title">
@@ -118,6 +118,31 @@ type DialogAction = ((...args: any[]) => any) | string
 
 const attrs = useAttrs()
 const emits = defineEmits(['update:modelValue'])
+function handleHeaderTextMouseDown(event: MouseEvent) {
+  if (event.button !== 0 || !(event.target instanceof Node)) return
+  if (event.target instanceof Element && event.target.closest('button, a, input, select, textarea, [role="button"]'))
+    return
+  const textNodes = event.target.ownerDocument.createTreeWalker(event.target, NodeFilter.SHOW_TEXT)
+  while (textNodes.nextNode()) {
+    const node = textNodes.currentNode
+    const text = node.textContent?.trim()
+    if (!text) continue
+    const range = node.ownerDocument.createRange()
+    range.selectNodeContents(node)
+    if (
+      Array.from(range.getClientRects()).some(
+        (rect) =>
+          event.clientX >= rect.left &&
+          event.clientX <= rect.right &&
+          event.clientY >= rect.top &&
+          event.clientY <= rect.bottom,
+      )
+    ) {
+      event.stopPropagation()
+      return
+    }
+  }
+}
 interface DialogProps {
   modelValue?: boolean
   mode?: 'dialog' | 'drawer'
@@ -755,6 +780,7 @@ onBeforeUnmount(() => {
     gap: 2px;
     overflow-wrap: anywhere;
     word-break: break-word;
+    user-select: text;
   }
 
   .s-dialog__header-title-row {
@@ -767,6 +793,8 @@ onBeforeUnmount(() => {
   .s-dialog__header-title {
     min-width: 0;
     line-height: 22px;
+    cursor: text;
+    user-select: text;
   }
 
   .s-dialog__header-append {
@@ -774,6 +802,7 @@ onBeforeUnmount(() => {
     align-items: center;
     gap: 8px;
     flex: 0 0 auto;
+    user-select: text;
   }
 
   .s-dialog__header-append,
@@ -782,6 +811,11 @@ onBeforeUnmount(() => {
     font-size: 13px;
     font-weight: 400;
     line-height: 20px;
+  }
+
+  .s-dialog__header-sub-title {
+    cursor: text;
+    user-select: text;
   }
 }
 
