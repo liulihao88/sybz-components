@@ -1,3 +1,8 @@
+.s-message-box--selectable-title.is-draggable .el-message-box__title > span {
+  cursor: text;
+  user-select: text;
+}
+
 .s-confirm-semantic,
 .s-message-box--delete,
 .s-message-box--warning {

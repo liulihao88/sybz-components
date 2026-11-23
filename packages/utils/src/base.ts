@@ -1,5 +1,5 @@
 import type { SybzComponentTheme } from './theme'
-import { unref, isRef, isVNode, toRaw, h, Fragment } from 'vue'
+import { unref, isRef, isVNode, toRaw, h, Fragment, nextTick } from 'vue'
 import type { AppContext, Component, StyleValue, VNode } from 'vue'
 import type { Ref } from 'vue'
 import { consola } from 'consola'
@@ -1748,6 +1748,7 @@ export function confirm(
     appendTo: resolvedAppendTo,
     appContext: resolvedAppContext,
     customClass: _mergeClassNames(
+      's-message-box--selectable-title',
       isChenghuaTheme && CHENGHUA_CONFIRM_BOX_CLASS,
       isShijingshanTheme && SHIJINGSHAN_CONFIRM_BOX_CLASS,
       isSybzTheme && SYBZ_CONFIRM_BOX_CLASS,
@@ -1770,7 +1771,17 @@ export function confirm(
     ),
   }
 
-  return ElMessageBox.confirm(resolvedMessage, mergeOptions)
+  const result = ElMessageBox.confirm(resolvedMessage, mergeOptions)
+  void nextTick(() => {
+    document
+      .querySelectorAll<HTMLElement>('.s-message-box--selectable-title .el-message-box__title > span')
+      .forEach((title) => {
+        if (title.dataset.selectableTitle) return
+        title.dataset.selectableTitle = 'true'
+        title.addEventListener('mousedown', (event) => event.stopPropagation())
+      })
+  })
+  return result
 }
 
 function _escapeHtml(value: string | number) {

@@ -42,6 +42,8 @@ utils/confirm/test
 
 `confirm` 用于在执行删除、提交、关闭等危险或重要操作前发起二次确认。它基于 Element Plus `ElMessageBox.confirm` 封装，默认补齐标题、按钮文案、按钮样式，并额外处理嵌套弹窗中的挂载节点和 Vue `appContext`。
 
+默认可拖动确认框。鼠标在标题文字上时可选中复制；标题文字以外的标题栏区域可拖动确认框。
+
 应用入口可通过 `configureUtils({ theme: 'shijingshan' })` 设置全局默认主题。单次调用的 `theme` 会覆盖全局配置。
 
 ### 调用形式
