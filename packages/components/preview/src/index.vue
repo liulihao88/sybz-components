@@ -230,6 +230,15 @@ onBeforeUnmount(() => {
       </s-flex>
     </template>
     <div class="s-preview s-preview--dialog" :style="[dialogFrameStyle, style]">
+      <s-button
+        v-if="fullscreenActive && resolvedType === 'pdf'"
+        class="s-preview__exit-fullscreen"
+        size="small"
+        type="primary"
+        @click="fullscreenActive = false"
+      >
+        退出全屏
+      </s-button>
       <div v-if="loading" class="s-preview__status">正在加载预览…</div>
       <template v-else>
         <div v-if="error || resolvedType === 'auto'" class="s-preview__status">
@@ -307,6 +316,12 @@ onBeforeUnmount(() => {
 }
 .s-preview--dialog {
   min-height: 0;
+}
+.s-preview__exit-fullscreen {
+  position: absolute;
+  top: 10px;
+  right: 180px;
+  z-index: 1;
 }
 :global(.s-preview-dialog--fullscreen > .el-dialog__header) {
   display: none;

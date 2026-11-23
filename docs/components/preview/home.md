@@ -4,7 +4,7 @@
 
 ## 使用说明
 
-`s-preview` 支持 TXT、CSV、TSV、Markdown、PDF、Word（DOCX）及 Excel（XLSX/XLSM）的容器内预览，也可用 `mode="dialog"` 在 `s-dialog` 中预览。CSV、TSV 按表格展示，支持带引号的字段和换行；最多显示前 1000 行。PDF 使用浏览器原生预览；Word 和 Excel 复用 `s-document-preview`。Markdown 使用 `s-markdown` 的只读渲染（`editable=false`、`disabled=false`），并禁用原始 HTML。旧版 DOC、XLS 文件的浏览器端渲染结果取决于现有解析器。PPTX 暂不支持。文本、CSV、TSV 和 Markdown 最多加载 2 MB。弹窗标题栏提供全屏切换；全屏时隐藏标题栏，按 Esc 返回普通弹窗。下载按钮只在弹窗模式显示。
+`s-preview` 支持 TXT、CSV、TSV、Markdown、PDF、Word（DOCX）及 Excel（XLSX/XLSM）的容器内预览，也可用 `mode="dialog"` 在 `s-dialog` 中预览。CSV、TSV 按表格展示，支持带引号的字段和换行；最多显示前 1000 行。PDF 使用浏览器原生预览；Word 和 Excel 复用 `s-document-preview`。Markdown 使用 `s-markdown` 的只读渲染（`editable=false`、`disabled=false`），并禁用原始 HTML。旧版 DOC、XLS 文件的浏览器端渲染结果取决于现有解析器。PPTX 暂不支持。文本、CSV、TSV 和 Markdown 最多加载 2 MB。弹窗标题栏提供全屏切换；全屏时隐藏标题栏，按 Esc 返回普通弹窗。PDF 原生查看器获得焦点后，浏览器不会把 Esc 事件传给页面，此时可点击 PDF 工具栏右侧按钮左边的“退出全屏”按钮。下载按钮只在弹窗模式显示。
 
 Word 文件为空或内容损坏、无法解析时，提示“文档为空或已损坏，无法预览。”；文件加载失败时会显示加载错误。
 
