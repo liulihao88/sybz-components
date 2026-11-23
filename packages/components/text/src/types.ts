@@ -25,6 +25,10 @@ export interface STextProps {
   code?: boolean
   /** 禁止选择文字；默认 false */
   unselectable?: boolean
+  /** 禁用点击及链接跳转；默认 false */
+  disabled?: boolean
+  /** 使用链接文字样式；默认 false，跳转仍由原生 href 和 component 控制 */
+  link?: boolean
   /** 将默认插槽中的字符串按白名单解析，支持任意已全局注册的组件（如 s-text、s-tag、s-button、el-button）；默认 true */
   dangerouslyUseHTMLString?: boolean
 }

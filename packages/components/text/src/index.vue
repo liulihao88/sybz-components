@@ -10,12 +10,18 @@
         's-text--gradient': hasGradient,
         's-text--unselectable': mergedProps.unselectable,
         's-text--code': isCode,
+        's-text--disabled': mergedProps.disabled,
+        's-text--link': mergedProps.link,
         's-mark': mergedProps.mark,
         [`s-mark--${mergedProps.theme}`]: mergedProps.mark && !!markTheme,
       },
     ]"
     :type="codeTypeAttr"
-    :style="[textStyle, style, gradientStyle]"
+    :style="[textStyle, style, gradientStyle, disabledStyle]"
+    :aria-disabled="mergedProps.disabled ? 'true' : undefined"
+    :tabindex="mergedProps.disabled ? -1 : undefined"
+    @click.capture="blockDisabledInteraction"
+    @keydown.capture="blockDisabledInteraction"
   >
     <RichTextContent v-if="mergedProps.dangerouslyUseHTMLString" :theme="mergedProps.theme">
       <slot />
@@ -41,6 +47,8 @@ const props = withDefaults(defineProps<STextProps>(), {
   mark: false,
   code: false,
   unselectable: false,
+  disabled: false,
+  link: false,
   dangerouslyUseHTMLString: true,
 })
 const mergedProps = useGlobalComponentConfig('text', props)
@@ -105,6 +113,15 @@ const needsInlineBlock = computed(
   () => hasBlockOnlyStyleProps.value && INLINE_TAGS.has(rootTag.value) && !clamped.value,
 )
 const hasGradient = computed(() => Boolean(mergedProps.value.gradient?.trim()))
+const disabledStyle = computed(() =>
+  mergedProps.value.disabled ? { color: 'var(--el-disabled-text-color)' } : undefined,
+)
+function blockDisabledInteraction(event: MouseEvent | KeyboardEvent) {
+  if (!mergedProps.value.disabled) return
+  if (event instanceof KeyboardEvent && !['Enter', ' '].includes(event.key)) return
+  event.preventDefault()
+  event.stopImmediatePropagation()
+}
 const gradientStyle = computed(() =>
   hasGradient.value
     ? { backgroundImage: mergedProps.value.gradient, color: 'transparent', WebkitTextFillColor: 'transparent' }
@@ -125,6 +142,8 @@ const textStyle = computed(() => {
 
   return {
     color: resolveColor(),
+    '--s-text-link-hover-color':
+      type === 'default' ? 'var(--el-color-primary)' : `var(--el-color-${type === 'error' ? 'danger' : type}-light-3)`,
     fontStyle: italic ? 'italic' : undefined,
     WebkitLineClamp: clamped.value ? lineClamp : undefined,
   }
@@ -153,5 +172,20 @@ const textStyle = computed(() => {
 
 .s-text--unselectable {
   user-select: none;
+}
+
+.s-text--link:not(.s-text--disabled) {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--s-text-link-hover-color) !important;
+  }
+}
+
+.s-text--disabled {
+  cursor: not-allowed;
+  user-select: none;
+  background-image: none !important;
+  -webkit-text-fill-color: var(--el-disabled-text-color) !important;
 }
 </style>

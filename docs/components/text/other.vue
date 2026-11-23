@@ -14,6 +14,9 @@ const fontSize = ref<number | ''>('')
 const fontWeight = ref('')
 const decoration = ref('none')
 const unselectable = ref(false)
+const disabled = ref(false)
+const link = ref(false)
+const clickCount = ref(0)
 const dangerouslyUseHTMLString = ref(true)
 const text =
   '这是一段用于展示 s-text 的较长文字。可以切换语义色、常用颜色、根元素、字号、字重和显示行数，观察文本在有限宽度内的换行与省略效果。'
@@ -97,6 +100,8 @@ const richText =
       type="simple"
     />
     <s-radio v-model="unselectable" title="unselectable（默认 false）" type="boolean" />
+    <s-radio v-model="disabled" title="disabled（true / false，默认 false）" type="boolean" />
+    <s-radio v-model="link" title="link（true / false，默认 false）" type="boolean" />
     <s-radio
       v-model="dangerouslyUseHTMLString"
       title="dangerouslyUseHTMLString（true / false，默认 true）"
@@ -114,11 +119,15 @@ const richText =
       :td="decoration === 'underline' ? 'underline' : decoration === 'delete' ? 'line-through' : undefined"
       :mark="decoration === 'mark'"
       :unselectable="unselectable"
+      :disabled="disabled"
+      :link="link"
       :dangerouslyUseHTMLString="dangerouslyUseHTMLString"
       w="280px"
       :title="text"
+      @click="clickCount++"
     >
       {{ richText }}
     </s-text>
+    <span>点击次数：{{ clickCount }}（disabled 为 true 时不增加）</span>
   </s-flex>
 </template>
