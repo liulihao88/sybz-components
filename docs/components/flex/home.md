@@ -38,7 +38,7 @@ flex/usually
 
 ### 容器尺寸
 
-:::demo 设置容器的宽度和高度。基础写法：`<s-flex width="320px" height="120px" align="center" justify="center"></s-flex>`。属性：`width`、`height` 类型均为 `string / number`，支持 CSS 长度值，默认不设置。
+:::demo 用样式简写 `w` / `h` 设置容器宽高。基础写法：`<s-flex w="320px" h="120px" align="center" justify="center"></s-flex>`。
 flex/size
 :::
 
@@ -71,8 +71,6 @@ flex/styleProps
 |    `inline`    | 使用 `inline-flex` 展示容器                                              | boolean                              | `true` / `false`                                                                                      | `false`  |
 |     `gap`      | 单值同时控制水平和垂直间距；数组按 `[x, y]` 分别控制水平、垂直间距       | boolean / string / number / 二元数组 | 单值或数组项：`true` / `false` / `small` / `default` / `large` / 自定义宽度                           | `0px`    |
 |     `flex`     | 当前 `s-flex` 自身在父级 flex 容器中的伸缩规则，对应 CSS `flex` 简写     | string                               | 任意合法 CSS `flex` 值，如 `1`、`0 0 180px`                                                           | `''`     |
-|    `width`     | 容器宽度                                                                 | string / number                      | 任意可被 `processWidth` 处理的 CSS 长度                                                               | -        |
-|    `height`    | 容器高度                                                                 | string / number                      | 任意可被 `processWidth` 处理的 CSS 长度                                                               | -        |
 |  `component`   | 自定义根节点标签或组件                                                   | string / Component                   | 原生标签名或 Vue 组件                                                                                 | `div`    |
 
 ### 插槽

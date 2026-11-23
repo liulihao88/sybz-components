@@ -11,9 +11,7 @@
 
 <script setup lang="ts">
 import { computed, type Component } from 'vue'
-import { processWidth } from '@sybz-components/utils'
 import { parseGap, type Gap } from '@/hooks/parseGap'
-import useSizeAliases from '@/hooks/useSizeAliases'
 import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
@@ -31,10 +29,6 @@ interface FlexProps {
   inline?: boolean
   flex?: string
   gap?: Gap
-  width?: string | number | boolean
-  w?: string | number | boolean
-  height?: string | number | boolean
-  h?: string | number | boolean
   component?: string | Component
 }
 
@@ -50,7 +44,6 @@ const props = withDefaults(defineProps<FlexProps>(), {
   gap: '0px', // small default large
   component: 'div',
 })
-const sizeProps = useSizeAliases(props)
 const { style } = useStyleProps()
 
 const resolvedDirection = computed(() => props.direction ?? (props.column ? 'column' : 'row'))
@@ -75,8 +68,6 @@ const flexStyles = computed(() => {
     flex: props.flex && props.flex !== 'normal' ? props.flex : undefined,
     'row-gap': gapValues.value.y,
     'column-gap': gapValues.value.x,
-    width: sizeProps.value.width === undefined ? undefined : processWidth(sizeProps.value.width, true),
-    height: sizeProps.value.height === undefined ? undefined : processWidth(sizeProps.value.height, true),
   }
 })
 </script>

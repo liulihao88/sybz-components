@@ -48,8 +48,8 @@ const order = ref(0)
       :gap="[horizontalGap, verticalGap]"
       :align-content="alignContent"
       :inline="inline"
-      width="280"
-      height="180"
+      w="280"
+      h="180"
       bg="#f8fafc"
     >
       <span v-for="item in 6" :key="item" class="demo-item">{{ item }}</span>
@@ -65,7 +65,7 @@ const order = ref(0)
   />
   <s-title title="order：子项视觉顺序（默认 0）" />
   <s-radio v-model="order" :options="[-1, 0, 1]" type="simple" />
-  <s-flex align="center" gap="12" height="80" bg="#f8fafc">
+  <s-flex align="center" gap="12" h="80" bg="#f8fafc">
     <s-button>普通子项</s-button>
     <s-button :align-self="alignSelf" :order="order">当前子项</s-button>
     <s-button>普通子项</s-button>

@@ -293,7 +293,7 @@ export const resolveStyleProps = (
  * 在组件内部解析样式简写属性。
  *
  * 返回的 `style` 直接绑定到根元素：`:style="[ownStyle, style]"`。
- * 已自动跳过组件自身声明的同名 prop（如 s-flex 的 w/h/flex/gap），避免重复应用。
+ * 已自动跳过组件自身声明的同名 prop（如 s-flex 的 flex），避免重复应用。
  */
 export function useStyleProps(): {
   style: ComputedRef<CSSProperties>

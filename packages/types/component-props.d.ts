@@ -513,10 +513,6 @@ export interface SFlexProps {
   flex?: string
   /** 子元素间距；单值同时控制 x/y，数组 [x, y] 分别控制水平/垂直间距；裸写或 true 等价于 small */
   gap?: SFlexGap
-  width?: string | number | boolean
-  w?: string | number | boolean
-  height?: string | number | boolean
-  h?: string | number | boolean
   component?: string | Component
 }
 

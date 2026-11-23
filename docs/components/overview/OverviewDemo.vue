@@ -200,7 +200,7 @@ const tableData = [
     </section>
 
     <section>
-      <s-flex gap="16" height="60">
+      <s-flex gap="16" h="60">
         <s-tabs v-model="tabsValue" :options="navList" :theme="currentTheme" :size="currentSize" width="200"></s-tabs>
         <s-tabs
           v-model="tabsValue"

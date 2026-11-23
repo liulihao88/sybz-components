@@ -6,10 +6,9 @@ import type {
   SFlexGap,
   SFlexGapValue,
   SFlexJustify,
-  SFlexProps,
   SFlexWrap,
 } from '../component-props'
-import type { SybzDimensionProps, SybzStyleProps } from '../component-props'
+import type { SybzStyleProps } from '../component-props'
 
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/flex/home.html | 查看文档}
@@ -35,8 +34,7 @@ export type SFlexComponent = {
       /** 子元素间距；单值同时控制 x/y，数组 [x, y] 分别控制水平/垂直间距；裸写或 true 等价于 small */
       gap?: SFlexGap
       component?: string | Component
-    } & SybzStyleProps &
-      SybzDimensionProps<SFlexProps>
+    } & SybzStyleProps
     $slots: {
       default?: () => any
     }
