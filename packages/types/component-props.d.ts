@@ -905,6 +905,8 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
   /** 基础类型选项简写，等价于 type="simple"；可与 multiple 同时使用 */
   simple?: boolean
   multiple?: boolean
+  /** 是否显示选择框加载图标及下拉层加载提示，并禁用快速选择；默认 false */
+  loading?: boolean
   showAll?: boolean
   showPrefix?: boolean
   /** 是否显示上下快速切换按钮，默认 true；空选项时仍显示 */

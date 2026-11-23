@@ -10,6 +10,7 @@
         'has-title': mergedProps.title,
         'has-quick': mergedProps.showQuick,
         'is-disabled': parseDisabled,
+        'is-loading': isLoading,
         'is-multiple': multiple,
         'has-custom-height': mergedProps.height,
         's-select--top-title': !!mergedProps.topTitle,
@@ -41,6 +42,7 @@
           :placeholder="selectPlaceholder"
           :popper-class="selectPopperClass"
           :multiple="multiple"
+          :loading="isLoading"
           v-bind="selectAttrs"
           @clear="hideSelectTooltip"
           @change="changeHandler"
@@ -96,14 +98,15 @@
             </el-option>
           </template>
         </el-select>
+        <el-icon v-if="isLoading" class="s-select__loading" aria-label="加载中"><Loading /></el-icon>
       </div>
     </el-tooltip>
 
     <span v-if="mergedProps.showQuick" class="s-select__select-box" @mousedown.prevent>
       <span class="s-select__select-box__inner">
-        <s-icon icon="ArrowUp" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(false)" />
+        <s-icon icon="ArrowUp" :size="quickIconSize" :disabled="quickDisabled" @click="quickSelect(false)" />
         <div class="s-select__divider" />
-        <s-icon icon="ArrowDown" :size="quickIconSize" :disabled="parseDisabled" @click="quickSelect(true)" />
+        <s-icon icon="ArrowDown" :size="quickIconSize" :disabled="quickDisabled" @click="quickSelect(true)" />
       </span>
     </span>
   </div>
@@ -114,6 +117,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
 import { ElSelect, useFormSize } from 'element-plus'
+import { Loading } from '@element-plus/icons-vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
@@ -185,6 +189,7 @@ interface SelectProps {
   showTooltip?: boolean
   tooltipAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
+  loading?: boolean
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -221,8 +226,10 @@ const props = withDefaults(defineProps<SelectProps>(), {
   showTooltip: true,
   tooltipAttrs: () => ({}),
   dangerouslyUseHTMLString: true,
+  loading: false,
 })
 const mergedProps = useGlobalComponentConfig('select', props)
+const isLoading = computed(() => mergedProps.value.loading === true)
 const isSimple = computed(() => props.simple || props.type === 'simple')
 const { style } = useStyleProps()
 const compTitleProps = computed(() => {
@@ -293,7 +300,15 @@ const selectAttrs = computed<Record<string, any>>(() => {
   }, {})
 
   // 包装组件自行处理的属性不重复透传，其余 Element Plus 属性可从全局 select 配置进入。
-  const controlledProps = new Set(['modelValue', 'options', 'multiple', 'size', 'placeholder', 'popperClass'])
+  const controlledProps = new Set([
+    'modelValue',
+    'options',
+    'multiple',
+    'size',
+    'placeholder',
+    'popperClass',
+    'loading',
+  ])
   Object.keys(ElSelect.props).forEach((key) => {
     const kebabKey = key.replace(/\B([A-Z])/g, '-$1').toLowerCase()
     if (controlledProps.has(key) || key in nextAttrs || kebabKey in nextAttrs) return
@@ -405,6 +420,7 @@ const parseDisabled = computed(() => {
 
   return directDisabled || ancestorDisabled
 })
+const quickDisabled = computed(() => parseDisabled.value || isLoading.value)
 
 // 设置半选
 const indeterminate = computed({
@@ -515,6 +531,7 @@ const selectPopperClass = computed(() => {
 })
 
 const selectPlaceholder = computed(() => {
+  if (isLoading.value && sOptions.value.length === 0 && inlineOptions.value.length === 0) return '加载中...'
   if (sOptions.value.length === 0 && inlineOptions.value.length === 0) {
     return mergedProps.value.emptyPlaceholder
   }
@@ -576,7 +593,7 @@ function handleLabel(option: SelectOption, index = sOptions.value.indexOf(option
 
 const quickSelect = (isPlus: boolean) => {
   const values = quickOptionValues.value
-  if (parseDisabled.value || values.length === 0) {
+  if (quickDisabled.value || values.length === 0) {
     return
   }
   let nextIdx = 0
@@ -662,11 +679,20 @@ function emitChangeSelect(
   --s-select-title-font-size: 14px;
   --s-select-quick-icon-size: 14px;
   --s-select-quick-width: 24px;
+  --s-select-loading-color: var(--s-sybz-primary);
   display: inline-flex;
   width: 316px;
   min-height: var(--s-select-min-height);
   align-items: stretch;
   vertical-align: bottom;
+
+  &.s-select--chenghua {
+    --s-select-loading-color: var(--s-ch-primary);
+  }
+
+  &.s-select--shijingshan {
+    --s-select-loading-color: var(--s-sjs-primary);
+  }
 
   .s-select__fraction {
     display: inline-flex;
@@ -701,6 +727,20 @@ function emitChangeSelect(
     flex: 1;
     height: 100%;
     min-width: 0;
+  }
+  .s-select__loading {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    z-index: 1;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--s-select-loading-color);
+    animation: s-select-loading-spin 1s linear infinite;
+  }
+
+  &.is-loading :deep(.el-select__suffix) {
+    visibility: hidden;
   }
   :deep(.el-select) {
     flex: 1;
@@ -789,6 +829,12 @@ function emitChangeSelect(
   }
 }
 
+@keyframes s-select-loading-spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
 .s-select__fraction-text--absolute {
   position: absolute;
   left: 1px;
@@ -831,7 +877,8 @@ function emitChangeSelect(
   }
 }
 
-.s-select.is-disabled {
+.s-select.is-disabled,
+.s-select.is-loading {
   .s-select__select-box {
     cursor: not-allowed;
     color: var(--el-disabled-text-color);

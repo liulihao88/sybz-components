@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const multiple = ref(false)
+const loading = ref(false)
 const singleValue = ref('北京')
 const multipleValue = ref<string[]>(['北京', '上海'])
 const options = ['北京', '上海', '广州']
@@ -16,11 +17,13 @@ const options = ['北京', '上海', '广州']
         { label: 'true', value: true },
       ]"
     />
+    <s-radio v-model="loading" title="loading（true / false，默认 false）" type="boolean" />
     <s-select
       v-if="multiple"
       v-model="multipleValue"
       simple
       multiple
+      :loading="loading"
       :options="options"
       title="simple=true（默认 false），multiple=true（默认 false）"
     />
@@ -28,6 +31,7 @@ const options = ['北京', '上海', '广州']
       v-else
       v-model="singleValue"
       simple
+      :loading="loading"
       :options="options"
       title="simple=true（默认 false），multiple=false（默认 false）"
     />

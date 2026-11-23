@@ -144,7 +144,7 @@ select/other
 
 ### 属性
 
-全局 `select` 配置中的 Element Plus 属性会自动透传给内部选择器，局部同名属性优先。`modelValue`、`options`、`multiple`、`size`、`placeholder`、`popperClass` 仍由 `s-select` 自行处理；自定义 `valueOnClear` 时，应将该值加入 `emptyValues`。
+全局 `select` 配置中的 Element Plus 属性会自动透传给内部选择器，局部同名属性优先。`modelValue`、`options`、`multiple`、`size`、`placeholder`、`popperClass` 和 `loading` 仍由 `s-select` 自行处理；自定义 `valueOnClear` 时，应将该值加入 `emptyValues`。基础写法：`<s-select :loading="true" :options="options" />`，选择框显示旋转图标，展开时下拉层显示加载提示，右侧快速选择按钮置灰且不可点击。`loading` 只接受布尔值，可裸写 `loading`，不要写 `loading="true"`。
 
 |           属性名           | 说明                                                                      | 类型                                 | 默认值                  |
 | :------------------------: | ------------------------------------------------------------------------- | ------------------------------------ | ----------------------- |
@@ -157,6 +157,7 @@ select/other
 |           `type`           | 数据类型，传 `simple` 时按基础类型数组处理                                | string                               | `''`                    |
 |          `simple`          | 基础类型选项简写，裸写等价于 `type="simple"`，可与 `multiple` 同时使用    | boolean                              | `false`                 |
 |         `multiple`         | 是否多选                                                                  | boolean                              | `false`                 |
+|         `loading`          | 在选择框显示加载图标，下拉层显示加载提示，并禁用右侧快速选择按钮          | boolean                              | `false`                 |
 |         `showAll`          | 多选时是否显示全选/反选                                                   | boolean                              | `true`                  |
 |        `showPrefix`        | 是否显示前缀数量信息                                                      | boolean                              | `false`                 |
 |        `showQuick`         | 是否显示上下快速切换按钮，仅由 showQuick 控制，空选项时仍显示             | boolean                              | `true`                  |
