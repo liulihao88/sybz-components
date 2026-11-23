@@ -76,16 +76,7 @@
               >
                 全选
               </el-checkbox>
-              <s-button
-                type="text"
-                size="small"
-                class="reverse-select"
-                h
-                c="var(--s-sybz-gray-500)"
-                @click.stop="reverseSelect"
-              >
-                反选
-              </s-button>
+              <s-button type="text" size="small" class="reverse-select" h @click.stop="reverseSelect">反选</s-button>
             </div>
           </template>
           <template v-for="(arg, name, index) in noDefaultSlots" #[name]>
@@ -917,6 +908,12 @@ function emitChangeSelect(
 }
 .reverse-select {
   margin-left: auto;
+  font-size: 12px;
+  color: var(--s-sybz-gray-500);
+
+  &:hover {
+    color: var(--s-sybz-blue-500);
+  }
 }
 .s-select__select-box {
   user-select: none;
