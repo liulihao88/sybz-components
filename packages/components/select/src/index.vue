@@ -76,7 +76,16 @@
               >
                 全选
               </el-checkbox>
-              <el-button type="primary" size="small" class="reverse-select" @click.stop="reverseSelect">反选</el-button>
+              <s-button
+                type="text"
+                size="small"
+                class="reverse-select"
+                h
+                c="var(--s-sybz-gray-500)"
+                @click.stop="reverseSelect"
+              >
+                反选
+              </s-button>
             </div>
           </template>
           <template v-for="(arg, name, index) in noDefaultSlots" #[name]>
