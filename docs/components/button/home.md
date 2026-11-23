@@ -68,6 +68,8 @@ button/ghost
 
 ### 链接 link
 
+基础写法：`<s-button link type="primary">链接按钮</s-button>`。`link` 可选 `true / false`，默认 `false`；默认主题悬浮时使用组件库的 sybz 品牌蓝，成华、石景山和 sybz 主题分别使用自己的主色悬浮 token，其他语义类型沿用各自的语义色。
+
 :::demo
 button/link
 :::

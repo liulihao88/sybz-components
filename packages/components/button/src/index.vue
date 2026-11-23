@@ -162,6 +162,12 @@ const handleClick = (evt: MouseEvent) => {
 </script>
 
 <style lang="scss" scoped>
+.el-button.is-link:not(.s-button--theme):not(.el-button--success):not(.el-button--warning):not(.el-button--danger):not(
+    .el-button--info
+  ):not(.is-disabled) {
+  --el-button-hover-link-text-color: var(--s-sybz-primary-hover);
+}
+
 .s-button--icon-end {
   flex-direction: row-reverse;
 
