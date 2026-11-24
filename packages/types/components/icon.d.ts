@@ -13,7 +13,7 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
  *
- * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
+ * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；link 的鼠标移入配色与 s-button link 一致；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
  *
  * 先提示 sybz 自身属性。
  */
@@ -38,6 +38,8 @@ declare const SIcon: {
       hoverAnimation?: boolean
       /** 鼠标移入高亮：默认色矢量图标线条变主题主色，语义色图标和图片 / Emoji 同色系加深；默认值：false */
       highlight?: boolean
+      /** 链接图标的鼠标移入配色，与 s-button link 一致；默认值：false */
+      link?: boolean
       /** 阴影显示时机，语义同 s-card；默认值：never */
       shadow?: 'always' | 'never' | 'hover'
       /** 图标旋转角度，数字及数字字符串按 deg 处理 */

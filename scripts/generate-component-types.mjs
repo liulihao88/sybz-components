@@ -569,7 +569,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SIconProps',
       description:
-        'Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。',
+        'Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；link 的鼠标移入配色与 s-button link 一致；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。',
       // 模板悬浮会展开构造签名而省略 JSDoc，把查询地址直接放进签名。
       hoverConstructorTypeParameters: "<Iconify图标查询 = 'https://icon-sets.iconify.design/'>",
       slots: ['default'],

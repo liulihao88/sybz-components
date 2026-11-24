@@ -16,6 +16,12 @@
 icon/base
 :::
 
+### 常用图标查找
+
+:::demo 基础写法：`<s-icon icon="delete" />`。`link` 可选 `true / false`，默认值 `false`；`icon` 类型 `string / Component`，默认值未设置。
+icon/other
+:::
+
 `icon` 也支持直接传入 Emoji 文本，例如 `<s-icon icon="❌" />`；`source="auto"` 下会按文本字形渲染，不会当作 Element Plus 图标名解析。
 
 ### 不同图标来源对比
@@ -209,12 +215,6 @@ icon/rotate
 icon/type
 :::
 
-### 常用图标查找
-
-:::demo 展示图标按钮配置。基础写法：`<s-icon :icon="v.value" color="var(--blue)"></s-icon>`。属性：`icon` 类型 `string / Component`，默认值未设置。
-icon/usually
-:::
-
 ### 所有图标
 
 :::demo 展示图标按钮。基础写法：`<s-icon :icon="iconName" class="item"></s-icon>`。属性：`icon` 类型 `SIconValue`，默认值未设置。
@@ -278,6 +278,10 @@ icon/highlight
 
 两种方式都只改线条，所以 `highlight` 可以和 `hoverAnimation`、`shadow="hover"` 随意组合，三个 Hover 效果互不覆盖；禁用状态（`disabled`）下不会触发。
 
+### 链接悬浮色（link 默认值：false）
+
+`link` 可选 `true / false`，默认值 `false`；鼠标移入时采用与 `s-button link` 一致的主题和语义色，禁用时不生效。基础写法：`<s-icon icon="delete" link />`。
+
 ### 属性
 
 |           属性名           | 说明                                                                      | 类型            | 默认值    |
@@ -291,6 +295,7 @@ icon/highlight
 |          `cursor`          | 鼠标指针样式，支持任意合法的 CSS `cursor` 值                              | SIconCursor     | `pointer` |
 |      `hoverAnimation`      | 鼠标移入时是否启用轻微上浮动画                                            | boolean         | `false`   |
 |        `highlight`         | 鼠标移入高亮：默认色图标线条变主题色，语义色图标同色系加深                | boolean         | `false`   |
+|           `link`           | 链接图标的鼠标移入配色，与 s-button link 一致                             | boolean         | `false`   |
 |          `shadow`          | 阴影显示时机，可选 `always / never / hover`                               | string          | `never`   |
 |          `rotate`          | 图标旋转角度，数字及数字字符串按 `deg` 处理                               | string / number | `''`      |
 |         `disabled`         | 是否禁用，禁用后不会触发点击                                              | boolean         | `false`   |

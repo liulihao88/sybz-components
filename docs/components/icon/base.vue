@@ -32,7 +32,7 @@ const iconLists = ref([
 
 <template>
   <div>
-    <s-icon icon="delete"></s-icon>
+    <s-icon icon="delete" link></s-icon>
     <s-icon icon="el-icon-delete"></s-icon>
     <s-icon>
       <Delete></Delete>

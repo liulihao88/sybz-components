@@ -1,4 +1,5 @@
 .s-icon--chenghua.s-icon--chenghua {
+  --s-icon-link-hover-color: var(--s-ch-primary-hover);
   &.s-icon--default {
     --s-icon-color: var(--s-ch-primary);
     --s-icon-light-bg: var(--s-ch-primary-soft);
@@ -13,6 +14,22 @@
       --s-icon-solid-bg: var(--s-ch-#{$type});
       --s-icon-solid-border: var(--s-ch-#{$type});
     }
+  }
+
+  &.s-icon--primary {
+    --s-icon-link-hover-color: var(--s-ch-primary-hover);
+  }
+  &.s-icon--success {
+    --s-icon-link-hover-color: var(--el-color-success-light-3);
+  }
+  &.s-icon--warning {
+    --s-icon-link-hover-color: var(--el-color-warning-light-3);
+  }
+  &.s-icon--danger {
+    --s-icon-link-hover-color: var(--el-color-danger-light-3);
+  }
+  &.s-icon--info {
+    --s-icon-link-hover-color: var(--el-color-info-light-3);
   }
 
   --s-icon-hover-color: var(--s-ch-primary);

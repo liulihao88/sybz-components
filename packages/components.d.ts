@@ -233,13 +233,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
      *
-     * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
+     * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；link 的鼠标移入配色与 s-button link 一致；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
      */
     SIcon: (typeof import('./types/components/icon'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/icon/home.html | 查看文档}
      *
-     * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
+     * Iconify 图标查询：https://icon-sets.iconify.design/；s-icon 图标组件，支持 Element Plus、Iconify、CSS class、SVG、在线图片和 Vue 图标组件等图标来源；link 的鼠标移入配色与 s-button link 一致；attrs 透传给当前图标节点，普通未声明属性透传给 tooltip；width / height 控制容器宽高，仅设置一边时保持正方形。
      */
     's-icon': (typeof import('./types/components/icon'))['default']
     /**

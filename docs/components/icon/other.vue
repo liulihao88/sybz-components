@@ -19,10 +19,25 @@ const lists = [
   { label: '锁定', value: 'lock' },
   { label: '未锁定', value: 'unlock' },
 ]
+const link = ref(false)
 </script>
 
 <template>
   <div>
+    <s-radio
+      v-model="link"
+      :options="[
+        { label: 'false', value: false },
+        { label: 'true', value: true },
+      ]"
+      variant="button"
+      title="link"
+    />
+    <div class="f-st-ct m-y-10">
+      <s-icon icon="delete" :link="link" />
+      <s-icon icon="delete" type="primary" :link="link" />
+      <s-icon icon="delete" type="danger" :link="link" />
+    </div>
     <sWrapper :column="3">
       <div v-for="(v, i) in lists" :key="i">
         <div class="f-st-ct">

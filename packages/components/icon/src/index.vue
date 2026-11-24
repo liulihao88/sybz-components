@@ -38,6 +38,7 @@ interface IconProps {
   cursor?: SIconCursor
   hoverAnimation?: boolean
   highlight?: boolean
+  link?: boolean
   shadow?: 'always' | 'never' | 'hover'
   disabled?: boolean
   theme?: SybzComponentTheme
@@ -58,6 +59,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   cursor: 'pointer',
   hoverAnimation: false,
   highlight: false,
+  link: false,
   shadow: 'never',
   disabled: false,
   theme: 'default',
@@ -95,13 +97,15 @@ function handleClick($event) {
 }
 const parseColor = computed(() => {
   if (mergedProps.value.disabled) return 'var(--el-disabled-text-color)'
-  if (mergedProps.value.color) return mergedProps.value.color
-  if (!mergedProps.value.type || (mergedProps.value.type === 'default' && mergedProps.value.variant === 'plain')) {
-    return undefined
-  }
-  if (mergedProps.value.type === 'default') return 'var(--s-icon-color)'
-  if (mergedProps.value.variant === 'solid') return 'var(--el-color-white)'
-  return 'var(--s-icon-color)'
+  let color: string | undefined
+  if (mergedProps.value.color) color = mergedProps.value.color
+  else if (!mergedProps.value.type || (mergedProps.value.type === 'default' && mergedProps.value.variant === 'plain')) {
+    color = undefined
+  } else if (mergedProps.value.type === 'default') color = 'var(--s-icon-color)'
+  else if (mergedProps.value.variant === 'solid') color = 'var(--el-color-white)'
+  else color = 'var(--s-icon-color)'
+
+  return mergedProps.value.link ? `var(--s-icon-link-current-color, ${color || 'inherit'})` : color
 })
 
 const isRemoteImage = computed(() => {
@@ -146,8 +150,9 @@ const iconClasses = computed(() => [
   mergedProps.value.type && `s-icon--${mergedProps.value.type}`,
   mergedProps.value.type && `s-icon--${mergedProps.value.variant}`,
   mergedProps.value.hoverAnimation && 's-icon--hover-animation',
-  mergedProps.value.highlight && 's-icon--highlight',
-  mergedProps.value.highlight && isHighlightColorMode.value && 's-icon--highlight-color',
+  mergedProps.value.highlight && !mergedProps.value.link && 's-icon--highlight',
+  mergedProps.value.link && 's-icon--link',
+  mergedProps.value.highlight && !mergedProps.value.link && isHighlightColorMode.value && 's-icon--highlight-color',
   mergedProps.value.shadow === 'always' && 's-icon--shadow-always',
   mergedProps.value.shadow === 'hover' && 's-icon--shadow-hover',
   mergedProps.value.disabled && 's-icon__not-allowed',
@@ -239,6 +244,27 @@ const tooltipAttrs = computed<Partial<ElTooltipProps> & Record<string, any>>(() 
   transition:
     top 0.2s ease,
     box-shadow 0.2s ease;
+
+  &--link:not(.s-icon__not-allowed) {
+    transition:
+      top 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      --s-icon-link-current-color: var(--s-icon-link-hover-color, var(--s-sybz-primary-hover));
+    }
+
+    &.s-icon--primary:hover {
+      --s-icon-link-current-color: var(--s-icon-link-hover-color, var(--el-color-primary-light-3));
+    }
+
+    @each $type in success, warning, danger, info {
+      &.s-icon--#{$type}:hover {
+        --s-icon-link-current-color: var(--s-icon-link-hover-color, var(--el-color-#{$type}-light-3));
+      }
+    }
+  }
 
   // 鼠标移入高亮：只改线条，不动背景、圆角和尺寸。
   &--highlight:not(.s-icon__not-allowed) {

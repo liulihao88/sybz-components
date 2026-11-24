@@ -1,9 +1,23 @@
 .s-icon--shijingshan.s-icon--shijingshan {
+  --s-icon-link-hover-color: var(--s-sjs-primary-hover);
   &.s-icon--default {
     --s-icon-color: var(--s-sjs-primary);
     --s-icon-light-bg: var(--s-sjs-primary-soft);
     --s-icon-solid-bg: var(--s-sjs-card-bg);
     --s-icon-solid-border: var(--s-sjs-primary);
+  }
+
+  &.s-icon--success {
+    --s-icon-link-hover-color: #22c55e;
+  }
+  &.s-icon--warning {
+    --s-icon-link-hover-color: #f8b64a;
+  }
+  &.s-icon--danger {
+    --s-icon-link-hover-color: #f87171;
+  }
+  &.s-icon--info {
+    --s-icon-link-hover-color: #7b8390;
   }
 
   @each $type in primary, success, warning, danger, info {

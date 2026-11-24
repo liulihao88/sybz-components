@@ -1,9 +1,23 @@
 .s-icon--sybz.s-icon--sybz {
+  --s-icon-link-hover-color: var(--s-sybz-primary-hover);
   &.s-icon--default {
     --s-icon-color: var(--s-sybz-primary);
     --s-icon-light-bg: var(--s-sybz-primary-soft);
     --s-icon-solid-bg: var(--s-sybz-card-bg);
     --s-icon-solid-border: var(--s-sybz-primary);
+  }
+
+  &.s-icon--success {
+    --s-icon-link-hover-color: var(--s-sybz-success-300);
+  }
+  &.s-icon--warning {
+    --s-icon-link-hover-color: var(--s-sybz-warning-300);
+  }
+  &.s-icon--danger {
+    --s-icon-link-hover-color: var(--s-sybz-danger-300);
+  }
+  &.s-icon--info {
+    --s-icon-link-hover-color: var(--s-sybz-gray-300);
   }
 
   @each $type in primary, success, warning, danger, info {
