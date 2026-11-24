@@ -139,7 +139,7 @@
     "@element-plus/icons-vue": "^2.3.1",
     "@iconify/vue": "^5.0.1",
     "@juggle/resize-observer": "^3.4.0",
-    "@sybz-components/utils": "^1.0.22",
+    "@sybz-components/utils": "^1.0.23",
     "abortcontroller-polyfill": "^1.7.8",
     "codemirror": "^6.0.2",
     "core-js": "^3.51.0",
