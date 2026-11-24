@@ -7,16 +7,25 @@ import vueJsx, { type Options as VueJsxOptions } from '@vitejs/plugin-vue-jsx'
 import type { Plugin, PluginOption, UserConfig } from 'vite'
 import { gitCommitLog, type GitCommitLogOptions } from './gitCommitLog'
 import { createSybzCompatPostcssPlugins, SYBZ_COMPAT_BROWSERS } from './postcss'
+import { createConsoleSource, type SybzConsoleSourceOptions } from './vite-plugins/consoleSource'
+import { createVersionCheck, type SybzVersionCheckOptions } from './vite-plugins/versionCheck'
+
+export type { SybzConsoleSourceOptions, SybzVersionCheckOptions }
+export type { SybzConsoleMethod } from './vite-plugins/consoleSource'
+export type { SybzVersionCheckPosition } from './vite-plugins/versionCheck'
 
 declare global {
   interface Window {
     __SYBZ_BUILD_TIME__: string
+    __SYBZ_VERSION__?: string
   }
 }
 
 const require = createRequire(import.meta.url)
 const virtualTailwindId = 'virtual:sybz-tailwind'
 const resolvedVirtualTailwindId = `\0${virtualTailwindId}`
+const virtualTailwindNoPreflightId = 'virtual:sybz-tailwind-no-preflight.css'
+const resolvedVirtualTailwindNoPreflightId = `\0${virtualTailwindNoPreflightId}`
 
 export type SybzCodeInspectorOptions = Omit<CodeInspectorPluginOptions, 'bundler'>
 
@@ -43,12 +52,18 @@ export interface SybzVitePluginsOptions {
   tailwind?: boolean | TailwindPluginOptions
   /** 自动向 HTML 注入 Tailwind CSS；默认启用，已有手动 CSS 入口时可设为 false。 */
   tailwindCss?: boolean
+  /** 是否注入 Tailwind preflight 全局重置，默认 true；设为 false 时只保留 theme/utilities，避免重置已有全局样式。 */
+  tailwindPreflight?: boolean
   /** 代码定位插件配置；默认启用，设为 false 时关闭。 */
   codeInspector?: boolean | SybzCodeInspectorOptions
   /** Git 提交信息插件配置；默认启用，设为 false 时关闭。 */
   gitCommitLog?: boolean | GitCommitLogOptions
   /** 打包时间注入配置；默认启用，设为 false 时关闭。 */
   buildTime?: boolean | { metaName?: string }
+  /** 控制台日志定位源码；默认在开发环境启用，设为 false 时关闭。 */
+  consoleSource?: boolean | SybzConsoleSourceOptions
+  /** 构建产物版本检测；默认启用，设为 false 时关闭。 */
+  versionCheck?: boolean | SybzVersionCheckOptions
   /**
    * 应用级低版本浏览器兼容预设：统一设置构建目标、启用 legacy 产物、
    * 注入 PostCSS 兼容插件。默认关闭，业务项目建议开启：
@@ -58,16 +73,29 @@ export interface SybzVitePluginsOptions {
 }
 
 /** 将工具包依赖的 Tailwind 样式作为页面入口，业务项目无需单独安装或导入。 */
-const createTailwindEntry = (): Plugin => {
+const createTailwindEntry = (preflight = true): Plugin => {
   const tailwindCssPath = require.resolve('tailwindcss/index.css')
+  const tailwindThemePath = require.resolve('tailwindcss/theme.css')
+  const tailwindUtilitiesPath = require.resolve('tailwindcss/utilities.css')
 
   return {
     name: 'sybz-tailwind-entry',
     resolveId(id) {
       if (id === virtualTailwindId) return resolvedVirtualTailwindId
+      if (id === virtualTailwindNoPreflightId) return resolvedVirtualTailwindNoPreflightId
     },
     load(id) {
-      if (id === resolvedVirtualTailwindId) return `import ${JSON.stringify(tailwindCssPath)}`
+      if (id === resolvedVirtualTailwindId) {
+        return preflight
+          ? `import ${JSON.stringify(tailwindCssPath)}`
+          : `import ${JSON.stringify(virtualTailwindNoPreflightId)}`
+      }
+      if (id === resolvedVirtualTailwindNoPreflightId) {
+        return [
+          `@import ${JSON.stringify(tailwindThemePath)} layer(theme);`,
+          `@import ${JSON.stringify(tailwindUtilitiesPath)} layer(utilities);`,
+        ].join('\n')
+      }
     },
     transformIndexHtml: {
       order: 'pre',
@@ -188,8 +216,8 @@ const createCompatPlugin = (options: SybzCompatOptions): Plugin => ({
 })
 
 /**
- * 创建 sybz 项目的 Vite 插件预设，默认包含 Vue JSX/TSX、Tailwind CSS v4、代码定位、Git 提交信息和打包时间。
- * Vite 会自动扁平化插件数组，推荐直接写入 plugins，无需展开运算符。
+ * 创建 sybz 项目的 Vite 插件预设，默认包含 Vue JSX/TSX、Tailwind CSS v4、控制台源码定位、代码定位、Git 提交信息、
+ * 打包时间和构建产物版本检测。Vite 会自动扁平化插件数组，推荐直接写入 plugins，无需展开运算符。
  *
  * 业务项目开启 `compat: true` 后，会额外统一设置 Chrome 60+ 构建目标、
  * 注入 legacy 产物（需要安装 @vitejs/plugin-legacy）和应用级 PostCSS 兼容插件。
@@ -203,7 +231,14 @@ export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): PluginOpt
 
   if (options.tailwind !== false) {
     plugins.push(...tailwindcss(typeof options.tailwind === 'object' ? options.tailwind : {}))
-    if (options.tailwindCss !== false) plugins.push(createTailwindEntry())
+    if (options.tailwindCss !== false) plugins.push(createTailwindEntry(options.tailwindPreflight !== false))
+  }
+
+  if (options.consoleSource !== false) {
+    const consoleSourceOptions = typeof options.consoleSource === 'object' ? options.consoleSource : {}
+    const inspectorOptions = typeof options.codeInspector === 'object' ? options.codeInspector : undefined
+    // 复用 codeInspector 的编辑器配置，控制台跳转和 DOM 定位保持一致。
+    plugins.push(createConsoleSource({ editor: inspectorOptions?.editor, ...consoleSourceOptions }))
   }
 
   if (options.codeInspector !== false) {
@@ -216,6 +251,10 @@ export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): PluginOpt
 
   if (options.buildTime !== false) {
     plugins.push(createBuildTime(typeof options.buildTime === 'object' ? options.buildTime.metaName : undefined))
+  }
+
+  if (options.versionCheck !== false) {
+    plugins.push(createVersionCheck(typeof options.versionCheck === 'object' ? options.versionCheck : {}))
   }
 
   if (options.compat) {
