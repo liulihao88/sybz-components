@@ -3,6 +3,21 @@
 }
 
 .el-message.s-toast {
+  align-items: center;
+
+  .el-message__icon {
+    flex: none;
+    align-self: center;
+  }
+
+  .el-message__content {
+    display: inline-flex;
+    min-height: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    line-height: 20px;
+  }
+
   .el-message__closeBtn {
     position: absolute;
     top: -8px;
