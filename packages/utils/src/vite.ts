@@ -52,7 +52,7 @@ export interface SybzVitePluginsOptions {
   tailwind?: boolean | TailwindPluginOptions
   /** 自动向 HTML 注入 Tailwind CSS；默认启用，已有手动 CSS 入口时可设为 false。 */
   tailwindCss?: boolean
-  /** 是否注入 Tailwind preflight 全局重置，默认 true；设为 false 时只保留 theme/utilities，避免重置已有全局样式。 */
+  /** 是否注入 Tailwind preflight 全局重置，默认 false；只有完全使用 Tailwind 的新项目才建议开启。 */
   tailwindPreflight?: boolean
   /** 代码定位插件配置；默认启用，设为 false 时关闭。 */
   codeInspector?: boolean | SybzCodeInspectorOptions
@@ -60,7 +60,7 @@ export interface SybzVitePluginsOptions {
   gitCommitLog?: boolean | GitCommitLogOptions
   /** 打包时间注入配置；默认启用，设为 false 时关闭。 */
   buildTime?: boolean | { metaName?: string }
-  /** 控制台日志定位源码；默认在开发环境启用，设为 false 时关闭。 */
+  /** 控制台日志定位源码；默认关闭，设为 true 或配置对象时启用。 */
   consoleSource?: boolean | SybzConsoleSourceOptions
   /** 构建产物版本检测；默认启用，设为 false 时关闭。 */
   versionCheck?: boolean | SybzVersionCheckOptions
@@ -73,7 +73,7 @@ export interface SybzVitePluginsOptions {
 }
 
 /** 将工具包依赖的 Tailwind 样式作为页面入口，业务项目无需单独安装或导入。 */
-const createTailwindEntry = (preflight = true): Plugin => {
+const createTailwindEntry = (preflight = false): Plugin => {
   const tailwindCssPath = require.resolve('tailwindcss/index.css')
   const tailwindThemePath = require.resolve('tailwindcss/theme.css')
   const tailwindUtilitiesPath = require.resolve('tailwindcss/utilities.css')
@@ -231,10 +231,10 @@ export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): PluginOpt
 
   if (options.tailwind !== false) {
     plugins.push(...tailwindcss(typeof options.tailwind === 'object' ? options.tailwind : {}))
-    if (options.tailwindCss !== false) plugins.push(createTailwindEntry(options.tailwindPreflight !== false))
+    if (options.tailwindCss !== false) plugins.push(createTailwindEntry(options.tailwindPreflight === true))
   }
 
-  if (options.consoleSource !== false) {
+  if (options.consoleSource) {
     const consoleSourceOptions = typeof options.consoleSource === 'object' ? options.consoleSource : {}
     const inspectorOptions = typeof options.codeInspector === 'object' ? options.codeInspector : undefined
     // 复用 codeInspector 的编辑器配置，控制台跳转和 DOM 定位保持一致。

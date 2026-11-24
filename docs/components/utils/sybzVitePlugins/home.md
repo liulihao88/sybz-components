@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-`sybzVitePlugins()` 默认同时启用 Vue JSX/TSX、Tailwind CSS v4、控制台源码定位、代码定位、Git 提交信息、打包时间和构建版本检测。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@vitejs/plugin-vue-jsx`、`@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
+`sybzVitePlugins()` 默认同时启用 Vue JSX/TSX、Tailwind CSS v4、代码定位、Git 提交信息、打包时间和构建版本检测；控制台源码定位 `consoleSource` 默认关闭，需要显式开启。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@vitejs/plugin-vue-jsx`、`@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
 
 ```ts
 import { defineConfig } from 'vite'
@@ -28,18 +28,18 @@ ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行�
 
 ### 配置项
 
-| 属性名称            | 类型                                  | 可选值                | 默认值  | 说明                                                           |
-| ------------------- | ------------------------------------- | --------------------- | ------- | -------------------------------------------------------------- |
-| `vueJsx`            | `boolean \| VueJsxOptions`            | `false/true/配置对象` | `true`  | 是否启用 Vue JSX/TSX，或传入插件配置。                         |
-| `tailwind`          | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true`  | 是否启用 Tailwind CSS v4 插件。                                |
-| `tailwindCss`       | `boolean`                             | `false/true`          | `true`  | 是否自动注入 Tailwind CSS 样式。                               |
-| `tailwindPreflight` | `boolean`                             | `false/true`          | `true`  | 是否注入 Tailwind preflight 全局重置；已有全局样式时建议关闭。 |
-| `codeInspector`     | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true`  | 是否启用代码定位，或传入插件配置。                             |
-| `gitCommitLog`      | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true`  | 是否启用 Git 信息，或传入插件配置。                            |
-| `buildTime`         | `boolean \| object`                   | `false/true/配置对象` | `true`  | 是否注入打包时间及其 meta 配置。                               |
-| `consoleSource`     | `boolean \| SybzConsoleSourceOptions` | `false/true/配置对象` | `true`  | 开发环境给 console 日志追加源码位置。                          |
-| `versionCheck`      | `boolean \| SybzVersionCheckOptions`  | `false/true/配置对象` | `true`  | 构建产物检测新版本并提示刷新。                                 |
-| `compat`            | `boolean \| SybzCompatOptions`        | `false/true/配置对象` | `false` | 应用级 Chrome 60+ 兼容：target + legacy + PostCSS。            |
+| 属性名称            | 类型                                  | 可选值                | 默认值  | 说明                                                               |
+| ------------------- | ------------------------------------- | --------------------- | ------- | ------------------------------------------------------------------ |
+| `vueJsx`            | `boolean \| VueJsxOptions`            | `false/true/配置对象` | `true`  | 是否启用 Vue JSX/TSX，或传入插件配置。                             |
+| `tailwind`          | `boolean \| TailwindPluginOptions`    | `false/true/配置对象` | `true`  | 是否启用 Tailwind CSS v4 插件。                                    |
+| `tailwindCss`       | `boolean`                             | `false/true`          | `true`  | 是否自动注入 Tailwind CSS 样式。                                   |
+| `tailwindPreflight` | `boolean`                             | `false/true`          | `false` | 是否注入 Tailwind preflight 全局重置；默认关闭，避免重置已有样式。 |
+| `codeInspector`     | `boolean \| SybzCodeInspectorOptions` | `false/true/配置对象` | `true`  | 是否启用代码定位，或传入插件配置。                                 |
+| `gitCommitLog`      | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true`  | 是否启用 Git 信息，或传入插件配置。                                |
+| `buildTime`         | `boolean \| object`                   | `false/true/配置对象` | `true`  | 是否注入打包时间及其 meta 配置。                                   |
+| `consoleSource`     | `boolean \| SybzConsoleSourceOptions` | `false/true/配置对象` | `false` | 开发环境给 console 日志末尾追加可点击的源码位置；默认关闭。        |
+| `versionCheck`      | `boolean \| SybzVersionCheckOptions`  | `false/true/配置对象` | `true`  | 构建产物检测新版本并提示刷新。                                     |
+| `compat`            | `boolean \| SybzCompatOptions`        | `false/true/配置对象` | `false` | 应用级 Chrome 60+ 兼容：target + legacy + PostCSS。                |
 
 `bundler` 已固定为 `vite`，业务项目无需重复传入。
 
@@ -93,7 +93,7 @@ plugins: [
 
 其他编辑器的配置可查看 [code-inspector IDE 配置列表](https://inspector.fe-dev.cn/guide/ide.html)。
 
-如果项目已有全局样式，Tailwind preflight 的 `* { margin: 0; padding: 0 }` 可能与现有布局冲突，表现为整页样式被重置。此时可以关闭 preflight，只保留 theme/utilities：`sybzVitePlugins({ tailwindPreflight: false })`。
+Tailwind preflight 会注入 `* { margin: 0; padding: 0; box-sizing: border-box }` 等全局 reset，适合完全从零使用 Tailwind 的项目；组件库预设默认不注入，避免重置业务项目已有的全局样式。需要完整的 Tailwind 基线时显式开启：`sybzVitePlugins({ tailwindPreflight: true })`。
 
 项目只保留一个 Tailwind Vite 插件和一个 Tailwind CSS 入口。若项目已有手动的 `@import 'tailwindcss'`，请设置 `tailwindCss: false`，避免重复注入；若已自行注册 `@tailwindcss/vite`，请关闭预设中的 Tailwind：
 
@@ -122,16 +122,16 @@ const globalBuildTime = window.__SYBZ_BUILD_TIME__
 plugins: [sybzVitePlugins({ buildTime: false })]
 ```
 
-### 控制台日志定位源码（`consoleSource` 默认 `true`，仅开发环境）
+### 控制台日志定位源码（`consoleSource` 默认 `false`，仅开发环境）
 
-开发环境下，每条日志最左侧会输出一个 `↗`，后面跟着可点击的跳转链接；点击链接会在对应 IDE 中打开文件并定位到行：
+默认关闭；开启后，每条日志末尾会跟一个可点击的短链接，指向源码位置。点击链接会在对应 IDE 中打开文件并定位到行：
 
 ```ts
 console.log('接口返回', data)
-// 控制台：↗ http://localhost:5173/s/1/c 接口返回 ...
+// 控制台：接口返回 ... http://localhost:5173/s/1/c
 ```
 
-`↗` 是视觉入口，真正可点击的是后面紧跟的 URL。浏览器控制台只能把 URL 变成可点击内容，纯图标点击需要 DevTools 扩展，原生 console 做不到。
+浏览器控制台只能把 URL 变成可点击内容，所以链接用的是压缩后的 `/s/<文件id>/<行号>`；`1` 和 `c` 分别对应文件与行号。如果只想要纯图标或纯路径文本，需要 DevTools 扩展，原生 console 做不到。
 
 | 属性名称  | 类型                     | 默认值        | 说明                                                              |
 | --------- | ------------------------ | ------------- | ----------------------------------------------------------------- |
@@ -159,10 +159,10 @@ plugins: [
 
 `editor` 支持 `code`、`cursor`、`webstorm` 等常见命令；也可以传本机可执行文件路径。点击链接后由 Vite 开发服务器打开编辑器，随后自动关闭新标签页；如果浏览器拦截关闭，会显示已打开的提示。生产构建（`build: true`）没有开发服务器，会退回静态 `[file:line]` 前缀。
 
-不需要时关闭：
+开启方式：
 
 ```ts
-plugins: [sybzVitePlugins({ consoleSource: false })]
+plugins: [sybzVitePlugins({ consoleSource: true })]
 ```
 
 ### 构建版本更新检测（`versionCheck` 默认 `true`，仅生产构建）
@@ -263,8 +263,8 @@ plugins: [sybzVitePlugins({ codeInspector: false })]
 // 使用项目自行配置的 Tailwind 插件
 plugins: [tailwindcss(), sybzVitePlugins({ tailwind: false })]
 
-// 关闭控制台源码定位
-plugins: [sybzVitePlugins({ consoleSource: false })]
+// 开启控制台源码定位
+plugins: [sybzVitePlugins({ consoleSource: true })]
 
 // 关闭版本更新检测
 plugins: [sybzVitePlugins({ versionCheck: false })]

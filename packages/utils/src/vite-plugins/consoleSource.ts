@@ -159,6 +159,78 @@ const findConsoleCalls = (code: string, methods: Set<string>): ConsoleCall[] => 
   return calls
 }
 
+const findClosingParen = (code: string, openIndex: number) => {
+  type State = 'code' | 'single' | 'double' | 'template' | 'line-comment' | 'block-comment'
+  let state: State = 'code'
+  let depth = 0
+
+  for (let index = openIndex; index < code.length; index++) {
+    const char = code[index]
+    const next = code[index + 1]
+
+    if (state === 'line-comment') {
+      if (char === '\n') state = 'code'
+      continue
+    }
+    if (state === 'block-comment') {
+      if (char === '*' && next === '/') {
+        state = 'code'
+        index++
+      }
+      continue
+    }
+    if (state === 'single') {
+      if (char === '\\') index++
+      else if (char === "'") state = 'code'
+      continue
+    }
+    if (state === 'double') {
+      if (char === '\\') index++
+      else if (char === '"') state = 'code'
+      continue
+    }
+    if (state === 'template') {
+      if (char === '\\') {
+        index++
+      } else if (char === '`') {
+        state = 'code'
+      }
+      continue
+    }
+
+    if (char === "'") {
+      state = 'single'
+      continue
+    }
+    if (char === '"') {
+      state = 'double'
+      continue
+    }
+    if (char === '`') {
+      state = 'template'
+      continue
+    }
+    if (char === '/' && next === '/') {
+      state = 'line-comment'
+      index++
+      continue
+    }
+    if (char === '/' && next === '*') {
+      state = 'block-comment'
+      index++
+      continue
+    }
+
+    if (char === '(') depth++
+    else if (char === ')') {
+      depth--
+      if (depth === 0) return index
+    }
+  }
+
+  return -1
+}
+
 const createStaticPrefix = (context: InjectContext, line: number) => {
   const format = context.options.format ?? ((source: string, lineNumber: number) => `[${source}:${lineNumber}]`)
 
@@ -171,15 +243,8 @@ const createStaticPrefix = (context: InjectContext, line: number) => {
 }
 
 const createJumpPrefix = (context: InjectContext, line: number) => {
-  // 控制台里只有 URL 可以被点击，用文件 id + 行号把链接压短。
-  const url = `(typeof window === 'undefined' ? '' : window.location.origin) + '/s/${context.fileId?.toString(36)}/${line.toString(36)}'`
-
-  // 浏览器控制台只有 URL 可以被点击；用 ↗ 作为最左侧的视觉入口，后面跟短链接。
-  return [
-    `'%c↗%c ' + ${url}`,
-    `'color:#2f6fed;font-weight:700;padding-right:2px;'`,
-    `'color:#2f6fed;font-size:11px;text-decoration:underline;cursor:pointer;'`,
-  ].join(', ')
+  // 控制台只有 URL 可以被点击；用文件 id + 行号压缩链接长度，避免长路径把日志撑开。
+  return `(typeof window === 'undefined' ? '' : window.location.origin) + '/s/${context.fileId?.toString(36)}/${line.toString(36)}'`
 }
 
 const injectConsoleSource = (code: string, context: InjectContext) => {
@@ -188,7 +253,7 @@ const injectConsoleSource = (code: string, context: InjectContext) => {
 
   let result = code
 
-  // 从后往前插入，前面的索引和行号不会被影响。
+  // 从后往前插入：链接放在原始日志参数后面，符合先看消息、再点跳转的习惯。
   for (let index = calls.length - 1; index >= 0; index--) {
     const call = calls[index]
     const line = context.lineOffset + countNewlines(code.slice(0, call.start))
@@ -196,12 +261,18 @@ const injectConsoleSource = (code: string, context: InjectContext) => {
 
     if (!prefix) continue
 
-    const insertAt = call.paren + 1
-    const rest = result.slice(insertAt)
-    const whitespace = rest.match(/^\s*/)?.[0] ?? ''
-    const hasArguments = rest[whitespace.length] !== ')'
-    const inserted = hasArguments ? `${prefix}, ` : prefix
-    result = result.slice(0, insertAt) + inserted + result.slice(insertAt)
+    const closeParen = findClosingParen(result, call.paren)
+    if (closeParen === -1) continue
+
+    // 插到最后一个非空白字符后面，避免多行调用把逗号单独放到新行。
+    let insertAt = closeParen
+    while (insertAt > call.paren + 1 && /\s/.test(result[insertAt - 1])) insertAt--
+
+    const hasArguments = result.slice(call.paren + 1, insertAt).trim().length > 0
+    const before = result.slice(0, insertAt)
+    const separator = hasArguments ? (before.endsWith(',') ? ' ' : ', ') : ''
+
+    result = result.slice(0, insertAt) + separator + prefix + result.slice(insertAt)
   }
 
   return result
@@ -323,7 +394,16 @@ export const createConsoleSource = (options: SybzConsoleSourceOptions = {}): Plu
     },
     transform(code, id) {
       if (!code) return
-      if (!id || id.startsWith('\0') || id.startsWith('virtual:') || id.includes('/node_modules/')) return
+      if (!id || id.startsWith('\0') || id.startsWith('virtual:')) return
+
+      const normalizedId = normalizePath(id)
+      if (
+        normalizedId.includes('/node_modules/') ||
+        normalizedId.includes('/.vitepress/cache/') ||
+        normalizedId.includes('/.vitepress/dist/')
+      ) {
+        return
+      }
 
       const cleanId = id.split('?')[0]
       if (!cleanId || !isAbsolute(cleanId) || !SOURCE_RE.test(cleanId)) return

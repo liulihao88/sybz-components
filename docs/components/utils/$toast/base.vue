@@ -3,6 +3,7 @@ import { $toast } from '@sybz-components/utils'
 const showToast = () => {
   $toast('保存成功')
 }
+console.log(`6行 docs/components/utils/$toast/base.vue 123 `, 123)
 </script>
 
 <template>

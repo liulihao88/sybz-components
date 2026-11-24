@@ -578,12 +578,7 @@ export default defineConfig({
         '@docs': fileURLToPath(new URL('..', import.meta.url)),
       },
     },
-    plugins: [
-      sybzVitePlugins({
-        tailwindPreflight: false,
-      }),
-      utilsSourceDocsHmrPlugin(),
-    ],
+    plugins: [sybzVitePlugins({ consoleSource: true }), utilsSourceDocsHmrPlugin()],
     build: {
       minify: 'terser',
       terserOptions: {
