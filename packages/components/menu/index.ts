@@ -11,5 +11,6 @@ export type {
   SMenuItemDetail,
   SMenuProps,
   SMenuSelfProps,
+  SMenuSizeConfig,
 } from './src/types'
 export default SMenu

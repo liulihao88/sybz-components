@@ -50,7 +50,6 @@ const menus = [
       :options="menus"
       :router="false"
       width="320px"
-      auto-height
     />
   </div>
 </template>

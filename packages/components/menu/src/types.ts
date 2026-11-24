@@ -1,8 +1,29 @@
-import type { SybzComponentTheme } from '../../../types/component-props'
+import type { SybzComponentSize, SybzComponentTheme } from '../../../types/component-props'
 import type { Component, CSSProperties } from 'vue'
 import type { MenuProps } from 'element-plus'
 
 export type SMenuIcon = string | Component
+
+export interface SMenuSizeConfig {
+  /** 菜单项字号，深色/浅色统一，默认 16px */
+  fontSize?: string | number
+  /** 菜单项高度，深色/浅色统一，默认 56px */
+  height?: string | number
+  /** 菜单项宽度，默认 100% */
+  width?: string | number
+  /** 菜单项行高，默认与 height 一致 */
+  lineHeight?: string | number
+  /** 菜单项左右内边距，默认 20px；可传数字、12px 或 0 12px */
+  padding?: string | number
+  /** 子级菜单每层缩进，默认与 padding 一致 */
+  levelPadding?: string | number
+  /** 菜单项上下外边距，深色/浅色统一，默认 4px */
+  margin?: string | number
+  /** 菜单项图标尺寸，默认 16px */
+  iconSize?: string | number
+  /** 菜单列表四周内边距，默认 16px；收起时固定 4px，autoHeight 时按可用高度计算 */
+  listPadding?: string | number
+}
 
 export interface SMenuItemDetail {
   tag?: string
@@ -67,6 +88,8 @@ export interface SMenuSelfProps {
   w?: string | number | boolean
   height?: string | number | boolean
   h?: string | number | boolean
+  /** 菜单尺寸：预设 small / default / large；也可传对象精细控制字号、宽高、行高、内边距和图标 */
+  size?: SybzComponentSize | SMenuSizeConfig
   /** 是否自适应菜单项尺寸：展开时四边保持 16px padding，收起时为 4px，仅空间不足时压缩菜单项 */
   autoHeight?: boolean
   /** 深色模式背景色；浅色模式始终为白色 */

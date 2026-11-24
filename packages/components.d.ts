@@ -325,13 +325,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/menu/home.html | 查看文档}
      *
-     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。头部和底部 padding 保持 16px，列表展开时为 16px、收起时为 4px；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
+     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。size 支持 small / default / large 预设或配置对象，可统一设置字号、宽高、行高、内边距、图标和列表内边距；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
      */
     SMenu: (typeof import('./types/components/menu'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/menu/home.html | 查看文档}
      *
-     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。头部和底部 padding 保持 16px，列表展开时为 16px、收起时为 4px；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
+     * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。size 支持 small / default / large 预设或配置对象，可统一设置字号、宽高、行高、内边距、图标和列表内边距；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
      */
     's-menu': (typeof import('./types/components/menu'))['default']
     /**
@@ -421,13 +421,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/select/home.html | 查看文档}
      *
-     * s-select 下拉选择组件，loading 显示选择框旋转图标和下拉层加载提示，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
+     * s-select 下拉选择组件，loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
      */
     SSelect: (typeof import('./types/components/select'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/select/home.html | 查看文档}
      *
-     * s-select 下拉选择组件，loading 显示选择框旋转图标和下拉层加载提示，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
+     * s-select 下拉选择组件，loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
      */
     's-select': (typeof import('./types/components/select'))['default']
     /**

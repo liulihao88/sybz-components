@@ -1,4 +1,4 @@
-import type { SybzComponentTheme } from '../component-props'
+import type { SybzComponentSize, SybzComponentTheme } from '../component-props'
 import type {
   SMenuFieldNames,
   SMenuFooterConfig,
@@ -8,13 +8,14 @@ import type {
   SMenuItemDetail,
   SMenuProps,
   SMenuSelfProps,
+  SMenuSizeConfig,
 } from '../../components/menu/src/types'
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/menu/home.html | 查看文档}
  *
- * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。头部和底部 padding 保持 16px，列表展开时为 16px、收起时为 4px；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
+ * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。size 支持 small / default / large 预设或配置对象，可统一设置字号、宽高、行高、内边距、图标和列表内边距；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
  *
  * 先提示 sybz 自身属性。
  */
@@ -28,6 +29,8 @@ export type SMenuComponent = {
       router?: boolean
       defaultOpenAll?: boolean
       defaultOpeneds?: string[]
+      /** 菜单尺寸：预设 small / default / large；也可传对象精细控制字号、宽高、行高、内边距和图标 */
+      size?: SybzComponentSize | SMenuSizeConfig
       /** 是否自适应菜单项尺寸：展开时四边保持 16px padding，收起时为 4px，仅空间不足时压缩菜单项 */
       autoHeight?: boolean
       /** 深色模式背景色；浅色模式始终为白色 */

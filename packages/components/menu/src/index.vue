@@ -6,9 +6,15 @@ import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import MenuNode from './MenuNode.vue'
 import SIcon from '@/components/icon'
-import type { SMenuFieldNames, SMenuIcon, SMenuItem, SMenuSelfProps } from './types'
+import type { SMenuFieldNames, SMenuIcon, SMenuItem, SMenuSelfProps, SMenuSizeConfig } from './types'
 
 defineOptions({ name: 'SMenu', inheritAttrs: false })
+
+const SIZE_PRESETS: Record<'small' | 'default' | 'large', SMenuSizeConfig> = {
+  small: { fontSize: 14, height: 40, padding: 12, levelPadding: 12, margin: 2, iconSize: 16, listPadding: 12 },
+  default: {},
+  large: { fontSize: 18, height: 64, padding: 24, levelPadding: 24, margin: 6, iconSize: 20, listPadding: 20 },
+}
 
 const props = withDefaults(defineProps<SMenuSelfProps>(), {
   modelValue: '',
@@ -19,6 +25,7 @@ const props = withDefaults(defineProps<SMenuSelfProps>(), {
   defaultOpeneds: () => [],
   width: 256,
   height: '100%',
+  size: 'default',
   autoHeight: false,
   backgroundColor: '#1d293b',
   textColor: '#cbd5e1',
@@ -40,7 +47,14 @@ const attrs = useAttrs()
 const iconProp = (value: SMenuIcon) => value as any
 const mergedProps = useGlobalComponentConfig('menu', props)
 const { style } = useStyleProps()
+const MENU_MOTION_DURATION = 280
+// 宽度动画前 160ms 已完成约 98%，此时再接文字淡入，既不会挤压也不会等太久。
+const MENU_EXPAND_TEXT_DELAY = 160
 const isCollapsed = ref(mergedProps.value.collapsible && mergedProps.value.collapse)
+// epCollapsed 控制 Element Plus 的折叠 DOM，和视觉宽度拆开，避免它自带的整段菜单替换动画。
+const epCollapsed = ref(isCollapsed.value)
+const isExpanding = ref(false)
+let collapseTimer: ReturnType<typeof setTimeout> | undefined
 const menuViewportRef = ref<HTMLElement>()
 const menuRef = ref<any>()
 const menuRowHeight = ref(0)
@@ -49,9 +63,99 @@ const menuDensity = ref(1)
 let resizeObserver: ResizeObserver | undefined
 let mutationObserver: MutationObserver | undefined
 let resizeFrame = 0
+
+const toCssLength = (value: string | number | undefined, fallback: string) => {
+  if (value === undefined || value === null || value === '') return fallback
+  return processWidth(value, true) || fallback
+}
+const toPaddingX = (value: string | number | undefined) => {
+  if (value === undefined || value === null || value === '') return ''
+  if (typeof value === 'number') return `${value}px`
+  // padding 简写只取左右方向的值，上下方向由 height / lineHeight 控制。
+  const parts = String(value).trim().split(/\s+/)
+  return toCssLength(parts.length === 1 ? parts[0] : parts[1] || parts[0], '')
+}
+const toPixelNumber = (value: string | number | undefined, fallback: number) => {
+  if (typeof value === 'number') return value
+  if (value === undefined || value === null || value === '') return fallback
+  const matched = String(value)
+    .trim()
+    .match(/^(\d+(?:\.\d+)?)px$/)
+  return matched ? Number(matched[1]) : fallback
+}
+const resolvedSizeConfig = computed<SMenuSizeConfig>(() => {
+  const size = mergedProps.value.size
+  if (typeof size === 'string') return SIZE_PRESETS[size] || SIZE_PRESETS.default
+  return size || SIZE_PRESETS.default
+})
+// 明暗主题只影响颜色，尺寸统一使用同一套默认值。
+const DEFAULT_MENU_SIZE = {
+  fontSize: 16,
+  height: 56,
+  margin: 4,
+  iconSize: 16,
+  padding: 20,
+  levelPadding: 20,
+  listPadding: 16,
+}
+const resolvedMenuSize = computed(() => {
+  const config = resolvedSizeConfig.value
+  const defaults = DEFAULT_MENU_SIZE
+  const padding = toPaddingX(config.padding) || `${defaults.padding}px`
+  const height = toCssLength(config.height, `${defaults.height}px`)
+  return {
+    fontSize: toCssLength(config.fontSize, `${defaults.fontSize}px`),
+    height,
+    lineHeight: toCssLength(config.lineHeight, height),
+    width: toCssLength(config.width, '100%'),
+    padding,
+    levelPadding: toCssLength(config.levelPadding, padding),
+    margin: toCssLength(config.margin, `${defaults.margin}px`),
+    iconSize: toCssLength(config.iconSize, `${defaults.iconSize}px`),
+    listPadding: toCssLength(config.listPadding, `${defaults.listPadding}px`),
+    pixels: {
+      fontSize: toPixelNumber(config.fontSize, defaults.fontSize),
+      height: toPixelNumber(config.height, defaults.height),
+      margin: toPixelNumber(config.margin, defaults.margin),
+      iconSize: toPixelNumber(config.iconSize, defaults.iconSize),
+    },
+  }
+})
+const menuSizeStyle = computed(() => {
+  const size = resolvedMenuSize.value
+  return {
+    '--el-menu-item-height': size.height,
+    '--el-menu-sub-item-height': size.height,
+    '--el-menu-item-font-size': size.fontSize,
+    '--el-menu-base-level-padding': size.padding,
+    '--el-menu-level-padding': size.levelPadding,
+    '--s-menu-item-line-height': size.lineHeight,
+    '--s-menu-item-margin': size.margin,
+    '--s-menu-item-icon-size': size.iconSize,
+    '--s-menu-item-width': size.width,
+    '--s-menu-list-padding': size.listPadding,
+  }
+})
+const externalPopperStyle = computed<any>(() => attrs['popper-style'] || attrs.popperStyle)
+const menuPopperStyle = computed<any>(() =>
+  externalPopperStyle.value ? [menuSizeStyle.value, externalPopperStyle.value] : menuSizeStyle.value,
+)
+const menuPopperClass = computed(() => {
+  const external = attrs['popper-class'] || attrs.popperClass
+  return external ? `s-menu-popper ${String(external)}` : 's-menu-popper'
+})
+// Element Plus 默认 hover 300ms 才弹出一级子菜单，收起状态会明显“顿一下”。
+const menuShowTimeout = computed(() => {
+  const value = attrs['show-timeout'] ?? attrs.showTimeout
+  return value === undefined ? 100 : Number(value)
+})
+const menuHideTimeout = computed(() => {
+  const value = attrs['hide-timeout'] ?? attrs.hideTimeout
+  return value === undefined ? 150 : Number(value)
+})
 const baseRowHeight = computed(() => {
-  if (isCollapsed.value) return 64
-  return mergedProps.value.variant === 'light' ? 52 : 64
+  const { height, margin } = resolvedMenuSize.value.pixels
+  return height + margin * 2
 })
 
 const updateMenuScale = () => {
@@ -91,11 +195,56 @@ const menuListStyle = computed(() =>
     ? {
         '--s-menu-fit-row': `${menuRowHeight.value}px`,
         '--s-menu-fit-padding': `${menuVerticalPadding.value}px`,
-        '--s-menu-fit-font': `${16 * menuDensity.value}px`,
-        '--s-menu-fit-icon': `${20 * menuDensity.value}px`,
+        '--s-menu-fit-font': `${resolvedMenuSize.value.pixels.fontSize * menuDensity.value}px`,
+        '--s-menu-fit-icon': `${resolvedMenuSize.value.pixels.iconSize * menuDensity.value}px`,
       }
     : undefined,
 )
+// SIcon 通过 size 属性输出内联 font-size，必须显式传入才能在预设和 autoHeight 下同步缩放。
+const menuIconSize = computed(() =>
+  mergedProps.value.autoHeight
+    ? `${resolvedMenuSize.value.pixels.iconSize * menuDensity.value}px`
+    : resolvedMenuSize.value.iconSize,
+)
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+const clearCollapseTimer = () => {
+  if (!collapseTimer) return
+  clearTimeout(collapseTimer)
+  collapseTimer = undefined
+}
+/**
+ * 视觉宽度立即切换，Element Plus 的折叠 DOM 延后切换：
+ * 收起时先在原 DOM 上把文字收干净，再换成弹层模式；展开时先换回内联 DOM 并保持文字隐藏，
+ * 等宽度展开完成后再淡入文字。这样不会出现整段菜单被替换或文字被挤压的跳变。
+ */
+const setCollapsed = (value: boolean) => {
+  if (value === isCollapsed.value) return
+  clearCollapseTimer()
+  if (prefersReducedMotion()) {
+    isCollapsed.value = value
+    epCollapsed.value = value
+    isExpanding.value = false
+    return
+  }
+  if (value) {
+    isExpanding.value = false
+    isCollapsed.value = true
+    collapseTimer = setTimeout(() => {
+      epCollapsed.value = true
+      collapseTimer = undefined
+    }, MENU_MOTION_DURATION)
+    return
+  }
+  epCollapsed.value = false
+  isExpanding.value = true
+  isCollapsed.value = false
+  collapseTimer = setTimeout(() => {
+    isExpanding.value = false
+    collapseTimer = undefined
+  }, MENU_EXPAND_TEXT_DELAY)
+}
 
 onMounted(() => {
   resizeObserver = new ResizeObserver(updateMenuScale)
@@ -115,12 +264,13 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   cancelAnimationFrame(resizeFrame)
+  clearCollapseTimer()
   resizeObserver?.disconnect()
   mutationObserver?.disconnect()
 })
 watch([() => mergedProps.value.autoHeight, () => baseRowHeight.value], () => nextTick(updateMenuScale))
 watch([() => mergedProps.value.collapse, () => mergedProps.value.collapsible], ([collapse, collapsible]) => {
-  isCollapsed.value = collapsible && collapse
+  setCollapsed(collapsible && collapse)
 })
 const fields = computed<Required<SMenuFieldNames>>(() => ({
   index: 'index',
@@ -178,7 +328,7 @@ const rootStyle = computed(() => ({
 }))
 const toggleCollapse = () => {
   if (!mergedProps.value.collapsible) return
-  isCollapsed.value = !isCollapsed.value
+  setCollapsed(!isCollapsed.value)
   emit('update:collapse', isCollapsed.value)
 }
 const handleSelect = (...args: any[]) => {
@@ -192,9 +342,9 @@ const handleSelect = (...args: any[]) => {
     class="s-menu"
     :class="[
       `s-menu--${mergedProps.variant}`,
-      { 'is-collapse': isCollapsed, 'is-auto-height': mergedProps.autoHeight },
+      { 'is-collapse': isCollapsed, 'is-expanding': isExpanding, 'is-auto-height': mergedProps.autoHeight },
     ]"
-    :style="[rootStyle, style]"
+    :style="[rootStyle, menuSizeStyle, style]"
   >
     <button
       v-if="mergedProps.collapsible"
@@ -238,10 +388,15 @@ const handleSelect = (...args: any[]) => {
         v-bind="attrs"
         class="s-menu__list"
         :style="menuListStyle"
+        :popper-class="menuPopperClass"
+        :popper-style="menuPopperStyle"
         :default-active="mergedProps.modelValue"
         :default-openeds="openedMenus"
         :router="mergedProps.router"
-        :collapse="isCollapsed"
+        :collapse="epCollapsed"
+        :collapse-transition="false"
+        :show-timeout="menuShowTimeout"
+        :hide-timeout="menuHideTimeout"
         :background-color="menuColors.background"
         :text-color="menuColors.text"
         :active-text-color="menuColors.activeText"
@@ -253,6 +408,7 @@ const handleSelect = (...args: any[]) => {
           :item="item"
           :field-names="fields"
           :collapsed="isCollapsed"
+          :icon-size="menuIconSize"
         />
       </el-menu>
     </div>
@@ -280,6 +436,8 @@ const handleSelect = (...args: any[]) => {
 .s-menu {
   --s-menu-motion-duration: 280ms;
   --s-menu-motion-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --s-menu-submenu-duration: 200ms;
+  --s-menu-submenu-easing: cubic-bezier(0, 0, 0.58, 1);
 
   display: flex;
   flex-direction: column;
@@ -353,8 +511,8 @@ const handleSelect = (...args: any[]) => {
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
       width: 100%;
-      height: 56px;
-      margin: 4px 0;
+      height: var(--el-menu-item-height);
+      margin: var(--s-menu-item-margin) 0;
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -397,6 +555,18 @@ const handleSelect = (...args: any[]) => {
     }
   }
 
+  // 展开过程中先保持头尾文字隐藏，等侧栏宽度到位后再和菜单文字一起淡入。
+  &.is-expanding {
+    :deep(.s-menu__brand-content),
+    :deep(.s-menu__account > div),
+    :deep(.s-menu__slot-text) {
+      max-width: 0;
+      opacity: 0;
+      transform: translateX(-6px);
+      visibility: hidden;
+    }
+  }
+
   &__header,
   &__footer {
     flex: none;
@@ -415,14 +585,17 @@ const handleSelect = (...args: any[]) => {
   &__viewport {
     position: relative;
     flex: 1;
+    min-width: 0;
     min-height: 0;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   &__list {
     box-sizing: border-box;
+    width: 100%;
     margin: 0;
-    padding: 16px;
+    padding: var(--s-menu-list-padding);
     border-right: 0;
     transition:
       width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
@@ -446,10 +619,6 @@ const handleSelect = (...args: any[]) => {
     flex: none;
   }
 
-  :deep(.el-menu) {
-    transition: width var(--s-menu-motion-duration) var(--s-menu-motion-easing);
-  }
-
   :deep(.el-menu-item),
   :deep(.el-sub-menu__title) {
     transition:
@@ -457,9 +626,9 @@ const handleSelect = (...args: any[]) => {
       color 220ms ease,
       padding var(--s-menu-motion-duration) var(--s-menu-motion-easing);
   }
-  // 覆盖 Element Plus 折叠时对文字设置的零尺寸与隐藏状态，让文字随侧栏平滑淡出。
-  :deep(.s-menu__list > .el-menu-item > span),
-  :deep(.s-menu__list > .el-sub-menu > .el-sub-menu__title > span) {
+  // 覆盖 Element Plus 折叠时对文字设置的零尺寸与隐藏状态，收起和展开期间统一做淡出/淡入。
+  :deep(.s-menu__list .el-menu-item > span),
+  :deep(.s-menu__list .el-sub-menu__title > span) {
     display: inline-block;
     width: auto;
     height: auto;
@@ -468,19 +637,106 @@ const handleSelect = (...args: any[]) => {
     opacity: 1;
     visibility: visible;
     transition:
-      max-width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      max-width 180ms var(--s-menu-submenu-easing),
       opacity 160ms ease,
       visibility 0s;
   }
-  &.is-collapse :deep(.s-menu__list > .el-menu-item > span),
-  &.is-collapse :deep(.s-menu__list > .el-sub-menu > .el-sub-menu__title > span) {
+  &.is-collapse :deep(.s-menu__list .el-menu-item > span),
+  &.is-collapse :deep(.s-menu__list .el-sub-menu__title > span),
+  &.is-expanding :deep(.s-menu__list .el-menu-item > span),
+  &.is-expanding :deep(.s-menu__list .el-sub-menu__title > span) {
     max-width: 0;
     opacity: 0;
     visibility: hidden;
     transition:
       max-width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
-      opacity 130ms ease,
+      opacity 180ms ease,
       visibility 0s var(--s-menu-motion-duration);
+  }
+  &.is-collapse :deep(.s-menu__list .s-menu-node__tag),
+  &.is-expanding :deep(.s-menu__list .s-menu-node__tag) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  :deep(.s-menu__list .s-menu-node__suffix) {
+    max-width: 100%;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      max-width 180ms var(--s-menu-motion-easing),
+      opacity 160ms ease,
+      visibility 0s;
+  }
+  &.is-collapse :deep(.s-menu__list .s-menu-node__suffix),
+  &.is-expanding :deep(.s-menu__list .s-menu-node__suffix) {
+    max-width: 0;
+    margin-left: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      opacity 180ms ease,
+      visibility 0s var(--s-menu-motion-duration);
+  }
+
+  // 内联子菜单和分组标题跟随侧栏一起淡出，避免收起过程中残留子项内容。
+  // 这里必须保留 max-height / padding 的过渡，否则会覆盖 Element Plus 二级菜单的展开动画。
+  :deep(.s-menu__list .el-sub-menu > .el-menu) {
+    // 建立 BFC：展开第一帧不会溢出；scrollHeight 也会把子项 margin 计入，动画终点不再突然多出 8px。
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      max-height var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      padding-top var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      padding-bottom var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      opacity 160ms ease,
+      visibility 0s;
+  }
+  &.is-collapse :deep(.s-menu__list .el-sub-menu > .el-menu),
+  &.is-expanding :deep(.s-menu__list .el-sub-menu > .el-menu) {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      padding-top var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      padding-bottom var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      opacity 180ms ease,
+      visibility 0s var(--s-menu-motion-duration);
+  }
+  :deep(.s-menu__list .s-menu-node__group) {
+    max-height: 80px;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      max-height var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      padding var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      opacity 160ms ease,
+      visibility 0s;
+  }
+  &.is-collapse :deep(.s-menu__list .s-menu-node__group),
+  &.is-expanding :deep(.s-menu__list .s-menu-node__group) {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      padding var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+      opacity 180ms ease,
+      visibility 0s var(--s-menu-motion-duration);
+  }
+
+  // Element Plus 默认用 300ms ease-in-out 展开二级菜单，起步太慢，看起来像先顿一下。
+  :deep(.el-collapse-transition-enter-active),
+  :deep(.el-collapse-transition-leave-active) {
+    transition:
+      max-height var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      padding-top var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      padding-bottom var(--s-menu-submenu-duration) var(--s-menu-submenu-easing);
   }
 
   &__brand {
@@ -566,10 +822,12 @@ const handleSelect = (...args: any[]) => {
 
   :deep(.el-menu-item),
   :deep(.el-sub-menu__title) {
-    height: 56px;
-    margin: 4px 0;
+    height: var(--el-menu-item-height);
+    line-height: var(--s-menu-item-line-height);
+    margin: var(--s-menu-item-margin) 0;
+    width: var(--s-menu-item-width);
     border-radius: 8px;
-    font-size: 16px;
+    font-size: var(--el-menu-item-font-size);
   }
 
   :deep(.el-menu-item.is-active) {
@@ -577,11 +835,24 @@ const handleSelect = (...args: any[]) => {
     color: #fff;
   }
   :deep(.el-icon) {
-    font-size: 20px;
+    font-size: var(--s-menu-item-icon-size);
+  }
+  // 箭头样式是 width: inherit，标题设置 width 后会被拉满并压到文字上，这里恢复为右侧预留的图标宽度。
+  :deep(.el-sub-menu__title .el-sub-menu__icon-arrow) {
+    width: var(--el-menu-icon-width, 24px);
+    opacity: 1;
+    transition:
+      transform var(--s-menu-submenu-duration) var(--s-menu-submenu-easing),
+      opacity 160ms ease;
+  }
+  &.is-expanding :deep(.el-sub-menu__title .el-sub-menu__icon-arrow) {
+    opacity: 0;
   }
 
   &--light {
-    border: 1px solid #dce5ef;
+    // 用内阴影代替边框，避免浅色主题的 1px 边框挤小菜单项可用宽度。
+    border: 0;
+    box-shadow: inset 0 0 0 1px #dce5ef;
 
     .s-menu__header,
     .s-menu__footer {
@@ -605,13 +876,7 @@ const handleSelect = (...args: any[]) => {
 
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
-      height: 48px;
-      margin: 2px 0;
-      font-size: 15px;
-    }
-    :deep(.el-menu-item.is-active) {
-      background-color: color-mix(in srgb, var(--s-menu-accent) 10%, #fff);
-      color: var(--s-menu-accent);
+      color: var(--s-menu-text);
     }
     :deep(.el-menu-item::before) {
       position: absolute;
@@ -735,5 +1000,17 @@ const handleSelect = (...args: any[]) => {
 :global(.s-menu-detail-popper.el-popper .el-popper__arrow::before) {
   border-color: #243b52;
   background: #243b52;
+}
+
+// 折叠后的子菜单弹层在 body 下，无法继承 .s-menu 上的尺寸变量，通过 popper-style 重新注入。
+:global(.s-menu-popper .el-menu-item),
+:global(.s-menu-popper .el-sub-menu__title) {
+  height: var(--el-menu-item-height);
+  line-height: var(--s-menu-item-line-height);
+  margin: var(--s-menu-item-margin) 0;
+  font-size: var(--el-menu-item-font-size);
+}
+:global(.s-menu-popper .el-icon) {
+  font-size: var(--s-menu-item-icon-size);
 }
 </style>

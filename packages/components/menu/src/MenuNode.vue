@@ -10,6 +10,7 @@ const props = defineProps<{
   fieldNames: Required<SMenuFieldNames>
   collapsed?: boolean
   inSubMenu?: boolean
+  iconSize?: string | number
 }>()
 
 const read = (field: keyof SMenuFieldNames) => props.item[props.fieldNames[field]]
@@ -18,6 +19,7 @@ const index = computed(() => String(read('index') || read('path') || ''))
 const icon = computed(() => read('icon'))
 const suffixIcon = computed(() => props.item.suffixIcon)
 const iconProp = (value: SMenuIcon) => value as any
+const iconSize = computed(() => props.iconSize)
 </script>
 
 <template>
@@ -30,11 +32,12 @@ const iconProp = (value: SMenuIcon) => value as any
       :field-names="fieldNames"
       :collapsed="props.collapsed"
       :in-sub-menu="props.inSubMenu"
+      :icon-size="iconSize"
     />
   </template>
   <el-sub-menu v-else-if="children.length" :index="index" :disabled="Boolean(read('disabled'))">
     <template #title>
-      <SIcon v-if="icon" :icon="iconProp(icon)" />
+      <SIcon v-if="icon" :icon="iconProp(icon)" :size="iconSize" />
       <span>{{ read('title') }}</span>
     </template>
     <SMenuNode
@@ -44,6 +47,7 @@ const iconProp = (value: SMenuIcon) => value as any
       :field-names="fieldNames"
       :collapsed="props.collapsed"
       in-sub-menu
+      :icon-size="iconSize"
     />
   </el-sub-menu>
   <el-tooltip
@@ -61,10 +65,10 @@ const iconProp = (value: SMenuIcon) => value as any
       </div>
     </template>
     <el-menu-item :index="index" :route="read('route') || read('path')" :disabled="Boolean(read('disabled'))">
-      <SIcon v-if="icon" :icon="iconProp(icon)" />
+      <SIcon v-if="icon" :icon="iconProp(icon)" :size="iconSize" />
       <span v-if="item.tag" class="s-menu-node__tag" :style="{ color: item.tagColor }">{{ item.tag }}</span>
       <span class="s-menu-node__title">{{ read('title') }}</span>
-      <SIcon v-if="suffixIcon" class="s-menu-node__suffix" :icon="iconProp(suffixIcon)" />
+      <SIcon v-if="suffixIcon" class="s-menu-node__suffix" :icon="iconProp(suffixIcon)" :size="iconSize" />
     </el-menu-item>
   </el-tooltip>
 </template>
