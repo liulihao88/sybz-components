@@ -1,6 +1,12 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
-import { createRenderContext, renderVNode, type RenderFunction, type RenderRecord } from '@/components/common/render'
+import {
+  createRenderContext,
+  renderVNode,
+  type RenderFunction,
+  type RenderRecord,
+  type RenderScope,
+} from '@/components/common/render'
 export default defineComponent({
   name: 'RenderComp',
   props: {
@@ -44,7 +50,7 @@ export default defineComponent({
         createRenderContext({
           item: props.item,
           row: props.row,
-          scope: props.scope,
+          scope: props.scope as RenderScope,
           value: props.value,
           column: props.column,
           action: props.action,

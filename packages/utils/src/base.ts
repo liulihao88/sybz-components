@@ -1,5 +1,5 @@
 import type { SybzComponentTheme } from './theme'
-import { unref, isRef, isVNode, toRaw, h, Fragment, nextTick } from 'vue'
+import { unref, isRef, isVNode, toRaw, h, Fragment, nextTick, normalizeClass } from 'vue'
 import type { AppContext, Component, StyleValue, VNode } from 'vue'
 import type { Ref } from 'vue'
 import { consola } from 'consola'
@@ -1726,7 +1726,7 @@ export function confirm(
     appContext: optionAppContext,
     ...messageBoxOptions
   } = options
-  const inputMessage = typeof message === 'function' ? message() : message
+  const inputMessage = typeof message === 'function' ? (message as () => VNode)() : message
   const semantic = resolveConfirmSemantic({
     variant,
     target,
@@ -1806,8 +1806,8 @@ function _escapeHtml(value: string | number) {
   })
 }
 
-function _mergeClassNames(...classNames: Array<string | undefined | null | false>) {
-  return classNames.filter(Boolean).join(' ')
+function _mergeClassNames(...classNames: Array<MessageOptions['customClass'] | null | false>) {
+  return normalizeClass(classNames.filter(Boolean))
 }
 
 function _resolveAppendTarget(appendTo?: ConfirmAppendTarget) {

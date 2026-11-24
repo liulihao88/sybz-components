@@ -170,7 +170,7 @@
     "dayjs": "^1.11.19",
     "dompurify": "^3.4.12",
     "echarts": "^5.5.1",
-    "element-plus": "^2.11.5",
+    "element-plus": "2.14.8",
     "escape-html": "^1.0.3",
     "eslint": "9.39.4",
     "eslint-config-prettier": "9.1.2",
@@ -213,7 +213,7 @@
     "vite-svg-loader": "^5.1.0",
     "vitepress": "1.0.0-rc.1",
     "vitest": "^1.6.1",
-    "vue": "^3.4.15",
+    "vue": "3.5.46",
     "vue-eslint-parser": "10.4.1",
     "vue-router": "^4.2.5",
     "vue-tsc": "^3.1.5",
@@ -235,8 +235,8 @@
   ],
   "peerDependencies": {
     "docx-preview": "^0.4.0",
-    "element-plus": ">=2.3.0 <3",
-    "vue": ">=3.4.0 <4",
+    "element-plus": "2.14.8",
+    "vue": ">=3.5.0 <4",
     "xlsx": "^0.18.5"
   },
   "peerDependenciesMeta": {
