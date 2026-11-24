@@ -6,7 +6,7 @@
 
 ### 基础用法
 
-`sybzVitePlugins()` 默认同时启用 Vue JSX/TSX、Tailwind CSS v4、代码定位、Git 提交信息、打包时间和构建版本检测；控制台源码定位 `consoleSource` 默认关闭，需要显式开启。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@vitejs/plugin-vue-jsx`、`@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
+`sybzVitePlugins()` 默认同时启用 Vue JSX/TSX、Tailwind CSS v4、生产环境移除 console、代码定位、Git 提交信息、打包时间和构建版本检测；控制台源码定位 `consoleSource` 默认关闭，需要显式开启。业务项目安装 `@sybz-components/utils` 后，不需要再单独安装或配置 `@vitejs/plugin-vue-jsx`、`@tailwindcss/vite`、`code-inspector-plugin`、`vite-plugin-html`。
 
 ```ts
 import { defineConfig } from 'vite'
@@ -38,6 +38,7 @@ ESLint、Prettier、lint-staged 和 Husky 分别运行在编辑器、命令行�
 | `gitCommitLog`      | `boolean \| GitCommitLogOptions`      | `false/true/配置对象` | `true`  | 是否启用 Git 信息，或传入插件配置。                                |
 | `buildTime`         | `boolean \| object`                   | `false/true/配置对象` | `true`  | 是否注入打包时间及其 meta 配置。                                   |
 | `consoleSource`     | `boolean \| SybzConsoleSourceOptions` | `false/true/配置对象` | `false` | 开发环境给 console 日志末尾追加可点击的源码位置；默认关闭。        |
+| `removeConsole`     | `boolean \| SybzRemoveConsoleOptions` | `false/true/配置对象` | `true`  | 生产构建移除 console 日志；默认开启，可配置保留项。                |
 | `versionCheck`      | `boolean \| SybzVersionCheckOptions`  | `false/true/配置对象` | `true`  | 构建产物检测新版本并提示刷新。                                     |
 | `compat`            | `boolean \| SybzCompatOptions`        | `false/true/配置对象` | `false` | 应用级 Chrome 60+ 兼容：target + legacy + PostCSS。                |
 
@@ -165,6 +166,44 @@ plugins: [
 plugins: [sybzVitePlugins({ consoleSource: true })]
 ```
 
+### 生产构建移除 console（`removeConsole` 默认 `true`）
+
+生产构建时把 `console.*` 替换为 `void 0`，再由压缩器清除；开发环境不处理。默认移除全部常用方法，需要保留的日志可以按方法、源码内容或注释标记排除。
+
+```ts
+sybzVitePlugins({
+  removeConsole: {
+    preserveMethods: ['error', 'warn'],
+    preserve: ['[build git info]'],
+  },
+})
+```
+
+单条日志保留，在调用上一行或同一行加标记：
+
+```js
+// @sybz-keep-console
+console.log('这条日志保留')
+```
+
+`gitCommitLog` 的 build git info 是 HTML 内联脚本，不经过 Vite 的 transform，因此不会被移除；默认 `preserve` 也包含 `[build git info]` 作为兜底。
+
+| 属性名称               | 类型                   | 默认值                 | 说明                                                   |
+| ---------------------- | ---------------------- | ---------------------- | ------------------------------------------------------ |
+| `methods`              | `string[]`             | 全部常用方法           | 需要移除的 console 方法。                              |
+| `preserveMethods`      | `string[]`             | `[]`                   | 不删除的方法，优先级高于 `methods`，例如 `['error']`。 |
+| `preserve`             | `(string \| RegExp)[]` | `['[build git info]']` | 保留调用源码中匹配这些内容的 console。                 |
+| `preserveComment`      | `string \| false`      | `@sybz-keep-console`   | 保留带此注释标记的调用；false 关闭标记识别。           |
+| `include`              | `RegExp \| string[]`   | -                      | 只处理匹配的文件。                                     |
+| `exclude`              | `RegExp \| string[]`   | -                      | 跳过匹配的文件。                                       |
+| `transformNodeModules` | `boolean`              | `false`                | 是否处理 node_modules。                                |
+
+不需要时关闭：
+
+```ts
+plugins: [sybzVitePlugins({ removeConsole: false })]
+```
+
 ### 构建版本更新检测（`versionCheck` 默认 `true`，仅生产构建）
 
 构建时会生成 `version.json` 并注入检测脚本。页面加载后 1 秒检查一次，之后每隔一段时间、窗口重新获得焦点或页面重新可见时检查；发现版本变化后会派发可取消的 `sybz:version-update` 事件，默认还会在右下角显示内置提示。组件库 lib 构建和 SSR 构建会自动跳过。内置提示不会修改全局样式；不想用这套自定义样式时，设置 `prompt: false` 并监听事件，用项目自己的 `confirm` / `$toast` 处理即可。
@@ -268,6 +307,9 @@ plugins: [sybzVitePlugins({ consoleSource: true })]
 
 // 关闭版本更新检测
 plugins: [sybzVitePlugins({ versionCheck: false })]
+
+// 保留生产环境的 console
+plugins: [sybzVitePlugins({ removeConsole: false })]
 ```
 
 :::utils-source sybzVitePlugins

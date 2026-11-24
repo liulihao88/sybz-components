@@ -26,9 +26,10 @@ export interface SybzConsoleSourceOptions {
   format?: (file: string, line: number) => string
 }
 
-interface ConsoleCall {
+export interface ConsoleCall {
   start: number
   paren: number
+  method: string
 }
 
 interface InjectContext {
@@ -47,7 +48,7 @@ const SCRIPT_RE = /<script\b[^>]*>([\s\S]*?)<\/script>/g
 const IDENTIFIER_RE = /[\w$]/
 const METHOD_RE = /[A-Za-z]/
 
-const normalizePath = (value: string) => value.replace(/\\/g, '/')
+export const normalizePath = (value: string) => value.replace(/\\/g, '/')
 
 const countNewlines = (value: string) => {
   let count = 0
@@ -57,7 +58,7 @@ const countNewlines = (value: string) => {
   return count
 }
 
-const createMatcher = (matcher: RegExp | string[] | undefined) => {
+export const createMatcher = (matcher: RegExp | string[] | undefined) => {
   if (!matcher) return undefined
   const matchers = Array.isArray(matcher) ? matcher : [matcher]
 
@@ -75,7 +76,7 @@ const createMatcher = (matcher: RegExp | string[] | undefined) => {
  * 找到代码里所有 `console.xxx(` 调用，跳过字符串、模板字符串和注释。
  * 这里不做完整 AST 解析，只服务于开发日志定位，控制台调用不会出现在正则字面量里。
  */
-const findConsoleCalls = (code: string, methods: Set<string>): ConsoleCall[] => {
+export const findConsoleCalls = (code: string, methods: Set<string>): ConsoleCall[] => {
   const calls: ConsoleCall[] = []
   type State = 'code' | 'single' | 'double' | 'template' | 'line-comment' | 'block-comment'
   let state: State = 'code'
@@ -136,12 +137,13 @@ const findConsoleCalls = (code: string, methods: Set<string>): ConsoleCall[] => 
     }
 
     if (!code.startsWith('console', index)) continue
-    if (index > 0 && IDENTIFIER_RE.test(code[index - 1])) continue
+    if (index > 0 && (IDENTIFIER_RE.test(code[index - 1]) || code[index - 1] === '.')) continue
 
     let cursor = index + 7
     while (/\s/.test(code[cursor] || '')) cursor++
-    if (code[cursor] !== '.') continue
-    cursor++
+    if (code[cursor] === '?' && code[cursor + 1] === '.') cursor += 2
+    else if (code[cursor] === '.') cursor++
+    else continue
     while (/\s/.test(code[cursor] || '')) cursor++
 
     const methodStart = cursor
@@ -152,14 +154,14 @@ const findConsoleCalls = (code: string, methods: Set<string>): ConsoleCall[] => 
     while (/\s/.test(code[cursor] || '')) cursor++
     if (code[cursor] !== '(') continue
 
-    calls.push({ start: index, paren: cursor })
+    calls.push({ start: index, paren: cursor, method })
     index = cursor
   }
 
   return calls
 }
 
-const findClosingParen = (code: string, openIndex: number) => {
+export const findClosingParen = (code: string, openIndex: number) => {
   type State = 'code' | 'single' | 'double' | 'template' | 'line-comment' | 'block-comment'
   let state: State = 'code'
   let depth = 0

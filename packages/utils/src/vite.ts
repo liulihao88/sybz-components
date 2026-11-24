@@ -8,10 +8,12 @@ import type { Plugin, PluginOption, UserConfig } from 'vite'
 import { gitCommitLog, type GitCommitLogOptions } from './gitCommitLog'
 import { createSybzCompatPostcssPlugins, SYBZ_COMPAT_BROWSERS } from './postcss'
 import { createConsoleSource, type SybzConsoleSourceOptions } from './vite-plugins/consoleSource'
+import { createRemoveConsole, type SybzRemoveConsoleOptions } from './vite-plugins/removeConsole'
 import { createVersionCheck, type SybzVersionCheckOptions } from './vite-plugins/versionCheck'
 
 export type { SybzConsoleSourceOptions, SybzVersionCheckOptions }
 export type { SybzConsoleMethod } from './vite-plugins/consoleSource'
+export type { SybzRemoveConsoleOptions } from './vite-plugins/removeConsole'
 export type { SybzVersionCheckPosition } from './vite-plugins/versionCheck'
 
 declare global {
@@ -62,6 +64,8 @@ export interface SybzVitePluginsOptions {
   buildTime?: boolean | { metaName?: string }
   /** 控制台日志定位源码；默认关闭，设为 true 或配置对象时启用。 */
   consoleSource?: boolean | SybzConsoleSourceOptions
+  /** 生产构建移除 console；默认开启，设为 false 时保留。 */
+  removeConsole?: boolean | SybzRemoveConsoleOptions
   /** 构建产物版本检测；默认启用，设为 false 时关闭。 */
   versionCheck?: boolean | SybzVersionCheckOptions
   /**
@@ -239,6 +243,10 @@ export const sybzVitePlugins = (options: SybzVitePluginsOptions = {}): PluginOpt
     const inspectorOptions = typeof options.codeInspector === 'object' ? options.codeInspector : undefined
     // 复用 codeInspector 的编辑器配置，控制台跳转和 DOM 定位保持一致。
     plugins.push(createConsoleSource({ editor: inspectorOptions?.editor, ...consoleSourceOptions }))
+  }
+
+  if (options.removeConsole !== false) {
+    plugins.push(createRemoveConsole(typeof options.removeConsole === 'object' ? options.removeConsole : {}))
   }
 
   if (options.codeInspector !== false) {
