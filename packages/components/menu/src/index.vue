@@ -41,7 +41,7 @@ const emit = defineEmits<{
   'update:collapse': [collapse: boolean]
   select: [...args: any[]]
 }>()
-defineSlots<{ header?: () => any; append?: () => any; footer?: () => any }>()
+defineSlots<{ default?: () => any; header?: () => any; append?: () => any; footer?: () => any }>()
 
 const attrs = useAttrs()
 const iconProp = (value: SMenuIcon) => value as any
@@ -411,6 +411,9 @@ const handleSelect = (...args: any[]) => {
           :icon-size="menuIconSize"
         />
       </el-menu>
+      <div v-if="$slots.default" class="s-menu__content">
+        <slot />
+      </div>
     </div>
     <footer v-if="$slots.footer || mergedProps.footer" class="s-menu__footer">
       <slot name="footer">
@@ -570,6 +573,7 @@ const handleSelect = (...args: any[]) => {
   &__header,
   &__footer {
     flex: none;
+    overflow: hidden;
     padding: 16px;
   }
   &__header {
@@ -589,6 +593,16 @@ const handleSelect = (...args: any[]) => {
     min-height: 0;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  &__content {
+    box-sizing: border-box;
+    padding: 0 var(--s-menu-list-padding) var(--s-menu-list-padding);
+  }
+  // 收起和展开过程中只显示菜单图标，自定义内容等展开完成后再出现。
+  &.is-collapse &__content,
+  &.is-expanding &__content {
+    display: none;
   }
 
   &__list {

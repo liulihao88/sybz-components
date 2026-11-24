@@ -40,6 +40,12 @@ menu/autoHeight
 menu/append
 :::
 
+### 菜单下方自定义内容（`default` 插槽，默认无内容）
+
+:::demo 顶部 `options` 只放导航项，项目/最近列表放默认插槽，头部用 `#header` + `#append`，底部账号栏用 `#footer`；内容随菜单区域滚动，头尾固定。基础写法：`<SMenu :options="menus"><template #default>...</template></SMenu>`。
+menu/custom
+:::
+
 ### 尺寸配置（`size` 可选值 `small / default / large` 或配置对象，默认值 `default`）
 
 :::demo `size` 可传预设，也可传对象精细设置 `fontSize / height / width / lineHeight / padding / levelPadding / margin / iconSize / listPadding`。基础写法：`<SMenu :size="size" :options="menus" />`。属性：`size` 可选值 `small / default / large` 或配置对象，默认值 `default`。
@@ -91,11 +97,14 @@ menu/other
 
 ### 插槽
 
-| 插槽名   | 说明                     |
-| -------- | ------------------------ |
-| `header` | 菜单顶部品牌或自定义内容 |
-| `append` | 在头部内容后追加元素     |
-| `footer` | 菜单底部操作或自定义内容 |
+| 插槽名    | 说明                                         |
+| --------- | -------------------------------------------- |
+| `default` | 菜单列表下方的自定义内容，随菜单区域一起滚动 |
+| `header`  | 菜单顶部品牌或自定义内容                     |
+| `append`  | 在头部内容后追加元素                         |
+| `footer`  | 菜单底部操作或自定义内容                     |
+
+默认插槽内容与菜单项共用滚动区域，适合放项目、最近记录等；菜单收起时该区域隐藏。`autoHeight` 只压缩菜单项，自定义内容仍正常滚动。自定义 `#header` / `#footer` 内容不会自动折叠，需在收起状态隐藏文字和按钮，可参考示例中的 `.s-menu.is-collapse` / `.is-expanding` 样式。
 
 ### 宽高布尔写法
 

@@ -860,8 +860,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
       typeName: 'SMenuProps',
       description:
-        's-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。size 支持 small / default / large 预设或配置对象，可统一设置字号、宽高、行高、内边距、图标和列表内边距；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。',
-      slots: ['header', 'append', 'footer'],
+        's-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），默认插槽可在菜单列表下方放项目、最近记录等自定义内容，以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。size 支持 small / default / large 预设或配置对象，可统一设置字号、宽高、行高、内边距、图标和列表内边距；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。',
+      slots: ['default', 'header', 'append', 'footer'],
       instanceMembers: ["$emit: (event: 'update:modelValue' | 'update:collapse' | 'select', ...args: any[]) => void"],
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/components/menu/src/types.ts'),
