@@ -18,7 +18,7 @@ const iptValue = ref('')
       </s-input>
       <s-input v-model="iptValue" title="名字" width="500" placeholder="请输入名字" size="default"></s-input>
       <s-input v-model="iptValue" title="密码框" type="password"></s-input>
-      <s-input v-model="iptValue" type="textarea"></s-input>
+      <s-input v-model="iptValue" type="textarea" :autosize="{ minRows: 2, maxRows: 8 }"></s-input>
     </sWrapper>
   </div>
 </template>
