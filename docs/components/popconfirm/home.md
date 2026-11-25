@@ -36,7 +36,7 @@ popconfirm/slot
 
 ### 设置宽高（width / w 默认值：普通态 200、语义态 320；height / h 默认值：未设置）
 
-:::demo 切换宽高属性及取值，观察弹层尺寸。基础写法：`<s-popconfirm width="240" height="180"><s-button>打开确认弹框</s-button></s-popconfirm>`；`w`、`h` 分别是简写。属性：`width / w`、`height / h` 均可传数字、CSS 长度或布尔值；数字自动补 `px`，裸写或 `true` 表示 `100%`，`false` 表示不设置。宽度默认值为普通态 `200`、语义态 `320`，高度默认不设置。
+:::demo 切换弹层尺寸和内容长度，观察正文滚动与底部按钮。`width / w` 默认普通态 `200`、语义态 `320`；`height / h` 与 `minw` 默认未设置。`minw` 可选未设置 / `240px` / `320px`，数字自动补 `px`。
 popconfirm/other
 :::
 

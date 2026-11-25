@@ -694,7 +694,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'popover',
       description:
-        's-popconfirm 确认弹层，title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。',
+        's-popconfirm 确认弹层，minw 设置弹层最小宽度；固定高度或内容过长时正文滚动，footer 固定在弹层底部；title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。',
       slots: ['default', 'title', 'content', 'footer', 'target'],
       hoverProps: componentHoverProps('SPopoverConfirmSelfProps', [
         'SDialogVariant',

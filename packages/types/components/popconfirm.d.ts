@@ -12,7 +12,7 @@ type ElPopoverInstance = InstanceType<typeof ElPopover>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
  *
- * s-popconfirm 确认弹层，title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
+ * s-popconfirm 确认弹层，minw 设置弹层最小宽度；固定高度或内容过长时正文滚动，footer 固定在弹层底部；title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Popover 的公开属性。
  */
@@ -29,6 +29,8 @@ export type SPopconfirmComponent = {
       /** 是否按 HTML 字符串渲染，默认 true，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
       title?: string
+      /** 弹层最小宽度，数字自动补 px；默认未设置 */
+      minw?: string | number
       content?: string
       reConfirm?: boolean
       disabled?: boolean
@@ -50,6 +52,7 @@ export type SPopconfirmComponent = {
       | 'title'
       | 'width'
       | 'w'
+      | 'minw'
       | 'height'
       | 'h'
       | 'content'

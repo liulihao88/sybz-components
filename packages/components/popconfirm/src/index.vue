@@ -70,6 +70,7 @@ interface PopconfirmProps {
   title?: string
   width?: string | number | boolean
   w?: string | number | boolean
+  minw?: string | number
   height?: string | number | boolean
   h?: string | number | boolean
   content?: string
@@ -169,10 +170,12 @@ const popconfirmWidth = computed(() => {
 const popperStyle = computed(() => {
   const original = attrs['popper-style'] ?? attrs.popperStyle
   const height = mergedProps.value.height
+  const minWidth = mergedProps.value.minw
   return normalizeStyle([
     original,
     {
       height: height === undefined || height === '' ? undefined : processWidth(height, true),
+      minWidth: minWidth === undefined || minWidth === '' ? undefined : processWidth(minWidth, true),
     },
   ])
 })
@@ -200,52 +203,58 @@ defineExpose({
     @show="handleShow"
     @hide="removeDocumentListeners"
   >
-    <slot name="title">
-      <template v-if="hasTitle">
-        <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__title" :html="safeTitle" />
-        <div v-else class="s-popconfirm__title" v-text="safeTitle"></div>
-      </template>
-    </slot>
-    <slot name="content">
-      <template v-if="mergedProps.content">
-        <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__content" :html="safeContent" />
-        <div v-else class="s-popconfirm__content" v-text="safeContent"></div>
-      </template>
-      <div v-else-if="showSemanticContent" class="s-popconfirm__content">
-        <template v-if="confirmSemantic.hasTarget">
-          确认要删除
-          <STag class="s-popconfirm__target" type="danger" :theme="popconfirmButtonTheme">
-            <slot name="target">{{ confirmSemantic.target }}</slot>
-          </STag>
-          吗？删除后不可恢复。
+    <div v-if="hasTitle || $slots.title" class="s-popconfirm__header">
+      <slot name="title">
+        <template v-if="hasTitle">
+          <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__title" :html="safeTitle" />
+          <div v-else class="s-popconfirm__title" v-text="safeTitle"></div>
         </template>
-        <template v-else>{{ confirmSemantic.defaultMessage }}</template>
-      </div>
-    </slot>
-    <slot name="footer">
-      <div class="s-popconfirm__footer">
-        <SButton
-          class="s-popconfirm__cancel-button"
-          size="small"
-          :type="resolvedCancelButtonType"
-          :text="cancelButtonIsText"
-          :theme="popconfirmButtonTheme"
-          @click="cancel"
-        >
-          {{ mergedProps.cancelButtonText }}
-        </SButton>
-        <SButton
-          class="s-popconfirm__confirm-button"
-          size="small"
-          :type="resolvedConfirmButtonType"
-          :text="confirmButtonIsText"
-          :theme="popconfirmButtonTheme"
-          @click="confirm"
-        >
-          {{ confirmSemantic.confirmButtonText }}
-        </SButton>
-      </div>
-    </slot>
+      </slot>
+    </div>
+    <div class="s-popconfirm__body">
+      <slot name="content">
+        <template v-if="mergedProps.content">
+          <SafeHtml v-if="htmlStringEnabled" tag="div" class="s-popconfirm__content" :html="safeContent" />
+          <div v-else class="s-popconfirm__content" v-text="safeContent"></div>
+        </template>
+        <div v-else-if="showSemanticContent" class="s-popconfirm__content">
+          <template v-if="confirmSemantic.hasTarget">
+            确认要删除
+            <STag class="s-popconfirm__target" type="danger" :theme="popconfirmButtonTheme">
+              <slot name="target">{{ confirmSemantic.target }}</slot>
+            </STag>
+            吗？删除后不可恢复。
+          </template>
+          <template v-else>{{ confirmSemantic.defaultMessage }}</template>
+        </div>
+      </slot>
+    </div>
+    <div class="s-popconfirm__actions">
+      <slot name="footer">
+        <div class="s-popconfirm__footer">
+          <SButton
+            class="s-popconfirm__cancel-button"
+            size="small"
+            :type="resolvedCancelButtonType"
+            :text="cancelButtonIsText"
+            :theme="popconfirmButtonTheme"
+            @click="cancel"
+          >
+            {{ mergedProps.cancelButtonText }}
+          </SButton>
+          <SButton
+            class="s-popconfirm__confirm-button"
+            size="small"
+            :type="resolvedConfirmButtonType"
+            :text="confirmButtonIsText"
+            :theme="popconfirmButtonTheme"
+            @click="confirm"
+          >
+            {{ confirmSemantic.confirmButtonText }}
+          </SButton>
+        </div>
+      </slot>
+    </div>
     <template #reference>
       <slot></slot>
     </template>
@@ -267,6 +276,27 @@ defineExpose({
 </template>
 
 <style scoped lang="scss">
+:global(.s-popconfirm__popper) {
+  display: flex;
+  max-height: calc(100vh - 32px);
+  flex-direction: column;
+}
+
+.s-popconfirm__header,
+.s-popconfirm__actions {
+  flex: none;
+}
+
+.s-popconfirm__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.s-popconfirm__actions {
+  margin-top: auto;
+}
+
 .s-popconfirm__title {
   margin: 0 0 8px;
   color: var(--el-text-color-primary);

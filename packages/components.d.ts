@@ -349,13 +349,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
      *
-     * s-popconfirm 确认弹层，title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
+     * s-popconfirm 确认弹层，minw 设置弹层最小宽度；固定高度或内容过长时正文滚动，footer 固定在弹层底部；title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
      */
     SPopconfirm: (typeof import('./types/components/popconfirm'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/popconfirm/home.html | 查看文档}
      *
-     * s-popconfirm 确认弹层，title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
+     * s-popconfirm 确认弹层，minw 设置弹层最小宽度；固定高度或内容过长时正文滚动，footer 固定在弹层底部；title 和 content 默认解析白名单 HTML（dangerouslyUseHTMLString 默认 true）；设为 false 时按纯文本渲染。
      */
     's-popconfirm': (typeof import('./types/components/popconfirm'))['default']
     /**

@@ -1012,6 +1012,8 @@ export interface SPopoverConfirmSelfProps extends SHtmlStringProps {
   title?: string
   width?: string | number | boolean
   w?: string | number | boolean
+  /** 弹层最小宽度，数字自动补 px；默认未设置 */
+  minw?: string | number
   /** 弹层高度，数字自动补 px */
   height?: string | number | boolean
   /** height 的简写 */
