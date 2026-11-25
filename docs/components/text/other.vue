@@ -15,6 +15,7 @@ const fontWeight = ref('')
 const decoration = ref('none')
 const unselectable = ref(false)
 const disabled = ref(false)
+const loading = ref(false)
 const link = ref(false)
 const clickCount = ref(0)
 const dangerouslyUseHTMLString = ref(true)
@@ -106,6 +107,7 @@ const richText =
     />
     <s-radio v-model="unselectable" title="unselectable（默认 false）" type="boolean" />
     <s-radio v-model="disabled" title="disabled（true / false，默认 false）" type="boolean" />
+    <s-radio v-model="loading" title="loading（true / false，默认 false；斜向流光）" type="boolean" />
     <s-radio v-model="link" title="link（true / false，默认 false）" type="boolean" />
     <s-radio
       v-model="dangerouslyUseHTMLString"
@@ -125,6 +127,7 @@ const richText =
       :mark="decoration === 'mark'"
       :unselectable="unselectable"
       :disabled="disabled"
+      :loading="loading"
       :link="link"
       :dangerouslyUseHTMLString="dangerouslyUseHTMLString"
       w="280px"
@@ -135,4 +138,6 @@ const richText =
     </s-text>
     <span>点击次数：{{ clickCount }}（disabled 为 true 时不增加）</span>
   </s-flex>
+
+  <s-text>我是link</s-text>
 </template>

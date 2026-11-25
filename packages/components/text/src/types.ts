@@ -27,6 +27,8 @@ export interface STextProps {
   unselectable?: boolean
   /** 禁用点击及链接跳转；默认 false */
   disabled?: boolean
+  /** 加载中的文字流光；默认 false，高光从左到右斜向扫过，子组件保持自身颜色；优先于 gradient，disabled 时不播放 */
+  loading?: boolean
   /** 使用链接文字样式；默认 false，跳转仍由原生 href 和 component 控制 */
   link?: boolean
   /** 将默认插槽中的字符串按白名单解析，支持任意已全局注册的组件（如 s-text、s-tag、s-button、el-button）；默认 true */

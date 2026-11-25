@@ -929,7 +929,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       typeName: 'STextProps',
       tagName: 's-text',
       description:
-        's-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；disabled 禁止点击，link 使用链接文字样式，默认均为 false。dangerouslyUseHTMLString 默认 true，可解析插槽字符串中的白名单 HTML 和已全局注册的组件标签。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。',
+        's-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮、loading 等待流光和 code 代码片段；disabled 禁止点击，loading 高光从左到右斜向扫过，link 使用链接文字样式，默认均为 false。dangerouslyUseHTMLString 默认 true，可解析插槽字符串中的白名单 HTML 和已全局注册的组件标签。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。',
       slots: ['default'],
       hoverProps: {
         sourcePath: resolve(rootDir, 'packages/components/text/src/types.ts'),

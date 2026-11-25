@@ -8,6 +8,7 @@
         's-text--block': needsInlineBlock,
         's-text--clamp': clamped,
         's-text--gradient': hasGradient,
+        's-text--loading': isLoading,
         's-text--unselectable': mergedProps.unselectable,
         's-text--code': isCode,
         's-text--disabled': mergedProps.disabled,
@@ -19,6 +20,7 @@
     :type="codeTypeAttr"
     :style="[textStyle, style, gradientStyle, disabledStyle]"
     :aria-disabled="mergedProps.disabled ? 'true' : undefined"
+    :aria-busy="isLoading ? 'true' : undefined"
     :tabindex="mergedProps.disabled ? -1 : undefined"
     @click.capture="blockDisabledInteraction"
     @keydown.capture="blockDisabledInteraction"
@@ -48,6 +50,7 @@ const props = withDefaults(defineProps<STextProps>(), {
   code: false,
   unselectable: false,
   disabled: false,
+  loading: false,
   link: false,
   dangerouslyUseHTMLString: true,
 })
@@ -113,6 +116,8 @@ const needsInlineBlock = computed(
   () => hasBlockOnlyStyleProps.value && INLINE_TAGS.has(rootTag.value) && !clamped.value,
 )
 const hasGradient = computed(() => Boolean(mergedProps.value.gradient?.trim()))
+/** 禁用时不再播放流光，disabled 的配色和交互优先。 */
+const isLoading = computed(() => mergedProps.value.loading && !mergedProps.value.disabled)
 const disabledStyle = computed(() =>
   mergedProps.value.disabled ? { color: 'var(--el-disabled-text-color)' } : undefined,
 )
@@ -123,7 +128,7 @@ function blockDisabledInteraction(event: MouseEvent | KeyboardEvent) {
   event.stopImmediatePropagation()
 }
 const gradientStyle = computed(() =>
-  hasGradient.value
+  hasGradient.value && !isLoading.value
     ? { backgroundImage: mergedProps.value.gradient, color: 'transparent', WebkitTextFillColor: 'transparent' }
     : undefined,
 )
@@ -158,6 +163,45 @@ const textStyle = computed(() => {
 .s-text--gradient {
   background-clip: text;
   -webkit-background-clip: text;
+}
+
+.s-text--loading {
+  background-image: linear-gradient(
+    100deg,
+    currentColor 0%,
+    currentColor 35%,
+    var(--s-text-loading-highlight, rgba(255, 255, 255, 0.85)) 50%,
+    currentColor 65%,
+    currentColor 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: s-text-loading-shimmer 1.8s linear infinite;
+}
+
+/* -webkit-text-fill-color 会继承，子组件（如 s-button）的文字需恢复自身颜色 */
+.s-text--loading :where(*) {
+  -webkit-text-fill-color: currentColor;
+}
+
+@keyframes s-text-loading-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s-text--loading {
+    animation: none;
+  }
 }
 
 .s-text--block {

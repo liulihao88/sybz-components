@@ -1,6 +1,6 @@
 # Text 文字
 
-`s-text` 用于三档常用文字色、状态色和文字排版，也提供 `mark` 高亮与 `code` 代码片段两种行内格式。默认渲染 `span`，继承父元素字号；可以通过 `component` 改为语义标签，`code` 开启且未指定根元素时默认渲染 `code`。文字层级、语义色和 `type` 使用当前主题 token，CSS 标准颜色名按原色显示；全局设置主题时自动继承，也可用 `theme` 单独覆盖。
+`s-text` 用于三档常用文字色、状态色和文字排版，也提供 `mark` 高亮、`loading` 等待流光和 `code` 代码片段等行内能力。默认渲染 `span`，继承父元素字号；可以通过 `component` 改为语义标签，`code` 开启且未指定根元素时默认渲染 `code`。文字层级、语义色和 `type` 使用当前主题 token，CSS 标准颜色名按原色显示；全局设置主题时自动继承，也可用 `theme` 单独覆盖。
 
 默认的 `span` 是行内元素，`mt / mb / pt / pb / p / w / h` 等只在块级元素上生效的样式简写会被浏览器忽略；`s-text` 检测到这类属性时会自动补 `display: inline-block` 让它们生效，不需要再额外传 `component="div"`。
 
@@ -22,7 +22,7 @@ text/base
 
 基础写法：`<s-text type="danger" :line-clamp="2">文字</s-text>`；渐变文字可写 `<s-text gradient="linear-gradient(90deg, red, blue)">文字</s-text>`。`gradient` 默认不设置，优先于 `c / color / type`，也支持 `var(--my-gradient)`。`color` 与 `c` 使用同一套常用文字色名称，也接受任意 CSS 颜色；`primary / success / warning / danger / error / info` 是主题语义色，随 `theme` 切换；`blue / red / green / yellow / white / black` 是 CSS 标准色，不随主题变化；`c` 优先于 `color`，`color` 优先于 `type`；`lineClamp=0` 不截断，`1 / 2 / 3` 分别显示最多一、二、三行。`lineClamp=1` 即单行省略。浏览器原生 `title` 可用于显示完整内容。
 
-:::demo 交互切换同一段文字的渐变、类型、文字层级、根元素、行数、鼠标指针、装饰、选择能力、禁用态及链接样式，以及 `mark` 高亮、`code` 代码片段和富文本解析。`cursor` 默认不设置；`<s-text cursor>` 等同于 `cursor="pointer"`，`:cursor="false"` 不设置，也可传 `auto / default / help / not-allowed` 等 CSS 值。`fs / fw / td` 分别设置字号、字重和文字装饰，默认均不设置；`italic / mark / code / unselectable / disabled / link` 默认均为 `false`。`disabled` 可选 `true / false`，开启后不响应点击或链接跳转；`link` 可选 `true / false`，开启后使用链接文字的悬浮效果，跳转仍需 `component="a"` 和 `href`。`dangerouslyUseHTMLString` 可选 `true / false`，默认 `true`，会解析插槽字符串中的 `<s-tag>`、`<br>` 等白名单标签，以及任意已全局注册的组件标签（如 `<s-button>`、`<el-button>`），设为 `false` 时按纯文本显示。`code` 开启后根元素默认变为 `code`，复用代码片段的等宽字体、边框和底色，`type` 切换 `primary / success / warning / danger / error / info` 语义配色；`mark` 默认黄色高亮底并继承文字色，`c / bg / fs / p / br` 等样式简写优先于默认样式。
+:::demo 交互切换同一段文字的渐变、类型、文字层级、根元素、行数、鼠标指针、装饰、选择能力、禁用态、加载流光及链接样式，以及 `mark` 高亮、`code` 代码片段和富文本解析。`cursor` 默认不设置；`<s-text cursor>` 等同于 `cursor="pointer"`，`:cursor="false"` 不设置，也可传 `auto / default / help / not-allowed` 等 CSS 值。`fs / fw / td` 分别设置字号、字重和文字装饰，默认均不设置；`italic / mark / code / unselectable / disabled / loading / link` 默认均为 `false`。`loading` 可选 `true / false`，开启后高光从左到右斜向扫过，子组件（如 `s-button`）保持自身颜色；优先于 `gradient`，`disabled` 时不播放。`disabled` 可选 `true / false`，开启后不响应点击或链接跳转；`link` 可选 `true / false`，开启后使用链接文字的悬浮效果，跳转仍需 `component="a"` 和 `href`。`dangerouslyUseHTMLString` 可选 `true / false`，默认 `true`，会解析插槽字符串中的 `<s-tag>`、`<br>` 等白名单标签，以及任意已全局注册的组件标签（如 `<s-button>`、`<el-button>`），设为 `false` 时按纯文本显示。`code` 开启后根元素默认变为 `code`，复用代码片段的等宽字体、边框和底色，`type` 切换 `primary / success / warning / danger / error / info` 语义配色；`mark` 默认黄色高亮底并继承文字色，`c / bg / fs / p / br` 等样式简写优先于默认样式。
 text/other
 :::
 
@@ -41,6 +41,7 @@ text/other
 | `code`                     | boolean                                                                                                                                                                              | `false`   | 代码片段；默认根元素变为 `code`，`type` 控制语义配色                                                                                       |
 | `unselectable`             | boolean                                                                                                                                                                              | `false`   | 禁止选择                                                                                                                                   |
 | `disabled`                 | `true / false`                                                                                                                                                                       | `false`   | 禁止点击及链接跳转，并显示禁用文字色                                                                                                       |
+| `loading`                  | `true / false`                                                                                                                                                                       | `false`   | 加载流光；仅作用于文字，子组件保持自身颜色；优先于 `gradient`，`disabled` 时不播放                                                         |
 | `link`                     | `true / false`                                                                                                                                                                       | `false`   | 使用链接文字悬浮样式；不会自动设置 `href`                                                                                                  |
 | `dangerouslyUseHTMLString` | `true / false`                                                                                                                                                                       | `true`    | 默认解析插槽中的白名单 HTML 字符串和任意已全局注册的组件标签（如 `s-text`、`s-tag`、`s-button`、`el-button`）；设为 `false` 时按纯文本输出 |
 

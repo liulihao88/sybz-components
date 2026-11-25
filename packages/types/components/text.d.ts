@@ -7,7 +7,7 @@ import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/text/home.html | 查看文档}
  *
- * s-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮和 code 代码片段；disabled 禁止点击，link 使用链接文字样式，默认均为 false。dangerouslyUseHTMLString 默认 true，可解析插槽字符串中的白名单 HTML 和已全局注册的组件标签。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。
+ * s-text 文字组件，支持语义色、常用颜色、文字渐变、行数省略、根元素，以及 mark 高亮、loading 等待流光和 code 代码片段；disabled 禁止点击，loading 高光从左到右斜向扫过，link 使用链接文字样式，默认均为 false。dangerouslyUseHTMLString 默认 true，可解析插槽字符串中的白名单 HTML 和已全局注册的组件标签。可通过 fs/fw/td 等样式简写设置排版；span 等行内标签在使用纵向间距或宽高简写时会自动切换为 inline-block 显示。
  *
  * 先提示 sybz 自身属性。
  */
@@ -35,6 +35,8 @@ export type STextComponent = {
       unselectable?: boolean
       /** 禁用点击及链接跳转；默认 false */
       disabled?: boolean
+      /** 加载中的文字流光；默认 false，高光从左到右斜向扫过，子组件保持自身颜色；优先于 gradient，disabled 时不播放 */
+      loading?: boolean
       /** 使用链接文字样式；默认 false，跳转仍由原生 href 和 component 控制 */
       link?: boolean
       /** 将默认插槽中的字符串按白名单解析，支持任意已全局注册的组件（如 s-text、s-tag、s-button、el-button）；默认 true */
