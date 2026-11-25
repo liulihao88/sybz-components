@@ -12,7 +12,7 @@
           :value="item[mergedProps.value!]"
           :border="mergedProps.border"
           :disabled="getOptionDisabled(item, index)"
-          :class="item.class"
+          :class="[item.class, { 's-radio-button--empty': isEmptyButtonLabel(item, index) }]"
           :style="getOptionStyle(item)"
           v-bind="getOptionAttrs(item)"
         >
@@ -169,6 +169,13 @@ const getOptionLabel = (option: RadioItem, index: number) => {
     value: option[mergedProps.value.value as keyof RadioItem],
   })
 }
+const isEmptyButtonLabel = (option: RadioItem, index: number) => {
+  if (mergedProps.value.variant !== 'button') return false
+  if ('slot' in option && option.slot) return false
+
+  const label = getOptionLabel(option, index)
+  return label === null || label === undefined || String(label).trim() === ''
+}
 const getTypeColors = (type: keyof typeof radioTypeColors) => {
   if (mergedProps.value.theme === 'chenghua') {
     return {
@@ -256,6 +263,11 @@ const radioClass = computed(() => {
 
   :deep(.el-radio-button) {
     flex: none;
+  }
+
+  // 空字符串选项没有文本行盒，补一个零宽字符让按钮高度与其它按钮一致
+  :deep(.el-radio-button.s-radio-button--empty .el-radio-button__inner)::after {
+    content: '\200b';
   }
 
   :deep(.el-radio-button:not(.is-disabled, .is-active) .el-radio-button__inner:hover) {
