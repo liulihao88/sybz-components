@@ -272,7 +272,7 @@ export const resolveStyleProps = (
     const css = STYLE_PROP_MAP[key]
     const targets: string[] = typeof css === 'string' ? [css] : [...css]
     const resolvedValue =
-      value === true && SPACING_PROP_KEYS.has(key)
+      value === true && (SPACING_PROP_KEYS.has(key) || key === 'br')
         ? 'small'
         : value === true && (key === 'w' || key === 'h')
           ? '100%'
@@ -327,7 +327,7 @@ export const styleProps = Object.fromEntries(
     key,
     {
       type:
-        SPACING_PROP_KEYS.has(key) || key === 'w' || key === 'h'
+        SPACING_PROP_KEYS.has(key) || key === 'br' || key === 'w' || key === 'h'
           ? [Boolean, String, Number]
           : key === 'cursor'
             ? [Boolean, String]

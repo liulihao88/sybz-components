@@ -155,6 +155,7 @@ const BOOLEAN_STYLE_PROP_KEYS = new Set([
   'w',
   'h',
   'cursor',
+  'br',
 ])
 
 const normalizeName = (name: string) => name.replace(/[-_]/g, '').toLowerCase()

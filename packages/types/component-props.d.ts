@@ -103,7 +103,8 @@ export interface SybzStyleProps {
   bdl?: string
   bdt?: string
   bdb?: string
-  br?: SybzLength
+  /** 圆角允许裸写；`true` 等价于 `small`（8px），`false` 不设置。 */
+  br?: SybzLength | boolean
 }
 
 /** 组件自身的宽高属性保留精确类型，在组件悬浮概览中折叠显示。 */
