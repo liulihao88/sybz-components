@@ -7,6 +7,8 @@ type ElSwitchInstance = InstanceType<typeof ElSwitch>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
  *
+ * s-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题。
+ *
  * 先提示 sybz 自身属性，再提示 Element Plus Switch 的公开属性。
  */
 export type SSwitchPublicProps = SSwitchSelfProps & Omit<ElSwitchInstance['$props'], keyof SSwitchSelfProps>
@@ -18,8 +20,12 @@ export type SSwitchComponent = {
   install: (app: import('vue').App) => void
   new <SSwitch文档 = 'https://liulihao88.github.io/sybz-components/components/switch/home.html'>(): {
     $props: {
+      /** 开关左侧标题，默认无标题 */
+      title?: string
+      /** 标题文字的自定义样式 */
+      compTitleStyle?: SybzRecord
       beforeChange?: (...args: any[]) => any
-    } & Omit<ElSwitchInstance['$props'], 'theme' | 'beforeChange' | 'width' | 'w'> &
+    } & Omit<ElSwitchInstance['$props'], 'title' | 'compTitleStyle' | 'theme' | 'beforeChange' | 'width' | 'w'> &
       SybzStyleProps &
       SybzDimensionProps<SSwitchSelfProps> &
       SybzThemeProps<SSwitchSelfProps>

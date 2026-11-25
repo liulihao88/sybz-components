@@ -1,6 +1,6 @@
 # CompTitle 组件标题前缀
 
-`s-comp-title` 是表单类组件左侧标题前缀，用来和 `s-input`、`s-select`、`s-input-number` 等输入控件拼接展示。单独使用时会保持和 Element Plus 输入框一致的高度。
+`s-comp-title` 用于输入框前缀，也可作为单选、多选和开关旁的标题。
 
 ## Hidden Title {.md-hidden}
 
@@ -16,6 +16,12 @@
 compTitle/base
 :::
 
+### 其他用法
+
+::: other
+compTitle/other
+:::
+
 ### 主题（theme 默认值：default）
 
 :::demo
@@ -27,6 +33,7 @@ compTitle/theme
 |      属性名      | 说明                                                    | 类型                                            | 默认值    |
 | :--------------: | ------------------------------------------------------- | ----------------------------------------------- | --------- |
 |     `title`      | 标题文案；为空时不渲染组件                              | string                                          | `''`      |
+|      `type`      | 标题样式：`input` 输入框前缀，`label` 普通控件标签      | `input` / `label`                               | `input`   |
 | `compTitleStyle` | 标题容器样式，支持 `width` 并会经过 `processWidth` 处理 | object                                          | `{}`      |
 |     `theme`      | 主题样式                                                | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |
 

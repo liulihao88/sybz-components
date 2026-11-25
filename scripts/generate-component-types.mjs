@@ -292,7 +292,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SCheckboxProps',
       description:
-        's-checkbox 多选组件，支持左侧 title、全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。',
+        's-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。',
       exportedComponentTypeName: 'SCheckboxComponent',
       publicPropsTypeName: 'SCheckboxPublicProps',
       useDefaultExportForGlobal: true,
@@ -322,6 +322,7 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SCompTitleProps',
+      description: 's-comp-title 标题，type="input" 为输入框前缀，type="label" 为单选、多选和开关旁的简洁标签。',
       hoverProps: componentHoverProps('SCompTitleProps', ['SCompTitleProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],
@@ -742,7 +743,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SRadioProps',
       description:
-        's-radio 单选组件，普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。',
+        's-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。',
       exportedComponentTypeName: 'SRadioComponent',
       publicPropsTypeName: 'SRadioPublicProps',
       useDefaultExportForGlobal: true,
@@ -824,7 +825,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SSwitchPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'switch',
-      hoverProps: componentHoverProps('SSwitchSelfProps', ['SSwitchSelfProps', 'SybzComponentTheme']),
+      description: 's-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题。',
+      hoverProps: componentHoverProps('SSwitchSelfProps', ['SSwitchSelfProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],
   [

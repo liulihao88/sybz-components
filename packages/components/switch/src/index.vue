@@ -2,14 +2,18 @@
 import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, ref } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import SCompTitle from '@/components/compTitle/src/index.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 
 defineOptions({
   name: 'SSwitch',
+  inheritAttrs: false,
 })
 
 interface SwitchProps {
+  title?: string
+  compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme
   beforeChange?: (...args: any[]) => any
   width?: string | number | boolean
@@ -17,6 +21,8 @@ interface SwitchProps {
 }
 
 const props = withDefaults(defineProps<SwitchProps>(), {
+  title: '',
+  compTitleStyle: undefined,
   theme: 'default',
   beforeChange: undefined,
   width: '',
@@ -55,17 +61,26 @@ const switchClass = computed(() => ({
 </script>
 
 <template>
-  <el-switch
-    v-bind="{ 'inline-prompt': true, disabled: mergedProps.disabled, ...$attrs }"
-    class="s-custom-switch"
-    :class="switchClass"
-    :loading="loading"
-    :before-change="beforeChangeHandler"
-    :style="[{ '--switch-width': handleWidth }, style]"
-  />
+  <span class="s-switch-box" :style="style">
+    <SCompTitle :title="mergedProps.title" type="label" :comp-title-style="mergedProps.compTitleStyle" />
+    <el-switch
+      v-bind="{ 'inline-prompt': true, disabled: mergedProps.disabled, ...$attrs }"
+      class="s-custom-switch"
+      :class="switchClass"
+      :loading="loading"
+      :before-change="beforeChangeHandler"
+      :style="{ '--switch-width': handleWidth }"
+    />
+  </span>
 </template>
 
 <style lang="scss" scoped>
+.s-switch-box {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
 .s-custom-switch {
   flex-direction: row-reverse; /* 反转子元素的顺序 */
   align-items: center;

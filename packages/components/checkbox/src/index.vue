@@ -12,7 +12,8 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 */
 import { ref, watch, computed, useAttrs } from 'vue'
 import { Check, Minus } from '@element-plus/icons-vue'
-import { isEmpty, processWidth, getType } from '@sybz-components/utils'
+import { isEmpty, getType } from '@sybz-components/utils'
+import SCompTitle from '@/components/compTitle/src/index.vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import { parseGap, type Gap } from '@/hooks/parseGap'
@@ -63,10 +64,6 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 
 const mergedProps = useGlobalComponentConfig('checkbox', props)
 const { style } = useStyleProps()
-const titleStyle = computed(() => {
-  const style = mergedProps.value.compTitleStyle
-  return style?.width ? { ...style, width: processWidth(style.width, true) } : style
-})
 const checkAll = ref(false)
 const isIndeterminate = ref(false)
 const allCheckList = ref([])
@@ -184,9 +181,7 @@ const checkboxClass = computed(() => ({
     :class="checkboxClass"
     :style="[style, hasGap ? { '--s-checkbox-gap-x': gapValues.x, '--s-checkbox-gap-y': gapValues.y } : undefined]"
   >
-    <span v-if="mergedProps.title" class="s-checkbox__title" :style="titleStyle">
-      {{ mergedProps.title }}
-    </span>
+    <SCompTitle :title="mergedProps.title" type="label" :comp-title-style="mergedProps.compTitleStyle" />
     <div class="s-checkbox__content">
       <component
         :is="checkType"
@@ -240,19 +235,6 @@ const checkboxClass = computed(() => ({
 
   .s-checkbox__content {
     display: contents;
-  }
-
-  .s-checkbox__title {
-    display: inline-flex;
-    align-items: center;
-    align-self: center;
-    flex: none;
-    margin-right: 12px;
-    color: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.5;
-    white-space: nowrap;
   }
 
   .s-checkbox__all {

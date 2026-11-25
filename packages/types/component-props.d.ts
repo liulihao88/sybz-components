@@ -442,6 +442,8 @@ export interface SClickOutsideProps {
 
 export interface SCompTitleProps {
   title?: string
+  /** 标题样式：input 为输入框前缀，label 为普通控件标签；默认 input */
+  type?: 'input' | 'label'
   compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme
 }
@@ -941,6 +943,10 @@ export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps 
 export type SSelectProps = SSelectSelfProps & Partial<Omit<SelectPropsPublic, keyof SSelectSelfProps>>
 
 export interface SSwitchSelfProps {
+  /** 开关左侧标题，默认无标题 */
+  title?: string
+  /** 标题文字的自定义样式 */
+  compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme
   beforeChange?: (...args: any[]) => any
   width?: string | number | boolean

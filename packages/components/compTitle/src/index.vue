@@ -12,12 +12,14 @@ const attrs = useAttrs()
 
 interface CompTitleProps {
   title?: string
+  type?: 'input' | 'label'
   compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme
 }
 
 const props = withDefaults(defineProps<CompTitleProps>(), {
   title: '',
+  type: 'input',
   compTitleStyle: undefined,
   theme: 'default',
 })
@@ -43,15 +45,17 @@ const sizeClass = computed(() => {
 const compTitleClass = computed(() => [
   sizeClass.value,
   {
-    's-comp-title--chenghua': mergedProps.value.theme === 'chenghua',
-    's-comp-title--shijingshan': mergedProps.value.theme === 'shijingshan',
-    's-comp-title--sybz': mergedProps.value.theme === 'sybz',
+    's-comp-title--label': mergedProps.value.type === 'label',
+    's-comp-title--chenghua': mergedProps.value.type === 'input' && mergedProps.value.theme === 'chenghua',
+    's-comp-title--shijingshan': mergedProps.value.type === 'input' && mergedProps.value.theme === 'shijingshan',
+    's-comp-title--sybz': mergedProps.value.type === 'input' && mergedProps.value.theme === 'sybz',
   },
 ])
 </script>
 
 <template>
-  <div
+  <component
+    :is="mergedProps.type === 'label' ? 'span' : 'div'"
     v-if="mergedProps.title"
     class="s-comp-title"
     :class="compTitleClass"
@@ -59,7 +63,7 @@ const compTitleClass = computed(() => [
     v-bind="$attrs"
   >
     {{ mergedProps.title }}
-  </div>
+  </component>
 </template>
 
 <style lang="scss" scoped>
@@ -87,5 +91,18 @@ const compTitleClass = computed(() => [
 }
 .s-comp-title__base-size {
   font-size: 14px;
+}
+.s-comp-title--label {
+  align-self: center;
+  flex: none;
+  min-height: 0;
+  padding: 0;
+  margin-right: 12px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  font-weight: 500;
+  line-height: 1.5 !important;
 }
 </style>

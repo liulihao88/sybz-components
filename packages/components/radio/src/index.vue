@@ -1,8 +1,6 @@
 <template>
   <div class="s-radio-box" :class="radioClass" :style="style">
-    <span v-if="mergedProps.title" class="s-radio-box__title" :style="titleStyle">
-      {{ mergedProps.title }}
-    </span>
+    <SCompTitle :title="mergedProps.title" type="label" :comp-title-style="mergedProps.compTitleStyle" />
     <el-radio-group v-bind="groupAttrs" :class="{ 's-radio-group--custom-gap': hasCustomGap }" :style="groupStyle">
       <slot>
         <component
@@ -32,6 +30,7 @@ import type { SybzComponentTheme } from '../../../types/component-props'
 import { computed, useAttrs } from 'vue'
 import type { CSSProperties } from 'vue'
 import { processWidth } from '@sybz-components/utils'
+import SCompTitle from '@/components/compTitle/src/index.vue'
 import { parseGap, type GapValue } from '@/hooks/parseGap'
 import type { RadioItem, RadioOption, RadioOptionValue } from './radio'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
@@ -86,10 +85,6 @@ const props = withDefaults(defineProps<RadioProps>(), {
 const mergedProps = useGlobalComponentConfig('radio', props)
 const attrs = useAttrs()
 const { style } = useStyleProps()
-const titleStyle = computed(() => {
-  const style = mergedProps.value.compTitleStyle
-  return style?.width ? { ...style, width: processWidth(style.width, true) } : style
-})
 const groupAttrs = computed(() => ({
   disabled: mergedProps.value.disabled,
   ...attrs,
@@ -237,19 +232,6 @@ const radioClass = computed(() => {
 <style lang="scss" scoped>
 .s-radio-box {
   display: flex;
-
-  .s-radio-box__title {
-    display: inline-flex;
-    align-items: center;
-    align-self: center;
-    flex: none;
-    margin-right: 12px;
-    color: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.5;
-    white-space: nowrap;
-  }
 }
 
 .s-radio-box--button {

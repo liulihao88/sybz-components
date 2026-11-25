@@ -14,7 +14,7 @@ type ElCheckboxGroupInstance = InstanceType<typeof ElCheckboxGroup>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
  *
- * s-checkbox 多选组件，支持左侧 title、全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
+ * s-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus CheckboxGroup 的公开属性。
  */

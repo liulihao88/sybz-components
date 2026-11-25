@@ -120,6 +120,24 @@ interface ContainerOpts {
   validate?(params: string): boolean
   render?(tokens: Token[], index: number): string
 }
+const renderDemoContainer = (tokens: Token[], idx: number) => {
+  if (tokens[idx].nesting !== 1) return '</Demo>\n'
+
+  const description = tokens[idx].info.trim().replace(/^(?:demo|other)\s*/, '')
+  const sourceFileToken = tokens[idx + 2]
+  const sourceFile = sourceFileToken.children?.[0].content ?? ''
+  const source =
+    sourceFileToken.type === 'inline'
+      ? fs.readFileSync(path.resolve(docRoot, 'components', `${sourceFile}.vue`), 'utf-8')
+      : ''
+  if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
+  return `<Demo
+            source="${encodeURIComponent(highlight(source, 'vue'))}"
+            path="${sourceFile}"
+            raw-source="${encodeURIComponent(source)}"
+            description="${encodeURIComponent(localMd.render(description))}">`
+}
+
 export const mdPlugin = (md: MarkdownIt) => {
   md.use(mdContainer, 'utils-source', {
     validate(params) {
@@ -138,30 +156,13 @@ export const mdPlugin = (md: MarkdownIt) => {
     validate(params) {
       return !!params.trim().match(/^demo\s*(.*)$/)
     },
-    render(tokens, idx) {
-      const m = tokens[idx].info.trim().match(/^demo\s+(.*)$/)
-      if (tokens[idx].nesting === 1) {
-        /* means the tag is opening */
-        const description = m && m.length > 1 ? m[1] : ''
-        const sourceFileToken = tokens[idx + 2]
-        let source = ''
-        // demo文件名称
-        const sourceFile = sourceFileToken.children?.[0].content ?? ''
-        if (sourceFileToken.type === 'inline') {
-          // 读取示列代码文件
-          source = fs.readFileSync(path.resolve(docRoot, 'components', `${sourceFile}.vue`), 'utf-8')
-        }
-        if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
-        // opening tag
-        return `<Demo
-                    source="${encodeURIComponent(highlight(source, 'vue'))}"
-                    path="${sourceFile}"
-                    raw-source="${encodeURIComponent(source)}"
-                    description="${encodeURIComponent(localMd.render(description))}">`
-      } else {
-        // closing tag
-        return '</Demo>\n'
-      }
+    render: renderDemoContainer,
+  } as ContainerOpts)
+
+  md.use(mdContainer, 'other', {
+    validate(params) {
+      return /^other(?:\s|$)/.test(params.trim())
     },
+    render: renderDemoContainer,
   } as ContainerOpts)
 }

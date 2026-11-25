@@ -15,7 +15,7 @@ type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
  *
- * s-radio 单选组件，普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
+ * s-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus RadioGroup 的公开属性。
  */
