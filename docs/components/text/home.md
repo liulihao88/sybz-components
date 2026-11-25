@@ -18,7 +18,7 @@
 text/base
 :::
 
-### 其他文字属性（`gradient` / `color` / `c` 默认不设置、`type=default`、`lineClamp=0`）
+### other
 
 基础写法：`<s-text type="danger" :line-clamp="2">文字</s-text>`；渐变文字可写 `<s-text gradient="linear-gradient(90deg, red, blue)">文字</s-text>`。`gradient` 默认不设置，优先于 `c / color / type`，也支持 `var(--my-gradient)`。`color` 与 `c` 使用同一套常用文字色名称，也接受任意 CSS 颜色；`blue / red / green / yellow / white / black` 是 CSS 标准色，不随主题变化；`type="primary"` 才使用主题主色；`c` 优先于 `color`，`color` 优先于 `type`；`lineClamp=0` 不截断，`1 / 2 / 3` 分别显示最多一、二、三行。`lineClamp=1` 即单行省略。浏览器原生 `title` 可用于显示完整内容。
 

@@ -2,7 +2,7 @@
 
 ## UI 规范
 
-- 所有的主题示例, 都要放到基础用法示例后面
+- 所有的主题示例, 都要放到基础用法和其他用法示例后面
 - 改过的代码, 不要自动build或docsbuild, 因为本来就可以直接看到效果
 - 每个对应的示例, 要把示例所要展示的属性名称, 还有都有哪些值, 默认值都显示出来, 但只写在示例标题或一行简短说明里, 不要展开成长篇属性介绍
 - 每次组件新增的theme="chenghua", 要保证星号也跟着加入
@@ -23,10 +23,40 @@
 
 ## 生成示例规范
 
-默认生成的示例, 都放在示例的最后一位. 是示例的最后一位, 不是最下面. 一般在属性上面
+除其他用法外, 新生成的独立示例放在示例区最后一位、属性表之前。
 
-- 单独展示一个简单属性时, 不要为它新建独立示例文件或独立 demo. 统一放进该组件的 `other.vue` 汇总示例; 已有 `other.vue` 就直接扩充, 没有时再创建. 如果项目中已经有usually文件了, 那就把usually改为other, 命名就叫other. 统一放到基础用法的下面. 也就是说, other.vue这个文件的重要性, 仅次于基础用法
-- `other.vue` 参考 `docs/components/table/other.vue`: 用可交互的选项分别切换属性, 在同一组件上直观看到不同取值的效果; 标出属性名、所有可选值和默认值, 基础写法用一句话说明即可, 不要展开成长篇文档.
-- 只有属性需要独立场景、较多配套代码或组合交互, 放进 `other.vue` 会影响理解时, 才新增单独示例. 汇总示例仍放在示例区最后一位、属性表之前.
+- 其他用法只能放在基础用法的下面, 在 `home.md` 中写成 `::: other`。
+- 单独展示一个简单属性时, 不要为它新建独立示例文件或独立 demo. 统一放进该组件的 `other.vue` 汇总示例; 已有 `other.vue` 就直接扩充, 没有时再创建. 如果项目中已经有 `usually.vue`, 就改名为 `other.vue`。
+- `other.vue` 尽量参考 `docs/components/flex/other.vue` 的简洁写法: 在 `<script setup>` 中用一个 `ref` 对象保存待切换的属性, 用 `s-radio` 直接绑定对象属性, 用 `v-bind` 把对象传给同一个组件。选项直接写在模板里, 能不用额外的 `computed`、转换函数和配置数组就不用。属性名、可选值和默认值只在标题或一行说明中交代。
+- 只有属性需要独立场景、较多配套代码或组合交互, 放进 `other.vue` 会影响理解时, 才新增单独示例。
 - 生成的示例代码, 不允许再用原生select等等, 尤其是有多个选项的示例, 要用s-radio
--
+
+`other.vue` 优先采用下面的结构, 保持示例简洁:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+const flexProps = ref({
+  column: false,
+  wrap: 'nowrap',
+})
+</script>
+
+<template>
+  <s-flex gap column>
+    <s-radio v-model="flexProps.column" size="small" variant="button" simple :options="[true, false]" title="column" />
+    <s-radio
+      v-model="flexProps.wrap"
+      :options="['wrap', 'nowrap', 'wrap-reverse']"
+      simple
+      title="wrap"
+      size="small"
+      variant="button"
+    />
+  </s-flex>
+  <s-flex v-bind="flexProps">
+    <div>1</div>
+    <div>2</div>
+  </s-flex>
+</template>
+```
