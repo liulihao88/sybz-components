@@ -49,6 +49,8 @@ export type SybzDimension = SybzLength | boolean
  * 所有 sybz 组件都通过全局 mixin 自动接受这些属性，直接以简写作为 prop 传入，
  * 例如 `<s-flex gap="small" m="10px" fs="14px">`。长度类属性支持尺寸 token
  * （`small` / `default` / `large`，分别对应 8 / 16 / 24px），数值会自动补全为 `px`。
+ * `color` / `c` 支持文字层级和 `primary` / `success` / `warning` / `danger` / `info`
+ * 语义色，均按当前主题解析。
  */
 export interface SybzStyleProps {
   // 内边距与外边距
@@ -96,6 +98,7 @@ export interface SybzStyleProps {
   order?: number
   // 背景与边框
   bg?: string
+  /** 文字色：文字层级、主题语义色或 CSS 颜色。 */
   c?: SybzTextColor
   opacity?: string | number
   bd?: string

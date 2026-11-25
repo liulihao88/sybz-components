@@ -198,8 +198,21 @@ const TEXT_COLOR_TOKENS = {
   },
 } as const
 
+/** 语义色名称 → 主题 token；`error` 为 `danger` 的别名，随主题切换。 */
+const THEME_COLOR_TOKENS = {
+  primary: 'primary',
+  success: 'success',
+  warning: 'warning',
+  danger: 'danger',
+  error: 'danger',
+  info: 'info',
+} as const
+
+export type SybzThemeColorName = keyof typeof THEME_COLOR_TOKENS
+
 export type SybzTextColor =
   | keyof typeof TEXT_COLOR_TOKENS.sybz
+  | SybzThemeColorName
   | 'blue'
   | 'red'
   | 'green'
@@ -211,18 +224,26 @@ export type SybzTextColor =
 const getThemePrefix = (theme: unknown): keyof typeof TEXT_COLOR_TOKENS =>
   theme === 'chenghua' ? 'ch' : theme === 'shijingshan' || theme === 'gulou' ? 'sjs' : 'sybz'
 
+const hasOwn = (source: object, key: string) => Object.prototype.hasOwnProperty.call(source, key)
+
+/**
+ * 解析文字色：
+ * - 语义色（primary / success / warning / danger / error / info）→ 当前主题 token
+ * - 文字层级名称（main / default / secondary 等）→ 当前主题 token
+ * - CSS 标准颜色名和任意 CSS 颜色原样透传
+ */
 export const resolveStyleColor = (value: string, theme?: unknown): string => {
   const prefix = getThemePrefix(theme)
-  const token = TEXT_COLOR_TOKENS[prefix][value as keyof typeof TEXT_COLOR_TOKENS.sybz]
+  const semantic = hasOwn(THEME_COLOR_TOKENS, value) ? THEME_COLOR_TOKENS[value as SybzThemeColorName] : undefined
+  if (semantic) return `var(--s-${prefix}-${semantic})`
+  const token = hasOwn(TEXT_COLOR_TOKENS[prefix], value)
+    ? TEXT_COLOR_TOKENS[prefix][value as keyof typeof TEXT_COLOR_TOKENS.sybz]
+    : undefined
   return token ? `var(--s-${prefix}-${token})` : value
 }
 
-/** 状态色仅供 type 等语义属性使用，避免与 CSS 标准颜色名混淆。 */
-export const resolveThemeColor = (type: string, theme?: unknown): string => {
-  const name = type === 'error' ? 'danger' : type
-  if (!['primary', 'success', 'warning', 'danger', 'info'].includes(name)) return resolveStyleColor(type, theme)
-  return `var(--s-${getThemePrefix(theme)}-${name})`
-}
+/** 语义状态色（type 等属性使用）与 `color` / `c` 共用同一套主题色解析。 */
+export const resolveThemeColor = (type: string, theme?: unknown): string => resolveStyleColor(type, theme)
 
 const getConfiguredTheme = (source: Record<string, unknown>, config: Record<string, any> | undefined) => {
   if (source.theme && source.theme !== 'default') return source.theme

@@ -11,6 +11,10 @@
   <!-- 外边距 12px、内边距 16px、浅蓝背景、蓝字 -->
   <s-flex gap="small" m="12" p="16" bg="#f0f6ff" c="#1d4ed8">内容</s-flex>
 
+  <!-- 主题语义色：随 theme 切换 primary 等色值 -->
+  <s-flex c="primary">主题主色文字</s-flex>
+  <s-flex c="danger">主题危险色文字</s-flex>
+
   <!-- 按钮：水平内边距 100px、水平外边距 100px -->
   <s-button px="100" mx="100">按钮</s-button>
 
@@ -74,17 +78,19 @@
 
 ### 背景与边框
 
-|     简写      | 对应 CSS        | 说明                                                                                                                                |
-| :-----------: | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
-|     `bg`      | `background`    | 颜色或完整背景值                                                                                                                    |
-| `color` / `c` | `color`         | `main / default / secondary / regular / disabled / placeholder / white / black / blue / red / green / yellow` 或 CSS 颜色；`c` 优先 |
-|   `opacity`   | `opacity`       | 如 `0.5`                                                                                                                            |
-|     `bd`      | `border`        | 如 `1px solid red`                                                                                                                  |
-|     `bdt`     | `border-top`    | —                                                                                                                                   |
-|     `bdb`     | `border-bottom` | —                                                                                                                                   |
-|     `bdl`     | `border-left`   | —                                                                                                                                   |
-|     `bdr`     | `border-right`  | —                                                                                                                                   |
-|     `br`      | `border-radius` | 数字补 `px`；裸写等价于 `small`（8px）                                                                                              |
+|     简写      | 对应 CSS        | 说明                                                                                                                                                                                      |
+| :-----------: | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     `bg`      | `background`    | 颜色或完整背景值                                                                                                                                                                          |
+| `color` / `c` | `color`         | `main / default / secondary / regular / disabled / placeholder / primary / success / warning / danger / error / info / white / black / blue / red / green / yellow` 或 CSS 颜色；`c` 优先 |
+|   `opacity`   | `opacity`       | 如 `0.5`                                                                                                                                                                                  |
+|     `bd`      | `border`        | 如 `1px solid red`                                                                                                                                                                        |
+|     `bdt`     | `border-top`    | —                                                                                                                                                                                         |
+|     `bdb`     | `border-bottom` | —                                                                                                                                                                                         |
+|     `bdl`     | `border-left`   | —                                                                                                                                                                                         |
+|     `bdr`     | `border-right`  | —                                                                                                                                                                                         |
+|     `br`      | `border-radius` | 数字补 `px`；裸写等价于 `small`（8px）                                                                                                                                                    |
+
+`color` / `c` 的 `primary / success / warning / danger / info` 是主题语义色（`error` 与 `danger` 同色），会跟随 `theme` 解析为对应主题的颜色；`blue / red` 等 CSS 颜色名保持原色。
 
 ## 尺寸 token
 
@@ -108,7 +114,7 @@
 ## 取值规则
 
 1. **长度类属性**（`m` / `p` / `w` / `h` / `fs` / `br` 等）：支持尺寸 token（`small` / `default` / `large`）、数字（自动补 `px`）或 CSS 长度字符串——`"10"` → `10px`、`"1rem"` 原样、`"50%"` 原样。
-2. **关键词类属性**（`fw` / `ta` / `tt` / `td` / `ff` / `pos` / `bg` / `bd` 等）：原样透传。`color` / `c` 的文字层级名称（如 `main / default / secondary / disabled`）解析为当前 sybz 主题 token；CSS 标准颜色名（如 `blue / red`）和其他 CSS 颜色原样透传。
+2. **关键词类属性**（`fw` / `ta` / `tt` / `td` / `ff` / `pos` / `bg` / `bd` 等）：原样透传。`color` / `c` 的文字层级名称（如 `main / default / secondary / disabled`）和语义色（`primary / success / warning / danger / error / info`）解析为当前主题 token；CSS 标准颜色名（如 `blue / red`）和其他 CSS 颜色原样透传。
 3. **`lh`**（行高）：数字保持无单位（`1.5` 就是 `1.5`，不会变 `1.5px`），字符串原样。
 4. **`inset`**：支持 token 和数字（补 `px`，四边同值），多值字符串（如 `"10px 20px"`）原样透传。
 

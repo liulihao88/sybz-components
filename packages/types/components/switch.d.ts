@@ -1,5 +1,5 @@
 import { ElSwitch } from 'element-plus'
-import type { SSwitchSelfProps, SybzComponentTheme } from '../component-props'
+import type { SSwitchSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElSwitchInstance = InstanceType<typeof ElSwitch>

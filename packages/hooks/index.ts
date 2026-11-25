@@ -36,4 +36,4 @@ export {
   STYLE_PROP_MAP,
   SIZE_PRESETS,
 } from './useStyleProps'
-export type { SybzStylePropKey, SybzTextColor } from './useStyleProps'
+export type { SybzStylePropKey, SybzTextColor, SybzThemeColorName } from './useStyleProps'

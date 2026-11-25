@@ -9,7 +9,7 @@ export interface STextProps {
   theme?: SybzComponentTheme
   /** 品牌或状态色；默认 default。color / c 优先于 type */
   type?: STextType
-  /** 常用文字色或 CSS 颜色；main / default / secondary 对应 85 / 65 / 45；不传时使用 default */
+  /** 文字色：文字层级（main / default / secondary 对应 85 / 65 / 45）、primary / success / warning / danger / info 主题语义色，或 CSS 颜色；不传时使用 default */
   color?: SybzTextColor
   /** CSS 渐变值，如 linear-gradient(...) 或 var(--gradient)；默认不设置，优先于 type / color / c */
   gradient?: string
