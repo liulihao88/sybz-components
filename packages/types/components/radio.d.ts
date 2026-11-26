@@ -15,7 +15,7 @@ type ElRadioGroupInstance = InstanceType<typeof ElRadioGroup>
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
  *
- * s-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
+ * s-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式，required 显示必填星号；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus RadioGroup 的公开属性。
  */
@@ -29,6 +29,8 @@ export type SRadioComponent = {
   new <SRadio文档 = 'https://liulihao88.github.io/sybz-components/components/radio/home.html'>(): {
     $props: {
       title?: string
+      /** 左侧标题前显示必填星号；默认 false */
+      required?: boolean
       compTitleStyle?: SybzRecord
       type?: '' | 'boolean' | 'simple'
       variant?: 'radio' | 'button'
@@ -43,6 +45,7 @@ export type SRadioComponent = {
     } & Omit<
       ElRadioGroupInstance['$props'],
       | 'title'
+      | 'required'
       | 'compTitleStyle'
       | 'theme'
       | 'type'

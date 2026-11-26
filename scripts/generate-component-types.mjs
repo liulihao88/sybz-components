@@ -95,7 +95,8 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: resolve(rootDir, 'packages/components/backtop/src/types.ts'),
       typeName: 'SBacktopProps',
       tagName: 's-backtop',
-      description: 's-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置、滚动时长和 useStyleProps 样式简写。',
+      description:
+        's-backtop 原生回到顶部组件，支持长按拖动位置、目标容器、显示阈值、滚动时长和 useStyleProps 样式简写。',
       slots: ['default'],
       instanceMembers: ['$emit: SBacktopEmits'],
       hoverProps: {

@@ -16,6 +16,12 @@
 checkbox/base
 :::
 
+### 其他用法（required 默认 false）
+
+::: other
+checkbox/other
+:::
+
 ### 主题（theme 默认值：default）
 
 :::demo
@@ -25,7 +31,7 @@ checkbox/theme
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" label="name" value="id"></s-checkbox>`。属性：`options` 类型 `array`，默认值 `[]`；`label` 类型 `string / number`，默认值按组件配置。
-checkbox/usually
+checkbox/options
 :::
 
 ### disabled（variant 默认值：checkbox）
@@ -37,7 +43,7 @@ checkbox/disabled
 ### 多属性用法（variant 默认值：checkbox）
 
 :::demo 展示按钮形式与其他属性组合。基础写法：`<s-checkbox v-model="checkboxValue" :options="options" variant="button" />`。属性：`variant` 可选 `checkbox / button`，默认值 `checkbox`。
-checkbox/usually
+checkbox/options
 :::
 
 ### 插槽用法
@@ -58,6 +64,7 @@ checkbox/customGap
 | :------------: | ---------------------------------------------------- | ----------------------------------------------- | --------- |
 |      type      | options参数的类型, 可以设置为simple                  | string                                          | -         |
 |     title      | 左侧文字标题，普通和 button 模式样式一致             | string                                          | -         |
+|    required    | 标题左侧显示红色必填星号                             | boolean                                         | `false`   |
 | compTitleStyle | 标题文字的自定义样式                                 | object                                          | -         |
 |    options     | checkbox的选项                                       | object                                          | {}        |
 |    variant     | 展示形式，可选 `checkbox` / `button`                 | string                                          | checkbox  |

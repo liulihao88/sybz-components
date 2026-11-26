@@ -37,13 +37,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/backtop/home.html | 查看文档}
      *
-     * s-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置、滚动时长和 useStyleProps 样式简写。
+     * s-backtop 原生回到顶部组件，支持长按拖动位置、目标容器、显示阈值、滚动时长和 useStyleProps 样式简写。
      */
     SBacktop: (typeof import('./types/components/backtop'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/backtop/home.html | 查看文档}
      *
-     * s-backtop 原生回到顶部组件，支持目标容器、显示阈值、位置、滚动时长和 useStyleProps 样式简写。
+     * s-backtop 原生回到顶部组件，支持长按拖动位置、目标容器、显示阈值、滚动时长和 useStyleProps 样式简写。
      */
     's-backtop': (typeof import('./types/components/backtop'))['default']
     /**
@@ -97,13 +97,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
      *
-     * s-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
+     * s-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式，required 显示必填星号；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
      */
     SCheckbox: (typeof import('./types/components/checkbox'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/checkbox/home.html | 查看文档}
      *
-     * s-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
+     * s-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式，required 显示必填星号；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。
      */
     's-checkbox': (typeof import('./types/components/checkbox'))['default']
     /**
@@ -117,13 +117,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/compTitle/home.html | 查看文档}
      *
-     * s-comp-title 标题，type="input" 为输入框前缀，type="label" 为单选、多选和开关旁的简洁标签。
+     * s-comp-title 标题，type="input" 为输入框前缀，type="label" 为普通控件标签；required 在标题左侧显示必填星号。
      */
     SCompTitle: (typeof import('./types/components/compTitle'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/compTitle/home.html | 查看文档}
      *
-     * s-comp-title 标题，type="input" 为输入框前缀，type="label" 为单选、多选和开关旁的简洁标签。
+     * s-comp-title 标题，type="input" 为输入框前缀，type="label" 为普通控件标签；required 在标题左侧显示必填星号。
      */
     's-comp-title': (typeof import('./types/components/compTitle'))['default']
     /**
@@ -385,13 +385,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
      *
-     * s-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
+     * s-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式，required 显示必填星号；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
      */
     SRadio: (typeof import('./types/components/radio'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/radio/home.html | 查看文档}
      *
-     * s-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
+     * s-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式，required 显示必填星号；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。
      */
     's-radio': (typeof import('./types/components/radio'))['default']
     /**
@@ -453,13 +453,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
      *
-     * s-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题。
+     * s-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题，required 显示必填星号。
      */
     SSwitch: (typeof import('./types/components/switch'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/switch/home.html | 查看文档}
      *
-     * s-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题。
+     * s-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题，required 显示必填星号。
      */
     's-switch': (typeof import('./types/components/switch'))['default']
     /**

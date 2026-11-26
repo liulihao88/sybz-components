@@ -2,12 +2,18 @@
   <Transition name="s-backtop-fade">
     <div
       v-if="visible"
+      ref="backtopRef"
       class="s-backtop"
-      :style="[{ right: `${right}px`, bottom: `${bottom}px` }, style]"
+      :class="{ 's-backtop--dragging': dragging }"
+      :style="[style, { right: `${dragPosition?.right ?? right}px`, bottom: `${dragPosition?.bottom ?? bottom}px` }]"
       role="button"
       tabindex="0"
       aria-label="回到顶部"
       @click="handleClick"
+      @pointerdown="handlePointerDown"
+      @pointermove="handlePointerMove"
+      @pointerup="handlePointerUp"
+      @pointercancel="handlePointerCancel"
       @keydown.enter.prevent="handleKeyboard"
       @keydown.space.prevent="handleKeyboard"
     >
@@ -43,8 +49,72 @@ const props = withDefaults(defineProps<SBacktopProps>(), {
 const emit = defineEmits<SBacktopEmits>()
 const { style } = useStyleProps()
 const visible = ref(false)
+const backtopRef = ref<HTMLElement | null>(null)
+const dragging = ref(false)
+const dragPosition = ref<{ right: number; bottom: number } | null>(null)
+let dragStart: { x: number; y: number; right: number; bottom: number } | null = null
+let pressTimer: ReturnType<typeof setTimeout> | undefined
+let suppressClick = false
 let container: HTMLElement | Window | undefined
 let frame = 0
+
+function clearPressTimer() {
+  if (pressTimer) clearTimeout(pressTimer)
+  pressTimer = undefined
+}
+
+function handlePointerDown(event: PointerEvent) {
+  if (event.button !== 0 || !event.isPrimary || !backtopRef.value) return
+  clearPressTimer()
+  const rect = backtopRef.value.getBoundingClientRect()
+  dragStart = {
+    x: event.clientX,
+    y: event.clientY,
+    right: window.innerWidth - rect.right,
+    bottom: window.innerHeight - rect.bottom,
+  }
+  backtopRef.value.setPointerCapture(event.pointerId)
+  pressTimer = setTimeout(() => {
+    dragging.value = true
+    suppressClick = true
+    pressTimer = undefined
+  }, 350)
+}
+
+function handlePointerMove(event: PointerEvent) {
+  if (!dragStart) return
+  const dx = event.clientX - dragStart.x
+  const dy = event.clientY - dragStart.y
+  if (!dragging.value) {
+    if (Math.hypot(dx, dy) > 6) {
+      clearPressTimer()
+      suppressClick = true
+    }
+    return
+  }
+  event.preventDefault()
+  const rect = backtopRef.value?.getBoundingClientRect()
+  dragPosition.value = {
+    right: Math.max(0, Math.min(window.innerWidth - (rect?.width ?? 0), dragStart.right - dx)),
+    bottom: Math.max(0, Math.min(window.innerHeight - (rect?.height ?? 0), dragStart.bottom - dy)),
+  }
+}
+
+function endPointer(event: PointerEvent) {
+  clearPressTimer()
+  dragStart = null
+  dragging.value = false
+  if (backtopRef.value?.hasPointerCapture(event.pointerId)) backtopRef.value.releasePointerCapture(event.pointerId)
+  if (suppressClick) setTimeout(() => (suppressClick = false), 0)
+}
+
+function handlePointerUp(event: PointerEvent) {
+  endPointer(event)
+}
+
+function handlePointerCancel(event: PointerEvent) {
+  endPointer(event)
+}
 
 function scrollTop() {
   return container === window
@@ -72,6 +142,10 @@ function bindTarget() {
 }
 
 function handleClick(event: MouseEvent) {
+  if (suppressClick) {
+    suppressClick = false
+    return
+  }
   emit('click', event)
   if (!container) return
   if (frame) cancelAnimationFrame(frame)
@@ -98,7 +172,12 @@ function handleKeyboard() {
 onMounted(bindTarget)
 watch(() => props.target, bindTarget)
 watch(() => props.visibilityHeight, updateVisibility)
+watch(
+  () => [props.right, props.bottom],
+  () => (dragPosition.value = null),
+)
 onBeforeUnmount(() => {
+  clearPressTimer()
   container?.removeEventListener('scroll', updateVisibility)
   if (frame) cancelAnimationFrame(frame)
 })
@@ -118,7 +197,11 @@ onBeforeUnmount(() => {
   color: var(--el-color-primary, #409eff);
   box-shadow: var(--el-box-shadow-lighter, 0 0 6px rgb(0 0 0 / 12%));
   cursor: pointer;
+  touch-action: none;
   user-select: none;
+}
+.s-backtop--dragging {
+  cursor: grabbing;
 }
 .s-backtop:hover {
   background: var(--el-fill-color-light, #f5f7fa);

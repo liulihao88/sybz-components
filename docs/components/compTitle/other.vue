@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-const titleProps = ref<{ title: string; type: 'input' | 'label' }>({
+const titleProps = ref<{ title: string; type: 'input' | 'label'; required: boolean }>({
   title: '标题',
   type: 'input',
   required: false,

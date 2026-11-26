@@ -16,6 +16,12 @@
 radio/base
 :::
 
+### 其他用法（required 默认 false）
+
+::: other
+radio/other
+:::
+
 ### 主题（theme 默认值：default）
 
 :::demo
@@ -31,7 +37,7 @@ radio/disabled
 ### 通常用法
 
 :::demo 展示通常用法配置。基础写法：`<s-radio v-model="value" :options="options" value="id" label="name" />`。属性：`options` 类型 `array`，默认值 `[]`；`value` 类型 `string / number / boolean`，默认值按组件配置。
-radio/usually
+radio/options
 :::
 
 ### 使用type
@@ -69,6 +75,7 @@ radio/gap
 |      属性名      | 说明                                                               | 类型                                          | 默认值                             |
 | :--------------: | ------------------------------------------------------------------ | --------------------------------------------- | ---------------------------------- |
 |     `title`      | 左侧文字标题，普通和 button 模式样式一致                           | string                                        | -                                  |
+|    `required`    | 标题左侧显示红色必填星号                                           | boolean                                       | `false`                            |
 | `compTitleStyle` | 标题文字的自定义样式                                               | object                                        | `{}`                               |
 |      `type`      | 数据类型，支持 `''` / `simple` / `boolean`                         | string                                        | `''`                               |
 |     `theme`      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`     | string                                        | `default`                          |
