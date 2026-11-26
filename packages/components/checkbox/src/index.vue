@@ -29,6 +29,7 @@ interface CheckboxOptionContext<Option = Record<string, any>> {
 }
 interface CheckboxProps {
   title?: string
+  required?: boolean
   compTitleStyle?: Record<string, any>
   type?: string
   options?: any[]
@@ -47,6 +48,7 @@ interface CheckboxProps {
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
   title: undefined,
+  required: false,
   compTitleStyle: undefined,
   type: '',
   options: () => [],
@@ -181,7 +183,12 @@ const checkboxClass = computed(() => ({
     :class="checkboxClass"
     :style="[style, hasGap ? { '--s-checkbox-gap-x': gapValues.x, '--s-checkbox-gap-y': gapValues.y } : undefined]"
   >
-    <SCompTitle :title="mergedProps.title" type="label" :comp-title-style="mergedProps.compTitleStyle" />
+    <SCompTitle
+      :title="mergedProps.title"
+      type="label"
+      :required="mergedProps.required"
+      :comp-title-style="mergedProps.compTitleStyle"
+    />
     <div class="s-checkbox__content">
       <component
         :is="checkType"

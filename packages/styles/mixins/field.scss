@@ -1,0 +1,48 @@
+// 独立表单控件的必填星号与错误提示，视觉与 s-form 的 el-form-item 保持一致。
+@mixin s-field-required {
+  &.is-required {
+    position: relative;
+    box-sizing: border-box;
+    padding-left: 10px;
+
+    &::before {
+      content: '*';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      color: var(--el-color-danger);
+      font-size: 14px;
+      line-height: 1;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+  }
+
+  .s-field__error {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    overflow-wrap: anywhere;
+    padding-top: 4px;
+    color: var(--el-color-danger);
+    font-size: 12px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  // 与 s-form 的 el-zoom-in-top 一致：从顶部展开并淡入，不改变布局高度。
+  .s-field-error-enter-active,
+  .s-field-error-leave-active {
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+    transform-origin: top;
+  }
+
+  .s-field-error-enter-from,
+  .s-field-error-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}

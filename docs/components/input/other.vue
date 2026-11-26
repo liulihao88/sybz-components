@@ -20,6 +20,29 @@
       show-password
     />
     <s-input v-model="input" width="240" height="48" title="height: 48" placeholder="height: 48" />
+    <div>rules（写法同 s-form，required: true 显示星号；trigger 默认 ['blur', 'change']）：</div>
+    <s-flex gap="small">
+      <s-input
+        ref="requiredInputRef"
+        v-model="requiredInput"
+        :rules="requiredRules"
+        width="240"
+        placeholder="请输入名称"
+      />
+      <s-button size="small" @click="validateRequiredInput">校验</s-button>
+    </s-flex>
+    <div>error-mode（inline 默认 / toast），rules 的 trigger: [] 表示只在点击校验时提示：</div>
+    <s-flex gap="small">
+      <s-input
+        ref="toastInputRef"
+        v-model="toastInput"
+        :rules="manualRules"
+        error-mode="toast"
+        width="240"
+        placeholder="toast 模式"
+      />
+      <s-button size="small" @click="validateToastInput">校验</s-button>
+    </s-flex>
   </s-flex>
 </template>
 
@@ -30,8 +53,22 @@ const input = ref('')
 const keyword = ref('')
 const requestedKeyword = ref('')
 const debounce = ref<boolean | number>(0)
+const requiredInput = ref('')
+const requiredInputRef = ref()
+const toastInput = ref('')
+const toastInputRef = ref()
+const requiredRules = [{ required: true, message: '请输入名称', trigger: ['blur', 'change'] }]
+const manualRules = [{ required: true, message: '请输入名称', trigger: [] }]
 
 const changeInput = (value: string) => {
   console.log('changeInput', value)
+}
+
+const validateRequiredInput = () => {
+  requiredInputRef.value?.validate()
+}
+
+const validateToastInput = () => {
+  toastInputRef.value?.validate()
 }
 </script>

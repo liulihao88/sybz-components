@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import type { SybzComponentTheme } from '../../../types/component-props'
+import type { SFormRule, SybzComponentTheme } from '../../../types/component-props'
 import { computed, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import SCompTitle from '@/components/compTitle'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import useFieldValidate from '@/hooks/useFieldValidate'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
+import FieldValidator from '../../common/FieldValidator.vue'
 
 defineOptions({
   name: 'SDatePicker',
@@ -25,6 +27,10 @@ interface DatePickerProps {
   compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme
   size?: '' | 'large' | 'default' | 'small'
+  /** 校验规则，写法同 s-form / el-form-item 的 rules；required: true 时显示红色星号 */
+  rules?: SFormRule | SFormRule[]
+  /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+  errorMode?: 'inline' | 'toast'
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
@@ -36,9 +42,30 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   compTitleStyle: undefined,
   theme: 'default',
   size: '',
+  rules: () => [],
+  errorMode: 'inline',
 })
 const mergedProps = useGlobalComponentConfig('datePicker', props)
 const { style } = useStyleProps()
+const fieldValue = computed(() => attrs.modelValue ?? attrs['model-value'])
+const fieldValidatorRef = ref<InstanceType<typeof FieldValidator>>()
+const {
+  standalone,
+  showErrorMessage,
+  errorMessage,
+  fieldClass,
+  normalizedRules,
+  validate,
+  clearValidate,
+  handleBlur,
+  handleChange,
+} = useFieldValidate({
+  rules: () => mergedProps.value.rules,
+  errorMode: () => mergedProps.value.errorMode,
+  label: () => mergedProps.value.title,
+  messagePrefix: '请选择',
+  runValidate: (trigger) => fieldValidatorRef.value?.validate(trigger) ?? Promise.resolve({ valid: true, message: '' }),
+})
 
 const pickerType = computed(() => String(attrs.type || 'date'))
 const isRangeType = computed(() => ['daterange', 'datetimerange', 'monthrange', 'yearrange'].includes(pickerType.value))
@@ -437,7 +464,7 @@ const datePickerClass = computed(() => ({
   'has-title': !!mergedProps.value.title,
   'is-disabled': isDisabled.value,
 }))
-const rootClass = computed<any>(() => [datePickerClass.value, attrs.class])
+const rootClass = computed<any>(() => [datePickerClass.value, attrs.class, fieldClass.value])
 const rootStyle = computed<any>(() => [datePickerStyle.value, attrs.style])
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {
@@ -576,6 +603,8 @@ const mergedAttrs = computed(() => {
 })
 
 defineExpose({
+  validate,
+  clearValidate,
   focus: () => datePickerRef.value?.focus(),
   blur: () => datePickerRef.value?.blur(),
   handleOpen: () => datePickerRef.value?.handleOpen(),
@@ -592,20 +621,47 @@ defineExpose({
         :title="mergedProps.topTitle"
         :square-left="Boolean(mergedProps.title)"
       />
-      <el-date-picker ref="datePickerRef" v-bind="mergedAttrs" class="s-date-picker__picker">
+      <el-date-picker
+        ref="datePickerRef"
+        v-bind="mergedAttrs"
+        class="s-date-picker__picker"
+        @blur="handleBlur"
+        @change="handleChange"
+      >
         <template v-for="(_, slotName) in $slots" #[slotName]="slotProps">
           <slot :name="slotName" v-bind="slotProps"></slot>
         </template>
       </el-date-picker>
     </div>
+    <FieldValidator
+      v-if="standalone && normalizedRules.length"
+      ref="fieldValidatorRef"
+      :model-value="fieldValue"
+      :rules="normalizedRules"
+    />
+    <Transition name="s-field-error">
+      <span v-if="showErrorMessage" class="s-field__error" role="alert">{{ errorMessage }}</span>
+    </Transition>
   </span>
 </template>
 
 <style scoped lang="scss">
+@use '../../../styles/mixins/field' as field;
+
 .s-date-picker {
   display: inline-flex;
   align-items: stretch;
   vertical-align: middle;
+
+  @include field.s-field-required;
+
+  &.is-error:not(.s-date-picker--top-title) {
+    :deep(.el-input__wrapper),
+    :deep(.el-input__wrapper:hover),
+    :deep(.el-input__wrapper.is-focus) {
+      box-shadow: 0 0 0 1px var(--el-color-danger) inset;
+    }
+  }
 
   .s-date-picker__main {
     position: relative;
@@ -655,6 +711,11 @@ defineExpose({
     :deep(.el-input__wrapper.is-focus) {
       box-shadow: none;
     }
+  }
+
+  // 放在 top-title hover 规则之后，错误态才能覆盖悬停色。
+  &.is-error.s-date-picker--top-title {
+    --s-top-title-border-color: var(--el-color-danger);
   }
 }
 </style>

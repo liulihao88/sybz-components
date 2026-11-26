@@ -16,6 +16,14 @@ const titleOptions = [
   { label: "不设置（默认值：''）", value: '' },
   { label: '左侧标题：数量', value: '数量' },
 ]
+const requiredValue = ref<number | undefined>()
+const requiredInputNumberRef = ref()
+
+const requiredRules = [{ required: true, trigger: ['blur', 'change'] }]
+
+const validateRequiredInputNumber = () => {
+  requiredInputNumberRef.value?.validate()
+}
 </script>
 
 <template>
@@ -41,4 +49,16 @@ const titleOptions = [
     :min="0"
     :max="99"
   />
+  <s-flex gap="small">
+    <s-input-number
+      ref="requiredInputNumberRef"
+      v-model="requiredValue"
+      :rules="requiredRules"
+      title="数量"
+      width="260"
+      :min="0"
+      :max="99"
+    />
+    <s-button size="small" @click="validateRequiredInputNumber">校验</s-button>
+  </s-flex>
 </template>

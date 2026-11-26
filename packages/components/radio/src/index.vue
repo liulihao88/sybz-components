@@ -1,6 +1,11 @@
 <template>
   <div class="s-radio-box" :class="radioClass" :style="style">
-    <SCompTitle :title="mergedProps.title" type="label" :comp-title-style="mergedProps.compTitleStyle" />
+    <SCompTitle
+      :title="mergedProps.title"
+      type="label"
+      :required="mergedProps.required"
+      :comp-title-style="mergedProps.compTitleStyle"
+    />
     <el-radio-group v-bind="groupAttrs" :class="{ 's-radio-group--custom-gap': hasCustomGap }" :style="groupStyle">
       <slot>
         <component
@@ -42,6 +47,7 @@ defineOptions({
 })
 interface RadioProps {
   title?: string
+  required?: boolean
   compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme
   size?: 'small' | 'default' | 'large'
@@ -72,6 +78,7 @@ const radioTypeColors = {
 
 const props = withDefaults(defineProps<RadioProps>(), {
   title: undefined,
+  required: false,
   compTitleStyle: undefined,
   theme: 'default',
   size: 'default',

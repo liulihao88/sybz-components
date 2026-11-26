@@ -1,5 +1,5 @@
 <template>
-  <div class="s-input" v-bind="mergedProps.subAttrs" :style="[mergedStyle, style]" :class="inputClass">
+  <div class="s-input" v-bind="mergedProps.subAttrs" :style="[mergedStyle, style]" :class="[inputClass, fieldClass]">
     <el-tooltip
       :content="inputTooltipContent"
       :disabled="inputTooltipDisabled"
@@ -25,6 +25,7 @@
           @clear="handleClear"
           @keyup.enter="triggerSearch"
           @mouseover="inputOnMouseOver($event)"
+          @blur="handleBlur"
           @update:model-value="handleInputUpdate"
         >
           <template v-if="$attrs.title || $slots.prepend" #prepend>
@@ -62,6 +63,7 @@
           @focus="focusHandler($event)"
           @keyup.enter="triggerSearch"
           @mouseover="inputOnMouseOver($event)"
+          @blur="handleBlur"
           @update:model-value="handleInputUpdate"
         >
           <template v-if="$attrs.title || $slots.prepend" #prepend>
@@ -115,19 +117,30 @@
     />
 
     <s-icon v-if="showTextareaClear" icon="circle-close" class="s-input__clear" @click="clearTextareaValue" />
+    <FieldValidator
+      v-if="standalone && normalizedRules.length"
+      ref="fieldValidatorRef"
+      :model-value="data"
+      :rules="normalizedRules"
+    />
+    <Transition name="s-field-error">
+      <span v-if="showErrorMessage" class="s-field__error" role="alert">{{ errorMessage }}</span>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { SybzComponentTheme } from '../../../types/component-props'
+import type { SFormRule, SybzComponentTheme } from '../../../types/component-props'
 import { ref, computed, useAttrs, useSlots, watch, nextTick, getCurrentInstance, onBeforeUnmount } from 'vue'
 import { useVModel } from '@vueuse/core'
 import { processWidth, getType, $toast } from '@sybz-components/utils'
 import { inputProps } from 'element-plus/es/components/input/src/input'
 import type { InputPropsPublic } from 'element-plus/es/components/input/src/input'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import useFieldValidate from '@/hooks/useFieldValidate'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
+import FieldValidator from '../../common/FieldValidator.vue'
 const attrs = useAttrs()
 const slots = useSlots()
 const instance = getCurrentInstance()
@@ -175,6 +188,10 @@ interface SInputProps {
   search?: boolean
   /** debounced-input 事件的防抖时间；true 为 500ms，false 或 0 为立即触发 */
   debounce?: boolean | number
+  /** 校验规则，写法同 s-form / el-form-item 的 rules；required: true 时显示红色星号 */
+  rules?: SFormRule | SFormRule[]
+  /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+  errorMode?: 'inline' | 'toast'
 }
 
 const props = withDefaults(defineProps<SInputProps>(), {
@@ -201,6 +218,8 @@ const props = withDefaults(defineProps<SInputProps>(), {
   dangerouslyUseHTMLString: true,
   search: false,
   debounce: 0,
+  rules: () => [],
+  errorMode: 'inline',
 })
 const emits = defineEmits<{
   'update:modelValue': [value: any]
@@ -216,6 +235,24 @@ const inputTooltipDisabled = ref(true)
 const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
+const fieldValidatorRef = ref<InstanceType<typeof FieldValidator>>()
+const {
+  standalone,
+  showErrorMessage,
+  errorMessage,
+  fieldClass,
+  normalizedRules,
+  validate,
+  clearValidate,
+  handleBlur,
+  handleChange,
+} = useFieldValidate({
+  rules: () => mergedProps.value.rules,
+  errorMode: () => mergedProps.value.errorMode,
+  label: () => (typeof attrs.title === 'string' ? attrs.title : undefined),
+  messagePrefix: '请输入',
+  runValidate: (trigger) => fieldValidatorRef.value?.validate(trigger) ?? Promise.resolve({ valid: true, message: '' }),
+})
 let debounceTimer: ReturnType<typeof setTimeout> | undefined
 onBeforeUnmount(() => clearTimeout(debounceTimer))
 const emitDebouncedInput = (value: unknown, immediate = false) => {
@@ -251,6 +288,7 @@ const inputClass = computed(() => [
     's-input--shijingshan': mergedProps.value.theme === 'shijingshan',
     's-input--sybz': mergedProps.value.theme === 'sybz',
     's-input--search': showSearchButton.value,
+    's-input--textarea': attrs.type === 'textarea',
   },
 ])
 
@@ -287,6 +325,7 @@ const resolveMaxLengthValue = (value: unknown) => {
 const handleInputUpdate = (value: unknown) => {
   const nextValue = resolveMaxLengthValue(value)
   data.value = nextValue
+  handleChange()
   emitDebouncedInput(nextValue, nextValue === '' || nextValue === null || nextValue === undefined)
 
   if (nextValue === '' || nextValue === null || nextValue === undefined) {
@@ -404,6 +443,7 @@ const handleSize = () => {
 }
 const clearTextareaValue = () => {
   data.value = ''
+  handleChange()
   emitDebouncedInput('', true)
   handleClear()
 }
@@ -476,6 +516,9 @@ const mergedAttrs = computed(() => {
   delete merged.search
   delete merged.debounce
   delete merged.topTitle
+  // 校验相关属性由组件自行处理，避免透传成原生属性。
+  delete merged.rules
+  delete merged.errorMode
   if (mergedProps.value.topTitle && !merged['aria-label']) {
     merged['aria-label'] = mergedProps.value.topTitle
   }
@@ -490,13 +533,38 @@ const mergedStyle = computed(() => {
     ...(typeof attrs.style === 'object' && attrs.style ? attrs.style : {}),
   }
 })
+
+defineExpose({
+  validate,
+  clearValidate,
+})
 </script>
 
 <style lang="scss" scoped>
+@use '../../../styles/mixins/field' as field;
+
 .s-input {
   position: relative;
   display: inline-block;
   width: 100%;
+
+  @include field.s-field-required;
+
+  &.is-required.s-input--textarea::before {
+    top: 8px;
+    transform: none;
+  }
+
+  &.is-error:not(.s-input--top-title) {
+    :deep(.el-input__wrapper),
+    :deep(.el-input__wrapper:hover),
+    :deep(.el-input__wrapper.is-focus),
+    :deep(.el-textarea__inner),
+    :deep(.el-textarea__inner:hover),
+    :deep(.el-textarea__inner.is-focus) {
+      box-shadow: 0 0 0 1px var(--el-color-danger) inset;
+    }
+  }
 
   .s-input__main {
     position: relative;
@@ -658,6 +726,11 @@ const mergedStyle = computed(() => {
       opacity: 0.5;
       cursor: not-allowed;
     }
+  }
+
+  // 放在 top-title hover 规则之后，错误态才能覆盖悬停色。
+  &.is-error.s-input--top-title {
+    --s-top-title-border-color: var(--el-color-danger);
   }
 }
 

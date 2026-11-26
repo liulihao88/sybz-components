@@ -38,7 +38,7 @@ input/maxlength
 
 ### 其他属性（debounce 默认值：0）
 
-基础写法：`<s-input v-model="keyword" debounce @debounced-input="loadDocuments" />`。`debounce` 为 `true` 时使用 500 毫秒防抖，也可写 `:debounce="300"` 指定毫秒数。`v-model` 每次输入都立即更新；停止输入后触发一次 `debounced-input(value)`，可在事件处理函数中请求接口。清空时立即触发。若请求可能交错返回，业务层仍需取消旧请求或忽略过期响应。
+基础写法：`<s-input v-model="keyword" debounce @debounced-input="loadDocuments" />`。`debounce` 为 `true` 时使用 500 毫秒防抖，也可写 `:debounce="300"` 指定毫秒数。`v-model` 每次输入都立即更新；停止输入后触发一次 `debounced-input(value)`，可在事件处理函数中请求接口。清空时立即触发。若请求可能交错返回，业务层仍需取消旧请求或忽略过期响应。示例同时演示 `rules` 校验：写法与 s-form 一致，`required: true` 时显示红色星号，`trigger: []` 时只在 `ref.validate()` 时校验；`error-mode` 默认 `inline`（底部文案 + 红框），设为 `toast` 时改用顶部 `$toast` 且只在手动校验时提示。
 
 :::demo 展示输入防抖及 Element Plus Input 属性透传。属性：`debounce` 类型 `boolean / number`，可选 `false / true / 毫秒数`，`true` 对应 500ms，`false` 和 `0` 表示立即触发，默认值 `0`；`type`、`show-password` 等继承 `el-input`。
 input/other
@@ -100,30 +100,32 @@ input/top-title
 
 ### 属性
 
-|           属性名           | 说明                                                  | 类型             | 默认值    |
-| :------------------------: | ----------------------------------------------------- | ---------------- | --------- |
-|        `modelValue`        | 绑定值                                                | any              | -         |
-|      `compTitleStyle`      | 标题前缀组件样式；默认内边距为 `0 8px`，可覆盖        | object           | `{}`      |
-|         `topTitle`         | 嵌在输入框上边框的标题，模板中写作 `top-title`        | string           | `''`      |
-|          `width`           | 输入框宽度                                            | string / number  | `100%`    |
-|          `height`          | 输入框高度                                            | string / number  | `''`      |
-|        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示      | string / number  | `10`      |
-|    `hideMaxLengthError`    | 是否隐藏超出最大长度时的 `$toast` 提示                | boolean          | `false`   |
-|    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案              | string           | `''`      |
-|           `size`           | 输入框尺寸                                            | string           | `''`      |
-|          `theme`           | 输入框主题                                            | string           | `default` |
-|      `showWordLimit`       | 是否显示字数统计                                      | boolean / string | `false`   |
-|          `block`           | 是否按块级宽度展示                                    | boolean          | `false`   |
-|      `disPlaceholder`      | 禁用态下显示的占位文案                                | string           | `''`      |
-|         `subAttrs`         | 外层容器额外属性                                      | object           | `{}`      |
-|       `tooltipAttrs`       | tooltip 额外属性                                      | object           | `{}`      |
-|        `iconAttrs`         | 右侧提示图标属性                                      | object           | `{}`      |
-|       `hideTooltip`        | 是否关闭溢出提示                                      | boolean          | `false`   |
-|         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`        | array            | -         |
-|         `content`          | 右侧说明提示文案                                      | string           | `''`      |
-|          `search`          | 是否在清空图标右侧显示搜索按钮，支持点击或 Enter 搜索 | boolean          | `false`   |
-|         `debounce`         | `debounced-input` 事件的防抖时间；`true` 为 500ms     | boolean / number | `0`       |
-| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染     | boolean          | `true`    |
+|           属性名           | 说明                                                                         | 类型                 | 默认值     |
+| :------------------------: | ---------------------------------------------------------------------------- | -------------------- | ---------- |
+|        `modelValue`        | 绑定值                                                                       | any                  | -          |
+|      `compTitleStyle`      | 标题前缀组件样式；默认内边距为 `0 8px`，可覆盖                               | object               | `{}`       |
+|         `topTitle`         | 嵌在输入框上边框的标题，模板中写作 `top-title`                               | string               | `''`       |
+|          `width`           | 输入框宽度                                                                   | string / number      | `100%`     |
+|          `height`          | 输入框高度                                                                   | string / number      | `''`       |
+|        `maxlength`         | 最大输入长度，超出后截断输入并触发 `$toast` 提示                             | string / number      | `10`       |
+|    `hideMaxLengthError`    | 是否隐藏超出最大长度时的 `$toast` 提示                                       | boolean              | `false`    |
+|    `maxLengthErrorText`    | 自定义超出最大长度时的 `$toast` 提示文案                                     | string               | `''`       |
+|           `size`           | 输入框尺寸                                                                   | string               | `''`       |
+|          `theme`           | 输入框主题                                                                   | string               | `default`  |
+|      `showWordLimit`       | 是否显示字数统计                                                             | boolean / string     | `false`    |
+|          `block`           | 是否按块级宽度展示                                                           | boolean              | `false`    |
+|      `disPlaceholder`      | 禁用态下显示的占位文案                                                       | string               | `''`       |
+|         `subAttrs`         | 外层容器额外属性                                                             | object               | `{}`       |
+|       `tooltipAttrs`       | tooltip 额外属性                                                             | object               | `{}`       |
+|        `iconAttrs`         | 右侧提示图标属性                                                             | object               | `{}`       |
+|       `hideTooltip`        | 是否关闭溢出提示                                                             | boolean              | `false`    |
+|         `options`          | 自动补全候选项，存在时渲染为 `el-autocomplete`                               | array                | -          |
+|         `content`          | 右侧说明提示文案                                                             | string               | `''`       |
+|          `search`          | 是否在清空图标右侧显示搜索按钮，支持点击或 Enter 搜索                        | boolean              | `false`    |
+|         `debounce`         | `debounced-input` 事件的防抖时间；`true` 为 500ms                            | boolean / number     | `0`        |
+|          `rules`           | 校验规则，写法同 s-form；`required: true` 显示星号，`trigger: []` 只手动校验 | array / object       | `[]`       |
+|        `errorMode`         | 错误显示方式；`toast` 用顶部 `$toast`，只在手动校验时提示                    | `'inline' / 'toast'` | `'inline'` |
+| `dangerouslyUseHTMLString` | 是否将右侧说明提示的 `content` 按 HTML 字符串渲染                            | boolean              | `true`     |
 
 ### 事件
 
@@ -133,10 +135,18 @@ input/top-title
 | `debounced-input` | 停止输入后触发，清空时立即触发                  | `(value: any)`                                |
 | `clear`           | Element Plus 清空事件，覆盖默认空值搜索         | `()`                                          |
 
+### 方法
+
+| 方法名          | 说明                                                                                       | 参数 |
+| --------------- | ------------------------------------------------------------------------------------------ | ---- |
+| `validate`      | 触发必填校验并返回是否通过；toast 模式失败时弹顶部提示，传 `{ showMessage: false }` 可静默 | -    |
+| `clearValidate` | 清除错误态和错误文案                                                                       | -    |
+
 ### 说明
 
 - 默认基于 `el-input` 二次封装，并透传绝大多数 `el-input` 属性。
 - 当传入 `options` 时会切换为 `el-autocomplete` 模式。
+- 在 `s-form` 内请使用字段的 `required` / `rules`，星号和错误由 `el-form-item` 渲染。
 
 ### 宽高布尔写法
 

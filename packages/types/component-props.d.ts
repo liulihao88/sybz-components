@@ -199,6 +199,29 @@ export interface SWidthHeightProps {
   h?: string | number | boolean
 }
 
+/** 表单控件的错误显示方式：inline 显示在控件下方，toast 使用顶部 $toast */
+export type SFieldErrorMode = 'inline' | 'toast'
+
+/** 独立校验结果 */
+export interface SFieldValidateResult {
+  valid: boolean
+  message: string
+}
+
+/**
+ * 表单控件的独立校验能力，规则写法与 s-form / el-form-item 的 rules 一致。
+ * 在 s-form 内由 el-form-item 接管，组件自身不重复渲染星号和错误。
+ */
+export interface SFieldValidateProps {
+  /**
+   * 校验规则，写法同 s-form / el-form-item 的 rules；规则带 required: true 时显示红色星号。
+   * trigger 默认 ['blur', 'change']，传 [] 表示只在手动 validate() 时校验。
+   */
+  rules?: SFormRule | SFormRule[]
+  /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+  errorMode?: SFieldErrorMode
+}
+
 /** 组件通用外观属性，由 useCommonProps 统一转换为样式和交互类名 */
 export interface SCommonProps extends SWidthHeightProps {
   color?: string
@@ -249,7 +272,7 @@ export type SButtonEmits = {
   click: (evt: MouseEvent) => boolean
 }
 
-export interface SDatePickerSelfProps {
+export interface SDatePickerSelfProps extends SFieldValidateProps {
   title?: string
   /** 嵌在日期选择框上边框的标题，与左侧标题 title 区分；默认空字符串 */
   topTitle?: string
@@ -354,7 +377,7 @@ export type SDialogPanelProps = Partial<Omit<DialogPropsPublic & DrawerPropsPubl
 
 export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 
-export interface SInputSelfProps extends SHtmlStringProps {
+export interface SInputSelfProps extends SHtmlStringProps, SFieldValidateProps {
   modelValue: any
   compTitleStyle?: SybzRecord
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
@@ -395,7 +418,7 @@ export interface SInputEmits {
 
 export type SInputProps = SInputSelfProps & Partial<Omit<InputPropsPublic, keyof SInputSelfProps>>
 
-export interface SInputNumberSelfProps {
+export interface SInputNumberSelfProps extends SFieldValidateProps {
   title?: string
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
   topTitle?: string
@@ -421,6 +444,8 @@ export interface SCheckboxOptionContext<Option = SybzRecord> {
 export interface SCheckboxSelfProps<Option = SybzRecord> {
   /** 左侧标题；button 模式显示为紧凑文字标签 */
   title?: string
+  /** 左侧标题前显示必填星号；默认 false */
+  required?: boolean
   /** 标题样式 */
   compTitleStyle?: SybzRecord
   type?: '' | 'simple'
@@ -446,6 +471,8 @@ export interface SClickOutsideProps {
 
 export interface SCompTitleProps {
   title?: string
+  /** 标题左侧显示必填星号；默认 false */
+  required?: boolean
   /** 标题样式：input 为输入框前缀，label 为普通控件标签；默认 input */
   type?: 'input' | 'label'
   compTitleStyle?: SybzRecord
@@ -875,6 +902,8 @@ export interface SRadioOptionContext<Option = SRadioItem> {
 
 export interface SRadioSelfProps<Option = SRadioItem> {
   title?: string
+  /** 左侧标题前显示必填星号；默认 false */
+  required?: boolean
   compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme
   type?: '' | 'boolean' | 'simple'
@@ -904,7 +933,7 @@ export interface SSelectChangeContext<Option = SybzRecord, Value = unknown, Labe
   index: number | number[] | undefined
 }
 
-export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps {
+export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps, SFieldValidateProps {
   modelValue?: any[] | string | number
   value?: string
   label?: string | string[]
@@ -949,6 +978,8 @@ export type SSelectProps = SSelectSelfProps & Partial<Omit<SelectPropsPublic, ke
 export interface SSwitchSelfProps {
   /** 开关左侧标题，默认无标题 */
   title?: string
+  /** 左侧标题前显示必填星号；默认 false */
+  required?: boolean
   /** 标题文字的自定义样式 */
   compTitleStyle?: SybzRecord
   theme?: SybzComponentTheme

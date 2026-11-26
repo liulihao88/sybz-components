@@ -5,6 +5,7 @@
     :class="[
       sizeClass,
       themeClass,
+      fieldClass,
       {
         's-select--theme': !!themeClass,
         'has-title': mergedProps.title,
@@ -44,6 +45,7 @@
           :multiple="multiple"
           :loading="isLoading"
           v-bind="selectAttrs"
+          @blur="handleBlur"
           @clear="hideSelectTooltip"
           @change="changeHandler"
         >
@@ -109,18 +111,29 @@
         <s-icon icon="ArrowDown" :size="quickIconSize" :disabled="quickDisabled" @click="quickSelect(true)" />
       </span>
     </span>
+    <FieldValidator
+      v-if="standalone && normalizedRules.length"
+      ref="fieldValidatorRef"
+      :model-value="childSelectedValue"
+      :rules="normalizedRules"
+    />
+    <Transition name="s-field-error">
+      <span v-if="showErrorMessage" class="s-field__error" role="alert">{{ errorMessage }}</span>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { SybzComponentTheme } from '../../../types/component-props'
+import type { SFormRule, SybzComponentTheme } from '../../../types/component-props'
 import { ref, getCurrentInstance, useAttrs, watch, useSlots, computed, nextTick } from 'vue'
 import { processWidth, isEmpty } from '@sybz-components/utils'
 import { ElSelect, useFormSize } from 'element-plus'
 import { Loading } from '@element-plus/icons-vue'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import useFieldValidate from '@/hooks/useFieldValidate'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
+import FieldValidator from '../../common/FieldValidator.vue'
 
 defineOptions({
   name: 'SSelect',
@@ -190,6 +203,10 @@ interface SelectProps {
   tooltipAttrs?: Record<string, any>
   dangerouslyUseHTMLString?: boolean
   loading?: boolean
+  /** 校验规则，写法同 s-form / el-form-item 的 rules；required: true 时显示红色星号 */
+  rules?: SFormRule | SFormRule[]
+  /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+  errorMode?: 'inline' | 'toast'
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -227,6 +244,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   tooltipAttrs: () => ({}),
   dangerouslyUseHTMLString: true,
   loading: false,
+  rules: () => [],
+  errorMode: 'inline',
 })
 const mergedProps = useGlobalComponentConfig('select', props)
 const isLoading = computed(() => mergedProps.value.loading === true)
@@ -346,6 +365,25 @@ const childSelectedValue = computed<SelectModelValue>({
 const isRecordOption = (item: SelectOption): item is Record<string, any> => {
   return item !== null && typeof item === 'object' && !Array.isArray(item)
 }
+
+const fieldValidatorRef = ref<InstanceType<typeof FieldValidator>>()
+const {
+  standalone,
+  showErrorMessage,
+  errorMessage,
+  fieldClass,
+  normalizedRules,
+  validate,
+  clearValidate,
+  handleBlur,
+  handleChange,
+} = useFieldValidate({
+  rules: () => mergedProps.value.rules,
+  errorMode: () => mergedProps.value.errorMode,
+  label: () => mergedProps.value.title,
+  messagePrefix: '请选择',
+  runValidate: (trigger) => fieldValidatorRef.value?.validate(trigger) ?? Promise.resolve({ valid: true, message: '' }),
+})
 
 const getModelValueArray = () => {
   return Array.isArray(props.modelValue) ? props.modelValue : []
@@ -641,6 +679,7 @@ function changeMulty(value: any[]) {
 // changeSelect 额外返回当前值对应的 label、option 和 index。
 function changeHandler(value: any) {
   hideSelectTooltip()
+  handleChange()
   // 如果val是数组, 证明是多选
   if (Array.isArray(value)) {
     changeMulty(value)
@@ -671,9 +710,16 @@ function emitChangeSelect(
   emits('update:modelValue', value)
   emits('change', value)
 }
+
+defineExpose({
+  validate,
+  clearValidate,
+})
 </script>
 
 <style lang="scss" scoped>
+@use '../../../styles/mixins/field' as field;
+
 .s-select {
   --s-select-min-height: var(--el-component-size, 32px);
   --s-select-title-font-size: 14px;
@@ -685,6 +731,22 @@ function emitChangeSelect(
   min-height: var(--s-select-min-height);
   align-items: stretch;
   vertical-align: bottom;
+
+  @include field.s-field-required;
+
+  &.is-required.is-multiple::before {
+    top: 8px;
+    transform: none;
+  }
+
+  &.is-error:not(.s-select--top-title) {
+    :deep(.el-select__wrapper),
+    :deep(.el-select__wrapper:hover),
+    :deep(.el-select__wrapper.is-focused),
+    :deep(.el-select__wrapper.is-focus) {
+      box-shadow: 0 0 0 1px var(--el-color-danger) inset;
+    }
+  }
 
   &.s-select--chenghua {
     --s-select-loading-color: var(--s-ch-primary);
@@ -826,6 +888,11 @@ function emitChangeSelect(
       height: auto !important;
       align-self: stretch;
     }
+  }
+
+  // 放在 top-title hover 规则之后，错误态才能覆盖悬停色。
+  &.is-error.s-select--top-title {
+    --s-top-title-border-color: var(--el-color-danger);
   }
 }
 

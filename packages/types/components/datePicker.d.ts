@@ -1,6 +1,12 @@
 import { ElDatePicker } from 'element-plus'
 import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'
-import type { SDatePickerSelfProps, SybzComponentTheme, SybzRecord } from '../component-props'
+import type {
+  SDatePickerSelfProps,
+  SFieldErrorMode,
+  SFormRule,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElDatePickerInstance = InstanceType<typeof ElDatePicker>
@@ -22,6 +28,13 @@ export type SDatePickerComponent = {
   install: (app: import('vue').App) => void
   new <SDatePicker文档 = 'https://liulihao88.github.io/sybz-components/components/datePicker/home.html'>(): {
     $props: {
+      /**
+       * 校验规则，写法同 s-form / el-form-item 的 rules；规则带 required: true 时显示红色星号。
+       * trigger 默认 ['blur', 'change']，传 [] 表示只在手动 validate() 时校验。
+       */
+      rules?: SFormRule | SFormRule[]
+      /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+      errorMode?: SFieldErrorMode
       title?: string
       /** 嵌在日期选择框上边框的标题，与左侧标题 title 区分；默认空字符串 */
       topTitle?: string
@@ -31,13 +44,26 @@ export type SDatePickerComponent = {
       compTitleStyle?: SybzRecord
     } & Omit<
       ElDatePickerInstance['$props'],
-      'title' | 'topTitle' | 'width' | 'w' | 'height' | 'h' | 'futureOnly' | 'theme' | 'shortcuts' | 'compTitleStyle'
+      | 'rules'
+      | 'errorMode'
+      | 'title'
+      | 'topTitle'
+      | 'width'
+      | 'w'
+      | 'height'
+      | 'h'
+      | 'futureOnly'
+      | 'theme'
+      | 'shortcuts'
+      | 'compTitleStyle'
     > &
       SybzStyleProps &
       SybzDimensionProps<SDatePickerSelfProps> &
       SybzThemeProps<SDatePickerSelfProps>
     $emit: ElDatePickerInstance['$emit']
     $slots: ElDatePickerInstance['$slots'] & Record<string, (...args: any[]) => any>
+    validate: (options?: { showMessage?: boolean }) => Promise<boolean>
+    clearValidate: () => void
   }
 }
 

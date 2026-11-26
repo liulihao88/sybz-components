@@ -12,23 +12,34 @@
         :title="mergedProps.topTitle"
         :square-left="Boolean(mergedProps.title)"
       />
-      <el-input-number class="s-input-number__inner" v-bind="mergedAttrs">
+      <el-input-number class="s-input-number__inner" v-bind="mergedAttrs" @blur="handleBlur" @change="handleChange">
         <template v-for="(_, name) in $slots" #[name]="slotProps">
           <slot :name="name" v-bind="slotProps || {}" />
         </template>
       </el-input-number>
     </div>
+    <FieldValidator
+      v-if="standalone && normalizedRules.length"
+      ref="fieldValidatorRef"
+      :model-value="fieldValue"
+      :rules="normalizedRules"
+    />
+    <Transition name="s-field-error">
+      <span v-if="showErrorMessage" class="s-field__error" role="alert">{{ errorMessage }}</span>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { SybzComponentTheme } from '../../../types/component-props'
-import { computed, useAttrs } from 'vue'
+import type { SFormRule, SybzComponentTheme } from '../../../types/component-props'
+import { computed, ref, useAttrs } from 'vue'
 import { processWidth } from '@sybz-components/utils'
 import { useFormSize } from 'element-plus'
 import useGlobalComponentConfig from '@/hooks/useGlobalComponentConfig'
+import useFieldValidate from '@/hooks/useFieldValidate'
 import { useStyleProps } from '@/hooks/useStyleProps'
 import TopTitleOutline from '../../common/TopTitleOutline.vue'
+import FieldValidator from '../../common/FieldValidator.vue'
 
 defineOptions({
   name: 'SInputNumber',
@@ -49,6 +60,10 @@ interface InputNumberProps {
   theme?: SybzComponentTheme
   size?: '' | 'large' | 'default' | 'small'
   subAttrs?: Record<string, any>
+  /** 校验规则，写法同 s-form / el-form-item 的 rules；required: true 时显示红色星号 */
+  rules?: SFormRule | SFormRule[]
+  /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+  errorMode?: 'inline' | 'toast'
 }
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
@@ -60,9 +75,30 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   theme: 'default',
   size: '',
   subAttrs: () => ({}),
+  rules: () => [],
+  errorMode: 'inline',
 })
 const mergedProps = useGlobalComponentConfig('inputNumber', props)
 const { style } = useStyleProps()
+const fieldValue = computed(() => attrs.modelValue ?? attrs['model-value'])
+const fieldValidatorRef = ref<InstanceType<typeof FieldValidator>>()
+const {
+  standalone,
+  showErrorMessage,
+  errorMessage,
+  fieldClass,
+  normalizedRules,
+  validate,
+  clearValidate,
+  handleBlur,
+  handleChange,
+} = useFieldValidate({
+  rules: () => mergedProps.value.rules,
+  errorMode: () => mergedProps.value.errorMode,
+  label: () => mergedProps.value.title,
+  messagePrefix: '请输入',
+  runValidate: (trigger) => fieldValidatorRef.value?.validate(trigger) ?? Promise.resolve({ valid: true, message: '' }),
+})
 const effectiveSize = useFormSize(computed(() => mergedProps.value.size || undefined))
 const isDisabled = computed(() => (attrs.disabled ?? mergedProps.value.disabled) === true || attrs.disabled === '')
 
@@ -89,6 +125,7 @@ const inputNumberClass = computed(() => [
     's-input-number--top-title': Boolean(mergedProps.value.topTitle),
     'has-title': !!mergedProps.value.title,
     'is-disabled': isDisabled.value,
+    ...fieldClass.value,
   },
 ])
 
@@ -131,13 +168,30 @@ const inputNumberStyle = computed(() => {
 
   return style
 })
+
+defineExpose({
+  validate,
+  clearValidate,
+})
 </script>
 
 <style scoped lang="scss">
+@use '../../../styles/mixins/field' as field;
+
 .s-input-number {
   display: inline-flex;
   align-items: stretch;
   vertical-align: middle;
+
+  @include field.s-field-required;
+
+  &.is-error:not(.s-input-number--top-title) {
+    :deep(.el-input__wrapper),
+    :deep(.el-input__wrapper:hover),
+    :deep(.el-input__wrapper.is-focus) {
+      box-shadow: 0 0 0 1px var(--el-color-danger) inset;
+    }
+  }
 
   .s-input-number__main {
     position: relative;
@@ -194,6 +248,11 @@ const inputNumberStyle = computed(() => {
     .s-input-number__main :deep(.el-input-number .el-input-number__increase:hover ~ .el-input .el-input__wrapper) {
       box-shadow: none;
     }
+  }
+
+  // 放在 top-title hover 规则之后，错误态才能覆盖悬停色。
+  &.is-error.s-input-number--top-title {
+    --s-top-title-border-color: var(--el-color-danger);
   }
 }
 </style>

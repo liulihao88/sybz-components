@@ -16,7 +16,7 @@
 compTitle/base
 :::
 
-### 其他用法
+### 其他用法（type 默认 input，required 默认 false）
 
 ::: other
 compTitle/other
@@ -33,6 +33,7 @@ compTitle/theme
 |      属性名      | 说明                                                    | 类型                                            | 默认值    |
 | :--------------: | ------------------------------------------------------- | ----------------------------------------------- | --------- |
 |     `title`      | 标题文案；为空时不渲染组件                              | string                                          | `''`      |
+|    `required`    | 标题左侧显示红色必填星号                                | boolean                                         | `false`   |
 |      `type`      | 标题样式：`input` 输入框前缀，`label` 普通控件标签      | `input` / `label`                               | `input`   |
 | `compTitleStyle` | 标题容器样式，支持 `width` 并会经过 `processWidth` 处理 | object                                          | `{}`      |
 |     `theme`      | 主题样式                                                | `default` / `chenghua` / `shijingshan` / `sybz` | `default` |

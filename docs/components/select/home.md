@@ -138,7 +138,7 @@ select/top-title
 
 基础写法：`<s-select v-model="value" simple :options="['北京', '上海']" />`；多选时使用 `ref<string[]>([])` 作为初始值，并添加 `multiple`。`simple` 可选 `true / false`，默认 `false`，裸写等价于 `:simple="true"`，也等价于 `type="simple"`。选项直接传字符串或数字数组，不需要转换成 `{ label, value }`。`multiple` 可选 `true / false`，默认 `false`；多选返回基础类型数组，单选返回一个基础类型值。
 
-:::demo 切换 `multiple`，观察同一基础类型选项数组的单选和多选效果。
+:::demo 切换 `multiple` 观察单选和多选；同屏演示 `rules`（写法同 s-form，`required: true` 显示星号）和 `ref.validate()`。
 select/other
 :::
 
@@ -146,40 +146,42 @@ select/other
 
 全局 `select` 配置中的 Element Plus 属性会自动透传给内部选择器，局部同名属性优先。`modelValue`、`options`、`multiple`、`size`、`placeholder`、`popperClass` 和 `loading` 仍由 `s-select` 自行处理；自定义 `valueOnClear` 时，应将该值加入 `emptyValues`。基础写法：`<s-select :loading="true" :options="options" />`，选择框显示旋转图标，展开时下拉层显示加载提示，右侧快速选择按钮置灰且不可点击。`loading` 只接受布尔值，可裸写 `loading`，不要写 `loading="true"`。
 
-|           属性名           | 说明                                                                      | 类型                                 | 默认值                  |
-| :------------------------: | ------------------------------------------------------------------------- | ------------------------------------ | ----------------------- |
-|        `modelValue`        | 当前值                                                                    | array / string / number              | -                       |
-|      `value-on-clear`      | 清空时写入的值；支持全局 `select.valueOnClear`，局部配置优先              | string / number / boolean / Function | `undefined`             |
-|       `empty-values`       | 视为空值的取值列表；支持全局 `select.emptyValues`，自定义清空值应包含在内 | array                                | `['', undefined, null]` |
-|          `value`           | 选项值字段名                                                              | string                               | `value`                 |
-|          `label`           | 选项显示字段名，支持字符串或多字段数组                                    | string / array                       | `label`                 |
-|         `options`          | 选项数据                                                                  | array                                | `[]`                    |
-|           `type`           | 数据类型，传 `simple` 时按基础类型数组处理                                | string                               | `''`                    |
-|          `simple`          | 基础类型选项简写，裸写等价于 `type="simple"`，可与 `multiple` 同时使用    | boolean                              | `false`                 |
-|         `multiple`         | 是否多选                                                                  | boolean                              | `false`                 |
-|         `loading`          | 在选择框显示加载图标，下拉层显示加载提示，并禁用右侧快速选择按钮          | boolean                              | `false`                 |
-|         `showAll`          | 多选时是否显示全选/反选                                                   | boolean                              | `true`                  |
-|        `showPrefix`        | 是否显示前缀数量信息                                                      | boolean                              | `false`                 |
-|        `showQuick`         | 是否显示上下快速切换按钮，仅由 showQuick 控制，空选项时仍显示             | boolean                              | `true`                  |
-|           `size`           | 选择器尺寸，支持 `small` / `default` / `large`                            | string                               | `''`                    |
-|          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` / `sybz`          | string                               | `default`               |
-|          `title`           | 左侧标题文案                                                              | string                               | `''`                    |
-|         `topTitle`         | 嵌在选择框上边框的标题，模板中写作 `top-title`                            | string                               | `''`                    |
-|      `compTitleStyle`      | 左侧标题组件样式；默认内边距为 `0 8px`                                    | object                               | `{}`                    |
-|         `connect`          | 多字段 label 拼接符                                                       | string                               | `/`                     |
-|       `customLabel`        | 自定义 label，参数为 `{ option, index, value }`                           | function                             | -                       |
-|          `width`           | 组件宽度                                                                  | string / number                      | `''`                    |
-|          `height`          | 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度        | string / number                      | `''`                    |
-|     `emptyPlaceholder`     | 没有选项时的占位文案，优先于 placeholder 和 disPlaceholder                | string                               | `暂无数据`              |
-|      `disPlaceholder`      | 禁用态占位文案                                                            | string                               | `''`                    |
-|      `customDisabled`      | 自定义禁用，参数为 `{ option, index, value }`                             | `(context) => boolean`               | -                       |
-|           `url`            | 远程请求地址或方法                                                        | string / function                    | `''`                    |
-|        `urlParams`         | 远程请求参数                                                              | object                               | `{}`                    |
-|    `optionsExpression`     | 远程结果取值表达式                                                        | string                               | `''`                    |
-|        `emptyColor`        | 选项为空时是否高亮边框                                                    | boolean                              | `false`                 |
-|       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                                          | boolean                              | `true`                  |
-|       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                                               | object                               | `{}`                    |
-| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染                         | boolean                              | `true`                  |
+|           属性名           | 说明                                                                         | 类型                                 | 默认值                  |
+| :------------------------: | ---------------------------------------------------------------------------- | ------------------------------------ | ----------------------- |
+|        `modelValue`        | 当前值                                                                       | array / string / number              | -                       |
+|      `value-on-clear`      | 清空时写入的值；支持全局 `select.valueOnClear`，局部配置优先                 | string / number / boolean / Function | `undefined`             |
+|       `empty-values`       | 视为空值的取值列表；支持全局 `select.emptyValues`，自定义清空值应包含在内    | array                                | `['', undefined, null]` |
+|          `value`           | 选项值字段名                                                                 | string                               | `value`                 |
+|          `label`           | 选项显示字段名，支持字符串或多字段数组                                       | string / array                       | `label`                 |
+|         `options`          | 选项数据                                                                     | array                                | `[]`                    |
+|           `type`           | 数据类型，传 `simple` 时按基础类型数组处理                                   | string                               | `''`                    |
+|          `simple`          | 基础类型选项简写，裸写等价于 `type="simple"`，可与 `multiple` 同时使用       | boolean                              | `false`                 |
+|         `multiple`         | 是否多选                                                                     | boolean                              | `false`                 |
+|         `loading`          | 在选择框显示加载图标，下拉层显示加载提示，并禁用右侧快速选择按钮             | boolean                              | `false`                 |
+|         `showAll`          | 多选时是否显示全选/反选                                                      | boolean                              | `true`                  |
+|        `showPrefix`        | 是否显示前缀数量信息                                                         | boolean                              | `false`                 |
+|        `showQuick`         | 是否显示上下快速切换按钮，仅由 showQuick 控制，空选项时仍显示                | boolean                              | `true`                  |
+|           `size`           | 选择器尺寸，支持 `small` / `default` / `large`                               | string                               | `''`                    |
+|          `theme`           | 选择器主题，支持 `default` / `chenghua` / `shijingshan` / `sybz`             | string                               | `default`               |
+|          `title`           | 左侧标题文案                                                                 | string                               | `''`                    |
+|         `topTitle`         | 嵌在选择框上边框的标题，模板中写作 `top-title`                               | string                               | `''`                    |
+|      `compTitleStyle`      | 左侧标题组件样式；默认内边距为 `0 8px`                                       | object                               | `{}`                    |
+|         `connect`          | 多字段 label 拼接符                                                          | string                               | `/`                     |
+|       `customLabel`        | 自定义 label，参数为 `{ option, index, value }`                              | function                             | -                       |
+|          `width`           | 组件宽度                                                                     | string / number                      | `''`                    |
+|          `height`          | 组件高度，支持数字、px、百分比等；百分比需要父容器具有可计算的高度           | string / number                      | `''`                    |
+|     `emptyPlaceholder`     | 没有选项时的占位文案，优先于 placeholder 和 disPlaceholder                   | string                               | `暂无数据`              |
+|      `disPlaceholder`      | 禁用态占位文案                                                               | string                               | `''`                    |
+|      `customDisabled`      | 自定义禁用，参数为 `{ option, index, value }`                                | `(context) => boolean`               | -                       |
+|           `url`            | 远程请求地址或方法                                                           | string / function                    | `''`                    |
+|        `urlParams`         | 远程请求参数                                                                 | object                               | `{}`                    |
+|    `optionsExpression`     | 远程结果取值表达式                                                           | string                               | `''`                    |
+|        `emptyColor`        | 选项为空时是否高亮边框                                                       | boolean                              | `false`                 |
+|       `showTooltip`        | 选中项文本溢出时是否显示 tooltip                                             | boolean                              | `true`                  |
+|       `tooltipAttrs`       | 选中项溢出 tooltip 额外属性                                                  | object                               | `{}`                    |
+| `dangerouslyUseHTMLString` | 是否将选中项溢出 tooltip 的内容按 HTML 字符串渲染                            | boolean                              | `true`                  |
+|          `rules`           | 校验规则，写法同 s-form；`required: true` 显示星号，`trigger: []` 只手动校验 | array / object                       | `[]`                    |
+|        `errorMode`         | 错误显示方式；`toast` 用顶部 `$toast`，只在手动校验时提示                    | `'inline' / 'toast'`                 | `'inline'`              |
 
 ### 事件
 
@@ -199,11 +201,19 @@ function changeSelect({ value, label, option, index }: SSelectChangeContext) {
 }
 ```
 
+### 方法
+
+| 方法名          | 说明                                                                                       | 参数 |
+| --------------- | ------------------------------------------------------------------------------------------ | ---- |
+| `validate`      | 触发必填校验并返回是否通过；toast 模式失败时弹顶部提示，传 `{ showMessage: false }` 可静默 | -    |
+| `clearValidate` | 清除错误态和错误文案                                                                       | -    |
+
 ### 说明
 
 - 组件基于 `el-select` 封装，绝大多数原生属性都可以直接透传。
 - 多选模式下支持全选、反选和上下快速切换；全选栏中除反选按钮外的任意位置均可切换全选状态。在 `s-form` 中，多选框与快速切换按钮会随标签换行一起增高。
 - 默认推荐使用 `options` 配置；未传 `options` 时，也支持在默认插槽中直接书写 `el-option`。
+- 在 `s-form` 内请使用字段的 `required` / `rules`，星号和错误由 `el-form-item` 渲染。
 
 ### 问题
 

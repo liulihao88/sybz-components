@@ -292,7 +292,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SCheckboxProps',
       description:
-        's-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。',
+        's-checkbox 多选组件，左侧 title 复用 s-comp-title 的 label 样式，required 显示必填星号；支持全选、gap 单值或 [水平, 垂直] 数组和 variant="checkbox|button"。',
       exportedComponentTypeName: 'SCheckboxComponent',
       publicPropsTypeName: 'SCheckboxPublicProps',
       useDefaultExportForGlobal: true,
@@ -322,7 +322,8 @@ const TYPED_COMPONENT_PROPS = new Map([
     {
       importPath: componentPropsPath,
       typeName: 'SCompTitleProps',
-      description: 's-comp-title 标题，type="input" 为输入框前缀，type="label" 为单选、多选和开关旁的简洁标签。',
+      description:
+        's-comp-title 标题，type="input" 为输入框前缀，type="label" 为普通控件标签；required 在标题左侧显示必填星号。',
       hoverProps: componentHoverProps('SCompTitleProps', ['SCompTitleProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],
@@ -338,9 +339,13 @@ const TYPED_COMPONENT_PROPS = new Map([
       allowAnySlots: true,
       description:
         's-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。',
+      instanceMembers: [
+        'validate: (options?: { showMessage?: boolean }) => Promise<boolean>',
+        'clearValidate: () => void',
+      ],
       hoverProps: componentHoverProps(
         'SDatePickerSelfProps',
-        ['SDatePickerSelfProps', 'SybzComponentTheme', 'SybzRecord'],
+        ['SDatePickerSelfProps', 'SFieldErrorMode', 'SFormRule', 'SybzComponentTheme', 'SybzRecord'],
         ["import type { DatePickerPropsPublic } from 'element-plus/es/components/date-picker/src/props'"],
       ),
     },
@@ -616,7 +621,13 @@ const TYPED_COMPONENT_PROPS = new Map([
       slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
       emitsMember:
         "ElInputInstance['$emit'] & (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)",
+      instanceMembers: [
+        'validate: (options?: { showMessage?: boolean }) => Promise<boolean>',
+        'clearValidate: () => void',
+      ],
       hoverProps: componentHoverProps('SInputSelfProps', [
+        'SFieldErrorMode',
+        'SFormRule',
         'SInputEmits',
         'SInputSelfProps',
         'SybzComponentSize',
@@ -644,7 +655,13 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'inputNumber',
       allowAnySlots: true,
       description: 's-input-number 数字输入框组件，支持上边框嵌入标题。',
+      instanceMembers: [
+        'validate: (options?: { showMessage?: boolean }) => Promise<boolean>',
+        'clearValidate: () => void',
+      ],
       hoverProps: componentHoverProps('SInputNumberSelfProps', [
+        'SFieldErrorMode',
+        'SFormRule',
         'SInputNumberSelfProps',
         'SybzComponentSize',
         'SybzComponentTheme',
@@ -743,7 +760,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       importPath: componentPropsPath,
       typeName: 'SRadioProps',
       description:
-        's-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。',
+        's-radio 单选组件，左侧 title 复用 s-comp-title 的 label 样式，required 显示必填星号；普通 radio 的 gap 默认 16px，支持单值或 [水平, 垂直] 数组；button 忽略 gap、保持连续单行，超出时横向滚动。',
       exportedComponentTypeName: 'SRadioComponent',
       publicPropsTypeName: 'SRadioPublicProps',
       useDefaultExportForGlobal: true,
@@ -789,7 +806,13 @@ const TYPED_COMPONENT_PROPS = new Map([
       allowAnySlots: true,
       description:
         's-select 下拉选择组件，loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。',
+      instanceMembers: [
+        'validate: (options?: { showMessage?: boolean }) => Promise<boolean>',
+        'clearValidate: () => void',
+      ],
       hoverProps: componentHoverProps('SSelectSelfProps', [
+        'SFieldErrorMode',
+        'SFormRule',
         'SSelectChangeContext',
         'SSelectOptionContext',
         'SSelectSelfProps',
@@ -825,7 +848,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       publicPropsTypeName: 'SSwitchPublicProps',
       useDefaultExportForGlobal: true,
       explicitComponentType: 'switch',
-      description: 's-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题。',
+      description: 's-switch 开关组件，title 使用 s-comp-title 的 label 样式显示左侧标题，required 显示必填星号。',
       hoverProps: componentHoverProps('SSwitchSelfProps', ['SSwitchSelfProps', 'SybzComponentTheme', 'SybzRecord']),
     },
   ],

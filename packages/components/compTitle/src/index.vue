@@ -12,6 +12,7 @@ const attrs = useAttrs()
 
 interface CompTitleProps {
   title?: string
+  required?: boolean
   type?: 'input' | 'label'
   compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme
@@ -19,6 +20,7 @@ interface CompTitleProps {
 
 const props = withDefaults(defineProps<CompTitleProps>(), {
   title: '',
+  required: false,
   type: 'input',
   compTitleStyle: undefined,
   theme: 'default',
@@ -62,6 +64,7 @@ const compTitleClass = computed(() => [
     :style="[{ ...computedBoxStyle }, style]"
     v-bind="$attrs"
   >
+    <span v-if="mergedProps.required" class="s-comp-title__required" aria-hidden="true">*</span>
     {{ mergedProps.title }}
   </component>
 </template>
@@ -91,6 +94,12 @@ const compTitleClass = computed(() => [
 }
 .s-comp-title__base-size {
   font-size: 14px;
+}
+.s-comp-title__required {
+  margin-right: 3px;
+  color: var(--el-color-danger);
+  font-size: 14px;
+  line-height: 1;
 }
 .s-comp-title--label {
   align-self: center;

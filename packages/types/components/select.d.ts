@@ -1,5 +1,7 @@
 import { ElSelect } from 'element-plus'
 import type {
+  SFieldErrorMode,
+  SFormRule,
   SSelectChangeContext,
   SSelectOptionContext,
   SSelectSelfProps,
@@ -29,6 +31,13 @@ export type SSelectComponent = {
     $props: {
       /** 是否按 HTML 字符串渲染，默认 true，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
+      /**
+       * 校验规则，写法同 s-form / el-form-item 的 rules；规则带 required: true 时显示红色星号。
+       * trigger 默认 ['blur', 'change']，传 [] 表示只在手动 validate() 时校验。
+       */
+      rules?: SFormRule | SFormRule[]
+      /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+      errorMode?: SFieldErrorMode
       modelValue?: any[] | string | number
       value?: string
       label?: string | string[]
@@ -63,6 +72,8 @@ export type SSelectComponent = {
     } & Omit<
       ElSelectInstance['$props'],
       | 'dangerouslyUseHTMLString'
+      | 'rules'
+      | 'errorMode'
       | 'modelValue'
       | 'value'
       | 'label'
@@ -100,6 +111,8 @@ export type SSelectComponent = {
       SybzThemeProps<SSelectSelfProps>
     $emit: ElSelectInstance['$emit']
     $slots: ElSelectInstance['$slots'] & Record<string, (...args: any[]) => any>
+    validate: (options?: { showMessage?: boolean }) => Promise<boolean>
+    clearValidate: () => void
   }
 }
 

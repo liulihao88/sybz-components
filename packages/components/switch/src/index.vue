@@ -13,6 +13,7 @@ defineOptions({
 
 interface SwitchProps {
   title?: string
+  required?: boolean
   compTitleStyle?: Record<string, any>
   theme?: SybzComponentTheme
   beforeChange?: (...args: any[]) => any
@@ -22,6 +23,7 @@ interface SwitchProps {
 
 const props = withDefaults(defineProps<SwitchProps>(), {
   title: '',
+  required: false,
   compTitleStyle: undefined,
   theme: 'default',
   beforeChange: undefined,
@@ -62,7 +64,12 @@ const switchClass = computed(() => ({
 
 <template>
   <span class="s-switch-box" :style="style">
-    <SCompTitle :title="mergedProps.title" type="label" :comp-title-style="mergedProps.compTitleStyle" />
+    <SCompTitle
+      :title="mergedProps.title"
+      type="label"
+      :required="mergedProps.required"
+      :comp-title-style="mergedProps.compTitleStyle"
+    />
     <el-switch
       v-bind="{ 'inline-prompt': true, disabled: mergedProps.disabled, ...$attrs }"
       class="s-custom-switch"

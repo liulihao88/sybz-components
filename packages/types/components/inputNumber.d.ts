@@ -1,5 +1,12 @@
 import { ElInputNumber } from 'element-plus'
-import type { SInputNumberSelfProps, SybzComponentSize, SybzComponentTheme, SybzRecord } from '../component-props'
+import type {
+  SFieldErrorMode,
+  SFormRule,
+  SInputNumberSelfProps,
+  SybzComponentSize,
+  SybzComponentTheme,
+  SybzRecord,
+} from '../component-props'
 import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElInputNumberInstance = InstanceType<typeof ElInputNumber>
@@ -21,6 +28,13 @@ export type SInputNumberComponent = {
   install: (app: import('vue').App) => void
   new <SInputNumber文档 = 'https://liulihao88.github.io/sybz-components/components/inputNumber/home.html'>(): {
     $props: {
+      /**
+       * 校验规则，写法同 s-form / el-form-item 的 rules；规则带 required: true 时显示红色星号。
+       * trigger 默认 ['blur', 'change']，传 [] 表示只在手动 validate() 时校验。
+       */
+      rules?: SFormRule | SFormRule[]
+      /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+      errorMode?: SFieldErrorMode
       title?: string
       /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
       topTitle?: string
@@ -29,13 +43,26 @@ export type SInputNumberComponent = {
       subAttrs?: SybzRecord
     } & Omit<
       ElInputNumberInstance['$props'],
-      'title' | 'topTitle' | 'compTitleStyle' | 'width' | 'w' | 'height' | 'h' | 'theme' | 'size' | 'subAttrs'
+      | 'rules'
+      | 'errorMode'
+      | 'title'
+      | 'topTitle'
+      | 'compTitleStyle'
+      | 'width'
+      | 'w'
+      | 'height'
+      | 'h'
+      | 'theme'
+      | 'size'
+      | 'subAttrs'
     > &
       SybzStyleProps &
       SybzDimensionProps<SInputNumberSelfProps> &
       SybzThemeProps<SInputNumberSelfProps>
     $emit: ElInputNumberInstance['$emit']
     $slots: ElInputNumberInstance['$slots'] & Record<string, (...args: any[]) => any>
+    validate: (options?: { showMessage?: boolean }) => Promise<boolean>
+    clearValidate: () => void
   }
 }
 

@@ -16,7 +16,7 @@
 switch/base
 :::
 
-### 其他用法（title 默认值：''）
+### 其他用法（title 默认 ''，required 默认 false）
 
 ::: other
 switch/other
@@ -40,6 +40,7 @@ switch/async
 | :------------: | -------------------------------------------------------------------------------- | ------------------ | --------- |
 |     theme      | 主题样式，支持 `default` / `chenghua` / `shijingshan` / `sybz`                   | string             | `default` |
 |     title      | 开关左侧标题，与 `s-radio` 的标题样式一致                                        | string             | `''`      |
+|    required    | 标题左侧显示红色必填星号                                                         | boolean            | `false`   |
 | compTitleStyle | 标题文字的自定义样式                                                             | object             | `{}`      |
 |  active-text   | switch 打开时的文字描述                                                          | string             | ''        |
 | inactive-text  | switch 的状态为 off 时的文字描述                                                 | string             | ''        |

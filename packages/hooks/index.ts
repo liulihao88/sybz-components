@@ -6,6 +6,9 @@ export { default as useClickOutside } from './useClickOutside'
 export { default as useCommonProps } from './useCommonProps'
 export type { UseCommonPropsReturn } from './useCommonProps'
 
+export { default as useFieldValidate } from './useFieldValidate'
+export type { UseFieldValidateOptions, UseFieldValidateReturn } from './useFieldValidate'
+
 export { default as useFlexFillSize } from './useFlexFillSize'
 export type { UseFlexFillSizeOptions } from './useFlexFillSize'
 

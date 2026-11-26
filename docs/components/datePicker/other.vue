@@ -3,6 +3,8 @@ import { ref } from 'vue'
 
 const rangeValue = ref([])
 const dateSimple = ref('')
+const requiredDate = ref('')
+const requiredDateRef = ref()
 const otherParams = ref({
   topTitle: '选择日期范围',
   title: '审核周期',
@@ -21,6 +23,12 @@ const disabledOptions = [
   { label: 'false（默认值）', value: false },
   { label: 'true', value: true },
 ]
+
+const requiredRules = [{ required: true, message: '请选择日期', trigger: ['blur', 'change'] }]
+
+const validateRequiredDate = () => {
+  requiredDateRef.value?.validate()
+}
 </script>
 
 <template>
@@ -56,6 +64,17 @@ const disabledOptions = [
     </div>
 
     <div class="demo-value">{{ rangeValue }} / {{ dateSimple }}</div>
+
+    <s-flex gap="small">
+      <s-date-picker
+        ref="requiredDateRef"
+        v-model="requiredDate"
+        :rules="requiredRules"
+        width="260"
+        placeholder="请选择日期"
+      />
+      <s-button size="small" @click="validateRequiredDate">校验</s-button>
+    </s-flex>
   </div>
 </template>
 

@@ -1,5 +1,7 @@
 import { ElInput } from 'element-plus'
 import type {
+  SFieldErrorMode,
+  SFormRule,
   SInputEmits,
   SInputSelfProps,
   SybzComponentSize,
@@ -28,6 +30,13 @@ export type SInputComponent = {
     $props: {
       /** 是否按 HTML 字符串渲染，默认 true，推荐使用 Element Plus 同名写法 */
       dangerouslyUseHTMLString?: boolean
+      /**
+       * 校验规则，写法同 s-form / el-form-item 的 rules；规则带 required: true 时显示红色星号。
+       * trigger 默认 ['blur', 'change']，传 [] 表示只在手动 validate() 时校验。
+       */
+      rules?: SFormRule | SFormRule[]
+      /** 错误显示方式，默认 inline；toast 使用顶部 $toast，且只在手动 validate() 时提示 */
+      errorMode?: SFieldErrorMode
       modelValue: any
       compTitleStyle?: SybzRecord
       /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
@@ -52,6 +61,8 @@ export type SInputComponent = {
     } & Omit<
       ElInputInstance['$props'],
       | 'dangerouslyUseHTMLString'
+      | 'rules'
+      | 'errorMode'
       | 'modelValue'
       | 'compTitleStyle'
       | 'topTitle'
@@ -88,6 +99,8 @@ export type SInputComponent = {
       suffix?: () => any
       append?: () => any
     }
+    validate: (options?: { showMessage?: boolean }) => Promise<boolean>
+    clearValidate: () => void
   }
 }
 
