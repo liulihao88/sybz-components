@@ -17,6 +17,8 @@ const attrs = useAttrs()
 const datePickerRef = ref()
 interface DatePickerProps {
   title?: string
+  /** 仅在左侧显示必填星号；默认 false，不触发校验 */
+  required?: boolean
   /** 嵌在日期选择框上边框的标题，与左侧标题 title 区分 */
   topTitle?: string
   width?: string | number | boolean
@@ -35,6 +37,7 @@ interface DatePickerProps {
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   title: '',
+  required: false,
   topTitle: '',
   width: '300px',
   height: '',
@@ -464,7 +467,12 @@ const datePickerClass = computed(() => ({
   'has-title': !!mergedProps.value.title,
   'is-disabled': isDisabled.value,
 }))
-const rootClass = computed<any>(() => [datePickerClass.value, attrs.class, fieldClass.value])
+const rootClass = computed<any>(() => [
+  datePickerClass.value,
+  attrs.class,
+  fieldClass.value,
+  { 'is-required': mergedProps.value.required },
+])
 const rootStyle = computed<any>(() => [datePickerStyle.value, attrs.style])
 const compTitleProps = computed(() => {
   const titleProps: Record<string, any> = {

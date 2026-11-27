@@ -339,7 +339,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'datePicker',
       allowAnySlots: true,
       description:
-        's-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。',
+        's-date-picker 日期选择组件，required 仅在左侧显示必填星号、不触发校验；支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。',
       instanceMembers: [
         'validate: (options?: { showMessage?: boolean }) => Promise<boolean>',
         'clearValidate: () => void',
@@ -618,7 +618,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'input',
       description:
-        's-input 输入框组件，宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。',
+        's-input 输入框组件，required 仅在左侧显示必填星号、不触发校验；宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。',
       slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
       emitsMember:
         "ElInputInstance['$emit'] & (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)",
@@ -806,7 +806,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       explicitComponentType: 'select',
       allowAnySlots: true,
       description:
-        's-select 下拉选择组件，loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。',
+        's-select 下拉选择组件，required 仅在左侧显示必填星号、不触发校验；loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。',
       instanceMembers: [
         'validate: (options?: { showMessage?: boolean }) => Promise<boolean>',
         'clearValidate: () => void',

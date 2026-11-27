@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const multiple = ref(false)
 const loading = ref(false)
+const required = ref(false)
 const singleValue = ref('北京')
 const multipleValue = ref<string[]>(['北京', '上海'])
 const requiredValue = ref('')
@@ -17,6 +18,7 @@ const validateRequiredSelect = () => {
 
 <template>
   <s-flex direction="column" gap="12">
+    <s-radio v-model="required" :options="[true, false]" simple title="required" variant="button" size="small" />
     <s-radio
       v-model="multiple"
       :options="[
@@ -31,6 +33,7 @@ const validateRequiredSelect = () => {
       simple
       multiple
       :loading="loading"
+      :required="required"
       :options="options"
       title="simple=true（默认 false），multiple=true（默认 false）"
     />
@@ -39,6 +42,7 @@ const validateRequiredSelect = () => {
       v-model="singleValue"
       simple
       :loading="loading"
+      :required="required"
       :options="options"
       title="simple=true（默认 false），multiple=false（默认 false）"
     />

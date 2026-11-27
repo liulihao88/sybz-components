@@ -276,6 +276,8 @@ export type SButtonEmits = {
 
 export interface SDatePickerSelfProps extends SFieldValidateProps {
   title?: string
+  /** 仅在左侧显示必填星号；默认 false，不触发校验 */
+  required?: boolean
   /** 嵌在日期选择框上边框的标题，与左侧标题 title 区分；默认空字符串 */
   topTitle?: string
   width?: string | number | boolean
@@ -381,6 +383,8 @@ export type SDialogProps = SDialogSelfProps & SDialogPanelProps
 
 export interface SInputSelfProps extends SHtmlStringProps, SFieldValidateProps {
   modelValue: any
+  /** 仅在左侧显示必填星号；默认 false，不触发校验 */
+  required?: boolean
   compTitleStyle?: SybzRecord
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分；默认空字符串 */
   topTitle?: string
@@ -933,6 +937,8 @@ export interface SSelectChangeContext<Option = SybzRecord, Value = unknown, Labe
 
 export interface SSelectSelfProps<Option = SybzRecord> extends SHtmlStringProps, SFieldValidateProps {
   modelValue?: any[] | string | number
+  /** 仅在左侧显示必填星号；默认 false，不触发校验 */
+  required?: boolean
   value?: string
   label?: string | string[]
   options?: any[]

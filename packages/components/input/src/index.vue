@@ -1,5 +1,10 @@
 <template>
-  <div class="s-input" v-bind="mergedProps.subAttrs" :style="[mergedStyle, style]" :class="[inputClass, fieldClass]">
+  <div
+    class="s-input"
+    v-bind="mergedProps.subAttrs"
+    :style="[mergedStyle, style]"
+    :class="[inputClass, fieldClass, { 'is-required': mergedProps.required }]"
+  >
     <el-tooltip
       :content="inputTooltipContent"
       :disabled="inputTooltipDisabled"
@@ -162,6 +167,8 @@ const normalizeInputSize = (size: unknown): InputSize | undefined => {
 
 interface SInputProps {
   modelValue: any
+  /** 仅在左侧显示必填星号；默认 false，不触发校验 */
+  required?: boolean
   compTitleStyle?: Record<string, any>
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分 */
   topTitle?: string
@@ -191,6 +198,7 @@ interface SInputProps {
 }
 
 const props = withDefaults(defineProps<SInputProps>(), {
+  required: false,
   compTitleStyle: undefined,
   topTitle: '',
   maxlength: undefined,
@@ -502,6 +510,7 @@ const mergedAttrs = computed(() => {
   // 校验相关属性由组件自行处理，避免透传成原生属性。
   delete merged.rules
   delete merged.errorMode
+  delete merged.required
   if (mergedProps.value.topTitle && !merged['aria-label']) {
     merged['aria-label'] = mergedProps.value.topTitle
   }

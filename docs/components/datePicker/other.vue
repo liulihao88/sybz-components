@@ -8,6 +8,7 @@ const requiredDateRef = ref()
 const otherParams = ref({
   topTitle: '选择日期范围',
   title: '审核周期',
+  required: false,
   disabled: false,
 })
 const topTitleOptions = [
@@ -36,12 +37,14 @@ const validateRequiredDate = () => {
     <s-flex gap="small" direction="column" class="p-b-12">
       <s-radio v-model="otherParams.topTitle" :options="topTitleOptions" variant="button" title="top-title" />
       <s-radio v-model="otherParams.title" :options="titleOptions" variant="button" title="title" />
+      <s-radio v-model="otherParams.required" :options="[true, false]" variant="button" title="required" />
       <s-radio v-model="otherParams.disabled" :options="disabledOptions" variant="button" title="disabled" />
     </s-flex>
     <div class="demo-list">
       <s-date-picker
         v-model="rangeValue"
         :title="otherParams.title"
+        :required="otherParams.required"
         :top-title="otherParams.topTitle"
         :disabled="otherParams.disabled"
         type="daterange"
@@ -54,6 +57,7 @@ const validateRequiredDate = () => {
       <s-date-picker
         v-model="dateSimple"
         :title="otherParams.title"
+        :required="otherParams.required"
         :top-title="otherParams.topTitle"
         :disabled="otherParams.disabled"
         type="datetime"

@@ -1,5 +1,6 @@
 <template>
   <s-flex gap="small" direction="column">
+    <s-radio v-model="required" :options="[true, false]" simple title="required" variant="button" size="small" />
     <div>debounce（可选 false / true（500ms）/ 300 / 600；默认 0）：</div>
     <s-radio v-model="debounce" :options="[false, true, 300, 600]" />
     <s-input
@@ -19,7 +20,7 @@
       placeholder="Please input password"
       show-password
     />
-    <s-input v-model="input" width="240" height="48" title="height: 48" placeholder="height: 48" />
+    <s-input v-model="input" width="240" height="48" title="height: 48" :required="required" placeholder="height: 48" />
     <div>rules（写法同 s-form，required: true 显示星号；trigger 默认 ['blur', 'change']）：</div>
     <s-flex gap="small">
       <s-input
@@ -49,6 +50,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
+const required = ref(false)
 const input = ref('')
 const keyword = ref('')
 const requestedKeyword = ref('')

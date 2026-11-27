@@ -7,6 +7,7 @@
       themeClass,
       fieldClass,
       {
+        'is-required': mergedProps.required,
         's-select--theme': !!themeClass,
         'has-title': mergedProps.title,
         'has-quick': mergedProps.showQuick,
@@ -168,6 +169,8 @@ const noDefaultSlots = computed<Record<string, any>>(() => {
 
 interface SelectProps {
   modelValue?: any[] | string | number
+  /** 仅在左侧显示必填星号；默认 false，不触发校验 */
+  required?: boolean
   value?: string
   label?: string | string[]
   options?: any[]
@@ -211,6 +214,7 @@ interface SelectProps {
 
 const props = withDefaults(defineProps<SelectProps>(), {
   modelValue: undefined,
+  required: false,
   value: 'value',
   label: 'label',
   options: () => [],
