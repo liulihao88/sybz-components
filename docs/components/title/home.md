@@ -54,7 +54,7 @@ title/other
 
 基础写法：`<s-title title="任务标题" append="草稿" sub-title="任务摘要" />`。`subTitle` 类型为字符串，默认 `''`，固定显示在主标题下方，左侧竖条会随副标题一起撑满整个标题块；`append` 类型为字符串，默认 `''`，显示在主标题右侧，颜色和字号与副标题一致。两者默认按白名单富文本渲染，可直接写任意已全局注册的组件标签（如 `<s-text>`、`<s-tag>`、`<s-button>`、`<el-button>`）或简单 HTML；需要纯文本时设置 `:dangerouslyUseHTMLString="false"`。`appendAttrs` 类型为对象，默认 `{}`，可透传追加内容的 DOM 属性；其中 `fontSize` 接受数字或 CSS 长度，默认未设置，`style` 也可直接传入。复杂内容使用 `#append` 插槽，插槽优先于 `append` 属性，`appendAttrs` 同样作用于插槽容器；`extra` 仍是最右侧操作区。
 
-:::demo 切换追加文本和 `appendAttrs.fontSize`，并对比 `append` 插槽和最右侧 `extra` 插槽。
+:::demo 切换追加文本和字号，观察 append 与主标题底部对齐。
 title/append
 :::
 

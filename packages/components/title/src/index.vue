@@ -325,7 +325,7 @@ const hasIcon = computed(() => {
   }
   .s-title__title-row {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: var(--s-title-gap, 8px);
     min-width: 0;
   }

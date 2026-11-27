@@ -785,7 +785,7 @@ onBeforeUnmount(() => {
 
   .s-dialog__header-title-row {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 8px;
     min-width: 0;
   }
