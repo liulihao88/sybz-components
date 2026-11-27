@@ -16,6 +16,14 @@
 input/base
 :::
 
+### other
+
+基础写法：`<s-input v-model="keyword" debounce @debounced-input="loadDocuments" />`。`debounce` 为 `true` 时使用 500 毫秒防抖，也可写 `:debounce="300"` 指定毫秒数。`v-model` 每次输入都立即更新；停止输入后触发一次 `debounced-input(value)`，可在事件处理函数中请求接口。清空时立即触发。若请求可能交错返回，业务层仍需取消旧请求或忽略过期响应。示例同时演示 `rules` 校验：写法与 s-form 一致，`required: true` 时显示红色星号，`trigger: []` 时只在 `ref.validate()` 时校验；`error-mode` 默认 `inline`（底部文案 + 红框），设为 `toast` 时改用顶部 `$toast` 且只在手动校验时提示。
+
+:::demo 展示输入防抖及 Element Plus Input 属性透传。属性：`debounce` 类型 `boolean / number`，可选 `false / true / 毫秒数`，`true` 对应 500ms，`false` 和 `0` 表示立即触发，默认值 `0`；`type`、`show-password` 等继承 `el-input`。
+input/other
+:::
+
 ### 主题（theme 默认值：default）
 
 用示例顶部的选项切换主题，查看普通输入框、带标题输入框、搜索框和多行输入框的外观。基础写法：`<s-input v-model="input" :theme="theme" width="320" placeholder="请输入服务名称" />`。
@@ -34,14 +42,6 @@ input/size
 
 :::demo 展示maxlength 最大长度配置。基础写法：`<s-input v-model="customValue" width="320" title="自定义 maxlength 和 toast 文案" :maxlength="6" max-length-error-text="最多只能输入 6 个字符" />`。
 input/maxlength
-:::
-
-### 其他属性（debounce 默认值：0）
-
-基础写法：`<s-input v-model="keyword" debounce @debounced-input="loadDocuments" />`。`debounce` 为 `true` 时使用 500 毫秒防抖，也可写 `:debounce="300"` 指定毫秒数。`v-model` 每次输入都立即更新；停止输入后触发一次 `debounced-input(value)`，可在事件处理函数中请求接口。清空时立即触发。若请求可能交错返回，业务层仍需取消旧请求或忽略过期响应。示例同时演示 `rules` 校验：写法与 s-form 一致，`required: true` 时显示红色星号，`trigger: []` 时只在 `ref.validate()` 时校验；`error-mode` 默认 `inline`（底部文案 + 红框），设为 `toast` 时改用顶部 `$toast` 且只在手动校验时提示。
-
-:::demo 展示输入防抖及 Element Plus Input 属性透传。属性：`debounce` 类型 `boolean / number`，可选 `false / true / 毫秒数`，`true` 对应 500ms，`false` 和 `0` 表示立即触发，默认值 `0`；`type`、`show-password` 等继承 `el-input`。
-input/other
 :::
 
 ### 禁用状态
@@ -147,7 +147,3 @@ input/top-title
 - 默认基于 `el-input` 二次封装，并透传绝大多数 `el-input` 属性。
 - 当传入 `options` 时会切换为 `el-autocomplete` 模式。
 - 在 `s-form` 内请使用字段的 `required` / `rules`，星号和错误由 `el-form-item` 渲染。
-
-### 宽高布尔写法
-
-`w` / `width` 裸写或传入 `true` 表示宽度 `100%`；`h` / `height` 裸写或传入 `true` 表示高度 `100%`。传入 `false` 表示不设置该尺寸；也可传数字或 CSS 长度。未传时沿用组件属性表中的默认值。百分比高度需要父容器有明确高度。
