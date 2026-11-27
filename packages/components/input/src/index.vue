@@ -165,10 +165,6 @@ interface SInputProps {
   compTitleStyle?: Record<string, any>
   /** 嵌在输入框上边框的标题，与左侧前缀 title 区分 */
   topTitle?: string
-  width?: string | number | boolean
-  w?: string | number | boolean
-  height?: string | number | boolean
-  h?: string | number | boolean
   maxlength?: string | number
   hideMaxLengthError?: boolean
   maxLengthErrorText?: string
@@ -197,8 +193,6 @@ interface SInputProps {
 const props = withDefaults(defineProps<SInputProps>(), {
   compTitleStyle: undefined,
   topTitle: '',
-  width: '100%',
-  height: '',
   maxlength: undefined,
   hideMaxLengthError: false,
   maxLengthErrorText: '',
@@ -430,23 +424,6 @@ async function inputOnMouseOver(event) {
   inputTooltipVisible.value = true
 }
 
-const handleSize = () => {
-  const sizeStyle: Record<string, any> = {}
-
-  if (mergedProps.value.width) {
-    sizeStyle.width = processWidth(mergedProps.value.width, true)
-  }
-
-  if (mergedProps.value.height) {
-    const inputHeight = processWidth(mergedProps.value.height, true)
-    sizeStyle.height = inputHeight
-    sizeStyle['--s-input-height'] = inputHeight
-    sizeStyle['--el-input-height'] = inputHeight
-    sizeStyle['--s-input-search-button-height'] = `calc(${inputHeight} - 8px)`
-  }
-
-  return sizeStyle
-}
 const clearTextareaValue = () => {
   data.value = ''
   handleChange()
@@ -532,10 +509,15 @@ const mergedAttrs = computed(() => {
 })
 
 const mergedStyle = computed(() => {
-  // ensure both parts are objects before spreading to avoid TS spread errors
-  const size = handleSize()
+  const inputHeight = style.value.height
   return {
-    ...(typeof size === 'object' && size ? size : {}),
+    ...(inputHeight
+      ? {
+          '--s-input-height': inputHeight,
+          '--el-input-height': inputHeight,
+          '--s-input-search-button-height': `calc(${inputHeight} - 8px)`,
+        }
+      : {}),
     ...(typeof attrs.style === 'object' && attrs.style ? attrs.style : {}),
   }
 })

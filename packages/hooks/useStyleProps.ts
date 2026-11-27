@@ -43,6 +43,8 @@ export const STYLE_PROP_MAP = {
   ff: 'font-family',
   lts: 'letter-spacing',
   // 尺寸与定位
+  width: 'width',
+  height: 'height',
   w: 'width',
   h: 'height',
   minw: 'min-width',
@@ -100,6 +102,8 @@ export const BLOCK_ONLY_STYLE_PROP_KEYS = new Set<SybzStylePropKey>([
   'pb',
   'w',
   'h',
+  'width',
+  'height',
   'minw',
   'maxw',
   'minh',
@@ -157,6 +161,8 @@ const LENGTH_PROP_KEYS = new Set<SybzStylePropKey>([
   'py',
   'w',
   'h',
+  'width',
+  'height',
   'minw',
   'maxw',
   'minh',
@@ -295,7 +301,7 @@ export const resolveStyleProps = (
     const resolvedValue =
       value === true && (SPACING_PROP_KEYS.has(key) || key === 'br')
         ? 'small'
-        : value === true && (key === 'w' || key === 'h')
+        : value === true && (key === 'w' || key === 'h' || key === 'width' || key === 'height')
           ? '100%'
           : value === true && key === 'cursor'
             ? 'pointer'
@@ -348,7 +354,7 @@ export const styleProps = Object.fromEntries(
     key,
     {
       type:
-        SPACING_PROP_KEYS.has(key) || key === 'br' || key === 'w' || key === 'h'
+        SPACING_PROP_KEYS.has(key) || key === 'br' || key === 'w' || key === 'h' || key === 'width' || key === 'height'
           ? [Boolean, String, Number]
           : key === 'cursor'
             ? [Boolean, String]

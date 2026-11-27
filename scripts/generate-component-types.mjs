@@ -10,7 +10,7 @@ const componentTypeDir = resolve(rootDir, 'packages/types/components')
 const chartComponentsOutputPath = resolve(componentTypeDir, 'company/chart/components.d.ts')
 const componentPropsPath = resolve(rootDir, 'packages/types/component-props.d.ts')
 // Style Props 的尺寸简写必须与 useStyleProps.ts 及共享类型声明一致。
-const styleDimensionPropNames = ['minw', 'maxw', 'minh', 'maxh']
+const styleDimensionPropNames = ['width', 'height', 'minw', 'maxw', 'minh', 'maxh']
 const stylePropsSource = readFileSync(resolve(rootDir, 'packages/hooks/useStyleProps.ts'), 'utf-8')
 const sharedPropsSource = readFileSync(componentPropsPath, 'utf-8')
 for (const name of styleDimensionPropNames) {
@@ -618,7 +618,7 @@ const TYPED_COMPONENT_PROPS = new Map([
       useDefaultExportForGlobal: true,
       explicitComponentType: 'input',
       description:
-        's-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。',
+        's-input 输入框组件，宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。',
       slots: ['default', 'prepend', 'prefix', 'suffix', 'append'],
       emitsMember:
         "ElInputInstance['$emit'] & (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)",
@@ -1038,7 +1038,6 @@ const SIZE_ALIAS_COMPONENTS = new Map([
   ['SEmpty', 'wh'],
   ['SIcon', 'wh'],
   ['SImage', 'wh'],
-  ['SInput', 'wh'],
   ['SInputNumber', 'wh'],
   ['SItem', 'wh'],
   ['SJson', 'wh'],

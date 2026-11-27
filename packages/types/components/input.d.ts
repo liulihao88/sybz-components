@@ -8,14 +8,14 @@ import type {
   SybzComponentTheme,
   SybzRecord,
 } from '../component-props'
-import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../component-props'
+import type { SybzThemeProps, SybzStyleProps } from '../component-props'
 
 type ElInputInstance = InstanceType<typeof ElInput>
 
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
  *
- * s-input 输入框组件，支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
+ * s-input 输入框组件，宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
  *
  * 先提示 sybz 自身属性，再提示 Element Plus Input 的公开属性。
  */
@@ -66,10 +66,6 @@ export type SInputComponent = {
       | 'modelValue'
       | 'compTitleStyle'
       | 'topTitle'
-      | 'width'
-      | 'w'
-      | 'height'
-      | 'h'
       | 'maxlength'
       | 'hideMaxLengthError'
       | 'maxLengthErrorText'
@@ -88,7 +84,6 @@ export type SInputComponent = {
       | 'debounce'
     > &
       SybzStyleProps &
-      SybzDimensionProps<SInputSelfProps> &
       SybzThemeProps<SInputSelfProps>
     $emit: ElInputInstance['$emit'] &
       (<Event extends keyof SInputEmits>(event: Event, ...args: SInputEmits[Event]) => void)
