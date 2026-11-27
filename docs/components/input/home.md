@@ -40,7 +40,7 @@ input/size
 
 ### maxlength 最大长度
 
-:::demo 展示maxlength 最大长度配置。基础写法：`<s-input v-model="customValue" width="320" title="自定义 maxlength 和 toast 文案" :maxlength="6" max-length-error-text="最多只能输入 6 个字符" />`。
+:::demo 展示 maxlength 限制；中文输入法提交标点后也会截断到上限。基础写法：`<s-input v-model="customValue" :maxlength="6" />`。
 input/maxlength
 :::
 

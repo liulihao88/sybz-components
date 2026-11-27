@@ -8,7 +8,7 @@
       transition="s-input-tooltip-no-transition"
       v-bind="mergedProps.tooltipAttrs"
     >
-      <div class="s-input__main" @mouseleave="hideInputTooltip">
+      <div ref="inputMainRef" class="s-input__main" @mouseleave="hideInputTooltip">
         <TopTitleOutline
           v-if="mergedProps.topTitle"
           :title="mergedProps.topTitle"
@@ -235,6 +235,7 @@ const inputTooltipDisabled = ref(true)
 const inputTooltipVisible = ref(false)
 const lastMaxLengthToastTime = ref(0)
 const data = useVModel(props)
+const inputMainRef = ref<HTMLElement | null>(null)
 const fieldValidatorRef = ref<InstanceType<typeof FieldValidator>>()
 const {
   standalone,
@@ -325,6 +326,11 @@ const resolveMaxLengthValue = (value: unknown) => {
 const handleInputUpdate = (value: unknown) => {
   const nextValue = resolveMaxLengthValue(value)
   data.value = nextValue
+  if (nextValue !== value) {
+    // 输入法提交标点时可能绕过原生 maxlength；模型值未变化时也要同步修正 DOM。
+    const nativeInput = inputMainRef.value?.querySelector<HTMLInputElement | HTMLTextAreaElement>('input, textarea')
+    if (nativeInput) nativeInput.value = String(nextValue)
+  }
   handleChange()
   emitDebouncedInput(nextValue, nextValue === '' || nextValue === null || nextValue === undefined)
 
