@@ -367,8 +367,8 @@ export default defineConfig({
               link: '/components/inputNumber/home.md',
             },
             {
-              text: 'inputLabel组件',
-              link: '/components/inputLabel/home.md',
+              text: 'inputTag组件',
+              link: '/components/inputTag/home.md',
             },
             {
               text: sybzMark('menu菜单组件'),

@@ -870,12 +870,48 @@ export interface SWrapperProps {
   minWidth?: string | number
 }
 
-export interface SInputLabelProps {
-  modelValue?: any[]
-  isComplex?: boolean
+/** 标签值：字符串、数字，或 isComplex 模式下的对象 */
+export type SInputTagValue = string | number | SybzRecord
+
+export interface SInputTagProps {
+  /** 标签数组，支持字符串或对象数组；默认 [] */
+  modelValue?: SInputTagValue[]
+  /** 分隔符正则：输入或粘贴时按它切分成多个标签，也可传正则字符串；传 false 关闭自动分割 */
+  splitRegExp?: RegExp | string | false
+  /** 单个标签的校验正则，校验失败时提示 message */
   regexp?: RegExp
+  /** 校验失败提示文案，默认 输入有误 */
   message?: string
+  /** 是否允许重复标签，默认 false */
+  allowDuplicate?: boolean
+  /** 最多允许的标签数量，0 表示不限制，默认 0 */
+  maxCount?: number
+  /** 是否按对象数组处理，新增标签时写入 { name }；对象项 isDelete 为 0 时不可删除；默认 false */
+  isComplex?: boolean
+  /** 透传给内部 s-input 的属性，默认 {} */
   inputAttrs?: SybzRecord
+  /** 透传给每个标签 s-tag 的属性，如 type / effect / size / round / theme，默认 {} */
+  tagAttrs?: SybzRecord
+  /** 输入框占位文案，默认 输入后回车 */
+  placeholder?: string
+  /** 是否只显示一行：默认 true，超出时左右滚动；false 时自动换行、高度随标签数量变化 */
+  singleLine?: boolean
+  /** 是否禁用，默认 false */
+  disabled?: boolean
+  /** 是否显示一键清空按钮，默认 true */
+  clearable?: boolean
+}
+
+export interface SInputTagEmits {
+  'update:modelValue': [value: SInputTagValue[]]
+  /** 标签变化后触发，包含新增、删除和清空 */
+  change: [value: SInputTagValue[]]
+  /** 新增标签时触发，多标签分割时每个标签触发一次 */
+  add: [value: SInputTagValue]
+  /** 删除标签时触发 */
+  remove: [value: SInputTagValue, index: number]
+  /** 点击一键清空时触发 */
+  clear: []
 }
 
 export type SRadioItemType = 'primary' | 'success' | 'warning' | 'danger' | 'info'

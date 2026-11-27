@@ -141,13 +141,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/datePicker/home.html | 查看文档}
      *
-     * s-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
+     * s-date-picker 日期选择组件，required 仅在左侧显示必填星号、不触发校验；支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
      */
     SDatePicker: (typeof import('./types/components/datePicker'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/datePicker/home.html | 查看文档}
      *
-     * s-date-picker 日期选择组件，支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
+     * s-date-picker 日期选择组件，required 仅在左侧显示必填星号、不触发校验；支持标题、宽高、主题、内置快捷项，以及通过 futureOnly 限制只能选择当前日期或周期之后的值。
      */
     's-date-picker': (typeof import('./types/components/datePicker'))['default']
     /**
@@ -261,23 +261,15 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
-     * s-input 输入框组件，宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
+     * s-input 输入框组件，required 仅在左侧显示必填星号、不触发校验；宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
      */
     SInput: (typeof import('./types/components/input'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/input/home.html | 查看文档}
      *
-     * s-input 输入框组件，宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
+     * s-input 输入框组件，required 仅在左侧显示必填星号、不触发校验；宽高由通用样式属性 width / w / height / h 控制；支持上边框嵌入标题、一键清空、溢出提示、自动补全、输入防抖事件和快捷搜索按钮；v-model 始终立即更新，debounce 控制 debounced-input 事件的延迟，true 为 500ms，开启 search 后清空默认触发空值搜索，@clear 可覆盖。
      */
     's-input': (typeof import('./types/components/input'))['default']
-    /**
-     * {@link https://liulihao88.github.io/sybz-components/components/inputLabel/home.html | 查看文档}
-     */
-    SInputLabel: (typeof import('./types/components/inputLabel'))['default']
-    /**
-     * {@link https://liulihao88.github.io/sybz-components/components/inputLabel/home.html | 查看文档}
-     */
-    's-input-label': (typeof import('./types/components/inputLabel'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/inputNumber/home.html | 查看文档}
      *
@@ -290,6 +282,18 @@ declare module 'vue' {
      * s-input-number 数字输入框组件，支持上边框嵌入标题。
      */
     's-input-number': (typeof import('./types/components/inputNumber'))['default']
+    /**
+     * {@link https://liulihao88.github.io/sybz-components/components/inputTag/home.html | 查看文档}
+     *
+     * s-input-tag 标签输入组件，按可配置的 splitRegExp 把输入或粘贴的文本（中英文逗号、顿号、分号、空白等）切分成多个标签，支持单个标签正则校验、去重、数量限制、禁用、一键清空、tag 插槽，并可通过 tagAttrs 透传 s-tag 属性；singleLine 默认 true 时单行左右滚动，设为 false 时自动换行、高度随标签数量变化。
+     */
+    SInputTag: (typeof import('./types/components/inputTag'))['default']
+    /**
+     * {@link https://liulihao88.github.io/sybz-components/components/inputTag/home.html | 查看文档}
+     *
+     * s-input-tag 标签输入组件，按可配置的 splitRegExp 把输入或粘贴的文本（中英文逗号、顿号、分号、空白等）切分成多个标签，支持单个标签正则校验、去重、数量限制、禁用、一键清空、tag 插槽，并可通过 tagAttrs 透传 s-tag 属性；singleLine 默认 true 时单行左右滚动，设为 false 时自动换行、高度随标签数量变化。
+     */
+    's-input-tag': (typeof import('./types/components/inputTag'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/item/home.html | 查看文档}
      *
@@ -425,13 +429,13 @@ declare module 'vue' {
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/select/home.html | 查看文档}
      *
-     * s-select 下拉选择组件，loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
+     * s-select 下拉选择组件，required 仅在左侧显示必填星号、不触发校验；loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
      */
     SSelect: (typeof import('./types/components/select'))['default']
     /**
      * {@link https://liulihao88.github.io/sybz-components/components/select/home.html | 查看文档}
      *
-     * s-select 下拉选择组件，loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
+     * s-select 下拉选择组件，required 仅在左侧显示必填星号、不触发校验；loading 仅接受 boolean，显示选择框旋转图标和下拉层加载提示，并禁用右侧快速选择按钮，默认 false；支持上边框嵌入标题；全局 select 配置中的 Element Plus 属性自动透传给内部选择器，局部属性优先；空选项时占位文案默认为“暂无数据”，支持 emptyPlaceholder 自定义；height 支持数字、px 和百分比，百分比需要父容器具有可计算的高度；支持 options 配置和默认插槽直接传入 el-option，两种模式均支持快速切换，按钮仅由 showQuick 控制，空选项时仍显示；options 模式额外支持全选、反选和完整选项上下文，点击全选栏中除反选按钮外的任意位置可切换全选状态。
      */
     's-select': (typeof import('./types/components/select'))['default']
     /**
@@ -673,13 +677,13 @@ export type SInputComponent = import('./types/components/input').SInputComponent
 export type SInputInstance = ComponentInstance<SInputComponent>
 export type SInputPublicProps = import('./types/components/input').SInputPublicProps
 
-export type SInputLabelComponent = (typeof import('./types/components/inputLabel'))['default']
-export type SInputLabelInstance = ComponentInstance<SInputLabelComponent>
-export type SInputLabelPublicProps = SInputLabelInstance['$props']
-
 export type SInputNumberComponent = import('./types/components/inputNumber').SInputNumberComponent
 export type SInputNumberInstance = ComponentInstance<SInputNumberComponent>
 export type SInputNumberPublicProps = import('./types/components/inputNumber').SInputNumberPublicProps
+
+export type SInputTagComponent = (typeof import('./types/components/inputTag'))['default']
+export type SInputTagInstance = ComponentInstance<SInputTagComponent>
+export type SInputTagPublicProps = SInputTagInstance['$props']
 
 export type SItemComponent = (typeof import('./types/components/item'))['default']
 export type SItemInstance = ComponentInstance<SItemComponent>
@@ -814,8 +818,8 @@ declare global {
       's-icon': JSXComponentProps<SIconPublicProps>
       's-image': JSXComponentProps<SImagePublicProps>
       's-input': JSXComponentProps<SInputPublicProps>
-      's-input-label': JSXComponentProps<SInputLabelPublicProps>
       's-input-number': JSXComponentProps<SInputNumberPublicProps>
+      's-input-tag': JSXComponentProps<SInputTagPublicProps>
       's-item': JSXComponentProps<SItemPublicProps>
       's-json': JSXComponentProps<SJsonPublicProps>
       's-markdown': JSXComponentProps<SMarkdownPublicProps>

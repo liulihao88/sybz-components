@@ -638,11 +638,25 @@ const TYPED_COMPONENT_PROPS = new Map([
     },
   ],
   [
-    'SInputLabel',
+    'SInputTag',
     {
       importPath: componentPropsPath,
-      typeName: 'SInputLabelProps',
-      hoverProps: componentHoverProps('SInputLabelProps', ['SInputLabelProps', 'SybzRecord']),
+      typeName: 'SInputTagProps',
+      description:
+        's-input-tag 标签输入组件，按可配置的 splitRegExp 把输入或粘贴的文本（中英文逗号、顿号、分号、空白等）切分成多个标签，支持单个标签正则校验、去重、数量限制、禁用、一键清空、tag 插槽，并可通过 tagAttrs 透传 s-tag 属性；singleLine 默认 true 时单行左右滚动，设为 false 时自动换行、高度随标签数量变化。',
+      slots: ['tag'],
+      instanceMembers: [
+        '$emit: SInputTagEmits',
+        '$getValue: () => SInputTagValue[]',
+        'clearAll: () => void',
+        'focus: () => void',
+      ],
+      hoverProps: componentHoverProps('SInputTagProps', [
+        'SInputTagEmits',
+        'SInputTagProps',
+        'SInputTagValue',
+        'SybzRecord',
+      ]),
     },
   ],
   [
