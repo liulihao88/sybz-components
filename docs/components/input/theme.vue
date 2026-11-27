@@ -17,7 +17,7 @@ const remark = ref('')
 </script>
 
 <template>
-  <SRadio v-model="theme" :options="docThemeOptions" variant="button" title="theme" class="p-b-10" />
+  <SRadio v-model="theme" :options="docThemeOptions" variant="button" title="theme" mb />
   <s-flex gap="small" direction="column">
     <s-input v-model="name" :theme="theme" width="320" size="large" placeholder="请输入服务名称" />
     <s-input v-model="owner" :theme="theme" width="320" title="负责人" placeholder="请输入负责人" />
