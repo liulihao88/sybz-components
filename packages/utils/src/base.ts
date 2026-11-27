@@ -17,16 +17,16 @@ type StorageValue = unknown
 type StorageMap = Record<string, any>
 type MaybeRef<T> = T | Ref<T>
 type WidthStyleResult = { width: string }
-type ValidateTriggerType = 'blur' | 'change'
-type ValidateInput = ValidateRules | ValidatePrimitiveValue
-type ValidateTypeInput = string | ValidateRules
+export type ValidateTriggerType = 'blur' | 'change'
+export type ValidateInput = ValidateRules | ValidatePrimitiveValue
+export type ValidateTypeInput = string | ValidateRules
 type NormalizedValidateParams = {
   type: string
   rulesObject: ValidateRules
   rawRules: ValidateInput
   pureValid: boolean
 }
-type ValidateRuleResult = {
+export interface ValidateRuleResult {
   required?: boolean
   message?: string
   trigger?: ValidateTriggerType[]
@@ -125,11 +125,11 @@ interface MockValueOptions {
   optionsIndex?: number | null
 }
 
-interface ValidateRules {
+export interface ValidateRules {
   /**
    * 校验类型。作为 `validate({ type: 'mobile' })` 使用时生效。
    */
-  type?: string
+  type?: ValidateTypeValue | (string & {})
   /**
    * 校验失败提示文案。
    */
@@ -146,6 +146,10 @@ interface ValidateRules {
    * 对比值，例如 `same` 校验时使用。
    */
   value?: any
+  /**
+   * `pureValid` 模式下的待校验值，目前仅 `same` 需要（`value` 表示对比值）。
+   */
+  compare?: any
   /**
    * 自定义正则。
    */
@@ -958,13 +962,17 @@ export function delay(delay: number = 0, fn?: () => void) {
  * 为 `validate` 预置空触发时机，只在提交或手动调用表单校验时触发。
  *
  * @param type 校验类型。
- * @param rules 校验规则。
+ * @param rules 校验规则；第一个参数是规则对象时，此参数作为 `pureValid`。
  * @param pureValid 是否直接返回布尔值。
  * @returns 与 `validate` 一致。
  *
  * @example
  * const rule = validateOnSubmit('required', { message: '请输入名称' })
+ *
+ * @example
+ * const isMobile = validateOnSubmit({ type: 'mobile', value: '13800138000' }, true)
  */
+export function validateOnSubmit(type: ValidateRules, rules: true, pureValid?: boolean): boolean
 export function validateOnSubmit(
   type?: ValidateTypeInput,
   rules?: ValidateInput | false,
@@ -994,6 +1002,142 @@ export function validateOnSubmit(
   )
 }
 
+/** 内置校验类型；不在其中的字符串会被当作错误提示文案。 */
+const ValidateType = {
+  REQUIRED: 'required',
+  CHANGE: 'change',
+  PASSWORD: 'password',
+  NUMBER: 'number',
+  POSITIVE: 'positive',
+  ZERO_POSITIVE: 'zeroPositive',
+  INTEGER: 'integer',
+  DECIMAL: 'decimal',
+  MOBILE: 'mobile',
+  EMAIL: 'email',
+  IP: 'ip',
+  PORT: 'port',
+  BETWEEN: 'between',
+  LENGTH: 'length',
+  SAME: 'same',
+  CUSTOM: 'custom',
+} as const
+
+/** 可用的内置校验类型。 */
+export type ValidateTypeValue = (typeof ValidateType)[keyof typeof ValidateType]
+
+const DEFAULT_VALIDATE_TRIGGER: ValidateTriggerType[] = ['blur', 'change']
+
+/** 内置正则统一在此维护，避免每次调用重新创建。 */
+const VALIDATE_REGEXP = {
+  password: /^[a-zA-Z0-9_-]+$/,
+  // 正整数
+  positiveInteger: /^[1-9]\d*$/,
+  // 非负整数
+  nonNegativeInteger: /^(0|[1-9]\d*)$/,
+  // 整数，包含负数和 0
+  integer: /^(0|-?[1-9]\d*)$/,
+  // 非负数字，最多 2 位小数
+  decimal: /^(?:0|[1-9]\d*)(?:\.\d{1,2})?$/,
+  mobile: /^1\d{10}$/,
+  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  ip: /^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/,
+  // 1-65535
+  port: /^(6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3})$/,
+} as const
+
+type ValidateValidator = (rule: any, value: any, callback: (error?: Error) => void) => void
+
+function isRegExp(value: unknown): value is RegExp {
+  return Object.prototype.toString.call(value) === '[object RegExp]'
+}
+
+/** null / undefined 一律视为不通过；顺带重置 g、y 标记的 lastIndex，避免多次校验结果交替。 */
+function testRegExp(reg: RegExp, value: unknown): boolean {
+  if (value == null) return false
+  if (reg.global || reg.sticky) reg.lastIndex = 0
+  return reg.test(value as string)
+}
+
+/** 非必填且值为空时跳过格式校验，把空值交给必填校验处理。 */
+function isOptionalEmpty(value: unknown, required: boolean): boolean {
+  return !required && isEmpty(value)
+}
+
+function createRegExpValidator(reg: RegExp, rules: ValidateRules, defaultMessage: string): ValidateValidator {
+  return (_rule, value, callback) => {
+    if (isOptionalEmpty(value, rules.required ?? true)) {
+      callback()
+      return
+    }
+    if (!testRegExp(reg, value)) {
+      callback(new Error(rules.message ?? defaultMessage))
+      return
+    }
+    callback()
+  }
+}
+
+function toOptionalNumber(value: unknown): number | undefined {
+  if (typeof value === 'number') return Number.isFinite(value) ? value : undefined
+  if (typeof value !== 'string' || value.trim() === '') return undefined
+  const parsed = Number(value)
+  return Number.isFinite(parsed) ? parsed : undefined
+}
+
+/** 数值范围校验，通过时返回 null。 */
+function getBetweenError(value: unknown, rules: ValidateRules): string | null {
+  const num = toOptionalNumber(value)
+  if (num === undefined) return '请输入数字'
+  const min = toOptionalNumber(rules.min)
+  const max = toOptionalNumber(rules.max)
+  if (min !== undefined && num < min) return `数字不能小于${rules.min}`
+  if (max !== undefined && num > max) return `数字不能大于${rules.max}`
+  return null
+}
+
+/** 字符长度校验，通过时返回 null。 */
+function getLengthError(value: unknown, rules: ValidateRules): string | null {
+  if (value == null) return rules.message ?? '请输入'
+  const min = toOptionalNumber(rules.min)
+  const max = toOptionalNumber(rules.max)
+  const length = String(value).length
+  if (min !== undefined && length < min) return rules.message ?? `请输入至少${min}个字符`
+  if (max !== undefined && length > max) return rules.message ?? `请输入最多${max}个字符`
+  return null
+}
+
+function getLengthMessage(rules: ValidateRules): string {
+  const min = toOptionalNumber(rules.min)
+  const max = toOptionalNumber(rules.max)
+  if (min !== undefined && max !== undefined) return `请输入${min}到${max}个字符`
+  if (min !== undefined) return `请输入至少${min}个字符`
+  if (max !== undefined) return `请输入最多${max}个字符`
+  return '请输入'
+}
+
+/** 一致性校验，通过时返回 null。 */
+function getSameError(value: unknown, rules: ValidateRules, required: boolean): string | null {
+  if (value !== unref(rules.value)) return rules.message ?? '密码和确认密码要一致'
+  if (required && isEmpty(value)) return rules.message ?? '请输入'
+  return null
+}
+
+function createValueRule(
+  value: unknown,
+  isPureValid: boolean,
+  reg: RegExp,
+  defaultMessage: string,
+  rules: ValidateRules,
+  trigger: ValidateTriggerType[],
+): ValidateRuleResult | boolean {
+  if (isPureValid) return testRegExp(reg, value)
+  return {
+    required: rules.required ?? true,
+    validator: createRegExpValidator(reg, rules, defaultMessage),
+    trigger,
+  }
+}
+
 /**
  * 生成 Element Plus 表单校验规则，或直接执行纯校验。
  *
@@ -1012,31 +1156,15 @@ export function validateOnSubmit(
  * @example
  * const isIp = validate('ip', '192.168.1.1', true)
  *
+ * @example
+ * const isSame = validate({ type: 'same', value: 'pwd', compare: 'pwd' }, true)
+ *
  * @param type 校验类型、校验规则对象；如果传入的字符串不在内置类型列表中，则会直接作为错误提示文案使用。
  * @param rules 校验规则配置，或在 `pureValid=true` 时直接传待校验值；当第一个参数是对象时，此参数表示 `pureValid`。
  * @param pureValid 是否直接返回布尔值。
  * @returns `pureValid=true` 时返回布尔值，否则返回 Element Plus 规则对象。
  */
-// 定义验证类型枚举
-enum ValidateType {
-  REQUIRED = 'required',
-  CHANGE = 'change',
-  PASSWORD = 'password',
-  NUMBER = 'number',
-  POSITIVE = 'positive',
-  ZERO_POSITIVE = 'zeroPositive',
-  INTEGER = 'integer',
-  DECIMAL = 'decimal',
-  MOBILE = 'mobile',
-  EMAIL = 'email',
-  IP = 'ip',
-  PORT = 'port',
-  BETWEEN = 'between',
-  LENGTH = 'length',
-  SAME = 'same',
-  CUSTOM = 'custom',
-}
-
+export function validate(type: ValidateRules, rules: true, pureValid?: boolean): boolean
 export function validate(type?: ValidateTypeInput, rules?: ValidateInput | false, pureValid?: false): ValidateRuleResult
 export function validate(
   type: ValidateTypeInput | undefined,
@@ -1051,24 +1179,16 @@ export function validate(
   const normalized = normalizeValidateParams(type, rules, pureValid)
   const rulesObject = normalized.rulesObject
   const rawRules = normalized.rawRules
-  const validType = normalized.type
+  const validType = normalized.type || ValidateType.REQUIRED
   const isPureValid = normalized.pureValid
-  const trigger = rulesObject.trigger ?? (['blur', 'change'] as ValidateTriggerType[])
-  // 使用枚举值组成的联合类型来确保类型安全
-  const typeMaps = Object.values(ValidateType) as string[]
+  const trigger = rulesObject.trigger ?? [...DEFAULT_VALIDATE_TRIGGER]
   const parseRequired = rulesObject.required ?? true
   const defaultRequiredMessage = validType === ValidateType.CHANGE ? '请选择' : '请输入'
-  const getPureValue = () => (Object.prototype.hasOwnProperty.call(rulesObject, 'value') ? rulesObject.value : rawRules)
+  // 纯校验时待校验值：type 为对象时优先取 rules.value，否则取第二个参数
+  const pureValue = Object.prototype.hasOwnProperty.call(rulesObject, 'value') ? rulesObject.value : rawRules
 
-  // 如果不包含typeMaps中的类型, 直接将第一个参数作为message
-  if (!typeMaps.includes(validType)) {
-    return {
-      required: parseRequired,
-      message: validType,
-      trigger,
-    }
-  }
   if (validType === ValidateType.REQUIRED || validType === ValidateType.CHANGE) {
+    if (isPureValid) return !isEmpty(pureValue)
     return {
       required: parseRequired,
       message: rulesObject.message ?? defaultRequiredMessage,
@@ -1076,138 +1196,134 @@ export function validate(
     }
   }
 
-  // validator: this.validateName,
   if (validType === ValidateType.PASSWORD) {
-    const validateName = (rule: any, value: any, callback: (error?: Error) => void) => {
-      let validFlag = /^[a-zA-Z0-9_-]+$/.test(value)
-      if (!validFlag) {
-        callback(new Error(rulesObject.message || '密码只能由英文、数字、下划线、中划线组成'))
-      } else {
-        callback()
-      }
-    }
+    if (isPureValid) return testRegExp(VALIDATE_REGEXP.password, pureValue)
     return {
-      validator: validateName,
+      required: parseRequired,
+      validator: createRegExpValidator(
+        VALIDATE_REGEXP.password,
+        rulesObject,
+        '密码只能由英文、数字、下划线、中划线组成',
+      ),
       trigger,
     }
   }
-  if (validType === ValidateType.POSITIVE || validType === ValidateType.NUMBER) {
-    // 正整数
-    return _validValue(getPureValue(), '请输入正整数', isPureValid, /^[1-9]+\d*$/)
+
+  if (validType === ValidateType.NUMBER || validType === ValidateType.POSITIVE) {
+    return createValueRule(
+      pureValue,
+      isPureValid,
+      VALIDATE_REGEXP.positiveInteger,
+      '请输入正整数',
+      rulesObject,
+      trigger,
+    )
   }
   if (validType === ValidateType.ZERO_POSITIVE) {
-    // 正整数且包含0
-    return _validValue(getPureValue(), '请输入非负整数', isPureValid, /^(0|[1-9]+\d*)$/)
-  }
-  // 整数, 包含负数和0
-  if (validType === ValidateType.INTEGER) {
-    return _validValue(getPureValue(), '请输入整数', isPureValid, /^(0|[-]?[1-9]\d*)$/)
-  }
-  // 非负数, 整数和最多2位小数
-  if (validType === ValidateType.DECIMAL) {
-    return _validValue(
-      getPureValue(),
-      '请输入非负数字, 包含小数且最多2位',
+    return createValueRule(
+      pureValue,
       isPureValid,
-      /(0|[1-9]\d*)(\.\d{1, 2})?|0\.\d{1,2}/,
+      VALIDATE_REGEXP.nonNegativeInteger,
+      '请输入非负整数',
+      rulesObject,
+      trigger,
+    )
+  }
+  if (validType === ValidateType.INTEGER) {
+    return createValueRule(pureValue, isPureValid, VALIDATE_REGEXP.integer, '请输入整数', rulesObject, trigger)
+  }
+  if (validType === ValidateType.DECIMAL) {
+    return createValueRule(
+      pureValue,
+      isPureValid,
+      VALIDATE_REGEXP.decimal,
+      '请输入非负数字, 包含小数且最多2位',
+      rulesObject,
+      trigger,
     )
   }
   if (validType === ValidateType.MOBILE) {
-    return _validValue(getPureValue(), '请输入正确的手机号', isPureValid, /^[1][0-9]{10}$/)
+    return createValueRule(pureValue, isPureValid, VALIDATE_REGEXP.mobile, '请输入正确的手机号', rulesObject, trigger)
   }
   if (validType === ValidateType.EMAIL) {
-    return _validValue(getPureValue(), '请输入正确的email', isPureValid, /^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+    return createValueRule(pureValue, isPureValid, VALIDATE_REGEXP.email, '请输入正确的email', rulesObject, trigger)
   }
   if (validType === ValidateType.IP) {
-    return _validValue(
-      getPureValue(),
-      '请输入正确的ip地址',
-      isPureValid,
-      /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
-    )
+    return createValueRule(pureValue, isPureValid, VALIDATE_REGEXP.ip, '请输入正确的ip地址', rulesObject, trigger)
   }
   if (validType === ValidateType.PORT) {
-    return _validValue(
-      getPureValue(),
-      '请输入1-65535的端口号',
-      isPureValid,
-      /^([1-9]|[1-9][0-9]{1,3}|[1-5][0-9]{4}|6[0-5][0-5][0-3][0-5])$/,
-    )
+    return createValueRule(pureValue, isPureValid, VALIDATE_REGEXP.port, '请输入1-65535的端口号', rulesObject, trigger)
   }
+
   if (validType === ValidateType.BETWEEN) {
-    let minValue = rulesObject.min ?? ''
-    let maxValue = rulesObject.max ?? ''
-    const validateBetween = (rule: any, value: any, callback: (error?: Error) => void) => {
-      let validFlag = /^-?[0-9]+$/.test(value)
-      if (!validFlag) {
-        callback(new Error('请输入数字'))
-      }
-      if (!isEmpty(minValue) && value < minValue) {
-        callback(new Error(`数字不能小于${minValue}`))
-      }
-      if (!isEmpty(maxValue) && value > maxValue && maxValue !== undefined) {
-        callback(new Error(`数字不能大于${maxValue}`))
-      }
-      callback()
-    }
+    if (isPureValid) return getBetweenError(pureValue, rulesObject) === null
     return {
-      validator: validateBetween,
-      trigger,
       required: parseRequired,
+      trigger,
+      validator: (_rule, value, callback) => {
+        if (isOptionalEmpty(value, parseRequired)) {
+          callback()
+          return
+        }
+        const errorMessage = getBetweenError(value, rulesObject)
+        if (errorMessage) {
+          callback(new Error(errorMessage))
+          return
+        }
+        callback()
+      },
     }
   }
+
   if (validType === ValidateType.LENGTH) {
+    if (isPureValid) return getLengthError(pureValue, rulesObject) === null
     return {
       min: rulesObject.min,
       max: rulesObject.max,
-      message: rulesObject.message ?? `请输入${rulesObject.min}到${rulesObject.max}个字符`,
+      message: rulesObject.message ?? getLengthMessage(rulesObject),
       trigger,
       required: parseRequired,
     }
   }
 
   if (validType === ValidateType.SAME) {
-    const validateSame = (rule: any, value: any, callback: (error?: Error) => void) => {
-      let isSame = value === rulesObject.value
-      if (!isSame) {
-        const errMessage = rulesObject.message || '密码和确认密码要一致'
-        callback(new Error(errMessage))
-      }
-      if (parseRequired && !value) {
-        callback(new Error(rulesObject.message || '请输入'))
-      }
-      callback()
-    }
-    let res = {
-      validator: validateSame,
-      trigger,
+    // same 需要两个值：rules.value 为对比值；纯校验时 rules.compare 为待校验值
+    if (isPureValid) return getSameError(rulesObject.compare, rulesObject, parseRequired) === null
+    return {
       required: parseRequired,
+      trigger,
+      validator: (_rule, value, callback) => {
+        const errorMessage = getSameError(value, rulesObject, parseRequired)
+        if (errorMessage) {
+          callback(new Error(errorMessage))
+          return
+        }
+        callback()
+      },
     }
-    return res
-  }
-  if (validType === ValidateType.CUSTOM) {
-    return _validValue(getPureValue(), rulesObject.message, isPureValid, rulesObject.reg!)
   }
 
-  function _validValue(value: any, msg: string | undefined, pureValid: boolean, reg: RegExp) {
-    if (pureValid) {
-      return reg.test(value)
-    }
-    const validatePhone = (rule: any, value: any, callback: (error?: Error) => void) => {
-      let validFlag = reg.test(value)
-      if (!validFlag) {
-        callback(new Error(rulesObject.message ?? msg))
-      } else {
-        callback()
+  if (validType === ValidateType.CUSTOM) {
+    // 缺少正则是配置错误：提示后降级为必填校验，避免校验时抛出难以定位的异常
+    if (!isRegExp(rulesObject.reg)) {
+      consola.warn('[validate] custom 类型需要传入 reg 正则，已降级为必填校验')
+      if (isPureValid) return !isEmpty(pureValue)
+      return {
+        required: parseRequired,
+        message: rulesObject.message ?? defaultRequiredMessage,
+        trigger,
       }
     }
-    return {
-      validator: validatePhone,
-      required: rulesObject.required ?? true,
-      trigger,
-    }
+    return createValueRule(pureValue, isPureValid, rulesObject.reg, '请输入', rulesObject, trigger)
   }
-  return {}
+
+  // 不是内置类型时，把 type 当作错误提示文案，行为等同必填校验
+  if (isPureValid) return !isEmpty(pureValue)
+  return {
+    required: parseRequired,
+    message: validType || defaultRequiredMessage,
+    trigger,
+  }
 }
 
 function normalizeValidateParams(

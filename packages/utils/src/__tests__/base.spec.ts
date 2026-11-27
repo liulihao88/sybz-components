@@ -169,6 +169,67 @@ describe('base utils', () => {
     })
   })
 
+  it('keeps built-in regex validation strict', () => {
+    expect(validate('decimal', '12.5', true)).toBe(true)
+    expect(validate('decimal', '12.567', true)).toBe(false)
+    expect(validate('decimal', 'abc12x', true)).toBe(false)
+    expect(validate('port', '60006', true)).toBe(true)
+    expect(validate('port', '65536', true)).toBe(false)
+    expect(validate('password', undefined, true)).toBe(false)
+  })
+
+  it('returns boolean in pure mode for every rule based type', () => {
+    expect(validate('required', '', true)).toBe(false)
+    expect(validate('required', 'value', true)).toBe(true)
+    expect(validate('password', 'abc_1-', true)).toBe(true)
+    expect(validate('password', 'abc!', true)).toBe(false)
+    expect(validate('between', { min: 1, max: 9, value: 5 }, true)).toBe(true)
+    expect(validate('between', { min: 1, max: 9, value: 10 }, true)).toBe(false)
+    expect(validate('length', { min: 2, max: 4, value: 'abc' }, true)).toBe(true)
+    expect(validate('length', { min: 2, max: 4, value: 'a' }, true)).toBe(false)
+    expect(validate('same', { value: 'pwd', compare: 'pwd' }, true)).toBe(true)
+    expect(validate('same', { value: 'pwd', compare: 'other' }, true)).toBe(false)
+  })
+
+  it('calls the validator callback once and skips empty optional values', () => {
+    const runValidator = (rule: any, value: unknown) => {
+      const messages: string[] = []
+      let calls = 0
+      rule.validator(rule, value, (error?: Error) => {
+        calls++
+        if (error) messages.push(error.message)
+      })
+      return { messages, calls }
+    }
+
+    expect(runValidator(validate('between', { min: 1, max: 9 }), 99)).toEqual({
+      messages: ['数字不能大于9'],
+      calls: 1,
+    })
+    expect(runValidator(validate('between', { min: 1, max: 9 }), 'x')).toEqual({ messages: ['请输入数字'], calls: 1 })
+    expect(runValidator(validate('same', { value: 'a' }), 'b')).toEqual({
+      messages: ['密码和确认密码要一致'],
+      calls: 1,
+    })
+    expect(runValidator(validate('mobile', { required: false }), '')).toEqual({ messages: [], calls: 1 })
+    expect(runValidator(validate('mobile'), '')).toEqual({ messages: ['请输入正确的手机号'], calls: 1 })
+  })
+
+  it('builds length messages from min and max', () => {
+    expect(validate('length').message).toBe('请输入')
+    expect(validate('length', { min: 1 }).message).toBe('请输入至少1个字符')
+    expect(validate('length', { max: 5 }).message).toBe('请输入最多5个字符')
+    expect(validate('length', { min: 1, max: 5 }).message).toBe('请输入1到5个字符')
+  })
+
+  it('falls back to required only when custom reg is missing', () => {
+    expect(validate('custom')).toEqual({
+      required: true,
+      message: '请输入',
+      trigger: ['blur', 'change'],
+    })
+  })
+
   it('creates submit-only validation rules and supports pure validation', () => {
     expect(validateOnSubmit('required')).toEqual({
       required: true,

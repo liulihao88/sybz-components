@@ -1,5 +1,6 @@
 # Changelog
 
+- 2026-11-27 14:20:00 `@sybz-components/utils` 修复 `validate`：`decimal`/`port` 正则补上边界、`between`/`same` 不再重复回调、非必填空值不再被格式校验拦截、`pureValid` 对所有内置类型都返回布尔值（`same` 纯校验用 `compare`），缺少 `reg` 的 `custom` 降级为必填校验
 - 2026-11-24 18:48:28 `element-plus`的版本强制固定, 防止再有不同版本导致的样式和行为不统一, 以组件库的`element-plus`版本为准
 - 2026-11-23 18:15:00 `sybzVitePlugins({ compat: true })` 新增应用级 Chrome 60+ 兼容：统一 build target、注入 `@vitejs/plugin-legacy` 生成 nomodule/SystemJS 产物、自动注入 PostCSS 兼容插件；已有 postcss.config 时提示手动合并 `createSybzCompatPostcssPlugins()`
 - 2026-11-23 17:10:00 组件库按 Chrome 60+ 构建：Babel/esbuild 语法降级、core-js + ResizeObserver/AbortController polyfill、PostCSS 前缀与可降级 CSS 处理（含 `:focus-visible`/`:where`/`:has` 选择器列表拆分）、按需入口自动带 polyfill，并新增 `pnpm check:compat` 产物校验
