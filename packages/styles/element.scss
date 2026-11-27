@@ -78,6 +78,17 @@
   font-family: var(--s-sybz-font-family);
 }
 
+.s-message-box--selectable-title .el-message-box__headerbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  .el-message-box__close {
+    display: block;
+  }
+}
+
 .s-message-box__confirm-btn,
 .s-message-box__cancel-btn {
   &::before {
