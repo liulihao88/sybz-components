@@ -102,6 +102,8 @@ export interface SMenuSelfProps {
   collapse?: boolean
   /** 是否允许收起；设为 false 时保持展开并隐藏收缩按钮 */
   collapsible?: boolean
+  /** 收起后鼠标移入是否临时展开，默认 true；展开宽度用负外边距抵消，不挤占布局（悬浮覆盖），移出后恢复收起 */
+  expandOnHover?: boolean
   /** 明暗外观：light 为白色背景，dark 为深色背景 */
   variant?: 'dark' | 'light'
   /** 主题强调色，不改变明暗外观 */

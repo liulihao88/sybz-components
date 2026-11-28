@@ -32,6 +32,7 @@ const props = withDefaults(defineProps<SMenuSelfProps>(), {
   activeTextColor: '#ffffff',
   collapse: false,
   collapsible: true,
+  expandOnHover: true,
   variant: 'dark',
   theme: 'default',
 })
@@ -50,10 +51,15 @@ const { style } = useStyleProps()
 const MENU_MOTION_DURATION = 280
 // 宽度动画前 160ms 已完成约 98%，此时再接文字淡入，既不会挤压也不会等太久。
 const MENU_EXPAND_TEXT_DELAY = 160
+// 收起宽度固定 64px；悬停临时展开时用负外边距抵消多出的宽度，布局始终按 64px 占位。
+const MENU_COLLAPSED_WIDTH = 64
 const isCollapsed = ref(mergedProps.value.collapsible && mergedProps.value.collapse)
 // epCollapsed 控制 Element Plus 的折叠 DOM，和视觉宽度拆开，避免它自带的整段菜单替换动画。
 const epCollapsed = ref(isCollapsed.value)
 const isExpanding = ref(false)
+// isHoverExpanded 表示鼠标移入后临时展开；isHoverFloating 表示悬浮层样式，收起动画结束后才移除。
+const isHoverExpanded = ref(false)
+const isHoverFloating = ref(false)
 let collapseTimer: ReturnType<typeof setTimeout> | undefined
 const menuViewportRef = ref<HTMLElement>()
 const menuRef = ref<any>()
@@ -157,6 +163,9 @@ const baseRowHeight = computed(() => {
   const { height, margin } = resolvedMenuSize.value.pixels
   return height + margin * 2
 })
+// 悬停临时展开时视觉上按展开态处理，但 isCollapsed 仍是真实的收起状态。
+const menuCollapsed = computed(() => isCollapsed.value && !isHoverExpanded.value)
+const expandedMenuWidth = computed(() => processWidth(mergedProps.value.width, true) || '256px')
 
 const updateMenuScale = () => {
   if (resizeFrame || !mergedProps.value.autoHeight) return
@@ -182,7 +191,7 @@ const updateMenuScale = () => {
       return true
     }).length
     // autoHeight 只压缩菜单项；收起时四边留 4px，展开时留 16px。
-    menuVerticalPadding.value = isCollapsed.value ? 4 : 16
+    menuVerticalPadding.value = menuCollapsed.value ? 4 : 16
     const availableHeight = Math.max(0, viewportHeight - menuVerticalPadding.value * 2)
     const rowHeight = count ? Math.min(baseRowHeight.value, availableHeight / count) : baseRowHeight.value
     // 向下取整，避免子像素累计让最后一项溢出。
@@ -222,6 +231,11 @@ const clearCollapseTimer = () => {
 const setCollapsed = (value: boolean) => {
   if (value === isCollapsed.value) return
   clearCollapseTimer()
+  if (!value) {
+    // 真正展开后不再需要悬停浮层，负外边距一起归零，布局平滑过渡回展开宽度。
+    isHoverExpanded.value = false
+    isHoverFloating.value = false
+  }
   if (prefersReducedMotion()) {
     isCollapsed.value = value
     epCollapsed.value = value
@@ -244,6 +258,43 @@ const setCollapsed = (value: boolean) => {
     isExpanding.value = false
     collapseTimer = undefined
   }, MENU_EXPAND_TEXT_DELAY)
+}
+// 收起状态下移入：临时展开成完整菜单，并用负外边距抵消多出的宽度，不挤占布局。
+const handleMenuEnter = () => {
+  if (!mergedProps.value.expandOnHover || !mergedProps.value.collapsible || !isCollapsed.value) return
+  if (isHoverExpanded.value) return
+  clearCollapseTimer()
+  isHoverExpanded.value = true
+  isHoverFloating.value = true
+  // 折叠时 Element Plus 只渲染图标，先切回内联 DOM，文字和内联子菜单才能展开。
+  epCollapsed.value = false
+  if (prefersReducedMotion()) {
+    isExpanding.value = false
+    return
+  }
+  isExpanding.value = true
+  collapseTimer = setTimeout(() => {
+    isExpanding.value = false
+    collapseTimer = undefined
+  }, MENU_EXPAND_TEXT_DELAY)
+}
+const handleMenuLeave = () => {
+  if (!isHoverExpanded.value) return
+  isHoverExpanded.value = false
+  isExpanding.value = false
+  clearCollapseTimer()
+  if (prefersReducedMotion()) {
+    isHoverFloating.value = false
+    epCollapsed.value = true
+    return
+  }
+  // 收窄动画结束前保留浮层样式，避免展开层瞬间掉到页面内容下面。
+  collapseTimer = setTimeout(() => {
+    collapseTimer = undefined
+    if (isHoverExpanded.value) return
+    isHoverFloating.value = false
+    if (isCollapsed.value) epCollapsed.value = true
+  }, MENU_MOTION_DURATION)
 }
 
 onMounted(() => {
@@ -269,8 +320,12 @@ onBeforeUnmount(() => {
   mutationObserver?.disconnect()
 })
 watch([() => mergedProps.value.autoHeight, () => baseRowHeight.value], () => nextTick(updateMenuScale))
+watch(menuCollapsed, () => nextTick(updateMenuScale))
 watch([() => mergedProps.value.collapse, () => mergedProps.value.collapsible], ([collapse, collapsible]) => {
   setCollapsed(collapsible && collapse)
+})
+watch([() => mergedProps.value.expandOnHover, () => mergedProps.value.collapsible], () => {
+  if (isHoverExpanded.value && (!mergedProps.value.expandOnHover || !mergedProps.value.collapsible)) handleMenuLeave()
 })
 const fields = computed<Required<SMenuFieldNames>>(() => ({
   index: 'index',
@@ -319,13 +374,20 @@ const menuColors = computed(() =>
         activeText: mergedProps.value.activeTextColor,
       },
 )
-const rootStyle = computed(() => ({
-  width: processWidth(isCollapsed.value ? 64 : mergedProps.value.width, true),
-  height: processWidth(mergedProps.value.height, true),
-  '--s-menu-bg': menuColors.value.background,
-  '--s-menu-text': menuColors.value.text,
-  '--s-menu-accent': themeAccent.value,
-}))
+const rootStyle = computed(() => {
+  const collapsed = menuCollapsed.value
+  const rootStyle: Record<string, string> = {
+    width: collapsed ? `${MENU_COLLAPSED_WIDTH}px` : expandedMenuWidth.value,
+    height: processWidth(mergedProps.value.height, true),
+    '--s-menu-bg': menuColors.value.background,
+    '--s-menu-text': menuColors.value.text,
+    '--s-menu-accent': themeAccent.value,
+  }
+  // 悬停临时展开：宽度做动画，同时用等量的负外边距抵消，布局占位始终保持收起宽度。
+  if (!collapsed && isCollapsed.value)
+    rootStyle.marginRight = `calc(${MENU_COLLAPSED_WIDTH}px - (${expandedMenuWidth.value}))`
+  return rootStyle
+})
 const toggleCollapse = () => {
   if (!mergedProps.value.collapsible) return
   setCollapsed(!isCollapsed.value)
@@ -342,9 +404,16 @@ const handleSelect = (...args: any[]) => {
     class="s-menu"
     :class="[
       `s-menu--${mergedProps.variant}`,
-      { 'is-collapse': isCollapsed, 'is-expanding': isExpanding, 'is-auto-height': mergedProps.autoHeight },
+      {
+        'is-collapse': menuCollapsed,
+        'is-expanding': isExpanding,
+        'is-hover-expanded': isHoverFloating,
+        'is-auto-height': mergedProps.autoHeight,
+      },
     ]"
     :style="[rootStyle, menuSizeStyle, style]"
+    @mouseenter="handleMenuEnter"
+    @mouseleave="handleMenuLeave"
   >
     <button
       v-if="mergedProps.collapsible"
@@ -360,7 +429,7 @@ const handleSelect = (...args: any[]) => {
       <slot name="header">
         <el-tooltip
           v-if="resolvedHeader"
-          :disabled="!isCollapsed || !(resolvedHeader.collapsedTooltip || resolvedHeader.title)"
+          :disabled="!menuCollapsed || !(resolvedHeader.collapsedTooltip || resolvedHeader.title)"
           placement="right"
           :content="resolvedHeader.collapsedTooltip || resolvedHeader.title"
         >
@@ -407,7 +476,7 @@ const handleSelect = (...args: any[]) => {
           :key="itemIndex(item) || String(item[fields.title] || index)"
           :item="item"
           :field-names="fields"
-          :collapsed="isCollapsed"
+          :collapsed="menuCollapsed"
           :icon-size="menuIconSize"
         />
       </el-menu>
@@ -448,7 +517,9 @@ const handleSelect = (...args: any[]) => {
   box-sizing: border-box;
   background: var(--s-menu-bg);
   position: relative;
-  transition: width var(--s-menu-motion-duration) var(--s-menu-motion-easing);
+  transition:
+    width var(--s-menu-motion-duration) var(--s-menu-motion-easing),
+    margin-right var(--s-menu-motion-duration) var(--s-menu-motion-easing);
 
   &__collapse-trigger {
     position: absolute;
@@ -481,6 +552,12 @@ const handleSelect = (...args: any[]) => {
   &:hover &__collapse-trigger,
   &__collapse-trigger:focus-visible {
     opacity: 1;
+  }
+
+  // 悬停临时展开的菜单浮在页面内容上方；收起动画结束后才移除层级和阴影。
+  &.is-hover-expanded {
+    z-index: 1000;
+    box-shadow: 0 12px 32px rgb(15 23 42 / 24%);
   }
 
   &.is-collapse {
@@ -867,6 +944,13 @@ const handleSelect = (...args: any[]) => {
     // 用内阴影代替边框，避免浅色主题的 1px 边框挤小菜单项可用宽度。
     border: 0;
     box-shadow: inset 0 0 0 1px #dce5ef;
+
+    // 悬停展开时保留内描边，并在外侧补一层浮层阴影。
+    &.is-hover-expanded {
+      box-shadow:
+        inset 0 0 0 1px #dce5ef,
+        0 12px 32px rgb(15 23 42 / 16%);
+    }
 
     .s-menu__header,
     .s-menu__footer {

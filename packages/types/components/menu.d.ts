@@ -15,7 +15,7 @@ import type { SybzDimensionProps, SybzThemeProps, SybzStyleProps } from '../comp
 /**
  * {@link https://liulihao88.github.io/sybz-components/components/menu/home.html | 查看文档}
  *
- * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），默认插槽可在菜单列表下方放项目、最近记录等自定义内容，以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。size 支持 small / default / large 预设或配置对象，可统一设置字号、宽高、行高、内边距、图标和列表内边距；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
+ * s-menu 递归菜单组件，支持路由、图标、分组、默认展开、collapsible 控制是否允许收起、expandOnHover 控制收起后鼠标移入是否临时悬浮展开（展开宽度不挤占布局），header/footer 头尾配置及 header 内的 append 插槽（支持响应式对象、handler 点击回调、class/style 和折叠悬浮文案），默认插槽可在菜单列表下方放项目、最近记录等自定义内容，以及由 variant 控制的明暗外观和由 theme 控制的强调色（light 始终为白色背景）。size 支持 small / default / large 预设或配置对象，可统一设置字号、宽高、行高、内边距、图标和列表内边距；autoHeight 从顶部排列菜单，仅空间不足时压缩菜单项尺寸。
  *
  * 先提示 sybz 自身属性。
  */
@@ -43,6 +43,8 @@ export type SMenuComponent = {
       collapse?: boolean
       /** 是否允许收起；设为 false 时保持展开并隐藏收缩按钮 */
       collapsible?: boolean
+      /** 收起后鼠标移入是否临时展开，默认 true；展开宽度用负外边距抵消，不挤占布局（悬浮覆盖），移出后恢复收起 */
+      expandOnHover?: boolean
       /** 明暗外观：light 为白色背景，dark 为深色背景 */
       variant?: 'dark' | 'light'
       header?: SMenuHeaderConfig

@@ -46,9 +46,9 @@ menu/append
 menu/custom
 :::
 
-### 尺寸配置（`size` 可选值 `small / default / large` 或配置对象，默认值 `default`）
+### 尺寸配置与悬停展开（`size` 默认值 `default`，`expandOnHover` 默认值 `true`）
 
-:::demo `size` 可传预设，也可传对象精细设置 `fontSize / height / width / lineHeight / padding / levelPadding / margin / iconSize / listPadding`。基础写法：`<SMenu :size="size" :options="menus" />`。属性：`size` 可选值 `small / default / large` 或配置对象，默认值 `default`。
+:::demo `size` 可传预设，也可传对象精细设置 `fontSize / height / width / lineHeight / padding / levelPadding / margin / iconSize / listPadding`；`expandOnHover` 开启后，收起状态鼠标移入临时展开为完整菜单，展开宽度不挤占布局。基础写法：`<SMenu v-model:collapse="collapsed" :size="size" :expand-on-hover="expandOnHover" :options="menus" />`。属性：`size` 可选值 `small / default / large` 或配置对象，默认值 `default`；`expandOnHover` 可选值 `true / false`，默认值 `true`。
 menu/other
 :::
 
@@ -71,6 +71,7 @@ menu/other
 | `activeTextColor` | 深色模式激活文字颜色                                                  | string                                 | CSS 颜色                                          | `#ffffff`   |
 | `collapse`        | 是否折叠菜单，支持 `v-model:collapse`；收起后列表 padding 为 4px      | boolean                                | `true / false`                                    | `false`     |
 | `collapsible`     | 是否允许收起；关闭后保持展开并隐藏切换按钮                            | boolean                                | `true / false`                                    | `true`      |
+| `expandOnHover`   | 收起后鼠标移入是否临时悬浮展开；展开宽度不挤占布局，移出恢复收起      | boolean                                | `true / false`                                    | `true`      |
 | `variant`         | 明暗外观：light 固定白色背景，dark 使用深色背景；仅颜色不同，尺寸一致 | string                                 | `dark / light`                                    | `dark`      |
 | `theme`           | 主题强调色，不改变明暗外观                                            | string                                 | `default / chenghua / shijingshan / sybz / gulou` | `default`   |
 | `header`          | 内置头部配置，可传点击回调、class/style 和折叠悬浮文案                | `SMenuHeaderConfig`                    | -                                                 | `undefined` |
@@ -84,6 +85,8 @@ menu/other
 `SMenuItem` 默认字段为 `index / path / title / icon / children / disabled / route`。`index` 优先于 `path`；`icon / suffixIcon` 可传 Element Plus 图标名称字符串或 Vue 图标组件。`type="group"` 用于分组标题；`tag / tagColor` 用于菜单标签；`detail` 配置 `tag / title / description` 后，鼠标移入会显示详情卡片。其余 Element Plus Menu 属性和事件会透传。
 
 菜单收起时，顶层单项可通过悬浮提示查看详情；多级菜单弹层已经展示了文字，弹层内的菜单项不再重复显示提示。
+
+开启 `expandOnHover`（默认 `true`）后，收起状态下鼠标移入会临时展开为完整菜单，展开宽度用负外边距抵消、始终按收起宽度占位，并悬浮在页面内容上方；移出后恢复收起。设为 `false` 时保留收起态的菜单项 hover 高亮，不再自动展开。
 
 切换选中项时，背景色与浅色模式的左侧标记会平滑过渡；收缩时文字先淡出，再切换为图标栏；展开时宽度先展开，文字随后淡入，避免菜单项被挤压。二级菜单展开约 200ms；收起状态下悬浮子菜单默认 100ms 展开、150ms 收起，可通过 `show-timeout` / `hide-timeout` 覆盖。系统开启“减少动态效果”时，菜单会缩短这些动画。
 

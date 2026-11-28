@@ -3,7 +3,11 @@ import { computed, ref } from 'vue'
 import { Collection, EditPen, Setting, Timer } from '@element-plus/icons-vue'
 
 const active = ref('/settings/general')
-const size = ref<'small' | 'default' | 'large' | 'custom'>('default')
+const collapsed = ref(true)
+const menuProps = ref({
+  size: 'default' as 'small' | 'default' | 'large' | 'custom',
+  expandOnHover: true,
+})
 const menus = [
   { path: '/material', title: '素材', icon: Collection },
   { path: '/writing', title: '写作', icon: EditPen },
@@ -27,16 +31,53 @@ const customSize = {
   iconSize: 16,
   listPadding: 12,
 }
-const menuSize = computed(() => (size.value === 'custom' ? customSize : size.value))
+const menuSize = computed(() => (menuProps.value.size === 'custom' ? customSize : menuProps.value.size))
 </script>
 
 <template>
-  <s-radio
-    v-model="size"
-    :options="['small', 'default', 'large', 'custom']"
-    type="simple"
-    title="size（默认 default）"
-    class="m-b-12"
-  ></s-radio>
-  <SMenu v-model="active" :size="menuSize" :options="menus" :router="false" height="420px" />
+  <s-flex gap class="m-b-12">
+    <s-radio
+      v-model="menuProps.size"
+      :options="['small', 'default', 'large', 'custom']"
+      size="small"
+      variant="button"
+      simple
+      title="size（默认 default）"
+    />
+    <s-radio
+      v-model="menuProps.expandOnHover"
+      :options="[true, false]"
+      size="small"
+      variant="button"
+      simple
+      title="expandOnHover（默认 true）"
+    />
+  </s-flex>
+  <div class="hover-expand">
+    <SMenu
+      v-model="active"
+      v-model:collapse="collapsed"
+      :size="menuSize"
+      :options="menus"
+      :router="false"
+      :expand-on-hover="menuProps.expandOnHover"
+      height="420px"
+    />
+    <p>右侧内容区不会被推开</p>
+  </div>
 </template>
+
+<style scoped lang="scss">
+.hover-expand {
+  display: flex;
+  border: 1px solid #dce5ef;
+  border-radius: 8px;
+}
+.hover-expand p {
+  flex: 1;
+  margin: 0;
+  padding: 16px;
+  color: #8da0b8;
+  font-size: 13px;
+}
+</style>

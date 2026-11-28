@@ -40,7 +40,7 @@ const menus = [
     <SRadio v-model="theme" :options="docThemeOptions" variant="button" title="theme" />
     <SRadio v-model="variant" :options="variantOptions" variant="button" title="variant" />
   </s-flex>
-  <div class="h-400">
+  <div class="h-100">
     <SMenu
       v-model="active"
       :theme="theme"

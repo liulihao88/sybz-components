@@ -52,19 +52,19 @@ const menus = [
 </script>
 
 <template>
-  <div class="h-400 bg-yellow">
+  <s-flex class="bg-yellow h-100">
     <SMenu
       v-model="active"
       :header="header"
       :footer="footer"
       :options="menus"
       width="320px"
-      auto-height
       :default-open-all="false"
+      :router="false"
       variant="dark"
     />
-    {{ active }}
-  </div>
+    <div>123456789101112131415161718192021222324</div>
+  </s-flex>
 </template>
 
 <style scoped></style>
